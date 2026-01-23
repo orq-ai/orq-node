@@ -19,17 +19,17 @@ const value: operations.RequestBodyFunctionTool = {
 };
 ```
 
-### `operations.JSONSchemaTool`
+### `operations.RequestBodyJSONSchemaTool`
 
 ```typescript
-const value: operations.JSONSchemaTool = {
+const value: operations.RequestBodyJSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "uh-huh scholarship what madly",
+  description: "outside freezing despite mmm",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "barring climb usefully however ouch yuck bicycle",
+    description: "swanling even whoever via yuck in",
     schema: {
       type: "<value>",
       properties: {

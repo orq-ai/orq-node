@@ -5,11 +5,11 @@
 ```typescript
 import { CreatePromptPromptsResponseType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsResponseType = "function";
+let value: CreatePromptPromptsResponseType = "exact_match";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"exact_match"
 ```

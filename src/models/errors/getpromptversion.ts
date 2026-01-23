@@ -49,19 +49,3 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type GetPromptVersionResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const GetPromptVersionResponseBody$outboundSchema: z.ZodType<
-  GetPromptVersionResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseBody
-> = z.instanceof(GetPromptVersionResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

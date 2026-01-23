@@ -11,9 +11,14 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `operations.CreatePromptContentPromptsRequestRequestBody2[]`
+### `operations.CreatePromptContentPromptsRequest2[]`
 
 ```typescript
-const value: operations.CreatePromptContentPromptsRequestRequestBody2[] = [];
+const value: operations.CreatePromptContentPromptsRequest2[] = [
+  {
+    type: "text",
+    text: "<value>",
+  },
+];
 ```
 

@@ -38,7 +38,7 @@ export type RetrieveDatasourceResponseBody = {
   /**
    * The unique identifier of the data source
    */
-  id?: string | undefined;
+  id: string;
   /**
    * The display name of the datasource. Normally the name of the uploaded file
    */
@@ -79,20 +79,6 @@ export type RetrieveDatasourceResponseBody = {
 };
 
 /** @internal */
-export const RetrieveDatasourceRequest$inboundSchema: z.ZodType<
-  RetrieveDatasourceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-  });
-});
-/** @internal */
 export type RetrieveDatasourceRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
@@ -120,24 +106,11 @@ export function retrieveDatasourceRequestToJSON(
     RetrieveDatasourceRequest$outboundSchema.parse(retrieveDatasourceRequest),
   );
 }
-export function retrieveDatasourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveDatasourceRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveDatasourceRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveDatasourceRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const RetrieveDatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatasourceStatus
 > = z.nativeEnum(RetrieveDatasourceStatus);
-/** @internal */
-export const RetrieveDatasourceStatus$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatasourceStatus
-> = RetrieveDatasourceStatus$inboundSchema;
 
 /** @internal */
 export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
@@ -145,7 +118,7 @@ export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KFBAEENR8CPSZKQED6C5Q1HX"),
+  _id: z.string().default("01KFN8ZQG28MY85R4ARJTBFNED"),
   display_name: z.string(),
   description: z.string().optional(),
   status: RetrieveDatasourceStatus$inboundSchema,
@@ -167,59 +140,7 @@ export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-/** @internal */
-export type RetrieveDatasourceResponseBody$Outbound = {
-  _id: string;
-  display_name: string;
-  description?: string | undefined;
-  status: string;
-  file_id?: string | null | undefined;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-  knowledge_id: string;
-  chunks_count: number;
-};
 
-/** @internal */
-export const RetrieveDatasourceResponseBody$outboundSchema: z.ZodType<
-  RetrieveDatasourceResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatasourceResponseBody
-> = z.object({
-  id: z.string().default("01KFBAEENR8CPSZKQED6C5Q1HX"),
-  displayName: z.string(),
-  description: z.string().optional(),
-  status: RetrieveDatasourceStatus$outboundSchema,
-  fileId: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-  knowledgeId: z.string(),
-  chunksCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    fileId: "file_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-    knowledgeId: "knowledge_id",
-    chunksCount: "chunks_count",
-  });
-});
-
-export function retrieveDatasourceResponseBodyToJSON(
-  retrieveDatasourceResponseBody: RetrieveDatasourceResponseBody,
-): string {
-  return JSON.stringify(
-    RetrieveDatasourceResponseBody$outboundSchema.parse(
-      retrieveDatasourceResponseBody,
-    ),
-  );
-}
 export function retrieveDatasourceResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatasourceResponseBody, SDKValidationError> {

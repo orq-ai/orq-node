@@ -9,6 +9,39 @@ let value: StreamRunAgentRequestBody = {
   key: "<key>",
   model: {
     id: "<id>",
+    parameters: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      loadBalancer: {
+        type: "weight_based",
+        models: [
+          {
+            model: "openai/gpt-4o",
+            weight: 0.7,
+          },
+        ],
+      },
+      timeout: {
+        callTimeout: 30000,
+      },
+    },
     retry: {
       count: 3,
       onCodes: [
@@ -20,13 +53,66 @@ let value: StreamRunAgentRequestBody = {
       ],
     },
   },
+  fallbackModels: [
+    {
+      id: "<id>",
+      parameters: {
+        fallbacks: [
+          {
+            model: "openai/gpt-4o-mini",
+          },
+        ],
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+        cache: {
+          ttl: 3600,
+          type: "exact_match",
+        },
+        loadBalancer: {
+          type: "weight_based",
+          models: [
+            {
+              model: "openai/gpt-4o",
+              weight: 0.7,
+            },
+          ],
+        },
+        timeout: {
+          callTimeout: 30000,
+        },
+      },
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
+  ],
   role: "<value>",
   instructions: "<value>",
   message: {
-    role: "tool",
-    parts: [],
+    role: "user",
+    parts: [
+      {
+        kind: "text",
+        text: "<value>",
+      },
+    ],
   },
-  contact: {
+  identity: {
     id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
     displayName: "Jane Doe",
     email: "jane.doe@example.com",
@@ -71,7 +157,8 @@ let value: StreamRunAgentRequestBody = {
 | `instructions`                                                                                                                                                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                      | Provides context and purpose for the agent. Combined with the system prompt template to generate the agent's instructions.                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                         |
 | `message`                                                                                                                                                                                                                                                                                                                                                               | [operations.StreamRunAgentA2AMessage](../../models/operations/streamrunagenta2amessage.md)                                                                                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                      | The A2A format message containing the task for the agent to perform.                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                         |
 | `variables`                                                                                                                                                                                                                                                                                                                                                             | Record<string, *any*>                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                      | Optional variables for template replacement in system prompt, instructions, and messages                                                                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                         |
-| `contact`                                                                                                                                                                                                                                                                                                                                                               | [operations.StreamRunAgentContact](../../models/operations/streamrunagentcontact.md)                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                      | Information about the contact making the request. If the contact does not exist, it will be created automatically.                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                         |
+| `identity`                                                                                                                                                                                                                                                                                                                                                              | [operations.StreamRunAgentIdentity](../../models/operations/streamrunagentidentity.md)                                                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                      | Information about the identity making the request. If the identity does not exist, it will be created automatically.                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                         |
+| ~~`contact`~~                                                                                                                                                                                                                                                                                                                                                           | [operations.StreamRunAgentContact](../../models/operations/streamrunagentcontact.md)                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                      | : warning: ** DEPRECATED **: This will be removed in a future release, please migrate away from it as soon as possible.<br/><br/>@deprecated Use identity instead. Information about the contact making the request.                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                         |
 | `thread`                                                                                                                                                                                                                                                                                                                                                                | [operations.StreamRunAgentThread](../../models/operations/streamrunagentthread.md)                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                      | Thread information to group related requests                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                         |
 | `memory`                                                                                                                                                                                                                                                                                                                                                                | [operations.StreamRunAgentMemory](../../models/operations/streamrunagentmemory.md)                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                      | Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                         |
 | `path`                                                                                                                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                      | Entity storage path in the format: `project/folder/subfolder/...`<br/><br/>The first element identifies the project, followed by nested folders (auto-created as needed).<br/><br/>With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.                                                          | Default                                                                                                                                                                                                                                                                                                                                                                 |

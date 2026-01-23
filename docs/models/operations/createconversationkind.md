@@ -1,6 +1,6 @@
 # CreateConversationKind
 
-Type discriminator indicating this is a conversation
+Resource type discriminator.
 
 ## Example Usage
 

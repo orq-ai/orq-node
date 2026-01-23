@@ -113,18 +113,6 @@ export type ListChunksPaginatedResponseBody = {
 };
 
 /** @internal */
-export const ListChunksPaginatedRequestBody$inboundSchema: z.ZodType<
-  ListChunksPaginatedRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  q: z.string().default(""),
-  enabled: z.boolean().optional(),
-  status: z.string().optional(),
-  limit: z.number().int().default(100),
-  page: z.number().int().default(1),
-});
-/** @internal */
 export type ListChunksPaginatedRequestBody$Outbound = {
   q: string;
   enabled?: boolean | undefined;
@@ -155,33 +143,7 @@ export function listChunksPaginatedRequestBodyToJSON(
     ),
   );
 }
-export function listChunksPaginatedRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksPaginatedRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksPaginatedRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksPaginatedRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const ListChunksPaginatedRequest$inboundSchema: z.ZodType<
-  ListChunksPaginatedRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-  RequestBody: z.lazy(() => ListChunksPaginatedRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type ListChunksPaginatedRequest$Outbound = {
   knowledge_id: string;
@@ -214,24 +176,11 @@ export function listChunksPaginatedRequestToJSON(
     ListChunksPaginatedRequest$outboundSchema.parse(listChunksPaginatedRequest),
   );
 }
-export function listChunksPaginatedRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksPaginatedRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksPaginatedRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksPaginatedRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListChunksPaginatedObject$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksPaginatedObject
 > = z.nativeEnum(ListChunksPaginatedObject);
-/** @internal */
-export const ListChunksPaginatedObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListChunksPaginatedObject
-> = ListChunksPaginatedObject$inboundSchema;
 
 /** @internal */
 export const ListChunksPaginatedMetadata$inboundSchema: z.ZodType<
@@ -239,25 +188,7 @@ export const ListChunksPaginatedMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type ListChunksPaginatedMetadata$Outbound = string | number | boolean;
 
-/** @internal */
-export const ListChunksPaginatedMetadata$outboundSchema: z.ZodType<
-  ListChunksPaginatedMetadata$Outbound,
-  z.ZodTypeDef,
-  ListChunksPaginatedMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function listChunksPaginatedMetadataToJSON(
-  listChunksPaginatedMetadata: ListChunksPaginatedMetadata,
-): string {
-  return JSON.stringify(
-    ListChunksPaginatedMetadata$outboundSchema.parse(
-      listChunksPaginatedMetadata,
-    ),
-  );
-}
 export function listChunksPaginatedMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedMetadata, SDKValidationError> {
@@ -272,10 +203,6 @@ export function listChunksPaginatedMetadataFromJSON(
 export const ListChunksPaginatedStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksPaginatedStatus
 > = z.nativeEnum(ListChunksPaginatedStatus);
-/** @internal */
-export const ListChunksPaginatedStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ListChunksPaginatedStatus
-> = ListChunksPaginatedStatus$inboundSchema;
 
 /** @internal */
 export const ListChunksPaginatedData$inboundSchema: z.ZodType<
@@ -299,49 +226,7 @@ export const ListChunksPaginatedData$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-/** @internal */
-export type ListChunksPaginatedData$Outbound = {
-  _id: string;
-  text: string;
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  enabled: boolean;
-  status: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-};
 
-/** @internal */
-export const ListChunksPaginatedData$outboundSchema: z.ZodType<
-  ListChunksPaginatedData$Outbound,
-  z.ZodTypeDef,
-  ListChunksPaginatedData
-> = z.object({
-  id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: ListChunksPaginatedStatus$outboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-  });
-});
-
-export function listChunksPaginatedDataToJSON(
-  listChunksPaginatedData: ListChunksPaginatedData,
-): string {
-  return JSON.stringify(
-    ListChunksPaginatedData$outboundSchema.parse(listChunksPaginatedData),
-  );
-}
 export function listChunksPaginatedDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedData, SDKValidationError> {
@@ -366,37 +251,7 @@ export const ListChunksPaginatedResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListChunksPaginatedResponseBody$Outbound = {
-  object: string;
-  data: Array<ListChunksPaginatedData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListChunksPaginatedResponseBody$outboundSchema: z.ZodType<
-  ListChunksPaginatedResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListChunksPaginatedResponseBody
-> = z.object({
-  object: ListChunksPaginatedObject$outboundSchema,
-  data: z.array(z.lazy(() => ListChunksPaginatedData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listChunksPaginatedResponseBodyToJSON(
-  listChunksPaginatedResponseBody: ListChunksPaginatedResponseBody,
-): string {
-  return JSON.stringify(
-    ListChunksPaginatedResponseBody$outboundSchema.parse(
-      listChunksPaginatedResponseBody,
-    ),
-  );
-}
 export function listChunksPaginatedResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListChunksPaginatedResponseBody, SDKValidationError> {

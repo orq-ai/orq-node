@@ -26,27 +26,7 @@ export const DataPart$inboundSchema: z.ZodType<
   data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });
-/** @internal */
-export type DataPart$Outbound = {
-  kind: "data";
-  data: { [k: string]: any };
-  metadata?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const DataPart$outboundSchema: z.ZodType<
-  DataPart$Outbound,
-  z.ZodTypeDef,
-  DataPart
-> = z.object({
-  kind: z.literal("data"),
-  data: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function dataPartToJSON(dataPart: DataPart): string {
-  return JSON.stringify(DataPart$outboundSchema.parse(dataPart));
-}
 export function dataPartFromJSON(
   jsonString: string,
 ): SafeParseResult<DataPart, SDKValidationError> {

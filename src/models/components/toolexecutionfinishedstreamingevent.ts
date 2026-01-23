@@ -29,6 +29,7 @@ export const ToolExecutionFinishedStreamingEventProduct = {
   Generic: "generic",
   Evaluators: "evaluators",
   Otel: "otel",
+  AiChat: "ai-chat",
 } as const;
 /**
  * Orquesta product
@@ -80,10 +81,6 @@ export type ToolExecutionFinishedStreamingEvent = {
 export const ToolExecutionFinishedStreamingEventProduct$inboundSchema:
   z.ZodNativeEnum<typeof ToolExecutionFinishedStreamingEventProduct> = z
     .nativeEnum(ToolExecutionFinishedStreamingEventProduct);
-/** @internal */
-export const ToolExecutionFinishedStreamingEventProduct$outboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionFinishedStreamingEventProduct> =
-    ToolExecutionFinishedStreamingEventProduct$inboundSchema;
 
 /** @internal */
 export const ToolExecutionFinishedStreamingEventMemory$inboundSchema: z.ZodType<
@@ -97,35 +94,7 @@ export const ToolExecutionFinishedStreamingEventMemory$inboundSchema: z.ZodType<
     "entity_id": "entityId",
   });
 });
-/** @internal */
-export type ToolExecutionFinishedStreamingEventMemory$Outbound = {
-  entity_id: string;
-};
 
-/** @internal */
-export const ToolExecutionFinishedStreamingEventMemory$outboundSchema:
-  z.ZodType<
-    ToolExecutionFinishedStreamingEventMemory$Outbound,
-    z.ZodTypeDef,
-    ToolExecutionFinishedStreamingEventMemory
-  > = z.object({
-    entityId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      entityId: "entity_id",
-    });
-  });
-
-export function toolExecutionFinishedStreamingEventMemoryToJSON(
-  toolExecutionFinishedStreamingEventMemory:
-    ToolExecutionFinishedStreamingEventMemory,
-): string {
-  return JSON.stringify(
-    ToolExecutionFinishedStreamingEventMemory$outboundSchema.parse(
-      toolExecutionFinishedStreamingEventMemory,
-    ),
-  );
-}
 export function toolExecutionFinishedStreamingEventMemoryFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -169,55 +138,7 @@ export const ToolExecutionFinishedStreamingEventToolExecutionContext$inboundSche
       "parent_id": "parentId",
     });
   });
-/** @internal */
-export type ToolExecutionFinishedStreamingEventToolExecutionContext$Outbound = {
-  action_id: string;
-  agent_tool_call_id: string;
-  workspace_id: string;
-  agent_manifest_id: string;
-  agent_execution_id: string;
-  product: string;
-  memory?: ToolExecutionFinishedStreamingEventMemory$Outbound | undefined;
-  parent_id?: string | undefined;
-};
 
-/** @internal */
-export const ToolExecutionFinishedStreamingEventToolExecutionContext$outboundSchema:
-  z.ZodType<
-    ToolExecutionFinishedStreamingEventToolExecutionContext$Outbound,
-    z.ZodTypeDef,
-    ToolExecutionFinishedStreamingEventToolExecutionContext
-  > = z.object({
-    actionId: z.string(),
-    agentToolCallId: z.string(),
-    workspaceId: z.string(),
-    agentManifestId: z.string(),
-    agentExecutionId: z.string(),
-    product: ToolExecutionFinishedStreamingEventProduct$outboundSchema,
-    memory: z.lazy(() =>
-      ToolExecutionFinishedStreamingEventMemory$outboundSchema
-    ).optional(),
-    parentId: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      actionId: "action_id",
-      agentToolCallId: "agent_tool_call_id",
-      workspaceId: "workspace_id",
-      agentManifestId: "agent_manifest_id",
-      agentExecutionId: "agent_execution_id",
-      parentId: "parent_id",
-    });
-  });
-
-export function toolExecutionFinishedStreamingEventToolExecutionContextToJSON(
-  toolExecutionFinishedStreamingEventToolExecutionContext:
-    ToolExecutionFinishedStreamingEventToolExecutionContext,
-): string {
-  return JSON.stringify(
-    ToolExecutionFinishedStreamingEventToolExecutionContext$outboundSchema
-      .parse(toolExecutionFinishedStreamingEventToolExecutionContext),
-  );
-}
 export function toolExecutionFinishedStreamingEventToolExecutionContextFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -253,48 +174,7 @@ export const ToolExecutionFinishedStreamingEventData$inboundSchema: z.ZodType<
     "tool_execution_context": "toolExecutionContext",
   });
 });
-/** @internal */
-export type ToolExecutionFinishedStreamingEventData$Outbound = {
-  result?: any | undefined;
-  action_type: string;
-  tool_execution_context:
-    ToolExecutionFinishedStreamingEventToolExecutionContext$Outbound;
-  responseId?: string | undefined;
-  workflowRunId: string;
-  stream?: boolean | undefined;
-};
 
-/** @internal */
-export const ToolExecutionFinishedStreamingEventData$outboundSchema: z.ZodType<
-  ToolExecutionFinishedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ToolExecutionFinishedStreamingEventData
-> = z.object({
-  result: z.any().optional(),
-  actionType: z.string(),
-  toolExecutionContext: z.lazy(() =>
-    ToolExecutionFinishedStreamingEventToolExecutionContext$outboundSchema
-  ),
-  responseId: z.string().optional(),
-  workflowRunId: z.string(),
-  stream: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    actionType: "action_type",
-    toolExecutionContext: "tool_execution_context",
-  });
-});
-
-export function toolExecutionFinishedStreamingEventDataToJSON(
-  toolExecutionFinishedStreamingEventData:
-    ToolExecutionFinishedStreamingEventData,
-): string {
-  return JSON.stringify(
-    ToolExecutionFinishedStreamingEventData$outboundSchema.parse(
-      toolExecutionFinishedStreamingEventData,
-    ),
-  );
-}
 export function toolExecutionFinishedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -321,33 +201,7 @@ export const ToolExecutionFinishedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ToolExecutionFinishedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ToolExecutionFinishedStreamingEvent$Outbound = {
-  type: "event.workflow_events.tool_execution_finished";
-  timestamp: string;
-  data: ToolExecutionFinishedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ToolExecutionFinishedStreamingEvent$outboundSchema: z.ZodType<
-  ToolExecutionFinishedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ToolExecutionFinishedStreamingEvent
-> = z.object({
-  type: z.literal("event.workflow_events.tool_execution_finished"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolExecutionFinishedStreamingEventData$outboundSchema),
-});
-
-export function toolExecutionFinishedStreamingEventToJSON(
-  toolExecutionFinishedStreamingEvent: ToolExecutionFinishedStreamingEvent,
-): string {
-  return JSON.stringify(
-    ToolExecutionFinishedStreamingEvent$outboundSchema.parse(
-      toolExecutionFinishedStreamingEvent,
-    ),
-  );
-}
 export function toolExecutionFinishedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolExecutionFinishedStreamingEvent, SDKValidationError> {

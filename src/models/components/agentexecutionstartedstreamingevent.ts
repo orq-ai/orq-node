@@ -51,40 +51,7 @@ export const AgentExecutionStartedStreamingEventData$inboundSchema: z.ZodType<
     "trace_id": "traceId",
   });
 });
-/** @internal */
-export type AgentExecutionStartedStreamingEventData$Outbound = {
-  agent_task_id: string;
-  workspace_id: string;
-  trace_id: string;
-};
 
-/** @internal */
-export const AgentExecutionStartedStreamingEventData$outboundSchema: z.ZodType<
-  AgentExecutionStartedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentExecutionStartedStreamingEventData
-> = z.object({
-  agentTaskId: z.string(),
-  workspaceId: z.string(),
-  traceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentTaskId: "agent_task_id",
-    workspaceId: "workspace_id",
-    traceId: "trace_id",
-  });
-});
-
-export function agentExecutionStartedStreamingEventDataToJSON(
-  agentExecutionStartedStreamingEventData:
-    AgentExecutionStartedStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentExecutionStartedStreamingEventData$outboundSchema.parse(
-      agentExecutionStartedStreamingEventData,
-    ),
-  );
-}
 export function agentExecutionStartedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -111,33 +78,7 @@ export const AgentExecutionStartedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => AgentExecutionStartedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type AgentExecutionStartedStreamingEvent$Outbound = {
-  type: "agents.execution_started";
-  timestamp: string;
-  data: AgentExecutionStartedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const AgentExecutionStartedStreamingEvent$outboundSchema: z.ZodType<
-  AgentExecutionStartedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  AgentExecutionStartedStreamingEvent
-> = z.object({
-  type: z.literal("agents.execution_started"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentExecutionStartedStreamingEventData$outboundSchema),
-});
-
-export function agentExecutionStartedStreamingEventToJSON(
-  agentExecutionStartedStreamingEvent: AgentExecutionStartedStreamingEvent,
-): string {
-  return JSON.stringify(
-    AgentExecutionStartedStreamingEvent$outboundSchema.parse(
-      agentExecutionStartedStreamingEvent,
-    ),
-  );
-}
 export function agentExecutionStartedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentExecutionStartedStreamingEvent, SDKValidationError> {

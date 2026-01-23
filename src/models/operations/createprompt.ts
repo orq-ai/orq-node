@@ -62,404 +62,7 @@ export type CreatePromptMetadata = {
   language?: CreatePromptLanguage | null | undefined;
 };
 
-/**
- * The role of the prompt message
- */
-export const CreatePromptRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type CreatePromptRole = ClosedEnum<typeof CreatePromptRole>;
-
-export type TwoFile = {
-  /**
-   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
-   */
-  fileData?: string | undefined;
-  /**
-   * URL to the file. Only supported by Anthropic Claude models for PDF files.
-   */
-  uri?: string | undefined;
-  /**
-   * MIME type of the file (e.g., application/pdf, image/png)
-   */
-  mimeType?: string | undefined;
-  /**
-   * The name of the file, used when passing the file to the model as a string.
-   */
-  filename?: string | undefined;
-};
-
-export type Two3 = {
-  /**
-   * The type of the content part. Always `file`.
-   */
-  type: "file";
-  file: TwoFile;
-};
-
-export type TwoImageUrl = {
-  /**
-   * Either a URL of the image or the base64 encoded data URI.
-   */
-  url: string;
-  /**
-   * Specifies the detail level of the image. Currently only supported with OpenAI models
-   */
-  detail?: string | undefined;
-};
-
-/**
- * The image part of the prompt message. Only supported with vision models.
- */
-export type CreatePrompt22 = {
-  type: "image_url";
-  imageUrl: TwoImageUrl;
-};
-
-/**
- * Text content part of a prompt message
- */
-export type Two1 = {
-  type: "text";
-  text: string;
-};
-
-export type CreatePromptContent2 = Two1 | CreatePrompt22 | Two3;
-
-/**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
- */
-export type CreatePromptContent = string | Array<Two1 | CreatePrompt22 | Two3>;
-
-export const CreatePromptType = {
-  Function: "function",
-} as const;
-export type CreatePromptType = ClosedEnum<typeof CreatePromptType>;
-
-export type CreatePromptFunction = {
-  name: string;
-  /**
-   * JSON string arguments for the functions
-   */
-  arguments: string;
-};
-
-export type CreatePromptToolCalls = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: CreatePromptType;
-  function: CreatePromptFunction;
-};
-
-export type CreatePromptMessages = {
-  /**
-   * The role of the prompt message
-   */
-  role: CreatePromptRole;
-  /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
-   */
-  content: string | Array<Two1 | CreatePrompt22 | Two3> | null;
-  toolCalls?: Array<CreatePromptToolCalls> | undefined;
-  toolCallId?: string | null | undefined;
-};
-
-/**
- * Only supported on `image` models.
- */
-export const CreatePromptFormat = {
-  Url: "url",
-  B64Json: "b64_json",
-  Text: "text",
-  JsonObject: "json_object",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
-
-export const Six = {
-  Json: "json",
-  Text: "text",
-  Srt: "srt",
-  VerboseJson: "verbose_json",
-  Vtt: "vtt",
-} as const;
-export type Six = ClosedEnum<typeof Six>;
-
-export const Five = {
-  Url: "url",
-  Base64Json: "base64_json",
-} as const;
-export type Five = ClosedEnum<typeof Five>;
-
-export const ResponseFormat4 = {
-  Mp3: "mp3",
-  Opus: "opus",
-  Aac: "aac",
-  Flac: "flac",
-  Wav: "wav",
-  Pcm: "pcm",
-} as const;
-export type ResponseFormat4 = ClosedEnum<typeof ResponseFormat4>;
-
-export const CreatePromptResponseFormatPromptsRequestType = {
-  Text: "text",
-} as const;
-export type CreatePromptResponseFormatPromptsRequestType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsRequestType
->;
-
-export type ResponseFormat3 = {
-  type: CreatePromptResponseFormatPromptsRequestType;
-};
-
-export const CreatePromptResponseFormatPromptsType = {
-  JsonObject: "json_object",
-} as const;
-export type CreatePromptResponseFormatPromptsType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsType
->;
-
-export type ResponseFormat2 = {
-  type: CreatePromptResponseFormatPromptsType;
-};
-
-export const CreatePromptResponseFormatType = {
-  JsonSchema: "json_schema",
-} as const;
-export type CreatePromptResponseFormatType = ClosedEnum<
-  typeof CreatePromptResponseFormatType
->;
-
-export type CreatePromptResponseFormatJsonSchema = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
-
-export type ResponseFormat1 = {
-  type: CreatePromptResponseFormatType;
-  displayName?: string | undefined;
-  jsonSchema: CreatePromptResponseFormatJsonSchema;
-};
-
-/**
- * An object specifying the format that the model must output.
- *
- * @remarks
- *
- *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
- *
- *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
- *
- * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
- */
-export type CreatePromptResponseFormat =
-  | ResponseFormat1
-  | ResponseFormat2
-  | ResponseFormat3
-  | ResponseFormat4
-  | Five
-  | Six;
-
-/**
- * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
- */
-export const PhotoRealVersion = {
-  V1: "v1",
-  V2: "v2",
-} as const;
-/**
- * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
- */
-export type PhotoRealVersion = ClosedEnum<typeof PhotoRealVersion>;
-
-/**
- * The format to return the embeddings
- */
-export const EncodingFormat = {
-  Float: "float",
-  Base64: "base64",
-} as const;
-/**
- * The format to return the embeddings
- */
-export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
-
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export const CreatePromptReasoningEffort = {
-  None: "none",
-  Disable: "disable",
-  Minimal: "minimal",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-} as const;
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export type CreatePromptReasoningEffort = ClosedEnum<
-  typeof CreatePromptReasoningEffort
->;
-
-/**
- * Controls the verbosity of the model output.
- */
-export const Verbosity = {
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-} as const;
-/**
- * Controls the verbosity of the model output.
- */
-export type Verbosity = ClosedEnum<typeof Verbosity>;
-
-/**
- * The level of thinking to use for the model. Only supported by `Google AI`
- */
-export const ThinkingLevel = {
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The level of thinking to use for the model. Only supported by `Google AI`
- */
-export type ThinkingLevel = ClosedEnum<typeof ThinkingLevel>;
-
-/**
- * Optional model parameters like temperature and maxTokens.
- */
-export type ModelParameters = {
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  temperature?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  maxTokens?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  topK?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  topP?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  frequencyPenalty?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  presencePenalty?: number | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  numImages?: number | undefined;
-  /**
-   * Best effort deterministic seed for the model. Currently only OpenAI models support these
-   */
-  seed?: number | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  format?: CreatePromptFormat | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  dimensions?: string | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  quality?: string | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  style?: string | undefined;
-  /**
-   * An object specifying the format that the model must output.
-   *
-   * @remarks
-   *
-   *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
-   *
-   *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
-   *
-   * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
-   */
-  responseFormat?:
-    | ResponseFormat1
-    | ResponseFormat2
-    | ResponseFormat3
-    | ResponseFormat4
-    | Five
-    | Six
-    | null
-    | undefined;
-  /**
-   * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
-   */
-  photoRealVersion?: PhotoRealVersion | undefined;
-  /**
-   * The format to return the embeddings
-   */
-  encodingFormat?: EncodingFormat | undefined;
-  /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   */
-  reasoningEffort?: CreatePromptReasoningEffort | undefined;
-  /**
-   * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
-   */
-  budgetTokens?: number | undefined;
-  /**
-   * Controls the verbosity of the model output.
-   */
-  verbosity?: Verbosity | undefined;
-  /**
-   * The level of thinking to use for the model. Only supported by `Google AI`
-   */
-  thinkingLevel?: ThinkingLevel | undefined;
-};
-
-/**
- * [DEPRECATED]. Please use the `prompt` property instead. The current `prompt_config` will keep working but it will be deprecated in future versions. Configuration for the prompt including model and messages.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
- */
-export type PromptConfiguration = {
-  /**
-   * Model ID used to generate the response, like `openai/gpt-4o` or `google/gemini-2.5-pro`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported.
-   */
-  model?: string | undefined;
-  /**
-   * Array of messages that make up the conversation.
-   */
-  messages: Array<CreatePromptMessages>;
-  /**
-   * Optional model parameters like temperature and maxTokens.
-   */
-  modelParameters?: ModelParameters | undefined;
-};
-
-export type CreatePromptContentPromptsRequestRequestBody2 =
+export type CreatePromptContentPromptsRequest2 =
   components.TextContentPartSchema;
 
 /**
@@ -544,7 +147,7 @@ export type CreatePromptMessagesToolMessage = {
   cacheControl?: CreatePromptMessagesCacheControl | undefined;
 };
 
-export type CreatePromptContentPromptsRequest2 =
+export type CreatePromptContentPrompts2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
@@ -651,14 +254,14 @@ export type CreatePromptMessagesAssistantMessage = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const CreatePrompt2PromptsRequestRequestBodyPromptType = {
+export const CreatePrompt2PromptsType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type CreatePrompt2PromptsRequestRequestBodyPromptType = ClosedEnum<
-  typeof CreatePrompt2PromptsRequestRequestBodyPromptType
+export type CreatePrompt2PromptsType = ClosedEnum<
+  typeof CreatePrompt2PromptsType
 >;
 
 /**
@@ -691,7 +294,7 @@ export type CreatePrompt2CacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: CreatePrompt2PromptsRequestRequestBodyPromptType;
+  type: CreatePrompt2PromptsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -717,7 +320,7 @@ export type CreatePrompt24 = {
   file: components.FileContentPartSchema;
 };
 
-export type CreatePromptContentPrompts2 =
+export type CreatePromptContent2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
@@ -782,13 +385,58 @@ export type CreatePromptMessagesSystemMessage = {
   name?: string | undefined;
 };
 
-export type CreatePromptPromptsMessages =
+export type CreatePromptMessages =
   | CreatePromptMessagesSystemMessage
   | CreatePromptMessagesUserMessage
   | CreatePromptMessagesAssistantMessage
   | CreatePromptMessagesToolMessage;
 
-export type CreatePromptResponseFormatPromptsRequestJsonSchema = {
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const CreatePromptVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type CreatePromptVoice = ClosedEnum<typeof CreatePromptVoice>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const CreatePromptFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type CreatePromptAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: CreatePromptVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: CreatePromptFormat;
+};
+
+export type CreatePromptResponseFormatPromptsJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -812,9 +460,9 @@ export type CreatePromptResponseFormatPromptsRequestJsonSchema = {
  *
  * JSON Schema response format. Used to generate structured JSON responses
  */
-export type CreatePromptResponseFormatPromptsJSONSchema = {
+export type CreatePromptResponseFormatJSONSchema = {
   type: "json_schema";
-  jsonSchema: CreatePromptResponseFormatPromptsRequestJsonSchema;
+  jsonSchema: CreatePromptResponseFormatPromptsJsonSchema;
 };
 
 /**
@@ -838,13 +486,228 @@ export type CreatePromptResponseFormatText = {
 /**
  * An object specifying the format that the model must output
  */
-export type CreatePromptPromptsResponseFormat =
+export type CreatePromptResponseFormat =
   | CreatePromptResponseFormatText
   | CreatePromptResponseFormatJSONObject
-  | CreatePromptResponseFormatPromptsJSONSchema;
+  | CreatePromptResponseFormatJSONSchema;
 
 /**
- * Prompt configuration with model and messages. Either this field or `prompt_config` must be provided.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const CreatePromptReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type CreatePromptReasoningEffort = ClosedEnum<
+  typeof CreatePromptReasoningEffort
+>;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type CreatePromptStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type CreatePromptStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+export type CreatePromptThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const CreatePromptToolChoiceType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type CreatePromptToolChoiceType = ClosedEnum<
+  typeof CreatePromptToolChoiceType
+>;
+
+export type CreatePromptToolChoiceFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name: string;
+};
+
+export type CreatePromptToolChoice2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: CreatePromptToolChoiceType | undefined;
+  function: CreatePromptToolChoiceFunction;
+};
+
+export const CreatePromptToolChoice1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type CreatePromptToolChoice1 = ClosedEnum<
+  typeof CreatePromptToolChoice1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type CreatePromptToolChoice =
+  | CreatePromptToolChoice2
+  | CreatePromptToolChoice1;
+
+export const CreatePromptModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type CreatePromptModalities = ClosedEnum<typeof CreatePromptModalities>;
+
+/**
+ * The key of the guardrail.
+ */
+export const CreatePromptId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type CreatePromptId1 = ClosedEnum<typeof CreatePromptId1>;
+
+export type CreatePromptId = CreatePromptId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const CreatePromptExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type CreatePromptExecuteOn = ClosedEnum<typeof CreatePromptExecuteOn>;
+
+export type CreatePromptGuardrails = {
+  id: CreatePromptId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: CreatePromptExecuteOn;
+};
+
+export type CreatePromptFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreatePromptRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const CreatePromptType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreatePromptType = ClosedEnum<typeof CreatePromptType>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreatePromptCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreatePromptType;
+};
+
+export const CreatePromptLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreatePromptLoadBalancerType = ClosedEnum<
+  typeof CreatePromptLoadBalancerType
+>;
+
+export type CreatePromptLoadBalancerModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreatePromptLoadBalancer1 = {
+  type: CreatePromptLoadBalancerType;
+  models: Array<CreatePromptLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
+export type CreatePromptLoadBalancer = CreatePromptLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreatePromptTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+/**
+ * Prompt configuration with model and messages.
  */
 export type PromptInput = {
   /**
@@ -857,13 +720,17 @@ export type PromptInput = {
     | CreatePromptMessagesToolMessage
   >;
   /**
-   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported.
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported.
    */
   model?: string | undefined;
   /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
-  temperature?: number | null | undefined;
+  audio?: CreatePromptAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
   /**
    * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
    *
@@ -873,13 +740,114 @@ export type PromptInput = {
    */
   maxTokens?: number | null | undefined;
   /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
    * An object specifying the format that the model must output
    */
   responseFormat?:
     | CreatePromptResponseFormatText
     | CreatePromptResponseFormatJSONObject
-    | CreatePromptResponseFormatPromptsJSONSchema
+    | CreatePromptResponseFormatJSONSchema
     | undefined;
+  /**
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   */
+  reasoningEffort?: CreatePromptReasoningEffort | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: CreatePromptStreamOptions | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?: CreatePromptToolChoice2 | CreatePromptToolChoice1 | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<CreatePromptModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<CreatePromptGuardrails> | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreatePromptFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreatePromptRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreatePromptCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreatePromptLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreatePromptTimeout | undefined;
 };
 
 export type CreatePromptRequestBody = {
@@ -893,13 +861,7 @@ export type CreatePromptRequestBody = {
   description?: string | null | undefined;
   metadata?: CreatePromptMetadata | undefined;
   /**
-   * [DEPRECATED]. Please use the `prompt` property instead. The current `prompt_config` will keep working but it will be deprecated in future versions. Configuration for the prompt including model and messages.
-   *
-   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  promptConfig?: PromptConfiguration | undefined;
-  /**
-   * Prompt configuration with model and messages. Either this field or `prompt_config` must be provided.
+   * Prompt configuration with model and messages.
    */
   prompt?: PromptInput | undefined;
   /**
@@ -924,7 +886,7 @@ export type CreatePromptPromptsType = ClosedEnum<
 /**
  * The modality of the model
  */
-export const CreatePromptModelType = {
+export const ModelType = {
   Chat: "chat",
   Completion: "completion",
   Embedding: "embedding",
@@ -932,13 +894,14 @@ export const CreatePromptModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Ocr: "ocr",
   Moderation: "moderation",
   Vision: "vision",
 } as const;
 /**
  * The modality of the model
  */
-export type CreatePromptModelType = ClosedEnum<typeof CreatePromptModelType>;
+export type ModelType = ClosedEnum<typeof ModelType>;
 
 /**
  * Only supported on `image` models.
@@ -987,47 +950,57 @@ export type CreatePromptResponseFormat4 = ClosedEnum<
   typeof CreatePromptResponseFormat4
 >;
 
-export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType = {
-  Text: "text",
-} as const;
-export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONType =
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType =
+  {
+    Text: "text",
+  } as const;
+export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType =
   ClosedEnum<
-    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType
   >;
 
 export type CreatePromptResponseFormat3 = {
-  type: CreatePromptResponseFormatPromptsResponse200ApplicationJSONType;
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType;
 };
 
-export const CreatePromptResponseFormatPromptsResponse200Type = {
-  JsonObject: "json_object",
-} as const;
-export type CreatePromptResponseFormatPromptsResponse200Type = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsResponse200Type
->;
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType =
+  {
+    JsonObject: "json_object",
+  } as const;
+export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType =
+  ClosedEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
+  >;
 
 export type CreatePromptResponseFormat2 = {
-  type: CreatePromptResponseFormatPromptsResponse200Type;
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType;
 };
 
-export const CreatePromptResponseFormatPromptsResponseType = {
-  JsonSchema: "json_schema",
-} as const;
-export type CreatePromptResponseFormatPromptsResponseType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsResponseType
->;
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  {
+    JsonSchema: "json_schema",
+  } as const;
+export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  >;
 
-export type CreatePromptResponseFormatPromptsResponseJsonSchema = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
+export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema =
+  {
+    name: string;
+    description?: string | undefined;
+    strict?: boolean | undefined;
+    schema: { [k: string]: any };
+  };
 
 export type CreatePromptResponseFormat1 = {
-  type: CreatePromptResponseFormatPromptsResponseType;
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType;
   displayName?: string | undefined;
-  jsonSchema: CreatePromptResponseFormatPromptsResponseJsonSchema;
+  jsonSchema:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema;
 };
 
 /**
@@ -1080,7 +1053,7 @@ export type CreatePromptEncodingFormat = ClosedEnum<
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const CreatePromptPromptsReasoningEffort = {
+export const CreatePromptPromptsResponseReasoningEffort = {
   None: "none",
   Disable: "disable",
   Minimal: "minimal",
@@ -1091,8 +1064,8 @@ export const CreatePromptPromptsReasoningEffort = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type CreatePromptPromptsReasoningEffort = ClosedEnum<
-  typeof CreatePromptPromptsReasoningEffort
+export type CreatePromptPromptsResponseReasoningEffort = ClosedEnum<
+  typeof CreatePromptPromptsResponseReasoningEffort
 >;
 
 /**
@@ -1125,7 +1098,7 @@ export type CreatePromptThinkingLevel = ClosedEnum<
 /**
  * Model Parameters: Not all parameters apply to every model
  */
-export type CreatePromptModelParameters = {
+export type ModelParameters = {
   /**
    * Only supported on `chat` and `completion` models.
    */
@@ -1205,7 +1178,7 @@ export type CreatePromptModelParameters = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: CreatePromptPromptsReasoningEffort | undefined;
+  reasoningEffort?: CreatePromptPromptsResponseReasoningEffort | undefined;
   /**
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
@@ -1253,7 +1226,7 @@ export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
 /**
  * The role of the prompt message
  */
-export const CreatePromptPromptsRole = {
+export const CreatePromptRole = {
   System: "system",
   Assistant: "assistant",
   User: "user",
@@ -1266,9 +1239,7 @@ export const CreatePromptPromptsRole = {
 /**
  * The role of the prompt message
  */
-export type CreatePromptPromptsRole = ClosedEnum<
-  typeof CreatePromptPromptsRole
->;
+export type CreatePromptRole = ClosedEnum<typeof CreatePromptRole>;
 
 export type CreatePrompt2File = {
   /**
@@ -1315,7 +1286,7 @@ export type CreatePrompt2ImageUrl = {
 /**
  * The image part of the prompt message. Only supported with vision models.
  */
-export type CreatePrompt2Prompts2 = {
+export type CreatePrompt22 = {
   type: "image_url";
   imageUrl: CreatePrompt2ImageUrl;
 };
@@ -1330,24 +1301,24 @@ export type CreatePrompt21 = {
 
 export type CreatePromptContentPromptsResponse2 =
   | CreatePrompt21
-  | CreatePrompt2Prompts2
+  | CreatePrompt22
   | CreatePrompt23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
-export type CreatePromptPromptsContent =
+export type CreatePromptContent =
   | string
-  | Array<CreatePrompt21 | CreatePrompt2Prompts2 | CreatePrompt23>;
+  | Array<CreatePrompt21 | CreatePrompt22 | CreatePrompt23>;
 
-export const CreatePromptPromptsResponseType = {
+export const CreatePromptPromptsResponse200Type = {
   Function: "function",
 } as const;
-export type CreatePromptPromptsResponseType = ClosedEnum<
-  typeof CreatePromptPromptsResponseType
+export type CreatePromptPromptsResponse200Type = ClosedEnum<
+  typeof CreatePromptPromptsResponse200Type
 >;
 
-export type CreatePromptPromptsFunction = {
+export type CreatePromptFunction = {
   name: string;
   /**
    * JSON string arguments for the functions
@@ -1355,35 +1326,37 @@ export type CreatePromptPromptsFunction = {
   arguments: string;
 };
 
-export type CreatePromptPromptsToolCalls = {
+export type CreatePromptToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: CreatePromptPromptsResponseType;
-  function: CreatePromptPromptsFunction;
+  type: CreatePromptPromptsResponse200Type;
+  function: CreatePromptFunction;
 };
 
-export type CreatePromptPromptsResponseMessages = {
+export type CreatePromptPromptsMessages = {
   /**
    * The role of the prompt message
    */
-  role: CreatePromptPromptsRole;
+  role: CreatePromptRole;
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
   content:
     | string
-    | Array<CreatePrompt21 | CreatePrompt2Prompts2 | CreatePrompt23>
+    | Array<CreatePrompt21 | CreatePrompt22 | CreatePrompt23>
     | null;
-  toolCalls?: Array<CreatePromptPromptsToolCalls> | undefined;
+  toolCalls?: Array<CreatePromptToolCalls> | undefined;
   toolCallId?: string | null | undefined;
 };
 
 /**
- * A list of messages compatible with the openAI schema
+ * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
-export type CreatePromptPromptConfig = {
+export type PromptConfig = {
   stream?: boolean | undefined;
-  model?: string | undefined;
+  model?: string | null | undefined;
   /**
    * The id of the resource
    */
@@ -1391,18 +1364,826 @@ export type CreatePromptPromptConfig = {
   /**
    * The modality of the model
    */
-  modelType?: CreatePromptModelType | null | undefined;
+  modelType?: ModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
-  modelParameters?: CreatePromptModelParameters | undefined;
-  provider?: CreatePromptProvider | undefined;
+  modelParameters?: ModelParameters | undefined;
+  provider?: CreatePromptProvider | null | undefined;
   /**
    * The ID of the integration to use
    */
   integrationId?: string | null | undefined;
   version?: string | undefined;
-  messages: Array<CreatePromptPromptsResponseMessages>;
+  messages: Array<CreatePromptPromptsMessages>;
+};
+
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const CreatePromptPromptsVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type CreatePromptPromptsVoice = ClosedEnum<
+  typeof CreatePromptPromptsVoice
+>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const CreatePromptPromptsResponse200Format = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type CreatePromptPromptsResponse200Format = ClosedEnum<
+  typeof CreatePromptPromptsResponse200Format
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type CreatePromptPromptsAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: CreatePromptPromptsVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: CreatePromptPromptsResponse200Format;
+};
+
+export type CreatePromptResponseFormatPromptsResponseJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict: boolean;
+};
+
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type CreatePromptResponseFormatPromptsResponse200JSONSchema = {
+  type: "json_schema";
+  jsonSchema: CreatePromptResponseFormatPromptsResponseJsonSchema;
+};
+
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type CreatePromptResponseFormatPromptsJSONObject = {
+  type: "json_object";
+};
+
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type CreatePromptResponseFormatPromptsText = {
+  type: "text";
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type CreatePromptPromptsResponseFormat =
+  | CreatePromptResponseFormatPromptsText
+  | CreatePromptResponseFormatPromptsJSONObject
+  | CreatePromptResponseFormatPromptsResponse200JSONSchema;
+
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const CreatePromptPromptsReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type CreatePromptPromptsReasoningEffort = ClosedEnum<
+  typeof CreatePromptPromptsReasoningEffort
+>;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type CreatePromptPromptsStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type CreatePromptPromptsStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+export type CreatePromptPromptsThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const CreatePromptToolChoicePromptsType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type CreatePromptToolChoicePromptsType = ClosedEnum<
+  typeof CreatePromptToolChoicePromptsType
+>;
+
+export type CreatePromptToolChoicePromptsFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name: string;
+};
+
+export type CreatePromptToolChoicePrompts2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: CreatePromptToolChoicePromptsType | undefined;
+  function: CreatePromptToolChoicePromptsFunction;
+};
+
+export const CreatePromptToolChoicePrompts1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type CreatePromptToolChoicePrompts1 = ClosedEnum<
+  typeof CreatePromptToolChoicePrompts1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type CreatePromptPromptsToolChoice =
+  | CreatePromptToolChoicePrompts2
+  | CreatePromptToolChoicePrompts1;
+
+export const CreatePromptPromptsModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type CreatePromptPromptsModalities = ClosedEnum<
+  typeof CreatePromptPromptsModalities
+>;
+
+/**
+ * The key of the guardrail.
+ */
+export const CreatePromptIdPrompts1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type CreatePromptIdPrompts1 = ClosedEnum<typeof CreatePromptIdPrompts1>;
+
+export type CreatePromptPromptsId = CreatePromptIdPrompts1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const CreatePromptPromptsExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type CreatePromptPromptsExecuteOn = ClosedEnum<
+  typeof CreatePromptPromptsExecuteOn
+>;
+
+export type CreatePromptPromptsGuardrails = {
+  id: CreatePromptIdPrompts1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: CreatePromptPromptsExecuteOn;
+};
+
+export type CreatePromptPromptsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreatePromptPromptsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count: number;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const CreatePromptPromptsResponseType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreatePromptPromptsResponseType = ClosedEnum<
+  typeof CreatePromptPromptsResponseType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreatePromptPromptsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl: number;
+  type: CreatePromptPromptsResponseType;
+};
+
+export const CreatePromptLoadBalancerPromptsType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreatePromptLoadBalancerPromptsType = ClosedEnum<
+  typeof CreatePromptLoadBalancerPromptsType
+>;
+
+export type CreatePromptLoadBalancerPromptsModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight: number;
+};
+
+export type CreatePromptLoadBalancerPrompts1 = {
+  type: CreatePromptLoadBalancerPromptsType;
+  models: Array<CreatePromptLoadBalancerPromptsModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
+export type CreatePromptPromptsLoadBalancer = CreatePromptLoadBalancerPrompts1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreatePromptPromptsTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+export type CreatePromptContentPromptsResponse200ApplicationJSONResponseBody2 =
+  components.TextContentPartSchema;
+
+/**
+ * The contents of the tool message.
+ */
+export type CreatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreatePromptMessagesPromptsResponse200Type = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreatePromptMessagesPromptsResponse200Type = ClosedEnum<
+  typeof CreatePromptMessagesPromptsResponse200Type
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const CreatePromptMessagesPromptsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type CreatePromptMessagesPromptsTtl = ClosedEnum<
+  typeof CreatePromptMessagesPromptsTtl
+>;
+
+export type CreatePromptMessagesPromptsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreatePromptMessagesPromptsResponse200Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: CreatePromptMessagesPromptsTtl;
+};
+
+export type CreatePromptMessagesPromptsToolMessage = {
+  /**
+   * The role of the messages author, in this case tool.
+   */
+  role: "tool";
+  /**
+   * The contents of the tool message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * Tool call that this message is responding to.
+   */
+  toolCallId: string | null;
+  cacheControl?: CreatePromptMessagesPromptsCacheControl | undefined;
+};
+
+export type CreatePromptContentPromptsResponse200ApplicationJson2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.RefusalPartSchema
+  | components.ReasoningPartSchema
+  | components.RedactedReasoningPartSchema;
+
+/**
+ * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+ */
+export type CreatePromptMessagesPromptsResponse200ApplicationJSONContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.RefusalPartSchema
+    | components.ReasoningPartSchema
+    | components.RedactedReasoningPartSchema
+  >;
+
+/**
+ * Data about a previous audio response from the model.
+ */
+export type CreatePromptMessagesPromptsAudio = {
+  /**
+   * Unique identifier for a previous audio response from the model.
+   */
+  id: string;
+};
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const CreatePromptMessagesPromptsResponseType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type CreatePromptMessagesPromptsResponseType = ClosedEnum<
+  typeof CreatePromptMessagesPromptsResponseType
+>;
+
+export type CreatePromptMessagesPromptsFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+  /**
+   * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+   */
+  arguments?: string | undefined;
+};
+
+export type CreatePromptMessagesPromptsToolCalls = {
+  /**
+   * The ID of the tool call.
+   */
+  id: string;
+  /**
+   * The type of the tool. Currently, only `function` is supported.
+   */
+  type: CreatePromptMessagesPromptsResponseType;
+  function: CreatePromptMessagesPromptsFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+export type CreatePromptMessagesPromptsAssistantMessage = {
+  /**
+   * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+   */
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.RefusalPartSchema
+      | components.ReasoningPartSchema
+      | components.RedactedReasoningPartSchema
+    >
+    | null
+    | undefined;
+  /**
+   * The refusal message by the assistant.
+   */
+  refusal?: string | null | undefined;
+  /**
+   * The role of the messages author, in this case `assistant`.
+   */
+  role: "assistant";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * Data about a previous audio response from the model.
+   */
+  audio?: CreatePromptMessagesPromptsAudio | null | undefined;
+  /**
+   * The tool calls generated by the model, such as function calls.
+   */
+  toolCalls?: Array<CreatePromptMessagesPromptsToolCalls> | undefined;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType =
+  {
+    Ephemeral: "ephemeral",
+  } as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType =
+  ClosedEnum<
+    typeof CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const CreatePrompt2PromptsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type CreatePrompt2PromptsTtl = ClosedEnum<
+  typeof CreatePrompt2PromptsTtl
+>;
+
+export type CreatePrompt2PromptsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: CreatePrompt2PromptsTtl;
+};
+
+export type CreatePrompt2Prompts4 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: CreatePrompt2PromptsCacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
+};
+
+export type CreatePromptContentPromptsResponse2002 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.ImageContentPartSchema
+  | components.AudioContentPartSchema
+  | CreatePrompt2Prompts4;
+
+/**
+ * The contents of the user message.
+ */
+export type CreatePromptMessagesPromptsResponse200Content =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.ImageContentPartSchema
+    | components.AudioContentPartSchema
+    | CreatePrompt2Prompts4
+  >;
+
+export type CreatePromptMessagesPromptsUserMessage = {
+  /**
+   * The role of the messages author, in this case `user`.
+   */
+  role: "user";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * The contents of the user message.
+   */
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.ImageContentPartSchema
+      | components.AudioContentPartSchema
+      | CreatePrompt2Prompts4
+    >;
+};
+
+/**
+ * The contents of the system message.
+ */
+export type CreatePromptMessagesPromptsResponseContent =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
+ */
+export type CreatePromptMessagesPromptsSystemMessage = {
+  /**
+   * The role of the messages author, in this case `system`.
+   */
+  role: "system";
+  /**
+   * The contents of the system message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+};
+
+export type CreatePromptPromptsResponseMessages =
+  | CreatePromptMessagesPromptsSystemMessage
+  | CreatePromptMessagesPromptsUserMessage
+  | CreatePromptMessagesPromptsAssistantMessage
+  | CreatePromptMessagesPromptsToolMessage;
+
+/**
+ * Prompt configuration with model and messages. Use this instead of prompt_config.
+ */
+export type PromptField = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: CreatePromptPromptsAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | CreatePromptResponseFormatPromptsText
+    | CreatePromptResponseFormatPromptsJSONObject
+    | CreatePromptResponseFormatPromptsResponse200JSONSchema
+    | undefined;
+  /**
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   */
+  reasoningEffort?: CreatePromptPromptsReasoningEffort | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: CreatePromptPromptsStreamOptions | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?:
+    | CreatePromptToolChoicePrompts2
+    | CreatePromptToolChoicePrompts1
+    | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<CreatePromptPromptsModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<CreatePromptPromptsGuardrails> | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreatePromptPromptsFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreatePromptPromptsRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreatePromptPromptsCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreatePromptLoadBalancerPrompts1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreatePromptPromptsTimeout | undefined;
+  /**
+   * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
+   */
+  messages?:
+    | Array<
+      | CreatePromptMessagesPromptsSystemMessage
+      | CreatePromptMessagesPromptsUserMessage
+      | CreatePromptMessagesPromptsAssistantMessage
+      | CreatePromptMessagesPromptsToolMessage
+    >
+    | undefined;
+  /**
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   */
+  model?: string | null | undefined;
+  version?: string | undefined;
 };
 
 export const CreatePromptUseCases = {
@@ -1480,41 +2261,27 @@ export type CreatePromptPrompt = {
    */
   description?: string | null | undefined;
   /**
-   * A list of messages compatible with the openAI schema
+   * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  promptConfig: CreatePromptPromptConfig;
+  promptConfig?: PromptConfig | undefined;
+  /**
+   * Prompt configuration with model and messages. Use this instead of prompt_config.
+   */
+  prompt: PromptField;
   metadata?: CreatePromptPromptsMetadata | undefined;
 };
 
 /** @internal */
-export const UseCases$inboundSchema: z.ZodNativeEnum<typeof UseCases> = z
+export const UseCases$outboundSchema: z.ZodNativeEnum<typeof UseCases> = z
   .nativeEnum(UseCases);
-/** @internal */
-export const UseCases$outboundSchema: z.ZodNativeEnum<typeof UseCases> =
-  UseCases$inboundSchema;
 
-/** @internal */
-export const CreatePromptLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptLanguage
-> = z.nativeEnum(CreatePromptLanguage);
 /** @internal */
 export const CreatePromptLanguage$outboundSchema: z.ZodNativeEnum<
   typeof CreatePromptLanguage
-> = CreatePromptLanguage$inboundSchema;
+> = z.nativeEnum(CreatePromptLanguage);
 
-/** @internal */
-export const CreatePromptMetadata$inboundSchema: z.ZodType<
-  CreatePromptMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  use_cases: z.array(UseCases$inboundSchema).optional(),
-  language: z.nullable(CreatePromptLanguage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "use_cases": "useCases",
-  });
-});
 /** @internal */
 export type CreatePromptMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
@@ -1542,1062 +2309,28 @@ export function createPromptMetadataToJSON(
     CreatePromptMetadata$outboundSchema.parse(createPromptMetadata),
   );
 }
-export function createPromptMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMetadata' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreatePromptRole$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptRole
-> = z.nativeEnum(CreatePromptRole);
-/** @internal */
-export const CreatePromptRole$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptRole
-> = CreatePromptRole$inboundSchema;
-
-/** @internal */
-export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
-  z.object({
-    file_data: z.string().optional(),
-    uri: z.string().optional(),
-    mimeType: z.string().optional(),
-    filename: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_data": "fileData",
-    });
-  });
-/** @internal */
-export type TwoFile$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
-
-/** @internal */
-export const TwoFile$outboundSchema: z.ZodType<
-  TwoFile$Outbound,
-  z.ZodTypeDef,
-  TwoFile
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-export function twoFileToJSON(twoFile: TwoFile): string {
-  return JSON.stringify(TwoFile$outboundSchema.parse(twoFile));
-}
-export function twoFileFromJSON(
-  jsonString: string,
-): SafeParseResult<TwoFile, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TwoFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwoFile' from JSON`,
-  );
-}
-
-/** @internal */
-export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("file"),
-    file: z.lazy(() => TwoFile$inboundSchema),
-  });
-/** @internal */
-export type Two3$Outbound = {
-  type: "file";
-  file: TwoFile$Outbound;
-};
-
-/** @internal */
-export const Two3$outboundSchema: z.ZodType<Two3$Outbound, z.ZodTypeDef, Two3> =
-  z.object({
-    type: z.literal("file"),
-    file: z.lazy(() => TwoFile$outboundSchema),
-  });
-
-export function two3ToJSON(two3: Two3): string {
-  return JSON.stringify(Two3$outboundSchema.parse(two3));
-}
-export function two3FromJSON(
-  jsonString: string,
-): SafeParseResult<Two3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Two3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two3' from JSON`,
-  );
-}
-
-/** @internal */
-export const TwoImageUrl$inboundSchema: z.ZodType<
-  TwoImageUrl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  url: z.string(),
-  detail: z.string().optional(),
-});
-/** @internal */
-export type TwoImageUrl$Outbound = {
-  url: string;
-  detail?: string | undefined;
-};
-
-/** @internal */
-export const TwoImageUrl$outboundSchema: z.ZodType<
-  TwoImageUrl$Outbound,
-  z.ZodTypeDef,
-  TwoImageUrl
-> = z.object({
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-export function twoImageUrlToJSON(twoImageUrl: TwoImageUrl): string {
-  return JSON.stringify(TwoImageUrl$outboundSchema.parse(twoImageUrl));
-}
-export function twoImageUrlFromJSON(
-  jsonString: string,
-): SafeParseResult<TwoImageUrl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TwoImageUrl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwoImageUrl' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePrompt22$inboundSchema: z.ZodType<
-  CreatePrompt22,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("image_url"),
-  image_url: z.lazy(() => TwoImageUrl$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
-  });
-});
-/** @internal */
-export type CreatePrompt22$Outbound = {
-  type: "image_url";
-  image_url: TwoImageUrl$Outbound;
-};
-
-/** @internal */
-export const CreatePrompt22$outboundSchema: z.ZodType<
-  CreatePrompt22$Outbound,
-  z.ZodTypeDef,
-  CreatePrompt22
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => TwoImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-export function createPrompt22ToJSON(createPrompt22: CreatePrompt22): string {
-  return JSON.stringify(CreatePrompt22$outboundSchema.parse(createPrompt22));
-}
-export function createPrompt22FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePrompt22, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePrompt22$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePrompt22' from JSON`,
-  );
-}
-
-/** @internal */
-export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("text"),
-    text: z.string(),
-  });
-/** @internal */
-export type Two1$Outbound = {
-  type: "text";
-  text: string;
-};
-
-/** @internal */
-export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
-  z.object({
-    type: z.literal("text"),
-    text: z.string(),
-  });
-
-export function two1ToJSON(two1: Two1): string {
-  return JSON.stringify(Two1$outboundSchema.parse(two1));
-}
-export function two1FromJSON(
-  jsonString: string,
-): SafeParseResult<Two1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Two1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two1' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptContent2$inboundSchema: z.ZodType<
-  CreatePromptContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => Two1$inboundSchema),
-  z.lazy(() => CreatePrompt22$inboundSchema),
-  z.lazy(() => Two3$inboundSchema),
-]);
-/** @internal */
-export type CreatePromptContent2$Outbound =
-  | Two1$Outbound
-  | CreatePrompt22$Outbound
-  | Two3$Outbound;
-
-/** @internal */
-export const CreatePromptContent2$outboundSchema: z.ZodType<
-  CreatePromptContent2$Outbound,
-  z.ZodTypeDef,
-  CreatePromptContent2
-> = z.union([
-  z.lazy(() => Two1$outboundSchema),
-  z.lazy(() => CreatePrompt22$outboundSchema),
-  z.lazy(() => Two3$outboundSchema),
-]);
-
-export function createPromptContent2ToJSON(
-  createPromptContent2: CreatePromptContent2,
-): string {
-  return JSON.stringify(
-    CreatePromptContent2$outboundSchema.parse(createPromptContent2),
-  );
-}
-export function createPromptContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptContent2' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptContent$inboundSchema: z.ZodType<
-  CreatePromptContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => Two1$inboundSchema),
-    z.lazy(() => CreatePrompt22$inboundSchema),
-    z.lazy(() => Two3$inboundSchema),
-  ])),
-]);
-/** @internal */
-export type CreatePromptContent$Outbound =
-  | string
-  | Array<Two1$Outbound | CreatePrompt22$Outbound | Two3$Outbound>;
-
-/** @internal */
-export const CreatePromptContent$outboundSchema: z.ZodType<
-  CreatePromptContent$Outbound,
-  z.ZodTypeDef,
-  CreatePromptContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => Two1$outboundSchema),
-    z.lazy(() => CreatePrompt22$outboundSchema),
-    z.lazy(() => Two3$outboundSchema),
-  ])),
-]);
-
-export function createPromptContentToJSON(
-  createPromptContent: CreatePromptContent,
-): string {
-  return JSON.stringify(
-    CreatePromptContent$outboundSchema.parse(createPromptContent),
-  );
-}
-export function createPromptContentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptContent' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptType
-> = z.nativeEnum(CreatePromptType);
-/** @internal */
-export const CreatePromptType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptType
-> = CreatePromptType$inboundSchema;
-
-/** @internal */
-export const CreatePromptFunction$inboundSchema: z.ZodType<
-  CreatePromptFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-/** @internal */
-export type CreatePromptFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
-
-/** @internal */
-export const CreatePromptFunction$outboundSchema: z.ZodType<
-  CreatePromptFunction$Outbound,
-  z.ZodTypeDef,
-  CreatePromptFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function createPromptFunctionToJSON(
-  createPromptFunction: CreatePromptFunction,
-): string {
-  return JSON.stringify(
-    CreatePromptFunction$outboundSchema.parse(createPromptFunction),
-  );
-}
-export function createPromptFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptFunction' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptToolCalls$inboundSchema: z.ZodType<
-  CreatePromptToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: CreatePromptType$inboundSchema,
-  function: z.lazy(() => CreatePromptFunction$inboundSchema),
-});
-/** @internal */
-export type CreatePromptToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: CreatePromptFunction$Outbound;
-};
-
-/** @internal */
-export const CreatePromptToolCalls$outboundSchema: z.ZodType<
-  CreatePromptToolCalls$Outbound,
-  z.ZodTypeDef,
-  CreatePromptToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: CreatePromptType$outboundSchema,
-  function: z.lazy(() => CreatePromptFunction$outboundSchema),
-});
-
-export function createPromptToolCallsToJSON(
-  createPromptToolCalls: CreatePromptToolCalls,
-): string {
-  return JSON.stringify(
-    CreatePromptToolCalls$outboundSchema.parse(createPromptToolCalls),
-  );
-}
-export function createPromptToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptToolCalls' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptMessages$inboundSchema: z.ZodType<
-  CreatePromptMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: CreatePromptRole$inboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => Two1$inboundSchema),
-        z.lazy(() => CreatePrompt22$inboundSchema),
-        z.lazy(() => Two3$inboundSchema),
-      ])),
-    ]),
-  ),
-  tool_calls: z.array(z.lazy(() => CreatePromptToolCalls$inboundSchema))
-    .optional(),
-  tool_call_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "tool_call_id": "toolCallId",
-  });
-});
-/** @internal */
-export type CreatePromptMessages$Outbound = {
-  role: string;
-  content:
-    | string
-    | Array<Two1$Outbound | CreatePrompt22$Outbound | Two3$Outbound>
-    | null;
-  tool_calls?: Array<CreatePromptToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
-};
-
-/** @internal */
-export const CreatePromptMessages$outboundSchema: z.ZodType<
-  CreatePromptMessages$Outbound,
-  z.ZodTypeDef,
-  CreatePromptMessages
-> = z.object({
-  role: CreatePromptRole$outboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => Two1$outboundSchema),
-        z.lazy(() => CreatePrompt22$outboundSchema),
-        z.lazy(() => Two3$outboundSchema),
-      ])),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => CreatePromptToolCalls$outboundSchema))
-    .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function createPromptMessagesToJSON(
-  createPromptMessages: CreatePromptMessages,
-): string {
-  return JSON.stringify(
-    CreatePromptMessages$outboundSchema.parse(createPromptMessages),
-  );
-}
-export function createPromptMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessages' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = z.nativeEnum(CreatePromptFormat);
-/** @internal */
-export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = CreatePromptFormat$inboundSchema;
-
-/** @internal */
-export const Six$inboundSchema: z.ZodNativeEnum<typeof Six> = z.nativeEnum(Six);
-/** @internal */
-export const Six$outboundSchema: z.ZodNativeEnum<typeof Six> =
-  Six$inboundSchema;
-
-/** @internal */
-export const Five$inboundSchema: z.ZodNativeEnum<typeof Five> = z.nativeEnum(
-  Five,
-);
-/** @internal */
-export const Five$outboundSchema: z.ZodNativeEnum<typeof Five> =
-  Five$inboundSchema;
-
-/** @internal */
-export const ResponseFormat4$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormat4
-> = z.nativeEnum(ResponseFormat4);
-/** @internal */
-export const ResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormat4
-> = ResponseFormat4$inboundSchema;
-
-/** @internal */
-export const CreatePromptResponseFormatPromptsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsRequestType> = z
-    .nativeEnum(CreatePromptResponseFormatPromptsRequestType);
-/** @internal */
-export const CreatePromptResponseFormatPromptsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsRequestType> =
-    CreatePromptResponseFormatPromptsRequestType$inboundSchema;
-
-/** @internal */
-export const ResponseFormat3$inboundSchema: z.ZodType<
-  ResponseFormat3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePromptResponseFormatPromptsRequestType$inboundSchema,
-});
-/** @internal */
-export type ResponseFormat3$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const ResponseFormat3$outboundSchema: z.ZodType<
-  ResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  ResponseFormat3
-> = z.object({
-  type: CreatePromptResponseFormatPromptsRequestType$outboundSchema,
-});
-
-export function responseFormat3ToJSON(
-  responseFormat3: ResponseFormat3,
-): string {
-  return JSON.stringify(ResponseFormat3$outboundSchema.parse(responseFormat3));
-}
-export function responseFormat3FromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseFormat3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormat3' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> = z.nativeEnum(
-    CreatePromptResponseFormatPromptsType,
-  );
-/** @internal */
-export const CreatePromptResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> =
-    CreatePromptResponseFormatPromptsType$inboundSchema;
-
-/** @internal */
-export const ResponseFormat2$inboundSchema: z.ZodType<
-  ResponseFormat2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePromptResponseFormatPromptsType$inboundSchema,
-});
-/** @internal */
-export type ResponseFormat2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const ResponseFormat2$outboundSchema: z.ZodType<
-  ResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  ResponseFormat2
-> = z.object({
-  type: CreatePromptResponseFormatPromptsType$outboundSchema,
-});
-
-export function responseFormat2ToJSON(
-  responseFormat2: ResponseFormat2,
-): string {
-  return JSON.stringify(ResponseFormat2$outboundSchema.parse(responseFormat2));
-}
-export function responseFormat2FromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseFormat2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormat2' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormatType
-> = z.nativeEnum(CreatePromptResponseFormatType);
-/** @internal */
-export const CreatePromptResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormatType
-> = CreatePromptResponseFormatType$inboundSchema;
-
-/** @internal */
-export const CreatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
-/** @internal */
-export type CreatePromptResponseFormatJsonSchema$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
-
-/** @internal */
-export const CreatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormatJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
-
-export function createPromptResponseFormatJsonSchemaToJSON(
-  createPromptResponseFormatJsonSchema: CreatePromptResponseFormatJsonSchema,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormatJsonSchema$outboundSchema.parse(
-      createPromptResponseFormatJsonSchema,
-    ),
-  );
-}
-export function createPromptResponseFormatJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatJsonSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatJsonSchema' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseFormat1$inboundSchema: z.ZodType<
-  ResponseFormat1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePromptResponseFormatType$inboundSchema,
-  display_name: z.string().optional(),
-  json_schema: z.lazy(() => CreatePromptResponseFormatJsonSchema$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "json_schema": "jsonSchema",
-  });
-});
-/** @internal */
-export type ResponseFormat1$Outbound = {
-  type: string;
-  display_name?: string | undefined;
-  json_schema: CreatePromptResponseFormatJsonSchema$Outbound;
-};
-
-/** @internal */
-export const ResponseFormat1$outboundSchema: z.ZodType<
-  ResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  ResponseFormat1
-> = z.object({
-  type: CreatePromptResponseFormatType$outboundSchema,
-  displayName: z.string().optional(),
-  jsonSchema: z.lazy(() => CreatePromptResponseFormatJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function responseFormat1ToJSON(
-  responseFormat1: ResponseFormat1,
-): string {
-  return JSON.stringify(ResponseFormat1$outboundSchema.parse(responseFormat1));
-}
-export function responseFormat1FromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseFormat1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseFormat1' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptResponseFormat$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => ResponseFormat1$inboundSchema),
-  z.lazy(() => ResponseFormat2$inboundSchema),
-  z.lazy(() => ResponseFormat3$inboundSchema),
-  ResponseFormat4$inboundSchema,
-  Five$inboundSchema,
-  Six$inboundSchema,
-]);
-/** @internal */
-export type CreatePromptResponseFormat$Outbound =
-  | ResponseFormat1$Outbound
-  | ResponseFormat2$Outbound
-  | ResponseFormat3$Outbound
-  | string
-  | string
-  | string;
-
-/** @internal */
-export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormat
-> = z.union([
-  z.lazy(() => ResponseFormat1$outboundSchema),
-  z.lazy(() => ResponseFormat2$outboundSchema),
-  z.lazy(() => ResponseFormat3$outboundSchema),
-  ResponseFormat4$outboundSchema,
-  Five$outboundSchema,
-  Six$outboundSchema,
-]);
-
-export function createPromptResponseFormatToJSON(
-  createPromptResponseFormat: CreatePromptResponseFormat,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat$outboundSchema.parse(createPromptResponseFormat),
-  );
-}
-export function createPromptResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const PhotoRealVersion$inboundSchema: z.ZodNativeEnum<
-  typeof PhotoRealVersion
-> = z.nativeEnum(PhotoRealVersion);
-/** @internal */
-export const PhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof PhotoRealVersion
-> = PhotoRealVersion$inboundSchema;
-
-/** @internal */
-export const EncodingFormat$inboundSchema: z.ZodNativeEnum<
-  typeof EncodingFormat
-> = z.nativeEnum(EncodingFormat);
-/** @internal */
-export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof EncodingFormat
-> = EncodingFormat$inboundSchema;
-
-/** @internal */
-export const CreatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptReasoningEffort
-> = z.nativeEnum(CreatePromptReasoningEffort);
-/** @internal */
-export const CreatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptReasoningEffort
-> = CreatePromptReasoningEffort$inboundSchema;
-
-/** @internal */
-export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
-  .nativeEnum(Verbosity);
-/** @internal */
-export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> =
-  Verbosity$inboundSchema;
-
-/** @internal */
-export const ThinkingLevel$inboundSchema: z.ZodNativeEnum<
-  typeof ThinkingLevel
-> = z.nativeEnum(ThinkingLevel);
-/** @internal */
-export const ThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof ThinkingLevel
-> = ThinkingLevel$inboundSchema;
-
-/** @internal */
-export const ModelParameters$inboundSchema: z.ZodType<
-  ModelParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: CreatePromptFormat$inboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => ResponseFormat1$inboundSchema),
-      z.lazy(() => ResponseFormat2$inboundSchema),
-      z.lazy(() => ResponseFormat3$inboundSchema),
-      ResponseFormat4$inboundSchema,
-      Five$inboundSchema,
-      Six$inboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
-  encoding_format: EncodingFormat$inboundSchema.optional(),
-  reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: Verbosity$inboundSchema.optional(),
-  thinkingLevel: ThinkingLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encoding_format": "encodingFormat",
-  });
-});
-/** @internal */
-export type ModelParameters$Outbound = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  numImages?: number | undefined;
-  seed?: number | undefined;
-  format?: string | undefined;
-  dimensions?: string | undefined;
-  quality?: string | undefined;
-  style?: string | undefined;
-  responseFormat?:
-    | ResponseFormat1$Outbound
-    | ResponseFormat2$Outbound
-    | ResponseFormat3$Outbound
-    | string
-    | string
-    | string
-    | null
-    | undefined;
-  photoRealVersion?: string | undefined;
-  encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-  verbosity?: string | undefined;
-  thinkingLevel?: string | undefined;
-};
-
-/** @internal */
-export const ModelParameters$outboundSchema: z.ZodType<
-  ModelParameters$Outbound,
-  z.ZodTypeDef,
-  ModelParameters
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: CreatePromptFormat$outboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => ResponseFormat1$outboundSchema),
-      z.lazy(() => ResponseFormat2$outboundSchema),
-      z.lazy(() => ResponseFormat3$outboundSchema),
-      ResponseFormat4$outboundSchema,
-      Five$outboundSchema,
-      Six$outboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: EncodingFormat$outboundSchema.optional(),
-  reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: Verbosity$outboundSchema.optional(),
-  thinkingLevel: ThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
-
-export function modelParametersToJSON(
-  modelParameters: ModelParameters,
-): string {
-  return JSON.stringify(ModelParameters$outboundSchema.parse(modelParameters));
-}
-export function modelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<ModelParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const PromptConfiguration$inboundSchema: z.ZodType<
-  PromptConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string().optional(),
-  messages: z.array(z.lazy(() => CreatePromptMessages$inboundSchema)),
-  model_parameters: z.lazy(() => ModelParameters$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_parameters": "modelParameters",
-  });
-});
-/** @internal */
-export type PromptConfiguration$Outbound = {
-  model?: string | undefined;
-  messages: Array<CreatePromptMessages$Outbound>;
-  model_parameters?: ModelParameters$Outbound | undefined;
-};
-
-/** @internal */
-export const PromptConfiguration$outboundSchema: z.ZodType<
-  PromptConfiguration$Outbound,
-  z.ZodTypeDef,
-  PromptConfiguration
-> = z.object({
-  model: z.string().optional(),
-  messages: z.array(z.lazy(() => CreatePromptMessages$outboundSchema)),
-  modelParameters: z.lazy(() => ModelParameters$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelParameters: "model_parameters",
-  });
-});
-
-export function promptConfigurationToJSON(
-  promptConfiguration: PromptConfiguration,
-): string {
-  return JSON.stringify(
-    PromptConfiguration$outboundSchema.parse(promptConfiguration),
-  );
-}
-export function promptConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptConfiguration' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePromptContentPromptsRequestRequestBody2$inboundSchema:
-  z.ZodType<
-    CreatePromptContentPromptsRequestRequestBody2,
-    z.ZodTypeDef,
-    unknown
-  > = components.TextContentPartSchema$inboundSchema;
-/** @internal */
-export type CreatePromptContentPromptsRequestRequestBody2$Outbound =
+export type CreatePromptContentPromptsRequest2$Outbound =
   components.TextContentPartSchema$Outbound;
 
 /** @internal */
-export const CreatePromptContentPromptsRequestRequestBody2$outboundSchema:
-  z.ZodType<
-    CreatePromptContentPromptsRequestRequestBody2$Outbound,
-    z.ZodTypeDef,
-    CreatePromptContentPromptsRequestRequestBody2
-  > = components.TextContentPartSchema$outboundSchema;
+export const CreatePromptContentPromptsRequest2$outboundSchema: z.ZodType<
+  CreatePromptContentPromptsRequest2$Outbound,
+  z.ZodTypeDef,
+  CreatePromptContentPromptsRequest2
+> = components.TextContentPartSchema$outboundSchema;
 
-export function createPromptContentPromptsRequestRequestBody2ToJSON(
-  createPromptContentPromptsRequestRequestBody2:
-    CreatePromptContentPromptsRequestRequestBody2,
+export function createPromptContentPromptsRequest2ToJSON(
+  createPromptContentPromptsRequest2: CreatePromptContentPromptsRequest2,
 ): string {
   return JSON.stringify(
-    CreatePromptContentPromptsRequestRequestBody2$outboundSchema.parse(
-      createPromptContentPromptsRequestRequestBody2,
+    CreatePromptContentPromptsRequest2$outboundSchema.parse(
+      createPromptContentPromptsRequest2,
     ),
   );
 }
-export function createPromptContentPromptsRequestRequestBody2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreatePromptContentPromptsRequestRequestBody2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptContentPromptsRequestRequestBody2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptContentPromptsRequestRequestBody2' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesPromptsRequestRequestBodyContent$inboundSchema:
-  z.ZodType<
-    CreatePromptMessagesPromptsRequestRequestBodyContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
 /** @internal */
 export type CreatePromptMessagesPromptsRequestRequestBodyContent$Outbound =
   | string
@@ -2624,49 +2357,17 @@ export function createPromptMessagesPromptsRequestRequestBodyContentToJSON(
     ),
   );
 }
-export function createPromptMessagesPromptsRequestRequestBodyContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreatePromptMessagesPromptsRequestRequestBodyContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptMessagesPromptsRequestRequestBodyContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptMessagesPromptsRequestRequestBodyContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptMessagesPromptsType
-> = z.nativeEnum(CreatePromptMessagesPromptsType);
 /** @internal */
 export const CreatePromptMessagesPromptsType$outboundSchema: z.ZodNativeEnum<
   typeof CreatePromptMessagesPromptsType
-> = CreatePromptMessagesPromptsType$inboundSchema;
+> = z.nativeEnum(CreatePromptMessagesPromptsType);
 
-/** @internal */
-export const CreatePromptMessagesTtl$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptMessagesTtl
-> = z.nativeEnum(CreatePromptMessagesTtl);
 /** @internal */
 export const CreatePromptMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreatePromptMessagesTtl
-> = CreatePromptMessagesTtl$inboundSchema;
+> = z.nativeEnum(CreatePromptMessagesTtl);
 
-/** @internal */
-export const CreatePromptMessagesCacheControl$inboundSchema: z.ZodType<
-  CreatePromptMessagesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePromptMessagesPromptsType$inboundSchema,
-  ttl: CreatePromptMessagesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type CreatePromptMessagesCacheControl$Outbound = {
   type: string;
@@ -2692,36 +2393,7 @@ export function createPromptMessagesCacheControlToJSON(
     ),
   );
 }
-export function createPromptMessagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesToolMessage$inboundSchema: z.ZodType<
-  CreatePromptMessagesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() => CreatePromptMessagesCacheControl$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type CreatePromptMessagesToolMessage$Outbound = {
   role: "tool";
@@ -2760,41 +2432,19 @@ export function createPromptMessagesToolMessageToJSON(
     ),
   );
 }
-export function createPromptMessagesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesToolMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesToolMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreatePromptContentPromptsRequest2$inboundSchema: z.ZodType<
-  CreatePromptContentPromptsRequest2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
-/** @internal */
-export type CreatePromptContentPromptsRequest2$Outbound =
+export type CreatePromptContentPrompts2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const CreatePromptContentPromptsRequest2$outboundSchema: z.ZodType<
-  CreatePromptContentPromptsRequest2$Outbound,
+export const CreatePromptContentPrompts2$outboundSchema: z.ZodType<
+  CreatePromptContentPrompts2$Outbound,
   z.ZodTypeDef,
-  CreatePromptContentPromptsRequest2
+  CreatePromptContentPrompts2
 > = z.union([
   components.TextContentPartSchema$outboundSchema.and(
     z.object({ type: z.literal("text") }),
@@ -2804,44 +2454,16 @@ export const CreatePromptContentPromptsRequest2$outboundSchema: z.ZodType<
   components.RedactedReasoningPartSchema$outboundSchema,
 ]);
 
-export function createPromptContentPromptsRequest2ToJSON(
-  createPromptContentPromptsRequest2: CreatePromptContentPromptsRequest2,
+export function createPromptContentPrompts2ToJSON(
+  createPromptContentPrompts2: CreatePromptContentPrompts2,
 ): string {
   return JSON.stringify(
-    CreatePromptContentPromptsRequest2$outboundSchema.parse(
-      createPromptContentPromptsRequest2,
+    CreatePromptContentPrompts2$outboundSchema.parse(
+      createPromptContentPrompts2,
     ),
   );
 }
-export function createPromptContentPromptsRequest2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptContentPromptsRequest2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptContentPromptsRequest2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptContentPromptsRequest2' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesPromptsRequestContent$inboundSchema: z.ZodType<
-  CreatePromptMessagesPromptsRequestContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.RefusalPartSchema$inboundSchema,
-      components.ReasoningPartSchema$inboundSchema,
-      components.RedactedReasoningPartSchema$inboundSchema,
-    ]),
-  ),
-]);
 /** @internal */
 export type CreatePromptMessagesPromptsRequestContent$Outbound =
   | string
@@ -2882,30 +2504,7 @@ export function createPromptMessagesPromptsRequestContentToJSON(
     ),
   );
 }
-export function createPromptMessagesPromptsRequestContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreatePromptMessagesPromptsRequestContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptMessagesPromptsRequestContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptMessagesPromptsRequestContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesAudio$inboundSchema: z.ZodType<
-  CreatePromptMessagesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type CreatePromptMessagesAudio$Outbound = {
   id: string;
@@ -2927,34 +2526,12 @@ export function createPromptMessagesAudioToJSON(
     CreatePromptMessagesAudio$outboundSchema.parse(createPromptMessagesAudio),
   );
 }
-export function createPromptMessagesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptMessagesType
-> = z.nativeEnum(CreatePromptMessagesType);
 /** @internal */
 export const CreatePromptMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof CreatePromptMessagesType
-> = CreatePromptMessagesType$inboundSchema;
+> = z.nativeEnum(CreatePromptMessagesType);
 
-/** @internal */
-export const CreatePromptMessagesFunction$inboundSchema: z.ZodType<
-  CreatePromptMessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type CreatePromptMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2980,31 +2557,7 @@ export function createPromptMessagesFunctionToJSON(
     ),
   );
 }
-export function createPromptMessagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesToolCalls$inboundSchema: z.ZodType<
-  CreatePromptMessagesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: CreatePromptMessagesType$inboundSchema,
-  function: z.lazy(() => CreatePromptMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type CreatePromptMessagesToolCalls$Outbound = {
   id: string;
@@ -3038,49 +2591,7 @@ export function createPromptMessagesToolCallsToJSON(
     ),
   );
 }
-export function createPromptMessagesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesAssistantMessage$inboundSchema: z.ZodType<
-  CreatePromptMessagesAssistantMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$inboundSchema,
-          components.ReasoningPartSchema$inboundSchema,
-          components.RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => CreatePromptMessagesAudio$inboundSchema))
-    .optional(),
-  tool_calls: z.array(z.lazy(() => CreatePromptMessagesToolCalls$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-  });
-});
 /** @internal */
 export type CreatePromptMessagesAssistantMessage$Outbound = {
   content?:
@@ -3143,44 +2654,17 @@ export function createPromptMessagesAssistantMessageToJSON(
     ),
   );
 }
-export function createPromptMessagesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesAssistantMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptMessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesAssistantMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePrompt2PromptsRequestRequestBodyPromptType> = z
-    .nativeEnum(CreatePrompt2PromptsRequestRequestBodyPromptType);
-/** @internal */
-export const CreatePrompt2PromptsRequestRequestBodyPromptType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePrompt2PromptsRequestRequestBodyPromptType> =
-    CreatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema;
+export const CreatePrompt2PromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePrompt2PromptsType
+> = z.nativeEnum(CreatePrompt2PromptsType);
 
-/** @internal */
-export const CreatePrompt2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePrompt2Ttl
-> = z.nativeEnum(CreatePrompt2Ttl);
 /** @internal */
 export const CreatePrompt2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CreatePrompt2Ttl
-> = CreatePrompt2Ttl$inboundSchema;
+> = z.nativeEnum(CreatePrompt2Ttl);
 
-/** @internal */
-export const CreatePrompt2CacheControl$inboundSchema: z.ZodType<
-  CreatePrompt2CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePrompt2PromptsRequestRequestBodyPromptType$inboundSchema,
-  ttl: CreatePrompt2Ttl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type CreatePrompt2CacheControl$Outbound = {
   type: string;
@@ -3193,7 +2677,7 @@ export const CreatePrompt2CacheControl$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePrompt2CacheControl
 > = z.object({
-  type: CreatePrompt2PromptsRequestRequestBodyPromptType$outboundSchema,
+  type: CreatePrompt2PromptsType$outboundSchema,
   ttl: CreatePrompt2Ttl$outboundSchema.default("5m"),
 });
 
@@ -3204,31 +2688,7 @@ export function createPrompt2CacheControlToJSON(
     CreatePrompt2CacheControl$outboundSchema.parse(createPrompt2CacheControl),
   );
 }
-export function createPrompt2CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePrompt2CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePrompt2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePrompt2CacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePrompt24$inboundSchema: z.ZodType<
-  CreatePrompt24,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => CreatePrompt2CacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type CreatePrompt24$Outbound = {
   type: "file";
@@ -3255,41 +2715,19 @@ export const CreatePrompt24$outboundSchema: z.ZodType<
 export function createPrompt24ToJSON(createPrompt24: CreatePrompt24): string {
   return JSON.stringify(CreatePrompt24$outboundSchema.parse(createPrompt24));
 }
-export function createPrompt24FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePrompt24, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePrompt24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePrompt24' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreatePromptContentPrompts2$inboundSchema: z.ZodType<
-  CreatePromptContentPrompts2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => CreatePrompt24$inboundSchema),
-]);
-/** @internal */
-export type CreatePromptContentPrompts2$Outbound =
+export type CreatePromptContent2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
   | CreatePrompt24$Outbound;
 
 /** @internal */
-export const CreatePromptContentPrompts2$outboundSchema: z.ZodType<
-  CreatePromptContentPrompts2$Outbound,
+export const CreatePromptContent2$outboundSchema: z.ZodType<
+  CreatePromptContent2$Outbound,
   z.ZodTypeDef,
-  CreatePromptContentPrompts2
+  CreatePromptContent2
 > = z.union([
   components.TextContentPartSchema$outboundSchema.and(
     z.object({ type: z.literal("text") }),
@@ -3299,43 +2737,14 @@ export const CreatePromptContentPrompts2$outboundSchema: z.ZodType<
   z.lazy(() => CreatePrompt24$outboundSchema),
 ]);
 
-export function createPromptContentPrompts2ToJSON(
-  createPromptContentPrompts2: CreatePromptContentPrompts2,
+export function createPromptContent2ToJSON(
+  createPromptContent2: CreatePromptContent2,
 ): string {
   return JSON.stringify(
-    CreatePromptContentPrompts2$outboundSchema.parse(
-      createPromptContentPrompts2,
-    ),
-  );
-}
-export function createPromptContentPrompts2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptContentPrompts2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptContentPrompts2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptContentPrompts2' from JSON`,
+    CreatePromptContent2$outboundSchema.parse(createPromptContent2),
   );
 }
 
-/** @internal */
-export const CreatePromptMessagesPromptsContent$inboundSchema: z.ZodType<
-  CreatePromptMessagesPromptsContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => CreatePrompt24$inboundSchema),
-    ]),
-  ),
-]);
 /** @internal */
 export type CreatePromptMessagesPromptsContent$Outbound =
   | string
@@ -3374,39 +2783,7 @@ export function createPromptMessagesPromptsContentToJSON(
     ),
   );
 }
-export function createPromptMessagesPromptsContentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesPromptsContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptMessagesPromptsContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesPromptsContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesUserMessage$inboundSchema: z.ZodType<
-  CreatePromptMessagesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => CreatePrompt24$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type CreatePromptMessagesUserMessage$Outbound = {
   role: "user";
@@ -3453,25 +2830,7 @@ export function createPromptMessagesUserMessageToJSON(
     ),
   );
 }
-export function createPromptMessagesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesUserMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesUserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesContent$inboundSchema: z.ZodType<
-  CreatePromptMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type CreatePromptMessagesContent$Outbound =
   | string
@@ -3496,29 +2855,7 @@ export function createPromptMessagesContentToJSON(
     ),
   );
 }
-export function createPromptMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptMessagesSystemMessage$inboundSchema: z.ZodType<
-  CreatePromptMessagesSystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type CreatePromptMessagesSystemMessage$Outbound = {
   role: "system";
@@ -3549,39 +2886,19 @@ export function createPromptMessagesSystemMessageToJSON(
     ),
   );
 }
-export function createPromptMessagesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptMessagesSystemMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMessagesSystemMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreatePromptPromptsMessages$inboundSchema: z.ZodType<
-  CreatePromptPromptsMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreatePromptMessagesSystemMessage$inboundSchema),
-  z.lazy(() => CreatePromptMessagesUserMessage$inboundSchema),
-  z.lazy(() => CreatePromptMessagesAssistantMessage$inboundSchema),
-  z.lazy(() => CreatePromptMessagesToolMessage$inboundSchema),
-]);
-/** @internal */
-export type CreatePromptPromptsMessages$Outbound =
+export type CreatePromptMessages$Outbound =
   | CreatePromptMessagesSystemMessage$Outbound
   | CreatePromptMessagesUserMessage$Outbound
   | CreatePromptMessagesAssistantMessage$Outbound
   | CreatePromptMessagesToolMessage$Outbound;
 
 /** @internal */
-export const CreatePromptPromptsMessages$outboundSchema: z.ZodType<
-  CreatePromptPromptsMessages$Outbound,
+export const CreatePromptMessages$outboundSchema: z.ZodType<
+  CreatePromptMessages$Outbound,
   z.ZodTypeDef,
-  CreatePromptPromptsMessages
+  CreatePromptMessages
 > = z.union([
   z.lazy(() => CreatePromptMessagesSystemMessage$outboundSchema),
   z.lazy(() => CreatePromptMessagesUserMessage$outboundSchema),
@@ -3589,39 +2906,50 @@ export const CreatePromptPromptsMessages$outboundSchema: z.ZodType<
   z.lazy(() => CreatePromptMessagesToolMessage$outboundSchema),
 ]);
 
-export function createPromptPromptsMessagesToJSON(
-  createPromptPromptsMessages: CreatePromptPromptsMessages,
+export function createPromptMessagesToJSON(
+  createPromptMessages: CreatePromptMessages,
 ): string {
   return JSON.stringify(
-    CreatePromptPromptsMessages$outboundSchema.parse(
-      createPromptPromptsMessages,
-    ),
-  );
-}
-export function createPromptPromptsMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptPromptsMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptPromptsMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsMessages' from JSON`,
+    CreatePromptMessages$outboundSchema.parse(createPromptMessages),
   );
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsRequestJsonSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+export const CreatePromptVoice$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptVoice
+> = z.nativeEnum(CreatePromptVoice);
+
 /** @internal */
-export type CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound = {
+export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptFormat
+> = z.nativeEnum(CreatePromptFormat);
+
+/** @internal */
+export type CreatePromptAudio$Outbound = {
+  voice: string;
+  format: string;
+};
+
+/** @internal */
+export const CreatePromptAudio$outboundSchema: z.ZodType<
+  CreatePromptAudio$Outbound,
+  z.ZodTypeDef,
+  CreatePromptAudio
+> = z.object({
+  voice: CreatePromptVoice$outboundSchema,
+  format: CreatePromptFormat$outboundSchema,
+});
+
+export function createPromptAudioToJSON(
+  createPromptAudio: CreatePromptAudio,
+): string {
+  return JSON.stringify(
+    CreatePromptAudio$outboundSchema.parse(createPromptAudio),
+  );
+}
+
+/** @internal */
+export type CreatePromptResponseFormatPromptsJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
@@ -3629,11 +2957,11 @@ export type CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound = {
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema:
+export const CreatePromptResponseFormatPromptsJsonSchema$outboundSchema:
   z.ZodType<
-    CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound,
+    CreatePromptResponseFormatPromptsJsonSchema$Outbound,
     z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsRequestJsonSchema
+    CreatePromptResponseFormatPromptsJsonSchema
   > = z.object({
     description: z.string().optional(),
     name: z.string(),
@@ -3641,105 +2969,49 @@ export const CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema:
     strict: z.boolean().default(false),
   });
 
-export function createPromptResponseFormatPromptsRequestJsonSchemaToJSON(
-  createPromptResponseFormatPromptsRequestJsonSchema:
-    CreatePromptResponseFormatPromptsRequestJsonSchema,
+export function createPromptResponseFormatPromptsJsonSchemaToJSON(
+  createPromptResponseFormatPromptsJsonSchema:
+    CreatePromptResponseFormatPromptsJsonSchema,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema.parse(
-      createPromptResponseFormatPromptsRequestJsonSchema,
+    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema.parse(
+      createPromptResponseFormatPromptsJsonSchema,
     ),
-  );
-}
-export function createPromptResponseFormatPromptsRequestJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreatePromptResponseFormatPromptsRequestJsonSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsRequestJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsJSONSchema$inboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsJSONSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      CreatePromptResponseFormatPromptsRequestJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
-/** @internal */
-export type CreatePromptResponseFormatPromptsJSONSchema$Outbound = {
+export type CreatePromptResponseFormatJSONSchema$Outbound = {
   type: "json_schema";
-  json_schema: CreatePromptResponseFormatPromptsRequestJsonSchema$Outbound;
+  json_schema: CreatePromptResponseFormatPromptsJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsJSONSchema$outboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsJSONSchema$Outbound,
-    z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsJSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      CreatePromptResponseFormatPromptsRequestJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
+export const CreatePromptResponseFormatJSONSchema$outboundSchema: z.ZodType<
+  CreatePromptResponseFormatJSONSchema$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormatJSONSchema
+> = z.object({
+  type: z.literal("json_schema"),
+  jsonSchema: z.lazy(() =>
+    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
   });
+});
 
-export function createPromptResponseFormatPromptsJSONSchemaToJSON(
-  createPromptResponseFormatPromptsJSONSchema:
-    CreatePromptResponseFormatPromptsJSONSchema,
+export function createPromptResponseFormatJSONSchemaToJSON(
+  createPromptResponseFormatJSONSchema: CreatePromptResponseFormatJSONSchema,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsJSONSchema$outboundSchema.parse(
-      createPromptResponseFormatPromptsJSONSchema,
+    CreatePromptResponseFormatJSONSchema$outboundSchema.parse(
+      createPromptResponseFormatJSONSchema,
     ),
   );
 }
-export function createPromptResponseFormatPromptsJSONSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreatePromptResponseFormatPromptsJSONSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptResponseFormatPromptsJSONSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsJSONSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptResponseFormatJSONObject$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatJSONObject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("json_object"),
-});
 /** @internal */
 export type CreatePromptResponseFormatJSONObject$Outbound = {
   type: "json_object";
@@ -3763,25 +3035,7 @@ export function createPromptResponseFormatJSONObjectToJSON(
     ),
   );
 }
-export function createPromptResponseFormatJSONObjectFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatJSONObject, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptResponseFormatJSONObject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatJSONObject' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptResponseFormatText$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatText,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-});
 /** @internal */
 export type CreatePromptResponseFormatText$Outbound = {
   type: "text";
@@ -3805,90 +3059,421 @@ export function createPromptResponseFormatTextToJSON(
     ),
   );
 }
-export function createPromptResponseFormatTextFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatText, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptResponseFormatText$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatText' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
-  CreatePromptPromptsResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreatePromptResponseFormatText$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatJSONObject$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$inboundSchema),
-]);
-/** @internal */
-export type CreatePromptPromptsResponseFormat$Outbound =
+export type CreatePromptResponseFormat$Outbound =
   | CreatePromptResponseFormatText$Outbound
   | CreatePromptResponseFormatJSONObject$Outbound
-  | CreatePromptResponseFormatPromptsJSONSchema$Outbound;
+  | CreatePromptResponseFormatJSONSchema$Outbound;
 
 /** @internal */
-export const CreatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
-  CreatePromptPromptsResponseFormat$Outbound,
+export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat$Outbound,
   z.ZodTypeDef,
-  CreatePromptPromptsResponseFormat
+  CreatePromptResponseFormat
 > = z.union([
   z.lazy(() => CreatePromptResponseFormatText$outboundSchema),
   z.lazy(() => CreatePromptResponseFormatJSONObject$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormatJSONSchema$outboundSchema),
 ]);
 
-export function createPromptPromptsResponseFormatToJSON(
-  createPromptPromptsResponseFormat: CreatePromptPromptsResponseFormat,
+export function createPromptResponseFormatToJSON(
+  createPromptResponseFormat: CreatePromptResponseFormat,
 ): string {
   return JSON.stringify(
-    CreatePromptPromptsResponseFormat$outboundSchema.parse(
-      createPromptPromptsResponseFormat,
-    ),
-  );
-}
-export function createPromptPromptsResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptPromptsResponseFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsResponseFormat' from JSON`,
+    CreatePromptResponseFormat$outboundSchema.parse(createPromptResponseFormat),
   );
 }
 
 /** @internal */
-export const PromptInput$inboundSchema: z.ZodType<
-  PromptInput,
+export const CreatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptReasoningEffort
+> = z.nativeEnum(CreatePromptReasoningEffort);
+
+/** @internal */
+export type CreatePromptStop$Outbound = string | Array<string>;
+
+/** @internal */
+export const CreatePromptStop$outboundSchema: z.ZodType<
+  CreatePromptStop$Outbound,
   z.ZodTypeDef,
-  unknown
+  CreatePromptStop
+> = z.union([z.string(), z.array(z.string())]);
+
+export function createPromptStopToJSON(
+  createPromptStop: CreatePromptStop,
+): string {
+  return JSON.stringify(
+    CreatePromptStop$outboundSchema.parse(createPromptStop),
+  );
+}
+
+/** @internal */
+export type CreatePromptStreamOptions$Outbound = {
+  include_usage?: boolean | undefined;
+};
+
+/** @internal */
+export const CreatePromptStreamOptions$outboundSchema: z.ZodType<
+  CreatePromptStreamOptions$Outbound,
+  z.ZodTypeDef,
+  CreatePromptStreamOptions
 > = z.object({
-  messages: z.array(
-    z.union([
-      z.lazy(() => CreatePromptMessagesSystemMessage$inboundSchema),
-      z.lazy(() => CreatePromptMessagesUserMessage$inboundSchema),
-      z.lazy(() => CreatePromptMessagesAssistantMessage$inboundSchema),
-      z.lazy(() => CreatePromptMessagesToolMessage$inboundSchema),
-    ]),
-  ),
-  model: z.string().optional(),
-  temperature: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  response_format: z.union([
-    z.lazy(() => CreatePromptResponseFormatText$inboundSchema),
-    z.lazy(() => CreatePromptResponseFormatJSONObject$inboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$inboundSchema),
-  ]).optional(),
+  includeUsage: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "max_tokens": "maxTokens",
-    "response_format": "responseFormat",
+    includeUsage: "include_usage",
   });
 });
+
+export function createPromptStreamOptionsToJSON(
+  createPromptStreamOptions: CreatePromptStreamOptions,
+): string {
+  return JSON.stringify(
+    CreatePromptStreamOptions$outboundSchema.parse(createPromptStreamOptions),
+  );
+}
+
+/** @internal */
+export type CreatePromptThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound;
+
+/** @internal */
+export const CreatePromptThinking$outboundSchema: z.ZodType<
+  CreatePromptThinking$Outbound,
+  z.ZodTypeDef,
+  CreatePromptThinking
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+]);
+
+export function createPromptThinkingToJSON(
+  createPromptThinking: CreatePromptThinking,
+): string {
+  return JSON.stringify(
+    CreatePromptThinking$outboundSchema.parse(createPromptThinking),
+  );
+}
+
+/** @internal */
+export const CreatePromptToolChoiceType$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptToolChoiceType
+> = z.nativeEnum(CreatePromptToolChoiceType);
+
+/** @internal */
+export type CreatePromptToolChoiceFunction$Outbound = {
+  name: string;
+};
+
+/** @internal */
+export const CreatePromptToolChoiceFunction$outboundSchema: z.ZodType<
+  CreatePromptToolChoiceFunction$Outbound,
+  z.ZodTypeDef,
+  CreatePromptToolChoiceFunction
+> = z.object({
+  name: z.string(),
+});
+
+export function createPromptToolChoiceFunctionToJSON(
+  createPromptToolChoiceFunction: CreatePromptToolChoiceFunction,
+): string {
+  return JSON.stringify(
+    CreatePromptToolChoiceFunction$outboundSchema.parse(
+      createPromptToolChoiceFunction,
+    ),
+  );
+}
+
+/** @internal */
+export type CreatePromptToolChoice2$Outbound = {
+  type?: string | undefined;
+  function: CreatePromptToolChoiceFunction$Outbound;
+};
+
+/** @internal */
+export const CreatePromptToolChoice2$outboundSchema: z.ZodType<
+  CreatePromptToolChoice2$Outbound,
+  z.ZodTypeDef,
+  CreatePromptToolChoice2
+> = z.object({
+  type: CreatePromptToolChoiceType$outboundSchema.optional(),
+  function: z.lazy(() => CreatePromptToolChoiceFunction$outboundSchema),
+});
+
+export function createPromptToolChoice2ToJSON(
+  createPromptToolChoice2: CreatePromptToolChoice2,
+): string {
+  return JSON.stringify(
+    CreatePromptToolChoice2$outboundSchema.parse(createPromptToolChoice2),
+  );
+}
+
+/** @internal */
+export const CreatePromptToolChoice1$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptToolChoice1
+> = z.nativeEnum(CreatePromptToolChoice1);
+
+/** @internal */
+export type CreatePromptToolChoice$Outbound =
+  | CreatePromptToolChoice2$Outbound
+  | string;
+
+/** @internal */
+export const CreatePromptToolChoice$outboundSchema: z.ZodType<
+  CreatePromptToolChoice$Outbound,
+  z.ZodTypeDef,
+  CreatePromptToolChoice
+> = z.union([
+  z.lazy(() => CreatePromptToolChoice2$outboundSchema),
+  CreatePromptToolChoice1$outboundSchema,
+]);
+
+export function createPromptToolChoiceToJSON(
+  createPromptToolChoice: CreatePromptToolChoice,
+): string {
+  return JSON.stringify(
+    CreatePromptToolChoice$outboundSchema.parse(createPromptToolChoice),
+  );
+}
+
+/** @internal */
+export const CreatePromptModalities$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptModalities
+> = z.nativeEnum(CreatePromptModalities);
+
+/** @internal */
+export const CreatePromptId1$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptId1
+> = z.nativeEnum(CreatePromptId1);
+
+/** @internal */
+export type CreatePromptId$Outbound = string | string;
+
+/** @internal */
+export const CreatePromptId$outboundSchema: z.ZodType<
+  CreatePromptId$Outbound,
+  z.ZodTypeDef,
+  CreatePromptId
+> = z.union([CreatePromptId1$outboundSchema, z.string()]);
+
+export function createPromptIdToJSON(createPromptId: CreatePromptId): string {
+  return JSON.stringify(CreatePromptId$outboundSchema.parse(createPromptId));
+}
+
+/** @internal */
+export const CreatePromptExecuteOn$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptExecuteOn
+> = z.nativeEnum(CreatePromptExecuteOn);
+
+/** @internal */
+export type CreatePromptGuardrails$Outbound = {
+  id: string | string;
+  execute_on: string;
+};
+
+/** @internal */
+export const CreatePromptGuardrails$outboundSchema: z.ZodType<
+  CreatePromptGuardrails$Outbound,
+  z.ZodTypeDef,
+  CreatePromptGuardrails
+> = z.object({
+  id: z.union([CreatePromptId1$outboundSchema, z.string()]),
+  executeOn: CreatePromptExecuteOn$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    executeOn: "execute_on",
+  });
+});
+
+export function createPromptGuardrailsToJSON(
+  createPromptGuardrails: CreatePromptGuardrails,
+): string {
+  return JSON.stringify(
+    CreatePromptGuardrails$outboundSchema.parse(createPromptGuardrails),
+  );
+}
+
+/** @internal */
+export type CreatePromptFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreatePromptFallbacks$outboundSchema: z.ZodType<
+  CreatePromptFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreatePromptFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createPromptFallbacksToJSON(
+  createPromptFallbacks: CreatePromptFallbacks,
+): string {
+  return JSON.stringify(
+    CreatePromptFallbacks$outboundSchema.parse(createPromptFallbacks),
+  );
+}
+
+/** @internal */
+export type CreatePromptRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreatePromptRetry$outboundSchema: z.ZodType<
+  CreatePromptRetry$Outbound,
+  z.ZodTypeDef,
+  CreatePromptRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createPromptRetryToJSON(
+  createPromptRetry: CreatePromptRetry,
+): string {
+  return JSON.stringify(
+    CreatePromptRetry$outboundSchema.parse(createPromptRetry),
+  );
+}
+
+/** @internal */
+export const CreatePromptType$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptType
+> = z.nativeEnum(CreatePromptType);
+
+/** @internal */
+export type CreatePromptCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreatePromptCache$outboundSchema: z.ZodType<
+  CreatePromptCache$Outbound,
+  z.ZodTypeDef,
+  CreatePromptCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreatePromptType$outboundSchema,
+});
+
+export function createPromptCacheToJSON(
+  createPromptCache: CreatePromptCache,
+): string {
+  return JSON.stringify(
+    CreatePromptCache$outboundSchema.parse(createPromptCache),
+  );
+}
+
+/** @internal */
+export const CreatePromptLoadBalancerType$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptLoadBalancerType
+> = z.nativeEnum(CreatePromptLoadBalancerType);
+
+/** @internal */
+export type CreatePromptLoadBalancerModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreatePromptLoadBalancerModels$outboundSchema: z.ZodType<
+  CreatePromptLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreatePromptLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createPromptLoadBalancerModelsToJSON(
+  createPromptLoadBalancerModels: CreatePromptLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreatePromptLoadBalancerModels$outboundSchema.parse(
+      createPromptLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreatePromptLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreatePromptLoadBalancerModels$Outbound>;
+};
+
+/** @internal */
+export const CreatePromptLoadBalancer1$outboundSchema: z.ZodType<
+  CreatePromptLoadBalancer1$Outbound,
+  z.ZodTypeDef,
+  CreatePromptLoadBalancer1
+> = z.object({
+  type: CreatePromptLoadBalancerType$outboundSchema,
+  models: z.array(z.lazy(() => CreatePromptLoadBalancerModels$outboundSchema)),
+});
+
+export function createPromptLoadBalancer1ToJSON(
+  createPromptLoadBalancer1: CreatePromptLoadBalancer1,
+): string {
+  return JSON.stringify(
+    CreatePromptLoadBalancer1$outboundSchema.parse(createPromptLoadBalancer1),
+  );
+}
+
+/** @internal */
+export type CreatePromptLoadBalancer$Outbound =
+  CreatePromptLoadBalancer1$Outbound;
+
+/** @internal */
+export const CreatePromptLoadBalancer$outboundSchema: z.ZodType<
+  CreatePromptLoadBalancer$Outbound,
+  z.ZodTypeDef,
+  CreatePromptLoadBalancer
+> = z.lazy(() => CreatePromptLoadBalancer1$outboundSchema);
+
+export function createPromptLoadBalancerToJSON(
+  createPromptLoadBalancer: CreatePromptLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreatePromptLoadBalancer$outboundSchema.parse(createPromptLoadBalancer),
+  );
+}
+
+/** @internal */
+export type CreatePromptTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreatePromptTimeout$outboundSchema: z.ZodType<
+  CreatePromptTimeout$Outbound,
+  z.ZodTypeDef,
+  CreatePromptTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function createPromptTimeoutToJSON(
+  createPromptTimeout: CreatePromptTimeout,
+): string {
+  return JSON.stringify(
+    CreatePromptTimeout$outboundSchema.parse(createPromptTimeout),
+  );
+}
+
 /** @internal */
 export type PromptInput$Outbound = {
   messages: Array<
@@ -3898,13 +3483,40 @@ export type PromptInput$Outbound = {
     | CreatePromptMessagesToolMessage$Outbound
   >;
   model?: string | undefined;
-  temperature?: number | null | undefined;
+  audio?: CreatePromptAudio$Outbound | null | undefined;
+  frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
+  max_completion_tokens?: number | null | undefined;
+  logprobs?: boolean | null | undefined;
+  top_logprobs?: number | null | undefined;
+  n?: number | null | undefined;
+  presence_penalty?: number | null | undefined;
   response_format?:
     | CreatePromptResponseFormatText$Outbound
     | CreatePromptResponseFormatJSONObject$Outbound
-    | CreatePromptResponseFormatPromptsJSONSchema$Outbound
+    | CreatePromptResponseFormatJSONSchema$Outbound
     | undefined;
+  reasoning_effort?: string | undefined;
+  verbosity?: string | undefined;
+  seed?: number | null | undefined;
+  stop?: string | Array<string> | null | undefined;
+  stream_options?: CreatePromptStreamOptions$Outbound | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | undefined;
+  temperature?: number | null | undefined;
+  top_p?: number | null | undefined;
+  top_k?: number | null | undefined;
+  tool_choice?: CreatePromptToolChoice2$Outbound | string | undefined;
+  parallel_tool_calls?: boolean | undefined;
+  modalities?: Array<string> | null | undefined;
+  guardrails?: Array<CreatePromptGuardrails$Outbound> | undefined;
+  fallbacks?: Array<CreatePromptFallbacks$Outbound> | undefined;
+  retry?: CreatePromptRetry$Outbound | undefined;
+  cache?: CreatePromptCache$Outbound | undefined;
+  load_balancer?: CreatePromptLoadBalancer1$Outbound | undefined;
+  timeout?: CreatePromptTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -3922,57 +3534,76 @@ export const PromptInput$outboundSchema: z.ZodType<
     ]),
   ),
   model: z.string().optional(),
-  temperature: z.nullable(z.number()).optional(),
+  audio: z.nullable(z.lazy(() => CreatePromptAudio$outboundSchema)).optional(),
+  frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
+  maxCompletionTokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  topLogprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
     z.lazy(() => CreatePromptResponseFormatText$outboundSchema),
     z.lazy(() => CreatePromptResponseFormatJSONObject$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormatPromptsJSONSchema$outboundSchema),
+    z.lazy(() => CreatePromptResponseFormatJSONSchema$outboundSchema),
   ]).optional(),
+  reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  streamOptions: z.nullable(
+    z.lazy(() => CreatePromptStreamOptions$outboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  topP: z.nullable(z.number()).optional(),
+  topK: z.nullable(z.number()).optional(),
+  toolChoice: z.union([
+    z.lazy(() => CreatePromptToolChoice2$outboundSchema),
+    CreatePromptToolChoice1$outboundSchema,
+  ]).optional(),
+  parallelToolCalls: z.boolean().optional(),
+  modalities: z.nullable(z.array(CreatePromptModalities$outboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => CreatePromptGuardrails$outboundSchema))
+    .optional(),
+  fallbacks: z.array(z.lazy(() => CreatePromptFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreatePromptRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreatePromptCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreatePromptLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreatePromptTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    frequencyPenalty: "frequency_penalty",
     maxTokens: "max_tokens",
+    maxCompletionTokens: "max_completion_tokens",
+    topLogprobs: "top_logprobs",
+    presencePenalty: "presence_penalty",
     responseFormat: "response_format",
+    reasoningEffort: "reasoning_effort",
+    streamOptions: "stream_options",
+    topP: "top_p",
+    topK: "top_k",
+    toolChoice: "tool_choice",
+    parallelToolCalls: "parallel_tool_calls",
+    loadBalancer: "load_balancer",
   });
 });
 
 export function promptInputToJSON(promptInput: PromptInput): string {
   return JSON.stringify(PromptInput$outboundSchema.parse(promptInput));
 }
-export function promptInputFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptInput' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreatePromptRequestBody$inboundSchema: z.ZodType<
-  CreatePromptRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  metadata: z.lazy(() => CreatePromptMetadata$inboundSchema).optional(),
-  prompt_config: z.lazy(() => PromptConfiguration$inboundSchema).optional(),
-  prompt: z.lazy(() => PromptInput$inboundSchema).optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "prompt_config": "promptConfig",
-  });
-});
 /** @internal */
 export type CreatePromptRequestBody$Outbound = {
   display_name: string;
   description?: string | null | undefined;
   metadata?: CreatePromptMetadata$Outbound | undefined;
-  prompt_config?: PromptConfiguration$Outbound | undefined;
   prompt?: PromptInput$Outbound | undefined;
   path: string;
 };
@@ -3986,13 +3617,11 @@ export const CreatePromptRequestBody$outboundSchema: z.ZodType<
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   metadata: z.lazy(() => CreatePromptMetadata$outboundSchema).optional(),
-  promptConfig: z.lazy(() => PromptConfiguration$outboundSchema).optional(),
   prompt: z.lazy(() => PromptInput$outboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
-    promptConfig: "prompt_config",
   });
 });
 
@@ -4003,83 +3632,43 @@ export function createPromptRequestBodyToJSON(
     CreatePromptRequestBody$outboundSchema.parse(createPromptRequestBody),
   );
 }
-export function createPromptRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreatePromptPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptPromptsType
 > = z.nativeEnum(CreatePromptPromptsType);
-/** @internal */
-export const CreatePromptPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsType
-> = CreatePromptPromptsType$inboundSchema;
 
 /** @internal */
-export const CreatePromptModelType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptModelType
-> = z.nativeEnum(CreatePromptModelType);
-/** @internal */
-export const CreatePromptModelType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptModelType
-> = CreatePromptModelType$inboundSchema;
+export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> = z
+  .nativeEnum(ModelType);
 
 /** @internal */
 export const CreatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptPromptsFormat
 > = z.nativeEnum(CreatePromptPromptsFormat);
-/** @internal */
-export const CreatePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsFormat
-> = CreatePromptPromptsFormat$inboundSchema;
 
 /** @internal */
 export const CreatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptResponseFormat6
 > = z.nativeEnum(CreatePromptResponseFormat6);
-/** @internal */
-export const CreatePromptResponseFormat6$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormat6
-> = CreatePromptResponseFormat6$inboundSchema;
 
 /** @internal */
 export const CreatePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptResponseFormat5
 > = z.nativeEnum(CreatePromptResponseFormat5);
-/** @internal */
-export const CreatePromptResponseFormat5$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormat5
-> = CreatePromptResponseFormat5$inboundSchema;
 
 /** @internal */
 export const CreatePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptResponseFormat4
 > = z.nativeEnum(CreatePromptResponseFormat4);
-/** @internal */
-export const CreatePromptResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormat4
-> = CreatePromptResponseFormat4$inboundSchema;
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType
   > = z.nativeEnum(
-    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType,
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType,
   );
-/** @internal */
-export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
-  > =
-    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
 
 /** @internal */
 export const CreatePromptResponseFormat3$inboundSchema: z.ZodType<
@@ -4088,32 +3677,9 @@ export const CreatePromptResponseFormat3$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type:
-    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
-});
-/** @internal */
-export type CreatePromptResponseFormat3$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const CreatePromptResponseFormat3$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormat3
-> = z.object({
-  type:
-    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema,
 });
 
-export function createPromptResponseFormat3ToJSON(
-  createPromptResponseFormat3: CreatePromptResponseFormat3,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat3$outboundSchema.parse(
-      createPromptResponseFormat3,
-    ),
-  );
-}
 export function createPromptResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptResponseFormat3, SDKValidationError> {
@@ -4125,13 +3691,12 @@ export function createPromptResponseFormat3FromJSON(
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponse200Type> = z
-    .nativeEnum(CreatePromptResponseFormatPromptsResponse200Type);
-/** @internal */
-export const CreatePromptResponseFormatPromptsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponse200Type> =
-    CreatePromptResponseFormatPromptsResponse200Type$inboundSchema;
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
+  > = z.nativeEnum(
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
+  );
 
 /** @internal */
 export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
@@ -4139,31 +3704,10 @@ export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreatePromptResponseFormatPromptsResponse200Type$inboundSchema,
-});
-/** @internal */
-export type CreatePromptResponseFormat2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const CreatePromptResponseFormat2$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormat2
-> = z.object({
-  type: CreatePromptResponseFormatPromptsResponse200Type$outboundSchema,
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
 });
 
-export function createPromptResponseFormat2ToJSON(
-  createPromptResponseFormat2: CreatePromptResponseFormat2,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat2$outboundSchema.parse(
-      createPromptResponseFormat2,
-    ),
-  );
-}
 export function createPromptResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptResponseFormat2, SDKValidationError> {
@@ -4175,18 +3719,17 @@ export function createPromptResponseFormat2FromJSON(
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponseType> = z
-    .nativeEnum(CreatePromptResponseFormatPromptsResponseType);
-/** @internal */
-export const CreatePromptResponseFormatPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponseType> =
-    CreatePromptResponseFormatPromptsResponseType$inboundSchema;
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+  );
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$inboundSchema:
   z.ZodType<
-    CreatePromptResponseFormatPromptsResponseJsonSchema,
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -4195,50 +3738,19 @@ export const CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
     strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
-/** @internal */
-export type CreatePromptResponseFormatPromptsResponseJsonSchema$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
 
-/** @internal */
-export const CreatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsResponseJsonSchema$Outbound,
-    z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsResponseJsonSchema
-  > = z.object({
-    name: z.string(),
-    description: z.string().optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
-
-export function createPromptResponseFormatPromptsResponseJsonSchemaToJSON(
-  createPromptResponseFormatPromptsResponseJsonSchema:
-    CreatePromptResponseFormatPromptsResponseJsonSchema,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema.parse(
-      createPromptResponseFormatPromptsResponseJsonSchema,
-    ),
-  );
-}
-export function createPromptResponseFormatPromptsResponseJsonSchemaFromJSON(
+export function createPromptResponseFormatPromptsResponse200ApplicationJSONJSONSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreatePromptResponseFormatPromptsResponseJsonSchema,
+  CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsResponseJsonSchema' from JSON`,
+      CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema' from JSON`,
   );
 }
 
@@ -4248,10 +3760,11 @@ export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
   display_name: z.string().optional(),
   json_schema: z.lazy(() =>
-    CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -4259,40 +3772,7 @@ export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type CreatePromptResponseFormat1$Outbound = {
-  type: string;
-  display_name?: string | undefined;
-  json_schema: CreatePromptResponseFormatPromptsResponseJsonSchema$Outbound;
-};
 
-/** @internal */
-export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormat1
-> = z.object({
-  type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
-  displayName: z.string().optional(),
-  jsonSchema: z.lazy(() =>
-    CreatePromptResponseFormatPromptsResponseJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function createPromptResponseFormat1ToJSON(
-  createPromptResponseFormat1: CreatePromptResponseFormat1,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat1$outboundSchema.parse(
-      createPromptResponseFormat1,
-    ),
-  );
-}
 export function createPromptResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptResponseFormat1, SDKValidationError> {
@@ -4316,40 +3796,7 @@ export const CreatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   CreatePromptResponseFormat5$inboundSchema,
   CreatePromptResponseFormat6$inboundSchema,
 ]);
-/** @internal */
-export type CreatePromptPromptsResponseResponseFormat$Outbound =
-  | CreatePromptResponseFormat1$Outbound
-  | CreatePromptResponseFormat2$Outbound
-  | CreatePromptResponseFormat3$Outbound
-  | string
-  | string
-  | string;
 
-/** @internal */
-export const CreatePromptPromptsResponseResponseFormat$outboundSchema:
-  z.ZodType<
-    CreatePromptPromptsResponseResponseFormat$Outbound,
-    z.ZodTypeDef,
-    CreatePromptPromptsResponseResponseFormat
-  > = z.union([
-    z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
-    z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
-    CreatePromptResponseFormat4$outboundSchema,
-    CreatePromptResponseFormat5$outboundSchema,
-    CreatePromptResponseFormat6$outboundSchema,
-  ]);
-
-export function createPromptPromptsResponseResponseFormatToJSON(
-  createPromptPromptsResponseResponseFormat:
-    CreatePromptPromptsResponseResponseFormat,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptsResponseResponseFormat$outboundSchema.parse(
-      createPromptPromptsResponseResponseFormat,
-    ),
-  );
-}
 export function createPromptPromptsResponseResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -4370,50 +3817,30 @@ export function createPromptPromptsResponseResponseFormatFromJSON(
 export const CreatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptPhotoRealVersion
 > = z.nativeEnum(CreatePromptPhotoRealVersion);
-/** @internal */
-export const CreatePromptPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPhotoRealVersion
-> = CreatePromptPhotoRealVersion$inboundSchema;
 
 /** @internal */
 export const CreatePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptEncodingFormat
 > = z.nativeEnum(CreatePromptEncodingFormat);
-/** @internal */
-export const CreatePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptEncodingFormat
-> = CreatePromptEncodingFormat$inboundSchema;
 
 /** @internal */
-export const CreatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsReasoningEffort
-> = z.nativeEnum(CreatePromptPromptsReasoningEffort);
-/** @internal */
-export const CreatePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsReasoningEffort
-> = CreatePromptPromptsReasoningEffort$inboundSchema;
+export const CreatePromptPromptsResponseReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptPromptsResponseReasoningEffort> = z
+    .nativeEnum(CreatePromptPromptsResponseReasoningEffort);
 
 /** @internal */
 export const CreatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptVerbosity
 > = z.nativeEnum(CreatePromptVerbosity);
-/** @internal */
-export const CreatePromptVerbosity$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptVerbosity
-> = CreatePromptVerbosity$inboundSchema;
 
 /** @internal */
 export const CreatePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptThinkingLevel
 > = z.nativeEnum(CreatePromptThinkingLevel);
-/** @internal */
-export const CreatePromptThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptThinkingLevel
-> = CreatePromptThinkingLevel$inboundSchema;
 
 /** @internal */
-export const CreatePromptModelParameters$inboundSchema: z.ZodType<
-  CreatePromptModelParameters,
+export const ModelParameters$inboundSchema: z.ZodType<
+  ModelParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4441,7 +3868,8 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: CreatePromptEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: CreatePromptPromptsReasoningEffort$inboundSchema.optional(),
+  reasoningEffort: CreatePromptPromptsResponseReasoningEffort$inboundSchema
+    .optional(),
   budgetTokens: z.number().optional(),
   verbosity: CreatePromptVerbosity$inboundSchema.optional(),
   thinkingLevel: CreatePromptThinkingLevel$inboundSchema.optional(),
@@ -4450,93 +3878,14 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-/** @internal */
-export type CreatePromptModelParameters$Outbound = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  numImages?: number | undefined;
-  seed?: number | undefined;
-  format?: string | undefined;
-  dimensions?: string | undefined;
-  quality?: string | undefined;
-  style?: string | undefined;
-  responseFormat?:
-    | CreatePromptResponseFormat1$Outbound
-    | CreatePromptResponseFormat2$Outbound
-    | CreatePromptResponseFormat3$Outbound
-    | string
-    | string
-    | string
-    | null
-    | undefined;
-  photoRealVersion?: string | undefined;
-  encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-  verbosity?: string | undefined;
-  thinkingLevel?: string | undefined;
-};
 
-/** @internal */
-export const CreatePromptModelParameters$outboundSchema: z.ZodType<
-  CreatePromptModelParameters$Outbound,
-  z.ZodTypeDef,
-  CreatePromptModelParameters
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: CreatePromptPromptsFormat$outboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
-      CreatePromptResponseFormat4$outboundSchema,
-      CreatePromptResponseFormat5$outboundSchema,
-      CreatePromptResponseFormat6$outboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: CreatePromptEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: CreatePromptPromptsReasoningEffort$outboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: CreatePromptVerbosity$outboundSchema.optional(),
-  thinkingLevel: CreatePromptThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
-
-export function createPromptModelParametersToJSON(
-  createPromptModelParameters: CreatePromptModelParameters,
-): string {
-  return JSON.stringify(
-    CreatePromptModelParameters$outboundSchema.parse(
-      createPromptModelParameters,
-    ),
-  );
-}
-export function createPromptModelParametersFromJSON(
+export function modelParametersFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptModelParameters, SDKValidationError> {
+): SafeParseResult<ModelParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptModelParameters' from JSON`,
+    (x) => ModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelParameters' from JSON`,
   );
 }
 
@@ -4544,19 +3893,11 @@ export function createPromptModelParametersFromJSON(
 export const CreatePromptProvider$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptProvider
 > = z.nativeEnum(CreatePromptProvider);
-/** @internal */
-export const CreatePromptProvider$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptProvider
-> = CreatePromptProvider$inboundSchema;
 
 /** @internal */
-export const CreatePromptPromptsRole$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsRole
-> = z.nativeEnum(CreatePromptPromptsRole);
-/** @internal */
-export const CreatePromptPromptsRole$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsRole
-> = CreatePromptPromptsRole$inboundSchema;
+export const CreatePromptRole$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptRole
+> = z.nativeEnum(CreatePromptRole);
 
 /** @internal */
 export const CreatePrompt2File$inboundSchema: z.ZodType<
@@ -4573,37 +3914,7 @@ export const CreatePrompt2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-/** @internal */
-export type CreatePrompt2File$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
 
-/** @internal */
-export const CreatePrompt2File$outboundSchema: z.ZodType<
-  CreatePrompt2File$Outbound,
-  z.ZodTypeDef,
-  CreatePrompt2File
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-export function createPrompt2FileToJSON(
-  createPrompt2File: CreatePrompt2File,
-): string {
-  return JSON.stringify(
-    CreatePrompt2File$outboundSchema.parse(createPrompt2File),
-  );
-}
 export function createPrompt2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePrompt2File, SDKValidationError> {
@@ -4623,25 +3934,7 @@ export const CreatePrompt23$inboundSchema: z.ZodType<
   type: z.literal("file"),
   file: z.lazy(() => CreatePrompt2File$inboundSchema),
 });
-/** @internal */
-export type CreatePrompt23$Outbound = {
-  type: "file";
-  file: CreatePrompt2File$Outbound;
-};
 
-/** @internal */
-export const CreatePrompt23$outboundSchema: z.ZodType<
-  CreatePrompt23$Outbound,
-  z.ZodTypeDef,
-  CreatePrompt23
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => CreatePrompt2File$outboundSchema),
-});
-
-export function createPrompt23ToJSON(createPrompt23: CreatePrompt23): string {
-  return JSON.stringify(CreatePrompt23$outboundSchema.parse(createPrompt23));
-}
 export function createPrompt23FromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePrompt23, SDKValidationError> {
@@ -4662,31 +3955,7 @@ export const CreatePrompt2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-/** @internal */
-export type CreatePrompt2ImageUrl$Outbound = {
-  id?: string | undefined;
-  url: string;
-  detail?: string | undefined;
-};
 
-/** @internal */
-export const CreatePrompt2ImageUrl$outboundSchema: z.ZodType<
-  CreatePrompt2ImageUrl$Outbound,
-  z.ZodTypeDef,
-  CreatePrompt2ImageUrl
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-export function createPrompt2ImageUrlToJSON(
-  createPrompt2ImageUrl: CreatePrompt2ImageUrl,
-): string {
-  return JSON.stringify(
-    CreatePrompt2ImageUrl$outboundSchema.parse(createPrompt2ImageUrl),
-  );
-}
 export function createPrompt2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePrompt2ImageUrl, SDKValidationError> {
@@ -4698,8 +3967,8 @@ export function createPrompt2ImageUrlFromJSON(
 }
 
 /** @internal */
-export const CreatePrompt2Prompts2$inboundSchema: z.ZodType<
-  CreatePrompt2Prompts2,
+export const CreatePrompt22$inboundSchema: z.ZodType<
+  CreatePrompt22,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4710,40 +3979,14 @@ export const CreatePrompt2Prompts2$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-/** @internal */
-export type CreatePrompt2Prompts2$Outbound = {
-  type: "image_url";
-  image_url: CreatePrompt2ImageUrl$Outbound;
-};
 
-/** @internal */
-export const CreatePrompt2Prompts2$outboundSchema: z.ZodType<
-  CreatePrompt2Prompts2$Outbound,
-  z.ZodTypeDef,
-  CreatePrompt2Prompts2
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => CreatePrompt2ImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-export function createPrompt2Prompts2ToJSON(
-  createPrompt2Prompts2: CreatePrompt2Prompts2,
-): string {
-  return JSON.stringify(
-    CreatePrompt2Prompts2$outboundSchema.parse(createPrompt2Prompts2),
-  );
-}
-export function createPrompt2Prompts2FromJSON(
+export function createPrompt22FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePrompt2Prompts2, SDKValidationError> {
+): SafeParseResult<CreatePrompt22, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePrompt2Prompts2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePrompt2Prompts2' from JSON`,
+    (x) => CreatePrompt22$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt22' from JSON`,
   );
 }
 
@@ -4756,25 +3999,7 @@ export const CreatePrompt21$inboundSchema: z.ZodType<
   type: z.literal("text"),
   text: z.string(),
 });
-/** @internal */
-export type CreatePrompt21$Outbound = {
-  type: "text";
-  text: string;
-};
 
-/** @internal */
-export const CreatePrompt21$outboundSchema: z.ZodType<
-  CreatePrompt21$Outbound,
-  z.ZodTypeDef,
-  CreatePrompt21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
-
-export function createPrompt21ToJSON(createPrompt21: CreatePrompt21): string {
-  return JSON.stringify(CreatePrompt21$outboundSchema.parse(createPrompt21));
-}
 export function createPrompt21FromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePrompt21, SDKValidationError> {
@@ -4792,35 +4017,10 @@ export const CreatePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() => CreatePrompt21$inboundSchema),
-  z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
+  z.lazy(() => CreatePrompt22$inboundSchema),
   z.lazy(() => CreatePrompt23$inboundSchema),
 ]);
-/** @internal */
-export type CreatePromptContentPromptsResponse2$Outbound =
-  | CreatePrompt21$Outbound
-  | CreatePrompt2Prompts2$Outbound
-  | CreatePrompt23$Outbound;
 
-/** @internal */
-export const CreatePromptContentPromptsResponse2$outboundSchema: z.ZodType<
-  CreatePromptContentPromptsResponse2$Outbound,
-  z.ZodTypeDef,
-  CreatePromptContentPromptsResponse2
-> = z.union([
-  z.lazy(() => CreatePrompt21$outboundSchema),
-  z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
-  z.lazy(() => CreatePrompt23$outboundSchema),
-]);
-
-export function createPromptContentPromptsResponse2ToJSON(
-  createPromptContentPromptsResponse2: CreatePromptContentPromptsResponse2,
-): string {
-  return JSON.stringify(
-    CreatePromptContentPromptsResponse2$outboundSchema.parse(
-      createPromptContentPromptsResponse2,
-    ),
-  );
-}
 export function createPromptContentPromptsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptContentPromptsResponse2, SDKValidationError> {
@@ -4833,179 +4033,94 @@ export function createPromptContentPromptsResponse2FromJSON(
 }
 
 /** @internal */
-export const CreatePromptPromptsContent$inboundSchema: z.ZodType<
-  CreatePromptPromptsContent,
+export const CreatePromptContent$inboundSchema: z.ZodType<
+  CreatePromptContent,
   z.ZodTypeDef,
   unknown
 > = z.union([
   z.string(),
   z.array(z.union([
     z.lazy(() => CreatePrompt21$inboundSchema),
-    z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
+    z.lazy(() => CreatePrompt22$inboundSchema),
     z.lazy(() => CreatePrompt23$inboundSchema),
   ])),
 ]);
-/** @internal */
-export type CreatePromptPromptsContent$Outbound =
-  | string
-  | Array<
-    | CreatePrompt21$Outbound
-    | CreatePrompt2Prompts2$Outbound
-    | CreatePrompt23$Outbound
-  >;
 
-/** @internal */
-export const CreatePromptPromptsContent$outboundSchema: z.ZodType<
-  CreatePromptPromptsContent$Outbound,
-  z.ZodTypeDef,
-  CreatePromptPromptsContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => CreatePrompt21$outboundSchema),
-    z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
-    z.lazy(() => CreatePrompt23$outboundSchema),
-  ])),
-]);
-
-export function createPromptPromptsContentToJSON(
-  createPromptPromptsContent: CreatePromptPromptsContent,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptsContent$outboundSchema.parse(createPromptPromptsContent),
-  );
-}
-export function createPromptPromptsContentFromJSON(
+export function createPromptContentFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsContent, SDKValidationError> {
+): SafeParseResult<CreatePromptContent, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptsContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsContent' from JSON`,
+    (x) => CreatePromptContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptContent' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsResponseType
-> = z.nativeEnum(CreatePromptPromptsResponseType);
-/** @internal */
-export const CreatePromptPromptsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsResponseType
-> = CreatePromptPromptsResponseType$inboundSchema;
+export const CreatePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsResponse200Type
+> = z.nativeEnum(CreatePromptPromptsResponse200Type);
 
 /** @internal */
-export const CreatePromptPromptsFunction$inboundSchema: z.ZodType<
-  CreatePromptPromptsFunction,
+export const CreatePromptFunction$inboundSchema: z.ZodType<
+  CreatePromptFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string(),
   arguments: z.string(),
 });
-/** @internal */
-export type CreatePromptPromptsFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
 
-/** @internal */
-export const CreatePromptPromptsFunction$outboundSchema: z.ZodType<
-  CreatePromptPromptsFunction$Outbound,
-  z.ZodTypeDef,
-  CreatePromptPromptsFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function createPromptPromptsFunctionToJSON(
-  createPromptPromptsFunction: CreatePromptPromptsFunction,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptsFunction$outboundSchema.parse(
-      createPromptPromptsFunction,
-    ),
-  );
-}
-export function createPromptPromptsFunctionFromJSON(
+export function createPromptFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsFunction, SDKValidationError> {
+): SafeParseResult<CreatePromptFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptsFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsFunction' from JSON`,
+    (x) => CreatePromptFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptFunction' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsToolCalls$inboundSchema: z.ZodType<
-  CreatePromptPromptsToolCalls,
+export const CreatePromptToolCalls$inboundSchema: z.ZodType<
+  CreatePromptToolCalls,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: CreatePromptPromptsResponseType$inboundSchema,
-  function: z.lazy(() => CreatePromptPromptsFunction$inboundSchema),
-});
-/** @internal */
-export type CreatePromptPromptsToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: CreatePromptPromptsFunction$Outbound;
-};
-
-/** @internal */
-export const CreatePromptPromptsToolCalls$outboundSchema: z.ZodType<
-  CreatePromptPromptsToolCalls$Outbound,
-  z.ZodTypeDef,
-  CreatePromptPromptsToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: CreatePromptPromptsResponseType$outboundSchema,
-  function: z.lazy(() => CreatePromptPromptsFunction$outboundSchema),
+  type: CreatePromptPromptsResponse200Type$inboundSchema,
+  function: z.lazy(() => CreatePromptFunction$inboundSchema),
 });
 
-export function createPromptPromptsToolCallsToJSON(
-  createPromptPromptsToolCalls: CreatePromptPromptsToolCalls,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptsToolCalls$outboundSchema.parse(
-      createPromptPromptsToolCalls,
-    ),
-  );
-}
-export function createPromptPromptsToolCallsFromJSON(
+export function createPromptToolCallsFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsToolCalls, SDKValidationError> {
+): SafeParseResult<CreatePromptToolCalls, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptsToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsToolCalls' from JSON`,
+    (x) => CreatePromptToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptToolCalls' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
-  CreatePromptPromptsResponseMessages,
+export const CreatePromptPromptsMessages$inboundSchema: z.ZodType<
+  CreatePromptPromptsMessages,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: CreatePromptPromptsRole$inboundSchema,
+  role: CreatePromptRole$inboundSchema,
   content: z.nullable(
     z.union([
       z.string(),
       z.array(z.union([
         z.lazy(() => CreatePrompt21$inboundSchema),
-        z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
+        z.lazy(() => CreatePrompt22$inboundSchema),
         z.lazy(() => CreatePrompt23$inboundSchema),
       ])),
     ]),
   ),
-  tool_calls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$inboundSchema))
+  tool_calls: z.array(z.lazy(() => CreatePromptToolCalls$inboundSchema))
     .optional(),
   tool_call_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -5014,57 +4129,1089 @@ export const CreatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-/** @internal */
-export type CreatePromptPromptsResponseMessages$Outbound = {
-  role: string;
-  content:
-    | string
-    | Array<
-      | CreatePrompt21$Outbound
-      | CreatePrompt2Prompts2$Outbound
-      | CreatePrompt23$Outbound
-    >
-    | null;
-  tool_calls?: Array<CreatePromptPromptsToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
-};
+
+export function createPromptPromptsMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsMessages' from JSON`,
+  );
+}
 
 /** @internal */
-export const CreatePromptPromptsResponseMessages$outboundSchema: z.ZodType<
-  CreatePromptPromptsResponseMessages$Outbound,
+export const PromptConfig$inboundSchema: z.ZodType<
+  PromptConfig,
   z.ZodTypeDef,
-  CreatePromptPromptsResponseMessages
+  unknown
 > = z.object({
-  role: CreatePromptPromptsRole$outboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => CreatePrompt21$outboundSchema),
-        z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
-        z.lazy(() => CreatePrompt23$outboundSchema),
-      ])),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$outboundSchema))
-    .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
+  stream: z.boolean().optional(),
+  model: z.nullable(z.string()).optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(ModelType$inboundSchema).optional(),
+  model_parameters: z.lazy(() => ModelParameters$inboundSchema).optional(),
+  provider: z.nullable(CreatePromptProvider$inboundSchema).optional(),
+  integration_id: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+  messages: z.array(z.lazy(() => CreatePromptPromptsMessages$inboundSchema)),
 }).transform((v) => {
   return remap$(v, {
-    toolCalls: "tool_calls",
-    toolCallId: "tool_call_id",
+    "model_db_id": "modelDbId",
+    "model_type": "modelType",
+    "model_parameters": "modelParameters",
+    "integration_id": "integrationId",
   });
 });
 
-export function createPromptPromptsResponseMessagesToJSON(
-  createPromptPromptsResponseMessages: CreatePromptPromptsResponseMessages,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptsResponseMessages$outboundSchema.parse(
-      createPromptPromptsResponseMessages,
-    ),
+export function promptConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<PromptConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PromptConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PromptConfig' from JSON`,
   );
 }
+
+/** @internal */
+export const CreatePromptPromptsVoice$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsVoice
+> = z.nativeEnum(CreatePromptPromptsVoice);
+
+/** @internal */
+export const CreatePromptPromptsResponse200Format$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptPromptsResponse200Format> = z.nativeEnum(
+    CreatePromptPromptsResponse200Format,
+  );
+
+/** @internal */
+export const CreatePromptPromptsAudio$inboundSchema: z.ZodType<
+  CreatePromptPromptsAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: CreatePromptPromptsVoice$inboundSchema,
+  format: CreatePromptPromptsResponse200Format$inboundSchema,
+});
+
+export function createPromptPromptsAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
+  z.ZodType<
+    CreatePromptResponseFormatPromptsResponseJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().default(false),
+  });
+
+export function createPromptResponseFormatPromptsResponseJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptResponseFormatPromptsResponseJsonSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptResponseFormatPromptsResponseJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema:
+  z.ZodType<
+    CreatePromptResponseFormatPromptsResponse200JSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() =>
+      CreatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
+  });
+
+export function createPromptResponseFormatPromptsResponse200JSONSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptResponseFormatPromptsResponse200JSONSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormatPromptsResponse200JSONSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsJSONObject$inboundSchema:
+  z.ZodType<
+    CreatePromptResponseFormatPromptsJSONObject,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("json_object"),
+  });
+
+export function createPromptResponseFormatPromptsJSONObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptResponseFormatPromptsJSONObject,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptResponseFormatPromptsJSONObject$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptResponseFormatPromptsJSONObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsText$inboundSchema: z.ZodType<
+  CreatePromptResponseFormatPromptsText,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text"),
+});
+
+export function createPromptResponseFormatPromptsTextFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptResponseFormatPromptsText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptResponseFormatPromptsText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormatPromptsText' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
+  CreatePromptPromptsResponseFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreatePromptResponseFormatPromptsText$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormatPromptsJSONObject$inboundSchema),
+  z.lazy(() =>
+    CreatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
+  ),
+]);
+
+export function createPromptPromptsResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsReasoningEffort
+> = z.nativeEnum(CreatePromptPromptsReasoningEffort);
+
+/** @internal */
+export const CreatePromptPromptsStop$inboundSchema: z.ZodType<
+  CreatePromptPromptsStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+export function createPromptPromptsStopFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsStreamOptions$inboundSchema: z.ZodType<
+  CreatePromptPromptsStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+
+export function createPromptPromptsStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsStreamOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsThinking$inboundSchema: z.ZodType<
+  CreatePromptPromptsThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
+
+export function createPromptPromptsThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptToolChoicePromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptToolChoicePromptsType
+> = z.nativeEnum(CreatePromptToolChoicePromptsType);
+
+/** @internal */
+export const CreatePromptToolChoicePromptsFunction$inboundSchema: z.ZodType<
+  CreatePromptToolChoicePromptsFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+});
+
+export function createPromptToolChoicePromptsFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptToolChoicePromptsFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptToolChoicePromptsFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptToolChoicePromptsFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptToolChoicePrompts2$inboundSchema: z.ZodType<
+  CreatePromptToolChoicePrompts2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptToolChoicePromptsType$inboundSchema.optional(),
+  function: z.lazy(() => CreatePromptToolChoicePromptsFunction$inboundSchema),
+});
+
+export function createPromptToolChoicePrompts2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptToolChoicePrompts2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptToolChoicePrompts2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptToolChoicePrompts2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptToolChoicePrompts1$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptToolChoicePrompts1
+> = z.nativeEnum(CreatePromptToolChoicePrompts1);
+
+/** @internal */
+export const CreatePromptPromptsToolChoice$inboundSchema: z.ZodType<
+  CreatePromptPromptsToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreatePromptToolChoicePrompts2$inboundSchema),
+  CreatePromptToolChoicePrompts1$inboundSchema,
+]);
+
+export function createPromptPromptsToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsModalities$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsModalities
+> = z.nativeEnum(CreatePromptPromptsModalities);
+
+/** @internal */
+export const CreatePromptIdPrompts1$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptIdPrompts1
+> = z.nativeEnum(CreatePromptIdPrompts1);
+
+/** @internal */
+export const CreatePromptPromptsId$inboundSchema: z.ZodType<
+  CreatePromptPromptsId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([CreatePromptIdPrompts1$inboundSchema, z.string()]);
+
+export function createPromptPromptsIdFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsId' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsExecuteOn
+> = z.nativeEnum(CreatePromptPromptsExecuteOn);
+
+/** @internal */
+export const CreatePromptPromptsGuardrails$inboundSchema: z.ZodType<
+  CreatePromptPromptsGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([CreatePromptIdPrompts1$inboundSchema, z.string()]),
+  execute_on: CreatePromptPromptsExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+
+export function createPromptPromptsGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsFallbacks$inboundSchema: z.ZodType<
+  CreatePromptPromptsFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function createPromptPromptsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsRetry$inboundSchema: z.ZodType<
+  CreatePromptPromptsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function createPromptPromptsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsResponseType
+> = z.nativeEnum(CreatePromptPromptsResponseType);
+
+/** @internal */
+export const CreatePromptPromptsCache$inboundSchema: z.ZodType<
+  CreatePromptPromptsCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreatePromptPromptsResponseType$inboundSchema,
+});
+
+export function createPromptPromptsCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptLoadBalancerPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptLoadBalancerPromptsType
+> = z.nativeEnum(CreatePromptLoadBalancerPromptsType);
+
+/** @internal */
+export const CreatePromptLoadBalancerPromptsModels$inboundSchema: z.ZodType<
+  CreatePromptLoadBalancerPromptsModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createPromptLoadBalancerPromptsModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptLoadBalancerPromptsModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptLoadBalancerPromptsModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptLoadBalancerPromptsModels' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptLoadBalancerPrompts1$inboundSchema: z.ZodType<
+  CreatePromptLoadBalancerPrompts1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptLoadBalancerPromptsType$inboundSchema,
+  models: z.array(
+    z.lazy(() => CreatePromptLoadBalancerPromptsModels$inboundSchema),
+  ),
+});
+
+export function createPromptLoadBalancerPrompts1FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptLoadBalancerPrompts1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptLoadBalancerPrompts1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptLoadBalancerPrompts1' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsLoadBalancer$inboundSchema: z.ZodType<
+  CreatePromptPromptsLoadBalancer,
+  z.ZodTypeDef,
+  unknown
+> = z.lazy(() => CreatePromptLoadBalancerPrompts1$inboundSchema);
+
+export function createPromptPromptsLoadBalancerFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsLoadBalancer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsLoadBalancer' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsTimeout$inboundSchema: z.ZodType<
+  CreatePromptPromptsTimeout,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  call_timeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "call_timeout": "callTimeout",
+  });
+});
+
+export function createPromptPromptsTimeoutFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptPromptsTimeout, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptPromptsTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsTimeout' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptContentPromptsResponse200ApplicationJSONResponseBody2$inboundSchema:
+  z.ZodType<
+    CreatePromptContentPromptsResponse200ApplicationJSONResponseBody2,
+    z.ZodTypeDef,
+    unknown
+  > = components.TextContentPartSchema$inboundSchema;
+
+export function createPromptContentPromptsResponse200ApplicationJSONResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptContentPromptsResponse200ApplicationJSONResponseBody2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptContentPromptsResponse200ApplicationJSONResponseBody2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptContentPromptsResponse200ApplicationJSONResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent$inboundSchema:
+  z.ZodType<
+    CreatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]);
+
+export function createPromptMessagesPromptsResponse200ApplicationJSONResponseBodyContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptMessagesPromptsResponse200Type> = z
+    .nativeEnum(CreatePromptMessagesPromptsResponse200Type);
+
+/** @internal */
+export const CreatePromptMessagesPromptsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptMessagesPromptsTtl
+> = z.nativeEnum(CreatePromptMessagesPromptsTtl);
+
+/** @internal */
+export const CreatePromptMessagesPromptsCacheControl$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptMessagesPromptsResponse200Type$inboundSchema,
+  ttl: CreatePromptMessagesPromptsTtl$inboundSchema.default("5m"),
+});
+
+export function createPromptMessagesPromptsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptMessagesPromptsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsToolMessage$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsToolMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  tool_call_id: z.nullable(z.string()),
+  cache_control: z.lazy(() =>
+    CreatePromptMessagesPromptsCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+    "cache_control": "cacheControl",
+  });
+});
+
+export function createPromptMessagesPromptsToolMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptMessagesPromptsToolMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsToolMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptContentPromptsResponse200ApplicationJson2$inboundSchema:
+  z.ZodType<
+    CreatePromptContentPromptsResponse200ApplicationJson2,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.TextContentPartSchema$inboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.RefusalPartSchema$inboundSchema,
+    components.ReasoningPartSchema$inboundSchema,
+    components.RedactedReasoningPartSchema$inboundSchema,
+  ]);
+
+export function createPromptContentPromptsResponse200ApplicationJSON2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptContentPromptsResponse200ApplicationJson2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptContentPromptsResponse200ApplicationJson2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptContentPromptsResponse200ApplicationJson2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsResponse200ApplicationJSONContent$inboundSchema:
+  z.ZodType<
+    CreatePromptMessagesPromptsResponse200ApplicationJSONContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$inboundSchema,
+        components.ReasoningPartSchema$inboundSchema,
+        components.RedactedReasoningPartSchema$inboundSchema,
+      ]),
+    ),
+  ]);
+
+export function createPromptMessagesPromptsResponse200ApplicationJSONContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsResponse200ApplicationJSONContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsResponse200ApplicationJSONContent$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsResponse200ApplicationJSONContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsAudio$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+});
+
+export function createPromptMessagesPromptsAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptMessagesPromptsAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptMessagesPromptsAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptMessagesPromptsResponseType> = z
+    .nativeEnum(CreatePromptMessagesPromptsResponseType);
+
+/** @internal */
+export const CreatePromptMessagesPromptsFunction$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function createPromptMessagesPromptsFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptMessagesPromptsFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsToolCalls$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: CreatePromptMessagesPromptsResponseType$inboundSchema,
+  function: z.lazy(() => CreatePromptMessagesPromptsFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function createPromptMessagesPromptsToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptMessagesPromptsToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsAssistantMessage$inboundSchema:
+  z.ZodType<
+    CreatePromptMessagesPromptsAssistantMessage,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            components.TextContentPartSchema$inboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            components.RefusalPartSchema$inboundSchema,
+            components.ReasoningPartSchema$inboundSchema,
+            components.RedactedReasoningPartSchema$inboundSchema,
+          ]),
+        ),
+      ]),
+    ).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role: z.literal("assistant"),
+    name: z.string().optional(),
+    audio: z.nullable(
+      z.lazy(() => CreatePromptMessagesPromptsAudio$inboundSchema),
+    ).optional(),
+    tool_calls: z.array(
+      z.lazy(() => CreatePromptMessagesPromptsToolCalls$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+    });
+  });
+
+export function createPromptMessagesPromptsAssistantMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsAssistantMessage,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsAssistantMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptMessagesPromptsAssistantMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType
+  > = z.nativeEnum(
+    CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType,
+  );
+
+/** @internal */
+export const CreatePrompt2PromptsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePrompt2PromptsTtl
+> = z.nativeEnum(CreatePrompt2PromptsTtl);
+
+/** @internal */
+export const CreatePrompt2PromptsCacheControl$inboundSchema: z.ZodType<
+  CreatePrompt2PromptsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    CreatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema,
+  ttl: CreatePrompt2PromptsTtl$inboundSchema.default("5m"),
+});
+
+export function createPrompt2PromptsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrompt2PromptsCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrompt2PromptsCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt2PromptsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePrompt2Prompts4$inboundSchema: z.ZodType<
+  CreatePrompt2Prompts4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("file"),
+  cache_control: z.lazy(() => CreatePrompt2PromptsCacheControl$inboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+
+export function createPrompt2Prompts4FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrompt2Prompts4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrompt2Prompts4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt2Prompts4' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
+  CreatePromptContentPromptsResponse2002,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.ImageContentPartSchema$inboundSchema,
+  components.AudioContentPartSchema$inboundSchema,
+  z.lazy(() => CreatePrompt2Prompts4$inboundSchema),
+]);
+
+export function createPromptContentPromptsResponse2002FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptContentPromptsResponse2002, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptContentPromptsResponse2002$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptContentPromptsResponse2002' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsResponse200Content$inboundSchema:
+  z.ZodType<
+    CreatePromptMessagesPromptsResponse200Content,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => CreatePrompt2Prompts4$inboundSchema),
+      ]),
+    ),
+  ]);
+
+export function createPromptMessagesPromptsResponse200ContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsResponse200Content,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsResponse200Content$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptMessagesPromptsResponse200Content' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsUserMessage$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsUserMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => CreatePrompt2Prompts4$inboundSchema),
+      ]),
+    ),
+  ]),
+});
+
+export function createPromptMessagesPromptsUserMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptMessagesPromptsUserMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsUserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsUserMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsResponseContent$inboundSchema:
+  z.ZodType<CreatePromptMessagesPromptsResponseContent, z.ZodTypeDef, unknown> =
+    z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ]);
+
+export function createPromptMessagesPromptsResponseContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsResponseContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsResponseContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptMessagesPromptsResponseContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsSystemMessage$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsSystemMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("system"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  name: z.string().optional(),
+});
+
+export function createPromptMessagesPromptsSystemMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsSystemMessage,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsSystemMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptMessagesPromptsSystemMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
+  CreatePromptPromptsResponseMessages,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreatePromptMessagesPromptsSystemMessage$inboundSchema),
+  z.lazy(() => CreatePromptMessagesPromptsUserMessage$inboundSchema),
+  z.lazy(() => CreatePromptMessagesPromptsAssistantMessage$inboundSchema),
+  z.lazy(() => CreatePromptMessagesPromptsToolMessage$inboundSchema),
+]);
+
 export function createPromptPromptsResponseMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptPromptsResponseMessages, SDKValidationError> {
@@ -5077,85 +5224,92 @@ export function createPromptPromptsResponseMessagesFromJSON(
 }
 
 /** @internal */
-export const CreatePromptPromptConfig$inboundSchema: z.ZodType<
-  CreatePromptPromptConfig,
+export const PromptField$inboundSchema: z.ZodType<
+  PromptField,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  stream: z.boolean().optional(),
-  model: z.string().optional(),
-  model_db_id: z.nullable(z.string()).optional(),
-  model_type: z.nullable(CreatePromptModelType$inboundSchema).optional(),
-  model_parameters: z.lazy(() => CreatePromptModelParameters$inboundSchema)
+  audio: z.nullable(z.lazy(() => CreatePromptPromptsAudio$inboundSchema))
     .optional(),
-  provider: CreatePromptProvider$inboundSchema.optional(),
-  integration_id: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => CreatePromptResponseFormatPromptsText$inboundSchema),
+    z.lazy(() => CreatePromptResponseFormatPromptsJSONObject$inboundSchema),
+    z.lazy(() =>
+      CreatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
+    ),
+  ]).optional(),
+  reasoning_effort: CreatePromptPromptsReasoningEffort$inboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => CreatePromptPromptsStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => CreatePromptToolChoicePrompts2$inboundSchema),
+    CreatePromptToolChoicePrompts1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(z.array(CreatePromptPromptsModalities$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => CreatePromptPromptsGuardrails$inboundSchema))
+    .optional(),
+  fallbacks: z.array(z.lazy(() => CreatePromptPromptsFallbacks$inboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreatePromptPromptsRetry$inboundSchema).optional(),
+  cache: z.lazy(() => CreatePromptPromptsCache$inboundSchema).optional(),
+  load_balancer: z.lazy(() => CreatePromptLoadBalancerPrompts1$inboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreatePromptPromptsTimeout$inboundSchema).optional(),
   messages: z.array(
-    z.lazy(() => CreatePromptPromptsResponseMessages$inboundSchema),
-  ),
+    z.union([
+      z.lazy(() => CreatePromptMessagesPromptsSystemMessage$inboundSchema),
+      z.lazy(() => CreatePromptMessagesPromptsUserMessage$inboundSchema),
+      z.lazy(() => CreatePromptMessagesPromptsAssistantMessage$inboundSchema),
+      z.lazy(() => CreatePromptMessagesPromptsToolMessage$inboundSchema),
+    ]),
+  ).optional(),
+  model: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
-/** @internal */
-export type CreatePromptPromptConfig$Outbound = {
-  stream?: boolean | undefined;
-  model?: string | undefined;
-  model_db_id?: string | null | undefined;
-  model_type?: string | null | undefined;
-  model_parameters?: CreatePromptModelParameters$Outbound | undefined;
-  provider?: string | undefined;
-  integration_id?: string | null | undefined;
-  version?: string | undefined;
-  messages: Array<CreatePromptPromptsResponseMessages$Outbound>;
-};
-
-/** @internal */
-export const CreatePromptPromptConfig$outboundSchema: z.ZodType<
-  CreatePromptPromptConfig$Outbound,
-  z.ZodTypeDef,
-  CreatePromptPromptConfig
-> = z.object({
-  stream: z.boolean().optional(),
-  model: z.string().optional(),
-  modelDbId: z.nullable(z.string()).optional(),
-  modelType: z.nullable(CreatePromptModelType$outboundSchema).optional(),
-  modelParameters: z.lazy(() => CreatePromptModelParameters$outboundSchema)
-    .optional(),
-  provider: CreatePromptProvider$outboundSchema.optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  messages: z.array(
-    z.lazy(() => CreatePromptPromptsResponseMessages$outboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-    integrationId: "integration_id",
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+    "load_balancer": "loadBalancer",
   });
 });
 
-export function createPromptPromptConfigToJSON(
-  createPromptPromptConfig: CreatePromptPromptConfig,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptConfig$outboundSchema.parse(createPromptPromptConfig),
-  );
-}
-export function createPromptPromptConfigFromJSON(
+export function promptFieldFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptConfig, SDKValidationError> {
+): SafeParseResult<PromptField, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptConfig' from JSON`,
+    (x) => PromptField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PromptField' from JSON`,
   );
 }
 
@@ -5163,19 +5317,11 @@ export function createPromptPromptConfigFromJSON(
 export const CreatePromptUseCases$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptUseCases
 > = z.nativeEnum(CreatePromptUseCases);
-/** @internal */
-export const CreatePromptUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptUseCases
-> = CreatePromptUseCases$inboundSchema;
 
 /** @internal */
 export const CreatePromptPromptsLanguage$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptPromptsLanguage
 > = z.nativeEnum(CreatePromptPromptsLanguage);
-/** @internal */
-export const CreatePromptPromptsLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsLanguage
-> = CreatePromptPromptsLanguage$inboundSchema;
 
 /** @internal */
 export const CreatePromptPromptsMetadata$inboundSchema: z.ZodType<
@@ -5190,35 +5336,7 @@ export const CreatePromptPromptsMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-/** @internal */
-export type CreatePromptPromptsMetadata$Outbound = {
-  use_cases?: Array<string> | undefined;
-  language?: string | null | undefined;
-};
 
-/** @internal */
-export const CreatePromptPromptsMetadata$outboundSchema: z.ZodType<
-  CreatePromptPromptsMetadata$Outbound,
-  z.ZodTypeDef,
-  CreatePromptPromptsMetadata
-> = z.object({
-  useCases: z.array(CreatePromptUseCases$outboundSchema).optional(),
-  language: z.nullable(CreatePromptPromptsLanguage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    useCases: "use_cases",
-  });
-});
-
-export function createPromptPromptsMetadataToJSON(
-  createPromptPromptsMetadata: CreatePromptPromptsMetadata,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptsMetadata$outboundSchema.parse(
-      createPromptPromptsMetadata,
-    ),
-  );
-}
 export function createPromptPromptsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptPromptsMetadata, SDKValidationError> {
@@ -5245,7 +5363,8 @@ export const CreatePromptPrompt$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => CreatePromptPromptConfig$inboundSchema),
+  prompt_config: z.lazy(() => PromptConfig$inboundSchema).optional(),
+  prompt: z.lazy(() => PromptField$inboundSchema),
   metadata: z.lazy(() => CreatePromptPromptsMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5257,58 +5376,7 @@ export const CreatePromptPrompt$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-/** @internal */
-export type CreatePromptPrompt$Outbound = {
-  _id: string;
-  type: string;
-  owner: string;
-  domain_id: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  display_name: string;
-  description?: string | null | undefined;
-  prompt_config: CreatePromptPromptConfig$Outbound;
-  metadata?: CreatePromptPromptsMetadata$Outbound | undefined;
-};
 
-/** @internal */
-export const CreatePromptPrompt$outboundSchema: z.ZodType<
-  CreatePromptPrompt$Outbound,
-  z.ZodTypeDef,
-  CreatePromptPrompt
-> = z.object({
-  id: z.string(),
-  type: CreatePromptPromptsType$outboundSchema,
-  owner: z.string(),
-  domainId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  displayName: z.string(),
-  description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => CreatePromptPromptConfig$outboundSchema),
-  metadata: z.lazy(() => CreatePromptPromptsMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    displayName: "display_name",
-    promptConfig: "prompt_config",
-  });
-});
-
-export function createPromptPromptToJSON(
-  createPromptPrompt: CreatePromptPrompt,
-): string {
-  return JSON.stringify(
-    CreatePromptPrompt$outboundSchema.parse(createPromptPrompt),
-  );
-}
 export function createPromptPromptFromJSON(
   jsonString: string,
 ): SafeParseResult<CreatePromptPrompt, SDKValidationError> {

@@ -12,6 +12,54 @@ let value: CreateAgentRequestRequestBody = {
   instructions: "<value>",
   path: "Default",
   model: "A4",
+  fallbackModels: [
+    {
+      id: "<id>",
+      parameters: {
+        fallbacks: [
+          {
+            model: "openai/gpt-4o-mini",
+          },
+        ],
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+        cache: {
+          ttl: 3600,
+          type: "exact_match",
+        },
+        loadBalancer: {
+          type: "weight_based",
+          models: [
+            {
+              model: "openai/gpt-4o",
+              weight: 0.7,
+            },
+          ],
+        },
+        timeout: {
+          callTimeout: 30000,
+        },
+      },
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
+  ],
   settings: {
     tools: [
       {
@@ -48,3 +96,4 @@ let value: CreateAgentRequestRequestBody = {
 | `knowledgeBases`                                                                                                                                                                                                                                                                              | [operations.KnowledgeBases](../../models/operations/knowledgebases.md)[]                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | Optional array of knowledge base configurations for the agent to access                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                               |
 | `teamOfAgents`                                                                                                                                                                                                                                                                                | [operations.TeamOfAgents](../../models/operations/teamofagents.md)[]                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.                                                                                                                                                                            |                                                                                                                                                                                                                                                                                               |
 | `variables`                                                                                                                                                                                                                                                                                   | Record<string, *any*>                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | N/A                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                               |
+| `source`                                                                                                                                                                                                                                                                                      | [operations.Source](../../models/operations/source.md)                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | N/A                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                               |

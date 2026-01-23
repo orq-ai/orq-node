@@ -7,22 +7,12 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.contacts.create({
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
+  const result = await orq.feedback.create({
+    field: "rating",
+    value: [
+      "good",
     ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
+    traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
   });
 
   console.log(result);

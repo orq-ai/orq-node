@@ -23,6 +23,9 @@ export type RemoteConfigsGetConfigRequestBody = {
   metadata?: { [k: string]: any } | undefined;
 };
 
+/**
+ * The return type of the rule
+ */
 export const RemoteConfigsGetConfigType = {
   Boolean: "boolean",
   String: "string",
@@ -32,6 +35,9 @@ export const RemoteConfigsGetConfigType = {
   Json: "json",
   Deployment: "deployment",
 } as const;
+/**
+ * The return type of the rule
+ */
 export type RemoteConfigsGetConfigType = ClosedEnum<
   typeof RemoteConfigsGetConfigType
 >;
@@ -40,20 +46,13 @@ export type RemoteConfigsGetConfigType = ClosedEnum<
  * An individual remote config
  */
 export type RemoteConfigsGetConfigResponseBody = {
+  /**
+   * The return type of the rule
+   */
   type: RemoteConfigsGetConfigType;
   value?: any | undefined;
 };
 
-/** @internal */
-export const RemoteConfigsGetConfigRequestBody$inboundSchema: z.ZodType<
-  RemoteConfigsGetConfigRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  context: z.record(z.any()).optional(),
-  metadata: z.record(z.any()).optional(),
-});
 /** @internal */
 export type RemoteConfigsGetConfigRequestBody$Outbound = {
   key: string;
@@ -81,24 +80,11 @@ export function remoteConfigsGetConfigRequestBodyToJSON(
     ),
   );
 }
-export function remoteConfigsGetConfigRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RemoteConfigsGetConfigRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RemoteConfigsGetConfigRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RemoteConfigsGetConfigRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const RemoteConfigsGetConfigType$inboundSchema: z.ZodNativeEnum<
   typeof RemoteConfigsGetConfigType
 > = z.nativeEnum(RemoteConfigsGetConfigType);
-/** @internal */
-export const RemoteConfigsGetConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof RemoteConfigsGetConfigType
-> = RemoteConfigsGetConfigType$inboundSchema;
 
 /** @internal */
 export const RemoteConfigsGetConfigResponseBody$inboundSchema: z.ZodType<
@@ -109,31 +95,7 @@ export const RemoteConfigsGetConfigResponseBody$inboundSchema: z.ZodType<
   type: RemoteConfigsGetConfigType$inboundSchema,
   value: z.any().optional(),
 });
-/** @internal */
-export type RemoteConfigsGetConfigResponseBody$Outbound = {
-  type: string;
-  value?: any | undefined;
-};
 
-/** @internal */
-export const RemoteConfigsGetConfigResponseBody$outboundSchema: z.ZodType<
-  RemoteConfigsGetConfigResponseBody$Outbound,
-  z.ZodTypeDef,
-  RemoteConfigsGetConfigResponseBody
-> = z.object({
-  type: RemoteConfigsGetConfigType$outboundSchema,
-  value: z.any().optional(),
-});
-
-export function remoteConfigsGetConfigResponseBodyToJSON(
-  remoteConfigsGetConfigResponseBody: RemoteConfigsGetConfigResponseBody,
-): string {
-  return JSON.stringify(
-    RemoteConfigsGetConfigResponseBody$outboundSchema.parse(
-      remoteConfigsGetConfigResponseBody,
-    ),
-  );
-}
 export function remoteConfigsGetConfigResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RemoteConfigsGetConfigResponseBody, SDKValidationError> {

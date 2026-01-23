@@ -14,6 +14,6 @@ let value: CreateChatCompletionAndEq = {
 
 ## Fields
 
-| Field                                        | Type                                         | Required                                     | Description                                  |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| `eq`                                         | *operations.CreateChatCompletionAndRouterEq* | :heavy_check_mark:                           | N/A                                          |
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `eq`                                                        | *operations.CreateChatCompletionAndRouterChatCompletionsEq* | :heavy_check_mark:                                          | N/A                                                         |

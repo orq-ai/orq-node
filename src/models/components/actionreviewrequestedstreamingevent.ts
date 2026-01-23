@@ -38,7 +38,7 @@ export type Tool = {
    * Optional tool description
    */
   description?: string | undefined;
-  requiresApproval?: boolean | undefined;
+  requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
@@ -47,7 +47,7 @@ export type Tool = {
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
-  timeout?: number | undefined;
+  timeout: number;
 };
 
 export type ActionReviewRequestedStreamingEventData = {
@@ -82,27 +82,7 @@ export const Conditions$inboundSchema: z.ZodType<
   operator: z.string(),
   value: z.string(),
 });
-/** @internal */
-export type Conditions$Outbound = {
-  condition: string;
-  operator: string;
-  value: string;
-};
 
-/** @internal */
-export const Conditions$outboundSchema: z.ZodType<
-  Conditions$Outbound,
-  z.ZodTypeDef,
-  Conditions
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
-
-export function conditionsToJSON(conditions: Conditions): string {
-  return JSON.stringify(Conditions$outboundSchema.parse(conditions));
-}
 export function conditionsFromJSON(
   jsonString: string,
 ): SafeParseResult<Conditions, SDKValidationError> {
@@ -133,43 +113,7 @@ export const Tool$inboundSchema: z.ZodType<Tool, z.ZodTypeDef, unknown> = z
       "tool_id": "toolId",
     });
   });
-/** @internal */
-export type Tool$Outbound = {
-  id: string;
-  key?: string | undefined;
-  action_type: string;
-  display_name?: string | undefined;
-  description?: string | undefined;
-  requires_approval: boolean;
-  tool_id?: string | undefined;
-  conditions?: Array<Conditions$Outbound> | undefined;
-  timeout: number;
-};
 
-/** @internal */
-export const Tool$outboundSchema: z.ZodType<Tool$Outbound, z.ZodTypeDef, Tool> =
-  z.object({
-    id: z.string(),
-    key: z.string().optional(),
-    actionType: z.string(),
-    displayName: z.string().optional(),
-    description: z.string().optional(),
-    requiresApproval: z.boolean().default(false),
-    toolId: z.string().optional(),
-    conditions: z.array(z.lazy(() => Conditions$outboundSchema)).optional(),
-    timeout: z.number().default(120),
-  }).transform((v) => {
-    return remap$(v, {
-      actionType: "action_type",
-      displayName: "display_name",
-      requiresApproval: "requires_approval",
-      toolId: "tool_id",
-    });
-  });
-
-export function toolToJSON(tool: Tool): string {
-  return JSON.stringify(Tool$outboundSchema.parse(tool));
-}
 export function toolFromJSON(
   jsonString: string,
 ): SafeParseResult<Tool, SDKValidationError> {
@@ -201,49 +145,7 @@ export const ActionReviewRequestedStreamingEventData$inboundSchema: z.ZodType<
     "agent_tool_call_id": "agentToolCallId",
   });
 });
-/** @internal */
-export type ActionReviewRequestedStreamingEventData$Outbound = {
-  agent_id: string;
-  action_id: string;
-  requires_approval: boolean;
-  tool: Tool$Outbound;
-  input: { [k: string]: any };
-  agent_tool_call_id: string;
-  responseId?: string | undefined;
-};
 
-/** @internal */
-export const ActionReviewRequestedStreamingEventData$outboundSchema: z.ZodType<
-  ActionReviewRequestedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ActionReviewRequestedStreamingEventData
-> = z.object({
-  agentId: z.string(),
-  actionId: z.string(),
-  requiresApproval: z.boolean(),
-  tool: z.lazy(() => Tool$outboundSchema),
-  input: z.record(z.any()),
-  agentToolCallId: z.string(),
-  responseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    actionId: "action_id",
-    requiresApproval: "requires_approval",
-    agentToolCallId: "agent_tool_call_id",
-  });
-});
-
-export function actionReviewRequestedStreamingEventDataToJSON(
-  actionReviewRequestedStreamingEventData:
-    ActionReviewRequestedStreamingEventData,
-): string {
-  return JSON.stringify(
-    ActionReviewRequestedStreamingEventData$outboundSchema.parse(
-      actionReviewRequestedStreamingEventData,
-    ),
-  );
-}
 export function actionReviewRequestedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -270,33 +172,7 @@ export const ActionReviewRequestedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ActionReviewRequestedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ActionReviewRequestedStreamingEvent$Outbound = {
-  type: "event.agents.action_review_requested";
-  timestamp: string;
-  data: ActionReviewRequestedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ActionReviewRequestedStreamingEvent$outboundSchema: z.ZodType<
-  ActionReviewRequestedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ActionReviewRequestedStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.action_review_requested"),
-  timestamp: z.string(),
-  data: z.lazy(() => ActionReviewRequestedStreamingEventData$outboundSchema),
-});
-
-export function actionReviewRequestedStreamingEventToJSON(
-  actionReviewRequestedStreamingEvent: ActionReviewRequestedStreamingEvent,
-): string {
-  return JSON.stringify(
-    ActionReviewRequestedStreamingEvent$outboundSchema.parse(
-      actionReviewRequestedStreamingEvent,
-    ),
-  );
-}
 export function actionReviewRequestedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ActionReviewRequestedStreamingEvent, SDKValidationError> {

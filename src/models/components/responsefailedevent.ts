@@ -39,29 +39,7 @@ export const ResponseFailedEventData$inboundSchema: z.ZodType<
   error: z.string(),
   code: z.number(),
 });
-/** @internal */
-export type ResponseFailedEventData$Outbound = {
-  error: string;
-  code: number;
-};
 
-/** @internal */
-export const ResponseFailedEventData$outboundSchema: z.ZodType<
-  ResponseFailedEventData$Outbound,
-  z.ZodTypeDef,
-  ResponseFailedEventData
-> = z.object({
-  error: z.string(),
-  code: z.number(),
-});
-
-export function responseFailedEventDataToJSON(
-  responseFailedEventData: ResponseFailedEventData,
-): string {
-  return JSON.stringify(
-    ResponseFailedEventData$outboundSchema.parse(responseFailedEventData),
-  );
-}
 export function responseFailedEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseFailedEventData, SDKValidationError> {
@@ -82,31 +60,7 @@ export const ResponseFailedEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ResponseFailedEventData$inboundSchema),
 });
-/** @internal */
-export type ResponseFailedEvent$Outbound = {
-  type: "response.failed";
-  timestamp: string;
-  data: ResponseFailedEventData$Outbound;
-};
 
-/** @internal */
-export const ResponseFailedEvent$outboundSchema: z.ZodType<
-  ResponseFailedEvent$Outbound,
-  z.ZodTypeDef,
-  ResponseFailedEvent
-> = z.object({
-  type: z.literal("response.failed"),
-  timestamp: z.string(),
-  data: z.lazy(() => ResponseFailedEventData$outboundSchema),
-});
-
-export function responseFailedEventToJSON(
-  responseFailedEvent: ResponseFailedEvent,
-): string {
-  return JSON.stringify(
-    ResponseFailedEvent$outboundSchema.parse(responseFailedEvent),
-  );
-}
 export function responseFailedEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseFailedEvent, SDKValidationError> {

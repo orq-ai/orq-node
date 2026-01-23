@@ -1,5 +1,7 @@
 # RemoteConfigsGetConfigType
 
+The return type of the rule
+
 ## Example Usage
 
 ```typescript

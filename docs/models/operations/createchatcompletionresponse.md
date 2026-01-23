@@ -20,5 +20,5 @@ const value: operations.CreateChatCompletionResponseBody = {
 };
 ```
 
-### `EventStream<operations.CreateChatCompletionRouterResponseBody>`
+### `EventStream<operations.CreateChatCompletionRouterChatCompletionsResponseBody>`
 

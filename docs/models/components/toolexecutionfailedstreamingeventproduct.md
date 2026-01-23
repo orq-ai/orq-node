@@ -13,5 +13,5 @@ let value: ToolExecutionFailedStreamingEventProduct = "knowledge";
 ## Values
 
 ```typescript
-"remoteconfigs" | "deployments" | "experiments" | "playgrounds" | "spreadsheets" | "spreadsheet_run" | "llm_evaluator" | "knowledge" | "router" | "workflows" | "external_events" | "agents" | "memory-stores" | "generic" | "evaluators" | "otel"
+"remoteconfigs" | "deployments" | "experiments" | "playgrounds" | "spreadsheets" | "spreadsheet_run" | "llm_evaluator" | "knowledge" | "router" | "workflows" | "external_events" | "agents" | "memory-stores" | "generic" | "evaluators" | "otel" | "ai-chat"
 ```

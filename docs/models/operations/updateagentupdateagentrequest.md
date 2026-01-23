@@ -10,6 +10,39 @@ import { UpdateAgentUpdateAgentRequest } from "@orq-ai/node/models/operations";
 let value: UpdateAgentUpdateAgentRequest = {
   model: {
     id: "<id>",
+    parameters: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      loadBalancer: {
+        type: "weight_based",
+        models: [
+          {
+            model: "openai/gpt-4o",
+            weight: 0.7,
+          },
+        ],
+      },
+      timeout: {
+        callTimeout: 30000,
+      },
+    },
     retry: {
       count: 3,
       onCodes: [
@@ -21,6 +54,9 @@ let value: UpdateAgentUpdateAgentRequest = {
       ],
     },
   },
+  fallbackModels: [
+    "<value>",
+  ],
   settings: {
     tools: [
       {

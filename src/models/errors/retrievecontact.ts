@@ -60,19 +60,3 @@ export const RetrieveContactResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type RetrieveContactResponseBody$Outbound = {
-  error: string;
-};
-
-/** @internal */
-export const RetrieveContactResponseBody$outboundSchema: z.ZodType<
-  RetrieveContactResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveContactResponseBody
-> = z.instanceof(RetrieveContactResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.string(),
-  }));

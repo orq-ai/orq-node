@@ -451,20 +451,9 @@ export type SearchKnowledgeResponseBody = {
 };
 
 /** @internal */
-export const SearchType$inboundSchema: z.ZodNativeEnum<typeof SearchType> = z
+export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> = z
   .nativeEnum(SearchType);
-/** @internal */
-export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> =
-  SearchType$inboundSchema;
 
-/** @internal */
-export const SearchKnowledgeOrExists$inboundSchema: z.ZodType<
-  SearchKnowledgeOrExists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type SearchKnowledgeOrExists$Outbound = {
   exists: boolean;
@@ -486,22 +475,7 @@ export function searchKnowledgeOrExistsToJSON(
     SearchKnowledgeOrExists$outboundSchema.parse(searchKnowledgeOrExists),
   );
 }
-export function searchKnowledgeOrExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrExists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrExists' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrKnowledgeNin$inboundSchema: z.ZodType<
-  SearchKnowledgeOrKnowledgeNin,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeOrKnowledgeNin$Outbound = string | number | boolean;
 
@@ -521,24 +495,7 @@ export function searchKnowledgeOrKnowledgeNinToJSON(
     ),
   );
 }
-export function searchKnowledgeOrKnowledgeNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrKnowledgeNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrKnowledgeNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrKnowledgeNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrNin$inboundSchema: z.ZodType<
-  SearchKnowledgeOrNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type SearchKnowledgeOrNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -560,22 +517,7 @@ export function searchKnowledgeOrNinToJSON(
     SearchKnowledgeOrNin$outboundSchema.parse(searchKnowledgeOrNin),
   );
 }
-export function searchKnowledgeOrNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrKnowledgeIn$inboundSchema: z.ZodType<
-  SearchKnowledgeOrKnowledgeIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeOrKnowledgeIn$Outbound = string | number | boolean;
 
@@ -595,24 +537,7 @@ export function searchKnowledgeOrKnowledgeInToJSON(
     ),
   );
 }
-export function searchKnowledgeOrKnowledgeInFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrKnowledgeIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrKnowledgeIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrKnowledgeIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrIn$inboundSchema: z.ZodType<
-  SearchKnowledgeOrIn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type SearchKnowledgeOrIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -634,24 +559,7 @@ export function searchKnowledgeOrInToJSON(
     SearchKnowledgeOrIn$outboundSchema.parse(searchKnowledgeOrIn),
   );
 }
-export function searchKnowledgeOrInFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrLte$inboundSchema: z.ZodType<
-  SearchKnowledgeOrLte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lte: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeOrLte$Outbound = {
   lte: number;
@@ -673,24 +581,7 @@ export function searchKnowledgeOrLteToJSON(
     SearchKnowledgeOrLte$outboundSchema.parse(searchKnowledgeOrLte),
   );
 }
-export function searchKnowledgeOrLteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrLte' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrLt$inboundSchema: z.ZodType<
-  SearchKnowledgeOrLt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeOrLt$Outbound = {
   lt: number;
@@ -712,24 +603,7 @@ export function searchKnowledgeOrLtToJSON(
     SearchKnowledgeOrLt$outboundSchema.parse(searchKnowledgeOrLt),
   );
 }
-export function searchKnowledgeOrLtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrLt' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrGte$inboundSchema: z.ZodType<
-  SearchKnowledgeOrGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gte: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeOrGte$Outbound = {
   gte: number;
@@ -751,24 +625,7 @@ export function searchKnowledgeOrGteToJSON(
     SearchKnowledgeOrGte$outboundSchema.parse(searchKnowledgeOrGte),
   );
 }
-export function searchKnowledgeOrGteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrGte' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrGt$inboundSchema: z.ZodType<
-  SearchKnowledgeOrGt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeOrGt$Outbound = {
   gt: number;
@@ -790,22 +647,7 @@ export function searchKnowledgeOrGtToJSON(
     SearchKnowledgeOrGt$outboundSchema.parse(searchKnowledgeOrGt),
   );
 }
-export function searchKnowledgeOrGtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrGt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrGt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrGt' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrKnowledgeNe$inboundSchema: z.ZodType<
-  SearchKnowledgeOrKnowledgeNe,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeOrKnowledgeNe$Outbound = string | number | boolean;
 
@@ -825,24 +667,7 @@ export function searchKnowledgeOrKnowledgeNeToJSON(
     ),
   );
 }
-export function searchKnowledgeOrKnowledgeNeFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrKnowledgeNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrKnowledgeNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrKnowledgeNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrNe$inboundSchema: z.ZodType<
-  SearchKnowledgeOrNe,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type SearchKnowledgeOrNe$Outbound = {
   ne: string | number | boolean;
@@ -864,22 +689,7 @@ export function searchKnowledgeOrNeToJSON(
     SearchKnowledgeOrNe$outboundSchema.parse(searchKnowledgeOrNe),
   );
 }
-export function searchKnowledgeOrNeFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrKnowledgeEq$inboundSchema: z.ZodType<
-  SearchKnowledgeOrKnowledgeEq,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeOrKnowledgeEq$Outbound = string | number | boolean;
 
@@ -899,24 +709,7 @@ export function searchKnowledgeOrKnowledgeEqToJSON(
     ),
   );
 }
-export function searchKnowledgeOrKnowledgeEqFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrKnowledgeEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrKnowledgeEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrKnowledgeEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeOrEq$inboundSchema: z.ZodType<
-  SearchKnowledgeOrEq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type SearchKnowledgeOrEq$Outbound = {
   eq: string | number | boolean;
@@ -938,32 +731,7 @@ export function searchKnowledgeOrEqToJSON(
     SearchKnowledgeOrEq$outboundSchema.parse(searchKnowledgeOrEq),
   );
 }
-export function searchKnowledgeOrEqFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeOrEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeOrEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeOrEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeFilterByOr$inboundSchema: z.ZodType<
-  SearchKnowledgeFilterByOr,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => SearchKnowledgeOrEq$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrNe$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrGt$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrGte$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrLt$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrLte$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrIn$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrNin$inboundSchema),
-  z.lazy(() => SearchKnowledgeOrExists$inboundSchema),
-]);
 /** @internal */
 export type SearchKnowledgeFilterByOr$Outbound =
   | SearchKnowledgeOrEq$Outbound
@@ -1000,38 +768,7 @@ export function searchKnowledgeFilterByOrToJSON(
     SearchKnowledgeFilterByOr$outboundSchema.parse(searchKnowledgeFilterByOr),
   );
 }
-export function searchKnowledgeFilterByOrFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeFilterByOr, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeFilterByOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeFilterByOr' from JSON`,
-  );
-}
 
-/** @internal */
-export const FilterByOr$inboundSchema: z.ZodType<
-  FilterByOr,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  or: z.array(
-    z.record(z.union([
-      z.lazy(() => SearchKnowledgeOrEq$inboundSchema),
-      z.lazy(() =>
-        SearchKnowledgeOrNe$inboundSchema
-      ),
-      z.lazy(() => SearchKnowledgeOrGt$inboundSchema),
-      z.lazy(() => SearchKnowledgeOrGte$inboundSchema),
-      z.lazy(() => SearchKnowledgeOrLt$inboundSchema),
-      z.lazy(() => SearchKnowledgeOrLte$inboundSchema),
-      z.lazy(() => SearchKnowledgeOrIn$inboundSchema),
-      z.lazy(() => SearchKnowledgeOrNin$inboundSchema),
-      z.lazy(() => SearchKnowledgeOrExists$inboundSchema),
-    ])),
-  ),
-});
 /** @internal */
 export type FilterByOr$Outbound = {
   or: Array<
@@ -1076,24 +813,7 @@ export const FilterByOr$outboundSchema: z.ZodType<
 export function filterByOrToJSON(filterByOr: FilterByOr): string {
   return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
 }
-export function filterByOrFromJSON(
-  jsonString: string,
-): SafeParseResult<FilterByOr, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilterByOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilterByOr' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndExists$inboundSchema: z.ZodType<
-  SearchKnowledgeAndExists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type SearchKnowledgeAndExists$Outbound = {
   exists: boolean;
@@ -1115,22 +835,7 @@ export function searchKnowledgeAndExistsToJSON(
     SearchKnowledgeAndExists$outboundSchema.parse(searchKnowledgeAndExists),
   );
 }
-export function searchKnowledgeAndExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndExists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndExists' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndKnowledgeNin$inboundSchema: z.ZodType<
-  SearchKnowledgeAndKnowledgeNin,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeAndKnowledgeNin$Outbound = string | number | boolean;
 
@@ -1150,24 +855,7 @@ export function searchKnowledgeAndKnowledgeNinToJSON(
     ),
   );
 }
-export function searchKnowledgeAndKnowledgeNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndKnowledgeNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndKnowledgeNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndKnowledgeNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndNin$inboundSchema: z.ZodType<
-  SearchKnowledgeAndNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type SearchKnowledgeAndNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -1189,22 +877,7 @@ export function searchKnowledgeAndNinToJSON(
     SearchKnowledgeAndNin$outboundSchema.parse(searchKnowledgeAndNin),
   );
 }
-export function searchKnowledgeAndNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndKnowledgeIn$inboundSchema: z.ZodType<
-  SearchKnowledgeAndKnowledgeIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeAndKnowledgeIn$Outbound = string | number | boolean;
 
@@ -1224,24 +897,7 @@ export function searchKnowledgeAndKnowledgeInToJSON(
     ),
   );
 }
-export function searchKnowledgeAndKnowledgeInFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndKnowledgeIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndKnowledgeIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndKnowledgeIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndIn$inboundSchema: z.ZodType<
-  SearchKnowledgeAndIn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type SearchKnowledgeAndIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -1263,24 +919,7 @@ export function searchKnowledgeAndInToJSON(
     SearchKnowledgeAndIn$outboundSchema.parse(searchKnowledgeAndIn),
   );
 }
-export function searchKnowledgeAndInFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndLte$inboundSchema: z.ZodType<
-  SearchKnowledgeAndLte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lte: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeAndLte$Outbound = {
   lte: number;
@@ -1302,24 +941,7 @@ export function searchKnowledgeAndLteToJSON(
     SearchKnowledgeAndLte$outboundSchema.parse(searchKnowledgeAndLte),
   );
 }
-export function searchKnowledgeAndLteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndLte' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndLt$inboundSchema: z.ZodType<
-  SearchKnowledgeAndLt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeAndLt$Outbound = {
   lt: number;
@@ -1341,24 +963,7 @@ export function searchKnowledgeAndLtToJSON(
     SearchKnowledgeAndLt$outboundSchema.parse(searchKnowledgeAndLt),
   );
 }
-export function searchKnowledgeAndLtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndLt' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndGte$inboundSchema: z.ZodType<
-  SearchKnowledgeAndGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gte: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeAndGte$Outbound = {
   gte: number;
@@ -1380,24 +985,7 @@ export function searchKnowledgeAndGteToJSON(
     SearchKnowledgeAndGte$outboundSchema.parse(searchKnowledgeAndGte),
   );
 }
-export function searchKnowledgeAndGteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndGte' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndGt$inboundSchema: z.ZodType<
-  SearchKnowledgeAndGt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type SearchKnowledgeAndGt$Outbound = {
   gt: number;
@@ -1419,22 +1007,7 @@ export function searchKnowledgeAndGtToJSON(
     SearchKnowledgeAndGt$outboundSchema.parse(searchKnowledgeAndGt),
   );
 }
-export function searchKnowledgeAndGtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndGt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndGt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndGt' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndKnowledgeNe$inboundSchema: z.ZodType<
-  SearchKnowledgeAndKnowledgeNe,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeAndKnowledgeNe$Outbound = string | number | boolean;
 
@@ -1454,24 +1027,7 @@ export function searchKnowledgeAndKnowledgeNeToJSON(
     ),
   );
 }
-export function searchKnowledgeAndKnowledgeNeFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndKnowledgeNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndKnowledgeNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndKnowledgeNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndNe$inboundSchema: z.ZodType<
-  SearchKnowledgeAndNe,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type SearchKnowledgeAndNe$Outbound = {
   ne: string | number | boolean;
@@ -1493,22 +1049,7 @@ export function searchKnowledgeAndNeToJSON(
     SearchKnowledgeAndNe$outboundSchema.parse(searchKnowledgeAndNe),
   );
 }
-export function searchKnowledgeAndNeFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndKnowledgeEq$inboundSchema: z.ZodType<
-  SearchKnowledgeAndKnowledgeEq,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledgeAndKnowledgeEq$Outbound = string | number | boolean;
 
@@ -1528,24 +1069,7 @@ export function searchKnowledgeAndKnowledgeEqToJSON(
     ),
   );
 }
-export function searchKnowledgeAndKnowledgeEqFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndKnowledgeEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndKnowledgeEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndKnowledgeEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeAndEq$inboundSchema: z.ZodType<
-  SearchKnowledgeAndEq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type SearchKnowledgeAndEq$Outbound = {
   eq: string | number | boolean;
@@ -1567,32 +1091,7 @@ export function searchKnowledgeAndEqToJSON(
     SearchKnowledgeAndEq$outboundSchema.parse(searchKnowledgeAndEq),
   );
 }
-export function searchKnowledgeAndEqFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeAndEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeAndEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAndEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeFilterByAnd$inboundSchema: z.ZodType<
-  SearchKnowledgeFilterByAnd,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => SearchKnowledgeAndEq$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndNe$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndGt$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndGte$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndLt$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndLte$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndIn$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndNin$inboundSchema),
-  z.lazy(() => SearchKnowledgeAndExists$inboundSchema),
-]);
 /** @internal */
 export type SearchKnowledgeFilterByAnd$Outbound =
   | SearchKnowledgeAndEq$Outbound
@@ -1629,38 +1128,7 @@ export function searchKnowledgeFilterByAndToJSON(
     SearchKnowledgeFilterByAnd$outboundSchema.parse(searchKnowledgeFilterByAnd),
   );
 }
-export function searchKnowledgeFilterByAndFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeFilterByAnd, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeFilterByAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeFilterByAnd' from JSON`,
-  );
-}
 
-/** @internal */
-export const FilterByAnd$inboundSchema: z.ZodType<
-  FilterByAnd,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  and: z.array(
-    z.record(z.union([
-      z.lazy(() => SearchKnowledgeAndEq$inboundSchema),
-      z.lazy(() =>
-        SearchKnowledgeAndNe$inboundSchema
-      ),
-      z.lazy(() => SearchKnowledgeAndGt$inboundSchema),
-      z.lazy(() => SearchKnowledgeAndGte$inboundSchema),
-      z.lazy(() => SearchKnowledgeAndLt$inboundSchema),
-      z.lazy(() => SearchKnowledgeAndLte$inboundSchema),
-      z.lazy(() => SearchKnowledgeAndIn$inboundSchema),
-      z.lazy(() => SearchKnowledgeAndNin$inboundSchema),
-      z.lazy(() => SearchKnowledgeAndExists$inboundSchema),
-    ])),
-  ),
-});
 /** @internal */
 export type FilterByAnd$Outbound = {
   and: Array<
@@ -1705,24 +1173,7 @@ export const FilterByAnd$outboundSchema: z.ZodType<
 export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
   return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
 }
-export function filterByAndFromJSON(
-  jsonString: string,
-): SafeParseResult<FilterByAnd, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilterByAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilterByAnd' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Exists$inboundSchema: z.ZodType<
-  SearchKnowledge1Exists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type SearchKnowledge1Exists$Outbound = {
   exists: boolean;
@@ -1744,22 +1195,7 @@ export function searchKnowledge1ExistsToJSON(
     SearchKnowledge1Exists$outboundSchema.parse(searchKnowledge1Exists),
   );
 }
-export function searchKnowledge1ExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Exists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Exists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Exists' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1KnowledgeNin$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeNin,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledge1KnowledgeNin$Outbound = string | number | boolean;
 
@@ -1779,24 +1215,7 @@ export function searchKnowledge1KnowledgeNinToJSON(
     ),
   );
 }
-export function searchKnowledge1KnowledgeNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1KnowledgeNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Nin$inboundSchema: z.ZodType<
-  SearchKnowledge1Nin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type SearchKnowledge1Nin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -1818,22 +1237,7 @@ export function searchKnowledge1NinToJSON(
     SearchKnowledge1Nin$outboundSchema.parse(searchKnowledge1Nin),
   );
 }
-export function searchKnowledge1NinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Nin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Nin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Nin' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1KnowledgeIn$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledge1KnowledgeIn$Outbound = string | number | boolean;
 
@@ -1853,24 +1257,7 @@ export function searchKnowledge1KnowledgeInToJSON(
     ),
   );
 }
-export function searchKnowledge1KnowledgeInFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1KnowledgeIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1In$inboundSchema: z.ZodType<
-  SearchKnowledge1In,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type SearchKnowledge1In$Outbound = {
   in: Array<string | number | boolean>;
@@ -1892,24 +1279,7 @@ export function searchKnowledge1InToJSON(
     SearchKnowledge1In$outboundSchema.parse(searchKnowledge1In),
   );
 }
-export function searchKnowledge1InFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1In, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1In$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1In' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Lte$inboundSchema: z.ZodType<
-  SearchKnowledge1Lte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lte: z.number(),
-});
 /** @internal */
 export type SearchKnowledge1Lte$Outbound = {
   lte: number;
@@ -1931,24 +1301,7 @@ export function searchKnowledge1LteToJSON(
     SearchKnowledge1Lte$outboundSchema.parse(searchKnowledge1Lte),
   );
 }
-export function searchKnowledge1LteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Lte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Lte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Lte' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Lt$inboundSchema: z.ZodType<
-  SearchKnowledge1Lt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type SearchKnowledge1Lt$Outbound = {
   lt: number;
@@ -1970,24 +1323,7 @@ export function searchKnowledge1LtToJSON(
     SearchKnowledge1Lt$outboundSchema.parse(searchKnowledge1Lt),
   );
 }
-export function searchKnowledge1LtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Lt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Lt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Lt' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Gte$inboundSchema: z.ZodType<
-  SearchKnowledge1Gte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gte: z.number(),
-});
 /** @internal */
 export type SearchKnowledge1Gte$Outbound = {
   gte: number;
@@ -2009,24 +1345,7 @@ export function searchKnowledge1GteToJSON(
     SearchKnowledge1Gte$outboundSchema.parse(searchKnowledge1Gte),
   );
 }
-export function searchKnowledge1GteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Gte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Gte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Gte' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Gt$inboundSchema: z.ZodType<
-  SearchKnowledge1Gt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type SearchKnowledge1Gt$Outbound = {
   gt: number;
@@ -2048,22 +1367,7 @@ export function searchKnowledge1GtToJSON(
     SearchKnowledge1Gt$outboundSchema.parse(searchKnowledge1Gt),
   );
 }
-export function searchKnowledge1GtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Gt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Gt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Gt' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1KnowledgeNe$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeNe,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledge1KnowledgeNe$Outbound = string | number | boolean;
 
@@ -2083,24 +1387,7 @@ export function searchKnowledge1KnowledgeNeToJSON(
     ),
   );
 }
-export function searchKnowledge1KnowledgeNeFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1KnowledgeNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Ne$inboundSchema: z.ZodType<
-  SearchKnowledge1Ne,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type SearchKnowledge1Ne$Outbound = {
   ne: string | number | boolean;
@@ -2122,22 +1409,7 @@ export function searchKnowledge1NeToJSON(
     SearchKnowledge1Ne$outboundSchema.parse(searchKnowledge1Ne),
   );
 }
-export function searchKnowledge1NeFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Ne, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Ne$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Ne' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1KnowledgeEq$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeEq,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type SearchKnowledge1KnowledgeEq$Outbound = string | number | boolean;
 
@@ -2157,24 +1429,7 @@ export function searchKnowledge1KnowledgeEqToJSON(
     ),
   );
 }
-export function searchKnowledge1KnowledgeEqFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1KnowledgeEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledge1Eq$inboundSchema: z.ZodType<
-  SearchKnowledge1Eq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type SearchKnowledge1Eq$Outbound = {
   eq: string | number | boolean;
@@ -2196,32 +1451,7 @@ export function searchKnowledge1EqToJSON(
     SearchKnowledge1Eq$outboundSchema.parse(searchKnowledge1Eq),
   );
 }
-export function searchKnowledge1EqFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1Eq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1Eq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1Eq' from JSON`,
-  );
-}
 
-/** @internal */
-export const FilterBy1$inboundSchema: z.ZodType<
-  FilterBy1,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => SearchKnowledge1Eq$inboundSchema),
-  z.lazy(() => SearchKnowledge1Ne$inboundSchema),
-  z.lazy(() => SearchKnowledge1Gt$inboundSchema),
-  z.lazy(() => SearchKnowledge1Gte$inboundSchema),
-  z.lazy(() => SearchKnowledge1Lt$inboundSchema),
-  z.lazy(() => SearchKnowledge1Lte$inboundSchema),
-  z.lazy(() => SearchKnowledge1In$inboundSchema),
-  z.lazy(() => SearchKnowledge1Nin$inboundSchema),
-  z.lazy(() => SearchKnowledge1Exists$inboundSchema),
-]);
 /** @internal */
 export type FilterBy1$Outbound =
   | SearchKnowledge1Eq$Outbound
@@ -2254,36 +1484,7 @@ export const FilterBy1$outboundSchema: z.ZodType<
 export function filterBy1ToJSON(filterBy1: FilterBy1): string {
   return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
 }
-export function filterBy1FromJSON(
-  jsonString: string,
-): SafeParseResult<FilterBy1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilterBy1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilterBy1' from JSON`,
-  );
-}
 
-/** @internal */
-export const FilterBy$inboundSchema: z.ZodType<
-  FilterBy,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => FilterByAnd$inboundSchema),
-  z.lazy(() => FilterByOr$inboundSchema),
-  z.record(z.union([
-    z.lazy(() => SearchKnowledge1Eq$inboundSchema),
-    z.lazy(() => SearchKnowledge1Ne$inboundSchema),
-    z.lazy(() => SearchKnowledge1Gt$inboundSchema),
-    z.lazy(() => SearchKnowledge1Gte$inboundSchema),
-    z.lazy(() => SearchKnowledge1Lt$inboundSchema),
-    z.lazy(() => SearchKnowledge1Lte$inboundSchema),
-    z.lazy(() => SearchKnowledge1In$inboundSchema),
-    z.lazy(() => SearchKnowledge1Nin$inboundSchema),
-    z.lazy(() => SearchKnowledge1Exists$inboundSchema),
-  ])),
-]);
 /** @internal */
 export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
   [k: string]:
@@ -2322,32 +1523,7 @@ export const FilterBy$outboundSchema: z.ZodType<
 export function filterByToJSON(filterBy: FilterBy): string {
   return JSON.stringify(FilterBy$outboundSchema.parse(filterBy));
 }
-export function filterByFromJSON(
-  jsonString: string,
-): SafeParseResult<FilterBy, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilterBy$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilterBy' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchOptions$inboundSchema: z.ZodType<
-  SearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_vectors: z.boolean().optional(),
-  include_metadata: z.boolean().optional(),
-  include_scores: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_vectors": "includeVectors",
-    "include_metadata": "includeMetadata",
-    "include_scores": "includeScores",
-  });
-});
 /** @internal */
 export type SearchOptions$Outbound = {
   include_vectors?: boolean | undefined;
@@ -2375,30 +1551,7 @@ export const SearchOptions$outboundSchema: z.ZodType<
 export function searchOptionsToJSON(searchOptions: SearchOptions): string {
   return JSON.stringify(SearchOptions$outboundSchema.parse(searchOptions));
 }
-export function searchOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const RerankConfig$inboundSchema: z.ZodType<
-  RerankConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0),
-  top_k: z.number().int().default(10),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-  });
-});
 /** @internal */
 export type RerankConfig$Outbound = {
   model: string;
@@ -2424,24 +1577,7 @@ export const RerankConfig$outboundSchema: z.ZodType<
 export function rerankConfigToJSON(rerankConfig: RerankConfig): string {
   return JSON.stringify(RerankConfig$outboundSchema.parse(rerankConfig));
 }
-export function rerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<RerankConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RerankConfig' from JSON`,
-  );
-}
 
-/** @internal */
-export const AgenticRagConfig$inboundSchema: z.ZodType<
-  AgenticRagConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
 /** @internal */
 export type AgenticRagConfig$Outbound = {
   model: string;
@@ -2463,54 +1599,7 @@ export function agenticRagConfigToJSON(
     AgenticRagConfig$outboundSchema.parse(agenticRagConfig),
   );
 }
-export function agenticRagConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<AgenticRagConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgenticRagConfig' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
-  SearchKnowledgeRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  query: z.string(),
-  top_k: z.number().int().optional(),
-  threshold: z.number().optional(),
-  search_type: SearchType$inboundSchema.default("hybrid_search"),
-  filter_by: z.union([
-    z.lazy(() => FilterByAnd$inboundSchema),
-    z.lazy(() => FilterByOr$inboundSchema),
-    z.record(z.union([
-      z.lazy(() => SearchKnowledge1Eq$inboundSchema),
-      z.lazy(() => SearchKnowledge1Ne$inboundSchema),
-      z.lazy(() => SearchKnowledge1Gt$inboundSchema),
-      z.lazy(() => SearchKnowledge1Gte$inboundSchema),
-      z.lazy(() => SearchKnowledge1Lt$inboundSchema),
-      z.lazy(() => SearchKnowledge1Lte$inboundSchema),
-      z.lazy(() => SearchKnowledge1In$inboundSchema),
-      z.lazy(() => SearchKnowledge1Nin$inboundSchema),
-      z.lazy(() => SearchKnowledge1Exists$inboundSchema),
-    ])),
-  ]).optional(),
-  search_options: z.lazy(() => SearchOptions$inboundSchema).optional(),
-  rerank_config: z.lazy(() => RerankConfig$inboundSchema).optional(),
-  agentic_rag_config: z.lazy(() => AgenticRagConfig$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "search_type": "searchType",
-    "filter_by": "filterBy",
-    "search_options": "searchOptions",
-    "rerank_config": "rerankConfig",
-    "agentic_rag_config": "agenticRagConfig",
-  });
-});
 /** @internal */
 export type SearchKnowledgeRequestBody$Outbound = {
   query: string;
@@ -2580,31 +1669,7 @@ export function searchKnowledgeRequestBodyToJSON(
     SearchKnowledgeRequestBody$outboundSchema.parse(searchKnowledgeRequestBody),
   );
 }
-export function searchKnowledgeRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const SearchKnowledgeRequest$inboundSchema: z.ZodType<
-  SearchKnowledgeRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  RequestBody: z.lazy(() => SearchKnowledgeRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type SearchKnowledgeRequest$Outbound = {
   knowledge_id: string;
@@ -2634,15 +1699,6 @@ export function searchKnowledgeRequestToJSON(
     SearchKnowledgeRequest$outboundSchema.parse(searchKnowledgeRequest),
   );
 }
-export function searchKnowledgeRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const Scores$inboundSchema: z.ZodType<Scores, z.ZodTypeDef, unknown> = z
@@ -2655,30 +1711,7 @@ export const Scores$inboundSchema: z.ZodType<Scores, z.ZodTypeDef, unknown> = z
       "search_score": "searchScore",
     });
   });
-/** @internal */
-export type Scores$Outbound = {
-  rerank_score?: number | undefined;
-  search_score?: number | undefined;
-};
 
-/** @internal */
-export const Scores$outboundSchema: z.ZodType<
-  Scores$Outbound,
-  z.ZodTypeDef,
-  Scores
-> = z.object({
-  rerankScore: z.number().optional(),
-  searchScore: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    rerankScore: "rerank_score",
-    searchScore: "search_score",
-  });
-});
-
-export function scoresToJSON(scores: Scores): string {
-  return JSON.stringify(Scores$outboundSchema.parse(scores));
-}
 export function scoresFromJSON(
   jsonString: string,
 ): SafeParseResult<Scores, SDKValidationError> {
@@ -2698,31 +1731,7 @@ export const Matches$inboundSchema: z.ZodType<Matches, z.ZodTypeDef, unknown> =
     metadata: z.record(z.any()).optional(),
     scores: z.lazy(() => Scores$inboundSchema).optional(),
   });
-/** @internal */
-export type Matches$Outbound = {
-  id: string;
-  text: string;
-  vector?: Array<number> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  scores?: Scores$Outbound | undefined;
-};
 
-/** @internal */
-export const Matches$outboundSchema: z.ZodType<
-  Matches$Outbound,
-  z.ZodTypeDef,
-  Matches
-> = z.object({
-  id: z.string(),
-  text: z.string(),
-  vector: z.array(z.number()).optional(),
-  metadata: z.record(z.any()).optional(),
-  scores: z.lazy(() => Scores$outboundSchema).optional(),
-});
-
-export function matchesToJSON(matches: Matches): string {
-  return JSON.stringify(Matches$outboundSchema.parse(matches));
-}
 export function matchesFromJSON(
   jsonString: string,
 ): SafeParseResult<Matches, SDKValidationError> {
@@ -2741,29 +1750,7 @@ export const SearchKnowledgeResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   matches: z.array(z.lazy(() => Matches$inboundSchema)),
 });
-/** @internal */
-export type SearchKnowledgeResponseBody$Outbound = {
-  matches: Array<Matches$Outbound>;
-};
 
-/** @internal */
-export const SearchKnowledgeResponseBody$outboundSchema: z.ZodType<
-  SearchKnowledgeResponseBody$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeResponseBody
-> = z.object({
-  matches: z.array(z.lazy(() => Matches$outboundSchema)),
-});
-
-export function searchKnowledgeResponseBodyToJSON(
-  searchKnowledgeResponseBody: SearchKnowledgeResponseBody,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeResponseBody$outboundSchema.parse(
-      searchKnowledgeResponseBody,
-    ),
-  );
-}
 export function searchKnowledgeResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<SearchKnowledgeResponseBody, SDKValidationError> {

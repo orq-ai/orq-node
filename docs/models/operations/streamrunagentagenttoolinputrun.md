@@ -1,6 +1,6 @@
 # StreamRunAgentAgentToolInputRun
 
-Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, MCP) support full inline definitions for on-the-fly creation.
+Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, JSON Schema, MCP) support full inline definitions for on-the-fly creation.
 
 
 ## Supported Types
@@ -136,6 +136,33 @@ const value: operations.AgentToolInputRunFunctionToolRun = {
   key: "<key>",
   function: {
     name: "<value>",
+  },
+};
+```
+
+### `operations.AgentToolInputRunJSONSchemaToolRun`
+
+```typescript
+const value: operations.AgentToolInputRunJSONSchemaToolRun = {
+  type: "json_schema",
+  key: "<key>",
+  description: "bathhouse republican respectful cinema place yet oof",
+  jsonSchema: {
+    name: "<value>",
+    description: "and courageous ah whoa boohoo swill whenever",
+    schema: {
+      type: "<value>",
+      properties: {
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+      },
+      required: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+    },
   },
 };
 ```

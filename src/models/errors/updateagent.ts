@@ -49,19 +49,3 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type UpdateAgentResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
-  UpdateAgentResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentResponseBody
-> = z.instanceof(UpdateAgentResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

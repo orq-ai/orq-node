@@ -1,5 +1,7 @@
 # Conversation
 
+Conversation context for chat studio integration
+
 ## Example Usage
 
 ```typescript

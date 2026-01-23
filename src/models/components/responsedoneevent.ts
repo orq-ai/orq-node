@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The reason why the agent stopped generating
  */
-export const FinishReason = {
+export const ResponseDoneEventFinishReason = {
   Stop: "stop",
   Length: "length",
   ToolCalls: "tool_calls",
@@ -24,7 +24,9 @@ export const FinishReason = {
 /**
  * The reason why the agent stopped generating
  */
-export type FinishReason = ClosedEnum<typeof FinishReason>;
+export type ResponseDoneEventFinishReason = ClosedEnum<
+  typeof ResponseDoneEventFinishReason
+>;
 
 export type ResponseDoneEventPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
@@ -75,7 +77,7 @@ export type ResponseDoneEventDataType = ClosedEnum<
   typeof ResponseDoneEventDataType
 >;
 
-export type FunctionT = {
+export type ResponseDoneEventFunction = {
   /**
    * The name of the function to call
    */
@@ -86,20 +88,20 @@ export type FunctionT = {
   arguments?: string | undefined;
 };
 
-export type PendingToolCalls = {
+export type ResponseDoneEventPendingToolCalls = {
   /**
    * Unique identifier for the tool call
    */
   id: string;
   type: ResponseDoneEventDataType;
-  function: FunctionT;
+  function: ResponseDoneEventFunction;
 };
 
 export type ResponseDoneEventData = {
   /**
    * The reason why the agent stopped generating
    */
-  finishReason: FinishReason;
+  finishReason: ResponseDoneEventFinishReason;
   /**
    * Token usage statistics for the complete response
    */
@@ -107,7 +109,7 @@ export type ResponseDoneEventData = {
   /**
    * Tool calls awaiting user response (when finishReason is function_call)
    */
-  pendingToolCalls?: Array<PendingToolCalls> | undefined;
+  pendingToolCalls?: Array<ResponseDoneEventPendingToolCalls> | undefined;
 };
 
 /**
@@ -123,11 +125,9 @@ export type ResponseDoneEvent = {
 };
 
 /** @internal */
-export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  z.nativeEnum(FinishReason);
-/** @internal */
-export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  FinishReason$inboundSchema;
+export const ResponseDoneEventFinishReason$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseDoneEventFinishReason
+> = z.nativeEnum(ResponseDoneEventFinishReason);
 
 /** @internal */
 export const ResponseDoneEventPromptTokensDetails$inboundSchema: z.ZodType<
@@ -145,39 +145,7 @@ export const ResponseDoneEventPromptTokensDetails$inboundSchema: z.ZodType<
     "audio_tokens": "audioTokens",
   });
 });
-/** @internal */
-export type ResponseDoneEventPromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-  cache_creation_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const ResponseDoneEventPromptTokensDetails$outboundSchema: z.ZodType<
-  ResponseDoneEventPromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  ResponseDoneEventPromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function responseDoneEventPromptTokensDetailsToJSON(
-  responseDoneEventPromptTokensDetails: ResponseDoneEventPromptTokensDetails,
-): string {
-  return JSON.stringify(
-    ResponseDoneEventPromptTokensDetails$outboundSchema.parse(
-      responseDoneEventPromptTokensDetails,
-    ),
-  );
-}
 export function responseDoneEventPromptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseDoneEventPromptTokensDetails, SDKValidationError> {
@@ -207,43 +175,7 @@ export const ResponseDoneEventCompletionTokensDetails$inboundSchema: z.ZodType<
     "audio_tokens": "audioTokens",
   });
 });
-/** @internal */
-export type ResponseDoneEventCompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-  accepted_prediction_tokens?: number | null | undefined;
-  rejected_prediction_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const ResponseDoneEventCompletionTokensDetails$outboundSchema: z.ZodType<
-  ResponseDoneEventCompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  ResponseDoneEventCompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-  acceptedPredictionTokens: z.nullable(z.number()).optional(),
-  rejectedPredictionTokens: z.nullable(z.number()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    acceptedPredictionTokens: "accepted_prediction_tokens",
-    rejectedPredictionTokens: "rejected_prediction_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function responseDoneEventCompletionTokensDetailsToJSON(
-  responseDoneEventCompletionTokensDetails:
-    ResponseDoneEventCompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    ResponseDoneEventCompletionTokensDetails$outboundSchema.parse(
-      responseDoneEventCompletionTokensDetails,
-    ),
-  );
-}
 export function responseDoneEventCompletionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -284,53 +216,7 @@ export const ResponseDoneEventUsage$inboundSchema: z.ZodType<
     "completion_tokens_details": "completionTokensDetails",
   });
 });
-/** @internal */
-export type ResponseDoneEventUsage$Outbound = {
-  completion_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-  prompt_tokens_details?:
-    | ResponseDoneEventPromptTokensDetails$Outbound
-    | null
-    | undefined;
-  completion_tokens_details?:
-    | ResponseDoneEventCompletionTokensDetails$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const ResponseDoneEventUsage$outboundSchema: z.ZodType<
-  ResponseDoneEventUsage$Outbound,
-  z.ZodTypeDef,
-  ResponseDoneEventUsage
-> = z.object({
-  completionTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-  promptTokensDetails: z.nullable(
-    z.lazy(() => ResponseDoneEventPromptTokensDetails$outboundSchema),
-  ).optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() => ResponseDoneEventCompletionTokensDetails$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completionTokens: "completion_tokens",
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
-
-export function responseDoneEventUsageToJSON(
-  responseDoneEventUsage: ResponseDoneEventUsage,
-): string {
-  return JSON.stringify(
-    ResponseDoneEventUsage$outboundSchema.parse(responseDoneEventUsage),
-  );
-}
 export function responseDoneEventUsageFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseDoneEventUsage, SDKValidationError> {
@@ -345,91 +231,45 @@ export function responseDoneEventUsageFromJSON(
 export const ResponseDoneEventDataType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseDoneEventDataType
 > = z.nativeEnum(ResponseDoneEventDataType);
-/** @internal */
-export const ResponseDoneEventDataType$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseDoneEventDataType
-> = ResponseDoneEventDataType$inboundSchema;
 
 /** @internal */
-export const FunctionT$inboundSchema: z.ZodType<
-  FunctionT,
+export const ResponseDoneEventFunction$inboundSchema: z.ZodType<
+  ResponseDoneEventFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-/** @internal */
-export type FunctionT$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
 
-/** @internal */
-export const FunctionT$outboundSchema: z.ZodType<
-  FunctionT$Outbound,
-  z.ZodTypeDef,
-  FunctionT
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function functionToJSON(functionT: FunctionT): string {
-  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
-}
-export function functionFromJSON(
+export function responseDoneEventFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionT, SDKValidationError> {
+): SafeParseResult<ResponseDoneEventFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionT' from JSON`,
+    (x) => ResponseDoneEventFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseDoneEventFunction' from JSON`,
   );
 }
 
 /** @internal */
-export const PendingToolCalls$inboundSchema: z.ZodType<
-  PendingToolCalls,
+export const ResponseDoneEventPendingToolCalls$inboundSchema: z.ZodType<
+  ResponseDoneEventPendingToolCalls,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   type: ResponseDoneEventDataType$inboundSchema,
-  function: z.lazy(() => FunctionT$inboundSchema),
-});
-/** @internal */
-export type PendingToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: FunctionT$Outbound;
-};
-
-/** @internal */
-export const PendingToolCalls$outboundSchema: z.ZodType<
-  PendingToolCalls$Outbound,
-  z.ZodTypeDef,
-  PendingToolCalls
-> = z.object({
-  id: z.string(),
-  type: ResponseDoneEventDataType$outboundSchema,
-  function: z.lazy(() => FunctionT$outboundSchema),
+  function: z.lazy(() => ResponseDoneEventFunction$inboundSchema),
 });
 
-export function pendingToolCallsToJSON(
-  pendingToolCalls: PendingToolCalls,
-): string {
-  return JSON.stringify(
-    PendingToolCalls$outboundSchema.parse(pendingToolCalls),
-  );
-}
-export function pendingToolCallsFromJSON(
+export function responseDoneEventPendingToolCallsFromJSON(
   jsonString: string,
-): SafeParseResult<PendingToolCalls, SDKValidationError> {
+): SafeParseResult<ResponseDoneEventPendingToolCalls, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PendingToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PendingToolCalls' from JSON`,
+    (x) => ResponseDoneEventPendingToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseDoneEventPendingToolCalls' from JSON`,
   );
 }
 
@@ -439,37 +279,13 @@ export const ResponseDoneEventData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  finishReason: FinishReason$inboundSchema,
+  finishReason: ResponseDoneEventFinishReason$inboundSchema,
   usage: z.lazy(() => ResponseDoneEventUsage$inboundSchema).optional(),
-  pendingToolCalls: z.array(z.lazy(() => PendingToolCalls$inboundSchema))
-    .optional(),
-});
-/** @internal */
-export type ResponseDoneEventData$Outbound = {
-  finishReason: string;
-  usage?: ResponseDoneEventUsage$Outbound | undefined;
-  pendingToolCalls?: Array<PendingToolCalls$Outbound> | undefined;
-};
-
-/** @internal */
-export const ResponseDoneEventData$outboundSchema: z.ZodType<
-  ResponseDoneEventData$Outbound,
-  z.ZodTypeDef,
-  ResponseDoneEventData
-> = z.object({
-  finishReason: FinishReason$outboundSchema,
-  usage: z.lazy(() => ResponseDoneEventUsage$outboundSchema).optional(),
-  pendingToolCalls: z.array(z.lazy(() => PendingToolCalls$outboundSchema))
-    .optional(),
+  pendingToolCalls: z.array(
+    z.lazy(() => ResponseDoneEventPendingToolCalls$inboundSchema),
+  ).optional(),
 });
 
-export function responseDoneEventDataToJSON(
-  responseDoneEventData: ResponseDoneEventData,
-): string {
-  return JSON.stringify(
-    ResponseDoneEventData$outboundSchema.parse(responseDoneEventData),
-  );
-}
 export function responseDoneEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseDoneEventData, SDKValidationError> {
@@ -490,31 +306,7 @@ export const ResponseDoneEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ResponseDoneEventData$inboundSchema),
 });
-/** @internal */
-export type ResponseDoneEvent$Outbound = {
-  type: "response.done";
-  timestamp: string;
-  data: ResponseDoneEventData$Outbound;
-};
 
-/** @internal */
-export const ResponseDoneEvent$outboundSchema: z.ZodType<
-  ResponseDoneEvent$Outbound,
-  z.ZodTypeDef,
-  ResponseDoneEvent
-> = z.object({
-  type: z.literal("response.done"),
-  timestamp: z.string(),
-  data: z.lazy(() => ResponseDoneEventData$outboundSchema),
-});
-
-export function responseDoneEventToJSON(
-  responseDoneEvent: ResponseDoneEvent,
-): string {
-  return JSON.stringify(
-    ResponseDoneEvent$outboundSchema.parse(responseDoneEvent),
-  );
-}
 export function responseDoneEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseDoneEvent, SDKValidationError> {

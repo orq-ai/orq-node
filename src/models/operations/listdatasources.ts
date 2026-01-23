@@ -59,7 +59,7 @@ export type ListDatasourcesData = {
   /**
    * The unique identifier of the data source
    */
-  id?: string | undefined;
+  id: string;
   /**
    * The display name of the datasource. Normally the name of the uploaded file
    */
@@ -109,9 +109,6 @@ export type ListDatasourcesResponseBody = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
-  .union([z.array(z.string()), z.string()]);
-/** @internal */
 export type Status$Outbound = Array<string> | string;
 
 /** @internal */
@@ -124,35 +121,7 @@ export const Status$outboundSchema: z.ZodType<
 export function statusToJSON(status: Status): string {
   return JSON.stringify(Status$outboundSchema.parse(status));
 }
-export function statusFromJSON(
-  jsonString: string,
-): SafeParseResult<Status, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Status$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Status' from JSON`,
-  );
-}
 
-/** @internal */
-export const ListDatasourcesRequest$inboundSchema: z.ZodType<
-  ListDatasourcesRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-  q: z.string().optional(),
-  limit: z.number().default(50),
-  status: z.union([z.array(z.string()), z.string()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
 /** @internal */
 export type ListDatasourcesRequest$Outbound = {
   knowledge_id: string;
@@ -190,33 +159,16 @@ export function listDatasourcesRequestToJSON(
     ListDatasourcesRequest$outboundSchema.parse(listDatasourcesRequest),
   );
 }
-export function listDatasourcesRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasourcesRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasourcesRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasourcesRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListDatasourcesObject$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasourcesObject
 > = z.nativeEnum(ListDatasourcesObject);
-/** @internal */
-export const ListDatasourcesObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesObject
-> = ListDatasourcesObject$inboundSchema;
 
 /** @internal */
 export const ListDatasourcesStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasourcesStatus
 > = z.nativeEnum(ListDatasourcesStatus);
-/** @internal */
-export const ListDatasourcesStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesStatus
-> = ListDatasourcesStatus$inboundSchema;
 
 /** @internal */
 export const ListDatasourcesData$inboundSchema: z.ZodType<
@@ -224,7 +176,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KFBAEENE8CNPEJDJDWMYKNVK"),
+  _id: z.string().default("01KFN8ZQFZ0Z5WE25M0AA6KP2Z"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -246,57 +198,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-/** @internal */
-export type ListDatasourcesData$Outbound = {
-  _id: string;
-  display_name: string;
-  description?: string | undefined;
-  status: string;
-  file_id?: string | null | undefined;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-  knowledge_id: string;
-  chunks_count: number;
-};
 
-/** @internal */
-export const ListDatasourcesData$outboundSchema: z.ZodType<
-  ListDatasourcesData$Outbound,
-  z.ZodTypeDef,
-  ListDatasourcesData
-> = z.object({
-  id: z.string().default("01KFBAEENE8CNPEJDJDWMYKNVK"),
-  displayName: z.string(),
-  description: z.string().optional(),
-  status: ListDatasourcesStatus$outboundSchema,
-  fileId: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-  knowledgeId: z.string(),
-  chunksCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    fileId: "file_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-    knowledgeId: "knowledge_id",
-    chunksCount: "chunks_count",
-  });
-});
-
-export function listDatasourcesDataToJSON(
-  listDatasourcesData: ListDatasourcesData,
-): string {
-  return JSON.stringify(
-    ListDatasourcesData$outboundSchema.parse(listDatasourcesData),
-  );
-}
 export function listDatasourcesDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasourcesData, SDKValidationError> {
@@ -321,37 +223,7 @@ export const ListDatasourcesResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListDatasourcesResponseBody$Outbound = {
-  object: string;
-  data: Array<ListDatasourcesData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListDatasourcesResponseBody$outboundSchema: z.ZodType<
-  ListDatasourcesResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListDatasourcesResponseBody
-> = z.object({
-  object: ListDatasourcesObject$outboundSchema,
-  data: z.array(z.lazy(() => ListDatasourcesData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listDatasourcesResponseBodyToJSON(
-  listDatasourcesResponseBody: ListDatasourcesResponseBody,
-): string {
-  return JSON.stringify(
-    ListDatasourcesResponseBody$outboundSchema.parse(
-      listDatasourcesResponseBody,
-    ),
-  );
-}
 export function listDatasourcesResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasourcesResponseBody, SDKValidationError> {

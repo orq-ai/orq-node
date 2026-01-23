@@ -95,12 +95,6 @@ export type ResponseBody = {
 };
 
 /** @internal */
-export const CreateChunkMetadata$inboundSchema: z.ZodType<
-  CreateChunkMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
 export type CreateChunkMetadata$Outbound = string | number | boolean;
 
 /** @internal */
@@ -117,26 +111,7 @@ export function createChunkMetadataToJSON(
     CreateChunkMetadata$outboundSchema.parse(createChunkMetadata),
   );
 }
-export function createChunkMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChunkMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChunkMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkMetadata' from JSON`,
-  );
-}
 
-/** @internal */
-export const RequestBody$inboundSchema: z.ZodType<
-  RequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  text: z.string(),
-  embedding: z.array(z.number()).optional(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
 /** @internal */
 export type RequestBody$Outbound = {
   text: string;
@@ -158,32 +133,7 @@ export const RequestBody$outboundSchema: z.ZodType<
 export function requestBodyToJSON(requestBody: RequestBody): string {
   return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
 }
-export function requestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChunkRequest$inboundSchema: z.ZodType<
-  CreateChunkRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-  RequestBody: z.array(z.lazy(() => RequestBody$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type CreateChunkRequest$Outbound = {
   knowledge_id: string;
@@ -215,15 +165,6 @@ export function createChunkRequestToJSON(
     CreateChunkRequest$outboundSchema.parse(createChunkRequest),
   );
 }
-export function createChunkRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChunkRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChunkRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
@@ -231,25 +172,7 @@ export const CreateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChunkKnowledgeMetadata$Outbound = string | number | boolean;
 
-/** @internal */
-export const CreateChunkKnowledgeMetadata$outboundSchema: z.ZodType<
-  CreateChunkKnowledgeMetadata$Outbound,
-  z.ZodTypeDef,
-  CreateChunkKnowledgeMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function createChunkKnowledgeMetadataToJSON(
-  createChunkKnowledgeMetadata: CreateChunkKnowledgeMetadata,
-): string {
-  return JSON.stringify(
-    CreateChunkKnowledgeMetadata$outboundSchema.parse(
-      createChunkKnowledgeMetadata,
-    ),
-  );
-}
 export function createChunkKnowledgeMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChunkKnowledgeMetadata, SDKValidationError> {
@@ -264,10 +187,6 @@ export function createChunkKnowledgeMetadataFromJSON(
 export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateChunkStatus
 > = z.nativeEnum(CreateChunkStatus);
-/** @internal */
-export const CreateChunkStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChunkStatus
-> = CreateChunkStatus$inboundSchema;
 
 /** @internal */
 export const ResponseBody$inboundSchema: z.ZodType<
@@ -291,45 +210,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-/** @internal */
-export type ResponseBody$Outbound = {
-  _id: string;
-  text: string;
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  enabled: boolean;
-  status: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-};
 
-/** @internal */
-export const ResponseBody$outboundSchema: z.ZodType<
-  ResponseBody$Outbound,
-  z.ZodTypeDef,
-  ResponseBody
-> = z.object({
-  id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: CreateChunkStatus$outboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-  });
-});
-
-export function responseBodyToJSON(responseBody: ResponseBody): string {
-  return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
-}
 export function responseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseBody, SDKValidationError> {

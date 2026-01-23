@@ -41,9 +41,6 @@ export type ActionReviewedStreamingEvent = {
 /** @internal */
 export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> = z
   .nativeEnum(Review);
-/** @internal */
-export const Review$outboundSchema: z.ZodNativeEnum<typeof Review> =
-  Review$inboundSchema;
 
 /** @internal */
 export const ActionReviewedStreamingEventData$inboundSchema: z.ZodType<
@@ -69,52 +66,7 @@ export const ActionReviewedStreamingEventData$inboundSchema: z.ZodType<
     "reviewed_by_id": "reviewedById",
   });
 });
-/** @internal */
-export type ActionReviewedStreamingEventData$Outbound = {
-  agent_id: string;
-  action_id: string;
-  agent_tool_call_id: string;
-  review: string;
-  mock_output?: { [k: string]: any } | undefined;
-  review_source?: string | undefined;
-  reviewed_by_id?: string | undefined;
-  workflowRunId: string;
-};
 
-/** @internal */
-export const ActionReviewedStreamingEventData$outboundSchema: z.ZodType<
-  ActionReviewedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ActionReviewedStreamingEventData
-> = z.object({
-  agentId: z.string(),
-  actionId: z.string(),
-  agentToolCallId: z.string(),
-  review: Review$outboundSchema,
-  mockOutput: z.record(z.any()).optional(),
-  reviewSource: z.string().optional(),
-  reviewedById: z.string().optional(),
-  workflowRunId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    actionId: "action_id",
-    agentToolCallId: "agent_tool_call_id",
-    mockOutput: "mock_output",
-    reviewSource: "review_source",
-    reviewedById: "reviewed_by_id",
-  });
-});
-
-export function actionReviewedStreamingEventDataToJSON(
-  actionReviewedStreamingEventData: ActionReviewedStreamingEventData,
-): string {
-  return JSON.stringify(
-    ActionReviewedStreamingEventData$outboundSchema.parse(
-      actionReviewedStreamingEventData,
-    ),
-  );
-}
 export function actionReviewedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ActionReviewedStreamingEventData, SDKValidationError> {
@@ -135,33 +87,7 @@ export const ActionReviewedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ActionReviewedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ActionReviewedStreamingEvent$Outbound = {
-  type: "event.agents.action_reviewed";
-  timestamp: string;
-  data: ActionReviewedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ActionReviewedStreamingEvent$outboundSchema: z.ZodType<
-  ActionReviewedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ActionReviewedStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.action_reviewed"),
-  timestamp: z.string(),
-  data: z.lazy(() => ActionReviewedStreamingEventData$outboundSchema),
-});
-
-export function actionReviewedStreamingEventToJSON(
-  actionReviewedStreamingEvent: ActionReviewedStreamingEvent,
-): string {
-  return JSON.stringify(
-    ActionReviewedStreamingEvent$outboundSchema.parse(
-      actionReviewedStreamingEvent,
-    ),
-  );
-}
 export function actionReviewedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ActionReviewedStreamingEvent, SDKValidationError> {

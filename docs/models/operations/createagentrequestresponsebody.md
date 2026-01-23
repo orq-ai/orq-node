@@ -18,6 +18,38 @@ let value: CreateAgentRequestResponseBody = {
   status: "live",
   model: {
     id: "<id>",
+    parameters: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      loadBalancer: {
+        type: "weight_based",
+        models: [
+          {
+            model: "openai/gpt-4o",
+            weight: 0.7,
+          },
+        ],
+      },
+      timeout: {
+        callTimeout: 30000,
+      },
+    },
     retry: {
       onCodes: [
         429,
@@ -27,10 +59,60 @@ let value: CreateAgentRequestResponseBody = {
         504,
       ],
     },
+    fallbackModels: [
+      {
+        id: "<id>",
+        parameters: {
+          fallbacks: [
+            {
+              model: "openai/gpt-4o-mini",
+            },
+          ],
+          retry: {
+            count: 3,
+            onCodes: [
+              429,
+              500,
+              502,
+              503,
+              504,
+            ],
+          },
+          cache: {
+            ttl: 3600,
+            type: "exact_match",
+          },
+          loadBalancer: {
+            type: "weight_based",
+            models: [
+              {
+                model: "openai/gpt-4o",
+                weight: 0.7,
+              },
+            ],
+          },
+          timeout: {
+            callTimeout: 30000,
+          },
+        },
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
+    ],
   },
   path: "Default",
   memoryStores: [
     "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   teamOfAgents: [
     {
@@ -71,3 +153,4 @@ let value: CreateAgentRequestResponseBody = {
 | `metrics`                                                                                                                                                                                                                                                                                      | [operations.Metrics](../../models/operations/metrics.md)                                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `variables`                                                                                                                                                                                                                                                                                    | Record<string, *any*>                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Extracted variables from agent instructions                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                |
 | `knowledgeBases`                                                                                                                                                                                                                                                                               | [operations.CreateAgentRequestKnowledgeBases](../../models/operations/createagentrequestknowledgebases.md)[]                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Agent knowledge bases reference                                                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                |
+| `source`                                                                                                                                                                                                                                                                                       | [operations.CreateAgentRequestSource](../../models/operations/createagentrequestsource.md)                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |

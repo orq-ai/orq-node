@@ -14,7 +14,6 @@ let value: GetV2ToolsToolIdVersionsResponseBody = {
       id: "<id>",
       createdAt: "1721115995833",
       updatedAt: "1735637587401",
-      updatedById: "<id>",
       version: "<value>",
       checksum: "<value>",
       entityType: "<value>",

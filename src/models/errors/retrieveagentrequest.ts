@@ -49,19 +49,3 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type RetrieveAgentRequestResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const RetrieveAgentRequestResponseBody$outboundSchema: z.ZodType<
-  RetrieveAgentRequestResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveAgentRequestResponseBody
-> = z.instanceof(RetrieveAgentRequestResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

@@ -33,29 +33,7 @@ export const ErrorStreamingEventData$inboundSchema: z.ZodType<
   error: z.string(),
   code: z.string(),
 });
-/** @internal */
-export type ErrorStreamingEventData$Outbound = {
-  error: string;
-  code: string;
-};
 
-/** @internal */
-export const ErrorStreamingEventData$outboundSchema: z.ZodType<
-  ErrorStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ErrorStreamingEventData
-> = z.object({
-  error: z.string(),
-  code: z.string(),
-});
-
-export function errorStreamingEventDataToJSON(
-  errorStreamingEventData: ErrorStreamingEventData,
-): string {
-  return JSON.stringify(
-    ErrorStreamingEventData$outboundSchema.parse(errorStreamingEventData),
-  );
-}
 export function errorStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ErrorStreamingEventData, SDKValidationError> {
@@ -76,31 +54,7 @@ export const ErrorStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ErrorStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ErrorStreamingEvent$Outbound = {
-  type: "agents.error";
-  timestamp: string;
-  data: ErrorStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ErrorStreamingEvent$outboundSchema: z.ZodType<
-  ErrorStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ErrorStreamingEvent
-> = z.object({
-  type: z.literal("agents.error"),
-  timestamp: z.string(),
-  data: z.lazy(() => ErrorStreamingEventData$outboundSchema),
-});
-
-export function errorStreamingEventToJSON(
-  errorStreamingEvent: ErrorStreamingEvent,
-): string {
-  return JSON.stringify(
-    ErrorStreamingEvent$outboundSchema.parse(errorStreamingEvent),
-  );
-}
 export function errorStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ErrorStreamingEvent, SDKValidationError> {

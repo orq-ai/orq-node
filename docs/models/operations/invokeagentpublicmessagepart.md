@@ -34,3 +34,12 @@ const value: components.ToolResultPart = {
 };
 ```
 
+### `components.ErrorPart`
+
+```typescript
+const value: components.ErrorPart = {
+  kind: "error",
+  error: "<value>",
+};
+```
+

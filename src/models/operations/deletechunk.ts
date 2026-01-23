@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteChunkRequest = {
   /**
@@ -23,22 +20,6 @@ export type DeleteChunkRequest = {
   knowledgeId: string;
 };
 
-/** @internal */
-export const DeleteChunkRequest$inboundSchema: z.ZodType<
-  DeleteChunkRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  chunk_id: z.string(),
-  datasource_id: z.string(),
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "chunk_id": "chunkId",
-    "datasource_id": "datasourceId",
-    "knowledge_id": "knowledgeId",
-  });
-});
 /** @internal */
 export type DeleteChunkRequest$Outbound = {
   chunk_id: string;
@@ -68,14 +49,5 @@ export function deleteChunkRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteChunkRequest$outboundSchema.parse(deleteChunkRequest),
-  );
-}
-export function deleteChunkRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteChunkRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteChunkRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteChunkRequest' from JSON`,
   );
 }

@@ -11,27 +11,27 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CreateChatCompletionContentRouterRequest2 =
+export type CreateChatCompletionContentRouterChatCompletionsRequest2 =
   components.TextContentPartSchema;
 
 /**
  * The contents of the tool message.
  */
-export type CreateChatCompletionMessagesRouterRequestRequestBody5Content =
+export type CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content =
   | string
   | Array<components.TextContentPartSchema>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const CreateChatCompletionMessagesRouterType = {
+export const CreateChatCompletionMessagesRouterChatCompletionsType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type CreateChatCompletionMessagesRouterType = ClosedEnum<
-  typeof CreateChatCompletionMessagesRouterType
+export type CreateChatCompletionMessagesRouterChatCompletionsType = ClosedEnum<
+  typeof CreateChatCompletionMessagesRouterChatCompletionsType
 >;
 
 /**
@@ -66,7 +66,7 @@ export type CreateChatCompletionMessagesCacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: CreateChatCompletionMessagesRouterType;
+  type: CreateChatCompletionMessagesRouterChatCompletionsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -96,7 +96,7 @@ export type CreateChatCompletionMessagesToolMessage = {
   cacheControl?: CreateChatCompletionMessagesCacheControl | undefined;
 };
 
-export type CreateChatCompletionContentRouter2 =
+export type CreateChatCompletionContentRouterChatCompletions2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
@@ -105,7 +105,7 @@ export type CreateChatCompletionContentRouter2 =
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
  */
-export type CreateChatCompletionMessagesRouterRequestRequestBodyContent =
+export type CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent =
   | string
   | Array<
     | (components.TextContentPartSchema & { type: "text" })
@@ -203,14 +203,14 @@ export type CreateChatCompletionMessagesAssistantMessage = {
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const CreateChatCompletion2RouterType = {
+export const CreateChatCompletion2RouterChatCompletionsType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type CreateChatCompletion2RouterType = ClosedEnum<
-  typeof CreateChatCompletion2RouterType
+export type CreateChatCompletion2RouterChatCompletionsType = ClosedEnum<
+  typeof CreateChatCompletion2RouterChatCompletionsType
 >;
 
 /**
@@ -245,7 +245,7 @@ export type CreateChatCompletion2CacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: CreateChatCompletion2RouterType;
+  type: CreateChatCompletion2RouterChatCompletionsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -280,7 +280,7 @@ export type CreateChatCompletionContent2 =
 /**
  * The contents of the user message.
  */
-export type CreateChatCompletionMessagesRouterRequestContent =
+export type CreateChatCompletionMessagesRouterChatCompletionsRequestContent =
   | string
   | Array<
     | (components.TextContentPartSchema & { type: "text" })
@@ -314,7 +314,7 @@ export type CreateChatCompletionMessagesUserMessage = {
 /**
  * The contents of the developer message.
  */
-export type CreateChatCompletionMessagesRouterContent =
+export type CreateChatCompletionMessagesRouterChatCompletionsContent =
   | string
   | Array<components.TextContentPartSchema>;
 
@@ -414,24 +414,25 @@ export type CreateChatCompletionAudio = {
   format: CreateChatCompletionFormat;
 };
 
-export type CreateChatCompletionResponseFormatRouterJsonSchema = {
-  /**
-   * A description of what the response format is for, used by the model to determine how to respond in the format.
-   */
-  description?: string | undefined;
-  /**
-   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
-   */
-  name: string;
-  /**
-   * The schema for the response format, described as a JSON Schema object.
-   */
-  schema?: any | undefined;
-  /**
-   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
-   */
-  strict?: boolean | undefined;
-};
+export type CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema =
+  {
+    /**
+     * A description of what the response format is for, used by the model to determine how to respond in the format.
+     */
+    description?: string | undefined;
+    /**
+     * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+     */
+    name: string;
+    /**
+     * The schema for the response format, described as a JSON Schema object.
+     */
+    schema?: any | undefined;
+    /**
+     * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+     */
+    strict?: boolean | undefined;
+  };
 
 /**
  * @remarks
@@ -440,7 +441,7 @@ export type CreateChatCompletionResponseFormatRouterJsonSchema = {
  */
 export type CreateChatCompletionResponseFormatJSONSchema = {
   type: "json_schema";
-  jsonSchema: CreateChatCompletionResponseFormatRouterJsonSchema;
+  jsonSchema: CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema;
 };
 
 /**
@@ -537,18 +538,18 @@ export type CreateChatCompletionType = ClosedEnum<
   typeof CreateChatCompletionType
 >;
 
-export const CreateChatCompletionRouterType = {
+export const CreateChatCompletionRouterChatCompletionsType = {
   Object: "object",
 } as const;
-export type CreateChatCompletionRouterType = ClosedEnum<
-  typeof CreateChatCompletionRouterType
+export type CreateChatCompletionRouterChatCompletionsType = ClosedEnum<
+  typeof CreateChatCompletionRouterChatCompletionsType
 >;
 
 /**
  * The parameters the functions accepts, described as a JSON Schema object
  */
 export type CreateChatCompletionParameters = {
-  type: CreateChatCompletionRouterType;
+  type: CreateChatCompletionRouterChatCompletionsType;
   properties: { [k: string]: any };
   required?: Array<string> | undefined;
   additionalProperties?: boolean | undefined;
@@ -672,6 +673,13 @@ export type CreateChatCompletionGuardrails = {
   executeOn: CreateChatCompletionExecuteOn;
 };
 
+export type CreateChatCompletionFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
 /**
  * Retry configuration for the request
  */
@@ -686,7 +694,78 @@ export type CreateChatCompletionRetry = {
   onCodes?: Array<number> | undefined;
 };
 
-export type Fallbacks = {
+export const CreateChatCompletionRouterChatCompletionsRequestType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreateChatCompletionRouterChatCompletionsRequestType = ClosedEnum<
+  typeof CreateChatCompletionRouterChatCompletionsRequestType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreateChatCompletionCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreateChatCompletionRouterChatCompletionsRequestType;
+};
+
+export const CreateChatCompletionLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateChatCompletionLoadBalancerType = ClosedEnum<
+  typeof CreateChatCompletionLoadBalancerType
+>;
+
+export type CreateChatCompletionLoadBalancerModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateChatCompletionLoadBalancer1 = {
+  type: CreateChatCompletionLoadBalancerType;
+  models: Array<CreateChatCompletionLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
+export type CreateChatCompletionLoadBalancer =
+  CreateChatCompletionLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateChatCompletionTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreateChatCompletionRouterChatCompletionsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateChatCompletionRouterChatCompletionsFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -719,6 +798,38 @@ export type Prompt = {
 };
 
 /**
+ * @deprecated Use identity instead. Information about the contact making the request.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type CreateChatCompletionContact = {
+  /**
+   * Unique identifier for the contact
+   */
+  id: string;
+  /**
+   * Display name of the contact
+   */
+  displayName?: string | undefined;
+  /**
+   * Email address of the contact
+   */
+  email?: string | undefined;
+  /**
+   * A hash of key/value pairs containing any other data about the contact
+   */
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * URL to the contact's avatar or logo
+   */
+  logoUrl?: string | undefined;
+  /**
+   * A list of tags associated with the contact
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
  * Thread information to group related requests
  */
 export type CreateChatCompletionThread = {
@@ -743,22 +854,23 @@ export type Inputs2 = {
  */
 export type Inputs = { [k: string]: any } | Array<Inputs2>;
 
-export const CreateChatCompletionRouterRequestType = {
+export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType = {
   ExactMatch: "exact_match",
 } as const;
-export type CreateChatCompletionRouterRequestType = ClosedEnum<
-  typeof CreateChatCompletionRouterRequestType
->;
+export type CreateChatCompletionRouterChatCompletionsRequestRequestBodyType =
+  ClosedEnum<
+    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
+  >;
 
 /**
  * Cache configuration for the request.
  */
-export type Cache = {
+export type CreateChatCompletionRouterChatCompletionsCache = {
   /**
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl?: number | undefined;
-  type: CreateChatCompletionRouterRequestType;
+  type: CreateChatCompletionRouterChatCompletionsRequestRequestBodyType;
 };
 
 /**
@@ -783,7 +895,10 @@ export type CreateChatCompletionOrExists = {
   exists: boolean;
 };
 
-export type CreateChatCompletionOrRouterNin = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsNin =
+  | string
+  | number
+  | boolean;
 
 /**
  * Not in
@@ -792,7 +907,10 @@ export type CreateChatCompletionOrNin = {
   nin: Array<string | number | boolean>;
 };
 
-export type CreateChatCompletionOrRouterIn = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsIn =
+  | string
+  | number
+  | boolean;
 
 /**
  * In
@@ -829,7 +947,10 @@ export type CreateChatCompletionOrGt = {
   gt: number;
 };
 
-export type CreateChatCompletionOrRouterNe = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsNe =
+  | string
+  | number
+  | boolean;
 
 /**
  * Not equal to
@@ -838,7 +959,10 @@ export type CreateChatCompletionOrNe = {
   ne: string | number | boolean;
 };
 
-export type CreateChatCompletionOrRouterEq = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsEq =
+  | string
+  | number
+  | boolean;
 
 /**
  * Equal to
@@ -847,7 +971,7 @@ export type CreateChatCompletionOrEq = {
   eq: string | number | boolean;
 };
 
-export type CreateChatCompletionFilterByRouterOr =
+export type CreateChatCompletionFilterByRouterChatCompletionsOr =
   | CreateChatCompletionOrEq
   | CreateChatCompletionOrNe
   | CreateChatCompletionOrGt
@@ -885,7 +1009,10 @@ export type CreateChatCompletionAndExists = {
   exists: boolean;
 };
 
-export type CreateChatCompletionAndRouterNin = string | number | boolean;
+export type CreateChatCompletionAndRouterChatCompletionsNin =
+  | string
+  | number
+  | boolean;
 
 /**
  * Not in
@@ -894,7 +1021,10 @@ export type CreateChatCompletionAndNin = {
   nin: Array<string | number | boolean>;
 };
 
-export type CreateChatCompletionAndRouterIn = string | number | boolean;
+export type CreateChatCompletionAndRouterChatCompletionsIn =
+  | string
+  | number
+  | boolean;
 
 /**
  * In
@@ -931,7 +1061,10 @@ export type CreateChatCompletionAndGt = {
   gt: number;
 };
 
-export type CreateChatCompletionAndRouterNe = string | number | boolean;
+export type CreateChatCompletionAndRouterChatCompletionsNe =
+  | string
+  | number
+  | boolean;
 
 /**
  * Not equal to
@@ -940,7 +1073,10 @@ export type CreateChatCompletionAndNe = {
   ne: string | number | boolean;
 };
 
-export type CreateChatCompletionAndRouterEq = string | number | boolean;
+export type CreateChatCompletionAndRouterChatCompletionsEq =
+  | string
+  | number
+  | boolean;
 
 /**
  * Equal to
@@ -949,7 +1085,7 @@ export type CreateChatCompletionAndEq = {
   eq: string | number | boolean;
 };
 
-export type CreateChatCompletionFilterByRouterAnd =
+export type CreateChatCompletionFilterByRouterChatCompletionsAnd =
   | CreateChatCompletionAndEq
   | CreateChatCompletionAndNe
   | CreateChatCompletionAndGt
@@ -987,7 +1123,10 @@ export type CreateChatCompletion1Exists = {
   exists: boolean;
 };
 
-export type CreateChatCompletion1RouterNin = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsNin =
+  | string
+  | number
+  | boolean;
 
 /**
  * Not in
@@ -996,7 +1135,10 @@ export type CreateChatCompletion1Nin = {
   nin: Array<string | number | boolean>;
 };
 
-export type CreateChatCompletion1RouterIn = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsIn =
+  | string
+  | number
+  | boolean;
 
 /**
  * In
@@ -1033,7 +1175,10 @@ export type CreateChatCompletion1Gt = {
   gt: number;
 };
 
-export type CreateChatCompletion1RouterNe = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsNe =
+  | string
+  | number
+  | boolean;
 
 /**
  * Not equal to
@@ -1042,7 +1187,10 @@ export type CreateChatCompletion1Ne = {
   ne: string | number | boolean;
 };
 
-export type CreateChatCompletion1RouterEq = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsEq =
+  | string
+  | number
+  | boolean;
 
 /**
  * Equal to
@@ -1181,13 +1329,13 @@ export type CreateChatCompletionKnowledgeBases = {
   query?: string | undefined;
 };
 
-export const LoadBalancerType = {
+export const CreateChatCompletionLoadBalancerRouterChatCompletionsType = {
   WeightBased: "weight_based",
 } as const;
-export type LoadBalancerType = ClosedEnum<typeof LoadBalancerType>;
+export type CreateChatCompletionLoadBalancerRouterChatCompletionsType =
+  ClosedEnum<typeof CreateChatCompletionLoadBalancerRouterChatCompletionsType>;
 
-export type LoadBalancer1 = {
-  type: LoadBalancerType;
+export type CreateChatCompletionLoadBalancerRouterChatCompletionsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -1198,12 +1346,21 @@ export type LoadBalancer1 = {
   weight?: number | undefined;
 };
 
-export type LoadBalancer = LoadBalancer1;
+export type CreateChatCompletionLoadBalancerRouterChatCompletions1 = {
+  type: CreateChatCompletionLoadBalancerRouterChatCompletionsType;
+  models: Array<CreateChatCompletionLoadBalancerRouterChatCompletionsModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateChatCompletionRouterChatCompletionsLoadBalancer =
+  CreateChatCompletionLoadBalancerRouterChatCompletions1;
 
 /**
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
-export type Timeout = {
+export type CreateChatCompletionRouterChatCompletionsTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -1211,7 +1368,9 @@ export type Timeout = {
 };
 
 /**
- * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, contact-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+ * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type Orq = {
   /**
@@ -1221,19 +1380,22 @@ export type Orq = {
   /**
    * Retry configuration for the request
    */
-  retry?: CreateChatCompletionRetry | undefined;
+  retry?: CreateChatCompletionRouterChatCompletionsRetry | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<Fallbacks> | undefined;
+  fallbacks?:
+    | Array<CreateChatCompletionRouterChatCompletionsFallbacks>
+    | undefined;
   /**
    * Prompt configuration for the request
    */
   prompt?: Prompt | undefined;
   /**
-   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  contact?: components.PublicContact | undefined;
+  identity?: components.PublicContact | undefined;
+  contact?: CreateChatCompletionContact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -1245,16 +1407,18 @@ export type Orq = {
   /**
    * Cache configuration for the request.
    */
-  cache?: Cache | undefined;
+  cache?: CreateChatCompletionRouterChatCompletionsCache | undefined;
   knowledgeBases?: Array<CreateChatCompletionKnowledgeBases> | undefined;
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: Array<LoadBalancer1> | undefined;
+  loadBalancer?:
+    | CreateChatCompletionLoadBalancerRouterChatCompletions1
+    | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: Timeout | undefined;
+  timeout?: CreateChatCompletionRouterChatCompletionsTimeout | undefined;
 };
 
 export type CreateChatCompletionRequestBody = {
@@ -1389,7 +1553,29 @@ export type CreateChatCompletionRequestBody = {
    */
   guardrails?: Array<CreateChatCompletionGuardrails> | undefined;
   /**
-   * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, contact-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateChatCompletionFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateChatCompletionRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreateChatCompletionCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateChatCompletionLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateChatCompletionTimeout | undefined;
+  /**
+   * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   orq?: Orq | undefined;
   stream?: boolean | undefined;
@@ -1412,7 +1598,7 @@ export type CreateChatCompletionFinishReason = ClosedEnum<
   typeof CreateChatCompletionFinishReason
 >;
 
-export type CreateChatCompletionRouterTopLogprobs = {
+export type CreateChatCompletionRouterChatCompletionsTopLogprobs = {
   /**
    * The token.
    */
@@ -1427,7 +1613,7 @@ export type CreateChatCompletionRouterTopLogprobs = {
   bytes: Array<number> | null;
 };
 
-export type CreateChatCompletionRouterContent = {
+export type CreateChatCompletionRouterChatCompletionsContent = {
   /**
    * The token.
    */
@@ -1443,10 +1629,10 @@ export type CreateChatCompletionRouterContent = {
   /**
    * List of the most likely tokens and their log probability, at this token position.
    */
-  topLogprobs: Array<CreateChatCompletionRouterTopLogprobs>;
+  topLogprobs: Array<CreateChatCompletionRouterChatCompletionsTopLogprobs>;
 };
 
-export type CreateChatCompletionRouterResponseTopLogprobs = {
+export type CreateChatCompletionRouterChatCompletionsResponseTopLogprobs = {
   /**
    * The token.
    */
@@ -1477,7 +1663,9 @@ export type CreateChatCompletionRefusal = {
   /**
    * List of the most likely tokens and their log probability, at this token position.
    */
-  topLogprobs: Array<CreateChatCompletionRouterResponseTopLogprobs>;
+  topLogprobs: Array<
+    CreateChatCompletionRouterChatCompletionsResponseTopLogprobs
+  >;
 };
 
 /**
@@ -1487,7 +1675,7 @@ export type CreateChatCompletionLogprobs = {
   /**
    * A list of message content tokens with log probability information.
    */
-  content: Array<CreateChatCompletionRouterContent> | null;
+  content: Array<CreateChatCompletionRouterChatCompletionsContent> | null;
   /**
    * A list of message refusal tokens with log probability information.
    */
@@ -1497,17 +1685,16 @@ export type CreateChatCompletionLogprobs = {
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export const CreateChatCompletionRouterResponse200Type = {
+export const CreateChatCompletionRouterChatCompletionsResponse200Type = {
   Function: "function",
 } as const;
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export type CreateChatCompletionRouterResponse200Type = ClosedEnum<
-  typeof CreateChatCompletionRouterResponse200Type
->;
+export type CreateChatCompletionRouterChatCompletionsResponse200Type =
+  ClosedEnum<typeof CreateChatCompletionRouterChatCompletionsResponse200Type>;
 
-export type CreateChatCompletionRouterResponseFunction = {
+export type CreateChatCompletionRouterChatCompletionsResponseFunction = {
   /**
    * The name of the function.
    */
@@ -1518,7 +1705,7 @@ export type CreateChatCompletionRouterResponseFunction = {
   arguments?: string | undefined;
 };
 
-export type CreateChatCompletionRouterToolCalls = {
+export type CreateChatCompletionRouterChatCompletionsToolCalls = {
   /**
    * The index of the tool call.
    */
@@ -1530,25 +1717,27 @@ export type CreateChatCompletionRouterToolCalls = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
-  type?: CreateChatCompletionRouterResponse200Type | undefined;
-  function?: CreateChatCompletionRouterResponseFunction | undefined;
+  type?: CreateChatCompletionRouterChatCompletionsResponse200Type | undefined;
+  function?:
+    | CreateChatCompletionRouterChatCompletionsResponseFunction
+    | undefined;
   /**
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models.
    */
   thoughtSignature?: string | undefined;
 };
 
-export const CreateChatCompletionRouterRole = {
+export const CreateChatCompletionRouterChatCompletionsRole = {
   Assistant: "assistant",
 } as const;
-export type CreateChatCompletionRouterRole = ClosedEnum<
-  typeof CreateChatCompletionRouterRole
+export type CreateChatCompletionRouterChatCompletionsRole = ClosedEnum<
+  typeof CreateChatCompletionRouterChatCompletionsRole
 >;
 
 /**
  * Audio response data in streaming mode.
  */
-export type CreateChatCompletionRouterResponseAudio = {
+export type CreateChatCompletionRouterChatCompletionsResponseAudio = {
   id?: string | undefined;
   transcript?: string | undefined;
   data?: string | undefined;
@@ -1564,8 +1753,10 @@ export type Delta = {
    */
   content?: string | null | undefined;
   refusal?: string | null | undefined;
-  toolCalls?: Array<CreateChatCompletionRouterToolCalls> | undefined;
-  role?: CreateChatCompletionRouterRole | undefined;
+  toolCalls?:
+    | Array<CreateChatCompletionRouterChatCompletionsToolCalls>
+    | undefined;
+  role?: CreateChatCompletionRouterChatCompletionsRole | undefined;
   /**
    * Internal thought process of the model
    */
@@ -1581,10 +1772,13 @@ export type Delta = {
   /**
    * Audio response data in streaming mode.
    */
-  audio?: CreateChatCompletionRouterResponseAudio | null | undefined;
+  audio?:
+    | CreateChatCompletionRouterChatCompletionsResponseAudio
+    | null
+    | undefined;
 };
 
-export type CreateChatCompletionRouterChoices = {
+export type CreateChatCompletionRouterChatCompletionsChoices = {
   /**
    * The reason the model stopped generating tokens.
    */
@@ -1592,7 +1786,7 @@ export type CreateChatCompletionRouterChoices = {
   /**
    * The index of the choice in the list of choices.
    */
-  index?: number | undefined;
+  index: number;
   /**
    * Log probability information for the choice.
    */
@@ -1603,7 +1797,7 @@ export type CreateChatCompletionRouterChoices = {
   delta: Delta;
 };
 
-export type CreateChatCompletionRouterPromptTokensDetails = {
+export type CreateChatCompletionRouterChatCompletionsPromptTokensDetails = {
   cachedTokens?: number | null | undefined;
   cacheCreationTokens?: number | null | undefined;
   /**
@@ -1612,7 +1806,7 @@ export type CreateChatCompletionRouterPromptTokensDetails = {
   audioTokens?: number | null | undefined;
 };
 
-export type CreateChatCompletionRouterCompletionTokensDetails = {
+export type CreateChatCompletionRouterChatCompletionsCompletionTokensDetails = {
   reasoningTokens?: number | null | undefined;
   acceptedPredictionTokens?: number | null | undefined;
   rejectedPredictionTokens?: number | null | undefined;
@@ -1625,7 +1819,7 @@ export type CreateChatCompletionRouterCompletionTokensDetails = {
 /**
  * Usage statistics for the completion request.
  */
-export type CreateChatCompletionRouterUsage = {
+export type CreateChatCompletionRouterChatCompletionsUsage = {
   /**
    * Number of tokens in the generated completion.
    */
@@ -1639,20 +1833,20 @@ export type CreateChatCompletionRouterUsage = {
    */
   totalTokens?: number | undefined;
   promptTokensDetails?:
-    | CreateChatCompletionRouterPromptTokensDetails
+    | CreateChatCompletionRouterChatCompletionsPromptTokensDetails
     | null
     | undefined;
   completionTokensDetails?:
-    | CreateChatCompletionRouterCompletionTokensDetails
+    | CreateChatCompletionRouterChatCompletionsCompletionTokensDetails
     | null
     | undefined;
 };
 
-export const CreateChatCompletionRouterObject = {
+export const CreateChatCompletionRouterChatCompletionsObject = {
   ChatCompletionChunk: "chat.completion.chunk",
 } as const;
-export type CreateChatCompletionRouterObject = ClosedEnum<
-  typeof CreateChatCompletionRouterObject
+export type CreateChatCompletionRouterChatCompletionsObject = ClosedEnum<
+  typeof CreateChatCompletionRouterChatCompletionsObject
 >;
 
 /**
@@ -1666,7 +1860,7 @@ export type CreateChatCompletionData = {
   /**
    * A list of chat completion choices. Can contain more than one elements if n is greater than 1. Can also be empty for the last chunk if you set stream_options: {"include_usage": true}.
    */
-  choices: Array<CreateChatCompletionRouterChoices>;
+  choices: Array<CreateChatCompletionRouterChatCompletionsChoices>;
   /**
    * The Unix timestamp (in seconds) of when the chat completion was created.
    */
@@ -1682,14 +1876,14 @@ export type CreateChatCompletionData = {
   /**
    * Usage statistics for the completion request.
    */
-  usage?: CreateChatCompletionRouterUsage | null | undefined;
-  object: CreateChatCompletionRouterObject;
+  usage?: CreateChatCompletionRouterChatCompletionsUsage | null | undefined;
+  object: CreateChatCompletionRouterChatCompletionsObject;
 };
 
 /**
  * Represents a streamed chunk of a chat completion response returned by model, based on the provided input.
  */
-export type CreateChatCompletionRouterResponseBody = {
+export type CreateChatCompletionRouterChatCompletionsResponseBody = {
   /**
    * Represents a streamed chunk of a chat completion response returned by model, based on the provided input.
    */
@@ -1711,14 +1905,14 @@ export const FinishReason = {
  */
 export type FinishReason = ClosedEnum<typeof FinishReason>;
 
-export const CreateChatCompletionRouterResponseType = {
+export const CreateChatCompletionRouterChatCompletionsResponseType = {
   Function: "function",
 } as const;
-export type CreateChatCompletionRouterResponseType = ClosedEnum<
-  typeof CreateChatCompletionRouterResponseType
+export type CreateChatCompletionRouterChatCompletionsResponseType = ClosedEnum<
+  typeof CreateChatCompletionRouterChatCompletionsResponseType
 >;
 
-export type CreateChatCompletionRouterFunction = {
+export type CreateChatCompletionRouterChatCompletionsFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
    */
@@ -1732,8 +1926,8 @@ export type CreateChatCompletionRouterFunction = {
 export type CreateChatCompletionToolCalls = {
   index?: number | undefined;
   id?: string | undefined;
-  type?: CreateChatCompletionRouterResponseType | undefined;
-  function?: CreateChatCompletionRouterFunction | undefined;
+  type?: CreateChatCompletionRouterChatCompletionsResponseType | undefined;
+  function?: CreateChatCompletionRouterChatCompletionsFunction | undefined;
   /**
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
@@ -1750,7 +1944,7 @@ export type CreateChatCompletionRole = ClosedEnum<
 /**
  * If the audio output modality is requested, this object contains data about the audio response from the model.
  */
-export type CreateChatCompletionRouterAudio = {
+export type CreateChatCompletionRouterChatCompletionsAudio = {
   id: string;
   expiresAt: number;
   data: string;
@@ -1780,7 +1974,7 @@ export type CreateChatCompletionMessage = {
   /**
    * If the audio output modality is requested, this object contains data about the audio response from the model.
    */
-  audio?: CreateChatCompletionRouterAudio | null | undefined;
+  audio?: CreateChatCompletionRouterChatCompletionsAudio | null | undefined;
 };
 
 export type TopLogprobs = {
@@ -1873,7 +2067,7 @@ export type CreateChatCompletionChoices = {
   /**
    * The index of the choice in the list of choices.
    */
-  index?: number | undefined;
+  index: number;
   /**
    * A chat completion message generated by the model.
    */
@@ -1969,130 +2163,69 @@ export type CreateChatCompletionResponseBody = {
 
 export type CreateChatCompletionResponse =
   | CreateChatCompletionResponseBody
-  | EventStream<CreateChatCompletionRouterResponseBody>;
+  | EventStream<CreateChatCompletionRouterChatCompletionsResponseBody>;
 
 /** @internal */
-export const CreateChatCompletionContentRouterRequest2$inboundSchema: z.ZodType<
-  CreateChatCompletionContentRouterRequest2,
-  z.ZodTypeDef,
-  unknown
-> = components.TextContentPartSchema$inboundSchema;
-/** @internal */
-export type CreateChatCompletionContentRouterRequest2$Outbound =
+export type CreateChatCompletionContentRouterChatCompletionsRequest2$Outbound =
   components.TextContentPartSchema$Outbound;
 
 /** @internal */
-export const CreateChatCompletionContentRouterRequest2$outboundSchema:
+export const CreateChatCompletionContentRouterChatCompletionsRequest2$outboundSchema:
   z.ZodType<
-    CreateChatCompletionContentRouterRequest2$Outbound,
+    CreateChatCompletionContentRouterChatCompletionsRequest2$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionContentRouterRequest2
+    CreateChatCompletionContentRouterChatCompletionsRequest2
   > = components.TextContentPartSchema$outboundSchema;
 
-export function createChatCompletionContentRouterRequest2ToJSON(
-  createChatCompletionContentRouterRequest2:
-    CreateChatCompletionContentRouterRequest2,
+export function createChatCompletionContentRouterChatCompletionsRequest2ToJSON(
+  createChatCompletionContentRouterChatCompletionsRequest2:
+    CreateChatCompletionContentRouterChatCompletionsRequest2,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionContentRouterRequest2$outboundSchema.parse(
-      createChatCompletionContentRouterRequest2,
-    ),
-  );
-}
-export function createChatCompletionContentRouterRequest2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionContentRouterRequest2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionContentRouterRequest2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionContentRouterRequest2' from JSON`,
+    CreateChatCompletionContentRouterChatCompletionsRequest2$outboundSchema
+      .parse(createChatCompletionContentRouterChatCompletionsRequest2),
   );
 }
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterRequestRequestBody5Content$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionMessagesRouterRequestRequestBody5Content,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
-/** @internal */
-export type CreateChatCompletionMessagesRouterRequestRequestBody5Content$Outbound =
+export type CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content$Outbound =
   | string
   | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterRequestRequestBody5Content$outboundSchema:
+export const CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content$outboundSchema:
   z.ZodType<
-    CreateChatCompletionMessagesRouterRequestRequestBody5Content$Outbound,
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionMessagesRouterRequestRequestBody5Content
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content
   > = z.union([
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]);
 
-export function createChatCompletionMessagesRouterRequestRequestBody5ContentToJSON(
-  createChatCompletionMessagesRouterRequestRequestBody5Content:
-    CreateChatCompletionMessagesRouterRequestRequestBody5Content,
+export function createChatCompletionMessagesRouterChatCompletionsRequestRequestBody5ContentToJSON(
+  createChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content:
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionMessagesRouterRequestRequestBody5Content$outboundSchema
-      .parse(createChatCompletionMessagesRouterRequestRequestBody5Content),
-  );
-}
-export function createChatCompletionMessagesRouterRequestRequestBody5ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesRouterRequestRequestBody5Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesRouterRequestRequestBody5Content$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessagesRouterRequestRequestBody5Content' from JSON`,
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content$outboundSchema
+      .parse(
+        createChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content,
+      ),
   );
 }
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionMessagesRouterType> = z.nativeEnum(
-    CreateChatCompletionMessagesRouterType,
-  );
-/** @internal */
-export const CreateChatCompletionMessagesRouterType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionMessagesRouterType> =
-    CreateChatCompletionMessagesRouterType$inboundSchema;
+export const CreateChatCompletionMessagesRouterChatCompletionsType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateChatCompletionMessagesRouterChatCompletionsType
+  > = z.nativeEnum(CreateChatCompletionMessagesRouterChatCompletionsType);
 
-/** @internal */
-export const CreateChatCompletionMessagesTtl$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionMessagesTtl
-> = z.nativeEnum(CreateChatCompletionMessagesTtl);
 /** @internal */
 export const CreateChatCompletionMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionMessagesTtl
-> = CreateChatCompletionMessagesTtl$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionMessagesTtl);
 
-/** @internal */
-export const CreateChatCompletionMessagesCacheControl$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateChatCompletionMessagesRouterType$inboundSchema,
-  ttl: CreateChatCompletionMessagesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type CreateChatCompletionMessagesCacheControl$Outbound = {
   type: string;
@@ -2105,7 +2238,7 @@ export const CreateChatCompletionMessagesCacheControl$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionMessagesCacheControl
 > = z.object({
-  type: CreateChatCompletionMessagesRouterType$outboundSchema,
+  type: CreateChatCompletionMessagesRouterChatCompletionsType$outboundSchema,
   ttl: CreateChatCompletionMessagesTtl$outboundSchema.default("5m"),
 });
 
@@ -2119,43 +2252,7 @@ export function createChatCompletionMessagesCacheControlToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessagesToolMessage$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() =>
-    CreateChatCompletionMessagesCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type CreateChatCompletionMessagesToolMessage$Outbound = {
   role: "tool";
@@ -2196,97 +2293,42 @@ export function createChatCompletionMessagesToolMessageToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesToolMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesToolMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesToolMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionContentRouter2$inboundSchema: z.ZodType<
-  CreateChatCompletionContentRouter2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
-/** @internal */
-export type CreateChatCompletionContentRouter2$Outbound =
+export type CreateChatCompletionContentRouterChatCompletions2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.RefusalPartSchema$Outbound
   | components.ReasoningPartSchema$Outbound
   | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const CreateChatCompletionContentRouter2$outboundSchema: z.ZodType<
-  CreateChatCompletionContentRouter2$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionContentRouter2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
+export const CreateChatCompletionContentRouterChatCompletions2$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionContentRouterChatCompletions2$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionContentRouterChatCompletions2
+  > = z.union([
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.RefusalPartSchema$outboundSchema,
+    components.ReasoningPartSchema$outboundSchema,
+    components.RedactedReasoningPartSchema$outboundSchema,
+  ]);
 
-export function createChatCompletionContentRouter2ToJSON(
-  createChatCompletionContentRouter2: CreateChatCompletionContentRouter2,
+export function createChatCompletionContentRouterChatCompletions2ToJSON(
+  createChatCompletionContentRouterChatCompletions2:
+    CreateChatCompletionContentRouterChatCompletions2,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionContentRouter2$outboundSchema.parse(
-      createChatCompletionContentRouter2,
+    CreateChatCompletionContentRouterChatCompletions2$outboundSchema.parse(
+      createChatCompletionContentRouterChatCompletions2,
     ),
-  );
-}
-export function createChatCompletionContentRouter2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionContentRouter2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionContentRouter2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionContentRouter2' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterRequestRequestBodyContent$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionMessagesRouterRequestRequestBodyContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
-  ]);
-/** @internal */
-export type CreateChatCompletionMessagesRouterRequestRequestBodyContent$Outbound =
+export type CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent$Outbound =
   | string
   | Array<
     | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2296,11 +2338,11 @@ export type CreateChatCompletionMessagesRouterRequestRequestBodyContent$Outbound
   >;
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterRequestRequestBodyContent$outboundSchema:
+export const CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent$outboundSchema:
   z.ZodType<
-    CreateChatCompletionMessagesRouterRequestRequestBodyContent$Outbound,
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionMessagesRouterRequestRequestBodyContent
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent
   > = z.union([
     z.string(),
     z.array(
@@ -2315,38 +2357,18 @@ export const CreateChatCompletionMessagesRouterRequestRequestBodyContent$outboun
     ),
   ]);
 
-export function createChatCompletionMessagesRouterRequestRequestBodyContentToJSON(
-  createChatCompletionMessagesRouterRequestRequestBodyContent:
-    CreateChatCompletionMessagesRouterRequestRequestBodyContent,
+export function createChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContentToJSON(
+  createChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent:
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionMessagesRouterRequestRequestBodyContent$outboundSchema
-      .parse(createChatCompletionMessagesRouterRequestRequestBodyContent),
-  );
-}
-export function createChatCompletionMessagesRouterRequestRequestBodyContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesRouterRequestRequestBodyContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesRouterRequestRequestBodyContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessagesRouterRequestRequestBodyContent' from JSON`,
+    CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent$outboundSchema
+      .parse(
+        createChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent,
+      ),
   );
 }
 
-/** @internal */
-export const CreateChatCompletionMessagesAudio$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type CreateChatCompletionMessagesAudio$Outbound = {
   id: string;
@@ -2370,34 +2392,12 @@ export function createChatCompletionMessagesAudioToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionMessagesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionMessagesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessagesAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionMessagesType
-> = z.nativeEnum(CreateChatCompletionMessagesType);
 /** @internal */
 export const CreateChatCompletionMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionMessagesType
-> = CreateChatCompletionMessagesType$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionMessagesType);
 
-/** @internal */
-export const CreateChatCompletionMessagesFunction$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type CreateChatCompletionMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2423,32 +2423,7 @@ export function createChatCompletionMessagesFunctionToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionMessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessagesToolCalls$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: CreateChatCompletionMessagesType$inboundSchema,
-  function: z.lazy(() => CreateChatCompletionMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type CreateChatCompletionMessagesToolCalls$Outbound = {
   id: string;
@@ -2482,53 +2457,7 @@ export function createChatCompletionMessagesToolCallsToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionMessagesToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessagesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessagesAssistantMessage$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionMessagesAssistantMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$inboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$inboundSchema,
-            components.ReasoningPartSchema$inboundSchema,
-            components.RedactedReasoningPartSchema$inboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => CreateChatCompletionMessagesAudio$inboundSchema),
-    ).optional(),
-    tool_calls: z.array(
-      z.lazy(() => CreateChatCompletionMessagesToolCalls$inboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tool_calls": "toolCalls",
-    });
-  });
 /** @internal */
 export type CreateChatCompletionMessagesAssistantMessage$Outbound = {
   content?:
@@ -2597,49 +2526,17 @@ export function createChatCompletionMessagesAssistantMessageToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesAssistantMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesAssistantMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesAssistantMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletion2RouterType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletion2RouterType
-> = z.nativeEnum(CreateChatCompletion2RouterType);
-/** @internal */
-export const CreateChatCompletion2RouterType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletion2RouterType
-> = CreateChatCompletion2RouterType$inboundSchema;
+export const CreateChatCompletion2RouterChatCompletionsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateChatCompletion2RouterChatCompletionsType> = z
+    .nativeEnum(CreateChatCompletion2RouterChatCompletionsType);
 
-/** @internal */
-export const CreateChatCompletion2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletion2Ttl
-> = z.nativeEnum(CreateChatCompletion2Ttl);
 /** @internal */
 export const CreateChatCompletion2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletion2Ttl
-> = CreateChatCompletion2Ttl$inboundSchema;
+> = z.nativeEnum(CreateChatCompletion2Ttl);
 
-/** @internal */
-export const CreateChatCompletion2CacheControl$inboundSchema: z.ZodType<
-  CreateChatCompletion2CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateChatCompletion2RouterType$inboundSchema,
-  ttl: CreateChatCompletion2Ttl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type CreateChatCompletion2CacheControl$Outbound = {
   type: string;
@@ -2652,7 +2549,7 @@ export const CreateChatCompletion2CacheControl$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletion2CacheControl
 > = z.object({
-  type: CreateChatCompletion2RouterType$outboundSchema,
+  type: CreateChatCompletion2RouterChatCompletionsType$outboundSchema,
   ttl: CreateChatCompletion2Ttl$outboundSchema.default("5m"),
 });
 
@@ -2665,31 +2562,7 @@ export function createChatCompletion2CacheControlToJSON(
     ),
   );
 }
-export function createChatCompletion2CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion2CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion2CacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion24$inboundSchema: z.ZodType<
-  CreateChatCompletion24,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => CreateChatCompletion2CacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type CreateChatCompletion24$Outbound = {
   type: "file";
@@ -2720,29 +2593,7 @@ export function createChatCompletion24ToJSON(
     CreateChatCompletion24$outboundSchema.parse(createChatCompletion24),
   );
 }
-export function createChatCompletion24FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion24, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion24' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionContent2$inboundSchema: z.ZodType<
-  CreateChatCompletionContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => CreateChatCompletion24$inboundSchema),
-]);
 /** @internal */
 export type CreateChatCompletionContent2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2773,37 +2624,9 @@ export function createChatCompletionContent2ToJSON(
     ),
   );
 }
-export function createChatCompletionContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionContent2' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterRequestContent$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionMessagesRouterRequestContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => CreateChatCompletion24$inboundSchema),
-      ]),
-    ),
-  ]);
-/** @internal */
-export type CreateChatCompletionMessagesRouterRequestContent$Outbound =
+export type CreateChatCompletionMessagesRouterChatCompletionsRequestContent$Outbound =
   | string
   | Array<
     | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2813,11 +2636,11 @@ export type CreateChatCompletionMessagesRouterRequestContent$Outbound =
   >;
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterRequestContent$outboundSchema:
+export const CreateChatCompletionMessagesRouterChatCompletionsRequestContent$outboundSchema:
   z.ZodType<
-    CreateChatCompletionMessagesRouterRequestContent$Outbound,
+    CreateChatCompletionMessagesRouterChatCompletionsRequestContent$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionMessagesRouterRequestContent
+    CreateChatCompletionMessagesRouterChatCompletionsRequestContent
   > = z.union([
     z.string(),
     z.array(
@@ -2832,54 +2655,16 @@ export const CreateChatCompletionMessagesRouterRequestContent$outboundSchema:
     ),
   ]);
 
-export function createChatCompletionMessagesRouterRequestContentToJSON(
-  createChatCompletionMessagesRouterRequestContent:
-    CreateChatCompletionMessagesRouterRequestContent,
+export function createChatCompletionMessagesRouterChatCompletionsRequestContentToJSON(
+  createChatCompletionMessagesRouterChatCompletionsRequestContent:
+    CreateChatCompletionMessagesRouterChatCompletionsRequestContent,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionMessagesRouterRequestContent$outboundSchema.parse(
-      createChatCompletionMessagesRouterRequestContent,
-    ),
-  );
-}
-export function createChatCompletionMessagesRouterRequestContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesRouterRequestContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesRouterRequestContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesRouterRequestContent' from JSON`,
+    CreateChatCompletionMessagesRouterChatCompletionsRequestContent$outboundSchema
+      .parse(createChatCompletionMessagesRouterChatCompletionsRequestContent),
   );
 }
 
-/** @internal */
-export const CreateChatCompletionMessagesUserMessage$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => CreateChatCompletion24$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type CreateChatCompletionMessagesUserMessage$Outbound = {
   role: "user";
@@ -2927,87 +2712,33 @@ export function createChatCompletionMessagesUserMessageToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesUserMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesUserMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesUserMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterContent$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesRouterContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
-/** @internal */
-export type CreateChatCompletionMessagesRouterContent$Outbound =
+export type CreateChatCompletionMessagesRouterChatCompletionsContent$Outbound =
   | string
   | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
-export const CreateChatCompletionMessagesRouterContent$outboundSchema:
+export const CreateChatCompletionMessagesRouterChatCompletionsContent$outboundSchema:
   z.ZodType<
-    CreateChatCompletionMessagesRouterContent$Outbound,
+    CreateChatCompletionMessagesRouterChatCompletionsContent$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionMessagesRouterContent
+    CreateChatCompletionMessagesRouterChatCompletionsContent
   > = z.union([
     z.string(),
     z.array(components.TextContentPartSchema$outboundSchema),
   ]);
 
-export function createChatCompletionMessagesRouterContentToJSON(
-  createChatCompletionMessagesRouterContent:
-    CreateChatCompletionMessagesRouterContent,
+export function createChatCompletionMessagesRouterChatCompletionsContentToJSON(
+  createChatCompletionMessagesRouterChatCompletionsContent:
+    CreateChatCompletionMessagesRouterChatCompletionsContent,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionMessagesRouterContent$outboundSchema.parse(
-      createChatCompletionMessagesRouterContent,
-    ),
-  );
-}
-export function createChatCompletionMessagesRouterContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesRouterContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesRouterContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesRouterContent' from JSON`,
+    CreateChatCompletionMessagesRouterChatCompletionsContent$outboundSchema
+      .parse(createChatCompletionMessagesRouterChatCompletionsContent),
   );
 }
 
-/** @internal */
-export const CreateChatCompletionMessagesDeveloperMessage$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionMessagesDeveloperMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    role: z.literal("developer"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
 /** @internal */
 export type CreateChatCompletionMessagesDeveloperMessage$Outbound = {
   role: "developer";
@@ -3040,31 +2771,7 @@ export function createChatCompletionMessagesDeveloperMessageToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesDeveloperMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesDeveloperMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesDeveloperMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesDeveloperMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessagesContent$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type CreateChatCompletionMessagesContent$Outbound =
   | string
@@ -3089,30 +2796,7 @@ export function createChatCompletionMessagesContentToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessagesSystemMessage$inboundSchema: z.ZodType<
-  CreateChatCompletionMessagesSystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type CreateChatCompletionMessagesSystemMessage$Outbound = {
   role: "system";
@@ -3145,34 +2829,7 @@ export function createChatCompletionMessagesSystemMessageToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionMessagesSystemMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionMessagesSystemMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionMessagesSystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionMessages$inboundSchema: z.ZodType<
-  CreateChatCompletionMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionMessagesSystemMessage$inboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesDeveloperMessage$inboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesUserMessage$inboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesAssistantMessage$inboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesToolMessage$inboundSchema),
-]);
 /** @internal */
 export type CreateChatCompletionMessages$Outbound =
   | CreateChatCompletionMessagesSystemMessage$Outbound
@@ -3203,43 +2860,17 @@ export function createChatCompletionMessagesToJSON(
     ),
   );
 }
-export function createChatCompletionMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionMessages' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionVoice$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionVoice
-> = z.nativeEnum(CreateChatCompletionVoice);
 /** @internal */
 export const CreateChatCompletionVoice$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionVoice
-> = CreateChatCompletionVoice$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionVoice);
 
-/** @internal */
-export const CreateChatCompletionFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionFormat
-> = z.nativeEnum(CreateChatCompletionFormat);
 /** @internal */
 export const CreateChatCompletionFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionFormat
-> = CreateChatCompletionFormat$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionFormat);
 
-/** @internal */
-export const CreateChatCompletionAudio$inboundSchema: z.ZodType<
-  CreateChatCompletionAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: CreateChatCompletionVoice$inboundSchema,
-  format: CreateChatCompletionFormat$inboundSchema,
-});
 /** @internal */
 export type CreateChatCompletionAudio$Outbound = {
   voice: string;
@@ -3263,42 +2894,22 @@ export function createChatCompletionAudioToJSON(
     CreateChatCompletionAudio$outboundSchema.parse(createChatCompletionAudio),
   );
 }
-export function createChatCompletionAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAudio' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionResponseFormatRouterJsonSchema$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionResponseFormatRouterJsonSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
-/** @internal */
-export type CreateChatCompletionResponseFormatRouterJsonSchema$Outbound = {
-  description?: string | undefined;
-  name: string;
-  schema?: any | undefined;
-  strict: boolean;
-};
+export type CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$Outbound =
+  {
+    description?: string | undefined;
+    name: string;
+    schema?: any | undefined;
+    strict: boolean;
+  };
 
 /** @internal */
-export const CreateChatCompletionResponseFormatRouterJsonSchema$outboundSchema:
+export const CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$outboundSchema:
   z.ZodType<
-    CreateChatCompletionResponseFormatRouterJsonSchema$Outbound,
+    CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$Outbound,
     z.ZodTypeDef,
-    CreateChatCompletionResponseFormatRouterJsonSchema
+    CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema
   > = z.object({
     description: z.string().optional(),
     name: z.string(),
@@ -3306,52 +2917,21 @@ export const CreateChatCompletionResponseFormatRouterJsonSchema$outboundSchema:
     strict: z.boolean().default(false),
   });
 
-export function createChatCompletionResponseFormatRouterJsonSchemaToJSON(
-  createChatCompletionResponseFormatRouterJsonSchema:
-    CreateChatCompletionResponseFormatRouterJsonSchema,
+export function createChatCompletionResponseFormatRouterChatCompletionsJsonSchemaToJSON(
+  createChatCompletionResponseFormatRouterChatCompletionsJsonSchema:
+    CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionResponseFormatRouterJsonSchema$outboundSchema.parse(
-      createChatCompletionResponseFormatRouterJsonSchema,
-    ),
-  );
-}
-export function createChatCompletionResponseFormatRouterJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionResponseFormatRouterJsonSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionResponseFormatRouterJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionResponseFormatRouterJsonSchema' from JSON`,
+    CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$outboundSchema
+      .parse(createChatCompletionResponseFormatRouterChatCompletionsJsonSchema),
   );
 }
 
-/** @internal */
-export const CreateChatCompletionResponseFormatJSONSchema$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionResponseFormatJSONSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      CreateChatCompletionResponseFormatRouterJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
 /** @internal */
 export type CreateChatCompletionResponseFormatJSONSchema$Outbound = {
   type: "json_schema";
-  json_schema: CreateChatCompletionResponseFormatRouterJsonSchema$Outbound;
+  json_schema:
+    CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$Outbound;
 };
 
 /** @internal */
@@ -3363,7 +2943,7 @@ export const CreateChatCompletionResponseFormatJSONSchema$outboundSchema:
   > = z.object({
     type: z.literal("json_schema"),
     jsonSchema: z.lazy(() =>
-      CreateChatCompletionResponseFormatRouterJsonSchema$outboundSchema
+      CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$outboundSchema
     ),
   }).transform((v) => {
     return remap$(v, {
@@ -3381,31 +2961,7 @@ export function createChatCompletionResponseFormatJSONSchemaToJSON(
     ),
   );
 }
-export function createChatCompletionResponseFormatJSONSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionResponseFormatJSONSchema,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionResponseFormatJSONSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionResponseFormatJSONSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionResponseFormatJSONObject$inboundSchema:
-  z.ZodType<
-    CreateChatCompletionResponseFormatJSONObject,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: z.literal("json_object"),
-  });
 /** @internal */
 export type CreateChatCompletionResponseFormatJSONObject$Outbound = {
   type: "json_object";
@@ -3431,30 +2987,7 @@ export function createChatCompletionResponseFormatJSONObjectToJSON(
     ),
   );
 }
-export function createChatCompletionResponseFormatJSONObjectFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateChatCompletionResponseFormatJSONObject,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionResponseFormatJSONObject$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionResponseFormatJSONObject' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionResponseFormatText$inboundSchema: z.ZodType<
-  CreateChatCompletionResponseFormatText,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-});
 /** @internal */
 export type CreateChatCompletionResponseFormatText$Outbound = {
   type: "text";
@@ -3479,27 +3012,7 @@ export function createChatCompletionResponseFormatTextToJSON(
     ),
   );
 }
-export function createChatCompletionResponseFormatTextFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionResponseFormatText, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionResponseFormatText$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionResponseFormatText' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionResponseFormat$inboundSchema: z.ZodType<
-  CreateChatCompletionResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionResponseFormatText$inboundSchema),
-  z.lazy(() => CreateChatCompletionResponseFormatJSONObject$inboundSchema),
-  z.lazy(() => CreateChatCompletionResponseFormatJSONSchema$inboundSchema),
-]);
 /** @internal */
 export type CreateChatCompletionResponseFormat$Outbound =
   | CreateChatCompletionResponseFormatText$Outbound
@@ -3526,32 +3039,13 @@ export function createChatCompletionResponseFormatToJSON(
     ),
   );
 }
-export function createChatCompletionResponseFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionResponseFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionResponseFormat' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionReasoningEffort
-> = z.nativeEnum(CreateChatCompletionReasoningEffort);
 /** @internal */
 export const CreateChatCompletionReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionReasoningEffort> =
-    CreateChatCompletionReasoningEffort$inboundSchema;
+  z.ZodNativeEnum<typeof CreateChatCompletionReasoningEffort> = z.nativeEnum(
+    CreateChatCompletionReasoningEffort,
+  );
 
-/** @internal */
-export const CreateChatCompletionStop$inboundSchema: z.ZodType<
-  CreateChatCompletionStop,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(z.string())]);
 /** @internal */
 export type CreateChatCompletionStop$Outbound = string | Array<string>;
 
@@ -3569,28 +3063,7 @@ export function createChatCompletionStopToJSON(
     CreateChatCompletionStop$outboundSchema.parse(createChatCompletionStop),
   );
 }
-export function createChatCompletionStopFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionStop, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionStop' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionStreamOptions$inboundSchema: z.ZodType<
-  CreateChatCompletionStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
 /** @internal */
 export type CreateChatCompletionStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -3618,25 +3091,7 @@ export function createChatCompletionStreamOptionsToJSON(
     ),
   );
 }
-export function createChatCompletionStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionStreamOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionThinking$inboundSchema: z.ZodType<
-  CreateChatCompletionThinking,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-]);
 /** @internal */
 export type CreateChatCompletionThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
@@ -3661,45 +3116,17 @@ export function createChatCompletionThinkingToJSON(
     ),
   );
 }
-export function createChatCompletionThinkingFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionThinking, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionThinking' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionType
-> = z.nativeEnum(CreateChatCompletionType);
 /** @internal */
 export const CreateChatCompletionType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionType
-> = CreateChatCompletionType$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionType);
 
 /** @internal */
-export const CreateChatCompletionRouterType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRouterType
-> = z.nativeEnum(CreateChatCompletionRouterType);
-/** @internal */
-export const CreateChatCompletionRouterType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRouterType
-> = CreateChatCompletionRouterType$inboundSchema;
+export const CreateChatCompletionRouterChatCompletionsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsType> = z
+    .nativeEnum(CreateChatCompletionRouterChatCompletionsType);
 
-/** @internal */
-export const CreateChatCompletionParameters$inboundSchema: z.ZodType<
-  CreateChatCompletionParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateChatCompletionRouterType$inboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()).optional(),
-  additionalProperties: z.boolean().optional(),
-});
 /** @internal */
 export type CreateChatCompletionParameters$Outbound = {
   type: string;
@@ -3714,7 +3141,7 @@ export const CreateChatCompletionParameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionParameters
 > = z.object({
-  type: CreateChatCompletionRouterType$outboundSchema,
+  type: CreateChatCompletionRouterChatCompletionsType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()).optional(),
   additionalProperties: z.boolean().optional(),
@@ -3729,28 +3156,7 @@ export function createChatCompletionParametersToJSON(
     ),
   );
 }
-export function createChatCompletionParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionParameters' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionFunction$inboundSchema: z.ZodType<
-  CreateChatCompletionFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  parameters: z.lazy(() => CreateChatCompletionParameters$inboundSchema)
-    .optional(),
-  strict: z.boolean().optional(),
-});
 /** @internal */
 export type CreateChatCompletionFunction$Outbound = {
   name: string;
@@ -3781,25 +3187,7 @@ export function createChatCompletionFunctionToJSON(
     ),
   );
 }
-export function createChatCompletionFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionTools$inboundSchema: z.ZodType<
-  CreateChatCompletionTools,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateChatCompletionType$inboundSchema.optional(),
-  function: z.lazy(() => CreateChatCompletionFunction$inboundSchema),
-});
 /** @internal */
 export type CreateChatCompletionTools$Outbound = {
   type?: string | undefined;
@@ -3823,33 +3211,12 @@ export function createChatCompletionToolsToJSON(
     CreateChatCompletionTools$outboundSchema.parse(createChatCompletionTools),
   );
 }
-export function createChatCompletionToolsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionTools, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionTools' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionToolChoiceType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionToolChoiceType
-> = z.nativeEnum(CreateChatCompletionToolChoiceType);
 /** @internal */
 export const CreateChatCompletionToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionToolChoiceType
-> = CreateChatCompletionToolChoiceType$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionToolChoiceType);
 
-/** @internal */
-export const CreateChatCompletionToolChoiceFunction$inboundSchema: z.ZodType<
-  CreateChatCompletionToolChoiceFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-});
 /** @internal */
 export type CreateChatCompletionToolChoiceFunction$Outbound = {
   name: string;
@@ -3874,26 +3241,7 @@ export function createChatCompletionToolChoiceFunctionToJSON(
     ),
   );
 }
-export function createChatCompletionToolChoiceFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionToolChoiceFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionToolChoiceFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionToolChoice2$inboundSchema: z.ZodType<
-  CreateChatCompletionToolChoice2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateChatCompletionToolChoiceType$inboundSchema.optional(),
-  function: z.lazy(() => CreateChatCompletionToolChoiceFunction$inboundSchema),
-});
 /** @internal */
 export type CreateChatCompletionToolChoice2$Outbound = {
   type?: string | undefined;
@@ -3919,34 +3267,12 @@ export function createChatCompletionToolChoice2ToJSON(
     ),
   );
 }
-export function createChatCompletionToolChoice2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionToolChoice2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionToolChoice2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionToolChoice2' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionToolChoice1$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionToolChoice1
-> = z.nativeEnum(CreateChatCompletionToolChoice1);
 /** @internal */
 export const CreateChatCompletionToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionToolChoice1
-> = CreateChatCompletionToolChoice1$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionToolChoice1);
 
-/** @internal */
-export const CreateChatCompletionToolChoice$inboundSchema: z.ZodType<
-  CreateChatCompletionToolChoice,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionToolChoice2$inboundSchema),
-  CreateChatCompletionToolChoice1$inboundSchema,
-]);
 /** @internal */
 export type CreateChatCompletionToolChoice$Outbound =
   | CreateChatCompletionToolChoice2$Outbound
@@ -3971,40 +3297,17 @@ export function createChatCompletionToolChoiceToJSON(
     ),
   );
 }
-export function createChatCompletionToolChoiceFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionToolChoice, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionToolChoice' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionModalities$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionModalities
-> = z.nativeEnum(CreateChatCompletionModalities);
 /** @internal */
 export const CreateChatCompletionModalities$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionModalities
-> = CreateChatCompletionModalities$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionModalities);
 
-/** @internal */
-export const CreateChatCompletionId1$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionId1
-> = z.nativeEnum(CreateChatCompletionId1);
 /** @internal */
 export const CreateChatCompletionId1$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionId1
-> = CreateChatCompletionId1$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionId1);
 
-/** @internal */
-export const CreateChatCompletionId$inboundSchema: z.ZodType<
-  CreateChatCompletionId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([CreateChatCompletionId1$inboundSchema, z.string()]);
 /** @internal */
 export type CreateChatCompletionId$Outbound = string | string;
 
@@ -4022,38 +3325,12 @@ export function createChatCompletionIdToJSON(
     CreateChatCompletionId$outboundSchema.parse(createChatCompletionId),
   );
 }
-export function createChatCompletionIdFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionId' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionExecuteOn
-> = z.nativeEnum(CreateChatCompletionExecuteOn);
 /** @internal */
 export const CreateChatCompletionExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionExecuteOn
-> = CreateChatCompletionExecuteOn$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionExecuteOn);
 
-/** @internal */
-export const CreateChatCompletionGuardrails$inboundSchema: z.ZodType<
-  CreateChatCompletionGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([CreateChatCompletionId1$inboundSchema, z.string()]),
-  execute_on: CreateChatCompletionExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
 /** @internal */
 export type CreateChatCompletionGuardrails$Outbound = {
   id: string | string;
@@ -4083,29 +3360,31 @@ export function createChatCompletionGuardrailsToJSON(
     ),
   );
 }
-export function createChatCompletionGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionGuardrails, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionGuardrails' from JSON`,
+
+/** @internal */
+export type CreateChatCompletionFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateChatCompletionFallbacks$outboundSchema: z.ZodType<
+  CreateChatCompletionFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createChatCompletionFallbacksToJSON(
+  createChatCompletionFallbacks: CreateChatCompletionFallbacks,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionFallbacks$outboundSchema.parse(
+      createChatCompletionFallbacks,
+    ),
   );
 }
 
-/** @internal */
-export const CreateChatCompletionRetry$inboundSchema: z.ZodType<
-  CreateChatCompletionRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
 /** @internal */
 export type CreateChatCompletionRetry$Outbound = {
   count: number;
@@ -4133,64 +3412,208 @@ export function createChatCompletionRetryToJSON(
     CreateChatCompletionRetry$outboundSchema.parse(createChatCompletionRetry),
   );
 }
-export function createChatCompletionRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRetry' from JSON`,
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsRequestType> =
+    z.nativeEnum(CreateChatCompletionRouterChatCompletionsRequestType);
+
+/** @internal */
+export type CreateChatCompletionCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreateChatCompletionCache$outboundSchema: z.ZodType<
+  CreateChatCompletionCache$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema,
+});
+
+export function createChatCompletionCacheToJSON(
+  createChatCompletionCache: CreateChatCompletionCache,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionCache$outboundSchema.parse(createChatCompletionCache),
   );
 }
 
 /** @internal */
-export const Fallbacks$inboundSchema: z.ZodType<
-  Fallbacks,
+export const CreateChatCompletionLoadBalancerType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateChatCompletionLoadBalancerType> = z.nativeEnum(
+    CreateChatCompletionLoadBalancerType,
+  );
+
+/** @internal */
+export type CreateChatCompletionLoadBalancerModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreateChatCompletionLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateChatCompletionLoadBalancerModels$Outbound,
   z.ZodTypeDef,
-  unknown
+  CreateChatCompletionLoadBalancerModels
 > = z.object({
   model: z.string(),
+  weight: z.number().default(0.5),
 });
+
+export function createChatCompletionLoadBalancerModelsToJSON(
+  createChatCompletionLoadBalancerModels:
+    CreateChatCompletionLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancerModels$outboundSchema.parse(
+      createChatCompletionLoadBalancerModels,
+    ),
+  );
+}
+
 /** @internal */
-export type Fallbacks$Outbound = {
+export type CreateChatCompletionLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateChatCompletionLoadBalancerModels$Outbound>;
+};
+
+/** @internal */
+export const CreateChatCompletionLoadBalancer1$outboundSchema: z.ZodType<
+  CreateChatCompletionLoadBalancer1$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionLoadBalancer1
+> = z.object({
+  type: CreateChatCompletionLoadBalancerType$outboundSchema,
+  models: z.array(
+    z.lazy(() => CreateChatCompletionLoadBalancerModels$outboundSchema),
+  ),
+});
+
+export function createChatCompletionLoadBalancer1ToJSON(
+  createChatCompletionLoadBalancer1: CreateChatCompletionLoadBalancer1,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancer1$outboundSchema.parse(
+      createChatCompletionLoadBalancer1,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionLoadBalancer$Outbound =
+  CreateChatCompletionLoadBalancer1$Outbound;
+
+/** @internal */
+export const CreateChatCompletionLoadBalancer$outboundSchema: z.ZodType<
+  CreateChatCompletionLoadBalancer$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionLoadBalancer
+> = z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema);
+
+export function createChatCompletionLoadBalancerToJSON(
+  createChatCompletionLoadBalancer: CreateChatCompletionLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancer$outboundSchema.parse(
+      createChatCompletionLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateChatCompletionTimeout$outboundSchema: z.ZodType<
+  CreateChatCompletionTimeout$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function createChatCompletionTimeoutToJSON(
+  createChatCompletionTimeout: CreateChatCompletionTimeout,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionTimeout$outboundSchema.parse(
+      createChatCompletionTimeout,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionRouterChatCompletionsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsRetry$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsRetry$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionRouterChatCompletionsRetry
+  > = z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  });
+
+export function createChatCompletionRouterChatCompletionsRetryToJSON(
+  createChatCompletionRouterChatCompletionsRetry:
+    CreateChatCompletionRouterChatCompletionsRetry,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionRouterChatCompletionsRetry$outboundSchema.parse(
+      createChatCompletionRouterChatCompletionsRetry,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionRouterChatCompletionsFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const Fallbacks$outboundSchema: z.ZodType<
-  Fallbacks$Outbound,
-  z.ZodTypeDef,
-  Fallbacks
-> = z.object({
-  model: z.string(),
-});
+export const CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsFallbacks$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionRouterChatCompletionsFallbacks
+  > = z.object({
+    model: z.string(),
+  });
 
-export function fallbacksToJSON(fallbacks: Fallbacks): string {
-  return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
-}
-export function fallbacksFromJSON(
-  jsonString: string,
-): SafeParseResult<Fallbacks, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Fallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Fallbacks' from JSON`,
+export function createChatCompletionRouterChatCompletionsFallbacksToJSON(
+  createChatCompletionRouterChatCompletionsFallbacks:
+    CreateChatCompletionRouterChatCompletionsFallbacks,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema.parse(
+      createChatCompletionRouterChatCompletionsFallbacks,
+    ),
   );
 }
 
 /** @internal */
-export const Version$inboundSchema: z.ZodNativeEnum<typeof Version> = z
+export const Version$outboundSchema: z.ZodNativeEnum<typeof Version> = z
   .nativeEnum(Version);
-/** @internal */
-export const Version$outboundSchema: z.ZodNativeEnum<typeof Version> =
-  Version$inboundSchema;
 
-/** @internal */
-export const Prompt$inboundSchema: z.ZodType<Prompt, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    version: Version$inboundSchema,
-  });
 /** @internal */
 export type Prompt$Outbound = {
   id: string;
@@ -4210,25 +3633,46 @@ export const Prompt$outboundSchema: z.ZodType<
 export function promptToJSON(prompt: Prompt): string {
   return JSON.stringify(Prompt$outboundSchema.parse(prompt));
 }
-export function promptFromJSON(
-  jsonString: string,
-): SafeParseResult<Prompt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Prompt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Prompt' from JSON`,
+
+/** @internal */
+export type CreateChatCompletionContact$Outbound = {
+  id: string;
+  display_name?: string | undefined;
+  email?: string | undefined;
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  logo_url?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const CreateChatCompletionContact$outboundSchema: z.ZodType<
+  CreateChatCompletionContact$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionContact
+> = z.object({
+  id: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logoUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    logoUrl: "logo_url",
+  });
+});
+
+export function createChatCompletionContactToJSON(
+  createChatCompletionContact: CreateChatCompletionContact,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionContact$outboundSchema.parse(
+      createChatCompletionContact,
+    ),
   );
 }
 
-/** @internal */
-export const CreateChatCompletionThread$inboundSchema: z.ZodType<
-  CreateChatCompletionThread,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
 /** @internal */
 export type CreateChatCompletionThread$Outbound = {
   id: string;
@@ -4252,27 +3696,7 @@ export function createChatCompletionThreadToJSON(
     CreateChatCompletionThread$outboundSchema.parse(createChatCompletionThread),
   );
 }
-export function createChatCompletionThreadFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionThread, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionThread$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionThread' from JSON`,
-  );
-}
 
-/** @internal */
-export const Inputs2$inboundSchema: z.ZodType<Inputs2, z.ZodTypeDef, unknown> =
-  z.object({
-    key: z.string(),
-    value: z.any().optional(),
-    is_pii: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "is_pii": "isPii",
-    });
-  });
 /** @internal */
 export type Inputs2$Outbound = {
   key: string;
@@ -4298,19 +3722,7 @@ export const Inputs2$outboundSchema: z.ZodType<
 export function inputs2ToJSON(inputs2: Inputs2): string {
   return JSON.stringify(Inputs2$outboundSchema.parse(inputs2));
 }
-export function inputs2FromJSON(
-  jsonString: string,
-): SafeParseResult<Inputs2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Inputs2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Inputs2' from JSON`,
-  );
-}
 
-/** @internal */
-export const Inputs$inboundSchema: z.ZodType<Inputs, z.ZodTypeDef, unknown> = z
-  .union([z.record(z.any()), z.array(z.lazy(() => Inputs2$inboundSchema))]);
 /** @internal */
 export type Inputs$Outbound = { [k: string]: any } | Array<Inputs2$Outbound>;
 
@@ -4324,78 +3736,49 @@ export const Inputs$outboundSchema: z.ZodType<
 export function inputsToJSON(inputs: Inputs): string {
   return JSON.stringify(Inputs$outboundSchema.parse(inputs));
 }
-export function inputsFromJSON(
-  jsonString: string,
-): SafeParseResult<Inputs, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Inputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Inputs' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionRouterRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterRequestType> = z.nativeEnum(
-    CreateChatCompletionRouterRequestType,
+export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
+  > = z.nativeEnum(
+    CreateChatCompletionRouterChatCompletionsRequestRequestBodyType,
   );
-/** @internal */
-export const CreateChatCompletionRouterRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterRequestType> =
-    CreateChatCompletionRouterRequestType$inboundSchema;
 
 /** @internal */
-export const Cache$inboundSchema: z.ZodType<Cache, z.ZodTypeDef, unknown> = z
-  .object({
-    ttl: z.number().default(1800),
-    type: CreateChatCompletionRouterRequestType$inboundSchema,
-  });
-/** @internal */
-export type Cache$Outbound = {
+export type CreateChatCompletionRouterChatCompletionsCache$Outbound = {
   ttl: number;
   type: string;
 };
 
 /** @internal */
-export const Cache$outboundSchema: z.ZodType<
-  Cache$Outbound,
-  z.ZodTypeDef,
-  Cache
-> = z.object({
-  ttl: z.number().default(1800),
-  type: CreateChatCompletionRouterRequestType$outboundSchema,
-});
+export const CreateChatCompletionRouterChatCompletionsCache$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsCache$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionRouterChatCompletionsCache
+  > = z.object({
+    ttl: z.number().default(1800),
+    type:
+      CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema,
+  });
 
-export function cacheToJSON(cache: Cache): string {
-  return JSON.stringify(Cache$outboundSchema.parse(cache));
-}
-export function cacheFromJSON(
-  jsonString: string,
-): SafeParseResult<Cache, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Cache$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Cache' from JSON`,
+export function createChatCompletionRouterChatCompletionsCacheToJSON(
+  createChatCompletionRouterChatCompletionsCache:
+    CreateChatCompletionRouterChatCompletionsCache,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionRouterChatCompletionsCache$outboundSchema.parse(
+      createChatCompletionRouterChatCompletionsCache,
+    ),
   );
 }
 
 /** @internal */
-export const CreateChatCompletionSearchType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionSearchType
-> = z.nativeEnum(CreateChatCompletionSearchType);
-/** @internal */
 export const CreateChatCompletionSearchType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionSearchType
-> = CreateChatCompletionSearchType$inboundSchema;
+> = z.nativeEnum(CreateChatCompletionSearchType);
 
-/** @internal */
-export const CreateChatCompletionOrExists$inboundSchema: z.ZodType<
-  CreateChatCompletionOrExists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type CreateChatCompletionOrExists$Outbound = {
   exists: boolean;
@@ -4419,62 +3802,32 @@ export function createChatCompletionOrExistsToJSON(
     ),
   );
 }
-export function createChatCompletionOrExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrExists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrExists' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionOrRouterNin$inboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterNin,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionOrRouterNin$Outbound =
+export type CreateChatCompletionOrRouterChatCompletionsNin$Outbound =
   | string
   | number
   | boolean;
 
 /** @internal */
-export const CreateChatCompletionOrRouterNin$outboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterNin$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionOrRouterNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionOrRouterChatCompletionsNin$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionOrRouterChatCompletionsNin$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionOrRouterChatCompletionsNin
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionOrRouterNinToJSON(
-  createChatCompletionOrRouterNin: CreateChatCompletionOrRouterNin,
+export function createChatCompletionOrRouterChatCompletionsNinToJSON(
+  createChatCompletionOrRouterChatCompletionsNin:
+    CreateChatCompletionOrRouterChatCompletionsNin,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionOrRouterNin$outboundSchema.parse(
-      createChatCompletionOrRouterNin,
+    CreateChatCompletionOrRouterChatCompletionsNin$outboundSchema.parse(
+      createChatCompletionOrRouterChatCompletionsNin,
     ),
   );
 }
-export function createChatCompletionOrRouterNinFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrRouterNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrRouterNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrRouterNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrNin$inboundSchema: z.ZodType<
-  CreateChatCompletionOrNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type CreateChatCompletionOrNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -4496,59 +3849,32 @@ export function createChatCompletionOrNinToJSON(
     CreateChatCompletionOrNin$outboundSchema.parse(createChatCompletionOrNin),
   );
 }
-export function createChatCompletionOrNinFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrNin' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionOrRouterIn$inboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionOrRouterIn$Outbound = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsIn$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletionOrRouterIn$outboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterIn$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionOrRouterIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionOrRouterChatCompletionsIn$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionOrRouterChatCompletionsIn$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionOrRouterChatCompletionsIn
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionOrRouterInToJSON(
-  createChatCompletionOrRouterIn: CreateChatCompletionOrRouterIn,
+export function createChatCompletionOrRouterChatCompletionsInToJSON(
+  createChatCompletionOrRouterChatCompletionsIn:
+    CreateChatCompletionOrRouterChatCompletionsIn,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionOrRouterIn$outboundSchema.parse(
-      createChatCompletionOrRouterIn,
+    CreateChatCompletionOrRouterChatCompletionsIn$outboundSchema.parse(
+      createChatCompletionOrRouterChatCompletionsIn,
     ),
   );
 }
-export function createChatCompletionOrRouterInFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrRouterIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrRouterIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrRouterIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrIn$inboundSchema: z.ZodType<
-  CreateChatCompletionOrIn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type CreateChatCompletionOrIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -4570,24 +3896,7 @@ export function createChatCompletionOrInToJSON(
     CreateChatCompletionOrIn$outboundSchema.parse(createChatCompletionOrIn),
   );
 }
-export function createChatCompletionOrInFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrLte$inboundSchema: z.ZodType<
-  CreateChatCompletionOrLte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lte: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionOrLte$Outbound = {
   lte: number;
@@ -4609,24 +3918,7 @@ export function createChatCompletionOrLteToJSON(
     CreateChatCompletionOrLte$outboundSchema.parse(createChatCompletionOrLte),
   );
 }
-export function createChatCompletionOrLteFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrLte' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrLt$inboundSchema: z.ZodType<
-  CreateChatCompletionOrLt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionOrLt$Outbound = {
   lt: number;
@@ -4648,24 +3940,7 @@ export function createChatCompletionOrLtToJSON(
     CreateChatCompletionOrLt$outboundSchema.parse(createChatCompletionOrLt),
   );
 }
-export function createChatCompletionOrLtFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrLt' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrGte$inboundSchema: z.ZodType<
-  CreateChatCompletionOrGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gte: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionOrGte$Outbound = {
   gte: number;
@@ -4687,24 +3962,7 @@ export function createChatCompletionOrGteToJSON(
     CreateChatCompletionOrGte$outboundSchema.parse(createChatCompletionOrGte),
   );
 }
-export function createChatCompletionOrGteFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrGte' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrGt$inboundSchema: z.ZodType<
-  CreateChatCompletionOrGt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionOrGt$Outbound = {
   gt: number;
@@ -4726,59 +3984,32 @@ export function createChatCompletionOrGtToJSON(
     CreateChatCompletionOrGt$outboundSchema.parse(createChatCompletionOrGt),
   );
 }
-export function createChatCompletionOrGtFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrGt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrGt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrGt' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionOrRouterNe$inboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterNe,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionOrRouterNe$Outbound = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsNe$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletionOrRouterNe$outboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterNe$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionOrRouterNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionOrRouterChatCompletionsNe$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionOrRouterChatCompletionsNe$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionOrRouterChatCompletionsNe
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionOrRouterNeToJSON(
-  createChatCompletionOrRouterNe: CreateChatCompletionOrRouterNe,
+export function createChatCompletionOrRouterChatCompletionsNeToJSON(
+  createChatCompletionOrRouterChatCompletionsNe:
+    CreateChatCompletionOrRouterChatCompletionsNe,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionOrRouterNe$outboundSchema.parse(
-      createChatCompletionOrRouterNe,
+    CreateChatCompletionOrRouterChatCompletionsNe$outboundSchema.parse(
+      createChatCompletionOrRouterChatCompletionsNe,
     ),
   );
 }
-export function createChatCompletionOrRouterNeFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrRouterNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrRouterNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrRouterNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrNe$inboundSchema: z.ZodType<
-  CreateChatCompletionOrNe,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type CreateChatCompletionOrNe$Outbound = {
   ne: string | number | boolean;
@@ -4800,59 +4031,32 @@ export function createChatCompletionOrNeToJSON(
     CreateChatCompletionOrNe$outboundSchema.parse(createChatCompletionOrNe),
   );
 }
-export function createChatCompletionOrNeFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrNe' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionOrRouterEq$inboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterEq,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionOrRouterEq$Outbound = string | number | boolean;
+export type CreateChatCompletionOrRouterChatCompletionsEq$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletionOrRouterEq$outboundSchema: z.ZodType<
-  CreateChatCompletionOrRouterEq$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionOrRouterEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionOrRouterChatCompletionsEq$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionOrRouterChatCompletionsEq$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionOrRouterChatCompletionsEq
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionOrRouterEqToJSON(
-  createChatCompletionOrRouterEq: CreateChatCompletionOrRouterEq,
+export function createChatCompletionOrRouterChatCompletionsEqToJSON(
+  createChatCompletionOrRouterChatCompletionsEq:
+    CreateChatCompletionOrRouterChatCompletionsEq,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionOrRouterEq$outboundSchema.parse(
-      createChatCompletionOrRouterEq,
+    CreateChatCompletionOrRouterChatCompletionsEq$outboundSchema.parse(
+      createChatCompletionOrRouterChatCompletionsEq,
     ),
   );
 }
-export function createChatCompletionOrRouterEqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrRouterEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrRouterEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrRouterEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionOrEq$inboundSchema: z.ZodType<
-  CreateChatCompletionOrEq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type CreateChatCompletionOrEq$Outbound = {
   eq: string | number | boolean;
@@ -4874,34 +4078,9 @@ export function createChatCompletionOrEqToJSON(
     CreateChatCompletionOrEq$outboundSchema.parse(createChatCompletionOrEq),
   );
 }
-export function createChatCompletionOrEqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionOrEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionOrEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionOrEq' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionFilterByRouterOr$inboundSchema: z.ZodType<
-  CreateChatCompletionFilterByRouterOr,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionOrEq$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrNe$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrGt$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrGte$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrLt$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrLte$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrIn$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrNin$inboundSchema),
-  z.lazy(() => CreateChatCompletionOrExists$inboundSchema),
-]);
-/** @internal */
-export type CreateChatCompletionFilterByRouterOr$Outbound =
+export type CreateChatCompletionFilterByRouterChatCompletionsOr$Outbound =
   | CreateChatCompletionOrEq$Outbound
   | CreateChatCompletionOrNe$Outbound
   | CreateChatCompletionOrGt$Outbound
@@ -4913,64 +4092,34 @@ export type CreateChatCompletionFilterByRouterOr$Outbound =
   | CreateChatCompletionOrExists$Outbound;
 
 /** @internal */
-export const CreateChatCompletionFilterByRouterOr$outboundSchema: z.ZodType<
-  CreateChatCompletionFilterByRouterOr$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionFilterByRouterOr
-> = z.union([
-  z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrNe$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrGt$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrGte$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrLt$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrExists$outboundSchema),
-]);
+export const CreateChatCompletionFilterByRouterChatCompletionsOr$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionFilterByRouterChatCompletionsOr$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionFilterByRouterChatCompletionsOr
+  > = z.union([
+    z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrNe$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrGt$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrGte$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrLt$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrExists$outboundSchema),
+  ]);
 
-export function createChatCompletionFilterByRouterOrToJSON(
-  createChatCompletionFilterByRouterOr: CreateChatCompletionFilterByRouterOr,
+export function createChatCompletionFilterByRouterChatCompletionsOrToJSON(
+  createChatCompletionFilterByRouterChatCompletionsOr:
+    CreateChatCompletionFilterByRouterChatCompletionsOr,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionFilterByRouterOr$outboundSchema.parse(
-      createChatCompletionFilterByRouterOr,
+    CreateChatCompletionFilterByRouterChatCompletionsOr$outboundSchema.parse(
+      createChatCompletionFilterByRouterChatCompletionsOr,
     ),
   );
 }
-export function createChatCompletionFilterByRouterOrFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFilterByRouterOr, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionFilterByRouterOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFilterByRouterOr' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionFilterByOr$inboundSchema: z.ZodType<
-  CreateChatCompletionFilterByOr,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  or: z.array(
-    z.record(z.union([
-      z.lazy(() => CreateChatCompletionOrEq$inboundSchema),
-      z.lazy(() =>
-        CreateChatCompletionOrNe$inboundSchema
-      ),
-      z.lazy(() => CreateChatCompletionOrGt$inboundSchema),
-      z.lazy(() => CreateChatCompletionOrGte$inboundSchema),
-      z.lazy(() => CreateChatCompletionOrLt$inboundSchema),
-      z.lazy(() => CreateChatCompletionOrLte$inboundSchema),
-      z.lazy(() => CreateChatCompletionOrIn$inboundSchema),
-      z.lazy(() => CreateChatCompletionOrNin$inboundSchema),
-      z.lazy(() => CreateChatCompletionOrExists$inboundSchema),
-    ])),
-  ),
-});
 /** @internal */
 export type CreateChatCompletionFilterByOr$Outbound = {
   or: Array<
@@ -5021,24 +4170,7 @@ export function createChatCompletionFilterByOrToJSON(
     ),
   );
 }
-export function createChatCompletionFilterByOrFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFilterByOr, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionFilterByOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFilterByOr' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndExists$inboundSchema: z.ZodType<
-  CreateChatCompletionAndExists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type CreateChatCompletionAndExists$Outbound = {
   exists: boolean;
@@ -5062,62 +4194,32 @@ export function createChatCompletionAndExistsToJSON(
     ),
   );
 }
-export function createChatCompletionAndExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndExists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndExists' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionAndRouterNin$inboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterNin,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionAndRouterNin$Outbound =
+export type CreateChatCompletionAndRouterChatCompletionsNin$Outbound =
   | string
   | number
   | boolean;
 
 /** @internal */
-export const CreateChatCompletionAndRouterNin$outboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterNin$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionAndRouterNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionAndRouterChatCompletionsNin$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionAndRouterChatCompletionsNin$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionAndRouterChatCompletionsNin
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionAndRouterNinToJSON(
-  createChatCompletionAndRouterNin: CreateChatCompletionAndRouterNin,
+export function createChatCompletionAndRouterChatCompletionsNinToJSON(
+  createChatCompletionAndRouterChatCompletionsNin:
+    CreateChatCompletionAndRouterChatCompletionsNin,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionAndRouterNin$outboundSchema.parse(
-      createChatCompletionAndRouterNin,
+    CreateChatCompletionAndRouterChatCompletionsNin$outboundSchema.parse(
+      createChatCompletionAndRouterChatCompletionsNin,
     ),
   );
 }
-export function createChatCompletionAndRouterNinFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndRouterNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndRouterNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndRouterNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndNin$inboundSchema: z.ZodType<
-  CreateChatCompletionAndNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type CreateChatCompletionAndNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -5139,62 +4241,32 @@ export function createChatCompletionAndNinToJSON(
     CreateChatCompletionAndNin$outboundSchema.parse(createChatCompletionAndNin),
   );
 }
-export function createChatCompletionAndNinFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndNin' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionAndRouterIn$inboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionAndRouterIn$Outbound =
+export type CreateChatCompletionAndRouterChatCompletionsIn$Outbound =
   | string
   | number
   | boolean;
 
 /** @internal */
-export const CreateChatCompletionAndRouterIn$outboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterIn$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionAndRouterIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionAndRouterChatCompletionsIn$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionAndRouterChatCompletionsIn$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionAndRouterChatCompletionsIn
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionAndRouterInToJSON(
-  createChatCompletionAndRouterIn: CreateChatCompletionAndRouterIn,
+export function createChatCompletionAndRouterChatCompletionsInToJSON(
+  createChatCompletionAndRouterChatCompletionsIn:
+    CreateChatCompletionAndRouterChatCompletionsIn,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionAndRouterIn$outboundSchema.parse(
-      createChatCompletionAndRouterIn,
+    CreateChatCompletionAndRouterChatCompletionsIn$outboundSchema.parse(
+      createChatCompletionAndRouterChatCompletionsIn,
     ),
   );
 }
-export function createChatCompletionAndRouterInFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndRouterIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndRouterIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndRouterIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndIn$inboundSchema: z.ZodType<
-  CreateChatCompletionAndIn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type CreateChatCompletionAndIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -5216,24 +4288,7 @@ export function createChatCompletionAndInToJSON(
     CreateChatCompletionAndIn$outboundSchema.parse(createChatCompletionAndIn),
   );
 }
-export function createChatCompletionAndInFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndLte$inboundSchema: z.ZodType<
-  CreateChatCompletionAndLte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lte: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionAndLte$Outbound = {
   lte: number;
@@ -5255,24 +4310,7 @@ export function createChatCompletionAndLteToJSON(
     CreateChatCompletionAndLte$outboundSchema.parse(createChatCompletionAndLte),
   );
 }
-export function createChatCompletionAndLteFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndLte' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndLt$inboundSchema: z.ZodType<
-  CreateChatCompletionAndLt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionAndLt$Outbound = {
   lt: number;
@@ -5294,24 +4332,7 @@ export function createChatCompletionAndLtToJSON(
     CreateChatCompletionAndLt$outboundSchema.parse(createChatCompletionAndLt),
   );
 }
-export function createChatCompletionAndLtFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndLt' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndGte$inboundSchema: z.ZodType<
-  CreateChatCompletionAndGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gte: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionAndGte$Outbound = {
   gte: number;
@@ -5333,24 +4354,7 @@ export function createChatCompletionAndGteToJSON(
     CreateChatCompletionAndGte$outboundSchema.parse(createChatCompletionAndGte),
   );
 }
-export function createChatCompletionAndGteFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndGte' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndGt$inboundSchema: z.ZodType<
-  CreateChatCompletionAndGt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type CreateChatCompletionAndGt$Outbound = {
   gt: number;
@@ -5372,62 +4376,32 @@ export function createChatCompletionAndGtToJSON(
     CreateChatCompletionAndGt$outboundSchema.parse(createChatCompletionAndGt),
   );
 }
-export function createChatCompletionAndGtFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndGt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndGt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndGt' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionAndRouterNe$inboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterNe,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionAndRouterNe$Outbound =
+export type CreateChatCompletionAndRouterChatCompletionsNe$Outbound =
   | string
   | number
   | boolean;
 
 /** @internal */
-export const CreateChatCompletionAndRouterNe$outboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterNe$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionAndRouterNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionAndRouterChatCompletionsNe$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionAndRouterChatCompletionsNe$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionAndRouterChatCompletionsNe
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionAndRouterNeToJSON(
-  createChatCompletionAndRouterNe: CreateChatCompletionAndRouterNe,
+export function createChatCompletionAndRouterChatCompletionsNeToJSON(
+  createChatCompletionAndRouterChatCompletionsNe:
+    CreateChatCompletionAndRouterChatCompletionsNe,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionAndRouterNe$outboundSchema.parse(
-      createChatCompletionAndRouterNe,
+    CreateChatCompletionAndRouterChatCompletionsNe$outboundSchema.parse(
+      createChatCompletionAndRouterChatCompletionsNe,
     ),
   );
 }
-export function createChatCompletionAndRouterNeFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndRouterNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndRouterNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndRouterNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndNe$inboundSchema: z.ZodType<
-  CreateChatCompletionAndNe,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type CreateChatCompletionAndNe$Outbound = {
   ne: string | number | boolean;
@@ -5449,62 +4423,32 @@ export function createChatCompletionAndNeToJSON(
     CreateChatCompletionAndNe$outboundSchema.parse(createChatCompletionAndNe),
   );
 }
-export function createChatCompletionAndNeFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndNe' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionAndRouterEq$inboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterEq,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletionAndRouterEq$Outbound =
+export type CreateChatCompletionAndRouterChatCompletionsEq$Outbound =
   | string
   | number
   | boolean;
 
 /** @internal */
-export const CreateChatCompletionAndRouterEq$outboundSchema: z.ZodType<
-  CreateChatCompletionAndRouterEq$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionAndRouterEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletionAndRouterChatCompletionsEq$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionAndRouterChatCompletionsEq$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionAndRouterChatCompletionsEq
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletionAndRouterEqToJSON(
-  createChatCompletionAndRouterEq: CreateChatCompletionAndRouterEq,
+export function createChatCompletionAndRouterChatCompletionsEqToJSON(
+  createChatCompletionAndRouterChatCompletionsEq:
+    CreateChatCompletionAndRouterChatCompletionsEq,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionAndRouterEq$outboundSchema.parse(
-      createChatCompletionAndRouterEq,
+    CreateChatCompletionAndRouterChatCompletionsEq$outboundSchema.parse(
+      createChatCompletionAndRouterChatCompletionsEq,
     ),
   );
 }
-export function createChatCompletionAndRouterEqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndRouterEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndRouterEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndRouterEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAndEq$inboundSchema: z.ZodType<
-  CreateChatCompletionAndEq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type CreateChatCompletionAndEq$Outbound = {
   eq: string | number | boolean;
@@ -5526,34 +4470,9 @@ export function createChatCompletionAndEqToJSON(
     CreateChatCompletionAndEq$outboundSchema.parse(createChatCompletionAndEq),
   );
 }
-export function createChatCompletionAndEqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAndEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionAndEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAndEq' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletionFilterByRouterAnd$inboundSchema: z.ZodType<
-  CreateChatCompletionFilterByRouterAnd,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionAndEq$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndNe$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndGt$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndGte$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndLt$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndLte$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndIn$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndNin$inboundSchema),
-  z.lazy(() => CreateChatCompletionAndExists$inboundSchema),
-]);
-/** @internal */
-export type CreateChatCompletionFilterByRouterAnd$Outbound =
+export type CreateChatCompletionFilterByRouterChatCompletionsAnd$Outbound =
   | CreateChatCompletionAndEq$Outbound
   | CreateChatCompletionAndNe$Outbound
   | CreateChatCompletionAndGt$Outbound
@@ -5565,64 +4484,34 @@ export type CreateChatCompletionFilterByRouterAnd$Outbound =
   | CreateChatCompletionAndExists$Outbound;
 
 /** @internal */
-export const CreateChatCompletionFilterByRouterAnd$outboundSchema: z.ZodType<
-  CreateChatCompletionFilterByRouterAnd$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionFilterByRouterAnd
-> = z.union([
-  z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndNe$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndGt$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndGte$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndLt$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndExists$outboundSchema),
-]);
+export const CreateChatCompletionFilterByRouterChatCompletionsAnd$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionFilterByRouterChatCompletionsAnd$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionFilterByRouterChatCompletionsAnd
+  > = z.union([
+    z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndNe$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndGt$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndGte$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndLt$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndExists$outboundSchema),
+  ]);
 
-export function createChatCompletionFilterByRouterAndToJSON(
-  createChatCompletionFilterByRouterAnd: CreateChatCompletionFilterByRouterAnd,
+export function createChatCompletionFilterByRouterChatCompletionsAndToJSON(
+  createChatCompletionFilterByRouterChatCompletionsAnd:
+    CreateChatCompletionFilterByRouterChatCompletionsAnd,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionFilterByRouterAnd$outboundSchema.parse(
-      createChatCompletionFilterByRouterAnd,
+    CreateChatCompletionFilterByRouterChatCompletionsAnd$outboundSchema.parse(
+      createChatCompletionFilterByRouterChatCompletionsAnd,
     ),
   );
 }
-export function createChatCompletionFilterByRouterAndFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFilterByRouterAnd, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionFilterByRouterAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFilterByRouterAnd' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionFilterByAnd$inboundSchema: z.ZodType<
-  CreateChatCompletionFilterByAnd,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  and: z.array(
-    z.record(z.union([
-      z.lazy(() => CreateChatCompletionAndEq$inboundSchema),
-      z.lazy(() =>
-        CreateChatCompletionAndNe$inboundSchema
-      ),
-      z.lazy(() => CreateChatCompletionAndGt$inboundSchema),
-      z.lazy(() => CreateChatCompletionAndGte$inboundSchema),
-      z.lazy(() => CreateChatCompletionAndLt$inboundSchema),
-      z.lazy(() => CreateChatCompletionAndLte$inboundSchema),
-      z.lazy(() => CreateChatCompletionAndIn$inboundSchema),
-      z.lazy(() => CreateChatCompletionAndNin$inboundSchema),
-      z.lazy(() => CreateChatCompletionAndExists$inboundSchema),
-    ])),
-  ),
-});
 /** @internal */
 export type CreateChatCompletionFilterByAnd$Outbound = {
   and: Array<
@@ -5673,24 +4562,7 @@ export function createChatCompletionFilterByAndToJSON(
     ),
   );
 }
-export function createChatCompletionFilterByAndFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFilterByAnd, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionFilterByAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFilterByAnd' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Exists$inboundSchema: z.ZodType<
-  CreateChatCompletion1Exists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type CreateChatCompletion1Exists$Outbound = {
   exists: boolean;
@@ -5714,59 +4586,32 @@ export function createChatCompletion1ExistsToJSON(
     ),
   );
 }
-export function createChatCompletion1ExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Exists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Exists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Exists' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletion1RouterNin$inboundSchema: z.ZodType<
-  CreateChatCompletion1RouterNin,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletion1RouterNin$Outbound = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsNin$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletion1RouterNin$outboundSchema: z.ZodType<
-  CreateChatCompletion1RouterNin$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletion1RouterNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletion1RouterChatCompletionsNin$outboundSchema:
+  z.ZodType<
+    CreateChatCompletion1RouterChatCompletionsNin$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletion1RouterChatCompletionsNin
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletion1RouterNinToJSON(
-  createChatCompletion1RouterNin: CreateChatCompletion1RouterNin,
+export function createChatCompletion1RouterChatCompletionsNinToJSON(
+  createChatCompletion1RouterChatCompletionsNin:
+    CreateChatCompletion1RouterChatCompletionsNin,
 ): string {
   return JSON.stringify(
-    CreateChatCompletion1RouterNin$outboundSchema.parse(
-      createChatCompletion1RouterNin,
+    CreateChatCompletion1RouterChatCompletionsNin$outboundSchema.parse(
+      createChatCompletion1RouterChatCompletionsNin,
     ),
   );
 }
-export function createChatCompletion1RouterNinFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1RouterNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1RouterNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1RouterNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Nin$inboundSchema: z.ZodType<
-  CreateChatCompletion1Nin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type CreateChatCompletion1Nin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -5788,59 +4633,32 @@ export function createChatCompletion1NinToJSON(
     CreateChatCompletion1Nin$outboundSchema.parse(createChatCompletion1Nin),
   );
 }
-export function createChatCompletion1NinFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Nin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Nin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Nin' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletion1RouterIn$inboundSchema: z.ZodType<
-  CreateChatCompletion1RouterIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletion1RouterIn$Outbound = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsIn$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletion1RouterIn$outboundSchema: z.ZodType<
-  CreateChatCompletion1RouterIn$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletion1RouterIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletion1RouterChatCompletionsIn$outboundSchema:
+  z.ZodType<
+    CreateChatCompletion1RouterChatCompletionsIn$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletion1RouterChatCompletionsIn
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletion1RouterInToJSON(
-  createChatCompletion1RouterIn: CreateChatCompletion1RouterIn,
+export function createChatCompletion1RouterChatCompletionsInToJSON(
+  createChatCompletion1RouterChatCompletionsIn:
+    CreateChatCompletion1RouterChatCompletionsIn,
 ): string {
   return JSON.stringify(
-    CreateChatCompletion1RouterIn$outboundSchema.parse(
-      createChatCompletion1RouterIn,
+    CreateChatCompletion1RouterChatCompletionsIn$outboundSchema.parse(
+      createChatCompletion1RouterChatCompletionsIn,
     ),
   );
 }
-export function createChatCompletion1RouterInFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1RouterIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1RouterIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1RouterIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1In$inboundSchema: z.ZodType<
-  CreateChatCompletion1In,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type CreateChatCompletion1In$Outbound = {
   in: Array<string | number | boolean>;
@@ -5862,24 +4680,7 @@ export function createChatCompletion1InToJSON(
     CreateChatCompletion1In$outboundSchema.parse(createChatCompletion1In),
   );
 }
-export function createChatCompletion1InFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1In, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1In$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1In' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Lte$inboundSchema: z.ZodType<
-  CreateChatCompletion1Lte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lte: z.number(),
-});
 /** @internal */
 export type CreateChatCompletion1Lte$Outbound = {
   lte: number;
@@ -5901,24 +4702,7 @@ export function createChatCompletion1LteToJSON(
     CreateChatCompletion1Lte$outboundSchema.parse(createChatCompletion1Lte),
   );
 }
-export function createChatCompletion1LteFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Lte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Lte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Lte' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Lt$inboundSchema: z.ZodType<
-  CreateChatCompletion1Lt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type CreateChatCompletion1Lt$Outbound = {
   lt: number;
@@ -5940,24 +4724,7 @@ export function createChatCompletion1LtToJSON(
     CreateChatCompletion1Lt$outboundSchema.parse(createChatCompletion1Lt),
   );
 }
-export function createChatCompletion1LtFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Lt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Lt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Lt' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Gte$inboundSchema: z.ZodType<
-  CreateChatCompletion1Gte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gte: z.number(),
-});
 /** @internal */
 export type CreateChatCompletion1Gte$Outbound = {
   gte: number;
@@ -5979,24 +4746,7 @@ export function createChatCompletion1GteToJSON(
     CreateChatCompletion1Gte$outboundSchema.parse(createChatCompletion1Gte),
   );
 }
-export function createChatCompletion1GteFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Gte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Gte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Gte' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Gt$inboundSchema: z.ZodType<
-  CreateChatCompletion1Gt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type CreateChatCompletion1Gt$Outbound = {
   gt: number;
@@ -6018,59 +4768,32 @@ export function createChatCompletion1GtToJSON(
     CreateChatCompletion1Gt$outboundSchema.parse(createChatCompletion1Gt),
   );
 }
-export function createChatCompletion1GtFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Gt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Gt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Gt' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletion1RouterNe$inboundSchema: z.ZodType<
-  CreateChatCompletion1RouterNe,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletion1RouterNe$Outbound = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsNe$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletion1RouterNe$outboundSchema: z.ZodType<
-  CreateChatCompletion1RouterNe$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletion1RouterNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletion1RouterChatCompletionsNe$outboundSchema:
+  z.ZodType<
+    CreateChatCompletion1RouterChatCompletionsNe$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletion1RouterChatCompletionsNe
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletion1RouterNeToJSON(
-  createChatCompletion1RouterNe: CreateChatCompletion1RouterNe,
+export function createChatCompletion1RouterChatCompletionsNeToJSON(
+  createChatCompletion1RouterChatCompletionsNe:
+    CreateChatCompletion1RouterChatCompletionsNe,
 ): string {
   return JSON.stringify(
-    CreateChatCompletion1RouterNe$outboundSchema.parse(
-      createChatCompletion1RouterNe,
+    CreateChatCompletion1RouterChatCompletionsNe$outboundSchema.parse(
+      createChatCompletion1RouterChatCompletionsNe,
     ),
   );
 }
-export function createChatCompletion1RouterNeFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1RouterNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1RouterNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1RouterNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Ne$inboundSchema: z.ZodType<
-  CreateChatCompletion1Ne,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type CreateChatCompletion1Ne$Outbound = {
   ne: string | number | boolean;
@@ -6092,59 +4815,32 @@ export function createChatCompletion1NeToJSON(
     CreateChatCompletion1Ne$outboundSchema.parse(createChatCompletion1Ne),
   );
 }
-export function createChatCompletion1NeFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Ne, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Ne$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Ne' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateChatCompletion1RouterEq$inboundSchema: z.ZodType<
-  CreateChatCompletion1RouterEq,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type CreateChatCompletion1RouterEq$Outbound = string | number | boolean;
+export type CreateChatCompletion1RouterChatCompletionsEq$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const CreateChatCompletion1RouterEq$outboundSchema: z.ZodType<
-  CreateChatCompletion1RouterEq$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletion1RouterEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+export const CreateChatCompletion1RouterChatCompletionsEq$outboundSchema:
+  z.ZodType<
+    CreateChatCompletion1RouterChatCompletionsEq$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletion1RouterChatCompletionsEq
+  > = z.union([z.string(), z.number(), z.boolean()]);
 
-export function createChatCompletion1RouterEqToJSON(
-  createChatCompletion1RouterEq: CreateChatCompletion1RouterEq,
+export function createChatCompletion1RouterChatCompletionsEqToJSON(
+  createChatCompletion1RouterChatCompletionsEq:
+    CreateChatCompletion1RouterChatCompletionsEq,
 ): string {
   return JSON.stringify(
-    CreateChatCompletion1RouterEq$outboundSchema.parse(
-      createChatCompletion1RouterEq,
+    CreateChatCompletion1RouterChatCompletionsEq$outboundSchema.parse(
+      createChatCompletion1RouterChatCompletionsEq,
     ),
   );
 }
-export function createChatCompletion1RouterEqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1RouterEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1RouterEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1RouterEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletion1Eq$inboundSchema: z.ZodType<
-  CreateChatCompletion1Eq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type CreateChatCompletion1Eq$Outbound = {
   eq: string | number | boolean;
@@ -6166,32 +4862,7 @@ export function createChatCompletion1EqToJSON(
     CreateChatCompletion1Eq$outboundSchema.parse(createChatCompletion1Eq),
   );
 }
-export function createChatCompletion1EqFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletion1Eq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletion1Eq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletion1Eq' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionFilterBy1$inboundSchema: z.ZodType<
-  CreateChatCompletionFilterBy1,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletion1Eq$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Ne$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Gt$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Gte$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Lt$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Lte$inboundSchema),
-  z.lazy(() => CreateChatCompletion1In$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Nin$inboundSchema),
-  z.lazy(() => CreateChatCompletion1Exists$inboundSchema),
-]);
 /** @internal */
 export type CreateChatCompletionFilterBy1$Outbound =
   | CreateChatCompletion1Eq$Outbound
@@ -6230,36 +4901,7 @@ export function createChatCompletionFilterBy1ToJSON(
     ),
   );
 }
-export function createChatCompletionFilterBy1FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFilterBy1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionFilterBy1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFilterBy1' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionFilterBy$inboundSchema: z.ZodType<
-  CreateChatCompletionFilterBy,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionFilterByAnd$inboundSchema),
-  z.lazy(() => CreateChatCompletionFilterByOr$inboundSchema),
-  z.record(z.union([
-    z.lazy(() => CreateChatCompletion1Eq$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Ne$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Gt$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Gte$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Lt$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Lte$inboundSchema),
-    z.lazy(() => CreateChatCompletion1In$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Nin$inboundSchema),
-    z.lazy(() => CreateChatCompletion1Exists$inboundSchema),
-  ])),
-]);
 /** @internal */
 export type CreateChatCompletionFilterBy$Outbound =
   | CreateChatCompletionFilterByAnd$Outbound
@@ -6307,32 +4949,7 @@ export function createChatCompletionFilterByToJSON(
     ),
   );
 }
-export function createChatCompletionFilterByFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionFilterBy, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionFilterBy$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionFilterBy' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionSearchOptions$inboundSchema: z.ZodType<
-  CreateChatCompletionSearchOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_vectors: z.boolean().optional(),
-  include_metadata: z.boolean().optional(),
-  include_scores: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_vectors": "includeVectors",
-    "include_metadata": "includeMetadata",
-    "include_scores": "includeScores",
-  });
-});
 /** @internal */
 export type CreateChatCompletionSearchOptions$Outbound = {
   include_vectors?: boolean | undefined;
@@ -6366,30 +4983,7 @@ export function createChatCompletionSearchOptionsToJSON(
     ),
   );
 }
-export function createChatCompletionSearchOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionSearchOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionSearchOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionSearchOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionRerankConfig$inboundSchema: z.ZodType<
-  CreateChatCompletionRerankConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0),
-  top_k: z.number().int().default(10),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-  });
-});
 /** @internal */
 export type CreateChatCompletionRerankConfig$Outbound = {
   model: string;
@@ -6421,24 +5015,7 @@ export function createChatCompletionRerankConfigToJSON(
     ),
   );
 }
-export function createChatCompletionRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionRerankConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionRerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRerankConfig' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionAgenticRagConfig$inboundSchema: z.ZodType<
-  CreateChatCompletionAgenticRagConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
 /** @internal */
 export type CreateChatCompletionAgenticRagConfig$Outbound = {
   model: string;
@@ -6462,65 +5039,7 @@ export function createChatCompletionAgenticRagConfigToJSON(
     ),
   );
 }
-export function createChatCompletionAgenticRagConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionAgenticRagConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionAgenticRagConfig' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionKnowledgeBases$inboundSchema: z.ZodType<
-  CreateChatCompletionKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  top_k: z.number().int().optional(),
-  threshold: z.number().optional(),
-  search_type: CreateChatCompletionSearchType$inboundSchema.default(
-    "hybrid_search",
-  ),
-  filter_by: z.union([
-    z.lazy(() => CreateChatCompletionFilterByAnd$inboundSchema),
-    z.lazy(() => CreateChatCompletionFilterByOr$inboundSchema),
-    z.record(
-      z.union([
-        z.lazy(() => CreateChatCompletion1Eq$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Ne$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Gt$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Gte$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Lt$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Lte$inboundSchema),
-        z.lazy(() => CreateChatCompletion1In$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Nin$inboundSchema),
-        z.lazy(() => CreateChatCompletion1Exists$inboundSchema),
-      ]),
-    ),
-  ]).optional(),
-  search_options: z.lazy(() => CreateChatCompletionSearchOptions$inboundSchema)
-    .optional(),
-  rerank_config: z.lazy(() => CreateChatCompletionRerankConfig$inboundSchema)
-    .optional(),
-  agentic_rag_config: z.lazy(() =>
-    CreateChatCompletionAgenticRagConfig$inboundSchema
-  ).optional(),
-  knowledge_id: z.string(),
-  query: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "search_type": "searchType",
-    "filter_by": "filterBy",
-    "search_options": "searchOptions",
-    "rerank_config": "rerankConfig",
-    "agentic_rag_config": "agenticRagConfig",
-    "knowledge_id": "knowledgeId",
-  });
-});
 /** @internal */
 export type CreateChatCompletionKnowledgeBases$Outbound = {
   top_k?: number | undefined;
@@ -6609,199 +5128,188 @@ export function createChatCompletionKnowledgeBasesToJSON(
     ),
   );
 }
-export function createChatCompletionKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionKnowledgeBases' from JSON`,
+
+/** @internal */
+export const CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateChatCompletionLoadBalancerRouterChatCompletionsType
+  > = z.nativeEnum(CreateChatCompletionLoadBalancerRouterChatCompletionsType);
+
+/** @internal */
+export type CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound =
+  {
+    model: string;
+    weight: number;
+  };
+
+/** @internal */
+export const CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createChatCompletionLoadBalancerRouterChatCompletionsModelsToJSON(
+  createChatCompletionLoadBalancerRouterChatCompletionsModels:
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema
+      .parse(createChatCompletionLoadBalancerRouterChatCompletionsModels),
   );
 }
 
 /** @internal */
-export const LoadBalancerType$inboundSchema: z.ZodNativeEnum<
-  typeof LoadBalancerType
-> = z.nativeEnum(LoadBalancerType);
-/** @internal */
-export const LoadBalancerType$outboundSchema: z.ZodNativeEnum<
-  typeof LoadBalancerType
-> = LoadBalancerType$inboundSchema;
-
-/** @internal */
-export const LoadBalancer1$inboundSchema: z.ZodType<
-  LoadBalancer1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: LoadBalancerType$inboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
-/** @internal */
-export type LoadBalancer1$Outbound = {
+export type CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound = {
   type: string;
-  model: string;
-  weight: number;
+  models: Array<
+    CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound
+  >;
 };
 
 /** @internal */
-export const LoadBalancer1$outboundSchema: z.ZodType<
-  LoadBalancer1$Outbound,
-  z.ZodTypeDef,
-  LoadBalancer1
-> = z.object({
-  type: LoadBalancerType$outboundSchema,
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
-
-export function loadBalancer1ToJSON(loadBalancer1: LoadBalancer1): string {
-  return JSON.stringify(LoadBalancer1$outboundSchema.parse(loadBalancer1));
-}
-export function loadBalancer1FromJSON(
-  jsonString: string,
-): SafeParseResult<LoadBalancer1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => LoadBalancer1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'LoadBalancer1' from JSON`,
-  );
-}
-
-/** @internal */
-export const LoadBalancer$inboundSchema: z.ZodType<
-  LoadBalancer,
-  z.ZodTypeDef,
-  unknown
-> = z.lazy(() => LoadBalancer1$inboundSchema);
-/** @internal */
-export type LoadBalancer$Outbound = LoadBalancer1$Outbound;
-
-/** @internal */
-export const LoadBalancer$outboundSchema: z.ZodType<
-  LoadBalancer$Outbound,
-  z.ZodTypeDef,
-  LoadBalancer
-> = z.lazy(() => LoadBalancer1$outboundSchema);
-
-export function loadBalancerToJSON(loadBalancer: LoadBalancer): string {
-  return JSON.stringify(LoadBalancer$outboundSchema.parse(loadBalancer));
-}
-export function loadBalancerFromJSON(
-  jsonString: string,
-): SafeParseResult<LoadBalancer, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => LoadBalancer$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'LoadBalancer' from JSON`,
-  );
-}
-
-/** @internal */
-export const Timeout$inboundSchema: z.ZodType<Timeout, z.ZodTypeDef, unknown> =
-  z.object({
-    call_timeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      "call_timeout": "callTimeout",
-    });
+export const CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionLoadBalancerRouterChatCompletions1
+  > = z.object({
+    type:
+      CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema
+      ),
+    ),
   });
+
+export function createChatCompletionLoadBalancerRouterChatCompletions1ToJSON(
+  createChatCompletionLoadBalancerRouterChatCompletions1:
+    CreateChatCompletionLoadBalancerRouterChatCompletions1,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema.parse(
+      createChatCompletionLoadBalancerRouterChatCompletions1,
+    ),
+  );
+}
+
 /** @internal */
-export type Timeout$Outbound = {
+export type CreateChatCompletionRouterChatCompletionsLoadBalancer$Outbound =
+  CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound;
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionRouterChatCompletionsLoadBalancer
+  > = z.lazy(() =>
+    CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
+  );
+
+export function createChatCompletionRouterChatCompletionsLoadBalancerToJSON(
+  createChatCompletionRouterChatCompletionsLoadBalancer:
+    CreateChatCompletionRouterChatCompletionsLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionRouterChatCompletionsLoadBalancer$outboundSchema.parse(
+      createChatCompletionRouterChatCompletionsLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionRouterChatCompletionsTimeout$Outbound = {
   call_timeout: number;
 };
 
 /** @internal */
-export const Timeout$outboundSchema: z.ZodType<
-  Timeout$Outbound,
-  z.ZodTypeDef,
-  Timeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
+export const CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsTimeout$Outbound,
+    z.ZodTypeDef,
+    CreateChatCompletionRouterChatCompletionsTimeout
+  > = z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
   });
-});
 
-export function timeoutToJSON(timeout: Timeout): string {
-  return JSON.stringify(Timeout$outboundSchema.parse(timeout));
-}
-export function timeoutFromJSON(
-  jsonString: string,
-): SafeParseResult<Timeout, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Timeout$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Timeout' from JSON`,
+export function createChatCompletionRouterChatCompletionsTimeoutToJSON(
+  createChatCompletionRouterChatCompletionsTimeout:
+    CreateChatCompletionRouterChatCompletionsTimeout,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema.parse(
+      createChatCompletionRouterChatCompletionsTimeout,
+    ),
   );
 }
 
 /** @internal */
-export const Orq$inboundSchema: z.ZodType<Orq, z.ZodTypeDef, unknown> = z
-  .object({
-    name: z.string().optional(),
-    retry: z.lazy(() => CreateChatCompletionRetry$inboundSchema).optional(),
-    fallbacks: z.array(z.lazy(() => Fallbacks$inboundSchema)).optional(),
-    prompt: z.lazy(() => Prompt$inboundSchema).optional(),
-    contact: components.PublicContact$inboundSchema.optional(),
-    thread: z.lazy(() => CreateChatCompletionThread$inboundSchema).optional(),
-    inputs: z.union([
-      z.record(z.any()),
-      z.array(z.lazy(() => Inputs2$inboundSchema)),
-    ]).optional(),
-    cache: z.lazy(() => Cache$inboundSchema).optional(),
-    knowledge_bases: z.array(
-      z.lazy(() => CreateChatCompletionKnowledgeBases$inboundSchema),
-    ).optional(),
-    load_balancer: z.array(z.lazy(() => LoadBalancer1$inboundSchema))
-      .optional(),
-    timeout: z.lazy(() => Timeout$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "knowledge_bases": "knowledgeBases",
-      "load_balancer": "loadBalancer",
-    });
-  });
-/** @internal */
 export type Orq$Outbound = {
   name?: string | undefined;
-  retry?: CreateChatCompletionRetry$Outbound | undefined;
-  fallbacks?: Array<Fallbacks$Outbound> | undefined;
+  retry?: CreateChatCompletionRouterChatCompletionsRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateChatCompletionRouterChatCompletionsFallbacks$Outbound>
+    | undefined;
   prompt?: Prompt$Outbound | undefined;
-  contact?: components.PublicContact$Outbound | undefined;
+  identity?: components.PublicContact$Outbound | undefined;
+  contact?: CreateChatCompletionContact$Outbound | undefined;
   thread?: CreateChatCompletionThread$Outbound | undefined;
   inputs?: { [k: string]: any } | Array<Inputs2$Outbound> | undefined;
-  cache?: Cache$Outbound | undefined;
+  cache?: CreateChatCompletionRouterChatCompletionsCache$Outbound | undefined;
   knowledge_bases?:
     | Array<CreateChatCompletionKnowledgeBases$Outbound>
     | undefined;
-  load_balancer?: Array<LoadBalancer1$Outbound> | undefined;
-  timeout?: Timeout$Outbound | undefined;
+  load_balancer?:
+    | CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound
+    | undefined;
+  timeout?:
+    | CreateChatCompletionRouterChatCompletionsTimeout$Outbound
+    | undefined;
 };
 
 /** @internal */
 export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
   .object({
     name: z.string().optional(),
-    retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
-    fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
+    retry: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsRetry$outboundSchema
+    ).optional(),
+    fallbacks: z.array(
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema
+      ),
+    ).optional(),
     prompt: z.lazy(() => Prompt$outboundSchema).optional(),
-    contact: components.PublicContact$outboundSchema.optional(),
+    identity: components.PublicContact$outboundSchema.optional(),
+    contact: z.lazy(() => CreateChatCompletionContact$outboundSchema)
+      .optional(),
     thread: z.lazy(() => CreateChatCompletionThread$outboundSchema).optional(),
     inputs: z.union([
       z.record(z.any()),
       z.array(z.lazy(() => Inputs2$outboundSchema)),
     ]).optional(),
-    cache: z.lazy(() => Cache$outboundSchema).optional(),
+    cache: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsCache$outboundSchema
+    ).optional(),
     knowledgeBases: z.array(
       z.lazy(() => CreateChatCompletionKnowledgeBases$outboundSchema),
     ).optional(),
-    loadBalancer: z.array(z.lazy(() => LoadBalancer1$outboundSchema))
-      .optional(),
-    timeout: z.lazy(() => Timeout$outboundSchema).optional(),
+    loadBalancer: z.lazy(() =>
+      CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       knowledgeBases: "knowledge_bases",
@@ -6812,92 +5320,7 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
 export function orqToJSON(orq: Orq): string {
   return JSON.stringify(Orq$outboundSchema.parse(orq));
 }
-export function orqFromJSON(
-  jsonString: string,
-): SafeParseResult<Orq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Orq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Orq' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateChatCompletionRequestBody$inboundSchema: z.ZodType<
-  CreateChatCompletionRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  messages: z.array(
-    z.union([
-      z.lazy(() => CreateChatCompletionMessagesSystemMessage$inboundSchema),
-      z.lazy(() => CreateChatCompletionMessagesDeveloperMessage$inboundSchema),
-      z.lazy(() => CreateChatCompletionMessagesUserMessage$inboundSchema),
-      z.lazy(() => CreateChatCompletionMessagesAssistantMessage$inboundSchema),
-      z.lazy(() => CreateChatCompletionMessagesToolMessage$inboundSchema),
-    ]),
-  ),
-  model: z.string(),
-  metadata: z.record(z.string()).optional(),
-  audio: z.nullable(z.lazy(() => CreateChatCompletionAudio$inboundSchema))
-    .optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => CreateChatCompletionResponseFormatText$inboundSchema),
-    z.lazy(() => CreateChatCompletionResponseFormatJSONObject$inboundSchema),
-    z.lazy(() => CreateChatCompletionResponseFormatJSONSchema$inboundSchema),
-  ]).optional(),
-  reasoning_effort: CreateChatCompletionReasoningEffort$inboundSchema
-    .optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => CreateChatCompletionStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tools: z.array(z.lazy(() => CreateChatCompletionTools$inboundSchema))
-    .optional(),
-  tool_choice: z.union([
-    z.lazy(() => CreateChatCompletionToolChoice2$inboundSchema),
-    CreateChatCompletionToolChoice1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(CreateChatCompletionModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateChatCompletionGuardrails$inboundSchema),
-  ).optional(),
-  orq: z.lazy(() => Orq$inboundSchema).optional(),
-  stream: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-  });
-});
 /** @internal */
 export type CreateChatCompletionRequestBody$Outbound = {
   messages: Array<
@@ -6942,6 +5365,11 @@ export type CreateChatCompletionRequestBody$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<CreateChatCompletionGuardrails$Outbound> | undefined;
+  fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
+  retry?: CreateChatCompletionRetry$Outbound | undefined;
+  cache?: CreateChatCompletionCache$Outbound | undefined;
+  load_balancer?: CreateChatCompletionLoadBalancer1$Outbound | undefined;
+  timeout?: CreateChatCompletionTimeout$Outbound | undefined;
   orq?: Orq$Outbound | undefined;
   stream: boolean;
 };
@@ -7006,6 +5434,13 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   guardrails: z.array(
     z.lazy(() => CreateChatCompletionGuardrails$outboundSchema),
   ).optional(),
+  fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreateChatCompletionCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateChatCompletionTimeout$outboundSchema).optional(),
   orq: z.lazy(() => Orq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {
@@ -7022,6 +5457,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    loadBalancer: "load_balancer",
   });
 });
 
@@ -7034,139 +5470,16 @@ export function createChatCompletionRequestBodyToJSON(
     ),
   );
 }
-export function createChatCompletionRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateChatCompletionFinishReason$inboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionFinishReason
 > = z.nativeEnum(CreateChatCompletionFinishReason);
-/** @internal */
-export const CreateChatCompletionFinishReason$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionFinishReason
-> = CreateChatCompletionFinishReason$inboundSchema;
 
 /** @internal */
-export const CreateChatCompletionRouterTopLogprobs$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterTopLogprobs,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
-/** @internal */
-export type CreateChatCompletionRouterTopLogprobs$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-};
-
-/** @internal */
-export const CreateChatCompletionRouterTopLogprobs$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterTopLogprobs$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterTopLogprobs
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
-
-export function createChatCompletionRouterTopLogprobsToJSON(
-  createChatCompletionRouterTopLogprobs: CreateChatCompletionRouterTopLogprobs,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterTopLogprobs$outboundSchema.parse(
-      createChatCompletionRouterTopLogprobs,
-    ),
-  );
-}
-export function createChatCompletionRouterTopLogprobsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterTopLogprobs, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionRouterTopLogprobs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterTopLogprobs' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateChatCompletionRouterContent$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterContent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  top_logprobs: z.array(
-    z.lazy(() => CreateChatCompletionRouterTopLogprobs$inboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "top_logprobs": "topLogprobs",
-  });
-});
-/** @internal */
-export type CreateChatCompletionRouterContent$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-  top_logprobs: Array<CreateChatCompletionRouterTopLogprobs$Outbound>;
-};
-
-/** @internal */
-export const CreateChatCompletionRouterContent$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterContent$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterContent
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  topLogprobs: z.array(
-    z.lazy(() => CreateChatCompletionRouterTopLogprobs$outboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    topLogprobs: "top_logprobs",
-  });
-});
-
-export function createChatCompletionRouterContentToJSON(
-  createChatCompletionRouterContent: CreateChatCompletionRouterContent,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterContent$outboundSchema.parse(
-      createChatCompletionRouterContent,
-    ),
-  );
-}
-export function createChatCompletionRouterContentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChatCompletionRouterContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterContent' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateChatCompletionRouterResponseTopLogprobs$inboundSchema:
+export const CreateChatCompletionRouterChatCompletionsTopLogprobs$inboundSchema:
   z.ZodType<
-    CreateChatCompletionRouterResponseTopLogprobs,
+    CreateChatCompletionRouterChatCompletionsTopLogprobs,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -7174,48 +5487,84 @@ export const CreateChatCompletionRouterResponseTopLogprobs$inboundSchema:
     logprob: z.number(),
     bytes: z.nullable(z.array(z.number())),
   });
-/** @internal */
-export type CreateChatCompletionRouterResponseTopLogprobs$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-};
+
+export function createChatCompletionRouterChatCompletionsTopLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsTopLogprobs,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsTopLogprobs$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsTopLogprobs' from JSON`,
+  );
+}
 
 /** @internal */
-export const CreateChatCompletionRouterResponseTopLogprobs$outboundSchema:
+export const CreateChatCompletionRouterChatCompletionsContent$inboundSchema:
   z.ZodType<
-    CreateChatCompletionRouterResponseTopLogprobs$Outbound,
+    CreateChatCompletionRouterChatCompletionsContent,
     z.ZodTypeDef,
-    CreateChatCompletionRouterResponseTopLogprobs
+    unknown
+  > = z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+    top_logprobs: z.array(
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsTopLogprobs$inboundSchema
+      ),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_logprobs": "topLogprobs",
+    });
+  });
+
+export function createChatCompletionRouterChatCompletionsContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsResponseTopLogprobs$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsResponseTopLogprobs,
+    z.ZodTypeDef,
+    unknown
   > = z.object({
     token: z.string(),
     logprob: z.number(),
     bytes: z.nullable(z.array(z.number())),
   });
 
-export function createChatCompletionRouterResponseTopLogprobsToJSON(
-  createChatCompletionRouterResponseTopLogprobs:
-    CreateChatCompletionRouterResponseTopLogprobs,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterResponseTopLogprobs$outboundSchema.parse(
-      createChatCompletionRouterResponseTopLogprobs,
-    ),
-  );
-}
-export function createChatCompletionRouterResponseTopLogprobsFromJSON(
+export function createChatCompletionRouterChatCompletionsResponseTopLogprobsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionRouterResponseTopLogprobs,
+  CreateChatCompletionRouterChatCompletionsResponseTopLogprobs,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterResponseTopLogprobs$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionRouterResponseTopLogprobs' from JSON`,
+      CreateChatCompletionRouterChatCompletionsResponseTopLogprobs$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsResponseTopLogprobs' from JSON`,
   );
 }
 
@@ -7229,48 +5578,16 @@ export const CreateChatCompletionRefusal$inboundSchema: z.ZodType<
   logprob: z.number(),
   bytes: z.nullable(z.array(z.number())),
   top_logprobs: z.array(
-    z.lazy(() => CreateChatCompletionRouterResponseTopLogprobs$inboundSchema),
+    z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsResponseTopLogprobs$inboundSchema
+    ),
   ),
 }).transform((v) => {
   return remap$(v, {
     "top_logprobs": "topLogprobs",
   });
 });
-/** @internal */
-export type CreateChatCompletionRefusal$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-  top_logprobs: Array<CreateChatCompletionRouterResponseTopLogprobs$Outbound>;
-};
 
-/** @internal */
-export const CreateChatCompletionRefusal$outboundSchema: z.ZodType<
-  CreateChatCompletionRefusal$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRefusal
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  topLogprobs: z.array(
-    z.lazy(() => CreateChatCompletionRouterResponseTopLogprobs$outboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    topLogprobs: "top_logprobs",
-  });
-});
-
-export function createChatCompletionRefusalToJSON(
-  createChatCompletionRefusal: CreateChatCompletionRefusal,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRefusal$outboundSchema.parse(
-      createChatCompletionRefusal,
-    ),
-  );
-}
 export function createChatCompletionRefusalFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionRefusal, SDKValidationError> {
@@ -7288,41 +5605,15 @@ export const CreateChatCompletionLogprobs$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   content: z.nullable(
-    z.array(z.lazy(() => CreateChatCompletionRouterContent$inboundSchema)),
+    z.array(z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsContent$inboundSchema
+    )),
   ),
   refusal: z.nullable(
     z.array(z.lazy(() => CreateChatCompletionRefusal$inboundSchema)),
   ),
 });
-/** @internal */
-export type CreateChatCompletionLogprobs$Outbound = {
-  content: Array<CreateChatCompletionRouterContent$Outbound> | null;
-  refusal: Array<CreateChatCompletionRefusal$Outbound> | null;
-};
 
-/** @internal */
-export const CreateChatCompletionLogprobs$outboundSchema: z.ZodType<
-  CreateChatCompletionLogprobs$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionLogprobs
-> = z.object({
-  content: z.nullable(
-    z.array(z.lazy(() => CreateChatCompletionRouterContent$outboundSchema)),
-  ),
-  refusal: z.nullable(
-    z.array(z.lazy(() => CreateChatCompletionRefusal$outboundSchema)),
-  ),
-});
-
-export function createChatCompletionLogprobsToJSON(
-  createChatCompletionLogprobs: CreateChatCompletionLogprobs,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionLogprobs$outboundSchema.parse(
-      createChatCompletionLogprobs,
-    ),
-  );
-}
 export function createChatCompletionLogprobsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionLogprobs, SDKValidationError> {
@@ -7334,201 +5625,108 @@ export function createChatCompletionLogprobsFromJSON(
 }
 
 /** @internal */
-export const CreateChatCompletionRouterResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterResponse200Type> = z
-    .nativeEnum(CreateChatCompletionRouterResponse200Type);
-/** @internal */
-export const CreateChatCompletionRouterResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterResponse200Type> =
-    CreateChatCompletionRouterResponse200Type$inboundSchema;
+export const CreateChatCompletionRouterChatCompletionsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateChatCompletionRouterChatCompletionsResponse200Type
+  > = z.nativeEnum(CreateChatCompletionRouterChatCompletionsResponse200Type);
 
 /** @internal */
-export const CreateChatCompletionRouterResponseFunction$inboundSchema:
-  z.ZodType<CreateChatCompletionRouterResponseFunction, z.ZodTypeDef, unknown> =
-    z.object({
-      name: z.string().optional(),
-      arguments: z.string().optional(),
-    });
-/** @internal */
-export type CreateChatCompletionRouterResponseFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
-
-/** @internal */
-export const CreateChatCompletionRouterResponseFunction$outboundSchema:
+export const CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema:
   z.ZodType<
-    CreateChatCompletionRouterResponseFunction$Outbound,
+    CreateChatCompletionRouterChatCompletionsResponseFunction,
     z.ZodTypeDef,
-    CreateChatCompletionRouterResponseFunction
+    unknown
   > = z.object({
     name: z.string().optional(),
     arguments: z.string().optional(),
   });
 
-export function createChatCompletionRouterResponseFunctionToJSON(
-  createChatCompletionRouterResponseFunction:
-    CreateChatCompletionRouterResponseFunction,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterResponseFunction$outboundSchema.parse(
-      createChatCompletionRouterResponseFunction,
-    ),
-  );
-}
-export function createChatCompletionRouterResponseFunctionFromJSON(
+export function createChatCompletionRouterChatCompletionsResponseFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionRouterResponseFunction,
+  CreateChatCompletionRouterChatCompletionsResponseFunction,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterResponseFunction$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionRouterResponseFunction' from JSON`,
+      CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsResponseFunction' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateChatCompletionRouterToolCalls$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  index: z.number().optional(),
-  id: z.string().optional(),
-  type: CreateChatCompletionRouterResponse200Type$inboundSchema.optional(),
-  function: z.lazy(() =>
-    CreateChatCompletionRouterResponseFunction$inboundSchema
-  ).optional(),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
+export const CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsToolCalls,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    index: z.number().optional(),
+    id: z.string().optional(),
+    type: CreateChatCompletionRouterChatCompletionsResponse200Type$inboundSchema
+      .optional(),
+    function: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema
+    ).optional(),
+    thought_signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
   });
-});
-/** @internal */
-export type CreateChatCompletionRouterToolCalls$Outbound = {
-  index?: number | undefined;
-  id?: string | undefined;
-  type?: string | undefined;
-  function?: CreateChatCompletionRouterResponseFunction$Outbound | undefined;
-  thought_signature?: string | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionRouterToolCalls$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterToolCalls$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterToolCalls
-> = z.object({
-  index: z.number().optional(),
-  id: z.string().optional(),
-  type: CreateChatCompletionRouterResponse200Type$outboundSchema.optional(),
-  function: z.lazy(() =>
-    CreateChatCompletionRouterResponseFunction$outboundSchema
-  ).optional(),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function createChatCompletionRouterToolCallsToJSON(
-  createChatCompletionRouterToolCalls: CreateChatCompletionRouterToolCalls,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterToolCalls$outboundSchema.parse(
-      createChatCompletionRouterToolCalls,
-    ),
-  );
-}
-export function createChatCompletionRouterToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateChatCompletionRouterToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterToolCalls' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateChatCompletionRouterRole$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRouterRole
-> = z.nativeEnum(CreateChatCompletionRouterRole);
-/** @internal */
-export const CreateChatCompletionRouterRole$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRouterRole
-> = CreateChatCompletionRouterRole$inboundSchema;
-
-/** @internal */
-export const CreateChatCompletionRouterResponseAudio$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterResponseAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().optional(),
-  transcript: z.string().optional(),
-  data: z.string().optional(),
-  expires_at: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
-  });
-});
-/** @internal */
-export type CreateChatCompletionRouterResponseAudio$Outbound = {
-  id?: string | undefined;
-  transcript?: string | undefined;
-  data?: string | undefined;
-  expires_at?: number | undefined;
-};
-
-/** @internal */
-export const CreateChatCompletionRouterResponseAudio$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterResponseAudio$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterResponseAudio
-> = z.object({
-  id: z.string().optional(),
-  transcript: z.string().optional(),
-  data: z.string().optional(),
-  expiresAt: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAt: "expires_at",
-  });
-});
-
-export function createChatCompletionRouterResponseAudioToJSON(
-  createChatCompletionRouterResponseAudio:
-    CreateChatCompletionRouterResponseAudio,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterResponseAudio$outboundSchema.parse(
-      createChatCompletionRouterResponseAudio,
-    ),
-  );
-}
-export function createChatCompletionRouterResponseAudioFromJSON(
+export function createChatCompletionRouterChatCompletionsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionRouterResponseAudio,
+  CreateChatCompletionRouterChatCompletionsToolCalls,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterResponseAudio$inboundSchema.parse(
+      CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateChatCompletionRouterResponseAudio' from JSON`,
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsRole$inboundSchema:
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsRole> = z
+    .nativeEnum(CreateChatCompletionRouterChatCompletionsRole);
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsResponseAudio$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsResponseAudio,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.string().optional(),
+    transcript: z.string().optional(),
+    data: z.string().optional(),
+    expires_at: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+    });
+  });
+
+export function createChatCompletionRouterChatCompletionsResponseAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsResponseAudio,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsResponseAudio$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsResponseAudio' from JSON`,
   );
 }
 
@@ -7538,14 +5736,19 @@ export const Delta$inboundSchema: z.ZodType<Delta, z.ZodTypeDef, unknown> = z
     content: z.nullable(z.string()).optional(),
     refusal: z.nullable(z.string()).optional(),
     tool_calls: z.array(
-      z.lazy(() => CreateChatCompletionRouterToolCalls$inboundSchema),
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema
+      ),
     ).optional(),
-    role: CreateChatCompletionRouterRole$inboundSchema.optional(),
+    role: CreateChatCompletionRouterChatCompletionsRole$inboundSchema
+      .optional(),
     reasoning: z.string().optional(),
     reasoning_signature: z.string().optional(),
     redacted_reasoning: z.string().optional(),
     audio: z.nullable(
-      z.lazy(() => CreateChatCompletionRouterResponseAudio$inboundSchema),
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsResponseAudio$inboundSchema
+      ),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -7554,47 +5757,7 @@ export const Delta$inboundSchema: z.ZodType<Delta, z.ZodTypeDef, unknown> = z
       "redacted_reasoning": "redactedReasoning",
     });
   });
-/** @internal */
-export type Delta$Outbound = {
-  content?: string | null | undefined;
-  refusal?: string | null | undefined;
-  tool_calls?: Array<CreateChatCompletionRouterToolCalls$Outbound> | undefined;
-  role?: string | undefined;
-  reasoning?: string | undefined;
-  reasoning_signature?: string | undefined;
-  redacted_reasoning?: string | undefined;
-  audio?: CreateChatCompletionRouterResponseAudio$Outbound | null | undefined;
-};
 
-/** @internal */
-export const Delta$outboundSchema: z.ZodType<
-  Delta$Outbound,
-  z.ZodTypeDef,
-  Delta
-> = z.object({
-  content: z.nullable(z.string()).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  toolCalls: z.array(
-    z.lazy(() => CreateChatCompletionRouterToolCalls$outboundSchema),
-  ).optional(),
-  role: CreateChatCompletionRouterRole$outboundSchema.optional(),
-  reasoning: z.string().optional(),
-  reasoningSignature: z.string().optional(),
-  redactedReasoning: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterResponseAudio$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    reasoningSignature: "reasoning_signature",
-    redactedReasoning: "redacted_reasoning",
-  });
-});
-
-export function deltaToJSON(delta: Delta): string {
-  return JSON.stringify(Delta$outboundSchema.parse(delta));
-}
 export function deltaFromJSON(
   jsonString: string,
 ): SafeParseResult<Delta, SDKValidationError> {
@@ -7606,70 +5769,44 @@ export function deltaFromJSON(
 }
 
 /** @internal */
-export const CreateChatCompletionRouterChoices$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterChoices,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  finish_reason: z.nullable(CreateChatCompletionFinishReason$inboundSchema),
-  index: z.number().default(0),
-  logprobs: z.nullable(z.lazy(() => CreateChatCompletionLogprobs$inboundSchema))
-    .optional(),
-  delta: z.lazy(() => Delta$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "finish_reason": "finishReason",
+export const CreateChatCompletionRouterChatCompletionsChoices$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsChoices,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    finish_reason: z.nullable(CreateChatCompletionFinishReason$inboundSchema),
+    index: z.number().default(0),
+    logprobs: z.nullable(
+      z.lazy(() => CreateChatCompletionLogprobs$inboundSchema),
+    ).optional(),
+    delta: z.lazy(() => Delta$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "finish_reason": "finishReason",
+    });
   });
-});
-/** @internal */
-export type CreateChatCompletionRouterChoices$Outbound = {
-  finish_reason: string | null;
-  index: number;
-  logprobs?: CreateChatCompletionLogprobs$Outbound | null | undefined;
-  delta: Delta$Outbound;
-};
 
-/** @internal */
-export const CreateChatCompletionRouterChoices$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterChoices$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterChoices
-> = z.object({
-  finishReason: z.nullable(CreateChatCompletionFinishReason$outboundSchema),
-  index: z.number().default(0),
-  logprobs: z.nullable(
-    z.lazy(() => CreateChatCompletionLogprobs$outboundSchema),
-  ).optional(),
-  delta: z.lazy(() => Delta$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    finishReason: "finish_reason",
-  });
-});
-
-export function createChatCompletionRouterChoicesToJSON(
-  createChatCompletionRouterChoices: CreateChatCompletionRouterChoices,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterChoices$outboundSchema.parse(
-      createChatCompletionRouterChoices,
-    ),
-  );
-}
-export function createChatCompletionRouterChoicesFromJSON(
+export function createChatCompletionRouterChatCompletionsChoicesFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterChoices, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsChoices,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CreateChatCompletionRouterChoices$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterChoices' from JSON`,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsChoices$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsChoices' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateChatCompletionRouterPromptTokensDetails$inboundSchema:
+export const CreateChatCompletionRouterChatCompletionsPromptTokensDetails$inboundSchema:
   z.ZodType<
-    CreateChatCompletionRouterPromptTokensDetails,
+    CreateChatCompletionRouterChatCompletionsPromptTokensDetails,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -7683,61 +5820,26 @@ export const CreateChatCompletionRouterPromptTokensDetails$inboundSchema:
       "audio_tokens": "audioTokens",
     });
   });
-/** @internal */
-export type CreateChatCompletionRouterPromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-  cache_creation_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionRouterPromptTokensDetails$outboundSchema:
-  z.ZodType<
-    CreateChatCompletionRouterPromptTokensDetails$Outbound,
-    z.ZodTypeDef,
-    CreateChatCompletionRouterPromptTokensDetails
-  > = z.object({
-    cachedTokens: z.nullable(z.number().int()).optional(),
-    cacheCreationTokens: z.nullable(z.number().int()).optional(),
-    audioTokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      cachedTokens: "cached_tokens",
-      cacheCreationTokens: "cache_creation_tokens",
-      audioTokens: "audio_tokens",
-    });
-  });
-
-export function createChatCompletionRouterPromptTokensDetailsToJSON(
-  createChatCompletionRouterPromptTokensDetails:
-    CreateChatCompletionRouterPromptTokensDetails,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterPromptTokensDetails$outboundSchema.parse(
-      createChatCompletionRouterPromptTokensDetails,
-    ),
-  );
-}
-export function createChatCompletionRouterPromptTokensDetailsFromJSON(
+export function createChatCompletionRouterChatCompletionsPromptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionRouterPromptTokensDetails,
+  CreateChatCompletionRouterChatCompletionsPromptTokensDetails,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterPromptTokensDetails$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateChatCompletionRouterPromptTokensDetails' from JSON`,
+      CreateChatCompletionRouterChatCompletionsPromptTokensDetails$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsPromptTokensDetails' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateChatCompletionRouterCompletionTokensDetails$inboundSchema:
+export const CreateChatCompletionRouterChatCompletionsCompletionTokensDetails$inboundSchema:
   z.ZodType<
-    CreateChatCompletionRouterCompletionTokensDetails,
+    CreateChatCompletionRouterChatCompletionsCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -7753,155 +5855,72 @@ export const CreateChatCompletionRouterCompletionTokensDetails$inboundSchema:
       "audio_tokens": "audioTokens",
     });
   });
-/** @internal */
-export type CreateChatCompletionRouterCompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-  accepted_prediction_tokens?: number | null | undefined;
-  rejected_prediction_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionRouterCompletionTokensDetails$outboundSchema:
-  z.ZodType<
-    CreateChatCompletionRouterCompletionTokensDetails$Outbound,
-    z.ZodTypeDef,
-    CreateChatCompletionRouterCompletionTokensDetails
-  > = z.object({
-    reasoningTokens: z.nullable(z.number()).optional(),
-    acceptedPredictionTokens: z.nullable(z.number()).optional(),
-    rejectedPredictionTokens: z.nullable(z.number()).optional(),
-    audioTokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reasoningTokens: "reasoning_tokens",
-      acceptedPredictionTokens: "accepted_prediction_tokens",
-      rejectedPredictionTokens: "rejected_prediction_tokens",
-      audioTokens: "audio_tokens",
-    });
-  });
-
-export function createChatCompletionRouterCompletionTokensDetailsToJSON(
-  createChatCompletionRouterCompletionTokensDetails:
-    CreateChatCompletionRouterCompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterCompletionTokensDetails$outboundSchema.parse(
-      createChatCompletionRouterCompletionTokensDetails,
-    ),
-  );
-}
-export function createChatCompletionRouterCompletionTokensDetailsFromJSON(
+export function createChatCompletionRouterChatCompletionsCompletionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateChatCompletionRouterCompletionTokensDetails,
+  CreateChatCompletionRouterChatCompletionsCompletionTokensDetails,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterCompletionTokensDetails$inboundSchema.parse(
-        JSON.parse(x),
+      CreateChatCompletionRouterChatCompletionsCompletionTokensDetails$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsCompletionTokensDetails' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsUsage$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsUsage,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsPromptTokensDetails$inboundSchema
       ),
-    `Failed to parse 'CreateChatCompletionRouterCompletionTokensDetails' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateChatCompletionRouterUsage$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterUsage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterPromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() =>
-      CreateChatCompletionRouterCompletionTokensDetails$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
+    ).optional(),
+    completion_tokens_details: z.nullable(
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsCompletionTokensDetails$inboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
   });
-});
-/** @internal */
-export type CreateChatCompletionRouterUsage$Outbound = {
-  completion_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-  prompt_tokens_details?:
-    | CreateChatCompletionRouterPromptTokensDetails$Outbound
-    | null
-    | undefined;
-  completion_tokens_details?:
-    | CreateChatCompletionRouterCompletionTokensDetails$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionRouterUsage$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterUsage$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterUsage
-> = z.object({
-  completionTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-  promptTokensDetails: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterPromptTokensDetails$outboundSchema),
-  ).optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() =>
-      CreateChatCompletionRouterCompletionTokensDetails$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completionTokens: "completion_tokens",
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
-
-export function createChatCompletionRouterUsageToJSON(
-  createChatCompletionRouterUsage: CreateChatCompletionRouterUsage,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterUsage$outboundSchema.parse(
-      createChatCompletionRouterUsage,
-    ),
-  );
-}
-export function createChatCompletionRouterUsageFromJSON(
+export function createChatCompletionRouterChatCompletionsUsageFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterUsage, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsUsage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CreateChatCompletionRouterUsage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterUsage' from JSON`,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsUsage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsUsage' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateChatCompletionRouterObject$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRouterObject
-> = z.nativeEnum(CreateChatCompletionRouterObject);
-/** @internal */
-export const CreateChatCompletionRouterObject$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRouterObject
-> = CreateChatCompletionRouterObject$inboundSchema;
+export const CreateChatCompletionRouterChatCompletionsObject$inboundSchema:
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsObject> = z
+    .nativeEnum(CreateChatCompletionRouterChatCompletionsObject);
 
 /** @internal */
 export const CreateChatCompletionData$inboundSchema: z.ZodType<
@@ -7911,60 +5930,23 @@ export const CreateChatCompletionData$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   choices: z.array(
-    z.lazy(() => CreateChatCompletionRouterChoices$inboundSchema),
+    z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsChoices$inboundSchema
+    ),
   ),
   created: z.number(),
   model: z.string(),
   system_fingerprint: z.nullable(z.string()).optional(),
-  usage: z.nullable(z.lazy(() => CreateChatCompletionRouterUsage$inboundSchema))
-    .optional(),
-  object: CreateChatCompletionRouterObject$inboundSchema,
+  usage: z.nullable(
+    z.lazy(() => CreateChatCompletionRouterChatCompletionsUsage$inboundSchema),
+  ).optional(),
+  object: CreateChatCompletionRouterChatCompletionsObject$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "system_fingerprint": "systemFingerprint",
   });
 });
-/** @internal */
-export type CreateChatCompletionData$Outbound = {
-  id: string;
-  choices: Array<CreateChatCompletionRouterChoices$Outbound>;
-  created: number;
-  model: string;
-  system_fingerprint?: string | null | undefined;
-  usage?: CreateChatCompletionRouterUsage$Outbound | null | undefined;
-  object: string;
-};
 
-/** @internal */
-export const CreateChatCompletionData$outboundSchema: z.ZodType<
-  CreateChatCompletionData$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionData
-> = z.object({
-  id: z.string(),
-  choices: z.array(
-    z.lazy(() => CreateChatCompletionRouterChoices$outboundSchema),
-  ),
-  created: z.number(),
-  model: z.string(),
-  systemFingerprint: z.nullable(z.string()).optional(),
-  usage: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterUsage$outboundSchema),
-  ).optional(),
-  object: CreateChatCompletionRouterObject$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    systemFingerprint: "system_fingerprint",
-  });
-});
-
-export function createChatCompletionDataToJSON(
-  createChatCompletionData: CreateChatCompletionData,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionData$outboundSchema.parse(createChatCompletionData),
-  );
-}
 export function createChatCompletionDataFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionData, SDKValidationError> {
@@ -7976,115 +5958,73 @@ export function createChatCompletionDataFromJSON(
 }
 
 /** @internal */
-export const CreateChatCompletionRouterResponseBody$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.string().optional().transform((v, ctx) => {
-    if (v === undefined) return undefined;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => CreateChatCompletionData$inboundSchema).optional()),
-});
-/** @internal */
-export type CreateChatCompletionRouterResponseBody$Outbound = {
-  data?: CreateChatCompletionData$Outbound | undefined;
-};
+export const CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    data: z.string().optional().transform((v, ctx) => {
+      if (v === undefined) return undefined;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(z.lazy(() => CreateChatCompletionData$inboundSchema).optional()),
+  });
 
-/** @internal */
-export const CreateChatCompletionRouterResponseBody$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterResponseBody
-> = z.object({
-  data: z.lazy(() => CreateChatCompletionData$outboundSchema).optional(),
-});
-
-export function createChatCompletionRouterResponseBodyToJSON(
-  createChatCompletionRouterResponseBody:
-    CreateChatCompletionRouterResponseBody,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterResponseBody$outboundSchema.parse(
-      createChatCompletionRouterResponseBody,
-    ),
-  );
-}
-export function createChatCompletionRouterResponseBodyFromJSON(
+export function createChatCompletionRouterChatCompletionsResponseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterResponseBody, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsResponseBody,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterResponseBody' from JSON`,
+      CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsResponseBody' from JSON`,
   );
 }
 
 /** @internal */
 export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
   z.nativeEnum(FinishReason);
-/** @internal */
-export const FinishReason$outboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  FinishReason$inboundSchema;
 
 /** @internal */
-export const CreateChatCompletionRouterResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterResponseType> = z.nativeEnum(
-    CreateChatCompletionRouterResponseType,
-  );
-/** @internal */
-export const CreateChatCompletionRouterResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterResponseType> =
-    CreateChatCompletionRouterResponseType$inboundSchema;
+export const CreateChatCompletionRouterChatCompletionsResponseType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateChatCompletionRouterChatCompletionsResponseType
+  > = z.nativeEnum(CreateChatCompletionRouterChatCompletionsResponseType);
 
 /** @internal */
-export const CreateChatCompletionRouterFunction$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-/** @internal */
-export type CreateChatCompletionRouterFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
+export const CreateChatCompletionRouterChatCompletionsFunction$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsFunction,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  });
 
-/** @internal */
-export const CreateChatCompletionRouterFunction$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterFunction$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function createChatCompletionRouterFunctionToJSON(
-  createChatCompletionRouterFunction: CreateChatCompletionRouterFunction,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterFunction$outboundSchema.parse(
-      createChatCompletionRouterFunction,
-    ),
-  );
-}
-export function createChatCompletionRouterFunctionFromJSON(
+export function createChatCompletionRouterChatCompletionsFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterFunction, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsFunction,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      CreateChatCompletionRouterFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterFunction' from JSON`,
+      CreateChatCompletionRouterChatCompletionsFunction$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsFunction' from JSON`,
   );
 }
 
@@ -8096,51 +6036,18 @@ export const CreateChatCompletionToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   index: z.number().optional(),
   id: z.string().optional(),
-  type: CreateChatCompletionRouterResponseType$inboundSchema.optional(),
-  function: z.lazy(() => CreateChatCompletionRouterFunction$inboundSchema)
+  type: CreateChatCompletionRouterChatCompletionsResponseType$inboundSchema
     .optional(),
+  function: z.lazy(() =>
+    CreateChatCompletionRouterChatCompletionsFunction$inboundSchema
+  ).optional(),
   thought_signature: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
   });
 });
-/** @internal */
-export type CreateChatCompletionToolCalls$Outbound = {
-  index?: number | undefined;
-  id?: string | undefined;
-  type?: string | undefined;
-  function?: CreateChatCompletionRouterFunction$Outbound | undefined;
-  thought_signature?: string | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionToolCalls$outboundSchema: z.ZodType<
-  CreateChatCompletionToolCalls$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionToolCalls
-> = z.object({
-  index: z.number().optional(),
-  id: z.string().optional(),
-  type: CreateChatCompletionRouterResponseType$outboundSchema.optional(),
-  function: z.lazy(() => CreateChatCompletionRouterFunction$outboundSchema)
-    .optional(),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function createChatCompletionToolCallsToJSON(
-  createChatCompletionToolCalls: CreateChatCompletionToolCalls,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionToolCalls$outboundSchema.parse(
-      createChatCompletionToolCalls,
-    ),
-  );
-}
 export function createChatCompletionToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionToolCalls, SDKValidationError> {
@@ -8155,66 +6062,37 @@ export function createChatCompletionToolCallsFromJSON(
 export const CreateChatCompletionRole$inboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionRole
 > = z.nativeEnum(CreateChatCompletionRole);
-/** @internal */
-export const CreateChatCompletionRole$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionRole
-> = CreateChatCompletionRole$inboundSchema;
 
 /** @internal */
-export const CreateChatCompletionRouterAudio$inboundSchema: z.ZodType<
-  CreateChatCompletionRouterAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  expires_at: z.number().int(),
-  data: z.string(),
-  transcript: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
+export const CreateChatCompletionRouterChatCompletionsAudio$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsAudio,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.string(),
+    expires_at: z.number().int(),
+    data: z.string(),
+    transcript: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+    });
   });
-});
-/** @internal */
-export type CreateChatCompletionRouterAudio$Outbound = {
-  id: string;
-  expires_at: number;
-  data: string;
-  transcript: string;
-};
 
-/** @internal */
-export const CreateChatCompletionRouterAudio$outboundSchema: z.ZodType<
-  CreateChatCompletionRouterAudio$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionRouterAudio
-> = z.object({
-  id: z.string(),
-  expiresAt: z.number().int(),
-  data: z.string(),
-  transcript: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAt: "expires_at",
-  });
-});
-
-export function createChatCompletionRouterAudioToJSON(
-  createChatCompletionRouterAudio: CreateChatCompletionRouterAudio,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRouterAudio$outboundSchema.parse(
-      createChatCompletionRouterAudio,
-    ),
-  );
-}
-export function createChatCompletionRouterAudioFromJSON(
+export function createChatCompletionRouterChatCompletionsAudioFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChatCompletionRouterAudio, SDKValidationError> {
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsAudio,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => CreateChatCompletionRouterAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChatCompletionRouterAudio' from JSON`,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsAudio$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsAudio' from JSON`,
   );
 }
 
@@ -8232,8 +6110,9 @@ export const CreateChatCompletionMessage$inboundSchema: z.ZodType<
   reasoning: z.nullable(z.string()).optional(),
   reasoning_signature: z.nullable(z.string()).optional(),
   redacted_reasoning: z.string().optional(),
-  audio: z.nullable(z.lazy(() => CreateChatCompletionRouterAudio$inboundSchema))
-    .optional(),
+  audio: z.nullable(
+    z.lazy(() => CreateChatCompletionRouterChatCompletionsAudio$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -8241,52 +6120,7 @@ export const CreateChatCompletionMessage$inboundSchema: z.ZodType<
     "redacted_reasoning": "redactedReasoning",
   });
 });
-/** @internal */
-export type CreateChatCompletionMessage$Outbound = {
-  content?: string | null | undefined;
-  refusal?: string | null | undefined;
-  tool_calls?: Array<CreateChatCompletionToolCalls$Outbound> | undefined;
-  role?: string | undefined;
-  reasoning?: string | null | undefined;
-  reasoning_signature?: string | null | undefined;
-  redacted_reasoning?: string | undefined;
-  audio?: CreateChatCompletionRouterAudio$Outbound | null | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionMessage$outboundSchema: z.ZodType<
-  CreateChatCompletionMessage$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionMessage
-> = z.object({
-  content: z.nullable(z.string()).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  toolCalls: z.array(z.lazy(() => CreateChatCompletionToolCalls$outboundSchema))
-    .optional(),
-  role: CreateChatCompletionRole$outboundSchema.optional(),
-  reasoning: z.nullable(z.string()).optional(),
-  reasoningSignature: z.nullable(z.string()).optional(),
-  redactedReasoning: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterAudio$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    reasoningSignature: "reasoning_signature",
-    redactedReasoning: "redacted_reasoning",
-  });
-});
-
-export function createChatCompletionMessageToJSON(
-  createChatCompletionMessage: CreateChatCompletionMessage,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionMessage$outboundSchema.parse(
-      createChatCompletionMessage,
-    ),
-  );
-}
 export function createChatCompletionMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionMessage, SDKValidationError> {
@@ -8307,27 +6141,7 @@ export const TopLogprobs$inboundSchema: z.ZodType<
   logprob: z.number(),
   bytes: z.nullable(z.array(z.number())),
 });
-/** @internal */
-export type TopLogprobs$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-};
 
-/** @internal */
-export const TopLogprobs$outboundSchema: z.ZodType<
-  TopLogprobs$Outbound,
-  z.ZodTypeDef,
-  TopLogprobs
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
-
-export function topLogprobsToJSON(topLogprobs: TopLogprobs): string {
-  return JSON.stringify(TopLogprobs$outboundSchema.parse(topLogprobs));
-}
 export function topLogprobsFromJSON(
   jsonString: string,
 ): SafeParseResult<TopLogprobs, SDKValidationError> {
@@ -8353,39 +6167,7 @@ export const CreateChatCompletionContent$inboundSchema: z.ZodType<
     "top_logprobs": "topLogprobs",
   });
 });
-/** @internal */
-export type CreateChatCompletionContent$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-  top_logprobs: Array<TopLogprobs$Outbound>;
-};
 
-/** @internal */
-export const CreateChatCompletionContent$outboundSchema: z.ZodType<
-  CreateChatCompletionContent$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionContent
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  topLogprobs: z.array(z.lazy(() => TopLogprobs$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    topLogprobs: "top_logprobs",
-  });
-});
-
-export function createChatCompletionContentToJSON(
-  createChatCompletionContent: CreateChatCompletionContent,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionContent$outboundSchema.parse(
-      createChatCompletionContent,
-    ),
-  );
-}
 export function createChatCompletionContentFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionContent, SDKValidationError> {
@@ -8406,33 +6188,7 @@ export const CreateChatCompletionTopLogprobs$inboundSchema: z.ZodType<
   logprob: z.number(),
   bytes: z.nullable(z.array(z.number())),
 });
-/** @internal */
-export type CreateChatCompletionTopLogprobs$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-};
 
-/** @internal */
-export const CreateChatCompletionTopLogprobs$outboundSchema: z.ZodType<
-  CreateChatCompletionTopLogprobs$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionTopLogprobs
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
-
-export function createChatCompletionTopLogprobsToJSON(
-  createChatCompletionTopLogprobs: CreateChatCompletionTopLogprobs,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionTopLogprobs$outboundSchema.parse(
-      createChatCompletionTopLogprobs,
-    ),
-  );
-}
 export function createChatCompletionTopLogprobsFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionTopLogprobs, SDKValidationError> {
@@ -8457,35 +6213,7 @@ export const Refusal$inboundSchema: z.ZodType<Refusal, z.ZodTypeDef, unknown> =
       "top_logprobs": "topLogprobs",
     });
   });
-/** @internal */
-export type Refusal$Outbound = {
-  token: string;
-  logprob: number;
-  bytes: Array<number> | null;
-  top_logprobs: Array<CreateChatCompletionTopLogprobs$Outbound>;
-};
 
-/** @internal */
-export const Refusal$outboundSchema: z.ZodType<
-  Refusal$Outbound,
-  z.ZodTypeDef,
-  Refusal
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  topLogprobs: z.array(
-    z.lazy(() => CreateChatCompletionTopLogprobs$outboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    topLogprobs: "top_logprobs",
-  });
-});
-
-export function refusalToJSON(refusal: Refusal): string {
-  return JSON.stringify(Refusal$outboundSchema.parse(refusal));
-}
 export function refusalFromJSON(
   jsonString: string,
 ): SafeParseResult<Refusal, SDKValidationError> {
@@ -8507,27 +6235,7 @@ export const Logprobs$inboundSchema: z.ZodType<
   ),
   refusal: z.nullable(z.array(z.lazy(() => Refusal$inboundSchema))),
 });
-/** @internal */
-export type Logprobs$Outbound = {
-  content: Array<CreateChatCompletionContent$Outbound> | null;
-  refusal: Array<Refusal$Outbound> | null;
-};
 
-/** @internal */
-export const Logprobs$outboundSchema: z.ZodType<
-  Logprobs$Outbound,
-  z.ZodTypeDef,
-  Logprobs
-> = z.object({
-  content: z.nullable(
-    z.array(z.lazy(() => CreateChatCompletionContent$outboundSchema)),
-  ),
-  refusal: z.nullable(z.array(z.lazy(() => Refusal$outboundSchema))),
-});
-
-export function logprobsToJSON(logprobs: Logprobs): string {
-  return JSON.stringify(Logprobs$outboundSchema.parse(logprobs));
-}
 export function logprobsFromJSON(
   jsonString: string,
 ): SafeParseResult<Logprobs, SDKValidationError> {
@@ -8553,39 +6261,7 @@ export const CreateChatCompletionChoices$inboundSchema: z.ZodType<
     "finish_reason": "finishReason",
   });
 });
-/** @internal */
-export type CreateChatCompletionChoices$Outbound = {
-  finish_reason: string | null;
-  index: number;
-  message: CreateChatCompletionMessage$Outbound;
-  logprobs?: Logprobs$Outbound | null | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionChoices$outboundSchema: z.ZodType<
-  CreateChatCompletionChoices$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionChoices
-> = z.object({
-  finishReason: z.nullable(FinishReason$outboundSchema),
-  index: z.number().default(0),
-  message: z.lazy(() => CreateChatCompletionMessage$outboundSchema),
-  logprobs: z.nullable(z.lazy(() => Logprobs$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    finishReason: "finish_reason",
-  });
-});
-
-export function createChatCompletionChoicesToJSON(
-  createChatCompletionChoices: CreateChatCompletionChoices,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionChoices$outboundSchema.parse(
-      createChatCompletionChoices,
-    ),
-  );
-}
 export function createChatCompletionChoicesFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionChoices, SDKValidationError> {
@@ -8612,40 +6288,7 @@ export const CreateChatCompletionPromptTokensDetails$inboundSchema: z.ZodType<
     "audio_tokens": "audioTokens",
   });
 });
-/** @internal */
-export type CreateChatCompletionPromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-  cache_creation_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionPromptTokensDetails$outboundSchema: z.ZodType<
-  CreateChatCompletionPromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionPromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function createChatCompletionPromptTokensDetailsToJSON(
-  createChatCompletionPromptTokensDetails:
-    CreateChatCompletionPromptTokensDetails,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionPromptTokensDetails$outboundSchema.parse(
-      createChatCompletionPromptTokensDetails,
-    ),
-  );
-}
 export function createChatCompletionPromptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8681,44 +6324,7 @@ export const CreateChatCompletionCompletionTokensDetails$inboundSchema:
       "audio_tokens": "audioTokens",
     });
   });
-/** @internal */
-export type CreateChatCompletionCompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-  accepted_prediction_tokens?: number | null | undefined;
-  rejected_prediction_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionCompletionTokensDetails$outboundSchema:
-  z.ZodType<
-    CreateChatCompletionCompletionTokensDetails$Outbound,
-    z.ZodTypeDef,
-    CreateChatCompletionCompletionTokensDetails
-  > = z.object({
-    reasoningTokens: z.nullable(z.number()).optional(),
-    acceptedPredictionTokens: z.nullable(z.number()).optional(),
-    rejectedPredictionTokens: z.nullable(z.number()).optional(),
-    audioTokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reasoningTokens: "reasoning_tokens",
-      acceptedPredictionTokens: "accepted_prediction_tokens",
-      rejectedPredictionTokens: "rejected_prediction_tokens",
-      audioTokens: "audio_tokens",
-    });
-  });
-
-export function createChatCompletionCompletionTokensDetailsToJSON(
-  createChatCompletionCompletionTokensDetails:
-    CreateChatCompletionCompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionCompletionTokensDetails$outboundSchema.parse(
-      createChatCompletionCompletionTokensDetails,
-    ),
-  );
-}
 export function createChatCompletionCompletionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -8759,53 +6365,7 @@ export const CreateChatCompletionUsage$inboundSchema: z.ZodType<
     "completion_tokens_details": "completionTokensDetails",
   });
 });
-/** @internal */
-export type CreateChatCompletionUsage$Outbound = {
-  completion_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-  prompt_tokens_details?:
-    | CreateChatCompletionPromptTokensDetails$Outbound
-    | null
-    | undefined;
-  completion_tokens_details?:
-    | CreateChatCompletionCompletionTokensDetails$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const CreateChatCompletionUsage$outboundSchema: z.ZodType<
-  CreateChatCompletionUsage$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionUsage
-> = z.object({
-  completionTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-  promptTokensDetails: z.nullable(
-    z.lazy(() => CreateChatCompletionPromptTokensDetails$outboundSchema),
-  ).optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() => CreateChatCompletionCompletionTokensDetails$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completionTokens: "completion_tokens",
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
-
-export function createChatCompletionUsageToJSON(
-  createChatCompletionUsage: CreateChatCompletionUsage,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionUsage$outboundSchema.parse(createChatCompletionUsage),
-  );
-}
 export function createChatCompletionUsageFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionUsage, SDKValidationError> {
@@ -8820,10 +6380,6 @@ export function createChatCompletionUsageFromJSON(
 export const CreateChatCompletionObject$inboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionObject
 > = z.nativeEnum(CreateChatCompletionObject);
-/** @internal */
-export const CreateChatCompletionObject$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionObject
-> = CreateChatCompletionObject$inboundSchema;
 
 /** @internal */
 export const CreateChatCompletionResponseBody$inboundSchema: z.ZodType<
@@ -8844,46 +6400,7 @@ export const CreateChatCompletionResponseBody$inboundSchema: z.ZodType<
     "system_fingerprint": "systemFingerprint",
   });
 });
-/** @internal */
-export type CreateChatCompletionResponseBody$Outbound = {
-  id: string;
-  choices: Array<CreateChatCompletionChoices$Outbound>;
-  created: number;
-  model: string;
-  system_fingerprint?: string | null | undefined;
-  usage?: CreateChatCompletionUsage$Outbound | null | undefined;
-  object: string;
-};
 
-/** @internal */
-export const CreateChatCompletionResponseBody$outboundSchema: z.ZodType<
-  CreateChatCompletionResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionResponseBody
-> = z.object({
-  id: z.string(),
-  choices: z.array(z.lazy(() => CreateChatCompletionChoices$outboundSchema)),
-  created: z.number(),
-  model: z.string(),
-  systemFingerprint: z.nullable(z.string()).optional(),
-  usage: z.nullable(z.lazy(() => CreateChatCompletionUsage$outboundSchema))
-    .optional(),
-  object: CreateChatCompletionObject$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    systemFingerprint: "system_fingerprint",
-  });
-});
-
-export function createChatCompletionResponseBodyToJSON(
-  createChatCompletionResponseBody: CreateChatCompletionResponseBody,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionResponseBody$outboundSchema.parse(
-      createChatCompletionResponseBody,
-    ),
-  );
-}
 export function createChatCompletionResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionResponseBody, SDKValidationError> {
@@ -8907,36 +6424,13 @@ export const CreateChatCompletionResponse$inboundSchema: z.ZodType<
         if (rawEvent.data === "[DONE]") return { done: true };
         return {
           value: z.lazy(() =>
-            CreateChatCompletionRouterResponseBody$inboundSchema
+            CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema
           ).parse(rawEvent),
         };
       });
     }),
 ]);
-/** @internal */
-export type CreateChatCompletionResponse$Outbound =
-  | CreateChatCompletionResponseBody$Outbound
-  | never;
 
-/** @internal */
-export const CreateChatCompletionResponse$outboundSchema: z.ZodType<
-  CreateChatCompletionResponse$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionResponse
-> = z.union([
-  z.lazy(() => CreateChatCompletionResponseBody$outboundSchema),
-  z.never(),
-]);
-
-export function createChatCompletionResponseToJSON(
-  createChatCompletionResponse: CreateChatCompletionResponse,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionResponse$outboundSchema.parse(
-      createChatCompletionResponse,
-    ),
-  );
-}
 export function createChatCompletionResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateChatCompletionResponse, SDKValidationError> {

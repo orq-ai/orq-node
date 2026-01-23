@@ -11,10 +11,10 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ## Supported Types
 
-### `operations.DeploymentGetConfigResponseFormat1`
+### `operations.ResponseFormat1`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat1 = {
+const value: operations.ResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -26,37 +26,37 @@ const value: operations.DeploymentGetConfigResponseFormat1 = {
 };
 ```
 
-### `operations.DeploymentGetConfigResponseFormat2`
+### `operations.ResponseFormat2`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat2 = {
+const value: operations.ResponseFormat2 = {
   type: "json_object",
 };
 ```
 
-### `operations.DeploymentGetConfigResponseFormat3`
+### `operations.ResponseFormat3`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat3 = {
+const value: operations.ResponseFormat3 = {
   type: "text",
 };
 ```
 
-### `operations.DeploymentGetConfigResponseFormat4`
+### `operations.ResponseFormat4`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat4 = "pcm";
+const value: operations.ResponseFormat4 = "opus";
 ```
 
-### `operations.DeploymentGetConfigResponseFormat5`
+### `operations.ResponseFormat5`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat5 = "base64_json";
+const value: operations.ResponseFormat5 = "base64_json";
 ```
 
-### `operations.DeploymentGetConfigResponseFormat6`
+### `operations.ResponseFormat6`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat6 = "json";
+const value: operations.ResponseFormat6 = "json";
 ```
 

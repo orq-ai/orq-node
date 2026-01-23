@@ -12,17 +12,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListConversationsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+   * Maximum number of conversations to return. Range: 1-100. Default: 10.
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `startingAfter` is a conversation ID that defines your place in the list.
+   * Pagination cursor. Returns conversations created after the specified conversation ID.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `endingBefore` is a conversation ID that defines your place in the list.
+   * Pagination cursor. Returns conversations created before the specified conversation ID.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter by parent entity. When specified, returns only conversations associated with this entity. When omitted, returns standalone conversations.
+   */
+  entityId?: string | undefined;
 };
 
 export const ListConversationsObject = {
@@ -42,20 +46,11 @@ export type ListConversationsResponseBody = {
 };
 
 /** @internal */
-export const ListConversationsRequest$inboundSchema: z.ZodType<
-  ListConversationsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-});
-/** @internal */
 export type ListConversationsRequest$Outbound = {
   limit?: number | undefined;
   startingAfter?: string | undefined;
   endingBefore?: string | undefined;
+  entityId?: string | undefined;
 };
 
 /** @internal */
@@ -67,6 +62,7 @@ export const ListConversationsRequest$outboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  entityId: z.string().optional(),
 });
 
 export function listConversationsRequestToJSON(
@@ -76,24 +72,11 @@ export function listConversationsRequestToJSON(
     ListConversationsRequest$outboundSchema.parse(listConversationsRequest),
   );
 }
-export function listConversationsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListConversationsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListConversationsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListConversationsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListConversationsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListConversationsObject
 > = z.nativeEnum(ListConversationsObject);
-/** @internal */
-export const ListConversationsObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListConversationsObject
-> = ListConversationsObject$inboundSchema;
 
 /** @internal */
 export const ListConversationsResponseBody$inboundSchema: z.ZodType<
@@ -109,37 +92,7 @@ export const ListConversationsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListConversationsResponseBody$Outbound = {
-  object: string;
-  data: Array<components.ConversationResponse$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListConversationsResponseBody$outboundSchema: z.ZodType<
-  ListConversationsResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListConversationsResponseBody
-> = z.object({
-  object: ListConversationsObject$outboundSchema,
-  data: z.array(components.ConversationResponse$outboundSchema),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listConversationsResponseBodyToJSON(
-  listConversationsResponseBody: ListConversationsResponseBody,
-): string {
-  return JSON.stringify(
-    ListConversationsResponseBody$outboundSchema.parse(
-      listConversationsResponseBody,
-    ),
-  );
-}
 export function listConversationsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListConversationsResponseBody, SDKValidationError> {

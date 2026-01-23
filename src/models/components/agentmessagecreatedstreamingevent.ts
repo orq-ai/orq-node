@@ -7,35 +7,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DataPart,
-  DataPart$inboundSchema,
-  DataPart$Outbound,
-  DataPart$outboundSchema,
-} from "./datapart.js";
-import {
-  FilePart,
-  FilePart$inboundSchema,
-  FilePart$Outbound,
-  FilePart$outboundSchema,
-} from "./filepart.js";
-import {
-  TextPart,
-  TextPart$inboundSchema,
-  TextPart$Outbound,
-  TextPart$outboundSchema,
-} from "./textpart.js";
-import {
-  ToolCallPart,
-  ToolCallPart$inboundSchema,
-  ToolCallPart$Outbound,
-  ToolCallPart$outboundSchema,
-} from "./toolcallpart.js";
+import { DataPart, DataPart$inboundSchema } from "./datapart.js";
+import { ErrorPart, ErrorPart$inboundSchema } from "./errorpart.js";
+import { FilePart, FilePart$inboundSchema } from "./filepart.js";
+import { TextPart, TextPart$inboundSchema } from "./textpart.js";
+import { ToolCallPart, ToolCallPart$inboundSchema } from "./toolcallpart.js";
 import {
   ToolResultPart,
   ToolResultPart$inboundSchema,
-  ToolResultPart$Outbound,
-  ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
 export const AgentMessageCreatedStreamingEventRole = {
@@ -48,6 +27,7 @@ export type AgentMessageCreatedStreamingEventRole = ClosedEnum<
 
 export type AgentMessageCreatedStreamingEventParts =
   | TextPart
+  | ErrorPart
   | DataPart
   | FilePart
   | ToolCallPart
@@ -56,7 +36,9 @@ export type AgentMessageCreatedStreamingEventParts =
 export type Message = {
   messageId?: string | undefined;
   role: AgentMessageCreatedStreamingEventRole;
-  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
+  parts: Array<
+    TextPart | ErrorPart | DataPart | FilePart | ToolCallPart | ToolResultPart
+  >;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -84,10 +66,6 @@ export const AgentMessageCreatedStreamingEventRole$inboundSchema:
   z.ZodNativeEnum<typeof AgentMessageCreatedStreamingEventRole> = z.nativeEnum(
     AgentMessageCreatedStreamingEventRole,
   );
-/** @internal */
-export const AgentMessageCreatedStreamingEventRole$outboundSchema:
-  z.ZodNativeEnum<typeof AgentMessageCreatedStreamingEventRole> =
-    AgentMessageCreatedStreamingEventRole$inboundSchema;
 
 /** @internal */
 export const AgentMessageCreatedStreamingEventParts$inboundSchema: z.ZodType<
@@ -96,42 +74,13 @@ export const AgentMessageCreatedStreamingEventParts$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   TextPart$inboundSchema,
+  ErrorPart$inboundSchema,
   DataPart$inboundSchema,
   FilePart$inboundSchema,
   ToolCallPart$inboundSchema,
   ToolResultPart$inboundSchema,
 ]);
-/** @internal */
-export type AgentMessageCreatedStreamingEventParts$Outbound =
-  | TextPart$Outbound
-  | DataPart$Outbound
-  | FilePart$Outbound
-  | ToolCallPart$Outbound
-  | ToolResultPart$Outbound;
 
-/** @internal */
-export const AgentMessageCreatedStreamingEventParts$outboundSchema: z.ZodType<
-  AgentMessageCreatedStreamingEventParts$Outbound,
-  z.ZodTypeDef,
-  AgentMessageCreatedStreamingEventParts
-> = z.union([
-  TextPart$outboundSchema,
-  DataPart$outboundSchema,
-  FilePart$outboundSchema,
-  ToolCallPart$outboundSchema,
-  ToolResultPart$outboundSchema,
-]);
-
-export function agentMessageCreatedStreamingEventPartsToJSON(
-  agentMessageCreatedStreamingEventParts:
-    AgentMessageCreatedStreamingEventParts,
-): string {
-  return JSON.stringify(
-    AgentMessageCreatedStreamingEventParts$outboundSchema.parse(
-      agentMessageCreatedStreamingEventParts,
-    ),
-  );
-}
 export function agentMessageCreatedStreamingEventPartsFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentMessageCreatedStreamingEventParts, SDKValidationError> {
@@ -151,6 +100,7 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
     parts: z.array(
       z.union([
         TextPart$inboundSchema,
+        ErrorPart$inboundSchema,
         DataPart$inboundSchema,
         FilePart$inboundSchema,
         ToolCallPart$inboundSchema,
@@ -159,43 +109,7 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
     ),
     metadata: z.record(z.any()).optional(),
   });
-/** @internal */
-export type Message$Outbound = {
-  messageId?: string | undefined;
-  role: string;
-  parts: Array<
-    | TextPart$Outbound
-    | DataPart$Outbound
-    | FilePart$Outbound
-    | ToolCallPart$Outbound
-    | ToolResultPart$Outbound
-  >;
-  metadata?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const Message$outboundSchema: z.ZodType<
-  Message$Outbound,
-  z.ZodTypeDef,
-  Message
-> = z.object({
-  messageId: z.string().optional(),
-  role: AgentMessageCreatedStreamingEventRole$outboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$outboundSchema,
-      DataPart$outboundSchema,
-      FilePart$outboundSchema,
-      ToolCallPart$outboundSchema,
-      ToolResultPart$outboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function messageToJSON(message: Message): string {
-  return JSON.stringify(Message$outboundSchema.parse(message));
-}
 export function messageFromJSON(
   jsonString: string,
 ): SafeParseResult<Message, SDKValidationError> {
@@ -217,35 +131,7 @@ export const AgentMessageCreatedStreamingEventData$inboundSchema: z.ZodType<
   parentId: z.string(),
   message: z.array(z.lazy(() => Message$inboundSchema)),
 });
-/** @internal */
-export type AgentMessageCreatedStreamingEventData$Outbound = {
-  workflowRunId: string;
-  spanId: string;
-  parentId: string;
-  message: Array<Message$Outbound>;
-};
 
-/** @internal */
-export const AgentMessageCreatedStreamingEventData$outboundSchema: z.ZodType<
-  AgentMessageCreatedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentMessageCreatedStreamingEventData
-> = z.object({
-  workflowRunId: z.string(),
-  spanId: z.string(),
-  parentId: z.string(),
-  message: z.array(z.lazy(() => Message$outboundSchema)),
-});
-
-export function agentMessageCreatedStreamingEventDataToJSON(
-  agentMessageCreatedStreamingEventData: AgentMessageCreatedStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentMessageCreatedStreamingEventData$outboundSchema.parse(
-      agentMessageCreatedStreamingEventData,
-    ),
-  );
-}
 export function agentMessageCreatedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentMessageCreatedStreamingEventData, SDKValidationError> {
@@ -267,33 +153,7 @@ export const AgentMessageCreatedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => AgentMessageCreatedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type AgentMessageCreatedStreamingEvent$Outbound = {
-  type: "event.agents.message-created";
-  timestamp: string;
-  data: AgentMessageCreatedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const AgentMessageCreatedStreamingEvent$outboundSchema: z.ZodType<
-  AgentMessageCreatedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  AgentMessageCreatedStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.message-created"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentMessageCreatedStreamingEventData$outboundSchema),
-});
-
-export function agentMessageCreatedStreamingEventToJSON(
-  agentMessageCreatedStreamingEvent: AgentMessageCreatedStreamingEvent,
-): string {
-  return JSON.stringify(
-    AgentMessageCreatedStreamingEvent$outboundSchema.parse(
-      agentMessageCreatedStreamingEvent,
-    ),
-  );
-}
 export function agentMessageCreatedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentMessageCreatedStreamingEvent, SDKValidationError> {

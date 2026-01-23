@@ -110,8 +110,8 @@ async function run() {
         },
       ],
       model: "openai/gpt-4o",
-      temperature: 0.7,
       maxTokens: 1000,
+      temperature: 0.7,
     },
     path: "Default",
   });
@@ -151,8 +151,8 @@ async function run() {
         },
       ],
       model: "openai/gpt-4o",
-      temperature: 0.7,
       maxTokens: 1000,
+      temperature: 0.7,
     },
     path: "Default",
   });
@@ -277,7 +277,6 @@ async function run() {
   const result = await orq.prompts.update({
     id: "<id>",
     requestBody: {
-      path: "Default",
       prompt: {
         messages: [
           {
@@ -292,6 +291,7 @@ async function run() {
         model: "anthropic/claude-3-5-sonnet-20241022",
         temperature: 0.5,
       },
+      path: "Default",
     },
   });
 
@@ -319,7 +319,6 @@ async function run() {
   const res = await promptsUpdate(orq, {
     id: "<id>",
     requestBody: {
-      path: "Default",
       prompt: {
         messages: [
           {
@@ -334,6 +333,7 @@ async function run() {
         model: "anthropic/claude-3-5-sonnet-20241022",
         temperature: 0.5,
       },
+      path: "Default",
     },
   });
   if (res.ok) {
@@ -436,9 +436,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                      | Status Code                     | Content Type                    |
+| ------------------------------- | ------------------------------- | ------------------------------- |
+| errors.DeletePromptResponseBody | 404                             | application/json                |
+| errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
 ## listVersions
 

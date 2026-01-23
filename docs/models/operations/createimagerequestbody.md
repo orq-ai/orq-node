@@ -25,6 +25,22 @@ let value: CreateImageRequestBody = {
         model: "openai/gpt-4o-mini",
       },
     ],
+    identity: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
     contact: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
@@ -45,18 +61,19 @@ let value: CreateImageRequestBody = {
       ttl: 3600,
       type: "exact_match",
     },
-    loadBalancer: [
-      {
-        type: "weight_based",
-        model: "openai/gpt-4o",
-        weight: 0.7,
-      },
-      {
-        type: "weight_based",
-        model: "openai/gpt-4o",
-        weight: 0.7,
-      },
-    ],
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+        {
+          model: "anthropic/claude-3-5-sonnet",
+          weight: 0.3,
+        },
+      ],
+    },
     timeout: {
       callTimeout: 30000,
     },

@@ -80,23 +80,6 @@ export const GenerateConversationNameConversationsResponseBody$inboundSchema:
     });
 
 /** @internal */
-export type GenerateConversationNameConversationsResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const GenerateConversationNameConversationsResponseBody$outboundSchema:
-  z.ZodType<
-    GenerateConversationNameConversationsResponseBody$Outbound,
-    z.ZodTypeDef,
-    GenerateConversationNameConversationsResponseBody
-  > = z.instanceof(GenerateConversationNameConversationsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
-
-/** @internal */
 export const GenerateConversationNameResponseBody$inboundSchema: z.ZodType<
   GenerateConversationNameResponseBody,
   z.ZodTypeDef,
@@ -114,19 +97,3 @@ export const GenerateConversationNameResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type GenerateConversationNameResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const GenerateConversationNameResponseBody$outboundSchema: z.ZodType<
-  GenerateConversationNameResponseBody$Outbound,
-  z.ZodTypeDef,
-  GenerateConversationNameResponseBody
-> = z.instanceof(GenerateConversationNameResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

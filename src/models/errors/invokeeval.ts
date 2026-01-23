@@ -77,22 +77,6 @@ export const InvokeEvalEvalsResponseBody$inboundSchema: z.ZodType<
   });
 
 /** @internal */
-export type InvokeEvalEvalsResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const InvokeEvalEvalsResponseBody$outboundSchema: z.ZodType<
-  InvokeEvalEvalsResponseBody$Outbound,
-  z.ZodTypeDef,
-  InvokeEvalEvalsResponseBody
-> = z.instanceof(InvokeEvalEvalsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
-
-/** @internal */
 export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   InvokeEvalResponseBody,
   z.ZodTypeDef,
@@ -110,19 +94,3 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type InvokeEvalResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const InvokeEvalResponseBody$outboundSchema: z.ZodType<
-  InvokeEvalResponseBody$Outbound,
-  z.ZodTypeDef,
-  InvokeEvalResponseBody
-> = z.instanceof(InvokeEvalResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

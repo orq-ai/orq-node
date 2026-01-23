@@ -49,19 +49,3 @@ export const CreateEvalResponseBody$inboundSchema: z.ZodType<
       body: v.body$,
     });
   });
-
-/** @internal */
-export type CreateEvalResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const CreateEvalResponseBody$outboundSchema: z.ZodType<
-  CreateEvalResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateEvalResponseBody
-> = z.instanceof(CreateEvalResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));

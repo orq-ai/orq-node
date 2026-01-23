@@ -87,7 +87,7 @@ export type RetrieveDatapointMessagesCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: RetrieveDatapointMessagesTtl | undefined;
+  ttl: RetrieveDatapointMessagesTtl;
 };
 
 export type RetrieveDatapointMessagesToolMessage = {
@@ -264,7 +264,7 @@ export type RetrieveDatapoint2CacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: RetrieveDatapoint2Ttl | undefined;
+  ttl: RetrieveDatapoint2Ttl;
 };
 
 export type RetrieveDatapoint24 = {
@@ -406,7 +406,7 @@ export type RetrieveDatapointEvaluations3 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: RetrieveDatapointEvaluationsDatasetsResponseSource | undefined;
+  source: RetrieveDatapointEvaluationsDatasetsResponseSource;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -414,7 +414,7 @@ export type RetrieveDatapointEvaluations3 = {
   /**
    * The date and time the item was reviewed
    */
-  reviewedAt?: Date | undefined;
+  reviewedAt: Date;
   type: "string_array";
   values: Array<string>;
 };
@@ -453,7 +453,7 @@ export type RetrieveDatapointEvaluations2 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: RetrieveDatapointEvaluationsDatasetsSource | undefined;
+  source: RetrieveDatapointEvaluationsDatasetsSource;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -461,7 +461,7 @@ export type RetrieveDatapointEvaluations2 = {
   /**
    * The date and time the item was reviewed
    */
-  reviewedAt?: Date | undefined;
+  reviewedAt: Date;
   type: "number";
   value: number;
 };
@@ -500,7 +500,7 @@ export type RetrieveDatapointEvaluations1 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: RetrieveDatapointEvaluationsSource | undefined;
+  source: RetrieveDatapointEvaluationsSource;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -508,7 +508,7 @@ export type RetrieveDatapointEvaluations1 = {
   /**
    * The date and time the item was reviewed
    */
-  reviewedAt?: Date | undefined;
+  reviewedAt: Date;
   type: "string";
   value: string;
 };
@@ -580,23 +580,9 @@ export type RetrieveDatapointResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const RetrieveDatapointRequest$inboundSchema: z.ZodType<
-  RetrieveDatapointRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  dataset_id: z.string(),
-  datapoint_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "dataset_id": "datasetId",
-    "datapoint_id": "datapointId",
-  });
-});
 /** @internal */
 export type RetrieveDatapointRequest$Outbound = {
   dataset_id: string;
@@ -625,15 +611,6 @@ export function retrieveDatapointRequestToJSON(
     RetrieveDatapointRequest$outboundSchema.parse(retrieveDatapointRequest),
   );
 }
-export function retrieveDatapointRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveDatapointRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveDatapointRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveDatapointRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const RetrieveDatapointContentDatasetsResponse2$inboundSchema: z.ZodType<
@@ -641,28 +618,7 @@ export const RetrieveDatapointContentDatasetsResponse2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = components.TextContentPartSchema$inboundSchema;
-/** @internal */
-export type RetrieveDatapointContentDatasetsResponse2$Outbound =
-  components.TextContentPartSchema$Outbound;
 
-/** @internal */
-export const RetrieveDatapointContentDatasetsResponse2$outboundSchema:
-  z.ZodType<
-    RetrieveDatapointContentDatasetsResponse2$Outbound,
-    z.ZodTypeDef,
-    RetrieveDatapointContentDatasetsResponse2
-  > = components.TextContentPartSchema$outboundSchema;
-
-export function retrieveDatapointContentDatasetsResponse2ToJSON(
-  retrieveDatapointContentDatasetsResponse2:
-    RetrieveDatapointContentDatasetsResponse2,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointContentDatasetsResponse2$outboundSchema.parse(
-      retrieveDatapointContentDatasetsResponse2,
-    ),
-  );
-}
 export function retrieveDatapointContentDatasetsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -689,33 +645,7 @@ export const RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent$
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]);
-/** @internal */
-export type RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent$outboundSchema:
-  z.ZodType<
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent$Outbound,
-    z.ZodTypeDef,
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function retrieveDatapointMessagesDatasetsResponse200ApplicationJSONContentToJSON(
-  retrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent:
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent$outboundSchema
-      .parse(
-        retrieveDatapointMessagesDatasetsResponse200ApplicationJSONContent,
-      ),
-  );
-}
 export function retrieveDatapointMessagesDatasetsResponse200ApplicationJSONContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -736,19 +666,11 @@ export const RetrieveDatapointMessagesDatasetsType$inboundSchema:
   z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsType> = z.nativeEnum(
     RetrieveDatapointMessagesDatasetsType,
   );
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsType> =
-    RetrieveDatapointMessagesDatasetsType$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointMessagesTtl$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatapointMessagesTtl
 > = z.nativeEnum(RetrieveDatapointMessagesTtl);
-/** @internal */
-export const RetrieveDatapointMessagesTtl$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointMessagesTtl
-> = RetrieveDatapointMessagesTtl$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointMessagesCacheControl$inboundSchema: z.ZodType<
@@ -759,31 +681,7 @@ export const RetrieveDatapointMessagesCacheControl$inboundSchema: z.ZodType<
   type: RetrieveDatapointMessagesDatasetsType$inboundSchema,
   ttl: RetrieveDatapointMessagesTtl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type RetrieveDatapointMessagesCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesCacheControl$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesCacheControl$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesCacheControl
-> = z.object({
-  type: RetrieveDatapointMessagesDatasetsType$outboundSchema,
-  ttl: RetrieveDatapointMessagesTtl$outboundSchema.default("5m"),
-});
-
-export function retrieveDatapointMessagesCacheControlToJSON(
-  retrieveDatapointMessagesCacheControl: RetrieveDatapointMessagesCacheControl,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesCacheControl$outboundSchema.parse(
-      retrieveDatapointMessagesCacheControl,
-    ),
-  );
-}
 export function retrieveDatapointMessagesCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesCacheControl, SDKValidationError> {
@@ -816,45 +714,7 @@ export const RetrieveDatapointMessagesToolMessage$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type RetrieveDatapointMessagesToolMessage$Outbound = {
-  role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string | null;
-  cache_control?: RetrieveDatapointMessagesCacheControl$Outbound | undefined;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesToolMessage$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesToolMessage$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() =>
-    RetrieveDatapointMessagesCacheControl$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
-
-export function retrieveDatapointMessagesToolMessageToJSON(
-  retrieveDatapointMessagesToolMessage: RetrieveDatapointMessagesToolMessage,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesToolMessage$outboundSchema.parse(
-      retrieveDatapointMessagesToolMessage,
-    ),
-  );
-}
 export function retrieveDatapointMessagesToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesToolMessage, SDKValidationError> {
@@ -879,36 +739,7 @@ export const RetrieveDatapointContentDatasets2$inboundSchema: z.ZodType<
   components.ReasoningPartSchema$inboundSchema,
   components.RedactedReasoningPartSchema$inboundSchema,
 ]);
-/** @internal */
-export type RetrieveDatapointContentDatasets2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
 
-/** @internal */
-export const RetrieveDatapointContentDatasets2$outboundSchema: z.ZodType<
-  RetrieveDatapointContentDatasets2$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointContentDatasets2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
-
-export function retrieveDatapointContentDatasets2ToJSON(
-  retrieveDatapointContentDatasets2: RetrieveDatapointContentDatasets2,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointContentDatasets2$outboundSchema.parse(
-      retrieveDatapointContentDatasets2,
-    ),
-  );
-}
 export function retrieveDatapointContentDatasets2FromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointContentDatasets2, SDKValidationError> {
@@ -938,46 +769,7 @@ export const RetrieveDatapointMessagesDatasetsResponse200Content$inboundSchema:
       ]),
     ),
   ]);
-/** @internal */
-export type RetrieveDatapointMessagesDatasetsResponse200Content$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.RefusalPartSchema$Outbound
-    | components.ReasoningPartSchema$Outbound
-    | components.RedactedReasoningPartSchema$Outbound
-  >;
 
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsResponse200Content$outboundSchema:
-  z.ZodType<
-    RetrieveDatapointMessagesDatasetsResponse200Content$Outbound,
-    z.ZodTypeDef,
-    RetrieveDatapointMessagesDatasetsResponse200Content
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
-
-export function retrieveDatapointMessagesDatasetsResponse200ContentToJSON(
-  retrieveDatapointMessagesDatasetsResponse200Content:
-    RetrieveDatapointMessagesDatasetsResponse200Content,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesDatasetsResponse200Content$outboundSchema.parse(
-      retrieveDatapointMessagesDatasetsResponse200Content,
-    ),
-  );
-}
 export function retrieveDatapointMessagesDatasetsResponse200ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1002,29 +794,7 @@ export const RetrieveDatapointMessagesAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-/** @internal */
-export type RetrieveDatapointMessagesAudio$Outbound = {
-  id: string;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesAudio$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesAudio$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesAudio
-> = z.object({
-  id: z.string(),
-});
-
-export function retrieveDatapointMessagesAudioToJSON(
-  retrieveDatapointMessagesAudio: RetrieveDatapointMessagesAudio,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesAudio$outboundSchema.parse(
-      retrieveDatapointMessagesAudio,
-    ),
-  );
-}
 export function retrieveDatapointMessagesAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesAudio, SDKValidationError> {
@@ -1039,10 +809,6 @@ export function retrieveDatapointMessagesAudioFromJSON(
 export const RetrieveDatapointMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatapointMessagesType
 > = z.nativeEnum(RetrieveDatapointMessagesType);
-/** @internal */
-export const RetrieveDatapointMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointMessagesType
-> = RetrieveDatapointMessagesType$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointMessagesFunction$inboundSchema: z.ZodType<
@@ -1053,31 +819,7 @@ export const RetrieveDatapointMessagesFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-/** @internal */
-export type RetrieveDatapointMessagesFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesFunction$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesFunction$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function retrieveDatapointMessagesFunctionToJSON(
-  retrieveDatapointMessagesFunction: RetrieveDatapointMessagesFunction,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesFunction$outboundSchema.parse(
-      retrieveDatapointMessagesFunction,
-    ),
-  );
-}
 export function retrieveDatapointMessagesFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesFunction, SDKValidationError> {
@@ -1103,39 +845,7 @@ export const RetrieveDatapointMessagesToolCalls$inboundSchema: z.ZodType<
     "thought_signature": "thoughtSignature",
   });
 });
-/** @internal */
-export type RetrieveDatapointMessagesToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: RetrieveDatapointMessagesFunction$Outbound;
-  thought_signature?: string | undefined;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesToolCalls$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesToolCalls$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: RetrieveDatapointMessagesType$outboundSchema,
-  function: z.lazy(() => RetrieveDatapointMessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function retrieveDatapointMessagesToolCallsToJSON(
-  retrieveDatapointMessagesToolCalls: RetrieveDatapointMessagesToolCalls,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesToolCalls$outboundSchema.parse(
-      retrieveDatapointMessagesToolCalls,
-    ),
-  );
-}
 export function retrieveDatapointMessagesToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesToolCalls, SDKValidationError> {
@@ -1181,72 +891,7 @@ export const RetrieveDatapointMessagesAssistantMessage$inboundSchema: z.ZodType<
     "tool_calls": "toolCalls",
   });
 });
-/** @internal */
-export type RetrieveDatapointMessagesAssistantMessage$Outbound = {
-  content?:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.RefusalPartSchema$Outbound
-      | components.ReasoningPartSchema$Outbound
-      | components.RedactedReasoningPartSchema$Outbound
-    >
-    | null
-    | undefined;
-  refusal?: string | null | undefined;
-  role: "assistant";
-  name?: string | undefined;
-  audio?: RetrieveDatapointMessagesAudio$Outbound | null | undefined;
-  tool_calls?: Array<RetrieveDatapointMessagesToolCalls$Outbound> | undefined;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesAssistantMessage$outboundSchema:
-  z.ZodType<
-    RetrieveDatapointMessagesAssistantMessage$Outbound,
-    z.ZodTypeDef,
-    RetrieveDatapointMessagesAssistantMessage
-  > = z.object({
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$outboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$outboundSchema,
-            components.ReasoningPartSchema$outboundSchema,
-            components.RedactedReasoningPartSchema$outboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => RetrieveDatapointMessagesAudio$outboundSchema),
-    ).optional(),
-    toolCalls: z.array(
-      z.lazy(() => RetrieveDatapointMessagesToolCalls$outboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolCalls: "tool_calls",
-    });
-  });
-
-export function retrieveDatapointMessagesAssistantMessageToJSON(
-  retrieveDatapointMessagesAssistantMessage:
-    RetrieveDatapointMessagesAssistantMessage,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesAssistantMessage$outboundSchema.parse(
-      retrieveDatapointMessagesAssistantMessage,
-    ),
-  );
-}
 export function retrieveDatapointMessagesAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1267,19 +912,11 @@ export function retrieveDatapointMessagesAssistantMessageFromJSON(
 export const RetrieveDatapoint2DatasetsType$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatapoint2DatasetsType
 > = z.nativeEnum(RetrieveDatapoint2DatasetsType);
-/** @internal */
-export const RetrieveDatapoint2DatasetsType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2DatasetsType
-> = RetrieveDatapoint2DatasetsType$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapoint2Ttl$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatapoint2Ttl
 > = z.nativeEnum(RetrieveDatapoint2Ttl);
-/** @internal */
-export const RetrieveDatapoint2Ttl$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Ttl
-> = RetrieveDatapoint2Ttl$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapoint2CacheControl$inboundSchema: z.ZodType<
@@ -1290,31 +927,7 @@ export const RetrieveDatapoint2CacheControl$inboundSchema: z.ZodType<
   type: RetrieveDatapoint2DatasetsType$inboundSchema,
   ttl: RetrieveDatapoint2Ttl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type RetrieveDatapoint2CacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const RetrieveDatapoint2CacheControl$outboundSchema: z.ZodType<
-  RetrieveDatapoint2CacheControl$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapoint2CacheControl
-> = z.object({
-  type: RetrieveDatapoint2DatasetsType$outboundSchema,
-  ttl: RetrieveDatapoint2Ttl$outboundSchema.default("5m"),
-});
-
-export function retrieveDatapoint2CacheControlToJSON(
-  retrieveDatapoint2CacheControl: RetrieveDatapoint2CacheControl,
-): string {
-  return JSON.stringify(
-    RetrieveDatapoint2CacheControl$outboundSchema.parse(
-      retrieveDatapoint2CacheControl,
-    ),
-  );
-}
 export function retrieveDatapoint2CacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapoint2CacheControl, SDKValidationError> {
@@ -1340,36 +953,7 @@ export const RetrieveDatapoint24$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type RetrieveDatapoint24$Outbound = {
-  type: "file";
-  cache_control?: RetrieveDatapoint2CacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
-};
 
-/** @internal */
-export const RetrieveDatapoint24$outboundSchema: z.ZodType<
-  RetrieveDatapoint24$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapoint24
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() => RetrieveDatapoint2CacheControl$outboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function retrieveDatapoint24ToJSON(
-  retrieveDatapoint24: RetrieveDatapoint24,
-): string {
-  return JSON.stringify(
-    RetrieveDatapoint24$outboundSchema.parse(retrieveDatapoint24),
-  );
-}
 export function retrieveDatapoint24FromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapoint24, SDKValidationError> {
@@ -1393,34 +977,7 @@ export const RetrieveDatapointContent2$inboundSchema: z.ZodType<
   components.AudioContentPartSchema$inboundSchema,
   z.lazy(() => RetrieveDatapoint24$inboundSchema),
 ]);
-/** @internal */
-export type RetrieveDatapointContent2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.ImageContentPartSchema$Outbound
-  | components.AudioContentPartSchema$Outbound
-  | RetrieveDatapoint24$Outbound;
 
-/** @internal */
-export const RetrieveDatapointContent2$outboundSchema: z.ZodType<
-  RetrieveDatapointContent2$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointContent2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => RetrieveDatapoint24$outboundSchema),
-]);
-
-export function retrieveDatapointContent2ToJSON(
-  retrieveDatapointContent2: RetrieveDatapointContent2,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointContent2$outboundSchema.parse(retrieveDatapointContent2),
-  );
-}
 export function retrieveDatapointContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointContent2, SDKValidationError> {
@@ -1450,46 +1007,7 @@ export const RetrieveDatapointMessagesDatasetsResponseContent$inboundSchema:
       ]),
     ),
   ]);
-/** @internal */
-export type RetrieveDatapointMessagesDatasetsResponseContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.ImageContentPartSchema$Outbound
-    | components.AudioContentPartSchema$Outbound
-    | RetrieveDatapoint24$Outbound
-  >;
 
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsResponseContent$outboundSchema:
-  z.ZodType<
-    RetrieveDatapointMessagesDatasetsResponseContent$Outbound,
-    z.ZodTypeDef,
-    RetrieveDatapointMessagesDatasetsResponseContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => RetrieveDatapoint24$outboundSchema),
-      ]),
-    ),
-  ]);
-
-export function retrieveDatapointMessagesDatasetsResponseContentToJSON(
-  retrieveDatapointMessagesDatasetsResponseContent:
-    RetrieveDatapointMessagesDatasetsResponseContent,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesDatasetsResponseContent$outboundSchema.parse(
-      retrieveDatapointMessagesDatasetsResponseContent,
-    ),
-  );
-}
 export function retrieveDatapointMessagesDatasetsResponseContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1528,52 +1046,7 @@ export const RetrieveDatapointMessagesUserMessage$inboundSchema: z.ZodType<
     ),
   ]),
 });
-/** @internal */
-export type RetrieveDatapointMessagesUserMessage$Outbound = {
-  role: "user";
-  name?: string | undefined;
-  content:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.ImageContentPartSchema$Outbound
-      | components.AudioContentPartSchema$Outbound
-      | RetrieveDatapoint24$Outbound
-    >;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesUserMessage$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesUserMessage$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => RetrieveDatapoint24$outboundSchema),
-      ]),
-    ),
-  ]),
-});
-
-export function retrieveDatapointMessagesUserMessageToJSON(
-  retrieveDatapointMessagesUserMessage: RetrieveDatapointMessagesUserMessage,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesUserMessage$outboundSchema.parse(
-      retrieveDatapointMessagesUserMessage,
-    ),
-  );
-}
 export function retrieveDatapointMessagesUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesUserMessage, SDKValidationError> {
@@ -1594,31 +1067,7 @@ export const RetrieveDatapointMessagesDatasetsContent$inboundSchema: z.ZodType<
   z.string(),
   z.array(components.TextContentPartSchema$inboundSchema),
 ]);
-/** @internal */
-export type RetrieveDatapointMessagesDatasetsContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsContent$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesDatasetsContent$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesDatasetsContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
-
-export function retrieveDatapointMessagesDatasetsContentToJSON(
-  retrieveDatapointMessagesDatasetsContent:
-    RetrieveDatapointMessagesDatasetsContent,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesDatasetsContent$outboundSchema.parse(
-      retrieveDatapointMessagesDatasetsContent,
-    ),
-  );
-}
 export function retrieveDatapointMessagesDatasetsContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1648,38 +1097,7 @@ export const RetrieveDatapointMessagesDeveloperMessage$inboundSchema: z.ZodType<
   ]),
   name: z.string().optional(),
 });
-/** @internal */
-export type RetrieveDatapointMessagesDeveloperMessage$Outbound = {
-  role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesDeveloperMessage$outboundSchema:
-  z.ZodType<
-    RetrieveDatapointMessagesDeveloperMessage$Outbound,
-    z.ZodTypeDef,
-    RetrieveDatapointMessagesDeveloperMessage
-  > = z.object({
-    role: z.literal("developer"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
-
-export function retrieveDatapointMessagesDeveloperMessageToJSON(
-  retrieveDatapointMessagesDeveloperMessage:
-    RetrieveDatapointMessagesDeveloperMessage,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesDeveloperMessage$outboundSchema.parse(
-      retrieveDatapointMessagesDeveloperMessage,
-    ),
-  );
-}
 export function retrieveDatapointMessagesDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -1705,30 +1123,7 @@ export const RetrieveDatapointMessagesContent$inboundSchema: z.ZodType<
   z.string(),
   z.array(components.TextContentPartSchema$inboundSchema),
 ]);
-/** @internal */
-export type RetrieveDatapointMessagesContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const RetrieveDatapointMessagesContent$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesContent$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
-
-export function retrieveDatapointMessagesContentToJSON(
-  retrieveDatapointMessagesContent: RetrieveDatapointMessagesContent,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesContent$outboundSchema.parse(
-      retrieveDatapointMessagesContent,
-    ),
-  );
-}
 export function retrieveDatapointMessagesContentFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesContent, SDKValidationError> {
@@ -1752,37 +1147,7 @@ export const RetrieveDatapointMessagesSystemMessage$inboundSchema: z.ZodType<
   ]),
   name: z.string().optional(),
 });
-/** @internal */
-export type RetrieveDatapointMessagesSystemMessage$Outbound = {
-  role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
 
-/** @internal */
-export const RetrieveDatapointMessagesSystemMessage$outboundSchema: z.ZodType<
-  RetrieveDatapointMessagesSystemMessage$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessagesSystemMessage
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  name: z.string().optional(),
-});
-
-export function retrieveDatapointMessagesSystemMessageToJSON(
-  retrieveDatapointMessagesSystemMessage:
-    RetrieveDatapointMessagesSystemMessage,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessagesSystemMessage$outboundSchema.parse(
-      retrieveDatapointMessagesSystemMessage,
-    ),
-  );
-}
 export function retrieveDatapointMessagesSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessagesSystemMessage, SDKValidationError> {
@@ -1806,34 +1171,7 @@ export const RetrieveDatapointMessages$inboundSchema: z.ZodType<
   z.lazy(() => RetrieveDatapointMessagesAssistantMessage$inboundSchema),
   z.lazy(() => RetrieveDatapointMessagesToolMessage$inboundSchema),
 ]);
-/** @internal */
-export type RetrieveDatapointMessages$Outbound =
-  | RetrieveDatapointMessagesSystemMessage$Outbound
-  | RetrieveDatapointMessagesDeveloperMessage$Outbound
-  | RetrieveDatapointMessagesUserMessage$Outbound
-  | RetrieveDatapointMessagesAssistantMessage$Outbound
-  | RetrieveDatapointMessagesToolMessage$Outbound;
 
-/** @internal */
-export const RetrieveDatapointMessages$outboundSchema: z.ZodType<
-  RetrieveDatapointMessages$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointMessages
-> = z.union([
-  z.lazy(() => RetrieveDatapointMessagesSystemMessage$outboundSchema),
-  z.lazy(() => RetrieveDatapointMessagesDeveloperMessage$outboundSchema),
-  z.lazy(() => RetrieveDatapointMessagesUserMessage$outboundSchema),
-  z.lazy(() => RetrieveDatapointMessagesAssistantMessage$outboundSchema),
-  z.lazy(() => RetrieveDatapointMessagesToolMessage$outboundSchema),
-]);
-
-export function retrieveDatapointMessagesToJSON(
-  retrieveDatapointMessages: RetrieveDatapointMessages,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointMessages$outboundSchema.parse(retrieveDatapointMessages),
-  );
-}
 export function retrieveDatapointMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointMessages, SDKValidationError> {
@@ -1849,20 +1187,11 @@ export const RetrieveDatapointEvaluationsDatasetsResponseEvaluationType$inboundS
   z.ZodNativeEnum<
     typeof RetrieveDatapointEvaluationsDatasetsResponseEvaluationType
   > = z.nativeEnum(RetrieveDatapointEvaluationsDatasetsResponseEvaluationType);
-/** @internal */
-export const RetrieveDatapointEvaluationsDatasetsResponseEvaluationType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapointEvaluationsDatasetsResponseEvaluationType
-  > = RetrieveDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointEvaluationsDatasetsResponseSource$inboundSchema:
   z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsResponseSource> = z
     .nativeEnum(RetrieveDatapointEvaluationsDatasetsResponseSource);
-/** @internal */
-export const RetrieveDatapointEvaluationsDatasetsResponseSource$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsResponseSource> =
-    RetrieveDatapointEvaluationsDatasetsResponseSource$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
@@ -1878,7 +1207,7 @@ export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:22.518Z",
+    "2026-01-23T11:14:15.786Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1890,53 +1219,7 @@ export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-/** @internal */
-export type RetrieveDatapointEvaluations3$Outbound = {
-  id: string;
-  evaluation_type: string;
-  human_review_id: string;
-  source: string;
-  reviewed_by_id: string;
-  reviewed_at: string;
-  type: "string_array";
-  values: Array<string>;
-};
 
-/** @internal */
-export const RetrieveDatapointEvaluations3$outboundSchema: z.ZodType<
-  RetrieveDatapointEvaluations3$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointEvaluations3
-> = z.object({
-  id: z.string(),
-  evaluationType:
-    RetrieveDatapointEvaluationsDatasetsResponseEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
-  source: RetrieveDatapointEvaluationsDatasetsResponseSource$outboundSchema
-    .default("orq"),
-  reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-19T14:27:22.518Z"))
-    .transform(v => v.toISOString()),
-  type: z.literal("string_array"),
-  values: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    evaluationType: "evaluation_type",
-    humanReviewId: "human_review_id",
-    reviewedById: "reviewed_by_id",
-    reviewedAt: "reviewed_at",
-  });
-});
-
-export function retrieveDatapointEvaluations3ToJSON(
-  retrieveDatapointEvaluations3: RetrieveDatapointEvaluations3,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointEvaluations3$outboundSchema.parse(
-      retrieveDatapointEvaluations3,
-    ),
-  );
-}
 export function retrieveDatapointEvaluations3FromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointEvaluations3, SDKValidationError> {
@@ -1951,19 +1234,11 @@ export function retrieveDatapointEvaluations3FromJSON(
 export const RetrieveDatapointEvaluationsDatasetsEvaluationType$inboundSchema:
   z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsEvaluationType> = z
     .nativeEnum(RetrieveDatapointEvaluationsDatasetsEvaluationType);
-/** @internal */
-export const RetrieveDatapointEvaluationsDatasetsEvaluationType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsEvaluationType> =
-    RetrieveDatapointEvaluationsDatasetsEvaluationType$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointEvaluationsDatasetsSource$inboundSchema:
   z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsSource> = z
     .nativeEnum(RetrieveDatapointEvaluationsDatasetsSource);
-/** @internal */
-export const RetrieveDatapointEvaluationsDatasetsSource$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsSource> =
-    RetrieveDatapointEvaluationsDatasetsSource$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
@@ -1980,7 +1255,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:22.518Z",
+    "2026-01-23T11:14:15.785Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1992,54 +1267,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-/** @internal */
-export type RetrieveDatapointEvaluations2$Outbound = {
-  id: string;
-  evaluation_type: string;
-  human_review_id: string;
-  source: string;
-  reviewed_by_id: string;
-  reviewed_at: string;
-  type: "number";
-  value: number;
-};
 
-/** @internal */
-export const RetrieveDatapointEvaluations2$outboundSchema: z.ZodType<
-  RetrieveDatapointEvaluations2$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointEvaluations2
-> = z.object({
-  id: z.string(),
-  evaluationType:
-    RetrieveDatapointEvaluationsDatasetsEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
-  source: RetrieveDatapointEvaluationsDatasetsSource$outboundSchema.default(
-    "orq",
-  ),
-  reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-19T14:27:22.518Z"))
-    .transform(v => v.toISOString()),
-  type: z.literal("number"),
-  value: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    evaluationType: "evaluation_type",
-    humanReviewId: "human_review_id",
-    reviewedById: "reviewed_by_id",
-    reviewedAt: "reviewed_at",
-  });
-});
-
-export function retrieveDatapointEvaluations2ToJSON(
-  retrieveDatapointEvaluations2: RetrieveDatapointEvaluations2,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointEvaluations2$outboundSchema.parse(
-      retrieveDatapointEvaluations2,
-    ),
-  );
-}
 export function retrieveDatapointEvaluations2FromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointEvaluations2, SDKValidationError> {
@@ -2054,19 +1282,11 @@ export function retrieveDatapointEvaluations2FromJSON(
 export const RetrieveDatapointEvaluationsEvaluationType$inboundSchema:
   z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsEvaluationType> = z
     .nativeEnum(RetrieveDatapointEvaluationsEvaluationType);
-/** @internal */
-export const RetrieveDatapointEvaluationsEvaluationType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsEvaluationType> =
-    RetrieveDatapointEvaluationsEvaluationType$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointEvaluationsSource$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveDatapointEvaluationsSource
 > = z.nativeEnum(RetrieveDatapointEvaluationsSource);
-/** @internal */
-export const RetrieveDatapointEvaluationsSource$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointEvaluationsSource
-> = RetrieveDatapointEvaluationsSource$inboundSchema;
 
 /** @internal */
 export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
@@ -2080,7 +1300,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
   source: RetrieveDatapointEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:22.517Z",
+    "2026-01-23T11:14:15.785Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2092,51 +1312,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-/** @internal */
-export type RetrieveDatapointEvaluations1$Outbound = {
-  id: string;
-  evaluation_type: string;
-  human_review_id: string;
-  source: string;
-  reviewed_by_id: string;
-  reviewed_at: string;
-  type: "string";
-  value: string;
-};
 
-/** @internal */
-export const RetrieveDatapointEvaluations1$outboundSchema: z.ZodType<
-  RetrieveDatapointEvaluations1$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointEvaluations1
-> = z.object({
-  id: z.string(),
-  evaluationType: RetrieveDatapointEvaluationsEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
-  source: RetrieveDatapointEvaluationsSource$outboundSchema.default("orq"),
-  reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-19T14:27:22.517Z"))
-    .transform(v => v.toISOString()),
-  type: z.literal("string"),
-  value: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    evaluationType: "evaluation_type",
-    humanReviewId: "human_review_id",
-    reviewedById: "reviewed_by_id",
-    reviewedAt: "reviewed_at",
-  });
-});
-
-export function retrieveDatapointEvaluations1ToJSON(
-  retrieveDatapointEvaluations1: RetrieveDatapointEvaluations1,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointEvaluations1$outboundSchema.parse(
-      retrieveDatapointEvaluations1,
-    ),
-  );
-}
 export function retrieveDatapointEvaluations1FromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointEvaluations1, SDKValidationError> {
@@ -2157,32 +1333,7 @@ export const RetrieveDatapointEvaluations$inboundSchema: z.ZodType<
   z.lazy(() => RetrieveDatapointEvaluations2$inboundSchema),
   z.lazy(() => RetrieveDatapointEvaluations3$inboundSchema),
 ]);
-/** @internal */
-export type RetrieveDatapointEvaluations$Outbound =
-  | RetrieveDatapointEvaluations1$Outbound
-  | RetrieveDatapointEvaluations2$Outbound
-  | RetrieveDatapointEvaluations3$Outbound;
 
-/** @internal */
-export const RetrieveDatapointEvaluations$outboundSchema: z.ZodType<
-  RetrieveDatapointEvaluations$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointEvaluations
-> = z.union([
-  z.lazy(() => RetrieveDatapointEvaluations1$outboundSchema),
-  z.lazy(() => RetrieveDatapointEvaluations2$outboundSchema),
-  z.lazy(() => RetrieveDatapointEvaluations3$outboundSchema),
-]);
-
-export function retrieveDatapointEvaluationsToJSON(
-  retrieveDatapointEvaluations: RetrieveDatapointEvaluations,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointEvaluations$outboundSchema.parse(
-      retrieveDatapointEvaluations,
-    ),
-  );
-}
 export function retrieveDatapointEvaluationsFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointEvaluations, SDKValidationError> {
@@ -2226,7 +1377,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:09.825Z",
+    "2026-01-23T11:14:01.166Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2239,90 +1390,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-/** @internal */
-export type RetrieveDatapointResponseBody$Outbound = {
-  _id: string;
-  workspace_id: string;
-  inputs?: { [k: string]: any } | undefined;
-  messages?:
-    | Array<
-      | RetrieveDatapointMessagesSystemMessage$Outbound
-      | RetrieveDatapointMessagesDeveloperMessage$Outbound
-      | RetrieveDatapointMessagesUserMessage$Outbound
-      | RetrieveDatapointMessagesAssistantMessage$Outbound
-      | RetrieveDatapointMessagesToolMessage$Outbound
-    >
-    | undefined;
-  expected_output?: string | undefined;
-  evaluations?:
-    | Array<
-      | RetrieveDatapointEvaluations1$Outbound
-      | RetrieveDatapointEvaluations2$Outbound
-      | RetrieveDatapointEvaluations3$Outbound
-    >
-    | undefined;
-  dataset_id: string;
-  snapshot_version?: string | undefined;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
-  RetrieveDatapointResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveDatapointResponseBody
-> = z.object({
-  id: z.string(),
-  workspaceId: z.string(),
-  inputs: z.record(z.any()).optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => RetrieveDatapointMessagesSystemMessage$outboundSchema),
-      z.lazy(() => RetrieveDatapointMessagesDeveloperMessage$outboundSchema),
-      z.lazy(() => RetrieveDatapointMessagesUserMessage$outboundSchema),
-      z.lazy(() => RetrieveDatapointMessagesAssistantMessage$outboundSchema),
-      z.lazy(() => RetrieveDatapointMessagesToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  expectedOutput: z.string().optional(),
-  evaluations: z.array(
-    z.union([
-      z.lazy(() => RetrieveDatapointEvaluations1$outboundSchema),
-      z.lazy(() => RetrieveDatapointEvaluations2$outboundSchema),
-      z.lazy(() => RetrieveDatapointEvaluations3$outboundSchema),
-    ]),
-  ).optional(),
-  datasetId: z.string(),
-  snapshotVersion: z.string().optional(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-19T14:27:09.825Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    workspaceId: "workspace_id",
-    expectedOutput: "expected_output",
-    datasetId: "dataset_id",
-    snapshotVersion: "snapshot_version",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
-
-export function retrieveDatapointResponseBodyToJSON(
-  retrieveDatapointResponseBody: RetrieveDatapointResponseBody,
-): string {
-  return JSON.stringify(
-    RetrieveDatapointResponseBody$outboundSchema.parse(
-      retrieveDatapointResponseBody,
-    ),
-  );
-}
 export function retrieveDatapointResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveDatapointResponseBody, SDKValidationError> {

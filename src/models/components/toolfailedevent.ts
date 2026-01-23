@@ -44,31 +44,7 @@ export const ToolFailedEventData$inboundSchema: z.ZodType<
   toolCallId: z.string(),
   error: z.string(),
 });
-/** @internal */
-export type ToolFailedEventData$Outbound = {
-  toolId: string;
-  toolCallId: string;
-  error: string;
-};
 
-/** @internal */
-export const ToolFailedEventData$outboundSchema: z.ZodType<
-  ToolFailedEventData$Outbound,
-  z.ZodTypeDef,
-  ToolFailedEventData
-> = z.object({
-  toolId: z.string(),
-  toolCallId: z.string(),
-  error: z.string(),
-});
-
-export function toolFailedEventDataToJSON(
-  toolFailedEventData: ToolFailedEventData,
-): string {
-  return JSON.stringify(
-    ToolFailedEventData$outboundSchema.parse(toolFailedEventData),
-  );
-}
 export function toolFailedEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolFailedEventData, SDKValidationError> {
@@ -89,29 +65,7 @@ export const ToolFailedEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ToolFailedEventData$inboundSchema),
 });
-/** @internal */
-export type ToolFailedEvent$Outbound = {
-  type: "tool.failed";
-  timestamp: string;
-  data: ToolFailedEventData$Outbound;
-};
 
-/** @internal */
-export const ToolFailedEvent$outboundSchema: z.ZodType<
-  ToolFailedEvent$Outbound,
-  z.ZodTypeDef,
-  ToolFailedEvent
-> = z.object({
-  type: z.literal("tool.failed"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolFailedEventData$outboundSchema),
-});
-
-export function toolFailedEventToJSON(
-  toolFailedEvent: ToolFailedEvent,
-): string {
-  return JSON.stringify(ToolFailedEvent$outboundSchema.parse(toolFailedEvent));
-}
 export function toolFailedEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ToolFailedEvent, SDKValidationError> {

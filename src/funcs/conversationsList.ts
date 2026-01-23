@@ -35,6 +35,7 @@ export function conversationsList(
   limit?: number | undefined,
   startingAfter?: string | undefined,
   endingBefore?: string | undefined,
+  entityId?: string | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,6 +55,7 @@ export function conversationsList(
     limit,
     startingAfter,
     endingBefore,
+    entityId,
     options,
   ));
 }
@@ -63,6 +65,7 @@ async function $do(
   limit?: number | undefined,
   startingAfter?: string | undefined,
   endingBefore?: string | undefined,
+  entityId?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -84,6 +87,7 @@ async function $do(
     limit: limit,
     startingAfter: startingAfter,
     endingBefore: endingBefore,
+    entityId: entityId,
   };
 
   const parsed = safeParse(
@@ -100,10 +104,11 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v2/conversations")();
+  const path = pathToFunc("/v2/conversations/")();
 
   const query = encodeFormQuery({
     "endingBefore": payload?.endingBefore,
+    "entityId": payload?.entityId,
     "limit": payload?.limit,
     "startingAfter": payload?.startingAfter,
   });

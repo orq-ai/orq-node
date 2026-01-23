@@ -40,35 +40,7 @@ export const AgentErroredStreamingEventData$inboundSchema: z.ZodType<
   responseId: z.string().optional(),
   workflowRunId: z.string(),
 });
-/** @internal */
-export type AgentErroredStreamingEventData$Outbound = {
-  error: string;
-  code: number;
-  responseId?: string | undefined;
-  workflowRunId: string;
-};
 
-/** @internal */
-export const AgentErroredStreamingEventData$outboundSchema: z.ZodType<
-  AgentErroredStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentErroredStreamingEventData
-> = z.object({
-  error: z.string(),
-  code: z.number(),
-  responseId: z.string().optional(),
-  workflowRunId: z.string(),
-});
-
-export function agentErroredStreamingEventDataToJSON(
-  agentErroredStreamingEventData: AgentErroredStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentErroredStreamingEventData$outboundSchema.parse(
-      agentErroredStreamingEventData,
-    ),
-  );
-}
 export function agentErroredStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentErroredStreamingEventData, SDKValidationError> {
@@ -89,31 +61,7 @@ export const AgentErroredStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => AgentErroredStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type AgentErroredStreamingEvent$Outbound = {
-  type: "event.agents.errored";
-  timestamp: string;
-  data: AgentErroredStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const AgentErroredStreamingEvent$outboundSchema: z.ZodType<
-  AgentErroredStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  AgentErroredStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.errored"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentErroredStreamingEventData$outboundSchema),
-});
-
-export function agentErroredStreamingEventToJSON(
-  agentErroredStreamingEvent: AgentErroredStreamingEvent,
-): string {
-  return JSON.stringify(
-    AgentErroredStreamingEvent$outboundSchema.parse(agentErroredStreamingEvent),
-  );
-}
 export function agentErroredStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentErroredStreamingEvent, SDKValidationError> {

@@ -13,5 +13,5 @@ let value: DeploymentGetConfigType = "completion";
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "moderation" | "vision"
+"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "ocr" | "moderation" | "vision"
 ```

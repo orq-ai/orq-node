@@ -4,49 +4,39 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AudioContentPartSchema,
-  AudioContentPartSchema$inboundSchema,
   AudioContentPartSchema$Outbound,
   AudioContentPartSchema$outboundSchema,
 } from "./audiocontentpartschema.js";
 import {
   FileContentPartSchema,
-  FileContentPartSchema$inboundSchema,
   FileContentPartSchema$Outbound,
   FileContentPartSchema$outboundSchema,
 } from "./filecontentpartschema.js";
 import {
   ImageContentPartSchema,
-  ImageContentPartSchema$inboundSchema,
   ImageContentPartSchema$Outbound,
   ImageContentPartSchema$outboundSchema,
 } from "./imagecontentpartschema.js";
 import {
   ReasoningPartSchema,
-  ReasoningPartSchema$inboundSchema,
   ReasoningPartSchema$Outbound,
   ReasoningPartSchema$outboundSchema,
 } from "./reasoningpartschema.js";
 import {
   RedactedReasoningPartSchema,
-  RedactedReasoningPartSchema$inboundSchema,
   RedactedReasoningPartSchema$Outbound,
   RedactedReasoningPartSchema$outboundSchema,
 } from "./redactedreasoningpartschema.js";
 import {
   RefusalPartSchema,
-  RefusalPartSchema$inboundSchema,
   RefusalPartSchema$Outbound,
   RefusalPartSchema$outboundSchema,
 } from "./refusalpartschema.js";
 import {
   TextContentPartSchema,
-  TextContentPartSchema$inboundSchema,
   TextContentPartSchema$Outbound,
   TextContentPartSchema$outboundSchema,
 } from "./textcontentpartschema.js";
@@ -1137,7 +1127,7 @@ export type InvokeDeploymentRequest = {
    */
   extraParams?: { [k: string]: any } | undefined;
   /**
-   * A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings.
+   * A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context.
    */
   documents?: Array<Documents> | undefined;
   invokeOptions?: InvokeOptions | undefined;
@@ -1150,12 +1140,6 @@ export type InvokeDeploymentRequest = {
   } | undefined;
 };
 
-/** @internal */
-export const InvokeDeploymentRequestContent2$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestContent2,
-  z.ZodTypeDef,
-  unknown
-> = TextContentPartSchema$inboundSchema;
 /** @internal */
 export type InvokeDeploymentRequestContent2$Outbound =
   TextContentPartSchema$Outbound;
@@ -1176,23 +1160,7 @@ export function invokeDeploymentRequestContent2ToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestContent2' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestPrefixMessages5Content$inboundSchema:
-  z.ZodType<
-    InvokeDeploymentRequestPrefixMessages5Content,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]);
 /** @internal */
 export type InvokeDeploymentRequestPrefixMessages5Content$Outbound =
   | string
@@ -1216,49 +1184,17 @@ export function invokeDeploymentRequestPrefixMessages5ContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestPrefixMessages5ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestPrefixMessages5Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestPrefixMessages5Content$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestPrefixMessages5Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestPrefixMessagesType$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequestPrefixMessagesType> = z
-    .nativeEnum(InvokeDeploymentRequestPrefixMessagesType);
 /** @internal */
 export const InvokeDeploymentRequestPrefixMessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequestPrefixMessagesType> =
-    InvokeDeploymentRequestPrefixMessagesType$inboundSchema;
+  z.ZodNativeEnum<typeof InvokeDeploymentRequestPrefixMessagesType> = z
+    .nativeEnum(InvokeDeploymentRequestPrefixMessagesType);
 
-/** @internal */
-export const PrefixMessagesTtl$inboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesTtl
-> = z.nativeEnum(PrefixMessagesTtl);
 /** @internal */
 export const PrefixMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof PrefixMessagesTtl
-> = PrefixMessagesTtl$inboundSchema;
+> = z.nativeEnum(PrefixMessagesTtl);
 
-/** @internal */
-export const PrefixMessagesCacheControl$inboundSchema: z.ZodType<
-  PrefixMessagesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeDeploymentRequestPrefixMessagesType$inboundSchema,
-  ttl: PrefixMessagesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type PrefixMessagesCacheControl$Outbound = {
   type: string;
@@ -1282,33 +1218,7 @@ export function prefixMessagesCacheControlToJSON(
     PrefixMessagesCacheControl$outboundSchema.parse(prefixMessagesCacheControl),
   );
 }
-export function prefixMessagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<PrefixMessagesCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PrefixMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PrefixMessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const ToolMessage$inboundSchema: z.ZodType<
-  ToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() => PrefixMessagesCacheControl$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type ToolMessage$Outbound = {
   role: "tool";
@@ -1338,29 +1248,7 @@ export const ToolMessage$outboundSchema: z.ZodType<
 export function toolMessageToJSON(toolMessage: ToolMessage): string {
   return JSON.stringify(ToolMessage$outboundSchema.parse(toolMessage));
 }
-export function toolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<ToolMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const Content2$inboundSchema: z.ZodType<
-  Content2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  RefusalPartSchema$inboundSchema,
-  ReasoningPartSchema$inboundSchema,
-  RedactedReasoningPartSchema$inboundSchema,
-]);
 /** @internal */
 export type Content2$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
@@ -1385,35 +1273,7 @@ export const Content2$outboundSchema: z.ZodType<
 export function content2ToJSON(content2: Content2): string {
   return JSON.stringify(Content2$outboundSchema.parse(content2));
 }
-export function content2FromJSON(
-  jsonString: string,
-): SafeParseResult<Content2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Content2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Content2' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestPrefixMessages4Content$inboundSchema:
-  z.ZodType<
-    InvokeDeploymentRequestPrefixMessages4Content,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        RefusalPartSchema$inboundSchema,
-        ReasoningPartSchema$inboundSchema,
-        RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
-  ]);
 /** @internal */
 export type InvokeDeploymentRequestPrefixMessages4Content$Outbound =
   | string
@@ -1454,27 +1314,7 @@ export function invokeDeploymentRequestPrefixMessages4ContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestPrefixMessages4ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestPrefixMessages4Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestPrefixMessages4Content$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestPrefixMessages4Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const Audio$inboundSchema: z.ZodType<Audio, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-  });
 /** @internal */
 export type Audio$Outbound = {
   id: string;
@@ -1492,34 +1332,12 @@ export const Audio$outboundSchema: z.ZodType<
 export function audioToJSON(audio: Audio): string {
   return JSON.stringify(Audio$outboundSchema.parse(audio));
 }
-export function audioFromJSON(
-  jsonString: string,
-): SafeParseResult<Audio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Audio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Audio' from JSON`,
-  );
-}
 
-/** @internal */
-export const PrefixMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesType
-> = z.nativeEnum(PrefixMessagesType);
 /** @internal */
 export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof PrefixMessagesType
-> = PrefixMessagesType$inboundSchema;
+> = z.nativeEnum(PrefixMessagesType);
 
-/** @internal */
-export const PrefixMessagesFunction$inboundSchema: z.ZodType<
-  PrefixMessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type PrefixMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -1543,31 +1361,7 @@ export function prefixMessagesFunctionToJSON(
     PrefixMessagesFunction$outboundSchema.parse(prefixMessagesFunction),
   );
 }
-export function prefixMessagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<PrefixMessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PrefixMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PrefixMessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const ToolCalls$inboundSchema: z.ZodType<
-  ToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: PrefixMessagesType$inboundSchema,
-  function: z.lazy(() => PrefixMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type ToolCalls$Outbound = {
   id: string;
@@ -1595,47 +1389,7 @@ export const ToolCalls$outboundSchema: z.ZodType<
 export function toolCallsToJSON(toolCalls: ToolCalls): string {
   return JSON.stringify(ToolCalls$outboundSchema.parse(toolCalls));
 }
-export function toolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<ToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const AssistantMessage$inboundSchema: z.ZodType<
-  AssistantMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          RefusalPartSchema$inboundSchema,
-          ReasoningPartSchema$inboundSchema,
-          RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => Audio$inboundSchema)).optional(),
-  tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-  });
-});
 /** @internal */
 export type AssistantMessage$Outbound = {
   content?:
@@ -1694,41 +1448,16 @@ export function assistantMessageToJSON(
     AssistantMessage$outboundSchema.parse(assistantMessage),
   );
 }
-export function assistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<AssistantMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AssistantMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AssistantMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequest2PrefixMessagesType$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequest2PrefixMessagesType> = z
-    .nativeEnum(InvokeDeploymentRequest2PrefixMessagesType);
 /** @internal */
 export const InvokeDeploymentRequest2PrefixMessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequest2PrefixMessagesType> =
-    InvokeDeploymentRequest2PrefixMessagesType$inboundSchema;
+  z.ZodNativeEnum<typeof InvokeDeploymentRequest2PrefixMessagesType> = z
+    .nativeEnum(InvokeDeploymentRequest2PrefixMessagesType);
 
 /** @internal */
-export const TwoTtl$inboundSchema: z.ZodNativeEnum<typeof TwoTtl> = z
+export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> = z
   .nativeEnum(TwoTtl);
-/** @internal */
-export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> =
-  TwoTtl$inboundSchema;
 
-/** @internal */
-export const TwoCacheControl$inboundSchema: z.ZodType<
-  TwoCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeDeploymentRequest2PrefixMessagesType$inboundSchema,
-  ttl: TwoTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type TwoCacheControl$Outbound = {
   type: string;
@@ -1750,27 +1479,7 @@ export function twoCacheControlToJSON(
 ): string {
   return JSON.stringify(TwoCacheControl$outboundSchema.parse(twoCacheControl));
 }
-export function twoCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<TwoCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TwoCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwoCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("file"),
-    cache_control: z.lazy(() => TwoCacheControl$inboundSchema).optional(),
-    file: FileContentPartSchema$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
 /** @internal */
 export type Four$Outbound = {
   type: "file";
@@ -1793,27 +1502,7 @@ export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
 export function fourToJSON(four: Four): string {
   return JSON.stringify(Four$outboundSchema.parse(four));
 }
-export function fourFromJSON(
-  jsonString: string,
-): SafeParseResult<Four, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Four$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Four' from JSON`,
-  );
-}
 
-/** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
-  [
-    TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    ImageContentPartSchema$inboundSchema,
-    AudioContentPartSchema$inboundSchema,
-    z.lazy(() => Four$inboundSchema),
-  ],
-);
 /** @internal */
 export type Two$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
@@ -1835,35 +1524,7 @@ export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
 export function twoToJSON(two: Two): string {
   return JSON.stringify(Two$outboundSchema.parse(two));
 }
-export function twoFromJSON(
-  jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestPrefixMessagesContent$inboundSchema:
-  z.ZodType<
-    InvokeDeploymentRequestPrefixMessagesContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        ImageContentPartSchema$inboundSchema,
-        AudioContentPartSchema$inboundSchema,
-        z.lazy(() => Four$inboundSchema),
-      ]),
-    ),
-  ]);
 /** @internal */
 export type InvokeDeploymentRequestPrefixMessagesContent$Outbound =
   | string
@@ -1904,44 +1565,7 @@ export function invokeDeploymentRequestPrefixMessagesContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestPrefixMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestPrefixMessagesContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestPrefixMessagesContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestPrefixMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const UserMessage$inboundSchema: z.ZodType<
-  UserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        ImageContentPartSchema$inboundSchema,
-        AudioContentPartSchema$inboundSchema,
-        z.lazy(() => Four$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type UserMessage$Outbound = {
   role: "user";
@@ -1982,22 +1606,7 @@ export const UserMessage$outboundSchema: z.ZodType<
 export function userMessageToJSON(userMessage: UserMessage): string {
   return JSON.stringify(UserMessage$outboundSchema.parse(userMessage));
 }
-export function userMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<UserMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UserMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const PrefixMessagesContent$inboundSchema: z.ZodType<
-  PrefixMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]);
 /** @internal */
 export type PrefixMessagesContent$Outbound =
   | string
@@ -2017,26 +1626,7 @@ export function prefixMessagesContentToJSON(
     PrefixMessagesContent$outboundSchema.parse(prefixMessagesContent),
   );
 }
-export function prefixMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<PrefixMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PrefixMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PrefixMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeveloperMessage$inboundSchema: z.ZodType<
-  DeveloperMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type DeveloperMessage$Outbound = {
   role: "developer";
@@ -2062,19 +1652,7 @@ export function developerMessageToJSON(
     DeveloperMessage$outboundSchema.parse(developerMessage),
   );
 }
-export function developerMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<DeveloperMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeveloperMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeveloperMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
-  z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]);
 /** @internal */
 export type Content$Outbound = string | Array<TextContentPartSchema$Outbound>;
 
@@ -2088,26 +1666,7 @@ export const Content$outboundSchema: z.ZodType<
 export function contentToJSON(content: Content): string {
   return JSON.stringify(Content$outboundSchema.parse(content));
 }
-export function contentFromJSON(
-  jsonString: string,
-): SafeParseResult<Content, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Content$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const SystemMessage$inboundSchema: z.ZodType<
-  SystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type SystemMessage$Outbound = {
   role: "system";
@@ -2129,28 +1688,7 @@ export const SystemMessage$outboundSchema: z.ZodType<
 export function systemMessageToJSON(systemMessage: SystemMessage): string {
   return JSON.stringify(SystemMessage$outboundSchema.parse(systemMessage));
 }
-export function systemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<SystemMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SystemMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const PrefixMessages$inboundSchema: z.ZodType<
-  PrefixMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => SystemMessage$inboundSchema),
-  z.lazy(() => DeveloperMessage$inboundSchema),
-  z.lazy(() => UserMessage$inboundSchema),
-  z.lazy(() => AssistantMessage$inboundSchema),
-  z.lazy(() => ToolMessage$inboundSchema),
-]);
 /** @internal */
 export type PrefixMessages$Outbound =
   | SystemMessage$Outbound
@@ -2175,22 +1713,7 @@ export const PrefixMessages$outboundSchema: z.ZodType<
 export function prefixMessagesToJSON(prefixMessages: PrefixMessages): string {
   return JSON.stringify(PrefixMessages$outboundSchema.parse(prefixMessages));
 }
-export function prefixMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<PrefixMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PrefixMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PrefixMessages' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestContentMessages52$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestContentMessages52,
-  z.ZodTypeDef,
-  unknown
-> = TextContentPartSchema$inboundSchema;
 /** @internal */
 export type InvokeDeploymentRequestContentMessages52$Outbound =
   TextContentPartSchema$Outbound;
@@ -2212,28 +1735,7 @@ export function invokeDeploymentRequestContentMessages52ToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestContentMessages52FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestContentMessages52,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestContentMessages52$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestContentMessages52' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestMessages5Content$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestMessages5Content,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]);
 /** @internal */
 export type InvokeDeploymentRequestMessages5Content$Outbound =
   | string
@@ -2256,47 +1758,17 @@ export function invokeDeploymentRequestMessages5ContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestMessages5ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestMessages5Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestMessages5Content$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestMessages5Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeDeploymentRequestMessagesType
-> = z.nativeEnum(InvokeDeploymentRequestMessagesType);
 /** @internal */
 export const InvokeDeploymentRequestMessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequestMessagesType> =
-    InvokeDeploymentRequestMessagesType$inboundSchema;
+  z.ZodNativeEnum<typeof InvokeDeploymentRequestMessagesType> = z.nativeEnum(
+    InvokeDeploymentRequestMessagesType,
+  );
 
 /** @internal */
-export const MessagesTtl$inboundSchema: z.ZodNativeEnum<typeof MessagesTtl> = z
+export const MessagesTtl$outboundSchema: z.ZodNativeEnum<typeof MessagesTtl> = z
   .nativeEnum(MessagesTtl);
-/** @internal */
-export const MessagesTtl$outboundSchema: z.ZodNativeEnum<typeof MessagesTtl> =
-  MessagesTtl$inboundSchema;
 
-/** @internal */
-export const MessagesCacheControl$inboundSchema: z.ZodType<
-  MessagesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeDeploymentRequestMessagesType$inboundSchema,
-  ttl: MessagesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type MessagesCacheControl$Outbound = {
   type: string;
@@ -2320,32 +1792,7 @@ export function messagesCacheControlToJSON(
     MessagesCacheControl$outboundSchema.parse(messagesCacheControl),
   );
 }
-export function messagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesToolMessage$inboundSchema: z.ZodType<
-  MessagesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() => MessagesCacheControl$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type MessagesToolMessage$Outbound = {
   role: "tool";
@@ -2378,29 +1825,7 @@ export function messagesToolMessageToJSON(
     MessagesToolMessage$outboundSchema.parse(messagesToolMessage),
   );
 }
-export function messagesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesToolMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesToolMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestContentMessages42$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestContentMessages42,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  RefusalPartSchema$inboundSchema,
-  ReasoningPartSchema$inboundSchema,
-  RedactedReasoningPartSchema$inboundSchema,
-]);
 /** @internal */
 export type InvokeDeploymentRequestContentMessages42$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
@@ -2432,40 +1857,7 @@ export function invokeDeploymentRequestContentMessages42ToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestContentMessages42FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestContentMessages42,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestContentMessages42$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestContentMessages42' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestMessages4Content$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestMessages4Content,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      RefusalPartSchema$inboundSchema,
-      ReasoningPartSchema$inboundSchema,
-      RedactedReasoningPartSchema$inboundSchema,
-    ]),
-  ),
-]);
 /** @internal */
 export type InvokeDeploymentRequestMessages4Content$Outbound =
   | string
@@ -2505,30 +1897,7 @@ export function invokeDeploymentRequestMessages4ContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestMessages4ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestMessages4Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestMessages4Content$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestMessages4Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesAudio$inboundSchema: z.ZodType<
-  MessagesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type MessagesAudio$Outbound = {
   id: string;
@@ -2546,32 +1915,11 @@ export const MessagesAudio$outboundSchema: z.ZodType<
 export function messagesAudioToJSON(messagesAudio: MessagesAudio): string {
   return JSON.stringify(MessagesAudio$outboundSchema.parse(messagesAudio));
 }
-export function messagesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesType$inboundSchema: z.ZodNativeEnum<typeof MessagesType> =
-  z.nativeEnum(MessagesType);
 /** @internal */
 export const MessagesType$outboundSchema: z.ZodNativeEnum<typeof MessagesType> =
-  MessagesType$inboundSchema;
+  z.nativeEnum(MessagesType);
 
-/** @internal */
-export const MessagesFunction$inboundSchema: z.ZodType<
-  MessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type MessagesFunction$Outbound = {
   name?: string | undefined;
@@ -2595,31 +1943,7 @@ export function messagesFunctionToJSON(
     MessagesFunction$outboundSchema.parse(messagesFunction),
   );
 }
-export function messagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesToolCalls$inboundSchema: z.ZodType<
-  MessagesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: MessagesType$inboundSchema,
-  function: z.lazy(() => MessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type MessagesToolCalls$Outbound = {
   id: string;
@@ -2651,47 +1975,7 @@ export function messagesToolCallsToJSON(
     MessagesToolCalls$outboundSchema.parse(messagesToolCalls),
   );
 }
-export function messagesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesAssistantMessage$inboundSchema: z.ZodType<
-  MessagesAssistantMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          RefusalPartSchema$inboundSchema,
-          ReasoningPartSchema$inboundSchema,
-          RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => MessagesAudio$inboundSchema)).optional(),
-  tool_calls: z.array(z.lazy(() => MessagesToolCalls$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-  });
-});
 /** @internal */
 export type MessagesAssistantMessage$Outbound = {
   content?:
@@ -2750,44 +2034,18 @@ export function messagesAssistantMessageToJSON(
     MessagesAssistantMessage$outboundSchema.parse(messagesAssistantMessage),
   );
 }
-export function messagesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesAssistantMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesAssistantMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const InvokeDeploymentRequest2MessagesType$inboundSchema:
+export const InvokeDeploymentRequest2MessagesType$outboundSchema:
   z.ZodNativeEnum<typeof InvokeDeploymentRequest2MessagesType> = z.nativeEnum(
     InvokeDeploymentRequest2MessagesType,
   );
-/** @internal */
-export const InvokeDeploymentRequest2MessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequest2MessagesType> =
-    InvokeDeploymentRequest2MessagesType$inboundSchema;
 
-/** @internal */
-export const InvokeDeploymentRequest2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeDeploymentRequest2Ttl
-> = z.nativeEnum(InvokeDeploymentRequest2Ttl);
 /** @internal */
 export const InvokeDeploymentRequest2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof InvokeDeploymentRequest2Ttl
-> = InvokeDeploymentRequest2Ttl$inboundSchema;
+> = z.nativeEnum(InvokeDeploymentRequest2Ttl);
 
-/** @internal */
-export const InvokeDeploymentRequest2CacheControl$inboundSchema: z.ZodType<
-  InvokeDeploymentRequest2CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeDeploymentRequest2MessagesType$inboundSchema,
-  ttl: InvokeDeploymentRequest2Ttl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type InvokeDeploymentRequest2CacheControl$Outbound = {
   type: string;
@@ -2813,30 +2071,7 @@ export function invokeDeploymentRequest2CacheControlToJSON(
     ),
   );
 }
-export function invokeDeploymentRequest2CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequest2CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequest2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequest2CacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const Two4$inboundSchema: z.ZodType<Two4, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("file"),
-    cache_control: z.lazy(() =>
-      InvokeDeploymentRequest2CacheControl$inboundSchema
-    ).optional(),
-    file: FileContentPartSchema$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "cache_control": "cacheControl",
-    });
-  });
 /** @internal */
 export type Two4$Outbound = {
   type: "file";
@@ -2861,29 +2096,7 @@ export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
 export function two4ToJSON(two4: Two4): string {
   return JSON.stringify(Two4$outboundSchema.parse(two4));
 }
-export function two4FromJSON(
-  jsonString: string,
-): SafeParseResult<Two4, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Two4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two4' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestContentMessages2$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestContentMessages2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  ImageContentPartSchema$inboundSchema,
-  AudioContentPartSchema$inboundSchema,
-  z.lazy(() => Two4$inboundSchema),
-]);
 /** @internal */
 export type InvokeDeploymentRequestContentMessages2$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
@@ -2915,40 +2128,7 @@ export function invokeDeploymentRequestContentMessages2ToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestContentMessages2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestContentMessages2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestContentMessages2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestContentMessages2' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestMessages3Content$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestMessages3Content,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      ImageContentPartSchema$inboundSchema,
-      AudioContentPartSchema$inboundSchema,
-      z.lazy(() => Two4$inboundSchema),
-    ]),
-  ),
-]);
 /** @internal */
 export type InvokeDeploymentRequestMessages3Content$Outbound =
   | string
@@ -2988,44 +2168,7 @@ export function invokeDeploymentRequestMessages3ContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestMessages3ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeDeploymentRequestMessages3Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestMessages3Content$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeDeploymentRequestMessages3Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesUserMessage$inboundSchema: z.ZodType<
-  MessagesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        ImageContentPartSchema$inboundSchema,
-        AudioContentPartSchema$inboundSchema,
-        z.lazy(() => Two4$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type MessagesUserMessage$Outbound = {
   role: "user";
@@ -3070,22 +2213,7 @@ export function messagesUserMessageToJSON(
     MessagesUserMessage$outboundSchema.parse(messagesUserMessage),
   );
 }
-export function messagesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesUserMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesUserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestMessagesContent$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]);
 /** @internal */
 export type InvokeDeploymentRequestMessagesContent$Outbound =
   | string
@@ -3108,27 +2236,7 @@ export function invokeDeploymentRequestMessagesContentToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeDeploymentRequestMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesDeveloperMessage$inboundSchema: z.ZodType<
-  MessagesDeveloperMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type MessagesDeveloperMessage$Outbound = {
   role: "developer";
@@ -3154,22 +2262,7 @@ export function messagesDeveloperMessageToJSON(
     MessagesDeveloperMessage$outboundSchema.parse(messagesDeveloperMessage),
   );
 }
-export function messagesDeveloperMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesDeveloperMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesDeveloperMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesDeveloperMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesContent$inboundSchema: z.ZodType<
-  MessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]);
 /** @internal */
 export type MessagesContent$Outbound =
   | string
@@ -3187,26 +2280,7 @@ export function messagesContentToJSON(
 ): string {
   return JSON.stringify(MessagesContent$outboundSchema.parse(messagesContent));
 }
-export function messagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const MessagesSystemMessage$inboundSchema: z.ZodType<
-  MessagesSystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$inboundSchema)]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type MessagesSystemMessage$Outbound = {
   role: "system";
@@ -3232,28 +2306,7 @@ export function messagesSystemMessageToJSON(
     MessagesSystemMessage$outboundSchema.parse(messagesSystemMessage),
   );
 }
-export function messagesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<MessagesSystemMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => MessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MessagesSystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const Messages$inboundSchema: z.ZodType<
-  Messages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => MessagesSystemMessage$inboundSchema),
-  z.lazy(() => MessagesDeveloperMessage$inboundSchema),
-  z.lazy(() => MessagesUserMessage$inboundSchema),
-  z.lazy(() => MessagesAssistantMessage$inboundSchema),
-  z.lazy(() => MessagesToolMessage$inboundSchema),
-]);
 /** @internal */
 export type Messages$Outbound =
   | MessagesSystemMessage$Outbound
@@ -3278,32 +2331,7 @@ export const Messages$outboundSchema: z.ZodType<
 export function messagesToJSON(messages: Messages): string {
   return JSON.stringify(Messages$outboundSchema.parse(messages));
 }
-export function messagesFromJSON(
-  jsonString: string,
-): SafeParseResult<Messages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Messages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Messages' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestMetadata$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file_name: z.string().optional(),
-  file_type: z.string().optional(),
-  page_number: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_name": "fileName",
-    "file_type": "fileType",
-    "page_number": "pageNumber",
-  });
-});
 /** @internal */
 export type InvokeDeploymentRequestMetadata$Outbound = {
   file_name?: string | undefined;
@@ -3337,26 +2365,7 @@ export function invokeDeploymentRequestMetadataToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestMetadata' from JSON`,
-  );
-}
 
-/** @internal */
-export const Documents$inboundSchema: z.ZodType<
-  Documents,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  text: z.string(),
-  metadata: z.lazy(() => InvokeDeploymentRequestMetadata$inboundSchema)
-    .optional(),
-});
 /** @internal */
 export type Documents$Outbound = {
   text: string;
@@ -3377,32 +2386,7 @@ export const Documents$outboundSchema: z.ZodType<
 export function documentsToJSON(documents: Documents): string {
   return JSON.stringify(Documents$outboundSchema.parse(documents));
 }
-export function documentsFromJSON(
-  jsonString: string,
-): SafeParseResult<Documents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Documents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Documents' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeOptions$inboundSchema: z.ZodType<
-  InvokeOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_retrievals: z.boolean().default(false),
-  include_usage: z.boolean().default(false),
-  mock_response: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_retrievals": "includeRetrievals",
-    "include_usage": "includeUsage",
-    "mock_response": "mockResponse",
-  });
-});
 /** @internal */
 export type InvokeOptions$Outbound = {
   include_retrievals: boolean;
@@ -3430,22 +2414,7 @@ export const InvokeOptions$outboundSchema: z.ZodType<
 export function invokeOptionsToJSON(invokeOptions: InvokeOptions): string {
   return JSON.stringify(InvokeOptions$outboundSchema.parse(invokeOptions));
 }
-export function invokeOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeOptions' from JSON`,
-  );
-}
 
-/** @internal */
-export const Thread$inboundSchema: z.ZodType<Thread, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    tags: z.array(z.string()).optional(),
-  });
 /** @internal */
 export type Thread$Outbound = {
   id: string;
@@ -3465,24 +2434,7 @@ export const Thread$outboundSchema: z.ZodType<
 export function threadToJSON(thread: Thread): string {
   return JSON.stringify(Thread$outboundSchema.parse(thread));
 }
-export function threadFromJSON(
-  jsonString: string,
-): SafeParseResult<Thread, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Thread$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Thread' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrExists$inboundSchema: z.ZodType<
-  OrExists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type OrExists$Outbound = {
   exists: boolean;
@@ -3500,19 +2452,7 @@ export const OrExists$outboundSchema: z.ZodType<
 export function orExistsToJSON(orExists: OrExists): string {
   return JSON.stringify(OrExists$outboundSchema.parse(orExists));
 }
-export function orExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<OrExists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrExists' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrNin$inboundSchema: z.ZodType<OrNin, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type OrNin$Outbound = string | number | boolean;
 
@@ -3526,24 +2466,7 @@ export const OrNin$outboundSchema: z.ZodType<
 export function orNinToJSON(orNin: OrNin): string {
   return JSON.stringify(OrNin$outboundSchema.parse(orNin));
 }
-export function orNinFromJSON(
-  jsonString: string,
-): SafeParseResult<OrNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestOrNin$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestOrNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type InvokeDeploymentRequestOrNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -3567,19 +2490,7 @@ export function invokeDeploymentRequestOrNinToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestOrNinFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestOrNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestOrNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestOrNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrIn$inboundSchema: z.ZodType<OrIn, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type OrIn$Outbound = string | number | boolean;
 
@@ -3590,24 +2501,7 @@ export const OrIn$outboundSchema: z.ZodType<OrIn$Outbound, z.ZodTypeDef, OrIn> =
 export function orInToJSON(orIn: OrIn): string {
   return JSON.stringify(OrIn$outboundSchema.parse(orIn));
 }
-export function orInFromJSON(
-  jsonString: string,
-): SafeParseResult<OrIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestOrIn$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestOrIn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type InvokeDeploymentRequestOrIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -3631,21 +2525,7 @@ export function invokeDeploymentRequestOrInToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestOrInFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestOrIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestOrIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestOrIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrLte$inboundSchema: z.ZodType<OrLte, z.ZodTypeDef, unknown> = z
-  .object({
-    lte: z.number(),
-  });
 /** @internal */
 export type OrLte$Outbound = {
   lte: number;
@@ -3663,21 +2543,7 @@ export const OrLte$outboundSchema: z.ZodType<
 export function orLteToJSON(orLte: OrLte): string {
   return JSON.stringify(OrLte$outboundSchema.parse(orLte));
 }
-export function orLteFromJSON(
-  jsonString: string,
-): SafeParseResult<OrLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrLte' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrLt$inboundSchema: z.ZodType<OrLt, z.ZodTypeDef, unknown> = z
-  .object({
-    lt: z.number(),
-  });
 /** @internal */
 export type OrLt$Outbound = {
   lt: number;
@@ -3692,21 +2558,7 @@ export const OrLt$outboundSchema: z.ZodType<OrLt$Outbound, z.ZodTypeDef, OrLt> =
 export function orLtToJSON(orLt: OrLt): string {
   return JSON.stringify(OrLt$outboundSchema.parse(orLt));
 }
-export function orLtFromJSON(
-  jsonString: string,
-): SafeParseResult<OrLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrLt' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrGte$inboundSchema: z.ZodType<OrGte, z.ZodTypeDef, unknown> = z
-  .object({
-    gte: z.number(),
-  });
 /** @internal */
 export type OrGte$Outbound = {
   gte: number;
@@ -3724,21 +2576,7 @@ export const OrGte$outboundSchema: z.ZodType<
 export function orGteToJSON(orGte: OrGte): string {
   return JSON.stringify(OrGte$outboundSchema.parse(orGte));
 }
-export function orGteFromJSON(
-  jsonString: string,
-): SafeParseResult<OrGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrGte' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrGt$inboundSchema: z.ZodType<OrGt, z.ZodTypeDef, unknown> = z
-  .object({
-    gt: z.number(),
-  });
 /** @internal */
 export type OrGt$Outbound = {
   gt: number;
@@ -3753,19 +2591,7 @@ export const OrGt$outboundSchema: z.ZodType<OrGt$Outbound, z.ZodTypeDef, OrGt> =
 export function orGtToJSON(orGt: OrGt): string {
   return JSON.stringify(OrGt$outboundSchema.parse(orGt));
 }
-export function orGtFromJSON(
-  jsonString: string,
-): SafeParseResult<OrGt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrGt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrGt' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrNe$inboundSchema: z.ZodType<OrNe, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type OrNe$Outbound = string | number | boolean;
 
@@ -3776,24 +2602,7 @@ export const OrNe$outboundSchema: z.ZodType<OrNe$Outbound, z.ZodTypeDef, OrNe> =
 export function orNeToJSON(orNe: OrNe): string {
   return JSON.stringify(OrNe$outboundSchema.parse(orNe));
 }
-export function orNeFromJSON(
-  jsonString: string,
-): SafeParseResult<OrNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestOrNe$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestOrNe,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type InvokeDeploymentRequestOrNe$Outbound = {
   ne: string | number | boolean;
@@ -3817,19 +2626,7 @@ export function invokeDeploymentRequestOrNeToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestOrNeFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestOrNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestOrNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestOrNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const OrEq$inboundSchema: z.ZodType<OrEq, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type OrEq$Outbound = string | number | boolean;
 
@@ -3840,24 +2637,7 @@ export const OrEq$outboundSchema: z.ZodType<OrEq$Outbound, z.ZodTypeDef, OrEq> =
 export function orEqToJSON(orEq: OrEq): string {
   return JSON.stringify(OrEq$outboundSchema.parse(orEq));
 }
-export function orEqFromJSON(
-  jsonString: string,
-): SafeParseResult<OrEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OrEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OrEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestOrEq$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestOrEq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type InvokeDeploymentRequestOrEq$Outbound = {
   eq: string | number | boolean;
@@ -3881,28 +2661,7 @@ export function invokeDeploymentRequestOrEqToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestOrEqFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestOrEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestOrEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestOrEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const Or$inboundSchema: z.ZodType<Or, z.ZodTypeDef, unknown> = z.union([
-  z.lazy(() => InvokeDeploymentRequestOrEq$inboundSchema),
-  z.lazy(() => InvokeDeploymentRequestOrNe$inboundSchema),
-  z.lazy(() => OrGt$inboundSchema),
-  z.lazy(() => OrGte$inboundSchema),
-  z.lazy(() => OrLt$inboundSchema),
-  z.lazy(() => OrLte$inboundSchema),
-  z.lazy(() => InvokeDeploymentRequestOrIn$inboundSchema),
-  z.lazy(() => InvokeDeploymentRequestOrNin$inboundSchema),
-  z.lazy(() => OrExists$inboundSchema),
-]);
 /** @internal */
 export type Or$Outbound =
   | InvokeDeploymentRequestOrEq$Outbound
@@ -3932,38 +2691,7 @@ export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
 export function orToJSON(or: Or): string {
   return JSON.stringify(Or$outboundSchema.parse(or));
 }
-export function orFromJSON(
-  jsonString: string,
-): SafeParseResult<Or, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Or$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Or' from JSON`,
-  );
-}
 
-/** @internal */
-export const KnowledgeFilterOr$inboundSchema: z.ZodType<
-  KnowledgeFilterOr,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  or: z.array(
-    z.record(z.union([
-      z.lazy(() => InvokeDeploymentRequestOrEq$inboundSchema),
-      z.lazy(() =>
-        InvokeDeploymentRequestOrNe$inboundSchema
-      ),
-      z.lazy(() => OrGt$inboundSchema),
-      z.lazy(() => OrGte$inboundSchema),
-      z.lazy(() => OrLt$inboundSchema),
-      z.lazy(() => OrLte$inboundSchema),
-      z.lazy(() => InvokeDeploymentRequestOrIn$inboundSchema),
-      z.lazy(() => InvokeDeploymentRequestOrNin$inboundSchema),
-      z.lazy(() => OrExists$inboundSchema),
-    ])),
-  ),
-});
 /** @internal */
 export type KnowledgeFilterOr$Outbound = {
   or: Array<
@@ -4012,24 +2740,7 @@ export function knowledgeFilterOrToJSON(
     KnowledgeFilterOr$outboundSchema.parse(knowledgeFilterOr),
   );
 }
-export function knowledgeFilterOrFromJSON(
-  jsonString: string,
-): SafeParseResult<KnowledgeFilterOr, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => KnowledgeFilterOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'KnowledgeFilterOr' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndExists$inboundSchema: z.ZodType<
-  AndExists,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  exists: z.boolean(),
-});
 /** @internal */
 export type AndExists$Outbound = {
   exists: boolean;
@@ -4047,19 +2758,7 @@ export const AndExists$outboundSchema: z.ZodType<
 export function andExistsToJSON(andExists: AndExists): string {
   return JSON.stringify(AndExists$outboundSchema.parse(andExists));
 }
-export function andExistsFromJSON(
-  jsonString: string,
-): SafeParseResult<AndExists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndExists' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndNin$inboundSchema: z.ZodType<AndNin, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type AndNin$Outbound = string | number | boolean;
 
@@ -4073,24 +2772,7 @@ export const AndNin$outboundSchema: z.ZodType<
 export function andNinToJSON(andNin: AndNin): string {
   return JSON.stringify(AndNin$outboundSchema.parse(andNin));
 }
-export function andNinFromJSON(
-  jsonString: string,
-): SafeParseResult<AndNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestAndNin$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestAndNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type InvokeDeploymentRequestAndNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -4114,19 +2796,7 @@ export function invokeDeploymentRequestAndNinToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestAndNinFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestAndNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestAndNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestAndNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndIn$inboundSchema: z.ZodType<AndIn, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type AndIn$Outbound = string | number | boolean;
 
@@ -4140,24 +2810,7 @@ export const AndIn$outboundSchema: z.ZodType<
 export function andInToJSON(andIn: AndIn): string {
   return JSON.stringify(AndIn$outboundSchema.parse(andIn));
 }
-export function andInFromJSON(
-  jsonString: string,
-): SafeParseResult<AndIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestAndIn$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestAndIn,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
 /** @internal */
 export type InvokeDeploymentRequestAndIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -4181,21 +2834,7 @@ export function invokeDeploymentRequestAndInToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestAndInFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestAndIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestAndIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestAndIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndLte$inboundSchema: z.ZodType<AndLte, z.ZodTypeDef, unknown> = z
-  .object({
-    lte: z.number(),
-  });
 /** @internal */
 export type AndLte$Outbound = {
   lte: number;
@@ -4213,21 +2852,7 @@ export const AndLte$outboundSchema: z.ZodType<
 export function andLteToJSON(andLte: AndLte): string {
   return JSON.stringify(AndLte$outboundSchema.parse(andLte));
 }
-export function andLteFromJSON(
-  jsonString: string,
-): SafeParseResult<AndLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndLte' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndLt$inboundSchema: z.ZodType<AndLt, z.ZodTypeDef, unknown> = z
-  .object({
-    lt: z.number(),
-  });
 /** @internal */
 export type AndLt$Outbound = {
   lt: number;
@@ -4245,21 +2870,7 @@ export const AndLt$outboundSchema: z.ZodType<
 export function andLtToJSON(andLt: AndLt): string {
   return JSON.stringify(AndLt$outboundSchema.parse(andLt));
 }
-export function andLtFromJSON(
-  jsonString: string,
-): SafeParseResult<AndLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndLt' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndGte$inboundSchema: z.ZodType<AndGte, z.ZodTypeDef, unknown> = z
-  .object({
-    gte: z.number(),
-  });
 /** @internal */
 export type AndGte$Outbound = {
   gte: number;
@@ -4277,21 +2888,7 @@ export const AndGte$outboundSchema: z.ZodType<
 export function andGteToJSON(andGte: AndGte): string {
   return JSON.stringify(AndGte$outboundSchema.parse(andGte));
 }
-export function andGteFromJSON(
-  jsonString: string,
-): SafeParseResult<AndGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndGte' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndGt$inboundSchema: z.ZodType<AndGt, z.ZodTypeDef, unknown> = z
-  .object({
-    gt: z.number(),
-  });
 /** @internal */
 export type AndGt$Outbound = {
   gt: number;
@@ -4309,19 +2906,7 @@ export const AndGt$outboundSchema: z.ZodType<
 export function andGtToJSON(andGt: AndGt): string {
   return JSON.stringify(AndGt$outboundSchema.parse(andGt));
 }
-export function andGtFromJSON(
-  jsonString: string,
-): SafeParseResult<AndGt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndGt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndGt' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndNe$inboundSchema: z.ZodType<AndNe, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type AndNe$Outbound = string | number | boolean;
 
@@ -4335,24 +2920,7 @@ export const AndNe$outboundSchema: z.ZodType<
 export function andNeToJSON(andNe: AndNe): string {
   return JSON.stringify(AndNe$outboundSchema.parse(andNe));
 }
-export function andNeFromJSON(
-  jsonString: string,
-): SafeParseResult<AndNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestAndNe$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestAndNe,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type InvokeDeploymentRequestAndNe$Outbound = {
   ne: string | number | boolean;
@@ -4376,19 +2944,7 @@ export function invokeDeploymentRequestAndNeToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestAndNeFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestAndNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestAndNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestAndNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const AndEq$inboundSchema: z.ZodType<AndEq, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type AndEq$Outbound = string | number | boolean;
 
@@ -4402,24 +2958,7 @@ export const AndEq$outboundSchema: z.ZodType<
 export function andEqToJSON(andEq: AndEq): string {
   return JSON.stringify(AndEq$outboundSchema.parse(andEq));
 }
-export function andEqFromJSON(
-  jsonString: string,
-): SafeParseResult<AndEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AndEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AndEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequestAndEq$inboundSchema: z.ZodType<
-  InvokeDeploymentRequestAndEq,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
 /** @internal */
 export type InvokeDeploymentRequestAndEq$Outbound = {
   eq: string | number | boolean;
@@ -4443,30 +2982,7 @@ export function invokeDeploymentRequestAndEqToJSON(
     ),
   );
 }
-export function invokeDeploymentRequestAndEqFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequestAndEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequestAndEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequestAndEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const And$inboundSchema: z.ZodType<And, z.ZodTypeDef, unknown> = z.union(
-  [
-    z.lazy(() => InvokeDeploymentRequestAndEq$inboundSchema),
-    z.lazy(() => InvokeDeploymentRequestAndNe$inboundSchema),
-    z.lazy(() => AndGt$inboundSchema),
-    z.lazy(() => AndGte$inboundSchema),
-    z.lazy(() => AndLt$inboundSchema),
-    z.lazy(() => AndLte$inboundSchema),
-    z.lazy(() => InvokeDeploymentRequestAndIn$inboundSchema),
-    z.lazy(() => InvokeDeploymentRequestAndNin$inboundSchema),
-    z.lazy(() => AndExists$inboundSchema),
-  ],
-);
 /** @internal */
 export type And$Outbound =
   | InvokeDeploymentRequestAndEq$Outbound
@@ -4496,38 +3012,7 @@ export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
 export function andToJSON(and: And): string {
   return JSON.stringify(And$outboundSchema.parse(and));
 }
-export function andFromJSON(
-  jsonString: string,
-): SafeParseResult<And, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => And$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'And' from JSON`,
-  );
-}
 
-/** @internal */
-export const KnowledgeFilterAnd$inboundSchema: z.ZodType<
-  KnowledgeFilterAnd,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  and: z.array(
-    z.record(z.union([
-      z.lazy(() => InvokeDeploymentRequestAndEq$inboundSchema),
-      z.lazy(() =>
-        InvokeDeploymentRequestAndNe$inboundSchema
-      ),
-      z.lazy(() => AndGt$inboundSchema),
-      z.lazy(() => AndGte$inboundSchema),
-      z.lazy(() => AndLt$inboundSchema),
-      z.lazy(() => AndLte$inboundSchema),
-      z.lazy(() => InvokeDeploymentRequestAndIn$inboundSchema),
-      z.lazy(() => InvokeDeploymentRequestAndNin$inboundSchema),
-      z.lazy(() => AndExists$inboundSchema),
-    ])),
-  ),
-});
 /** @internal */
 export type KnowledgeFilterAnd$Outbound = {
   and: Array<
@@ -4576,21 +3061,7 @@ export function knowledgeFilterAndToJSON(
     KnowledgeFilterAnd$outboundSchema.parse(knowledgeFilterAnd),
   );
 }
-export function knowledgeFilterAndFromJSON(
-  jsonString: string,
-): SafeParseResult<KnowledgeFilterAnd, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => KnowledgeFilterAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'KnowledgeFilterAnd' from JSON`,
-  );
-}
 
-/** @internal */
-export const Exists$inboundSchema: z.ZodType<Exists, z.ZodTypeDef, unknown> = z
-  .object({
-    exists: z.boolean(),
-  });
 /** @internal */
 export type Exists$Outbound = {
   exists: boolean;
@@ -4608,20 +3079,7 @@ export const Exists$outboundSchema: z.ZodType<
 export function existsToJSON(exists: Exists): string {
   return JSON.stringify(Exists$outboundSchema.parse(exists));
 }
-export function existsFromJSON(
-  jsonString: string,
-): SafeParseResult<Exists, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Exists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Exists' from JSON`,
-  );
-}
 
-/** @internal */
-export const Nin$inboundSchema: z.ZodType<Nin, z.ZodTypeDef, unknown> = z.union(
-  [z.string(), z.number(), z.boolean()],
-);
 /** @internal */
 export type Nin$Outbound = string | number | boolean;
 
@@ -4632,21 +3090,7 @@ export const Nin$outboundSchema: z.ZodType<Nin$Outbound, z.ZodTypeDef, Nin> = z
 export function ninToJSON(nin: Nin): string {
   return JSON.stringify(Nin$outboundSchema.parse(nin));
 }
-export function ninFromJSON(
-  jsonString: string,
-): SafeParseResult<Nin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Nin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Nin' from JSON`,
-  );
-}
 
-/** @internal */
-export const OneNin$inboundSchema: z.ZodType<OneNin, z.ZodTypeDef, unknown> = z
-  .object({
-    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-  });
 /** @internal */
 export type OneNin$Outbound = {
   nin: Array<string | number | boolean>;
@@ -4664,22 +3108,7 @@ export const OneNin$outboundSchema: z.ZodType<
 export function oneNinToJSON(oneNin: OneNin): string {
   return JSON.stringify(OneNin$outboundSchema.parse(oneNin));
 }
-export function oneNinFromJSON(
-  jsonString: string,
-): SafeParseResult<OneNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OneNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OneNin' from JSON`,
-  );
-}
 
-/** @internal */
-export const In$inboundSchema: z.ZodType<In, z.ZodTypeDef, unknown> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-]);
 /** @internal */
 export type In$Outbound = string | number | boolean;
 
@@ -4690,21 +3119,7 @@ export const In$outboundSchema: z.ZodType<In$Outbound, z.ZodTypeDef, In> = z
 export function inToJSON(value: In): string {
   return JSON.stringify(In$outboundSchema.parse(value));
 }
-export function inFromJSON(
-  jsonString: string,
-): SafeParseResult<In, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => In$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'In' from JSON`,
-  );
-}
 
-/** @internal */
-export const OneIn$inboundSchema: z.ZodType<OneIn, z.ZodTypeDef, unknown> = z
-  .object({
-    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-  });
 /** @internal */
 export type OneIn$Outbound = {
   in: Array<string | number | boolean>;
@@ -4722,21 +3137,7 @@ export const OneIn$outboundSchema: z.ZodType<
 export function oneInToJSON(oneIn: OneIn): string {
   return JSON.stringify(OneIn$outboundSchema.parse(oneIn));
 }
-export function oneInFromJSON(
-  jsonString: string,
-): SafeParseResult<OneIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OneIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OneIn' from JSON`,
-  );
-}
 
-/** @internal */
-export const Lte$inboundSchema: z.ZodType<Lte, z.ZodTypeDef, unknown> = z
-  .object({
-    lte: z.number(),
-  });
 /** @internal */
 export type Lte$Outbound = {
   lte: number;
@@ -4751,20 +3152,7 @@ export const Lte$outboundSchema: z.ZodType<Lte$Outbound, z.ZodTypeDef, Lte> = z
 export function lteToJSON(lte: Lte): string {
   return JSON.stringify(Lte$outboundSchema.parse(lte));
 }
-export function lteFromJSON(
-  jsonString: string,
-): SafeParseResult<Lte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Lte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Lte' from JSON`,
-  );
-}
 
-/** @internal */
-export const Lt$inboundSchema: z.ZodType<Lt, z.ZodTypeDef, unknown> = z.object({
-  lt: z.number(),
-});
 /** @internal */
 export type Lt$Outbound = {
   lt: number;
@@ -4779,21 +3167,7 @@ export const Lt$outboundSchema: z.ZodType<Lt$Outbound, z.ZodTypeDef, Lt> = z
 export function ltToJSON(lt: Lt): string {
   return JSON.stringify(Lt$outboundSchema.parse(lt));
 }
-export function ltFromJSON(
-  jsonString: string,
-): SafeParseResult<Lt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Lt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Lt' from JSON`,
-  );
-}
 
-/** @internal */
-export const Gte$inboundSchema: z.ZodType<Gte, z.ZodTypeDef, unknown> = z
-  .object({
-    gte: z.number(),
-  });
 /** @internal */
 export type Gte$Outbound = {
   gte: number;
@@ -4808,20 +3182,7 @@ export const Gte$outboundSchema: z.ZodType<Gte$Outbound, z.ZodTypeDef, Gte> = z
 export function gteToJSON(gte: Gte): string {
   return JSON.stringify(Gte$outboundSchema.parse(gte));
 }
-export function gteFromJSON(
-  jsonString: string,
-): SafeParseResult<Gte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Gte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Gte' from JSON`,
-  );
-}
 
-/** @internal */
-export const Gt$inboundSchema: z.ZodType<Gt, z.ZodTypeDef, unknown> = z.object({
-  gt: z.number(),
-});
 /** @internal */
 export type Gt$Outbound = {
   gt: number;
@@ -4836,22 +3197,7 @@ export const Gt$outboundSchema: z.ZodType<Gt$Outbound, z.ZodTypeDef, Gt> = z
 export function gtToJSON(gt: Gt): string {
   return JSON.stringify(Gt$outboundSchema.parse(gt));
 }
-export function gtFromJSON(
-  jsonString: string,
-): SafeParseResult<Gt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Gt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Gt' from JSON`,
-  );
-}
 
-/** @internal */
-export const Ne$inboundSchema: z.ZodType<Ne, z.ZodTypeDef, unknown> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-]);
 /** @internal */
 export type Ne$Outbound = string | number | boolean;
 
@@ -4862,21 +3208,7 @@ export const Ne$outboundSchema: z.ZodType<Ne$Outbound, z.ZodTypeDef, Ne> = z
 export function neToJSON(ne: Ne): string {
   return JSON.stringify(Ne$outboundSchema.parse(ne));
 }
-export function neFromJSON(
-  jsonString: string,
-): SafeParseResult<Ne, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Ne$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Ne' from JSON`,
-  );
-}
 
-/** @internal */
-export const OneNe$inboundSchema: z.ZodType<OneNe, z.ZodTypeDef, unknown> = z
-  .object({
-    ne: z.union([z.string(), z.number(), z.boolean()]),
-  });
 /** @internal */
 export type OneNe$Outbound = {
   ne: string | number | boolean;
@@ -4894,22 +3226,7 @@ export const OneNe$outboundSchema: z.ZodType<
 export function oneNeToJSON(oneNe: OneNe): string {
   return JSON.stringify(OneNe$outboundSchema.parse(oneNe));
 }
-export function oneNeFromJSON(
-  jsonString: string,
-): SafeParseResult<OneNe, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OneNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OneNe' from JSON`,
-  );
-}
 
-/** @internal */
-export const Eq$inboundSchema: z.ZodType<Eq, z.ZodTypeDef, unknown> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-]);
 /** @internal */
 export type Eq$Outbound = string | number | boolean;
 
@@ -4920,21 +3237,7 @@ export const Eq$outboundSchema: z.ZodType<Eq$Outbound, z.ZodTypeDef, Eq> = z
 export function eqToJSON(eq: Eq): string {
   return JSON.stringify(Eq$outboundSchema.parse(eq));
 }
-export function eqFromJSON(
-  jsonString: string,
-): SafeParseResult<Eq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Eq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Eq' from JSON`,
-  );
-}
 
-/** @internal */
-export const OneEq$inboundSchema: z.ZodType<OneEq, z.ZodTypeDef, unknown> = z
-  .object({
-    eq: z.union([z.string(), z.number(), z.boolean()]),
-  });
 /** @internal */
 export type OneEq$Outbound = {
   eq: string | number | boolean;
@@ -4952,30 +3255,7 @@ export const OneEq$outboundSchema: z.ZodType<
 export function oneEqToJSON(oneEq: OneEq): string {
   return JSON.stringify(OneEq$outboundSchema.parse(oneEq));
 }
-export function oneEqFromJSON(
-  jsonString: string,
-): SafeParseResult<OneEq, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OneEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OneEq' from JSON`,
-  );
-}
 
-/** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z.union(
-  [
-    z.lazy(() => OneEq$inboundSchema),
-    z.lazy(() => OneNe$inboundSchema),
-    z.lazy(() => Gt$inboundSchema),
-    z.lazy(() => Gte$inboundSchema),
-    z.lazy(() => Lt$inboundSchema),
-    z.lazy(() => Lte$inboundSchema),
-    z.lazy(() => OneIn$inboundSchema),
-    z.lazy(() => OneNin$inboundSchema),
-    z.lazy(() => Exists$inboundSchema),
-  ],
-);
 /** @internal */
 export type One$Outbound =
   | OneEq$Outbound
@@ -5005,36 +3285,7 @@ export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
 export function oneToJSON(one: One): string {
   return JSON.stringify(One$outboundSchema.parse(one));
 }
-export function oneFromJSON(
-  jsonString: string,
-): SafeParseResult<One, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => One$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One' from JSON`,
-  );
-}
 
-/** @internal */
-export const KnowledgeFilter$inboundSchema: z.ZodType<
-  KnowledgeFilter,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => KnowledgeFilterAnd$inboundSchema),
-  z.lazy(() => KnowledgeFilterOr$inboundSchema),
-  z.record(z.union([
-    z.lazy(() => OneEq$inboundSchema),
-    z.lazy(() => OneNe$inboundSchema),
-    z.lazy(() => Gt$inboundSchema),
-    z.lazy(() => Gte$inboundSchema),
-    z.lazy(() => Lt$inboundSchema),
-    z.lazy(() => Lte$inboundSchema),
-    z.lazy(() => OneIn$inboundSchema),
-    z.lazy(() => OneNin$inboundSchema),
-    z.lazy(() => Exists$inboundSchema),
-  ])),
-]);
 /** @internal */
 export type KnowledgeFilter$Outbound =
   | KnowledgeFilterAnd$Outbound
@@ -5078,74 +3329,7 @@ export function knowledgeFilterToJSON(
 ): string {
   return JSON.stringify(KnowledgeFilter$outboundSchema.parse(knowledgeFilter));
 }
-export function knowledgeFilterFromJSON(
-  jsonString: string,
-): SafeParseResult<KnowledgeFilter, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => KnowledgeFilter$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'KnowledgeFilter' from JSON`,
-  );
-}
 
-/** @internal */
-export const InvokeDeploymentRequest$inboundSchema: z.ZodType<
-  InvokeDeploymentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  stream: z.boolean().default(false),
-  inputs: z.record(z.any()).optional(),
-  context: z.record(z.any()).optional(),
-  prefix_messages: z.array(
-    z.union([
-      z.lazy(() => SystemMessage$inboundSchema),
-      z.lazy(() => DeveloperMessage$inboundSchema),
-      z.lazy(() => UserMessage$inboundSchema),
-      z.lazy(() => AssistantMessage$inboundSchema),
-      z.lazy(() => ToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => MessagesSystemMessage$inboundSchema),
-      z.lazy(() => MessagesDeveloperMessage$inboundSchema),
-      z.lazy(() => MessagesUserMessage$inboundSchema),
-      z.lazy(() => MessagesAssistantMessage$inboundSchema),
-      z.lazy(() => MessagesToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  file_ids: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  extra_params: z.record(z.any()).optional(),
-  documents: z.array(z.lazy(() => Documents$inboundSchema)).optional(),
-  invoke_options: z.lazy(() => InvokeOptions$inboundSchema).optional(),
-  thread: z.lazy(() => Thread$inboundSchema).optional(),
-  knowledge_filter: z.union([
-    z.lazy(() => KnowledgeFilterAnd$inboundSchema),
-    z.lazy(() => KnowledgeFilterOr$inboundSchema),
-    z.record(z.union([
-      z.lazy(() => OneEq$inboundSchema),
-      z.lazy(() => OneNe$inboundSchema),
-      z.lazy(() => Gt$inboundSchema),
-      z.lazy(() => Gte$inboundSchema),
-      z.lazy(() => Lt$inboundSchema),
-      z.lazy(() => Lte$inboundSchema),
-      z.lazy(() => OneIn$inboundSchema),
-      z.lazy(() => OneNin$inboundSchema),
-      z.lazy(() => Exists$inboundSchema),
-    ])),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prefix_messages": "prefixMessages",
-    "file_ids": "fileIds",
-    "extra_params": "extraParams",
-    "invoke_options": "invokeOptions",
-    "knowledge_filter": "knowledgeFilter",
-  });
-});
 /** @internal */
 export type InvokeDeploymentRequest$Outbound = {
   key: string;
@@ -5258,14 +3442,5 @@ export function invokeDeploymentRequestToJSON(
 ): string {
   return JSON.stringify(
     InvokeDeploymentRequest$outboundSchema.parse(invokeDeploymentRequest),
-  );
-}
-export function invokeDeploymentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeDeploymentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeDeploymentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeDeploymentRequest' from JSON`,
   );
 }

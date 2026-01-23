@@ -1,18 +1,23 @@
-# Contacts
+# ~~Contacts~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Create a contact
-* [list](#list) - List contacts
-* [retrieve](#retrieve) - Retrieve a contact
-* [update](#update) - Update a contact
-* [delete](#delete) - Delete a contact
+* [~~create~~](#create) - Create a contact :warning: **Deprecated**
+* [~~list~~](#list) - List contacts :warning: **Deprecated**
+* [~~retrieve~~](#retrieve) - Retrieve a contact :warning: **Deprecated**
+* [~~update~~](#update) - Update a contact :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete a contact :warning: **Deprecated**
 
-## create
+## ~~create~~
 
 Creates a new contact with a unique external_id. If a contact with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -111,9 +116,11 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## list
+## ~~list~~
 
 Retrieves a paginated list of contacts in your workspace. Use pagination parameters to navigate through large contact lists efficiently.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -196,9 +203,11 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## retrieve
+## ~~retrieve~~
 
 Retrieves detailed information about a specific contact using their contact ID or external ID from your system.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -270,9 +279,11 @@ run();
 | errors.RetrieveContactResponseBody | 404                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
-## update
+## ~~update~~
 
 Updates specific fields of an existing contact. Only the fields provided in the request body will be updated.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -376,9 +387,11 @@ run();
 | errors.UpdateContactResponseBody | 404                              | application/json                 |
 | errors.APIError                  | 4XX, 5XX                         | \*/\*                            |
 
-## delete
+## ~~delete~~
 
 Permanently deletes a contact from your workspace and cleans up associated budget configurations. This action cannot be undone.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

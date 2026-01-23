@@ -41,7 +41,7 @@ export type UpdateDatasourceResponseBody = {
   /**
    * The unique identifier of the data source
    */
-  id?: string | undefined;
+  id: string;
   /**
    * The display name of the datasource. Normally the name of the uploaded file
    */
@@ -82,18 +82,6 @@ export type UpdateDatasourceResponseBody = {
 };
 
 /** @internal */
-export const UpdateDatasourceRequestBody$inboundSchema: z.ZodType<
-  UpdateDatasourceRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
-/** @internal */
 export type UpdateDatasourceRequestBody$Outbound = {
   display_name: string;
 };
@@ -120,32 +108,7 @@ export function updateDatasourceRequestBodyToJSON(
     ),
   );
 }
-export function updateDatasourceRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasourceRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasourceRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasourceRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateDatasourceRequest$inboundSchema: z.ZodType<
-  UpdateDatasourceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-  RequestBody: z.lazy(() => UpdateDatasourceRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateDatasourceRequest$Outbound = {
   knowledge_id: string;
@@ -177,24 +140,11 @@ export function updateDatasourceRequestToJSON(
     UpdateDatasourceRequest$outboundSchema.parse(updateDatasourceRequest),
   );
 }
-export function updateDatasourceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasourceRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasourceRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasourceRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateDatasourceStatus
 > = z.nativeEnum(UpdateDatasourceStatus);
-/** @internal */
-export const UpdateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateDatasourceStatus
-> = UpdateDatasourceStatus$inboundSchema;
 
 /** @internal */
 export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
@@ -202,7 +152,7 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KFBAEENV0AYFPKH04TKD2B66"),
+  _id: z.string().default("01KFN8ZQG67KHQ74DKMWDQ0856"),
   display_name: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$inboundSchema,
@@ -224,59 +174,7 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
     "chunks_count": "chunksCount",
   });
 });
-/** @internal */
-export type UpdateDatasourceResponseBody$Outbound = {
-  _id: string;
-  display_name: string;
-  description?: string | undefined;
-  status: string;
-  file_id?: string | null | undefined;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-  knowledge_id: string;
-  chunks_count: number;
-};
 
-/** @internal */
-export const UpdateDatasourceResponseBody$outboundSchema: z.ZodType<
-  UpdateDatasourceResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateDatasourceResponseBody
-> = z.object({
-  id: z.string().default("01KFBAEENV0AYFPKH04TKD2B66"),
-  displayName: z.string(),
-  description: z.string().optional(),
-  status: UpdateDatasourceStatus$outboundSchema,
-  fileId: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-  knowledgeId: z.string(),
-  chunksCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    fileId: "file_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-    knowledgeId: "knowledge_id",
-    chunksCount: "chunks_count",
-  });
-});
-
-export function updateDatasourceResponseBodyToJSON(
-  updateDatasourceResponseBody: UpdateDatasourceResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateDatasourceResponseBody$outboundSchema.parse(
-      updateDatasourceResponseBody,
-    ),
-  );
-}
 export function updateDatasourceResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasourceResponseBody, SDKValidationError> {

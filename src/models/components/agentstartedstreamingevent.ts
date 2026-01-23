@@ -8,35 +8,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  DataPart,
-  DataPart$inboundSchema,
-  DataPart$Outbound,
-  DataPart$outboundSchema,
-} from "./datapart.js";
-import {
-  FilePart,
-  FilePart$inboundSchema,
-  FilePart$Outbound,
-  FilePart$outboundSchema,
-} from "./filepart.js";
-import {
-  TextPart,
-  TextPart$inboundSchema,
-  TextPart$Outbound,
-  TextPart$outboundSchema,
-} from "./textpart.js";
-import {
-  ToolCallPart,
-  ToolCallPart$inboundSchema,
-  ToolCallPart$Outbound,
-  ToolCallPart$outboundSchema,
-} from "./toolcallpart.js";
+import { DataPart, DataPart$inboundSchema } from "./datapart.js";
+import { ErrorPart, ErrorPart$inboundSchema } from "./errorpart.js";
+import { FilePart, FilePart$inboundSchema } from "./filepart.js";
+import { TextPart, TextPart$inboundSchema } from "./textpart.js";
+import { ToolCallPart, ToolCallPart$inboundSchema } from "./toolcallpart.js";
 import {
   ToolResultPart,
   ToolResultPart$inboundSchema,
-  ToolResultPart$Outbound,
-  ToolResultPart$outboundSchema,
 } from "./toolresultpart.js";
 
 /**
@@ -57,6 +36,7 @@ export type AgentStartedStreamingEventRole = ClosedEnum<
 
 export type AgentStartedStreamingEventParts =
   | TextPart
+  | ErrorPart
   | DataPart
   | FilePart
   | ToolCallPart
@@ -68,7 +48,9 @@ export type InputMessage = {
    * Extended A2A message role
    */
   role: AgentStartedStreamingEventRole;
-  parts: Array<TextPart | DataPart | FilePart | ToolCallPart | ToolResultPart>;
+  parts: Array<
+    TextPart | ErrorPart | DataPart | FilePart | ToolCallPart | ToolResultPart
+  >;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -115,7 +97,7 @@ export type Tools = {
    * Optional tool description
    */
   description?: string | undefined;
-  requiresApproval?: boolean | undefined;
+  requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
@@ -124,7 +106,7 @@ export type Tools = {
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
-  timeout?: number | undefined;
+  timeout: number;
 };
 
 /**
@@ -147,7 +129,7 @@ export type Evaluators = {
   /**
    * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
    */
-  sampleRate?: number | undefined;
+  sampleRate: number;
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
@@ -176,7 +158,7 @@ export type Guardrails = {
   /**
    * The percentage of executions to evaluate with this evaluator (1-100). For example, a value of 50 means the evaluator will run on approximately half of the executions.
    */
-  sampleRate?: number | undefined;
+  sampleRate: number;
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
@@ -187,15 +169,15 @@ export type Settings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
    */
-  maxIterations?: number | undefined;
+  maxIterations: number;
   /**
    * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
-  maxExecutionTime?: number | undefined;
+  maxExecutionTime: number;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
-  toolApprovalRequired?: ToolApprovalRequired | undefined;
+  toolApprovalRequired: ToolApprovalRequired;
   tools?: Array<Tools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -240,10 +222,6 @@ export type AgentStartedStreamingEvent = {
 export const AgentStartedStreamingEventRole$inboundSchema: z.ZodNativeEnum<
   typeof AgentStartedStreamingEventRole
 > = z.nativeEnum(AgentStartedStreamingEventRole);
-/** @internal */
-export const AgentStartedStreamingEventRole$outboundSchema: z.ZodNativeEnum<
-  typeof AgentStartedStreamingEventRole
-> = AgentStartedStreamingEventRole$inboundSchema;
 
 /** @internal */
 export const AgentStartedStreamingEventParts$inboundSchema: z.ZodType<
@@ -252,41 +230,13 @@ export const AgentStartedStreamingEventParts$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   TextPart$inboundSchema,
+  ErrorPart$inboundSchema,
   DataPart$inboundSchema,
   FilePart$inboundSchema,
   ToolCallPart$inboundSchema,
   ToolResultPart$inboundSchema,
 ]);
-/** @internal */
-export type AgentStartedStreamingEventParts$Outbound =
-  | TextPart$Outbound
-  | DataPart$Outbound
-  | FilePart$Outbound
-  | ToolCallPart$Outbound
-  | ToolResultPart$Outbound;
 
-/** @internal */
-export const AgentStartedStreamingEventParts$outboundSchema: z.ZodType<
-  AgentStartedStreamingEventParts$Outbound,
-  z.ZodTypeDef,
-  AgentStartedStreamingEventParts
-> = z.union([
-  TextPart$outboundSchema,
-  DataPart$outboundSchema,
-  FilePart$outboundSchema,
-  ToolCallPart$outboundSchema,
-  ToolResultPart$outboundSchema,
-]);
-
-export function agentStartedStreamingEventPartsToJSON(
-  agentStartedStreamingEventParts: AgentStartedStreamingEventParts,
-): string {
-  return JSON.stringify(
-    AgentStartedStreamingEventParts$outboundSchema.parse(
-      agentStartedStreamingEventParts,
-    ),
-  );
-}
 export function agentStartedStreamingEventPartsFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentStartedStreamingEventParts, SDKValidationError> {
@@ -308,6 +258,7 @@ export const InputMessage$inboundSchema: z.ZodType<
   parts: z.array(
     z.union([
       TextPart$inboundSchema,
+      ErrorPart$inboundSchema,
       DataPart$inboundSchema,
       FilePart$inboundSchema,
       ToolCallPart$inboundSchema,
@@ -316,43 +267,7 @@ export const InputMessage$inboundSchema: z.ZodType<
   ),
   metadata: z.record(z.any()).optional(),
 });
-/** @internal */
-export type InputMessage$Outbound = {
-  messageId?: string | undefined;
-  role: string;
-  parts: Array<
-    | TextPart$Outbound
-    | DataPart$Outbound
-    | FilePart$Outbound
-    | ToolCallPart$Outbound
-    | ToolResultPart$Outbound
-  >;
-  metadata?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const InputMessage$outboundSchema: z.ZodType<
-  InputMessage$Outbound,
-  z.ZodTypeDef,
-  InputMessage
-> = z.object({
-  messageId: z.string().optional(),
-  role: AgentStartedStreamingEventRole$outboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$outboundSchema,
-      DataPart$outboundSchema,
-      FilePart$outboundSchema,
-      ToolCallPart$outboundSchema,
-      ToolResultPart$outboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
-
-export function inputMessageToJSON(inputMessage: InputMessage): string {
-  return JSON.stringify(InputMessage$outboundSchema.parse(inputMessage));
-}
 export function inputMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<InputMessage, SDKValidationError> {
@@ -367,10 +282,6 @@ export function inputMessageFromJSON(
 export const ToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalRequired
 > = z.nativeEnum(ToolApprovalRequired);
-/** @internal */
-export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
-  typeof ToolApprovalRequired
-> = ToolApprovalRequired$inboundSchema;
 
 /** @internal */
 export const AgentStartedStreamingEventConditions$inboundSchema: z.ZodType<
@@ -382,33 +293,7 @@ export const AgentStartedStreamingEventConditions$inboundSchema: z.ZodType<
   operator: z.string(),
   value: z.string(),
 });
-/** @internal */
-export type AgentStartedStreamingEventConditions$Outbound = {
-  condition: string;
-  operator: string;
-  value: string;
-};
 
-/** @internal */
-export const AgentStartedStreamingEventConditions$outboundSchema: z.ZodType<
-  AgentStartedStreamingEventConditions$Outbound,
-  z.ZodTypeDef,
-  AgentStartedStreamingEventConditions
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
-
-export function agentStartedStreamingEventConditionsToJSON(
-  agentStartedStreamingEventConditions: AgentStartedStreamingEventConditions,
-): string {
-  return JSON.stringify(
-    AgentStartedStreamingEventConditions$outboundSchema.parse(
-      agentStartedStreamingEventConditions,
-    ),
-  );
-}
 export function agentStartedStreamingEventConditionsFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentStartedStreamingEventConditions, SDKValidationError> {
@@ -442,48 +327,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
       "tool_id": "toolId",
     });
   });
-/** @internal */
-export type Tools$Outbound = {
-  id: string;
-  key?: string | undefined;
-  action_type: string;
-  display_name?: string | undefined;
-  description?: string | undefined;
-  requires_approval: boolean;
-  tool_id?: string | undefined;
-  conditions?: Array<AgentStartedStreamingEventConditions$Outbound> | undefined;
-  timeout: number;
-};
 
-/** @internal */
-export const Tools$outboundSchema: z.ZodType<
-  Tools$Outbound,
-  z.ZodTypeDef,
-  Tools
-> = z.object({
-  id: z.string(),
-  key: z.string().optional(),
-  actionType: z.string(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-  toolId: z.string().optional(),
-  conditions: z.array(
-    z.lazy(() => AgentStartedStreamingEventConditions$outboundSchema),
-  ).optional(),
-  timeout: z.number().default(120),
-}).transform((v) => {
-  return remap$(v, {
-    actionType: "action_type",
-    displayName: "display_name",
-    requiresApproval: "requires_approval",
-    toolId: "tool_id",
-  });
-});
-
-export function toolsToJSON(tools: Tools): string {
-  return JSON.stringify(Tools$outboundSchema.parse(tools));
-}
 export function toolsFromJSON(
   jsonString: string,
 ): SafeParseResult<Tools, SDKValidationError> {
@@ -497,9 +341,6 @@ export function toolsFromJSON(
 /** @internal */
 export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
   .nativeEnum(ExecuteOn);
-/** @internal */
-export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
-  ExecuteOn$inboundSchema;
 
 /** @internal */
 export const Evaluators$inboundSchema: z.ZodType<
@@ -516,32 +357,7 @@ export const Evaluators$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type Evaluators$Outbound = {
-  id: string;
-  sample_rate: number;
-  execute_on: string;
-};
 
-/** @internal */
-export const Evaluators$outboundSchema: z.ZodType<
-  Evaluators$Outbound,
-  z.ZodTypeDef,
-  Evaluators
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: ExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
-
-export function evaluatorsToJSON(evaluators: Evaluators): string {
-  return JSON.stringify(Evaluators$outboundSchema.parse(evaluators));
-}
 export function evaluatorsFromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluators, SDKValidationError> {
@@ -556,10 +372,6 @@ export function evaluatorsFromJSON(
 export const AgentStartedStreamingEventExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof AgentStartedStreamingEventExecuteOn
 > = z.nativeEnum(AgentStartedStreamingEventExecuteOn);
-/** @internal */
-export const AgentStartedStreamingEventExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof AgentStartedStreamingEventExecuteOn> =
-    AgentStartedStreamingEventExecuteOn$inboundSchema;
 
 /** @internal */
 export const Guardrails$inboundSchema: z.ZodType<
@@ -576,32 +388,7 @@ export const Guardrails$inboundSchema: z.ZodType<
     "execute_on": "executeOn",
   });
 });
-/** @internal */
-export type Guardrails$Outbound = {
-  id: string;
-  sample_rate: number;
-  execute_on: string;
-};
 
-/** @internal */
-export const Guardrails$outboundSchema: z.ZodType<
-  Guardrails$Outbound,
-  z.ZodTypeDef,
-  Guardrails
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: AgentStartedStreamingEventExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
-
-export function guardrailsToJSON(guardrails: Guardrails): string {
-  return JSON.stringify(Guardrails$outboundSchema.parse(guardrails));
-}
 export function guardrailsFromJSON(
   jsonString: string,
 ): SafeParseResult<Guardrails, SDKValidationError> {
@@ -633,41 +420,7 @@ export const Settings$inboundSchema: z.ZodType<
     "tool_approval_required": "toolApprovalRequired",
   });
 });
-/** @internal */
-export type Settings$Outbound = {
-  max_iterations: number;
-  max_execution_time: number;
-  tool_approval_required: string;
-  tools?: Array<Tools$Outbound> | undefined;
-  evaluators?: Array<Evaluators$Outbound> | undefined;
-  guardrails?: Array<Guardrails$Outbound> | undefined;
-};
 
-/** @internal */
-export const Settings$outboundSchema: z.ZodType<
-  Settings$Outbound,
-  z.ZodTypeDef,
-  Settings
-> = z.object({
-  maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
-  toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
-    "respect_tool",
-  ),
-  tools: z.array(z.lazy(() => Tools$outboundSchema)).optional(),
-  evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxIterations: "max_iterations",
-    maxExecutionTime: "max_execution_time",
-    toolApprovalRequired: "tool_approval_required",
-  });
-});
-
-export function settingsToJSON(settings: Settings): string {
-  return JSON.stringify(Settings$outboundSchema.parse(settings));
-}
 export function settingsFromJSON(
   jsonString: string,
 ): SafeParseResult<Settings, SDKValidationError> {
@@ -708,64 +461,7 @@ export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
     "is_continuation": "isContinuation",
   });
 });
-/** @internal */
-export type AgentStartedStreamingEventData$Outbound = {
-  workflowRunId: string;
-  integration_id?: string | undefined;
-  inputMessage: InputMessage$Outbound;
-  modelId: string;
-  instructions: string;
-  system_prompt: string;
-  settings?: Settings$Outbound | undefined;
-  agent_manifest_id: string;
-  agent_key: string;
-  variables?: { [k: string]: any } | undefined;
-  tool_execution_id?: string | undefined;
-  is_continuation?: boolean | undefined;
-  stream?: boolean | undefined;
-  responseId?: string | undefined;
-};
 
-/** @internal */
-export const AgentStartedStreamingEventData$outboundSchema: z.ZodType<
-  AgentStartedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  AgentStartedStreamingEventData
-> = z.object({
-  workflowRunId: z.string(),
-  integrationId: z.string().optional(),
-  inputMessage: z.lazy(() => InputMessage$outboundSchema),
-  modelId: z.string(),
-  instructions: z.string(),
-  systemPrompt: z.string(),
-  settings: z.lazy(() => Settings$outboundSchema).optional(),
-  agentManifestId: z.string(),
-  agentKey: z.string(),
-  variables: z.record(z.any()).optional(),
-  toolExecutionId: z.string().optional(),
-  isContinuation: z.boolean().optional(),
-  stream: z.boolean().optional(),
-  responseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    integrationId: "integration_id",
-    systemPrompt: "system_prompt",
-    agentManifestId: "agent_manifest_id",
-    agentKey: "agent_key",
-    toolExecutionId: "tool_execution_id",
-    isContinuation: "is_continuation",
-  });
-});
-
-export function agentStartedStreamingEventDataToJSON(
-  agentStartedStreamingEventData: AgentStartedStreamingEventData,
-): string {
-  return JSON.stringify(
-    AgentStartedStreamingEventData$outboundSchema.parse(
-      agentStartedStreamingEventData,
-    ),
-  );
-}
 export function agentStartedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentStartedStreamingEventData, SDKValidationError> {
@@ -786,31 +482,7 @@ export const AgentStartedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => AgentStartedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type AgentStartedStreamingEvent$Outbound = {
-  type: "event.agents.started";
-  timestamp: string;
-  data: AgentStartedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const AgentStartedStreamingEvent$outboundSchema: z.ZodType<
-  AgentStartedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  AgentStartedStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.started"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentStartedStreamingEventData$outboundSchema),
-});
-
-export function agentStartedStreamingEventToJSON(
-  agentStartedStreamingEvent: AgentStartedStreamingEvent,
-): string {
-  return JSON.stringify(
-    AgentStartedStreamingEvent$outboundSchema.parse(agentStartedStreamingEvent),
-  );
-}
 export function agentStartedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<AgentStartedStreamingEvent, SDKValidationError> {

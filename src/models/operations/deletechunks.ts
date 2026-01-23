@@ -42,18 +42,6 @@ export type DeleteChunksResponseBody = {
 };
 
 /** @internal */
-export const DeleteChunksRequestBody$inboundSchema: z.ZodType<
-  DeleteChunksRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  chunk_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "chunk_ids": "chunkIds",
-  });
-});
-/** @internal */
 export type DeleteChunksRequestBody$Outbound = {
   chunk_ids: Array<string>;
 };
@@ -78,32 +66,7 @@ export function deleteChunksRequestBodyToJSON(
     DeleteChunksRequestBody$outboundSchema.parse(deleteChunksRequestBody),
   );
 }
-export function deleteChunksRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteChunksRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteChunksRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteChunksRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeleteChunksRequest$inboundSchema: z.ZodType<
-  DeleteChunksRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-  datasource_id: z.string(),
-  RequestBody: z.lazy(() => DeleteChunksRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "datasource_id": "datasourceId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type DeleteChunksRequest$Outbound = {
   knowledge_id: string;
@@ -135,15 +98,6 @@ export function deleteChunksRequestToJSON(
     DeleteChunksRequest$outboundSchema.parse(deleteChunksRequest),
   );
 }
-export function deleteChunksRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteChunksRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteChunksRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteChunksRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const DeleteChunksResponseBody$inboundSchema: z.ZodType<
@@ -159,34 +113,7 @@ export const DeleteChunksResponseBody$inboundSchema: z.ZodType<
     "failed_ids": "failedIds",
   });
 });
-/** @internal */
-export type DeleteChunksResponseBody$Outbound = {
-  deleted_count: number;
-  failed_ids?: Array<string> | undefined;
-};
 
-/** @internal */
-export const DeleteChunksResponseBody$outboundSchema: z.ZodType<
-  DeleteChunksResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeleteChunksResponseBody
-> = z.object({
-  deletedCount: z.number(),
-  failedIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    deletedCount: "deleted_count",
-    failedIds: "failed_ids",
-  });
-});
-
-export function deleteChunksResponseBodyToJSON(
-  deleteChunksResponseBody: DeleteChunksResponseBody,
-): string {
-  return JSON.stringify(
-    DeleteChunksResponseBody$outboundSchema.parse(deleteChunksResponseBody),
-  );
-}
 export function deleteChunksResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeleteChunksResponseBody, SDKValidationError> {

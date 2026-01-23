@@ -102,7 +102,7 @@ export type DataCodeTool = {
  * Executes code snippets in a sandboxed environment, currently supporting Python.
  */
 export type DataCodeExecutionTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -140,7 +140,7 @@ export type DataCodeExecutionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: GetAllToolsDataToolsResponse200Status | undefined;
+  status: GetAllToolsDataToolsResponse200Status;
   versionHash?: string | undefined;
   type: "code";
   codeTool: DataCodeTool;
@@ -164,7 +164,7 @@ export type GetAllToolsDataToolsResponseStatus = ClosedEnum<
 
 export type DataHeaders = {
   value: string;
-  encrypted?: boolean | undefined;
+  encrypted: boolean;
 };
 
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type = {
@@ -182,7 +182,7 @@ export type GetAllToolsDataSchema = {
 };
 
 export type DataTools = {
-  id?: string | undefined;
+  id: string;
   name: string;
   description?: string | undefined;
   schema: GetAllToolsDataSchema;
@@ -223,7 +223,7 @@ export type DataMcp = {
  * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
  */
 export type DataMCPTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -261,7 +261,7 @@ export type DataMCPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: GetAllToolsDataToolsResponseStatus | undefined;
+  status: GetAllToolsDataToolsResponseStatus;
   versionHash?: string | undefined;
   type: "mcp";
   mcp: DataMcp;
@@ -299,7 +299,7 @@ export type GetAllToolsDataMethod = ClosedEnum<typeof GetAllToolsDataMethod>;
 
 export type GetAllToolsHeaders2 = {
   value: string;
-  encrypted?: boolean | undefined;
+  encrypted: boolean;
 };
 
 export type GetAllToolsDataHeaders = GetAllToolsHeaders2 | string;
@@ -359,7 +359,7 @@ export type DataArguments = {
   /**
    * Whether to send the argument to the model. If set to false, the argument will not be sent to the model and needs to be provided by the user or it will be left blank.
    */
-  sendToModel?: boolean | undefined;
+  sendToModel: boolean;
   /**
    * The default value of the argument.
    */
@@ -381,7 +381,7 @@ export type GetAllToolsDataHttp = {
  * Executes HTTP requests to interact with external APIs and web services using customizable blueprints.
  */
 export type DataHTTPTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -419,7 +419,7 @@ export type DataHTTPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: GetAllToolsDataToolsStatus | undefined;
+  status: GetAllToolsDataToolsStatus;
   versionHash?: string | undefined;
   type: "http";
   http: GetAllToolsDataHttp;
@@ -481,7 +481,7 @@ export type DataJsonSchema = {
  * A tool that enforces structured output format using JSON Schema for consistent response formatting.
  */
 export type DataJSONSchemaTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -519,7 +519,7 @@ export type DataJSONSchemaTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: GetAllToolsDataStatus | undefined;
+  status: GetAllToolsDataStatus;
   versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: DataJsonSchema;
@@ -595,7 +595,7 @@ export type GetAllToolsDataFunction = {
  * A custom function tool that allows the model to call predefined functions with structured parameters.
  */
 export type DataFunctionTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -633,7 +633,7 @@ export type DataFunctionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: DataStatus | undefined;
+  status: DataStatus;
   versionHash?: string | undefined;
   type: "function";
   function: GetAllToolsDataFunction;
@@ -661,21 +661,6 @@ export type GetAllToolsResponseBody = {
   hasMore: boolean;
 };
 
-/** @internal */
-export const GetAllToolsRequest$inboundSchema: z.ZodType<
-  GetAllToolsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().optional(),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
 /** @internal */
 export type GetAllToolsRequest$Outbound = {
   limit?: number | undefined;
@@ -706,34 +691,17 @@ export function getAllToolsRequestToJSON(
     GetAllToolsRequest$outboundSchema.parse(getAllToolsRequest),
   );
 }
-export function getAllToolsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllToolsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllToolsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetAllToolsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsObject
 > = z.nativeEnum(GetAllToolsObject);
-/** @internal */
-export const GetAllToolsObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsObject
-> = GetAllToolsObject$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200Status$inboundSchema:
   z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> = z.nativeEnum(
     GetAllToolsDataToolsResponse200Status,
   );
-/** @internal */
-export const GetAllToolsDataToolsResponse200Status$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> =
-    GetAllToolsDataToolsResponse200Status$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema:
@@ -742,12 +710,6 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inb
   > = z.nativeEnum(
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type,
   );
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type
-  > =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
@@ -764,41 +726,7 @@ export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
-/** @internal */
-export type GetAllToolsDataParameters$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required: Array<string>;
-  [additionalProperties: string]: unknown;
-};
 
-/** @internal */
-export const GetAllToolsDataParameters$outboundSchema: z.ZodType<
-  GetAllToolsDataParameters$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsDataParameters
-> = z.object({
-  type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function getAllToolsDataParametersToJSON(
-  getAllToolsDataParameters: GetAllToolsDataParameters,
-): string {
-  return JSON.stringify(
-    GetAllToolsDataParameters$outboundSchema.parse(getAllToolsDataParameters),
-  );
-}
 export function getAllToolsDataParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataParameters, SDKValidationError> {
@@ -812,9 +740,6 @@ export function getAllToolsDataParametersFromJSON(
 /** @internal */
 export const DataLanguage$inboundSchema: z.ZodNativeEnum<typeof DataLanguage> =
   z.nativeEnum(DataLanguage);
-/** @internal */
-export const DataLanguage$outboundSchema: z.ZodNativeEnum<typeof DataLanguage> =
-  DataLanguage$inboundSchema;
 
 /** @internal */
 export const DataCodeTool$inboundSchema: z.ZodType<
@@ -826,27 +751,7 @@ export const DataCodeTool$inboundSchema: z.ZodType<
   language: DataLanguage$inboundSchema,
   code: z.string(),
 });
-/** @internal */
-export type DataCodeTool$Outbound = {
-  parameters?: GetAllToolsDataParameters$Outbound | undefined;
-  language: string;
-  code: string;
-};
 
-/** @internal */
-export const DataCodeTool$outboundSchema: z.ZodType<
-  DataCodeTool$Outbound,
-  z.ZodTypeDef,
-  DataCodeTool
-> = z.object({
-  parameters: z.lazy(() => GetAllToolsDataParameters$outboundSchema).optional(),
-  language: DataLanguage$outboundSchema,
-  code: z.string(),
-});
-
-export function dataCodeToolToJSON(dataCodeTool: DataCodeTool): string {
-  return JSON.stringify(DataCodeTool$outboundSchema.parse(dataCodeTool));
-}
 export function dataCodeToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataCodeTool, SDKValidationError> {
@@ -863,7 +768,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEET3SRHQ2N34PWC8941"),
+  _id: z.string().default("tool_01KFN8ZQAKCK366C5DSTW5M93D"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -890,66 +795,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
     "code_tool": "codeTool",
   });
 });
-/** @internal */
-export type DataCodeExecutionTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "code";
-  code_tool: DataCodeTool$Outbound;
-};
 
-/** @internal */
-export const DataCodeExecutionTool$outboundSchema: z.ZodType<
-  DataCodeExecutionTool$Outbound,
-  z.ZodTypeDef,
-  DataCodeExecutionTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEET3SRHQ2N34PWC8941"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataToolsResponse200Status$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("code"),
-  codeTool: z.lazy(() => DataCodeTool$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-    codeTool: "code_tool",
-  });
-});
-
-export function dataCodeExecutionToolToJSON(
-  dataCodeExecutionTool: DataCodeExecutionTool,
-): string {
-  return JSON.stringify(
-    DataCodeExecutionTool$outboundSchema.parse(dataCodeExecutionTool),
-  );
-}
 export function dataCodeExecutionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataCodeExecutionTool, SDKValidationError> {
@@ -964,10 +810,6 @@ export function dataCodeExecutionToolFromJSON(
 export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseStatus
 > = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
-/** @internal */
-export const GetAllToolsDataToolsResponseStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsResponseStatus
-> = GetAllToolsDataToolsResponseStatus$inboundSchema;
 
 /** @internal */
 export const DataHeaders$inboundSchema: z.ZodType<
@@ -978,25 +820,7 @@ export const DataHeaders$inboundSchema: z.ZodType<
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
-/** @internal */
-export type DataHeaders$Outbound = {
-  value: string;
-  encrypted: boolean;
-};
 
-/** @internal */
-export const DataHeaders$outboundSchema: z.ZodType<
-  DataHeaders$Outbound,
-  z.ZodTypeDef,
-  DataHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function dataHeadersToJSON(dataHeaders: DataHeaders): string {
-  return JSON.stringify(DataHeaders$outboundSchema.parse(dataHeaders));
-}
 export function dataHeadersFromJSON(
   jsonString: string,
 ): SafeParseResult<DataHeaders, SDKValidationError> {
@@ -1014,12 +838,6 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inb
   > = z.nativeEnum(
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type,
   );
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type
-  > =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataSchema$inboundSchema: z.ZodType<
@@ -1032,32 +850,7 @@ export const GetAllToolsDataSchema$inboundSchema: z.ZodType<
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
-/** @internal */
-export type GetAllToolsDataSchema$Outbound = {
-  type: string;
-  properties?: { [k: string]: any } | undefined;
-  required?: Array<string> | undefined;
-};
 
-/** @internal */
-export const GetAllToolsDataSchema$outboundSchema: z.ZodType<
-  GetAllToolsDataSchema$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsDataSchema
-> = z.object({
-  type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$outboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
-
-export function getAllToolsDataSchemaToJSON(
-  getAllToolsDataSchema: GetAllToolsDataSchema,
-): string {
-  return JSON.stringify(
-    GetAllToolsDataSchema$outboundSchema.parse(getAllToolsDataSchema),
-  );
-}
 export function getAllToolsDataSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataSchema, SDKValidationError> {
@@ -1074,34 +867,12 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KFBAEEESKDHHD7V3GHH1579R"),
+  id: z.string().default("01KFN8ZQAJCWB385M5YRQ2MB4N"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
 });
-/** @internal */
-export type DataTools$Outbound = {
-  id: string;
-  name: string;
-  description?: string | undefined;
-  schema: GetAllToolsDataSchema$Outbound;
-};
 
-/** @internal */
-export const DataTools$outboundSchema: z.ZodType<
-  DataTools$Outbound,
-  z.ZodTypeDef,
-  DataTools
-> = z.object({
-  id: z.string().default("01KFBAEEESKDHHD7V3GHH1579R"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() => GetAllToolsDataSchema$outboundSchema),
-});
-
-export function dataToolsToJSON(dataTools: DataTools): string {
-  return JSON.stringify(DataTools$outboundSchema.parse(dataTools));
-}
 export function dataToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<DataTools, SDKValidationError> {
@@ -1116,10 +887,6 @@ export function dataToolsFromJSON(
 export const DataConnectionType$inboundSchema: z.ZodNativeEnum<
   typeof DataConnectionType
 > = z.nativeEnum(DataConnectionType);
-/** @internal */
-export const DataConnectionType$outboundSchema: z.ZodNativeEnum<
-  typeof DataConnectionType
-> = DataConnectionType$inboundSchema;
 
 /** @internal */
 export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
@@ -1134,34 +901,7 @@ export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
       "connection_type": "connectionType",
     });
   });
-/** @internal */
-export type DataMcp$Outbound = {
-  server_url: string;
-  headers?: { [k: string]: DataHeaders$Outbound } | undefined;
-  tools: Array<DataTools$Outbound>;
-  connection_type: string;
-};
 
-/** @internal */
-export const DataMcp$outboundSchema: z.ZodType<
-  DataMcp$Outbound,
-  z.ZodTypeDef,
-  DataMcp
-> = z.object({
-  serverUrl: z.string(),
-  headers: z.record(z.lazy(() => DataHeaders$outboundSchema)).optional(),
-  tools: z.array(z.lazy(() => DataTools$outboundSchema)),
-  connectionType: DataConnectionType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    connectionType: "connection_type",
-  });
-});
-
-export function dataMcpToJSON(dataMcp: DataMcp): string {
-  return JSON.stringify(DataMcp$outboundSchema.parse(dataMcp));
-}
 export function dataMcpFromJSON(
   jsonString: string,
 ): SafeParseResult<DataMcp, SDKValidationError> {
@@ -1178,7 +918,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEEQJX5MKD35C0CG0ME9"),
+  _id: z.string().default("tool_01KFN8ZQAGASBAXN1B7DMX9BGW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1204,61 +944,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-/** @internal */
-export type DataMCPTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "mcp";
-  mcp: DataMcp$Outbound;
-};
 
-/** @internal */
-export const DataMCPTool$outboundSchema: z.ZodType<
-  DataMCPTool$Outbound,
-  z.ZodTypeDef,
-  DataMCPTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEEQJX5MKD35C0CG0ME9"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataToolsResponseStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => DataMcp$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-  });
-});
-
-export function dataMCPToolToJSON(dataMCPTool: DataMCPTool): string {
-  return JSON.stringify(DataMCPTool$outboundSchema.parse(dataMCPTool));
-}
 export function dataMCPToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataMCPTool, SDKValidationError> {
@@ -1273,19 +959,11 @@ export function dataMCPToolFromJSON(
 export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsStatus
 > = z.nativeEnum(GetAllToolsDataToolsStatus);
-/** @internal */
-export const GetAllToolsDataToolsStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsStatus
-> = GetAllToolsDataToolsStatus$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataMethod$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataMethod
 > = z.nativeEnum(GetAllToolsDataMethod);
-/** @internal */
-export const GetAllToolsDataMethod$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataMethod
-> = GetAllToolsDataMethod$inboundSchema;
 
 /** @internal */
 export const GetAllToolsHeaders2$inboundSchema: z.ZodType<
@@ -1296,29 +974,7 @@ export const GetAllToolsHeaders2$inboundSchema: z.ZodType<
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
-/** @internal */
-export type GetAllToolsHeaders2$Outbound = {
-  value: string;
-  encrypted: boolean;
-};
 
-/** @internal */
-export const GetAllToolsHeaders2$outboundSchema: z.ZodType<
-  GetAllToolsHeaders2$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsHeaders2
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function getAllToolsHeaders2ToJSON(
-  getAllToolsHeaders2: GetAllToolsHeaders2,
-): string {
-  return JSON.stringify(
-    GetAllToolsHeaders2$outboundSchema.parse(getAllToolsHeaders2),
-  );
-}
 export function getAllToolsHeaders2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsHeaders2, SDKValidationError> {
@@ -1335,25 +991,7 @@ export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]);
-/** @internal */
-export type GetAllToolsDataHeaders$Outbound =
-  | GetAllToolsHeaders2$Outbound
-  | string;
 
-/** @internal */
-export const GetAllToolsDataHeaders$outboundSchema: z.ZodType<
-  GetAllToolsDataHeaders$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsDataHeaders
-> = z.union([z.lazy(() => GetAllToolsHeaders2$outboundSchema), z.string()]);
-
-export function getAllToolsDataHeadersToJSON(
-  getAllToolsDataHeaders: GetAllToolsDataHeaders,
-): string {
-  return JSON.stringify(
-    GetAllToolsDataHeaders$outboundSchema.parse(getAllToolsDataHeaders),
-  );
-}
 export function getAllToolsDataHeadersFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataHeaders, SDKValidationError> {
@@ -1377,31 +1015,7 @@ export const DataBlueprint$inboundSchema: z.ZodType<
   ).optional(),
   body: z.record(z.any()).optional(),
 });
-/** @internal */
-export type DataBlueprint$Outbound = {
-  url: string;
-  method: string;
-  headers?: { [k: string]: GetAllToolsHeaders2$Outbound | string } | undefined;
-  body?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const DataBlueprint$outboundSchema: z.ZodType<
-  DataBlueprint$Outbound,
-  z.ZodTypeDef,
-  DataBlueprint
-> = z.object({
-  url: z.string(),
-  method: GetAllToolsDataMethod$outboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => GetAllToolsHeaders2$outboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-});
-
-export function dataBlueprintToJSON(dataBlueprint: DataBlueprint): string {
-  return JSON.stringify(DataBlueprint$outboundSchema.parse(dataBlueprint));
-}
 export function dataBlueprintFromJSON(
   jsonString: string,
 ): SafeParseResult<DataBlueprint, SDKValidationError> {
@@ -1419,12 +1033,6 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inb
   > = z.nativeEnum(
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type,
   );
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type
-  > =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
 
 /** @internal */
 export const DataDefaultValue$inboundSchema: z.ZodType<
@@ -1432,23 +1040,7 @@ export const DataDefaultValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type DataDefaultValue$Outbound = string | number | boolean;
 
-/** @internal */
-export const DataDefaultValue$outboundSchema: z.ZodType<
-  DataDefaultValue$Outbound,
-  z.ZodTypeDef,
-  DataDefaultValue
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function dataDefaultValueToJSON(
-  dataDefaultValue: DataDefaultValue,
-): string {
-  return JSON.stringify(
-    DataDefaultValue$outboundSchema.parse(dataDefaultValue),
-  );
-}
 export function dataDefaultValueFromJSON(
   jsonString: string,
 ): SafeParseResult<DataDefaultValue, SDKValidationError> {
@@ -1476,35 +1068,7 @@ export const DataArguments$inboundSchema: z.ZodType<
     "default_value": "defaultValue",
   });
 });
-/** @internal */
-export type DataArguments$Outbound = {
-  type: string;
-  description: string;
-  send_to_model: boolean;
-  default_value?: string | number | boolean | undefined;
-};
 
-/** @internal */
-export const DataArguments$outboundSchema: z.ZodType<
-  DataArguments$Outbound,
-  z.ZodTypeDef,
-  DataArguments
-> = z.object({
-  type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$outboundSchema,
-  description: z.string(),
-  sendToModel: z.boolean().default(true),
-  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sendToModel: "send_to_model",
-    defaultValue: "default_value",
-  });
-});
-
-export function dataArgumentsToJSON(dataArguments: DataArguments): string {
-  return JSON.stringify(DataArguments$outboundSchema.parse(dataArguments));
-}
 export function dataArgumentsFromJSON(
   jsonString: string,
 ): SafeParseResult<DataArguments, SDKValidationError> {
@@ -1524,29 +1088,7 @@ export const GetAllToolsDataHttp$inboundSchema: z.ZodType<
   blueprint: z.lazy(() => DataBlueprint$inboundSchema),
   arguments: z.record(z.lazy(() => DataArguments$inboundSchema)).optional(),
 });
-/** @internal */
-export type GetAllToolsDataHttp$Outbound = {
-  blueprint: DataBlueprint$Outbound;
-  arguments?: { [k: string]: DataArguments$Outbound } | undefined;
-};
 
-/** @internal */
-export const GetAllToolsDataHttp$outboundSchema: z.ZodType<
-  GetAllToolsDataHttp$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsDataHttp
-> = z.object({
-  blueprint: z.lazy(() => DataBlueprint$outboundSchema),
-  arguments: z.record(z.lazy(() => DataArguments$outboundSchema)).optional(),
-});
-
-export function getAllToolsDataHttpToJSON(
-  getAllToolsDataHttp: GetAllToolsDataHttp,
-): string {
-  return JSON.stringify(
-    GetAllToolsDataHttp$outboundSchema.parse(getAllToolsDataHttp),
-  );
-}
 export function getAllToolsDataHttpFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataHttp, SDKValidationError> {
@@ -1563,7 +1105,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEENZM7XRKC105K2E08V"),
+  _id: z.string().default("tool_01KFN8ZQA8ZW0YKJ1ZB9X4ZNK3"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1589,61 +1131,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-/** @internal */
-export type DataHTTPTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "http";
-  http: GetAllToolsDataHttp$Outbound;
-};
 
-/** @internal */
-export const DataHTTPTool$outboundSchema: z.ZodType<
-  DataHTTPTool$Outbound,
-  z.ZodTypeDef,
-  DataHTTPTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEENZM7XRKC105K2E08V"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataToolsStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("http"),
-  http: z.lazy(() => GetAllToolsDataHttp$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-  });
-});
-
-export function dataHTTPToolToJSON(dataHTTPTool: DataHTTPTool): string {
-  return JSON.stringify(DataHTTPTool$outboundSchema.parse(dataHTTPTool));
-}
 export function dataHTTPToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataHTTPTool, SDKValidationError> {
@@ -1658,10 +1146,6 @@ export function dataHTTPToolFromJSON(
 export const GetAllToolsDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataStatus
 > = z.nativeEnum(GetAllToolsDataStatus);
-/** @internal */
-export const GetAllToolsDataStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataStatus
-> = GetAllToolsDataStatus$inboundSchema;
 
 /** @internal */
 export const DataSchema$inboundSchema: z.ZodType<
@@ -1677,36 +1161,7 @@ export const DataSchema$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
-/** @internal */
-export type DataSchema$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required: Array<string>;
-  [additionalProperties: string]: unknown;
-};
 
-/** @internal */
-export const DataSchema$outboundSchema: z.ZodType<
-  DataSchema$Outbound,
-  z.ZodTypeDef,
-  DataSchema
-> = z.object({
-  type: z.string(),
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function dataSchemaToJSON(dataSchema: DataSchema): string {
-  return JSON.stringify(DataSchema$outboundSchema.parse(dataSchema));
-}
 export function dataSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DataSchema, SDKValidationError> {
@@ -1728,29 +1183,7 @@ export const DataJsonSchema$inboundSchema: z.ZodType<
   schema: z.lazy(() => DataSchema$inboundSchema),
   strict: z.boolean().optional(),
 });
-/** @internal */
-export type DataJsonSchema$Outbound = {
-  name: string;
-  description: string;
-  schema: DataSchema$Outbound;
-  strict?: boolean | undefined;
-};
 
-/** @internal */
-export const DataJsonSchema$outboundSchema: z.ZodType<
-  DataJsonSchema$Outbound,
-  z.ZodTypeDef,
-  DataJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => DataSchema$outboundSchema),
-  strict: z.boolean().optional(),
-});
-
-export function dataJsonSchemaToJSON(dataJsonSchema: DataJsonSchema): string {
-  return JSON.stringify(DataJsonSchema$outboundSchema.parse(dataJsonSchema));
-}
 export function dataJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<DataJsonSchema, SDKValidationError> {
@@ -1767,7 +1200,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEEM78EX7W2K75K6HBW9"),
+  _id: z.string().default("tool_01KFN8ZQA5DFN4YTXF9P1GF025"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1794,66 +1227,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type DataJSONSchemaTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "json_schema";
-  json_schema: DataJsonSchema$Outbound;
-};
 
-/** @internal */
-export const DataJSONSchemaTool$outboundSchema: z.ZodType<
-  DataJSONSchemaTool$Outbound,
-  z.ZodTypeDef,
-  DataJSONSchemaTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEEM78EX7W2K75K6HBW9"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() => DataJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function dataJSONSchemaToolToJSON(
-  dataJSONSchemaTool: DataJSONSchemaTool,
-): string {
-  return JSON.stringify(
-    DataJSONSchemaTool$outboundSchema.parse(dataJSONSchemaTool),
-  );
-}
 export function dataJSONSchemaToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataJSONSchemaTool, SDKValidationError> {
@@ -1867,9 +1241,6 @@ export function dataJSONSchemaToolFromJSON(
 /** @internal */
 export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
   .nativeEnum(DataStatus);
-/** @internal */
-export const DataStatus$outboundSchema: z.ZodNativeEnum<typeof DataStatus> =
-  DataStatus$inboundSchema;
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
@@ -1878,12 +1249,6 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inbo
   > = z.nativeEnum(
     GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
   );
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
-  > =
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /** @internal */
 export const DataParameters$inboundSchema: z.ZodType<
@@ -1900,37 +1265,7 @@ export const DataParameters$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
-/** @internal */
-export type DataParameters$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required: Array<string>;
-  [additionalProperties: string]: unknown;
-};
 
-/** @internal */
-export const DataParameters$outboundSchema: z.ZodType<
-  DataParameters$Outbound,
-  z.ZodTypeDef,
-  DataParameters
-> = z.object({
-  type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function dataParametersToJSON(dataParameters: DataParameters): string {
-  return JSON.stringify(DataParameters$outboundSchema.parse(dataParameters));
-}
 export function dataParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<DataParameters, SDKValidationError> {
@@ -1952,33 +1287,7 @@ export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
   strict: z.boolean().optional(),
   parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
 });
-/** @internal */
-export type GetAllToolsDataFunction$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  parameters?: DataParameters$Outbound | undefined;
-};
 
-/** @internal */
-export const GetAllToolsDataFunction$outboundSchema: z.ZodType<
-  GetAllToolsDataFunction$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsDataFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => DataParameters$outboundSchema).optional(),
-});
-
-export function getAllToolsDataFunctionToJSON(
-  getAllToolsDataFunction: GetAllToolsDataFunction,
-): string {
-  return JSON.stringify(
-    GetAllToolsDataFunction$outboundSchema.parse(getAllToolsDataFunction),
-  );
-}
 export function getAllToolsDataFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsDataFunction, SDKValidationError> {
@@ -1995,7 +1304,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEEJHV0K4MS25DREPJHW"),
+  _id: z.string().default("tool_01KFN8ZQ9TM6CF8RXCYN8K4DNP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2021,65 +1330,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-/** @internal */
-export type DataFunctionTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "function";
-  function: GetAllToolsDataFunction$Outbound;
-};
 
-/** @internal */
-export const DataFunctionTool$outboundSchema: z.ZodType<
-  DataFunctionTool$Outbound,
-  z.ZodTypeDef,
-  DataFunctionTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEEJHV0K4MS25DREPJHW"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: DataStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("function"),
-  function: z.lazy(() => GetAllToolsDataFunction$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-  });
-});
-
-export function dataFunctionToolToJSON(
-  dataFunctionTool: DataFunctionTool,
-): string {
-  return JSON.stringify(
-    DataFunctionTool$outboundSchema.parse(dataFunctionTool),
-  );
-}
 export function dataFunctionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<DataFunctionTool, SDKValidationError> {
@@ -2102,32 +1353,7 @@ export const GetAllToolsData$inboundSchema: z.ZodType<
   z.lazy(() => DataMCPTool$inboundSchema),
   z.lazy(() => DataCodeExecutionTool$inboundSchema),
 ]);
-/** @internal */
-export type GetAllToolsData$Outbound =
-  | DataFunctionTool$Outbound
-  | DataJSONSchemaTool$Outbound
-  | DataHTTPTool$Outbound
-  | DataMCPTool$Outbound
-  | DataCodeExecutionTool$Outbound;
 
-/** @internal */
-export const GetAllToolsData$outboundSchema: z.ZodType<
-  GetAllToolsData$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsData
-> = z.union([
-  z.lazy(() => DataFunctionTool$outboundSchema),
-  z.lazy(() => DataJSONSchemaTool$outboundSchema),
-  z.lazy(() => DataHTTPTool$outboundSchema),
-  z.lazy(() => DataMCPTool$outboundSchema),
-  z.lazy(() => DataCodeExecutionTool$outboundSchema),
-]);
-
-export function getAllToolsDataToJSON(
-  getAllToolsData: GetAllToolsData,
-): string {
-  return JSON.stringify(GetAllToolsData$outboundSchema.parse(getAllToolsData));
-}
 export function getAllToolsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsData, SDKValidationError> {
@@ -2160,49 +1386,7 @@ export const GetAllToolsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type GetAllToolsResponseBody$Outbound = {
-  object: string;
-  data: Array<
-    | DataFunctionTool$Outbound
-    | DataJSONSchemaTool$Outbound
-    | DataHTTPTool$Outbound
-    | DataMCPTool$Outbound
-    | DataCodeExecutionTool$Outbound
-  >;
-  has_more: boolean;
-};
 
-/** @internal */
-export const GetAllToolsResponseBody$outboundSchema: z.ZodType<
-  GetAllToolsResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetAllToolsResponseBody
-> = z.object({
-  object: GetAllToolsObject$outboundSchema,
-  data: z.array(
-    z.union([
-      z.lazy(() => DataFunctionTool$outboundSchema),
-      z.lazy(() => DataJSONSchemaTool$outboundSchema),
-      z.lazy(() => DataHTTPTool$outboundSchema),
-      z.lazy(() => DataMCPTool$outboundSchema),
-      z.lazy(() => DataCodeExecutionTool$outboundSchema),
-    ]),
-  ),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function getAllToolsResponseBodyToJSON(
-  getAllToolsResponseBody: GetAllToolsResponseBody,
-): string {
-  return JSON.stringify(
-    GetAllToolsResponseBody$outboundSchema.parse(getAllToolsResponseBody),
-  );
-}
 export function getAllToolsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetAllToolsResponseBody, SDKValidationError> {

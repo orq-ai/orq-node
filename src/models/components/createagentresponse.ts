@@ -5,13 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AgentResponseMessage,
   AgentResponseMessage$inboundSchema,
-  AgentResponseMessage$Outbound,
-  AgentResponseMessage$outboundSchema,
 } from "./agentresponsemessage.js";
 
 export type PromptTokensDetails = {
@@ -54,6 +53,41 @@ export type Usage = {
 };
 
 /**
+ * The reason why the agent stopped generating
+ */
+export const FinishReason = {
+  Stop: "stop",
+  Length: "length",
+  ToolCalls: "tool_calls",
+  ContentFilter: "content_filter",
+  FunctionCall: "function_call",
+  MaxIterations: "max_iterations",
+  MaxTime: "max_time",
+} as const;
+/**
+ * The reason why the agent stopped generating
+ */
+export type FinishReason = ClosedEnum<typeof FinishReason>;
+
+export const CreateAgentResponseType = {
+  Function: "function",
+} as const;
+export type CreateAgentResponseType = ClosedEnum<
+  typeof CreateAgentResponseType
+>;
+
+export type FunctionT = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
+
+export type PendingToolCalls = {
+  id: string;
+  type: CreateAgentResponseType;
+  function: FunctionT;
+};
+
+/**
  * Response type from the create-response endpoint.
  */
 export type CreateAgentResponse = {
@@ -81,6 +115,14 @@ export type CreateAgentResponse = {
    * Token usage from the agent execution
    */
   usage?: Usage | null | undefined;
+  /**
+   * The reason why the agent stopped generating
+   */
+  finishReason?: FinishReason | undefined;
+  /**
+   * Tool calls awaiting user response (when finish_reason is function_call)
+   */
+  pendingToolCalls?: Array<PendingToolCalls> | undefined;
 };
 
 /** @internal */
@@ -99,37 +141,7 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
     "audio_tokens": "audioTokens",
   });
 });
-/** @internal */
-export type PromptTokensDetails$Outbound = {
-  cached_tokens?: number | null | undefined;
-  cache_creation_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const PromptTokensDetails$outboundSchema: z.ZodType<
-  PromptTokensDetails$Outbound,
-  z.ZodTypeDef,
-  PromptTokensDetails
-> = z.object({
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  cacheCreationTokens: z.nullable(z.number().int()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-    cacheCreationTokens: "cache_creation_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function promptTokensDetailsToJSON(
-  promptTokensDetails: PromptTokensDetails,
-): string {
-  return JSON.stringify(
-    PromptTokensDetails$outboundSchema.parse(promptTokensDetails),
-  );
-}
 export function promptTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<PromptTokensDetails, SDKValidationError> {
@@ -158,40 +170,7 @@ export const CompletionTokensDetails$inboundSchema: z.ZodType<
     "audio_tokens": "audioTokens",
   });
 });
-/** @internal */
-export type CompletionTokensDetails$Outbound = {
-  reasoning_tokens?: number | null | undefined;
-  accepted_prediction_tokens?: number | null | undefined;
-  rejected_prediction_tokens?: number | null | undefined;
-  audio_tokens?: number | null | undefined;
-};
 
-/** @internal */
-export const CompletionTokensDetails$outboundSchema: z.ZodType<
-  CompletionTokensDetails$Outbound,
-  z.ZodTypeDef,
-  CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.nullable(z.number()).optional(),
-  acceptedPredictionTokens: z.nullable(z.number()).optional(),
-  rejectedPredictionTokens: z.nullable(z.number()).optional(),
-  audioTokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    acceptedPredictionTokens: "accepted_prediction_tokens",
-    rejectedPredictionTokens: "rejected_prediction_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
-
-export function completionTokensDetailsToJSON(
-  completionTokensDetails: CompletionTokensDetails,
-): string {
-  return JSON.stringify(
-    CompletionTokensDetails$outboundSchema.parse(completionTokensDetails),
-  );
-}
 export function completionTokensDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<CompletionTokensDetails, SDKValidationError> {
@@ -223,46 +202,7 @@ export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
       "completion_tokens_details": "completionTokensDetails",
     });
   });
-/** @internal */
-export type Usage$Outbound = {
-  completion_tokens?: number | undefined;
-  prompt_tokens?: number | undefined;
-  total_tokens?: number | undefined;
-  prompt_tokens_details?: PromptTokensDetails$Outbound | null | undefined;
-  completion_tokens_details?:
-    | CompletionTokensDetails$Outbound
-    | null
-    | undefined;
-};
 
-/** @internal */
-export const Usage$outboundSchema: z.ZodType<
-  Usage$Outbound,
-  z.ZodTypeDef,
-  Usage
-> = z.object({
-  completionTokens: z.number().optional(),
-  promptTokens: z.number().optional(),
-  totalTokens: z.number().optional(),
-  promptTokensDetails: z.nullable(
-    z.lazy(() => PromptTokensDetails$outboundSchema),
-  ).optional(),
-  completionTokensDetails: z.nullable(
-    z.lazy(() => CompletionTokensDetails$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    completionTokens: "completion_tokens",
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-    promptTokensDetails: "prompt_tokens_details",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
-
-export function usageToJSON(usage: Usage): string {
-  return JSON.stringify(Usage$outboundSchema.parse(usage));
-}
 export function usageFromJSON(
   jsonString: string,
 ): SafeParseResult<Usage, SDKValidationError> {
@@ -270,6 +210,56 @@ export function usageFromJSON(
     jsonString,
     (x) => Usage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Usage' from JSON`,
+  );
+}
+
+/** @internal */
+export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
+  z.nativeEnum(FinishReason);
+
+/** @internal */
+export const CreateAgentResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentResponseType
+> = z.nativeEnum(CreateAgentResponseType);
+
+/** @internal */
+export const FunctionT$inboundSchema: z.ZodType<
+  FunctionT,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function functionFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionT, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionT' from JSON`,
+  );
+}
+
+/** @internal */
+export const PendingToolCalls$inboundSchema: z.ZodType<
+  PendingToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: CreateAgentResponseType$inboundSchema,
+  function: z.lazy(() => FunctionT$inboundSchema),
+});
+
+export function pendingToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<PendingToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PendingToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PendingToolCalls' from JSON`,
   );
 }
 
@@ -285,50 +275,19 @@ export const CreateAgentResponse$inboundSchema: z.ZodType<
   created_at: z.string(),
   model: z.string(),
   usage: z.nullable(z.lazy(() => Usage$inboundSchema)).optional(),
+  finish_reason: FinishReason$inboundSchema.optional(),
+  pending_tool_calls: z.array(z.lazy(() => PendingToolCalls$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "task_id": "taskId",
     "created_at": "createdAt",
-  });
-});
-/** @internal */
-export type CreateAgentResponse$Outbound = {
-  _id: string;
-  task_id: string;
-  output: Array<AgentResponseMessage$Outbound>;
-  created_at: string;
-  model: string;
-  usage?: Usage$Outbound | null | undefined;
-};
-
-/** @internal */
-export const CreateAgentResponse$outboundSchema: z.ZodType<
-  CreateAgentResponse$Outbound,
-  z.ZodTypeDef,
-  CreateAgentResponse
-> = z.object({
-  id: z.string(),
-  taskId: z.string(),
-  output: z.array(AgentResponseMessage$outboundSchema),
-  createdAt: z.string(),
-  model: z.string(),
-  usage: z.nullable(z.lazy(() => Usage$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    taskId: "task_id",
-    createdAt: "created_at",
+    "finish_reason": "finishReason",
+    "pending_tool_calls": "pendingToolCalls",
   });
 });
 
-export function createAgentResponseToJSON(
-  createAgentResponse: CreateAgentResponse,
-): string {
-  return JSON.stringify(
-    CreateAgentResponse$outboundSchema.parse(createAgentResponse),
-  );
-}
 export function createAgentResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateAgentResponse, SDKValidationError> {

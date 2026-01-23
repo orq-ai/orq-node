@@ -81,28 +81,9 @@ export type CreateContactResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const CreateContactRequestBody$inboundSchema: z.ZodType<
-  CreateContactRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  external_id: z.string(),
-  display_name: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatar_url: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "external_id": "externalId",
-    "display_name": "displayName",
-    "avatar_url": "avatarUrl",
-  });
-});
 /** @internal */
 export type CreateContactRequestBody$Outbound = {
   external_id: string;
@@ -140,15 +121,6 @@ export function createContactRequestBodyToJSON(
     CreateContactRequestBody$outboundSchema.parse(createContactRequestBody),
   );
 }
-export function createContactRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateContactRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateContactRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateContactRequestBody' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateContactResponseBody$inboundSchema: z.ZodType<
@@ -167,7 +139,7 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:09.825Z",
+    "2026-01-23T11:14:01.166Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -178,54 +150,7 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
     "avatar_url": "avatarUrl",
   });
 });
-/** @internal */
-export type CreateContactResponseBody$Outbound = {
-  _id: string;
-  external_id: string;
-  workspace_id: string;
-  display_name?: string | null | undefined;
-  email?: string | null | undefined;
-  avatar_url?: string | null | undefined;
-  tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const CreateContactResponseBody$outboundSchema: z.ZodType<
-  CreateContactResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateContactResponseBody
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  workspaceId: z.string(),
-  displayName: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  avatarUrl: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-19T14:27:09.825Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    externalId: "external_id",
-    workspaceId: "workspace_id",
-    displayName: "display_name",
-    avatarUrl: "avatar_url",
-  });
-});
-
-export function createContactResponseBodyToJSON(
-  createContactResponseBody: CreateContactResponseBody,
-): string {
-  return JSON.stringify(
-    CreateContactResponseBody$outboundSchema.parse(createContactResponseBody),
-  );
-}
 export function createContactResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateContactResponseBody, SDKValidationError> {

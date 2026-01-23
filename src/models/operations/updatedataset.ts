@@ -78,24 +78,9 @@ export type UpdateDatasetResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const UpdateDatasetRequestBody$inboundSchema: z.ZodType<
-  UpdateDatasetRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  display_name: z.string().optional(),
-  project_id: z.string().optional(),
-  path: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "project_id": "projectId",
-  });
-});
 /** @internal */
 export type UpdateDatasetRequestBody$Outbound = {
   display_name?: string | undefined;
@@ -126,30 +111,7 @@ export function updateDatasetRequestBodyToJSON(
     UpdateDatasetRequestBody$outboundSchema.parse(updateDatasetRequestBody),
   );
 }
-export function updateDatasetRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasetRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasetRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasetRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateDatasetRequest$inboundSchema: z.ZodType<
-  UpdateDatasetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  dataset_id: z.string(),
-  RequestBody: z.lazy(() => UpdateDatasetRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "dataset_id": "datasetId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateDatasetRequest$Outbound = {
   dataset_id: string;
@@ -178,15 +140,6 @@ export function updateDatasetRequestToJSON(
     UpdateDatasetRequest$outboundSchema.parse(updateDatasetRequest),
   );
 }
-export function updateDatasetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasetRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateDatasetMetadata$inboundSchema: z.ZodType<
@@ -202,34 +155,7 @@ export const UpdateDatasetMetadata$inboundSchema: z.ZodType<
     "datapoints_count": "datapointsCount",
   });
 });
-/** @internal */
-export type UpdateDatasetMetadata$Outbound = {
-  total_versions: number;
-  datapoints_count: number;
-};
 
-/** @internal */
-export const UpdateDatasetMetadata$outboundSchema: z.ZodType<
-  UpdateDatasetMetadata$Outbound,
-  z.ZodTypeDef,
-  UpdateDatasetMetadata
-> = z.object({
-  totalVersions: z.number(),
-  datapointsCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    totalVersions: "total_versions",
-    datapointsCount: "datapoints_count",
-  });
-});
-
-export function updateDatasetMetadataToJSON(
-  updateDatasetMetadata: UpdateDatasetMetadata,
-): string {
-  return JSON.stringify(
-    UpdateDatasetMetadata$outboundSchema.parse(updateDatasetMetadata),
-  );
-}
 export function updateDatasetMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasetMetadata, SDKValidationError> {
@@ -256,7 +182,7 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:09.825Z",
+    "2026-01-23T11:14:01.166Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -268,53 +194,7 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-/** @internal */
-export type UpdateDatasetResponseBody$Outbound = {
-  _id: string;
-  display_name: string;
-  project_id: string;
-  workspace_id: string;
-  metadata: UpdateDatasetMetadata$Outbound;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const UpdateDatasetResponseBody$outboundSchema: z.ZodType<
-  UpdateDatasetResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateDatasetResponseBody
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  metadata: z.lazy(() => UpdateDatasetMetadata$outboundSchema),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-19T14:27:09.825Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
-
-export function updateDatasetResponseBodyToJSON(
-  updateDatasetResponseBody: UpdateDatasetResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateDatasetResponseBody$outboundSchema.parse(updateDatasetResponseBody),
-  );
-}
 export function updateDatasetResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateDatasetResponseBody, SDKValidationError> {

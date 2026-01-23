@@ -1,19 +1,26 @@
 # Schema
 
+The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
+
 ## Example Usage
 
 ```typescript
 import { Schema } from "@orq-ai/node/models/operations";
 
 let value: Schema = {
-  type: "object",
+  type: "<value>",
+  properties: {
+    "key": "<value>",
+  },
+  required: [],
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                                                                    | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                   | [operations.RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15McpType](../../models/operations/runagentagenttoolinputrunagentsrequestrequestbodysettingstools15mcptype.md) | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
-| `properties`                                                                                                                                                                             | Record<string, *any*>                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
-| `required`                                                                                                                                                                               | *string*[]                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| Field                                    | Type                                     | Required                                 | Description                              |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `type`                                   | *string*                                 | :heavy_check_mark:                       | The JSON Schema type                     |
+| `properties`                             | Record<string, *any*>                    | :heavy_check_mark:                       | The properties of the JSON Schema object |
+| `required`                               | *string*[]                               | :heavy_check_mark:                       | Array of required property names         |
+| `additionalProperties`                   | Record<string, *any*>                    | :heavy_minus_sign:                       | N/A                                      |

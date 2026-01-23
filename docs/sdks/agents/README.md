@@ -48,6 +48,54 @@ async function run() {
         ],
       },
     },
+    fallbackModels: [
+      {
+        id: "<id>",
+        parameters: {
+          fallbacks: [
+            {
+              model: "openai/gpt-4o-mini",
+            },
+          ],
+          retry: {
+            count: 3,
+            onCodes: [
+              429,
+              500,
+              502,
+              503,
+              504,
+            ],
+          },
+          cache: {
+            ttl: 3600,
+            type: "exact_match",
+          },
+          loadBalancer: {
+            type: "weight_based",
+            models: [
+              {
+                model: "openai/gpt-4o",
+                weight: 0.7,
+              },
+            ],
+          },
+          timeout: {
+            callTimeout: 30000,
+          },
+        },
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
+    ],
     settings: {
       tools: [
         {
@@ -105,6 +153,54 @@ async function run() {
         ],
       },
     },
+    fallbackModels: [
+      {
+        id: "<id>",
+        parameters: {
+          fallbacks: [
+            {
+              model: "openai/gpt-4o-mini",
+            },
+          ],
+          retry: {
+            count: 3,
+            onCodes: [
+              429,
+              500,
+              502,
+              503,
+              504,
+            ],
+          },
+          cache: {
+            ttl: 3600,
+            type: "exact_match",
+          },
+          loadBalancer: {
+            type: "weight_based",
+            models: [
+              {
+                model: "openai/gpt-4o",
+                weight: 0.7,
+              },
+            ],
+          },
+          timeout: {
+            callTimeout: 30000,
+          },
+        },
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
+    ],
     settings: {
       tools: [
         {
@@ -147,10 +243,9 @@ run();
 
 ### Errors
 
-| Error Type                            | Status Code                           | Content Type                          |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| errors.CreateAgentRequestResponseBody | 409                                   | application/json                      |
-| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -309,6 +404,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.update({
     model: "El Camino",
+    fallbackModels: [
+      "<value>",
+    ],
     settings: {
       tools: [
         {
@@ -350,6 +448,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsUpdate(orq, {
     model: "El Camino",
+    fallbackModels: [
+      "<value>",
+    ],
     settings: {
       tools: [
         {
@@ -421,7 +522,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -472,7 +573,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -618,6 +719,9 @@ async function run() {
   const result = await orq.agents.run({
     key: "<key>",
     model: "F-150",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -629,7 +733,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -685,6 +789,9 @@ async function run() {
   const res = await agentsRun(orq, {
     key: "<key>",
     model: "F-150",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -696,7 +803,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -777,6 +884,9 @@ async function run() {
   const result = await orq.agents.streamRun({
     key: "<key>",
     model: "Alpine",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -790,7 +900,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -848,6 +958,9 @@ async function run() {
   const res = await agentsStreamRun(orq, {
     key: "<key>",
     model: "Alpine",
+    fallbackModels: [
+      "<value>",
+    ],
     role: "<value>",
     instructions: "<value>",
     message: {
@@ -861,7 +974,7 @@ async function run() {
         },
       ],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -947,7 +1060,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",
@@ -1000,7 +1113,7 @@ async function run() {
       role: "user",
       parts: [],
     },
-    contact: {
+    identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
       displayName: "Jane Doe",
       email: "jane.doe@example.com",

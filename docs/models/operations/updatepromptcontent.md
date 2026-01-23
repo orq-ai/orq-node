@@ -11,9 +11,16 @@ The contents of the user message. Either the text content of the message or an a
 const value: string = "<value>";
 ```
 
-### `operations.UpdatePromptContent2[]`
+### `operations.UpdatePromptContentPromptsResponse2[]`
 
 ```typescript
-const value: operations.UpdatePromptContent2[] = [];
+const value: operations.UpdatePromptContentPromptsResponse2[] = [
+  {
+    type: "image_url",
+    imageUrl: {
+      url: "https://picsum.photos/id/1/200/300",
+    },
+  },
+];
 ```
 

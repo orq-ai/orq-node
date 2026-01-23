@@ -26,6 +26,14 @@ export type Data = {
    * Trace ID for this turn of the conversation (new for each continuation)
    */
   workflowRunId: string;
+  /**
+   * Server-generated ID for the user message. Use this ID for frontend state consistency.
+   */
+  userMessageId?: string | undefined;
+  /**
+   * Server-generated ID for the assistant message. Use this ID for frontend state consistency.
+   */
+  assistantMessageId?: string | undefined;
 };
 
 /**
@@ -47,27 +55,10 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     taskId: z.string(),
     model: z.string(),
     workflowRunId: z.string(),
-  });
-/** @internal */
-export type Data$Outbound = {
-  responseId: string;
-  taskId: string;
-  model: string;
-  workflowRunId: string;
-};
-
-/** @internal */
-export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
-  z.object({
-    responseId: z.string(),
-    taskId: z.string(),
-    model: z.string(),
-    workflowRunId: z.string(),
+    userMessageId: z.string().optional(),
+    assistantMessageId: z.string().optional(),
   });
 
-export function dataToJSON(data: Data): string {
-  return JSON.stringify(Data$outboundSchema.parse(data));
-}
 export function dataFromJSON(
   jsonString: string,
 ): SafeParseResult<Data, SDKValidationError> {
@@ -88,31 +79,7 @@ export const ResponseStartedEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => Data$inboundSchema),
 });
-/** @internal */
-export type ResponseStartedEvent$Outbound = {
-  type: "response.started";
-  timestamp: string;
-  data: Data$Outbound;
-};
 
-/** @internal */
-export const ResponseStartedEvent$outboundSchema: z.ZodType<
-  ResponseStartedEvent$Outbound,
-  z.ZodTypeDef,
-  ResponseStartedEvent
-> = z.object({
-  type: z.literal("response.started"),
-  timestamp: z.string(),
-  data: z.lazy(() => Data$outboundSchema),
-});
-
-export function responseStartedEventToJSON(
-  responseStartedEvent: ResponseStartedEvent,
-): string {
-  return JSON.stringify(
-    ResponseStartedEvent$outboundSchema.parse(responseStartedEvent),
-  );
-}
 export function responseStartedEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseStartedEvent, SDKValidationError> {

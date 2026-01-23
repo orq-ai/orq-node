@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteDatasetRequest = {
   /**
@@ -15,18 +12,6 @@ export type DeleteDatasetRequest = {
   datasetId: string;
 };
 
-/** @internal */
-export const DeleteDatasetRequest$inboundSchema: z.ZodType<
-  DeleteDatasetRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  dataset_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "dataset_id": "datasetId",
-  });
-});
 /** @internal */
 export type DeleteDatasetRequest$Outbound = {
   dataset_id: string;
@@ -50,14 +35,5 @@ export function deleteDatasetRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteDatasetRequest$outboundSchema.parse(deleteDatasetRequest),
-  );
-}
-export function deleteDatasetRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteDatasetRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteDatasetRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteDatasetRequest' from JSON`,
   );
 }

@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FileDeleteRequest = {
   /**
@@ -15,18 +12,6 @@ export type FileDeleteRequest = {
   fileId: string;
 };
 
-/** @internal */
-export const FileDeleteRequest$inboundSchema: z.ZodType<
-  FileDeleteRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
 /** @internal */
 export type FileDeleteRequest$Outbound = {
   file_id: string;
@@ -50,14 +35,5 @@ export function fileDeleteRequestToJSON(
 ): string {
   return JSON.stringify(
     FileDeleteRequest$outboundSchema.parse(fileDeleteRequest),
-  );
-}
-export function fileDeleteRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<FileDeleteRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileDeleteRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileDeleteRequest' from JSON`,
   );
 }

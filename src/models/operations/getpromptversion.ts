@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetPromptVersionRequest = {
@@ -31,6 +32,7 @@ export const GetPromptVersionModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Ocr: "ocr",
   Moderation: "moderation",
   Vision: "vision",
 } as const;
@@ -86,36 +88,41 @@ export type GetPromptVersionResponseFormat4 = ClosedEnum<
   typeof GetPromptVersionResponseFormat4
 >;
 
-export const GetPromptVersionResponseFormatPromptsResponseType = {
-  Text: "text",
-} as const;
-export type GetPromptVersionResponseFormatPromptsResponseType = ClosedEnum<
-  typeof GetPromptVersionResponseFormatPromptsResponseType
->;
+export const GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  {
+    Text: "text",
+  } as const;
+export type GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  >;
 
 export type GetPromptVersionResponseFormat3 = {
-  type: GetPromptVersionResponseFormatPromptsResponseType;
+  type:
+    GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType;
 };
 
-export const GetPromptVersionResponseFormatPromptsType = {
-  JsonObject: "json_object",
-} as const;
-export type GetPromptVersionResponseFormatPromptsType = ClosedEnum<
-  typeof GetPromptVersionResponseFormatPromptsType
->;
+export const GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType =
+  {
+    JsonObject: "json_object",
+  } as const;
+export type GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType
+  >;
 
 export type GetPromptVersionResponseFormat2 = {
-  type: GetPromptVersionResponseFormatPromptsType;
+  type: GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType;
 };
 
-export const GetPromptVersionResponseFormatType = {
+export const GetPromptVersionResponseFormatPromptsResponse200Type = {
   JsonSchema: "json_schema",
 } as const;
-export type GetPromptVersionResponseFormatType = ClosedEnum<
-  typeof GetPromptVersionResponseFormatType
+export type GetPromptVersionResponseFormatPromptsResponse200Type = ClosedEnum<
+  typeof GetPromptVersionResponseFormatPromptsResponse200Type
 >;
 
-export type GetPromptVersionResponseFormatJsonSchema = {
+export type GetPromptVersionResponseFormatPromptsResponseJsonSchema = {
   name: string;
   description?: string | undefined;
   strict?: boolean | undefined;
@@ -123,9 +130,9 @@ export type GetPromptVersionResponseFormatJsonSchema = {
 };
 
 export type GetPromptVersionResponseFormat1 = {
-  type: GetPromptVersionResponseFormatType;
+  type: GetPromptVersionResponseFormatPromptsResponse200Type;
   displayName?: string | undefined;
-  jsonSchema: GetPromptVersionResponseFormatJsonSchema;
+  jsonSchema: GetPromptVersionResponseFormatPromptsResponseJsonSchema;
 };
 
 /**
@@ -139,7 +146,7 @@ export type GetPromptVersionResponseFormat1 = {
  *
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
-export type GetPromptVersionResponseFormat =
+export type GetPromptVersionPromptsResponseFormat =
   | GetPromptVersionResponseFormat1
   | GetPromptVersionResponseFormat2
   | GetPromptVersionResponseFormat3
@@ -178,7 +185,7 @@ export type GetPromptVersionEncodingFormat = ClosedEnum<
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const GetPromptVersionReasoningEffort = {
+export const GetPromptVersionPromptsReasoningEffort = {
   None: "none",
   Disable: "disable",
   Minimal: "minimal",
@@ -189,8 +196,8 @@ export const GetPromptVersionReasoningEffort = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type GetPromptVersionReasoningEffort = ClosedEnum<
-  typeof GetPromptVersionReasoningEffort
+export type GetPromptVersionPromptsReasoningEffort = ClosedEnum<
+  typeof GetPromptVersionPromptsReasoningEffort
 >;
 
 /**
@@ -305,7 +312,7 @@ export type GetPromptVersionModelParameters = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  reasoningEffort?: GetPromptVersionReasoningEffort | undefined;
+  reasoningEffort?: GetPromptVersionPromptsReasoningEffort | undefined;
   /**
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
@@ -440,10 +447,12 @@ export type GetPromptVersionContent =
   | string
   | Array<GetPromptVersion21 | GetPromptVersion22 | GetPromptVersion23>;
 
-export const GetPromptVersionType = {
+export const GetPromptVersionPromptsType = {
   Function: "function",
 } as const;
-export type GetPromptVersionType = ClosedEnum<typeof GetPromptVersionType>;
+export type GetPromptVersionPromptsType = ClosedEnum<
+  typeof GetPromptVersionPromptsType
+>;
 
 export type GetPromptVersionFunction = {
   name: string;
@@ -456,7 +465,7 @@ export type GetPromptVersionFunction = {
 export type GetPromptVersionToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: GetPromptVersionType;
+  type: GetPromptVersionPromptsType;
   function: GetPromptVersionFunction;
 };
 
@@ -477,11 +486,13 @@ export type GetPromptVersionMessages = {
 };
 
 /**
- * A list of messages compatible with the openAI schema
+ * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type GetPromptVersionPromptConfig = {
   stream?: boolean | undefined;
-  model?: string | undefined;
+  model?: string | null | undefined;
   /**
    * The id of the resource
    */
@@ -494,13 +505,813 @@ export type GetPromptVersionPromptConfig = {
    * Model Parameters: Not all parameters apply to every model
    */
   modelParameters?: GetPromptVersionModelParameters | undefined;
-  provider?: GetPromptVersionProvider | undefined;
+  provider?: GetPromptVersionProvider | null | undefined;
   /**
    * The ID of the integration to use
    */
   integrationId?: string | null | undefined;
   version?: string | undefined;
   messages: Array<GetPromptVersionMessages>;
+};
+
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export const GetPromptVersionVoice = {
+  Alloy: "alloy",
+  Echo: "echo",
+  Fable: "fable",
+  Onyx: "onyx",
+  Nova: "nova",
+  Shimmer: "shimmer",
+} as const;
+/**
+ * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+ */
+export type GetPromptVersionVoice = ClosedEnum<typeof GetPromptVersionVoice>;
+
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export const GetPromptVersionPromptsFormat = {
+  Wav: "wav",
+  Mp3: "mp3",
+  Flac: "flac",
+  Opus: "opus",
+  Pcm16: "pcm16",
+} as const;
+/**
+ * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+ */
+export type GetPromptVersionPromptsFormat = ClosedEnum<
+  typeof GetPromptVersionPromptsFormat
+>;
+
+/**
+ * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+ */
+export type GetPromptVersionAudio = {
+  /**
+   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
+   */
+  voice: GetPromptVersionVoice;
+  /**
+   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
+   */
+  format: GetPromptVersionPromptsFormat;
+};
+
+export type GetPromptVersionResponseFormatJsonSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema?: any | undefined;
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
+   */
+  strict: boolean;
+};
+
+/**
+ * @remarks
+ *
+ * JSON Schema response format. Used to generate structured JSON responses
+ */
+export type GetPromptVersionResponseFormatPromptsJSONSchema = {
+  type: "json_schema";
+  jsonSchema: GetPromptVersionResponseFormatJsonSchema;
+};
+
+/**
+ * @remarks
+ *
+ * JSON object response format. An older method of generating JSON responses. Using `json_schema` is recommended for models that support it. Note that the model will not generate JSON without a system or user message instructing it to do so.
+ */
+export type GetPromptVersionResponseFormatJSONObject = {
+  type: "json_object";
+};
+
+/**
+ * @remarks
+ *
+ * Default response format. Used to generate text responses
+ */
+export type GetPromptVersionResponseFormatText = {
+  type: "text";
+};
+
+/**
+ * An object specifying the format that the model must output
+ */
+export type GetPromptVersionResponseFormat =
+  | GetPromptVersionResponseFormatText
+  | GetPromptVersionResponseFormatJSONObject
+  | GetPromptVersionResponseFormatPromptsJSONSchema;
+
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export const GetPromptVersionReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ *
+ * @remarks
+ *
+ * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+ * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+ * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+ * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+ *
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ */
+export type GetPromptVersionReasoningEffort = ClosedEnum<
+  typeof GetPromptVersionReasoningEffort
+>;
+
+/**
+ * Up to 4 sequences where the API will stop generating further tokens.
+ */
+export type GetPromptVersionStop = string | Array<string>;
+
+/**
+ * Options for streaming response. Only set this when you set stream: true.
+ */
+export type GetPromptVersionStreamOptions = {
+  /**
+   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
+   */
+  includeUsage?: boolean | undefined;
+};
+
+export type GetPromptVersionThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema;
+
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export const GetPromptVersionToolChoiceType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only function is supported.
+ */
+export type GetPromptVersionToolChoiceType = ClosedEnum<
+  typeof GetPromptVersionToolChoiceType
+>;
+
+export type GetPromptVersionToolChoiceFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name: string;
+};
+
+export type GetPromptVersionToolChoice2 = {
+  /**
+   * The type of the tool. Currently, only function is supported.
+   */
+  type?: GetPromptVersionToolChoiceType | undefined;
+  function: GetPromptVersionToolChoiceFunction;
+};
+
+export const GetPromptVersionToolChoice1 = {
+  None: "none",
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type GetPromptVersionToolChoice1 = ClosedEnum<
+  typeof GetPromptVersionToolChoice1
+>;
+
+/**
+ * Controls which (if any) tool is called by the model.
+ */
+export type GetPromptVersionToolChoice =
+  | GetPromptVersionToolChoice2
+  | GetPromptVersionToolChoice1;
+
+export const GetPromptVersionModalities = {
+  Text: "text",
+  Audio: "audio",
+} as const;
+export type GetPromptVersionModalities = ClosedEnum<
+  typeof GetPromptVersionModalities
+>;
+
+/**
+ * The key of the guardrail.
+ */
+export const GetPromptVersionId1 = {
+  OrqPiiDetection: "orq_pii_detection",
+  OrqSexualModeration: "orq_sexual_moderation",
+  OrqHarmfulModeration: "orq_harmful_moderation",
+} as const;
+/**
+ * The key of the guardrail.
+ */
+export type GetPromptVersionId1 = ClosedEnum<typeof GetPromptVersionId1>;
+
+export type GetPromptVersionId = GetPromptVersionId1 | string;
+
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export const GetPromptVersionExecuteOn = {
+  Input: "input",
+  Output: "output",
+} as const;
+/**
+ * Determines whether the guardrail runs on the input (user message) or output (model response).
+ */
+export type GetPromptVersionExecuteOn = ClosedEnum<
+  typeof GetPromptVersionExecuteOn
+>;
+
+export type GetPromptVersionGuardrails = {
+  id: GetPromptVersionId1 | string;
+  /**
+   * Determines whether the guardrail runs on the input (user message) or output (model response).
+   */
+  executeOn: GetPromptVersionExecuteOn;
+};
+
+export type GetPromptVersionFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type GetPromptVersionRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count: number;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const GetPromptVersionType = {
+  ExactMatch: "exact_match",
+} as const;
+export type GetPromptVersionType = ClosedEnum<typeof GetPromptVersionType>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type GetPromptVersionCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl: number;
+  type: GetPromptVersionType;
+};
+
+export const GetPromptVersionLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type GetPromptVersionLoadBalancerType = ClosedEnum<
+  typeof GetPromptVersionLoadBalancerType
+>;
+
+export type GetPromptVersionLoadBalancerModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight: number;
+};
+
+export type GetPromptVersionLoadBalancer1 = {
+  type: GetPromptVersionLoadBalancerType;
+  models: Array<GetPromptVersionLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
+export type GetPromptVersionLoadBalancer = GetPromptVersionLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type GetPromptVersionTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+export type GetPromptVersionContentPromptsResponse2002 =
+  components.TextContentPartSchema;
+
+/**
+ * The contents of the tool message.
+ */
+export type GetPromptVersionMessagesPromptsResponse200Content =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetPromptVersionMessagesPromptsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetPromptVersionMessagesPromptsType = ClosedEnum<
+  typeof GetPromptVersionMessagesPromptsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetPromptVersionMessagesTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetPromptVersionMessagesTtl = ClosedEnum<
+  typeof GetPromptVersionMessagesTtl
+>;
+
+export type GetPromptVersionMessagesCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetPromptVersionMessagesPromptsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: GetPromptVersionMessagesTtl;
+};
+
+export type GetPromptVersionMessagesToolMessage = {
+  /**
+   * The role of the messages author, in this case tool.
+   */
+  role: "tool";
+  /**
+   * The contents of the tool message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * Tool call that this message is responding to.
+   */
+  toolCallId: string | null;
+  cacheControl?: GetPromptVersionMessagesCacheControl | undefined;
+};
+
+export type GetPromptVersionContentPromptsResponse2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.RefusalPartSchema
+  | components.ReasoningPartSchema
+  | components.RedactedReasoningPartSchema;
+
+/**
+ * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+ */
+export type GetPromptVersionMessagesPromptsResponseContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.RefusalPartSchema
+    | components.ReasoningPartSchema
+    | components.RedactedReasoningPartSchema
+  >;
+
+/**
+ * Data about a previous audio response from the model.
+ */
+export type GetPromptVersionMessagesAudio = {
+  /**
+   * Unique identifier for a previous audio response from the model.
+   */
+  id: string;
+};
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const GetPromptVersionMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type GetPromptVersionMessagesType = ClosedEnum<
+  typeof GetPromptVersionMessagesType
+>;
+
+export type GetPromptVersionMessagesFunction = {
+  /**
+   * The name of the function to call.
+   */
+  name?: string | undefined;
+  /**
+   * The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+   */
+  arguments?: string | undefined;
+};
+
+export type GetPromptVersionMessagesToolCalls = {
+  /**
+   * The ID of the tool call.
+   */
+  id: string;
+  /**
+   * The type of the tool. Currently, only `function` is supported.
+   */
+  type: GetPromptVersionMessagesType;
+  function: GetPromptVersionMessagesFunction;
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+export type GetPromptVersionMessagesAssistantMessage = {
+  /**
+   * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+   */
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.RefusalPartSchema
+      | components.ReasoningPartSchema
+      | components.RedactedReasoningPartSchema
+    >
+    | null
+    | undefined;
+  /**
+   * The refusal message by the assistant.
+   */
+  refusal?: string | null | undefined;
+  /**
+   * The role of the messages author, in this case `assistant`.
+   */
+  role: "assistant";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * Data about a previous audio response from the model.
+   */
+  audio?: GetPromptVersionMessagesAudio | null | undefined;
+  /**
+   * The tool calls generated by the model, such as function calls.
+   */
+  toolCalls?: Array<GetPromptVersionMessagesToolCalls> | undefined;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetPromptVersion2PromptsResponse200ApplicationJSONType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetPromptVersion2PromptsResponse200ApplicationJSONType = ClosedEnum<
+  typeof GetPromptVersion2PromptsResponse200ApplicationJSONType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetPromptVersion2Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetPromptVersion2Ttl = ClosedEnum<typeof GetPromptVersion2Ttl>;
+
+export type GetPromptVersion2CacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetPromptVersion2PromptsResponse200ApplicationJSONType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: GetPromptVersion2Ttl;
+};
+
+export type GetPromptVersion24 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: "file";
+  cacheControl?: GetPromptVersion2CacheControl | undefined;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
+  file: components.FileContentPartSchema;
+};
+
+export type GetPromptVersionContentPrompts2 =
+  | (components.TextContentPartSchema & { type: "text" })
+  | components.ImageContentPartSchema
+  | components.AudioContentPartSchema
+  | GetPromptVersion24;
+
+/**
+ * The contents of the user message.
+ */
+export type GetPromptVersionMessagesPromptsContent =
+  | string
+  | Array<
+    | (components.TextContentPartSchema & { type: "text" })
+    | components.ImageContentPartSchema
+    | components.AudioContentPartSchema
+    | GetPromptVersion24
+  >;
+
+export type GetPromptVersionMessagesUserMessage = {
+  /**
+   * The role of the messages author, in this case `user`.
+   */
+  role: "user";
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+  /**
+   * The contents of the user message.
+   */
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema & { type: "text" })
+      | components.ImageContentPartSchema
+      | components.AudioContentPartSchema
+      | GetPromptVersion24
+    >;
+};
+
+/**
+ * The contents of the system message.
+ */
+export type GetPromptVersionMessagesContent =
+  | string
+  | Array<components.TextContentPartSchema>;
+
+/**
+ * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
+ */
+export type GetPromptVersionMessagesSystemMessage = {
+  /**
+   * The role of the messages author, in this case `system`.
+   */
+  role: "system";
+  /**
+   * The contents of the system message.
+   */
+  content: string | Array<components.TextContentPartSchema>;
+  /**
+   * An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+   */
+  name?: string | undefined;
+};
+
+export type GetPromptVersionPromptsMessages =
+  | GetPromptVersionMessagesSystemMessage
+  | GetPromptVersionMessagesUserMessage
+  | GetPromptVersionMessagesAssistantMessage
+  | GetPromptVersionMessagesToolMessage;
+
+/**
+ * Prompt configuration with model and messages. Use this instead of prompt_config.
+ */
+export type GetPromptVersionPromptField = {
+  /**
+   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
+   */
+  audio?: GetPromptVersionAudio | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+   */
+  frequencyPenalty?: number | null | undefined;
+  /**
+   * `[Deprecated]`. The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
+   *
+   * @remarks
+   *
+   *  This value is now `deprecated` in favor of `max_completion_tokens`, and is not compatible with o1 series models.
+   */
+  maxTokens?: number | null | undefined;
+  /**
+   * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
+   */
+  maxCompletionTokens?: number | null | undefined;
+  /**
+   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
+   */
+  logprobs?: boolean | null | undefined;
+  /**
+   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
+   */
+  topLogprobs?: number | null | undefined;
+  /**
+   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
+   */
+  n?: number | null | undefined;
+  /**
+   * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+   */
+  presencePenalty?: number | null | undefined;
+  /**
+   * An object specifying the format that the model must output
+   */
+  responseFormat?:
+    | GetPromptVersionResponseFormatText
+    | GetPromptVersionResponseFormatJSONObject
+    | GetPromptVersionResponseFormatPromptsJSONSchema
+    | undefined;
+  /**
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   *
+   * @remarks
+   *
+   * - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
+   * - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
+   * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
+   * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
+   *
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   */
+  reasoningEffort?: GetPromptVersionReasoningEffort | undefined;
+  /**
+   * Adjusts response verbosity. Lower levels yield shorter answers.
+   */
+  verbosity?: string | undefined;
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+   */
+  seed?: number | null | undefined;
+  /**
+   * Up to 4 sequences where the API will stop generating further tokens.
+   */
+  stop?: string | Array<string> | null | undefined;
+  /**
+   * Options for streaming response. Only set this when you set stream: true.
+   */
+  streamOptions?: GetPromptVersionStreamOptions | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | undefined;
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+   */
+  temperature?: number | null | undefined;
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   */
+  topP?: number | null | undefined;
+  /**
+   * Limits the model to consider only the top k most likely tokens at each step.
+   */
+  topK?: number | null | undefined;
+  /**
+   * Controls which (if any) tool is called by the model.
+   */
+  toolChoice?:
+    | GetPromptVersionToolChoice2
+    | GetPromptVersionToolChoice1
+    | undefined;
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  parallelToolCalls?: boolean | undefined;
+  /**
+   * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
+   */
+  modalities?: Array<GetPromptVersionModalities> | null | undefined;
+  /**
+   * A list of guardrails to apply to the request.
+   */
+  guardrails?: Array<GetPromptVersionGuardrails> | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<GetPromptVersionFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: GetPromptVersionRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: GetPromptVersionCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: GetPromptVersionLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: GetPromptVersionTimeout | undefined;
+  /**
+   * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
+   */
+  messages?:
+    | Array<
+      | GetPromptVersionMessagesSystemMessage
+      | GetPromptVersionMessagesUserMessage
+      | GetPromptVersionMessagesAssistantMessage
+      | GetPromptVersionMessagesToolMessage
+    >
+    | undefined;
+  /**
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   */
+  model?: string | null | undefined;
+  version?: string | undefined;
 };
 
 export const GetPromptVersionUseCases = {
@@ -571,27 +1382,19 @@ export type GetPromptVersionResponseBody = {
    */
   description?: string | null | undefined;
   /**
-   * A list of messages compatible with the openAI schema
+   * [DEPRECATED] Use the `prompt` property instead. A list of messages compatible with the openAI schema.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  promptConfig: GetPromptVersionPromptConfig;
+  promptConfig?: GetPromptVersionPromptConfig | undefined;
+  /**
+   * Prompt configuration with model and messages. Use this instead of prompt_config.
+   */
+  prompt: GetPromptVersionPromptField;
   metadata?: GetPromptVersionMetadata | undefined;
   timestamp: string;
 };
 
-/** @internal */
-export const GetPromptVersionRequest$inboundSchema: z.ZodType<
-  GetPromptVersionRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  prompt_id: z.string(),
-  version_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_id": "promptId",
-    "version_id": "versionId",
-  });
-});
 /** @internal */
 export type GetPromptVersionRequest$Outbound = {
   prompt_id: string;
@@ -620,69 +1423,39 @@ export function getPromptVersionRequestToJSON(
     GetPromptVersionRequest$outboundSchema.parse(getPromptVersionRequest),
   );
 }
-export function getPromptVersionRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetPromptVersionRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetPromptVersionRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetPromptVersionRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetPromptVersionModelType$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionModelType
 > = z.nativeEnum(GetPromptVersionModelType);
-/** @internal */
-export const GetPromptVersionModelType$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionModelType
-> = GetPromptVersionModelType$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionFormat
 > = z.nativeEnum(GetPromptVersionFormat);
-/** @internal */
-export const GetPromptVersionFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionFormat
-> = GetPromptVersionFormat$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat6
 > = z.nativeEnum(GetPromptVersionResponseFormat6);
-/** @internal */
-export const GetPromptVersionResponseFormat6$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionResponseFormat6
-> = GetPromptVersionResponseFormat6$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat5
 > = z.nativeEnum(GetPromptVersionResponseFormat5);
-/** @internal */
-export const GetPromptVersionResponseFormat5$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionResponseFormat5
-> = GetPromptVersionResponseFormat5$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionResponseFormat4
 > = z.nativeEnum(GetPromptVersionResponseFormat4);
-/** @internal */
-export const GetPromptVersionResponseFormat4$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionResponseFormat4
-> = GetPromptVersionResponseFormat4$inboundSchema;
 
 /** @internal */
-export const GetPromptVersionResponseFormatPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsResponseType> = z
-    .nativeEnum(GetPromptVersionResponseFormatPromptsResponseType);
-/** @internal */
-export const GetPromptVersionResponseFormatPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsResponseType> =
-    GetPromptVersionResponseFormatPromptsResponseType$inboundSchema;
+export const GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+  );
 
 /** @internal */
 export const GetPromptVersionResponseFormat3$inboundSchema: z.ZodType<
@@ -690,31 +1463,10 @@ export const GetPromptVersionResponseFormat3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetPromptVersionResponseFormatPromptsResponseType$inboundSchema,
-});
-/** @internal */
-export type GetPromptVersionResponseFormat3$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetPromptVersionResponseFormat3$outboundSchema: z.ZodType<
-  GetPromptVersionResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseFormat3
-> = z.object({
-  type: GetPromptVersionResponseFormatPromptsResponseType$outboundSchema,
+  type:
+    GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
 });
 
-export function getPromptVersionResponseFormat3ToJSON(
-  getPromptVersionResponseFormat3: GetPromptVersionResponseFormat3,
-): string {
-  return JSON.stringify(
-    GetPromptVersionResponseFormat3$outboundSchema.parse(
-      getPromptVersionResponseFormat3,
-    ),
-  );
-}
 export function getPromptVersionResponseFormat3FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat3, SDKValidationError> {
@@ -726,13 +1478,12 @@ export function getPromptVersionResponseFormat3FromJSON(
 }
 
 /** @internal */
-export const GetPromptVersionResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsType> = z
-    .nativeEnum(GetPromptVersionResponseFormatPromptsType);
-/** @internal */
-export const GetPromptVersionResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsType> =
-    GetPromptVersionResponseFormatPromptsType$inboundSchema;
+export const GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType,
+  );
 
 /** @internal */
 export const GetPromptVersionResponseFormat2$inboundSchema: z.ZodType<
@@ -740,31 +1491,10 @@ export const GetPromptVersionResponseFormat2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetPromptVersionResponseFormatPromptsType$inboundSchema,
-});
-/** @internal */
-export type GetPromptVersionResponseFormat2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetPromptVersionResponseFormat2$outboundSchema: z.ZodType<
-  GetPromptVersionResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseFormat2
-> = z.object({
-  type: GetPromptVersionResponseFormatPromptsType$outboundSchema,
+  type:
+    GetPromptVersionResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
 });
 
-export function getPromptVersionResponseFormat2ToJSON(
-  getPromptVersionResponseFormat2: GetPromptVersionResponseFormat2,
-): string {
-  return JSON.stringify(
-    GetPromptVersionResponseFormat2$outboundSchema.parse(
-      getPromptVersionResponseFormat2,
-    ),
-  );
-}
 export function getPromptVersionResponseFormat2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat2, SDKValidationError> {
@@ -776,68 +1506,35 @@ export function getPromptVersionResponseFormat2FromJSON(
 }
 
 /** @internal */
-export const GetPromptVersionResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionResponseFormatType
-> = z.nativeEnum(GetPromptVersionResponseFormatType);
-/** @internal */
-export const GetPromptVersionResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionResponseFormatType
-> = GetPromptVersionResponseFormatType$inboundSchema;
+export const GetPromptVersionResponseFormatPromptsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof GetPromptVersionResponseFormatPromptsResponse200Type> =
+    z.nativeEnum(GetPromptVersionResponseFormatPromptsResponse200Type);
 
 /** @internal */
-export const GetPromptVersionResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  GetPromptVersionResponseFormatJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
-/** @internal */
-export type GetPromptVersionResponseFormatJsonSchema$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
+export const GetPromptVersionResponseFormatPromptsResponseJsonSchema$inboundSchema:
+  z.ZodType<
+    GetPromptVersionResponseFormatPromptsResponseJsonSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    schema: z.record(z.any()),
+  });
 
-/** @internal */
-export const GetPromptVersionResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  GetPromptVersionResponseFormatJsonSchema$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseFormatJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  schema: z.record(z.any()),
-});
-
-export function getPromptVersionResponseFormatJsonSchemaToJSON(
-  getPromptVersionResponseFormatJsonSchema:
-    GetPromptVersionResponseFormatJsonSchema,
-): string {
-  return JSON.stringify(
-    GetPromptVersionResponseFormatJsonSchema$outboundSchema.parse(
-      getPromptVersionResponseFormatJsonSchema,
-    ),
-  );
-}
-export function getPromptVersionResponseFormatJsonSchemaFromJSON(
+export function getPromptVersionResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  GetPromptVersionResponseFormatJsonSchema,
+  GetPromptVersionResponseFormatPromptsResponseJsonSchema,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      GetPromptVersionResponseFormatJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetPromptVersionResponseFormatJsonSchema' from JSON`,
+      GetPromptVersionResponseFormatPromptsResponseJsonSchema$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionResponseFormatPromptsResponseJsonSchema' from JSON`,
   );
 }
 
@@ -847,10 +1544,10 @@ export const GetPromptVersionResponseFormat1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetPromptVersionResponseFormatType$inboundSchema,
+  type: GetPromptVersionResponseFormatPromptsResponse200Type$inboundSchema,
   display_name: z.string().optional(),
   json_schema: z.lazy(() =>
-    GetPromptVersionResponseFormatJsonSchema$inboundSchema
+    GetPromptVersionResponseFormatPromptsResponseJsonSchema$inboundSchema
   ),
 }).transform((v) => {
   return remap$(v, {
@@ -858,40 +1555,7 @@ export const GetPromptVersionResponseFormat1$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type GetPromptVersionResponseFormat1$Outbound = {
-  type: string;
-  display_name?: string | undefined;
-  json_schema: GetPromptVersionResponseFormatJsonSchema$Outbound;
-};
 
-/** @internal */
-export const GetPromptVersionResponseFormat1$outboundSchema: z.ZodType<
-  GetPromptVersionResponseFormat1$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseFormat1
-> = z.object({
-  type: GetPromptVersionResponseFormatType$outboundSchema,
-  displayName: z.string().optional(),
-  jsonSchema: z.lazy(() =>
-    GetPromptVersionResponseFormatJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function getPromptVersionResponseFormat1ToJSON(
-  getPromptVersionResponseFormat1: GetPromptVersionResponseFormat1,
-): string {
-  return JSON.stringify(
-    GetPromptVersionResponseFormat1$outboundSchema.parse(
-      getPromptVersionResponseFormat1,
-    ),
-  );
-}
 export function getPromptVersionResponseFormat1FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseFormat1, SDKValidationError> {
@@ -903,8 +1567,8 @@ export function getPromptVersionResponseFormat1FromJSON(
 }
 
 /** @internal */
-export const GetPromptVersionResponseFormat$inboundSchema: z.ZodType<
-  GetPromptVersionResponseFormat,
+export const GetPromptVersionPromptsResponseFormat$inboundSchema: z.ZodType<
+  GetPromptVersionPromptsResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -915,45 +1579,15 @@ export const GetPromptVersionResponseFormat$inboundSchema: z.ZodType<
   GetPromptVersionResponseFormat5$inboundSchema,
   GetPromptVersionResponseFormat6$inboundSchema,
 ]);
-/** @internal */
-export type GetPromptVersionResponseFormat$Outbound =
-  | GetPromptVersionResponseFormat1$Outbound
-  | GetPromptVersionResponseFormat2$Outbound
-  | GetPromptVersionResponseFormat3$Outbound
-  | string
-  | string
-  | string;
 
-/** @internal */
-export const GetPromptVersionResponseFormat$outboundSchema: z.ZodType<
-  GetPromptVersionResponseFormat$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseFormat
-> = z.union([
-  z.lazy(() => GetPromptVersionResponseFormat1$outboundSchema),
-  z.lazy(() => GetPromptVersionResponseFormat2$outboundSchema),
-  z.lazy(() => GetPromptVersionResponseFormat3$outboundSchema),
-  GetPromptVersionResponseFormat4$outboundSchema,
-  GetPromptVersionResponseFormat5$outboundSchema,
-  GetPromptVersionResponseFormat6$outboundSchema,
-]);
-
-export function getPromptVersionResponseFormatToJSON(
-  getPromptVersionResponseFormat: GetPromptVersionResponseFormat,
-): string {
-  return JSON.stringify(
-    GetPromptVersionResponseFormat$outboundSchema.parse(
-      getPromptVersionResponseFormat,
-    ),
-  );
-}
-export function getPromptVersionResponseFormatFromJSON(
+export function getPromptVersionPromptsResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<GetPromptVersionResponseFormat, SDKValidationError> {
+): SafeParseResult<GetPromptVersionPromptsResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetPromptVersionResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetPromptVersionResponseFormat' from JSON`,
+    (x) =>
+      GetPromptVersionPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionPromptsResponseFormat' from JSON`,
   );
 }
 
@@ -961,46 +1595,27 @@ export function getPromptVersionResponseFormatFromJSON(
 export const GetPromptVersionPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionPhotoRealVersion
 > = z.nativeEnum(GetPromptVersionPhotoRealVersion);
-/** @internal */
-export const GetPromptVersionPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionPhotoRealVersion
-> = GetPromptVersionPhotoRealVersion$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionEncodingFormat
 > = z.nativeEnum(GetPromptVersionEncodingFormat);
-/** @internal */
-export const GetPromptVersionEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionEncodingFormat
-> = GetPromptVersionEncodingFormat$inboundSchema;
 
 /** @internal */
-export const GetPromptVersionReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionReasoningEffort
-> = z.nativeEnum(GetPromptVersionReasoningEffort);
-/** @internal */
-export const GetPromptVersionReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionReasoningEffort
-> = GetPromptVersionReasoningEffort$inboundSchema;
+export const GetPromptVersionPromptsReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof GetPromptVersionPromptsReasoningEffort> = z.nativeEnum(
+    GetPromptVersionPromptsReasoningEffort,
+  );
 
 /** @internal */
 export const GetPromptVersionVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionVerbosity
 > = z.nativeEnum(GetPromptVersionVerbosity);
-/** @internal */
-export const GetPromptVersionVerbosity$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionVerbosity
-> = GetPromptVersionVerbosity$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionThinkingLevel
 > = z.nativeEnum(GetPromptVersionThinkingLevel);
-/** @internal */
-export const GetPromptVersionThinkingLevel$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionThinkingLevel
-> = GetPromptVersionThinkingLevel$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
@@ -1032,7 +1647,8 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: GetPromptVersionPhotoRealVersion$inboundSchema.optional(),
   encoding_format: GetPromptVersionEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: GetPromptVersionReasoningEffort$inboundSchema.optional(),
+  reasoningEffort: GetPromptVersionPromptsReasoningEffort$inboundSchema
+    .optional(),
   budgetTokens: z.number().optional(),
   verbosity: GetPromptVersionVerbosity$inboundSchema.optional(),
   thinkingLevel: GetPromptVersionThinkingLevel$inboundSchema.optional(),
@@ -1041,86 +1657,7 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
     "encoding_format": "encodingFormat",
   });
 });
-/** @internal */
-export type GetPromptVersionModelParameters$Outbound = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  numImages?: number | undefined;
-  seed?: number | undefined;
-  format?: string | undefined;
-  dimensions?: string | undefined;
-  quality?: string | undefined;
-  style?: string | undefined;
-  responseFormat?:
-    | GetPromptVersionResponseFormat1$Outbound
-    | GetPromptVersionResponseFormat2$Outbound
-    | GetPromptVersionResponseFormat3$Outbound
-    | string
-    | string
-    | string
-    | null
-    | undefined;
-  photoRealVersion?: string | undefined;
-  encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-  verbosity?: string | undefined;
-  thinkingLevel?: string | undefined;
-};
 
-/** @internal */
-export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
-  GetPromptVersionModelParameters$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionModelParameters
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: GetPromptVersionFormat$outboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
-      z.lazy(() => GetPromptVersionResponseFormat1$outboundSchema),
-      z.lazy(() => GetPromptVersionResponseFormat2$outboundSchema),
-      z.lazy(() => GetPromptVersionResponseFormat3$outboundSchema),
-      GetPromptVersionResponseFormat4$outboundSchema,
-      GetPromptVersionResponseFormat5$outboundSchema,
-      GetPromptVersionResponseFormat6$outboundSchema,
-    ]),
-  ).optional(),
-  photoRealVersion: GetPromptVersionPhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: GetPromptVersionEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: GetPromptVersionReasoningEffort$outboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: GetPromptVersionVerbosity$outboundSchema.optional(),
-  thinkingLevel: GetPromptVersionThinkingLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
-
-export function getPromptVersionModelParametersToJSON(
-  getPromptVersionModelParameters: GetPromptVersionModelParameters,
-): string {
-  return JSON.stringify(
-    GetPromptVersionModelParameters$outboundSchema.parse(
-      getPromptVersionModelParameters,
-    ),
-  );
-}
 export function getPromptVersionModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionModelParameters, SDKValidationError> {
@@ -1135,19 +1672,11 @@ export function getPromptVersionModelParametersFromJSON(
 export const GetPromptVersionProvider$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionProvider
 > = z.nativeEnum(GetPromptVersionProvider);
-/** @internal */
-export const GetPromptVersionProvider$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionProvider
-> = GetPromptVersionProvider$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionRole$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionRole
 > = z.nativeEnum(GetPromptVersionRole);
-/** @internal */
-export const GetPromptVersionRole$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionRole
-> = GetPromptVersionRole$inboundSchema;
 
 /** @internal */
 export const GetPromptVersion2File$inboundSchema: z.ZodType<
@@ -1164,37 +1693,7 @@ export const GetPromptVersion2File$inboundSchema: z.ZodType<
     "file_data": "fileData",
   });
 });
-/** @internal */
-export type GetPromptVersion2File$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
 
-/** @internal */
-export const GetPromptVersion2File$outboundSchema: z.ZodType<
-  GetPromptVersion2File$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersion2File
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-export function getPromptVersion2FileToJSON(
-  getPromptVersion2File: GetPromptVersion2File,
-): string {
-  return JSON.stringify(
-    GetPromptVersion2File$outboundSchema.parse(getPromptVersion2File),
-  );
-}
 export function getPromptVersion2FileFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion2File, SDKValidationError> {
@@ -1214,29 +1713,7 @@ export const GetPromptVersion23$inboundSchema: z.ZodType<
   type: z.literal("file"),
   file: z.lazy(() => GetPromptVersion2File$inboundSchema),
 });
-/** @internal */
-export type GetPromptVersion23$Outbound = {
-  type: "file";
-  file: GetPromptVersion2File$Outbound;
-};
 
-/** @internal */
-export const GetPromptVersion23$outboundSchema: z.ZodType<
-  GetPromptVersion23$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersion23
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => GetPromptVersion2File$outboundSchema),
-});
-
-export function getPromptVersion23ToJSON(
-  getPromptVersion23: GetPromptVersion23,
-): string {
-  return JSON.stringify(
-    GetPromptVersion23$outboundSchema.parse(getPromptVersion23),
-  );
-}
 export function getPromptVersion23FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion23, SDKValidationError> {
@@ -1257,31 +1734,7 @@ export const GetPromptVersion2ImageUrl$inboundSchema: z.ZodType<
   url: z.string(),
   detail: z.string().optional(),
 });
-/** @internal */
-export type GetPromptVersion2ImageUrl$Outbound = {
-  id?: string | undefined;
-  url: string;
-  detail?: string | undefined;
-};
 
-/** @internal */
-export const GetPromptVersion2ImageUrl$outboundSchema: z.ZodType<
-  GetPromptVersion2ImageUrl$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersion2ImageUrl
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-export function getPromptVersion2ImageUrlToJSON(
-  getPromptVersion2ImageUrl: GetPromptVersion2ImageUrl,
-): string {
-  return JSON.stringify(
-    GetPromptVersion2ImageUrl$outboundSchema.parse(getPromptVersion2ImageUrl),
-  );
-}
 export function getPromptVersion2ImageUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion2ImageUrl, SDKValidationError> {
@@ -1305,33 +1758,7 @@ export const GetPromptVersion22$inboundSchema: z.ZodType<
     "image_url": "imageUrl",
   });
 });
-/** @internal */
-export type GetPromptVersion22$Outbound = {
-  type: "image_url";
-  image_url: GetPromptVersion2ImageUrl$Outbound;
-};
 
-/** @internal */
-export const GetPromptVersion22$outboundSchema: z.ZodType<
-  GetPromptVersion22$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersion22
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => GetPromptVersion2ImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-export function getPromptVersion22ToJSON(
-  getPromptVersion22: GetPromptVersion22,
-): string {
-  return JSON.stringify(
-    GetPromptVersion22$outboundSchema.parse(getPromptVersion22),
-  );
-}
 export function getPromptVersion22FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion22, SDKValidationError> {
@@ -1351,29 +1778,7 @@ export const GetPromptVersion21$inboundSchema: z.ZodType<
   type: z.literal("text"),
   text: z.string(),
 });
-/** @internal */
-export type GetPromptVersion21$Outbound = {
-  type: "text";
-  text: string;
-};
 
-/** @internal */
-export const GetPromptVersion21$outboundSchema: z.ZodType<
-  GetPromptVersion21$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersion21
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
-
-export function getPromptVersion21ToJSON(
-  getPromptVersion21: GetPromptVersion21,
-): string {
-  return JSON.stringify(
-    GetPromptVersion21$outboundSchema.parse(getPromptVersion21),
-  );
-}
 export function getPromptVersion21FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersion21, SDKValidationError> {
@@ -1394,30 +1799,7 @@ export const GetPromptVersionContent2$inboundSchema: z.ZodType<
   z.lazy(() => GetPromptVersion22$inboundSchema),
   z.lazy(() => GetPromptVersion23$inboundSchema),
 ]);
-/** @internal */
-export type GetPromptVersionContent2$Outbound =
-  | GetPromptVersion21$Outbound
-  | GetPromptVersion22$Outbound
-  | GetPromptVersion23$Outbound;
 
-/** @internal */
-export const GetPromptVersionContent2$outboundSchema: z.ZodType<
-  GetPromptVersionContent2$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionContent2
-> = z.union([
-  z.lazy(() => GetPromptVersion21$outboundSchema),
-  z.lazy(() => GetPromptVersion22$outboundSchema),
-  z.lazy(() => GetPromptVersion23$outboundSchema),
-]);
-
-export function getPromptVersionContent2ToJSON(
-  getPromptVersionContent2: GetPromptVersionContent2,
-): string {
-  return JSON.stringify(
-    GetPromptVersionContent2$outboundSchema.parse(getPromptVersionContent2),
-  );
-}
 export function getPromptVersionContent2FromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionContent2, SDKValidationError> {
@@ -1441,36 +1823,7 @@ export const GetPromptVersionContent$inboundSchema: z.ZodType<
     z.lazy(() => GetPromptVersion23$inboundSchema),
   ])),
 ]);
-/** @internal */
-export type GetPromptVersionContent$Outbound =
-  | string
-  | Array<
-    | GetPromptVersion21$Outbound
-    | GetPromptVersion22$Outbound
-    | GetPromptVersion23$Outbound
-  >;
 
-/** @internal */
-export const GetPromptVersionContent$outboundSchema: z.ZodType<
-  GetPromptVersionContent$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => GetPromptVersion21$outboundSchema),
-    z.lazy(() => GetPromptVersion22$outboundSchema),
-    z.lazy(() => GetPromptVersion23$outboundSchema),
-  ])),
-]);
-
-export function getPromptVersionContentToJSON(
-  getPromptVersionContent: GetPromptVersionContent,
-): string {
-  return JSON.stringify(
-    GetPromptVersionContent$outboundSchema.parse(getPromptVersionContent),
-  );
-}
 export function getPromptVersionContentFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionContent, SDKValidationError> {
@@ -1482,13 +1835,9 @@ export function getPromptVersionContentFromJSON(
 }
 
 /** @internal */
-export const GetPromptVersionType$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionType
-> = z.nativeEnum(GetPromptVersionType);
-/** @internal */
-export const GetPromptVersionType$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionType
-> = GetPromptVersionType$inboundSchema;
+export const GetPromptVersionPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionPromptsType
+> = z.nativeEnum(GetPromptVersionPromptsType);
 
 /** @internal */
 export const GetPromptVersionFunction$inboundSchema: z.ZodType<
@@ -1499,29 +1848,7 @@ export const GetPromptVersionFunction$inboundSchema: z.ZodType<
   name: z.string(),
   arguments: z.string(),
 });
-/** @internal */
-export type GetPromptVersionFunction$Outbound = {
-  name: string;
-  arguments: string;
-};
 
-/** @internal */
-export const GetPromptVersionFunction$outboundSchema: z.ZodType<
-  GetPromptVersionFunction$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
-
-export function getPromptVersionFunctionToJSON(
-  getPromptVersionFunction: GetPromptVersionFunction,
-): string {
-  return JSON.stringify(
-    GetPromptVersionFunction$outboundSchema.parse(getPromptVersionFunction),
-  );
-}
 export function getPromptVersionFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionFunction, SDKValidationError> {
@@ -1540,36 +1867,10 @@ export const GetPromptVersionToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: GetPromptVersionType$inboundSchema,
+  type: GetPromptVersionPromptsType$inboundSchema,
   function: z.lazy(() => GetPromptVersionFunction$inboundSchema),
 });
-/** @internal */
-export type GetPromptVersionToolCalls$Outbound = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: string;
-  function: GetPromptVersionFunction$Outbound;
-};
 
-/** @internal */
-export const GetPromptVersionToolCalls$outboundSchema: z.ZodType<
-  GetPromptVersionToolCalls$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionToolCalls
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: GetPromptVersionType$outboundSchema,
-  function: z.lazy(() => GetPromptVersionFunction$outboundSchema),
-});
-
-export function getPromptVersionToolCallsToJSON(
-  getPromptVersionToolCalls: GetPromptVersionToolCalls,
-): string {
-  return JSON.stringify(
-    GetPromptVersionToolCalls$outboundSchema.parse(getPromptVersionToolCalls),
-  );
-}
 export function getPromptVersionToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionToolCalls, SDKValidationError> {
@@ -1608,57 +1909,7 @@ export const GetPromptVersionMessages$inboundSchema: z.ZodType<
     "tool_call_id": "toolCallId",
   });
 });
-/** @internal */
-export type GetPromptVersionMessages$Outbound = {
-  role: string;
-  content:
-    | string
-    | Array<
-      | GetPromptVersion21$Outbound
-      | GetPromptVersion22$Outbound
-      | GetPromptVersion23$Outbound
-    >
-    | null;
-  tool_calls?: Array<GetPromptVersionToolCalls$Outbound> | undefined;
-  tool_call_id?: string | null | undefined;
-};
 
-/** @internal */
-export const GetPromptVersionMessages$outboundSchema: z.ZodType<
-  GetPromptVersionMessages$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionMessages
-> = z.object({
-  role: GetPromptVersionRole$outboundSchema,
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          z.lazy(() => GetPromptVersion21$outboundSchema),
-          z.lazy(() => GetPromptVersion22$outboundSchema),
-          z.lazy(() => GetPromptVersion23$outboundSchema),
-        ]),
-      ),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => GetPromptVersionToolCalls$outboundSchema))
-    .optional(),
-  toolCallId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-    toolCallId: "tool_call_id",
-  });
-});
-
-export function getPromptVersionMessagesToJSON(
-  getPromptVersionMessages: GetPromptVersionMessages,
-): string {
-  return JSON.stringify(
-    GetPromptVersionMessages$outboundSchema.parse(getPromptVersionMessages),
-  );
-}
 export function getPromptVersionMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionMessages, SDKValidationError> {
@@ -1676,12 +1927,12 @@ export const GetPromptVersionPromptConfig$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   stream: z.boolean().optional(),
-  model: z.string().optional(),
+  model: z.nullable(z.string()).optional(),
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(GetPromptVersionModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => GetPromptVersionModelParameters$inboundSchema)
     .optional(),
-  provider: GetPromptVersionProvider$inboundSchema.optional(),
+  provider: z.nullable(GetPromptVersionProvider$inboundSchema).optional(),
   integration_id: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => GetPromptVersionMessages$inboundSchema)),
@@ -1693,53 +1944,7 @@ export const GetPromptVersionPromptConfig$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
   });
 });
-/** @internal */
-export type GetPromptVersionPromptConfig$Outbound = {
-  stream?: boolean | undefined;
-  model?: string | undefined;
-  model_db_id?: string | null | undefined;
-  model_type?: string | null | undefined;
-  model_parameters?: GetPromptVersionModelParameters$Outbound | undefined;
-  provider?: string | undefined;
-  integration_id?: string | null | undefined;
-  version?: string | undefined;
-  messages: Array<GetPromptVersionMessages$Outbound>;
-};
 
-/** @internal */
-export const GetPromptVersionPromptConfig$outboundSchema: z.ZodType<
-  GetPromptVersionPromptConfig$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionPromptConfig
-> = z.object({
-  stream: z.boolean().optional(),
-  model: z.string().optional(),
-  modelDbId: z.nullable(z.string()).optional(),
-  modelType: z.nullable(GetPromptVersionModelType$outboundSchema).optional(),
-  modelParameters: z.lazy(() => GetPromptVersionModelParameters$outboundSchema)
-    .optional(),
-  provider: GetPromptVersionProvider$outboundSchema.optional(),
-  integrationId: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  messages: z.array(z.lazy(() => GetPromptVersionMessages$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-    integrationId: "integration_id",
-  });
-});
-
-export function getPromptVersionPromptConfigToJSON(
-  getPromptVersionPromptConfig: GetPromptVersionPromptConfig,
-): string {
-  return JSON.stringify(
-    GetPromptVersionPromptConfig$outboundSchema.parse(
-      getPromptVersionPromptConfig,
-    ),
-  );
-}
 export function getPromptVersionPromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionPromptConfig, SDKValidationError> {
@@ -1751,22 +1956,1117 @@ export function getPromptVersionPromptConfigFromJSON(
 }
 
 /** @internal */
+export const GetPromptVersionVoice$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionVoice
+> = z.nativeEnum(GetPromptVersionVoice);
+
+/** @internal */
+export const GetPromptVersionPromptsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionPromptsFormat
+> = z.nativeEnum(GetPromptVersionPromptsFormat);
+
+/** @internal */
+export const GetPromptVersionAudio$inboundSchema: z.ZodType<
+  GetPromptVersionAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  voice: GetPromptVersionVoice$inboundSchema,
+  format: GetPromptVersionPromptsFormat$inboundSchema,
+});
+
+export function getPromptVersionAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  GetPromptVersionResponseFormatJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.any().optional(),
+  strict: z.boolean().default(false),
+});
+
+export function getPromptVersionResponseFormatJsonSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionResponseFormatJsonSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionResponseFormatJsonSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionResponseFormatJsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionResponseFormatPromptsJSONSchema$inboundSchema:
+  z.ZodType<
+    GetPromptVersionResponseFormatPromptsJSONSchema,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() =>
+      GetPromptVersionResponseFormatJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "json_schema": "jsonSchema",
+    });
+  });
+
+export function getPromptVersionResponseFormatPromptsJSONSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionResponseFormatPromptsJSONSchema,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionResponseFormatPromptsJSONSchema$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionResponseFormatPromptsJSONSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionResponseFormatJSONObject$inboundSchema: z.ZodType<
+  GetPromptVersionResponseFormatJSONObject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("json_object"),
+});
+
+export function getPromptVersionResponseFormatJSONObjectFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionResponseFormatJSONObject,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionResponseFormatJSONObject$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionResponseFormatJSONObject' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionResponseFormatText$inboundSchema: z.ZodType<
+  GetPromptVersionResponseFormatText,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("text"),
+});
+
+export function getPromptVersionResponseFormatTextFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionResponseFormatText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionResponseFormatText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionResponseFormatText' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionResponseFormat$inboundSchema: z.ZodType<
+  GetPromptVersionResponseFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetPromptVersionResponseFormatText$inboundSchema),
+  z.lazy(() => GetPromptVersionResponseFormatJSONObject$inboundSchema),
+  z.lazy(() => GetPromptVersionResponseFormatPromptsJSONSchema$inboundSchema),
+]);
+
+export function getPromptVersionResponseFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionResponseFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionResponseFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionReasoningEffort
+> = z.nativeEnum(GetPromptVersionReasoningEffort);
+
+/** @internal */
+export const GetPromptVersionStop$inboundSchema: z.ZodType<
+  GetPromptVersionStop,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.array(z.string())]);
+
+export function getPromptVersionStopFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionStop, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionStop' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionStreamOptions$inboundSchema: z.ZodType<
+  GetPromptVersionStreamOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_usage: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_usage": "includeUsage",
+  });
+});
+
+export function getPromptVersionStreamOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionStreamOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionStreamOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionThinking$inboundSchema: z.ZodType<
+  GetPromptVersionThinking,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.ThinkingConfigDisabledSchema$inboundSchema,
+  components.ThinkingConfigEnabledSchema$inboundSchema,
+]);
+
+export function getPromptVersionThinkingFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionThinking, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionThinking' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionToolChoiceType$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionToolChoiceType
+> = z.nativeEnum(GetPromptVersionToolChoiceType);
+
+/** @internal */
+export const GetPromptVersionToolChoiceFunction$inboundSchema: z.ZodType<
+  GetPromptVersionToolChoiceFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+});
+
+export function getPromptVersionToolChoiceFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionToolChoiceFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionToolChoiceFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionToolChoiceFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionToolChoice2$inboundSchema: z.ZodType<
+  GetPromptVersionToolChoice2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetPromptVersionToolChoiceType$inboundSchema.optional(),
+  function: z.lazy(() => GetPromptVersionToolChoiceFunction$inboundSchema),
+});
+
+export function getPromptVersionToolChoice2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionToolChoice2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionToolChoice2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionToolChoice2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionToolChoice1$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionToolChoice1
+> = z.nativeEnum(GetPromptVersionToolChoice1);
+
+/** @internal */
+export const GetPromptVersionToolChoice$inboundSchema: z.ZodType<
+  GetPromptVersionToolChoice,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetPromptVersionToolChoice2$inboundSchema),
+  GetPromptVersionToolChoice1$inboundSchema,
+]);
+
+export function getPromptVersionToolChoiceFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionToolChoice, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionToolChoice' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionModalities$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionModalities
+> = z.nativeEnum(GetPromptVersionModalities);
+
+/** @internal */
+export const GetPromptVersionId1$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionId1
+> = z.nativeEnum(GetPromptVersionId1);
+
+/** @internal */
+export const GetPromptVersionId$inboundSchema: z.ZodType<
+  GetPromptVersionId,
+  z.ZodTypeDef,
+  unknown
+> = z.union([GetPromptVersionId1$inboundSchema, z.string()]);
+
+export function getPromptVersionIdFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionId, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionId' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionExecuteOn
+> = z.nativeEnum(GetPromptVersionExecuteOn);
+
+/** @internal */
+export const GetPromptVersionGuardrails$inboundSchema: z.ZodType<
+  GetPromptVersionGuardrails,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.union([GetPromptVersionId1$inboundSchema, z.string()]),
+  execute_on: GetPromptVersionExecuteOn$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "execute_on": "executeOn",
+  });
+});
+
+export function getPromptVersionGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionGuardrails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionFallbacks$inboundSchema: z.ZodType<
+  GetPromptVersionFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function getPromptVersionFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionRetry$inboundSchema: z.ZodType<
+  GetPromptVersionRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function getPromptVersionRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionType$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionType
+> = z.nativeEnum(GetPromptVersionType);
+
+/** @internal */
+export const GetPromptVersionCache$inboundSchema: z.ZodType<
+  GetPromptVersionCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: GetPromptVersionType$inboundSchema,
+});
+
+export function getPromptVersionCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionLoadBalancerType$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionLoadBalancerType
+> = z.nativeEnum(GetPromptVersionLoadBalancerType);
+
+/** @internal */
+export const GetPromptVersionLoadBalancerModels$inboundSchema: z.ZodType<
+  GetPromptVersionLoadBalancerModels,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function getPromptVersionLoadBalancerModelsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionLoadBalancerModels, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionLoadBalancerModels$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionLoadBalancerModels' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionLoadBalancer1$inboundSchema: z.ZodType<
+  GetPromptVersionLoadBalancer1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetPromptVersionLoadBalancerType$inboundSchema,
+  models: z.array(
+    z.lazy(() => GetPromptVersionLoadBalancerModels$inboundSchema),
+  ),
+});
+
+export function getPromptVersionLoadBalancer1FromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionLoadBalancer1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionLoadBalancer1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionLoadBalancer1' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionLoadBalancer$inboundSchema: z.ZodType<
+  GetPromptVersionLoadBalancer,
+  z.ZodTypeDef,
+  unknown
+> = z.lazy(() => GetPromptVersionLoadBalancer1$inboundSchema);
+
+export function getPromptVersionLoadBalancerFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionLoadBalancer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionLoadBalancer' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionTimeout$inboundSchema: z.ZodType<
+  GetPromptVersionTimeout,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  call_timeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "call_timeout": "callTimeout",
+  });
+});
+
+export function getPromptVersionTimeoutFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionTimeout, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionTimeout' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionContentPromptsResponse2002$inboundSchema:
+  z.ZodType<GetPromptVersionContentPromptsResponse2002, z.ZodTypeDef, unknown> =
+    components.TextContentPartSchema$inboundSchema;
+
+export function getPromptVersionContentPromptsResponse2002FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionContentPromptsResponse2002,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionContentPromptsResponse2002$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionContentPromptsResponse2002' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesPromptsResponse200Content$inboundSchema:
+  z.ZodType<
+    GetPromptVersionMessagesPromptsResponse200Content,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]);
+
+export function getPromptVersionMessagesPromptsResponse200ContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionMessagesPromptsResponse200Content,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesPromptsResponse200Content$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionMessagesPromptsResponse200Content' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionMessagesPromptsType
+> = z.nativeEnum(GetPromptVersionMessagesPromptsType);
+
+/** @internal */
+export const GetPromptVersionMessagesTtl$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionMessagesTtl
+> = z.nativeEnum(GetPromptVersionMessagesTtl);
+
+/** @internal */
+export const GetPromptVersionMessagesCacheControl$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetPromptVersionMessagesPromptsType$inboundSchema,
+  ttl: GetPromptVersionMessagesTtl$inboundSchema.default("5m"),
+});
+
+export function getPromptVersionMessagesCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesToolMessage$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesToolMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  tool_call_id: z.nullable(z.string()),
+  cache_control: z.lazy(() =>
+    GetPromptVersionMessagesCacheControl$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+    "cache_control": "cacheControl",
+  });
+});
+
+export function getPromptVersionMessagesToolMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesToolMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesToolMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionContentPromptsResponse2$inboundSchema: z.ZodType<
+  GetPromptVersionContentPromptsResponse2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$inboundSchema,
+  components.ReasoningPartSchema$inboundSchema,
+  components.RedactedReasoningPartSchema$inboundSchema,
+]);
+
+export function getPromptVersionContentPromptsResponse2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionContentPromptsResponse2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionContentPromptsResponse2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionContentPromptsResponse2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesPromptsResponseContent$inboundSchema:
+  z.ZodType<
+    GetPromptVersionMessagesPromptsResponseContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$inboundSchema,
+        components.ReasoningPartSchema$inboundSchema,
+        components.RedactedReasoningPartSchema$inboundSchema,
+      ]),
+    ),
+  ]);
+
+export function getPromptVersionMessagesPromptsResponseContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionMessagesPromptsResponseContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesPromptsResponseContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionMessagesPromptsResponseContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesAudio$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesAudio,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+});
+
+export function getPromptVersionMessagesAudioFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesAudio, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionMessagesAudio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesAudio' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionMessagesType
+> = z.nativeEnum(GetPromptVersionMessagesType);
+
+/** @internal */
+export const GetPromptVersionMessagesFunction$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesFunction,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function getPromptVersionMessagesFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesFunction, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionMessagesFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesToolCalls$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesToolCalls,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  type: GetPromptVersionMessagesType$inboundSchema,
+  function: z.lazy(() => GetPromptVersionMessagesFunction$inboundSchema),
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function getPromptVersionMessagesToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesToolCalls, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesAssistantMessage$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesAssistantMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$inboundSchema,
+          components.ReasoningPartSchema$inboundSchema,
+          components.RedactedReasoningPartSchema$inboundSchema,
+        ]),
+      ),
+    ]),
+  ).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: z.literal("assistant"),
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => GetPromptVersionMessagesAudio$inboundSchema))
+    .optional(),
+  tool_calls: z.array(
+    z.lazy(() => GetPromptVersionMessagesToolCalls$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_calls": "toolCalls",
+  });
+});
+
+export function getPromptVersionMessagesAssistantMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetPromptVersionMessagesAssistantMessage,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesAssistantMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetPromptVersionMessagesAssistantMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersion2PromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetPromptVersion2PromptsResponse200ApplicationJSONType
+  > = z.nativeEnum(GetPromptVersion2PromptsResponse200ApplicationJSONType);
+
+/** @internal */
+export const GetPromptVersion2Ttl$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersion2Ttl
+> = z.nativeEnum(GetPromptVersion2Ttl);
+
+/** @internal */
+export const GetPromptVersion2CacheControl$inboundSchema: z.ZodType<
+  GetPromptVersion2CacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetPromptVersion2PromptsResponse200ApplicationJSONType$inboundSchema,
+  ttl: GetPromptVersion2Ttl$inboundSchema.default("5m"),
+});
+
+export function getPromptVersion2CacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersion2CacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersion2CacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersion2CacheControl' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersion24$inboundSchema: z.ZodType<
+  GetPromptVersion24,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("file"),
+  cache_control: z.lazy(() => GetPromptVersion2CacheControl$inboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "cache_control": "cacheControl",
+  });
+});
+
+export function getPromptVersion24FromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersion24, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersion24$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersion24' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionContentPrompts2$inboundSchema: z.ZodType<
+  GetPromptVersionContentPrompts2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.TextContentPartSchema$inboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.ImageContentPartSchema$inboundSchema,
+  components.AudioContentPartSchema$inboundSchema,
+  z.lazy(() => GetPromptVersion24$inboundSchema),
+]);
+
+export function getPromptVersionContentPrompts2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionContentPrompts2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionContentPrompts2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionContentPrompts2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesPromptsContent$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesPromptsContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.string(),
+  z.array(
+    z.union([
+      components.TextContentPartSchema$inboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.ImageContentPartSchema$inboundSchema,
+      components.AudioContentPartSchema$inboundSchema,
+      z.lazy(() => GetPromptVersion24$inboundSchema),
+    ]),
+  ),
+]);
+
+export function getPromptVersionMessagesPromptsContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesPromptsContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesPromptsContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesPromptsContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesUserMessage$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesUserMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => GetPromptVersion24$inboundSchema),
+      ]),
+    ),
+  ]),
+});
+
+export function getPromptVersionMessagesUserMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesUserMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesUserMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesContent$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.string(),
+  z.array(components.TextContentPartSchema$inboundSchema),
+]);
+
+export function getPromptVersionMessagesContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionMessagesContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesSystemMessage$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesSystemMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: z.literal("system"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$inboundSchema),
+  ]),
+  name: z.string().optional(),
+});
+
+export function getPromptVersionMessagesSystemMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesSystemMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesSystemMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionPromptsMessages$inboundSchema: z.ZodType<
+  GetPromptVersionPromptsMessages,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => GetPromptVersionMessagesSystemMessage$inboundSchema),
+  z.lazy(() => GetPromptVersionMessagesUserMessage$inboundSchema),
+  z.lazy(() => GetPromptVersionMessagesAssistantMessage$inboundSchema),
+  z.lazy(() => GetPromptVersionMessagesToolMessage$inboundSchema),
+]);
+
+export function getPromptVersionPromptsMessagesFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionPromptsMessages, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionPromptsMessages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionPromptsMessages' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionPromptField$inboundSchema: z.ZodType<
+  GetPromptVersionPromptField,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  audio: z.nullable(z.lazy(() => GetPromptVersionAudio$inboundSchema))
+    .optional(),
+  frequency_penalty: z.nullable(z.number()).optional(),
+  max_tokens: z.nullable(z.number().int()).optional(),
+  max_completion_tokens: z.nullable(z.number().int()).optional(),
+  logprobs: z.nullable(z.boolean()).optional(),
+  top_logprobs: z.nullable(z.number().int()).optional(),
+  n: z.nullable(z.number().int()).optional(),
+  presence_penalty: z.nullable(z.number()).optional(),
+  response_format: z.union([
+    z.lazy(() => GetPromptVersionResponseFormatText$inboundSchema),
+    z.lazy(() => GetPromptVersionResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => GetPromptVersionResponseFormatPromptsJSONSchema$inboundSchema),
+  ]).optional(),
+  reasoning_effort: GetPromptVersionReasoningEffort$inboundSchema.optional(),
+  verbosity: z.string().optional(),
+  seed: z.nullable(z.number()).optional(),
+  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+  stream_options: z.nullable(
+    z.lazy(() => GetPromptVersionStreamOptions$inboundSchema),
+  ).optional(),
+  thinking: z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+  ]).optional(),
+  temperature: z.nullable(z.number()).optional(),
+  top_p: z.nullable(z.number()).optional(),
+  top_k: z.nullable(z.number()).optional(),
+  tool_choice: z.union([
+    z.lazy(() => GetPromptVersionToolChoice2$inboundSchema),
+    GetPromptVersionToolChoice1$inboundSchema,
+  ]).optional(),
+  parallel_tool_calls: z.boolean().optional(),
+  modalities: z.nullable(z.array(GetPromptVersionModalities$inboundSchema))
+    .optional(),
+  guardrails: z.array(z.lazy(() => GetPromptVersionGuardrails$inboundSchema))
+    .optional(),
+  fallbacks: z.array(z.lazy(() => GetPromptVersionFallbacks$inboundSchema))
+    .optional(),
+  retry: z.lazy(() => GetPromptVersionRetry$inboundSchema).optional(),
+  cache: z.lazy(() => GetPromptVersionCache$inboundSchema).optional(),
+  load_balancer: z.lazy(() => GetPromptVersionLoadBalancer1$inboundSchema)
+    .optional(),
+  timeout: z.lazy(() => GetPromptVersionTimeout$inboundSchema).optional(),
+  messages: z.array(
+    z.union([
+      z.lazy(() => GetPromptVersionMessagesSystemMessage$inboundSchema),
+      z.lazy(() => GetPromptVersionMessagesUserMessage$inboundSchema),
+      z.lazy(() => GetPromptVersionMessagesAssistantMessage$inboundSchema),
+      z.lazy(() => GetPromptVersionMessagesToolMessage$inboundSchema),
+    ]),
+  ).optional(),
+  model: z.nullable(z.string()).optional(),
+  version: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "frequency_penalty": "frequencyPenalty",
+    "max_tokens": "maxTokens",
+    "max_completion_tokens": "maxCompletionTokens",
+    "top_logprobs": "topLogprobs",
+    "presence_penalty": "presencePenalty",
+    "response_format": "responseFormat",
+    "reasoning_effort": "reasoningEffort",
+    "stream_options": "streamOptions",
+    "top_p": "topP",
+    "top_k": "topK",
+    "tool_choice": "toolChoice",
+    "parallel_tool_calls": "parallelToolCalls",
+    "load_balancer": "loadBalancer",
+  });
+});
+
+export function getPromptVersionPromptFieldFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionPromptField, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionPromptField$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionPromptField' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetPromptVersionUseCases$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionUseCases
 > = z.nativeEnum(GetPromptVersionUseCases);
-/** @internal */
-export const GetPromptVersionUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionUseCases
-> = GetPromptVersionUseCases$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionLanguage$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersionLanguage
 > = z.nativeEnum(GetPromptVersionLanguage);
-/** @internal */
-export const GetPromptVersionLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionLanguage
-> = GetPromptVersionLanguage$inboundSchema;
 
 /** @internal */
 export const GetPromptVersionMetadata$inboundSchema: z.ZodType<
@@ -1781,33 +3081,7 @@ export const GetPromptVersionMetadata$inboundSchema: z.ZodType<
     "use_cases": "useCases",
   });
 });
-/** @internal */
-export type GetPromptVersionMetadata$Outbound = {
-  use_cases?: Array<string> | undefined;
-  language?: string | null | undefined;
-};
 
-/** @internal */
-export const GetPromptVersionMetadata$outboundSchema: z.ZodType<
-  GetPromptVersionMetadata$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionMetadata
-> = z.object({
-  useCases: z.array(GetPromptVersionUseCases$outboundSchema).optional(),
-  language: z.nullable(GetPromptVersionLanguage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    useCases: "use_cases",
-  });
-});
-
-export function getPromptVersionMetadataToJSON(
-  getPromptVersionMetadata: GetPromptVersionMetadata,
-): string {
-  return JSON.stringify(
-    GetPromptVersionMetadata$outboundSchema.parse(getPromptVersionMetadata),
-  );
-}
 export function getPromptVersionMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionMetadata, SDKValidationError> {
@@ -1828,7 +3102,9 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => GetPromptVersionPromptConfig$inboundSchema),
+  prompt_config: z.lazy(() => GetPromptVersionPromptConfig$inboundSchema)
+    .optional(),
+  prompt: z.lazy(() => GetPromptVersionPromptField$inboundSchema),
   metadata: z.lazy(() => GetPromptVersionMetadata$inboundSchema).optional(),
   timestamp: z.string(),
 }).transform((v) => {
@@ -1839,48 +3115,7 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
     "prompt_config": "promptConfig",
   });
 });
-/** @internal */
-export type GetPromptVersionResponseBody$Outbound = {
-  _id: string;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  description?: string | null | undefined;
-  prompt_config: GetPromptVersionPromptConfig$Outbound;
-  metadata?: GetPromptVersionMetadata$Outbound | undefined;
-  timestamp: string;
-};
 
-/** @internal */
-export const GetPromptVersionResponseBody$outboundSchema: z.ZodType<
-  GetPromptVersionResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetPromptVersionResponseBody
-> = z.object({
-  id: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => GetPromptVersionPromptConfig$outboundSchema),
-  metadata: z.lazy(() => GetPromptVersionMetadata$outboundSchema).optional(),
-  timestamp: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    promptConfig: "prompt_config",
-  });
-});
-
-export function getPromptVersionResponseBodyToJSON(
-  getPromptVersionResponseBody: GetPromptVersionResponseBody,
-): string {
-  return JSON.stringify(
-    GetPromptVersionResponseBody$outboundSchema.parse(
-      getPromptVersionResponseBody,
-    ),
-  );
-}
 export function getPromptVersionResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetPromptVersionResponseBody, SDKValidationError> {

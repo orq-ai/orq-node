@@ -27,7 +27,7 @@ export type PartReasoningPart = {
   /**
    * Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)
    */
-  id?: string | undefined;
+  id: string;
   /**
    * Optional metadata associated with the message part. Can store arbitrary key-value pairs for custom data. Maximum size of 50KB and maximum of 20 keys.
    */
@@ -69,9 +69,6 @@ export type PartDoneEvent = {
 /** @internal */
 export const PartKind$inboundSchema: z.ZodNativeEnum<typeof PartKind> = z
   .nativeEnum(PartKind);
-/** @internal */
-export const PartKind$outboundSchema: z.ZodNativeEnum<typeof PartKind> =
-  PartKind$inboundSchema;
 
 /** @internal */
 export const PartReasoningPart$inboundSchema: z.ZodType<
@@ -79,7 +76,7 @@ export const PartReasoningPart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("reasoning_01kfbaedy80m4e3zqvmrrgw354"),
+  _id: z.string().default("reasoning_01kfn8zp8qv532bm9a9ajt3fy8"),
   metadata: z.record(z.any()).optional(),
   kind: PartKind$inboundSchema,
   reasoning: z.string(),
@@ -89,39 +86,7 @@ export const PartReasoningPart$inboundSchema: z.ZodType<
     "_id": "id",
   });
 });
-/** @internal */
-export type PartReasoningPart$Outbound = {
-  _id: string;
-  metadata?: { [k: string]: any } | undefined;
-  kind: string;
-  reasoning: string;
-  signature?: string | undefined;
-};
 
-/** @internal */
-export const PartReasoningPart$outboundSchema: z.ZodType<
-  PartReasoningPart$Outbound,
-  z.ZodTypeDef,
-  PartReasoningPart
-> = z.object({
-  id: z.string().default("reasoning_01kfbaedy80m4e3zqvmrrgw354"),
-  metadata: z.record(z.any()).optional(),
-  kind: PartKind$outboundSchema,
-  reasoning: z.string(),
-  signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
-
-export function partReasoningPartToJSON(
-  partReasoningPart: PartReasoningPart,
-): string {
-  return JSON.stringify(
-    PartReasoningPart$outboundSchema.parse(partReasoningPart),
-  );
-}
 export function partReasoningPartFromJSON(
   jsonString: string,
 ): SafeParseResult<PartReasoningPart, SDKValidationError> {
@@ -141,29 +106,7 @@ export const PartDoneEventData$inboundSchema: z.ZodType<
   partId: z.string(),
   part: z.any().optional(),
 });
-/** @internal */
-export type PartDoneEventData$Outbound = {
-  partId: string;
-  part?: any | undefined;
-};
 
-/** @internal */
-export const PartDoneEventData$outboundSchema: z.ZodType<
-  PartDoneEventData$Outbound,
-  z.ZodTypeDef,
-  PartDoneEventData
-> = z.object({
-  partId: z.string(),
-  part: z.any().optional(),
-});
-
-export function partDoneEventDataToJSON(
-  partDoneEventData: PartDoneEventData,
-): string {
-  return JSON.stringify(
-    PartDoneEventData$outboundSchema.parse(partDoneEventData),
-  );
-}
 export function partDoneEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDoneEventData, SDKValidationError> {
@@ -184,27 +127,7 @@ export const PartDoneEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => PartDoneEventData$inboundSchema),
 });
-/** @internal */
-export type PartDoneEvent$Outbound = {
-  type: "part.done";
-  timestamp: string;
-  data: PartDoneEventData$Outbound;
-};
 
-/** @internal */
-export const PartDoneEvent$outboundSchema: z.ZodType<
-  PartDoneEvent$Outbound,
-  z.ZodTypeDef,
-  PartDoneEvent
-> = z.object({
-  type: z.literal("part.done"),
-  timestamp: z.string(),
-  data: z.lazy(() => PartDoneEventData$outboundSchema),
-});
-
-export function partDoneEventToJSON(partDoneEvent: PartDoneEvent): string {
-  return JSON.stringify(PartDoneEvent$outboundSchema.parse(partDoneEvent));
-}
 export function partDoneEventFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDoneEvent, SDKValidationError> {

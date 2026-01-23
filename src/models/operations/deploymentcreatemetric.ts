@@ -819,19 +819,6 @@ export type DeploymentCreateMetricResponseBody = {
 };
 
 /** @internal */
-export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
-  .object({
-    prompt_tokens: z.number(),
-    completion_tokens: z.number(),
-    total_tokens: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "prompt_tokens": "promptTokens",
-      "completion_tokens": "completionTokens",
-      "total_tokens": "totalTokens",
-    });
-  });
-/** @internal */
 export type Usage$Outbound = {
   prompt_tokens: number;
   completion_tokens: number;
@@ -858,29 +845,7 @@ export const Usage$outboundSchema: z.ZodType<
 export function usageToJSON(usage: Usage): string {
   return JSON.stringify(Usage$outboundSchema.parse(usage));
 }
-export function usageFromJSON(
-  jsonString: string,
-): SafeParseResult<Usage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Usage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Usage' from JSON`,
-  );
-}
 
-/** @internal */
-export const Performance$inboundSchema: z.ZodType<
-  Performance,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  latency: z.number(),
-  time_to_first_token: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "time_to_first_token": "timeToFirstToken",
-  });
-});
 /** @internal */
 export type Performance$Outbound = {
   latency: number;
@@ -904,23 +869,7 @@ export const Performance$outboundSchema: z.ZodType<
 export function performanceToJSON(performance: Performance): string {
   return JSON.stringify(Performance$outboundSchema.parse(performance));
 }
-export function performanceFromJSON(
-  jsonString: string,
-): SafeParseResult<Performance, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Performance$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Performance' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricContentDeploymentsMetricsRequest2$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricContentDeploymentsMetricsRequest2,
-    z.ZodTypeDef,
-    unknown
-  > = components.TextContentPartSchema$inboundSchema;
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetricsRequest2$Outbound =
   components.TextContentPartSchema$Outbound;
@@ -942,31 +891,7 @@ export function deploymentCreateMetricContentDeploymentsMetricsRequest2ToJSON(
       .parse(deploymentCreateMetricContentDeploymentsMetricsRequest2),
   );
 }
-export function deploymentCreateMetricContentDeploymentsMetricsRequest2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricContentDeploymentsMetricsRequest2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricContentDeploymentsMetricsRequest2$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricContentDeploymentsMetricsRequest2' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Content$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Content,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Content$Outbound =
   | string
@@ -994,46 +919,17 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBo
       ),
   );
 }
-export function deploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Content$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Content' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsType> =
-    z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsType);
 /** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsType> =
-    DeploymentCreateMetricMessagesDeploymentsMetricsType$inboundSchema;
+    z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsType);
 
-/** @internal */
-export const DeploymentCreateMetricMessagesTtl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricMessagesTtl
-> = z.nativeEnum(DeploymentCreateMetricMessagesTtl);
 /** @internal */
 export const DeploymentCreateMetricMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessagesTtl
-> = DeploymentCreateMetricMessagesTtl$inboundSchema;
+> = z.nativeEnum(DeploymentCreateMetricMessagesTtl);
 
-/** @internal */
-export const DeploymentCreateMetricMessagesCacheControl$inboundSchema:
-  z.ZodType<DeploymentCreateMetricMessagesCacheControl, z.ZodTypeDef, unknown> =
-    z.object({
-      type: DeploymentCreateMetricMessagesDeploymentsMetricsType$inboundSchema,
-      ttl: DeploymentCreateMetricMessagesTtl$inboundSchema.default("5m"),
-    });
 /** @internal */
 export type DeploymentCreateMetricMessagesCacheControl$Outbound = {
   type: string;
@@ -1061,43 +957,7 @@ export function deploymentCreateMetricMessagesCacheControlToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesToolMessage$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessagesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() =>
-    DeploymentCreateMetricMessagesCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type DeploymentCreateMetricMessagesToolMessage$Outbound = {
   role: "tool";
@@ -1141,36 +1001,7 @@ export function deploymentCreateMetricMessagesToolMessageToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesToolMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesToolMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesToolMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricContentDeploymentsMetrics2$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricContentDeploymentsMetrics2,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$inboundSchema,
-    components.ReasoningPartSchema$inboundSchema,
-    components.RedactedReasoningPartSchema$inboundSchema,
-  ]);
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetrics2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -1203,41 +1034,7 @@ export function deploymentCreateMetricContentDeploymentsMetrics2ToJSON(
     ),
   );
 }
-export function deploymentCreateMetricContentDeploymentsMetrics2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricContentDeploymentsMetrics2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricContentDeploymentsMetrics2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricContentDeploymentsMetrics2' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContent$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContent$Outbound =
   | string
@@ -1279,29 +1076,7 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBo
       ),
   );
 }
-export function deploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesAudio$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessagesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type DeploymentCreateMetricMessagesAudio$Outbound = {
   id: string;
@@ -1325,35 +1100,12 @@ export function deploymentCreateMetricMessagesAudioToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessagesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricMessagesType
-> = z.nativeEnum(DeploymentCreateMetricMessagesType);
 /** @internal */
 export const DeploymentCreateMetricMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessagesType
-> = DeploymentCreateMetricMessagesType$inboundSchema;
+> = z.nativeEnum(DeploymentCreateMetricMessagesType);
 
-/** @internal */
-export const DeploymentCreateMetricMessagesFunction$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type DeploymentCreateMetricMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -1380,32 +1132,7 @@ export function deploymentCreateMetricMessagesFunctionToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesToolCalls$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessagesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: DeploymentCreateMetricMessagesType$inboundSchema,
-  function: z.lazy(() => DeploymentCreateMetricMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type DeploymentCreateMetricMessagesToolCalls$Outbound = {
   id: string;
@@ -1440,58 +1167,7 @@ export function deploymentCreateMetricMessagesToolCallsToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesToolCalls,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesToolCalls$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesAssistantMessage$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesAssistantMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$inboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$inboundSchema,
-            components.ReasoningPartSchema$inboundSchema,
-            components.RedactedReasoningPartSchema$inboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => DeploymentCreateMetricMessagesAudio$inboundSchema),
-    ).optional(),
-    tool_calls: z.array(
-      z.lazy(() => DeploymentCreateMetricMessagesToolCalls$inboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tool_calls": "toolCalls",
-    });
-  });
 /** @internal */
 export type DeploymentCreateMetricMessagesAssistantMessage$Outbound = {
   content?:
@@ -1560,49 +1236,17 @@ export function deploymentCreateMetricMessagesAssistantMessageToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesAssistantMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesAssistantMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesAssistantMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> = z
-    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsType);
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> =
-    DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> = z
+    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsType);
 
-/** @internal */
-export const DeploymentCreateMetric2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Ttl
-> = z.nativeEnum(DeploymentCreateMetric2Ttl);
 /** @internal */
 export const DeploymentCreateMetric2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetric2Ttl
-> = DeploymentCreateMetric2Ttl$inboundSchema;
+> = z.nativeEnum(DeploymentCreateMetric2Ttl);
 
-/** @internal */
-export const DeploymentCreateMetric2CacheControl$inboundSchema: z.ZodType<
-  DeploymentCreateMetric2CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema,
-  ttl: DeploymentCreateMetric2Ttl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type DeploymentCreateMetric2CacheControl$Outbound = {
   type: string;
@@ -1628,32 +1272,7 @@ export function deploymentCreateMetric2CacheControlToJSON(
     ),
   );
 }
-export function deploymentCreateMetric2CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetric2CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetric2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetric2CacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetric24$inboundSchema: z.ZodType<
-  DeploymentCreateMetric24,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => DeploymentCreateMetric2CacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type DeploymentCreateMetric24$Outbound = {
   type: "file";
@@ -1684,29 +1303,7 @@ export function deploymentCreateMetric24ToJSON(
     DeploymentCreateMetric24$outboundSchema.parse(deploymentCreateMetric24),
   );
 }
-export function deploymentCreateMetric24FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetric24, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentCreateMetric24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetric24' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricContent2$inboundSchema: z.ZodType<
-  DeploymentCreateMetricContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => DeploymentCreateMetric24$inboundSchema),
-]);
 /** @internal */
 export type DeploymentCreateMetricContent2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -1737,35 +1334,7 @@ export function deploymentCreateMetricContent2ToJSON(
     ),
   );
 }
-export function deploymentCreateMetricContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentCreateMetricContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricContent2' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentCreateMetric24$inboundSchema),
-      ]),
-    ),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$Outbound =
   | string
@@ -1805,43 +1374,7 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsRequestContentTo
       .parse(deploymentCreateMetricMessagesDeploymentsMetricsRequestContent),
   );
 }
-export function deploymentCreateMetricMessagesDeploymentsMetricsRequestContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesUserMessage$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessagesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentCreateMetric24$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type DeploymentCreateMetricMessagesUserMessage$Outbound = {
   role: "user";
@@ -1890,32 +1423,7 @@ export function deploymentCreateMetricMessagesUserMessageToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesUserMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesUserMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesUserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesDeploymentsMetricsContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsContent$Outbound =
   | string
@@ -1941,35 +1449,7 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsContentToJSON(
       .parse(deploymentCreateMetricMessagesDeploymentsMetricsContent),
   );
 }
-export function deploymentCreateMetricMessagesDeploymentsMetricsContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesDeploymentsMetricsContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesDeploymentsMetricsContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesDeveloperMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    role: z.literal("developer"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
 /** @internal */
 export type DeploymentCreateMetricMessagesDeveloperMessage$Outbound = {
   role: "developer";
@@ -2002,31 +1482,7 @@ export function deploymentCreateMetricMessagesDeveloperMessageToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesDeveloperMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesDeveloperMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesDeveloperMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesContent$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type DeploymentCreateMetricMessagesContent$Outbound =
   | string
@@ -2051,31 +1507,7 @@ export function deploymentCreateMetricMessagesContentToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessagesSystemMessage$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricMessagesSystemMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    role: z.literal("system"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
 /** @internal */
 export type DeploymentCreateMetricMessagesSystemMessage$Outbound = {
   role: "system";
@@ -2108,34 +1540,7 @@ export function deploymentCreateMetricMessagesSystemMessageToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricMessagesSystemMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricMessagesSystemMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetricMessagesSystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricMessages$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
-]);
 /** @internal */
 export type DeploymentCreateMetricMessages$Outbound =
   | DeploymentCreateMetricMessagesSystemMessage$Outbound
@@ -2166,23 +1571,7 @@ export function deploymentCreateMetricMessagesToJSON(
     ),
   );
 }
-export function deploymentCreateMetricMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentCreateMetricMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessages' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52,
-    z.ZodTypeDef,
-    unknown
-  > = components.TextContentPartSchema$inboundSchema;
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52$Outbound =
   components.TextContentPartSchema$Outbound;
@@ -2206,31 +1595,7 @@ export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBod
       ),
   );
 }
-export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices52' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContent$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContent$Outbound =
   | string
@@ -2258,46 +1623,16 @@ export function deploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBod
       ),
   );
 }
-export function deploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricChoicesType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricChoicesType
-> = z.nativeEnum(DeploymentCreateMetricChoicesType);
 /** @internal */
 export const DeploymentCreateMetricChoicesType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricChoicesType
-> = DeploymentCreateMetricChoicesType$inboundSchema;
+> = z.nativeEnum(DeploymentCreateMetricChoicesType);
 
 /** @internal */
-export const ChoicesTtl$inboundSchema: z.ZodNativeEnum<typeof ChoicesTtl> = z
+export const ChoicesTtl$outboundSchema: z.ZodNativeEnum<typeof ChoicesTtl> = z
   .nativeEnum(ChoicesTtl);
-/** @internal */
-export const ChoicesTtl$outboundSchema: z.ZodNativeEnum<typeof ChoicesTtl> =
-  ChoicesTtl$inboundSchema;
 
-/** @internal */
-export const ChoicesCacheControl$inboundSchema: z.ZodType<
-  ChoicesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentCreateMetricChoicesType$inboundSchema,
-  ttl: ChoicesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type ChoicesCacheControl$Outbound = {
   type: string;
@@ -2321,35 +1656,7 @@ export function choicesCacheControlToJSON(
     ChoicesCacheControl$outboundSchema.parse(choicesCacheControl),
   );
 }
-export function choicesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesToolMessage$inboundSchema: z.ZodType<
-  ChoicesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() => ChoicesCacheControl$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type ChoicesToolMessage$Outbound = {
   role: "tool";
@@ -2385,30 +1692,7 @@ export function choicesToolMessageToJSON(
     ChoicesToolMessage$outboundSchema.parse(choicesToolMessage),
   );
 }
-export function choicesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesToolMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesToolMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesToolMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$inboundSchema,
-    components.ReasoningPartSchema$inboundSchema,
-    components.RedactedReasoningPartSchema$inboundSchema,
-  ]);
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2442,40 +1726,7 @@ export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBod
       ),
   );
 }
-export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBodyChoices2' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestContent$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestContent$Outbound =
   | string
@@ -2515,29 +1766,7 @@ export function deploymentCreateMetricChoicesDeploymentsMetricsRequestContentToJ
       .parse(deploymentCreateMetricChoicesDeploymentsMetricsRequestContent),
   );
 }
-export function deploymentCreateMetricChoicesDeploymentsMetricsRequestContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricChoicesDeploymentsMetricsRequestContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricChoicesDeploymentsMetricsRequestContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricChoicesDeploymentsMetricsRequestContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesAudio$inboundSchema: z.ZodType<
-  ChoicesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type ChoicesAudio$Outbound = {
   id: string;
@@ -2555,32 +1784,11 @@ export const ChoicesAudio$outboundSchema: z.ZodType<
 export function choicesAudioToJSON(choicesAudio: ChoicesAudio): string {
   return JSON.stringify(ChoicesAudio$outboundSchema.parse(choicesAudio));
 }
-export function choicesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesAudio' from JSON`,
-  );
-}
 
 /** @internal */
-export const ChoicesType$inboundSchema: z.ZodNativeEnum<typeof ChoicesType> = z
+export const ChoicesType$outboundSchema: z.ZodNativeEnum<typeof ChoicesType> = z
   .nativeEnum(ChoicesType);
-/** @internal */
-export const ChoicesType$outboundSchema: z.ZodNativeEnum<typeof ChoicesType> =
-  ChoicesType$inboundSchema;
 
-/** @internal */
-export const ChoicesFunction$inboundSchema: z.ZodType<
-  ChoicesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type ChoicesFunction$Outbound = {
   name?: string | undefined;
@@ -2602,31 +1810,7 @@ export function choicesFunctionToJSON(
 ): string {
   return JSON.stringify(ChoicesFunction$outboundSchema.parse(choicesFunction));
 }
-export function choicesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesToolCalls$inboundSchema: z.ZodType<
-  ChoicesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: ChoicesType$inboundSchema,
-  function: z.lazy(() => ChoicesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type ChoicesToolCalls$Outbound = {
   id: string;
@@ -2658,47 +1842,7 @@ export function choicesToolCallsToJSON(
     ChoicesToolCalls$outboundSchema.parse(choicesToolCalls),
   );
 }
-export function choicesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesAssistantMessage$inboundSchema: z.ZodType<
-  ChoicesAssistantMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$inboundSchema,
-          components.ReasoningPartSchema$inboundSchema,
-          components.RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => ChoicesAudio$inboundSchema)).optional(),
-  tool_calls: z.array(z.lazy(() => ChoicesToolCalls$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-  });
-});
 /** @internal */
 export type ChoicesAssistantMessage$Outbound = {
   content?:
@@ -2757,52 +1901,20 @@ export function choicesAssistantMessageToJSON(
     ChoicesAssistantMessage$outboundSchema.parse(choicesAssistantMessage),
   );
 }
-export function choicesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesAssistantMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesAssistantMessage' from JSON`,
-  );
-}
 
 /** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema:
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
   > = z.nativeEnum(
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType,
   );
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
 
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsTtl$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsTtl> = z
-    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsTtl);
 /** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsTtl$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsTtl> =
-    DeploymentCreateMetric2DeploymentsMetricsTtl$inboundSchema;
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsTtl> = z
+    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsTtl);
 
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsCacheControl$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetric2DeploymentsMetricsCacheControl,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type:
-      DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema,
-    ttl: DeploymentCreateMetric2DeploymentsMetricsTtl$inboundSchema.default(
-      "5m",
-    ),
-  });
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsCacheControl$Outbound = {
   type: string;
@@ -2833,36 +1945,7 @@ export function deploymentCreateMetric2DeploymentsMetricsCacheControlToJSON(
     ),
   );
 }
-export function deploymentCreateMetric2DeploymentsMetricsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetric2DeploymentsMetricsCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetric2DeploymentsMetricsCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetric2DeploymentsMetricsCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema:
-  z.ZodType<DeploymentCreateMetric2DeploymentsMetrics4, z.ZodTypeDef, unknown> =
-    z.object({
-      type: z.literal("file"),
-      cache_control: z.lazy(() =>
-        DeploymentCreateMetric2DeploymentsMetricsCacheControl$inboundSchema
-      ).optional(),
-      file: components.FileContentPartSchema$inboundSchema,
-    }).transform((v) => {
-      return remap$(v, {
-        "cache_control": "cacheControl",
-      });
-    });
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetrics4$Outbound = {
   type: "file";
@@ -2900,36 +1983,7 @@ export function deploymentCreateMetric2DeploymentsMetrics4ToJSON(
     ),
   );
 }
-export function deploymentCreateMetric2DeploymentsMetrics4FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetric2DeploymentsMetrics4,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetric2DeploymentsMetrics4' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    components.TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.ImageContentPartSchema$inboundSchema,
-    components.AudioContentPartSchema$inboundSchema,
-    z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -2963,40 +2017,7 @@ export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBod
       ),
   );
 }
-export function deploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchema:
-  z.ZodType<
-    DeploymentCreateMetricChoicesDeploymentsMetricsContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema),
-      ]),
-    ),
-  ]);
 /** @internal */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsContent$Outbound =
   | string
@@ -3037,43 +2058,7 @@ export function deploymentCreateMetricChoicesDeploymentsMetricsContentToJSON(
     ),
   );
 }
-export function deploymentCreateMetricChoicesDeploymentsMetricsContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetricChoicesDeploymentsMetricsContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricChoicesDeploymentsMetricsContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesUserMessage$inboundSchema: z.ZodType<
-  ChoicesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics4$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type ChoicesUserMessage$Outbound = {
   role: "user";
@@ -3118,25 +2103,7 @@ export function choicesUserMessageToJSON(
     ChoicesUserMessage$outboundSchema.parse(choicesUserMessage),
   );
 }
-export function choicesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesUserMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesUserMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesUserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricChoicesContent$inboundSchema: z.ZodType<
-  DeploymentCreateMetricChoicesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type DeploymentCreateMetricChoicesContent$Outbound =
   | string
@@ -3161,30 +2128,7 @@ export function deploymentCreateMetricChoicesContentToJSON(
     ),
   );
 }
-export function deploymentCreateMetricChoicesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricChoicesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentCreateMetricChoicesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricChoicesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesDeveloperMessage$inboundSchema: z.ZodType<
-  ChoicesDeveloperMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type ChoicesDeveloperMessage$Outbound = {
   role: "developer";
@@ -3213,25 +2157,7 @@ export function choicesDeveloperMessageToJSON(
     ChoicesDeveloperMessage$outboundSchema.parse(choicesDeveloperMessage),
   );
 }
-export function choicesDeveloperMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesDeveloperMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesDeveloperMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesDeveloperMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesContent$inboundSchema: z.ZodType<
-  ChoicesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type ChoicesContent$Outbound =
   | string
@@ -3250,29 +2176,7 @@ export const ChoicesContent$outboundSchema: z.ZodType<
 export function choicesContentToJSON(choicesContent: ChoicesContent): string {
   return JSON.stringify(ChoicesContent$outboundSchema.parse(choicesContent));
 }
-export function choicesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const ChoicesSystemMessage$inboundSchema: z.ZodType<
-  ChoicesSystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type ChoicesSystemMessage$Outbound = {
   role: "system";
@@ -3301,25 +2205,7 @@ export function choicesSystemMessageToJSON(
     ChoicesSystemMessage$outboundSchema.parse(choicesSystemMessage),
   );
 }
-export function choicesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<ChoicesSystemMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ChoicesSystemMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChoicesSystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => ChoicesSystemMessage$inboundSchema),
-    z.lazy(() => ChoicesDeveloperMessage$inboundSchema),
-    z.lazy(() => ChoicesUserMessage$inboundSchema),
-    z.lazy(() => ChoicesAssistantMessage$inboundSchema),
-    z.lazy(() => ChoicesToolMessage$inboundSchema),
-  ]);
 /** @internal */
 export type Choices$Outbound =
   | ChoicesSystemMessage$Outbound
@@ -3344,24 +2230,7 @@ export const Choices$outboundSchema: z.ZodType<
 export function choicesToJSON(choices: Choices): string {
   return JSON.stringify(Choices$outboundSchema.parse(choices));
 }
-export function choicesFromJSON(
-  jsonString: string,
-): SafeParseResult<Choices, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Choices$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Choices' from JSON`,
-  );
-}
 
-/** @internal */
-export const Feedback$inboundSchema: z.ZodType<
-  Feedback,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  score: z.number().int(),
-});
 /** @internal */
 export type Feedback$Outbound = {
   score: number;
@@ -3379,49 +2248,7 @@ export const Feedback$outboundSchema: z.ZodType<
 export function feedbackToJSON(feedback: Feedback): string {
   return JSON.stringify(Feedback$outboundSchema.parse(feedback));
 }
-export function feedbackFromJSON(
-  jsonString: string,
-): SafeParseResult<Feedback, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Feedback$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Feedback' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricRequestBody$inboundSchema: z.ZodType<
-  DeploymentCreateMetricRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  metadata: z.record(z.any()).optional(),
-  usage: z.lazy(() => Usage$inboundSchema).optional(),
-  performance: z.lazy(() => Performance$inboundSchema).optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$inboundSchema),
-      z.lazy(() =>
-        DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema
-      ),
-      z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
-      z.lazy(() =>
-        DeploymentCreateMetricMessagesAssistantMessage$inboundSchema
-      ),
-      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  choices: z.array(
-    z.union([
-      z.lazy(() => ChoicesSystemMessage$inboundSchema),
-      z.lazy(() => ChoicesDeveloperMessage$inboundSchema),
-      z.lazy(() => ChoicesUserMessage$inboundSchema),
-      z.lazy(() => ChoicesAssistantMessage$inboundSchema),
-      z.lazy(() => ChoicesToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  feedback: z.lazy(() => Feedback$inboundSchema).optional(),
-});
 /** @internal */
 export type DeploymentCreateMetricRequestBody$Outbound = {
   metadata?: { [k: string]: any } | undefined;
@@ -3491,29 +2318,7 @@ export function deploymentCreateMetricRequestBodyToJSON(
     ),
   );
 }
-export function deploymentCreateMetricRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentCreateMetricRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const DeploymentCreateMetricRequest$inboundSchema: z.ZodType<
-  DeploymentCreateMetricRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => DeploymentCreateMetricRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type DeploymentCreateMetricRequest$Outbound = {
   id: string;
@@ -3543,15 +2348,6 @@ export function deploymentCreateMetricRequestToJSON(
     ),
   );
 }
-export function deploymentCreateMetricRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentCreateMetricRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const DeploymentCreateMetricResponseBody$inboundSchema: z.ZodType<
@@ -3561,29 +2357,7 @@ export const DeploymentCreateMetricResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   success: z.boolean(),
 });
-/** @internal */
-export type DeploymentCreateMetricResponseBody$Outbound = {
-  success: boolean;
-};
 
-/** @internal */
-export const DeploymentCreateMetricResponseBody$outboundSchema: z.ZodType<
-  DeploymentCreateMetricResponseBody$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricResponseBody
-> = z.object({
-  success: z.boolean(),
-});
-
-export function deploymentCreateMetricResponseBodyToJSON(
-  deploymentCreateMetricResponseBody: DeploymentCreateMetricResponseBody,
-): string {
-  return JSON.stringify(
-    DeploymentCreateMetricResponseBody$outboundSchema.parse(
-      deploymentCreateMetricResponseBody,
-    ),
-  );
-}
 export function deploymentCreateMetricResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<DeploymentCreateMetricResponseBody, SDKValidationError> {

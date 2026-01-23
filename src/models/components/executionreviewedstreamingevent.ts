@@ -27,25 +27,7 @@ export const ExecutionReviewedStreamingEventData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({});
-/** @internal */
-export type ExecutionReviewedStreamingEventData$Outbound = {};
 
-/** @internal */
-export const ExecutionReviewedStreamingEventData$outboundSchema: z.ZodType<
-  ExecutionReviewedStreamingEventData$Outbound,
-  z.ZodTypeDef,
-  ExecutionReviewedStreamingEventData
-> = z.object({});
-
-export function executionReviewedStreamingEventDataToJSON(
-  executionReviewedStreamingEventData: ExecutionReviewedStreamingEventData,
-): string {
-  return JSON.stringify(
-    ExecutionReviewedStreamingEventData$outboundSchema.parse(
-      executionReviewedStreamingEventData,
-    ),
-  );
-}
 export function executionReviewedStreamingEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ExecutionReviewedStreamingEventData, SDKValidationError> {
@@ -67,33 +49,7 @@ export const ExecutionReviewedStreamingEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => ExecutionReviewedStreamingEventData$inboundSchema),
 });
-/** @internal */
-export type ExecutionReviewedStreamingEvent$Outbound = {
-  type: "event.agents.execution_reviewed";
-  timestamp: string;
-  data: ExecutionReviewedStreamingEventData$Outbound;
-};
 
-/** @internal */
-export const ExecutionReviewedStreamingEvent$outboundSchema: z.ZodType<
-  ExecutionReviewedStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ExecutionReviewedStreamingEvent
-> = z.object({
-  type: z.literal("event.agents.execution_reviewed"),
-  timestamp: z.string(),
-  data: z.lazy(() => ExecutionReviewedStreamingEventData$outboundSchema),
-});
-
-export function executionReviewedStreamingEventToJSON(
-  executionReviewedStreamingEvent: ExecutionReviewedStreamingEvent,
-): string {
-  return JSON.stringify(
-    ExecutionReviewedStreamingEvent$outboundSchema.parse(
-      executionReviewedStreamingEvent,
-    ),
-  );
-}
 export function executionReviewedStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ExecutionReviewedStreamingEvent, SDKValidationError> {

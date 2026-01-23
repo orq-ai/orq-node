@@ -650,7 +650,7 @@ export type UpdateToolResponseBodyCodeTool = {
  * Executes code snippets in a sandboxed environment, currently supporting Python.
  */
 export type UpdateToolResponseBodyCodeExecutionTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -688,9 +688,7 @@ export type UpdateToolResponseBodyCodeExecutionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?:
-    | UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus
-    | undefined;
+  status: UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus;
   versionHash?: string | undefined;
   type: "code";
   codeTool: UpdateToolResponseBodyCodeTool;
@@ -714,7 +712,7 @@ export type UpdateToolResponseBodyToolsResponse200Status = ClosedEnum<
 
 export type UpdateToolResponseBodyHeaders = {
   value: string;
-  encrypted?: boolean | undefined;
+  encrypted: boolean;
 };
 
 export const UpdateToolResponseBodyToolsResponse200ApplicationJson4Type = {
@@ -730,7 +728,7 @@ export type UpdateToolResponseBodyToolsSchema = {
 };
 
 export type UpdateToolResponseBodyTools = {
-  id?: string | undefined;
+  id: string;
   name: string;
   description?: string | undefined;
   schema: UpdateToolResponseBodyToolsSchema;
@@ -773,7 +771,7 @@ export type UpdateToolResponseBodyMcp = {
  * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
  */
 export type UpdateToolResponseBodyMCPTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -811,7 +809,7 @@ export type UpdateToolResponseBodyMCPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: UpdateToolResponseBodyToolsResponse200Status | undefined;
+  status: UpdateToolResponseBodyToolsResponse200Status;
   versionHash?: string | undefined;
   type: "mcp";
   mcp: UpdateToolResponseBodyMcp;
@@ -851,7 +849,7 @@ export type UpdateToolResponseBodyMethod = ClosedEnum<
 
 export type UpdateToolHeadersTools2 = {
   value: string;
-  encrypted?: boolean | undefined;
+  encrypted: boolean;
 };
 
 export type UpdateToolResponseBodyToolsHeaders =
@@ -911,7 +909,7 @@ export type UpdateToolResponseBodyArguments = {
   /**
    * Whether to send the argument to the model. If set to false, the argument will not be sent to the model and needs to be provided by the user or it will be left blank.
    */
-  sendToModel?: boolean | undefined;
+  sendToModel: boolean;
   /**
    * The default value of the argument.
    */
@@ -933,7 +931,7 @@ export type UpdateToolResponseBodyHttp = {
  * Executes HTTP requests to interact with external APIs and web services using customizable blueprints.
  */
 export type UpdateToolResponseBodyHTTPTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -971,7 +969,7 @@ export type UpdateToolResponseBodyHTTPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: UpdateToolResponseBodyToolsResponseStatus | undefined;
+  status: UpdateToolResponseBodyToolsResponseStatus;
   versionHash?: string | undefined;
   type: "http";
   http: UpdateToolResponseBodyHttp;
@@ -1035,7 +1033,7 @@ export type UpdateToolResponseBodyJsonSchema = {
  * A tool that enforces structured output format using JSON Schema for consistent response formatting.
  */
 export type UpdateToolResponseBodyJSONSchemaTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -1073,7 +1071,7 @@ export type UpdateToolResponseBodyJSONSchemaTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: UpdateToolResponseBodyToolsStatus | undefined;
+  status: UpdateToolResponseBodyToolsStatus;
   versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: UpdateToolResponseBodyJsonSchema;
@@ -1149,7 +1147,7 @@ export type UpdateToolResponseBodyFunction = {
  * A custom function tool that allows the model to call predefined functions with structured parameters.
  */
 export type UpdateToolResponseBodyFunctionTool = {
-  id?: string | undefined;
+  id: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -1187,7 +1185,7 @@ export type UpdateToolResponseBodyFunctionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: UpdateToolResponseBodyStatus | undefined;
+  status: UpdateToolResponseBodyStatus;
   versionHash?: string | undefined;
   type: "function";
   function: UpdateToolResponseBodyFunction;
@@ -1204,37 +1202,15 @@ export type UpdateToolResponseBody =
   | UpdateToolResponseBodyCodeExecutionTool;
 
 /** @internal */
-export const UpdateToolRequestBodyToolsRequest5Status$inboundSchema:
+export const UpdateToolRequestBodyToolsRequest5Status$outboundSchema:
   z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest5Status> = z
     .nativeEnum(UpdateToolRequestBodyToolsRequest5Status);
-/** @internal */
-export const UpdateToolRequestBodyToolsRequest5Status$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest5Status> =
-    UpdateToolRequestBodyToolsRequest5Status$inboundSchema;
 
-/** @internal */
-export const UpdateToolRequestBodyToolsRequest5CodeToolType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest5CodeToolType> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequest5CodeToolType);
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest5CodeToolType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest5CodeToolType> =
-    UpdateToolRequestBodyToolsRequest5CodeToolType$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest5CodeToolType> = z
+    .nativeEnum(UpdateToolRequestBodyToolsRequest5CodeToolType);
 
-/** @internal */
-export const UpdateToolRequestBodyToolsParameters$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyToolsParameters,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    type: UpdateToolRequestBodyToolsRequest5CodeToolType$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
 /** @internal */
 export type UpdateToolRequestBodyToolsParameters$Outbound = {
   type: string;
@@ -1271,37 +1247,12 @@ export function updateToolRequestBodyToolsParametersToJSON(
     ),
   );
 }
-export function updateToolRequestBodyToolsParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyToolsParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateToolRequestBodyToolsParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyToolsParameters' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolRequestBodyLanguage
-> = z.nativeEnum(UpdateToolRequestBodyLanguage);
 /** @internal */
 export const UpdateToolRequestBodyLanguage$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyLanguage
-> = UpdateToolRequestBodyLanguage$inboundSchema;
+> = z.nativeEnum(UpdateToolRequestBodyLanguage);
 
-/** @internal */
-export const UpdateToolRequestBodyCodeTool$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyCodeTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  parameters: z.lazy(() => UpdateToolRequestBodyToolsParameters$inboundSchema)
-    .optional(),
-  language: UpdateToolRequestBodyLanguage$inboundSchema,
-  code: z.string(),
-});
 /** @internal */
 export type UpdateToolRequestBodyCodeTool$Outbound = {
   parameters?: UpdateToolRequestBodyToolsParameters$Outbound | undefined;
@@ -1330,38 +1281,7 @@ export function updateToolRequestBodyCodeToolToJSON(
     ),
   );
 }
-export function updateToolRequestBodyCodeToolFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyCodeTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyCodeTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyCodeTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateCodeExecutionTool$inboundSchema: z.ZodType<
-  UpdateCodeExecutionTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsRequest5Status$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("code"),
-  code_tool: z.lazy(() => UpdateToolRequestBodyCodeTool$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "code_tool": "codeTool",
-  });
-});
 /** @internal */
 export type UpdateCodeExecutionTool$Outbound = {
   path?: string | undefined;
@@ -1403,34 +1323,12 @@ export function updateCodeExecutionToolToJSON(
     UpdateCodeExecutionTool$outboundSchema.parse(updateCodeExecutionTool),
   );
 }
-export function updateCodeExecutionToolFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateCodeExecutionTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateCodeExecutionTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateCodeExecutionTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyToolsRequest4Status$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4Status> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequest4Status);
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest4Status$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4Status> =
-    UpdateToolRequestBodyToolsRequest4Status$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4Status> = z
+    .nativeEnum(UpdateToolRequestBodyToolsRequest4Status);
 
-/** @internal */
-export const UpdateToolRequestBodyHeaders$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
 /** @internal */
 export type UpdateToolRequestBodyHeaders$Outbound = {
   value: string;
@@ -1456,35 +1354,12 @@ export function updateToolRequestBodyHeadersToJSON(
     ),
   );
 }
-export function updateToolRequestBodyHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyHeaders' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyToolsRequest4McpType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4McpType> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequest4McpType);
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest4McpType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4McpType> =
-    UpdateToolRequestBodyToolsRequest4McpType$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4McpType> = z
+    .nativeEnum(UpdateToolRequestBodyToolsRequest4McpType);
 
-/** @internal */
-export const UpdateToolRequestBodyToolsSchema$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyToolsSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateToolRequestBodyToolsRequest4McpType$inboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
 /** @internal */
 export type UpdateToolRequestBodyToolsSchema$Outbound = {
   type: string;
@@ -1512,27 +1387,7 @@ export function updateToolRequestBodyToolsSchemaToJSON(
     ),
   );
 }
-export function updateToolRequestBodyToolsSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyToolsSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyToolsSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyToolsSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const RequestBodyTools$inboundSchema: z.ZodType<
-  RequestBodyTools,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().default("01KFBAEEGYSBPPH6DHDXER15VP"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() => UpdateToolRequestBodyToolsSchema$inboundSchema),
-});
 /** @internal */
 export type RequestBodyTools$Outbound = {
   id: string;
@@ -1547,7 +1402,7 @@ export const RequestBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestBodyTools
 > = z.object({
-  id: z.string().default("01KFBAEEGYSBPPH6DHDXER15VP"),
+  id: z.string().default("01KFN8ZQC48MZMD7XWKFX4Q73C"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolRequestBodyToolsSchema$outboundSchema),
@@ -1560,42 +1415,13 @@ export function requestBodyToolsToJSON(
     RequestBodyTools$outboundSchema.parse(requestBodyTools),
   );
 }
-export function requestBodyToolsFromJSON(
-  jsonString: string,
-): SafeParseResult<RequestBodyTools, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RequestBodyTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBodyTools' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyConnectionType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolRequestBodyConnectionType
-> = z.nativeEnum(UpdateToolRequestBodyConnectionType);
 /** @internal */
 export const UpdateToolRequestBodyConnectionType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyConnectionType> =
-    UpdateToolRequestBodyConnectionType$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyConnectionType> = z.nativeEnum(
+    UpdateToolRequestBodyConnectionType,
+  );
 
-/** @internal */
-export const UpdateToolRequestBodyMcp$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyMcp,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  server_url: z.string().optional(),
-  headers: z.record(z.lazy(() => UpdateToolRequestBodyHeaders$inboundSchema))
-    .optional(),
-  tools: z.array(z.lazy(() => RequestBodyTools$inboundSchema)).optional(),
-  connection_type: UpdateToolRequestBodyConnectionType$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_url": "serverUrl",
-    "connection_type": "connectionType",
-  });
-});
 /** @internal */
 export type UpdateToolRequestBodyMcp$Outbound = {
   server_url?: string | undefined;
@@ -1629,36 +1455,7 @@ export function updateToolRequestBodyMcpToJSON(
     UpdateToolRequestBodyMcp$outboundSchema.parse(updateToolRequestBodyMcp),
   );
 }
-export function updateToolRequestBodyMcpFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyMcp, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyMcp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyMcp' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateMCPTool$inboundSchema: z.ZodType<
-  UpdateMCPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsRequest4Status$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => UpdateToolRequestBodyMcp$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
 /** @internal */
 export type UpdateMCPTool$Outbound = {
   path?: string | undefined;
@@ -1694,43 +1491,17 @@ export const UpdateMCPTool$outboundSchema: z.ZodType<
 export function updateMCPToolToJSON(updateMCPTool: UpdateMCPTool): string {
   return JSON.stringify(UpdateMCPTool$outboundSchema.parse(updateMCPTool));
 }
-export function updateMCPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMCPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMCPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMCPTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyToolsRequestStatus$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestStatus> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequestStatus);
 /** @internal */
 export const UpdateToolRequestBodyToolsRequestStatus$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestStatus> =
-    UpdateToolRequestBodyToolsRequestStatus$inboundSchema;
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestStatus> = z
+    .nativeEnum(UpdateToolRequestBodyToolsRequestStatus);
 
-/** @internal */
-export const UpdateToolRequestBodyMethod$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolRequestBodyMethod
-> = z.nativeEnum(UpdateToolRequestBodyMethod);
 /** @internal */
 export const UpdateToolRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyMethod
-> = UpdateToolRequestBodyMethod$inboundSchema;
+> = z.nativeEnum(UpdateToolRequestBodyMethod);
 
-/** @internal */
-export const UpdateToolHeaders2$inboundSchema: z.ZodType<
-  UpdateToolHeaders2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
 /** @internal */
 export type UpdateToolHeaders2$Outbound = {
   value: string;
@@ -1754,22 +1525,7 @@ export function updateToolHeaders2ToJSON(
     UpdateToolHeaders2$outboundSchema.parse(updateToolHeaders2),
   );
 }
-export function updateToolHeaders2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolHeaders2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolHeaders2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolHeaders2' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyToolsHeaders$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyToolsHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.lazy(() => UpdateToolHeaders2$inboundSchema), z.string()]);
 /** @internal */
 export type UpdateToolRequestBodyToolsHeaders$Outbound =
   | UpdateToolHeaders2$Outbound
@@ -1791,29 +1547,7 @@ export function updateToolRequestBodyToolsHeadersToJSON(
     ),
   );
 }
-export function updateToolRequestBodyToolsHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyToolsHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyToolsHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyToolsHeaders' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyBlueprint$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyBlueprint,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  url: z.string(),
-  method: UpdateToolRequestBodyMethod$inboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => UpdateToolHeaders2$inboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-});
 /** @internal */
 export type UpdateToolRequestBodyBlueprint$Outbound = {
   url: string;
@@ -1845,32 +1579,13 @@ export function updateToolRequestBodyBlueprintToJSON(
     ),
   );
 }
-export function updateToolRequestBodyBlueprintFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyBlueprint, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyBlueprint$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyBlueprint' from JSON`,
-  );
-}
 
 /** @internal */
-export const UpdateToolRequestBodyToolsRequest3Type$inboundSchema:
+export const UpdateToolRequestBodyToolsRequest3Type$outboundSchema:
   z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest3Type> = z.nativeEnum(
     UpdateToolRequestBodyToolsRequest3Type,
   );
-/** @internal */
-export const UpdateToolRequestBodyToolsRequest3Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest3Type> =
-    UpdateToolRequestBodyToolsRequest3Type$inboundSchema;
 
-/** @internal */
-export const UpdateToolRequestBodyDefaultValue$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyDefaultValue,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
 /** @internal */
 export type UpdateToolRequestBodyDefaultValue$Outbound =
   | string
@@ -1893,32 +1608,7 @@ export function updateToolRequestBodyDefaultValueToJSON(
     ),
   );
 }
-export function updateToolRequestBodyDefaultValueFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyDefaultValue, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyDefaultValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyDefaultValue' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyArguments$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyArguments,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdateToolRequestBodyToolsRequest3Type$inboundSchema,
-  description: z.string(),
-  send_to_model: z.boolean().default(true),
-  default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "send_to_model": "sendToModel",
-    "default_value": "defaultValue",
-  });
-});
 /** @internal */
 export type UpdateToolRequestBodyArguments$Outbound = {
   type: string;
@@ -1953,27 +1643,7 @@ export function updateToolRequestBodyArgumentsToJSON(
     ),
   );
 }
-export function updateToolRequestBodyArgumentsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyArguments, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyArguments$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyArguments' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyHttp$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyHttp,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  blueprint: z.lazy(() => UpdateToolRequestBodyBlueprint$inboundSchema),
-  arguments: z.record(
-    z.lazy(() => UpdateToolRequestBodyArguments$inboundSchema),
-  ).optional(),
-});
 /** @internal */
 export type UpdateToolRequestBodyHttp$Outbound = {
   blueprint: UpdateToolRequestBodyBlueprint$Outbound;
@@ -2001,34 +1671,7 @@ export function updateToolRequestBodyHttpToJSON(
     UpdateToolRequestBodyHttp$outboundSchema.parse(updateToolRequestBodyHttp),
   );
 }
-export function updateToolRequestBodyHttpFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyHttp, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyHttp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyHttp' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateHTTPTool$inboundSchema: z.ZodType<
-  UpdateHTTPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsRequestStatus$inboundSchema.default("live"),
-  type: z.literal("http"),
-  http: z.lazy(() => UpdateToolRequestBodyHttp$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
 /** @internal */
 export type UpdateHTTPTool$Outbound = {
   path?: string | undefined;
@@ -2064,39 +1707,12 @@ export const UpdateHTTPTool$outboundSchema: z.ZodType<
 export function updateHTTPToolToJSON(updateHTTPTool: UpdateHTTPTool): string {
   return JSON.stringify(UpdateHTTPTool$outboundSchema.parse(updateHTTPTool));
 }
-export function updateHTTPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateHTTPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateHTTPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateHTTPTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolRequestBodyToolsStatus
-> = z.nativeEnum(UpdateToolRequestBodyToolsStatus);
 /** @internal */
 export const UpdateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyToolsStatus
-> = UpdateToolRequestBodyToolsStatus$inboundSchema;
+> = z.nativeEnum(UpdateToolRequestBodyToolsStatus);
 
-/** @internal */
-export const UpdateToolRequestBodySchema$inboundSchema: z.ZodType<
-  UpdateToolRequestBodySchema,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string(),
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
 /** @internal */
 export type UpdateToolRequestBodySchema$Outbound = {
   type: string;
@@ -2133,27 +1749,7 @@ export function updateToolRequestBodySchemaToJSON(
     ),
   );
 }
-export function updateToolRequestBodySchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodySchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodySchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodySchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyJsonSchema$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyJsonSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => UpdateToolRequestBodySchema$inboundSchema),
-  strict: z.boolean().optional(),
-});
 /** @internal */
 export type UpdateToolRequestBodyJsonSchema$Outbound = {
   name: string;
@@ -2183,36 +1779,7 @@ export function updateToolRequestBodyJsonSchemaToJSON(
     ),
   );
 }
-export function updateToolRequestBodyJsonSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyJsonSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyJsonSchema' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateJSONSchemaTool$inboundSchema: z.ZodType<
-  UpdateJSONSchemaTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsStatus$inboundSchema.default("live"),
-  type: z.literal("json_schema"),
-  json_schema: z.lazy(() => UpdateToolRequestBodyJsonSchema$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "json_schema": "jsonSchema",
-  });
-});
 /** @internal */
 export type UpdateJSONSchemaTool$Outbound = {
   path?: string | undefined;
@@ -2252,49 +1819,18 @@ export function updateJSONSchemaToolToJSON(
     UpdateJSONSchemaTool$outboundSchema.parse(updateJSONSchemaTool),
   );
 }
-export function updateJSONSchemaToolFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateJSONSchemaTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateJSONSchemaTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateJSONSchemaTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolRequestBodyStatus
-> = z.nativeEnum(UpdateToolRequestBodyStatus);
 /** @internal */
 export const UpdateToolRequestBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyStatus
-> = UpdateToolRequestBodyStatus$inboundSchema;
+> = z.nativeEnum(UpdateToolRequestBodyStatus);
 
 /** @internal */
-export const UpdateToolRequestBodyToolsRequest1Type$inboundSchema:
+export const UpdateToolRequestBodyToolsRequest1Type$outboundSchema:
   z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest1Type> = z.nativeEnum(
     UpdateToolRequestBodyToolsRequest1Type,
   );
-/** @internal */
-export const UpdateToolRequestBodyToolsRequest1Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest1Type> =
-    UpdateToolRequestBodyToolsRequest1Type$inboundSchema;
 
-/** @internal */
-export const UpdateToolRequestBodyParameters$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyParameters,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    type: UpdateToolRequestBodyToolsRequest1Type$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
 /** @internal */
 export type UpdateToolRequestBodyParameters$Outbound = {
   type: string;
@@ -2331,28 +1867,7 @@ export function updateToolRequestBodyParametersToJSON(
     ),
   );
 }
-export function updateToolRequestBodyParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyParameters' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBodyFunction$inboundSchema: z.ZodType<
-  UpdateToolRequestBodyFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => UpdateToolRequestBodyParameters$inboundSchema)
-    .optional(),
-});
 /** @internal */
 export type UpdateToolRequestBodyFunction$Outbound = {
   name: string;
@@ -2383,35 +1898,7 @@ export function updateToolRequestBodyFunctionToJSON(
     ),
   );
 }
-export function updateToolRequestBodyFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBodyFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBodyFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBodyFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateFunctionTool$inboundSchema: z.ZodType<
-  UpdateFunctionTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyStatus$inboundSchema.default("live"),
-  type: z.literal("function"),
-  function: z.lazy(() => UpdateToolRequestBodyFunction$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
 /** @internal */
 export type UpdateFunctionTool$Outbound = {
   path?: string | undefined;
@@ -2450,28 +1937,7 @@ export function updateFunctionToolToJSON(
     UpdateFunctionTool$outboundSchema.parse(updateFunctionTool),
   );
 }
-export function updateFunctionToolFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateFunctionTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateFunctionTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateFunctionTool' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequestBody$inboundSchema: z.ZodType<
-  UpdateToolRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => UpdateFunctionTool$inboundSchema),
-  z.lazy(() => UpdateJSONSchemaTool$inboundSchema),
-  z.lazy(() => UpdateHTTPTool$inboundSchema),
-  z.lazy(() => UpdateMCPTool$inboundSchema),
-  z.lazy(() => UpdateCodeExecutionTool$inboundSchema),
-]);
 /** @internal */
 export type UpdateToolRequestBody$Outbound =
   | UpdateFunctionTool$Outbound
@@ -2500,36 +1966,7 @@ export function updateToolRequestBodyToJSON(
     UpdateToolRequestBody$outboundSchema.parse(updateToolRequestBody),
   );
 }
-export function updateToolRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateToolRequest$inboundSchema: z.ZodType<
-  UpdateToolRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  tool_id: z.string(),
-  RequestBody: z.union([
-    z.lazy(() => UpdateFunctionTool$inboundSchema),
-    z.lazy(() => UpdateJSONSchemaTool$inboundSchema),
-    z.lazy(() => UpdateHTTPTool$inboundSchema),
-    z.lazy(() => UpdateMCPTool$inboundSchema),
-    z.lazy(() => UpdateCodeExecutionTool$inboundSchema),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateToolRequest$Outbound = {
   tool_id: string;
@@ -2570,37 +2007,18 @@ export function updateToolRequestToJSON(
     UpdateToolRequest$outboundSchema.parse(updateToolRequest),
   );
 }
-export function updateToolRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateToolRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateToolRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus
   > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus
-  > = UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJson5Type
   > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson5Type);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponse200ApplicationJson5Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateToolResponseBodyToolsResponse200ApplicationJson5Type
-  > = UpdateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
@@ -2617,43 +2035,7 @@ export const UpdateToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
-/** @internal */
-export type UpdateToolResponseBodyToolsParameters$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required: Array<string>;
-  [additionalProperties: string]: unknown;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyToolsParameters$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyToolsParameters$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyToolsParameters
-> = z.object({
-  type:
-    UpdateToolResponseBodyToolsResponse200ApplicationJson5Type$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function updateToolResponseBodyToolsParametersToJSON(
-  updateToolResponseBodyToolsParameters: UpdateToolResponseBodyToolsParameters,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyToolsParameters$outboundSchema.parse(
-      updateToolResponseBodyToolsParameters,
-    ),
-  );
-}
 export function updateToolResponseBodyToolsParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyToolsParameters, SDKValidationError> {
@@ -2669,10 +2051,6 @@ export function updateToolResponseBodyToolsParametersFromJSON(
 export const UpdateToolResponseBodyLanguage$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyLanguage
 > = z.nativeEnum(UpdateToolResponseBodyLanguage);
-/** @internal */
-export const UpdateToolResponseBodyLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolResponseBodyLanguage
-> = UpdateToolResponseBodyLanguage$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyCodeTool$inboundSchema: z.ZodType<
@@ -2685,34 +2063,7 @@ export const UpdateToolResponseBodyCodeTool$inboundSchema: z.ZodType<
   language: UpdateToolResponseBodyLanguage$inboundSchema,
   code: z.string(),
 });
-/** @internal */
-export type UpdateToolResponseBodyCodeTool$Outbound = {
-  parameters?: UpdateToolResponseBodyToolsParameters$Outbound | undefined;
-  language: string;
-  code: string;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyCodeTool$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyCodeTool$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyCodeTool
-> = z.object({
-  parameters: z.lazy(() => UpdateToolResponseBodyToolsParameters$outboundSchema)
-    .optional(),
-  language: UpdateToolResponseBodyLanguage$outboundSchema,
-  code: z.string(),
-});
-
-export function updateToolResponseBodyCodeToolToJSON(
-  updateToolResponseBodyCodeTool: UpdateToolResponseBodyCodeTool,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyCodeTool$outboundSchema.parse(
-      updateToolResponseBodyCodeTool,
-    ),
-  );
-}
 export function updateToolResponseBodyCodeToolFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyCodeTool, SDKValidationError> {
@@ -2729,7 +2080,7 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEGNE6QBJGY2TDF526AH"),
+  _id: z.string().default("tool_01KFN8ZQBNHE5Y11ZTMXXH3ZGK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2758,71 +2109,7 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
     "code_tool": "codeTool",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyCodeExecutionTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "code";
-  code_tool: UpdateToolResponseBodyCodeTool$Outbound;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyCodeExecutionTool$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyCodeExecutionTool$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyCodeExecutionTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEGNE6QBJGY2TDF526AH"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status:
-    UpdateToolResponseBodyToolsResponse200ApplicationJSONStatus$outboundSchema
-      .default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("code"),
-  codeTool: z.lazy(() => UpdateToolResponseBodyCodeTool$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-    codeTool: "code_tool",
-  });
-});
-
-export function updateToolResponseBodyCodeExecutionToolToJSON(
-  updateToolResponseBodyCodeExecutionTool:
-    UpdateToolResponseBodyCodeExecutionTool,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyCodeExecutionTool$outboundSchema.parse(
-      updateToolResponseBodyCodeExecutionTool,
-    ),
-  );
-}
 export function updateToolResponseBodyCodeExecutionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2843,10 +2130,6 @@ export function updateToolResponseBodyCodeExecutionToolFromJSON(
 export const UpdateToolResponseBodyToolsResponse200Status$inboundSchema:
   z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponse200Status> = z
     .nativeEnum(UpdateToolResponseBodyToolsResponse200Status);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponse200Status$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponse200Status> =
-    UpdateToolResponseBodyToolsResponse200Status$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyHeaders$inboundSchema: z.ZodType<
@@ -2857,31 +2140,7 @@ export const UpdateToolResponseBodyHeaders$inboundSchema: z.ZodType<
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
-/** @internal */
-export type UpdateToolResponseBodyHeaders$Outbound = {
-  value: string;
-  encrypted: boolean;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyHeaders$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyHeaders$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function updateToolResponseBodyHeadersToJSON(
-  updateToolResponseBodyHeaders: UpdateToolResponseBodyHeaders,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyHeaders$outboundSchema.parse(
-      updateToolResponseBodyHeaders,
-    ),
-  );
-}
 export function updateToolResponseBodyHeadersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyHeaders, SDKValidationError> {
@@ -2897,11 +2156,6 @@ export const UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundS
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJson4Type
   > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson4Type);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateToolResponseBodyToolsResponse200ApplicationJson4Type
-  > = UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyToolsSchema$inboundSchema: z.ZodType<
@@ -2914,34 +2168,7 @@ export const UpdateToolResponseBodyToolsSchema$inboundSchema: z.ZodType<
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
-/** @internal */
-export type UpdateToolResponseBodyToolsSchema$Outbound = {
-  type: string;
-  properties?: { [k: string]: any } | undefined;
-  required?: Array<string> | undefined;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyToolsSchema$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyToolsSchema$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyToolsSchema
-> = z.object({
-  type:
-    UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$outboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
-
-export function updateToolResponseBodyToolsSchemaToJSON(
-  updateToolResponseBodyToolsSchema: UpdateToolResponseBodyToolsSchema,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyToolsSchema$outboundSchema.parse(
-      updateToolResponseBodyToolsSchema,
-    ),
-  );
-}
 export function updateToolResponseBodyToolsSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyToolsSchema, SDKValidationError> {
@@ -2958,40 +2185,12 @@ export const UpdateToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KFBAEEGMCQYWSV1DRFW8KVYX"),
+  id: z.string().default("01KFN8ZQBMSCPV9BEWZJ3XV415"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolResponseBodyToolsSchema$inboundSchema),
 });
-/** @internal */
-export type UpdateToolResponseBodyTools$Outbound = {
-  id: string;
-  name: string;
-  description?: string | undefined;
-  schema: UpdateToolResponseBodyToolsSchema$Outbound;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyTools$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyTools$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyTools
-> = z.object({
-  id: z.string().default("01KFBAEEGMCQYWSV1DRFW8KVYX"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() => UpdateToolResponseBodyToolsSchema$outboundSchema),
-});
-
-export function updateToolResponseBodyToolsToJSON(
-  updateToolResponseBodyTools: UpdateToolResponseBodyTools,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyTools$outboundSchema.parse(
-      updateToolResponseBodyTools,
-    ),
-  );
-}
 export function updateToolResponseBodyToolsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyTools, SDKValidationError> {
@@ -3007,10 +2206,6 @@ export const UpdateToolResponseBodyConnectionType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateToolResponseBodyConnectionType> = z.nativeEnum(
     UpdateToolResponseBodyConnectionType,
   );
-/** @internal */
-export const UpdateToolResponseBodyConnectionType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolResponseBodyConnectionType> =
-    UpdateToolResponseBodyConnectionType$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyMcp$inboundSchema: z.ZodType<
@@ -3029,39 +2224,7 @@ export const UpdateToolResponseBodyMcp$inboundSchema: z.ZodType<
     "connection_type": "connectionType",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyMcp$Outbound = {
-  server_url: string;
-  headers?: { [k: string]: UpdateToolResponseBodyHeaders$Outbound } | undefined;
-  tools: Array<UpdateToolResponseBodyTools$Outbound>;
-  connection_type: string;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyMcp$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyMcp$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyMcp
-> = z.object({
-  serverUrl: z.string(),
-  headers: z.record(z.lazy(() => UpdateToolResponseBodyHeaders$outboundSchema))
-    .optional(),
-  tools: z.array(z.lazy(() => UpdateToolResponseBodyTools$outboundSchema)),
-  connectionType: UpdateToolResponseBodyConnectionType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    connectionType: "connection_type",
-  });
-});
-
-export function updateToolResponseBodyMcpToJSON(
-  updateToolResponseBodyMcp: UpdateToolResponseBodyMcp,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyMcp$outboundSchema.parse(updateToolResponseBodyMcp),
-  );
-}
 export function updateToolResponseBodyMcpFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyMcp, SDKValidationError> {
@@ -3078,7 +2241,7 @@ export const UpdateToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEGKJY746JEP97AFZBAF"),
+  _id: z.string().default("tool_01KFN8ZQBJV76CNF5W1474CTQF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3106,69 +2269,7 @@ export const UpdateToolResponseBodyMCPTool$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyMCPTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "mcp";
-  mcp: UpdateToolResponseBodyMcp$Outbound;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyMCPTool$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyMCPTool$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyMCPTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEGKJY746JEP97AFZBAF"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyToolsResponse200Status$outboundSchema.default(
-    "live",
-  ),
-  versionHash: z.string().optional(),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => UpdateToolResponseBodyMcp$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-  });
-});
-
-export function updateToolResponseBodyMCPToolToJSON(
-  updateToolResponseBodyMCPTool: UpdateToolResponseBodyMCPTool,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyMCPTool$outboundSchema.parse(
-      updateToolResponseBodyMCPTool,
-    ),
-  );
-}
 export function updateToolResponseBodyMCPToolFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyMCPTool, SDKValidationError> {
@@ -3183,19 +2284,11 @@ export function updateToolResponseBodyMCPToolFromJSON(
 export const UpdateToolResponseBodyToolsResponseStatus$inboundSchema:
   z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponseStatus> = z
     .nativeEnum(UpdateToolResponseBodyToolsResponseStatus);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponseStatus$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponseStatus> =
-    UpdateToolResponseBodyToolsResponseStatus$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyMethod
 > = z.nativeEnum(UpdateToolResponseBodyMethod);
-/** @internal */
-export const UpdateToolResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolResponseBodyMethod
-> = UpdateToolResponseBodyMethod$inboundSchema;
 
 /** @internal */
 export const UpdateToolHeadersTools2$inboundSchema: z.ZodType<
@@ -3206,29 +2299,7 @@ export const UpdateToolHeadersTools2$inboundSchema: z.ZodType<
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
-/** @internal */
-export type UpdateToolHeadersTools2$Outbound = {
-  value: string;
-  encrypted: boolean;
-};
 
-/** @internal */
-export const UpdateToolHeadersTools2$outboundSchema: z.ZodType<
-  UpdateToolHeadersTools2$Outbound,
-  z.ZodTypeDef,
-  UpdateToolHeadersTools2
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function updateToolHeadersTools2ToJSON(
-  updateToolHeadersTools2: UpdateToolHeadersTools2,
-): string {
-  return JSON.stringify(
-    UpdateToolHeadersTools2$outboundSchema.parse(updateToolHeadersTools2),
-  );
-}
 export function updateToolHeadersTools2FromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolHeadersTools2, SDKValidationError> {
@@ -3245,27 +2316,7 @@ export const UpdateToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => UpdateToolHeadersTools2$inboundSchema), z.string()]);
-/** @internal */
-export type UpdateToolResponseBodyToolsHeaders$Outbound =
-  | UpdateToolHeadersTools2$Outbound
-  | string;
 
-/** @internal */
-export const UpdateToolResponseBodyToolsHeaders$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyToolsHeaders$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyToolsHeaders
-> = z.union([z.lazy(() => UpdateToolHeadersTools2$outboundSchema), z.string()]);
-
-export function updateToolResponseBodyToolsHeadersToJSON(
-  updateToolResponseBodyToolsHeaders: UpdateToolResponseBodyToolsHeaders,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyToolsHeaders$outboundSchema.parse(
-      updateToolResponseBodyToolsHeaders,
-    ),
-  );
-}
 export function updateToolResponseBodyToolsHeadersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyToolsHeaders, SDKValidationError> {
@@ -3290,39 +2341,7 @@ export const UpdateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
   ).optional(),
   body: z.record(z.any()).optional(),
 });
-/** @internal */
-export type UpdateToolResponseBodyBlueprint$Outbound = {
-  url: string;
-  method: string;
-  headers?:
-    | { [k: string]: UpdateToolHeadersTools2$Outbound | string }
-    | undefined;
-  body?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyBlueprint$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyBlueprint$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyBlueprint
-> = z.object({
-  url: z.string(),
-  method: UpdateToolResponseBodyMethod$outboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => UpdateToolHeadersTools2$outboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-});
-
-export function updateToolResponseBodyBlueprintToJSON(
-  updateToolResponseBodyBlueprint: UpdateToolResponseBodyBlueprint,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyBlueprint$outboundSchema.parse(
-      updateToolResponseBodyBlueprint,
-    ),
-  );
-}
 export function updateToolResponseBodyBlueprintFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyBlueprint, SDKValidationError> {
@@ -3338,11 +2357,6 @@ export const UpdateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundS
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJson3Type
   > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson3Type);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponse200ApplicationJson3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateToolResponseBodyToolsResponse200ApplicationJson3Type
-  > = UpdateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyDefaultValue$inboundSchema: z.ZodType<
@@ -3350,28 +2364,7 @@ export const UpdateToolResponseBodyDefaultValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type UpdateToolResponseBodyDefaultValue$Outbound =
-  | string
-  | number
-  | boolean;
 
-/** @internal */
-export const UpdateToolResponseBodyDefaultValue$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyDefaultValue$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyDefaultValue
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function updateToolResponseBodyDefaultValueToJSON(
-  updateToolResponseBodyDefaultValue: UpdateToolResponseBodyDefaultValue,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyDefaultValue$outboundSchema.parse(
-      updateToolResponseBodyDefaultValue,
-    ),
-  );
-}
 export function updateToolResponseBodyDefaultValueFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyDefaultValue, SDKValidationError> {
@@ -3400,41 +2393,7 @@ export const UpdateToolResponseBodyArguments$inboundSchema: z.ZodType<
     "default_value": "defaultValue",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyArguments$Outbound = {
-  type: string;
-  description: string;
-  send_to_model: boolean;
-  default_value?: string | number | boolean | undefined;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyArguments$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyArguments$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyArguments
-> = z.object({
-  type:
-    UpdateToolResponseBodyToolsResponse200ApplicationJson3Type$outboundSchema,
-  description: z.string(),
-  sendToModel: z.boolean().default(true),
-  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sendToModel: "send_to_model",
-    defaultValue: "default_value",
-  });
-});
-
-export function updateToolResponseBodyArgumentsToJSON(
-  updateToolResponseBodyArguments: UpdateToolResponseBodyArguments,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyArguments$outboundSchema.parse(
-      updateToolResponseBodyArguments,
-    ),
-  );
-}
 export function updateToolResponseBodyArgumentsFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyArguments, SDKValidationError> {
@@ -3456,33 +2415,7 @@ export const UpdateToolResponseBodyHttp$inboundSchema: z.ZodType<
     z.lazy(() => UpdateToolResponseBodyArguments$inboundSchema),
   ).optional(),
 });
-/** @internal */
-export type UpdateToolResponseBodyHttp$Outbound = {
-  blueprint: UpdateToolResponseBodyBlueprint$Outbound;
-  arguments?:
-    | { [k: string]: UpdateToolResponseBodyArguments$Outbound }
-    | undefined;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyHttp$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyHttp$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyHttp
-> = z.object({
-  blueprint: z.lazy(() => UpdateToolResponseBodyBlueprint$outboundSchema),
-  arguments: z.record(
-    z.lazy(() => UpdateToolResponseBodyArguments$outboundSchema),
-  ).optional(),
-});
-
-export function updateToolResponseBodyHttpToJSON(
-  updateToolResponseBodyHttp: UpdateToolResponseBodyHttp,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyHttp$outboundSchema.parse(updateToolResponseBodyHttp),
-  );
-}
 export function updateToolResponseBodyHttpFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyHttp, SDKValidationError> {
@@ -3499,7 +2432,7 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEGH6H6T7RVJNKXVWR88"),
+  _id: z.string().default("tool_01KFN8ZQBGGEM0X08DY9Y41AG4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3527,69 +2460,7 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyHTTPTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "http";
-  http: UpdateToolResponseBodyHttp$Outbound;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyHTTPTool$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyHTTPTool$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyHTTPTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEGH6H6T7RVJNKXVWR88"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyToolsResponseStatus$outboundSchema.default(
-    "live",
-  ),
-  versionHash: z.string().optional(),
-  type: z.literal("http"),
-  http: z.lazy(() => UpdateToolResponseBodyHttp$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-  });
-});
-
-export function updateToolResponseBodyHTTPToolToJSON(
-  updateToolResponseBodyHTTPTool: UpdateToolResponseBodyHTTPTool,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyHTTPTool$outboundSchema.parse(
-      updateToolResponseBodyHTTPTool,
-    ),
-  );
-}
 export function updateToolResponseBodyHTTPToolFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyHTTPTool, SDKValidationError> {
@@ -3604,10 +2475,6 @@ export function updateToolResponseBodyHTTPToolFromJSON(
 export const UpdateToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyToolsStatus
 > = z.nativeEnum(UpdateToolResponseBodyToolsStatus);
-/** @internal */
-export const UpdateToolResponseBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolResponseBodyToolsStatus
-> = UpdateToolResponseBodyToolsStatus$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodySchema$inboundSchema: z.ZodType<
@@ -3623,42 +2490,7 @@ export const UpdateToolResponseBodySchema$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
-/** @internal */
-export type UpdateToolResponseBodySchema$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required: Array<string>;
-  [additionalProperties: string]: unknown;
-};
 
-/** @internal */
-export const UpdateToolResponseBodySchema$outboundSchema: z.ZodType<
-  UpdateToolResponseBodySchema$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodySchema
-> = z.object({
-  type: z.string(),
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function updateToolResponseBodySchemaToJSON(
-  updateToolResponseBodySchema: UpdateToolResponseBodySchema,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodySchema$outboundSchema.parse(
-      updateToolResponseBodySchema,
-    ),
-  );
-}
 export function updateToolResponseBodySchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodySchema, SDKValidationError> {
@@ -3680,35 +2512,7 @@ export const UpdateToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   schema: z.lazy(() => UpdateToolResponseBodySchema$inboundSchema),
   strict: z.boolean().optional(),
 });
-/** @internal */
-export type UpdateToolResponseBodyJsonSchema$Outbound = {
-  name: string;
-  description: string;
-  schema: UpdateToolResponseBodySchema$Outbound;
-  strict?: boolean | undefined;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyJsonSchema$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyJsonSchema$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => UpdateToolResponseBodySchema$outboundSchema),
-  strict: z.boolean().optional(),
-});
-
-export function updateToolResponseBodyJsonSchemaToJSON(
-  updateToolResponseBodyJsonSchema: UpdateToolResponseBodyJsonSchema,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyJsonSchema$outboundSchema.parse(
-      updateToolResponseBodyJsonSchema,
-    ),
-  );
-}
 export function updateToolResponseBodyJsonSchemaFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyJsonSchema, SDKValidationError> {
@@ -3725,7 +2529,7 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEGGFN7DBVXEVZX0215Q"),
+  _id: z.string().default("tool_01KFN8ZQBEQXCBJ1RPR1PD5AMK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3752,68 +2556,7 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
     "json_schema": "jsonSchema",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyJSONSchemaTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "json_schema";
-  json_schema: UpdateToolResponseBodyJsonSchema$Outbound;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyJSONSchemaTool$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyJSONSchemaTool$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyJSONSchemaTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEGGFN7DBVXEVZX0215Q"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyToolsStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() => UpdateToolResponseBodyJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-    jsonSchema: "json_schema",
-  });
-});
-
-export function updateToolResponseBodyJSONSchemaToolToJSON(
-  updateToolResponseBodyJSONSchemaTool: UpdateToolResponseBodyJSONSchemaTool,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyJSONSchemaTool$outboundSchema.parse(
-      updateToolResponseBodyJSONSchemaTool,
-    ),
-  );
-}
 export function updateToolResponseBodyJSONSchemaToolFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyJSONSchemaTool, SDKValidationError> {
@@ -3829,21 +2572,12 @@ export function updateToolResponseBodyJSONSchemaToolFromJSON(
 export const UpdateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyStatus
 > = z.nativeEnum(UpdateToolResponseBodyStatus);
-/** @internal */
-export const UpdateToolResponseBodyStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateToolResponseBodyStatus
-> = UpdateToolResponseBodyStatus$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJson1Type
   > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson1Type);
-/** @internal */
-export const UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdateToolResponseBodyToolsResponse200ApplicationJson1Type
-  > = UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema;
 
 /** @internal */
 export const UpdateToolResponseBodyParameters$inboundSchema: z.ZodType<
@@ -3860,43 +2594,7 @@ export const UpdateToolResponseBodyParameters$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
-/** @internal */
-export type UpdateToolResponseBodyParameters$Outbound = {
-  type: string;
-  properties: { [k: string]: any };
-  required: Array<string>;
-  [additionalProperties: string]: unknown;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyParameters$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyParameters$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyParameters
-> = z.object({
-  type:
-    UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function updateToolResponseBodyParametersToJSON(
-  updateToolResponseBodyParameters: UpdateToolResponseBodyParameters,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyParameters$outboundSchema.parse(
-      updateToolResponseBodyParameters,
-    ),
-  );
-}
 export function updateToolResponseBodyParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyParameters, SDKValidationError> {
@@ -3919,36 +2617,7 @@ export const UpdateToolResponseBodyFunction$inboundSchema: z.ZodType<
   parameters: z.lazy(() => UpdateToolResponseBodyParameters$inboundSchema)
     .optional(),
 });
-/** @internal */
-export type UpdateToolResponseBodyFunction$Outbound = {
-  name: string;
-  description?: string | undefined;
-  strict?: boolean | undefined;
-  parameters?: UpdateToolResponseBodyParameters$Outbound | undefined;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyFunction$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyFunction$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => UpdateToolResponseBodyParameters$outboundSchema)
-    .optional(),
-});
-
-export function updateToolResponseBodyFunctionToJSON(
-  updateToolResponseBodyFunction: UpdateToolResponseBodyFunction,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyFunction$outboundSchema.parse(
-      updateToolResponseBodyFunction,
-    ),
-  );
-}
 export function updateToolResponseBodyFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyFunction, SDKValidationError> {
@@ -3965,7 +2634,7 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KFBAEEG687GYZW1MAYADMJ64"),
+  _id: z.string().default("tool_01KFN8ZQBCMVFH1JKA1AWKMRFP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3991,67 +2660,7 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
     "version_hash": "versionHash",
   });
 });
-/** @internal */
-export type UpdateToolResponseBodyFunctionTool$Outbound = {
-  _id: string;
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  project_id: string;
-  workspace_id: string;
-  created: string;
-  updated: string;
-  status: string;
-  version_hash?: string | undefined;
-  type: "function";
-  function: UpdateToolResponseBodyFunction$Outbound;
-};
 
-/** @internal */
-export const UpdateToolResponseBodyFunctionTool$outboundSchema: z.ZodType<
-  UpdateToolResponseBodyFunctionTool$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBodyFunctionTool
-> = z.object({
-  id: z.string().default("tool_01KFBAEEG687GYZW1MAYADMJ64"),
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
-  type: z.literal("function"),
-  function: z.lazy(() => UpdateToolResponseBodyFunction$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    versionHash: "version_hash",
-  });
-});
-
-export function updateToolResponseBodyFunctionToolToJSON(
-  updateToolResponseBodyFunctionTool: UpdateToolResponseBodyFunctionTool,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBodyFunctionTool$outboundSchema.parse(
-      updateToolResponseBodyFunctionTool,
-    ),
-  );
-}
 export function updateToolResponseBodyFunctionToolFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBodyFunctionTool, SDKValidationError> {
@@ -4075,34 +2684,7 @@ export const UpdateToolResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => UpdateToolResponseBodyMCPTool$inboundSchema),
   z.lazy(() => UpdateToolResponseBodyCodeExecutionTool$inboundSchema),
 ]);
-/** @internal */
-export type UpdateToolResponseBody$Outbound =
-  | UpdateToolResponseBodyFunctionTool$Outbound
-  | UpdateToolResponseBodyJSONSchemaTool$Outbound
-  | UpdateToolResponseBodyHTTPTool$Outbound
-  | UpdateToolResponseBodyMCPTool$Outbound
-  | UpdateToolResponseBodyCodeExecutionTool$Outbound;
 
-/** @internal */
-export const UpdateToolResponseBody$outboundSchema: z.ZodType<
-  UpdateToolResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateToolResponseBody
-> = z.union([
-  z.lazy(() => UpdateToolResponseBodyFunctionTool$outboundSchema),
-  z.lazy(() => UpdateToolResponseBodyJSONSchemaTool$outboundSchema),
-  z.lazy(() => UpdateToolResponseBodyHTTPTool$outboundSchema),
-  z.lazy(() => UpdateToolResponseBodyMCPTool$outboundSchema),
-  z.lazy(() => UpdateToolResponseBodyCodeExecutionTool$outboundSchema),
-]);
-
-export function updateToolResponseBodyToJSON(
-  updateToolResponseBody: UpdateToolResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateToolResponseBody$outboundSchema.parse(updateToolResponseBody),
-  );
-}
 export function updateToolResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateToolResponseBody, SDKValidationError> {

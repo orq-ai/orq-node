@@ -50,20 +50,3 @@ export const GetV2ToolsToolIdVersionsVersionIdResponseBody$inboundSchema:
         body: v.body$,
       });
     });
-
-/** @internal */
-export type GetV2ToolsToolIdVersionsVersionIdResponseBody$Outbound = {
-  message: string;
-};
-
-/** @internal */
-export const GetV2ToolsToolIdVersionsVersionIdResponseBody$outboundSchema:
-  z.ZodType<
-    GetV2ToolsToolIdVersionsVersionIdResponseBody$Outbound,
-    z.ZodTypeDef,
-    GetV2ToolsToolIdVersionsVersionIdResponseBody
-  > = z.instanceof(GetV2ToolsToolIdVersionsVersionIdResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));

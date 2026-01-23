@@ -15,6 +15,38 @@ let value: ListAgentsData = {
   status: "draft",
   model: {
     id: "<id>",
+    parameters: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      loadBalancer: {
+        type: "weight_based",
+        models: [
+          {
+            model: "openai/gpt-4o",
+            weight: 0.7,
+          },
+        ],
+      },
+      timeout: {
+        callTimeout: 30000,
+      },
+    },
     retry: {
       onCodes: [
         429,
@@ -24,6 +56,9 @@ let value: ListAgentsData = {
         504,
       ],
     },
+    fallbackModels: [
+      "<value>",
+    ],
   },
   path: "Default",
   memoryStores: [
@@ -64,3 +99,4 @@ let value: ListAgentsData = {
 | `metrics`                                                                                                                                                                                                                                                                                      | [operations.ListAgentsMetrics](../../models/operations/listagentsmetrics.md)                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `variables`                                                                                                                                                                                                                                                                                    | Record<string, *any*>                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Extracted variables from agent instructions                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                |
 | `knowledgeBases`                                                                                                                                                                                                                                                                               | [operations.ListAgentsKnowledgeBases](../../models/operations/listagentsknowledgebases.md)[]                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Agent knowledge bases reference                                                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                |
+| `source`                                                                                                                                                                                                                                                                                       | [operations.ListAgentsSource](../../models/operations/listagentssource.md)                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |

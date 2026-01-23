@@ -46,22 +46,6 @@ export type RetrieveMemoryDocumentResponseBody = {
 };
 
 /** @internal */
-export const RetrieveMemoryDocumentRequest$inboundSchema: z.ZodType<
-  RetrieveMemoryDocumentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  memory_entity_id: z.string(),
-  document_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "memory_entity_id": "memoryEntityId",
-    "document_id": "documentId",
-  });
-});
-/** @internal */
 export type RetrieveMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
   memory_entity_id: string;
@@ -94,15 +78,6 @@ export function retrieveMemoryDocumentRequestToJSON(
     ),
   );
 }
-export function retrieveMemoryDocumentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveMemoryDocumentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveMemoryDocumentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveMemoryDocumentRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const RetrieveMemoryDocumentResponseBody$inboundSchema: z.ZodType<
@@ -130,56 +105,7 @@ export const RetrieveMemoryDocumentResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type RetrieveMemoryDocumentResponseBody$Outbound = {
-  _id: string;
-  memory_id: string;
-  store_id: string;
-  text: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  workspace_id: string;
-  metadata?: { [k: string]: string } | undefined;
-};
 
-/** @internal */
-export const RetrieveMemoryDocumentResponseBody$outboundSchema: z.ZodType<
-  RetrieveMemoryDocumentResponseBody$Outbound,
-  z.ZodTypeDef,
-  RetrieveMemoryDocumentResponseBody
-> = z.object({
-  id: z.string(),
-  memoryId: z.string(),
-  storeId: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  workspaceId: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    memoryId: "memory_id",
-    storeId: "store_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function retrieveMemoryDocumentResponseBodyToJSON(
-  retrieveMemoryDocumentResponseBody: RetrieveMemoryDocumentResponseBody,
-): string {
-  return JSON.stringify(
-    RetrieveMemoryDocumentResponseBody$outboundSchema.parse(
-      retrieveMemoryDocumentResponseBody,
-    ),
-  );
-}
 export function retrieveMemoryDocumentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<RetrieveMemoryDocumentResponseBody, SDKValidationError> {

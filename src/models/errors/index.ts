@@ -3,17 +3,20 @@
  */
 
 export * from "./apierror.js";
-export * from "./createagentrequest.js";
 export * from "./createeval.js";
+export * from "./createmoderation.js";
+export * from "./createtranscription.js";
+export * from "./createtranslation.js";
 export * from "./deleteagent.js";
 export * from "./deletecontact.js";
 export * from "./deleteconversation.js";
 export * from "./deleteeval.js";
+export * from "./deleteidentity.js";
+export * from "./deleteprompt.js";
 export * from "./generateconversationname.js";
 export * from "./getevals.js";
 export * from "./getpromptversion.js";
 export * from "./getv2evaluatorsidversions.js";
-export * from "./getv2evaluatorsidversionsversionid.js";
 export * from "./getv2toolstoolidversions.js";
 export * from "./getv2toolstoolidversionsversionid.js";
 export * from "./honoapierror.js";
@@ -24,6 +27,7 @@ export * from "./responsevalidationerror.js";
 export * from "./retrieveagentrequest.js";
 export * from "./retrievecontact.js";
 export * from "./retrieveconversation.js";
+export * from "./retrieveidentity.js";
 export * from "./sdkvalidationerror.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
@@ -31,5 +35,6 @@ export * from "./updateagent.js";
 export * from "./updatecontact.js";
 export * from "./updateconversation.js";
 export * from "./updateeval.js";
+export * from "./updateidentity.js";
 export * from "./updateprompt.js";
 export * from "./updatetool.js";

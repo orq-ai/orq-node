@@ -1,0 +1,22 @@
+# ListPromptVersionsMessagesToolCalls
+
+## Example Usage
+
+```typescript
+import { ListPromptVersionsMessagesToolCalls } from "@orq-ai/node/models/operations";
+
+let value: ListPromptVersionsMessagesToolCalls = {
+  id: "<id>",
+  type: "function",
+  function: {},
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                 | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                  | *string*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | The ID of the tool call.                                                                                                                                              |
+| `type`                                                                                                                                                                | [operations.ListPromptVersionsMessagesType](../../models/operations/listpromptversionsmessagestype.md)                                                                | :heavy_check_mark:                                                                                                                                                    | The type of the tool. Currently, only `function` is supported.                                                                                                        |
+| `function`                                                                                                                                                            | [operations.ListPromptVersionsMessagesFunction](../../models/operations/listpromptversionsmessagesfunction.md)                                                        | :heavy_check_mark:                                                                                                                                                    | N/A                                                                                                                                                                   |
+| `thoughtSignature`                                                                                                                                                    | *string*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. |

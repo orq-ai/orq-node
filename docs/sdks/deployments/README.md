@@ -28,6 +28,23 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.invoke({
     key: "<key>",
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
 
   console.log(result);
@@ -55,6 +72,23 @@ const orq = new OrqCore({
 async function run() {
   const res = await deploymentsInvoke(orq, {
     key: "<key>",
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -173,6 +207,23 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.getConfig({
     key: "<key>",
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
 
   console.log(result);
@@ -198,6 +249,23 @@ const orq = new OrqCore({
 async function run() {
   const res = await deploymentsGetConfig(orq, {
     key: "<key>",
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -248,6 +316,23 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.stream({
     key: "<key>",
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
 
   for await (const event of result) {
@@ -277,6 +362,23 @@ const orq = new OrqCore({
 async function run() {
   const res = await deploymentsStream(orq, {
     key: "<key>",
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
   });
   if (res.ok) {
     const { value: result } = res;

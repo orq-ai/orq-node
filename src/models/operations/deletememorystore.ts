@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteMemoryStoreRequest = {
   /**
@@ -15,18 +12,6 @@ export type DeleteMemoryStoreRequest = {
   memoryStoreKey: string;
 };
 
-/** @internal */
-export const DeleteMemoryStoreRequest$inboundSchema: z.ZodType<
-  DeleteMemoryStoreRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-  });
-});
 /** @internal */
 export type DeleteMemoryStoreRequest$Outbound = {
   memory_store_key: string;
@@ -50,14 +35,5 @@ export function deleteMemoryStoreRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteMemoryStoreRequest$outboundSchema.parse(deleteMemoryStoreRequest),
-  );
-}
-export function deleteMemoryStoreRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteMemoryStoreRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteMemoryStoreRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteMemoryStoreRequest' from JSON`,
   );
 }

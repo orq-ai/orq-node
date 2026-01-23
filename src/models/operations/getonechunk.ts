@@ -84,22 +84,6 @@ export type GetOneChunkResponseBody = {
 };
 
 /** @internal */
-export const GetOneChunkRequest$inboundSchema: z.ZodType<
-  GetOneChunkRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  chunk_id: z.string(),
-  datasource_id: z.string(),
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "chunk_id": "chunkId",
-    "datasource_id": "datasourceId",
-    "knowledge_id": "knowledgeId",
-  });
-});
-/** @internal */
 export type GetOneChunkRequest$Outbound = {
   chunk_id: string;
   datasource_id: string;
@@ -130,15 +114,6 @@ export function getOneChunkRequestToJSON(
     GetOneChunkRequest$outboundSchema.parse(getOneChunkRequest),
   );
 }
-export function getOneChunkRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneChunkRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneChunkRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneChunkRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetOneChunkMetadata$inboundSchema: z.ZodType<
@@ -146,23 +121,7 @@ export const GetOneChunkMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
-/** @internal */
-export type GetOneChunkMetadata$Outbound = string | number | boolean;
 
-/** @internal */
-export const GetOneChunkMetadata$outboundSchema: z.ZodType<
-  GetOneChunkMetadata$Outbound,
-  z.ZodTypeDef,
-  GetOneChunkMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function getOneChunkMetadataToJSON(
-  getOneChunkMetadata: GetOneChunkMetadata,
-): string {
-  return JSON.stringify(
-    GetOneChunkMetadata$outboundSchema.parse(getOneChunkMetadata),
-  );
-}
 export function getOneChunkMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneChunkMetadata, SDKValidationError> {
@@ -177,10 +136,6 @@ export function getOneChunkMetadataFromJSON(
 export const GetOneChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetOneChunkStatus
 > = z.nativeEnum(GetOneChunkStatus);
-/** @internal */
-export const GetOneChunkStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GetOneChunkStatus
-> = GetOneChunkStatus$inboundSchema;
 
 /** @internal */
 export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
@@ -204,49 +159,7 @@ export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
     "update_by_id": "updateById",
   });
 });
-/** @internal */
-export type GetOneChunkResponseBody$Outbound = {
-  _id: string;
-  text: string;
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  enabled: boolean;
-  status: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | null | undefined;
-  update_by_id?: string | null | undefined;
-};
 
-/** @internal */
-export const GetOneChunkResponseBody$outboundSchema: z.ZodType<
-  GetOneChunkResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetOneChunkResponseBody
-> = z.object({
-  id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: GetOneChunkStatus$outboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.nullable(z.string()).optional(),
-  updateById: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    createdById: "created_by_id",
-    updateById: "update_by_id",
-  });
-});
-
-export function getOneChunkResponseBodyToJSON(
-  getOneChunkResponseBody: GetOneChunkResponseBody,
-): string {
-  return JSON.stringify(
-    GetOneChunkResponseBody$outboundSchema.parse(getOneChunkResponseBody),
-  );
-}
 export function getOneChunkResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<GetOneChunkResponseBody, SDKValidationError> {

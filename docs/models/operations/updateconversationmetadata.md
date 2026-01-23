@@ -1,6 +1,6 @@
 # UpdateConversationMetadata
 
-Optional metadata to update for the conversation.
+Metadata fields to update. Only provided fields are modified.
 
 ## Example Usage
 
@@ -12,7 +12,7 @@ let value: UpdateConversationMetadata = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `generatingTitle`  | *boolean*          | :heavy_minus_sign: | N/A                |
-| `entityId`         | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `generatingTitle`                                                 | *boolean*                                                         | :heavy_minus_sign:                                                | Set to `true` to indicate the title is being auto-generated.      |
+| `entityId`                                                        | *string*                                                          | :heavy_minus_sign:                                                | Parent entity identifier. Set to `null` to detach from an entity. |

@@ -58,15 +58,6 @@ export type UpdateMemoryDocumentResponseBody = {
 };
 
 /** @internal */
-export const UpdateMemoryDocumentRequestBody$inboundSchema: z.ZodType<
-  UpdateMemoryDocumentRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  text: z.string(),
-  metadata: z.record(z.string()).optional(),
-});
-/** @internal */
 export type UpdateMemoryDocumentRequestBody$Outbound = {
   text: string;
   metadata?: { [k: string]: string } | undefined;
@@ -91,35 +82,7 @@ export function updateMemoryDocumentRequestBodyToJSON(
     ),
   );
 }
-export function updateMemoryDocumentRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryDocumentRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryDocumentRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryDocumentRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateMemoryDocumentRequest$inboundSchema: z.ZodType<
-  UpdateMemoryDocumentRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  memory_entity_id: z.string(),
-  document_id: z.string(),
-  RequestBody: z.lazy(() => UpdateMemoryDocumentRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "memory_entity_id": "memoryEntityId",
-    "document_id": "documentId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
@@ -157,15 +120,6 @@ export function updateMemoryDocumentRequestToJSON(
     ),
   );
 }
-export function updateMemoryDocumentRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryDocumentRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryDocumentRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryDocumentRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
@@ -193,56 +147,7 @@ export const UpdateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
   });
 });
-/** @internal */
-export type UpdateMemoryDocumentResponseBody$Outbound = {
-  _id: string;
-  memory_id: string;
-  store_id: string;
-  text: string;
-  created: string;
-  updated: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  workspace_id: string;
-  metadata?: { [k: string]: string } | undefined;
-};
 
-/** @internal */
-export const UpdateMemoryDocumentResponseBody$outboundSchema: z.ZodType<
-  UpdateMemoryDocumentResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryDocumentResponseBody
-> = z.object({
-  id: z.string(),
-  memoryId: z.string(),
-  storeId: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  workspaceId: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    memoryId: "memory_id",
-    storeId: "store_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    workspaceId: "workspace_id",
-  });
-});
-
-export function updateMemoryDocumentResponseBodyToJSON(
-  updateMemoryDocumentResponseBody: UpdateMemoryDocumentResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateMemoryDocumentResponseBody$outboundSchema.parse(
-      updateMemoryDocumentResponseBody,
-    ),
-  );
-}
 export function updateMemoryDocumentResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryDocumentResponseBody, SDKValidationError> {

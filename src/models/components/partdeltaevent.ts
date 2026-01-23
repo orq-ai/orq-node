@@ -6,12 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  PartDelta,
-  PartDelta$inboundSchema,
-  PartDelta$Outbound,
-  PartDelta$outboundSchema,
-} from "./partdelta.js";
+import { PartDelta, PartDelta$inboundSchema } from "./partdelta.js";
 
 export type PartDeltaEventData = {
   /**
@@ -45,29 +40,7 @@ export const PartDeltaEventData$inboundSchema: z.ZodType<
   partId: z.string(),
   delta: PartDelta$inboundSchema,
 });
-/** @internal */
-export type PartDeltaEventData$Outbound = {
-  partId: string;
-  delta: PartDelta$Outbound;
-};
 
-/** @internal */
-export const PartDeltaEventData$outboundSchema: z.ZodType<
-  PartDeltaEventData$Outbound,
-  z.ZodTypeDef,
-  PartDeltaEventData
-> = z.object({
-  partId: z.string(),
-  delta: PartDelta$outboundSchema,
-});
-
-export function partDeltaEventDataToJSON(
-  partDeltaEventData: PartDeltaEventData,
-): string {
-  return JSON.stringify(
-    PartDeltaEventData$outboundSchema.parse(partDeltaEventData),
-  );
-}
 export function partDeltaEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDeltaEventData, SDKValidationError> {
@@ -88,27 +61,7 @@ export const PartDeltaEvent$inboundSchema: z.ZodType<
   timestamp: z.string(),
   data: z.lazy(() => PartDeltaEventData$inboundSchema),
 });
-/** @internal */
-export type PartDeltaEvent$Outbound = {
-  type: "part.delta";
-  timestamp: string;
-  data: PartDeltaEventData$Outbound;
-};
 
-/** @internal */
-export const PartDeltaEvent$outboundSchema: z.ZodType<
-  PartDeltaEvent$Outbound,
-  z.ZodTypeDef,
-  PartDeltaEvent
-> = z.object({
-  type: z.literal("part.delta"),
-  timestamp: z.string(),
-  data: z.lazy(() => PartDeltaEventData$outboundSchema),
-});
-
-export function partDeltaEventToJSON(partDeltaEvent: PartDeltaEvent): string {
-  return JSON.stringify(PartDeltaEvent$outboundSchema.parse(partDeltaEvent));
-}
 export function partDeltaEventFromJSON(
   jsonString: string,
 ): SafeParseResult<PartDeltaEvent, SDKValidationError> {

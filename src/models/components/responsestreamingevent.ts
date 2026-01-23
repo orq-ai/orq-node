@@ -9,62 +9,36 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   PartDeltaEvent,
   PartDeltaEvent$inboundSchema,
-  PartDeltaEvent$Outbound,
-  PartDeltaEvent$outboundSchema,
 } from "./partdeltaevent.js";
-import {
-  PartDoneEvent,
-  PartDoneEvent$inboundSchema,
-  PartDoneEvent$Outbound,
-  PartDoneEvent$outboundSchema,
-} from "./partdoneevent.js";
+import { PartDoneEvent, PartDoneEvent$inboundSchema } from "./partdoneevent.js";
 import {
   ResponseDoneEvent,
   ResponseDoneEvent$inboundSchema,
-  ResponseDoneEvent$Outbound,
-  ResponseDoneEvent$outboundSchema,
 } from "./responsedoneevent.js";
 import {
   ResponseFailedEvent,
   ResponseFailedEvent$inboundSchema,
-  ResponseFailedEvent$Outbound,
-  ResponseFailedEvent$outboundSchema,
 } from "./responsefailedevent.js";
 import {
   ResponseStartedEvent,
   ResponseStartedEvent$inboundSchema,
-  ResponseStartedEvent$Outbound,
-  ResponseStartedEvent$outboundSchema,
 } from "./responsestartedevent.js";
-import {
-  ToolDoneEvent,
-  ToolDoneEvent$inboundSchema,
-  ToolDoneEvent$Outbound,
-  ToolDoneEvent$outboundSchema,
-} from "./tooldoneevent.js";
+import { ToolDoneEvent, ToolDoneEvent$inboundSchema } from "./tooldoneevent.js";
 import {
   ToolFailedEvent,
   ToolFailedEvent$inboundSchema,
-  ToolFailedEvent$Outbound,
-  ToolFailedEvent$outboundSchema,
 } from "./toolfailedevent.js";
 import {
   ToolReviewDoneEvent,
   ToolReviewDoneEvent$inboundSchema,
-  ToolReviewDoneEvent$Outbound,
-  ToolReviewDoneEvent$outboundSchema,
 } from "./toolreviewdoneevent.js";
 import {
   ToolReviewRequestedEvent,
   ToolReviewRequestedEvent$inboundSchema,
-  ToolReviewRequestedEvent$Outbound,
-  ToolReviewRequestedEvent$outboundSchema,
 } from "./toolreviewrequestedevent.js";
 import {
   ToolStartedEvent,
   ToolStartedEvent$inboundSchema,
-  ToolStartedEvent$Outbound,
-  ToolStartedEvent$outboundSchema,
 } from "./toolstartedevent.js";
 
 /**
@@ -99,44 +73,7 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
   PartDeltaEvent$inboundSchema,
   PartDoneEvent$inboundSchema,
 ]);
-/** @internal */
-export type ResponseStreamingEvent$Outbound =
-  | ResponseStartedEvent$Outbound
-  | ResponseDoneEvent$Outbound
-  | ResponseFailedEvent$Outbound
-  | ToolStartedEvent$Outbound
-  | ToolDoneEvent$Outbound
-  | ToolFailedEvent$Outbound
-  | ToolReviewRequestedEvent$Outbound
-  | ToolReviewDoneEvent$Outbound
-  | PartDeltaEvent$Outbound
-  | PartDoneEvent$Outbound;
 
-/** @internal */
-export const ResponseStreamingEvent$outboundSchema: z.ZodType<
-  ResponseStreamingEvent$Outbound,
-  z.ZodTypeDef,
-  ResponseStreamingEvent
-> = z.union([
-  ResponseStartedEvent$outboundSchema,
-  ResponseDoneEvent$outboundSchema,
-  ResponseFailedEvent$outboundSchema,
-  ToolStartedEvent$outboundSchema,
-  ToolDoneEvent$outboundSchema,
-  ToolFailedEvent$outboundSchema,
-  ToolReviewRequestedEvent$outboundSchema,
-  ToolReviewDoneEvent$outboundSchema,
-  PartDeltaEvent$outboundSchema,
-  PartDoneEvent$outboundSchema,
-]);
-
-export function responseStreamingEventToJSON(
-  responseStreamingEvent: ResponseStreamingEvent,
-): string {
-  return JSON.stringify(
-    ResponseStreamingEvent$outboundSchema.parse(responseStreamingEvent),
-  );
-}
 export function responseStreamingEventFromJSON(
   jsonString: string,
 ): SafeParseResult<ResponseStreamingEvent, SDKValidationError> {

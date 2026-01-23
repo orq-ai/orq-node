@@ -115,16 +115,6 @@ export type UpdateMemoryStoreResponseBody = {
 };
 
 /** @internal */
-export const UpdateMemoryStoreRequestBody$inboundSchema: z.ZodType<
-  UpdateMemoryStoreRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  description: z.string().optional(),
-  ttl: z.number().optional(),
-  path: z.string().optional(),
-});
-/** @internal */
 export type UpdateMemoryStoreRequestBody$Outbound = {
   description?: string | undefined;
   ttl?: number | undefined;
@@ -151,31 +141,7 @@ export function updateMemoryStoreRequestBodyToJSON(
     ),
   );
 }
-export function updateMemoryStoreRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const UpdateMemoryStoreRequest$inboundSchema: z.ZodType<
-  UpdateMemoryStoreRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  memory_store_key: z.string(),
-  RequestBody: z.lazy(() => UpdateMemoryStoreRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_key": "memoryStoreKey",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type UpdateMemoryStoreRequest$Outbound = {
   memory_store_key: string;
@@ -205,24 +171,11 @@ export function updateMemoryStoreRequestToJSON(
     UpdateMemoryStoreRequest$outboundSchema.parse(updateMemoryStoreRequest),
   );
 }
-export function updateMemoryStoreRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdateMemoryStoreProvider$inboundSchema: z.ZodNativeEnum<
   typeof UpdateMemoryStoreProvider
 > = z.nativeEnum(UpdateMemoryStoreProvider);
-/** @internal */
-export const UpdateMemoryStoreProvider$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreProvider
-> = UpdateMemoryStoreProvider$inboundSchema;
 
 /** @internal */
 export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
@@ -241,41 +194,7 @@ export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
     "top_k": "topK",
   });
 });
-/** @internal */
-export type UpdateMemoryStoreEmbeddingConfig$Outbound = {
-  model_id: string;
-  integration_id?: string | undefined;
-  top_k?: number | undefined;
-  provider: string;
-};
 
-/** @internal */
-export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
-  UpdateMemoryStoreEmbeddingConfig$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryStoreEmbeddingConfig
-> = z.object({
-  modelId: z.string(),
-  integrationId: z.string().optional(),
-  topK: z.number().optional(),
-  provider: UpdateMemoryStoreProvider$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    integrationId: "integration_id",
-    topK: "top_k",
-  });
-});
-
-export function updateMemoryStoreEmbeddingConfigToJSON(
-  updateMemoryStoreEmbeddingConfig: UpdateMemoryStoreEmbeddingConfig,
-): string {
-  return JSON.stringify(
-    UpdateMemoryStoreEmbeddingConfig$outboundSchema.parse(
-      updateMemoryStoreEmbeddingConfig,
-    ),
-  );
-}
 export function updateMemoryStoreEmbeddingConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
@@ -313,57 +232,7 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
     "embedding_config": "embeddingConfig",
   });
 });
-/** @internal */
-export type UpdateMemoryStoreResponseBody$Outbound = {
-  _id: string;
-  key: string;
-  project_id: string;
-  description: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created: string;
-  updated: string;
-  ttl?: number | undefined;
-  embedding_config: UpdateMemoryStoreEmbeddingConfig$Outbound;
-};
 
-/** @internal */
-export const UpdateMemoryStoreResponseBody$outboundSchema: z.ZodType<
-  UpdateMemoryStoreResponseBody$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryStoreResponseBody
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  projectId: z.string(),
-  description: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.number().optional(),
-  embeddingConfig: z.lazy(() =>
-    UpdateMemoryStoreEmbeddingConfig$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    projectId: "project_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    embeddingConfig: "embedding_config",
-  });
-});
-
-export function updateMemoryStoreResponseBodyToJSON(
-  updateMemoryStoreResponseBody: UpdateMemoryStoreResponseBody,
-): string {
-  return JSON.stringify(
-    UpdateMemoryStoreResponseBody$outboundSchema.parse(
-      updateMemoryStoreResponseBody,
-    ),
-  );
-}
 export function updateMemoryStoreResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateMemoryStoreResponseBody, SDKValidationError> {

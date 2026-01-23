@@ -67,7 +67,7 @@ export type ListDatasetsData = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
 /**
@@ -79,21 +79,6 @@ export type ListDatasetsResponseBody = {
   hasMore: boolean;
 };
 
-/** @internal */
-export const ListDatasetsRequest$inboundSchema: z.ZodType<
-  ListDatasetsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
-});
 /** @internal */
 export type ListDatasetsRequest$Outbound = {
   limit: number;
@@ -124,24 +109,11 @@ export function listDatasetsRequestToJSON(
     ListDatasetsRequest$outboundSchema.parse(listDatasetsRequest),
   );
 }
-export function listDatasetsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasetsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasetsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasetsRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const ListDatasetsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListDatasetsObject
 > = z.nativeEnum(ListDatasetsObject);
-/** @internal */
-export const ListDatasetsObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListDatasetsObject
-> = ListDatasetsObject$inboundSchema;
 
 /** @internal */
 export const ListDatasetsMetadata$inboundSchema: z.ZodType<
@@ -157,34 +129,7 @@ export const ListDatasetsMetadata$inboundSchema: z.ZodType<
     "datapoints_count": "datapointsCount",
   });
 });
-/** @internal */
-export type ListDatasetsMetadata$Outbound = {
-  total_versions: number;
-  datapoints_count: number;
-};
 
-/** @internal */
-export const ListDatasetsMetadata$outboundSchema: z.ZodType<
-  ListDatasetsMetadata$Outbound,
-  z.ZodTypeDef,
-  ListDatasetsMetadata
-> = z.object({
-  totalVersions: z.number(),
-  datapointsCount: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    totalVersions: "total_versions",
-    datapointsCount: "datapoints_count",
-  });
-});
-
-export function listDatasetsMetadataToJSON(
-  listDatasetsMetadata: ListDatasetsMetadata,
-): string {
-  return JSON.stringify(
-    ListDatasetsMetadata$outboundSchema.parse(listDatasetsMetadata),
-  );
-}
 export function listDatasetsMetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsMetadata, SDKValidationError> {
@@ -211,7 +156,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:09.825Z",
+    "2026-01-23T11:14:01.166Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -223,53 +168,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-/** @internal */
-export type ListDatasetsData$Outbound = {
-  _id: string;
-  display_name: string;
-  project_id: string;
-  workspace_id: string;
-  metadata: ListDatasetsMetadata$Outbound;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const ListDatasetsData$outboundSchema: z.ZodType<
-  ListDatasetsData$Outbound,
-  z.ZodTypeDef,
-  ListDatasetsData
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  metadata: z.lazy(() => ListDatasetsMetadata$outboundSchema),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-19T14:27:09.825Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    projectId: "project_id",
-    workspaceId: "workspace_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
-
-export function listDatasetsDataToJSON(
-  listDatasetsData: ListDatasetsData,
-): string {
-  return JSON.stringify(
-    ListDatasetsData$outboundSchema.parse(listDatasetsData),
-  );
-}
 export function listDatasetsDataFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsData, SDKValidationError> {
@@ -294,35 +193,7 @@ export const ListDatasetsResponseBody$inboundSchema: z.ZodType<
     "has_more": "hasMore",
   });
 });
-/** @internal */
-export type ListDatasetsResponseBody$Outbound = {
-  object: string;
-  data: Array<ListDatasetsData$Outbound>;
-  has_more: boolean;
-};
 
-/** @internal */
-export const ListDatasetsResponseBody$outboundSchema: z.ZodType<
-  ListDatasetsResponseBody$Outbound,
-  z.ZodTypeDef,
-  ListDatasetsResponseBody
-> = z.object({
-  object: ListDatasetsObject$outboundSchema,
-  data: z.array(z.lazy(() => ListDatasetsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
-
-export function listDatasetsResponseBodyToJSON(
-  listDatasetsResponseBody: ListDatasetsResponseBody,
-): string {
-  return JSON.stringify(
-    ListDatasetsResponseBody$outboundSchema.parse(listDatasetsResponseBody),
-  );
-}
 export function listDatasetsResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<ListDatasetsResponseBody, SDKValidationError> {

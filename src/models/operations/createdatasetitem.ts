@@ -456,7 +456,7 @@ export type CreateDatasetItemMessagesDatasetsCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: CreateDatasetItemMessagesDatasetsTtl | undefined;
+  ttl: CreateDatasetItemMessagesDatasetsTtl;
 };
 
 export type CreateDatasetItemMessagesDatasetsToolMessage = {
@@ -635,7 +635,7 @@ export type CreateDatasetItem2DatasetsCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: CreateDatasetItem2DatasetsTtl | undefined;
+  ttl: CreateDatasetItem2DatasetsTtl;
 };
 
 export type CreateDatasetItem2Datasets4 = {
@@ -757,12 +757,12 @@ export type CreateDatasetItemEvaluationsEvaluationType = ClosedEnum<
   typeof CreateDatasetItemEvaluationsEvaluationType
 >;
 
-export const CreateDatasetItemEvaluationsSource = {
+export const CreateDatasetItemEvaluationsDatasetsSource = {
   Orq: "orq",
   External: "external",
 } as const;
-export type CreateDatasetItemEvaluationsSource = ClosedEnum<
-  typeof CreateDatasetItemEvaluationsSource
+export type CreateDatasetItemEvaluationsDatasetsSource = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsSource
 >;
 
 export type Evaluations3 = {
@@ -778,7 +778,7 @@ export type Evaluations3 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: CreateDatasetItemEvaluationsSource | undefined;
+  source: CreateDatasetItemEvaluationsDatasetsSource;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -786,7 +786,7 @@ export type Evaluations3 = {
   /**
    * The date and time the item was reviewed
    */
-  reviewedAt?: Date | undefined;
+  reviewedAt: Date;
   type: "string_array";
   values: Array<string>;
 };
@@ -804,11 +804,13 @@ export type EvaluationsEvaluationType = ClosedEnum<
   typeof EvaluationsEvaluationType
 >;
 
-export const EvaluationsSource = {
+export const CreateDatasetItemEvaluationsSource = {
   Orq: "orq",
   External: "external",
 } as const;
-export type EvaluationsSource = ClosedEnum<typeof EvaluationsSource>;
+export type CreateDatasetItemEvaluationsSource = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsSource
+>;
 
 export type Evaluations2 = {
   /**
@@ -823,7 +825,7 @@ export type Evaluations2 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: EvaluationsSource | undefined;
+  source: CreateDatasetItemEvaluationsSource;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -831,7 +833,7 @@ export type Evaluations2 = {
   /**
    * The date and time the item was reviewed
    */
-  reviewedAt?: Date | undefined;
+  reviewedAt: Date;
   type: "number";
   value: number;
 };
@@ -847,11 +849,11 @@ export const EvaluationType = {
  */
 export type EvaluationType = ClosedEnum<typeof EvaluationType>;
 
-export const Source = {
+export const EvaluationsSource = {
   Orq: "orq",
   External: "external",
 } as const;
-export type Source = ClosedEnum<typeof Source>;
+export type EvaluationsSource = ClosedEnum<typeof EvaluationsSource>;
 
 export type Evaluations1 = {
   /**
@@ -866,7 +868,7 @@ export type Evaluations1 = {
    * The unique identifier of the human review
    */
   humanReviewId: string;
-  source?: Source | undefined;
+  source: EvaluationsSource;
   /**
    * The unique identifier of the user who reviewed the item
    */
@@ -874,7 +876,7 @@ export type Evaluations1 = {
   /**
    * The date and time the item was reviewed
    */
-  reviewedAt?: Date | undefined;
+  reviewedAt: Date;
   type: "string";
   value: string;
 };
@@ -934,15 +936,9 @@ export type CreateDatasetItemResponseBody = {
   /**
    * The date and time the resource was last updated
    */
-  updated?: Date | undefined;
+  updated: Date;
 };
 
-/** @internal */
-export const CreateDatasetItemContentDatasetsRequest2$inboundSchema: z.ZodType<
-  CreateDatasetItemContentDatasetsRequest2,
-  z.ZodTypeDef,
-  unknown
-> = components.TextContentPartSchema$inboundSchema;
 /** @internal */
 export type CreateDatasetItemContentDatasetsRequest2$Outbound =
   components.TextContentPartSchema$Outbound;
@@ -964,32 +960,7 @@ export function createDatasetItemContentDatasetsRequest2ToJSON(
     ),
   );
 }
-export function createDatasetItemContentDatasetsRequest2FromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemContentDatasetsRequest2,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemContentDatasetsRequest2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateDatasetItemContentDatasetsRequest2' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Content$inboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsRequestRequestBody5Content,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsRequestRequestBody5Content$Outbound =
   | string
@@ -1015,49 +986,18 @@ export function createDatasetItemMessagesDatasetsRequestRequestBody5ContentToJSO
       .parse(createDatasetItemMessagesDatasetsRequestRequestBody5Content),
   );
 }
-export function createDatasetItemMessagesDatasetsRequestRequestBody5ContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemMessagesDatasetsRequestRequestBody5Content,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesDatasetsRequestRequestBody5Content$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesDatasetsRequestRequestBody5Content' from JSON`,
-  );
-}
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsType$inboundSchema:
+export const CreateDatasetItemMessagesDatasetsType$outboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsType,
   );
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> =
-    CreateDatasetItemMessagesDatasetsType$inboundSchema;
 
-/** @internal */
-export const CreateDatasetItemMessagesTtl$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemMessagesTtl
-> = z.nativeEnum(CreateDatasetItemMessagesTtl);
 /** @internal */
 export const CreateDatasetItemMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemMessagesTtl
-> = CreateDatasetItemMessagesTtl$inboundSchema;
+> = z.nativeEnum(CreateDatasetItemMessagesTtl);
 
-/** @internal */
-export const CreateDatasetItemMessagesCacheControl$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateDatasetItemMessagesDatasetsType$inboundSchema,
-  ttl: CreateDatasetItemMessagesTtl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type CreateDatasetItemMessagesCacheControl$Outbound = {
   type: string;
@@ -1083,38 +1023,7 @@ export function createDatasetItemMessagesCacheControlToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesCacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesToolMessage$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesToolMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() =>
-    CreateDatasetItemMessagesCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type CreateDatasetItemMessagesToolMessage$Outbound = {
   role: "tool";
@@ -1154,30 +1063,7 @@ export function createDatasetItemMessagesToolMessageToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesToolMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesToolMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesToolMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemContentDatasets2$inboundSchema: z.ZodType<
-  CreateDatasetItemContentDatasets2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
 /** @internal */
 export type CreateDatasetItemContentDatasets2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -1208,35 +1094,7 @@ export function createDatasetItemContentDatasets2ToJSON(
     ),
   );
 }
-export function createDatasetItemContentDatasets2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemContentDatasets2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemContentDatasets2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemContentDatasets2' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBodyContent$inboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsRequestRequestBodyContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
-  ]);
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsRequestRequestBodyContent$Outbound =
   | string
@@ -1276,29 +1134,7 @@ export function createDatasetItemMessagesDatasetsRequestRequestBodyContentToJSON
       .parse(createDatasetItemMessagesDatasetsRequestRequestBodyContent),
   );
 }
-export function createDatasetItemMessagesDatasetsRequestRequestBodyContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemMessagesDatasetsRequestRequestBodyContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesDatasetsRequestRequestBodyContent$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesDatasetsRequestRequestBodyContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesAudio$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-});
 /** @internal */
 export type CreateDatasetItemMessagesAudio$Outbound = {
   id: string;
@@ -1322,34 +1158,12 @@ export function createDatasetItemMessagesAudioToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemMessagesAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesAudio' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemMessagesType
-> = z.nativeEnum(CreateDatasetItemMessagesType);
 /** @internal */
 export const CreateDatasetItemMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItemMessagesType
-> = CreateDatasetItemMessagesType$inboundSchema;
+> = z.nativeEnum(CreateDatasetItemMessagesType);
 
-/** @internal */
-export const CreateDatasetItemMessagesFunction$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
 /** @internal */
 export type CreateDatasetItemMessagesFunction$Outbound = {
   name?: string | undefined;
@@ -1375,31 +1189,7 @@ export function createDatasetItemMessagesFunctionToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesFunctionFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesFunction, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesFunction' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesToolCalls$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesToolCalls,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  type: CreateDatasetItemMessagesType$inboundSchema,
-  function: z.lazy(() => CreateDatasetItemMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
 /** @internal */
 export type CreateDatasetItemMessagesToolCalls$Outbound = {
   id: string;
@@ -1433,51 +1223,7 @@ export function createDatasetItemMessagesToolCallsToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesToolCallsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesToolCalls, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesToolCalls' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesAssistantMessage$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesAssistantMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$inboundSchema,
-          components.ReasoningPartSchema$inboundSchema,
-          components.RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => CreateDatasetItemMessagesAudio$inboundSchema))
-    .optional(),
-  tool_calls: z.array(
-    z.lazy(() => CreateDatasetItemMessagesToolCalls$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-  });
-});
 /** @internal */
 export type CreateDatasetItemMessagesAssistantMessage$Outbound = {
   content?:
@@ -1544,49 +1290,17 @@ export function createDatasetItemMessagesAssistantMessageToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesAssistantMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemMessagesAssistantMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesAssistantMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateDatasetItemMessagesAssistantMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItem2DatasetsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsType
-> = z.nativeEnum(CreateDatasetItem2DatasetsType);
 /** @internal */
 export const CreateDatasetItem2DatasetsType$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsType
-> = CreateDatasetItem2DatasetsType$inboundSchema;
+> = z.nativeEnum(CreateDatasetItem2DatasetsType);
 
-/** @internal */
-export const CreateDatasetItem2Ttl$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Ttl
-> = z.nativeEnum(CreateDatasetItem2Ttl);
 /** @internal */
 export const CreateDatasetItem2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2Ttl
-> = CreateDatasetItem2Ttl$inboundSchema;
+> = z.nativeEnum(CreateDatasetItem2Ttl);
 
-/** @internal */
-export const CreateDatasetItem2CacheControl$inboundSchema: z.ZodType<
-  CreateDatasetItem2CacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateDatasetItem2DatasetsType$inboundSchema,
-  ttl: CreateDatasetItem2Ttl$inboundSchema.default("5m"),
-});
 /** @internal */
 export type CreateDatasetItem2CacheControl$Outbound = {
   type: string;
@@ -1612,31 +1326,7 @@ export function createDatasetItem2CacheControlToJSON(
     ),
   );
 }
-export function createDatasetItem2CacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItem2CacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItem2CacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItem2CacheControl' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItem24$inboundSchema: z.ZodType<
-  CreateDatasetItem24,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => CreateDatasetItem2CacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
 /** @internal */
 export type CreateDatasetItem24$Outbound = {
   type: "file";
@@ -1667,29 +1357,7 @@ export function createDatasetItem24ToJSON(
     CreateDatasetItem24$outboundSchema.parse(createDatasetItem24),
   );
 }
-export function createDatasetItem24FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItem24, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItem24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItem24' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemContent2$inboundSchema: z.ZodType<
-  CreateDatasetItemContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => CreateDatasetItem24$inboundSchema),
-]);
 /** @internal */
 export type CreateDatasetItemContent2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
@@ -1718,35 +1386,7 @@ export function createDatasetItemContent2ToJSON(
     CreateDatasetItemContent2$outboundSchema.parse(createDatasetItemContent2),
   );
 }
-export function createDatasetItemContent2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemContent2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemContent2' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsRequestContent,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => CreateDatasetItem24$inboundSchema),
-      ]),
-    ),
-  ]);
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsRequestContent$Outbound =
   | string
@@ -1787,44 +1427,7 @@ export function createDatasetItemMessagesDatasetsRequestContentToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesDatasetsRequestContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemMessagesDatasetsRequestContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateDatasetItemMessagesDatasetsRequestContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesUserMessage$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesUserMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => CreateDatasetItem24$inboundSchema),
-      ]),
-    ),
-  ]),
-});
 /** @internal */
 export type CreateDatasetItemMessagesUserMessage$Outbound = {
   role: "user";
@@ -1871,26 +1474,7 @@ export function createDatasetItemMessagesUserMessageToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesUserMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesUserMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsContent$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesDatasetsContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type CreateDatasetItemMessagesDatasetsContent$Outbound =
   | string
@@ -1916,35 +1500,7 @@ export function createDatasetItemMessagesDatasetsContentToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesDatasetsContentFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemMessagesDatasetsContent,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesDatasetsContent$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateDatasetItemMessagesDatasetsContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesDeveloperMessage$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesDeveloperMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type CreateDatasetItemMessagesDeveloperMessage$Outbound = {
   role: "developer";
@@ -1977,31 +1533,7 @@ export function createDatasetItemMessagesDeveloperMessageToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesDeveloperMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateDatasetItemMessagesDeveloperMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesDeveloperMessage$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateDatasetItemMessagesDeveloperMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesContent$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
 /** @internal */
 export type CreateDatasetItemMessagesContent$Outbound =
   | string
@@ -2026,29 +1558,7 @@ export function createDatasetItemMessagesContentToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesContentFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemMessagesContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesContent' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessagesSystemMessage$inboundSchema: z.ZodType<
-  CreateDatasetItemMessagesSystemMessage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
 /** @internal */
 export type CreateDatasetItemMessagesSystemMessage$Outbound = {
   role: "system";
@@ -2080,29 +1590,7 @@ export function createDatasetItemMessagesSystemMessageToJSON(
     ),
   );
 }
-export function createDatasetItemMessagesSystemMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessagesSystemMessage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateDatasetItemMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessagesSystemMessage' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemMessages$inboundSchema: z.ZodType<
-  CreateDatasetItemMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => CreateDatasetItemMessagesSystemMessage$inboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesDeveloperMessage$inboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesUserMessage$inboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesAssistantMessage$inboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesToolMessage$inboundSchema),
-]);
 /** @internal */
 export type CreateDatasetItemMessages$Outbound =
   | CreateDatasetItemMessagesSystemMessage$Outbound
@@ -2131,38 +1619,7 @@ export function createDatasetItemMessagesToJSON(
     CreateDatasetItemMessages$outboundSchema.parse(createDatasetItemMessages),
   );
 }
-export function createDatasetItemMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemMessages' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemRequestBody$inboundSchema: z.ZodType<
-  CreateDatasetItemRequestBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  inputs: z.record(z.any()).optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => CreateDatasetItemMessagesSystemMessage$inboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesDeveloperMessage$inboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesUserMessage$inboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesAssistantMessage$inboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  expected_output: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expected_output": "expectedOutput",
-  });
-});
 /** @internal */
 export type CreateDatasetItemRequestBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
@@ -2210,31 +1667,7 @@ export function createDatasetItemRequestBodyToJSON(
     ),
   );
 }
-export function createDatasetItemRequestBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemRequestBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemRequestBody' from JSON`,
-  );
-}
 
-/** @internal */
-export const CreateDatasetItemRequest$inboundSchema: z.ZodType<
-  CreateDatasetItemRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  dataset_id: z.string(),
-  RequestBody: z.array(z.lazy(() => CreateDatasetItemRequestBody$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "dataset_id": "datasetId",
-    "RequestBody": "requestBody",
-  });
-});
 /** @internal */
 export type CreateDatasetItemRequest$Outbound = {
   dataset_id: string;
@@ -2265,15 +1698,6 @@ export function createDatasetItemRequestToJSON(
     CreateDatasetItemRequest$outboundSchema.parse(createDatasetItemRequest),
   );
 }
-export function createDatasetItemRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateDatasetItemRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateDatasetItemRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemRequest' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateDatasetItemContentDatasetsResponse200ApplicationJson2$inboundSchema:
@@ -2282,27 +1706,7 @@ export const CreateDatasetItemContentDatasetsResponse200ApplicationJson2$inbound
     z.ZodTypeDef,
     unknown
   > = components.TextContentPartSchema$inboundSchema;
-/** @internal */
-export type CreateDatasetItemContentDatasetsResponse200ApplicationJson2$Outbound =
-  components.TextContentPartSchema$Outbound;
 
-/** @internal */
-export const CreateDatasetItemContentDatasetsResponse200ApplicationJson2$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemContentDatasetsResponse200ApplicationJson2$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemContentDatasetsResponse200ApplicationJson2
-  > = components.TextContentPartSchema$outboundSchema;
-
-export function createDatasetItemContentDatasetsResponse200ApplicationJSON2ToJSON(
-  createDatasetItemContentDatasetsResponse200ApplicationJson2:
-    CreateDatasetItemContentDatasetsResponse200ApplicationJson2,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemContentDatasetsResponse200ApplicationJson2$outboundSchema
-      .parse(createDatasetItemContentDatasetsResponse200ApplicationJson2),
-  );
-}
 export function createDatasetItemContentDatasetsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2328,33 +1732,7 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponse
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]);
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5ContentToJSON(
-  createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content:
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content$outboundSchema
-      .parse(
-        createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Content,
-      ),
-  );
-}
 export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2374,20 +1752,12 @@ export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONRespo
 export const CreateDatasetItemMessagesDatasetsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Type> = z
     .nativeEnum(CreateDatasetItemMessagesDatasetsResponse200Type);
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Type> =
-    CreateDatasetItemMessagesDatasetsResponse200Type$inboundSchema;
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsTtl$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsTtl> = z.nativeEnum(
     CreateDatasetItemMessagesDatasetsTtl,
   );
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsTtl> =
-    CreateDatasetItemMessagesDatasetsTtl$inboundSchema;
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsCacheControl$inboundSchema:
@@ -2399,33 +1769,7 @@ export const CreateDatasetItemMessagesDatasetsCacheControl$inboundSchema:
     type: CreateDatasetItemMessagesDatasetsResponse200Type$inboundSchema,
     ttl: CreateDatasetItemMessagesDatasetsTtl$inboundSchema.default("5m"),
   });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsCacheControl$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsCacheControl$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsCacheControl
-  > = z.object({
-    type: CreateDatasetItemMessagesDatasetsResponse200Type$outboundSchema,
-    ttl: CreateDatasetItemMessagesDatasetsTtl$outboundSchema.default("5m"),
-  });
-
-export function createDatasetItemMessagesDatasetsCacheControlToJSON(
-  createDatasetItemMessagesDatasetsCacheControl:
-    CreateDatasetItemMessagesDatasetsCacheControl,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsCacheControl$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsCacheControl,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2464,49 +1808,7 @@ export const CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema:
       "cache_control": "cacheControl",
     });
   });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsToolMessage$Outbound = {
-  role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string | null;
-  cache_control?:
-    | CreateDatasetItemMessagesDatasetsCacheControl$Outbound
-    | undefined;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsToolMessage$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsToolMessage
-  > = z.object({
-    role: z.literal("tool"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
-    ]),
-    toolCallId: z.nullable(z.string()),
-    cacheControl: z.lazy(() =>
-      CreateDatasetItemMessagesDatasetsCacheControl$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolCallId: "tool_call_id",
-      cacheControl: "cache_control",
-    });
-  });
-
-export function createDatasetItemMessagesDatasetsToolMessageToJSON(
-  createDatasetItemMessagesDatasetsToolMessage:
-    CreateDatasetItemMessagesDatasetsToolMessage,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsToolMessage,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsToolMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2537,38 +1839,7 @@ export const CreateDatasetItemContentDatasetsResponse2002$inboundSchema:
     components.ReasoningPartSchema$inboundSchema,
     components.RedactedReasoningPartSchema$inboundSchema,
   ]);
-/** @internal */
-export type CreateDatasetItemContentDatasetsResponse2002$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
 
-/** @internal */
-export const CreateDatasetItemContentDatasetsResponse2002$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemContentDatasetsResponse2002$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemContentDatasetsResponse2002
-  > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$outboundSchema,
-    components.ReasoningPartSchema$outboundSchema,
-    components.RedactedReasoningPartSchema$outboundSchema,
-  ]);
-
-export function createDatasetItemContentDatasetsResponse2002ToJSON(
-  createDatasetItemContentDatasetsResponse2002:
-    CreateDatasetItemContentDatasetsResponse2002,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemContentDatasetsResponse2002$outboundSchema.parse(
-      createDatasetItemContentDatasetsResponse2002,
-    ),
-  );
-}
 export function createDatasetItemContentDatasetsResponse2002FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2604,47 +1875,7 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponse
       ]),
     ),
   ]);
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.RefusalPartSchema$Outbound
-    | components.ReasoningPartSchema$Outbound
-    | components.RedactedReasoningPartSchema$Outbound
-  >;
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
-
-export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContentToJSON(
-  createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent:
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent$outboundSchema
-      .parse(
-        createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContent,
-      ),
-  );
-}
 export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2668,30 +1899,7 @@ export const CreateDatasetItemMessagesDatasetsAudio$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
 });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsAudio$Outbound = {
-  id: string;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsAudio$outboundSchema: z.ZodType<
-  CreateDatasetItemMessagesDatasetsAudio$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetItemMessagesDatasetsAudio
-> = z.object({
-  id: z.string(),
-});
-
-export function createDatasetItemMessagesDatasetsAudioToJSON(
-  createDatasetItemMessagesDatasetsAudio:
-    CreateDatasetItemMessagesDatasetsAudio,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsAudio$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsAudio,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsAudioFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemMessagesDatasetsAudio, SDKValidationError> {
@@ -2707,10 +1915,6 @@ export function createDatasetItemMessagesDatasetsAudioFromJSON(
 export const CreateDatasetItemMessagesDatasetsResponseType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseType> = z
     .nativeEnum(CreateDatasetItemMessagesDatasetsResponseType);
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseType> =
-    CreateDatasetItemMessagesDatasetsResponseType$inboundSchema;
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsFunction$inboundSchema: z.ZodType<
@@ -2721,33 +1925,7 @@ export const CreateDatasetItemMessagesDatasetsFunction$inboundSchema: z.ZodType<
   name: z.string().optional(),
   arguments: z.string().optional(),
 });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsFunction$Outbound = {
-  name?: string | undefined;
-  arguments?: string | undefined;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsFunction$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsFunction$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsFunction
-  > = z.object({
-    name: z.string().optional(),
-    arguments: z.string().optional(),
-  });
-
-export function createDatasetItemMessagesDatasetsFunctionToJSON(
-  createDatasetItemMessagesDatasetsFunction:
-    CreateDatasetItemMessagesDatasetsFunction,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsFunction$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsFunction,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsFunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2779,43 +1957,7 @@ export const CreateDatasetItemMessagesDatasetsToolCalls$inboundSchema:
         "thought_signature": "thoughtSignature",
       });
     });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: CreateDatasetItemMessagesDatasetsFunction$Outbound;
-  thought_signature?: string | undefined;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsToolCalls$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsToolCalls$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsToolCalls
-  > = z.object({
-    id: z.string(),
-    type: CreateDatasetItemMessagesDatasetsResponseType$outboundSchema,
-    function: z.lazy(() =>
-      CreateDatasetItemMessagesDatasetsFunction$outboundSchema
-    ),
-    thoughtSignature: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      thoughtSignature: "thought_signature",
-    });
-  });
-
-export function createDatasetItemMessagesDatasetsToolCallsToJSON(
-  createDatasetItemMessagesDatasetsToolCalls:
-    CreateDatasetItemMessagesDatasetsToolCalls,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsToolCalls$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsToolCalls,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2868,74 +2010,7 @@ export const CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema:
       "tool_calls": "toolCalls",
     });
   });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound = {
-  content?:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.RefusalPartSchema$Outbound
-      | components.ReasoningPartSchema$Outbound
-      | components.RedactedReasoningPartSchema$Outbound
-    >
-    | null
-    | undefined;
-  refusal?: string | null | undefined;
-  role: "assistant";
-  name?: string | undefined;
-  audio?: CreateDatasetItemMessagesDatasetsAudio$Outbound | null | undefined;
-  tool_calls?:
-    | Array<CreateDatasetItemMessagesDatasetsToolCalls$Outbound>
-    | undefined;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsAssistantMessage
-  > = z.object({
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$outboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$outboundSchema,
-            components.ReasoningPartSchema$outboundSchema,
-            components.RedactedReasoningPartSchema$outboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => CreateDatasetItemMessagesDatasetsAudio$outboundSchema),
-    ).optional(),
-    toolCalls: z.array(
-      z.lazy(() => CreateDatasetItemMessagesDatasetsToolCalls$outboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolCalls: "tool_calls",
-    });
-  });
-
-export function createDatasetItemMessagesDatasetsAssistantMessageToJSON(
-  createDatasetItemMessagesDatasetsAssistantMessage:
-    CreateDatasetItemMessagesDatasetsAssistantMessage,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsAssistantMessage,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsAssistantMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -2956,19 +2031,11 @@ export function createDatasetItemMessagesDatasetsAssistantMessageFromJSON(
 export const CreateDatasetItem2DatasetsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> = z
     .nativeEnum(CreateDatasetItem2DatasetsResponse200Type);
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> =
-    CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
 
 /** @internal */
 export const CreateDatasetItem2DatasetsTtl$inboundSchema: z.ZodNativeEnum<
   typeof CreateDatasetItem2DatasetsTtl
 > = z.nativeEnum(CreateDatasetItem2DatasetsTtl);
-/** @internal */
-export const CreateDatasetItem2DatasetsTtl$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsTtl
-> = CreateDatasetItem2DatasetsTtl$inboundSchema;
 
 /** @internal */
 export const CreateDatasetItem2DatasetsCacheControl$inboundSchema: z.ZodType<
@@ -2979,32 +2046,7 @@ export const CreateDatasetItem2DatasetsCacheControl$inboundSchema: z.ZodType<
   type: CreateDatasetItem2DatasetsResponse200Type$inboundSchema,
   ttl: CreateDatasetItem2DatasetsTtl$inboundSchema.default("5m"),
 });
-/** @internal */
-export type CreateDatasetItem2DatasetsCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
 
-/** @internal */
-export const CreateDatasetItem2DatasetsCacheControl$outboundSchema: z.ZodType<
-  CreateDatasetItem2DatasetsCacheControl$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetItem2DatasetsCacheControl
-> = z.object({
-  type: CreateDatasetItem2DatasetsResponse200Type$outboundSchema,
-  ttl: CreateDatasetItem2DatasetsTtl$outboundSchema.default("5m"),
-});
-
-export function createDatasetItem2DatasetsCacheControlToJSON(
-  createDatasetItem2DatasetsCacheControl:
-    CreateDatasetItem2DatasetsCacheControl,
-): string {
-  return JSON.stringify(
-    CreateDatasetItem2DatasetsCacheControl$outboundSchema.parse(
-      createDatasetItem2DatasetsCacheControl,
-    ),
-  );
-}
 export function createDatasetItem2DatasetsCacheControlFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2DatasetsCacheControl, SDKValidationError> {
@@ -3032,39 +2074,7 @@ export const CreateDatasetItem2Datasets4$inboundSchema: z.ZodType<
     "cache_control": "cacheControl",
   });
 });
-/** @internal */
-export type CreateDatasetItem2Datasets4$Outbound = {
-  type: "file";
-  cache_control?: CreateDatasetItem2DatasetsCacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
-};
 
-/** @internal */
-export const CreateDatasetItem2Datasets4$outboundSchema: z.ZodType<
-  CreateDatasetItem2Datasets4$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetItem2Datasets4
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() =>
-    CreateDatasetItem2DatasetsCacheControl$outboundSchema
-  ).optional(),
-  file: components.FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
-
-export function createDatasetItem2Datasets4ToJSON(
-  createDatasetItem2Datasets4: CreateDatasetItem2Datasets4,
-): string {
-  return JSON.stringify(
-    CreateDatasetItem2Datasets4$outboundSchema.parse(
-      createDatasetItem2Datasets4,
-    ),
-  );
-}
 export function createDatasetItem2Datasets4FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItem2Datasets4, SDKValidationError> {
@@ -3088,38 +2098,7 @@ export const CreateDatasetItemContentDatasetsResponse2$inboundSchema: z.ZodType<
   components.AudioContentPartSchema$inboundSchema,
   z.lazy(() => CreateDatasetItem2Datasets4$inboundSchema),
 ]);
-/** @internal */
-export type CreateDatasetItemContentDatasetsResponse2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.ImageContentPartSchema$Outbound
-  | components.AudioContentPartSchema$Outbound
-  | CreateDatasetItem2Datasets4$Outbound;
 
-/** @internal */
-export const CreateDatasetItemContentDatasetsResponse2$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemContentDatasetsResponse2$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemContentDatasetsResponse2
-  > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.ImageContentPartSchema$outboundSchema,
-    components.AudioContentPartSchema$outboundSchema,
-    z.lazy(() => CreateDatasetItem2Datasets4$outboundSchema),
-  ]);
-
-export function createDatasetItemContentDatasetsResponse2ToJSON(
-  createDatasetItemContentDatasetsResponse2:
-    CreateDatasetItemContentDatasetsResponse2,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemContentDatasetsResponse2$outboundSchema.parse(
-      createDatasetItemContentDatasetsResponse2,
-    ),
-  );
-}
 export function createDatasetItemContentDatasetsResponse2FromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3155,47 +2134,7 @@ export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$
       ]),
     ),
   ]);
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.ImageContentPartSchema$Outbound
-    | components.AudioContentPartSchema$Outbound
-    | CreateDatasetItem2Datasets4$Outbound
-  >;
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => CreateDatasetItem2Datasets4$outboundSchema),
-      ]),
-    ),
-  ]);
-
-export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONContentToJSON(
-  createDatasetItemMessagesDatasetsResponse200ApplicationJSONContent:
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$outboundSchema
-      .parse(
-        createDatasetItemMessagesDatasetsResponse200ApplicationJSONContent,
-      ),
-  );
-}
 export function createDatasetItemMessagesDatasetsResponse200ApplicationJSONContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3234,54 +2173,7 @@ export const CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema:
       ),
     ]),
   });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsUserMessage$Outbound = {
-  role: "user";
-  name?: string | undefined;
-  content:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.ImageContentPartSchema$Outbound
-      | components.AudioContentPartSchema$Outbound
-      | CreateDatasetItem2Datasets4$Outbound
-    >;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsUserMessage$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsUserMessage
-  > = z.object({
-    role: z.literal("user"),
-    name: z.string().optional(),
-    content: z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.ImageContentPartSchema$outboundSchema,
-          components.AudioContentPartSchema$outboundSchema,
-          z.lazy(() => CreateDatasetItem2Datasets4$outboundSchema),
-        ]),
-      ),
-    ]),
-  });
-
-export function createDatasetItemMessagesDatasetsUserMessageToJSON(
-  createDatasetItemMessagesDatasetsUserMessage:
-    CreateDatasetItemMessagesDatasetsUserMessage,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsUserMessage,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsUserMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3308,32 +2200,7 @@ export const CreateDatasetItemMessagesDatasetsResponse200Content$inboundSchema:
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]);
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsResponse200Content$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200Content$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsResponse200Content$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsResponse200Content
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function createDatasetItemMessagesDatasetsResponse200ContentToJSON(
-  createDatasetItemMessagesDatasetsResponse200Content:
-    CreateDatasetItemMessagesDatasetsResponse200Content,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsResponse200Content$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsResponse200Content,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsResponse200ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3364,38 +2231,7 @@ export const CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema:
     ]),
     name: z.string().optional(),
   });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound = {
-  role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsDeveloperMessage
-  > = z.object({
-    role: z.literal("developer"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
-
-export function createDatasetItemMessagesDatasetsDeveloperMessageToJSON(
-  createDatasetItemMessagesDatasetsDeveloperMessage:
-    CreateDatasetItemMessagesDatasetsDeveloperMessage,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsDeveloperMessage,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsDeveloperMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3422,32 +2258,7 @@ export const CreateDatasetItemMessagesDatasetsResponseContent$inboundSchema:
     z.string(),
     z.array(components.TextContentPartSchema$inboundSchema),
   ]);
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsResponseContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponseContent$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsResponseContent$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsResponseContent
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
-
-export function createDatasetItemMessagesDatasetsResponseContentToJSON(
-  createDatasetItemMessagesDatasetsResponseContent:
-    CreateDatasetItemMessagesDatasetsResponseContent,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsResponseContent$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsResponseContent,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsResponseContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3478,38 +2289,7 @@ export const CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema:
     ]),
     name: z.string().optional(),
   });
-/** @internal */
-export type CreateDatasetItemMessagesDatasetsSystemMessage$Outbound = {
-  role: "system";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
 
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema:
-  z.ZodType<
-    CreateDatasetItemMessagesDatasetsSystemMessage$Outbound,
-    z.ZodTypeDef,
-    CreateDatasetItemMessagesDatasetsSystemMessage
-  > = z.object({
-    role: z.literal("system"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
-
-export function createDatasetItemMessagesDatasetsSystemMessageToJSON(
-  createDatasetItemMessagesDatasetsSystemMessage:
-    CreateDatasetItemMessagesDatasetsSystemMessage,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema.parse(
-      createDatasetItemMessagesDatasetsSystemMessage,
-    ),
-  );
-}
 export function createDatasetItemMessagesDatasetsSystemMessageFromJSON(
   jsonString: string,
 ): SafeParseResult<
@@ -3538,40 +2318,7 @@ export const CreateDatasetItemDatasetsMessages$inboundSchema: z.ZodType<
   z.lazy(() => CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema),
 ]);
-/** @internal */
-export type CreateDatasetItemDatasetsMessages$Outbound =
-  | CreateDatasetItemMessagesDatasetsSystemMessage$Outbound
-  | CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound
-  | CreateDatasetItemMessagesDatasetsUserMessage$Outbound
-  | CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound
-  | CreateDatasetItemMessagesDatasetsToolMessage$Outbound;
 
-/** @internal */
-export const CreateDatasetItemDatasetsMessages$outboundSchema: z.ZodType<
-  CreateDatasetItemDatasetsMessages$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetItemDatasetsMessages
-> = z.union([
-  z.lazy(() => CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema),
-  z.lazy(() =>
-    CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema
-  ),
-  z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema),
-  z.lazy(() =>
-    CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema
-  ),
-  z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema),
-]);
-
-export function createDatasetItemDatasetsMessagesToJSON(
-  createDatasetItemDatasetsMessages: CreateDatasetItemDatasetsMessages,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemDatasetsMessages$outboundSchema.parse(
-      createDatasetItemDatasetsMessages,
-    ),
-  );
-}
 export function createDatasetItemDatasetsMessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemDatasetsMessages, SDKValidationError> {
@@ -3586,19 +2333,11 @@ export function createDatasetItemDatasetsMessagesFromJSON(
 export const CreateDatasetItemEvaluationsEvaluationType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> = z
     .nativeEnum(CreateDatasetItemEvaluationsEvaluationType);
-/** @internal */
-export const CreateDatasetItemEvaluationsEvaluationType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> =
-    CreateDatasetItemEvaluationsEvaluationType$inboundSchema;
 
 /** @internal */
-export const CreateDatasetItemEvaluationsSource$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemEvaluationsSource
-> = z.nativeEnum(CreateDatasetItemEvaluationsSource);
-/** @internal */
-export const CreateDatasetItemEvaluationsSource$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemEvaluationsSource
-> = CreateDatasetItemEvaluationsSource$inboundSchema;
+export const CreateDatasetItemEvaluationsDatasetsSource$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsSource> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsSource);
 
 /** @internal */
 export const Evaluations3$inboundSchema: z.ZodType<
@@ -3609,10 +2348,12 @@ export const Evaluations3$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type: CreateDatasetItemEvaluationsEvaluationType$inboundSchema,
   human_review_id: z.string(),
-  source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
+  source: CreateDatasetItemEvaluationsDatasetsSource$inboundSchema.default(
+    "orq",
+  ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:22.538Z",
+    "2026-01-23T11:14:15.797Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -3624,45 +2365,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-/** @internal */
-export type Evaluations3$Outbound = {
-  id: string;
-  evaluation_type: string;
-  human_review_id: string;
-  source: string;
-  reviewed_by_id: string;
-  reviewed_at: string;
-  type: "string_array";
-  values: Array<string>;
-};
 
-/** @internal */
-export const Evaluations3$outboundSchema: z.ZodType<
-  Evaluations3$Outbound,
-  z.ZodTypeDef,
-  Evaluations3
-> = z.object({
-  id: z.string(),
-  evaluationType: CreateDatasetItemEvaluationsEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
-  source: CreateDatasetItemEvaluationsSource$outboundSchema.default("orq"),
-  reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-19T14:27:22.538Z"))
-    .transform(v => v.toISOString()),
-  type: z.literal("string_array"),
-  values: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    evaluationType: "evaluation_type",
-    humanReviewId: "human_review_id",
-    reviewedById: "reviewed_by_id",
-    reviewedAt: "reviewed_at",
-  });
-});
-
-export function evaluations3ToJSON(evaluations3: Evaluations3): string {
-  return JSON.stringify(Evaluations3$outboundSchema.parse(evaluations3));
-}
 export function evaluations3FromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations3, SDKValidationError> {
@@ -3677,19 +2380,11 @@ export function evaluations3FromJSON(
 export const EvaluationsEvaluationType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationsEvaluationType
 > = z.nativeEnum(EvaluationsEvaluationType);
-/** @internal */
-export const EvaluationsEvaluationType$outboundSchema: z.ZodNativeEnum<
-  typeof EvaluationsEvaluationType
-> = EvaluationsEvaluationType$inboundSchema;
 
 /** @internal */
-export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
-  typeof EvaluationsSource
-> = z.nativeEnum(EvaluationsSource);
-/** @internal */
-export const EvaluationsSource$outboundSchema: z.ZodNativeEnum<
-  typeof EvaluationsSource
-> = EvaluationsSource$inboundSchema;
+export const CreateDatasetItemEvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsSource
+> = z.nativeEnum(CreateDatasetItemEvaluationsSource);
 
 /** @internal */
 export const Evaluations2$inboundSchema: z.ZodType<
@@ -3700,10 +2395,10 @@ export const Evaluations2$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type: EvaluationsEvaluationType$inboundSchema,
   human_review_id: z.string(),
-  source: EvaluationsSource$inboundSchema.default("orq"),
+  source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:22.537Z",
+    "2026-01-23T11:14:15.796Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3715,45 +2410,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-/** @internal */
-export type Evaluations2$Outbound = {
-  id: string;
-  evaluation_type: string;
-  human_review_id: string;
-  source: string;
-  reviewed_by_id: string;
-  reviewed_at: string;
-  type: "number";
-  value: number;
-};
 
-/** @internal */
-export const Evaluations2$outboundSchema: z.ZodType<
-  Evaluations2$Outbound,
-  z.ZodTypeDef,
-  Evaluations2
-> = z.object({
-  id: z.string(),
-  evaluationType: EvaluationsEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
-  source: EvaluationsSource$outboundSchema.default("orq"),
-  reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-19T14:27:22.537Z"))
-    .transform(v => v.toISOString()),
-  type: z.literal("number"),
-  value: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    evaluationType: "evaluation_type",
-    humanReviewId: "human_review_id",
-    reviewedById: "reviewed_by_id",
-    reviewedAt: "reviewed_at",
-  });
-});
-
-export function evaluations2ToJSON(evaluations2: Evaluations2): string {
-  return JSON.stringify(Evaluations2$outboundSchema.parse(evaluations2));
-}
 export function evaluations2FromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations2, SDKValidationError> {
@@ -3768,17 +2425,11 @@ export function evaluations2FromJSON(
 export const EvaluationType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationType
 > = z.nativeEnum(EvaluationType);
-/** @internal */
-export const EvaluationType$outboundSchema: z.ZodNativeEnum<
-  typeof EvaluationType
-> = EvaluationType$inboundSchema;
 
 /** @internal */
-export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
-  .nativeEnum(Source);
-/** @internal */
-export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
-  Source$inboundSchema;
+export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsSource
+> = z.nativeEnum(EvaluationsSource);
 
 /** @internal */
 export const Evaluations1$inboundSchema: z.ZodType<
@@ -3789,10 +2440,10 @@ export const Evaluations1$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type: EvaluationType$inboundSchema,
   human_review_id: z.string(),
-  source: Source$inboundSchema.default("orq"),
+  source: EvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:22.537Z",
+    "2026-01-23T11:14:15.795Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3804,45 +2455,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
     "reviewed_at": "reviewedAt",
   });
 });
-/** @internal */
-export type Evaluations1$Outbound = {
-  id: string;
-  evaluation_type: string;
-  human_review_id: string;
-  source: string;
-  reviewed_by_id: string;
-  reviewed_at: string;
-  type: "string";
-  value: string;
-};
 
-/** @internal */
-export const Evaluations1$outboundSchema: z.ZodType<
-  Evaluations1$Outbound,
-  z.ZodTypeDef,
-  Evaluations1
-> = z.object({
-  id: z.string(),
-  evaluationType: EvaluationType$outboundSchema,
-  humanReviewId: z.string(),
-  source: Source$outboundSchema.default("orq"),
-  reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2026-01-19T14:27:22.537Z"))
-    .transform(v => v.toISOString()),
-  type: z.literal("string"),
-  value: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    evaluationType: "evaluation_type",
-    humanReviewId: "human_review_id",
-    reviewedById: "reviewed_by_id",
-    reviewedAt: "reviewed_at",
-  });
-});
-
-export function evaluations1ToJSON(evaluations1: Evaluations1): string {
-  return JSON.stringify(Evaluations1$outboundSchema.parse(evaluations1));
-}
 export function evaluations1FromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations1, SDKValidationError> {
@@ -3863,26 +2476,7 @@ export const Evaluations$inboundSchema: z.ZodType<
   z.lazy(() => Evaluations2$inboundSchema),
   z.lazy(() => Evaluations3$inboundSchema),
 ]);
-/** @internal */
-export type Evaluations$Outbound =
-  | Evaluations1$Outbound
-  | Evaluations2$Outbound
-  | Evaluations3$Outbound;
 
-/** @internal */
-export const Evaluations$outboundSchema: z.ZodType<
-  Evaluations$Outbound,
-  z.ZodTypeDef,
-  Evaluations
-> = z.union([
-  z.lazy(() => Evaluations1$outboundSchema),
-  z.lazy(() => Evaluations2$outboundSchema),
-  z.lazy(() => Evaluations3$outboundSchema),
-]);
-
-export function evaluationsToJSON(evaluations: Evaluations): string {
-  return JSON.stringify(Evaluations$outboundSchema.parse(evaluations));
-}
 export function evaluationsFromJSON(
   jsonString: string,
 ): SafeParseResult<Evaluations, SDKValidationError> {
@@ -3932,7 +2526,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-19T14:27:09.825Z",
+    "2026-01-23T11:14:01.166Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -3945,94 +2539,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
   });
 });
-/** @internal */
-export type CreateDatasetItemResponseBody$Outbound = {
-  _id: string;
-  workspace_id: string;
-  inputs?: { [k: string]: any } | undefined;
-  messages?:
-    | Array<
-      | CreateDatasetItemMessagesDatasetsSystemMessage$Outbound
-      | CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound
-      | CreateDatasetItemMessagesDatasetsUserMessage$Outbound
-      | CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound
-      | CreateDatasetItemMessagesDatasetsToolMessage$Outbound
-    >
-    | undefined;
-  expected_output?: string | undefined;
-  evaluations?:
-    | Array<
-      Evaluations1$Outbound | Evaluations2$Outbound | Evaluations3$Outbound
-    >
-    | undefined;
-  dataset_id: string;
-  snapshot_version?: string | undefined;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
-  created?: string | undefined;
-  updated: string;
-};
 
-/** @internal */
-export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
-  CreateDatasetItemResponseBody$Outbound,
-  z.ZodTypeDef,
-  CreateDatasetItemResponseBody
-> = z.object({
-  id: z.string(),
-  workspaceId: z.string(),
-  inputs: z.record(z.any()).optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() =>
-        CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema
-      ),
-      z.lazy(() =>
-        CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema
-      ),
-      z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema),
-      z.lazy(() =>
-        CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema
-      ),
-      z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  expectedOutput: z.string().optional(),
-  evaluations: z.array(
-    z.union([
-      z.lazy(() => Evaluations1$outboundSchema),
-      z.lazy(() => Evaluations2$outboundSchema),
-      z.lazy(() => Evaluations3$outboundSchema),
-    ]),
-  ).optional(),
-  datasetId: z.string(),
-  snapshotVersion: z.string().optional(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
-  created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2026-01-19T14:27:09.825Z"))
-    .transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    workspaceId: "workspace_id",
-    expectedOutput: "expected_output",
-    datasetId: "dataset_id",
-    snapshotVersion: "snapshot_version",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
-
-export function createDatasetItemResponseBodyToJSON(
-  createDatasetItemResponseBody: CreateDatasetItemResponseBody,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemResponseBody$outboundSchema.parse(
-      createDatasetItemResponseBody,
-    ),
-  );
-}
 export function createDatasetItemResponseBodyFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateDatasetItemResponseBody, SDKValidationError> {
