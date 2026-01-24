@@ -1,6 +1,6 @@
 # CreateContactRequestBody
 
-Contact profile information
+Update user information payload
 
 ## Example Usage
 

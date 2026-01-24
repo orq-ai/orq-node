@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Contact profile information
+ * Update user information payload
  */
 export type CreateContactRequestBody = {
   /**
@@ -39,7 +39,7 @@ export type CreateContactRequestBody = {
 };
 
 /**
- * Created Contact
+ * Successful operation
  */
 export type CreateContactResponseBody = {
   /**
@@ -50,10 +50,6 @@ export type CreateContactResponseBody = {
    * Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user.
    */
   externalId: string;
-  /**
-   * Unique identifier for the workspace to which the contact belongs
-   */
-  workspaceId: string;
   /**
    * Display name or nickname of the contact user. This is typically shown in user interfaces.
    */
@@ -130,7 +126,6 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   external_id: z.string(),
-  workspace_id: z.string(),
   display_name: z.nullable(z.string()).optional(),
   email: z.nullable(z.string()).optional(),
   avatar_url: z.nullable(z.string()).optional(),
@@ -139,13 +134,12 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-23T09:49:01.865Z",
+    "2026-01-24T23:05:31.950Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "external_id": "externalId",
-    "workspace_id": "workspaceId",
     "display_name": "displayName",
     "avatar_url": "avatarUrl",
   });

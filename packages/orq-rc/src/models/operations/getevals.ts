@@ -24,10 +24,10 @@ export type GetEvalsRequest = {
   endingBefore?: string | undefined;
 };
 
-export const GetEvalsObject = {
+export const ObjectT = {
   List: "list",
 } as const;
-export type GetEvalsObject = ClosedEnum<typeof GetEvalsObject>;
+export type ObjectT = ClosedEnum<typeof ObjectT>;
 
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator = {
   Eq: "eq",
@@ -588,7 +588,7 @@ export type DataLLM = {
   model: string;
 };
 
-export type GetEvalsData =
+export type Data =
   | DataLLM
   | DataJSON
   | DataHTTP
@@ -601,7 +601,7 @@ export type GetEvalsData =
  * Returns a list of evals
  */
 export type GetEvalsResponseBody = {
-  object: GetEvalsObject;
+  object: ObjectT;
   data: Array<
     | DataLLM
     | DataJSON
@@ -644,9 +644,8 @@ export function getEvalsRequestToJSON(
 }
 
 /** @internal */
-export const GetEvalsObject$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsObject
-> = z.nativeEnum(GetEvalsObject);
+export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
+  .nativeEnum(ObjectT);
 
 /** @internal */
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema:
@@ -760,8 +759,8 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-01-23T09:49:04.371Z"),
-  updated: z.string().default("2026-01-23T09:49:04.371Z"),
+  created: z.string().default("2026-01-24T23:05:33.746Z"),
+  updated: z.string().default("2026-01-24T23:05:33.746Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
@@ -902,8 +901,8 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-01-23T09:49:04.371Z"),
-  updated: z.string().default("2026-01-23T09:49:04.371Z"),
+  created: z.string().default("2026-01-24T23:05:33.746Z"),
+  updated: z.string().default("2026-01-24T23:05:33.746Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
@@ -1703,8 +1702,8 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-01-23T09:49:04.371Z"),
-  updated: z.string().default("2026-01-23T09:49:04.371Z"),
+  created: z.string().default("2026-01-24T23:05:33.746Z"),
+  updated: z.string().default("2026-01-24T23:05:33.746Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
@@ -1852,8 +1851,8 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-01-23T09:49:04.371Z"),
-  updated: z.string().default("2026-01-23T09:49:04.371Z"),
+  created: z.string().default("2026-01-24T23:05:33.746Z"),
+  updated: z.string().default("2026-01-24T23:05:33.746Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
@@ -1968,8 +1967,8 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-01-23T09:49:04.371Z"),
-  updated: z.string().default("2026-01-23T09:49:04.371Z"),
+  created: z.string().default("2026-01-24T23:05:33.746Z"),
+  updated: z.string().default("2026-01-24T23:05:33.746Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
@@ -2103,8 +2102,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-01-23T09:49:04.371Z"),
-  updated: z.string().default("2026-01-23T09:49:04.371Z"),
+  created: z.string().default("2026-01-24T23:05:33.746Z"),
+  updated: z.string().default("2026-01-24T23:05:33.746Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema
@@ -2242,8 +2241,8 @@ export const DataLLM$inboundSchema: z.ZodType<DataLLM, z.ZodTypeDef, unknown> =
   z.object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-01-23T09:49:04.371Z"),
-    updated: z.string().default("2026-01-23T09:49:04.371Z"),
+    created: z.string().default("2026-01-24T23:05:33.746Z"),
+    updated: z.string().default("2026-01-24T23:05:33.746Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
@@ -2274,27 +2273,24 @@ export function dataLLMFromJSON(
 }
 
 /** @internal */
-export const GetEvalsData$inboundSchema: z.ZodType<
-  GetEvalsData,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => DataLLM$inboundSchema),
-  z.lazy(() => DataJSON$inboundSchema),
-  z.lazy(() => DataHTTP$inboundSchema),
-  z.lazy(() => DataPython$inboundSchema),
-  z.lazy(() => DataFunction$inboundSchema),
-  z.lazy(() => DataRagas$inboundSchema),
-  z.lazy(() => DataTypescript$inboundSchema),
-]);
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
+  .union([
+    z.lazy(() => DataLLM$inboundSchema),
+    z.lazy(() => DataJSON$inboundSchema),
+    z.lazy(() => DataHTTP$inboundSchema),
+    z.lazy(() => DataPython$inboundSchema),
+    z.lazy(() => DataFunction$inboundSchema),
+    z.lazy(() => DataRagas$inboundSchema),
+    z.lazy(() => DataTypescript$inboundSchema),
+  ]);
 
-export function getEvalsDataFromJSON(
+export function dataFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalsData, SDKValidationError> {
+): SafeParseResult<Data, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalsData' from JSON`,
+    (x) => Data$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data' from JSON`,
   );
 }
 
@@ -2304,7 +2300,7 @@ export const GetEvalsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: GetEvalsObject$inboundSchema,
+  object: ObjectT$inboundSchema,
   data: z.array(
     z.union([
       z.lazy(() => DataLLM$inboundSchema),

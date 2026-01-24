@@ -65,38 +65,6 @@ export type CreateCompletionPrompt = {
 };
 
 /**
- * @deprecated Use identity instead. Information about the contact making the request.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
- */
-export type CreateCompletionContact = {
-  /**
-   * Unique identifier for the contact
-   */
-  id: string;
-  /**
-   * Display name of the contact
-   */
-  displayName?: string | undefined;
-  /**
-   * Email address of the contact
-   */
-  email?: string | undefined;
-  /**
-   * A hash of key/value pairs containing any other data about the contact
-   */
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  /**
-   * URL to the contact's avatar or logo
-   */
-  logoUrl?: string | undefined;
-  /**
-   * A list of tags associated with the contact
-   */
-  tags?: Array<string> | undefined;
-};
-
-/**
  * Thread information to group related requests
  */
 export type CreateCompletionThread = {
@@ -618,8 +586,13 @@ export type CreateCompletionOrq = {
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  identity?: components.PublicContact | undefined;
-  contact?: CreateCompletionContact | undefined;
+  identity?: components.PublicIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  contact?: components.PublicContact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -1024,43 +997,6 @@ export function createCompletionPromptToJSON(
 ): string {
   return JSON.stringify(
     CreateCompletionPrompt$outboundSchema.parse(createCompletionPrompt),
-  );
-}
-
-/** @internal */
-export type CreateCompletionContact$Outbound = {
-  id: string;
-  display_name?: string | undefined;
-  email?: string | undefined;
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  logo_url?: string | undefined;
-  tags?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CreateCompletionContact$outboundSchema: z.ZodType<
-  CreateCompletionContact$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
-
-export function createCompletionContactToJSON(
-  createCompletionContact: CreateCompletionContact,
-): string {
-  return JSON.stringify(
-    CreateCompletionContact$outboundSchema.parse(createCompletionContact),
   );
 }
 
@@ -2602,8 +2538,8 @@ export type CreateCompletionOrq$Outbound = {
   retry?: CreateCompletionRetry$Outbound | undefined;
   fallbacks?: Array<CreateCompletionFallbacks$Outbound> | undefined;
   prompt?: CreateCompletionPrompt$Outbound | undefined;
-  identity?: components.PublicContact$Outbound | undefined;
-  contact?: CreateCompletionContact$Outbound | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
   thread?: CreateCompletionThread$Outbound | undefined;
   inputs?:
     | { [k: string]: any }
@@ -2626,8 +2562,8 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
   fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))
     .optional(),
   prompt: z.lazy(() => CreateCompletionPrompt$outboundSchema).optional(),
-  identity: components.PublicContact$outboundSchema.optional(),
-  contact: z.lazy(() => CreateCompletionContact$outboundSchema).optional(),
+  identity: components.PublicIdentity$outboundSchema.optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
   thread: z.lazy(() => CreateCompletionThread$outboundSchema).optional(),
   inputs: z.union([
     z.record(z.any()),

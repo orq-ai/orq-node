@@ -798,38 +798,6 @@ export type Prompt = {
 };
 
 /**
- * @deprecated Use identity instead. Information about the contact making the request.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
- */
-export type CreateChatCompletionContact = {
-  /**
-   * Unique identifier for the contact
-   */
-  id: string;
-  /**
-   * Display name of the contact
-   */
-  displayName?: string | undefined;
-  /**
-   * Email address of the contact
-   */
-  email?: string | undefined;
-  /**
-   * A hash of key/value pairs containing any other data about the contact
-   */
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  /**
-   * URL to the contact's avatar or logo
-   */
-  logoUrl?: string | undefined;
-  /**
-   * A list of tags associated with the contact
-   */
-  tags?: Array<string> | undefined;
-};
-
-/**
  * Thread information to group related requests
  */
 export type CreateChatCompletionThread = {
@@ -1394,8 +1362,13 @@ export type Orq = {
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  identity?: components.PublicContact | undefined;
-  contact?: CreateChatCompletionContact | undefined;
+  identity?: components.PublicIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  contact?: components.PublicContact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -3635,45 +3608,6 @@ export function promptToJSON(prompt: Prompt): string {
 }
 
 /** @internal */
-export type CreateChatCompletionContact$Outbound = {
-  id: string;
-  display_name?: string | undefined;
-  email?: string | undefined;
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  logo_url?: string | undefined;
-  tags?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CreateChatCompletionContact$outboundSchema: z.ZodType<
-  CreateChatCompletionContact$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
-
-export function createChatCompletionContactToJSON(
-  createChatCompletionContact: CreateChatCompletionContact,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionContact$outboundSchema.parse(
-      createChatCompletionContact,
-    ),
-  );
-}
-
-/** @internal */
 export type CreateChatCompletionThread$Outbound = {
   id: string;
   tags?: Array<string> | undefined;
@@ -5261,8 +5195,8 @@ export type Orq$Outbound = {
     | Array<CreateChatCompletionRouterChatCompletionsFallbacks$Outbound>
     | undefined;
   prompt?: Prompt$Outbound | undefined;
-  identity?: components.PublicContact$Outbound | undefined;
-  contact?: CreateChatCompletionContact$Outbound | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
   thread?: CreateChatCompletionThread$Outbound | undefined;
   inputs?: { [k: string]: any } | Array<Inputs2$Outbound> | undefined;
   cache?: CreateChatCompletionRouterChatCompletionsCache$Outbound | undefined;
@@ -5290,9 +5224,8 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
       ),
     ).optional(),
     prompt: z.lazy(() => Prompt$outboundSchema).optional(),
-    identity: components.PublicContact$outboundSchema.optional(),
-    contact: z.lazy(() => CreateChatCompletionContact$outboundSchema)
-      .optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
     thread: z.lazy(() => CreateChatCompletionThread$outboundSchema).optional(),
     inputs: z.union([
       z.record(z.any()),

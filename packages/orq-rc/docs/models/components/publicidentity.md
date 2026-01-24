@@ -1,15 +1,13 @@
-# ~~CreateImageVariationContact~~
+# PublicIdentity
 
-@deprecated Use identity instead. Information about the contact making the request.
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+Information about the identity making the request. If the identity does not exist, it will be created automatically.
 
 ## Example Usage
 
 ```typescript
-import { CreateImageVariationContact } from "@orq-ai/node/models/operations";
+import { PublicIdentity } from "@orq-ai/node/models/components";
 
-let value: CreateImageVariationContact = {
+let value: PublicIdentity = {
   id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
   displayName: "Jane Doe",
   email: "jane.doe@example.com",

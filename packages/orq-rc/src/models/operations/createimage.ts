@@ -111,38 +111,6 @@ export type CreateImageFallbacks = {
   model: string;
 };
 
-/**
- * @deprecated Use identity instead. Information about the contact making the request.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
- */
-export type CreateImageContact = {
-  /**
-   * Unique identifier for the contact
-   */
-  id: string;
-  /**
-   * Display name of the contact
-   */
-  displayName?: string | undefined;
-  /**
-   * Email address of the contact
-   */
-  email?: string | undefined;
-  /**
-   * A hash of key/value pairs containing any other data about the contact
-   */
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  /**
-   * URL to the contact's avatar or logo
-   */
-  logoUrl?: string | undefined;
-  /**
-   * A list of tags associated with the contact
-   */
-  tags?: Array<string> | undefined;
-};
-
 export const CreateImageType = {
   ExactMatch: "exact_match",
 } as const;
@@ -213,8 +181,13 @@ export type CreateImageOrq = {
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  identity?: components.PublicContact | undefined;
-  contact?: CreateImageContact | undefined;
+  identity?: components.PublicIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  contact?: components.PublicContact | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -399,43 +372,6 @@ export function createImageFallbacksToJSON(
 }
 
 /** @internal */
-export type CreateImageContact$Outbound = {
-  id: string;
-  display_name?: string | undefined;
-  email?: string | undefined;
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  logo_url?: string | undefined;
-  tags?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CreateImageContact$outboundSchema: z.ZodType<
-  CreateImageContact$Outbound,
-  z.ZodTypeDef,
-  CreateImageContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
-
-export function createImageContactToJSON(
-  createImageContact: CreateImageContact,
-): string {
-  return JSON.stringify(
-    CreateImageContact$outboundSchema.parse(createImageContact),
-  );
-}
-
-/** @internal */
 export const CreateImageType$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageType
 > = z.nativeEnum(CreateImageType);
@@ -569,8 +505,8 @@ export type CreateImageOrq$Outbound = {
   name?: string | undefined;
   retry?: CreateImageRetry$Outbound | undefined;
   fallbacks?: Array<CreateImageFallbacks$Outbound> | undefined;
-  identity?: components.PublicContact$Outbound | undefined;
-  contact?: CreateImageContact$Outbound | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
   cache?: CreateImageCache$Outbound | undefined;
   load_balancer?: CreateImageLoadBalancer1$Outbound | undefined;
   timeout?: CreateImageTimeout$Outbound | undefined;
@@ -586,8 +522,8 @@ export const CreateImageOrq$outboundSchema: z.ZodType<
   retry: z.lazy(() => CreateImageRetry$outboundSchema).optional(),
   fallbacks: z.array(z.lazy(() => CreateImageFallbacks$outboundSchema))
     .optional(),
-  identity: components.PublicContact$outboundSchema.optional(),
-  contact: z.lazy(() => CreateImageContact$outboundSchema).optional(),
+  identity: components.PublicIdentity$outboundSchema.optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
   cache: z.lazy(() => CreateImageCache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
     .optional(),

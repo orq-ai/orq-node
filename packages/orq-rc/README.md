@@ -89,12 +89,22 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.feedback.create({
-    field: "rating",
-    value: [
-      "good",
+  const result = await orq.contacts.create({
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
     ],
-    traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
@@ -125,12 +135,22 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.feedback.create({
-    field: "rating",
-    value: [
-      "good",
+  const result = await orq.contacts.create({
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
     ],
-    traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
@@ -167,13 +187,9 @@ run();
 
 * [parse](docs/sdks/chunking/README.md#parse) - Parse text
 
-### [~~Contacts~~](docs/sdks/contacts/README.md)
+### [Contacts](docs/sdks/contacts/README.md)
 
-* [~~create~~](docs/sdks/contacts/README.md#create) - Create a contact :warning: **Deprecated**
-* [~~list~~](docs/sdks/contacts/README.md#list) - List contacts :warning: **Deprecated**
-* [~~retrieve~~](docs/sdks/contacts/README.md#retrieve) - Retrieve a contact :warning: **Deprecated**
-* [~~update~~](docs/sdks/contacts/README.md#update) - Update a contact :warning: **Deprecated**
-* [~~delete~~](docs/sdks/contacts/README.md#delete) - Delete a contact :warning: **Deprecated**
+* [create](docs/sdks/contacts/README.md#create) - Update user information
 
 ### [Conversations](docs/sdks/conversations/README.md)
 
@@ -390,6 +406,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
 - [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update agent
 - [`chunkingParse`](docs/sdks/chunking/README.md#parse) - Parse text
+- [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
 - [`conversationsCreate`](docs/sdks/conversations/README.md#create) - Create conversation
 - [`conversationsCreateConversationResponse`](docs/sdks/conversations/README.md#createconversationresponse) - Create internal response
 - [`conversationsCreateConversationResponse`](docs/sdks/internal/README.md#createconversationresponse) - Create internal response
@@ -497,11 +514,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`agentsRun`](docs/sdks/agents/README.md#run)~~ - Run an agent with configuration :warning: **Deprecated**
 - ~~[`agentsStream`](docs/sdks/agents/README.md#stream)~~ - Stream agent execution in real-time :warning: **Deprecated**
 - ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
-- ~~[`contactsCreate`](docs/sdks/contacts/README.md#create)~~ - Create a contact :warning: **Deprecated**
-- ~~[`contactsDelete`](docs/sdks/contacts/README.md#delete)~~ - Delete a contact :warning: **Deprecated**
-- ~~[`contactsList`](docs/sdks/contacts/README.md#list)~~ - List contacts :warning: **Deprecated**
-- ~~[`contactsRetrieve`](docs/sdks/contacts/README.md#retrieve)~~ - Retrieve a contact :warning: **Deprecated**
-- ~~[`contactsUpdate`](docs/sdks/contacts/README.md#update)~~ - Update a contact :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -527,6 +539,22 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.stream({
     key: "<key>",
+    identity: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
     documents: [
       {
         text:
@@ -609,12 +637,22 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.feedback.create({
-    field: "rating",
-    value: [
-      "good",
+  const result = await orq.contacts.create({
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
     ],
-    traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   }, {
     retries: {
       strategy: "backoff",
@@ -654,12 +692,22 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.feedback.create({
-    field: "rating",
-    value: [
-      "good",
+  const result = await orq.contacts.create({
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
     ],
-    traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
@@ -722,7 +770,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (39)</summary>
+<details><summary>Less common errors (36)</summary>
 
 <br />
 
@@ -735,39 +783,36 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 9 of 119 methods.*
-* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 119 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 119 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 119 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 119 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 119 methods.*
-* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 119 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 119 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 119 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 119 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 119 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 119 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 9 of 115 methods.*
+* [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 115 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 115 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 115 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 115 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`GenerateConversationNameConversationsResponseBody`](./src/models/errors/generateconversationnameconversationsresponsebody.ts): Conversation not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`RetrieveConversationResponseBody`](./src/models/errors/retrieveconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 115 methods.*
+* [`UpdateConversationResponseBody`](./src/models/errors/updateconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 115 methods.*
+* [`DeleteConversationResponseBody`](./src/models/errors/deleteconversationresponsebody.ts): Conversation not found. The specified conversation ID does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 115 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 115 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 115 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 115 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 115 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 115 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 115 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -790,12 +835,22 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.feedback.create({
-    field: "rating",
-    value: [
-      "good",
+  const result = await orq.contacts.create({
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
     ],
-    traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
