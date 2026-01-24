@@ -25,16 +25,14 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a contact
+ * Update user information
  *
  * @remarks
- * Creates a new contact with a unique external_id. If a contact with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
- *
- * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+ * Update or add user information to workspace
  */
 export function contactsCreate(
   client: OrqCore,
-  request?: operations.CreateContactRequestBody | undefined,
+  request: operations.CreateContactRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +56,7 @@ export function contactsCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.CreateContactRequestBody | undefined,
+  request: operations.CreateContactRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,19 +76,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.CreateContactRequestBody$outboundSchema.optional().parse(
-        value,
-      ),
+    (value) => operations.CreateContactRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/contacts")();
 
@@ -155,7 +148,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, operations.CreateContactResponseBody$inboundSchema),
+    M.json(200, operations.CreateContactResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

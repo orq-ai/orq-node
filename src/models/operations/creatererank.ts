@@ -47,38 +47,6 @@ export type CreateRerankRetry = {
   onCodes?: Array<number> | undefined;
 };
 
-/**
- * @deprecated Use identity instead. Information about the contact making the request.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
- */
-export type CreateRerankContact = {
-  /**
-   * Unique identifier for the contact
-   */
-  id: string;
-  /**
-   * Display name of the contact
-   */
-  displayName?: string | undefined;
-  /**
-   * Email address of the contact
-   */
-  email?: string | undefined;
-  /**
-   * A hash of key/value pairs containing any other data about the contact
-   */
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  /**
-   * URL to the contact's avatar or logo
-   */
-  logoUrl?: string | undefined;
-  /**
-   * A list of tags associated with the contact
-   */
-  tags?: Array<string> | undefined;
-};
-
 export const CreateRerankLoadBalancerType = {
   WeightBased: "weight_based",
 } as const;
@@ -137,8 +105,13 @@ export type CreateRerankOrq = {
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  identity?: components.PublicContact | undefined;
-  contact?: CreateRerankContact | undefined;
+  identity?: components.PublicIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  contact?: components.PublicContact | undefined;
   /**
    * Array of models with weights for load balancing requests
    */
@@ -326,43 +299,6 @@ export function createRerankRetryToJSON(
 }
 
 /** @internal */
-export type CreateRerankContact$Outbound = {
-  id: string;
-  display_name?: string | undefined;
-  email?: string | undefined;
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  logo_url?: string | undefined;
-  tags?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CreateRerankContact$outboundSchema: z.ZodType<
-  CreateRerankContact$Outbound,
-  z.ZodTypeDef,
-  CreateRerankContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
-
-export function createRerankContactToJSON(
-  createRerankContact: CreateRerankContact,
-): string {
-  return JSON.stringify(
-    CreateRerankContact$outboundSchema.parse(createRerankContact),
-  );
-}
-
-/** @internal */
 export const CreateRerankLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRerankLoadBalancerType
 > = z.nativeEnum(CreateRerankLoadBalancerType);
@@ -468,8 +404,8 @@ export type CreateRerankOrq$Outbound = {
   fallbacks?: Array<CreateRerankFallbacks$Outbound> | undefined;
   cache?: CreateRerankCache$Outbound | undefined;
   retry?: CreateRerankRetry$Outbound | undefined;
-  identity?: components.PublicContact$Outbound | undefined;
-  contact?: CreateRerankContact$Outbound | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
   load_balancer?: CreateRerankLoadBalancer1$Outbound | undefined;
   timeout?: CreateRerankTimeout$Outbound | undefined;
 };
@@ -485,8 +421,8 @@ export const CreateRerankOrq$outboundSchema: z.ZodType<
     .optional(),
   cache: z.lazy(() => CreateRerankCache$outboundSchema).optional(),
   retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
-  identity: components.PublicContact$outboundSchema.optional(),
-  contact: z.lazy(() => CreateRerankContact$outboundSchema).optional(),
+  identity: components.PublicIdentity$outboundSchema.optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
   loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),

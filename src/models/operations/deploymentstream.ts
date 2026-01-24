@@ -1119,6 +1119,10 @@ export type DeploymentStreamRequestBody = {
     >
     | undefined;
   /**
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+   */
+  identity?: components.PublicIdentity | undefined;
+  /**
    * A list of file IDs that are associated with the deployment request.
    */
   fileIds?: Array<string> | undefined;
@@ -4095,6 +4099,7 @@ export type DeploymentStreamRequestBody$Outbound = {
       | DeploymentStreamMessagesToolMessage$Outbound
     >
     | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
   file_ids?: Array<string> | undefined;
   metadata?: { [k: string]: any } | undefined;
   extra_params?: { [k: string]: any } | undefined;
@@ -4146,6 +4151,7 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => DeploymentStreamMessagesToolMessage$outboundSchema),
     ]),
   ).optional(),
+  identity: components.PublicIdentity$outboundSchema.optional(),
   fileIds: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   extraParams: z.record(z.any()).optional(),

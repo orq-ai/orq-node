@@ -21,6 +21,11 @@ import {
   ImageContentPartSchema$outboundSchema,
 } from "./imagecontentpartschema.js";
 import {
+  PublicIdentity,
+  PublicIdentity$Outbound,
+  PublicIdentity$outboundSchema,
+} from "./publicidentity.js";
+import {
   ReasoningPartSchema,
   ReasoningPartSchema$Outbound,
   ReasoningPartSchema$outboundSchema,
@@ -1114,6 +1119,10 @@ export type InvokeDeploymentRequest = {
       | MessagesToolMessage
     >
     | undefined;
+  /**
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+   */
+  identity?: PublicIdentity | undefined;
   /**
    * A list of file IDs that are associated with the deployment request.
    */
@@ -3354,6 +3363,7 @@ export type InvokeDeploymentRequest$Outbound = {
       | MessagesToolMessage$Outbound
     >
     | undefined;
+  identity?: PublicIdentity$Outbound | undefined;
   file_ids?: Array<string> | undefined;
   metadata?: { [k: string]: any } | undefined;
   extra_params?: { [k: string]: any } | undefined;
@@ -3406,6 +3416,7 @@ export const InvokeDeploymentRequest$outboundSchema: z.ZodType<
       z.lazy(() => MessagesToolMessage$outboundSchema),
     ]),
   ).optional(),
+  identity: PublicIdentity$outboundSchema.optional(),
   fileIds: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   extraParams: z.record(z.any()).optional(),

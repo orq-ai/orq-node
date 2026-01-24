@@ -1,47 +1,104 @@
 # Data
 
-## Example Usage
+
+## Supported Types
+
+### `operations.DataLLM`
 
 ```typescript
-import { Data } from "@orq-ai/node/models/operations";
-
-let value: Data = {
-  id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-  externalId: "user_12345",
-  displayName: "Jane Smith",
-  email: "jane.smith@example.com",
-  avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-  tags: [
-    "premium",
-    "beta-user",
-    "enterprise",
-  ],
-  metadata: {
-    "department": "Engineering",
-    "role": "Senior Developer",
-    "subscription_tier": "premium",
-    "last_login": "2024-01-15T10:30:00Z",
-  },
-  metrics: {
-    totalCost: 100,
-    totalTokens: 1000,
-    totalRequests: 1000,
-    errorRate: 22,
-  },
+const value: operations.DataLLM = {
+  id: "<id>",
+  description:
+    "advertisement list amid vainly bah partially owlishly treble why however",
+  type: "llm_eval",
+  prompt: "<value>",
+  key: "<key>",
+  model: "Element",
 };
 ```
 
-## Fields
+### `operations.DataJSON`
 
-| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          | Example                                                                                                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                                                                 | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact                                                               | contact_01ARZ3NDEKTSV4RRFFQ69G5FAV                                                                                                                   |
-| `externalId`                                                                                                                                         | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user. | user_12345                                                                                                                                           |
-| `displayName`                                                                                                                                        | *string*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Display name or nickname of the contact user. This is typically shown in user interfaces.                                                            | Jane Smith                                                                                                                                           |
-| `email`                                                                                                                                              | *string*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Email address of the contact user                                                                                                                    | jane.smith@example.com                                                                                                                               |
-| `avatarUrl`                                                                                                                                          | *string*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | URL linking to the contact user's avatar image                                                                                                       | https://example.com/avatars/jane-smith.jpg                                                                                                           |
-| `tags`                                                                                                                                               | *string*[]                                                                                                                                           | :heavy_minus_sign:                                                                                                                                   | Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications.       | [<br/>"premium",<br/>"beta-user",<br/>"enterprise"<br/>]                                                                                             |
-| `metadata`                                                                                                                                           | Record<string, *any*>                                                                                                                                | :heavy_minus_sign:                                                                                                                                   | Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application.     | {<br/>"department": "Engineering",<br/>"role": "Senior Developer",<br/>"subscription_tier": "premium",<br/>"last_login": "2024-01-15T10:30:00Z"<br/>} |
-| `created`                                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                        | :heavy_minus_sign:                                                                                                                                   | The date and time the resource was created                                                                                                           |                                                                                                                                                      |
-| `updated`                                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                        | :heavy_minus_sign:                                                                                                                                   | The date and time the resource was last updated                                                                                                      |                                                                                                                                                      |
-| `metrics`                                                                                                                                            | [operations.ListContactsMetrics](../../models/operations/listcontactsmetrics.md)                                                                     | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |                                                                                                                                                      |
+```typescript
+const value: operations.DataJSON = {
+  id: "<id>",
+  description: "absent unaccountably anenst hunt floodlight",
+  type: "json_schema",
+  schema: "<value>",
+  key: "<key>",
+};
+```
+
+### `operations.DataHTTP`
+
+```typescript
+const value: operations.DataHTTP = {
+  id: "<id>",
+  description: "queasy incidentally neatly tall necessary",
+  type: "http_eval",
+  url: "https://majestic-alert.biz/",
+  method: "GET",
+  headers: {
+    "key": "<value>",
+  },
+  payload: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
+  key: "<key>",
+};
+```
+
+### `operations.DataPython`
+
+```typescript
+const value: operations.DataPython = {
+  id: "<id>",
+  description:
+    "anenst gastropod partridge tuxedo without bleach except as blissfully",
+  code: "<value>",
+  type: "python_eval",
+  key: "<key>",
+};
+```
+
+### `operations.DataFunction`
+
+```typescript
+const value: operations.DataFunction = {
+  id: "<id>",
+  description: "down at for gee excitable huzzah acidic provided hmph",
+  type: "function_eval",
+  functionParams: {
+    type: "levenshtein_distance",
+  },
+  key: "<key>",
+};
+```
+
+### `operations.DataRagas`
+
+```typescript
+const value: operations.DataRagas = {
+  id: "<id>",
+  description: "hurtful deny doodle for",
+  type: "ragas",
+  ragasMetric: "context_entities_recall",
+  key: "<key>",
+  model: "El Camino",
+};
+```
+
+### `operations.DataTypescript`
+
+```typescript
+const value: operations.DataTypescript = {
+  id: "<id>",
+  description: "psst trench forceful",
+  code: "<value>",
+  type: "typescript_eval",
+  key: "<key>",
+};
+```
+

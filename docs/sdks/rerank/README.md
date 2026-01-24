@@ -62,22 +62,6 @@ async function run() {
           "engineering",
         ],
       },
-      contact: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        displayName: "Jane Doe",
-        email: "jane.doe@example.com",
-        metadata: [
-          {
-            "department": "Engineering",
-            "role": "Senior Developer",
-          },
-        ],
-        logoUrl: "https://example.com/avatars/jane-doe.jpg",
-        tags: [
-          "hr",
-          "engineering",
-        ],
-      },
       loadBalancer: {
         type: "weight_based",
         models: [
@@ -144,22 +128,6 @@ async function run() {
         ],
       },
       identity: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        displayName: "Jane Doe",
-        email: "jane.doe@example.com",
-        metadata: [
-          {
-            "department": "Engineering",
-            "role": "Senior Developer",
-          },
-        ],
-        logoUrl: "https://example.com/avatars/jane-doe.jpg",
-        tags: [
-          "hr",
-          "engineering",
-        ],
-      },
-      contact: {
         id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
         displayName: "Jane Doe",
         email: "jane.doe@example.com",

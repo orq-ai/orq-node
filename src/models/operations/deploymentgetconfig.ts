@@ -1090,6 +1090,10 @@ export type DeploymentGetConfigRequestBody = {
     >
     | undefined;
   /**
+   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
+   */
+  identity?: components.PublicIdentity | undefined;
+  /**
    * A list of file IDs that are associated with the deployment request.
    */
   fileIds?: Array<string> | undefined;
@@ -3867,6 +3871,7 @@ export type DeploymentGetConfigRequestBody$Outbound = {
       | MessagesToolMessage$Outbound
     >
     | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
   file_ids?: Array<string> | undefined;
   metadata?: { [k: string]: any } | undefined;
   extra_params?: { [k: string]: any } | undefined;
@@ -3914,6 +3919,7 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => MessagesToolMessage$outboundSchema),
     ]),
   ).optional(),
+  identity: components.PublicIdentity$outboundSchema.optional(),
   fileIds: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   extraParams: z.record(z.any()).optional(),

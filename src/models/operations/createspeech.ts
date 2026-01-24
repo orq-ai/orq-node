@@ -47,38 +47,6 @@ export type CreateSpeechFallbacks = {
 };
 
 /**
- * @deprecated Use identity instead. Information about the contact making the request.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
- */
-export type CreateSpeechContact = {
-  /**
-   * Unique identifier for the contact
-   */
-  id: string;
-  /**
-   * Display name of the contact
-   */
-  displayName?: string | undefined;
-  /**
-   * Email address of the contact
-   */
-  email?: string | undefined;
-  /**
-   * A hash of key/value pairs containing any other data about the contact
-   */
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  /**
-   * URL to the contact's avatar or logo
-   */
-  logoUrl?: string | undefined;
-  /**
-   * A list of tags associated with the contact
-   */
-  tags?: Array<string> | undefined;
-};
-
-/**
  * Thread information to group related requests
  */
 export type CreateSpeechThread = {
@@ -146,8 +114,13 @@ export type CreateSpeechOrq = {
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  identity?: components.PublicContact | undefined;
-  contact?: CreateSpeechContact | undefined;
+  identity?: components.PublicIdentity | undefined;
+  /**
+   * @deprecated Use identity instead. Information about the contact making the request.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  contact?: components.PublicContact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -251,43 +224,6 @@ export function createSpeechFallbacksToJSON(
 ): string {
   return JSON.stringify(
     CreateSpeechFallbacks$outboundSchema.parse(createSpeechFallbacks),
-  );
-}
-
-/** @internal */
-export type CreateSpeechContact$Outbound = {
-  id: string;
-  display_name?: string | undefined;
-  email?: string | undefined;
-  metadata?: Array<{ [k: string]: any }> | undefined;
-  logo_url?: string | undefined;
-  tags?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CreateSpeechContact$outboundSchema: z.ZodType<
-  CreateSpeechContact$Outbound,
-  z.ZodTypeDef,
-  CreateSpeechContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
-
-export function createSpeechContactToJSON(
-  createSpeechContact: CreateSpeechContact,
-): string {
-  return JSON.stringify(
-    CreateSpeechContact$outboundSchema.parse(createSpeechContact),
   );
 }
 
@@ -420,8 +356,8 @@ export type CreateSpeechOrq$Outbound = {
   retry?: CreateSpeechRetry$Outbound | undefined;
   fallbacks?: Array<CreateSpeechFallbacks$Outbound> | undefined;
   name?: string | undefined;
-  identity?: components.PublicContact$Outbound | undefined;
-  contact?: CreateSpeechContact$Outbound | undefined;
+  identity?: components.PublicIdentity$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
   thread?: CreateSpeechThread$Outbound | undefined;
   load_balancer?: CreateSpeechLoadBalancer1$Outbound | undefined;
   timeout?: CreateSpeechTimeout$Outbound | undefined;
@@ -437,8 +373,8 @@ export const CreateSpeechOrq$outboundSchema: z.ZodType<
   fallbacks: z.array(z.lazy(() => CreateSpeechFallbacks$outboundSchema))
     .optional(),
   name: z.string().optional(),
-  identity: components.PublicContact$outboundSchema.optional(),
-  contact: z.lazy(() => CreateSpeechContact$outboundSchema).optional(),
+  identity: components.PublicIdentity$outboundSchema.optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
   thread: z.lazy(() => CreateSpeechThread$outboundSchema).optional(),
   loadBalancer: z.lazy(() => CreateSpeechLoadBalancer1$outboundSchema)
     .optional(),

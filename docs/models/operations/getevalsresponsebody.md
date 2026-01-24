@@ -13,8 +13,8 @@ let value: GetEvalsResponseBody = {
     {
       id: "<id>",
       description: "ah boo tame ethyl without consequently",
-      created: "2026-01-23T11:14:03.704Z",
-      updated: "2026-01-23T11:14:03.704Z",
+      created: "2026-01-24T10:38:24.375Z",
+      updated: "2026-01-24T10:38:24.375Z",
       type: "function_eval",
       functionParams: {
         type: "meteor_score",
@@ -28,8 +28,8 @@ let value: GetEvalsResponseBody = {
 
 ## Fields
 
-| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `object`                                                               | [operations.GetEvalsObject](../../models/operations/getevalsobject.md) | :heavy_check_mark:                                                     | N/A                                                                    |
-| `data`                                                                 | *operations.GetEvalsData*[]                                            | :heavy_check_mark:                                                     | N/A                                                                    |
-| `hasMore`                                                              | *boolean*                                                              | :heavy_check_mark:                                                     | N/A                                                                    |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `object`                                                 | [operations.ObjectT](../../models/operations/objectt.md) | :heavy_check_mark:                                       | N/A                                                      |
+| `data`                                                   | *operations.Data*[]                                      | :heavy_check_mark:                                       | N/A                                                      |
+| `hasMore`                                                | *boolean*                                                | :heavy_check_mark:                                       | N/A                                                      |

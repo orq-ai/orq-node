@@ -6,11 +6,9 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
- * @deprecated Use identity instead. Information about the contact making the request.
- *
- * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ * Information about the identity making the request. If the identity does not exist, it will be created automatically.
  */
-export type PublicContact = {
+export type PublicIdentity = {
   /**
    * Unique identifier for the contact
    */
@@ -38,7 +36,7 @@ export type PublicContact = {
 };
 
 /** @internal */
-export type PublicContact$Outbound = {
+export type PublicIdentity$Outbound = {
   id: string;
   display_name?: string | undefined;
   email?: string | undefined;
@@ -48,10 +46,10 @@ export type PublicContact$Outbound = {
 };
 
 /** @internal */
-export const PublicContact$outboundSchema: z.ZodType<
-  PublicContact$Outbound,
+export const PublicIdentity$outboundSchema: z.ZodType<
+  PublicIdentity$Outbound,
   z.ZodTypeDef,
-  PublicContact
+  PublicIdentity
 > = z.object({
   id: z.string(),
   displayName: z.string().optional(),
@@ -66,6 +64,6 @@ export const PublicContact$outboundSchema: z.ZodType<
   });
 });
 
-export function publicContactToJSON(publicContact: PublicContact): string {
-  return JSON.stringify(PublicContact$outboundSchema.parse(publicContact));
+export function publicIdentityToJSON(publicIdentity: PublicIdentity): string {
+  return JSON.stringify(PublicIdentity$outboundSchema.parse(publicIdentity));
 }
