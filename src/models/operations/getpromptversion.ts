@@ -1169,6 +1169,10 @@ export type GetPromptVersionPromptsMessages =
  */
 export type GetPromptVersionPromptField = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: GetPromptVersionAudio | null | undefined;
@@ -2976,6 +2980,7 @@ export const GetPromptVersionPromptField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => GetPromptVersionAudio$inboundSchema))
     .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),

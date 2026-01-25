@@ -17,6 +17,20 @@ export type CreateRerankFallbacks = {
   model: string;
 };
 
+/**
+ * Retry configuration for the request
+ */
+export type CreateRerankRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
 export const CreateRerankType = {
   ExactMatch: "exact_match",
 } as const;
@@ -31,20 +45,6 @@ export type CreateRerankCache = {
    */
   ttl?: number | undefined;
   type: CreateRerankType;
-};
-
-/**
- * Retry configuration for the request
- */
-export type CreateRerankRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
 };
 
 export const CreateRerankLoadBalancerType = {
@@ -71,7 +71,7 @@ export type CreateRerankLoadBalancer1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateRerankLoadBalancer = CreateRerankLoadBalancer1;
 
@@ -79,6 +79,84 @@ export type CreateRerankLoadBalancer = CreateRerankLoadBalancer1;
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
 export type CreateRerankTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+export type CreateRerankRouterRerankFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+export const CreateRerankRouterRerankType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreateRerankRouterRerankType = ClosedEnum<
+  typeof CreateRerankRouterRerankType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreateRerankRouterRerankCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreateRerankRouterRerankType;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreateRerankRouterRerankRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const CreateRerankLoadBalancerRouterRerankType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateRerankLoadBalancerRouterRerankType = ClosedEnum<
+  typeof CreateRerankLoadBalancerRouterRerankType
+>;
+
+export type CreateRerankLoadBalancerRouterRerankModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateRerankLoadBalancerRouterRerank1 = {
+  type: CreateRerankLoadBalancerRouterRerankType;
+  models: Array<CreateRerankLoadBalancerRouterRerankModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateRerankRouterRerankLoadBalancer =
+  CreateRerankLoadBalancerRouterRerank1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateRerankRouterRerankTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -93,15 +171,15 @@ export type CreateRerankOrq = {
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateRerankFallbacks> | undefined;
+  fallbacks?: Array<CreateRerankRouterRerankFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
-  cache?: CreateRerankCache | undefined;
+  cache?: CreateRerankRouterRerankCache | undefined;
   /**
    * Retry configuration for the request
    */
-  retry?: CreateRerankRetry | undefined;
+  retry?: CreateRerankRouterRerankRetry | undefined;
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
@@ -115,11 +193,11 @@ export type CreateRerankOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateRerankLoadBalancer1 | undefined;
+  loadBalancer?: CreateRerankLoadBalancerRouterRerank1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateRerankTimeout | undefined;
+  timeout?: CreateRerankRouterRerankTimeout | undefined;
 };
 
 /**
@@ -146,6 +224,30 @@ export type CreateRerankRequestBody = {
    * The filename of the document to rerank
    */
   filename?: string | null | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateRerankFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateRerankRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreateRerankCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateRerankLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateRerankTimeout | undefined;
   orq?: CreateRerankOrq | undefined;
 };
 
@@ -242,6 +344,34 @@ export function createRerankFallbacksToJSON(
 }
 
 /** @internal */
+export type CreateRerankRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateRerankRetry$outboundSchema: z.ZodType<
+  CreateRerankRetry$Outbound,
+  z.ZodTypeDef,
+  CreateRerankRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createRerankRetryToJSON(
+  createRerankRetry: CreateRerankRetry,
+): string {
+  return JSON.stringify(
+    CreateRerankRetry$outboundSchema.parse(createRerankRetry),
+  );
+}
+
+/** @internal */
 export const CreateRerankType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRerankType
 > = z.nativeEnum(CreateRerankType);
@@ -267,34 +397,6 @@ export function createRerankCacheToJSON(
 ): string {
   return JSON.stringify(
     CreateRerankCache$outboundSchema.parse(createRerankCache),
-  );
-}
-
-/** @internal */
-export type CreateRerankRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const CreateRerankRetry$outboundSchema: z.ZodType<
-  CreateRerankRetry$Outbound,
-  z.ZodTypeDef,
-  CreateRerankRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function createRerankRetryToJSON(
-  createRerankRetry: CreateRerankRetry,
-): string {
-  return JSON.stringify(
-    CreateRerankRetry$outboundSchema.parse(createRerankRetry),
   );
 }
 
@@ -399,15 +501,210 @@ export function createRerankTimeoutToJSON(
 }
 
 /** @internal */
+export type CreateRerankRouterRerankFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateRerankRouterRerankFallbacks$outboundSchema: z.ZodType<
+  CreateRerankRouterRerankFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateRerankRouterRerankFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createRerankRouterRerankFallbacksToJSON(
+  createRerankRouterRerankFallbacks: CreateRerankRouterRerankFallbacks,
+): string {
+  return JSON.stringify(
+    CreateRerankRouterRerankFallbacks$outboundSchema.parse(
+      createRerankRouterRerankFallbacks,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateRerankRouterRerankType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRerankRouterRerankType
+> = z.nativeEnum(CreateRerankRouterRerankType);
+
+/** @internal */
+export type CreateRerankRouterRerankCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreateRerankRouterRerankCache$outboundSchema: z.ZodType<
+  CreateRerankRouterRerankCache$Outbound,
+  z.ZodTypeDef,
+  CreateRerankRouterRerankCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreateRerankRouterRerankType$outboundSchema,
+});
+
+export function createRerankRouterRerankCacheToJSON(
+  createRerankRouterRerankCache: CreateRerankRouterRerankCache,
+): string {
+  return JSON.stringify(
+    CreateRerankRouterRerankCache$outboundSchema.parse(
+      createRerankRouterRerankCache,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateRerankRouterRerankRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateRerankRouterRerankRetry$outboundSchema: z.ZodType<
+  CreateRerankRouterRerankRetry$Outbound,
+  z.ZodTypeDef,
+  CreateRerankRouterRerankRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createRerankRouterRerankRetryToJSON(
+  createRerankRouterRerankRetry: CreateRerankRouterRerankRetry,
+): string {
+  return JSON.stringify(
+    CreateRerankRouterRerankRetry$outboundSchema.parse(
+      createRerankRouterRerankRetry,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateRerankLoadBalancerRouterRerankType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRerankLoadBalancerRouterRerankType> = z
+    .nativeEnum(CreateRerankLoadBalancerRouterRerankType);
+
+/** @internal */
+export type CreateRerankLoadBalancerRouterRerankModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreateRerankLoadBalancerRouterRerankModels$outboundSchema:
+  z.ZodType<
+    CreateRerankLoadBalancerRouterRerankModels$Outbound,
+    z.ZodTypeDef,
+    CreateRerankLoadBalancerRouterRerankModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createRerankLoadBalancerRouterRerankModelsToJSON(
+  createRerankLoadBalancerRouterRerankModels:
+    CreateRerankLoadBalancerRouterRerankModels,
+): string {
+  return JSON.stringify(
+    CreateRerankLoadBalancerRouterRerankModels$outboundSchema.parse(
+      createRerankLoadBalancerRouterRerankModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateRerankLoadBalancerRouterRerank1$Outbound = {
+  type: string;
+  models: Array<CreateRerankLoadBalancerRouterRerankModels$Outbound>;
+};
+
+/** @internal */
+export const CreateRerankLoadBalancerRouterRerank1$outboundSchema: z.ZodType<
+  CreateRerankLoadBalancerRouterRerank1$Outbound,
+  z.ZodTypeDef,
+  CreateRerankLoadBalancerRouterRerank1
+> = z.object({
+  type: CreateRerankLoadBalancerRouterRerankType$outboundSchema,
+  models: z.array(
+    z.lazy(() => CreateRerankLoadBalancerRouterRerankModels$outboundSchema),
+  ),
+});
+
+export function createRerankLoadBalancerRouterRerank1ToJSON(
+  createRerankLoadBalancerRouterRerank1: CreateRerankLoadBalancerRouterRerank1,
+): string {
+  return JSON.stringify(
+    CreateRerankLoadBalancerRouterRerank1$outboundSchema.parse(
+      createRerankLoadBalancerRouterRerank1,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateRerankRouterRerankLoadBalancer$Outbound =
+  CreateRerankLoadBalancerRouterRerank1$Outbound;
+
+/** @internal */
+export const CreateRerankRouterRerankLoadBalancer$outboundSchema: z.ZodType<
+  CreateRerankRouterRerankLoadBalancer$Outbound,
+  z.ZodTypeDef,
+  CreateRerankRouterRerankLoadBalancer
+> = z.lazy(() => CreateRerankLoadBalancerRouterRerank1$outboundSchema);
+
+export function createRerankRouterRerankLoadBalancerToJSON(
+  createRerankRouterRerankLoadBalancer: CreateRerankRouterRerankLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateRerankRouterRerankLoadBalancer$outboundSchema.parse(
+      createRerankRouterRerankLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateRerankRouterRerankTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateRerankRouterRerankTimeout$outboundSchema: z.ZodType<
+  CreateRerankRouterRerankTimeout$Outbound,
+  z.ZodTypeDef,
+  CreateRerankRouterRerankTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function createRerankRouterRerankTimeoutToJSON(
+  createRerankRouterRerankTimeout: CreateRerankRouterRerankTimeout,
+): string {
+  return JSON.stringify(
+    CreateRerankRouterRerankTimeout$outboundSchema.parse(
+      createRerankRouterRerankTimeout,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateRerankOrq$Outbound = {
   name?: string | undefined;
-  fallbacks?: Array<CreateRerankFallbacks$Outbound> | undefined;
-  cache?: CreateRerankCache$Outbound | undefined;
-  retry?: CreateRerankRetry$Outbound | undefined;
+  fallbacks?: Array<CreateRerankRouterRerankFallbacks$Outbound> | undefined;
+  cache?: CreateRerankRouterRerankCache$Outbound | undefined;
+  retry?: CreateRerankRouterRerankRetry$Outbound | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
-  load_balancer?: CreateRerankLoadBalancer1$Outbound | undefined;
-  timeout?: CreateRerankTimeout$Outbound | undefined;
+  load_balancer?: CreateRerankLoadBalancerRouterRerank1$Outbound | undefined;
+  timeout?: CreateRerankRouterRerankTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -417,15 +714,18 @@ export const CreateRerankOrq$outboundSchema: z.ZodType<
   CreateRerankOrq
 > = z.object({
   name: z.string().optional(),
-  fallbacks: z.array(z.lazy(() => CreateRerankFallbacks$outboundSchema))
-    .optional(),
-  cache: z.lazy(() => CreateRerankCache$outboundSchema).optional(),
-  retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() => CreateRerankRouterRerankFallbacks$outboundSchema),
+  ).optional(),
+  cache: z.lazy(() => CreateRerankRouterRerankCache$outboundSchema).optional(),
+  retry: z.lazy(() => CreateRerankRouterRerankRetry$outboundSchema).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
-  loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
+  loadBalancer: z.lazy(() =>
+    CreateRerankLoadBalancerRouterRerank1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() => CreateRerankRouterRerankTimeout$outboundSchema)
     .optional(),
-  timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     loadBalancer: "load_balancer",
@@ -445,6 +745,12 @@ export type CreateRerankRequestBody$Outbound = {
   model: string;
   top_n?: number | undefined;
   filename?: string | null | undefined;
+  name?: string | undefined;
+  fallbacks?: Array<CreateRerankFallbacks$Outbound> | undefined;
+  retry?: CreateRerankRetry$Outbound | undefined;
+  cache?: CreateRerankCache$Outbound | undefined;
+  load_balancer?: CreateRerankLoadBalancer1$Outbound | undefined;
+  timeout?: CreateRerankTimeout$Outbound | undefined;
   orq?: CreateRerankOrq$Outbound | undefined;
 };
 
@@ -459,10 +765,19 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
   model: z.string(),
   topN: z.number().optional(),
   filename: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateRerankFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreateRerankCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateRerankOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     topN: "top_n",
+    loadBalancer: "load_balancer",
   });
 });
 

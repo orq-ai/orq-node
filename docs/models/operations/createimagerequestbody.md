@@ -10,6 +10,31 @@ import { CreateImageRequestBody } from "@orq-ai/node/models/operations";
 let value: CreateImageRequestBody = {
   prompt: "<value>",
   model: "Land Cruiser",
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+      503,
+      504,
+    ],
+  },
+  cache: {
+    ttl: 3600,
+    type: "exact_match",
+  },
+  loadBalancer: {
+    type: "weight_based",
+    models: [
+      {
+        model: "openai/gpt-4o",
+        weight: 0.7,
+      },
+    ],
+  },
+  timeout: {
+    callTimeout: 30000,
+  },
   orq: {
     retry: {
       onCodes: [
@@ -80,4 +105,10 @@ let value: CreateImageRequestBody = {
 | `responseFormat`                                                                                                                                                                        | [operations.CreateImageResponseFormat](../../models/operations/createimageresponseformat.md)                                                                                            | :heavy_minus_sign:                                                                                                                                                                      | The format in which generated images are returned. Must be one of `url` or `b64_json`. This parameter isn't supported for `gpt-image-1` which will always return base64-encoded images. |
 | `size`                                                                                                                                                                                  | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The size of the generated images. Must be one of the specified sizes for each model.                                                                                                    |
 | `style`                                                                                                                                                                                 | [operations.Style](../../models/operations/style.md)                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                      | The style of the generated images. This parameter is only supported for `openai/dall-e-3`. Must be one of `vivid` or `natural`.                                                         |
+| `name`                                                                                                                                                                                  | *string*                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                      | The name to display on the trace. If not specified, the default system name will be used.                                                                                               |
+| `fallbacks`                                                                                                                                                                             | [operations.CreateImageFallbacks](../../models/operations/createimagefallbacks.md)[]                                                                                                    | :heavy_minus_sign:                                                                                                                                                                      | Array of fallback models to use if primary model fails                                                                                                                                  |
+| `retry`                                                                                                                                                                                 | [operations.CreateImageRetry](../../models/operations/createimageretry.md)                                                                                                              | :heavy_minus_sign:                                                                                                                                                                      | Retry configuration for the request                                                                                                                                                     |
+| `cache`                                                                                                                                                                                 | [operations.CreateImageCache](../../models/operations/createimagecache.md)                                                                                                              | :heavy_minus_sign:                                                                                                                                                                      | Cache configuration for the request.                                                                                                                                                    |
+| `loadBalancer`                                                                                                                                                                          | *operations.CreateImageLoadBalancer*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                      | Load balancer configuration for the request.                                                                                                                                            |
+| `timeout`                                                                                                                                                                               | [operations.CreateImageTimeout](../../models/operations/createimagetimeout.md)                                                                                                          | :heavy_minus_sign:                                                                                                                                                                      | Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.                                      |
 | `orq`                                                                                                                                                                                   | [operations.CreateImageOrq](../../models/operations/createimageorq.md)                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                      | N/A                                                                                                                                                                                     |

@@ -24,6 +24,31 @@ async function run() {
   const result = await orq.router.completions.create({
     model: "XC90",
     prompt: "<value>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
   });
 
   console.log(result);
@@ -50,6 +75,31 @@ async function run() {
   const res = await routerCompletionsCreate(orq, {
     model: "XC90",
     prompt: "<value>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
   });
   if (res.ok) {
     const { value: result } = res;

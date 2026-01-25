@@ -338,6 +338,10 @@ export type ModelConfigurationTimeout = {
  */
 export type ModelConfigurationParameters = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: UpdateAgentModelConfigurationAudio | null | undefined;
@@ -837,6 +841,10 @@ export type UpdateAgentFallbackModelConfigurationTimeout = {
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type UpdateAgentFallbackModelConfigurationParameters = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -2122,6 +2130,10 @@ export type UpdateAgentTimeout = {
  */
 export type UpdateAgentParameters = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: UpdateAgentAudio | null | undefined;
@@ -2603,6 +2615,10 @@ export type UpdateAgentFallbackModelConfigurationAgentsTimeout = {
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -3482,6 +3498,7 @@ export function modelConfigurationTimeoutToJSON(
 
 /** @internal */
 export type ModelConfigurationParameters$Outbound = {
+  name?: string | undefined;
   audio?: UpdateAgentModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -3524,6 +3541,7 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelConfigurationParameters
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(
     z.lazy(() => UpdateAgentModelConfigurationAudio$outboundSchema),
   ).optional(),
@@ -4316,6 +4334,7 @@ export function updateAgentFallbackModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
+  name?: string | undefined;
   audio?:
     | UpdateAgentFallbackModelConfigurationAudio$Outbound
     | null
@@ -4369,6 +4388,7 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
     z.ZodTypeDef,
     UpdateAgentFallbackModelConfigurationParameters
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() => UpdateAgentFallbackModelConfigurationAudio$outboundSchema),
     ).optional(),
@@ -6263,6 +6283,7 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => UpdateAgentAudio$inboundSchema)).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
@@ -7001,6 +7022,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() =>
         UpdateAgentFallbackModelConfigurationAgentsAudio$inboundSchema

@@ -1,6 +1,6 @@
 # CreateSpeechLoadBalancer
 
-Array of models with weights for load balancing requests
+Load balancer configuration for the request.
 
 
 ## Supported Types
@@ -14,10 +14,6 @@ const value: operations.CreateSpeechLoadBalancer1 = {
     {
       model: "openai/gpt-4o",
       weight: 0.7,
-    },
-    {
-      model: "anthropic/claude-3-5-sonnet",
-      weight: 0.3,
     },
   ],
 };

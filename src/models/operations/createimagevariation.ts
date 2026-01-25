@@ -37,6 +37,13 @@ export const Size = {
  */
 export type Size = ClosedEnum<typeof Size>;
 
+export type CreateImageVariationFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
 /**
  * Retry configuration for the request
  */
@@ -49,40 +56,6 @@ export type CreateImageVariationRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-export type CreateImageVariationFallbacks = {
-  /**
-   * Fallback model identifier
-   */
-  model: string;
-};
-
-/**
- * Version of the prompt to use (currently only "latest" supported)
- */
-export const CreateImageVariationVersion = {
-  Latest: "latest",
-} as const;
-/**
- * Version of the prompt to use (currently only "latest" supported)
- */
-export type CreateImageVariationVersion = ClosedEnum<
-  typeof CreateImageVariationVersion
->;
-
-/**
- * Prompt configuration for the request
- */
-export type CreateImageVariationPrompt = {
-  /**
-   * Unique identifier of the prompt to use
-   */
-  id: string;
-  /**
-   * Version of the prompt to use (currently only "latest" supported)
-   */
-  version: CreateImageVariationVersion;
 };
 
 export const CreateImageVariationType = {
@@ -127,7 +100,7 @@ export type CreateImageVariationLoadBalancer1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateImageVariationLoadBalancer =
   CreateImageVariationLoadBalancer1;
@@ -142,6 +115,110 @@ export type CreateImageVariationTimeout = {
   callTimeout: number;
 };
 
+/**
+ * Retry configuration for the request
+ */
+export type CreateImageVariationRouterImagesVariationsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateImageVariationRouterImagesVariationsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Version of the prompt to use (currently only "latest" supported)
+ */
+export const CreateImageVariationVersion = {
+  Latest: "latest",
+} as const;
+/**
+ * Version of the prompt to use (currently only "latest" supported)
+ */
+export type CreateImageVariationVersion = ClosedEnum<
+  typeof CreateImageVariationVersion
+>;
+
+/**
+ * Prompt configuration for the request
+ */
+export type CreateImageVariationPrompt = {
+  /**
+   * Unique identifier of the prompt to use
+   */
+  id: string;
+  /**
+   * Version of the prompt to use (currently only "latest" supported)
+   */
+  version: CreateImageVariationVersion;
+};
+
+export const CreateImageVariationRouterImagesVariationsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreateImageVariationRouterImagesVariationsType = ClosedEnum<
+  typeof CreateImageVariationRouterImagesVariationsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreateImageVariationRouterImagesVariationsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreateImageVariationRouterImagesVariationsType;
+};
+
+export const CreateImageVariationLoadBalancerRouterImagesVariationsType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateImageVariationLoadBalancerRouterImagesVariationsType =
+  ClosedEnum<typeof CreateImageVariationLoadBalancerRouterImagesVariationsType>;
+
+export type CreateImageVariationLoadBalancerRouterImagesVariationsModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateImageVariationLoadBalancerRouterImagesVariations1 = {
+  type: CreateImageVariationLoadBalancerRouterImagesVariationsType;
+  models: Array<CreateImageVariationLoadBalancerRouterImagesVariationsModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateImageVariationRouterImagesVariationsLoadBalancer =
+  CreateImageVariationLoadBalancerRouterImagesVariations1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateImageVariationRouterImagesVariationsTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 export type CreateImageVariationOrq = {
   /**
    * The name to display on the trace. If not specified, the default system name will be used.
@@ -150,11 +227,13 @@ export type CreateImageVariationOrq = {
   /**
    * Retry configuration for the request
    */
-  retry?: CreateImageVariationRetry | undefined;
+  retry?: CreateImageVariationRouterImagesVariationsRetry | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateImageVariationFallbacks> | undefined;
+  fallbacks?:
+    | Array<CreateImageVariationRouterImagesVariationsFallbacks>
+    | undefined;
   /**
    * Prompt configuration for the request
    */
@@ -172,15 +251,17 @@ export type CreateImageVariationOrq = {
   /**
    * Cache configuration for the request.
    */
-  cache?: CreateImageVariationCache | undefined;
+  cache?: CreateImageVariationRouterImagesVariationsCache | undefined;
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateImageVariationLoadBalancer1 | undefined;
+  loadBalancer?:
+    | CreateImageVariationLoadBalancerRouterImagesVariations1
+    | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateImageVariationTimeout | undefined;
+  timeout?: CreateImageVariationRouterImagesVariationsTimeout | undefined;
 };
 
 /**
@@ -211,6 +292,30 @@ export type CreateImageVariationRequestBody = {
    * A unique identifier representing your end-user, which can help to monitor and detect abuse.
    */
   user?: string | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateImageVariationFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateImageVariationRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreateImageVariationCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateImageVariationLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateImageVariationTimeout | undefined;
   orq?: CreateImageVariationOrq | undefined;
 };
 
@@ -302,34 +407,6 @@ export const Size$outboundSchema: z.ZodNativeEnum<typeof Size> = z.nativeEnum(
 );
 
 /** @internal */
-export type CreateImageVariationRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const CreateImageVariationRetry$outboundSchema: z.ZodType<
-  CreateImageVariationRetry$Outbound,
-  z.ZodTypeDef,
-  CreateImageVariationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function createImageVariationRetryToJSON(
-  createImageVariationRetry: CreateImageVariationRetry,
-): string {
-  return JSON.stringify(
-    CreateImageVariationRetry$outboundSchema.parse(createImageVariationRetry),
-  );
-}
-
-/** @internal */
 export type CreateImageVariationFallbacks$Outbound = {
   model: string;
 };
@@ -354,31 +431,30 @@ export function createImageVariationFallbacksToJSON(
 }
 
 /** @internal */
-export const CreateImageVariationVersion$outboundSchema: z.ZodNativeEnum<
-  typeof CreateImageVariationVersion
-> = z.nativeEnum(CreateImageVariationVersion);
-
-/** @internal */
-export type CreateImageVariationPrompt$Outbound = {
-  id: string;
-  version: string;
+export type CreateImageVariationRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const CreateImageVariationPrompt$outboundSchema: z.ZodType<
-  CreateImageVariationPrompt$Outbound,
+export const CreateImageVariationRetry$outboundSchema: z.ZodType<
+  CreateImageVariationRetry$Outbound,
   z.ZodTypeDef,
-  CreateImageVariationPrompt
+  CreateImageVariationRetry
 > = z.object({
-  id: z.string(),
-  version: CreateImageVariationVersion$outboundSchema,
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
 });
 
-export function createImageVariationPromptToJSON(
-  createImageVariationPrompt: CreateImageVariationPrompt,
+export function createImageVariationRetryToJSON(
+  createImageVariationRetry: CreateImageVariationRetry,
 ): string {
   return JSON.stringify(
-    CreateImageVariationPrompt$outboundSchema.parse(createImageVariationPrompt),
+    CreateImageVariationRetry$outboundSchema.parse(createImageVariationRetry),
   );
 }
 
@@ -522,16 +598,265 @@ export function createImageVariationTimeoutToJSON(
 }
 
 /** @internal */
+export type CreateImageVariationRouterImagesVariationsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateImageVariationRouterImagesVariationsRetry$outboundSchema:
+  z.ZodType<
+    CreateImageVariationRouterImagesVariationsRetry$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationRouterImagesVariationsRetry
+  > = z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  });
+
+export function createImageVariationRouterImagesVariationsRetryToJSON(
+  createImageVariationRouterImagesVariationsRetry:
+    CreateImageVariationRouterImagesVariationsRetry,
+): string {
+  return JSON.stringify(
+    CreateImageVariationRouterImagesVariationsRetry$outboundSchema.parse(
+      createImageVariationRouterImagesVariationsRetry,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageVariationRouterImagesVariationsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateImageVariationRouterImagesVariationsFallbacks$outboundSchema:
+  z.ZodType<
+    CreateImageVariationRouterImagesVariationsFallbacks$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationRouterImagesVariationsFallbacks
+  > = z.object({
+    model: z.string(),
+  });
+
+export function createImageVariationRouterImagesVariationsFallbacksToJSON(
+  createImageVariationRouterImagesVariationsFallbacks:
+    CreateImageVariationRouterImagesVariationsFallbacks,
+): string {
+  return JSON.stringify(
+    CreateImageVariationRouterImagesVariationsFallbacks$outboundSchema.parse(
+      createImageVariationRouterImagesVariationsFallbacks,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateImageVariationVersion$outboundSchema: z.ZodNativeEnum<
+  typeof CreateImageVariationVersion
+> = z.nativeEnum(CreateImageVariationVersion);
+
+/** @internal */
+export type CreateImageVariationPrompt$Outbound = {
+  id: string;
+  version: string;
+};
+
+/** @internal */
+export const CreateImageVariationPrompt$outboundSchema: z.ZodType<
+  CreateImageVariationPrompt$Outbound,
+  z.ZodTypeDef,
+  CreateImageVariationPrompt
+> = z.object({
+  id: z.string(),
+  version: CreateImageVariationVersion$outboundSchema,
+});
+
+export function createImageVariationPromptToJSON(
+  createImageVariationPrompt: CreateImageVariationPrompt,
+): string {
+  return JSON.stringify(
+    CreateImageVariationPrompt$outboundSchema.parse(createImageVariationPrompt),
+  );
+}
+
+/** @internal */
+export const CreateImageVariationRouterImagesVariationsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateImageVariationRouterImagesVariationsType> = z
+    .nativeEnum(CreateImageVariationRouterImagesVariationsType);
+
+/** @internal */
+export type CreateImageVariationRouterImagesVariationsCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreateImageVariationRouterImagesVariationsCache$outboundSchema:
+  z.ZodType<
+    CreateImageVariationRouterImagesVariationsCache$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationRouterImagesVariationsCache
+  > = z.object({
+    ttl: z.number().default(1800),
+    type: CreateImageVariationRouterImagesVariationsType$outboundSchema,
+  });
+
+export function createImageVariationRouterImagesVariationsCacheToJSON(
+  createImageVariationRouterImagesVariationsCache:
+    CreateImageVariationRouterImagesVariationsCache,
+): string {
+  return JSON.stringify(
+    CreateImageVariationRouterImagesVariationsCache$outboundSchema.parse(
+      createImageVariationRouterImagesVariationsCache,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateImageVariationLoadBalancerRouterImagesVariationsType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateImageVariationLoadBalancerRouterImagesVariationsType
+  > = z.nativeEnum(CreateImageVariationLoadBalancerRouterImagesVariationsType);
+
+/** @internal */
+export type CreateImageVariationLoadBalancerRouterImagesVariationsModels$Outbound =
+  {
+    model: string;
+    weight: number;
+  };
+
+/** @internal */
+export const CreateImageVariationLoadBalancerRouterImagesVariationsModels$outboundSchema:
+  z.ZodType<
+    CreateImageVariationLoadBalancerRouterImagesVariationsModels$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationLoadBalancerRouterImagesVariationsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createImageVariationLoadBalancerRouterImagesVariationsModelsToJSON(
+  createImageVariationLoadBalancerRouterImagesVariationsModels:
+    CreateImageVariationLoadBalancerRouterImagesVariationsModels,
+): string {
+  return JSON.stringify(
+    CreateImageVariationLoadBalancerRouterImagesVariationsModels$outboundSchema
+      .parse(createImageVariationLoadBalancerRouterImagesVariationsModels),
+  );
+}
+
+/** @internal */
+export type CreateImageVariationLoadBalancerRouterImagesVariations1$Outbound = {
+  type: string;
+  models: Array<
+    CreateImageVariationLoadBalancerRouterImagesVariationsModels$Outbound
+  >;
+};
+
+/** @internal */
+export const CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema:
+  z.ZodType<
+    CreateImageVariationLoadBalancerRouterImagesVariations1$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationLoadBalancerRouterImagesVariations1
+  > = z.object({
+    type:
+      CreateImageVariationLoadBalancerRouterImagesVariationsType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateImageVariationLoadBalancerRouterImagesVariationsModels$outboundSchema
+      ),
+    ),
+  });
+
+export function createImageVariationLoadBalancerRouterImagesVariations1ToJSON(
+  createImageVariationLoadBalancerRouterImagesVariations1:
+    CreateImageVariationLoadBalancerRouterImagesVariations1,
+): string {
+  return JSON.stringify(
+    CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
+      .parse(createImageVariationLoadBalancerRouterImagesVariations1),
+  );
+}
+
+/** @internal */
+export type CreateImageVariationRouterImagesVariationsLoadBalancer$Outbound =
+  CreateImageVariationLoadBalancerRouterImagesVariations1$Outbound;
+
+/** @internal */
+export const CreateImageVariationRouterImagesVariationsLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateImageVariationRouterImagesVariationsLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationRouterImagesVariationsLoadBalancer
+  > = z.lazy(() =>
+    CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
+  );
+
+export function createImageVariationRouterImagesVariationsLoadBalancerToJSON(
+  createImageVariationRouterImagesVariationsLoadBalancer:
+    CreateImageVariationRouterImagesVariationsLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateImageVariationRouterImagesVariationsLoadBalancer$outboundSchema.parse(
+      createImageVariationRouterImagesVariationsLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageVariationRouterImagesVariationsTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateImageVariationRouterImagesVariationsTimeout$outboundSchema:
+  z.ZodType<
+    CreateImageVariationRouterImagesVariationsTimeout$Outbound,
+    z.ZodTypeDef,
+    CreateImageVariationRouterImagesVariationsTimeout
+  > = z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  });
+
+export function createImageVariationRouterImagesVariationsTimeoutToJSON(
+  createImageVariationRouterImagesVariationsTimeout:
+    CreateImageVariationRouterImagesVariationsTimeout,
+): string {
+  return JSON.stringify(
+    CreateImageVariationRouterImagesVariationsTimeout$outboundSchema.parse(
+      createImageVariationRouterImagesVariationsTimeout,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateImageVariationOrq$Outbound = {
   name?: string | undefined;
-  retry?: CreateImageVariationRetry$Outbound | undefined;
-  fallbacks?: Array<CreateImageVariationFallbacks$Outbound> | undefined;
+  retry?: CreateImageVariationRouterImagesVariationsRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateImageVariationRouterImagesVariationsFallbacks$Outbound>
+    | undefined;
   prompt?: CreateImageVariationPrompt$Outbound | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
-  cache?: CreateImageVariationCache$Outbound | undefined;
-  load_balancer?: CreateImageVariationLoadBalancer1$Outbound | undefined;
-  timeout?: CreateImageVariationTimeout$Outbound | undefined;
+  cache?: CreateImageVariationRouterImagesVariationsCache$Outbound | undefined;
+  load_balancer?:
+    | CreateImageVariationLoadBalancerRouterImagesVariations1$Outbound
+    | undefined;
+  timeout?:
+    | CreateImageVariationRouterImagesVariationsTimeout$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -541,16 +866,26 @@ export const CreateImageVariationOrq$outboundSchema: z.ZodType<
   CreateImageVariationOrq
 > = z.object({
   name: z.string().optional(),
-  retry: z.lazy(() => CreateImageVariationRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateImageVariationFallbacks$outboundSchema))
-    .optional(),
+  retry: z.lazy(() =>
+    CreateImageVariationRouterImagesVariationsRetry$outboundSchema
+  ).optional(),
+  fallbacks: z.array(
+    z.lazy(() =>
+      CreateImageVariationRouterImagesVariationsFallbacks$outboundSchema
+    ),
+  ).optional(),
   prompt: z.lazy(() => CreateImageVariationPrompt$outboundSchema).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
-  cache: z.lazy(() => CreateImageVariationCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateImageVariationLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateImageVariationTimeout$outboundSchema).optional(),
+  cache: z.lazy(() =>
+    CreateImageVariationRouterImagesVariationsCache$outboundSchema
+  ).optional(),
+  loadBalancer: z.lazy(() =>
+    CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() =>
+    CreateImageVariationRouterImagesVariationsTimeout$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     loadBalancer: "load_balancer",
@@ -573,6 +908,12 @@ export type CreateImageVariationRequestBody$Outbound = {
   response_format: string;
   size: string;
   user?: string | undefined;
+  name?: string | undefined;
+  fallbacks?: Array<CreateImageVariationFallbacks$Outbound> | undefined;
+  retry?: CreateImageVariationRetry$Outbound | undefined;
+  cache?: CreateImageVariationCache$Outbound | undefined;
+  load_balancer?: CreateImageVariationLoadBalancer1$Outbound | undefined;
+  timeout?: CreateImageVariationTimeout$Outbound | undefined;
   orq?: CreateImageVariationOrq$Outbound | undefined;
 };
 
@@ -590,10 +931,19 @@ export const CreateImageVariationRequestBody$outboundSchema: z.ZodType<
   ),
   size: Size$outboundSchema.default("1024x1024"),
   user: z.string().optional(),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateImageVariationFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateImageVariationRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreateImageVariationCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateImageVariationLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateImageVariationTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateImageVariationOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
+    loadBalancer: "load_balancer",
   });
 });
 

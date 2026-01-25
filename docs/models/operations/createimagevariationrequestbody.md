@@ -9,6 +9,26 @@ import { CreateImageVariationRequestBody } from "@orq-ai/node/models/operations"
 
 let value: CreateImageVariationRequestBody = {
   model: "Sentra",
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+      503,
+      504,
+    ],
+  },
+  cache: {
+    ttl: 3600,
+    type: "exact_match",
+  },
+  loadBalancer: {
+    type: "weight_based",
+    models: [],
+  },
+  timeout: {
+    callTimeout: 30000,
+  },
   orq: {
     retry: {
       onCodes: [
@@ -78,4 +98,10 @@ let value: CreateImageVariationRequestBody = {
 | `responseFormat`                                                                                                                                                  | [operations.CreateImageVariationResponseFormat](../../models/operations/createimagevariationresponseformat.md)                                                    | :heavy_minus_sign:                                                                                                                                                | The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated. |
 | `size`                                                                                                                                                            | [operations.Size](../../models/operations/size.md)                                                                                                                | :heavy_minus_sign:                                                                                                                                                | The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.                                                                            |
 | `user`                                                                                                                                                            | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | A unique identifier representing your end-user, which can help to monitor and detect abuse.                                                                       |
+| `name`                                                                                                                                                            | *string*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                | The name to display on the trace. If not specified, the default system name will be used.                                                                         |
+| `fallbacks`                                                                                                                                                       | [operations.CreateImageVariationFallbacks](../../models/operations/createimagevariationfallbacks.md)[]                                                            | :heavy_minus_sign:                                                                                                                                                | Array of fallback models to use if primary model fails                                                                                                            |
+| `retry`                                                                                                                                                           | [operations.CreateImageVariationRetry](../../models/operations/createimagevariationretry.md)                                                                      | :heavy_minus_sign:                                                                                                                                                | Retry configuration for the request                                                                                                                               |
+| `cache`                                                                                                                                                           | [operations.CreateImageVariationCache](../../models/operations/createimagevariationcache.md)                                                                      | :heavy_minus_sign:                                                                                                                                                | Cache configuration for the request.                                                                                                                              |
+| `loadBalancer`                                                                                                                                                    | *operations.CreateImageVariationLoadBalancer*                                                                                                                     | :heavy_minus_sign:                                                                                                                                                | Load balancer configuration for the request.                                                                                                                      |
+| `timeout`                                                                                                                                                         | [operations.CreateImageVariationTimeout](../../models/operations/createimagevariationtimeout.md)                                                                  | :heavy_minus_sign:                                                                                                                                                | Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.                |
 | `orq`                                                                                                                                                             | [operations.CreateImageVariationOrq](../../models/operations/createimagevariationorq.md)                                                                          | :heavy_minus_sign:                                                                                                                                                | N/A                                                                                                                                                               |

@@ -99,6 +99,13 @@ async function $do(
   if (payload.enable_logging !== undefined) {
     appendForm(body, "enable_logging", payload.enable_logging);
   }
+  if (payload.fallbacks !== undefined) {
+    appendForm(
+      body,
+      "fallbacks",
+      encodeJSON("fallbacks", payload.fallbacks, { explode: true }),
+    );
+  }
   if (payload.file !== undefined) {
     if (isBlobLike(payload.file)) {
       appendForm(body, "file", payload.file);
@@ -122,6 +129,16 @@ async function $do(
   if (payload.language !== undefined) {
     appendForm(body, "language", payload.language);
   }
+  if (payload.load_balancer !== undefined) {
+    appendForm(
+      body,
+      "load_balancer",
+      encodeJSON("load_balancer", payload.load_balancer, { explode: true }),
+    );
+  }
+  if (payload.name !== undefined) {
+    appendForm(body, "name", payload.name);
+  }
   if (payload.num_speakers !== undefined) {
     appendForm(body, "num_speakers", payload.num_speakers);
   }
@@ -134,11 +151,25 @@ async function $do(
   if (payload.response_format !== undefined) {
     appendForm(body, "response_format", payload.response_format);
   }
+  if (payload.retry !== undefined) {
+    appendForm(
+      body,
+      "retry",
+      encodeJSON("retry", payload.retry, { explode: true }),
+    );
+  }
   if (payload.tag_audio_events !== undefined) {
     appendForm(body, "tag_audio_events", payload.tag_audio_events);
   }
   if (payload.temperature !== undefined) {
     appendForm(body, "temperature", payload.temperature);
+  }
+  if (payload.timeout !== undefined) {
+    appendForm(
+      body,
+      "timeout",
+      encodeJSON("timeout", payload.timeout, { explode: true }),
+    );
   }
   if (payload.timestamp_granularities !== undefined) {
     appendForm(

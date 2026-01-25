@@ -1414,6 +1414,10 @@ export type CreateChatCompletionRequestBody = {
    */
   metadata?: { [k: string]: string } | undefined;
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: CreateChatCompletionAudio | null | undefined;
@@ -5265,6 +5269,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
   >;
   model: string;
   metadata?: { [k: string]: string } | undefined;
+  name?: string | undefined;
   audio?: CreateChatCompletionAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -5326,6 +5331,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   ),
   model: z.string(),
   metadata: z.record(z.string()).optional(),
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => CreateChatCompletionAudio$outboundSchema))
     .optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),

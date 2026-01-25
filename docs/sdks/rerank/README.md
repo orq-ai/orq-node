@@ -27,6 +27,26 @@ async function run() {
       "<value 1>",
     ],
     model: "XTS",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       fallbacks: [
         {
@@ -108,6 +128,26 @@ async function run() {
       "<value 1>",
     ],
     model: "XTS",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       fallbacks: [
         {

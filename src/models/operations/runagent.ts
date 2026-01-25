@@ -336,6 +336,10 @@ export type RunAgentModelConfigurationTimeout = {
  */
 export type RunAgentModelConfigurationParameters = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: RunAgentModelConfigurationAudio | null | undefined;
@@ -831,6 +835,10 @@ export type RunAgentFallbackModelConfigurationTimeout = {
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type RunAgentFallbackModelConfigurationParameters = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -2625,6 +2633,7 @@ export function runAgentModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export type RunAgentModelConfigurationParameters$Outbound = {
+  name?: string | undefined;
   audio?: RunAgentModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -2670,6 +2679,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentModelConfigurationParameters
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(
     z.lazy(() => RunAgentModelConfigurationAudio$outboundSchema),
   ).optional(),
@@ -3455,6 +3465,7 @@ export function runAgentFallbackModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export type RunAgentFallbackModelConfigurationParameters$Outbound = {
+  name?: string | undefined;
   audio?: RunAgentFallbackModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -3505,6 +3516,7 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     z.ZodTypeDef,
     RunAgentFallbackModelConfigurationParameters
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() => RunAgentFallbackModelConfigurationAudio$outboundSchema),
     ).optional(),
@@ -4015,7 +4027,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KFVJH94Q8YZF61362F7YDNKB"),
+  id: z.string().default("01KFVN6DV6VWKFY5A6JA1Y33G0"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

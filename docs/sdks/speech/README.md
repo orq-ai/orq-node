@@ -25,6 +25,27 @@ async function run() {
     input: "<value>",
     model: "Grand Caravan",
     voice: "<value>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [
@@ -107,6 +128,27 @@ async function run() {
     input: "<value>",
     model: "Grand Caravan",
     voice: "<value>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [

@@ -92,7 +92,7 @@ export type CreateTranscriptionLoadBalancer1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateTranscriptionLoadBalancer = CreateTranscriptionLoadBalancer1;
 
@@ -100,6 +100,67 @@ export type CreateTranscriptionLoadBalancer = CreateTranscriptionLoadBalancer1;
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
 export type CreateTranscriptionTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+export type CreateTranscriptionRouterAudioTranscriptionsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreateTranscriptionRouterAudioTranscriptionsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export const CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType =
+  ClosedEnum<
+    typeof CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType
+  >;
+
+export type CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateTranscriptionLoadBalancerRouterAudioTranscriptions1 = {
+  type: CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType;
+  models: Array<CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateTranscriptionRouterAudioTranscriptionsLoadBalancer =
+  CreateTranscriptionLoadBalancerRouterAudioTranscriptions1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateTranscriptionRouterAudioTranscriptionsTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -114,11 +175,13 @@ export type CreateTranscriptionOrq = {
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateTranscriptionFallbacks> | undefined;
+  fallbacks?:
+    | Array<CreateTranscriptionRouterAudioTranscriptionsFallbacks>
+    | undefined;
   /**
    * Retry configuration for the request
    */
-  retry?: CreateTranscriptionRetry | undefined;
+  retry?: CreateTranscriptionRouterAudioTranscriptionsRetry | undefined;
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
@@ -132,11 +195,13 @@ export type CreateTranscriptionOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateTranscriptionLoadBalancer1 | undefined;
+  loadBalancer?:
+    | CreateTranscriptionLoadBalancerRouterAudioTranscriptions1
+    | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateTranscriptionTimeout | undefined;
+  timeout?: CreateTranscriptionRouterAudioTranscriptionsTimeout | undefined;
 };
 
 export type CreateTranscriptionFile = {
@@ -192,6 +257,26 @@ export type CreateTranscriptionRequestBody = {
    * The timestamp granularities to populate for this transcription. response_format must be set to verbose_json to use timestamp granularities. Either or both of these options are supported: "word" or "segment". Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
    */
   timestampGranularities?: Array<TimestampGranularities> | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateTranscriptionFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateTranscriptionRetry | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateTranscriptionLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateTranscriptionTimeout | undefined;
   orq?: CreateTranscriptionOrq | undefined;
   /**
    * The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -414,14 +499,205 @@ export function createTranscriptionTimeoutToJSON(
 }
 
 /** @internal */
+export type CreateTranscriptionRouterAudioTranscriptionsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateTranscriptionRouterAudioTranscriptionsFallbacks$outboundSchema:
+  z.ZodType<
+    CreateTranscriptionRouterAudioTranscriptionsFallbacks$Outbound,
+    z.ZodTypeDef,
+    CreateTranscriptionRouterAudioTranscriptionsFallbacks
+  > = z.object({
+    model: z.string(),
+  });
+
+export function createTranscriptionRouterAudioTranscriptionsFallbacksToJSON(
+  createTranscriptionRouterAudioTranscriptionsFallbacks:
+    CreateTranscriptionRouterAudioTranscriptionsFallbacks,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionRouterAudioTranscriptionsFallbacks$outboundSchema.parse(
+      createTranscriptionRouterAudioTranscriptionsFallbacks,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateTranscriptionRouterAudioTranscriptionsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema:
+  z.ZodType<
+    CreateTranscriptionRouterAudioTranscriptionsRetry$Outbound,
+    z.ZodTypeDef,
+    CreateTranscriptionRouterAudioTranscriptionsRetry
+  > = z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  });
+
+export function createTranscriptionRouterAudioTranscriptionsRetryToJSON(
+  createTranscriptionRouterAudioTranscriptionsRetry:
+    CreateTranscriptionRouterAudioTranscriptionsRetry,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema.parse(
+      createTranscriptionRouterAudioTranscriptionsRetry,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType
+  > = z.nativeEnum(
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType,
+  );
+
+/** @internal */
+export type CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$Outbound =
+  {
+    model: string;
+    weight: number;
+  };
+
+/** @internal */
+export const CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$outboundSchema:
+  z.ZodType<
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$Outbound,
+    z.ZodTypeDef,
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createTranscriptionLoadBalancerRouterAudioTranscriptionsModelsToJSON(
+  createTranscriptionLoadBalancerRouterAudioTranscriptionsModels:
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$outboundSchema
+      .parse(createTranscriptionLoadBalancerRouterAudioTranscriptionsModels),
+  );
+}
+
+/** @internal */
+export type CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$Outbound =
+  {
+    type: string;
+    models: Array<
+      CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$Outbound
+    >;
+  };
+
+/** @internal */
+export const CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema:
+  z.ZodType<
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$Outbound,
+    z.ZodTypeDef,
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1
+  > = z.object({
+    type:
+      CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$outboundSchema
+      ),
+    ),
+  });
+
+export function createTranscriptionLoadBalancerRouterAudioTranscriptions1ToJSON(
+  createTranscriptionLoadBalancerRouterAudioTranscriptions1:
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
+      .parse(createTranscriptionLoadBalancerRouterAudioTranscriptions1),
+  );
+}
+
+/** @internal */
+export type CreateTranscriptionRouterAudioTranscriptionsLoadBalancer$Outbound =
+  CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$Outbound;
+
+/** @internal */
+export const CreateTranscriptionRouterAudioTranscriptionsLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateTranscriptionRouterAudioTranscriptionsLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateTranscriptionRouterAudioTranscriptionsLoadBalancer
+  > = z.lazy(() =>
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
+  );
+
+export function createTranscriptionRouterAudioTranscriptionsLoadBalancerToJSON(
+  createTranscriptionRouterAudioTranscriptionsLoadBalancer:
+    CreateTranscriptionRouterAudioTranscriptionsLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionRouterAudioTranscriptionsLoadBalancer$outboundSchema
+      .parse(createTranscriptionRouterAudioTranscriptionsLoadBalancer),
+  );
+}
+
+/** @internal */
+export type CreateTranscriptionRouterAudioTranscriptionsTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateTranscriptionRouterAudioTranscriptionsTimeout$outboundSchema:
+  z.ZodType<
+    CreateTranscriptionRouterAudioTranscriptionsTimeout$Outbound,
+    z.ZodTypeDef,
+    CreateTranscriptionRouterAudioTranscriptionsTimeout
+  > = z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  });
+
+export function createTranscriptionRouterAudioTranscriptionsTimeoutToJSON(
+  createTranscriptionRouterAudioTranscriptionsTimeout:
+    CreateTranscriptionRouterAudioTranscriptionsTimeout,
+): string {
+  return JSON.stringify(
+    CreateTranscriptionRouterAudioTranscriptionsTimeout$outboundSchema.parse(
+      createTranscriptionRouterAudioTranscriptionsTimeout,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateTranscriptionOrq$Outbound = {
   name?: string | undefined;
-  fallbacks?: Array<CreateTranscriptionFallbacks$Outbound> | undefined;
-  retry?: CreateTranscriptionRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateTranscriptionRouterAudioTranscriptionsFallbacks$Outbound>
+    | undefined;
+  retry?:
+    | CreateTranscriptionRouterAudioTranscriptionsRetry$Outbound
+    | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
-  load_balancer?: CreateTranscriptionLoadBalancer1$Outbound | undefined;
-  timeout?: CreateTranscriptionTimeout$Outbound | undefined;
+  load_balancer?:
+    | CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$Outbound
+    | undefined;
+  timeout?:
+    | CreateTranscriptionRouterAudioTranscriptionsTimeout$Outbound
+    | undefined;
 };
 
 /** @internal */
@@ -431,14 +707,22 @@ export const CreateTranscriptionOrq$outboundSchema: z.ZodType<
   CreateTranscriptionOrq
 > = z.object({
   name: z.string().optional(),
-  fallbacks: z.array(z.lazy(() => CreateTranscriptionFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateTranscriptionRetry$outboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() =>
+      CreateTranscriptionRouterAudioTranscriptionsFallbacks$outboundSchema
+    ),
+  ).optional(),
+  retry: z.lazy(() =>
+    CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema
+  ).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
-  loadBalancer: z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateTranscriptionTimeout$outboundSchema).optional(),
+  loadBalancer: z.lazy(() =>
+    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() =>
+    CreateTranscriptionRouterAudioTranscriptionsTimeout$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     loadBalancer: "load_balancer",
@@ -495,6 +779,11 @@ export type CreateTranscriptionRequestBody$Outbound = {
   temperature?: number | undefined;
   language?: string | undefined;
   timestamp_granularities?: Array<string> | undefined;
+  name?: string | undefined;
+  fallbacks?: Array<CreateTranscriptionFallbacks$Outbound> | undefined;
+  retry?: CreateTranscriptionRetry$Outbound | undefined;
+  load_balancer?: CreateTranscriptionLoadBalancer1$Outbound | undefined;
+  timeout?: CreateTranscriptionTimeout$Outbound | undefined;
   orq?: CreateTranscriptionOrq$Outbound | undefined;
   file?: CreateTranscriptionFile$Outbound | Blob | undefined;
 };
@@ -517,6 +806,13 @@ export const CreateTranscriptionRequestBody$outboundSchema: z.ZodType<
   language: z.string().optional(),
   timestampGranularities: z.array(TimestampGranularities$outboundSchema)
     .optional(),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateTranscriptionFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateTranscriptionRetry$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateTranscriptionTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateTranscriptionOrq$outboundSchema).optional(),
   file: z.lazy(() => CreateTranscriptionFile$outboundSchema).or(blobLikeSchema)
     .optional(),
@@ -528,6 +824,7 @@ export const CreateTranscriptionRequestBody$outboundSchema: z.ZodType<
     numSpeakers: "num_speakers",
     timestampsGranularity: "timestamps_granularity",
     timestampGranularities: "timestamp_granularities",
+    loadBalancer: "load_balancer",
   });
 });
 

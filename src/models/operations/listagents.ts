@@ -501,6 +501,10 @@ export type ListAgentsTimeout = {
  */
 export type ListAgentsParameters = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: ListAgentsAudio | null | undefined;
@@ -973,6 +977,10 @@ export type ListAgentsFallbackModelConfigurationTimeout = {
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type ListAgentsFallbackModelConfigurationParameters = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -1958,6 +1966,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => ListAgentsAudio$inboundSchema)).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
@@ -2648,6 +2657,7 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() => ListAgentsFallbackModelConfigurationAudio$inboundSchema),
     ).optional(),
