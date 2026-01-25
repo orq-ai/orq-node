@@ -1868,7 +1868,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "reasoning_01kfvjh8ypsdzthnnzzqm98cve"
+              default: "reasoning_01kfvn6dn63mj76wvfvx4qvm3x"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             "kind":
@@ -1952,7 +1952,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "text_01kfvjh8ymggzajb8rzhr77bpv"
+                      default: "text_01kfvn6dn47nhc5xe3g8fbh008"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     "kind":
@@ -1978,7 +1978,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "file_01kfvjh8ysrwpnqgcke76371r7"
+                      default: "file_01kfvn6dn7fk6qqptcw9ndnzdj"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     "kind":
@@ -2009,7 +2009,7 @@ components:
                   properties:
                     "_id":
                       type: "string"
-                      default: "data_01kfvjh8yvk3g044jcmkcz39fq"
+                      default: "data_01kfvn6dncez0zpcdectxtcq44"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     "kind":
@@ -2091,7 +2091,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "text_01kfvjh8z7ktkfkntjf4at0ryz"
+                                  default: "text_01kfvn6dnme9d9hgxnbtb2rqrx"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 "kind":
@@ -2116,7 +2116,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "reasoning_01kfvjh8z9kz74c7e8sqvt8hv7"
+                                  default: "reasoning_01kfvn6dnpjbxfc5kefq2qdxpf"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 "kind":
@@ -2144,7 +2144,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "file_01kfvjh8z9s5kfvw0h1qhv0gyx"
+                                  default: "file_01kfvn6dnq6eb3qvn05g0y5xh9"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 "kind":
@@ -2175,7 +2175,7 @@ components:
                               properties:
                                 "_id":
                                   type: "string"
-                                  default: "data_01kfvjh8zbrtx9ravszqae318q"
+                                  default: "data_01kfvn6dns6001mwjq4eh0z88g"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 "kind":
@@ -3647,7 +3647,7 @@ components:
       properties:
         "_id":
           type: "string"
-          default: "conv_01kfvjh98xpq7txy94b17s96kw"
+          default: "conv_01kfvn6dznm1sfafeky9ayzrf6"
           description: "Unique conversation identifier with `conv_` prefix."
           example: "conv_01jj1hdhn79xas7a01wb3hysdb"
         "kind":
@@ -3766,7 +3766,7 @@ components:
           properties:
             "_id":
               type: "string"
-              default: "conv_01kfvjh992xegc77y1g4epck6h"
+              default: "conv_01kfvn6dzv13qg5cr0apfcwske"
               description: "Unique conversation identifier with `conv_` prefix."
               example: "conv_01jj1hdhn79xas7a01wb3hysdb"
             "messages":
@@ -3968,7 +3968,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3976,7 +3976,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -4112,10 +4112,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4192,10 +4192,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4269,10 +4269,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4361,10 +4361,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4438,10 +4438,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4815,10 +4815,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -4908,10 +4908,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "updated":
                               type: "string"
-                              default: "2026-01-25T21:56:23.421Z"
+                              default: "2026-01-25T22:42:53.396Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -5358,10 +5358,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5438,10 +5438,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5515,10 +5515,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5607,10 +5607,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -5684,10 +5684,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6061,10 +6061,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6154,10 +6154,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6591,10 +6591,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6671,10 +6671,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6748,10 +6748,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6840,10 +6840,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -6917,10 +6917,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7294,10 +7294,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -7387,10 +7387,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "updated":
                         type: "string"
-                        default: "2026-01-25T21:56:23.421Z"
+                        default: "2026-01-25T22:42:53.396Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -8160,7 +8160,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-25T21:56:21.656Z"
+                          default: "2026-01-25T22:42:51.692Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -8168,7 +8168,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:21.657Z"
+                              default: "2026-01-25T22:42:51.693Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -8327,7 +8327,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8335,7 +8335,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8422,7 +8422,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8430,7 +8430,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8566,7 +8566,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8574,7 +8574,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -12536,6 +12536,9 @@ paths:
                         "parameters":
                           type: "object"
                           properties:
+                            "name":
+                              type: "string"
+                              description: "The name to display on the trace. If not specified, the default system name will be used."
                             "audio":
                               type:
                                 - "object"
@@ -12914,6 +12917,9 @@ paths:
                           "parameters":
                             type: "object"
                             properties:
+                              "name":
+                                type: "string"
+                                description: "The name to display on the trace. If not specified, the default system name will be used."
                               "audio":
                                 type:
                                   - "object"
@@ -13858,6 +13864,9 @@ paths:
                       "parameters":
                         type: "object"
                         properties:
+                          "name":
+                            type: "string"
+                            description: "The name to display on the trace. If not specified, the default system name will be used."
                           "audio":
                             type:
                               - "object"
@@ -14233,6 +14242,9 @@ paths:
                                 "parameters":
                                   type: "object"
                                   properties:
+                                    "name":
+                                      type: "string"
+                                      description: "The name to display on the trace. If not specified, the default system name will be used."
                                     "audio":
                                       type:
                                         - "object"
@@ -15136,6 +15148,9 @@ paths:
                       "parameters":
                         type: "object"
                         properties:
+                          "name":
+                            type: "string"
+                            description: "The name to display on the trace. If not specified, the default system name will be used."
                           "audio":
                             type:
                               - "object"
@@ -15511,6 +15526,9 @@ paths:
                                 "parameters":
                                   type: "object"
                                   properties:
+                                    "name":
+                                      type: "string"
+                                      description: "The name to display on the trace. If not specified, the default system name will be used."
                                     "audio":
                                       type:
                                         - "object"
@@ -16016,6 +16034,9 @@ paths:
                         "parameters":
                           type: "object"
                           properties:
+                            "name":
+                              type: "string"
+                              description: "The name to display on the trace. If not specified, the default system name will be used."
                             "audio":
                               type:
                                 - "object"
@@ -16394,6 +16415,9 @@ paths:
                           "parameters":
                             type: "object"
                             properties:
+                              "name":
+                                type: "string"
+                                description: "The name to display on the trace. If not specified, the default system name will be used."
                               "audio":
                                 type:
                                   - "object"
@@ -17328,6 +17352,9 @@ paths:
                       "parameters":
                         type: "object"
                         properties:
+                          "name":
+                            type: "string"
+                            description: "The name to display on the trace. If not specified, the default system name will be used."
                           "audio":
                             type:
                               - "object"
@@ -17703,6 +17730,9 @@ paths:
                                 "parameters":
                                   type: "object"
                                   properties:
+                                    "name":
+                                      type: "string"
+                                      description: "The name to display on the trace. If not specified, the default system name will be used."
                                     "audio":
                                       type:
                                         - "object"
@@ -18672,6 +18702,9 @@ paths:
                             "parameters":
                               type: "object"
                               properties:
+                                "name":
+                                  type: "string"
+                                  description: "The name to display on the trace. If not specified, the default system name will be used."
                                 "audio":
                                   type:
                                     - "object"
@@ -19047,6 +19080,9 @@ paths:
                                       "parameters":
                                         type: "object"
                                         properties:
+                                          "name":
+                                            type: "string"
+                                            description: "The name to display on the trace. If not specified, the default system name will be used."
                                           "audio":
                                             type:
                                               - "object"
@@ -19527,6 +19563,9 @@ paths:
                         "parameters":
                           type: "object"
                           properties:
+                            "name":
+                              type: "string"
+                              description: "The name to display on the trace. If not specified, the default system name will be used."
                             "audio":
                               type:
                                 - "object"
@@ -19905,6 +19944,9 @@ paths:
                           "parameters":
                             type: "object"
                             properties:
+                              "name":
+                                type: "string"
+                                description: "The name to display on the trace. If not specified, the default system name will be used."
                               "audio":
                                 type:
                                   - "object"
@@ -20973,7 +21015,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KFVJH94Q8YZF61362F7YDNKB"
+                                          default: "01KFVN6DV6VWKFY5A6JA1Y33G0"
                                         "name":
                                           type: "string"
                                         "description":
@@ -21243,6 +21285,9 @@ paths:
                         "parameters":
                           type: "object"
                           properties:
+                            "name":
+                              type: "string"
+                              description: "The name to display on the trace. If not specified, the default system name will be used."
                             "audio":
                               type:
                                 - "object"
@@ -21621,6 +21666,9 @@ paths:
                           "parameters":
                             type: "object"
                             properties:
+                              "name":
+                                type: "string"
+                                description: "The name to display on the trace. If not specified, the default system name will be used."
                               "audio":
                                 type:
                                   - "object"
@@ -22689,7 +22737,7 @@ paths:
                                       properties:
                                         "id":
                                           type: "string"
-                                          default: "01KFVJH97C7YHM7X8CSBB7AGQ1"
+                                          default: "01KFVN6DY1BW967PKVZNJFTRTZ"
                                         "name":
                                           type: "string"
                                         "description":
@@ -23275,7 +23323,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kfvjh98z6b5qsr5af3sr1c69"
+                        default: "conv_01kfvn6dzq4zz3h7m7dgn7gzrt"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -23369,7 +23417,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kfvjh990sg61ns6azg03nvev"
+                        default: "conv_01kfvn6dzsggfs1e7necjy89a6"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -23534,7 +23582,7 @@ paths:
                   - properties:
                       "_id":
                         type: "string"
-                        default: "conv_01kfvjh999wcqyk36wkc4vbjjq"
+                        default: "conv_01kfvn6e02bgrcrkhxtn1kb9g3"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       "kind":
@@ -23716,7 +23764,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "text_01kfvjh99hc2n46cdt5vw5ykcg"
+                                                            default: "text_01kfvn6e0a212t79e1hztcmj7w"
                                                             description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                                             example: "text_01hxyz123abc"
                                                           "kind":
@@ -23741,7 +23789,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "reasoning_01kfvjh99sbd2ynq0r65y5n5hj"
+                                                            default: "reasoning_01kfvn6e0b1kr4k7r0tj5zt6y2"
                                                             description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                                             example: "reasoning_01hxyz123abc"
                                                           "kind":
@@ -23769,7 +23817,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "file_01kfvjh99th1ef5rnzqykdt60r"
+                                                            default: "file_01kfvn6e0ccx3pe25q5fzwn0gb"
                                                             description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                                             example: "file_01hxyz123abc"
                                                           "kind":
@@ -23800,7 +23848,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "data_01kfvjh99wk2d92c55qhr0t53d"
+                                                            default: "data_01kfvn6e0ecr030bwwwv3vdtf3"
                                                             description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                                             example: "data_01hxyz123abc"
                                                           "kind":
@@ -23850,7 +23898,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "text_01kfvjh9a01sfa1bgsepwbjzz3"
+                                                            default: "text_01kfvn6e0gxhhzk31wenh02jsm"
                                                             description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                                             example: "text_01hxyz123abc"
                                                           "kind":
@@ -23875,7 +23923,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "reasoning_01kfvjh9a1s2nqtxrehsab13cd"
+                                                            default: "reasoning_01kfvn6e0hvczbqgx4qrt02a29"
                                                             description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                                             example: "reasoning_01hxyz123abc"
                                                           "kind":
@@ -23903,7 +23951,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "file_01kfvjh9a2rkz0ndxpnz816b7y"
+                                                            default: "file_01kfvn6e0hk2vph6ns2mmgngv2"
                                                             description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                                             example: "file_01hxyz123abc"
                                                           "kind":
@@ -23934,7 +23982,7 @@ paths:
                                                         properties:
                                                           "_id":
                                                             type: "string"
-                                                            default: "data_01kfvjh9a40m5gwtg7vre609c0"
+                                                            default: "data_01kfvn6e0k0wk8dbdesteyjewb"
                                                             description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                                             example: "data_01hxyz123abc"
                                                           "kind":
@@ -24022,7 +24070,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-25T21:56:25.008Z"
+                    default: "2026-01-25T22:42:54.997Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -24111,7 +24159,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2026-01-25T21:56:25.008Z"
+                          default: "2026-01-25T22:42:54.997Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -24179,7 +24227,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2026-01-25T21:56:25.008Z"
+                    default: "2026-01-25T22:42:54.997Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -24661,6 +24709,9 @@ paths:
                         "prompt":
                           type: "object"
                           properties:
+                            "name":
+                              type: "string"
+                              description: "The name to display on the trace. If not specified, the default system name will be used."
                             "audio":
                               type:
                                 - "object"
@@ -25561,6 +25612,9 @@ paths:
                       type: "string"
                       description: "Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported."
                       example: "openai/gpt-4o"
+                    "name":
+                      type: "string"
+                      description: "The name to display on the trace. If not specified, the default system name will be used."
                     "audio":
                       type:
                         - "object"
@@ -26313,6 +26367,9 @@ paths:
                   "prompt":
                     type: "object"
                     properties:
+                      "name":
+                        type: "string"
+                        description: "The name to display on the trace. If not specified, the default system name will be used."
                       "audio":
                         type:
                           - "object"
@@ -27345,6 +27402,9 @@ paths:
                   "prompt":
                     type: "object"
                     properties:
+                      "name":
+                        type: "string"
+                        description: "The name to display on the trace. If not specified, the default system name will be used."
                       "audio":
                         type:
                           - "object"
@@ -28225,6 +28285,9 @@ paths:
                         - "null"
                       description: "Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported."
                       example: "openai/gpt-4o"
+                    "name":
+                      type: "string"
+                      description: "The name to display on the trace. If not specified, the default system name will be used."
                     "audio":
                       type:
                         - "object"
@@ -29015,6 +29078,9 @@ paths:
                   "prompt":
                     type: "object"
                     properties:
+                      "name":
+                        type: "string"
+                        description: "The name to display on the trace. If not specified, the default system name will be used."
                       "audio":
                         type:
                           - "object"
@@ -30104,6 +30170,9 @@ paths:
                             "prompt":
                               type: "object"
                               properties:
+                                "name":
+                                  type: "string"
+                                  description: "The name to display on the trace. If not specified, the default system name will be used."
                                 "audio":
                                   type:
                                     - "object"
@@ -31131,6 +31200,9 @@ paths:
                       "prompt":
                         type: "object"
                         properties:
+                          "name":
+                            type: "string"
+                            description: "The name to display on the trace. If not specified, the default system name will be used."
                           "audio":
                             type:
                               - "object"
@@ -31930,7 +32002,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KFVJH9JR0RZMW4RXW8Q4R382"
+                              default: "tool_01KFVN6EAJSGQNX4VS10RZRM6M"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -32029,7 +32101,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KFVJH9JT4T7QMW7JQQ1KT5NF"
+                              default: "tool_01KFVN6EAMT2634AKV61FAVBGM"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -32130,7 +32202,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KFVJH9JVEVBQHH086KKT84FS"
+                              default: "tool_01KFVN6EANG2JYESJ4JR79C0KT"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -32264,7 +32336,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KFVJH9JXDMEHWPFWGJ5RJ2G8"
+                              default: "tool_01KFVN6EAQJM9TRBJK1N7T1WYZ"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -32338,7 +32410,7 @@ paths:
                                     properties:
                                       "id":
                                         type: "string"
-                                        default: "01KFVJH9JYKWRS4Z1EJ5XBFGJN"
+                                        default: "01KFVN6EAR86KRYZWRB71CV74T"
                                       "name":
                                         type: "string"
                                       "description":
@@ -32389,7 +32461,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01KFVJH9JZFZKZFR2AW26J3Q2B"
+                              default: "tool_01KFVN6EASWAKCK3HNKVR2N8HM"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -32932,7 +33004,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9K82D6J3QKHQB5G0V6D"
+                        default: "tool_01KFVN6EB4YXFZWVTV33YRYQ7H"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33031,7 +33103,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9KADAZDXRYH9TX81P60"
+                        default: "tool_01KFVN6EB6NH66N7AJ85662CTE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33132,7 +33204,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9KNBSCZNM94STQ79RCX"
+                        default: "tool_01KFVN6EB855HTD2DVEF62NY6J"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33266,7 +33338,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9KVQNGJVF7ZHT5AWTNS"
+                        default: "tool_01KFVN6EBB3Q7BHSPVDVJEMPPX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33340,7 +33412,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KFVJH9KZXC9FYW8G9E8SP381"
+                                  default: "01KFVN6EBFK92TAQJ5YPM3E515"
                                 "name":
                                   type: "string"
                                 "description":
@@ -33391,7 +33463,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9M102R2216F3T2SVKQQ"
+                        default: "tool_01KFVN6EBGKCWGTAY1KTCC5MZE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33821,7 +33893,7 @@ paths:
                             properties:
                               "id":
                                 type: "string"
-                                default: "01KFVJH9MMM1CNXGE0VTKKMNRN"
+                                default: "01KFVN6ECAKKZWM7C9VJMS4E18"
                               "name":
                                 type: "string"
                               "description":
@@ -33939,7 +34011,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9M9G5CPF3JDPCB6TKFG"
+                        default: "tool_01KFVN6EBQNA6CKEPNV8334XCJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34038,7 +34110,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9MAG5B5DMVWMDZWC1AH"
+                        default: "tool_01KFVN6EC06J7W0KTB5SH0JBPX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34139,7 +34211,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9MB2HNGMN5S4HSZPYJV"
+                        default: "tool_01KFVN6EC13XW1297BB2G6QVF5"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34273,7 +34345,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9MDPNF3TT14QD7FRZHA"
+                        default: "tool_01KFVN6EC35QXNK3VNN8ZREJB2"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34347,7 +34419,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KFVJH9ME1ZENDHKDXNW7Z8RS"
+                                  default: "01KFVN6EC497801YG8BYE696ZD"
                                 "name":
                                   type: "string"
                                 "description":
@@ -34398,7 +34470,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9MF0CXHV8X272RPNHAF"
+                        default: "tool_01KFVN6EC5MYDCAMFJM4VHKMPY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34552,7 +34624,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9N2A0DXTGZ91F2WJEAQ"
+                        default: "tool_01KFVN6ECQ14CMT717KMF8P4VS"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34651,7 +34723,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9N4YRNDD3HZGRB37YK2"
+                        default: "tool_01KFVN6ECSK6FTB49ZWVTCGAWW"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34752,7 +34824,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9NEQV2B07C4WARR5MV3"
+                        default: "tool_01KFVN6ECVPF9SMG099Y96P6FA"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34886,7 +34958,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9NH5NGQ6V1VBPDT6BEN"
+                        default: "tool_01KFVN6ECYX8M4QZ317H11VTHZ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34960,7 +35032,7 @@ paths:
                               properties:
                                 "id":
                                   type: "string"
-                                  default: "01KFVJH9NKSWGN2S84VCEJCKTT"
+                                  default: "01KFVN6ED0YHHA6F8Y589GAVHZ"
                                 "name":
                                   type: "string"
                                 "description":
@@ -35011,7 +35083,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01KFVJH9NM9TBCZP05BS07WFKD"
+                        default: "tool_01KFVN6ED1J4XP8WWB0NXWY2XG"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -37145,7 +37217,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KFVJH9RV7F89GKBYP3TJ5RRW"
+                          default: "01KFVN6EGKMQFWCPSP28NXTXFG"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -37311,7 +37383,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KFVJH9RXNFN8BFTPY72M9XCJ"
+                    default: "01KFVN6EGZ8DMB7ZM3VKH8T3HY"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -37407,7 +37479,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KFVJH9RWAM28YN49NWEJAHP0"
+                    default: "01KFVN6EGPBZ5XZNW3DVFVE2ES"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -37539,7 +37611,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KFVJH9S1JQEAHE3SW52D5RXK"
+                    default: "01KFVN6EH2ANE9D6GBKQQW2JCN"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -40085,7 +40157,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-25T21:56:21.656Z"
+                          default: "2026-01-25T22:42:51.692Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -40093,7 +40165,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:21.657Z"
+                              default: "2026-01-25T22:42:51.693Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -40229,7 +40301,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -40237,7 +40309,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -40360,7 +40432,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -40368,7 +40440,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -40521,7 +40593,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -40529,7 +40601,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -40902,7 +40974,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-25T21:56:35.319Z"
+                                    default: "2026-01-25T22:43:05.450Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -40942,7 +41014,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-25T21:56:35.320Z"
+                                    default: "2026-01-25T22:43:05.451Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -40982,7 +41054,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-01-25T21:56:35.320Z"
+                                    default: "2026-01-25T22:43:05.451Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -41018,7 +41090,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-01-25T21:56:21.656Z"
+                          default: "2026-01-25T22:42:51.692Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41026,7 +41098,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:21.657Z"
+                              default: "2026-01-25T22:42:51.693Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -41592,7 +41664,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-25T21:56:35.352Z"
+                                default: "2026-01-25T22:43:05.476Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -41632,7 +41704,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-25T21:56:35.352Z"
+                                default: "2026-01-25T22:43:05.476Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -41672,7 +41744,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-01-25T21:56:35.353Z"
+                                default: "2026-01-25T22:43:05.477Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -41708,7 +41780,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-01-25T21:56:21.656Z"
+                      default: "2026-01-25T22:42:51.692Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -41716,7 +41788,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-01-25T21:56:21.657Z"
+                          default: "2026-01-25T22:42:51.693Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -42033,7 +42105,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:35.341Z"
+                              default: "2026-01-25T22:43:05.458Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -42073,7 +42145,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:35.342Z"
+                              default: "2026-01-25T22:43:05.459Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -42113,7 +42185,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:35.343Z"
+                              default: "2026-01-25T22:43:05.459Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -42149,7 +42221,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42157,7 +42229,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -42721,7 +42793,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:35.390Z"
+                              default: "2026-01-25T22:43:05.507Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -42761,7 +42833,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:35.391Z"
+                              default: "2026-01-25T22:43:05.507Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -42801,7 +42873,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2026-01-25T21:56:35.391Z"
+                              default: "2026-01-25T22:43:05.508Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -42837,7 +42909,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-01-25T21:56:21.656Z"
+                    default: "2026-01-25T22:42:51.692Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42845,7 +42917,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-01-25T21:56:21.657Z"
+                        default: "2026-01-25T22:42:51.693Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -43177,6 +43249,9 @@ paths:
                         type: "string"
                         maxLength: 512
                       description: "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can have a maximum length of 64 characters and values can have a maximum length of 512 characters."
+                    "name":
+                      type: "string"
+                      description: "The name to display on the trace. If not specified, the default system name will be used."
                     "audio":
                       type:
                         - "object"
@@ -45168,6 +45243,100 @@ paths:
                 "user":
                   type: "string"
                   description: "A unique identifier representing your end-user"
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                        example: "openai/text-embedding-3-small"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "cache":
+                  type: "object"
+                  properties:
+                    "ttl":
+                      type: "number"
+                      minimum: 1
+                      maximum: 259200
+                      default: 1800
+                      description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                      example: 3600
+                    "type":
+                      type: "string"
+                      enum:
+                        - "exact_match"
+                  required:
+                    - "type"
+                  description: "Cache configuration for the request."
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -45368,6 +45537,99 @@ paths:
                     - "string"
                     - "null"
                   description: "The filename of the document to rerank"
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "cache":
+                  type: "object"
+                  properties:
+                    "ttl":
+                      type: "number"
+                      minimum: 1
+                      maximum: 259200
+                      default: 1800
+                      description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                      example: 3600
+                    "type":
+                      type: "string"
+                      enum:
+                        - "exact_match"
+                  required:
+                    - "type"
+                  description: "Cache configuration for the request."
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -45573,6 +45835,82 @@ paths:
                   type: "number"
                   default: 1
                   description: "The speed of the generated audio."
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -45767,6 +46105,99 @@ paths:
                     "user":
                       type: "string"
                       description: "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse."
+                    "name":
+                      type: "string"
+                      description: "The name to display on the trace. If not specified, the default system name will be used."
+                    "fallbacks":
+                      type: "array"
+                      items:
+                        type: "object"
+                        properties:
+                          "model":
+                            type: "string"
+                            description: "Fallback model identifier"
+                        required:
+                          - "model"
+                      description: "Array of fallback models to use if primary model fails"
+                    "retry":
+                      type: "object"
+                      properties:
+                        "count":
+                          type: "number"
+                          minimum: 1
+                          maximum: 5
+                          default: 3
+                          description: "Number of retry attempts (1-5)"
+                          example: 3
+                        "on_codes":
+                          type: "array"
+                          items:
+                            type: "number"
+                            minimum: 100
+                            maximum: 599
+                          minItems: 1
+                          default: [429]
+                          description: "HTTP status codes that trigger retry logic"
+                          example: [429, 500, 502, 503, 504]
+                      description: "Retry configuration for the request"
+                    "cache":
+                      type: "object"
+                      properties:
+                        "ttl":
+                          type: "number"
+                          minimum: 1
+                          maximum: 259200
+                          default: 1800
+                          description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                          example: 3600
+                        "type":
+                          type: "string"
+                          enum:
+                            - "exact_match"
+                      required:
+                        - "type"
+                      description: "Cache configuration for the request."
+                    "load_balancer":
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "weight_based"
+                            "models":
+                              type: "array"
+                              items:
+                                type: "object"
+                                properties:
+                                  "model":
+                                    type: "string"
+                                    description: "Model identifier for load balancing"
+                                    example: "openai/gpt-4o"
+                                  "weight":
+                                    type: "number"
+                                    minimum: 0.001
+                                    maximum: 1
+                                    default: 0.5
+                                    description: "Weight assigned to this model for load balancing"
+                                    example: 0.7
+                                required:
+                                  - "model"
+                          required:
+                            - "type"
+                            - "models"
+                      description: "Load balancer configuration for the request."
+                    "timeout":
+                      type: "object"
+                      properties:
+                        "call_timeout":
+                          type: "number"
+                          minimum: 1
+                          description: "Timeout value in milliseconds"
+                          example: 30000
+                      required:
+                        - "call_timeout"
+                      description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                     "orq":
                       type: "object"
                       properties:
@@ -46684,6 +47115,99 @@ paths:
                     - "vivid"
                     - "natural"
                   description: "The style of the generated images. This parameter is only supported for `openai/dall-e-3`. Must be one of `vivid` or `natural`."
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "cache":
+                  type: "object"
+                  properties:
+                    "ttl":
+                      type: "number"
+                      minimum: 1
+                      maximum: 259200
+                      default: 1800
+                      description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                      example: 3600
+                    "type":
+                      type: "string"
+                      enum:
+                        - "exact_match"
+                  required:
+                    - "type"
+                  description: "Cache configuration for the request."
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -46897,6 +47421,99 @@ paths:
                 "user":
                   type: "string"
                   description: "A unique identifier representing your end-user, which can help to monitor and detect abuse."
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "cache":
+                  type: "object"
+                  properties:
+                    "ttl":
+                      type: "number"
+                      minimum: 1
+                      maximum: 259200
+                      default: 1800
+                      description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                      example: 3600
+                    "type":
+                      type: "string"
+                      enum:
+                        - "exact_match"
+                  required:
+                    - "type"
+                  description: "Cache configuration for the request."
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -47135,6 +47752,99 @@ paths:
                 "user":
                   type: "string"
                   description: "A unique identifier representing your end-user, which can help to monitor and detect abuse."
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "cache":
+                  type: "object"
+                  properties:
+                    "ttl":
+                      type: "number"
+                      minimum: 1
+                      maximum: 259200
+                      default: 1800
+                      description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                      example: 3600
+                    "type":
+                      type: "string"
+                      enum:
+                        - "exact_match"
+                  required:
+                    - "type"
+                  description: "Cache configuration for the request."
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -47394,6 +48104,82 @@ paths:
                       - "segment"
                   description: "The timestamp granularities to populate for this transcription. response_format must be set to verbose_json to use timestamp granularities. Either or both of these options are supported: \"word\" or \"segment\". Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency."
                   example: ["word", "segment"]
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
@@ -47647,6 +48433,82 @@ paths:
                   type: "number"
                   example: 0.5
                   description: "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+                "name":
+                  type: "string"
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                "fallbacks":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "model":
+                        type: "string"
+                        description: "Fallback model identifier"
+                    required:
+                      - "model"
+                  description: "Array of fallback models to use if primary model fails"
+                "retry":
+                  type: "object"
+                  properties:
+                    "count":
+                      type: "number"
+                      minimum: 1
+                      maximum: 5
+                      default: 3
+                      description: "Number of retry attempts (1-5)"
+                      example: 3
+                    "on_codes":
+                      type: "array"
+                      items:
+                        type: "number"
+                        minimum: 100
+                        maximum: 599
+                      minItems: 1
+                      default: [429]
+                      description: "HTTP status codes that trigger retry logic"
+                      example: [429, 500, 502, 503, 504]
+                  description: "Retry configuration for the request"
+                "load_balancer":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "weight_based"
+                        "models":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Model identifier for load balancing"
+                                example: "openai/gpt-4o"
+                              "weight":
+                                type: "number"
+                                minimum: 0.001
+                                maximum: 1
+                                default: 0.5
+                                description: "Weight assigned to this model for load balancing"
+                                example: 0.7
+                            required:
+                              - "model"
+                      required:
+                        - "type"
+                        - "models"
+                  description: "Load balancer configuration for the request."
+                "timeout":
+                  type: "object"
+                  properties:
+                    "call_timeout":
+                      type: "number"
+                      minimum: 1
+                      description: "Timeout value in milliseconds"
+                      example: 30000
+                  required:
+                    - "call_timeout"
+                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
                 "orq":
                   type: "object"
                   properties:
