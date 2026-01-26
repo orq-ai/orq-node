@@ -16,6 +16,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type CreateCompletionStop = string | Array<string>;
 
+export type CreateCompletionFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
 /**
  * Retry configuration for the request
  */
@@ -30,7 +37,75 @@ export type CreateCompletionRetry = {
   onCodes?: Array<number> | undefined;
 };
 
-export type CreateCompletionFallbacks = {
+export const CreateCompletionType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreateCompletionType = ClosedEnum<typeof CreateCompletionType>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreateCompletionCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreateCompletionType;
+};
+
+export const CreateCompletionLoadBalancerType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateCompletionLoadBalancerType = ClosedEnum<
+  typeof CreateCompletionLoadBalancerType
+>;
+
+export type CreateCompletionLoadBalancerModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateCompletionLoadBalancer1 = {
+  type: CreateCompletionLoadBalancerType;
+  models: Array<CreateCompletionLoadBalancerModels>;
+};
+
+/**
+ * Load balancer configuration for the request.
+ */
+export type CreateCompletionLoadBalancer = CreateCompletionLoadBalancer1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateCompletionTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreateCompletionRouterCompletionsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateCompletionRouterCompletionsFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -91,20 +166,22 @@ export type CreateCompletionInputs =
   | { [k: string]: any }
   | Array<CreateCompletionInputs2>;
 
-export const CreateCompletionType = {
+export const CreateCompletionRouterCompletionsType = {
   ExactMatch: "exact_match",
 } as const;
-export type CreateCompletionType = ClosedEnum<typeof CreateCompletionType>;
+export type CreateCompletionRouterCompletionsType = ClosedEnum<
+  typeof CreateCompletionRouterCompletionsType
+>;
 
 /**
  * Cache configuration for the request.
  */
-export type CreateCompletionCache = {
+export type CreateCompletionRouterCompletionsCache = {
   /**
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl?: number | undefined;
-  type: CreateCompletionType;
+  type: CreateCompletionRouterCompletionsType;
 };
 
 /**
@@ -523,14 +600,14 @@ export type CreateCompletionKnowledgeBases = {
   query?: string | undefined;
 };
 
-export const CreateCompletionLoadBalancerType = {
+export const CreateCompletionLoadBalancerRouterCompletionsType = {
   WeightBased: "weight_based",
 } as const;
-export type CreateCompletionLoadBalancerType = ClosedEnum<
-  typeof CreateCompletionLoadBalancerType
+export type CreateCompletionLoadBalancerRouterCompletionsType = ClosedEnum<
+  typeof CreateCompletionLoadBalancerRouterCompletionsType
 >;
 
-export type CreateCompletionLoadBalancerModels = {
+export type CreateCompletionLoadBalancerRouterCompletionsModels = {
   /**
    * Model identifier for load balancing
    */
@@ -541,20 +618,21 @@ export type CreateCompletionLoadBalancerModels = {
   weight?: number | undefined;
 };
 
-export type CreateCompletionLoadBalancer1 = {
-  type: CreateCompletionLoadBalancerType;
-  models: Array<CreateCompletionLoadBalancerModels>;
+export type CreateCompletionLoadBalancerRouterCompletions1 = {
+  type: CreateCompletionLoadBalancerRouterCompletionsType;
+  models: Array<CreateCompletionLoadBalancerRouterCompletionsModels>;
 };
 
 /**
  * Array of models with weights for load balancing requests
  */
-export type CreateCompletionLoadBalancer = CreateCompletionLoadBalancer1;
+export type CreateCompletionRouterCompletionsLoadBalancer =
+  CreateCompletionLoadBalancerRouterCompletions1;
 
 /**
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
-export type CreateCompletionTimeout = {
+export type CreateCompletionRouterCompletionsTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -574,11 +652,11 @@ export type CreateCompletionOrq = {
   /**
    * Retry configuration for the request
    */
-  retry?: CreateCompletionRetry | undefined;
+  retry?: CreateCompletionRouterCompletionsRetry | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateCompletionFallbacks> | undefined;
+  fallbacks?: Array<CreateCompletionRouterCompletionsFallbacks> | undefined;
   /**
    * Prompt configuration for the request
    */
@@ -604,16 +682,16 @@ export type CreateCompletionOrq = {
   /**
    * Cache configuration for the request.
    */
-  cache?: CreateCompletionCache | undefined;
+  cache?: CreateCompletionRouterCompletionsCache | undefined;
   knowledgeBases?: Array<CreateCompletionKnowledgeBases> | undefined;
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateCompletionLoadBalancer1 | undefined;
+  loadBalancer?: CreateCompletionLoadBalancerRouterCompletions1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateCompletionTimeout | undefined;
+  timeout?: CreateCompletionRouterCompletionsTimeout | undefined;
 };
 
 export type CreateCompletionRequestBody = {
@@ -665,6 +743,30 @@ export type CreateCompletionRequestBody = {
    * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
    */
   user?: string | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateCompletionFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateCompletionRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreateCompletionCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateCompletionLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateCompletionTimeout | undefined;
   /**
    * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
    *
@@ -922,6 +1024,28 @@ export function createCompletionStopToJSON(
 }
 
 /** @internal */
+export type CreateCompletionFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateCompletionFallbacks$outboundSchema: z.ZodType<
+  CreateCompletionFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createCompletionFallbacksToJSON(
+  createCompletionFallbacks: CreateCompletionFallbacks,
+): string {
+  return JSON.stringify(
+    CreateCompletionFallbacks$outboundSchema.parse(createCompletionFallbacks),
+  );
+}
+
+/** @internal */
 export type CreateCompletionRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
@@ -950,24 +1074,194 @@ export function createCompletionRetryToJSON(
 }
 
 /** @internal */
-export type CreateCompletionFallbacks$Outbound = {
+export const CreateCompletionType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateCompletionType
+> = z.nativeEnum(CreateCompletionType);
+
+/** @internal */
+export type CreateCompletionCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreateCompletionCache$outboundSchema: z.ZodType<
+  CreateCompletionCache$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreateCompletionType$outboundSchema,
+});
+
+export function createCompletionCacheToJSON(
+  createCompletionCache: CreateCompletionCache,
+): string {
+  return JSON.stringify(
+    CreateCompletionCache$outboundSchema.parse(createCompletionCache),
+  );
+}
+
+/** @internal */
+export const CreateCompletionLoadBalancerType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateCompletionLoadBalancerType
+> = z.nativeEnum(CreateCompletionLoadBalancerType);
+
+/** @internal */
+export type CreateCompletionLoadBalancerModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreateCompletionLoadBalancerModels$outboundSchema: z.ZodType<
+  CreateCompletionLoadBalancerModels$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionLoadBalancerModels
+> = z.object({
+  model: z.string(),
+  weight: z.number().default(0.5),
+});
+
+export function createCompletionLoadBalancerModelsToJSON(
+  createCompletionLoadBalancerModels: CreateCompletionLoadBalancerModels,
+): string {
+  return JSON.stringify(
+    CreateCompletionLoadBalancerModels$outboundSchema.parse(
+      createCompletionLoadBalancerModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateCompletionLoadBalancer1$Outbound = {
+  type: string;
+  models: Array<CreateCompletionLoadBalancerModels$Outbound>;
+};
+
+/** @internal */
+export const CreateCompletionLoadBalancer1$outboundSchema: z.ZodType<
+  CreateCompletionLoadBalancer1$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionLoadBalancer1
+> = z.object({
+  type: CreateCompletionLoadBalancerType$outboundSchema,
+  models: z.array(
+    z.lazy(() => CreateCompletionLoadBalancerModels$outboundSchema),
+  ),
+});
+
+export function createCompletionLoadBalancer1ToJSON(
+  createCompletionLoadBalancer1: CreateCompletionLoadBalancer1,
+): string {
+  return JSON.stringify(
+    CreateCompletionLoadBalancer1$outboundSchema.parse(
+      createCompletionLoadBalancer1,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateCompletionLoadBalancer$Outbound =
+  CreateCompletionLoadBalancer1$Outbound;
+
+/** @internal */
+export const CreateCompletionLoadBalancer$outboundSchema: z.ZodType<
+  CreateCompletionLoadBalancer$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionLoadBalancer
+> = z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema);
+
+export function createCompletionLoadBalancerToJSON(
+  createCompletionLoadBalancer: CreateCompletionLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateCompletionLoadBalancer$outboundSchema.parse(
+      createCompletionLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateCompletionTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateCompletionTimeout$outboundSchema: z.ZodType<
+  CreateCompletionTimeout$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function createCompletionTimeoutToJSON(
+  createCompletionTimeout: CreateCompletionTimeout,
+): string {
+  return JSON.stringify(
+    CreateCompletionTimeout$outboundSchema.parse(createCompletionTimeout),
+  );
+}
+
+/** @internal */
+export type CreateCompletionRouterCompletionsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateCompletionRouterCompletionsRetry$outboundSchema: z.ZodType<
+  CreateCompletionRouterCompletionsRetry$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionRouterCompletionsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createCompletionRouterCompletionsRetryToJSON(
+  createCompletionRouterCompletionsRetry:
+    CreateCompletionRouterCompletionsRetry,
+): string {
+  return JSON.stringify(
+    CreateCompletionRouterCompletionsRetry$outboundSchema.parse(
+      createCompletionRouterCompletionsRetry,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateCompletionRouterCompletionsFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const CreateCompletionFallbacks$outboundSchema: z.ZodType<
-  CreateCompletionFallbacks$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionFallbacks
-> = z.object({
-  model: z.string(),
-});
+export const CreateCompletionRouterCompletionsFallbacks$outboundSchema:
+  z.ZodType<
+    CreateCompletionRouterCompletionsFallbacks$Outbound,
+    z.ZodTypeDef,
+    CreateCompletionRouterCompletionsFallbacks
+  > = z.object({
+    model: z.string(),
+  });
 
-export function createCompletionFallbacksToJSON(
-  createCompletionFallbacks: CreateCompletionFallbacks,
+export function createCompletionRouterCompletionsFallbacksToJSON(
+  createCompletionRouterCompletionsFallbacks:
+    CreateCompletionRouterCompletionsFallbacks,
 ): string {
   return JSON.stringify(
-    CreateCompletionFallbacks$outboundSchema.parse(createCompletionFallbacks),
+    CreateCompletionRouterCompletionsFallbacks$outboundSchema.parse(
+      createCompletionRouterCompletionsFallbacks,
+    ),
   );
 }
 
@@ -1078,31 +1372,35 @@ export function createCompletionInputsToJSON(
 }
 
 /** @internal */
-export const CreateCompletionType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateCompletionType
-> = z.nativeEnum(CreateCompletionType);
+export const CreateCompletionRouterCompletionsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateCompletionRouterCompletionsType> = z.nativeEnum(
+    CreateCompletionRouterCompletionsType,
+  );
 
 /** @internal */
-export type CreateCompletionCache$Outbound = {
+export type CreateCompletionRouterCompletionsCache$Outbound = {
   ttl: number;
   type: string;
 };
 
 /** @internal */
-export const CreateCompletionCache$outboundSchema: z.ZodType<
-  CreateCompletionCache$Outbound,
+export const CreateCompletionRouterCompletionsCache$outboundSchema: z.ZodType<
+  CreateCompletionRouterCompletionsCache$Outbound,
   z.ZodTypeDef,
-  CreateCompletionCache
+  CreateCompletionRouterCompletionsCache
 > = z.object({
   ttl: z.number().default(1800),
-  type: CreateCompletionType$outboundSchema,
+  type: CreateCompletionRouterCompletionsType$outboundSchema,
 });
 
-export function createCompletionCacheToJSON(
-  createCompletionCache: CreateCompletionCache,
+export function createCompletionRouterCompletionsCacheToJSON(
+  createCompletionRouterCompletionsCache:
+    CreateCompletionRouterCompletionsCache,
 ): string {
   return JSON.stringify(
-    CreateCompletionCache$outboundSchema.parse(createCompletionCache),
+    CreateCompletionRouterCompletionsCache$outboundSchema.parse(
+      createCompletionRouterCompletionsCache,
+    ),
   );
 }
 
@@ -2427,95 +2725,105 @@ export function createCompletionKnowledgeBasesToJSON(
 }
 
 /** @internal */
-export const CreateCompletionLoadBalancerType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateCompletionLoadBalancerType
-> = z.nativeEnum(CreateCompletionLoadBalancerType);
+export const CreateCompletionLoadBalancerRouterCompletionsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateCompletionLoadBalancerRouterCompletionsType> = z
+    .nativeEnum(CreateCompletionLoadBalancerRouterCompletionsType);
 
 /** @internal */
-export type CreateCompletionLoadBalancerModels$Outbound = {
+export type CreateCompletionLoadBalancerRouterCompletionsModels$Outbound = {
   model: string;
   weight: number;
 };
 
 /** @internal */
-export const CreateCompletionLoadBalancerModels$outboundSchema: z.ZodType<
-  CreateCompletionLoadBalancerModels$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+export const CreateCompletionLoadBalancerRouterCompletionsModels$outboundSchema:
+  z.ZodType<
+    CreateCompletionLoadBalancerRouterCompletionsModels$Outbound,
+    z.ZodTypeDef,
+    CreateCompletionLoadBalancerRouterCompletionsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
 
-export function createCompletionLoadBalancerModelsToJSON(
-  createCompletionLoadBalancerModels: CreateCompletionLoadBalancerModels,
+export function createCompletionLoadBalancerRouterCompletionsModelsToJSON(
+  createCompletionLoadBalancerRouterCompletionsModels:
+    CreateCompletionLoadBalancerRouterCompletionsModels,
 ): string {
   return JSON.stringify(
-    CreateCompletionLoadBalancerModels$outboundSchema.parse(
-      createCompletionLoadBalancerModels,
+    CreateCompletionLoadBalancerRouterCompletionsModels$outboundSchema.parse(
+      createCompletionLoadBalancerRouterCompletionsModels,
     ),
   );
 }
 
 /** @internal */
-export type CreateCompletionLoadBalancer1$Outbound = {
+export type CreateCompletionLoadBalancerRouterCompletions1$Outbound = {
   type: string;
-  models: Array<CreateCompletionLoadBalancerModels$Outbound>;
+  models: Array<CreateCompletionLoadBalancerRouterCompletionsModels$Outbound>;
 };
 
 /** @internal */
-export const CreateCompletionLoadBalancer1$outboundSchema: z.ZodType<
-  CreateCompletionLoadBalancer1$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionLoadBalancer1
-> = z.object({
-  type: CreateCompletionLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateCompletionLoadBalancerModels$outboundSchema),
-  ),
-});
+export const CreateCompletionLoadBalancerRouterCompletions1$outboundSchema:
+  z.ZodType<
+    CreateCompletionLoadBalancerRouterCompletions1$Outbound,
+    z.ZodTypeDef,
+    CreateCompletionLoadBalancerRouterCompletions1
+  > = z.object({
+    type: CreateCompletionLoadBalancerRouterCompletionsType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateCompletionLoadBalancerRouterCompletionsModels$outboundSchema
+      ),
+    ),
+  });
 
-export function createCompletionLoadBalancer1ToJSON(
-  createCompletionLoadBalancer1: CreateCompletionLoadBalancer1,
+export function createCompletionLoadBalancerRouterCompletions1ToJSON(
+  createCompletionLoadBalancerRouterCompletions1:
+    CreateCompletionLoadBalancerRouterCompletions1,
 ): string {
   return JSON.stringify(
-    CreateCompletionLoadBalancer1$outboundSchema.parse(
-      createCompletionLoadBalancer1,
+    CreateCompletionLoadBalancerRouterCompletions1$outboundSchema.parse(
+      createCompletionLoadBalancerRouterCompletions1,
     ),
   );
 }
 
 /** @internal */
-export type CreateCompletionLoadBalancer$Outbound =
-  CreateCompletionLoadBalancer1$Outbound;
+export type CreateCompletionRouterCompletionsLoadBalancer$Outbound =
+  CreateCompletionLoadBalancerRouterCompletions1$Outbound;
 
 /** @internal */
-export const CreateCompletionLoadBalancer$outboundSchema: z.ZodType<
-  CreateCompletionLoadBalancer$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionLoadBalancer
-> = z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema);
+export const CreateCompletionRouterCompletionsLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateCompletionRouterCompletionsLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateCompletionRouterCompletionsLoadBalancer
+  > = z.lazy(() =>
+    CreateCompletionLoadBalancerRouterCompletions1$outboundSchema
+  );
 
-export function createCompletionLoadBalancerToJSON(
-  createCompletionLoadBalancer: CreateCompletionLoadBalancer,
+export function createCompletionRouterCompletionsLoadBalancerToJSON(
+  createCompletionRouterCompletionsLoadBalancer:
+    CreateCompletionRouterCompletionsLoadBalancer,
 ): string {
   return JSON.stringify(
-    CreateCompletionLoadBalancer$outboundSchema.parse(
-      createCompletionLoadBalancer,
+    CreateCompletionRouterCompletionsLoadBalancer$outboundSchema.parse(
+      createCompletionRouterCompletionsLoadBalancer,
     ),
   );
 }
 
 /** @internal */
-export type CreateCompletionTimeout$Outbound = {
+export type CreateCompletionRouterCompletionsTimeout$Outbound = {
   call_timeout: number;
 };
 
 /** @internal */
-export const CreateCompletionTimeout$outboundSchema: z.ZodType<
-  CreateCompletionTimeout$Outbound,
+export const CreateCompletionRouterCompletionsTimeout$outboundSchema: z.ZodType<
+  CreateCompletionRouterCompletionsTimeout$Outbound,
   z.ZodTypeDef,
-  CreateCompletionTimeout
+  CreateCompletionRouterCompletionsTimeout
 > = z.object({
   callTimeout: z.number(),
 }).transform((v) => {
@@ -2524,19 +2832,24 @@ export const CreateCompletionTimeout$outboundSchema: z.ZodType<
   });
 });
 
-export function createCompletionTimeoutToJSON(
-  createCompletionTimeout: CreateCompletionTimeout,
+export function createCompletionRouterCompletionsTimeoutToJSON(
+  createCompletionRouterCompletionsTimeout:
+    CreateCompletionRouterCompletionsTimeout,
 ): string {
   return JSON.stringify(
-    CreateCompletionTimeout$outboundSchema.parse(createCompletionTimeout),
+    CreateCompletionRouterCompletionsTimeout$outboundSchema.parse(
+      createCompletionRouterCompletionsTimeout,
+    ),
   );
 }
 
 /** @internal */
 export type CreateCompletionOrq$Outbound = {
   name?: string | undefined;
-  retry?: CreateCompletionRetry$Outbound | undefined;
-  fallbacks?: Array<CreateCompletionFallbacks$Outbound> | undefined;
+  retry?: CreateCompletionRouterCompletionsRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateCompletionRouterCompletionsFallbacks$Outbound>
+    | undefined;
   prompt?: CreateCompletionPrompt$Outbound | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
@@ -2545,10 +2858,12 @@ export type CreateCompletionOrq$Outbound = {
     | { [k: string]: any }
     | Array<CreateCompletionInputs2$Outbound>
     | undefined;
-  cache?: CreateCompletionCache$Outbound | undefined;
+  cache?: CreateCompletionRouterCompletionsCache$Outbound | undefined;
   knowledge_bases?: Array<CreateCompletionKnowledgeBases$Outbound> | undefined;
-  load_balancer?: CreateCompletionLoadBalancer1$Outbound | undefined;
-  timeout?: CreateCompletionTimeout$Outbound | undefined;
+  load_balancer?:
+    | CreateCompletionLoadBalancerRouterCompletions1$Outbound
+    | undefined;
+  timeout?: CreateCompletionRouterCompletionsTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -2558,9 +2873,11 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
   CreateCompletionOrq
 > = z.object({
   name: z.string().optional(),
-  retry: z.lazy(() => CreateCompletionRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))
+  retry: z.lazy(() => CreateCompletionRouterCompletionsRetry$outboundSchema)
     .optional(),
+  fallbacks: z.array(
+    z.lazy(() => CreateCompletionRouterCompletionsFallbacks$outboundSchema),
+  ).optional(),
   prompt: z.lazy(() => CreateCompletionPrompt$outboundSchema).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
@@ -2569,13 +2886,16 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
     z.record(z.any()),
     z.array(z.lazy(() => CreateCompletionInputs2$outboundSchema)),
   ]).optional(),
-  cache: z.lazy(() => CreateCompletionCache$outboundSchema).optional(),
+  cache: z.lazy(() => CreateCompletionRouterCompletionsCache$outboundSchema)
+    .optional(),
   knowledgeBases: z.array(
     z.lazy(() => CreateCompletionKnowledgeBases$outboundSchema),
   ).optional(),
-  loadBalancer: z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
+  loadBalancer: z.lazy(() =>
+    CreateCompletionLoadBalancerRouterCompletions1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() => CreateCompletionRouterCompletionsTimeout$outboundSchema)
     .optional(),
-  timeout: z.lazy(() => CreateCompletionTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeBases: "knowledge_bases",
@@ -2605,6 +2925,12 @@ export type CreateCompletionRequestBody$Outbound = {
   top_p: number | null;
   n: number | null;
   user?: string | undefined;
+  name?: string | undefined;
+  fallbacks?: Array<CreateCompletionFallbacks$Outbound> | undefined;
+  retry?: CreateCompletionRetry$Outbound | undefined;
+  cache?: CreateCompletionCache$Outbound | undefined;
+  load_balancer?: CreateCompletionLoadBalancer1$Outbound | undefined;
+  timeout?: CreateCompletionTimeout$Outbound | undefined;
   orq?: CreateCompletionOrq$Outbound | undefined;
   stream: boolean;
 };
@@ -2627,6 +2953,14 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
   topP: z.nullable(z.number().default(1)),
   n: z.nullable(z.number().default(1)),
   user: z.string().optional(),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateCompletionRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreateCompletionCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateCompletionTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateCompletionOrq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {
@@ -2635,6 +2969,7 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
     maxTokens: "max_tokens",
     presencePenalty: "presence_penalty",
     topP: "top_p",
+    loadBalancer: "load_balancer",
   });
 });
 

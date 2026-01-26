@@ -505,6 +505,10 @@ export type RetrieveAgentRequestTimeout = {
  */
 export type RetrieveAgentRequestParameters = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: RetrieveAgentRequestAudio | null | undefined;
@@ -983,6 +987,10 @@ export type RetrieveAgentRequestFallbackModelConfigurationTimeout = {
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -1993,6 +2001,7 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => RetrieveAgentRequestAudio$inboundSchema))
     .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
@@ -2725,6 +2734,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     z.ZodTypeDef,
     unknown
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() =>
         RetrieveAgentRequestFallbackModelConfigurationAudio$inboundSchema

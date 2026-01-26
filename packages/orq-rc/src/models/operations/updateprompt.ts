@@ -674,6 +674,10 @@ export type UpdatePromptPromptInput = {
    */
   model?: string | null | undefined;
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: UpdatePromptAudio | null | undefined;
@@ -2056,6 +2060,10 @@ export type UpdatePromptPromptsResponseMessages =
  * Prompt configuration with model and messages. Use this instead of prompt_config.
  */
 export type UpdatePromptPromptField = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -3466,6 +3474,7 @@ export type UpdatePromptPromptInput$Outbound = {
     >
     | undefined;
   model?: string | null | undefined;
+  name?: string | undefined;
   audio?: UpdatePromptAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -3517,6 +3526,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     ]),
   ).optional(),
   model: z.nullable(z.string()).optional(),
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => UpdatePromptAudio$outboundSchema)).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
@@ -5299,6 +5309,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => UpdatePromptPromptsAudio$inboundSchema))
     .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),

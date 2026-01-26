@@ -90,6 +90,13 @@ export const Style = {
  */
 export type Style = ClosedEnum<typeof Style>;
 
+export type CreateImageFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
 /**
  * Retry configuration for the request
  */
@@ -102,13 +109,6 @@ export type CreateImageRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-export type CreateImageFallbacks = {
-  /**
-   * Fallback model identifier
-   */
-  model: string;
 };
 
 export const CreateImageType = {
@@ -151,7 +151,7 @@ export type CreateImageLoadBalancer1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateImageLoadBalancer = CreateImageLoadBalancer1;
 
@@ -159,6 +159,84 @@ export type CreateImageLoadBalancer = CreateImageLoadBalancer1;
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
 export type CreateImageTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreateImageRouterImagesGenerationsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateImageRouterImagesGenerationsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+export const CreateImageRouterImagesGenerationsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreateImageRouterImagesGenerationsType = ClosedEnum<
+  typeof CreateImageRouterImagesGenerationsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreateImageRouterImagesGenerationsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreateImageRouterImagesGenerationsType;
+};
+
+export const CreateImageLoadBalancerRouterImagesGenerationsType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateImageLoadBalancerRouterImagesGenerationsType = ClosedEnum<
+  typeof CreateImageLoadBalancerRouterImagesGenerationsType
+>;
+
+export type CreateImageLoadBalancerRouterImagesGenerationsModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateImageLoadBalancerRouterImagesGenerations1 = {
+  type: CreateImageLoadBalancerRouterImagesGenerationsType;
+  models: Array<CreateImageLoadBalancerRouterImagesGenerationsModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateImageRouterImagesGenerationsLoadBalancer =
+  CreateImageLoadBalancerRouterImagesGenerations1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateImageRouterImagesGenerationsTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -173,11 +251,11 @@ export type CreateImageOrq = {
   /**
    * Retry configuration for the request
    */
-  retry?: CreateImageRetry | undefined;
+  retry?: CreateImageRouterImagesGenerationsRetry | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateImageFallbacks> | undefined;
+  fallbacks?: Array<CreateImageRouterImagesGenerationsFallbacks> | undefined;
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
@@ -191,15 +269,15 @@ export type CreateImageOrq = {
   /**
    * Cache configuration for the request.
    */
-  cache?: CreateImageCache | undefined;
+  cache?: CreateImageRouterImagesGenerationsCache | undefined;
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateImageLoadBalancer1 | undefined;
+  loadBalancer?: CreateImageLoadBalancerRouterImagesGenerations1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateImageTimeout | undefined;
+  timeout?: CreateImageRouterImagesGenerationsTimeout | undefined;
 };
 
 /**
@@ -250,6 +328,30 @@ export type CreateImageRequestBody = {
    * The style of the generated images. This parameter is only supported for `openai/dall-e-3`. Must be one of `vivid` or `natural`.
    */
   style?: Style | null | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateImageFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateImageRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreateImageCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateImageLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateImageTimeout | undefined;
   orq?: CreateImageOrq | undefined;
 };
 
@@ -322,6 +424,28 @@ export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
 );
 
 /** @internal */
+export type CreateImageFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateImageFallbacks$outboundSchema: z.ZodType<
+  CreateImageFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateImageFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createImageFallbacksToJSON(
+  createImageFallbacks: CreateImageFallbacks,
+): string {
+  return JSON.stringify(
+    CreateImageFallbacks$outboundSchema.parse(createImageFallbacks),
+  );
+}
+
+/** @internal */
 export type CreateImageRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
@@ -346,28 +470,6 @@ export function createImageRetryToJSON(
 ): string {
   return JSON.stringify(
     CreateImageRetry$outboundSchema.parse(createImageRetry),
-  );
-}
-
-/** @internal */
-export type CreateImageFallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const CreateImageFallbacks$outboundSchema: z.ZodType<
-  CreateImageFallbacks$Outbound,
-  z.ZodTypeDef,
-  CreateImageFallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function createImageFallbacksToJSON(
-  createImageFallbacks: CreateImageFallbacks,
-): string {
-  return JSON.stringify(
-    CreateImageFallbacks$outboundSchema.parse(createImageFallbacks),
   );
 }
 
@@ -501,15 +603,229 @@ export function createImageTimeoutToJSON(
 }
 
 /** @internal */
+export type CreateImageRouterImagesGenerationsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateImageRouterImagesGenerationsRetry$outboundSchema: z.ZodType<
+  CreateImageRouterImagesGenerationsRetry$Outbound,
+  z.ZodTypeDef,
+  CreateImageRouterImagesGenerationsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createImageRouterImagesGenerationsRetryToJSON(
+  createImageRouterImagesGenerationsRetry:
+    CreateImageRouterImagesGenerationsRetry,
+): string {
+  return JSON.stringify(
+    CreateImageRouterImagesGenerationsRetry$outboundSchema.parse(
+      createImageRouterImagesGenerationsRetry,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageRouterImagesGenerationsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateImageRouterImagesGenerationsFallbacks$outboundSchema:
+  z.ZodType<
+    CreateImageRouterImagesGenerationsFallbacks$Outbound,
+    z.ZodTypeDef,
+    CreateImageRouterImagesGenerationsFallbacks
+  > = z.object({
+    model: z.string(),
+  });
+
+export function createImageRouterImagesGenerationsFallbacksToJSON(
+  createImageRouterImagesGenerationsFallbacks:
+    CreateImageRouterImagesGenerationsFallbacks,
+): string {
+  return JSON.stringify(
+    CreateImageRouterImagesGenerationsFallbacks$outboundSchema.parse(
+      createImageRouterImagesGenerationsFallbacks,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateImageRouterImagesGenerationsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateImageRouterImagesGenerationsType> = z.nativeEnum(
+    CreateImageRouterImagesGenerationsType,
+  );
+
+/** @internal */
+export type CreateImageRouterImagesGenerationsCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreateImageRouterImagesGenerationsCache$outboundSchema: z.ZodType<
+  CreateImageRouterImagesGenerationsCache$Outbound,
+  z.ZodTypeDef,
+  CreateImageRouterImagesGenerationsCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreateImageRouterImagesGenerationsType$outboundSchema,
+});
+
+export function createImageRouterImagesGenerationsCacheToJSON(
+  createImageRouterImagesGenerationsCache:
+    CreateImageRouterImagesGenerationsCache,
+): string {
+  return JSON.stringify(
+    CreateImageRouterImagesGenerationsCache$outboundSchema.parse(
+      createImageRouterImagesGenerationsCache,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateImageLoadBalancerRouterImagesGenerationsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateImageLoadBalancerRouterImagesGenerationsType> = z
+    .nativeEnum(CreateImageLoadBalancerRouterImagesGenerationsType);
+
+/** @internal */
+export type CreateImageLoadBalancerRouterImagesGenerationsModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreateImageLoadBalancerRouterImagesGenerationsModels$outboundSchema:
+  z.ZodType<
+    CreateImageLoadBalancerRouterImagesGenerationsModels$Outbound,
+    z.ZodTypeDef,
+    CreateImageLoadBalancerRouterImagesGenerationsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createImageLoadBalancerRouterImagesGenerationsModelsToJSON(
+  createImageLoadBalancerRouterImagesGenerationsModels:
+    CreateImageLoadBalancerRouterImagesGenerationsModels,
+): string {
+  return JSON.stringify(
+    CreateImageLoadBalancerRouterImagesGenerationsModels$outboundSchema.parse(
+      createImageLoadBalancerRouterImagesGenerationsModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageLoadBalancerRouterImagesGenerations1$Outbound = {
+  type: string;
+  models: Array<CreateImageLoadBalancerRouterImagesGenerationsModels$Outbound>;
+};
+
+/** @internal */
+export const CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema:
+  z.ZodType<
+    CreateImageLoadBalancerRouterImagesGenerations1$Outbound,
+    z.ZodTypeDef,
+    CreateImageLoadBalancerRouterImagesGenerations1
+  > = z.object({
+    type: CreateImageLoadBalancerRouterImagesGenerationsType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateImageLoadBalancerRouterImagesGenerationsModels$outboundSchema
+      ),
+    ),
+  });
+
+export function createImageLoadBalancerRouterImagesGenerations1ToJSON(
+  createImageLoadBalancerRouterImagesGenerations1:
+    CreateImageLoadBalancerRouterImagesGenerations1,
+): string {
+  return JSON.stringify(
+    CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema.parse(
+      createImageLoadBalancerRouterImagesGenerations1,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageRouterImagesGenerationsLoadBalancer$Outbound =
+  CreateImageLoadBalancerRouterImagesGenerations1$Outbound;
+
+/** @internal */
+export const CreateImageRouterImagesGenerationsLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateImageRouterImagesGenerationsLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateImageRouterImagesGenerationsLoadBalancer
+  > = z.lazy(() =>
+    CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema
+  );
+
+export function createImageRouterImagesGenerationsLoadBalancerToJSON(
+  createImageRouterImagesGenerationsLoadBalancer:
+    CreateImageRouterImagesGenerationsLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateImageRouterImagesGenerationsLoadBalancer$outboundSchema.parse(
+      createImageRouterImagesGenerationsLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageRouterImagesGenerationsTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateImageRouterImagesGenerationsTimeout$outboundSchema:
+  z.ZodType<
+    CreateImageRouterImagesGenerationsTimeout$Outbound,
+    z.ZodTypeDef,
+    CreateImageRouterImagesGenerationsTimeout
+  > = z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  });
+
+export function createImageRouterImagesGenerationsTimeoutToJSON(
+  createImageRouterImagesGenerationsTimeout:
+    CreateImageRouterImagesGenerationsTimeout,
+): string {
+  return JSON.stringify(
+    CreateImageRouterImagesGenerationsTimeout$outboundSchema.parse(
+      createImageRouterImagesGenerationsTimeout,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateImageOrq$Outbound = {
   name?: string | undefined;
-  retry?: CreateImageRetry$Outbound | undefined;
-  fallbacks?: Array<CreateImageFallbacks$Outbound> | undefined;
+  retry?: CreateImageRouterImagesGenerationsRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateImageRouterImagesGenerationsFallbacks$Outbound>
+    | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
-  cache?: CreateImageCache$Outbound | undefined;
-  load_balancer?: CreateImageLoadBalancer1$Outbound | undefined;
-  timeout?: CreateImageTimeout$Outbound | undefined;
+  cache?: CreateImageRouterImagesGenerationsCache$Outbound | undefined;
+  load_balancer?:
+    | CreateImageLoadBalancerRouterImagesGenerations1$Outbound
+    | undefined;
+  timeout?: CreateImageRouterImagesGenerationsTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -519,15 +835,21 @@ export const CreateImageOrq$outboundSchema: z.ZodType<
   CreateImageOrq
 > = z.object({
   name: z.string().optional(),
-  retry: z.lazy(() => CreateImageRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateImageFallbacks$outboundSchema))
+  retry: z.lazy(() => CreateImageRouterImagesGenerationsRetry$outboundSchema)
     .optional(),
+  fallbacks: z.array(
+    z.lazy(() => CreateImageRouterImagesGenerationsFallbacks$outboundSchema),
+  ).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
-  cache: z.lazy(() => CreateImageCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
+  cache: z.lazy(() => CreateImageRouterImagesGenerationsCache$outboundSchema)
     .optional(),
-  timeout: z.lazy(() => CreateImageTimeout$outboundSchema).optional(),
+  loadBalancer: z.lazy(() =>
+    CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() =>
+    CreateImageRouterImagesGenerationsTimeout$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     loadBalancer: "load_balancer",
@@ -551,6 +873,12 @@ export type CreateImageRequestBody$Outbound = {
   response_format?: string | null | undefined;
   size?: string | null | undefined;
   style?: string | null | undefined;
+  name?: string | undefined;
+  fallbacks?: Array<CreateImageFallbacks$Outbound> | undefined;
+  retry?: CreateImageRetry$Outbound | undefined;
+  cache?: CreateImageCache$Outbound | undefined;
+  load_balancer?: CreateImageLoadBalancer1$Outbound | undefined;
+  timeout?: CreateImageTimeout$Outbound | undefined;
   orq?: CreateImageOrq$Outbound | undefined;
 };
 
@@ -572,12 +900,21 @@ export const CreateImageRequestBody$outboundSchema: z.ZodType<
     .optional(),
   size: z.nullable(z.string()).optional(),
   style: z.nullable(Style$outboundSchema).optional(),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateImageFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateImageRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreateImageCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateImageTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateImageOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     outputCompression: "output_compression",
     outputFormat: "output_format",
     responseFormat: "response_format",
+    loadBalancer: "load_balancer",
   });
 });
 

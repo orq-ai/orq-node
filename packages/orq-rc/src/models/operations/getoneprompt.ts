@@ -1161,6 +1161,10 @@ export type GetOnePromptPromptsMessages =
  */
 export type GetOnePromptPromptField = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: GetOnePromptAudio | null | undefined;
@@ -2925,6 +2929,7 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => GetOnePromptAudio$inboundSchema)).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),

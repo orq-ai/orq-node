@@ -39,6 +39,13 @@ export type CreateImageEditResponseFormat = ClosedEnum<
   typeof CreateImageEditResponseFormat
 >;
 
+export type CreateImageEditFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
 /**
  * Retry configuration for the request
  */
@@ -51,38 +58,6 @@ export type CreateImageEditRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-export type CreateImageEditFallbacks = {
-  /**
-   * Fallback model identifier
-   */
-  model: string;
-};
-
-/**
- * Version of the prompt to use (currently only "latest" supported)
- */
-export const CreateImageEditVersion = {
-  Latest: "latest",
-} as const;
-/**
- * Version of the prompt to use (currently only "latest" supported)
- */
-export type CreateImageEditVersion = ClosedEnum<typeof CreateImageEditVersion>;
-
-/**
- * Prompt configuration for the request
- */
-export type CreateImageEditPrompt = {
-  /**
-   * Unique identifier of the prompt to use
-   */
-  id: string;
-  /**
-   * Version of the prompt to use (currently only "latest" supported)
-   */
-  version: CreateImageEditVersion;
 };
 
 export const CreateImageEditType = {
@@ -125,7 +100,7 @@ export type CreateImageEditLoadBalancer1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateImageEditLoadBalancer = CreateImageEditLoadBalancer1;
 
@@ -133,6 +108,109 @@ export type CreateImageEditLoadBalancer = CreateImageEditLoadBalancer1;
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
 export type CreateImageEditTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type CreateImageEditRouterImagesEditsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateImageEditRouterImagesEditsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Version of the prompt to use (currently only "latest" supported)
+ */
+export const CreateImageEditVersion = {
+  Latest: "latest",
+} as const;
+/**
+ * Version of the prompt to use (currently only "latest" supported)
+ */
+export type CreateImageEditVersion = ClosedEnum<typeof CreateImageEditVersion>;
+
+/**
+ * Prompt configuration for the request
+ */
+export type CreateImageEditPrompt = {
+  /**
+   * Unique identifier of the prompt to use
+   */
+  id: string;
+  /**
+   * Version of the prompt to use (currently only "latest" supported)
+   */
+  version: CreateImageEditVersion;
+};
+
+export const CreateImageEditRouterImagesEditsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type CreateImageEditRouterImagesEditsType = ClosedEnum<
+  typeof CreateImageEditRouterImagesEditsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type CreateImageEditRouterImagesEditsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: CreateImageEditRouterImagesEditsType;
+};
+
+export const CreateImageEditLoadBalancerRouterImagesEditsType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateImageEditLoadBalancerRouterImagesEditsType = ClosedEnum<
+  typeof CreateImageEditLoadBalancerRouterImagesEditsType
+>;
+
+export type CreateImageEditLoadBalancerRouterImagesEditsModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateImageEditLoadBalancerRouterImagesEdits1 = {
+  type: CreateImageEditLoadBalancerRouterImagesEditsType;
+  models: Array<CreateImageEditLoadBalancerRouterImagesEditsModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateImageEditRouterImagesEditsLoadBalancer =
+  CreateImageEditLoadBalancerRouterImagesEdits1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateImageEditRouterImagesEditsTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -147,11 +225,11 @@ export type CreateImageEditOrq = {
   /**
    * Retry configuration for the request
    */
-  retry?: CreateImageEditRetry | undefined;
+  retry?: CreateImageEditRouterImagesEditsRetry | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateImageEditFallbacks> | undefined;
+  fallbacks?: Array<CreateImageEditRouterImagesEditsFallbacks> | undefined;
   /**
    * Prompt configuration for the request
    */
@@ -169,15 +247,15 @@ export type CreateImageEditOrq = {
   /**
    * Cache configuration for the request.
    */
-  cache?: CreateImageEditCache | undefined;
+  cache?: CreateImageEditRouterImagesEditsCache | undefined;
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateImageEditLoadBalancer1 | undefined;
+  loadBalancer?: CreateImageEditLoadBalancerRouterImagesEdits1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateImageEditTimeout | undefined;
+  timeout?: CreateImageEditRouterImagesEditsTimeout | undefined;
 };
 
 export type CreateImageEditRequestBody = {
@@ -213,6 +291,30 @@ export type CreateImageEditRequestBody = {
    * A unique identifier representing your end-user, which can help to monitor and detect abuse.
    */
   user?: string | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateImageEditFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateImageEditRetry | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: CreateImageEditCache | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateImageEditLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateImageEditTimeout | undefined;
   orq?: CreateImageEditOrq | undefined;
 };
 
@@ -304,6 +406,28 @@ export const CreateImageEditResponseFormat$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateImageEditResponseFormat);
 
 /** @internal */
+export type CreateImageEditFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateImageEditFallbacks$outboundSchema: z.ZodType<
+  CreateImageEditFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateImageEditFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createImageEditFallbacksToJSON(
+  createImageEditFallbacks: CreateImageEditFallbacks,
+): string {
+  return JSON.stringify(
+    CreateImageEditFallbacks$outboundSchema.parse(createImageEditFallbacks),
+  );
+}
+
+/** @internal */
 export type CreateImageEditRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
@@ -328,57 +452,6 @@ export function createImageEditRetryToJSON(
 ): string {
   return JSON.stringify(
     CreateImageEditRetry$outboundSchema.parse(createImageEditRetry),
-  );
-}
-
-/** @internal */
-export type CreateImageEditFallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const CreateImageEditFallbacks$outboundSchema: z.ZodType<
-  CreateImageEditFallbacks$Outbound,
-  z.ZodTypeDef,
-  CreateImageEditFallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function createImageEditFallbacksToJSON(
-  createImageEditFallbacks: CreateImageEditFallbacks,
-): string {
-  return JSON.stringify(
-    CreateImageEditFallbacks$outboundSchema.parse(createImageEditFallbacks),
-  );
-}
-
-/** @internal */
-export const CreateImageEditVersion$outboundSchema: z.ZodNativeEnum<
-  typeof CreateImageEditVersion
-> = z.nativeEnum(CreateImageEditVersion);
-
-/** @internal */
-export type CreateImageEditPrompt$Outbound = {
-  id: string;
-  version: string;
-};
-
-/** @internal */
-export const CreateImageEditPrompt$outboundSchema: z.ZodType<
-  CreateImageEditPrompt$Outbound,
-  z.ZodTypeDef,
-  CreateImageEditPrompt
-> = z.object({
-  id: z.string(),
-  version: CreateImageEditVersion$outboundSchema,
-});
-
-export function createImageEditPromptToJSON(
-  createImageEditPrompt: CreateImageEditPrompt,
-): string {
-  return JSON.stringify(
-    CreateImageEditPrompt$outboundSchema.parse(createImageEditPrompt),
   );
 }
 
@@ -518,16 +591,256 @@ export function createImageEditTimeoutToJSON(
 }
 
 /** @internal */
+export type CreateImageEditRouterImagesEditsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateImageEditRouterImagesEditsRetry$outboundSchema: z.ZodType<
+  CreateImageEditRouterImagesEditsRetry$Outbound,
+  z.ZodTypeDef,
+  CreateImageEditRouterImagesEditsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createImageEditRouterImagesEditsRetryToJSON(
+  createImageEditRouterImagesEditsRetry: CreateImageEditRouterImagesEditsRetry,
+): string {
+  return JSON.stringify(
+    CreateImageEditRouterImagesEditsRetry$outboundSchema.parse(
+      createImageEditRouterImagesEditsRetry,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageEditRouterImagesEditsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateImageEditRouterImagesEditsFallbacks$outboundSchema:
+  z.ZodType<
+    CreateImageEditRouterImagesEditsFallbacks$Outbound,
+    z.ZodTypeDef,
+    CreateImageEditRouterImagesEditsFallbacks
+  > = z.object({
+    model: z.string(),
+  });
+
+export function createImageEditRouterImagesEditsFallbacksToJSON(
+  createImageEditRouterImagesEditsFallbacks:
+    CreateImageEditRouterImagesEditsFallbacks,
+): string {
+  return JSON.stringify(
+    CreateImageEditRouterImagesEditsFallbacks$outboundSchema.parse(
+      createImageEditRouterImagesEditsFallbacks,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateImageEditVersion$outboundSchema: z.ZodNativeEnum<
+  typeof CreateImageEditVersion
+> = z.nativeEnum(CreateImageEditVersion);
+
+/** @internal */
+export type CreateImageEditPrompt$Outbound = {
+  id: string;
+  version: string;
+};
+
+/** @internal */
+export const CreateImageEditPrompt$outboundSchema: z.ZodType<
+  CreateImageEditPrompt$Outbound,
+  z.ZodTypeDef,
+  CreateImageEditPrompt
+> = z.object({
+  id: z.string(),
+  version: CreateImageEditVersion$outboundSchema,
+});
+
+export function createImageEditPromptToJSON(
+  createImageEditPrompt: CreateImageEditPrompt,
+): string {
+  return JSON.stringify(
+    CreateImageEditPrompt$outboundSchema.parse(createImageEditPrompt),
+  );
+}
+
+/** @internal */
+export const CreateImageEditRouterImagesEditsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateImageEditRouterImagesEditsType> = z.nativeEnum(
+    CreateImageEditRouterImagesEditsType,
+  );
+
+/** @internal */
+export type CreateImageEditRouterImagesEditsCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const CreateImageEditRouterImagesEditsCache$outboundSchema: z.ZodType<
+  CreateImageEditRouterImagesEditsCache$Outbound,
+  z.ZodTypeDef,
+  CreateImageEditRouterImagesEditsCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: CreateImageEditRouterImagesEditsType$outboundSchema,
+});
+
+export function createImageEditRouterImagesEditsCacheToJSON(
+  createImageEditRouterImagesEditsCache: CreateImageEditRouterImagesEditsCache,
+): string {
+  return JSON.stringify(
+    CreateImageEditRouterImagesEditsCache$outboundSchema.parse(
+      createImageEditRouterImagesEditsCache,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateImageEditLoadBalancerRouterImagesEditsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateImageEditLoadBalancerRouterImagesEditsType> = z
+    .nativeEnum(CreateImageEditLoadBalancerRouterImagesEditsType);
+
+/** @internal */
+export type CreateImageEditLoadBalancerRouterImagesEditsModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreateImageEditLoadBalancerRouterImagesEditsModels$outboundSchema:
+  z.ZodType<
+    CreateImageEditLoadBalancerRouterImagesEditsModels$Outbound,
+    z.ZodTypeDef,
+    CreateImageEditLoadBalancerRouterImagesEditsModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createImageEditLoadBalancerRouterImagesEditsModelsToJSON(
+  createImageEditLoadBalancerRouterImagesEditsModels:
+    CreateImageEditLoadBalancerRouterImagesEditsModels,
+): string {
+  return JSON.stringify(
+    CreateImageEditLoadBalancerRouterImagesEditsModels$outboundSchema.parse(
+      createImageEditLoadBalancerRouterImagesEditsModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageEditLoadBalancerRouterImagesEdits1$Outbound = {
+  type: string;
+  models: Array<CreateImageEditLoadBalancerRouterImagesEditsModels$Outbound>;
+};
+
+/** @internal */
+export const CreateImageEditLoadBalancerRouterImagesEdits1$outboundSchema:
+  z.ZodType<
+    CreateImageEditLoadBalancerRouterImagesEdits1$Outbound,
+    z.ZodTypeDef,
+    CreateImageEditLoadBalancerRouterImagesEdits1
+  > = z.object({
+    type: CreateImageEditLoadBalancerRouterImagesEditsType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateImageEditLoadBalancerRouterImagesEditsModels$outboundSchema
+      ),
+    ),
+  });
+
+export function createImageEditLoadBalancerRouterImagesEdits1ToJSON(
+  createImageEditLoadBalancerRouterImagesEdits1:
+    CreateImageEditLoadBalancerRouterImagesEdits1,
+): string {
+  return JSON.stringify(
+    CreateImageEditLoadBalancerRouterImagesEdits1$outboundSchema.parse(
+      createImageEditLoadBalancerRouterImagesEdits1,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageEditRouterImagesEditsLoadBalancer$Outbound =
+  CreateImageEditLoadBalancerRouterImagesEdits1$Outbound;
+
+/** @internal */
+export const CreateImageEditRouterImagesEditsLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateImageEditRouterImagesEditsLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateImageEditRouterImagesEditsLoadBalancer
+  > = z.lazy(() =>
+    CreateImageEditLoadBalancerRouterImagesEdits1$outboundSchema
+  );
+
+export function createImageEditRouterImagesEditsLoadBalancerToJSON(
+  createImageEditRouterImagesEditsLoadBalancer:
+    CreateImageEditRouterImagesEditsLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateImageEditRouterImagesEditsLoadBalancer$outboundSchema.parse(
+      createImageEditRouterImagesEditsLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateImageEditRouterImagesEditsTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateImageEditRouterImagesEditsTimeout$outboundSchema: z.ZodType<
+  CreateImageEditRouterImagesEditsTimeout$Outbound,
+  z.ZodTypeDef,
+  CreateImageEditRouterImagesEditsTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function createImageEditRouterImagesEditsTimeoutToJSON(
+  createImageEditRouterImagesEditsTimeout:
+    CreateImageEditRouterImagesEditsTimeout,
+): string {
+  return JSON.stringify(
+    CreateImageEditRouterImagesEditsTimeout$outboundSchema.parse(
+      createImageEditRouterImagesEditsTimeout,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateImageEditOrq$Outbound = {
   name?: string | undefined;
-  retry?: CreateImageEditRetry$Outbound | undefined;
-  fallbacks?: Array<CreateImageEditFallbacks$Outbound> | undefined;
+  retry?: CreateImageEditRouterImagesEditsRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateImageEditRouterImagesEditsFallbacks$Outbound>
+    | undefined;
   prompt?: CreateImageEditPrompt$Outbound | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
-  cache?: CreateImageEditCache$Outbound | undefined;
-  load_balancer?: CreateImageEditLoadBalancer1$Outbound | undefined;
-  timeout?: CreateImageEditTimeout$Outbound | undefined;
+  cache?: CreateImageEditRouterImagesEditsCache$Outbound | undefined;
+  load_balancer?:
+    | CreateImageEditLoadBalancerRouterImagesEdits1$Outbound
+    | undefined;
+  timeout?: CreateImageEditRouterImagesEditsTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -537,16 +850,21 @@ export const CreateImageEditOrq$outboundSchema: z.ZodType<
   CreateImageEditOrq
 > = z.object({
   name: z.string().optional(),
-  retry: z.lazy(() => CreateImageEditRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateImageEditFallbacks$outboundSchema))
+  retry: z.lazy(() => CreateImageEditRouterImagesEditsRetry$outboundSchema)
     .optional(),
+  fallbacks: z.array(
+    z.lazy(() => CreateImageEditRouterImagesEditsFallbacks$outboundSchema),
+  ).optional(),
   prompt: z.lazy(() => CreateImageEditPrompt$outboundSchema).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
-  cache: z.lazy(() => CreateImageEditCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateImageEditLoadBalancer1$outboundSchema)
+  cache: z.lazy(() => CreateImageEditRouterImagesEditsCache$outboundSchema)
     .optional(),
-  timeout: z.lazy(() => CreateImageEditTimeout$outboundSchema).optional(),
+  loadBalancer: z.lazy(() =>
+    CreateImageEditLoadBalancerRouterImagesEdits1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() => CreateImageEditRouterImagesEditsTimeout$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     loadBalancer: "load_balancer",
@@ -571,6 +889,12 @@ export type CreateImageEditRequestBody$Outbound = {
   quality?: string | null | undefined;
   response_format?: string | undefined;
   user?: string | undefined;
+  name?: string | undefined;
+  fallbacks?: Array<CreateImageEditFallbacks$Outbound> | undefined;
+  retry?: CreateImageEditRetry$Outbound | undefined;
+  cache?: CreateImageEditCache$Outbound | undefined;
+  load_balancer?: CreateImageEditLoadBalancer1$Outbound | undefined;
+  timeout?: CreateImageEditTimeout$Outbound | undefined;
   orq?: CreateImageEditOrq$Outbound | undefined;
 };
 
@@ -588,10 +912,19 @@ export const CreateImageEditRequestBody$outboundSchema: z.ZodType<
   quality: z.nullable(CreateImageEditQuality$outboundSchema).optional(),
   responseFormat: CreateImageEditResponseFormat$outboundSchema.optional(),
   user: z.string().optional(),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateImageEditFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateImageEditRetry$outboundSchema).optional(),
+  cache: z.lazy(() => CreateImageEditCache$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateImageEditLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateImageEditTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateImageEditOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
+    loadBalancer: "load_balancer",
   });
 });
 

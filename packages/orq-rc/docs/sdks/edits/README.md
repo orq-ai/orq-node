@@ -24,6 +24,31 @@ async function run() {
   const result = await orq.router.images.edits.create({
     model: "LeBaron",
     prompt: "<value>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [
@@ -106,6 +131,31 @@ async function run() {
   const res = await routerImagesEditsCreate(orq, {
     model: "LeBaron",
     prompt: "<value>",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [

@@ -24,6 +24,26 @@ async function run() {
   const result = await orq.router.images.generations.create({
     prompt: "<value>",
     model: "2",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [
@@ -102,6 +122,26 @@ async function run() {
   const res = await routerImagesGenerationsCreate(orq, {
     prompt: "<value>",
     model: "2",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [

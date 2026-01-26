@@ -23,6 +23,26 @@ const orq = new Orq({
 async function run() {
   const result = await orq.router.images.variations.create({
     model: "Altima",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [
@@ -104,6 +124,26 @@ const orq = new OrqCore({
 async function run() {
   const res = await routerImagesVariationsCreate(orq, {
     model: "Altima",
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       retry: {
         onCodes: [

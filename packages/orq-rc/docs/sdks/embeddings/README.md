@@ -27,6 +27,36 @@ async function run() {
       "<value 2>",
     ],
     model: "V90",
+    fallbacks: [
+      {
+        model: "openai/text-embedding-3-small",
+      },
+    ],
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       fallbacks: [
         {
@@ -108,6 +138,36 @@ async function run() {
       "<value 2>",
     ],
     model: "V90",
+    fallbacks: [
+      {
+        model: "openai/text-embedding-3-small",
+      },
+    ],
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       fallbacks: [
         {

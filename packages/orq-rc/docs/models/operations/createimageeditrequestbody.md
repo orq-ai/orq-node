@@ -8,6 +8,26 @@ import { CreateImageEditRequestBody } from "@orq-ai/node/models/operations";
 let value: CreateImageEditRequestBody = {
   model: "Focus",
   prompt: "<value>",
+  retry: {
+    onCodes: [
+      429,
+      500,
+      502,
+      503,
+      504,
+    ],
+  },
+  cache: {
+    ttl: 3600,
+    type: "exact_match",
+  },
+  loadBalancer: {
+    type: "weight_based",
+    models: [],
+  },
+  timeout: {
+    callTimeout: 30000,
+  },
   orq: {
     retry: {
       onCodes: [
@@ -79,4 +99,10 @@ let value: CreateImageEditRequestBody = {
 | `quality`                                                                                                                                                                   | [operations.CreateImageEditQuality](../../models/operations/createimageeditquality.md)                                                                                      | :heavy_minus_sign:                                                                                                                                                          | The quality of the image that will be generated. Auto will automatically select the best quality for the given model.                                                       |
 | `responseFormat`                                                                                                                                                            | [operations.CreateImageEditResponseFormat](../../models/operations/createimageeditresponseformat.md)                                                                        | :heavy_minus_sign:                                                                                                                                                          | The format in which the generated images are returned. Some of the models only return the image in base64 format.                                                           |
 | `user`                                                                                                                                                                      | *string*                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                          | A unique identifier representing your end-user, which can help to monitor and detect abuse.                                                                                 |
+| `name`                                                                                                                                                                      | *string*                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                          | The name to display on the trace. If not specified, the default system name will be used.                                                                                   |
+| `fallbacks`                                                                                                                                                                 | [operations.CreateImageEditFallbacks](../../models/operations/createimageeditfallbacks.md)[]                                                                                | :heavy_minus_sign:                                                                                                                                                          | Array of fallback models to use if primary model fails                                                                                                                      |
+| `retry`                                                                                                                                                                     | [operations.CreateImageEditRetry](../../models/operations/createimageeditretry.md)                                                                                          | :heavy_minus_sign:                                                                                                                                                          | Retry configuration for the request                                                                                                                                         |
+| `cache`                                                                                                                                                                     | [operations.CreateImageEditCache](../../models/operations/createimageeditcache.md)                                                                                          | :heavy_minus_sign:                                                                                                                                                          | Cache configuration for the request.                                                                                                                                        |
+| `loadBalancer`                                                                                                                                                              | *operations.CreateImageEditLoadBalancer*                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                          | Load balancer configuration for the request.                                                                                                                                |
+| `timeout`                                                                                                                                                                   | [operations.CreateImageEditTimeout](../../models/operations/createimageedittimeout.md)                                                                                      | :heavy_minus_sign:                                                                                                                                                          | Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.                          |
 | `orq`                                                                                                                                                                       | [operations.CreateImageEditOrq](../../models/operations/createimageeditorq.md)                                                                                              | :heavy_minus_sign:                                                                                                                                                          | N/A                                                                                                                                                                         |

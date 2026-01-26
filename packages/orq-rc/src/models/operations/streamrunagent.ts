@@ -341,6 +341,10 @@ export type StreamRunAgentModelConfigurationTimeout = {
  */
 export type StreamRunAgentModelConfigurationParameters = {
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: StreamRunAgentModelConfigurationAudio | null | undefined;
@@ -852,6 +856,10 @@ export type StreamRunAgentFallbackModelConfigurationTimeout = {
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type StreamRunAgentFallbackModelConfigurationParameters = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -2618,6 +2626,7 @@ export function streamRunAgentModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export type StreamRunAgentModelConfigurationParameters$Outbound = {
+  name?: string | undefined;
   audio?: StreamRunAgentModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -2668,6 +2677,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationParameters
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() => StreamRunAgentModelConfigurationAudio$outboundSchema),
     ).optional(),
@@ -3481,6 +3491,7 @@ export function streamRunAgentFallbackModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
+  name?: string | undefined;
   audio?:
     | StreamRunAgentFallbackModelConfigurationAudio$Outbound
     | null
@@ -3536,6 +3547,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationParameters
   > = z.object({
+    name: z.string().optional(),
     audio: z.nullable(
       z.lazy(() =>
         StreamRunAgentFallbackModelConfigurationAudio$outboundSchema
@@ -4087,7 +4099,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KFS437JZ79F2A8WS33BG36DA"),
+  id: z.string().default("01KFWKZ5XRN7N42X3MM61MEWCC"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

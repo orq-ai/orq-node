@@ -24,6 +24,27 @@ async function run() {
   const result = await orq.router.audio.translations.create({
     model: "Impala",
     temperature: 0.5,
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       fallbacks: [
         {
@@ -98,6 +119,27 @@ async function run() {
   const res = await routerAudioTranslationsCreate(orq, {
     model: "Impala",
     temperature: 0.5,
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
     orq: {
       fallbacks: [
         {

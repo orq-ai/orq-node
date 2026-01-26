@@ -25,6 +25,13 @@ export type CreateSpeechResponseFormat = ClosedEnum<
   typeof CreateSpeechResponseFormat
 >;
 
+export type CreateSpeechFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
 /**
  * Retry configuration for the request
  */
@@ -37,27 +44,6 @@ export type CreateSpeechRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-export type CreateSpeechFallbacks = {
-  /**
-   * Fallback model identifier
-   */
-  model: string;
-};
-
-/**
- * Thread information to group related requests
- */
-export type CreateSpeechThread = {
-  /**
-   * Unique thread identifier to group related invocations.
-   */
-  id: string;
-  /**
-   * Optional tags to differentiate or categorize threads
-   */
-  tags?: Array<string> | undefined;
 };
 
 export const CreateSpeechLoadBalancerType = {
@@ -84,7 +70,7 @@ export type CreateSpeechLoadBalancer1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateSpeechLoadBalancer = CreateSpeechLoadBalancer1;
 
@@ -98,15 +84,89 @@ export type CreateSpeechTimeout = {
   callTimeout: number;
 };
 
+/**
+ * Retry configuration for the request
+ */
+export type CreateSpeechRouterAudioSpeechRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateSpeechRouterAudioSpeechFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Thread information to group related requests
+ */
+export type CreateSpeechThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
+};
+
+export const CreateSpeechLoadBalancerRouterAudioSpeechType = {
+  WeightBased: "weight_based",
+} as const;
+export type CreateSpeechLoadBalancerRouterAudioSpeechType = ClosedEnum<
+  typeof CreateSpeechLoadBalancerRouterAudioSpeechType
+>;
+
+export type CreateSpeechLoadBalancerRouterAudioSpeechModels = {
+  /**
+   * Model identifier for load balancing
+   */
+  model: string;
+  /**
+   * Weight assigned to this model for load balancing
+   */
+  weight?: number | undefined;
+};
+
+export type CreateSpeechLoadBalancerRouterAudioSpeech1 = {
+  type: CreateSpeechLoadBalancerRouterAudioSpeechType;
+  models: Array<CreateSpeechLoadBalancerRouterAudioSpeechModels>;
+};
+
+/**
+ * Array of models with weights for load balancing requests
+ */
+export type CreateSpeechRouterAudioSpeechLoadBalancer =
+  CreateSpeechLoadBalancerRouterAudioSpeech1;
+
+/**
+ * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+ */
+export type CreateSpeechRouterAudioSpeechTimeout = {
+  /**
+   * Timeout value in milliseconds
+   */
+  callTimeout: number;
+};
+
 export type CreateSpeechOrq = {
   /**
    * Retry configuration for the request
    */
-  retry?: CreateSpeechRetry | undefined;
+  retry?: CreateSpeechRouterAudioSpeechRetry | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<CreateSpeechFallbacks> | undefined;
+  fallbacks?: Array<CreateSpeechRouterAudioSpeechFallbacks> | undefined;
   /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
@@ -128,11 +188,11 @@ export type CreateSpeechOrq = {
   /**
    * Array of models with weights for load balancing requests
    */
-  loadBalancer?: CreateSpeechLoadBalancer1 | undefined;
+  loadBalancer?: CreateSpeechLoadBalancerRouterAudioSpeech1 | undefined;
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: CreateSpeechTimeout | undefined;
+  timeout?: CreateSpeechRouterAudioSpeechTimeout | undefined;
 };
 
 /**
@@ -169,6 +229,26 @@ export type CreateSpeechRequestBody = {
    * The speed of the generated audio.
    */
   speed?: number | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<CreateSpeechFallbacks> | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: CreateSpeechRetry | undefined;
+  /**
+   * Load balancer configuration for the request.
+   */
+  loadBalancer?: CreateSpeechLoadBalancer1 | undefined;
+  /**
+   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
+   */
+  timeout?: CreateSpeechTimeout | undefined;
   orq?: CreateSpeechOrq | undefined;
 };
 
@@ -176,6 +256,28 @@ export type CreateSpeechRequestBody = {
 export const CreateSpeechResponseFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateSpeechResponseFormat
 > = z.nativeEnum(CreateSpeechResponseFormat);
+
+/** @internal */
+export type CreateSpeechFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateSpeechFallbacks$outboundSchema: z.ZodType<
+  CreateSpeechFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateSpeechFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createSpeechFallbacksToJSON(
+  createSpeechFallbacks: CreateSpeechFallbacks,
+): string {
+  return JSON.stringify(
+    CreateSpeechFallbacks$outboundSchema.parse(createSpeechFallbacks),
+  );
+}
 
 /** @internal */
 export type CreateSpeechRetry$Outbound = {
@@ -202,52 +304,6 @@ export function createSpeechRetryToJSON(
 ): string {
   return JSON.stringify(
     CreateSpeechRetry$outboundSchema.parse(createSpeechRetry),
-  );
-}
-
-/** @internal */
-export type CreateSpeechFallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const CreateSpeechFallbacks$outboundSchema: z.ZodType<
-  CreateSpeechFallbacks$Outbound,
-  z.ZodTypeDef,
-  CreateSpeechFallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function createSpeechFallbacksToJSON(
-  createSpeechFallbacks: CreateSpeechFallbacks,
-): string {
-  return JSON.stringify(
-    CreateSpeechFallbacks$outboundSchema.parse(createSpeechFallbacks),
-  );
-}
-
-/** @internal */
-export type CreateSpeechThread$Outbound = {
-  id: string;
-  tags?: Array<string> | undefined;
-};
-
-/** @internal */
-export const CreateSpeechThread$outboundSchema: z.ZodType<
-  CreateSpeechThread$Outbound,
-  z.ZodTypeDef,
-  CreateSpeechThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
-
-export function createSpeechThreadToJSON(
-  createSpeechThread: CreateSpeechThread,
-): string {
-  return JSON.stringify(
-    CreateSpeechThread$outboundSchema.parse(createSpeechThread),
   );
 }
 
@@ -352,15 +408,214 @@ export function createSpeechTimeoutToJSON(
 }
 
 /** @internal */
+export type CreateSpeechRouterAudioSpeechRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateSpeechRouterAudioSpeechRetry$outboundSchema: z.ZodType<
+  CreateSpeechRouterAudioSpeechRetry$Outbound,
+  z.ZodTypeDef,
+  CreateSpeechRouterAudioSpeechRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createSpeechRouterAudioSpeechRetryToJSON(
+  createSpeechRouterAudioSpeechRetry: CreateSpeechRouterAudioSpeechRetry,
+): string {
+  return JSON.stringify(
+    CreateSpeechRouterAudioSpeechRetry$outboundSchema.parse(
+      createSpeechRouterAudioSpeechRetry,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateSpeechRouterAudioSpeechFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateSpeechRouterAudioSpeechFallbacks$outboundSchema: z.ZodType<
+  CreateSpeechRouterAudioSpeechFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateSpeechRouterAudioSpeechFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createSpeechRouterAudioSpeechFallbacksToJSON(
+  createSpeechRouterAudioSpeechFallbacks:
+    CreateSpeechRouterAudioSpeechFallbacks,
+): string {
+  return JSON.stringify(
+    CreateSpeechRouterAudioSpeechFallbacks$outboundSchema.parse(
+      createSpeechRouterAudioSpeechFallbacks,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateSpeechThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const CreateSpeechThread$outboundSchema: z.ZodType<
+  CreateSpeechThread$Outbound,
+  z.ZodTypeDef,
+  CreateSpeechThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+export function createSpeechThreadToJSON(
+  createSpeechThread: CreateSpeechThread,
+): string {
+  return JSON.stringify(
+    CreateSpeechThread$outboundSchema.parse(createSpeechThread),
+  );
+}
+
+/** @internal */
+export const CreateSpeechLoadBalancerRouterAudioSpeechType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateSpeechLoadBalancerRouterAudioSpeechType> = z
+    .nativeEnum(CreateSpeechLoadBalancerRouterAudioSpeechType);
+
+/** @internal */
+export type CreateSpeechLoadBalancerRouterAudioSpeechModels$Outbound = {
+  model: string;
+  weight: number;
+};
+
+/** @internal */
+export const CreateSpeechLoadBalancerRouterAudioSpeechModels$outboundSchema:
+  z.ZodType<
+    CreateSpeechLoadBalancerRouterAudioSpeechModels$Outbound,
+    z.ZodTypeDef,
+    CreateSpeechLoadBalancerRouterAudioSpeechModels
+  > = z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  });
+
+export function createSpeechLoadBalancerRouterAudioSpeechModelsToJSON(
+  createSpeechLoadBalancerRouterAudioSpeechModels:
+    CreateSpeechLoadBalancerRouterAudioSpeechModels,
+): string {
+  return JSON.stringify(
+    CreateSpeechLoadBalancerRouterAudioSpeechModels$outboundSchema.parse(
+      createSpeechLoadBalancerRouterAudioSpeechModels,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateSpeechLoadBalancerRouterAudioSpeech1$Outbound = {
+  type: string;
+  models: Array<CreateSpeechLoadBalancerRouterAudioSpeechModels$Outbound>;
+};
+
+/** @internal */
+export const CreateSpeechLoadBalancerRouterAudioSpeech1$outboundSchema:
+  z.ZodType<
+    CreateSpeechLoadBalancerRouterAudioSpeech1$Outbound,
+    z.ZodTypeDef,
+    CreateSpeechLoadBalancerRouterAudioSpeech1
+  > = z.object({
+    type: CreateSpeechLoadBalancerRouterAudioSpeechType$outboundSchema,
+    models: z.array(
+      z.lazy(() =>
+        CreateSpeechLoadBalancerRouterAudioSpeechModels$outboundSchema
+      ),
+    ),
+  });
+
+export function createSpeechLoadBalancerRouterAudioSpeech1ToJSON(
+  createSpeechLoadBalancerRouterAudioSpeech1:
+    CreateSpeechLoadBalancerRouterAudioSpeech1,
+): string {
+  return JSON.stringify(
+    CreateSpeechLoadBalancerRouterAudioSpeech1$outboundSchema.parse(
+      createSpeechLoadBalancerRouterAudioSpeech1,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateSpeechRouterAudioSpeechLoadBalancer$Outbound =
+  CreateSpeechLoadBalancerRouterAudioSpeech1$Outbound;
+
+/** @internal */
+export const CreateSpeechRouterAudioSpeechLoadBalancer$outboundSchema:
+  z.ZodType<
+    CreateSpeechRouterAudioSpeechLoadBalancer$Outbound,
+    z.ZodTypeDef,
+    CreateSpeechRouterAudioSpeechLoadBalancer
+  > = z.lazy(() => CreateSpeechLoadBalancerRouterAudioSpeech1$outboundSchema);
+
+export function createSpeechRouterAudioSpeechLoadBalancerToJSON(
+  createSpeechRouterAudioSpeechLoadBalancer:
+    CreateSpeechRouterAudioSpeechLoadBalancer,
+): string {
+  return JSON.stringify(
+    CreateSpeechRouterAudioSpeechLoadBalancer$outboundSchema.parse(
+      createSpeechRouterAudioSpeechLoadBalancer,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateSpeechRouterAudioSpeechTimeout$Outbound = {
+  call_timeout: number;
+};
+
+/** @internal */
+export const CreateSpeechRouterAudioSpeechTimeout$outboundSchema: z.ZodType<
+  CreateSpeechRouterAudioSpeechTimeout$Outbound,
+  z.ZodTypeDef,
+  CreateSpeechRouterAudioSpeechTimeout
+> = z.object({
+  callTimeout: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    callTimeout: "call_timeout",
+  });
+});
+
+export function createSpeechRouterAudioSpeechTimeoutToJSON(
+  createSpeechRouterAudioSpeechTimeout: CreateSpeechRouterAudioSpeechTimeout,
+): string {
+  return JSON.stringify(
+    CreateSpeechRouterAudioSpeechTimeout$outboundSchema.parse(
+      createSpeechRouterAudioSpeechTimeout,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateSpeechOrq$Outbound = {
-  retry?: CreateSpeechRetry$Outbound | undefined;
-  fallbacks?: Array<CreateSpeechFallbacks$Outbound> | undefined;
+  retry?: CreateSpeechRouterAudioSpeechRetry$Outbound | undefined;
+  fallbacks?:
+    | Array<CreateSpeechRouterAudioSpeechFallbacks$Outbound>
+    | undefined;
   name?: string | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
   thread?: CreateSpeechThread$Outbound | undefined;
-  load_balancer?: CreateSpeechLoadBalancer1$Outbound | undefined;
-  timeout?: CreateSpeechTimeout$Outbound | undefined;
+  load_balancer?:
+    | CreateSpeechLoadBalancerRouterAudioSpeech1$Outbound
+    | undefined;
+  timeout?: CreateSpeechRouterAudioSpeechTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -369,16 +624,20 @@ export const CreateSpeechOrq$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateSpeechOrq
 > = z.object({
-  retry: z.lazy(() => CreateSpeechRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateSpeechFallbacks$outboundSchema))
+  retry: z.lazy(() => CreateSpeechRouterAudioSpeechRetry$outboundSchema)
     .optional(),
+  fallbacks: z.array(
+    z.lazy(() => CreateSpeechRouterAudioSpeechFallbacks$outboundSchema),
+  ).optional(),
   name: z.string().optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
   thread: z.lazy(() => CreateSpeechThread$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateSpeechLoadBalancer1$outboundSchema)
+  loadBalancer: z.lazy(() =>
+    CreateSpeechLoadBalancerRouterAudioSpeech1$outboundSchema
+  ).optional(),
+  timeout: z.lazy(() => CreateSpeechRouterAudioSpeechTimeout$outboundSchema)
     .optional(),
-  timeout: z.lazy(() => CreateSpeechTimeout$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     loadBalancer: "load_balancer",
@@ -398,6 +657,11 @@ export type CreateSpeechRequestBody$Outbound = {
   voice: string;
   response_format: string;
   speed: number;
+  name?: string | undefined;
+  fallbacks?: Array<CreateSpeechFallbacks$Outbound> | undefined;
+  retry?: CreateSpeechRetry$Outbound | undefined;
+  load_balancer?: CreateSpeechLoadBalancer1$Outbound | undefined;
+  timeout?: CreateSpeechTimeout$Outbound | undefined;
   orq?: CreateSpeechOrq$Outbound | undefined;
 };
 
@@ -412,10 +676,18 @@ export const CreateSpeechRequestBody$outboundSchema: z.ZodType<
   voice: z.string(),
   responseFormat: CreateSpeechResponseFormat$outboundSchema.default("mp3"),
   speed: z.number().default(1),
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => CreateSpeechFallbacks$outboundSchema))
+    .optional(),
+  retry: z.lazy(() => CreateSpeechRetry$outboundSchema).optional(),
+  loadBalancer: z.lazy(() => CreateSpeechLoadBalancer1$outboundSchema)
+    .optional(),
+  timeout: z.lazy(() => CreateSpeechTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateSpeechOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
+    loadBalancer: "load_balancer",
   });
 });
 

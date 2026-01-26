@@ -724,6 +724,10 @@ export type PromptInput = {
    */
   model?: string | undefined;
   /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
   audio?: CreatePromptAudio | null | undefined;
@@ -2040,6 +2044,10 @@ export type CreatePromptPromptsResponseMessages =
  * Prompt configuration with model and messages. Use this instead of prompt_config.
  */
 export type PromptField = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
   /**
    * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
    */
@@ -3483,6 +3491,7 @@ export type PromptInput$Outbound = {
     | CreatePromptMessagesToolMessage$Outbound
   >;
   model?: string | undefined;
+  name?: string | undefined;
   audio?: CreatePromptAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
@@ -3534,6 +3543,7 @@ export const PromptInput$outboundSchema: z.ZodType<
     ]),
   ),
   model: z.string().optional(),
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => CreatePromptAudio$outboundSchema)).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
@@ -5229,6 +5239,7 @@ export const PromptField$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  name: z.string().optional(),
   audio: z.nullable(z.lazy(() => CreatePromptPromptsAudio$inboundSchema))
     .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
