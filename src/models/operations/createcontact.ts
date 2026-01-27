@@ -134,7 +134,7 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-01-26T13:54:24.067Z",
+    "2026-01-27T08:08:52.242Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
