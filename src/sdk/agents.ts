@@ -41,6 +41,27 @@ export class Agents extends ClientSDK {
   }
 
   /**
+   * List agents
+   *
+   * @remarks
+   * Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
+   */
+  async list(
+    limit?: number | undefined,
+    startingAfter?: string | undefined,
+    endingBefore?: string | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.ListAgentsResponseBody> {
+    return unwrapAsync(agentsList(
+      this,
+      limit,
+      startingAfter,
+      endingBefore,
+      options,
+    ));
+  }
+
+  /**
    * Delete agent
    *
    * @remarks
@@ -110,27 +131,6 @@ export class Agents extends ClientSDK {
       this,
       key,
       requestBody,
-      options,
-    ));
-  }
-
-  /**
-   * List agents
-   *
-   * @remarks
-   * Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
-   */
-  async list(
-    limit?: number | undefined,
-    startingAfter?: string | undefined,
-    endingBefore?: string | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.ListAgentsResponseBody> {
-    return unwrapAsync(agentsList(
-      this,
-      limit,
-      startingAfter,
-      endingBefore,
       options,
     ));
   }

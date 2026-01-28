@@ -98,7 +98,7 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v2/agents/")();
+  const path = pathToFunc("/v2/agents")();
 
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,

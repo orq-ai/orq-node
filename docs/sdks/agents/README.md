@@ -5,11 +5,11 @@
 ### Available Operations
 
 * [create](#create) - Create agent
+* [list](#list) - List agents
 * [delete](#delete) - Delete agent
 * [retrieve](#retrieve) - Retrieve agent
 * [update](#update) - Update agent
 * [~~invoke~~](#invoke) - Execute an agent task :warning: **Deprecated**
-* [list](#list) - List agents
 * [~~run~~](#run) - Run an agent with configuration :warning: **Deprecated**
 * [~~streamRun~~](#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](#stream) - Stream agent execution in real-time :warning: **Deprecated**
@@ -240,6 +240,77 @@ run();
 ### Response
 
 **Promise\<[operations.CreateAgentRequestResponseBody](../../models/operations/createagentrequestresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## list
+
+Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListAgents" method="get" path="/v2/agents" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.agents.list(10);
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsList } from "@orq-ai/node/funcs/agentsList.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsList(orq, 10);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsList failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`                                                                                                                                                                                                                                                                                                                                 | *number*                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | A limit on the number of objects to be returned. Limit can range between 1 and 200. When not provided, returns all agents without pagination.                                                                                                                                                                                           |
+| `startingAfter`                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.       |
+| `endingBefore`                                                                                                                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list. |
+| `options`                                                                                                                                                                                                                                                                                                                               | RequestOptions                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | Used to set various options for making HTTP requests.                                                                                                                                                                                                                                                                                   |
+| `options.fetchOptions`                                                                                                                                                                                                                                                                                                                  | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                                                                                                                          |
+| `options.retries`                                                                                                                                                                                                                                                                                                                       | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                                                                                                                        |
+
+### Response
+
+**Promise\<[operations.ListAgentsResponseBody](../../models/operations/listagentsresponsebody.md)\>**
 
 ### Errors
 
@@ -621,77 +692,6 @@ run();
 ### Response
 
 **Promise\<[operations.InvokeAgentA2ATaskResponse](../../models/operations/invokeagenta2ataskresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## list
-
-Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="ListAgents" method="get" path="/v2/agents/" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.agents.list(10);
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { agentsList } from "@orq-ai/node/funcs/agentsList.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await agentsList(orq, 10);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("agentsList failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `limit`                                                                                                                                                                                                                                                                                                                                 | *number*                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | A limit on the number of objects to be returned. Limit can range between 1 and 200. When not provided, returns all agents without pagination.                                                                                                                                                                                           |
-| `startingAfter`                                                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.       |
-| `endingBefore`                                                                                                                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list. |
-| `options`                                                                                                                                                                                                                                                                                                                               | RequestOptions                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | Used to set various options for making HTTP requests.                                                                                                                                                                                                                                                                                   |
-| `options.fetchOptions`                                                                                                                                                                                                                                                                                                                  | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed.                                                                                                                                                          |
-| `options.retries`                                                                                                                                                                                                                                                                                                                       | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                      | Enables retrying HTTP requests under certain failure conditions.                                                                                                                                                                                                                                                                        |
-
-### Response
-
-**Promise\<[operations.ListAgentsResponseBody](../../models/operations/listagentsresponsebody.md)\>**
 
 ### Errors
 
