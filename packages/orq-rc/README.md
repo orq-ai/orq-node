@@ -170,11 +170,11 @@ run();
 ### [Agents](docs/sdks/agents/README.md)
 
 * [create](docs/sdks/agents/README.md#create) - Create agent
+* [list](docs/sdks/agents/README.md#list) - List agents
 * [delete](docs/sdks/agents/README.md#delete) - Delete agent
 * [retrieve](docs/sdks/agents/README.md#retrieve) - Retrieve agent
 * [update](docs/sdks/agents/README.md#update) - Update agent
 * [~~invoke~~](docs/sdks/agents/README.md#invoke) - Execute an agent task :warning: **Deprecated**
-* [list](docs/sdks/agents/README.md#list) - List agents
 * [~~run~~](docs/sdks/agents/README.md#run) - Run an agent with configuration :warning: **Deprecated**
 * [~~streamRun~~](docs/sdks/agents/README.md#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](docs/sdks/agents/README.md#stream) - Stream agent execution in real-time :warning: **Deprecated**
