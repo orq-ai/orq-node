@@ -142,6 +142,10 @@ export type InvokeEvalRequestBody = {
    * The messages used to generate the output, without the last user message
    */
   messages?: Array<Messages> | undefined;
+  /**
+   * Model to use for LLM-based evaluators (e.g. "openai/gpt-4o")
+   */
+  model?: string | undefined;
 };
 
 export type InvokeEvalRequest = {
@@ -528,6 +532,7 @@ export type InvokeEvalRequestBody$Outbound = {
   reference?: string | undefined;
   retrievals?: Array<string> | undefined;
   messages?: Array<Messages$Outbound> | undefined;
+  model?: string | undefined;
 };
 
 /** @internal */
@@ -541,6 +546,7 @@ export const InvokeEvalRequestBody$outboundSchema: z.ZodType<
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
   messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
+  model: z.string().optional(),
 });
 
 export function invokeEvalRequestBodyToJSON(
