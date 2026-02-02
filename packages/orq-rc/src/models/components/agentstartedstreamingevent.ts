@@ -175,6 +175,10 @@ export type Settings = {
    */
   maxExecutionTime: number;
   /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost: number;
+  /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: ToolApprovalRequired;
@@ -407,6 +411,7 @@ export const Settings$inboundSchema: z.ZodType<
 > = z.object({
   max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(600),
+  max_cost: z.number().default(0),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -417,6 +422,7 @@ export const Settings$inboundSchema: z.ZodType<
   return remap$(v, {
     "max_iterations": "maxIterations",
     "max_execution_time": "maxExecutionTime",
+    "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
   });
 });

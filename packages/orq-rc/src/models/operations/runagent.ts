@@ -1823,6 +1823,10 @@ export type RunAgentSettings = {
    */
   maxExecutionTime?: number | undefined;
   /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost?: number | undefined;
+  /**
    * Configuration for an evaluator applied to the agent
    */
   evaluators?: Array<RunAgentEvaluators> | undefined;
@@ -4027,7 +4031,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KGED4VA8AFRQ7B0G399XEM0W"),
+  id: z.string().default("01KGETTSB41QTSHW59KWET6JZ3"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -5089,6 +5093,7 @@ export type RunAgentSettings$Outbound = {
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
+  max_cost: number;
   evaluators?: Array<RunAgentEvaluators$Outbound> | undefined;
   guardrails?: Array<RunAgentGuardrails$Outbound> | undefined;
 };
@@ -5124,6 +5129,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
   ),
   maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(600),
+  maxCost: z.number().default(0),
   evaluators: z.array(z.lazy(() => RunAgentEvaluators$outboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => RunAgentGuardrails$outboundSchema))
@@ -5133,6 +5139,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
     toolApprovalRequired: "tool_approval_required",
     maxIterations: "max_iterations",
     maxExecutionTime: "max_execution_time",
+    maxCost: "max_cost",
   });
 });
 

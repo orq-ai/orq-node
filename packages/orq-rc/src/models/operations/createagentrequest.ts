@@ -1503,6 +1503,10 @@ export type Settings = {
    */
   maxExecutionTime?: number | undefined;
   /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost?: number | undefined;
+  /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: ToolApprovalRequired | undefined;
@@ -1765,6 +1769,10 @@ export type CreateAgentRequestSettings = {
    * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
   maxExecutionTime: number;
+  /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost: number;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -5065,6 +5073,7 @@ export function createAgentRequestGuardrailsToJSON(
 export type Settings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
+  max_cost: number;
   tool_approval_required: string;
   tools?:
     | Array<
@@ -5098,6 +5107,7 @@ export const Settings$outboundSchema: z.ZodType<
 > = z.object({
   maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(600),
+  maxCost: z.number().default(0),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -5128,6 +5138,7 @@ export const Settings$outboundSchema: z.ZodType<
   return remap$(v, {
     maxIterations: "max_iterations",
     maxExecutionTime: "max_execution_time",
+    maxCost: "max_cost",
     toolApprovalRequired: "tool_approval_required",
   });
 });
@@ -5391,6 +5402,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
 > = z.object({
   max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(600),
+  max_cost: z.number().default(0),
   tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
@@ -5404,6 +5416,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
   return remap$(v, {
     "max_iterations": "maxIterations",
     "max_execution_time": "maxExecutionTime",
+    "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
   });
 });
