@@ -156,6 +156,11 @@ export type InvokeEvalRequest = {
   requestBody?: InvokeEvalRequestBody | undefined;
 };
 
+export type Structured = {
+  type: "structured";
+  value: { [k: string]: any };
+};
+
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
   | number
   | boolean;
@@ -287,7 +292,8 @@ export type InvokeEvalResponseBody =
   | RougeN
   | BERTScore
   | InvokeEvalResponseBodyLLM
-  | InvokeEvalResponseBodyHTTP;
+  | InvokeEvalResponseBodyHTTP
+  | Structured;
 
 /** @internal */
 export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
@@ -582,6 +588,26 @@ export function invokeEvalRequestToJSON(
 ): string {
   return JSON.stringify(
     InvokeEvalRequest$outboundSchema.parse(invokeEvalRequest),
+  );
+}
+
+/** @internal */
+export const Structured$inboundSchema: z.ZodType<
+  Structured,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("structured"),
+  value: z.record(z.any()),
+});
+
+export function structuredFromJSON(
+  jsonString: string,
+): SafeParseResult<Structured, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Structured$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Structured' from JSON`,
   );
 }
 
@@ -1089,6 +1115,7 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => BERTScore$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyHTTP$inboundSchema),
+  z.lazy(() => Structured$inboundSchema),
 ]);
 
 export function invokeEvalResponseBodyFromJSON(
