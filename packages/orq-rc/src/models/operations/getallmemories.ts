@@ -85,7 +85,7 @@ export const GetAllMemoriesRequest$outboundSchema: z.ZodType<
   GetAllMemoriesRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   q: z.string().optional(),

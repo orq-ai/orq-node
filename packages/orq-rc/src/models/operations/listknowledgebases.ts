@@ -290,7 +290,7 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListKnowledgeBasesRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {

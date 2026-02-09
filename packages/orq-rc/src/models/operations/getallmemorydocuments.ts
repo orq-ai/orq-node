@@ -94,7 +94,7 @@ export const GetAllMemoryDocumentsRequest$outboundSchema: z.ZodType<
 > = z.object({
   memoryStoreKey: z.string(),
   memoryEntityId: z.string(),
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   updatedAfter: z.date().transform(v => v.toISOString()).optional(),

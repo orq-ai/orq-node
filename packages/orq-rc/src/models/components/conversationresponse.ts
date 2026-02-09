@@ -107,7 +107,7 @@ export const ConversationResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kgysbcgrvdzkp4cy34er4fpr"),
+  _id: z.string().default("conv_01kh0kgpb4trfvj9ssjdr5k5vh"),
   kind: ConversationResponseKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
