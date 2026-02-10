@@ -226,7 +226,7 @@ export const UpdateConversationResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("conv_01kh3yn5rv12ak2fk7hkj7wnjv"),
+  _id: z.string().default("conv_01kh3zn2s0gg9vwq0dn7sf26gd"),
   kind: UpdateConversationKind$inboundSchema,
   displayName: z.string(),
   createdAt: z.number(),
