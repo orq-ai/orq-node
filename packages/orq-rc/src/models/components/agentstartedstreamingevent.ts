@@ -203,6 +203,7 @@ export type AgentStartedStreamingEventData = {
   settings?: Settings | undefined;
   agentManifestId: string;
   agentKey: string;
+  agentDescription?: string | null | undefined;
   variables?: { [k: string]: any } | undefined;
   toolExecutionId?: string | undefined;
   isContinuation?: boolean | undefined;
@@ -452,6 +453,7 @@ export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
   settings: z.lazy(() => Settings$inboundSchema).optional(),
   agent_manifest_id: z.string(),
   agent_key: z.string(),
+  agent_description: z.nullable(z.string()).optional(),
   variables: z.record(z.any()).optional(),
   tool_execution_id: z.string().optional(),
   is_continuation: z.boolean().optional(),
@@ -463,6 +465,7 @@ export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
     "system_prompt": "systemPrompt",
     "agent_manifest_id": "agentManifestId",
     "agent_key": "agentKey",
+    "agent_description": "agentDescription",
     "tool_execution_id": "toolExecutionId",
     "is_continuation": "isContinuation",
   });
