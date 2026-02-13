@@ -414,6 +414,7 @@ export const DeploymentsProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Minimax: "minimax",
   Slack: "slack",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;

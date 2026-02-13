@@ -1040,6 +1040,20 @@ export type UpdateAgentToolApprovalRequired = ClosedEnum<
 >;
 
 /**
+ * Provider-specific built-in tools that are passed through to the provider. Must be prefixed with the provider name (e.g., openai:web_search, anthropic:web_search_20250305, google:google_search).
+ */
+export type AgentToolInputCRUDProviderBuiltInTool = {
+  /**
+   * Provider-prefixed tool type
+   */
+  type: string;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+};
+
+/**
  * MCP tool type
  */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
@@ -1452,7 +1466,7 @@ export type AgentToolInputCRUDGoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id. Provider-prefixed tools (e.g., openai:web_search) are passed through to the provider.
  */
 export type UpdateAgentAgentToolInputCRUD =
   | AgentToolInputCRUDGoogleSearchTool
@@ -1467,6 +1481,7 @@ export type UpdateAgentAgentToolInputCRUD =
   | AgentToolInputCRUDQueryKnowledgeBaseTool
   | AgentToolInputCRUDCurrentDateTool
   | AgentToolInputCRUDMCPTool
+  | AgentToolInputCRUDProviderBuiltInTool
   | AgentToolInputCRUDHTTPTool
   | AgentToolInputCRUDCodeExecutionTool
   | AgentToolInputCRUDFunctionTool
@@ -1562,6 +1577,7 @@ export type UpdateAgentSettings = {
       | AgentToolInputCRUDQueryKnowledgeBaseTool
       | AgentToolInputCRUDCurrentDateTool
       | AgentToolInputCRUDMCPTool
+      | AgentToolInputCRUDProviderBuiltInTool
       | AgentToolInputCRUDHTTPTool
       | AgentToolInputCRUDCodeExecutionTool
       | AgentToolInputCRUDFunctionTool
@@ -4588,6 +4604,36 @@ export const UpdateAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateAgentToolApprovalRequired);
 
 /** @internal */
+export type AgentToolInputCRUDProviderBuiltInTool$Outbound = {
+  type: string;
+  requires_approval?: boolean | undefined;
+};
+
+/** @internal */
+export const AgentToolInputCRUDProviderBuiltInTool$outboundSchema: z.ZodType<
+  AgentToolInputCRUDProviderBuiltInTool$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputCRUDProviderBuiltInTool
+> = z.object({
+  type: z.string(),
+  requiresApproval: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function agentToolInputCRUDProviderBuiltInToolToJSON(
+  agentToolInputCRUDProviderBuiltInTool: AgentToolInputCRUDProviderBuiltInTool,
+): string {
+  return JSON.stringify(
+    AgentToolInputCRUDProviderBuiltInTool$outboundSchema.parse(
+      agentToolInputCRUDProviderBuiltInTool,
+    ),
+  );
+}
+
+/** @internal */
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
   z.ZodNativeEnum<
     typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
@@ -5244,6 +5290,7 @@ export type UpdateAgentAgentToolInputCRUD$Outbound =
   | AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound
   | AgentToolInputCRUDCurrentDateTool$Outbound
   | AgentToolInputCRUDMCPTool$Outbound
+  | AgentToolInputCRUDProviderBuiltInTool$Outbound
   | AgentToolInputCRUDHTTPTool$Outbound
   | AgentToolInputCRUDCodeExecutionTool$Outbound
   | AgentToolInputCRUDFunctionTool$Outbound
@@ -5267,6 +5314,7 @@ export const UpdateAgentAgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDCurrentDateTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
+  z.lazy(() => AgentToolInputCRUDProviderBuiltInTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDHTTPTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDCodeExecutionTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDFunctionTool$outboundSchema),
@@ -5375,6 +5423,7 @@ export type UpdateAgentSettings$Outbound = {
       | AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound
       | AgentToolInputCRUDCurrentDateTool$Outbound
       | AgentToolInputCRUDMCPTool$Outbound
+      | AgentToolInputCRUDProviderBuiltInTool$Outbound
       | AgentToolInputCRUDHTTPTool$Outbound
       | AgentToolInputCRUDCodeExecutionTool$Outbound
       | AgentToolInputCRUDFunctionTool$Outbound
@@ -5411,6 +5460,7 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDCurrentDateTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
+      z.lazy(() => AgentToolInputCRUDProviderBuiltInTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDHTTPTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDCodeExecutionTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDFunctionTool$outboundSchema),

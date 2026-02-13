@@ -997,6 +997,20 @@ export const ToolApprovalRequired = {
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 /**
+ * Provider-specific built-in tools that are passed through to the provider. Must be prefixed with the provider name (e.g., openai:web_search, anthropic:web_search_20250305, google:google_search).
+ */
+export type ProviderBuiltInTool = {
+  /**
+   * Provider-prefixed tool type
+   */
+  type: string;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+};
+
+/**
  * MCP tool type
  */
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
@@ -1412,7 +1426,7 @@ export type GoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id. Provider-prefixed tools (e.g., openai:web_search) are passed through to the provider.
  */
 export type AgentToolInputCRUD =
   | GoogleSearchTool
@@ -1427,6 +1441,7 @@ export type AgentToolInputCRUD =
   | QueryKnowledgeBaseTool
   | CurrentDateTool
   | MCPTool
+  | ProviderBuiltInTool
   | HTTPTool
   | CodeExecutionTool
   | FunctionTool
@@ -1527,6 +1542,7 @@ export type Settings = {
       | QueryKnowledgeBaseTool
       | CurrentDateTool
       | MCPTool
+      | ProviderBuiltInTool
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
@@ -4366,6 +4382,34 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ToolApprovalRequired);
 
 /** @internal */
+export type ProviderBuiltInTool$Outbound = {
+  type: string;
+  requires_approval?: boolean | undefined;
+};
+
+/** @internal */
+export const ProviderBuiltInTool$outboundSchema: z.ZodType<
+  ProviderBuiltInTool$Outbound,
+  z.ZodTypeDef,
+  ProviderBuiltInTool
+> = z.object({
+  type: z.string(),
+  requiresApproval: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function providerBuiltInToolToJSON(
+  providerBuiltInTool: ProviderBuiltInTool,
+): string {
+  return JSON.stringify(
+    ProviderBuiltInTool$outboundSchema.parse(providerBuiltInTool),
+  );
+}
+
+/** @internal */
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
@@ -4962,6 +5006,7 @@ export type AgentToolInputCRUD$Outbound =
   | QueryKnowledgeBaseTool$Outbound
   | CurrentDateTool$Outbound
   | MCPTool$Outbound
+  | ProviderBuiltInTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
   | FunctionTool$Outbound
@@ -4985,6 +5030,7 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => CurrentDateTool$outboundSchema),
   z.lazy(() => MCPTool$outboundSchema),
+  z.lazy(() => ProviderBuiltInTool$outboundSchema),
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
@@ -5089,6 +5135,7 @@ export type Settings$Outbound = {
       | QueryKnowledgeBaseTool$Outbound
       | CurrentDateTool$Outbound
       | MCPTool$Outbound
+      | ProviderBuiltInTool$Outbound
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
@@ -5125,6 +5172,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => CurrentDateTool$outboundSchema),
       z.lazy(() => MCPTool$outboundSchema),
+      z.lazy(() => ProviderBuiltInTool$outboundSchema),
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),

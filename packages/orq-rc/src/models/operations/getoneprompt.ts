@@ -349,6 +349,7 @@ export const GetOnePromptProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Minimax: "minimax",
   Slack: "slack",
 } as const;
 export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
