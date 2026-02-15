@@ -58,6 +58,7 @@ export type ToolExecutionStartedStreamingEventData = {
   toolId: string;
   toolKey?: string | undefined;
   toolDisplayName?: string | undefined;
+  toolDescription?: string | null | undefined;
   actionType: string;
   toolArguments: { [k: string]: any };
   toolExecutionContext: ToolExecutionContext;
@@ -146,6 +147,7 @@ export const ToolExecutionStartedStreamingEventData$inboundSchema: z.ZodType<
   tool_id: z.string(),
   tool_key: z.string().optional(),
   tool_display_name: z.string().optional(),
+  tool_description: z.nullable(z.string()).optional(),
   action_type: z.string(),
   tool_arguments: z.record(z.any()),
   tool_execution_context: z.lazy(() => ToolExecutionContext$inboundSchema),
@@ -157,6 +159,7 @@ export const ToolExecutionStartedStreamingEventData$inboundSchema: z.ZodType<
     "tool_id": "toolId",
     "tool_key": "toolKey",
     "tool_display_name": "toolDisplayName",
+    "tool_description": "toolDescription",
     "action_type": "actionType",
     "tool_arguments": "toolArguments",
     "tool_execution_context": "toolExecutionContext",

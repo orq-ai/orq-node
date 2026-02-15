@@ -1179,7 +1179,7 @@ export type CreateChatCompletionFilterBy1 =
   | CreateChatCompletion1Exists;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
  */
 export type CreateChatCompletionFilterBy =
   | CreateChatCompletionFilterByAnd
@@ -1257,7 +1257,7 @@ export type CreateChatCompletionKnowledgeBases = {
    */
   searchType?: CreateChatCompletionSearchType | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
   filterBy?:
     | CreateChatCompletionFilterByAnd

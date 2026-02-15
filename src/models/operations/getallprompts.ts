@@ -363,6 +363,7 @@ export const GetAllPromptsProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Minimax: "minimax",
   Slack: "slack",
 } as const;
 export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
@@ -1430,7 +1431,7 @@ export const GetAllPromptsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {

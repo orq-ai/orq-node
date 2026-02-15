@@ -1,11 +1,11 @@
-# InvokeEvalResponseBody
+# InvokeEvalEvalsResponseResponseBody
 
-Bad request
+Error running the evaluator
 
 ## Example Usage
 
 ```typescript
-import { InvokeEvalResponseBody } from "@orq-ai/node/models/errors";
+import { InvokeEvalEvalsResponseResponseBody } from "@orq-ai/node/models/errors";
 
 // No examples available for this model
 ```

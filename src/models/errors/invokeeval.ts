@@ -8,12 +8,38 @@ import { OrqError } from "./orqerror.js";
 /**
  * Error running the evaluator
  */
-export type InvokeEvalEvalsResponseBodyData = {
+export type InvokeEvalEvalsResponseResponseBodyData = {
   message: string;
 };
 
 /**
  * Error running the evaluator
+ */
+export class InvokeEvalEvalsResponseResponseBody extends OrqError {
+  /** The original data that was passed to this error instance. */
+  data$: InvokeEvalEvalsResponseResponseBodyData;
+
+  constructor(
+    err: InvokeEvalEvalsResponseResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+
+    this.name = "InvokeEvalEvalsResponseResponseBody";
+  }
+}
+
+/**
+ * Workspace ID is not found on the request
+ */
+export type InvokeEvalEvalsResponseBodyData = {
+  message: string;
+};
+
+/**
+ * Workspace ID is not found on the request
  */
 export class InvokeEvalEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
@@ -32,14 +58,14 @@ export class InvokeEvalEvalsResponseBody extends OrqError {
 }
 
 /**
- * Workspace ID is not found on the request
+ * Bad request
  */
 export type InvokeEvalResponseBodyData = {
   message: string;
 };
 
 /**
- * Workspace ID is not found on the request
+ * Bad request
  */
 export class InvokeEvalResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
@@ -56,6 +82,25 @@ export class InvokeEvalResponseBody extends OrqError {
     this.name = "InvokeEvalResponseBody";
   }
 }
+
+/** @internal */
+export const InvokeEvalEvalsResponseResponseBody$inboundSchema: z.ZodType<
+  InvokeEvalEvalsResponseResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
+})
+  .transform((v) => {
+    return new InvokeEvalEvalsResponseResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
+  });
 
 /** @internal */
 export const InvokeEvalEvalsResponseBody$inboundSchema: z.ZodType<

@@ -1239,6 +1239,7 @@ export const UpdatePromptProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Minimax: "minimax",
   Slack: "slack",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;

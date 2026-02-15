@@ -1863,6 +1863,10 @@ export type StreamRunAgentSettings = {
    */
   maxExecutionTime?: number | undefined;
   /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost?: number | undefined;
+  /**
    * Configuration for an evaluator applied to the agent
    */
   evaluators?: Array<StreamRunAgentEvaluators> | undefined;
@@ -4099,7 +4103,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KGHB3KB85QFXB78NW6E2MH34"),
+  id: z.string().default("01KHHGC6WBQ107KDKN4VASMK98"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -5296,6 +5300,7 @@ export type StreamRunAgentSettings$Outbound = {
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
+  max_cost: number;
   evaluators?: Array<StreamRunAgentEvaluators$Outbound> | undefined;
   guardrails?: Array<StreamRunAgentGuardrails$Outbound> | undefined;
 };
@@ -5352,6 +5357,7 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
     .default("none"),
   maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(600),
+  maxCost: z.number().default(0),
   evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$outboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$outboundSchema))
@@ -5361,6 +5367,7 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
     toolApprovalRequired: "tool_approval_required",
     maxIterations: "max_iterations",
     maxExecutionTime: "max_execution_time",
+    maxCost: "max_cost",
   });
 });
 

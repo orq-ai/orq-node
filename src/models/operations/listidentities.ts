@@ -154,7 +154,7 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListIdentitiesRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   search: z.string().optional(),
@@ -227,7 +227,7 @@ export const ListIdentitiesData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-02-03T08:49:51.414Z",
+    "2026-02-15T20:37:37.270Z",
   ).transform(v => new Date(v)),
   metrics: z.lazy(() => ListIdentitiesMetrics$inboundSchema),
 }).transform((v) => {

@@ -71,7 +71,7 @@ export const GetV2ToolsToolIdVersionsRequest$outboundSchema: z.ZodType<
   GetV2ToolsToolIdVersionsRequest
 > = z.object({
   toolId: z.string(),
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {

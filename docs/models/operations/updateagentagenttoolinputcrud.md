@@ -1,6 +1,6 @@
 # UpdateAgentAgentToolInputCRUD
 
-Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id.
+Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id. Provider-prefixed tools (e.g., openai:web_search) are passed through to the provider.
 
 
 ## Supported Types
@@ -123,6 +123,14 @@ const value: operations.AgentToolInputCRUDJSONSchemaTool = {};
 const value: operations.AgentToolInputCRUDMCPTool = {
   id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
   toolId: "01KXYZ123456789",
+};
+```
+
+### `operations.AgentToolInputCRUDProviderBuiltInTool`
+
+```typescript
+const value: operations.AgentToolInputCRUDProviderBuiltInTool = {
+  type: "openai:web_search",
 };
 ```
 

@@ -86,7 +86,7 @@ export const FileListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileListRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -125,7 +125,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2026-02-03T08:49:54.792Z",
+    "2026-02-15T20:37:40.674Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

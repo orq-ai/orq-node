@@ -423,8 +423,9 @@ run();
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.InvokeEvalResponseBody      | 404                                | application/json                   |
-| errors.InvokeEvalEvalsResponseBody | 500                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type                                 | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| errors.InvokeEvalResponseBody              | 400                                        | application/json                           |
+| errors.InvokeEvalEvalsResponseBody         | 404                                        | application/json                           |
+| errors.InvokeEvalEvalsResponseResponseBody | 500                                        | application/json                           |
+| errors.APIError                            | 4XX, 5XX                                   | \*/\*                                      |

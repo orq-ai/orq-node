@@ -414,6 +414,7 @@ export const DeploymentsProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Minimax: "minimax",
   Slack: "slack",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
@@ -603,7 +604,7 @@ export const DeploymentsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentsRequest
 > = z.object({
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {

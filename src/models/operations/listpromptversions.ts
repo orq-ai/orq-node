@@ -367,6 +367,7 @@ export const ListPromptVersionsProvider = {
   Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
+  Minimax: "minimax",
   Slack: "slack",
 } as const;
 export type ListPromptVersionsProvider = ClosedEnum<
@@ -1435,7 +1436,7 @@ export const ListPromptVersionsRequest$outboundSchema: z.ZodType<
   ListPromptVersionsRequest
 > = z.object({
   promptId: z.string(),
-  limit: z.number().default(10),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {

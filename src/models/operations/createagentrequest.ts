@@ -997,6 +997,20 @@ export const ToolApprovalRequired = {
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 /**
+ * Provider-specific built-in tools that are passed through to the provider. Must be prefixed with the provider name (e.g., openai:web_search, anthropic:web_search_20250305, google:google_search).
+ */
+export type ProviderBuiltInTool = {
+  /**
+   * Provider-prefixed tool type
+   */
+  type: string;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+};
+
+/**
  * MCP tool type
  */
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
@@ -1412,7 +1426,7 @@ export type GoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id. Provider-prefixed tools (e.g., openai:web_search) are passed through to the provider.
  */
 export type AgentToolInputCRUD =
   | GoogleSearchTool
@@ -1427,6 +1441,7 @@ export type AgentToolInputCRUD =
   | QueryKnowledgeBaseTool
   | CurrentDateTool
   | MCPTool
+  | ProviderBuiltInTool
   | HTTPTool
   | CodeExecutionTool
   | FunctionTool
@@ -1503,6 +1518,10 @@ export type Settings = {
    */
   maxExecutionTime?: number | undefined;
   /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost?: number | undefined;
+  /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: ToolApprovalRequired | undefined;
@@ -1523,6 +1542,7 @@ export type Settings = {
       | QueryKnowledgeBaseTool
       | CurrentDateTool
       | MCPTool
+      | ProviderBuiltInTool
       | HTTPTool
       | CodeExecutionTool
       | FunctionTool
@@ -1765,6 +1785,10 @@ export type CreateAgentRequestSettings = {
    * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
   maxExecutionTime: number;
+  /**
+   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
+   */
+  maxCost: number;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -4358,6 +4382,34 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ToolApprovalRequired);
 
 /** @internal */
+export type ProviderBuiltInTool$Outbound = {
+  type: string;
+  requires_approval?: boolean | undefined;
+};
+
+/** @internal */
+export const ProviderBuiltInTool$outboundSchema: z.ZodType<
+  ProviderBuiltInTool$Outbound,
+  z.ZodTypeDef,
+  ProviderBuiltInTool
+> = z.object({
+  type: z.string(),
+  requiresApproval: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function providerBuiltInToolToJSON(
+  providerBuiltInTool: ProviderBuiltInTool,
+): string {
+  return JSON.stringify(
+    ProviderBuiltInTool$outboundSchema.parse(providerBuiltInTool),
+  );
+}
+
+/** @internal */
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
@@ -4954,6 +5006,7 @@ export type AgentToolInputCRUD$Outbound =
   | QueryKnowledgeBaseTool$Outbound
   | CurrentDateTool$Outbound
   | MCPTool$Outbound
+  | ProviderBuiltInTool$Outbound
   | HTTPTool$Outbound
   | CodeExecutionTool$Outbound
   | FunctionTool$Outbound
@@ -4977,6 +5030,7 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => CurrentDateTool$outboundSchema),
   z.lazy(() => MCPTool$outboundSchema),
+  z.lazy(() => ProviderBuiltInTool$outboundSchema),
   z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
   z.lazy(() => FunctionTool$outboundSchema),
@@ -5065,6 +5119,7 @@ export function createAgentRequestGuardrailsToJSON(
 export type Settings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
+  max_cost: number;
   tool_approval_required: string;
   tools?:
     | Array<
@@ -5080,6 +5135,7 @@ export type Settings$Outbound = {
       | QueryKnowledgeBaseTool$Outbound
       | CurrentDateTool$Outbound
       | MCPTool$Outbound
+      | ProviderBuiltInTool$Outbound
       | HTTPTool$Outbound
       | CodeExecutionTool$Outbound
       | FunctionTool$Outbound
@@ -5098,6 +5154,7 @@ export const Settings$outboundSchema: z.ZodType<
 > = z.object({
   maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(600),
+  maxCost: z.number().default(0),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -5115,6 +5172,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => CurrentDateTool$outboundSchema),
       z.lazy(() => MCPTool$outboundSchema),
+      z.lazy(() => ProviderBuiltInTool$outboundSchema),
       z.lazy(() => HTTPTool$outboundSchema),
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
@@ -5128,6 +5186,7 @@ export const Settings$outboundSchema: z.ZodType<
   return remap$(v, {
     maxIterations: "max_iterations",
     maxExecutionTime: "max_execution_time",
+    maxCost: "max_cost",
     toolApprovalRequired: "tool_approval_required",
   });
 });
@@ -5391,6 +5450,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
 > = z.object({
   max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(600),
+  max_cost: z.number().default(0),
   tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
@@ -5404,6 +5464,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
   return remap$(v, {
     "max_iterations": "maxIterations",
     "max_execution_time": "maxExecutionTime",
+    "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
   });
 });

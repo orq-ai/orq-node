@@ -142,6 +142,10 @@ export type InvokeEvalRequestBody = {
    * The messages used to generate the output, without the last user message
    */
   messages?: Array<Messages> | undefined;
+  /**
+   * Model to use for LLM-based evaluators (e.g. "openai/gpt-4o")
+   */
+  model?: string | undefined;
 };
 
 export type InvokeEvalRequest = {
@@ -150,6 +154,11 @@ export type InvokeEvalRequest = {
    */
   id: string;
   requestBody?: InvokeEvalRequestBody | undefined;
+};
+
+export type Structured = {
+  type: "structured";
+  value: { [k: string]: any };
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
@@ -283,7 +292,8 @@ export type InvokeEvalResponseBody =
   | RougeN
   | BERTScore
   | InvokeEvalResponseBodyLLM
-  | InvokeEvalResponseBodyHTTP;
+  | InvokeEvalResponseBodyHTTP
+  | Structured;
 
 /** @internal */
 export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
@@ -528,6 +538,7 @@ export type InvokeEvalRequestBody$Outbound = {
   reference?: string | undefined;
   retrievals?: Array<string> | undefined;
   messages?: Array<Messages$Outbound> | undefined;
+  model?: string | undefined;
 };
 
 /** @internal */
@@ -541,6 +552,7 @@ export const InvokeEvalRequestBody$outboundSchema: z.ZodType<
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
   messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
+  model: z.string().optional(),
 });
 
 export function invokeEvalRequestBodyToJSON(
@@ -576,6 +588,26 @@ export function invokeEvalRequestToJSON(
 ): string {
   return JSON.stringify(
     InvokeEvalRequest$outboundSchema.parse(invokeEvalRequest),
+  );
+}
+
+/** @internal */
+export const Structured$inboundSchema: z.ZodType<
+  Structured,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("structured"),
+  value: z.record(z.any()),
+});
+
+export function structuredFromJSON(
+  jsonString: string,
+): SafeParseResult<Structured, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Structured$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Structured' from JSON`,
   );
 }
 
@@ -1083,6 +1115,7 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => BERTScore$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyHTTP$inboundSchema),
+  z.lazy(() => Structured$inboundSchema),
 ]);
 
 export function invokeEvalResponseBodyFromJSON(

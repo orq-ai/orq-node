@@ -770,7 +770,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (36)</summary>
+<details><summary>Less common errors (37)</summary>
 
 <br />
 
@@ -784,12 +784,13 @@ run();
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
 * [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 9 of 115 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 115 methods.*
 * [`GenerateConversationNameResponseBody`](./src/models/errors/generateconversationnameresponsebody.ts): Conversation already has a display name. This endpoint only generates names for conversations with empty display names. Status code `400`. Applicable to 1 of 115 methods.*
 * [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
 * [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
 * [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
 * [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 115 methods.*
 * [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 115 methods.*
 * [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 115 methods.*
 * [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 115 methods.*
@@ -812,7 +813,7 @@ run();
 * [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 115 methods.*
 * [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 115 methods.*
 * [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 115 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 115 methods.*
+* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 115 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -874,19 +875,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Orq } from "@orq-ai/node";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "@orq-ai/node/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {

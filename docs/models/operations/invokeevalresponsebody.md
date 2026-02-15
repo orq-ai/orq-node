@@ -98,3 +98,14 @@ const value: operations.InvokeEvalResponseBodyHTTP = {
 };
 ```
 
+### `operations.Structured`
+
+```typescript
+const value: operations.Structured = {
+  type: "structured",
+  value: {
+    "key": "<value>",
+  },
+};
+```
+

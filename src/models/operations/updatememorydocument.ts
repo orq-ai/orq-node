@@ -12,7 +12,7 @@ export type UpdateMemoryDocumentRequestBody = {
   /**
    * The content of the memory document (whitespace trimmed).
    */
-  text: string;
+  text?: string | undefined;
   /**
    * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
    */
@@ -59,7 +59,7 @@ export type UpdateMemoryDocumentResponseBody = {
 
 /** @internal */
 export type UpdateMemoryDocumentRequestBody$Outbound = {
-  text: string;
+  text?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
 };
 
@@ -69,7 +69,7 @@ export const UpdateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateMemoryDocumentRequestBody
 > = z.object({
-  text: z.string(),
+  text: z.string().optional(),
   metadata: z.record(z.string()).optional(),
 });
 
