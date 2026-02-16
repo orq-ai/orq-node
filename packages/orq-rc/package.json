@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.4.0-rc.2",
+  "version": "4.4.0-rc.3",
   "author": "Orq",
   "main": "./index.js",
   "sideEffects": false,
