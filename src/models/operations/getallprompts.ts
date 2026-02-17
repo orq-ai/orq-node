@@ -364,6 +364,7 @@ export const GetAllPromptsProvider = {
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",
+  Alibaba: "alibaba",
   Slack: "slack",
 } as const;
 export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;

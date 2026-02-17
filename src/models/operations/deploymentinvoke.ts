@@ -57,6 +57,7 @@ export const Provider = {
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",
+  Alibaba: "alibaba",
   Slack: "slack",
 } as const;
 /**

@@ -7,11 +7,11 @@ The provider used to generate the response
 ```typescript
 import { DeploymentStreamProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamProvider = "nvidia";
+let value: DeploymentStreamProvider = "jina";
 ```
 
 ## Values
 
 ```typescript
-"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai" | "zai" | "minimax" | "slack"
+"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai" | "zai" | "minimax" | "alibaba" | "slack"
 ```
