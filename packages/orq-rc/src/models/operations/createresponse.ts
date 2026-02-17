@@ -284,6 +284,20 @@ export const Include = {
 export type Include = ClosedEnum<typeof Include>;
 
 /**
+ * Specifies the latency tier to use for processing the request. Defaults to "auto".
+ */
+export const ServiceTier = {
+  Auto: "auto",
+  Default: "default",
+  Flex: "flex",
+  Priority: "priority",
+} as const;
+/**
+ * Specifies the latency tier to use for processing the request. Defaults to "auto".
+ */
+export type ServiceTier = ClosedEnum<typeof ServiceTier>;
+
+/**
  * The ranking algorithm
  */
 export const Ranker = {
@@ -604,6 +618,10 @@ export type CreateResponseRequestBody = {
    * Whether to store this response for use in distillations or evals.
    */
   store?: boolean | null | undefined;
+  /**
+   * Specifies the latency tier to use for processing the request. Defaults to "auto".
+   */
+  serviceTier?: ServiceTier | null | undefined;
   /**
    * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
    */
@@ -1318,14 +1336,18 @@ export type Truncation = ClosedEnum<typeof Truncation>;
 /**
  * The service tier used for processing the request
  */
-export const ServiceTier = {
+export const CreateResponseServiceTier = {
   Auto: "auto",
   Default: "default",
+  Flex: "flex",
+  Priority: "priority",
 } as const;
 /**
  * The service tier used for processing the request
  */
-export type ServiceTier = ClosedEnum<typeof ServiceTier>;
+export type CreateResponseServiceTier = ClosedEnum<
+  typeof CreateResponseServiceTier
+>;
 
 /**
  * Represents the completed model response returned when `stream` is false
@@ -1405,7 +1427,7 @@ export type CreateResponseResponseBody = {
   /**
    * The service tier used for processing the request
    */
-  serviceTier?: ServiceTier | null | undefined;
+  serviceTier?: CreateResponseServiceTier | null | undefined;
   /**
    * Whether the response was processed in the background
    */
@@ -1868,6 +1890,10 @@ export const Include$outboundSchema: z.ZodNativeEnum<typeof Include> = z
   .nativeEnum(Include);
 
 /** @internal */
+export const ServiceTier$outboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
+  .nativeEnum(ServiceTier);
+
+/** @internal */
 export const Ranker$outboundSchema: z.ZodNativeEnum<typeof Ranker> = z
   .nativeEnum(Ranker);
 
@@ -2241,6 +2267,7 @@ export type CreateResponseRequestBody$Outbound = {
   include?: Array<string> | null | undefined;
   parallel_tool_calls?: boolean | null | undefined;
   store: boolean | null;
+  service_tier?: string | null | undefined;
   tools?:
     | Array<Tools1$Outbound | Tools2$Outbound | Tools3$Outbound>
     | undefined;
@@ -2279,6 +2306,7 @@ export const CreateResponseRequestBody$outboundSchema: z.ZodType<
   include: z.nullable(z.array(Include$outboundSchema)).optional(),
   parallelToolCalls: z.nullable(z.boolean()).optional(),
   store: z.nullable(z.boolean().default(true)),
+  serviceTier: z.nullable(ServiceTier$outboundSchema).optional(),
   tools: z.array(
     z.union([
       z.lazy(() => Tools1$outboundSchema),
@@ -2299,6 +2327,7 @@ export const CreateResponseRequestBody$outboundSchema: z.ZodType<
     previousResponseId: "previous_response_id",
     maxOutputTokens: "max_output_tokens",
     parallelToolCalls: "parallel_tool_calls",
+    serviceTier: "service_tier",
     toolChoice: "tool_choice",
   });
 });
@@ -3183,8 +3212,9 @@ export const Truncation$inboundSchema: z.ZodNativeEnum<typeof Truncation> = z
   .nativeEnum(Truncation);
 
 /** @internal */
-export const ServiceTier$inboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
-  .nativeEnum(ServiceTier);
+export const CreateResponseServiceTier$inboundSchema: z.ZodNativeEnum<
+  typeof CreateResponseServiceTier
+> = z.nativeEnum(CreateResponseServiceTier);
 
 /** @internal */
 export const CreateResponseResponseBody$inboundSchema: z.ZodType<
@@ -3234,7 +3264,7 @@ export const CreateResponseResponseBody$inboundSchema: z.ZodType<
     .optional(),
   truncation: z.nullable(Truncation$inboundSchema.default("disabled")),
   user: z.nullable(z.string()).optional(),
-  service_tier: z.nullable(ServiceTier$inboundSchema).optional(),
+  service_tier: z.nullable(CreateResponseServiceTier$inboundSchema).optional(),
   background: z.nullable(z.boolean()).optional(),
   top_logprobs: z.nullable(z.number().int()).optional(),
   logprobs: z.nullable(z.boolean()).optional(),
