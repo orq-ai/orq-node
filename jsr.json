@@ -2,7 +2,7 @@
 
 {
   "name": "@orq-ai/node",
-  "version": "4.3.10",
+  "version": "4.3.11",
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    
