@@ -1,31 +1,35 @@
 # DataLLM
 
-## Example Usage
+
+## Supported Types
+
+### `operations.GetEvalsLlm1`
 
 ```typescript
-import { DataLLM } from "@orq-ai/node/models/operations";
-
-let value: DataLLM = {
+const value: operations.GetEvalsLlm1 = {
   id: "<id>",
-  description:
-    "advertisement list amid vainly bah partially owlishly treble why however",
+  description: "loosely actual ew",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Element",
+  mode: "single",
+  model: "Mercielago",
 };
 ```
 
-## Fields
+### `operations.GetEvalsLlm2`
 
-| Field                                                                               | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `id`                                                                                | *string*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `description`                                                                       | *string*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `created`                                                                           | *string*                                                                            | :heavy_minus_sign:                                                                  | N/A                                                                                 |
-| `updated`                                                                           | *string*                                                                            | :heavy_minus_sign:                                                                  | N/A                                                                                 |
-| `guardrailConfig`                                                                   | *operations.GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailConfig* | :heavy_minus_sign:                                                                  | N/A                                                                                 |
-| `type`                                                                              | *"llm_eval"*                                                                        | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `prompt`                                                                            | *string*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `key`                                                                               | *string*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `model`                                                                             | *string*                                                                            | :heavy_check_mark:                                                                  | N/A                                                                                 |
+```typescript
+const value: operations.GetEvalsLlm2 = {
+  id: "<id>",
+  description: "whereas barring without or annual",
+  type: "llm_eval",
+  prompt: "<value>",
+  key: "<key>",
+  mode: "jury",
+  jury: {
+    judges: [],
+  },
+};
+```
+

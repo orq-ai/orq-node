@@ -10,11 +10,14 @@ Successfully created an evaluator
 ```typescript
 const value: operations.ResponseBodyLLM = {
   id: "<id>",
-  description: "duh unexpectedly famously handful helplessly around yum qua",
+  description: "considerate amid crystallize thorny gracious",
+  created: "2026-02-20T21:44:14.406Z",
+  updated: "2026-02-20T21:44:14.406Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Model Y",
+  mode: "single",
+  model: "A4",
 };
 ```
 

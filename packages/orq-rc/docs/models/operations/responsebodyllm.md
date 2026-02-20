@@ -1,30 +1,35 @@
 # ResponseBodyLLM
 
-## Example Usage
+
+## Supported Types
+
+### `operations.CreateEvalLlm1`
 
 ```typescript
-import { ResponseBodyLLM } from "@orq-ai/node/models/operations";
-
-let value: ResponseBodyLLM = {
+const value: operations.CreateEvalLlm1 = {
   id: "<id>",
-  description: "duh unexpectedly famously handful helplessly around yum qua",
+  description: "stump geez anenst gadzooks yuck hype that obnoxiously pasta",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Model Y",
+  mode: "single",
+  model: "Silverado",
 };
 ```
 
-## Fields
+### `operations.CreateEvalLlm2`
 
-| Field                                    | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `id`                                     | *string*                                 | :heavy_check_mark:                       | N/A                                      |
-| `description`                            | *string*                                 | :heavy_check_mark:                       | N/A                                      |
-| `created`                                | *string*                                 | :heavy_minus_sign:                       | N/A                                      |
-| `updated`                                | *string*                                 | :heavy_minus_sign:                       | N/A                                      |
-| `guardrailConfig`                        | *operations.ResponseBodyGuardrailConfig* | :heavy_minus_sign:                       | N/A                                      |
-| `type`                                   | *"llm_eval"*                             | :heavy_check_mark:                       | N/A                                      |
-| `prompt`                                 | *string*                                 | :heavy_check_mark:                       | N/A                                      |
-| `key`                                    | *string*                                 | :heavy_check_mark:                       | N/A                                      |
-| `model`                                  | *string*                                 | :heavy_check_mark:                       | N/A                                      |
+```typescript
+const value: operations.CreateEvalLlm2 = {
+  id: "<id>",
+  description: "event needy since psst shampoo worth whoa",
+  type: "llm_eval",
+  prompt: "<value>",
+  key: "<key>",
+  mode: "jury",
+  jury: {
+    judges: [],
+  },
+};
+```
+

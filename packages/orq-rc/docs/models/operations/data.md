@@ -8,12 +8,14 @@
 ```typescript
 const value: operations.DataLLM = {
   id: "<id>",
-  description:
-    "advertisement list amid vainly bah partially owlishly treble why however",
+  description: "tremendously enrage till pfft wire dish godfather spring",
+  created: "2026-02-20T21:44:14.406Z",
+  updated: "2026-02-20T21:44:14.406Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Element",
+  mode: "single",
+  model: "A4",
 };
 ```
 

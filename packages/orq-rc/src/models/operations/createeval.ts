@@ -9,67 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const CreateEvalGuardrailConfigEvalsOperator = {
-  Eq: "eq",
-  Ne: "ne",
-  Gt: "gt",
-  Gte: "gte",
-  Lt: "lt",
-  Lte: "lte",
-} as const;
-export type CreateEvalGuardrailConfigEvalsOperator = ClosedEnum<
-  typeof CreateEvalGuardrailConfigEvalsOperator
->;
-
-export type CreateEvalGuardrailConfigEvalsNumber = {
-  enabled: boolean;
-  alertOnFailure?: boolean | undefined;
-  type: "number";
-  value: number;
-  operator: CreateEvalGuardrailConfigEvalsOperator;
-};
-
-export type CreateEvalGuardrailConfigEvalsBoolean = {
-  enabled: boolean;
-  alertOnFailure?: boolean | undefined;
-  type: "boolean";
-  value: boolean;
-};
-
-export type CreateEvalRequestBodyEvalsGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsBoolean
-  | CreateEvalGuardrailConfigEvalsNumber;
-
-export const CreateEvalRequestBodyEvalsOutputType = {
-  Boolean: "boolean",
-  Number: "number",
-} as const;
-export type CreateEvalRequestBodyEvalsOutputType = ClosedEnum<
-  typeof CreateEvalRequestBodyEvalsOutputType
->;
-
-export type Python = {
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsBoolean
-    | CreateEvalGuardrailConfigEvalsNumber
-    | undefined;
-  outputType?: CreateEvalRequestBodyEvalsOutputType | undefined;
-  code: string;
-  type: "python_eval";
-  /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
-   *
-   * @remarks
-   *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
-   *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
-   */
-  path: string;
-  description?: string | undefined;
-  key: string;
-};
-
 export const CreateEvalGuardrailConfigOperator = {
   Eq: "eq",
   Ne: "ne",
@@ -101,44 +40,29 @@ export type CreateEvalRequestBodyGuardrailConfig =
   | CreateEvalGuardrailConfigBoolean
   | CreateEvalGuardrailConfigNumber;
 
-/**
- * The type of output expected from the evaluator
- */
 export const CreateEvalRequestBodyOutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
   Number: "number",
-  String: "string",
 } as const;
-/**
- * The type of output expected from the evaluator
- */
 export type CreateEvalRequestBodyOutputType = ClosedEnum<
   typeof CreateEvalRequestBodyOutputType
 >;
 
-export const CreateEvalRequestBodyMethod = {
-  Get: "GET",
-  Post: "POST",
+export const CreateEvalRequestBodyType = {
+  PythonEval: "python_eval",
 } as const;
-export type CreateEvalRequestBodyMethod = ClosedEnum<
-  typeof CreateEvalRequestBodyMethod
+export type CreateEvalRequestBodyType = ClosedEnum<
+  typeof CreateEvalRequestBodyType
 >;
 
-export type CreateEvalRequestBodyHTTP = {
+export type Python = {
   guardrailConfig?:
     | CreateEvalGuardrailConfigBoolean
     | CreateEvalGuardrailConfigNumber
     | undefined;
-  /**
-   * The type of output expected from the evaluator
-   */
   outputType?: CreateEvalRequestBodyOutputType | undefined;
-  type: "http_eval";
-  url: string;
-  method: CreateEvalRequestBodyMethod;
-  headers: { [k: string]: string };
-  payload: { [k: string]: any };
+  code: string;
+  type: CreateEvalRequestBodyType;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -184,16 +108,44 @@ export type RequestBodyGuardrailConfig =
   | GuardrailConfigBoolean
   | GuardrailConfigNumber;
 
+/**
+ * The type of output expected from the evaluator
+ */
 export const RequestBodyOutputType = {
   Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
 } as const;
+/**
+ * The type of output expected from the evaluator
+ */
 export type RequestBodyOutputType = ClosedEnum<typeof RequestBodyOutputType>;
 
-export type Json = {
+export const RequestBodyType = {
+  HttpEval: "http_eval",
+} as const;
+export type RequestBodyType = ClosedEnum<typeof RequestBodyType>;
+
+export const CreateEvalRequestBodyMethod = {
+  Get: "GET",
+  Post: "POST",
+} as const;
+export type CreateEvalRequestBodyMethod = ClosedEnum<
+  typeof CreateEvalRequestBodyMethod
+>;
+
+export type CreateEvalRequestBodyHTTP = {
   guardrailConfig?: GuardrailConfigBoolean | GuardrailConfigNumber | undefined;
+  /**
+   * The type of output expected from the evaluator
+   */
   outputType?: RequestBodyOutputType | undefined;
-  type: "json_schema";
-  schema: string;
+  type: RequestBodyType;
+  url: string;
+  method: CreateEvalRequestBodyMethod;
+  headers: { [k: string]: string };
+  payload: { [k: string]: any };
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -235,10 +187,72 @@ export type Boolean = {
 
 export type GuardrailConfig = Boolean | NumberT;
 
+export const OutputType = {
+  Boolean: "boolean",
+} as const;
+export type OutputType = ClosedEnum<typeof OutputType>;
+
+export const CreateEvalRequestBodyEvalsType = {
+  JsonSchema: "json_schema",
+} as const;
+export type CreateEvalRequestBodyEvalsType = ClosedEnum<
+  typeof CreateEvalRequestBodyEvalsType
+>;
+
+export type Json = {
+  guardrailConfig?: Boolean | NumberT | undefined;
+  outputType?: OutputType | undefined;
+  type: CreateEvalRequestBodyEvalsType;
+  schema: string;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path: string;
+  description?: string | undefined;
+  key: string;
+};
+
+export const CreateEvalGuardrailConfigEvalsOperator = {
+  Eq: "eq",
+  Ne: "ne",
+  Gt: "gt",
+  Gte: "gte",
+  Lt: "lt",
+  Lte: "lte",
+} as const;
+export type CreateEvalGuardrailConfigEvalsOperator = ClosedEnum<
+  typeof CreateEvalGuardrailConfigEvalsOperator
+>;
+
+export type CreateEvalGuardrailConfigEvalsNumber = {
+  enabled: boolean;
+  alertOnFailure?: boolean | undefined;
+  type: "number";
+  value: number;
+  operator: CreateEvalGuardrailConfigEvalsOperator;
+};
+
+export type CreateEvalGuardrailConfigEvalsBoolean = {
+  enabled: boolean;
+  alertOnFailure?: boolean | undefined;
+  type: "boolean";
+  value: boolean;
+};
+
+export type LLMGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsBoolean
+  | CreateEvalGuardrailConfigEvalsNumber;
+
 /**
  * The type of output expected from the evaluator
  */
-export const OutputType = {
+export const LLMOutputType = {
   Boolean: "boolean",
   Categorical: "categorical",
   Number: "number",
@@ -247,15 +261,66 @@ export const OutputType = {
 /**
  * The type of output expected from the evaluator
  */
-export type OutputType = ClosedEnum<typeof OutputType>;
+export type LLMOutputType = ClosedEnum<typeof LLMOutputType>;
 
-export type Llm = {
-  guardrailConfig?: Boolean | NumberT | undefined;
+export const LLMType = {
+  LlmEval: "llm_eval",
+} as const;
+export type LLMType = ClosedEnum<typeof LLMType>;
+
+export type CreateEvalLLMRetry = {
+  count?: number | undefined;
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateEvalLLMFallbacks = {
+  model: string;
+};
+
+export type LLMJudges = {
+  model: string;
+  retry?: CreateEvalLLMRetry | undefined;
+  fallbacks?: Array<CreateEvalLLMFallbacks> | undefined;
+};
+
+export type LLMRetry = {
+  count?: number | undefined;
+  onCodes?: Array<number> | undefined;
+};
+
+export type LLMFallbacks = {
+  model: string;
+};
+
+export type LLMReplacementJudges = {
+  model: string;
+  retry?: LLMRetry | undefined;
+  fallbacks?: Array<LLMFallbacks> | undefined;
+};
+
+export const LLMTieValue = {
+  Tie: "Tie",
+} as const;
+export type LLMTieValue = ClosedEnum<typeof LLMTieValue>;
+
+export type LLMJury = {
+  judges: Array<LLMJudges>;
+  replacementJudges?: Array<LLMReplacementJudges> | undefined;
+  minSuccessfulJudges?: number | undefined;
+  tieValue?: LLMTieValue | undefined;
+};
+
+export type Llm2 = {
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsBoolean
+    | CreateEvalGuardrailConfigEvalsNumber
+    | undefined;
   /**
    * The type of output expected from the evaluator
    */
-  outputType?: OutputType | undefined;
-  type: "llm_eval";
+  outputType?: LLMOutputType | undefined;
+  type: LLMType;
+  repetitions?: number | undefined;
   prompt: string;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -268,15 +333,99 @@ export type Llm = {
    */
   path: string;
   description?: string | undefined;
-  model: string;
   key: string;
+  mode: "jury";
+  jury: LLMJury;
 };
 
+export const CreateEvalGuardrailConfigEvalsRequestOperator = {
+  Eq: "eq",
+  Ne: "ne",
+  Gt: "gt",
+  Gte: "gte",
+  Lt: "lt",
+  Lte: "lte",
+} as const;
+export type CreateEvalGuardrailConfigEvalsRequestOperator = ClosedEnum<
+  typeof CreateEvalGuardrailConfigEvalsRequestOperator
+>;
+
+export type CreateEvalGuardrailConfigEvalsRequestNumber = {
+  enabled: boolean;
+  alertOnFailure?: boolean | undefined;
+  type: "number";
+  value: number;
+  operator: CreateEvalGuardrailConfigEvalsRequestOperator;
+};
+
+export type CreateEvalGuardrailConfigEvalsRequestBoolean = {
+  enabled: boolean;
+  alertOnFailure?: boolean | undefined;
+  type: "boolean";
+  value: boolean;
+};
+
+export type CreateEvalLLMGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsRequestBoolean
+  | CreateEvalGuardrailConfigEvalsRequestNumber;
+
+/**
+ * The type of output expected from the evaluator
+ */
+export const CreateEvalLLMOutputType = {
+  Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
+} as const;
+/**
+ * The type of output expected from the evaluator
+ */
+export type CreateEvalLLMOutputType = ClosedEnum<
+  typeof CreateEvalLLMOutputType
+>;
+
+export const CreateEvalLLMType = {
+  LlmEval: "llm_eval",
+} as const;
+export type CreateEvalLLMType = ClosedEnum<typeof CreateEvalLLMType>;
+
+export type Llm1 = {
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsRequestBoolean
+    | CreateEvalGuardrailConfigEvalsRequestNumber
+    | undefined;
+  /**
+   * The type of output expected from the evaluator
+   */
+  outputType?: CreateEvalLLMOutputType | undefined;
+  type: CreateEvalLLMType;
+  repetitions?: number | undefined;
+  prompt: string;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path: string;
+  description?: string | undefined;
+  key: string;
+  mode: "single";
+  model: string;
+};
+
+export type Llm = Llm1 | Llm2;
+
 export type CreateEvalRequestBody =
-  | Llm
-  | Json
   | CreateEvalRequestBodyHTTP
-  | Python;
+  | Json
+  | Python
+  | Llm1
+  | Llm2;
 
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Operator =
   {
@@ -310,9 +459,15 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
     value: boolean;
   };
 
-export type CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig =
+export type CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number;
+
+export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONType = {
+  TypescriptEval: "typescript_eval",
+} as const;
+export type CreateEvalResponseBodyEvalsResponse200ApplicationJSONType =
+  ClosedEnum<typeof CreateEvalResponseBodyEvalsResponse200ApplicationJSONType>;
 
 export type Typescript = {
   id: string;
@@ -324,7 +479,7 @@ export type Typescript = {
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number
     | undefined;
   code: string;
-  type: "typescript_eval";
+  type: CreateEvalResponseBodyEvalsResponse200ApplicationJSONType;
   key: string;
 };
 
@@ -360,9 +515,16 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
     value: boolean;
   };
 
-export type CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig =
+export type CreateEvalResponseBodyEvalsResponse200GuardrailConfig =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number;
+
+export const CreateEvalResponseBodyEvalsResponse200Type = {
+  Ragas: "ragas",
+} as const;
+export type CreateEvalResponseBodyEvalsResponse200Type = ClosedEnum<
+  typeof CreateEvalResponseBodyEvalsResponse200Type
+>;
 
 export const RagasMetric = {
   ContextPrecision: "context_precision",
@@ -389,13 +551,13 @@ export type Ragas = {
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number
     | undefined;
-  type: "ragas";
+  type: CreateEvalResponseBodyEvalsResponse200Type;
   ragasMetric: RagasMetric;
   key: string;
   model: string;
 };
 
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator =
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator =
   {
     Eq: "eq",
     Ne: "ne",
@@ -404,22 +566,22 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     Lt: "lt",
     Lte: "lte",
   } as const;
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator =
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator =
   ClosedEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
   >;
 
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number =
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
   {
     enabled: boolean;
     alertOnFailure: boolean;
     type: "number";
     value: number;
     operator:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator;
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator;
   };
 
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean =
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
   {
     enabled: boolean;
     alertOnFailure: boolean;
@@ -427,9 +589,16 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
     value: boolean;
   };
 
-export type CreateEvalResponseBodyEvalsResponse200GuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number;
+export type CreateEvalResponseBodyEvalsResponseGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber;
+
+export const CreateEvalResponseBodyEvalsResponseType = {
+  FunctionEval: "function_eval",
+} as const;
+export type CreateEvalResponseBodyEvalsResponseType = ClosedEnum<
+  typeof CreateEvalResponseBodyEvalsResponseType
+>;
 
 export type ThirtyTwo = {
   type: "grammar_diversity";
@@ -561,19 +730,19 @@ export type CreateEvalFunctionParams3 = {
   keywords: Array<string>;
 };
 
-export type CreateEvalFunctionParams2 = {
+export type FunctionParams2 = {
   type: "contains_none";
   keywords: Array<string>;
 };
 
-export type CreateEvalFunctionParams1 = {
+export type FunctionParams1 = {
   type: "contains";
   value: string;
 };
 
 export type FunctionParams =
-  | CreateEvalFunctionParams1
-  | CreateEvalFunctionParams2
+  | FunctionParams1
+  | FunctionParams2
   | CreateEvalFunctionParams3
   | CreateEvalFunctionParams4
   | Five
@@ -611,13 +780,13 @@ export type CreateEvalResponseBodyFunction = {
   created: string;
   updated: string;
   guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
     | undefined;
-  type: "function_eval";
+  type: CreateEvalResponseBodyEvalsResponseType;
   functionParams:
-    | CreateEvalFunctionParams1
-    | CreateEvalFunctionParams2
+    | FunctionParams1
+    | FunctionParams2
     | CreateEvalFunctionParams3
     | CreateEvalFunctionParams4
     | Five
@@ -648,56 +817,6 @@ export type CreateEvalResponseBodyFunction = {
     | Thirty
     | ThirtyOne
     | ThirtyTwo;
-  key: string;
-};
-
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator =
-  {
-    Eq: "eq",
-    Ne: "ne",
-    Gt: "gt",
-    Gte: "gte",
-    Lt: "lt",
-    Lte: "lte",
-  } as const;
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator =
-  ClosedEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
-  >;
-
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
-  {
-    enabled: boolean;
-    alertOnFailure: boolean;
-    type: "number";
-    value: number;
-    operator:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator;
-  };
-
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
-  {
-    enabled: boolean;
-    alertOnFailure: boolean;
-    type: "boolean";
-    value: boolean;
-  };
-
-export type CreateEvalResponseBodyEvalsResponseGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber;
-
-export type ResponseBodyPython = {
-  id: string;
-  description: string;
-  created: string;
-  updated: string;
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
-    | undefined;
-  code: string;
-  type: "python_eval";
   key: string;
 };
 
@@ -734,13 +853,14 @@ export type CreateEvalResponseBodyEvalsGuardrailConfig =
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
   | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber;
 
-export const ResponseBodyMethod = {
-  Get: "GET",
-  Post: "POST",
+export const CreateEvalResponseBodyEvalsType = {
+  PythonEval: "python_eval",
 } as const;
-export type ResponseBodyMethod = ClosedEnum<typeof ResponseBodyMethod>;
+export type CreateEvalResponseBodyEvalsType = ClosedEnum<
+  typeof CreateEvalResponseBodyEvalsType
+>;
 
-export type ResponseBodyHTTP = {
+export type ResponseBodyPython = {
   id: string;
   description: string;
   created: string;
@@ -749,11 +869,8 @@ export type ResponseBodyHTTP = {
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
     | undefined;
-  type: "http_eval";
-  url: string;
-  method: ResponseBodyMethod;
-  headers: { [k: string]: string };
-  payload: { [k: string]: any };
+  code: string;
+  type: CreateEvalResponseBodyEvalsType;
   key: string;
 };
 
@@ -788,7 +905,20 @@ export type CreateEvalResponseBodyGuardrailConfig =
   | CreateEvalGuardrailConfigEvalsResponse200Boolean
   | CreateEvalGuardrailConfigEvalsResponse200Number;
 
-export type ResponseBodyJSON = {
+export const CreateEvalResponseBodyType = {
+  HttpEval: "http_eval",
+} as const;
+export type CreateEvalResponseBodyType = ClosedEnum<
+  typeof CreateEvalResponseBodyType
+>;
+
+export const ResponseBodyMethod = {
+  Get: "GET",
+  Post: "POST",
+} as const;
+export type ResponseBodyMethod = ClosedEnum<typeof ResponseBodyMethod>;
+
+export type ResponseBodyHTTP = {
   id: string;
   description: string;
   created: string;
@@ -797,8 +927,11 @@ export type ResponseBodyJSON = {
     | CreateEvalGuardrailConfigEvalsResponse200Boolean
     | CreateEvalGuardrailConfigEvalsResponse200Number
     | undefined;
-  type: "json_schema";
-  schema: string;
+  type: CreateEvalResponseBodyType;
+  url: string;
+  method: ResponseBodyMethod;
+  headers: { [k: string]: string };
+  payload: { [k: string]: any };
   key: string;
 };
 
@@ -833,7 +966,12 @@ export type ResponseBodyGuardrailConfig =
   | CreateEvalGuardrailConfigEvalsResponseBoolean
   | CreateEvalGuardrailConfigEvalsResponseNumber;
 
-export type ResponseBodyLLM = {
+export const ResponseBodyType = {
+  JsonSchema: "json_schema",
+} as const;
+export type ResponseBodyType = ClosedEnum<typeof ResponseBodyType>;
+
+export type ResponseBodyJSON = {
   id: string;
   description: string;
   created: string;
@@ -842,173 +980,185 @@ export type ResponseBodyLLM = {
     | CreateEvalGuardrailConfigEvalsResponseBoolean
     | CreateEvalGuardrailConfigEvalsResponseNumber
     | undefined;
-  type: "llm_eval";
-  prompt: string;
+  type: ResponseBodyType;
+  schema: string;
   key: string;
+};
+
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator =
+  {
+    Eq: "eq",
+    Ne: "ne",
+    Gt: "gt",
+    Gte: "gte",
+    Lt: "lt",
+    Lte: "lte",
+  } as const;
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator =
+  ClosedEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator
+  >;
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber =
+  {
+    enabled: boolean;
+    alertOnFailure: boolean;
+    type: "number";
+    value: number;
+    operator:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator;
+  };
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean =
+  {
+    enabled: boolean;
+    alertOnFailure: boolean;
+    type: "boolean";
+    value: boolean;
+  };
+
+export type CreateEvalLLMEvalsResponseGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber;
+
+export const CreateEvalLLMEvalsResponseType = {
+  LlmEval: "llm_eval",
+} as const;
+export type CreateEvalLLMEvalsResponseType = ClosedEnum<
+  typeof CreateEvalLLMEvalsResponseType
+>;
+
+export type CreateEvalLLMEvalsResponseRetry = {
+  count: number;
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateEvalLLMEvalsResponseFallbacks = {
   model: string;
 };
+
+export type CreateEvalLLMJudges = {
+  model: string;
+  retry?: CreateEvalLLMEvalsResponseRetry | undefined;
+  fallbacks?: Array<CreateEvalLLMEvalsResponseFallbacks> | undefined;
+};
+
+export type CreateEvalLLMEvalsRetry = {
+  count: number;
+  onCodes?: Array<number> | undefined;
+};
+
+export type CreateEvalLLMEvalsFallbacks = {
+  model: string;
+};
+
+export type CreateEvalLLMReplacementJudges = {
+  model: string;
+  retry?: CreateEvalLLMEvalsRetry | undefined;
+  fallbacks?: Array<CreateEvalLLMEvalsFallbacks> | undefined;
+};
+
+export const CreateEvalLLMTieValue = {
+  Tie: "Tie",
+} as const;
+export type CreateEvalLLMTieValue = ClosedEnum<typeof CreateEvalLLMTieValue>;
+
+export type CreateEvalLLMJury = {
+  judges: Array<CreateEvalLLMJudges>;
+  replacementJudges?: Array<CreateEvalLLMReplacementJudges> | undefined;
+  minSuccessfulJudges: number;
+  tieValue: CreateEvalLLMTieValue;
+};
+
+export type CreateEvalLlm2 = {
+  id: string;
+  description: string;
+  created: string;
+  updated: string;
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber
+    | undefined;
+  type: CreateEvalLLMEvalsResponseType;
+  repetitions?: number | undefined;
+  prompt: string;
+  key: string;
+  mode: "jury";
+  jury: CreateEvalLLMJury;
+};
+
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator =
+  {
+    Eq: "eq",
+    Ne: "ne",
+    Gt: "gt",
+    Gte: "gte",
+    Lt: "lt",
+    Lte: "lte",
+  } as const;
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator =
+  ClosedEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator
+  >;
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number =
+  {
+    enabled: boolean;
+    alertOnFailure: boolean;
+    type: "number";
+    value: number;
+    operator:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator;
+  };
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean =
+  {
+    enabled: boolean;
+    alertOnFailure: boolean;
+    type: "boolean";
+    value: boolean;
+  };
+
+export type CreateEvalLLMEvalsGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number;
+
+export const CreateEvalLLMEvalsType = {
+  LlmEval: "llm_eval",
+} as const;
+export type CreateEvalLLMEvalsType = ClosedEnum<typeof CreateEvalLLMEvalsType>;
+
+export type CreateEvalLlm1 = {
+  id: string;
+  description: string;
+  created: string;
+  updated: string;
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number
+    | undefined;
+  type: CreateEvalLLMEvalsType;
+  repetitions?: number | undefined;
+  prompt: string;
+  key: string;
+  mode: "single";
+  model: string;
+};
+
+export type ResponseBodyLLM = CreateEvalLlm1 | CreateEvalLlm2;
 
 /**
  * Successfully created an evaluator
  */
 export type CreateEvalResponseBody =
-  | ResponseBodyLLM
-  | ResponseBodyJSON
   | ResponseBodyHTTP
+  | Ragas
+  | ResponseBodyJSON
   | ResponseBodyPython
   | CreateEvalResponseBodyFunction
-  | Ragas
-  | Typescript;
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsOperator$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsOperator> = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsOperator,
-  );
-
-/** @internal */
-export type CreateEvalGuardrailConfigEvalsNumber$Outbound = {
-  enabled: boolean;
-  alert_on_failure: boolean;
-  type: "number";
-  value: number;
-  operator: string;
-};
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsNumber$outboundSchema: z.ZodType<
-  CreateEvalGuardrailConfigEvalsNumber$Outbound,
-  z.ZodTypeDef,
-  CreateEvalGuardrailConfigEvalsNumber
-> = z.object({
-  enabled: z.boolean(),
-  alertOnFailure: z.boolean().default(false),
-  type: z.literal("number"),
-  value: z.number(),
-  operator: CreateEvalGuardrailConfigEvalsOperator$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    alertOnFailure: "alert_on_failure",
-  });
-});
-
-export function createEvalGuardrailConfigEvalsNumberToJSON(
-  createEvalGuardrailConfigEvalsNumber: CreateEvalGuardrailConfigEvalsNumber,
-): string {
-  return JSON.stringify(
-    CreateEvalGuardrailConfigEvalsNumber$outboundSchema.parse(
-      createEvalGuardrailConfigEvalsNumber,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEvalGuardrailConfigEvalsBoolean$Outbound = {
-  enabled: boolean;
-  alert_on_failure: boolean;
-  type: "boolean";
-  value: boolean;
-};
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsBoolean$outboundSchema: z.ZodType<
-  CreateEvalGuardrailConfigEvalsBoolean$Outbound,
-  z.ZodTypeDef,
-  CreateEvalGuardrailConfigEvalsBoolean
-> = z.object({
-  enabled: z.boolean(),
-  alertOnFailure: z.boolean().default(false),
-  type: z.literal("boolean"),
-  value: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    alertOnFailure: "alert_on_failure",
-  });
-});
-
-export function createEvalGuardrailConfigEvalsBooleanToJSON(
-  createEvalGuardrailConfigEvalsBoolean: CreateEvalGuardrailConfigEvalsBoolean,
-): string {
-  return JSON.stringify(
-    CreateEvalGuardrailConfigEvalsBoolean$outboundSchema.parse(
-      createEvalGuardrailConfigEvalsBoolean,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEvalRequestBodyEvalsGuardrailConfig$Outbound =
-  | CreateEvalGuardrailConfigEvalsBoolean$Outbound
-  | CreateEvalGuardrailConfigEvalsNumber$Outbound;
-
-/** @internal */
-export const CreateEvalRequestBodyEvalsGuardrailConfig$outboundSchema:
-  z.ZodType<
-    CreateEvalRequestBodyEvalsGuardrailConfig$Outbound,
-    z.ZodTypeDef,
-    CreateEvalRequestBodyEvalsGuardrailConfig
-  > = z.union([
-    z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$outboundSchema),
-    z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$outboundSchema),
-  ]);
-
-export function createEvalRequestBodyEvalsGuardrailConfigToJSON(
-  createEvalRequestBodyEvalsGuardrailConfig:
-    CreateEvalRequestBodyEvalsGuardrailConfig,
-): string {
-  return JSON.stringify(
-    CreateEvalRequestBodyEvalsGuardrailConfig$outboundSchema.parse(
-      createEvalRequestBodyEvalsGuardrailConfig,
-    ),
-  );
-}
-
-/** @internal */
-export const CreateEvalRequestBodyEvalsOutputType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsOutputType> = z.nativeEnum(
-    CreateEvalRequestBodyEvalsOutputType,
-  );
-
-/** @internal */
-export type Python$Outbound = {
-  guardrail_config?:
-    | CreateEvalGuardrailConfigEvalsBoolean$Outbound
-    | CreateEvalGuardrailConfigEvalsNumber$Outbound
-    | undefined;
-  output_type?: string | undefined;
-  code: string;
-  type: "python_eval";
-  path: string;
-  description: string;
-  key: string;
-};
-
-/** @internal */
-export const Python$outboundSchema: z.ZodType<
-  Python$Outbound,
-  z.ZodTypeDef,
-  Python
-> = z.object({
-  guardrailConfig: z.union([
-    z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$outboundSchema),
-    z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$outboundSchema),
-  ]).optional(),
-  outputType: CreateEvalRequestBodyEvalsOutputType$outboundSchema.optional(),
-  code: z.string(),
-  type: z.literal("python_eval"),
-  path: z.string(),
-  description: z.string().default(""),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    guardrailConfig: "guardrail_config",
-    outputType: "output_type",
-  });
-});
-
-export function pythonToJSON(python: Python): string {
-  return JSON.stringify(Python$outboundSchema.parse(python));
-}
+  | Typescript
+  | CreateEvalLlm1
+  | CreateEvalLlm2;
 
 /** @internal */
 export const CreateEvalGuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
@@ -1116,43 +1266,37 @@ export const CreateEvalRequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateEvalRequestBodyOutputType);
 
 /** @internal */
-export const CreateEvalRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalRequestBodyMethod
-> = z.nativeEnum(CreateEvalRequestBodyMethod);
+export const CreateEvalRequestBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyType
+> = z.nativeEnum(CreateEvalRequestBodyType);
 
 /** @internal */
-export type CreateEvalRequestBodyHTTP$Outbound = {
+export type Python$Outbound = {
   guardrail_config?:
     | CreateEvalGuardrailConfigBoolean$Outbound
     | CreateEvalGuardrailConfigNumber$Outbound
     | undefined;
   output_type?: string | undefined;
-  type: "http_eval";
-  url: string;
-  method: string;
-  headers: { [k: string]: string };
-  payload: { [k: string]: any };
+  code: string;
+  type: string;
   path: string;
   description: string;
   key: string;
 };
 
 /** @internal */
-export const CreateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
-  CreateEvalRequestBodyHTTP$Outbound,
+export const Python$outboundSchema: z.ZodType<
+  Python$Outbound,
   z.ZodTypeDef,
-  CreateEvalRequestBodyHTTP
+  Python
 > = z.object({
   guardrailConfig: z.union([
     z.lazy(() => CreateEvalGuardrailConfigBoolean$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigNumber$outboundSchema),
   ]).optional(),
   outputType: CreateEvalRequestBodyOutputType$outboundSchema.optional(),
-  type: z.literal("http_eval"),
-  url: z.string(),
-  method: CreateEvalRequestBodyMethod$outboundSchema,
-  headers: z.record(z.string()),
-  payload: z.record(z.any()),
+  code: z.string(),
+  type: CreateEvalRequestBodyType$outboundSchema,
   path: z.string(),
   description: z.string().default(""),
   key: z.string(),
@@ -1163,12 +1307,8 @@ export const CreateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
   });
 });
 
-export function createEvalRequestBodyHTTPToJSON(
-  createEvalRequestBodyHTTP: CreateEvalRequestBodyHTTP,
-): string {
-  return JSON.stringify(
-    CreateEvalRequestBodyHTTP$outboundSchema.parse(createEvalRequestBodyHTTP),
-  );
+export function pythonToJSON(python: Python): string {
+  return JSON.stringify(Python$outboundSchema.parse(python));
 }
 
 /** @internal */
@@ -1271,41 +1411,64 @@ export const RequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RequestBodyOutputType);
 
 /** @internal */
-export type Json$Outbound = {
+export const RequestBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyType
+> = z.nativeEnum(RequestBodyType);
+
+/** @internal */
+export const CreateEvalRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyMethod
+> = z.nativeEnum(CreateEvalRequestBodyMethod);
+
+/** @internal */
+export type CreateEvalRequestBodyHTTP$Outbound = {
   guardrail_config?:
     | GuardrailConfigBoolean$Outbound
     | GuardrailConfigNumber$Outbound
     | undefined;
   output_type?: string | undefined;
-  type: "json_schema";
-  schema: string;
+  type: string;
+  url: string;
+  method: string;
+  headers: { [k: string]: string };
+  payload: { [k: string]: any };
   path: string;
   description: string;
   key: string;
 };
 
 /** @internal */
-export const Json$outboundSchema: z.ZodType<Json$Outbound, z.ZodTypeDef, Json> =
-  z.object({
-    guardrailConfig: z.union([
-      z.lazy(() => GuardrailConfigBoolean$outboundSchema),
-      z.lazy(() => GuardrailConfigNumber$outboundSchema),
-    ]).optional(),
-    outputType: RequestBodyOutputType$outboundSchema.optional(),
-    type: z.literal("json_schema"),
-    schema: z.string(),
-    path: z.string(),
-    description: z.string().default(""),
-    key: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      guardrailConfig: "guardrail_config",
-      outputType: "output_type",
-    });
+export const CreateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
+  CreateEvalRequestBodyHTTP$Outbound,
+  z.ZodTypeDef,
+  CreateEvalRequestBodyHTTP
+> = z.object({
+  guardrailConfig: z.union([
+    z.lazy(() => GuardrailConfigBoolean$outboundSchema),
+    z.lazy(() => GuardrailConfigNumber$outboundSchema),
+  ]).optional(),
+  outputType: RequestBodyOutputType$outboundSchema.optional(),
+  type: RequestBodyType$outboundSchema,
+  url: z.string(),
+  method: CreateEvalRequestBodyMethod$outboundSchema,
+  headers: z.record(z.string()),
+  payload: z.record(z.any()),
+  path: z.string(),
+  description: z.string().default(""),
+  key: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
+});
 
-export function jsonToJSON(json: Json): string {
-  return JSON.stringify(Json$outboundSchema.parse(json));
+export function createEvalRequestBodyHTTPToJSON(
+  createEvalRequestBodyHTTP: CreateEvalRequestBodyHTTP,
+): string {
+  return JSON.stringify(
+    CreateEvalRequestBodyHTTP$outboundSchema.parse(createEvalRequestBodyHTTP),
+  );
 }
 
 /** @internal */
@@ -1394,30 +1557,33 @@ export const OutputType$outboundSchema: z.ZodNativeEnum<typeof OutputType> = z
   .nativeEnum(OutputType);
 
 /** @internal */
-export type Llm$Outbound = {
+export const CreateEvalRequestBodyEvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyEvalsType
+> = z.nativeEnum(CreateEvalRequestBodyEvalsType);
+
+/** @internal */
+export type Json$Outbound = {
   guardrail_config?: Boolean$Outbound | NumberT$Outbound | undefined;
   output_type?: string | undefined;
-  type: "llm_eval";
-  prompt: string;
+  type: string;
+  schema: string;
   path: string;
   description: string;
-  model: string;
   key: string;
 };
 
 /** @internal */
-export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
-  .object({
+export const Json$outboundSchema: z.ZodType<Json$Outbound, z.ZodTypeDef, Json> =
+  z.object({
     guardrailConfig: z.union([
       z.lazy(() => Boolean$outboundSchema),
       z.lazy(() => NumberT$outboundSchema),
     ]).optional(),
     outputType: OutputType$outboundSchema.optional(),
-    type: z.literal("llm_eval"),
-    prompt: z.string(),
+    type: CreateEvalRequestBodyEvalsType$outboundSchema,
+    schema: z.string(),
     path: z.string(),
     description: z.string().default(""),
-    model: z.string(),
     key: z.string(),
   }).transform((v) => {
     return remap$(v, {
@@ -1426,16 +1592,517 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
     });
   });
 
+export function jsonToJSON(json: Json): string {
+  return JSON.stringify(Json$outboundSchema.parse(json));
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsOperator$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsOperator> = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsOperator,
+  );
+
+/** @internal */
+export type CreateEvalGuardrailConfigEvalsNumber$Outbound = {
+  enabled: boolean;
+  alert_on_failure: boolean;
+  type: "number";
+  value: number;
+  operator: string;
+};
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsNumber$outboundSchema: z.ZodType<
+  CreateEvalGuardrailConfigEvalsNumber$Outbound,
+  z.ZodTypeDef,
+  CreateEvalGuardrailConfigEvalsNumber
+> = z.object({
+  enabled: z.boolean(),
+  alertOnFailure: z.boolean().default(false),
+  type: z.literal("number"),
+  value: z.number(),
+  operator: CreateEvalGuardrailConfigEvalsOperator$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    alertOnFailure: "alert_on_failure",
+  });
+});
+
+export function createEvalGuardrailConfigEvalsNumberToJSON(
+  createEvalGuardrailConfigEvalsNumber: CreateEvalGuardrailConfigEvalsNumber,
+): string {
+  return JSON.stringify(
+    CreateEvalGuardrailConfigEvalsNumber$outboundSchema.parse(
+      createEvalGuardrailConfigEvalsNumber,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateEvalGuardrailConfigEvalsBoolean$Outbound = {
+  enabled: boolean;
+  alert_on_failure: boolean;
+  type: "boolean";
+  value: boolean;
+};
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsBoolean$outboundSchema: z.ZodType<
+  CreateEvalGuardrailConfigEvalsBoolean$Outbound,
+  z.ZodTypeDef,
+  CreateEvalGuardrailConfigEvalsBoolean
+> = z.object({
+  enabled: z.boolean(),
+  alertOnFailure: z.boolean().default(false),
+  type: z.literal("boolean"),
+  value: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    alertOnFailure: "alert_on_failure",
+  });
+});
+
+export function createEvalGuardrailConfigEvalsBooleanToJSON(
+  createEvalGuardrailConfigEvalsBoolean: CreateEvalGuardrailConfigEvalsBoolean,
+): string {
+  return JSON.stringify(
+    CreateEvalGuardrailConfigEvalsBoolean$outboundSchema.parse(
+      createEvalGuardrailConfigEvalsBoolean,
+    ),
+  );
+}
+
+/** @internal */
+export type LLMGuardrailConfig$Outbound =
+  | CreateEvalGuardrailConfigEvalsBoolean$Outbound
+  | CreateEvalGuardrailConfigEvalsNumber$Outbound;
+
+/** @internal */
+export const LLMGuardrailConfig$outboundSchema: z.ZodType<
+  LLMGuardrailConfig$Outbound,
+  z.ZodTypeDef,
+  LLMGuardrailConfig
+> = z.union([
+  z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$outboundSchema),
+  z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$outboundSchema),
+]);
+
+export function llmGuardrailConfigToJSON(
+  llmGuardrailConfig: LLMGuardrailConfig,
+): string {
+  return JSON.stringify(
+    LLMGuardrailConfig$outboundSchema.parse(llmGuardrailConfig),
+  );
+}
+
+/** @internal */
+export const LLMOutputType$outboundSchema: z.ZodNativeEnum<
+  typeof LLMOutputType
+> = z.nativeEnum(LLMOutputType);
+
+/** @internal */
+export const LLMType$outboundSchema: z.ZodNativeEnum<typeof LLMType> = z
+  .nativeEnum(LLMType);
+
+/** @internal */
+export type CreateEvalLLMRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const CreateEvalLLMRetry$outboundSchema: z.ZodType<
+  CreateEvalLLMRetry$Outbound,
+  z.ZodTypeDef,
+  CreateEvalLLMRetry
+> = z.object({
+  count: z.number().int().default(2),
+  onCodes: z.array(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function createEvalLLMRetryToJSON(
+  createEvalLLMRetry: CreateEvalLLMRetry,
+): string {
+  return JSON.stringify(
+    CreateEvalLLMRetry$outboundSchema.parse(createEvalLLMRetry),
+  );
+}
+
+/** @internal */
+export type CreateEvalLLMFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateEvalLLMFallbacks$outboundSchema: z.ZodType<
+  CreateEvalLLMFallbacks$Outbound,
+  z.ZodTypeDef,
+  CreateEvalLLMFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function createEvalLLMFallbacksToJSON(
+  createEvalLLMFallbacks: CreateEvalLLMFallbacks,
+): string {
+  return JSON.stringify(
+    CreateEvalLLMFallbacks$outboundSchema.parse(createEvalLLMFallbacks),
+  );
+}
+
+/** @internal */
+export type LLMJudges$Outbound = {
+  model: string;
+  retry?: CreateEvalLLMRetry$Outbound | undefined;
+  fallbacks?: Array<CreateEvalLLMFallbacks$Outbound> | undefined;
+};
+
+/** @internal */
+export const LLMJudges$outboundSchema: z.ZodType<
+  LLMJudges$Outbound,
+  z.ZodTypeDef,
+  LLMJudges
+> = z.object({
+  model: z.string(),
+  retry: z.lazy(() => CreateEvalLLMRetry$outboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => CreateEvalLLMFallbacks$outboundSchema))
+    .optional(),
+});
+
+export function llmJudgesToJSON(llmJudges: LLMJudges): string {
+  return JSON.stringify(LLMJudges$outboundSchema.parse(llmJudges));
+}
+
+/** @internal */
+export type LLMRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const LLMRetry$outboundSchema: z.ZodType<
+  LLMRetry$Outbound,
+  z.ZodTypeDef,
+  LLMRetry
+> = z.object({
+  count: z.number().int().default(2),
+  onCodes: z.array(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function llmRetryToJSON(llmRetry: LLMRetry): string {
+  return JSON.stringify(LLMRetry$outboundSchema.parse(llmRetry));
+}
+
+/** @internal */
+export type LLMFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const LLMFallbacks$outboundSchema: z.ZodType<
+  LLMFallbacks$Outbound,
+  z.ZodTypeDef,
+  LLMFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function llmFallbacksToJSON(llmFallbacks: LLMFallbacks): string {
+  return JSON.stringify(LLMFallbacks$outboundSchema.parse(llmFallbacks));
+}
+
+/** @internal */
+export type LLMReplacementJudges$Outbound = {
+  model: string;
+  retry?: LLMRetry$Outbound | undefined;
+  fallbacks?: Array<LLMFallbacks$Outbound> | undefined;
+};
+
+/** @internal */
+export const LLMReplacementJudges$outboundSchema: z.ZodType<
+  LLMReplacementJudges$Outbound,
+  z.ZodTypeDef,
+  LLMReplacementJudges
+> = z.object({
+  model: z.string(),
+  retry: z.lazy(() => LLMRetry$outboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => LLMFallbacks$outboundSchema)).optional(),
+});
+
+export function llmReplacementJudgesToJSON(
+  llmReplacementJudges: LLMReplacementJudges,
+): string {
+  return JSON.stringify(
+    LLMReplacementJudges$outboundSchema.parse(llmReplacementJudges),
+  );
+}
+
+/** @internal */
+export const LLMTieValue$outboundSchema: z.ZodNativeEnum<typeof LLMTieValue> = z
+  .nativeEnum(LLMTieValue);
+
+/** @internal */
+export type LLMJury$Outbound = {
+  judges: Array<LLMJudges$Outbound>;
+  replacement_judges?: Array<LLMReplacementJudges$Outbound> | undefined;
+  min_successful_judges: number;
+  tie_value: string;
+};
+
+/** @internal */
+export const LLMJury$outboundSchema: z.ZodType<
+  LLMJury$Outbound,
+  z.ZodTypeDef,
+  LLMJury
+> = z.object({
+  judges: z.array(z.lazy(() => LLMJudges$outboundSchema)),
+  replacementJudges: z.array(z.lazy(() => LLMReplacementJudges$outboundSchema))
+    .optional(),
+  minSuccessfulJudges: z.number().int().default(2),
+  tieValue: LLMTieValue$outboundSchema.default("Tie"),
+}).transform((v) => {
+  return remap$(v, {
+    replacementJudges: "replacement_judges",
+    minSuccessfulJudges: "min_successful_judges",
+    tieValue: "tie_value",
+  });
+});
+
+export function llmJuryToJSON(llmJury: LLMJury): string {
+  return JSON.stringify(LLMJury$outboundSchema.parse(llmJury));
+}
+
+/** @internal */
+export type Llm2$Outbound = {
+  guardrail_config?:
+    | CreateEvalGuardrailConfigEvalsBoolean$Outbound
+    | CreateEvalGuardrailConfigEvalsNumber$Outbound
+    | undefined;
+  output_type?: string | undefined;
+  type: string;
+  repetitions?: number | undefined;
+  prompt: string;
+  path: string;
+  description: string;
+  key: string;
+  mode: "jury";
+  jury: LLMJury$Outbound;
+};
+
+/** @internal */
+export const Llm2$outboundSchema: z.ZodType<Llm2$Outbound, z.ZodTypeDef, Llm2> =
+  z.object({
+    guardrailConfig: z.union([
+      z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$outboundSchema),
+      z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$outboundSchema),
+    ]).optional(),
+    outputType: LLMOutputType$outboundSchema.optional(),
+    type: LLMType$outboundSchema,
+    repetitions: z.number().int().optional(),
+    prompt: z.string(),
+    path: z.string(),
+    description: z.string().default(""),
+    key: z.string(),
+    mode: z.literal("jury"),
+    jury: z.lazy(() => LLMJury$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      guardrailConfig: "guardrail_config",
+      outputType: "output_type",
+    });
+  });
+
+export function llm2ToJSON(llm2: Llm2): string {
+  return JSON.stringify(Llm2$outboundSchema.parse(llm2));
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestOperator$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestOperator> = z
+    .nativeEnum(CreateEvalGuardrailConfigEvalsRequestOperator);
+
+/** @internal */
+export type CreateEvalGuardrailConfigEvalsRequestNumber$Outbound = {
+  enabled: boolean;
+  alert_on_failure: boolean;
+  type: "number";
+  value: number;
+  operator: string;
+};
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestNumber$outboundSchema:
+  z.ZodType<
+    CreateEvalGuardrailConfigEvalsRequestNumber$Outbound,
+    z.ZodTypeDef,
+    CreateEvalGuardrailConfigEvalsRequestNumber
+  > = z.object({
+    enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
+    type: z.literal("number"),
+    value: z.number(),
+    operator: CreateEvalGuardrailConfigEvalsRequestOperator$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
+  });
+
+export function createEvalGuardrailConfigEvalsRequestNumberToJSON(
+  createEvalGuardrailConfigEvalsRequestNumber:
+    CreateEvalGuardrailConfigEvalsRequestNumber,
+): string {
+  return JSON.stringify(
+    CreateEvalGuardrailConfigEvalsRequestNumber$outboundSchema.parse(
+      createEvalGuardrailConfigEvalsRequestNumber,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateEvalGuardrailConfigEvalsRequestBoolean$Outbound = {
+  enabled: boolean;
+  alert_on_failure: boolean;
+  type: "boolean";
+  value: boolean;
+};
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema:
+  z.ZodType<
+    CreateEvalGuardrailConfigEvalsRequestBoolean$Outbound,
+    z.ZodTypeDef,
+    CreateEvalGuardrailConfigEvalsRequestBoolean
+  > = z.object({
+    enabled: z.boolean(),
+    alertOnFailure: z.boolean().default(false),
+    type: z.literal("boolean"),
+    value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertOnFailure: "alert_on_failure",
+    });
+  });
+
+export function createEvalGuardrailConfigEvalsRequestBooleanToJSON(
+  createEvalGuardrailConfigEvalsRequestBoolean:
+    CreateEvalGuardrailConfigEvalsRequestBoolean,
+): string {
+  return JSON.stringify(
+    CreateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema.parse(
+      createEvalGuardrailConfigEvalsRequestBoolean,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateEvalLLMGuardrailConfig$Outbound =
+  | CreateEvalGuardrailConfigEvalsRequestBoolean$Outbound
+  | CreateEvalGuardrailConfigEvalsRequestNumber$Outbound;
+
+/** @internal */
+export const CreateEvalLLMGuardrailConfig$outboundSchema: z.ZodType<
+  CreateEvalLLMGuardrailConfig$Outbound,
+  z.ZodTypeDef,
+  CreateEvalLLMGuardrailConfig
+> = z.union([
+  z.lazy(() => CreateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
+  z.lazy(() => CreateEvalGuardrailConfigEvalsRequestNumber$outboundSchema),
+]);
+
+export function createEvalLLMGuardrailConfigToJSON(
+  createEvalLLMGuardrailConfig: CreateEvalLLMGuardrailConfig,
+): string {
+  return JSON.stringify(
+    CreateEvalLLMGuardrailConfig$outboundSchema.parse(
+      createEvalLLMGuardrailConfig,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMOutputType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalLLMOutputType
+> = z.nativeEnum(CreateEvalLLMOutputType);
+
+/** @internal */
+export const CreateEvalLLMType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalLLMType
+> = z.nativeEnum(CreateEvalLLMType);
+
+/** @internal */
+export type Llm1$Outbound = {
+  guardrail_config?:
+    | CreateEvalGuardrailConfigEvalsRequestBoolean$Outbound
+    | CreateEvalGuardrailConfigEvalsRequestNumber$Outbound
+    | undefined;
+  output_type?: string | undefined;
+  type: string;
+  repetitions?: number | undefined;
+  prompt: string;
+  path: string;
+  description: string;
+  key: string;
+  mode: "single";
+  model: string;
+};
+
+/** @internal */
+export const Llm1$outboundSchema: z.ZodType<Llm1$Outbound, z.ZodTypeDef, Llm1> =
+  z.object({
+    guardrailConfig: z.union([
+      z.lazy(() => CreateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
+      z.lazy(() => CreateEvalGuardrailConfigEvalsRequestNumber$outboundSchema),
+    ]).optional(),
+    outputType: CreateEvalLLMOutputType$outboundSchema.optional(),
+    type: CreateEvalLLMType$outboundSchema,
+    repetitions: z.number().int().optional(),
+    prompt: z.string(),
+    path: z.string(),
+    description: z.string().default(""),
+    key: z.string(),
+    mode: z.literal("single"),
+    model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      guardrailConfig: "guardrail_config",
+      outputType: "output_type",
+    });
+  });
+
+export function llm1ToJSON(llm1: Llm1): string {
+  return JSON.stringify(Llm1$outboundSchema.parse(llm1));
+}
+
+/** @internal */
+export type Llm$Outbound = Llm1$Outbound | Llm2$Outbound;
+
+/** @internal */
+export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
+  .union([
+    z.lazy(() => Llm1$outboundSchema),
+    z.lazy(() => Llm2$outboundSchema),
+  ]);
+
 export function llmToJSON(llm: Llm): string {
   return JSON.stringify(Llm$outboundSchema.parse(llm));
 }
 
 /** @internal */
 export type CreateEvalRequestBody$Outbound =
-  | Llm$Outbound
-  | Json$Outbound
   | CreateEvalRequestBodyHTTP$Outbound
-  | Python$Outbound;
+  | Json$Outbound
+  | Python$Outbound
+  | Llm1$Outbound
+  | Llm2$Outbound;
 
 /** @internal */
 export const CreateEvalRequestBody$outboundSchema: z.ZodType<
@@ -1443,10 +2110,13 @@ export const CreateEvalRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateEvalRequestBody
 > = z.union([
-  z.lazy(() => Llm$outboundSchema),
-  z.lazy(() => Json$outboundSchema),
   z.lazy(() => CreateEvalRequestBodyHTTP$outboundSchema),
+  z.lazy(() => Json$outboundSchema),
   z.lazy(() => Python$outboundSchema),
+  z.union([
+    z.lazy(() => Llm1$outboundSchema),
+    z.lazy(() => Llm2$outboundSchema),
+  ]),
 ]);
 
 export function createEvalRequestBodyToJSON(
@@ -1532,9 +2202,9 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$inboundSchema:
+export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$inboundSchema:
   z.ZodType<
-    CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig,
+    CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig,
     z.ZodTypeDef,
     unknown
   > = z.union([
@@ -1546,20 +2216,26 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConf
     ),
   ]);
 
-export function createEvalResponseBodyEvalsResponse200ApplicationJSON7GuardrailConfigFromJSON(
+export function createEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig,
+  CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig$inboundSchema
+      CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalResponseBodyEvalsResponse200ApplicationJson7GuardrailConfig' from JSON`,
+    `Failed to parse 'CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig' from JSON`,
   );
 }
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalResponseBodyEvalsResponse200ApplicationJSONType
+  > = z.nativeEnum(CreateEvalResponseBodyEvalsResponse200ApplicationJSONType);
 
 /** @internal */
 export const Typescript$inboundSchema: z.ZodType<
@@ -1569,8 +2245,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-02-20T13:15:48.711Z"),
-  updated: z.string().default("2026-02-20T13:15:48.711Z"),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$inboundSchema
@@ -1580,7 +2256,7 @@ export const Typescript$inboundSchema: z.ZodType<
     ),
   ]).optional(),
   code: z.string(),
-  type: z.literal("typescript_eval"),
+  type: CreateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -1674,9 +2350,9 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$inboundSchema:
+export const CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema:
   z.ZodType<
-    CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig,
+    CreateEvalResponseBodyEvalsResponse200GuardrailConfig,
     z.ZodTypeDef,
     unknown
   > = z.union([
@@ -1688,20 +2364,26 @@ export const CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfi
     ),
   ]);
 
-export function createEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfigFromJSON(
+export function createEvalResponseBodyEvalsResponse200GuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig,
+  CreateEvalResponseBodyEvalsResponse200GuardrailConfig,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalResponseBodyEvalsResponse200ApplicationJSONGuardrailConfig' from JSON`,
+      CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateEvalResponseBodyEvalsResponse200GuardrailConfig' from JSON`,
   );
 }
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponse200Type> = z
+    .nativeEnum(CreateEvalResponseBodyEvalsResponse200Type);
 
 /** @internal */
 export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
@@ -1712,8 +2394,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-02-20T13:15:48.711Z"),
-    updated: z.string().default("2026-02-20T13:15:48.711Z"),
+    created: z.string().default("2026-02-20T21:44:14.406Z"),
+    updated: z.string().default("2026-02-20T21:44:14.406Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$inboundSchema
@@ -1722,7 +2404,7 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
         CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
       ),
     ]).optional(),
-    type: z.literal("ragas"),
+    type: CreateEvalResponseBodyEvalsResponse200Type$inboundSchema,
     ragas_metric: RagasMetric$inboundSchema,
     key: z.string(),
     model: z.string(),
@@ -1745,17 +2427,17 @@ export function ragasFromJSON(
 }
 
 /** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema:
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
   > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator,
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator,
   );
 
 /** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema:
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema:
   z.ZodType<
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number,
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -1764,32 +2446,32 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     type: z.literal("number"),
     value: z.number(),
     operator:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Operator$inboundSchema,
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "alert_on_failure": "alertOnFailure",
     });
   });
 
-export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5NumberFromJSON(
+export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumberFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number,
+  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number' from JSON`,
+    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema:
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema:
   z.ZodType<
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean,
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -1803,51 +2485,56 @@ export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBod
     });
   });
 
-export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5BooleanFromJSON(
+export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBooleanFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean,
+  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
         .parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean' from JSON`,
+    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema:
+export const CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema:
   z.ZodType<
-    CreateEvalResponseBodyEvalsResponse200GuardrailConfig,
+    CreateEvalResponseBodyEvalsResponseGuardrailConfig,
     z.ZodTypeDef,
     unknown
   > = z.union([
     z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
     ),
     z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
     ),
   ]);
 
-export function createEvalResponseBodyEvalsResponse200GuardrailConfigFromJSON(
+export function createEvalResponseBodyEvalsResponseGuardrailConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateEvalResponseBodyEvalsResponse200GuardrailConfig,
+  CreateEvalResponseBodyEvalsResponseGuardrailConfig,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema.parse(
+      CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'CreateEvalResponseBodyEvalsResponse200GuardrailConfig' from JSON`,
+    `Failed to parse 'CreateEvalResponseBodyEvalsResponseGuardrailConfig' from JSON`,
   );
 }
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> = z
+    .nativeEnum(CreateEvalResponseBodyEvalsResponseType);
 
 /** @internal */
 export const ThirtyTwo$inboundSchema: z.ZodType<
@@ -2394,8 +3081,8 @@ export function createEvalFunctionParams3FromJSON(
 }
 
 /** @internal */
-export const CreateEvalFunctionParams2$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams2,
+export const FunctionParams2$inboundSchema: z.ZodType<
+  FunctionParams2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2403,19 +3090,19 @@ export const CreateEvalFunctionParams2$inboundSchema: z.ZodType<
   keywords: z.array(z.string()),
 });
 
-export function createEvalFunctionParams2FromJSON(
+export function functionParams2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams2, SDKValidationError> {
+): SafeParseResult<FunctionParams2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams2' from JSON`,
+    (x) => FunctionParams2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams2' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateEvalFunctionParams1$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams1,
+export const FunctionParams1$inboundSchema: z.ZodType<
+  FunctionParams1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2423,13 +3110,13 @@ export const CreateEvalFunctionParams1$inboundSchema: z.ZodType<
   value: z.string(),
 });
 
-export function createEvalFunctionParams1FromJSON(
+export function functionParams1FromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams1, SDKValidationError> {
+): SafeParseResult<FunctionParams1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams1' from JSON`,
+    (x) => FunctionParams1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams1' from JSON`,
   );
 }
 
@@ -2439,8 +3126,8 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateEvalFunctionParams1$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams2$inboundSchema),
+  z.lazy(() => FunctionParams1$inboundSchema),
+  z.lazy(() => FunctionParams2$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams3$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams4$inboundSchema),
   z.lazy(() => Five$inboundSchema),
@@ -2491,20 +3178,20 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-02-20T13:15:48.711Z"),
-  updated: z.string().default("2026-02-20T13:15:48.711Z"),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
   guardrail_config: z.union([
     z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Boolean$inboundSchema
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
     ),
     z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
     ),
   ]).optional(),
-  type: z.literal("function_eval"),
+  type: CreateEvalResponseBodyEvalsResponseType$inboundSchema,
   function_params: z.union([
-    z.lazy(() => CreateEvalFunctionParams1$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams2$inboundSchema),
+    z.lazy(() => FunctionParams1$inboundSchema),
+    z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams3$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams4$inboundSchema),
     z.lazy(() => Five$inboundSchema),
@@ -2552,149 +3239,6 @@ export function createEvalResponseBodyFunctionFromJSON(
     jsonString,
     (x) => CreateEvalResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateEvalResponseBodyFunction' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema:
-  z.ZodType<
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean(),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("number"),
-    value: z.number(),
-    operator:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumberFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema:
-  z.ZodType<
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean(),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("boolean"),
-    value: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBooleanFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema:
-  z.ZodType<
-    CreateEvalResponseBodyEvalsResponseGuardrailConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
-    ),
-    z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
-    ),
-  ]);
-
-export function createEvalResponseBodyEvalsResponseGuardrailConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateEvalResponseBodyEvalsResponseGuardrailConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateEvalResponseBodyEvalsResponseGuardrailConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyPython$inboundSchema: z.ZodType<
-  ResponseBodyPython,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  description: z.string(),
-  created: z.string().default("2026-02-20T13:15:48.711Z"),
-  updated: z.string().default("2026-02-20T13:15:48.711Z"),
-  guardrail_config: z.union([
-    z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
-    ),
-    z.lazy(() =>
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
-    ),
-  ]).optional(),
-  code: z.string(),
-  type: z.literal("python_eval"),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "guardrail_config": "guardrailConfig",
-  });
-});
-
-export function responseBodyPythonFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyPython, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyPython$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyPython' from JSON`,
   );
 }
 
@@ -2801,20 +3345,20 @@ export function createEvalResponseBodyEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyMethod
-> = z.nativeEnum(ResponseBodyMethod);
+export const CreateEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalResponseBodyEvalsType
+> = z.nativeEnum(CreateEvalResponseBodyEvalsType);
 
 /** @internal */
-export const ResponseBodyHTTP$inboundSchema: z.ZodType<
-  ResponseBodyHTTP,
+export const ResponseBodyPython$inboundSchema: z.ZodType<
+  ResponseBodyPython,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-02-20T13:15:48.711Z"),
-  updated: z.string().default("2026-02-20T13:15:48.711Z"),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
@@ -2823,11 +3367,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
     ),
   ]).optional(),
-  type: z.literal("http_eval"),
-  url: z.string(),
-  method: ResponseBodyMethod$inboundSchema,
-  headers: z.record(z.string()),
-  payload: z.record(z.any()),
+  code: z.string(),
+  type: CreateEvalResponseBodyEvalsType$inboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -2836,13 +3377,13 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
   });
 });
 
-export function responseBodyHTTPFromJSON(
+export function responseBodyPythonFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyHTTP, SDKValidationError> {
+): SafeParseResult<ResponseBodyPython, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyHTTP' from JSON`,
+    (x) => ResponseBodyPython$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyPython' from JSON`,
   );
 }
 
@@ -2940,23 +3481,36 @@ export function createEvalResponseBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyJSON$inboundSchema: z.ZodType<
-  ResponseBodyJSON,
+export const CreateEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalResponseBodyType
+> = z.nativeEnum(CreateEvalResponseBodyType);
+
+/** @internal */
+export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyMethod
+> = z.nativeEnum(ResponseBodyMethod);
+
+/** @internal */
+export const ResponseBodyHTTP$inboundSchema: z.ZodType<
+  ResponseBodyHTTP,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-02-20T13:15:48.711Z"),
-  updated: z.string().default("2026-02-20T13:15:48.711Z"),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
     ),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
   ]).optional(),
-  type: z.literal("json_schema"),
-  schema: z.string(),
+  type: CreateEvalResponseBodyType$inboundSchema,
+  url: z.string(),
+  method: ResponseBodyMethod$inboundSchema,
+  headers: z.record(z.string()),
+  payload: z.record(z.any()),
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -2965,13 +3519,13 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
   });
 });
 
-export function responseBodyJSONFromJSON(
+export function responseBodyHTTPFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyJSON, SDKValidationError> {
+): SafeParseResult<ResponseBodyHTTP, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyJSON$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyJSON' from JSON`,
+    (x) => ResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyHTTP' from JSON`,
   );
 }
 
@@ -3068,22 +3622,487 @@ export function responseBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyLLM$inboundSchema: z.ZodType<
-  ResponseBodyLLM,
+export const ResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyType
+> = z.nativeEnum(ResponseBodyType);
+
+/** @internal */
+export const ResponseBodyJSON$inboundSchema: z.ZodType<
+  ResponseBodyJSON,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-02-20T13:15:48.711Z"),
-  updated: z.string().default("2026-02-20T13:15:48.711Z"),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
   ]).optional(),
-  type: z.literal("llm_eval"),
+  type: ResponseBodyType$inboundSchema,
+  schema: z.string(),
+  key: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "guardrail_config": "guardrailConfig",
+  });
+});
+
+export function responseBodyJSONFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyJSON, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyJSON$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyJSON' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber$inboundSchema:
+  z.ZodType<
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
+    type: z.literal("number"),
+    value: z.number(),
+    operator:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMOperator$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
+  });
+
+export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumberFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema:
+  z.ZodType<
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
+    type: z.literal("boolean"),
+    value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
+  });
+
+export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBooleanFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsResponseGuardrailConfig$inboundSchema: z.ZodType<
+  CreateEvalLLMEvalsResponseGuardrailConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() =>
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema
+  ),
+  z.lazy(() =>
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber$inboundSchema
+  ),
+]);
+
+export function createEvalLLMEvalsResponseGuardrailConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateEvalLLMEvalsResponseGuardrailConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateEvalLLMEvalsResponseGuardrailConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateEvalLLMEvalsResponseGuardrailConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalLLMEvalsResponseType
+> = z.nativeEnum(CreateEvalLLMEvalsResponseType);
+
+/** @internal */
+export const CreateEvalLLMEvalsResponseRetry$inboundSchema: z.ZodType<
+  CreateEvalLLMEvalsResponseRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int().default(2),
+  on_codes: z.array(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function createEvalLLMEvalsResponseRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMEvalsResponseRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMEvalsResponseRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMEvalsResponseRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsResponseFallbacks$inboundSchema: z.ZodType<
+  CreateEvalLLMEvalsResponseFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function createEvalLLMEvalsResponseFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMEvalsResponseFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateEvalLLMEvalsResponseFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMEvalsResponseFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMJudges$inboundSchema: z.ZodType<
+  CreateEvalLLMJudges,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  retry: z.lazy(() => CreateEvalLLMEvalsResponseRetry$inboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() => CreateEvalLLMEvalsResponseFallbacks$inboundSchema),
+  ).optional(),
+});
+
+export function createEvalLLMJudgesFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMJudges, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMJudges$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMJudges' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsRetry$inboundSchema: z.ZodType<
+  CreateEvalLLMEvalsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int().default(2),
+  on_codes: z.array(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function createEvalLLMEvalsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMEvalsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMEvalsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMEvalsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsFallbacks$inboundSchema: z.ZodType<
+  CreateEvalLLMEvalsFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+export function createEvalLLMEvalsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMEvalsFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMEvalsFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMEvalsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMReplacementJudges$inboundSchema: z.ZodType<
+  CreateEvalLLMReplacementJudges,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+  retry: z.lazy(() => CreateEvalLLMEvalsRetry$inboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => CreateEvalLLMEvalsFallbacks$inboundSchema))
+    .optional(),
+});
+
+export function createEvalLLMReplacementJudgesFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMReplacementJudges, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMReplacementJudges$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMReplacementJudges' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMTieValue$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalLLMTieValue
+> = z.nativeEnum(CreateEvalLLMTieValue);
+
+/** @internal */
+export const CreateEvalLLMJury$inboundSchema: z.ZodType<
+  CreateEvalLLMJury,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  judges: z.array(z.lazy(() => CreateEvalLLMJudges$inboundSchema)),
+  replacement_judges: z.array(
+    z.lazy(() => CreateEvalLLMReplacementJudges$inboundSchema),
+  ).optional(),
+  min_successful_judges: z.number().int().default(2),
+  tie_value: CreateEvalLLMTieValue$inboundSchema.default("Tie"),
+}).transform((v) => {
+  return remap$(v, {
+    "replacement_judges": "replacementJudges",
+    "min_successful_judges": "minSuccessfulJudges",
+    "tie_value": "tieValue",
+  });
+});
+
+export function createEvalLLMJuryFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMJury, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMJury$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMJury' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLlm2$inboundSchema: z.ZodType<
+  CreateEvalLlm2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  description: z.string(),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
+  guardrail_config: z.union([
+    z.lazy(() =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema
+    ),
+    z.lazy(() =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber$inboundSchema
+    ),
+  ]).optional(),
+  type: CreateEvalLLMEvalsResponseType$inboundSchema,
+  repetitions: z.number().int().optional(),
   prompt: z.string(),
   key: z.string(),
+  mode: z.literal("jury"),
+  jury: z.lazy(() => CreateEvalLLMJury$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "guardrail_config": "guardrailConfig",
+  });
+});
+
+export function createEvalLLM2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLlm2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLlm2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLlm2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number$inboundSchema:
+  z.ZodType<
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
+    type: z.literal("number"),
+    value: z.number(),
+    operator:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Operator$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
+  });
+
+export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1NumberFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema:
+  z.ZodType<
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    enabled: z.boolean(),
+    alert_on_failure: z.boolean().default(false),
+    type: z.literal("boolean"),
+    value: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "alert_on_failure": "alertOnFailure",
+    });
+  });
+
+export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1BooleanFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsGuardrailConfig$inboundSchema: z.ZodType<
+  CreateEvalLLMEvalsGuardrailConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() =>
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema
+  ),
+  z.lazy(() =>
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number$inboundSchema
+  ),
+]);
+
+export function createEvalLLMEvalsGuardrailConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLLMEvalsGuardrailConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLLMEvalsGuardrailConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLLMEvalsGuardrailConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateEvalLLMEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalLLMEvalsType
+> = z.nativeEnum(CreateEvalLLMEvalsType);
+
+/** @internal */
+export const CreateEvalLlm1$inboundSchema: z.ZodType<
+  CreateEvalLlm1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  description: z.string(),
+  created: z.string().default("2026-02-20T21:44:14.406Z"),
+  updated: z.string().default("2026-02-20T21:44:14.406Z"),
+  guardrail_config: z.union([
+    z.lazy(() =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema
+    ),
+    z.lazy(() =>
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number$inboundSchema
+    ),
+  ]).optional(),
+  type: CreateEvalLLMEvalsType$inboundSchema,
+  repetitions: z.number().int().optional(),
+  prompt: z.string(),
+  key: z.string(),
+  mode: z.literal("single"),
   model: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -3091,6 +4110,26 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
     "guardrail_config": "guardrailConfig",
   });
 });
+
+export function createEvalLLM1FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalLlm1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalLlm1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalLlm1' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyLLM$inboundSchema: z.ZodType<
+  ResponseBodyLLM,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateEvalLlm1$inboundSchema),
+  z.lazy(() => CreateEvalLlm2$inboundSchema),
+]);
 
 export function responseBodyLLMFromJSON(
   jsonString: string,
@@ -3108,13 +4147,16 @@ export const CreateEvalResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ResponseBodyLLM$inboundSchema),
-  z.lazy(() => ResponseBodyJSON$inboundSchema),
   z.lazy(() => ResponseBodyHTTP$inboundSchema),
+  z.lazy(() => Ragas$inboundSchema),
+  z.lazy(() => ResponseBodyJSON$inboundSchema),
   z.lazy(() => ResponseBodyPython$inboundSchema),
   z.lazy(() => CreateEvalResponseBodyFunction$inboundSchema),
-  z.lazy(() => Ragas$inboundSchema),
   z.lazy(() => Typescript$inboundSchema),
+  z.union([
+    z.lazy(() => CreateEvalLlm1$inboundSchema),
+    z.lazy(() => CreateEvalLlm2$inboundSchema),
+  ]),
 ]);
 
 export function createEvalResponseBodyFromJSON(
