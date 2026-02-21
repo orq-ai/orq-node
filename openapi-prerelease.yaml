@@ -1891,7 +1891,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01khzwfwkr7behak3jjtkcn1fa"
+              default: "reasoning_01kj05jjh7dhee0nmrktegzqv7"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -1975,7 +1975,7 @@ components:
                   properties:
                     _id:
                       type: "string"
-                      default: "text_01khzwfwkqrt4n6jf8mn9bcaej"
+                      default: "text_01kj05jjh6xvqeg2nznmjg99rk"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     kind:
@@ -2001,7 +2001,7 @@ components:
                   properties:
                     _id:
                       type: "string"
-                      default: "file_01khzwfwktnefxpck3j51snjrq"
+                      default: "file_01kj05jjh9my220c8v4e606z76"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     kind:
@@ -2032,7 +2032,7 @@ components:
                   properties:
                     _id:
                       type: "string"
-                      default: "data_01khzwfwkvegc28sc1yd921d7s"
+                      default: "data_01kj05jjhbk8rrahmg5gywe50g"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     kind:
@@ -2121,7 +2121,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "text_01khzwfwkxem9cm7nkwbbz1995"
+                                  default: "text_01kj05jjhdq4gq69ynvnffcxf3"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 kind:
@@ -2146,7 +2146,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "reasoning_01khzwfwkxs7vgnmvb19fd1e6r"
+                                  default: "reasoning_01kj05jjhewn8ebs6k552cnme4"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 kind:
@@ -2174,7 +2174,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "file_01khzwfwky8zjvktge9h8hxd0z"
+                                  default: "file_01kj05jjhe9wmrnwvvrhy58qn9"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 kind:
@@ -2205,7 +2205,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "data_01khzwfwkzwrk6q33wwdh27ee0"
+                                  default: "data_01kj05jjhg25s789d0v05fdmx3"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 kind:
@@ -3703,7 +3703,7 @@ components:
       properties:
         _id:
           type: "string"
-          default: "conv_01khzwfwxvp4gtbj4gdtxaftxs"
+          default: "conv_01kj05jjvg2x8wabg9eyvbdgme"
           description: "Unique conversation identifier with `conv_` prefix."
           example: "conv_01jj1hdhn79xas7a01wb3hysdb"
         kind:
@@ -3822,7 +3822,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "conv_01khzwfwy1y6xwsfkfrrynqtfs"
+              default: "conv_01kj05jjvppc6gt1d5jna16rc6"
               description: "Unique conversation identifier with `conv_` prefix."
               example: "conv_01jj1hdhn79xas7a01wb3hysdb"
             messages:
@@ -4046,7 +4046,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4054,7 +4054,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -4186,277 +4186,85 @@ paths:
                     type: "array"
                     items:
                       oneOf:
-                        - oneOf:
-                            - type: "object"
-                              properties:
-                                _id:
-                                  type: "string"
-                                description:
-                                  type: "string"
-                                created:
-                                  type: "string"
-                                  default: "2026-02-21T10:38:44.211Z"
-                                updated:
-                                  type: "string"
-                                  default: "2026-02-21T10:38:44.211Z"
-                                guardrail_config:
-                                  oneOf:
-                                    - type: "object"
-                                      properties:
-                                        enabled:
-                                          type: "boolean"
-                                        alert_on_failure:
-                                          type: "boolean"
-                                          default: false
-                                        type:
-                                          type: "string"
-                                          enum:
-                                            - "boolean"
-                                        value:
-                                          type: "boolean"
-                                      required:
-                                        - "enabled"
-                                        - "type"
-                                        - "value"
-                                      title: "Boolean"
-                                    - type: "object"
-                                      properties:
-                                        enabled:
-                                          type: "boolean"
-                                        alert_on_failure:
-                                          type: "boolean"
-                                          default: false
-                                        type:
-                                          type: "string"
-                                          enum:
-                                            - "number"
-                                        value:
-                                          type: "number"
-                                        operator:
-                                          type: "string"
-                                          enum:
-                                            - "eq"
-                                            - "ne"
-                                            - "gt"
-                                            - "gte"
-                                            - "lt"
-                                            - "lte"
-                                      required:
-                                        - "enabled"
-                                        - "type"
-                                        - "value"
-                                        - "operator"
-                                      title: "Number"
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "llm_eval"
-                                repetitions:
-                                  type: "integer"
-                                  minimum: 1
-                                  maximum: 3
-                                prompt:
-                                  type: "string"
-                                key:
-                                  type: "string"
-                                  minLength: 1
-                                  pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                                mode:
-                                  type: "string"
-                                  enum:
-                                    - "single"
-                                model:
-                                  type: "string"
-                              required:
-                                - "_id"
-                                - "description"
-                                - "type"
-                                - "prompt"
-                                - "key"
-                                - "mode"
-                                - "model"
-                            - type: "object"
-                              properties:
-                                _id:
-                                  type: "string"
-                                description:
-                                  type: "string"
-                                created:
-                                  type: "string"
-                                  default: "2026-02-21T10:38:44.211Z"
-                                updated:
-                                  type: "string"
-                                  default: "2026-02-21T10:38:44.211Z"
-                                guardrail_config:
-                                  oneOf:
-                                    - type: "object"
-                                      properties:
-                                        enabled:
-                                          type: "boolean"
-                                        alert_on_failure:
-                                          type: "boolean"
-                                          default: false
-                                        type:
-                                          type: "string"
-                                          enum:
-                                            - "boolean"
-                                        value:
-                                          type: "boolean"
-                                      required:
-                                        - "enabled"
-                                        - "type"
-                                        - "value"
-                                      title: "Boolean"
-                                    - type: "object"
-                                      properties:
-                                        enabled:
-                                          type: "boolean"
-                                        alert_on_failure:
-                                          type: "boolean"
-                                          default: false
-                                        type:
-                                          type: "string"
-                                          enum:
-                                            - "number"
-                                        value:
-                                          type: "number"
-                                        operator:
-                                          type: "string"
-                                          enum:
-                                            - "eq"
-                                            - "ne"
-                                            - "gt"
-                                            - "gte"
-                                            - "lt"
-                                            - "lte"
-                                      required:
-                                        - "enabled"
-                                        - "type"
-                                        - "value"
-                                        - "operator"
-                                      title: "Number"
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "llm_eval"
-                                repetitions:
-                                  type: "integer"
-                                  minimum: 1
-                                  maximum: 3
-                                prompt:
-                                  type: "string"
-                                key:
-                                  type: "string"
-                                  minLength: 1
-                                  pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                                mode:
-                                  type: "string"
-                                  enum:
-                                    - "jury"
-                                jury:
-                                  type: "object"
+                        - type: "object"
+                          properties:
+                            _id:
+                              type: "string"
+                            description:
+                              type: "string"
+                            created:
+                              type: "string"
+                              default: "2026-02-21T13:17:29.344Z"
+                            updated:
+                              type: "string"
+                              default: "2026-02-21T13:17:29.344Z"
+                            guardrail_config:
+                              oneOf:
+                                - type: "object"
                                   properties:
-                                    judges:
-                                      type: "array"
-                                      items:
-                                        type: "object"
-                                        properties:
-                                          model:
-                                            type: "string"
-                                          retry:
-                                            type: "object"
-                                            properties:
-                                              count:
-                                                type: "integer"
-                                                minimum: 1
-                                                maximum: 5
-                                                default: 2
-                                              on_codes:
-                                                type: "array"
-                                                items:
-                                                  type: "integer"
-                                                  minimum: 100
-                                                  maximum: 599
-                                                minItems: 1
-                                                default:
-                                                  - 429
-                                                  - 500
-                                                  - 502
-                                                  - 503
-                                                  - 504
-                                          fallbacks:
-                                            type: "array"
-                                            items:
-                                              type: "object"
-                                              properties:
-                                                model:
-                                                  type: "string"
-                                              required:
-                                                - "model"
-                                            default: []
-                                        required:
-                                          - "model"
-                                      minItems: 2
-                                    replacement_judges:
-                                      type: "array"
-                                      items:
-                                        type: "object"
-                                        properties:
-                                          model:
-                                            type: "string"
-                                          retry:
-                                            type: "object"
-                                            properties:
-                                              count:
-                                                type: "integer"
-                                                minimum: 1
-                                                maximum: 5
-                                                default: 2
-                                              on_codes:
-                                                type: "array"
-                                                items:
-                                                  type: "integer"
-                                                  minimum: 100
-                                                  maximum: 599
-                                                minItems: 1
-                                                default:
-                                                  - 429
-                                                  - 500
-                                                  - 502
-                                                  - 503
-                                                  - 504
-                                          fallbacks:
-                                            type: "array"
-                                            items:
-                                              type: "object"
-                                              properties:
-                                                model:
-                                                  type: "string"
-                                              required:
-                                                - "model"
-                                            default: []
-                                        required:
-                                          - "model"
-                                      default: []
-                                    min_successful_judges:
-                                      type: "integer"
-                                      minimum: 2
-                                      default: 2
-                                    tie_value:
+                                    enabled:
+                                      type: "boolean"
+                                    alert_on_failure:
+                                      type: "boolean"
+                                      default: false
+                                    type:
                                       type: "string"
                                       enum:
-                                        - "Tie"
-                                      default: "Tie"
+                                        - "boolean"
+                                    value:
+                                      type: "boolean"
                                   required:
-                                    - "judges"
-                              required:
-                                - "_id"
-                                - "description"
-                                - "type"
-                                - "prompt"
-                                - "key"
-                                - "mode"
-                                - "jury"
+                                    - "enabled"
+                                    - "type"
+                                    - "value"
+                                  title: "Boolean"
+                                - type: "object"
+                                  properties:
+                                    enabled:
+                                      type: "boolean"
+                                    alert_on_failure:
+                                      type: "boolean"
+                                      default: false
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "number"
+                                    value:
+                                      type: "number"
+                                    operator:
+                                      type: "string"
+                                      enum:
+                                        - "eq"
+                                        - "ne"
+                                        - "gt"
+                                        - "gte"
+                                        - "lt"
+                                        - "lte"
+                                  required:
+                                    - "enabled"
+                                    - "type"
+                                    - "value"
+                                    - "operator"
+                                  title: "Number"
+                            type:
+                              type: "string"
+                              enum:
+                                - "llm_eval"
+                            prompt:
+                              type: "string"
+                            key:
+                              type: "string"
+                              minLength: 1
+                              pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+                            model:
+                              type: "string"
+                          required:
+                            - "_id"
+                            - "description"
+                            - "type"
+                            - "prompt"
+                            - "key"
+                            - "model"
                           title: "LLM"
                         - type: "object"
                           properties:
@@ -4466,10 +4274,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             updated:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4543,10 +4351,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             updated:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4635,10 +4443,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             updated:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4712,10 +4520,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             updated:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5089,10 +4897,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             updated:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5182,10 +4990,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             updated:
                               type: "string"
-                              default: "2026-02-21T10:38:44.211Z"
+                              default: "2026-02-21T13:17:29.344Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5282,285 +5090,89 @@ paths:
           application/json:
             schema:
               oneOf:
-                - oneOf:
-                    - type: "object"
-                      properties:
-                        guardrail_config:
-                          oneOf:
-                            - type: "object"
-                              properties:
-                                enabled:
-                                  type: "boolean"
-                                alert_on_failure:
-                                  type: "boolean"
-                                  default: false
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "boolean"
-                                value:
-                                  type: "boolean"
-                              required:
-                                - "enabled"
-                                - "type"
-                                - "value"
-                              title: "Boolean"
-                            - type: "object"
-                              properties:
-                                enabled:
-                                  type: "boolean"
-                                alert_on_failure:
-                                  type: "boolean"
-                                  default: false
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "number"
-                                value:
-                                  type: "number"
-                                operator:
-                                  type: "string"
-                                  enum:
-                                    - "eq"
-                                    - "ne"
-                                    - "gt"
-                                    - "gte"
-                                    - "lt"
-                                    - "lte"
-                              required:
-                                - "enabled"
-                                - "type"
-                                - "value"
-                                - "operator"
-                              title: "Number"
-                        output_type:
-                          type: "string"
-                          enum:
-                            - "boolean"
-                            - "categorical"
-                            - "number"
-                            - "string"
-                          description: "The type of output expected from the evaluator"
-                        type:
-                          type: "string"
-                          enum:
-                            - "llm_eval"
-                        repetitions:
-                          type: "integer"
-                          minimum: 1
-                          maximum: 3
-                        prompt:
-                          type: "string"
-                        path:
-                          type: "string"
-                          description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
-                          example: "Default"
-                        description:
-                          type: "string"
-                          default: ""
-                        key:
-                          type: "string"
-                          minLength: 1
-                          pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                        mode:
-                          type: "string"
-                          enum:
-                            - "single"
-                        model:
-                          type: "string"
-                      required:
-                        - "type"
-                        - "prompt"
-                        - "path"
-                        - "key"
-                        - "mode"
-                        - "model"
-                    - type: "object"
-                      properties:
-                        guardrail_config:
-                          oneOf:
-                            - type: "object"
-                              properties:
-                                enabled:
-                                  type: "boolean"
-                                alert_on_failure:
-                                  type: "boolean"
-                                  default: false
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "boolean"
-                                value:
-                                  type: "boolean"
-                              required:
-                                - "enabled"
-                                - "type"
-                                - "value"
-                              title: "Boolean"
-                            - type: "object"
-                              properties:
-                                enabled:
-                                  type: "boolean"
-                                alert_on_failure:
-                                  type: "boolean"
-                                  default: false
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "number"
-                                value:
-                                  type: "number"
-                                operator:
-                                  type: "string"
-                                  enum:
-                                    - "eq"
-                                    - "ne"
-                                    - "gt"
-                                    - "gte"
-                                    - "lt"
-                                    - "lte"
-                              required:
-                                - "enabled"
-                                - "type"
-                                - "value"
-                                - "operator"
-                              title: "Number"
-                        output_type:
-                          type: "string"
-                          enum:
-                            - "boolean"
-                            - "categorical"
-                            - "number"
-                            - "string"
-                          description: "The type of output expected from the evaluator"
-                        type:
-                          type: "string"
-                          enum:
-                            - "llm_eval"
-                        repetitions:
-                          type: "integer"
-                          minimum: 1
-                          maximum: 3
-                        prompt:
-                          type: "string"
-                        path:
-                          type: "string"
-                          description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
-                          example: "Default"
-                        description:
-                          type: "string"
-                          default: ""
-                        key:
-                          type: "string"
-                          minLength: 1
-                          pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                        mode:
-                          type: "string"
-                          enum:
-                            - "jury"
-                        jury:
-                          type: "object"
+                - type: "object"
+                  properties:
+                    guardrail_config:
+                      oneOf:
+                        - type: "object"
                           properties:
-                            judges:
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  model:
-                                    type: "string"
-                                  retry:
-                                    type: "object"
-                                    properties:
-                                      count:
-                                        type: "integer"
-                                        minimum: 1
-                                        maximum: 5
-                                        default: 2
-                                      on_codes:
-                                        type: "array"
-                                        items:
-                                          type: "integer"
-                                          minimum: 100
-                                          maximum: 599
-                                        minItems: 1
-                                        default:
-                                          - 429
-                                          - 500
-                                          - 502
-                                          - 503
-                                          - 504
-                                  fallbacks:
-                                    type: "array"
-                                    items:
-                                      type: "object"
-                                      properties:
-                                        model:
-                                          type: "string"
-                                      required:
-                                        - "model"
-                                    default: []
-                                required:
-                                  - "model"
-                              minItems: 2
-                            replacement_judges:
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  model:
-                                    type: "string"
-                                  retry:
-                                    type: "object"
-                                    properties:
-                                      count:
-                                        type: "integer"
-                                        minimum: 1
-                                        maximum: 5
-                                        default: 2
-                                      on_codes:
-                                        type: "array"
-                                        items:
-                                          type: "integer"
-                                          minimum: 100
-                                          maximum: 599
-                                        minItems: 1
-                                        default:
-                                          - 429
-                                          - 500
-                                          - 502
-                                          - 503
-                                          - 504
-                                  fallbacks:
-                                    type: "array"
-                                    items:
-                                      type: "object"
-                                      properties:
-                                        model:
-                                          type: "string"
-                                      required:
-                                        - "model"
-                                    default: []
-                                required:
-                                  - "model"
-                              default: []
-                            min_successful_judges:
-                              type: "integer"
-                              minimum: 2
-                              default: 2
-                            tie_value:
+                            enabled:
+                              type: "boolean"
+                            alert_on_failure:
+                              type: "boolean"
+                              default: false
+                            type:
                               type: "string"
                               enum:
-                                - "Tie"
-                              default: "Tie"
+                                - "boolean"
+                            value:
+                              type: "boolean"
                           required:
-                            - "judges"
-                      required:
-                        - "type"
-                        - "prompt"
-                        - "path"
-                        - "key"
-                        - "mode"
-                        - "jury"
+                            - "enabled"
+                            - "type"
+                            - "value"
+                          title: "Boolean"
+                        - type: "object"
+                          properties:
+                            enabled:
+                              type: "boolean"
+                            alert_on_failure:
+                              type: "boolean"
+                              default: false
+                            type:
+                              type: "string"
+                              enum:
+                                - "number"
+                            value:
+                              type: "number"
+                            operator:
+                              type: "string"
+                              enum:
+                                - "eq"
+                                - "ne"
+                                - "gt"
+                                - "gte"
+                                - "lt"
+                                - "lte"
+                          required:
+                            - "enabled"
+                            - "type"
+                            - "value"
+                            - "operator"
+                          title: "Number"
+                    output_type:
+                      type: "string"
+                      enum:
+                        - "boolean"
+                        - "categorical"
+                        - "number"
+                        - "string"
+                      description: "The type of output expected from the evaluator"
+                    type:
+                      type: "string"
+                      enum:
+                        - "llm_eval"
+                    prompt:
+                      type: "string"
+                    path:
+                      type: "string"
+                      description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
+                      example: "Default"
+                    description:
+                      type: "string"
+                      default: ""
+                    model:
+                      type: "string"
+                    key:
+                      type: "string"
+                      minLength: 1
+                      pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+                  required:
+                    - "type"
+                    - "prompt"
+                    - "path"
+                    - "model"
+                    - "key"
                   title: "LLM"
                 - type: "object"
                   properties:
@@ -5820,277 +5432,85 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - oneOf:
-                      - type: "object"
-                        properties:
-                          _id:
-                            type: "string"
-                          description:
-                            type: "string"
-                          created:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          updated:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          guardrail_config:
-                            oneOf:
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "boolean"
-                                  value:
-                                    type: "boolean"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "number"
-                                  value:
-                                    type: "number"
-                                  operator:
-                                    type: "string"
-                                    enum:
-                                      - "eq"
-                                      - "ne"
-                                      - "gt"
-                                      - "gte"
-                                      - "lt"
-                                      - "lte"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                  - "operator"
-                                title: "Number"
-                          type:
-                            type: "string"
-                            enum:
-                              - "llm_eval"
-                          repetitions:
-                            type: "integer"
-                            minimum: 1
-                            maximum: 3
-                          prompt:
-                            type: "string"
-                          key:
-                            type: "string"
-                            minLength: 1
-                            pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                          mode:
-                            type: "string"
-                            enum:
-                              - "single"
-                          model:
-                            type: "string"
-                        required:
-                          - "_id"
-                          - "description"
-                          - "type"
-                          - "prompt"
-                          - "key"
-                          - "mode"
-                          - "model"
-                      - type: "object"
-                        properties:
-                          _id:
-                            type: "string"
-                          description:
-                            type: "string"
-                          created:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          updated:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          guardrail_config:
-                            oneOf:
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "boolean"
-                                  value:
-                                    type: "boolean"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "number"
-                                  value:
-                                    type: "number"
-                                  operator:
-                                    type: "string"
-                                    enum:
-                                      - "eq"
-                                      - "ne"
-                                      - "gt"
-                                      - "gte"
-                                      - "lt"
-                                      - "lte"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                  - "operator"
-                                title: "Number"
-                          type:
-                            type: "string"
-                            enum:
-                              - "llm_eval"
-                          repetitions:
-                            type: "integer"
-                            minimum: 1
-                            maximum: 3
-                          prompt:
-                            type: "string"
-                          key:
-                            type: "string"
-                            minLength: 1
-                            pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                          mode:
-                            type: "string"
-                            enum:
-                              - "jury"
-                          jury:
-                            type: "object"
+                  - type: "object"
+                    properties:
+                      _id:
+                        type: "string"
+                      description:
+                        type: "string"
+                      created:
+                        type: "string"
+                        default: "2026-02-21T13:17:29.344Z"
+                      updated:
+                        type: "string"
+                        default: "2026-02-21T13:17:29.344Z"
+                      guardrail_config:
+                        oneOf:
+                          - type: "object"
                             properties:
-                              judges:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "integer"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 2
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "integer"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                    fallbacks:
-                                      type: "array"
-                                      items:
-                                        type: "object"
-                                        properties:
-                                          model:
-                                            type: "string"
-                                        required:
-                                          - "model"
-                                      default: []
-                                  required:
-                                    - "model"
-                                minItems: 2
-                              replacement_judges:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "integer"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 2
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "integer"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                    fallbacks:
-                                      type: "array"
-                                      items:
-                                        type: "object"
-                                        properties:
-                                          model:
-                                            type: "string"
-                                        required:
-                                          - "model"
-                                      default: []
-                                  required:
-                                    - "model"
-                                default: []
-                              min_successful_judges:
-                                type: "integer"
-                                minimum: 2
-                                default: 2
-                              tie_value:
+                              enabled:
+                                type: "boolean"
+                              alert_on_failure:
+                                type: "boolean"
+                                default: false
+                              type:
                                 type: "string"
                                 enum:
-                                  - "Tie"
-                                default: "Tie"
+                                  - "boolean"
+                              value:
+                                type: "boolean"
                             required:
-                              - "judges"
-                        required:
-                          - "_id"
-                          - "description"
-                          - "type"
-                          - "prompt"
-                          - "key"
-                          - "mode"
-                          - "jury"
+                              - "enabled"
+                              - "type"
+                              - "value"
+                            title: "Boolean"
+                          - type: "object"
+                            properties:
+                              enabled:
+                                type: "boolean"
+                              alert_on_failure:
+                                type: "boolean"
+                                default: false
+                              type:
+                                type: "string"
+                                enum:
+                                  - "number"
+                              value:
+                                type: "number"
+                              operator:
+                                type: "string"
+                                enum:
+                                  - "eq"
+                                  - "ne"
+                                  - "gt"
+                                  - "gte"
+                                  - "lt"
+                                  - "lte"
+                            required:
+                              - "enabled"
+                              - "type"
+                              - "value"
+                              - "operator"
+                            title: "Number"
+                      type:
+                        type: "string"
+                        enum:
+                          - "llm_eval"
+                      prompt:
+                        type: "string"
+                      key:
+                        type: "string"
+                        minLength: 1
+                        pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+                      model:
+                        type: "string"
+                    required:
+                      - "_id"
+                      - "description"
+                      - "type"
+                      - "prompt"
+                      - "key"
+                      - "model"
                     title: "LLM"
                   - type: "object"
                     properties:
@@ -6100,10 +5520,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6177,10 +5597,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6269,10 +5689,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6346,10 +5766,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6723,10 +6143,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6816,10 +6236,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6981,15 +6401,6 @@ paths:
                       type: "string"
                       enum:
                         - "llm_eval"
-                    mode:
-                      type: "string"
-                      enum:
-                        - "single"
-                        - "jury"
-                    repetitions:
-                      type: "integer"
-                      minimum: 1
-                      maximum: 3
                     prompt:
                       type: "string"
                     path:
@@ -7000,102 +6411,6 @@ paths:
                       type: "string"
                     model:
                       type: "string"
-                    jury:
-                      type: "object"
-                      properties:
-                        judges:
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              model:
-                                type: "string"
-                              retry:
-                                type: "object"
-                                properties:
-                                  count:
-                                    type: "integer"
-                                    minimum: 1
-                                    maximum: 5
-                                    default: 2
-                                  on_codes:
-                                    type: "array"
-                                    items:
-                                      type: "integer"
-                                      minimum: 100
-                                      maximum: 599
-                                    minItems: 1
-                                    default:
-                                      - 429
-                                      - 500
-                                      - 502
-                                      - 503
-                                      - 504
-                              fallbacks:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                  required:
-                                    - "model"
-                                default: []
-                            required:
-                              - "model"
-                          minItems: 2
-                        replacement_judges:
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              model:
-                                type: "string"
-                              retry:
-                                type: "object"
-                                properties:
-                                  count:
-                                    type: "integer"
-                                    minimum: 1
-                                    maximum: 5
-                                    default: 2
-                                  on_codes:
-                                    type: "array"
-                                    items:
-                                      type: "integer"
-                                      minimum: 100
-                                      maximum: 599
-                                    minItems: 1
-                                    default:
-                                      - 429
-                                      - 500
-                                      - 502
-                                      - 503
-                                      - 504
-                              fallbacks:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                  required:
-                                    - "model"
-                                default: []
-                            required:
-                              - "model"
-                          default: []
-                        min_successful_judges:
-                          type: "integer"
-                          minimum: 2
-                          default: 2
-                        tie_value:
-                          type: "string"
-                          enum:
-                            - "Tie"
-                          default: "Tie"
-                      required:
-                        - "judges"
                     key:
                       type: "string"
                       minLength: 1
@@ -7350,277 +6665,85 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - oneOf:
-                      - type: "object"
-                        properties:
-                          _id:
-                            type: "string"
-                          description:
-                            type: "string"
-                          created:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          updated:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          guardrail_config:
-                            oneOf:
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "boolean"
-                                  value:
-                                    type: "boolean"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "number"
-                                  value:
-                                    type: "number"
-                                  operator:
-                                    type: "string"
-                                    enum:
-                                      - "eq"
-                                      - "ne"
-                                      - "gt"
-                                      - "gte"
-                                      - "lt"
-                                      - "lte"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                  - "operator"
-                                title: "Number"
-                          type:
-                            type: "string"
-                            enum:
-                              - "llm_eval"
-                          repetitions:
-                            type: "integer"
-                            minimum: 1
-                            maximum: 3
-                          prompt:
-                            type: "string"
-                          key:
-                            type: "string"
-                            minLength: 1
-                            pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                          mode:
-                            type: "string"
-                            enum:
-                              - "single"
-                          model:
-                            type: "string"
-                        required:
-                          - "_id"
-                          - "description"
-                          - "type"
-                          - "prompt"
-                          - "key"
-                          - "mode"
-                          - "model"
-                      - type: "object"
-                        properties:
-                          _id:
-                            type: "string"
-                          description:
-                            type: "string"
-                          created:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          updated:
-                            type: "string"
-                            default: "2026-02-21T10:38:44.211Z"
-                          guardrail_config:
-                            oneOf:
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "boolean"
-                                  value:
-                                    type: "boolean"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "number"
-                                  value:
-                                    type: "number"
-                                  operator:
-                                    type: "string"
-                                    enum:
-                                      - "eq"
-                                      - "ne"
-                                      - "gt"
-                                      - "gte"
-                                      - "lt"
-                                      - "lte"
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "value"
-                                  - "operator"
-                                title: "Number"
-                          type:
-                            type: "string"
-                            enum:
-                              - "llm_eval"
-                          repetitions:
-                            type: "integer"
-                            minimum: 1
-                            maximum: 3
-                          prompt:
-                            type: "string"
-                          key:
-                            type: "string"
-                            minLength: 1
-                            pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
-                          mode:
-                            type: "string"
-                            enum:
-                              - "jury"
-                          jury:
-                            type: "object"
+                  - type: "object"
+                    properties:
+                      _id:
+                        type: "string"
+                      description:
+                        type: "string"
+                      created:
+                        type: "string"
+                        default: "2026-02-21T13:17:29.344Z"
+                      updated:
+                        type: "string"
+                        default: "2026-02-21T13:17:29.344Z"
+                      guardrail_config:
+                        oneOf:
+                          - type: "object"
                             properties:
-                              judges:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "integer"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 2
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "integer"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                    fallbacks:
-                                      type: "array"
-                                      items:
-                                        type: "object"
-                                        properties:
-                                          model:
-                                            type: "string"
-                                        required:
-                                          - "model"
-                                      default: []
-                                  required:
-                                    - "model"
-                                minItems: 2
-                              replacement_judges:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "integer"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 2
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "integer"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                    fallbacks:
-                                      type: "array"
-                                      items:
-                                        type: "object"
-                                        properties:
-                                          model:
-                                            type: "string"
-                                        required:
-                                          - "model"
-                                      default: []
-                                  required:
-                                    - "model"
-                                default: []
-                              min_successful_judges:
-                                type: "integer"
-                                minimum: 2
-                                default: 2
-                              tie_value:
+                              enabled:
+                                type: "boolean"
+                              alert_on_failure:
+                                type: "boolean"
+                                default: false
+                              type:
                                 type: "string"
                                 enum:
-                                  - "Tie"
-                                default: "Tie"
+                                  - "boolean"
+                              value:
+                                type: "boolean"
                             required:
-                              - "judges"
-                        required:
-                          - "_id"
-                          - "description"
-                          - "type"
-                          - "prompt"
-                          - "key"
-                          - "mode"
-                          - "jury"
+                              - "enabled"
+                              - "type"
+                              - "value"
+                            title: "Boolean"
+                          - type: "object"
+                            properties:
+                              enabled:
+                                type: "boolean"
+                              alert_on_failure:
+                                type: "boolean"
+                                default: false
+                              type:
+                                type: "string"
+                                enum:
+                                  - "number"
+                              value:
+                                type: "number"
+                              operator:
+                                type: "string"
+                                enum:
+                                  - "eq"
+                                  - "ne"
+                                  - "gt"
+                                  - "gte"
+                                  - "lt"
+                                  - "lte"
+                            required:
+                              - "enabled"
+                              - "type"
+                              - "value"
+                              - "operator"
+                            title: "Number"
+                      type:
+                        type: "string"
+                        enum:
+                          - "llm_eval"
+                      prompt:
+                        type: "string"
+                      key:
+                        type: "string"
+                        minLength: 1
+                        pattern: "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+                      model:
+                        type: "string"
+                    required:
+                      - "_id"
+                      - "description"
+                      - "type"
+                      - "prompt"
+                      - "key"
+                      - "model"
                     title: "LLM"
                   - type: "object"
                     properties:
@@ -7630,10 +6753,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7707,10 +6830,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7799,10 +6922,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7876,10 +6999,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8253,10 +7376,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8346,10 +7469,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       updated:
                         type: "string"
-                        default: "2026-02-21T10:38:44.211Z"
+                        default: "2026-02-21T13:17:29.344Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8830,64 +7953,6 @@ paths:
                             type:
                               - "string"
                               - "null"
-                          jury:
-                            type: "object"
-                            properties:
-                              judges_configured:
-                                type: "integer"
-                                minimum: 0
-                              judges_succeeded:
-                                type: "integer"
-                                minimum: 0
-                              judges_failed:
-                                type: "integer"
-                                minimum: 0
-                              replacements_used:
-                                type: "integer"
-                                minimum: 0
-                              tie:
-                                type: "boolean"
-                              votes:
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    model:
-                                      type: "string"
-                                    replacement:
-                                      type: "boolean"
-                                    success:
-                                      type: "boolean"
-                                    value:
-                                      anyOf:
-                                        - type: "number"
-                                        - type: "boolean"
-                                        - type: "string"
-                                    explanation:
-                                      type: "string"
-                                    error:
-                                      type: "string"
-                                  required:
-                                    - "model"
-                                    - "replacement"
-                                    - "success"
-                              stats:
-                                type: "object"
-                                properties:
-                                  mean:
-                                    type: "number"
-                                  std:
-                                    type: "number"
-                                required:
-                                  - "mean"
-                                  - "std"
-                            required:
-                              - "judges_configured"
-                              - "judges_succeeded"
-                              - "judges_failed"
-                              - "replacements_used"
-                              - "tie"
-                              - "votes"
                         required:
                           - "workflow_run_id"
                           - "value"
@@ -9220,7 +8285,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-02-21T10:38:42.264Z"
+                          default: "2026-02-21T13:17:27.302Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -9228,7 +8293,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:42.265Z"
+                              default: "2026-02-21T13:17:27.303Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -9433,7 +8498,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -9441,7 +8506,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9556,7 +8621,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -9564,7 +8629,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9735,7 +8800,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -9743,7 +8808,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -22668,7 +21733,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KHZWFWS99NYJYPNWX1SZBP2V"
+                                          default: "01KJ05JJPVV3GJ59STRKQDEA1Z"
                                         name:
                                           type: "string"
                                         description:
@@ -24448,7 +23513,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KHZWFWW2XKV649SPGMSRPMNE"
+                                          default: "01KJ05JJSXX4VBJ5GS12YRSFE6"
                                         name:
                                           type: "string"
                                         description:
@@ -25068,7 +24133,7 @@ paths:
                   - properties:
                       _id:
                         type: "string"
-                        default: "conv_01khzwfwxxbs82qzz3xf8ptekf"
+                        default: "conv_01kj05jjvjftx0bb86wq4k70cc"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       kind:
@@ -25162,7 +24227,7 @@ paths:
                   - properties:
                       _id:
                         type: "string"
-                        default: "conv_01khzwfwxz8g6gwp606f3tr5yg"
+                        default: "conv_01kj05jjvmt886sxrcm13jqf76"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       kind:
@@ -25340,7 +24405,7 @@ paths:
                   - properties:
                       _id:
                         type: "string"
-                        default: "conv_01khzwfwydje1qamdy0ewmmcyj"
+                        default: "conv_01kj05jjvv3gchqx0xdhv9djgk"
                         description: "Unique conversation identifier with `conv_` prefix."
                         example: "conv_01jj1hdhn79xas7a01wb3hysdb"
                       kind:
@@ -25529,7 +24594,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: text_01khzwfwymyttpqt9d7k7zvq0q
+                                                            default: text_01kj05jjw41xw01kbdy7scar9x
                                                             description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                                             example: text_01hxyz123abc
                                                           kind:
@@ -25554,7 +24619,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: reasoning_01khzwfwynr01adk8vnfs0z31y
+                                                            default: reasoning_01kj05jjw654xvcvrxxph0jaba
                                                             description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                                             example: reasoning_01hxyz123abc
                                                           kind:
@@ -25582,7 +24647,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: file_01khzwfwyn5wj1h0da44ea1sm2
+                                                            default: file_01kj05jjw6qtbnwy7ey535hnb7
                                                             description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                                             example: file_01hxyz123abc
                                                           kind:
@@ -25613,7 +24678,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: data_01khzwfwypvnjw9c5ensn9txve
+                                                            default: data_01kj05jjw74c3gb0a3mjqc0awv
                                                             description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                                             example: data_01hxyz123abc
                                                           kind:
@@ -25669,7 +24734,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: text_01khzwfwyqrx87n41g2v6ycjdf
+                                                            default: text_01kj05jjw9mdz3megy2xafgm53
                                                             description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                                             example: text_01hxyz123abc
                                                           kind:
@@ -25694,7 +24759,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: reasoning_01khzwfwyrfnzs3569xmnh24wd
+                                                            default: reasoning_01kj05jjw9d9gyvdzc7awv7h5v
                                                             description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                                             example: reasoning_01hxyz123abc
                                                           kind:
@@ -25722,7 +24787,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: file_01khzwfwyse7qeyj2ns3emg0xn
+                                                            default: file_01kj05jjwa4fbe6yvz85h7pcg1
                                                             description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                                             example: file_01hxyz123abc
                                                           kind:
@@ -25753,7 +24818,7 @@ paths:
                                                         properties:
                                                           _id:
                                                             type: string
-                                                            default: data_01khzwfwytgjs4ce4j3t5bexwt
+                                                            default: data_01kj05jjwbm1evw4ykpybtg2dw
                                                             description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                                             example: data_01hxyz123abc
                                                           kind:
@@ -25847,7 +24912,7 @@ paths:
                   created:
                     type: "string"
                     format: "date-time"
-                    default: "2026-02-21T10:38:46.427Z"
+                    default: "2026-02-21T13:17:31.462Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -25936,7 +25001,7 @@ paths:
                         created:
                           type: "string"
                           format: "date-time"
-                          default: "2026-02-21T10:38:46.427Z"
+                          default: "2026-02-21T13:17:31.462Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -26004,7 +25069,7 @@ paths:
                   created:
                     type: "string"
                     format: "date-time"
-                    default: "2026-02-21T10:38:46.427Z"
+                    default: "2026-02-21T13:17:31.462Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -33950,7 +33015,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KHZWFX7PF6WMXN7ECJVT3SZ2"
+                              default: "tool_01KJ05JK55E6NMWQJ6F27AZ4YG"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34049,7 +33114,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KHZWFX7QT8BGRKM3885EHK89"
+                              default: "tool_01KJ05JK5686HKJCVBNBEH2KKP"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34150,7 +33215,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KHZWFX7R1FCNBJDEVJAAQ2HP"
+                              default: "tool_01KJ05JK58QCKPVT34633QQADG"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34287,7 +33352,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KHZWFX7T136ZRQ1BFASHWHT0"
+                              default: "tool_01KJ05JK59MB77MEDTEK3MXD2F"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34361,7 +33426,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KHZWFX7V04CMGNDZ44073FG3"
+                                        default: "01KJ05JK5H7XHPZF30TR75AJEN"
                                       name:
                                         type: "string"
                                       description:
@@ -34412,7 +33477,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KHZWFX7WD7MXN5TNS88B2DDG"
+                              default: "tool_01KJ05JK5J7RN005D9Y75XPRYB"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34959,7 +34024,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX8MN63ZFBZ99ENQ0CYS"
+                        default: "tool_01KJ05JK611NN16FCAWYSWE3YF"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35058,7 +34123,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX8P4D0VW977ES7CRA3J"
+                        default: "tool_01KJ05JK63HYWG9TX2EC1T4W32"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35159,7 +34224,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX8S6CSFMSE2EH9MQ89G"
+                        default: "tool_01KJ05JK66TX26930BF7ACSASD"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35296,7 +34361,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX8W9NRNZ46E637N557G"
+                        default: "tool_01KJ05JK68HA8KSCHJ4JPG24KT"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35370,7 +34435,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KHZWFX8Y1TD40HZ2YBFM2MZ7"
+                                  default: "01KJ05JK698C304N9JCC70CKDB"
                                 name:
                                   type: "string"
                                 description:
@@ -35421,7 +34486,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX8ZKFXE5NY6VM62DJVA"
+                        default: "tool_01KJ05JK6BJZPHZQWZXDAMW1JD"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35854,7 +34919,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KHZWFX9PX340SR0Z09KK371Q"
+                                default: "01KJ05JK761D8TJSRS5YBKSZPB"
                               name:
                                 type: "string"
                               description:
@@ -35972,7 +35037,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX9982VWV0Z6WK5M1W3V"
+                        default: "tool_01KJ05JK6KFE3GTV4DY8MS6P78"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36071,7 +35136,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX9BCHAS48DFE24NBRAT"
+                        default: "tool_01KJ05JK6M46SA2C7RVPJ996MB"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36172,7 +35237,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX9DGW3VK3KKAK34T3QM"
+                        default: "tool_01KJ05JK6NJWF16T6G712HZW11"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36309,7 +35374,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX9F8F1Z5TX7WF43J5WK"
+                        default: "tool_01KJ05JK6QMGCGDM50M2JD8KPG"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36383,7 +35448,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KHZWFX9GZ3DKMN121KKGMVK1"
+                                  default: "01KJ05JK6RA833J5HA8HECN0V3"
                                 name:
                                   type: "string"
                                 description:
@@ -36434,7 +35499,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFX9H096655E36YXKKG4F"
+                        default: "tool_01KJ05JK6SBTZ4T4NEMTCSDKV6"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36589,7 +35654,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFXAGQ4T034CQX37F16KW"
+                        default: "tool_01KJ05JK7KAQ9TCJD8YVVWDJEZ"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36688,7 +35753,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFXAJ97B3BEMWR5TTF546"
+                        default: "tool_01KJ05JK7PS2B53SJGFQNSJGR8"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36789,7 +35854,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFXAKAD6PARZJDDC4HZKX"
+                        default: "tool_01KJ05JK7RW6A1YWK56TP1DF86"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36926,7 +35991,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFXANQW34KNXF08T70QCF"
+                        default: "tool_01KJ05JK7T8G0Y3K91JWMK8WX5"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -37000,7 +36065,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KHZWFXAPNAVKEEYX1GXTC5G1"
+                                  default: "01KJ05JK7W5RX5S4ZPSVG7NCQQ"
                                 name:
                                   type: "string"
                                 description:
@@ -37051,7 +36116,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KHZWFXAQDT1NW7376K8EF7K0"
+                        default: "tool_01KJ05JK7X9BJYH0DS0V4F78X0"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -39187,7 +38252,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KHZWFXDWZ8FSK85C9XC69W44"
+                          default: "01KJ05JKBB90QEFSH7E3EQGWYS"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -39353,7 +38418,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KHZWFXE1H5VQTMSJFY2D7RXN"
+                    default: "01KJ05JKBF5AM0SRNQ6RKQ7SP6"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39449,7 +38514,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KHZWFXDZH8VZ1FZ5H7YMZDMM"
+                    default: "01KJ05JKBEWJJZF2KSV0SFH0WG"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39581,7 +38646,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KHZWFXE428M01CAGZD3Z8ZTF"
+                    default: "01KJ05JKBK4HYQBEEF3XBWR3NT"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42163,7 +41228,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-02-21T10:38:42.264Z"
+                          default: "2026-02-21T13:17:27.302Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42171,7 +41236,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:42.265Z"
+                              default: "2026-02-21T13:17:27.303Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -42307,7 +41372,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42315,7 +41380,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -42438,7 +41503,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42446,7 +41511,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -42600,7 +41665,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42608,7 +41673,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -42985,7 +42050,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-02-21T10:38:57.048Z"
+                                    default: "2026-02-21T13:17:42.207Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43025,7 +42090,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-02-21T10:38:57.048Z"
+                                    default: "2026-02-21T13:17:42.207Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43065,7 +42130,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-02-21T10:38:57.049Z"
+                                    default: "2026-02-21T13:17:42.208Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43101,7 +42166,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-02-21T10:38:42.264Z"
+                          default: "2026-02-21T13:17:27.302Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -43109,7 +42174,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:42.265Z"
+                              default: "2026-02-21T13:17:27.303Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -43681,7 +42746,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-02-21T10:38:57.075Z"
+                                default: "2026-02-21T13:17:42.227Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43721,7 +42786,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-02-21T10:38:57.076Z"
+                                default: "2026-02-21T13:17:42.228Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43761,7 +42826,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-02-21T10:38:57.078Z"
+                                default: "2026-02-21T13:17:42.228Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43797,7 +42862,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-02-21T10:38:42.264Z"
+                      default: "2026-02-21T13:17:27.302Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43805,7 +42870,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-02-21T10:38:42.265Z"
+                          default: "2026-02-21T13:17:27.303Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -44125,7 +43190,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:57.062Z"
+                              default: "2026-02-21T13:17:42.215Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44165,7 +43230,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:57.063Z"
+                              default: "2026-02-21T13:17:42.216Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44205,7 +43270,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:57.064Z"
+                              default: "2026-02-21T13:17:42.216Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44241,7 +43306,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44249,7 +43314,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -44820,7 +43885,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:57.125Z"
+                              default: "2026-02-21T13:17:42.262Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44860,7 +43925,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:57.126Z"
+                              default: "2026-02-21T13:17:42.262Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44900,7 +43965,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-02-21T10:38:57.127Z"
+                              default: "2026-02-21T13:17:42.263Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44936,7 +44001,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-02-21T10:38:42.264Z"
+                    default: "2026-02-21T13:17:27.302Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44944,7 +44009,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-02-21T10:38:42.265Z"
+                        default: "2026-02-21T13:17:27.303Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -51477,16 +50542,6 @@ paths:
                         - "null"
                       default: true
                       description: "Whether to store this response for use in distillations or evals."
-                    service_tier:
-                      type:
-                        - "string"
-                        - "null"
-                      enum:
-                        - "auto"
-                        - "default"
-                        - "flex"
-                        - "priority"
-                      description: "Specifies the latency tier to use for processing the request. Defaults to \"auto\"."
                     tools:
                       type: "array"
                       items:
@@ -52288,8 +51343,6 @@ paths:
                     enum:
                       - "auto"
                       - "default"
-                      - "flex"
-                      - "priority"
                     description: "The service tier used for processing the request"
                   background:
                     type:
