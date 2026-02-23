@@ -5,6 +5,7 @@
 export * from "./cleardataset.js";
 export * from "./createagentrequest.js";
 export * from "./createagentresponserequest.js";
+export * from "./createannotation.js";
 export * from "./createchatcompletion.js";
 export * from "./createchunk.js";
 export * from "./createcompletion.js";
@@ -32,6 +33,7 @@ export * from "./createtool.js";
 export * from "./createtranscription.js";
 export * from "./createtranslation.js";
 export * from "./deleteagent.js";
+export * from "./deleteannotation.js";
 export * from "./deletechunk.js";
 export * from "./deletechunks.js";
 export * from "./deletedatapoint.js";

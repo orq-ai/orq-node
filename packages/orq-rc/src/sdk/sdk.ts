@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
+import { Annotations } from "./annotations.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
 import { Datasets } from "./datasets.js";
@@ -105,5 +106,10 @@ export class Orq extends ClientSDK {
   private _router?: Router;
   get router(): Router {
     return (this._router ??= new Router(this._options));
+  }
+
+  private _annotations?: Annotations;
+  get annotations(): Annotations {
+    return (this._annotations ??= new Annotations(this._options));
   }
 }

@@ -923,7 +923,7 @@ export type Annotations1 = {
 /**
  * An annotation in the output text
  */
-export type Annotations = Annotations1 | Annotations2;
+export type ContentAnnotations = Annotations1 | Annotations2;
 
 /**
  * Text output from the model
@@ -2591,8 +2591,8 @@ export function annotations1FromJSON(
 }
 
 /** @internal */
-export const Annotations$inboundSchema: z.ZodType<
-  Annotations,
+export const ContentAnnotations$inboundSchema: z.ZodType<
+  ContentAnnotations,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -2600,13 +2600,13 @@ export const Annotations$inboundSchema: z.ZodType<
   z.lazy(() => Annotations2$inboundSchema),
 ]);
 
-export function annotationsFromJSON(
+export function contentAnnotationsFromJSON(
   jsonString: string,
-): SafeParseResult<Annotations, SDKValidationError> {
+): SafeParseResult<ContentAnnotations, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Annotations$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Annotations' from JSON`,
+    (x) => ContentAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ContentAnnotations' from JSON`,
   );
 }
 
