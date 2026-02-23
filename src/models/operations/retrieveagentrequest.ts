@@ -1247,7 +1247,7 @@ export type RetrieveAgentRequestResponseBody = {
    * Unique identifier for the agent within the workspace
    */
   key: string;
-  displayName: string;
+  displayName?: string | undefined;
   workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
@@ -3051,7 +3051,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),

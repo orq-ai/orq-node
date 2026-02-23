@@ -1,31 +1,39 @@
 # UpdateEvalResponseBodyLLM
 
-## Example Usage
+
+## Supported Types
+
+### `operations.UpdateEvalLlm1`
 
 ```typescript
-import { UpdateEvalResponseBodyLLM } from "@orq-ai/node/models/operations";
-
-let value: UpdateEvalResponseBodyLLM = {
+const value: operations.UpdateEvalLlm1 = {
   id: "<id>",
-  description:
-    "boohoo mundane phew friendly chainstay writhing stunt confiscate legend that",
+  description: "opposite monthly last before eek",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Explorer",
+  mode: "single",
+  model: "A4",
 };
 ```
 
-## Fields
+### `operations.UpdateEvalLlm2`
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `id`                                               | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `description`                                      | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `created`                                          | *string*                                           | :heavy_minus_sign:                                 | N/A                                                |
-| `updated`                                          | *string*                                           | :heavy_minus_sign:                                 | N/A                                                |
-| `guardrailConfig`                                  | *operations.UpdateEvalResponseBodyGuardrailConfig* | :heavy_minus_sign:                                 | N/A                                                |
-| `type`                                             | *"llm_eval"*                                       | :heavy_check_mark:                                 | N/A                                                |
-| `prompt`                                           | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `key`                                              | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
-| `model`                                            | *string*                                           | :heavy_check_mark:                                 | N/A                                                |
+```typescript
+const value: operations.UpdateEvalLlm2 = {
+  id: "<id>",
+  description: "singe mmm resolve briskly duh while mid cautiously uh-huh",
+  type: "llm_eval",
+  prompt: "<value>",
+  key: "<key>",
+  mode: "jury",
+  jury: {
+    judges: [
+      {
+        model: "Alpine",
+      },
+    ],
+  },
+};
+```
+

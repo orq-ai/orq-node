@@ -13,12 +13,10 @@ let value: ListAgentsResponseBody = {
     {
       id: "<id>",
       key: "<key>",
-      displayName: "Fleta.Oberbrunner",
       role: "<value>",
-      description:
-        "lasting functional into if excepting apprehensive tray thoughtfully wallop",
+      description: "stock coincide ah agreement presume",
       instructions: "<value>",
-      status: "published",
+      status: "draft",
       model: {
         id: "<id>",
         parameters: {
@@ -62,21 +60,11 @@ let value: ListAgentsResponseBody = {
             504,
           ],
         },
-        fallbackModels: [
-          "<value>",
-        ],
+        fallbackModels: null,
       },
       path: "Default",
-      memoryStores: [
-        "<value 1>",
-        "<value 2>",
-        "<value 3>",
-      ],
-      teamOfAgents: [
-        {
-          key: "<key>",
-        },
-      ],
+      memoryStores: [],
+      teamOfAgents: [],
       knowledgeBases: [
         {
           knowledgeId: "customer-knowledge-base",

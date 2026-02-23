@@ -3,27 +3,27 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean =
     {
-      enabled: false,
+      enabled: true,
       type: "boolean",
       value: true,
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number =
     {
-      enabled: false,
+      enabled: true,
       type: "number",
-      value: 4424.96,
+      value: 4932.17,
       operator: "eq",
     };
 ```

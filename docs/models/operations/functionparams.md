@@ -3,23 +3,21 @@
 
 ## Supported Types
 
-### `operations.CreateEvalFunctionParams1`
+### `operations.FunctionParams1`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams1 = {
+const value: operations.FunctionParams1 = {
   type: "contains",
   value: "<value>",
 };
 ```
 
-### `operations.CreateEvalFunctionParams2`
+### `operations.FunctionParams2`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams2 = {
+const value: operations.FunctionParams2 = {
   type: "contains_none",
-  keywords: [
-    "<value 1>",
-  ],
+  keywords: [],
 };
 ```
 

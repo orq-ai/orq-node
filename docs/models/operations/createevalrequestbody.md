@@ -10,8 +10,10 @@ const value: operations.Llm = {
   type: "llm_eval",
   prompt: "<value>",
   path: "Default",
-  model: "Model S",
+  description: "",
   key: "<key>",
+  mode: "single",
+  model: "Alpine",
 };
 ```
 

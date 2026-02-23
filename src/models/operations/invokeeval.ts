@@ -182,12 +182,42 @@ export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value =
 
 export type OriginalValue = number | boolean | string;
 
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue =
+  | number
+  | boolean
+  | string;
+
+export type Votes = {
+  model: string;
+  replacement: boolean;
+  success: boolean;
+  value?: number | boolean | string | undefined;
+  explanation?: string | undefined;
+  error?: string | undefined;
+};
+
+export type Stats = {
+  mean: number;
+  std: number;
+};
+
+export type ResponseBodyJury = {
+  judgesConfigured: number;
+  judgesSucceeded: number;
+  judgesFailed: number;
+  replacementsUsed: number;
+  tie: boolean;
+  votes: Array<Votes>;
+  stats?: Stats | undefined;
+};
+
 export type InvokeEvalResponseBodyEvalsResponseValue = {
   workflowRunId: string;
   value: number | boolean | string | null;
   explanation?: string | null | undefined;
   originalValue?: number | boolean | string | null | undefined;
   originalExplanation?: string | null | undefined;
+  jury?: ResponseBodyJury | undefined;
 };
 
 export type InvokeEvalResponseBodyLLM = {
@@ -724,6 +754,99 @@ export function originalValueFromJSON(
 }
 
 /** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue$inboundSchema:
+  z.ZodType<
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.number(), z.boolean(), z.string()]);
+
+export function invokeEvalResponseBodyEvalsResponse200ApplicationJSON7ValueValueFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue' from JSON`,
+  );
+}
+
+/** @internal */
+export const Votes$inboundSchema: z.ZodType<Votes, z.ZodTypeDef, unknown> = z
+  .object({
+    model: z.string(),
+    replacement: z.boolean(),
+    success: z.boolean(),
+    value: z.union([z.number(), z.boolean(), z.string()]).optional(),
+    explanation: z.string().optional(),
+    error: z.string().optional(),
+  });
+
+export function votesFromJSON(
+  jsonString: string,
+): SafeParseResult<Votes, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Votes$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Votes' from JSON`,
+  );
+}
+
+/** @internal */
+export const Stats$inboundSchema: z.ZodType<Stats, z.ZodTypeDef, unknown> = z
+  .object({
+    mean: z.number(),
+    std: z.number(),
+  });
+
+export function statsFromJSON(
+  jsonString: string,
+): SafeParseResult<Stats, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Stats$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Stats' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyJury$inboundSchema: z.ZodType<
+  ResponseBodyJury,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  judges_configured: z.number().int(),
+  judges_succeeded: z.number().int(),
+  judges_failed: z.number().int(),
+  replacements_used: z.number().int(),
+  tie: z.boolean(),
+  votes: z.array(z.lazy(() => Votes$inboundSchema)),
+  stats: z.lazy(() => Stats$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "judges_configured": "judgesConfigured",
+    "judges_succeeded": "judgesSucceeded",
+    "judges_failed": "judgesFailed",
+    "replacements_used": "replacementsUsed",
+  });
+});
+
+export function responseBodyJuryFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyJury, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyJury$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyJury' from JSON`,
+  );
+}
+
+/** @internal */
 export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
   InvokeEvalResponseBodyEvalsResponseValue,
   z.ZodTypeDef,
@@ -735,6 +858,7 @@ export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
   original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
     .optional(),
   original_explanation: z.nullable(z.string()).optional(),
+  jury: z.lazy(() => ResponseBodyJury$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "workflow_run_id": "workflowRunId",

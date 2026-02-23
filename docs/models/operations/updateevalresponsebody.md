@@ -10,12 +10,14 @@ Successfully updated an eval
 ```typescript
 const value: operations.UpdateEvalResponseBodyLLM = {
   id: "<id>",
-  description:
-    "boohoo mundane phew friendly chainstay writhing stunt confiscate legend that",
+  description: "once supposing abnegate extremely deploy cosset ravel",
+  created: "2026-02-23T19:53:49.503Z",
+  updated: "2026-02-23T19:53:49.503Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Explorer",
+  mode: "single",
+  model: "Silverado",
 };
 ```
 

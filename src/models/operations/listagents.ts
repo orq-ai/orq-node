@@ -1225,7 +1225,7 @@ export type ListAgentsData = {
    * Unique identifier for the agent within the workspace
    */
   key: string;
-  displayName: string;
+  displayName?: string | undefined;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
@@ -2947,7 +2947,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),

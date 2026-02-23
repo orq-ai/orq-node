@@ -193,6 +193,13 @@ export type Settings = {
   guardrails?: Array<Guardrails> | undefined;
 };
 
+export const AgentSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type AgentSource = ClosedEnum<typeof AgentSource>;
+
 export type AgentStartedStreamingEventData = {
   workflowRunId: string;
   integrationId?: string | undefined;
@@ -204,6 +211,7 @@ export type AgentStartedStreamingEventData = {
   agentManifestId: string;
   agentKey: string;
   agentDescription?: string | null | undefined;
+  agentSource?: AgentSource | null | undefined;
   variables?: { [k: string]: any } | undefined;
   toolExecutionId?: string | undefined;
   isContinuation?: boolean | undefined;
@@ -439,6 +447,10 @@ export function settingsFromJSON(
 }
 
 /** @internal */
+export const AgentSource$inboundSchema: z.ZodNativeEnum<typeof AgentSource> = z
+  .nativeEnum(AgentSource);
+
+/** @internal */
 export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
   AgentStartedStreamingEventData,
   z.ZodTypeDef,
@@ -454,6 +466,7 @@ export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
   agent_manifest_id: z.string(),
   agent_key: z.string(),
   agent_description: z.nullable(z.string()).optional(),
+  agent_source: z.nullable(AgentSource$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   tool_execution_id: z.string().optional(),
   is_continuation: z.boolean().optional(),
@@ -466,6 +479,7 @@ export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
     "agent_manifest_id": "agentManifestId",
     "agent_key": "agentKey",
     "agent_description": "agentDescription",
+    "agent_source": "agentSource",
     "tool_execution_id": "toolExecutionId",
     "is_continuation": "isContinuation",
   });
