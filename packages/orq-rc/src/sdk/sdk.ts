@@ -6,7 +6,6 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
-import { Conversations } from "./conversations.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
@@ -14,7 +13,6 @@ import { Evaluators } from "./evaluators.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { Identities } from "./identities.js";
-import { Internal } from "./internal.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
@@ -57,16 +55,6 @@ export class Orq extends ClientSDK {
   private _agents?: Agents;
   get agents(): Agents {
     return (this._agents ??= new Agents(this._options));
-  }
-
-  private _conversations?: Conversations;
-  get conversations(): Conversations {
-    return (this._conversations ??= new Conversations(this._options));
-  }
-
-  private _internal?: Internal;
-  get internal(): Internal {
-    return (this._internal ??= new Internal(this._options));
   }
 
   private _files?: Files;
