@@ -4,9 +4,9 @@
 
 export type SseMessage<T> = {
   data?: T | undefined;
-  event?: string | undefined;
-  id?: string | undefined;
-  retry?: number | undefined;
+  event?: string | null | undefined;
+  id?: string | null | undefined;
+  retry?: number | null | undefined;
 };
 export class EventStream<T extends SseMessage<unknown>>
   extends ReadableStream<T>
