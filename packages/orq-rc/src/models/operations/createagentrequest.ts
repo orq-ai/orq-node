@@ -2878,7 +2878,7 @@ export type CreateAgentRequestResponseBody = {
    * Unique identifier for the agent within the workspace
    */
   key: string;
-  displayName: string;
+  displayName?: string | undefined;
   projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
@@ -7042,7 +7042,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),

@@ -10,12 +10,12 @@ import { CreateAgentRequestResponseBody } from "@orq-ai/node/models/operations";
 let value: CreateAgentRequestResponseBody = {
   id: "<id>",
   key: "<key>",
-  displayName: "Troy88",
   projectId: "<id>",
   role: "<value>",
-  description: "rough up mmm since shirk hierarchy zowie",
+  description:
+    "unwelcome mushy gosh cosset fooey despite coolly esteemed witty concerned",
   instructions: "<value>",
-  status: "live",
+  status: "draft",
   model: {
     id: "<id>",
     parameters: {
@@ -60,60 +60,11 @@ let value: CreateAgentRequestResponseBody = {
       ],
     },
     fallbackModels: [
-      {
-        id: "<id>",
-        parameters: {
-          fallbacks: [
-            {
-              model: "openai/gpt-4o-mini",
-            },
-          ],
-          retry: {
-            count: 3,
-            onCodes: [
-              429,
-              500,
-              502,
-              503,
-              504,
-            ],
-          },
-          cache: {
-            ttl: 3600,
-            type: "exact_match",
-          },
-          loadBalancer: {
-            type: "weight_based",
-            models: [
-              {
-                model: "openai/gpt-4o",
-                weight: 0.7,
-              },
-            ],
-          },
-          timeout: {
-            callTimeout: 30000,
-          },
-        },
-        retry: {
-          count: 3,
-          onCodes: [
-            429,
-            500,
-            502,
-            503,
-            504,
-          ],
-        },
-      },
+      "<value>",
     ],
   },
   path: "Default",
-  memoryStores: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
-  ],
+  memoryStores: [],
   teamOfAgents: [
     {
       key: "<key>",
@@ -133,7 +84,7 @@ let value: CreateAgentRequestResponseBody = {
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `key`                                                                                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Unique identifier for the agent within the workspace                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                |
-| `displayName`                                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
+| `displayName`                                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `projectId`                                                                                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `createdById`                                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `updatedById`                                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
