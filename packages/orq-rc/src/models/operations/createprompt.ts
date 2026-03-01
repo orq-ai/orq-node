@@ -1224,6 +1224,7 @@ export const CreatePromptProvider = {
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",
+  Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
 } as const;
