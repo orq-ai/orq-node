@@ -79,6 +79,15 @@ export type UpdateToolRequestBodyCodeTool = {
   code: string;
 };
 
+export const UpdateToolRequestBodyToolsRequestVersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+export type UpdateToolRequestBodyToolsRequestVersionIncrement = ClosedEnum<
+  typeof UpdateToolRequestBodyToolsRequestVersionIncrement
+>;
+
 /**
  * Updates an existing code execution tool configuration.
  */
@@ -111,6 +120,9 @@ export type UpdateCodeExecutionTool = {
   status?: UpdateToolRequestBodyToolsRequest5Status | undefined;
   type: "code";
   codeTool?: UpdateToolRequestBodyCodeTool | undefined;
+  versionIncrement?:
+    | UpdateToolRequestBodyToolsRequestVersionIncrement
+    | undefined;
 };
 
 /**
@@ -187,6 +199,15 @@ export type UpdateToolRequestBodyMcp = {
   connectionType?: UpdateToolRequestBodyConnectionType | undefined;
 };
 
+export const UpdateToolRequestBodyToolsVersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+export type UpdateToolRequestBodyToolsVersionIncrement = ClosedEnum<
+  typeof UpdateToolRequestBodyToolsVersionIncrement
+>;
+
 /**
  * Updates an existing MCP tool configuration.
  */
@@ -219,6 +240,7 @@ export type UpdateMCPTool = {
   status?: UpdateToolRequestBodyToolsRequest4Status | undefined;
   type: "mcp";
   mcp?: UpdateToolRequestBodyMcp | undefined;
+  versionIncrement?: UpdateToolRequestBodyToolsVersionIncrement | undefined;
 };
 
 /**
@@ -332,6 +354,15 @@ export type UpdateToolRequestBodyHttp = {
   arguments?: { [k: string]: UpdateToolRequestBodyArguments } | undefined;
 };
 
+export const UpdateToolRequestBodyVersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+export type UpdateToolRequestBodyVersionIncrement = ClosedEnum<
+  typeof UpdateToolRequestBodyVersionIncrement
+>;
+
 /**
  * Updates an existing HTTP tool configuration.
  */
@@ -364,6 +395,7 @@ export type UpdateHTTPTool = {
   status?: UpdateToolRequestBodyToolsRequestStatus | undefined;
   type: "http";
   http?: UpdateToolRequestBodyHttp | undefined;
+  versionIncrement?: UpdateToolRequestBodyVersionIncrement | undefined;
 };
 
 /**
@@ -420,6 +452,15 @@ export type UpdateToolRequestBodyJsonSchema = {
   strict?: boolean | undefined;
 };
 
+export const RequestBodyVersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+export type RequestBodyVersionIncrement = ClosedEnum<
+  typeof RequestBodyVersionIncrement
+>;
+
 /**
  * Updates an existing JSON Schema tool configuration.
  */
@@ -452,6 +493,7 @@ export type UpdateJSONSchemaTool = {
   status?: UpdateToolRequestBodyToolsStatus | undefined;
   type: "json_schema";
   jsonSchema?: UpdateToolRequestBodyJsonSchema | undefined;
+  versionIncrement?: RequestBodyVersionIncrement | undefined;
 };
 
 /**
@@ -521,6 +563,13 @@ export type UpdateToolRequestBodyFunction = {
   parameters?: UpdateToolRequestBodyParameters | undefined;
 };
 
+export const VersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+
 /**
  * Updates an existing function tool configuration.
  */
@@ -553,6 +602,7 @@ export type UpdateFunctionTool = {
   status?: UpdateToolRequestBodyStatus | undefined;
   type: "function";
   function?: UpdateToolRequestBodyFunction | undefined;
+  versionIncrement?: VersionIncrement | undefined;
 };
 
 /**
@@ -1283,6 +1333,11 @@ export function updateToolRequestBodyCodeToolToJSON(
 }
 
 /** @internal */
+export const UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestVersionIncrement> = z
+    .nativeEnum(UpdateToolRequestBodyToolsRequestVersionIncrement);
+
+/** @internal */
 export type UpdateCodeExecutionTool$Outbound = {
   path?: string | undefined;
   key?: string | undefined;
@@ -1291,6 +1346,7 @@ export type UpdateCodeExecutionTool$Outbound = {
   status: string;
   type: "code";
   code_tool?: UpdateToolRequestBodyCodeTool$Outbound | undefined;
+  versionIncrement?: string | undefined;
 };
 
 /** @internal */
@@ -1309,6 +1365,8 @@ export const UpdateCodeExecutionTool$outboundSchema: z.ZodType<
   type: z.literal("code"),
   codeTool: z.lazy(() => UpdateToolRequestBodyCodeTool$outboundSchema)
     .optional(),
+  versionIncrement:
+    UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -1402,7 +1460,7 @@ export const RequestBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestBodyTools
 > = z.object({
-  id: z.string().default("01KJQEWDHRREG80GTZC3N4GFBF"),
+  id: z.string().default("01KJSC9RYSR0ZJHYT2FP76FQFC"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolRequestBodyToolsSchema$outboundSchema),
@@ -1457,6 +1515,11 @@ export function updateToolRequestBodyMcpToJSON(
 }
 
 /** @internal */
+export const UpdateToolRequestBodyToolsVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsVersionIncrement> = z
+    .nativeEnum(UpdateToolRequestBodyToolsVersionIncrement);
+
+/** @internal */
 export type UpdateMCPTool$Outbound = {
   path?: string | undefined;
   key?: string | undefined;
@@ -1465,6 +1528,7 @@ export type UpdateMCPTool$Outbound = {
   status: string;
   type: "mcp";
   mcp?: UpdateToolRequestBodyMcp$Outbound | undefined;
+  versionIncrement?: string | undefined;
 };
 
 /** @internal */
@@ -1482,6 +1546,8 @@ export const UpdateMCPTool$outboundSchema: z.ZodType<
   ),
   type: z.literal("mcp"),
   mcp: z.lazy(() => UpdateToolRequestBodyMcp$outboundSchema).optional(),
+  versionIncrement: UpdateToolRequestBodyToolsVersionIncrement$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -1673,6 +1739,12 @@ export function updateToolRequestBodyHttpToJSON(
 }
 
 /** @internal */
+export const UpdateToolRequestBodyVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyVersionIncrement> = z.nativeEnum(
+    UpdateToolRequestBodyVersionIncrement,
+  );
+
+/** @internal */
 export type UpdateHTTPTool$Outbound = {
   path?: string | undefined;
   key?: string | undefined;
@@ -1681,6 +1753,7 @@ export type UpdateHTTPTool$Outbound = {
   status: string;
   type: "http";
   http?: UpdateToolRequestBodyHttp$Outbound | undefined;
+  versionIncrement?: string | undefined;
 };
 
 /** @internal */
@@ -1698,6 +1771,8 @@ export const UpdateHTTPTool$outboundSchema: z.ZodType<
   ),
   type: z.literal("http"),
   http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
+  versionIncrement: UpdateToolRequestBodyVersionIncrement$outboundSchema
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -1781,6 +1856,11 @@ export function updateToolRequestBodyJsonSchemaToJSON(
 }
 
 /** @internal */
+export const RequestBodyVersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyVersionIncrement
+> = z.nativeEnum(RequestBodyVersionIncrement);
+
+/** @internal */
 export type UpdateJSONSchemaTool$Outbound = {
   path?: string | undefined;
   key?: string | undefined;
@@ -1789,6 +1869,7 @@ export type UpdateJSONSchemaTool$Outbound = {
   status: string;
   type: "json_schema";
   json_schema?: UpdateToolRequestBodyJsonSchema$Outbound | undefined;
+  versionIncrement?: string | undefined;
 };
 
 /** @internal */
@@ -1805,6 +1886,7 @@ export const UpdateJSONSchemaTool$outboundSchema: z.ZodType<
   type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => UpdateToolRequestBodyJsonSchema$outboundSchema)
     .optional(),
+  versionIncrement: RequestBodyVersionIncrement$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -1900,6 +1982,11 @@ export function updateToolRequestBodyFunctionToJSON(
 }
 
 /** @internal */
+export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof VersionIncrement
+> = z.nativeEnum(VersionIncrement);
+
+/** @internal */
 export type UpdateFunctionTool$Outbound = {
   path?: string | undefined;
   key?: string | undefined;
@@ -1908,6 +1995,7 @@ export type UpdateFunctionTool$Outbound = {
   status: string;
   type: "function";
   function?: UpdateToolRequestBodyFunction$Outbound | undefined;
+  versionIncrement?: string | undefined;
 };
 
 /** @internal */
@@ -1924,6 +2012,7 @@ export const UpdateFunctionTool$outboundSchema: z.ZodType<
   type: z.literal("function"),
   function: z.lazy(() => UpdateToolRequestBodyFunction$outboundSchema)
     .optional(),
+  versionIncrement: VersionIncrement$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -2080,7 +2169,7 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJQEWDHEXNR4HN7EN0XFE5XS"),
+  _id: z.string().default("tool_01KJSC9RY7PMPW6WHW6EX2W1SA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2185,7 +2274,7 @@ export const UpdateToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KJQEWDHDJTAJ70281V380Q66"),
+  id: z.string().default("01KJSC9RY6NPCJ9BKD1ZJR9R93"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolResponseBodyToolsSchema$inboundSchema),
@@ -2241,7 +2330,7 @@ export const UpdateToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJQEWDH2Q460SPEBSF1F9KEF"),
+  _id: z.string().default("tool_01KJSC9RY4E9WNECBCH3S67Q53"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2432,7 +2521,7 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJQEWDGZQ2QFE94TAT9TBHDH"),
+  _id: z.string().default("tool_01KJSC9RY27FAEE4M10597RMBC"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2529,7 +2618,7 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJQEWDGXT5PFV8VM5M6F7VNA"),
+  _id: z.string().default("tool_01KJSC9RY0K1GNQ8HMH1FFFGHM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2634,7 +2723,7 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJQEWDGVEJQAXFGXN54WK5J3"),
+  _id: z.string().default("tool_01KJSC9RXXA4YRSHDJXFE7M5MY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

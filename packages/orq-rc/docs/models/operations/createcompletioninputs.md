@@ -1,6 +1,8 @@
-# CreateCompletionInputs
+# ~~CreateCompletionInputs~~
 
-Values to replace in the prompt messages using {{variableName}} syntax
+@deprecated Use top-level `variables` field instead. Values to replace in the prompt messages using {{variableName}} syntax.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 
 ## Supported Types

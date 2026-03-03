@@ -160,7 +160,9 @@ export type CreateCompletionInputs2 = {
 };
 
 /**
- * Values to replace in the prompt messages using {{variableName}} syntax
+ * @deprecated Use top-level `variables` field instead. Values to replace in the prompt messages using {{variableName}} syntax.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type CreateCompletionInputs =
   | { [k: string]: any }
@@ -676,7 +678,9 @@ export type CreateCompletionOrq = {
    */
   thread?: CreateCompletionThread | undefined;
   /**
-   * Values to replace in the prompt messages using {{variableName}} syntax
+   * @deprecated Use top-level `variables` field instead. Values to replace in the prompt messages using {{variableName}} syntax.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   inputs?: { [k: string]: any } | Array<CreateCompletionInputs2> | undefined;
   /**
@@ -3392,8 +3396,9 @@ export const CreateCompletionResponse$inboundSchema: z.ZodType<
   z.instanceof(ReadableStream<Uint8Array>)
     .transform(stream => {
       return new EventStream(stream, rawEvent => {
-        if (rawEvent.data === "[DONE]") return { done: true };
+        if (rawEvent.data === "[DONE]") return { done: true, value: undefined };
         return {
+          done: false,
           value: z.lazy(() =>
             CreateCompletionRouterCompletionsResponseBody$inboundSchema
           ).parse(rawEvent),
