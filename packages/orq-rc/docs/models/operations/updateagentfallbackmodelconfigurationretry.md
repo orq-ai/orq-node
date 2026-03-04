@@ -1,6 +1,6 @@
 # UpdateAgentFallbackModelConfigurationRetry
 
-Retry configuration for the request
+Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
 
 ## Example Usage
 

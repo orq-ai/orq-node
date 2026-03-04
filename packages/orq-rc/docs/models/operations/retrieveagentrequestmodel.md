@@ -13,15 +13,6 @@ let value: RetrieveAgentRequestModel = {
         model: "openai/gpt-4o-mini",
       },
     ],
-    retry: {
-      onCodes: [
-        429,
-        500,
-        502,
-        503,
-        504,
-      ],
-    },
     cache: {
       ttl: 3600,
       type: "exact_match",

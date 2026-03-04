@@ -185,51 +185,6 @@ export type ListAgentsSettings = {
   guardrails?: Array<ListAgentsGuardrails> | undefined;
 };
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const ListAgentsVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type ListAgentsVoice = ClosedEnum<typeof ListAgentsVoice>;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const ListAgentsFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type ListAgentsFormat = ClosedEnum<typeof ListAgentsFormat>;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type ListAgentsAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: ListAgentsVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: ListAgentsFormat;
-};
-
 export type ListAgentsResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -325,16 +280,6 @@ export type ListAgentsReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ListAgentsStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type ListAgentsStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type ListAgentsThinking =
   | components.ThinkingConfigDisabledSchema
@@ -432,20 +377,6 @@ export type ListAgentsFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type ListAgentsAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const ListAgentsType = {
   ExactMatch: "exact_match",
 } as const;
@@ -509,10 +440,6 @@ export type ListAgentsParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: ListAgentsAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -528,18 +455,6 @@ export type ListAgentsParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -577,10 +492,6 @@ export type ListAgentsParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: ListAgentsStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -618,10 +529,6 @@ export type ListAgentsParameters = {
    */
   fallbacks?: Array<ListAgentsFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: ListAgentsAgentsRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: ListAgentsCache | undefined;
@@ -647,55 +554,6 @@ export type ListAgentsRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const ListAgentsFallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type ListAgentsFallbackModelConfigurationVoice = ClosedEnum<
-  typeof ListAgentsFallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const ListAgentsFallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type ListAgentsFallbackModelConfigurationFormat = ClosedEnum<
-  typeof ListAgentsFallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type ListAgentsFallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: ListAgentsFallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: ListAgentsFallbackModelConfigurationFormat;
 };
 
 export type ListAgentsResponseFormatAgentsResponseJsonSchema = {
@@ -793,16 +651,6 @@ export type ListAgentsFallbackModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ListAgentsFallbackModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type ListAgentsFallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type ListAgentsFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -906,20 +754,6 @@ export type ListAgentsFallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type ListAgentsFallbackModelConfigurationAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const ListAgentsFallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -986,10 +820,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: ListAgentsFallbackModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -1005,18 +835,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -1056,13 +874,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | ListAgentsFallbackModelConfigurationStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -1107,10 +918,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<ListAgentsFallbackModelConfigurationFallbacks> | undefined;
-  /**
-   * Retry configuration for the request
-   */
-  retry?: ListAgentsFallbackModelConfigurationAgentsRetry | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -1481,36 +1288,6 @@ export function listAgentsSettingsFromJSON(
 }
 
 /** @internal */
-export const ListAgentsVoice$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsVoice
-> = z.nativeEnum(ListAgentsVoice);
-
-/** @internal */
-export const ListAgentsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFormat
-> = z.nativeEnum(ListAgentsFormat);
-
-/** @internal */
-export const ListAgentsAudio$inboundSchema: z.ZodType<
-  ListAgentsAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: ListAgentsVoice$inboundSchema,
-  format: ListAgentsFormat$inboundSchema,
-});
-
-export function listAgentsAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsAudio' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   ListAgentsResponseFormatJsonSchema,
   z.ZodTypeDef,
@@ -1642,29 +1419,6 @@ export function listAgentsStopFromJSON(
     jsonString,
     (x) => ListAgentsStop$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsStreamOptions$inboundSchema: z.ZodType<
-  ListAgentsStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
-
-export function listAgentsStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsStreamOptions' from JSON`,
   );
 }
 
@@ -1833,30 +1587,6 @@ export function listAgentsFallbacksFromJSON(
 }
 
 /** @internal */
-export const ListAgentsAgentsRetry$inboundSchema: z.ZodType<
-  ListAgentsAgentsRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function listAgentsAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsAgentsRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsAgentsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsType
 > = z.nativeEnum(ListAgentsType);
@@ -1973,13 +1703,9 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => ListAgentsAudio$inboundSchema)).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
     z.lazy(() => ListAgentsResponseFormatText$inboundSchema),
@@ -1990,9 +1716,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => ListAgentsStreamOptions$inboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -2011,7 +1734,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     .optional(),
   fallbacks: z.array(z.lazy(() => ListAgentsFallbacks$inboundSchema))
     .optional(),
-  retry: z.lazy(() => ListAgentsAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => ListAgentsCache$inboundSchema).optional(),
   load_balancer: z.lazy(() => ListAgentsLoadBalancer1$inboundSchema).optional(),
   timeout: z.lazy(() => ListAgentsTimeout$inboundSchema).optional(),
@@ -2020,11 +1742,9 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     "frequency_penalty": "frequencyPenalty",
     "max_tokens": "maxTokens",
     "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
     "presence_penalty": "presencePenalty",
     "response_format": "responseFormat",
     "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
     "top_p": "topP",
     "top_k": "topK",
     "tool_choice": "toolChoice",
@@ -2064,42 +1784,6 @@ export function listAgentsRetryFromJSON(
     jsonString,
     (x) => ListAgentsRetry$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationVoice$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationVoice> = z
-    .nativeEnum(ListAgentsFallbackModelConfigurationVoice);
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationFormat> = z
-    .nativeEnum(ListAgentsFallbackModelConfigurationFormat);
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationAudio$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelConfigurationAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: ListAgentsFallbackModelConfigurationVoice$inboundSchema,
-  format: ListAgentsFallbackModelConfigurationFormat$inboundSchema,
-});
-
-export function listAgentsFallbackModelConfigurationAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsFallbackModelConfigurationAudio,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfigurationAudio$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListAgentsFallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -2265,36 +1949,6 @@ export function listAgentsFallbackModelConfigurationStopFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'ListAgentsFallbackModelConfigurationStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema:
-  z.ZodType<
-    ListAgentsFallbackModelConfigurationStreamOptions,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    include_usage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "include_usage": "includeUsage",
-    });
-  });
-
-export function listAgentsFallbackModelConfigurationStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsFallbackModelConfigurationStreamOptions,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListAgentsFallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
@@ -2493,37 +2147,6 @@ export function listAgentsFallbackModelConfigurationFallbacksFromJSON(
 }
 
 /** @internal */
-export const ListAgentsFallbackModelConfigurationAgentsRetry$inboundSchema:
-  z.ZodType<
-    ListAgentsFallbackModelConfigurationAgentsRetry,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
-
-export function listAgentsFallbackModelConfigurationAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsFallbackModelConfigurationAgentsRetry,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfigurationAgentsRetry$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListAgentsFallbackModelConfigurationAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsFallbackModelConfigurationType$inboundSchema:
   z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationType> = z
     .nativeEnum(ListAgentsFallbackModelConfigurationType);
@@ -2664,15 +2287,9 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     unknown
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => ListAgentsFallbackModelConfigurationAudio$inboundSchema),
-    ).optional(),
     frequency_penalty: z.nullable(z.number()).optional(),
     max_tokens: z.nullable(z.number().int()).optional(),
     max_completion_tokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    top_logprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
       z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
@@ -2687,11 +2304,6 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    stream_options: z.nullable(
-      z.lazy(() =>
-        ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -2715,9 +2327,6 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     fallbacks: z.array(
       z.lazy(() => ListAgentsFallbackModelConfigurationFallbacks$inboundSchema),
     ).optional(),
-    retry: z.lazy(() =>
-      ListAgentsFallbackModelConfigurationAgentsRetry$inboundSchema
-    ).optional(),
     cache: z.lazy(() => ListAgentsFallbackModelConfigurationCache$inboundSchema)
       .optional(),
     load_balancer: z.lazy(() => ListAgentsLoadBalancerAgents1$inboundSchema)
@@ -2730,11 +2339,9 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       "frequency_penalty": "frequencyPenalty",
       "max_tokens": "maxTokens",
       "max_completion_tokens": "maxCompletionTokens",
-      "top_logprobs": "topLogprobs",
       "presence_penalty": "presencePenalty",
       "response_format": "responseFormat",
       "reasoning_effort": "reasoningEffort",
-      "stream_options": "streamOptions",
       "top_p": "topP",
       "top_k": "topK",
       "tool_choice": "toolChoice",

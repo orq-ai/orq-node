@@ -10,51 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const Voice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type Voice = ClosedEnum<typeof Voice>;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const Format = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type Format = ClosedEnum<typeof Format>;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type ModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: Voice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: Format;
-};
-
 export type ResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -146,16 +101,6 @@ export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
  */
 export type Stop = string | Array<string>;
 
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type StreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
-
 export type Thinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema;
@@ -246,20 +191,6 @@ export type Fallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type Retry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const ModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -321,10 +252,6 @@ export type ParametersT = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: ModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -340,18 +267,6 @@ export type ParametersT = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -385,10 +300,6 @@ export type ParametersT = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: StreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -426,10 +337,6 @@ export type ParametersT = {
    */
   fallbacks?: Array<Fallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: Retry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: Cache | undefined;
@@ -446,7 +353,7 @@ export type ParametersT = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type ModelConfigurationRetry = {
+export type Retry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -474,62 +381,13 @@ export type ModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: ModelConfigurationRetry | undefined;
+  retry?: Retry | undefined;
 };
 
 /**
  * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters and retry settings.
  */
 export type ModelConfiguration = ModelConfiguration2 | string;
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const FallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type FallbackModelConfigurationVoice = ClosedEnum<
-  typeof FallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const FallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type FallbackModelConfigurationFormat = ClosedEnum<
-  typeof FallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type FallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: FallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: FallbackModelConfigurationFormat;
-};
 
 export type CreateAgentRequestResponseFormatAgentsJsonSchema = {
   /**
@@ -626,16 +484,6 @@ export type FallbackModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type FallbackModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type FallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type FallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -737,20 +585,6 @@ export type FallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type FallbackModelConfigurationRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const FallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -817,10 +651,6 @@ export type FallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: FallbackModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -836,18 +666,6 @@ export type FallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -885,10 +703,6 @@ export type FallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: FallbackModelConfigurationStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -929,10 +743,6 @@ export type FallbackModelConfigurationParameters = {
    */
   fallbacks?: Array<FallbackModelConfigurationFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: FallbackModelConfigurationRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: FallbackModelConfigurationCache | undefined;
@@ -949,7 +759,7 @@ export type FallbackModelConfigurationParameters = {
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type CreateAgentRequestFallbackModelConfigurationRetry = {
+export type FallbackModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -975,7 +785,7 @@ export type FallbackModelConfiguration2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: CreateAgentRequestFallbackModelConfigurationRetry | undefined;
+  retry?: FallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -1804,55 +1614,6 @@ export type CreateAgentRequestSettings = {
   guardrails?: Array<CreateAgentRequestAgentsGuardrails> | undefined;
 };
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const CreateAgentRequestVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type CreateAgentRequestVoice = ClosedEnum<
-  typeof CreateAgentRequestVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const CreateAgentRequestFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type CreateAgentRequestFormat = ClosedEnum<
-  typeof CreateAgentRequestFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type CreateAgentRequestAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: CreateAgentRequestVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: CreateAgentRequestFormat;
-};
-
 export type CreateAgentRequestResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -1948,16 +1709,6 @@ export type CreateAgentRequestReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type CreateAgentRequestStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type CreateAgentRequestStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type CreateAgentRequestThinking =
   | components.ThinkingConfigDisabledSchema
@@ -2062,20 +1813,6 @@ export type CreateAgentRequestFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type CreateAgentRequestAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const CreateAgentRequestType = {
   ExactMatch: "exact_match",
 } as const;
@@ -2140,10 +1877,6 @@ export type CreateAgentRequestParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: CreateAgentRequestAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -2159,18 +1892,6 @@ export type CreateAgentRequestParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -2208,10 +1929,6 @@ export type CreateAgentRequestParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: CreateAgentRequestStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -2252,10 +1969,6 @@ export type CreateAgentRequestParameters = {
    */
   fallbacks?: Array<CreateAgentRequestFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: CreateAgentRequestAgentsRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: CreateAgentRequestCache | undefined;
@@ -2281,55 +1994,6 @@ export type CreateAgentRequestRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const CreateAgentRequestFallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type CreateAgentRequestFallbackModelConfigurationVoice = ClosedEnum<
-  typeof CreateAgentRequestFallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const CreateAgentRequestFallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type CreateAgentRequestFallbackModelConfigurationFormat = ClosedEnum<
-  typeof CreateAgentRequestFallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type CreateAgentRequestFallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: CreateAgentRequestFallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: CreateAgentRequestFallbackModelConfigurationFormat;
 };
 
 export type CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema =
@@ -2433,16 +2097,6 @@ export type CreateAgentRequestFallbackModelConfigurationReasoningEffort =
 export type CreateAgentRequestFallbackModelConfigurationStop =
   | string
   | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type CreateAgentRequestFallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type CreateAgentRequestFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -2548,20 +2202,6 @@ export type CreateAgentRequestFallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const CreateAgentRequestFallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -2628,10 +2268,6 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: CreateAgentRequestFallbackModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -2647,18 +2283,6 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -2698,13 +2322,6 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | CreateAgentRequestFallbackModelConfigurationStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -2752,12 +2369,6 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
     | Array<CreateAgentRequestFallbackModelConfigurationFallbacks>
     | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?:
-    | CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry
-    | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: CreateAgentRequestFallbackModelConfigurationCache | undefined;
@@ -2774,7 +2385,7 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type CreateAgentRequestFallbackModelConfigurationAgentsRetry = {
+export type CreateAgentRequestFallbackModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -2802,7 +2413,7 @@ export type CreateAgentRequestFallbackModelConfiguration2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: CreateAgentRequestFallbackModelConfigurationAgentsRetry | undefined;
+  retry?: CreateAgentRequestFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -2926,39 +2537,6 @@ export type CreateAgentRequestResponseBody = {
 };
 
 /** @internal */
-export const Voice$outboundSchema: z.ZodNativeEnum<typeof Voice> = z.nativeEnum(
-  Voice,
-);
-
-/** @internal */
-export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
-
-/** @internal */
-export type ModelConfigurationAudio$Outbound = {
-  voice: string;
-  format: string;
-};
-
-/** @internal */
-export const ModelConfigurationAudio$outboundSchema: z.ZodType<
-  ModelConfigurationAudio$Outbound,
-  z.ZodTypeDef,
-  ModelConfigurationAudio
-> = z.object({
-  voice: Voice$outboundSchema,
-  format: Format$outboundSchema,
-});
-
-export function modelConfigurationAudioToJSON(
-  modelConfigurationAudio: ModelConfigurationAudio,
-): string {
-  return JSON.stringify(
-    ModelConfigurationAudio$outboundSchema.parse(modelConfigurationAudio),
-  );
-}
-
-/** @internal */
 export type ResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
@@ -3078,28 +2656,6 @@ export const Stop$outboundSchema: z.ZodType<Stop$Outbound, z.ZodTypeDef, Stop> =
 
 export function stopToJSON(stop: Stop): string {
   return JSON.stringify(Stop$outboundSchema.parse(stop));
-}
-
-/** @internal */
-export type StreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
-
-/** @internal */
-export const StreamOptions$outboundSchema: z.ZodType<
-  StreamOptions$Outbound,
-  z.ZodTypeDef,
-  StreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function streamOptionsToJSON(streamOptions: StreamOptions): string {
-  return JSON.stringify(StreamOptions$outboundSchema.parse(streamOptions));
 }
 
 /** @internal */
@@ -3256,30 +2812,6 @@ export function fallbacksToJSON(fallbacks: Fallbacks): string {
 }
 
 /** @internal */
-export type Retry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const Retry$outboundSchema: z.ZodType<
-  Retry$Outbound,
-  z.ZodTypeDef,
-  Retry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function retryToJSON(retry: Retry): string {
-  return JSON.stringify(Retry$outboundSchema.parse(retry));
-}
-
-/** @internal */
 export const ModelConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationType
 > = z.nativeEnum(ModelConfigurationType);
@@ -3388,13 +2920,9 @@ export function timeoutToJSON(timeout: Timeout): string {
 /** @internal */
 export type ParametersT$Outbound = {
   name?: string | undefined;
-  audio?: ModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
     | Text$Outbound
@@ -3405,7 +2933,6 @@ export type ParametersT$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?: StreamOptions$Outbound | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -3418,7 +2945,6 @@ export type ParametersT$Outbound = {
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<Guardrails$Outbound> | undefined;
   fallbacks?: Array<Fallbacks$Outbound> | undefined;
-  retry?: Retry$Outbound | undefined;
   cache?: Cache$Outbound | undefined;
   load_balancer?: LoadBalancer1$Outbound | undefined;
   timeout?: Timeout$Outbound | undefined;
@@ -3431,14 +2957,9 @@ export const ParametersT$outboundSchema: z.ZodType<
   ParametersT
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => ModelConfigurationAudio$outboundSchema))
-    .optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
     z.lazy(() => Text$outboundSchema),
@@ -3449,8 +2970,6 @@ export const ParametersT$outboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(z.lazy(() => StreamOptions$outboundSchema))
-    .optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -3466,7 +2985,6 @@ export const ParametersT$outboundSchema: z.ZodType<
   modalities: z.nullable(z.array(Modalities$outboundSchema)).optional(),
   guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
   fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
-  retry: z.lazy(() => Retry$outboundSchema).optional(),
   cache: z.lazy(() => Cache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => Timeout$outboundSchema).optional(),
@@ -3475,11 +2993,9 @@ export const ParametersT$outboundSchema: z.ZodType<
     frequencyPenalty: "frequency_penalty",
     maxTokens: "max_tokens",
     maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
     presencePenalty: "presence_penalty",
     responseFormat: "response_format",
     reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
     topP: "top_p",
     topK: "top_k",
     toolChoice: "tool_choice",
@@ -3493,16 +3009,16 @@ export function parametersToJSON(parametersT: ParametersT): string {
 }
 
 /** @internal */
-export type ModelConfigurationRetry$Outbound = {
+export type Retry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const ModelConfigurationRetry$outboundSchema: z.ZodType<
-  ModelConfigurationRetry$Outbound,
+export const Retry$outboundSchema: z.ZodType<
+  Retry$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationRetry
+  Retry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3512,19 +3028,15 @@ export const ModelConfigurationRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function modelConfigurationRetryToJSON(
-  modelConfigurationRetry: ModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
-  );
+export function retryToJSON(retry: Retry): string {
+  return JSON.stringify(Retry$outboundSchema.parse(retry));
 }
 
 /** @internal */
 export type ModelConfiguration2$Outbound = {
   id: string;
   parameters?: ParametersT$Outbound | undefined;
-  retry?: ModelConfigurationRetry$Outbound | undefined;
+  retry?: Retry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3535,7 +3047,7 @@ export const ModelConfiguration2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
+  retry: z.lazy(() => Retry$outboundSchema).optional(),
 });
 
 export function modelConfiguration2ToJSON(
@@ -3561,42 +3073,6 @@ export function modelConfigurationToJSON(
 ): string {
   return JSON.stringify(
     ModelConfiguration$outboundSchema.parse(modelConfiguration),
-  );
-}
-
-/** @internal */
-export const FallbackModelConfigurationVoice$outboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelConfigurationVoice
-> = z.nativeEnum(FallbackModelConfigurationVoice);
-
-/** @internal */
-export const FallbackModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
-  typeof FallbackModelConfigurationFormat
-> = z.nativeEnum(FallbackModelConfigurationFormat);
-
-/** @internal */
-export type FallbackModelConfigurationAudio$Outbound = {
-  voice: string;
-  format: string;
-};
-
-/** @internal */
-export const FallbackModelConfigurationAudio$outboundSchema: z.ZodType<
-  FallbackModelConfigurationAudio$Outbound,
-  z.ZodTypeDef,
-  FallbackModelConfigurationAudio
-> = z.object({
-  voice: FallbackModelConfigurationVoice$outboundSchema,
-  format: FallbackModelConfigurationFormat$outboundSchema,
-});
-
-export function fallbackModelConfigurationAudioToJSON(
-  fallbackModelConfigurationAudio: FallbackModelConfigurationAudio,
-): string {
-  return JSON.stringify(
-    FallbackModelConfigurationAudio$outboundSchema.parse(
-      fallbackModelConfigurationAudio,
-    ),
   );
 }
 
@@ -3759,35 +3235,6 @@ export function fallbackModelConfigurationStopToJSON(
   return JSON.stringify(
     FallbackModelConfigurationStop$outboundSchema.parse(
       fallbackModelConfigurationStop,
-    ),
-  );
-}
-
-/** @internal */
-export type FallbackModelConfigurationStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
-
-/** @internal */
-export const FallbackModelConfigurationStreamOptions$outboundSchema: z.ZodType<
-  FallbackModelConfigurationStreamOptions$Outbound,
-  z.ZodTypeDef,
-  FallbackModelConfigurationStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function fallbackModelConfigurationStreamOptionsToJSON(
-  fallbackModelConfigurationStreamOptions:
-    FallbackModelConfigurationStreamOptions,
-): string {
-  return JSON.stringify(
-    FallbackModelConfigurationStreamOptions$outboundSchema.parse(
-      fallbackModelConfigurationStreamOptions,
     ),
   );
 }
@@ -3994,36 +3441,6 @@ export function fallbackModelConfigurationFallbacksToJSON(
 }
 
 /** @internal */
-export type FallbackModelConfigurationRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const FallbackModelConfigurationRetry$outboundSchema: z.ZodType<
-  FallbackModelConfigurationRetry$Outbound,
-  z.ZodTypeDef,
-  FallbackModelConfigurationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function fallbackModelConfigurationRetryToJSON(
-  fallbackModelConfigurationRetry: FallbackModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    FallbackModelConfigurationRetry$outboundSchema.parse(
-      fallbackModelConfigurationRetry,
-    ),
-  );
-}
-
-/** @internal */
 export const FallbackModelConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof FallbackModelConfigurationType
 > = z.nativeEnum(FallbackModelConfigurationType);
@@ -4162,13 +3579,9 @@ export function fallbackModelConfigurationTimeoutToJSON(
 /** @internal */
 export type FallbackModelConfigurationParameters$Outbound = {
   name?: string | undefined;
-  audio?: FallbackModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
     | ResponseFormatText$Outbound
@@ -4179,10 +3592,6 @@ export type FallbackModelConfigurationParameters$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?:
-    | FallbackModelConfigurationStreamOptions$Outbound
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -4195,7 +3604,6 @@ export type FallbackModelConfigurationParameters$Outbound = {
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<FallbackModelConfigurationGuardrails$Outbound> | undefined;
   fallbacks?: Array<FallbackModelConfigurationFallbacks$Outbound> | undefined;
-  retry?: FallbackModelConfigurationRetry$Outbound | undefined;
   cache?: FallbackModelConfigurationCache$Outbound | undefined;
   load_balancer?: CreateAgentRequestLoadBalancer1$Outbound | undefined;
   timeout?: FallbackModelConfigurationTimeout$Outbound | undefined;
@@ -4208,15 +3616,9 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   FallbackModelConfigurationParameters
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => FallbackModelConfigurationAudio$outboundSchema),
-  ).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
     z.lazy(() => ResponseFormatText$outboundSchema),
@@ -4228,9 +3630,6 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => FallbackModelConfigurationStreamOptions$outboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -4252,8 +3651,6 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   fallbacks: z.array(
     z.lazy(() => FallbackModelConfigurationFallbacks$outboundSchema),
   ).optional(),
-  retry: z.lazy(() => FallbackModelConfigurationRetry$outboundSchema)
-    .optional(),
   cache: z.lazy(() => FallbackModelConfigurationCache$outboundSchema)
     .optional(),
   loadBalancer: z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema)
@@ -4265,11 +3662,9 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
     frequencyPenalty: "frequency_penalty",
     maxTokens: "max_tokens",
     maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
     presencePenalty: "presence_penalty",
     responseFormat: "response_format",
     reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
     topP: "top_p",
     topK: "top_k",
     toolChoice: "tool_choice",
@@ -4289,33 +3684,31 @@ export function fallbackModelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type CreateAgentRequestFallbackModelConfigurationRetry$Outbound = {
+export type FallbackModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const CreateAgentRequestFallbackModelConfigurationRetry$outboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationRetry$Outbound,
-    z.ZodTypeDef,
-    CreateAgentRequestFallbackModelConfigurationRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
+export const FallbackModelConfigurationRetry$outboundSchema: z.ZodType<
+  FallbackModelConfigurationRetry$Outbound,
+  z.ZodTypeDef,
+  FallbackModelConfigurationRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
   });
+});
 
-export function createAgentRequestFallbackModelConfigurationRetryToJSON(
-  createAgentRequestFallbackModelConfigurationRetry:
-    CreateAgentRequestFallbackModelConfigurationRetry,
+export function fallbackModelConfigurationRetryToJSON(
+  fallbackModelConfigurationRetry: FallbackModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    CreateAgentRequestFallbackModelConfigurationRetry$outboundSchema.parse(
-      createAgentRequestFallbackModelConfigurationRetry,
+    FallbackModelConfigurationRetry$outboundSchema.parse(
+      fallbackModelConfigurationRetry,
     ),
   );
 }
@@ -4324,9 +3717,7 @@ export function createAgentRequestFallbackModelConfigurationRetryToJSON(
 export type FallbackModelConfiguration2$Outbound = {
   id: string;
   parameters?: FallbackModelConfigurationParameters$Outbound | undefined;
-  retry?:
-    | CreateAgentRequestFallbackModelConfigurationRetry$Outbound
-    | undefined;
+  retry?: FallbackModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -4338,9 +3729,8 @@ export const FallbackModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => FallbackModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() =>
-    CreateAgentRequestFallbackModelConfigurationRetry$outboundSchema
-  ).optional(),
+  retry: z.lazy(() => FallbackModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function fallbackModelConfiguration2ToJSON(
@@ -5480,36 +4870,6 @@ export function createAgentRequestSettingsFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestVoice$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestVoice
-> = z.nativeEnum(CreateAgentRequestVoice);
-
-/** @internal */
-export const CreateAgentRequestFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreateAgentRequestFormat
-> = z.nativeEnum(CreateAgentRequestFormat);
-
-/** @internal */
-export const CreateAgentRequestAudio$inboundSchema: z.ZodType<
-  CreateAgentRequestAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: CreateAgentRequestVoice$inboundSchema,
-  format: CreateAgentRequestFormat$inboundSchema,
-});
-
-export function createAgentRequestAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentRequestAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentRequestAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestAudio' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema:
   z.ZodType<
     CreateAgentRequestResponseFormatAgentsResponseJsonSchema,
@@ -5654,29 +5014,6 @@ export function createAgentRequestStopFromJSON(
     jsonString,
     (x) => CreateAgentRequestStop$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateAgentRequestStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestStreamOptions$inboundSchema: z.ZodType<
-  CreateAgentRequestStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
-
-export function createAgentRequestStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentRequestStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentRequestStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestStreamOptions' from JSON`,
   );
 }
 
@@ -5859,30 +5196,6 @@ export function createAgentRequestFallbacksFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestAgentsRetry$inboundSchema: z.ZodType<
-  CreateAgentRequestAgentsRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function createAgentRequestAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentRequestAgentsRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentRequestAgentsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestType
 > = z.nativeEnum(CreateAgentRequestType);
@@ -6003,14 +5316,9 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => CreateAgentRequestAudio$inboundSchema))
-    .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
     z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
@@ -6023,9 +5331,6 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => CreateAgentRequestStreamOptions$inboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -6045,7 +5350,6 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateAgentRequestFallbacks$inboundSchema))
     .optional(),
-  retry: z.lazy(() => CreateAgentRequestAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => CreateAgentRequestCache$inboundSchema).optional(),
   load_balancer: z.lazy(() =>
     CreateAgentRequestLoadBalancerAgents1$inboundSchema
@@ -6056,11 +5360,9 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
     "frequency_penalty": "frequencyPenalty",
     "max_tokens": "maxTokens",
     "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
     "presence_penalty": "presencePenalty",
     "response_format": "responseFormat",
     "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
     "top_p": "topP",
     "top_k": "topK",
     "tool_choice": "toolChoice",
@@ -6100,43 +5402,6 @@ export function createAgentRequestRetryFromJSON(
     jsonString,
     (x) => CreateAgentRequestRetry$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateAgentRequestRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationVoice$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationVoice> = z
-    .nativeEnum(CreateAgentRequestFallbackModelConfigurationVoice);
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationFormat$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationFormat> = z
-    .nativeEnum(CreateAgentRequestFallbackModelConfigurationFormat);
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationAudio$inboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationAudio,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    voice: CreateAgentRequestFallbackModelConfigurationVoice$inboundSchema,
-    format: CreateAgentRequestFallbackModelConfigurationFormat$inboundSchema,
-  });
-
-export function createAgentRequestFallbackModelConfigurationAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAgentRequestFallbackModelConfigurationAudio,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentRequestFallbackModelConfigurationAudio$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -6307,35 +5572,6 @@ export function createAgentRequestFallbackModelConfigurationStopFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'CreateAgentRequestFallbackModelConfigurationStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationStreamOptions,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    include_usage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "include_usage": "includeUsage",
-    });
-  });
-
-export function createAgentRequestFallbackModelConfigurationStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAgentRequestFallbackModelConfigurationStreamOptions,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
@@ -6560,36 +5796,6 @@ export function createAgentRequestFallbackModelConfigurationFallbacksFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry$inboundSchema:
-  z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
-
-export function createAgentRequestFallbackModelConfigurationAgentsResponseRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestFallbackModelConfigurationType$inboundSchema:
   z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationType> = z
     .nativeEnum(CreateAgentRequestFallbackModelConfigurationType);
@@ -6740,17 +5946,9 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     unknown
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() =>
-        CreateAgentRequestFallbackModelConfigurationAudio$inboundSchema
-      ),
-    ).optional(),
     frequency_penalty: z.nullable(z.number()).optional(),
     max_tokens: z.nullable(z.number().int()).optional(),
     max_completion_tokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    top_logprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
       z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
@@ -6767,11 +5965,6 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    stream_options: z.nullable(
-      z.lazy(() =>
-        CreateAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -6799,9 +5992,6 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
         CreateAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
       ),
     ).optional(),
-    retry: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationAgentsResponseRetry$inboundSchema
-    ).optional(),
     cache: z.lazy(() =>
       CreateAgentRequestFallbackModelConfigurationCache$inboundSchema
     ).optional(),
@@ -6816,11 +6006,9 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
       "frequency_penalty": "frequencyPenalty",
       "max_tokens": "maxTokens",
       "max_completion_tokens": "maxCompletionTokens",
-      "top_logprobs": "topLogprobs",
       "presence_penalty": "presencePenalty",
       "response_format": "responseFormat",
       "reasoning_effort": "reasoningEffort",
-      "stream_options": "streamOptions",
       "top_p": "topP",
       "top_k": "topK",
       "tool_choice": "toolChoice",
@@ -6845,9 +6033,9 @@ export function createAgentRequestFallbackModelConfigurationParametersFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestFallbackModelConfigurationAgentsRetry$inboundSchema:
+export const CreateAgentRequestFallbackModelConfigurationRetry$inboundSchema:
   z.ZodType<
-    CreateAgentRequestFallbackModelConfigurationAgentsRetry,
+    CreateAgentRequestFallbackModelConfigurationRetry,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -6859,18 +6047,19 @@ export const CreateAgentRequestFallbackModelConfigurationAgentsRetry$inboundSche
     });
   });
 
-export function createAgentRequestFallbackModelConfigurationAgentsRetryFromJSON(
+export function createAgentRequestFallbackModelConfigurationRetryFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  CreateAgentRequestFallbackModelConfigurationAgentsRetry,
+  CreateAgentRequestFallbackModelConfigurationRetry,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      CreateAgentRequestFallbackModelConfigurationAgentsRetry$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationAgentsRetry' from JSON`,
+      CreateAgentRequestFallbackModelConfigurationRetry$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateAgentRequestFallbackModelConfigurationRetry' from JSON`,
   );
 }
 
@@ -6886,7 +6075,7 @@ export const CreateAgentRequestFallbackModelConfiguration2$inboundSchema:
       CreateAgentRequestFallbackModelConfigurationParameters$inboundSchema
     ).optional(),
     retry: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationAgentsRetry$inboundSchema
+      CreateAgentRequestFallbackModelConfigurationRetry$inboundSchema
     ).optional(),
   });
 

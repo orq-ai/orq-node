@@ -176,55 +176,6 @@ export type RetrieveAgentRequestSettings = {
   guardrails?: Array<RetrieveAgentRequestGuardrails> | undefined;
 };
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const RetrieveAgentRequestVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type RetrieveAgentRequestVoice = ClosedEnum<
-  typeof RetrieveAgentRequestVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const RetrieveAgentRequestFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type RetrieveAgentRequestFormat = ClosedEnum<
-  typeof RetrieveAgentRequestFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type RetrieveAgentRequestAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: RetrieveAgentRequestVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: RetrieveAgentRequestFormat;
-};
-
 export type RetrieveAgentRequestResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -320,16 +271,6 @@ export type RetrieveAgentRequestReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RetrieveAgentRequestStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type RetrieveAgentRequestStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type RetrieveAgentRequestThinking =
   | components.ThinkingConfigDisabledSchema
@@ -433,20 +374,6 @@ export type RetrieveAgentRequestFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type RetrieveAgentRequestAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const RetrieveAgentRequestType = {
   ExactMatch: "exact_match",
 } as const;
@@ -513,10 +440,6 @@ export type RetrieveAgentRequestParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: RetrieveAgentRequestAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -532,18 +455,6 @@ export type RetrieveAgentRequestParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -581,10 +492,6 @@ export type RetrieveAgentRequestParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: RetrieveAgentRequestStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -625,10 +532,6 @@ export type RetrieveAgentRequestParameters = {
    */
   fallbacks?: Array<RetrieveAgentRequestFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: RetrieveAgentRequestAgentsRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: RetrieveAgentRequestCache | undefined;
@@ -654,55 +557,6 @@ export type RetrieveAgentRequestRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const RetrieveAgentRequestFallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type RetrieveAgentRequestFallbackModelConfigurationVoice = ClosedEnum<
-  typeof RetrieveAgentRequestFallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const RetrieveAgentRequestFallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type RetrieveAgentRequestFallbackModelConfigurationFormat = ClosedEnum<
-  typeof RetrieveAgentRequestFallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type RetrieveAgentRequestFallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: RetrieveAgentRequestFallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: RetrieveAgentRequestFallbackModelConfigurationFormat;
 };
 
 export type RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema = {
@@ -803,16 +657,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationReasoningEffort =
 export type RetrieveAgentRequestFallbackModelConfigurationStop =
   | string
   | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type RetrieveAgentRequestFallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type RetrieveAgentRequestFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -916,20 +760,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type RetrieveAgentRequestFallbackModelConfigurationAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const RetrieveAgentRequestFallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -996,13 +826,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?:
-    | RetrieveAgentRequestFallbackModelConfigurationAudio
-    | null
-    | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -1018,18 +841,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -1069,13 +880,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | RetrieveAgentRequestFallbackModelConfigurationStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -1122,10 +926,6 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
   fallbacks?:
     | Array<RetrieveAgentRequestFallbackModelConfigurationFallbacks>
     | undefined;
-  /**
-   * Retry configuration for the request
-   */
-  retry?: RetrieveAgentRequestFallbackModelConfigurationAgentsRetry | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -1491,36 +1291,6 @@ export function retrieveAgentRequestSettingsFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestVoice$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestVoice
-> = z.nativeEnum(RetrieveAgentRequestVoice);
-
-/** @internal */
-export const RetrieveAgentRequestFormat$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestFormat
-> = z.nativeEnum(RetrieveAgentRequestFormat);
-
-/** @internal */
-export const RetrieveAgentRequestAudio$inboundSchema: z.ZodType<
-  RetrieveAgentRequestAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: RetrieveAgentRequestVoice$inboundSchema,
-  format: RetrieveAgentRequestFormat$inboundSchema,
-});
-
-export function retrieveAgentRequestAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestAudio' from JSON`,
-  );
-}
-
-/** @internal */
 export const RetrieveAgentRequestResponseFormatJsonSchema$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestResponseFormatJsonSchema,
@@ -1671,29 +1441,6 @@ export function retrieveAgentRequestStopFromJSON(
     jsonString,
     (x) => RetrieveAgentRequestStop$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveAgentRequestStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestStreamOptions$inboundSchema: z.ZodType<
-  RetrieveAgentRequestStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
-
-export function retrieveAgentRequestStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestStreamOptions' from JSON`,
   );
 }
 
@@ -1864,30 +1611,6 @@ export function retrieveAgentRequestFallbacksFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestAgentsRetry$inboundSchema: z.ZodType<
-  RetrieveAgentRequestAgentsRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function retrieveAgentRequestAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestAgentsRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestAgentsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const RetrieveAgentRequestType$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestType
 > = z.nativeEnum(RetrieveAgentRequestType);
@@ -2008,14 +1731,9 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => RetrieveAgentRequestAudio$inboundSchema))
-    .optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
     z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
@@ -2029,9 +1747,6 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => RetrieveAgentRequestStreamOptions$inboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -2051,7 +1766,6 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   ).optional(),
   fallbacks: z.array(z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema))
     .optional(),
-  retry: z.lazy(() => RetrieveAgentRequestAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => RetrieveAgentRequestCache$inboundSchema).optional(),
   load_balancer: z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
     .optional(),
@@ -2061,11 +1775,9 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
     "frequency_penalty": "frequencyPenalty",
     "max_tokens": "maxTokens",
     "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
     "presence_penalty": "presencePenalty",
     "response_format": "responseFormat",
     "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
     "top_p": "topP",
     "top_k": "topK",
     "tool_choice": "toolChoice",
@@ -2105,43 +1817,6 @@ export function retrieveAgentRequestRetryFromJSON(
     jsonString,
     (x) => RetrieveAgentRequestRetry$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveAgentRequestRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationVoice$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationVoice> =
-    z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationVoice);
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationFormat$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationFormat> =
-    z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationFormat);
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationAudio$inboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationAudio,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    voice: RetrieveAgentRequestFallbackModelConfigurationVoice$inboundSchema,
-    format: RetrieveAgentRequestFallbackModelConfigurationFormat$inboundSchema,
-  });
-
-export function retrieveAgentRequestFallbackModelConfigurationAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RetrieveAgentRequestFallbackModelConfigurationAudio,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestFallbackModelConfigurationAudio$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -2317,35 +1992,6 @@ export function retrieveAgentRequestFallbackModelConfigurationStopFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationStreamOptions,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    include_usage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "include_usage": "includeUsage",
-    });
-  });
-
-export function retrieveAgentRequestFallbackModelConfigurationStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RetrieveAgentRequestFallbackModelConfigurationStreamOptions,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
@@ -2559,36 +2205,6 @@ export function retrieveAgentRequestFallbackModelConfigurationFallbacksFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestFallbackModelConfigurationAgentsRetry$inboundSchema:
-  z.ZodType<
-    RetrieveAgentRequestFallbackModelConfigurationAgentsRetry,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
-
-export function retrieveAgentRequestFallbackModelConfigurationAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  RetrieveAgentRequestFallbackModelConfigurationAgentsRetry,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestFallbackModelConfigurationAgentsRetry$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema:
   z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationType> = z
     .nativeEnum(RetrieveAgentRequestFallbackModelConfigurationType);
@@ -2741,17 +2357,9 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     unknown
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() =>
-        RetrieveAgentRequestFallbackModelConfigurationAudio$inboundSchema
-      ),
-    ).optional(),
     frequency_penalty: z.nullable(z.number()).optional(),
     max_tokens: z.nullable(z.number().int()).optional(),
     max_completion_tokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    top_logprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
       z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$inboundSchema),
@@ -2768,11 +2376,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    stream_options: z.nullable(
-      z.lazy(() =>
-        RetrieveAgentRequestFallbackModelConfigurationStreamOptions$inboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -2800,9 +2403,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
         RetrieveAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
       ),
     ).optional(),
-    retry: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationAgentsRetry$inboundSchema
-    ).optional(),
     cache: z.lazy(() =>
       RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema
     ).optional(),
@@ -2817,11 +2417,9 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
       "frequency_penalty": "frequencyPenalty",
       "max_tokens": "maxTokens",
       "max_completion_tokens": "maxCompletionTokens",
-      "top_logprobs": "topLogprobs",
       "presence_penalty": "presencePenalty",
       "response_format": "responseFormat",
       "reasoning_effort": "reasoningEffort",
-      "stream_options": "streamOptions",
       "top_p": "topP",
       "top_k": "topK",
       "tool_choice": "toolChoice",
