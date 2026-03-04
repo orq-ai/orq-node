@@ -39,6 +39,7 @@ export * from "./responsestartedevent.js";
 export * from "./responsestreamingevent.js";
 export * from "./reviewoutcome.js";
 export * from "./security.js";
+export * from "./telemetry.js";
 export * from "./textcontentpartschema.js";
 export * from "./textpart.js";
 export * from "./thinkingconfigdisabledschema.js";

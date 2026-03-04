@@ -8,6 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { Telemetry, Telemetry$inboundSchema } from "./telemetry.js";
 
 /**
  * The reason why the agent stopped generating
@@ -110,6 +111,10 @@ export type ResponseDoneEventData = {
    * Tool calls awaiting user response (when finishReason is function_call)
    */
   pendingToolCalls?: Array<ResponseDoneEventPendingToolCalls> | undefined;
+  /**
+   * Telemetry information for correlating the response with traces
+   */
+  telemetry?: Telemetry | undefined;
 };
 
 /**
@@ -284,6 +289,7 @@ export const ResponseDoneEventData$inboundSchema: z.ZodType<
   pendingToolCalls: z.array(
     z.lazy(() => ResponseDoneEventPendingToolCalls$inboundSchema),
   ).optional(),
+  telemetry: Telemetry$inboundSchema.optional(),
 });
 
 export function responseDoneEventDataFromJSON(

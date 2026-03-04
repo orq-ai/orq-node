@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { Telemetry, Telemetry$inboundSchema } from "./telemetry.js";
 
 export type Data = {
   /**
@@ -34,6 +35,10 @@ export type Data = {
    * Server-generated ID for the assistant message. Use this ID for frontend state consistency.
    */
   assistantMessageId?: string | undefined;
+  /**
+   * Telemetry information for correlating the response with traces
+   */
+  telemetry?: Telemetry | undefined;
 };
 
 /**
@@ -57,6 +62,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     workflowRunId: z.string(),
     userMessageId: z.string().optional(),
     assistantMessageId: z.string().optional(),
+    telemetry: Telemetry$inboundSchema.optional(),
   });
 
 export function dataFromJSON(

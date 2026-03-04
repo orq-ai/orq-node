@@ -12,6 +12,7 @@ import {
   AgentResponseMessage,
   AgentResponseMessage$inboundSchema,
 } from "./agentresponsemessage.js";
+import { Telemetry, Telemetry$inboundSchema } from "./telemetry.js";
 
 export type PromptTokensDetails = {
   cachedTokens?: number | null | undefined;
@@ -123,6 +124,10 @@ export type CreateAgentResponse = {
    * Tool calls awaiting user response (when finish_reason is function_call)
    */
   pendingToolCalls?: Array<PendingToolCalls> | undefined;
+  /**
+   * Telemetry information for correlating the response with traces
+   */
+  telemetry?: Telemetry | undefined;
 };
 
 /** @internal */
@@ -278,6 +283,7 @@ export const CreateAgentResponse$inboundSchema: z.ZodType<
   finish_reason: FinishReason$inboundSchema.optional(),
   pending_tool_calls: z.array(z.lazy(() => PendingToolCalls$inboundSchema))
     .optional(),
+  telemetry: Telemetry$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
