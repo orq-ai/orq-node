@@ -1891,7 +1891,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kjvn9r642mmm4p0pkgfky7j5"
+              default: "reasoning_01kjwa1e5matv8dqqwyzkb33ts"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -1975,7 +1975,7 @@ components:
                   properties:
                     _id:
                       type: "string"
-                      default: "text_01kjvn9r63ndx07k2e5xzew688"
+                      default: "text_01kjwa1e5ej2d4bknc2qrkyen6"
                       description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                       example: "text_01hxyz123abc"
                     kind:
@@ -2001,7 +2001,7 @@ components:
                   properties:
                     _id:
                       type: "string"
-                      default: "file_01kjvn9r65rc0pk99mq20tm4w3"
+                      default: "file_01kjwa1e5s4a7znea11se4721v"
                       description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                       example: "file_01hxyz123abc"
                     kind:
@@ -2032,7 +2032,7 @@ components:
                   properties:
                     _id:
                       type: "string"
-                      default: "data_01kjvn9r67twjnevxv1kc82naq"
+                      default: "data_01kjwa1e5z0vb7h4yy24a1wyk6"
                       description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                       example: "data_01hxyz123abc"
                     kind:
@@ -2121,7 +2121,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "text_01kjvn9r684mv2crknqzddq03f"
+                                  default: "text_01kjwa1e65yzw22vw07ay1c1h8"
                                   description: "Unique identifier for the part. Format: text_{ulid} (e.g., text_01hxyz...)"
                                   example: "text_01hxyz123abc"
                                 kind:
@@ -2146,7 +2146,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "reasoning_01kjvn9r68ekkc6rtdrz30yyt4"
+                                  default: "reasoning_01kjwa1e66nqza13sq5wgaha8w"
                                   description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
                                   example: "reasoning_01hxyz123abc"
                                 kind:
@@ -2174,7 +2174,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "file_01kjvn9r69n3s1v0fdmdc05rqh"
+                                  default: "file_01kjwa1e6b5p1rjn2bxscb8cjf"
                                   description: "Unique identifier for the part. Format: file_{ulid} (e.g., file_01hxyz...)"
                                   example: "file_01hxyz123abc"
                                 kind:
@@ -2205,7 +2205,7 @@ components:
                               properties:
                                 _id:
                                   type: "string"
-                                  default: "data_01kjvn9r6absbb8jwpr5gxx16s"
+                                  default: "data_01kjwa1e6hh6ew9nmrzrxeza24"
                                   description: "Unique identifier for the part. Format: data_{ulid} (e.g., data_01hxyz...)"
                                   example: "data_01hxyz123abc"
                                 kind:
@@ -3874,7 +3874,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -3882,7 +3882,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -4023,10 +4023,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-03-04T05:31:46.548Z"
+                                  default: "2026-03-04T11:34:12.057Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-03-04T05:31:46.548Z"
+                                  default: "2026-03-04T11:34:12.057Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -4111,10 +4111,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-03-04T05:31:46.548Z"
+                                  default: "2026-03-04T11:34:12.057Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-03-04T05:31:46.548Z"
+                                  default: "2026-03-04T11:34:12.057Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -4294,10 +4294,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             updated:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4371,10 +4371,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             updated:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4463,10 +4463,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             updated:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4540,10 +4540,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             updated:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4917,10 +4917,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             updated:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5010,10 +5010,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             updated:
                               type: "string"
-                              default: "2026-03-04T05:31:46.548Z"
+                              default: "2026-03-04T11:34:12.057Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5657,10 +5657,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           updated:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -5745,10 +5745,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           updated:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -5928,10 +5928,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6005,10 +6005,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6097,10 +6097,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6174,10 +6174,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6551,10 +6551,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6644,10 +6644,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7187,10 +7187,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           updated:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7275,10 +7275,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           updated:
                             type: "string"
-                            default: "2026-03-04T05:31:46.548Z"
+                            default: "2026-03-04T11:34:12.057Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7458,10 +7458,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7535,10 +7535,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7627,10 +7627,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7704,10 +7704,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8081,10 +8081,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8174,10 +8174,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       updated:
                         type: "string"
-                        default: "2026-03-04T05:31:46.548Z"
+                        default: "2026-03-04T11:34:12.057Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9048,7 +9048,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-03-04T05:31:45.405Z"
+                          default: "2026-03-04T11:34:10.822Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -9056,7 +9056,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:45.405Z"
+                              default: "2026-03-04T11:34:10.823Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -9261,7 +9261,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -9269,7 +9269,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9384,7 +9384,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -9392,7 +9392,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -9563,7 +9563,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -9571,7 +9571,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -13608,34 +13608,6 @@ paths:
                             name:
                               type: "string"
                               description: "The name to display on the trace. If not specified, the default system name will be used."
-                            audio:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                voice:
-                                  type: "string"
-                                  enum:
-                                    - "alloy"
-                                    - "echo"
-                                    - "fable"
-                                    - "onyx"
-                                    - "nova"
-                                    - "shimmer"
-                                  description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                format:
-                                  type: "string"
-                                  enum:
-                                    - "wav"
-                                    - "mp3"
-                                    - "flac"
-                                    - "opus"
-                                    - "pcm16"
-                                  description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                              required:
-                                - "voice"
-                                - "format"
-                              description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                             frequency_penalty:
                               type:
                                 - "number"
@@ -13652,24 +13624,6 @@ paths:
                                 - "null"
                               exclusiveMinimum: 0
                               description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                            logprobs:
-                              type:
-                                - "boolean"
-                                - "null"
-                              description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                            top_logprobs:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 0
-                              maximum: 20
-                              description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                            n:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 1
-                              description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                             presence_penalty:
                               type:
                                 - "number"
@@ -13753,15 +13707,6 @@ paths:
                                   maxItems: 4
                                 - type: "null"
                               description: "Up to 4 sequences where the API will stop generating further tokens."
-                            stream_options:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                include_usage:
-                                  type: "boolean"
-                                  description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                              description: "Options for streaming response. Only set this when you set stream: true."
                             thinking:
                               oneOf:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -13865,33 +13810,6 @@ paths:
                                 required:
                                   - "model"
                               description: "Array of fallback models to use if primary model fails"
-                            retry:
-                              type: "object"
-                              properties:
-                                count:
-                                  type: "number"
-                                  minimum: 1
-                                  maximum: 5
-                                  default: 3
-                                  description: "Number of retry attempts (1-5)"
-                                  example: 3
-                                on_codes:
-                                  type: "array"
-                                  items:
-                                    type: "number"
-                                    minimum: 100
-                                    maximum: 599
-                                  minItems: 1
-                                  default:
-                                    - 429
-                                  description: "HTTP status codes that trigger retry logic"
-                                  example:
-                                    - 429
-                                    - 500
-                                    - 502
-                                    - 503
-                                    - 504
-                              description: "Retry configuration for the request"
                             cache:
                               type: "object"
                               properties:
@@ -14009,34 +13927,6 @@ paths:
                               name:
                                 type: "string"
                                 description: "The name to display on the trace. If not specified, the default system name will be used."
-                              audio:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  voice:
-                                    type: "string"
-                                    enum:
-                                      - "alloy"
-                                      - "echo"
-                                      - "fable"
-                                      - "onyx"
-                                      - "nova"
-                                      - "shimmer"
-                                    description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                  format:
-                                    type: "string"
-                                    enum:
-                                      - "wav"
-                                      - "mp3"
-                                      - "flac"
-                                      - "opus"
-                                      - "pcm16"
-                                    description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                required:
-                                  - "voice"
-                                  - "format"
-                                description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                               frequency_penalty:
                                 type:
                                   - "number"
@@ -14053,24 +13943,6 @@ paths:
                                   - "null"
                                 exclusiveMinimum: 0
                                 description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                              logprobs:
-                                type:
-                                  - "boolean"
-                                  - "null"
-                                description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                              top_logprobs:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 0
-                                maximum: 20
-                                description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                              n:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 1
-                                description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                               presence_penalty:
                                 type:
                                   - "number"
@@ -14154,15 +14026,6 @@ paths:
                                     maxItems: 4
                                   - type: "null"
                                 description: "Up to 4 sequences where the API will stop generating further tokens."
-                              stream_options:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  include_usage:
-                                    type: "boolean"
-                                    description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                description: "Options for streaming response. Only set this when you set stream: true."
                               thinking:
                                 oneOf:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -14266,33 +14129,6 @@ paths:
                                   required:
                                     - "model"
                                 description: "Array of fallback models to use if primary model fails"
-                              retry:
-                                type: "object"
-                                properties:
-                                  count:
-                                    type: "number"
-                                    minimum: 1
-                                    maximum: 5
-                                    default: 3
-                                    description: "Number of retry attempts (1-5)"
-                                    example: 3
-                                  on_codes:
-                                    type: "array"
-                                    items:
-                                      type: "number"
-                                      minimum: 100
-                                      maximum: 599
-                                    minItems: 1
-                                    default:
-                                      - 429
-                                    description: "HTTP status codes that trigger retry logic"
-                                    example:
-                                      - 429
-                                      - 500
-                                      - 502
-                                      - 503
-                                      - 504
-                                description: "Retry configuration for the request"
                               cache:
                                 type: "object"
                                 properties:
@@ -15010,34 +14846,6 @@ paths:
                           name:
                             type: "string"
                             description: "The name to display on the trace. If not specified, the default system name will be used."
-                          audio:
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              voice:
-                                type: "string"
-                                enum:
-                                  - "alloy"
-                                  - "echo"
-                                  - "fable"
-                                  - "onyx"
-                                  - "nova"
-                                  - "shimmer"
-                                description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                              format:
-                                type: "string"
-                                enum:
-                                  - "wav"
-                                  - "mp3"
-                                  - "flac"
-                                  - "opus"
-                                  - "pcm16"
-                                description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                            required:
-                              - "voice"
-                              - "format"
-                            description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                           frequency_penalty:
                             type:
                               - "number"
@@ -15054,24 +14862,6 @@ paths:
                               - "null"
                             exclusiveMinimum: 0
                             description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                          logprobs:
-                            type:
-                              - "boolean"
-                              - "null"
-                            description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                          top_logprobs:
-                            type:
-                              - "integer"
-                              - "null"
-                            minimum: 0
-                            maximum: 20
-                            description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                          n:
-                            type:
-                              - "integer"
-                              - "null"
-                            minimum: 1
-                            description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                           presence_penalty:
                             type:
                               - "number"
@@ -15155,15 +14945,6 @@ paths:
                                 maxItems: 4
                               - type: "null"
                             description: "Up to 4 sequences where the API will stop generating further tokens."
-                          stream_options:
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              include_usage:
-                                type: "boolean"
-                                description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                            description: "Options for streaming response. Only set this when you set stream: true."
                           thinking:
                             oneOf:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -15267,33 +15048,6 @@ paths:
                               required:
                                 - "model"
                             description: "Array of fallback models to use if primary model fails"
-                          retry:
-                            type: "object"
-                            properties:
-                              count:
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              on_codes:
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default:
-                                  - 429
-                                description: "HTTP status codes that trigger retry logic"
-                                example:
-                                  - 429
-                                  - 500
-                                  - 502
-                                  - 503
-                                  - 504
-                            description: "Retry configuration for the request"
                           cache:
                             type: "object"
                             properties:
@@ -15408,34 +15162,6 @@ paths:
                                     name:
                                       type: "string"
                                       description: "The name to display on the trace. If not specified, the default system name will be used."
-                                    audio:
-                                      type:
-                                        - "object"
-                                        - "null"
-                                      properties:
-                                        voice:
-                                          type: "string"
-                                          enum:
-                                            - "alloy"
-                                            - "echo"
-                                            - "fable"
-                                            - "onyx"
-                                            - "nova"
-                                            - "shimmer"
-                                          description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                        format:
-                                          type: "string"
-                                          enum:
-                                            - "wav"
-                                            - "mp3"
-                                            - "flac"
-                                            - "opus"
-                                            - "pcm16"
-                                          description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                      required:
-                                        - "voice"
-                                        - "format"
-                                      description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                                     frequency_penalty:
                                       type:
                                         - "number"
@@ -15452,24 +15178,6 @@ paths:
                                         - "null"
                                       exclusiveMinimum: 0
                                       description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                                    logprobs:
-                                      type:
-                                        - "boolean"
-                                        - "null"
-                                      description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                                    top_logprobs:
-                                      type:
-                                        - "integer"
-                                        - "null"
-                                      minimum: 0
-                                      maximum: 20
-                                      description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                                    n:
-                                      type:
-                                        - "integer"
-                                        - "null"
-                                      minimum: 1
-                                      description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                                     presence_penalty:
                                       type:
                                         - "number"
@@ -15553,15 +15261,6 @@ paths:
                                           maxItems: 4
                                         - type: "null"
                                       description: "Up to 4 sequences where the API will stop generating further tokens."
-                                    stream_options:
-                                      type:
-                                        - "object"
-                                        - "null"
-                                      properties:
-                                        include_usage:
-                                          type: "boolean"
-                                          description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                      description: "Options for streaming response. Only set this when you set stream: true."
                                     thinking:
                                       oneOf:
                                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -15665,33 +15364,6 @@ paths:
                                         required:
                                           - "model"
                                       description: "Array of fallback models to use if primary model fails"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "number"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 3
-                                          description: "Number of retry attempts (1-5)"
-                                          example: 3
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "number"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                          description: "HTTP status codes that trigger retry logic"
-                                          example:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                      description: "Retry configuration for the request"
                                     cache:
                                       type: "object"
                                       properties:
@@ -16112,34 +15784,6 @@ paths:
                                 name:
                                   type: "string"
                                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                                audio:
-                                  type:
-                                    - "object"
-                                    - "null"
-                                  properties:
-                                    voice:
-                                      type: "string"
-                                      enum:
-                                        - "alloy"
-                                        - "echo"
-                                        - "fable"
-                                        - "onyx"
-                                        - "nova"
-                                        - "shimmer"
-                                      description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                    format:
-                                      type: "string"
-                                      enum:
-                                        - "wav"
-                                        - "mp3"
-                                        - "flac"
-                                        - "opus"
-                                        - "pcm16"
-                                      description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                  required:
-                                    - "voice"
-                                    - "format"
-                                  description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                                 frequency_penalty:
                                   type:
                                     - "number"
@@ -16156,24 +15800,6 @@ paths:
                                     - "null"
                                   exclusiveMinimum: 0
                                   description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                                logprobs:
-                                  type:
-                                    - "boolean"
-                                    - "null"
-                                  description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                                top_logprobs:
-                                  type:
-                                    - "integer"
-                                    - "null"
-                                  minimum: 0
-                                  maximum: 20
-                                  description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                                n:
-                                  type:
-                                    - "integer"
-                                    - "null"
-                                  minimum: 1
-                                  description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                                 presence_penalty:
                                   type:
                                     - "number"
@@ -16257,15 +15883,6 @@ paths:
                                       maxItems: 4
                                     - type: "null"
                                   description: "Up to 4 sequences where the API will stop generating further tokens."
-                                stream_options:
-                                  type:
-                                    - "object"
-                                    - "null"
-                                  properties:
-                                    include_usage:
-                                      type: "boolean"
-                                      description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                  description: "Options for streaming response. Only set this when you set stream: true."
                                 thinking:
                                   oneOf:
                                     - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -16369,33 +15986,6 @@ paths:
                                     required:
                                       - "model"
                                   description: "Array of fallback models to use if primary model fails"
-                                retry:
-                                  type: "object"
-                                  properties:
-                                    count:
-                                      type: "number"
-                                      minimum: 1
-                                      maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
-                                    on_codes:
-                                      type: "array"
-                                      items:
-                                        type: "number"
-                                        minimum: 100
-                                        maximum: 599
-                                      minItems: 1
-                                      default:
-                                        - 429
-                                      description: "HTTP status codes that trigger retry logic"
-                                      example:
-                                        - 429
-                                        - 500
-                                        - 502
-                                        - 503
-                                        - 504
-                                  description: "Retry configuration for the request"
                                 cache:
                                   type: "object"
                                   properties:
@@ -16510,34 +16100,6 @@ paths:
                                           name:
                                             type: "string"
                                             description: "The name to display on the trace. If not specified, the default system name will be used."
-                                          audio:
-                                            type:
-                                              - "object"
-                                              - "null"
-                                            properties:
-                                              voice:
-                                                type: "string"
-                                                enum:
-                                                  - "alloy"
-                                                  - "echo"
-                                                  - "fable"
-                                                  - "onyx"
-                                                  - "nova"
-                                                  - "shimmer"
-                                                description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                              format:
-                                                type: "string"
-                                                enum:
-                                                  - "wav"
-                                                  - "mp3"
-                                                  - "flac"
-                                                  - "opus"
-                                                  - "pcm16"
-                                                description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                            required:
-                                              - "voice"
-                                              - "format"
-                                            description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                                           frequency_penalty:
                                             type:
                                               - "number"
@@ -16554,24 +16116,6 @@ paths:
                                               - "null"
                                             exclusiveMinimum: 0
                                             description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                                          logprobs:
-                                            type:
-                                              - "boolean"
-                                              - "null"
-                                            description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                                          top_logprobs:
-                                            type:
-                                              - "integer"
-                                              - "null"
-                                            minimum: 0
-                                            maximum: 20
-                                            description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                                          n:
-                                            type:
-                                              - "integer"
-                                              - "null"
-                                            minimum: 1
-                                            description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                                           presence_penalty:
                                             type:
                                               - "number"
@@ -16655,15 +16199,6 @@ paths:
                                                 maxItems: 4
                                               - type: "null"
                                             description: "Up to 4 sequences where the API will stop generating further tokens."
-                                          stream_options:
-                                            type:
-                                              - "object"
-                                              - "null"
-                                            properties:
-                                              include_usage:
-                                                type: "boolean"
-                                                description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                            description: "Options for streaming response. Only set this when you set stream: true."
                                           thinking:
                                             oneOf:
                                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -16767,33 +16302,6 @@ paths:
                                               required:
                                                 - "model"
                                             description: "Array of fallback models to use if primary model fails"
-                                          retry:
-                                            type: "object"
-                                            properties:
-                                              count:
-                                                type: "number"
-                                                minimum: 1
-                                                maximum: 5
-                                                default: 3
-                                                description: "Number of retry attempts (1-5)"
-                                                example: 3
-                                              on_codes:
-                                                type: "array"
-                                                items:
-                                                  type: "number"
-                                                  minimum: 100
-                                                  maximum: 599
-                                                minItems: 1
-                                                default:
-                                                  - 429
-                                                description: "HTTP status codes that trigger retry logic"
-                                                example:
-                                                  - 429
-                                                  - 500
-                                                  - 502
-                                                  - 503
-                                                  - 504
-                                            description: "Retry configuration for the request"
                                           cache:
                                             type: "object"
                                             properties:
@@ -17472,34 +16980,6 @@ paths:
                           name:
                             type: "string"
                             description: "The name to display on the trace. If not specified, the default system name will be used."
-                          audio:
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              voice:
-                                type: "string"
-                                enum:
-                                  - "alloy"
-                                  - "echo"
-                                  - "fable"
-                                  - "onyx"
-                                  - "nova"
-                                  - "shimmer"
-                                description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                              format:
-                                type: "string"
-                                enum:
-                                  - "wav"
-                                  - "mp3"
-                                  - "flac"
-                                  - "opus"
-                                  - "pcm16"
-                                description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                            required:
-                              - "voice"
-                              - "format"
-                            description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                           frequency_penalty:
                             type:
                               - "number"
@@ -17516,24 +16996,6 @@ paths:
                               - "null"
                             exclusiveMinimum: 0
                             description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                          logprobs:
-                            type:
-                              - "boolean"
-                              - "null"
-                            description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                          top_logprobs:
-                            type:
-                              - "integer"
-                              - "null"
-                            minimum: 0
-                            maximum: 20
-                            description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                          n:
-                            type:
-                              - "integer"
-                              - "null"
-                            minimum: 1
-                            description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                           presence_penalty:
                             type:
                               - "number"
@@ -17617,15 +17079,6 @@ paths:
                                 maxItems: 4
                               - type: "null"
                             description: "Up to 4 sequences where the API will stop generating further tokens."
-                          stream_options:
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              include_usage:
-                                type: "boolean"
-                                description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                            description: "Options for streaming response. Only set this when you set stream: true."
                           thinking:
                             oneOf:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -17729,33 +17182,6 @@ paths:
                               required:
                                 - "model"
                             description: "Array of fallback models to use if primary model fails"
-                          retry:
-                            type: "object"
-                            properties:
-                              count:
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              on_codes:
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default:
-                                  - 429
-                                description: "HTTP status codes that trigger retry logic"
-                                example:
-                                  - 429
-                                  - 500
-                                  - 502
-                                  - 503
-                                  - 504
-                            description: "Retry configuration for the request"
                           cache:
                             type: "object"
                             properties:
@@ -17870,34 +17296,6 @@ paths:
                                     name:
                                       type: "string"
                                       description: "The name to display on the trace. If not specified, the default system name will be used."
-                                    audio:
-                                      type:
-                                        - "object"
-                                        - "null"
-                                      properties:
-                                        voice:
-                                          type: "string"
-                                          enum:
-                                            - "alloy"
-                                            - "echo"
-                                            - "fable"
-                                            - "onyx"
-                                            - "nova"
-                                            - "shimmer"
-                                          description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                        format:
-                                          type: "string"
-                                          enum:
-                                            - "wav"
-                                            - "mp3"
-                                            - "flac"
-                                            - "opus"
-                                            - "pcm16"
-                                          description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                      required:
-                                        - "voice"
-                                        - "format"
-                                      description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                                     frequency_penalty:
                                       type:
                                         - "number"
@@ -17914,24 +17312,6 @@ paths:
                                         - "null"
                                       exclusiveMinimum: 0
                                       description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                                    logprobs:
-                                      type:
-                                        - "boolean"
-                                        - "null"
-                                      description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                                    top_logprobs:
-                                      type:
-                                        - "integer"
-                                        - "null"
-                                      minimum: 0
-                                      maximum: 20
-                                      description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                                    n:
-                                      type:
-                                        - "integer"
-                                        - "null"
-                                      minimum: 1
-                                      description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                                     presence_penalty:
                                       type:
                                         - "number"
@@ -18015,15 +17395,6 @@ paths:
                                           maxItems: 4
                                         - type: "null"
                                       description: "Up to 4 sequences where the API will stop generating further tokens."
-                                    stream_options:
-                                      type:
-                                        - "object"
-                                        - "null"
-                                      properties:
-                                        include_usage:
-                                          type: "boolean"
-                                          description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                      description: "Options for streaming response. Only set this when you set stream: true."
                                     thinking:
                                       oneOf:
                                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -18127,33 +17498,6 @@ paths:
                                         required:
                                           - "model"
                                       description: "Array of fallback models to use if primary model fails"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "number"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 3
-                                          description: "Number of retry attempts (1-5)"
-                                          example: 3
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "number"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                          description: "HTTP status codes that trigger retry logic"
-                                          example:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                      description: "Retry configuration for the request"
                                     cache:
                                       type: "object"
                                       properties:
@@ -18398,34 +17742,6 @@ paths:
                             name:
                               type: "string"
                               description: "The name to display on the trace. If not specified, the default system name will be used."
-                            audio:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                voice:
-                                  type: "string"
-                                  enum:
-                                    - "alloy"
-                                    - "echo"
-                                    - "fable"
-                                    - "onyx"
-                                    - "nova"
-                                    - "shimmer"
-                                  description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                format:
-                                  type: "string"
-                                  enum:
-                                    - "wav"
-                                    - "mp3"
-                                    - "flac"
-                                    - "opus"
-                                    - "pcm16"
-                                  description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                              required:
-                                - "voice"
-                                - "format"
-                              description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                             frequency_penalty:
                               type:
                                 - "number"
@@ -18442,24 +17758,6 @@ paths:
                                 - "null"
                               exclusiveMinimum: 0
                               description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                            logprobs:
-                              type:
-                                - "boolean"
-                                - "null"
-                              description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                            top_logprobs:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 0
-                              maximum: 20
-                              description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                            n:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 1
-                              description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                             presence_penalty:
                               type:
                                 - "number"
@@ -18543,15 +17841,6 @@ paths:
                                   maxItems: 4
                                 - type: "null"
                               description: "Up to 4 sequences where the API will stop generating further tokens."
-                            stream_options:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                include_usage:
-                                  type: "boolean"
-                                  description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                              description: "Options for streaming response. Only set this when you set stream: true."
                             thinking:
                               oneOf:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -18655,33 +17944,6 @@ paths:
                                 required:
                                   - "model"
                               description: "Array of fallback models to use if primary model fails"
-                            retry:
-                              type: "object"
-                              properties:
-                                count:
-                                  type: "number"
-                                  minimum: 1
-                                  maximum: 5
-                                  default: 3
-                                  description: "Number of retry attempts (1-5)"
-                                  example: 3
-                                on_codes:
-                                  type: "array"
-                                  items:
-                                    type: "number"
-                                    minimum: 100
-                                    maximum: 599
-                                  minItems: 1
-                                  default:
-                                    - 429
-                                  description: "HTTP status codes that trigger retry logic"
-                                  example:
-                                    - 429
-                                    - 500
-                                    - 502
-                                    - 503
-                                    - 504
-                              description: "Retry configuration for the request"
                             cache:
                               type: "object"
                               properties:
@@ -18799,34 +18061,6 @@ paths:
                               name:
                                 type: "string"
                                 description: "The name to display on the trace. If not specified, the default system name will be used."
-                              audio:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  voice:
-                                    type: "string"
-                                    enum:
-                                      - "alloy"
-                                      - "echo"
-                                      - "fable"
-                                      - "onyx"
-                                      - "nova"
-                                      - "shimmer"
-                                    description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                  format:
-                                    type: "string"
-                                    enum:
-                                      - "wav"
-                                      - "mp3"
-                                      - "flac"
-                                      - "opus"
-                                      - "pcm16"
-                                    description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                required:
-                                  - "voice"
-                                  - "format"
-                                description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                               frequency_penalty:
                                 type:
                                   - "number"
@@ -18843,24 +18077,6 @@ paths:
                                   - "null"
                                 exclusiveMinimum: 0
                                 description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                              logprobs:
-                                type:
-                                  - "boolean"
-                                  - "null"
-                                description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                              top_logprobs:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 0
-                                maximum: 20
-                                description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                              n:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 1
-                                description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                               presence_penalty:
                                 type:
                                   - "number"
@@ -18944,15 +18160,6 @@ paths:
                                     maxItems: 4
                                   - type: "null"
                                 description: "Up to 4 sequences where the API will stop generating further tokens."
-                              stream_options:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  include_usage:
-                                    type: "boolean"
-                                    description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                description: "Options for streaming response. Only set this when you set stream: true."
                               thinking:
                                 oneOf:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -19056,33 +18263,6 @@ paths:
                                   required:
                                     - "model"
                                 description: "Array of fallback models to use if primary model fails"
-                              retry:
-                                type: "object"
-                                properties:
-                                  count:
-                                    type: "number"
-                                    minimum: 1
-                                    maximum: 5
-                                    default: 3
-                                    description: "Number of retry attempts (1-5)"
-                                    example: 3
-                                  on_codes:
-                                    type: "array"
-                                    items:
-                                      type: "number"
-                                      minimum: 100
-                                      maximum: 599
-                                    minItems: 1
-                                    default:
-                                      - 429
-                                    description: "HTTP status codes that trigger retry logic"
-                                    example:
-                                      - 429
-                                      - 500
-                                      - 502
-                                      - 503
-                                      - 504
-                                description: "Retry configuration for the request"
                               cache:
                                 type: "object"
                                 properties:
@@ -19790,34 +18970,6 @@ paths:
                           name:
                             type: "string"
                             description: "The name to display on the trace. If not specified, the default system name will be used."
-                          audio:
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              voice:
-                                type: "string"
-                                enum:
-                                  - "alloy"
-                                  - "echo"
-                                  - "fable"
-                                  - "onyx"
-                                  - "nova"
-                                  - "shimmer"
-                                description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                              format:
-                                type: "string"
-                                enum:
-                                  - "wav"
-                                  - "mp3"
-                                  - "flac"
-                                  - "opus"
-                                  - "pcm16"
-                                description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                            required:
-                              - "voice"
-                              - "format"
-                            description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                           frequency_penalty:
                             type:
                               - "number"
@@ -19834,24 +18986,6 @@ paths:
                               - "null"
                             exclusiveMinimum: 0
                             description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                          logprobs:
-                            type:
-                              - "boolean"
-                              - "null"
-                            description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                          top_logprobs:
-                            type:
-                              - "integer"
-                              - "null"
-                            minimum: 0
-                            maximum: 20
-                            description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                          n:
-                            type:
-                              - "integer"
-                              - "null"
-                            minimum: 1
-                            description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                           presence_penalty:
                             type:
                               - "number"
@@ -19935,15 +19069,6 @@ paths:
                                 maxItems: 4
                               - type: "null"
                             description: "Up to 4 sequences where the API will stop generating further tokens."
-                          stream_options:
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              include_usage:
-                                type: "boolean"
-                                description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                            description: "Options for streaming response. Only set this when you set stream: true."
                           thinking:
                             oneOf:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -20047,33 +19172,6 @@ paths:
                               required:
                                 - "model"
                             description: "Array of fallback models to use if primary model fails"
-                          retry:
-                            type: "object"
-                            properties:
-                              count:
-                                type: "number"
-                                minimum: 1
-                                maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
-                              on_codes:
-                                type: "array"
-                                items:
-                                  type: "number"
-                                  minimum: 100
-                                  maximum: 599
-                                minItems: 1
-                                default:
-                                  - 429
-                                description: "HTTP status codes that trigger retry logic"
-                                example:
-                                  - 429
-                                  - 500
-                                  - 502
-                                  - 503
-                                  - 504
-                            description: "Retry configuration for the request"
                           cache:
                             type: "object"
                             properties:
@@ -20188,34 +19286,6 @@ paths:
                                     name:
                                       type: "string"
                                       description: "The name to display on the trace. If not specified, the default system name will be used."
-                                    audio:
-                                      type:
-                                        - "object"
-                                        - "null"
-                                      properties:
-                                        voice:
-                                          type: "string"
-                                          enum:
-                                            - "alloy"
-                                            - "echo"
-                                            - "fable"
-                                            - "onyx"
-                                            - "nova"
-                                            - "shimmer"
-                                          description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                        format:
-                                          type: "string"
-                                          enum:
-                                            - "wav"
-                                            - "mp3"
-                                            - "flac"
-                                            - "opus"
-                                            - "pcm16"
-                                          description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                      required:
-                                        - "voice"
-                                        - "format"
-                                      description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                                     frequency_penalty:
                                       type:
                                         - "number"
@@ -20232,24 +19302,6 @@ paths:
                                         - "null"
                                       exclusiveMinimum: 0
                                       description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                                    logprobs:
-                                      type:
-                                        - "boolean"
-                                        - "null"
-                                      description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                                    top_logprobs:
-                                      type:
-                                        - "integer"
-                                        - "null"
-                                      minimum: 0
-                                      maximum: 20
-                                      description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                                    n:
-                                      type:
-                                        - "integer"
-                                        - "null"
-                                      minimum: 1
-                                      description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                                     presence_penalty:
                                       type:
                                         - "number"
@@ -20333,15 +19385,6 @@ paths:
                                           maxItems: 4
                                         - type: "null"
                                       description: "Up to 4 sequences where the API will stop generating further tokens."
-                                    stream_options:
-                                      type:
-                                        - "object"
-                                        - "null"
-                                      properties:
-                                        include_usage:
-                                          type: "boolean"
-                                          description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                      description: "Options for streaming response. Only set this when you set stream: true."
                                     thinking:
                                       oneOf:
                                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -20445,33 +19488,6 @@ paths:
                                         required:
                                           - "model"
                                       description: "Array of fallback models to use if primary model fails"
-                                    retry:
-                                      type: "object"
-                                      properties:
-                                        count:
-                                          type: "number"
-                                          minimum: 1
-                                          maximum: 5
-                                          default: 3
-                                          description: "Number of retry attempts (1-5)"
-                                          example: 3
-                                        on_codes:
-                                          type: "array"
-                                          items:
-                                            type: "number"
-                                            minimum: 100
-                                            maximum: 599
-                                          minItems: 1
-                                          default:
-                                            - 429
-                                          description: "HTTP status codes that trigger retry logic"
-                                          example:
-                                            - 429
-                                            - 500
-                                            - 502
-                                            - 503
-                                            - 504
-                                      description: "Retry configuration for the request"
                                     cache:
                                       type: "object"
                                       properties:
@@ -20993,34 +20009,6 @@ paths:
                             name:
                               type: "string"
                               description: "The name to display on the trace. If not specified, the default system name will be used."
-                            audio:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                voice:
-                                  type: "string"
-                                  enum:
-                                    - "alloy"
-                                    - "echo"
-                                    - "fable"
-                                    - "onyx"
-                                    - "nova"
-                                    - "shimmer"
-                                  description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                format:
-                                  type: "string"
-                                  enum:
-                                    - "wav"
-                                    - "mp3"
-                                    - "flac"
-                                    - "opus"
-                                    - "pcm16"
-                                  description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                              required:
-                                - "voice"
-                                - "format"
-                              description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                             frequency_penalty:
                               type:
                                 - "number"
@@ -21037,24 +20025,6 @@ paths:
                                 - "null"
                               exclusiveMinimum: 0
                               description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                            logprobs:
-                              type:
-                                - "boolean"
-                                - "null"
-                              description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                            top_logprobs:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 0
-                              maximum: 20
-                              description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                            n:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 1
-                              description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                             presence_penalty:
                               type:
                                 - "number"
@@ -21138,15 +20108,6 @@ paths:
                                   maxItems: 4
                                 - type: "null"
                               description: "Up to 4 sequences where the API will stop generating further tokens."
-                            stream_options:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                include_usage:
-                                  type: "boolean"
-                                  description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                              description: "Options for streaming response. Only set this when you set stream: true."
                             thinking:
                               oneOf:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -21250,33 +20211,6 @@ paths:
                                 required:
                                   - "model"
                               description: "Array of fallback models to use if primary model fails"
-                            retry:
-                              type: "object"
-                              properties:
-                                count:
-                                  type: "number"
-                                  minimum: 1
-                                  maximum: 5
-                                  default: 3
-                                  description: "Number of retry attempts (1-5)"
-                                  example: 3
-                                on_codes:
-                                  type: "array"
-                                  items:
-                                    type: "number"
-                                    minimum: 100
-                                    maximum: 599
-                                  minItems: 1
-                                  default:
-                                    - 429
-                                  description: "HTTP status codes that trigger retry logic"
-                                  example:
-                                    - 429
-                                    - 500
-                                    - 502
-                                    - 503
-                                    - 504
-                              description: "Retry configuration for the request"
                             cache:
                               type: "object"
                               properties:
@@ -21394,34 +20328,6 @@ paths:
                               name:
                                 type: "string"
                                 description: "The name to display on the trace. If not specified, the default system name will be used."
-                              audio:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  voice:
-                                    type: "string"
-                                    enum:
-                                      - "alloy"
-                                      - "echo"
-                                      - "fable"
-                                      - "onyx"
-                                      - "nova"
-                                      - "shimmer"
-                                    description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                  format:
-                                    type: "string"
-                                    enum:
-                                      - "wav"
-                                      - "mp3"
-                                      - "flac"
-                                      - "opus"
-                                      - "pcm16"
-                                    description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                required:
-                                  - "voice"
-                                  - "format"
-                                description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                               frequency_penalty:
                                 type:
                                   - "number"
@@ -21438,24 +20344,6 @@ paths:
                                   - "null"
                                 exclusiveMinimum: 0
                                 description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                              logprobs:
-                                type:
-                                  - "boolean"
-                                  - "null"
-                                description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                              top_logprobs:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 0
-                                maximum: 20
-                                description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                              n:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 1
-                                description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                               presence_penalty:
                                 type:
                                   - "number"
@@ -21539,15 +20427,6 @@ paths:
                                     maxItems: 4
                                   - type: "null"
                                 description: "Up to 4 sequences where the API will stop generating further tokens."
-                              stream_options:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  include_usage:
-                                    type: "boolean"
-                                    description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                description: "Options for streaming response. Only set this when you set stream: true."
                               thinking:
                                 oneOf:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -21651,33 +20530,6 @@ paths:
                                   required:
                                     - "model"
                                 description: "Array of fallback models to use if primary model fails"
-                              retry:
-                                type: "object"
-                                properties:
-                                  count:
-                                    type: "number"
-                                    minimum: 1
-                                    maximum: 5
-                                    default: 3
-                                    description: "Number of retry attempts (1-5)"
-                                    example: 3
-                                  on_codes:
-                                    type: "array"
-                                    items:
-                                      type: "number"
-                                      minimum: 100
-                                      maximum: 599
-                                    minItems: 1
-                                    default:
-                                      - 429
-                                    description: "HTTP status codes that trigger retry logic"
-                                    example:
-                                      - 429
-                                      - 500
-                                      - 502
-                                      - 503
-                                      - 504
-                                description: "Retry configuration for the request"
                               cache:
                                 type: "object"
                                 properties:
@@ -22495,7 +21347,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KJVN9RBJ7B5AYS4KDVZP5EKX"
+                                          default: "01KJWA1EG491PADWB977TNX0XM"
                                         name:
                                           type: "string"
                                         description:
@@ -22773,34 +21625,6 @@ paths:
                             name:
                               type: "string"
                               description: "The name to display on the trace. If not specified, the default system name will be used."
-                            audio:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                voice:
-                                  type: "string"
-                                  enum:
-                                    - "alloy"
-                                    - "echo"
-                                    - "fable"
-                                    - "onyx"
-                                    - "nova"
-                                    - "shimmer"
-                                  description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                format:
-                                  type: "string"
-                                  enum:
-                                    - "wav"
-                                    - "mp3"
-                                    - "flac"
-                                    - "opus"
-                                    - "pcm16"
-                                  description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                              required:
-                                - "voice"
-                                - "format"
-                              description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                             frequency_penalty:
                               type:
                                 - "number"
@@ -22817,24 +21641,6 @@ paths:
                                 - "null"
                               exclusiveMinimum: 0
                               description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                            logprobs:
-                              type:
-                                - "boolean"
-                                - "null"
-                              description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                            top_logprobs:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 0
-                              maximum: 20
-                              description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                            n:
-                              type:
-                                - "integer"
-                                - "null"
-                              minimum: 1
-                              description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                             presence_penalty:
                               type:
                                 - "number"
@@ -22918,15 +21724,6 @@ paths:
                                   maxItems: 4
                                 - type: "null"
                               description: "Up to 4 sequences where the API will stop generating further tokens."
-                            stream_options:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                include_usage:
-                                  type: "boolean"
-                                  description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                              description: "Options for streaming response. Only set this when you set stream: true."
                             thinking:
                               oneOf:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -23030,33 +21827,6 @@ paths:
                                 required:
                                   - "model"
                               description: "Array of fallback models to use if primary model fails"
-                            retry:
-                              type: "object"
-                              properties:
-                                count:
-                                  type: "number"
-                                  minimum: 1
-                                  maximum: 5
-                                  default: 3
-                                  description: "Number of retry attempts (1-5)"
-                                  example: 3
-                                on_codes:
-                                  type: "array"
-                                  items:
-                                    type: "number"
-                                    minimum: 100
-                                    maximum: 599
-                                  minItems: 1
-                                  default:
-                                    - 429
-                                  description: "HTTP status codes that trigger retry logic"
-                                  example:
-                                    - 429
-                                    - 500
-                                    - 502
-                                    - 503
-                                    - 504
-                              description: "Retry configuration for the request"
                             cache:
                               type: "object"
                               properties:
@@ -23174,34 +21944,6 @@ paths:
                               name:
                                 type: "string"
                                 description: "The name to display on the trace. If not specified, the default system name will be used."
-                              audio:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  voice:
-                                    type: "string"
-                                    enum:
-                                      - "alloy"
-                                      - "echo"
-                                      - "fable"
-                                      - "onyx"
-                                      - "nova"
-                                      - "shimmer"
-                                    description: "The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer."
-                                  format:
-                                    type: "string"
-                                    enum:
-                                      - "wav"
-                                      - "mp3"
-                                      - "flac"
-                                      - "opus"
-                                      - "pcm16"
-                                    description: "Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16."
-                                required:
-                                  - "voice"
-                                  - "format"
-                                description: "Parameters for audio output. Required when audio output is requested with modalities: [\"audio\"]. Learn more."
                               frequency_penalty:
                                 type:
                                   - "number"
@@ -23218,24 +21960,6 @@ paths:
                                   - "null"
                                 exclusiveMinimum: 0
                                 description: "An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens"
-                              logprobs:
-                                type:
-                                  - "boolean"
-                                  - "null"
-                                description: "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message."
-                              top_logprobs:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 0
-                                maximum: 20
-                                description: "An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used."
-                              n:
-                                type:
-                                  - "integer"
-                                  - "null"
-                                minimum: 1
-                                description: "How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs."
                               presence_penalty:
                                 type:
                                   - "number"
@@ -23319,15 +22043,6 @@ paths:
                                     maxItems: 4
                                   - type: "null"
                                 description: "Up to 4 sequences where the API will stop generating further tokens."
-                              stream_options:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  include_usage:
-                                    type: "boolean"
-                                    description: "If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value."
-                                description: "Options for streaming response. Only set this when you set stream: true."
                               thinking:
                                 oneOf:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
@@ -23431,33 +22146,6 @@ paths:
                                   required:
                                     - "model"
                                 description: "Array of fallback models to use if primary model fails"
-                              retry:
-                                type: "object"
-                                properties:
-                                  count:
-                                    type: "number"
-                                    minimum: 1
-                                    maximum: 5
-                                    default: 3
-                                    description: "Number of retry attempts (1-5)"
-                                    example: 3
-                                  on_codes:
-                                    type: "array"
-                                    items:
-                                      type: "number"
-                                      minimum: 100
-                                      maximum: 599
-                                    minItems: 1
-                                    default:
-                                      - 429
-                                    description: "HTTP status codes that trigger retry logic"
-                                    example:
-                                      - 429
-                                      - 500
-                                      - 502
-                                      - 503
-                                      - 504
-                                description: "Retry configuration for the request"
                               cache:
                                 type: "object"
                                 properties:
@@ -24275,7 +22963,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KJVN9RE8H6EXK5ETG9VTFGJD"
+                                          default: "01KJWA1EJWGJG7VDDK03NRRZ70"
                                         name:
                                           type: "string"
                                         description:
@@ -24809,7 +23497,7 @@ paths:
                   created:
                     type: "string"
                     format: "date-time"
-                    default: "2026-03-04T05:31:48.581Z"
+                    default: "2026-03-04T11:34:14.206Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -24898,7 +23586,7 @@ paths:
                         created:
                           type: "string"
                           format: "date-time"
-                          default: "2026-03-04T05:31:48.581Z"
+                          default: "2026-03-04T11:34:14.206Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -24966,7 +23654,7 @@ paths:
                   created:
                     type: "string"
                     format: "date-time"
-                    default: "2026-03-04T05:31:48.581Z"
+                    default: "2026-03-04T11:34:14.206Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -32918,7 +31606,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KJVN9RQXCCYKZEYDEP1PVQRF"
+                              default: "tool_01KJWA1FHRDSKR3SJHBMXX28HA"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33017,7 +31705,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KJVN9RR0A0Z036FRV204P34Y"
+                              default: "tool_01KJWA1FHT3QNH7VD20851KH8K"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33118,7 +31806,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KJVN9RR2K08S8S5WJSQJV8DK"
+                              default: "tool_01KJWA1FHYPRD0FCSAVT24NHZM"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33255,7 +31943,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KJVN9RR5M1THPF4F8D8C5CTR"
+                              default: "tool_01KJWA1FJ2YPCWBW704Y0527CS"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33329,7 +32017,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KJVN9RR6RGVH33PV9DQM3KT1"
+                                        default: "01KJWA1FJ4E2K69NB4QDZSAXA6"
                                       name:
                                         type: "string"
                                       description:
@@ -33380,7 +32068,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KJVN9RR7G2TMH7PESMKF4ZJN"
+                              default: "tool_01KJWA1FJ5451CB3HK4HGMS70H"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33927,7 +32615,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RRXDPQM2HZTD0KZEBZ7"
+                        default: "tool_01KJWA1FJV0GBJ0V1B4PDN8HKN"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34026,7 +32714,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RRYAP3MJKH8EZNBWW9G"
+                        default: "tool_01KJWA1FJZQGQ704XEXBYEG35J"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34127,7 +32815,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RRZM4YVYV7385T2R5HR"
+                        default: "tool_01KJWA1FK5BCYX7BX4FMTK856D"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34264,7 +32952,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RS1XZJ80MMT1GC9RZF5"
+                        default: "tool_01KJWA1FM2FBZAA47X1SKHXQHT"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34338,7 +33026,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KJVN9RS2N35XW14PDA6NCDJ0"
+                                  default: "01KJWA1FM89KMEYT44AATC60ZS"
                                 name:
                                   type: "string"
                                 description:
@@ -34389,7 +33077,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RS3066S642YVNZY9KXB"
+                        default: "tool_01KJWA1FMDYVDGAFXQ73F05ZMB"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34840,7 +33528,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KJVN9RSWBEVZ9ZK4KNRTWJMV"
+                                default: "01KJWA1FQ0K5CJ1WQD9KF5T5BK"
                               name:
                                 type: "string"
                               description:
@@ -34970,7 +33658,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RS91CMKF0QBNB17XZ0F"
+                        default: "tool_01KJWA1FN85MCXHFR1VNYKBNW2"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35069,7 +33757,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RSBS9AJWH9TPATCGDR0"
+                        default: "tool_01KJWA1FNEMWCA2P1VXK6SK9QT"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35170,7 +33858,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RSDRYPEHJM4484N0PKA"
+                        default: "tool_01KJWA1FNR48HEDBD0HV7BYXR9"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35307,7 +33995,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RSGPP5GZRYVKWGNZA5F"
+                        default: "tool_01KJWA1FP17D846TV0V06NH9RQ"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35381,7 +34069,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KJVN9RSJHKZ3CBP6CFK90T46"
+                                  default: "01KJWA1FP5X40KSQ6XAXXKQ11P"
                                 name:
                                   type: "string"
                                 description:
@@ -35432,7 +34120,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RSKCRXV9RJBZ97EV6PZ"
+                        default: "tool_01KJWA1FP69BW3RYJF121HRGQZ"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35587,7 +34275,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RTGR125N4D7ZZWX31ZA"
+                        default: "tool_01KJWA1FS01K572K2XHEN59RMD"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35686,7 +34374,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RTJ17A4BN67NWC9FJPW"
+                        default: "tool_01KJWA1FS8T7RXDQZMK3D7K7BE"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35787,7 +34475,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RTMGH3SXVJCT04N71P8"
+                        default: "tool_01KJWA1FT5HNDD03GX2MAFF097"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35924,7 +34612,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RTN8AEZC4VF7X8W9VSB"
+                        default: "tool_01KJWA1FTNAZX8S8KZ10H2A694"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35998,7 +34686,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KJVN9RTPHE5KN99RTGZA5D8H"
+                                  default: "01KJWA1FTPEVZSDT2MPNQ3PKPN"
                                 name:
                                   type: "string"
                                 description:
@@ -36049,7 +34737,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KJVN9RTQY9S4FJJP2J4YPCGB"
+                        default: "tool_01KJWA1FTV3FSVRBPMTW2XM0E3"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -38185,7 +36873,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KJVN9RXH3XMMK50W07S7D8HB"
+                          default: "01KJWA1FZF3M7Q69PJH0E7TN1Q"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -38351,7 +37039,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KJVN9RXWQVRB2TF4E6H2CXY0"
+                    default: "01KJWA1FZJSRWRCJ16GNQP3KCW"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -38447,7 +37135,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KJVN9RXRB74ZTMC4N92VKG2T"
+                    default: "01KJWA1FZH95D77XPF1WPF3ERQ"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -38579,7 +37267,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KJVN9RY2X3CXFPJ4GKTTQ5DB"
+                    default: "01KJWA1FZMC280CP6K9HKZJK41"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -41120,7 +39808,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-03-04T05:31:45.405Z"
+                          default: "2026-03-04T11:34:10.822Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41128,7 +39816,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:45.405Z"
+                              default: "2026-03-04T11:34:10.823Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -41264,7 +39952,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41272,7 +39960,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -41395,7 +40083,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41403,7 +40091,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -41557,7 +40245,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41565,7 +40253,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -41942,7 +40630,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-03-04T05:31:59.881Z"
+                                    default: "2026-03-04T11:34:28.667Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -41982,7 +40670,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-03-04T05:31:59.882Z"
+                                    default: "2026-03-04T11:34:28.668Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42022,7 +40710,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-03-04T05:31:59.882Z"
+                                    default: "2026-03-04T11:34:28.668Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42058,7 +40746,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2026-03-04T05:31:45.405Z"
+                          default: "2026-03-04T11:34:10.822Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42066,7 +40754,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:45.405Z"
+                              default: "2026-03-04T11:34:10.823Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -42638,7 +41326,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-03-04T05:31:59.900Z"
+                                default: "2026-03-04T11:34:28.700Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -42678,7 +41366,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-03-04T05:31:59.901Z"
+                                default: "2026-03-04T11:34:28.700Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -42718,7 +41406,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-03-04T05:31:59.901Z"
+                                default: "2026-03-04T11:34:28.701Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -42754,7 +41442,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2026-03-04T05:31:45.405Z"
+                      default: "2026-03-04T11:34:10.822Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -42762,7 +41450,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-03-04T05:31:45.405Z"
+                          default: "2026-03-04T11:34:10.823Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -43082,7 +41770,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:59.893Z"
+                              default: "2026-03-04T11:34:28.687Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43122,7 +41810,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:59.893Z"
+                              default: "2026-03-04T11:34:28.688Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43162,7 +41850,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:59.894Z"
+                              default: "2026-03-04T11:34:28.688Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43198,7 +41886,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43206,7 +41894,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -43777,7 +42465,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:59.948Z"
+                              default: "2026-03-04T11:34:28.743Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43817,7 +42505,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:59.949Z"
+                              default: "2026-03-04T11:34:28.744Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43857,7 +42545,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-03-04T05:31:59.950Z"
+                              default: "2026-03-04T11:34:28.744Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43893,7 +42581,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2026-03-04T05:31:45.405Z"
+                    default: "2026-03-04T11:34:10.822Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43901,7 +42589,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-03-04T05:31:45.405Z"
+                        default: "2026-03-04T11:34:10.823Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
