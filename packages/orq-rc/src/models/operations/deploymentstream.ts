@@ -1215,6 +1215,17 @@ export type DeploymentStreamProvider = ClosedEnum<
   typeof DeploymentStreamProvider
 >;
 
+export type DeploymentStreamTelemetry = {
+  /**
+   * The trace id for the request that generated this response
+   */
+  traceId: string;
+  /**
+   * The span id for the request that generated this response
+   */
+  spanId: string;
+};
+
 /**
  * Metadata of the retrieved chunk from the knowledge base
  */
@@ -1451,6 +1462,7 @@ export type DeploymentStreamData = {
    * Indicates integration id used to generate the response
    */
   integrationId?: string | undefined;
+  telemetry: DeploymentStreamTelemetry;
   /**
    * A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601
    */
@@ -4211,6 +4223,31 @@ export const DeploymentStreamProvider$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentStreamProvider);
 
 /** @internal */
+export const DeploymentStreamTelemetry$inboundSchema: z.ZodType<
+  DeploymentStreamTelemetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  trace_id: z.string(),
+  span_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "trace_id": "traceId",
+    "span_id": "spanId",
+  });
+});
+
+export function deploymentStreamTelemetryFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamTelemetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamTelemetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamTelemetry' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamDeploymentsMetadata$inboundSchema: z.ZodType<
   DeploymentStreamDeploymentsMetadata,
   z.ZodTypeDef,
@@ -4559,6 +4596,7 @@ export const DeploymentStreamData$inboundSchema: z.ZodType<
   provider: DeploymentStreamProvider$inboundSchema,
   is_final: z.boolean(),
   integration_id: z.string().optional(),
+  telemetry: z.lazy(() => DeploymentStreamTelemetry$inboundSchema),
   finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   system_fingerprint: z.nullable(z.string()).optional(),

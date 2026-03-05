@@ -872,7 +872,7 @@ export type RunAgentA2AMessage = {
    */
   role: RunAgentRoleUserMessage | RunAgentRoleToolMessage;
   /**
-   * A2A message parts (text, file, or tool_result only)
+   * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
   parts: Array<
     | components.TextPart
@@ -986,7 +986,7 @@ export type RunAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export type AgentToolInputRunHeaders = {
+export type RunAgentAgentToolInputRunHeaders = {
   value: string;
   encrypted?: boolean | undefined;
 };
@@ -1033,7 +1033,7 @@ export type Mcp = {
   /**
    * HTTP headers for MCP server requests with encryption support
    */
-  headers?: { [k: string]: AgentToolInputRunHeaders } | undefined;
+  headers?: { [k: string]: RunAgentAgentToolInputRunHeaders } | undefined;
   /**
    * Array of tools available from the MCP server
    */
@@ -1280,7 +1280,7 @@ export type Headers2 = {
   encrypted?: boolean | undefined;
 };
 
-export type Headers = Headers2 | string;
+export type AgentToolInputRunHeaders = Headers2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -1845,6 +1845,10 @@ export type RunAgentA2ATaskResponse = {
    * Current task status information
    */
   status: RunAgentTaskStatus;
+  /**
+   * Array of messages in the task conversation. Only present when blocking mode is enabled.
+   */
+  messages?: Array<components.ExtendedMessage> | undefined;
   /**
    * Task metadata containing workspace_id and trace_id for feedback and tracking
    */
@@ -3521,26 +3525,28 @@ export function runAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
-export type AgentToolInputRunHeaders$Outbound = {
+export type RunAgentAgentToolInputRunHeaders$Outbound = {
   value: string;
   encrypted: boolean;
 };
 
 /** @internal */
-export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
-  AgentToolInputRunHeaders$Outbound,
+export const RunAgentAgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  RunAgentAgentToolInputRunHeaders$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunHeaders
+  RunAgentAgentToolInputRunHeaders
 > = z.object({
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
 
-export function agentToolInputRunHeadersToJSON(
-  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+export function runAgentAgentToolInputRunHeadersToJSON(
+  runAgentAgentToolInputRunHeaders: RunAgentAgentToolInputRunHeaders,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+    RunAgentAgentToolInputRunHeaders$outboundSchema.parse(
+      runAgentAgentToolInputRunHeaders,
+    ),
   );
 }
 
@@ -3593,7 +3599,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KJWE7V4YJZ66B8VGS9TY5CC2"),
+  id: z.string().default("01KJZ6J2SPJR976554V1PQKJCY"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -3611,7 +3617,9 @@ export const ConnectionType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type Mcp$Outbound = {
   server_url: string;
-  headers?: { [k: string]: AgentToolInputRunHeaders$Outbound } | undefined;
+  headers?:
+    | { [k: string]: RunAgentAgentToolInputRunHeaders$Outbound }
+    | undefined;
   tools: Array<Tools$Outbound>;
   connection_type: string;
 };
@@ -3620,8 +3628,9 @@ export type Mcp$Outbound = {
 export const Mcp$outboundSchema: z.ZodType<Mcp$Outbound, z.ZodTypeDef, Mcp> = z
   .object({
     serverUrl: z.string(),
-    headers: z.record(z.lazy(() => AgentToolInputRunHeaders$outboundSchema))
-      .optional(),
+    headers: z.record(
+      z.lazy(() => RunAgentAgentToolInputRunHeaders$outboundSchema),
+    ).optional(),
     tools: z.array(z.lazy(() => Tools$outboundSchema)),
     connectionType: ConnectionType$outboundSchema,
   }).transform((v) => {
@@ -4021,17 +4030,21 @@ export function headers2ToJSON(headers2: Headers2): string {
 }
 
 /** @internal */
-export type Headers$Outbound = Headers2$Outbound | string;
+export type AgentToolInputRunHeaders$Outbound = Headers2$Outbound | string;
 
 /** @internal */
-export const Headers$outboundSchema: z.ZodType<
-  Headers$Outbound,
+export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  AgentToolInputRunHeaders$Outbound,
   z.ZodTypeDef,
-  Headers
+  AgentToolInputRunHeaders
 > = z.union([z.lazy(() => Headers2$outboundSchema), z.string()]);
 
-export function headersToJSON(headers: Headers): string {
-  return JSON.stringify(Headers$outboundSchema.parse(headers));
+export function agentToolInputRunHeadersToJSON(
+  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+  );
 }
 
 /** @internal */
@@ -4899,6 +4912,7 @@ export const RunAgentA2ATaskResponse$inboundSchema: z.ZodType<
   contextId: z.string(),
   kind: RunAgentKind$inboundSchema,
   status: z.lazy(() => RunAgentTaskStatus$inboundSchema),
+  messages: z.array(components.ExtendedMessage$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
 });
 

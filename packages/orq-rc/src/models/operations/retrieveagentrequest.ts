@@ -20,7 +20,7 @@ export type RetrieveAgentRequestRequest = {
 /**
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const RetrieveAgentRequestStatus = {
+export const RetrieveAgentRequestResponseBodyAgentsStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -29,14 +29,196 @@ export const RetrieveAgentRequestStatus = {
 /**
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type RetrieveAgentRequestStatus = ClosedEnum<
-  typeof RetrieveAgentRequestStatus
+export type RetrieveAgentRequestResponseBodyAgentsStatus = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyAgentsStatus
+>;
+
+export type RetrieveAgentRequestResponseBodyAgentsTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type RetrieveAgentRequestResponseBodyAgentsMetrics = {
+  totalCost: number;
+};
+
+export type RetrieveAgentRequestResponseBodyAgentsKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const RetrieveAgentRequestResponseBodyAgentsSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type RetrieveAgentRequestResponseBodyAgentsSource = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyAgentsSource
+>;
+
+export type RetrieveAgentRequestResponseBodyHeaders = {
+  /**
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
+   */
+  value: string;
+  encrypted: boolean;
+};
+
+/**
+ * A2A configuration with agent endpoint and authentication. External agents manage their own model/settings.
+ */
+export type ResponseBodyA2AAgentConfiguration = {
+  /**
+   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
+   */
+  agentUrl: string;
+  /**
+   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
+   */
+  cardUrl?: string | undefined;
+  /**
+   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
+   */
+  headers?:
+    | { [k: string]: RetrieveAgentRequestResponseBodyHeaders }
+    | undefined;
+  /**
+   * Cached agent card from discovery. Refreshed periodically.
+   */
+  cachedCard?: any | undefined;
+};
+
+export type RetrieveAgentRequestResponseBody2 = {
+  id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
+  key: string;
+  displayName?: string | undefined;
+  projectId: string;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
+  created?: string | undefined;
+  updated?: string | undefined;
+  /**
+   * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+   */
+  status: RetrieveAgentRequestResponseBodyAgentsStatus;
+  versionHash?: string | undefined;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
+  memoryStores?: Array<string> | undefined;
+  /**
+   * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
+   */
+  teamOfAgents?:
+    | Array<RetrieveAgentRequestResponseBodyAgentsTeamOfAgents>
+    | undefined;
+  metrics?: RetrieveAgentRequestResponseBodyAgentsMetrics | undefined;
+  /**
+   * Extracted variables from agent instructions
+   */
+  variables?: { [k: string]: any } | undefined;
+  /**
+   * Agent knowledge bases reference
+   */
+  knowledgeBases?:
+    | Array<RetrieveAgentRequestResponseBodyAgentsKnowledgeBases>
+    | undefined;
+  source?: RetrieveAgentRequestResponseBodyAgentsSource | undefined;
+  /**
+   * External A2A-compliant agent
+   */
+  type: "a2a";
+  /**
+   * Role fetched from agent card name or user-provided
+   */
+  role: string;
+  /**
+   * Description fetched from agent card or user-provided
+   */
+  description: string;
+  systemPrompt?: string | undefined;
+  /**
+   * Instructions from agent card description or user-provided
+   */
+  instructions: string;
+  /**
+   * A2A configuration with agent endpoint and authentication. External agents manage their own model/settings.
+   */
+  a2a: ResponseBodyA2AAgentConfiguration;
+};
+
+/**
+ * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+ */
+export const RetrieveAgentRequestResponseBodyStatus = {
+  Live: "live",
+  Draft: "draft",
+  Pending: "pending",
+  Published: "published",
+} as const;
+/**
+ * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+ */
+export type RetrieveAgentRequestResponseBodyStatus = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyStatus
+>;
+
+export type RetrieveAgentRequestResponseBodyTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type RetrieveAgentRequestResponseBodyMetrics = {
+  totalCost: number;
+};
+
+export type RetrieveAgentRequestResponseBodyKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const RetrieveAgentRequestResponseBodySource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type RetrieveAgentRequestResponseBodySource = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodySource
 >;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
  */
-export const RetrieveAgentRequestToolApprovalRequired = {
+export const RetrieveAgentRequestResponseBodyToolApprovalRequired = {
   All: "all",
   RespectTool: "respect_tool",
   None: "none",
@@ -44,11 +226,11 @@ export const RetrieveAgentRequestToolApprovalRequired = {
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
  */
-export type RetrieveAgentRequestToolApprovalRequired = ClosedEnum<
-  typeof RetrieveAgentRequestToolApprovalRequired
+export type RetrieveAgentRequestResponseBodyToolApprovalRequired = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyToolApprovalRequired
 >;
 
-export type RetrieveAgentRequestConditions = {
+export type ResponseBodyConditions = {
   /**
    * The argument of the tool call to evaluate
    */
@@ -63,7 +245,7 @@ export type RetrieveAgentRequestConditions = {
   value: string;
 };
 
-export type RetrieveAgentRequestTools = {
+export type RetrieveAgentRequestResponseBodyTools = {
   /**
    * The id of the resource
    */
@@ -83,7 +265,7 @@ export type RetrieveAgentRequestTools = {
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
   toolId?: string | undefined;
-  conditions?: Array<RetrieveAgentRequestConditions> | undefined;
+  conditions?: Array<ResponseBodyConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
@@ -93,18 +275,18 @@ export type RetrieveAgentRequestTools = {
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const RetrieveAgentRequestExecuteOn = {
+export const RetrieveAgentRequestResponseBodyExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type RetrieveAgentRequestExecuteOn = ClosedEnum<
-  typeof RetrieveAgentRequestExecuteOn
+export type RetrieveAgentRequestResponseBodyExecuteOn = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyExecuteOn
 >;
 
-export type RetrieveAgentRequestEvaluators = {
+export type RetrieveAgentRequestResponseBodyEvaluators = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -116,24 +298,24 @@ export type RetrieveAgentRequestEvaluators = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: RetrieveAgentRequestExecuteOn;
+  executeOn: RetrieveAgentRequestResponseBodyExecuteOn;
 };
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const RetrieveAgentRequestAgentsExecuteOn = {
+export const RetrieveAgentRequestResponseBodyAgentsExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type RetrieveAgentRequestAgentsExecuteOn = ClosedEnum<
-  typeof RetrieveAgentRequestAgentsExecuteOn
+export type RetrieveAgentRequestResponseBodyAgentsExecuteOn = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyAgentsExecuteOn
 >;
 
-export type RetrieveAgentRequestGuardrails = {
+export type RetrieveAgentRequestResponseBodyGuardrails = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -145,10 +327,10 @@ export type RetrieveAgentRequestGuardrails = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: RetrieveAgentRequestAgentsExecuteOn;
+  executeOn: RetrieveAgentRequestResponseBodyAgentsExecuteOn;
 };
 
-export type RetrieveAgentRequestSettings = {
+export type RetrieveAgentRequestResponseBodySettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
    */
@@ -164,16 +346,16 @@ export type RetrieveAgentRequestSettings = {
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
-  toolApprovalRequired: RetrieveAgentRequestToolApprovalRequired;
-  tools?: Array<RetrieveAgentRequestTools> | undefined;
+  toolApprovalRequired: RetrieveAgentRequestResponseBodyToolApprovalRequired;
+  tools?: Array<RetrieveAgentRequestResponseBodyTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
    */
-  evaluators?: Array<RetrieveAgentRequestEvaluators> | undefined;
+  evaluators?: Array<RetrieveAgentRequestResponseBodyEvaluators> | undefined;
   /**
    * Configuration for a guardrail applied to the agent
    */
-  guardrails?: Array<RetrieveAgentRequestGuardrails> | undefined;
+  guardrails?: Array<RetrieveAgentRequestResponseBodyGuardrails> | undefined;
 };
 
 export type RetrieveAgentRequestResponseFormatJsonSchema = {
@@ -226,7 +408,7 @@ export type RetrieveAgentRequestResponseFormatText = {
 /**
  * An object specifying the format that the model must output
  */
-export type RetrieveAgentRequestResponseFormat =
+export type RetrieveAgentRequestResponseBodyResponseFormat =
   | RetrieveAgentRequestResponseFormatText
   | RetrieveAgentRequestResponseFormatJSONObject
   | RetrieveAgentRequestResponseFormatAgentsJSONSchema;
@@ -243,7 +425,7 @@ export type RetrieveAgentRequestResponseFormat =
  *
  * Any of "none", "minimal", "low", "medium", "high", "xhigh".
  */
-export const RetrieveAgentRequestReasoningEffort = {
+export const RetrieveAgentRequestResponseBodyReasoningEffort = {
   None: "none",
   Minimal: "minimal",
   Low: "low",
@@ -263,16 +445,16 @@ export const RetrieveAgentRequestReasoningEffort = {
  *
  * Any of "none", "minimal", "low", "medium", "high", "xhigh".
  */
-export type RetrieveAgentRequestReasoningEffort = ClosedEnum<
-  typeof RetrieveAgentRequestReasoningEffort
+export type RetrieveAgentRequestResponseBodyReasoningEffort = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyReasoningEffort
 >;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
-export type RetrieveAgentRequestStop = string | Array<string>;
+export type RetrieveAgentRequestResponseBodyStop = string | Array<string>;
 
-export type RetrieveAgentRequestThinking =
+export type RetrieveAgentRequestResponseBodyThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema;
 
@@ -316,16 +498,16 @@ export type RetrieveAgentRequestToolChoice1 = ClosedEnum<
 /**
  * Controls which (if any) tool is called by the model.
  */
-export type RetrieveAgentRequestToolChoice =
+export type RetrieveAgentRequestResponseBodyToolChoice =
   | RetrieveAgentRequestToolChoice2
   | RetrieveAgentRequestToolChoice1;
 
-export const RetrieveAgentRequestModalities = {
+export const RetrieveAgentRequestResponseBodyModalities = {
   Text: "text",
   Audio: "audio",
 } as const;
-export type RetrieveAgentRequestModalities = ClosedEnum<
-  typeof RetrieveAgentRequestModalities
+export type RetrieveAgentRequestResponseBodyModalities = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyModalities
 >;
 
 /**
@@ -343,53 +525,54 @@ export type RetrieveAgentRequestId1 = ClosedEnum<
   typeof RetrieveAgentRequestId1
 >;
 
-export type RetrieveAgentRequestId = RetrieveAgentRequestId1 | string;
+export type RetrieveAgentRequestResponseBodyId =
+  | RetrieveAgentRequestId1
+  | string;
 
 /**
  * Determines whether the guardrail runs on the input (user message) or output (model response).
  */
-export const RetrieveAgentRequestAgentsResponseExecuteOn = {
+export const RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the guardrail runs on the input (user message) or output (model response).
  */
-export type RetrieveAgentRequestAgentsResponseExecuteOn = ClosedEnum<
-  typeof RetrieveAgentRequestAgentsResponseExecuteOn
->;
+export type RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn =
+  ClosedEnum<typeof RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn>;
 
-export type RetrieveAgentRequestAgentsGuardrails = {
+export type RetrieveAgentRequestResponseBodyAgentsGuardrails = {
   id: RetrieveAgentRequestId1 | string;
   /**
    * Determines whether the guardrail runs on the input (user message) or output (model response).
    */
-  executeOn: RetrieveAgentRequestAgentsResponseExecuteOn;
+  executeOn: RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn;
 };
 
-export type RetrieveAgentRequestFallbacks = {
+export type RetrieveAgentRequestResponseBodyFallbacks = {
   /**
    * Fallback model identifier
    */
   model: string;
 };
 
-export const RetrieveAgentRequestType = {
+export const RetrieveAgentRequestResponseBodyAgentsResponseType = {
   ExactMatch: "exact_match",
 } as const;
-export type RetrieveAgentRequestType = ClosedEnum<
-  typeof RetrieveAgentRequestType
+export type RetrieveAgentRequestResponseBodyAgentsResponseType = ClosedEnum<
+  typeof RetrieveAgentRequestResponseBodyAgentsResponseType
 >;
 
 /**
  * Cache configuration for the request.
  */
-export type RetrieveAgentRequestCache = {
+export type RetrieveAgentRequestResponseBodyCache = {
   /**
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl: number;
-  type: RetrieveAgentRequestType;
+  type: RetrieveAgentRequestResponseBodyAgentsResponseType;
 };
 
 export const RetrieveAgentRequestLoadBalancerType = {
@@ -418,13 +601,13 @@ export type RetrieveAgentRequestLoadBalancer1 = {
 /**
  * Load balancer configuration for the request.
  */
-export type RetrieveAgentRequestLoadBalancer =
+export type RetrieveAgentRequestResponseBodyLoadBalancer =
   RetrieveAgentRequestLoadBalancer1;
 
 /**
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
-export type RetrieveAgentRequestTimeout = {
+export type RetrieveAgentRequestResponseBodyTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -434,7 +617,7 @@ export type RetrieveAgentRequestTimeout = {
 /**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
-export type RetrieveAgentRequestParameters = {
+export type RetrieveAgentRequestResponseBodyParameters = {
   /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
@@ -479,7 +662,7 @@ export type RetrieveAgentRequestParameters = {
    *
    * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: RetrieveAgentRequestReasoningEffort | undefined;
+  reasoningEffort?: RetrieveAgentRequestResponseBodyReasoningEffort | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -522,19 +705,24 @@ export type RetrieveAgentRequestParameters = {
   /**
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
-  modalities?: Array<RetrieveAgentRequestModalities> | null | undefined;
+  modalities?:
+    | Array<RetrieveAgentRequestResponseBodyModalities>
+    | null
+    | undefined;
   /**
    * A list of guardrails to apply to the request.
    */
-  guardrails?: Array<RetrieveAgentRequestAgentsGuardrails> | undefined;
+  guardrails?:
+    | Array<RetrieveAgentRequestResponseBodyAgentsGuardrails>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<RetrieveAgentRequestFallbacks> | undefined;
+  fallbacks?: Array<RetrieveAgentRequestResponseBodyFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
-  cache?: RetrieveAgentRequestCache | undefined;
+  cache?: RetrieveAgentRequestResponseBodyCache | undefined;
   /**
    * Load balancer configuration for the request.
    */
@@ -542,13 +730,13 @@ export type RetrieveAgentRequestParameters = {
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: RetrieveAgentRequestTimeout | undefined;
+  timeout?: RetrieveAgentRequestResponseBodyTimeout | undefined;
 };
 
 /**
  * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
  */
-export type RetrieveAgentRequestRetry = {
+export type RetrieveAgentRequestResponseBodyRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -977,11 +1165,11 @@ export type RetrieveAgentRequestFallbackModelConfiguration2 = {
 /**
  * Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order.
  */
-export type RetrieveAgentRequestFallbackModelConfiguration =
+export type RetrieveAgentRequestResponseBodyFallbackModelConfiguration =
   | RetrieveAgentRequestFallbackModelConfiguration2
   | string;
 
-export type RetrieveAgentRequestModel = {
+export type ResponseBodyModel = {
   /**
    * The database ID of the primary model
    */
@@ -993,11 +1181,11 @@ export type RetrieveAgentRequestModel = {
   /**
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
-  parameters?: RetrieveAgentRequestParameters | undefined;
+  parameters?: RetrieveAgentRequestResponseBodyParameters | undefined;
   /**
    * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
    */
-  retry?: RetrieveAgentRequestRetry | undefined;
+  retry?: RetrieveAgentRequestResponseBodyRetry | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
@@ -1007,63 +1195,22 @@ export type RetrieveAgentRequestModel = {
     | undefined;
 };
 
-export type RetrieveAgentRequestTeamOfAgents = {
-  /**
-   * The unique key of the agent within the workspace
-   */
-  key: string;
-  /**
-   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
-   */
-  role?: string | undefined;
-};
-
-export type RetrieveAgentRequestMetrics = {
-  totalCost: number;
-};
-
-export type RetrieveAgentRequestKnowledgeBases = {
-  /**
-   * Unique identifier of the knowledge base to search
-   */
-  knowledgeId: string;
-};
-
-export const RetrieveAgentRequestSource = {
-  Internal: "internal",
-  External: "external",
-  Experiment: "experiment",
-} as const;
-export type RetrieveAgentRequestSource = ClosedEnum<
-  typeof RetrieveAgentRequestSource
->;
-
-/**
- * Agent successfully retrieved. Returns the complete agent manifest with all configuration details, including models, tools, knowledge bases, and execution settings.
- */
-export type RetrieveAgentRequestResponseBody = {
+export type RetrieveAgentRequestResponseBody1 = {
   id: string;
   /**
    * Unique identifier for the agent within the workspace
    */
   key: string;
   displayName?: string | undefined;
-  workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  role: string;
-  description: string;
-  systemPrompt?: string | undefined;
-  instructions: string;
   /**
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: RetrieveAgentRequestStatus;
-  settings?: RetrieveAgentRequestSettings | undefined;
-  model: RetrieveAgentRequestModel;
+  status: RetrieveAgentRequestResponseBodyStatus;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -1078,12 +1225,14 @@ export type RetrieveAgentRequestResponseBody = {
   /**
    * Array of memory store identifiers. Accepts both memory store IDs and keys.
    */
-  memoryStores: Array<string>;
+  memoryStores?: Array<string> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents: Array<RetrieveAgentRequestTeamOfAgents>;
-  metrics?: RetrieveAgentRequestMetrics | undefined;
+  teamOfAgents?:
+    | Array<RetrieveAgentRequestResponseBodyTeamOfAgents>
+    | undefined;
+  metrics?: RetrieveAgentRequestResponseBodyMetrics | undefined;
   /**
    * Extracted variables from agent instructions
    */
@@ -1091,9 +1240,28 @@ export type RetrieveAgentRequestResponseBody = {
   /**
    * Agent knowledge bases reference
    */
-  knowledgeBases?: Array<RetrieveAgentRequestKnowledgeBases> | undefined;
-  source?: RetrieveAgentRequestSource | undefined;
+  knowledgeBases?:
+    | Array<RetrieveAgentRequestResponseBodyKnowledgeBases>
+    | undefined;
+  source?: RetrieveAgentRequestResponseBodySource | undefined;
+  /**
+   * Orquesta-managed agent
+   */
+  type: "internal";
+  role: string;
+  description: string;
+  systemPrompt?: string | undefined;
+  instructions: string;
+  settings?: RetrieveAgentRequestResponseBodySettings | undefined;
+  model: ResponseBodyModel;
 };
+
+/**
+ * Agent successfully retrieved. Returns the complete agent manifest with all configuration details, including models, tools, knowledge bases, and execution settings.
+ */
+export type RetrieveAgentRequestResponseBody =
+  | RetrieveAgentRequestResponseBody1
+  | RetrieveAgentRequestResponseBody2;
 
 /** @internal */
 export type RetrieveAgentRequestRequest$Outbound = {
@@ -1124,18 +1292,328 @@ export function retrieveAgentRequestRequestToJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestStatus$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestStatus
-> = z.nativeEnum(RetrieveAgentRequestStatus);
+export const RetrieveAgentRequestResponseBodyAgentsStatus$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyAgentsStatus> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyAgentsStatus);
 
 /** @internal */
-export const RetrieveAgentRequestToolApprovalRequired$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestToolApprovalRequired> = z
-    .nativeEnum(RetrieveAgentRequestToolApprovalRequired);
+export const RetrieveAgentRequestResponseBodyAgentsTeamOfAgents$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyAgentsTeamOfAgents,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    key: z.string(),
+    role: z.string().optional(),
+  });
+
+export function retrieveAgentRequestResponseBodyAgentsTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyAgentsTeamOfAgents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyAgentsTeamOfAgents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyAgentsTeamOfAgents' from JSON`,
+  );
+}
 
 /** @internal */
-export const RetrieveAgentRequestConditions$inboundSchema: z.ZodType<
-  RetrieveAgentRequestConditions,
+export const RetrieveAgentRequestResponseBodyAgentsMetrics$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyAgentsMetrics,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    total_cost: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+    });
+  });
+
+export function retrieveAgentRequestResponseBodyAgentsMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyAgentsMetrics,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyAgentsMetrics$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyAgentsMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyAgentsKnowledgeBases$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyAgentsKnowledgeBases,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    knowledge_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "knowledge_id": "knowledgeId",
+    });
+  });
+
+export function retrieveAgentRequestResponseBodyAgentsKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyAgentsKnowledgeBases,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyAgentsKnowledgeBases$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyAgentsKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyAgentsSource$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyAgentsSource> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyAgentsSource);
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyHeaders$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function retrieveAgentRequestResponseBodyHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyHeaders,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyHeaders$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyHeaders' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyA2AAgentConfiguration$inboundSchema: z.ZodType<
+  ResponseBodyA2AAgentConfiguration,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  agent_url: z.string(),
+  card_url: z.string().optional(),
+  headers: z.record(
+    z.lazy(() => RetrieveAgentRequestResponseBodyHeaders$inboundSchema),
+  ).optional(),
+  cached_card: z.any().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_url": "agentUrl",
+    "card_url": "cardUrl",
+    "cached_card": "cachedCard",
+  });
+});
+
+export function responseBodyA2AAgentConfigurationFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyA2AAgentConfiguration, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyA2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyA2AAgentConfiguration' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBody2$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  key: z.string(),
+  display_name: z.string().optional(),
+  project_id: z.string(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  created: z.string().optional(),
+  updated: z.string().optional(),
+  status: RetrieveAgentRequestResponseBodyAgentsStatus$inboundSchema,
+  version_hash: z.string().optional(),
+  path: z.string(),
+  memory_stores: z.array(z.string()).optional(),
+  team_of_agents: z.array(
+    z.lazy(() =>
+      RetrieveAgentRequestResponseBodyAgentsTeamOfAgents$inboundSchema
+    ),
+  ).optional(),
+  metrics: z.lazy(() =>
+    RetrieveAgentRequestResponseBodyAgentsMetrics$inboundSchema
+  ).optional(),
+  variables: z.record(z.any()).optional(),
+  knowledge_bases: z.array(
+    z.lazy(() =>
+      RetrieveAgentRequestResponseBodyAgentsKnowledgeBases$inboundSchema
+    ),
+  ).optional(),
+  source: RetrieveAgentRequestResponseBodyAgentsSource$inboundSchema.optional(),
+  type: z.literal("a2a"),
+  role: z.string(),
+  description: z.string(),
+  system_prompt: z.string().optional(),
+  instructions: z.string(),
+  a2a: z.lazy(() => ResponseBodyA2AAgentConfiguration$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "project_id": "projectId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "version_hash": "versionHash",
+    "memory_stores": "memoryStores",
+    "team_of_agents": "teamOfAgents",
+    "knowledge_bases": "knowledgeBases",
+    "system_prompt": "systemPrompt",
+  });
+});
+
+export function retrieveAgentRequestResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestResponseBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAgentRequestResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyStatus$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyStatus> = z.nativeEnum(
+    RetrieveAgentRequestResponseBodyStatus,
+  );
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyTeamOfAgents$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyTeamOfAgents,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    key: z.string(),
+    role: z.string().optional(),
+  });
+
+export function retrieveAgentRequestResponseBodyTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyTeamOfAgents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyTeamOfAgents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyMetrics$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function retrieveAgentRequestResponseBodyMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyMetrics,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyMetrics$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyKnowledgeBases$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyKnowledgeBases,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    knowledge_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "knowledge_id": "knowledgeId",
+    });
+  });
+
+export function retrieveAgentRequestResponseBodyKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyKnowledgeBases,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyKnowledgeBases$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodySource$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodySource> = z.nativeEnum(
+    RetrieveAgentRequestResponseBodySource,
+  );
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyToolApprovalRequired$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyToolApprovalRequired> =
+    z.nativeEnum(RetrieveAgentRequestResponseBodyToolApprovalRequired);
+
+/** @internal */
+export const ResponseBodyConditions$inboundSchema: z.ZodType<
+  ResponseBodyConditions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1144,19 +1622,19 @@ export const RetrieveAgentRequestConditions$inboundSchema: z.ZodType<
   value: z.string(),
 });
 
-export function retrieveAgentRequestConditionsFromJSON(
+export function responseBodyConditionsFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestConditions, SDKValidationError> {
+): SafeParseResult<ResponseBodyConditions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestConditions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestConditions' from JSON`,
+    (x) => ResponseBodyConditions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyConditions' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestTools$inboundSchema: z.ZodType<
-  RetrieveAgentRequestTools,
+export const RetrieveAgentRequestResponseBodyTools$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyTools,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1167,9 +1645,8 @@ export const RetrieveAgentRequestTools$inboundSchema: z.ZodType<
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
-  conditions: z.array(
-    z.lazy(() => RetrieveAgentRequestConditions$inboundSchema),
-  ).optional(),
+  conditions: z.array(z.lazy(() => ResponseBodyConditions$inboundSchema))
+    .optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
@@ -1180,96 +1657,108 @@ export const RetrieveAgentRequestTools$inboundSchema: z.ZodType<
   });
 });
 
-export function retrieveAgentRequestToolsFromJSON(
+export function retrieveAgentRequestResponseBodyToolsFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestTools, SDKValidationError> {
+): SafeParseResult<RetrieveAgentRequestResponseBodyTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestTools' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyTools' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestExecuteOn
-> = z.nativeEnum(RetrieveAgentRequestExecuteOn);
+export const RetrieveAgentRequestResponseBodyExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyExecuteOn> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyExecuteOn);
 
 /** @internal */
-export const RetrieveAgentRequestEvaluators$inboundSchema: z.ZodType<
-  RetrieveAgentRequestEvaluators,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: RetrieveAgentRequestExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+export const RetrieveAgentRequestResponseBodyEvaluators$inboundSchema:
+  z.ZodType<RetrieveAgentRequestResponseBodyEvaluators, z.ZodTypeDef, unknown> =
+    z.object({
+      id: z.string(),
+      sample_rate: z.number().default(50),
+      execute_on: RetrieveAgentRequestResponseBodyExecuteOn$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "sample_rate": "sampleRate",
+        "execute_on": "executeOn",
+      });
+    });
 
-export function retrieveAgentRequestEvaluatorsFromJSON(
+export function retrieveAgentRequestResponseBodyEvaluatorsFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestEvaluators, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyEvaluators,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestEvaluators$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestEvaluators' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyEvaluators$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyEvaluators' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestAgentsExecuteOn
-> = z.nativeEnum(RetrieveAgentRequestAgentsExecuteOn);
+export const RetrieveAgentRequestResponseBodyAgentsExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyAgentsExecuteOn> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyAgentsExecuteOn);
 
 /** @internal */
-export const RetrieveAgentRequestGuardrails$inboundSchema: z.ZodType<
-  RetrieveAgentRequestGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: RetrieveAgentRequestAgentsExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+export const RetrieveAgentRequestResponseBodyGuardrails$inboundSchema:
+  z.ZodType<RetrieveAgentRequestResponseBodyGuardrails, z.ZodTypeDef, unknown> =
+    z.object({
+      id: z.string(),
+      sample_rate: z.number().default(50),
+      execute_on: RetrieveAgentRequestResponseBodyAgentsExecuteOn$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "sample_rate": "sampleRate",
+        "execute_on": "executeOn",
+      });
+    });
 
-export function retrieveAgentRequestGuardrailsFromJSON(
+export function retrieveAgentRequestResponseBodyGuardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestGuardrails, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyGuardrails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestGuardrails' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyGuardrails' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
-  RetrieveAgentRequestSettings,
+export const RetrieveAgentRequestResponseBodySettings$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodySettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(600),
   max_cost: z.number().default(0),
-  tool_approval_required: RetrieveAgentRequestToolApprovalRequired$inboundSchema
-    .default("respect_tool"),
-  tools: z.array(z.lazy(() => RetrieveAgentRequestTools$inboundSchema))
-    .optional(),
+  tool_approval_required:
+    RetrieveAgentRequestResponseBodyToolApprovalRequired$inboundSchema.default(
+      "respect_tool",
+    ),
+  tools: z.array(
+    z.lazy(() => RetrieveAgentRequestResponseBodyTools$inboundSchema),
+  ).optional(),
   evaluators: z.array(
-    z.lazy(() => RetrieveAgentRequestEvaluators$inboundSchema),
+    z.lazy(() => RetrieveAgentRequestResponseBodyEvaluators$inboundSchema),
   ).optional(),
   guardrails: z.array(
-    z.lazy(() => RetrieveAgentRequestGuardrails$inboundSchema),
+    z.lazy(() => RetrieveAgentRequestResponseBodyGuardrails$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1280,13 +1769,19 @@ export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
   });
 });
 
-export function retrieveAgentRequestSettingsFromJSON(
+export function retrieveAgentRequestResponseBodySettingsFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestSettings, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodySettings,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestSettings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestSettings' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodySettings$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodySettings' from JSON`,
   );
 }
 
@@ -1399,54 +1894,61 @@ export function retrieveAgentRequestResponseFormatTextFromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestResponseFormat$inboundSchema: z.ZodType<
-  RetrieveAgentRequestResponseFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
-  z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
-  z.lazy(() =>
-    RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
-  ),
-]);
+export const RetrieveAgentRequestResponseBodyResponseFormat$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyResponseFormat,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
+    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
+    z.lazy(() =>
+      RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
+    ),
+  ]);
 
-export function retrieveAgentRequestResponseFormatFromJSON(
+export function retrieveAgentRequestResponseBodyResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestResponseFormat, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyResponseFormat,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      RetrieveAgentRequestResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestResponseFormat' from JSON`,
+      RetrieveAgentRequestResponseBodyResponseFormat$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestReasoningEffort
-> = z.nativeEnum(RetrieveAgentRequestReasoningEffort);
+export const RetrieveAgentRequestResponseBodyReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyReasoningEffort> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyReasoningEffort);
 
 /** @internal */
-export const RetrieveAgentRequestStop$inboundSchema: z.ZodType<
-  RetrieveAgentRequestStop,
+export const RetrieveAgentRequestResponseBodyStop$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyStop,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
 
-export function retrieveAgentRequestStopFromJSON(
+export function retrieveAgentRequestResponseBodyStopFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestStop, SDKValidationError> {
+): SafeParseResult<RetrieveAgentRequestResponseBodyStop, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestStop' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyStop' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestThinking$inboundSchema: z.ZodType<
-  RetrieveAgentRequestThinking,
+export const RetrieveAgentRequestResponseBodyThinking$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyThinking,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -1454,13 +1956,19 @@ export const RetrieveAgentRequestThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigEnabledSchema$inboundSchema,
 ]);
 
-export function retrieveAgentRequestThinkingFromJSON(
+export function retrieveAgentRequestResponseBodyThinkingFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestThinking, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyThinking,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestThinking' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyThinking$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyThinking' from JSON`,
   );
 }
 
@@ -1515,29 +2023,33 @@ export const RetrieveAgentRequestToolChoice1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RetrieveAgentRequestToolChoice1);
 
 /** @internal */
-export const RetrieveAgentRequestToolChoice$inboundSchema: z.ZodType<
-  RetrieveAgentRequestToolChoice,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
-  RetrieveAgentRequestToolChoice1$inboundSchema,
-]);
+export const RetrieveAgentRequestResponseBodyToolChoice$inboundSchema:
+  z.ZodType<RetrieveAgentRequestResponseBodyToolChoice, z.ZodTypeDef, unknown> =
+    z.union([
+      z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
+      RetrieveAgentRequestToolChoice1$inboundSchema,
+    ]);
 
-export function retrieveAgentRequestToolChoiceFromJSON(
+export function retrieveAgentRequestResponseBodyToolChoiceFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestToolChoice, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyToolChoice,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestToolChoice' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyToolChoice$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyToolChoice' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestModalities$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestModalities
-> = z.nativeEnum(RetrieveAgentRequestModalities);
+export const RetrieveAgentRequestResponseBodyModalities$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyModalities> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyModalities);
 
 /** @internal */
 export const RetrieveAgentRequestId1$inboundSchema: z.ZodNativeEnum<
@@ -1545,93 +2057,109 @@ export const RetrieveAgentRequestId1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RetrieveAgentRequestId1);
 
 /** @internal */
-export const RetrieveAgentRequestId$inboundSchema: z.ZodType<
-  RetrieveAgentRequestId,
+export const RetrieveAgentRequestResponseBodyId$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyId,
   z.ZodTypeDef,
   unknown
 > = z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]);
 
-export function retrieveAgentRequestIdFromJSON(
+export function retrieveAgentRequestResponseBodyIdFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestId' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseExecuteOn> = z
-    .nativeEnum(RetrieveAgentRequestAgentsResponseExecuteOn);
-
-/** @internal */
-export const RetrieveAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
-  RetrieveAgentRequestAgentsGuardrails,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]),
-  execute_on: RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
-
-export function retrieveAgentRequestAgentsGuardrailsFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestAgentsGuardrails, SDKValidationError> {
+): SafeParseResult<RetrieveAgentRequestResponseBodyId, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      RetrieveAgentRequestAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestAgentsGuardrails' from JSON`,
+      RetrieveAgentRequestResponseBodyId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyId' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestFallbacks$inboundSchema: z.ZodType<
-  RetrieveAgentRequestFallbacks,
+export const RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn
+  > = z.nativeEnum(RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn);
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyAgentsGuardrails$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyAgentsGuardrails,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]),
+    execute_on:
+      RetrieveAgentRequestResponseBodyAgentsResponseExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  });
+
+export function retrieveAgentRequestResponseBodyAgentsGuardrailsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyAgentsGuardrails,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestResponseBodyAgentsGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyAgentsGuardrails' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBodyFallbacks$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyFallbacks,
   z.ZodTypeDef,
   unknown
 > = z.object({
   model: z.string(),
 });
 
-export function retrieveAgentRequestFallbacksFromJSON(
+export function retrieveAgentRequestResponseBodyFallbacksFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestFallbacks, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyFallbacks,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestFallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestFallbacks' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyFallbacks$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyFallbacks' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestType
-> = z.nativeEnum(RetrieveAgentRequestType);
+export const RetrieveAgentRequestResponseBodyAgentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestResponseBodyAgentsResponseType> = z
+    .nativeEnum(RetrieveAgentRequestResponseBodyAgentsResponseType);
 
 /** @internal */
-export const RetrieveAgentRequestCache$inboundSchema: z.ZodType<
-  RetrieveAgentRequestCache,
+export const RetrieveAgentRequestResponseBodyCache$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyCache,
   z.ZodTypeDef,
   unknown
 > = z.object({
   ttl: z.number().default(1800),
-  type: RetrieveAgentRequestType$inboundSchema,
+  type: RetrieveAgentRequestResponseBodyAgentsResponseType$inboundSchema,
 });
 
-export function retrieveAgentRequestCacheFromJSON(
+export function retrieveAgentRequestResponseBodyCacheFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestCache, SDKValidationError> {
+): SafeParseResult<RetrieveAgentRequestResponseBodyCache, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestCache$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestCache' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyCache' from JSON`,
   );
 }
 
@@ -1685,25 +2213,32 @@ export function retrieveAgentRequestLoadBalancer1FromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestLoadBalancer$inboundSchema: z.ZodType<
-  RetrieveAgentRequestLoadBalancer,
-  z.ZodTypeDef,
-  unknown
-> = z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema);
+export const RetrieveAgentRequestResponseBodyLoadBalancer$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestResponseBodyLoadBalancer,
+    z.ZodTypeDef,
+    unknown
+  > = z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema);
 
-export function retrieveAgentRequestLoadBalancerFromJSON(
+export function retrieveAgentRequestResponseBodyLoadBalancerFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestLoadBalancer, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyLoadBalancer,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestLoadBalancer$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestLoadBalancer' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyLoadBalancer$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyLoadBalancer' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestTimeout$inboundSchema: z.ZodType<
-  RetrieveAgentRequestTimeout,
+export const RetrieveAgentRequestResponseBodyTimeout$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyTimeout,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1714,91 +2249,112 @@ export const RetrieveAgentRequestTimeout$inboundSchema: z.ZodType<
   });
 });
 
-export function retrieveAgentRequestTimeoutFromJSON(
+export function retrieveAgentRequestResponseBodyTimeoutFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestTimeout, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyTimeout,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestTimeout$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestTimeout' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyTimeout$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyTimeout' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
-  RetrieveAgentRequestParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  name: z.string().optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
-    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
-    z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
-    ),
-  ]).optional(),
-  reasoning_effort: RetrieveAgentRequestReasoningEffort$inboundSchema
-    .optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
-    RetrieveAgentRequestToolChoice1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(RetrieveAgentRequestModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => RetrieveAgentRequestAgentsGuardrails$inboundSchema),
-  ).optional(),
-  fallbacks: z.array(z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema))
-    .optional(),
-  cache: z.lazy(() => RetrieveAgentRequestCache$inboundSchema).optional(),
-  load_balancer: z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
-    .optional(),
-  timeout: z.lazy(() => RetrieveAgentRequestTimeout$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "load_balancer": "loadBalancer",
-  });
-});
+export const RetrieveAgentRequestResponseBodyParameters$inboundSchema:
+  z.ZodType<RetrieveAgentRequestResponseBodyParameters, z.ZodTypeDef, unknown> =
+    z.object({
+      name: z.string().optional(),
+      frequency_penalty: z.nullable(z.number()).optional(),
+      max_tokens: z.nullable(z.number().int()).optional(),
+      max_completion_tokens: z.nullable(z.number().int()).optional(),
+      presence_penalty: z.nullable(z.number()).optional(),
+      response_format: z.union([
+        z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
+        z.lazy(() =>
+          RetrieveAgentRequestResponseFormatJSONObject$inboundSchema
+        ),
+        z.lazy(() =>
+          RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
+        ),
+      ]).optional(),
+      reasoning_effort:
+        RetrieveAgentRequestResponseBodyReasoningEffort$inboundSchema
+          .optional(),
+      verbosity: z.string().optional(),
+      seed: z.nullable(z.number()).optional(),
+      stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+      thinking: z.union([
+        components.ThinkingConfigDisabledSchema$inboundSchema,
+        components.ThinkingConfigEnabledSchema$inboundSchema,
+      ]).optional(),
+      temperature: z.nullable(z.number()).optional(),
+      top_p: z.nullable(z.number()).optional(),
+      top_k: z.nullable(z.number()).optional(),
+      tool_choice: z.union([
+        z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
+        RetrieveAgentRequestToolChoice1$inboundSchema,
+      ]).optional(),
+      parallel_tool_calls: z.boolean().optional(),
+      modalities: z.nullable(
+        z.array(RetrieveAgentRequestResponseBodyModalities$inboundSchema),
+      ).optional(),
+      guardrails: z.array(
+        z.lazy(() =>
+          RetrieveAgentRequestResponseBodyAgentsGuardrails$inboundSchema
+        ),
+      ).optional(),
+      fallbacks: z.array(
+        z.lazy(() => RetrieveAgentRequestResponseBodyFallbacks$inboundSchema),
+      ).optional(),
+      cache: z.lazy(() => RetrieveAgentRequestResponseBodyCache$inboundSchema)
+        .optional(),
+      load_balancer: z.lazy(() =>
+        RetrieveAgentRequestLoadBalancer1$inboundSchema
+      ).optional(),
+      timeout: z.lazy(() =>
+        RetrieveAgentRequestResponseBodyTimeout$inboundSchema
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "frequency_penalty": "frequencyPenalty",
+        "max_tokens": "maxTokens",
+        "max_completion_tokens": "maxCompletionTokens",
+        "presence_penalty": "presencePenalty",
+        "response_format": "responseFormat",
+        "reasoning_effort": "reasoningEffort",
+        "top_p": "topP",
+        "top_k": "topK",
+        "tool_choice": "toolChoice",
+        "parallel_tool_calls": "parallelToolCalls",
+        "load_balancer": "loadBalancer",
+      });
+    });
 
-export function retrieveAgentRequestParametersFromJSON(
+export function retrieveAgentRequestResponseBodyParametersFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestParameters, SDKValidationError> {
+): SafeParseResult<
+  RetrieveAgentRequestResponseBodyParameters,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestParameters' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyParameters' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestRetry$inboundSchema: z.ZodType<
-  RetrieveAgentRequestRetry,
+export const RetrieveAgentRequestResponseBodyRetry$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBodyRetry,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1810,13 +2366,14 @@ export const RetrieveAgentRequestRetry$inboundSchema: z.ZodType<
   });
 });
 
-export function retrieveAgentRequestRetryFromJSON(
+export function retrieveAgentRequestResponseBodyRetryFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestRetry, SDKValidationError> {
+): SafeParseResult<RetrieveAgentRequestResponseBodyRetry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestRetry' from JSON`,
+    (x) =>
+      RetrieveAgentRequestResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyRetry' from JSON`,
   );
 }
 
@@ -2507,9 +3064,9 @@ export function retrieveAgentRequestFallbackModelConfiguration2FromJSON(
 }
 
 /** @internal */
-export const RetrieveAgentRequestFallbackModelConfiguration$inboundSchema:
+export const RetrieveAgentRequestResponseBodyFallbackModelConfiguration$inboundSchema:
   z.ZodType<
-    RetrieveAgentRequestFallbackModelConfiguration,
+    RetrieveAgentRequestResponseBodyFallbackModelConfiguration,
     z.ZodTypeDef,
     unknown
   > = z.union([
@@ -2517,33 +3074,34 @@ export const RetrieveAgentRequestFallbackModelConfiguration$inboundSchema:
     z.string(),
   ]);
 
-export function retrieveAgentRequestFallbackModelConfigurationFromJSON(
+export function retrieveAgentRequestResponseBodyFallbackModelConfigurationFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  RetrieveAgentRequestFallbackModelConfiguration,
+  RetrieveAgentRequestResponseBodyFallbackModelConfiguration,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      RetrieveAgentRequestFallbackModelConfiguration$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'RetrieveAgentRequestFallbackModelConfiguration' from JSON`,
+      RetrieveAgentRequestResponseBodyFallbackModelConfiguration$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBodyFallbackModelConfiguration' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestModel$inboundSchema: z.ZodType<
-  RetrieveAgentRequestModel,
+export const ResponseBodyModel$inboundSchema: z.ZodType<
+  ResponseBodyModel,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => RetrieveAgentRequestParameters$inboundSchema)
+  parameters: z.lazy(() =>
+    RetrieveAgentRequestResponseBodyParameters$inboundSchema
+  ).optional(),
+  retry: z.lazy(() => RetrieveAgentRequestResponseBodyRetry$inboundSchema)
     .optional(),
-  retry: z.lazy(() => RetrieveAgentRequestRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() =>
@@ -2559,137 +3117,86 @@ export const RetrieveAgentRequestModel$inboundSchema: z.ZodType<
   });
 });
 
-export function retrieveAgentRequestModelFromJSON(
+export function responseBodyModelFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveAgentRequestModel, SDKValidationError> {
+): SafeParseResult<ResponseBodyModel, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveAgentRequestModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestModel' from JSON`,
+    (x) => ResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyModel' from JSON`,
   );
 }
 
 /** @internal */
-export const RetrieveAgentRequestTeamOfAgents$inboundSchema: z.ZodType<
-  RetrieveAgentRequestTeamOfAgents,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
-
-export function retrieveAgentRequestTeamOfAgentsFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestTeamOfAgents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestTeamOfAgents' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestMetrics$inboundSchema: z.ZodType<
-  RetrieveAgentRequestMetrics,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_cost: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "total_cost": "totalCost",
-  });
-});
-
-export function retrieveAgentRequestMetricsFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestMetrics, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveAgentRequestMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestMetrics' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestKnowledgeBases$inboundSchema: z.ZodType<
-  RetrieveAgentRequestKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
-
-export function retrieveAgentRequestKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveAgentRequestKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveAgentRequestKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveAgentRequestKnowledgeBases' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveAgentRequestSource$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveAgentRequestSource
-> = z.nativeEnum(RetrieveAgentRequestSource);
-
-/** @internal */
-export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
-  RetrieveAgentRequestResponseBody,
+export const RetrieveAgentRequestResponseBody1$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
-  workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
+  status: RetrieveAgentRequestResponseBodyStatus$inboundSchema,
+  version_hash: z.string().optional(),
+  path: z.string(),
+  memory_stores: z.array(z.string()).optional(),
+  team_of_agents: z.array(
+    z.lazy(() => RetrieveAgentRequestResponseBodyTeamOfAgents$inboundSchema),
+  ).optional(),
+  metrics: z.lazy(() => RetrieveAgentRequestResponseBodyMetrics$inboundSchema)
+    .optional(),
+  variables: z.record(z.any()).optional(),
+  knowledge_bases: z.array(
+    z.lazy(() => RetrieveAgentRequestResponseBodyKnowledgeBases$inboundSchema),
+  ).optional(),
+  source: RetrieveAgentRequestResponseBodySource$inboundSchema.optional(),
+  type: z.literal("internal"),
   role: z.string(),
   description: z.string(),
   system_prompt: z.string().optional(),
   instructions: z.string(),
-  status: RetrieveAgentRequestStatus$inboundSchema,
-  settings: z.lazy(() => RetrieveAgentRequestSettings$inboundSchema).optional(),
-  model: z.lazy(() => RetrieveAgentRequestModel$inboundSchema),
-  version_hash: z.string().optional(),
-  path: z.string(),
-  memory_stores: z.array(z.string()),
-  team_of_agents: z.array(
-    z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
-  ),
-  metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  knowledge_bases: z.array(
-    z.lazy(() => RetrieveAgentRequestKnowledgeBases$inboundSchema),
-  ).optional(),
-  source: RetrieveAgentRequestSource$inboundSchema.optional(),
+  settings: z.lazy(() => RetrieveAgentRequestResponseBodySettings$inboundSchema)
+    .optional(),
+  model: z.lazy(() => ResponseBodyModel$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
-    "workspace_id": "workspaceId",
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "system_prompt": "systemPrompt",
     "version_hash": "versionHash",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
+    "system_prompt": "systemPrompt",
   });
 });
+
+export function retrieveAgentRequestResponseBody1FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestResponseBody1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAgentRequestResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestResponseBody1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
+  RetrieveAgentRequestResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => RetrieveAgentRequestResponseBody1$inboundSchema),
+  z.lazy(() => RetrieveAgentRequestResponseBody2$inboundSchema),
+]);
 
 export function retrieveAgentRequestResponseBodyFromJSON(
   jsonString: string,

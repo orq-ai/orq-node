@@ -1,19 +1,18 @@
 # CreateToolResponseBodyHeaders
 
-
-## Supported Types
-
-### `string`
+## Example Usage
 
 ```typescript
-const value: string = "<value>";
-```
+import { CreateToolResponseBodyHeaders } from "@orq-ai/node/models/operations";
 
-### `operations.CreateToolHeadersTools2`
-
-```typescript
-const value: operations.CreateToolHeadersTools2 = {
+let value: CreateToolResponseBodyHeaders = {
   value: "<value>",
 };
 ```
 
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |
+| `encrypted`        | *boolean*          | :heavy_minus_sign: | N/A                |

@@ -10,6 +10,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+ */
+export const QueryParamType = {
+  Internal: "internal",
+  A2a: "a2a",
+} as const;
+/**
+ * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+ */
+export type QueryParamType = ClosedEnum<typeof QueryParamType>;
+
 export type ListAgentsRequest = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 200. When not provided, returns all agents without pagination.
@@ -23,6 +35,10 @@ export type ListAgentsRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+   */
+  type?: QueryParamType | undefined;
 };
 
 export const ListAgentsObject = {
@@ -33,7 +49,7 @@ export type ListAgentsObject = ClosedEnum<typeof ListAgentsObject>;
 /**
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const ListAgentsStatus = {
+export const ListAgentsDataStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -42,12 +58,181 @@ export const ListAgentsStatus = {
 /**
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type ListAgentsStatus = ClosedEnum<typeof ListAgentsStatus>;
+export type ListAgentsDataStatus = ClosedEnum<typeof ListAgentsDataStatus>;
+
+export type ListAgentsDataTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type ListAgentsDataMetrics = {
+  totalCost: number;
+};
+
+export type ListAgentsDataKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const ListAgentsDataSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type ListAgentsDataSource = ClosedEnum<typeof ListAgentsDataSource>;
+
+export type DataHeaders = {
+  /**
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
+   */
+  value: string;
+  encrypted: boolean;
+};
+
+/**
+ * A2A configuration with agent endpoint and authentication. External agents manage their own model/settings.
+ */
+export type DataA2AAgentConfiguration = {
+  /**
+   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
+   */
+  agentUrl: string;
+  /**
+   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
+   */
+  cardUrl?: string | undefined;
+  /**
+   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
+   */
+  headers?: { [k: string]: DataHeaders } | undefined;
+  /**
+   * Cached agent card from discovery. Refreshed periodically.
+   */
+  cachedCard?: any | undefined;
+};
+
+export type Data2 = {
+  id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
+  key: string;
+  displayName?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
+  created?: string | undefined;
+  updated?: string | undefined;
+  /**
+   * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+   */
+  status: ListAgentsDataStatus;
+  versionHash?: string | undefined;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
+  memoryStores?: Array<string> | undefined;
+  /**
+   * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
+   */
+  teamOfAgents?: Array<ListAgentsDataTeamOfAgents> | undefined;
+  metrics?: ListAgentsDataMetrics | undefined;
+  /**
+   * Extracted variables from agent instructions
+   */
+  variables?: { [k: string]: any } | undefined;
+  /**
+   * Agent knowledge bases reference
+   */
+  knowledgeBases?: Array<ListAgentsDataKnowledgeBases> | undefined;
+  source?: ListAgentsDataSource | undefined;
+  /**
+   * External A2A-compliant agent
+   */
+  type: "a2a";
+  /**
+   * Role fetched from agent card name or user-provided
+   */
+  role: string;
+  /**
+   * Description fetched from agent card or user-provided
+   */
+  description: string;
+  systemPrompt?: string | undefined;
+  /**
+   * Instructions from agent card description or user-provided
+   */
+  instructions: string;
+  /**
+   * A2A configuration with agent endpoint and authentication. External agents manage their own model/settings.
+   */
+  a2a: DataA2AAgentConfiguration;
+};
+
+/**
+ * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+ */
+export const DataStatus = {
+  Live: "live",
+  Draft: "draft",
+  Pending: "pending",
+  Published: "published",
+} as const;
+/**
+ * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+ */
+export type DataStatus = ClosedEnum<typeof DataStatus>;
+
+export type DataTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type DataMetrics = {
+  totalCost: number;
+};
+
+export type DataKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const DataSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type DataSource = ClosedEnum<typeof DataSource>;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
  */
-export const ListAgentsToolApprovalRequired = {
+export const DataToolApprovalRequired = {
   All: "all",
   RespectTool: "respect_tool",
   None: "none",
@@ -55,11 +240,11 @@ export const ListAgentsToolApprovalRequired = {
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
  */
-export type ListAgentsToolApprovalRequired = ClosedEnum<
-  typeof ListAgentsToolApprovalRequired
+export type DataToolApprovalRequired = ClosedEnum<
+  typeof DataToolApprovalRequired
 >;
 
-export type ListAgentsConditions = {
+export type DataConditions = {
   /**
    * The argument of the tool call to evaluate
    */
@@ -74,7 +259,7 @@ export type ListAgentsConditions = {
   value: string;
 };
 
-export type ListAgentsTools = {
+export type DataTools = {
   /**
    * The id of the resource
    */
@@ -94,7 +279,7 @@ export type ListAgentsTools = {
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
   toolId?: string | undefined;
-  conditions?: Array<ListAgentsConditions> | undefined;
+  conditions?: Array<DataConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
@@ -104,16 +289,16 @@ export type ListAgentsTools = {
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const ListAgentsExecuteOn = {
+export const DataExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type ListAgentsExecuteOn = ClosedEnum<typeof ListAgentsExecuteOn>;
+export type DataExecuteOn = ClosedEnum<typeof DataExecuteOn>;
 
-export type ListAgentsEvaluators = {
+export type DataEvaluators = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -125,24 +310,24 @@ export type ListAgentsEvaluators = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: ListAgentsExecuteOn;
+  executeOn: DataExecuteOn;
 };
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const ListAgentsAgentsExecuteOn = {
+export const ListAgentsDataExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type ListAgentsAgentsExecuteOn = ClosedEnum<
-  typeof ListAgentsAgentsExecuteOn
+export type ListAgentsDataExecuteOn = ClosedEnum<
+  typeof ListAgentsDataExecuteOn
 >;
 
-export type ListAgentsGuardrails = {
+export type DataGuardrails = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -154,10 +339,10 @@ export type ListAgentsGuardrails = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: ListAgentsAgentsExecuteOn;
+  executeOn: ListAgentsDataExecuteOn;
 };
 
-export type ListAgentsSettings = {
+export type DataSettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
    */
@@ -173,16 +358,16 @@ export type ListAgentsSettings = {
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
-  toolApprovalRequired: ListAgentsToolApprovalRequired;
-  tools?: Array<ListAgentsTools> | undefined;
+  toolApprovalRequired: DataToolApprovalRequired;
+  tools?: Array<DataTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
    */
-  evaluators?: Array<ListAgentsEvaluators> | undefined;
+  evaluators?: Array<DataEvaluators> | undefined;
   /**
    * Configuration for a guardrail applied to the agent
    */
-  guardrails?: Array<ListAgentsGuardrails> | undefined;
+  guardrails?: Array<DataGuardrails> | undefined;
 };
 
 export type ListAgentsResponseFormatJsonSchema = {
@@ -235,7 +420,7 @@ export type ListAgentsResponseFormatText = {
 /**
  * An object specifying the format that the model must output
  */
-export type ListAgentsResponseFormat =
+export type DataResponseFormat =
   | ListAgentsResponseFormatText
   | ListAgentsResponseFormatJSONObject
   | ListAgentsResponseFormatAgentsJSONSchema;
@@ -252,7 +437,7 @@ export type ListAgentsResponseFormat =
  *
  * Any of "none", "minimal", "low", "medium", "high", "xhigh".
  */
-export const ListAgentsReasoningEffort = {
+export const DataReasoningEffort = {
   None: "none",
   Minimal: "minimal",
   Low: "low",
@@ -272,16 +457,14 @@ export const ListAgentsReasoningEffort = {
  *
  * Any of "none", "minimal", "low", "medium", "high", "xhigh".
  */
-export type ListAgentsReasoningEffort = ClosedEnum<
-  typeof ListAgentsReasoningEffort
->;
+export type DataReasoningEffort = ClosedEnum<typeof DataReasoningEffort>;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
-export type ListAgentsStop = string | Array<string>;
+export type DataStop = string | Array<string>;
 
-export type ListAgentsThinking =
+export type DataThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema;
 
@@ -323,15 +506,13 @@ export type ListAgentsToolChoice1 = ClosedEnum<typeof ListAgentsToolChoice1>;
 /**
  * Controls which (if any) tool is called by the model.
  */
-export type ListAgentsToolChoice =
-  | ListAgentsToolChoice2
-  | ListAgentsToolChoice1;
+export type DataToolChoice = ListAgentsToolChoice2 | ListAgentsToolChoice1;
 
-export const ListAgentsModalities = {
+export const DataModalities = {
   Text: "text",
   Audio: "audio",
 } as const;
-export type ListAgentsModalities = ClosedEnum<typeof ListAgentsModalities>;
+export type DataModalities = ClosedEnum<typeof DataModalities>;
 
 /**
  * The key of the guardrail.
@@ -346,51 +527,53 @@ export const ListAgentsId1 = {
  */
 export type ListAgentsId1 = ClosedEnum<typeof ListAgentsId1>;
 
-export type ListAgentsId = ListAgentsId1 | string;
+export type DataId = ListAgentsId1 | string;
 
 /**
  * Determines whether the guardrail runs on the input (user message) or output (model response).
  */
-export const ListAgentsAgentsResponseExecuteOn = {
+export const ListAgentsDataAgentsExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the guardrail runs on the input (user message) or output (model response).
  */
-export type ListAgentsAgentsResponseExecuteOn = ClosedEnum<
-  typeof ListAgentsAgentsResponseExecuteOn
+export type ListAgentsDataAgentsExecuteOn = ClosedEnum<
+  typeof ListAgentsDataAgentsExecuteOn
 >;
 
-export type ListAgentsAgentsGuardrails = {
+export type ListAgentsDataGuardrails = {
   id: ListAgentsId1 | string;
   /**
    * Determines whether the guardrail runs on the input (user message) or output (model response).
    */
-  executeOn: ListAgentsAgentsResponseExecuteOn;
+  executeOn: ListAgentsDataAgentsExecuteOn;
 };
 
-export type ListAgentsFallbacks = {
+export type DataFallbacks = {
   /**
    * Fallback model identifier
    */
   model: string;
 };
 
-export const ListAgentsType = {
+export const ListAgentsDataAgentsResponseType = {
   ExactMatch: "exact_match",
 } as const;
-export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
+export type ListAgentsDataAgentsResponseType = ClosedEnum<
+  typeof ListAgentsDataAgentsResponseType
+>;
 
 /**
  * Cache configuration for the request.
  */
-export type ListAgentsCache = {
+export type DataCache = {
   /**
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl: number;
-  type: ListAgentsType;
+  type: ListAgentsDataAgentsResponseType;
 };
 
 export const ListAgentsLoadBalancerType = {
@@ -419,12 +602,12 @@ export type ListAgentsLoadBalancer1 = {
 /**
  * Load balancer configuration for the request.
  */
-export type ListAgentsLoadBalancer = ListAgentsLoadBalancer1;
+export type DataLoadBalancer = ListAgentsLoadBalancer1;
 
 /**
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
-export type ListAgentsTimeout = {
+export type DataTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -434,7 +617,7 @@ export type ListAgentsTimeout = {
 /**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
-export type ListAgentsParameters = {
+export type DataParameters = {
   /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
@@ -479,7 +662,7 @@ export type ListAgentsParameters = {
    *
    * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: ListAgentsReasoningEffort | undefined;
+  reasoningEffort?: DataReasoningEffort | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -519,19 +702,19 @@ export type ListAgentsParameters = {
   /**
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
-  modalities?: Array<ListAgentsModalities> | null | undefined;
+  modalities?: Array<DataModalities> | null | undefined;
   /**
    * A list of guardrails to apply to the request.
    */
-  guardrails?: Array<ListAgentsAgentsGuardrails> | undefined;
+  guardrails?: Array<ListAgentsDataGuardrails> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<ListAgentsFallbacks> | undefined;
+  fallbacks?: Array<DataFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
-  cache?: ListAgentsCache | undefined;
+  cache?: DataCache | undefined;
   /**
    * Load balancer configuration for the request.
    */
@@ -539,13 +722,13 @@ export type ListAgentsParameters = {
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: ListAgentsTimeout | undefined;
+  timeout?: DataTimeout | undefined;
 };
 
 /**
  * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
  */
-export type ListAgentsRetry = {
+export type DataRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -967,11 +1150,11 @@ export type ListAgentsFallbackModelConfiguration2 = {
 /**
  * Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order.
  */
-export type ListAgentsFallbackModelConfiguration =
+export type DataFallbackModelConfiguration =
   | ListAgentsFallbackModelConfiguration2
   | string;
 
-export type ListAgentsModel = {
+export type DataModel = {
   /**
    * The database ID of the primary model
    */
@@ -983,11 +1166,11 @@ export type ListAgentsModel = {
   /**
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
-  parameters?: ListAgentsParameters | undefined;
+  parameters?: DataParameters | undefined;
   /**
    * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
    */
-  retry?: ListAgentsRetry | undefined;
+  retry?: DataRetry | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
@@ -997,36 +1180,7 @@ export type ListAgentsModel = {
     | undefined;
 };
 
-export type ListAgentsTeamOfAgents = {
-  /**
-   * The unique key of the agent within the workspace
-   */
-  key: string;
-  /**
-   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
-   */
-  role?: string | undefined;
-};
-
-export type ListAgentsMetrics = {
-  totalCost: number;
-};
-
-export type ListAgentsKnowledgeBases = {
-  /**
-   * Unique identifier of the knowledge base to search
-   */
-  knowledgeId: string;
-};
-
-export const ListAgentsSource = {
-  Internal: "internal",
-  External: "external",
-  Experiment: "experiment",
-} as const;
-export type ListAgentsSource = ClosedEnum<typeof ListAgentsSource>;
-
-export type ListAgentsData = {
+export type Data1 = {
   id: string;
   /**
    * Unique identifier for the agent within the workspace
@@ -1037,16 +1191,10 @@ export type ListAgentsData = {
   updatedById?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  role: string;
-  description: string;
-  systemPrompt?: string | undefined;
-  instructions: string;
   /**
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: ListAgentsStatus;
-  settings?: ListAgentsSettings | undefined;
-  model: ListAgentsModel;
+  status: DataStatus;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -1061,12 +1209,12 @@ export type ListAgentsData = {
   /**
    * Array of memory store identifiers. Accepts both memory store IDs and keys.
    */
-  memoryStores: Array<string>;
+  memoryStores?: Array<string> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents: Array<ListAgentsTeamOfAgents>;
-  metrics?: ListAgentsMetrics | undefined;
+  teamOfAgents?: Array<DataTeamOfAgents> | undefined;
+  metrics?: DataMetrics | undefined;
   /**
    * Extracted variables from agent instructions
    */
@@ -1074,24 +1222,42 @@ export type ListAgentsData = {
   /**
    * Agent knowledge bases reference
    */
-  knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
-  source?: ListAgentsSource | undefined;
+  knowledgeBases?: Array<DataKnowledgeBases> | undefined;
+  source?: DataSource | undefined;
+  /**
+   * Orquesta-managed agent
+   */
+  type: "internal";
+  role: string;
+  description: string;
+  systemPrompt?: string | undefined;
+  instructions: string;
+  settings?: DataSettings | undefined;
+  model: DataModel;
 };
+
+export type ListAgentsData = Data1 | Data2;
 
 /**
  * Successfully retrieved the list of agents. Returns a paginated response containing agent manifests with complete configurations, including primary and fallback models, tools, knowledge bases, and execution settings.
  */
 export type ListAgentsResponseBody = {
   object: ListAgentsObject;
-  data: Array<ListAgentsData>;
+  data: Array<Data1 | Data2>;
   hasMore: boolean;
 };
+
+/** @internal */
+export const QueryParamType$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamType
+> = z.nativeEnum(QueryParamType);
 
 /** @internal */
 export type ListAgentsRequest$Outbound = {
   limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  type?: string | undefined;
 };
 
 /** @internal */
@@ -1103,6 +1269,7 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   limit: z.number().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  type: QueryParamType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -1124,18 +1291,264 @@ export const ListAgentsObject$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListAgentsObject);
 
 /** @internal */
-export const ListAgentsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsStatus
-> = z.nativeEnum(ListAgentsStatus);
+export const ListAgentsDataStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsDataStatus
+> = z.nativeEnum(ListAgentsDataStatus);
 
 /** @internal */
-export const ListAgentsToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsToolApprovalRequired
-> = z.nativeEnum(ListAgentsToolApprovalRequired);
+export const ListAgentsDataTeamOfAgents$inboundSchema: z.ZodType<
+  ListAgentsDataTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+export function listAgentsDataTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsDataTeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsDataTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsDataTeamOfAgents' from JSON`,
+  );
+}
 
 /** @internal */
-export const ListAgentsConditions$inboundSchema: z.ZodType<
-  ListAgentsConditions,
+export const ListAgentsDataMetrics$inboundSchema: z.ZodType<
+  ListAgentsDataMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function listAgentsDataMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsDataMetrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsDataMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsDataMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsDataKnowledgeBases$inboundSchema: z.ZodType<
+  ListAgentsDataKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  knowledge_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "knowledge_id": "knowledgeId",
+  });
+});
+
+export function listAgentsDataKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsDataKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsDataKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsDataKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsDataSource$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsDataSource
+> = z.nativeEnum(ListAgentsDataSource);
+
+/** @internal */
+export const DataHeaders$inboundSchema: z.ZodType<
+  DataHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function dataHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<DataHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataHeaders' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataA2AAgentConfiguration$inboundSchema: z.ZodType<
+  DataA2AAgentConfiguration,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  agent_url: z.string(),
+  card_url: z.string().optional(),
+  headers: z.record(z.lazy(() => DataHeaders$inboundSchema)).optional(),
+  cached_card: z.any().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_url": "agentUrl",
+    "card_url": "cardUrl",
+    "cached_card": "cachedCard",
+  });
+});
+
+export function dataA2AAgentConfigurationFromJSON(
+  jsonString: string,
+): SafeParseResult<DataA2AAgentConfiguration, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataA2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataA2AAgentConfiguration' from JSON`,
+  );
+}
+
+/** @internal */
+export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    status: ListAgentsDataStatus$inboundSchema,
+    version_hash: z.string().optional(),
+    path: z.string(),
+    memory_stores: z.array(z.string()).optional(),
+    team_of_agents: z.array(
+      z.lazy(() => ListAgentsDataTeamOfAgents$inboundSchema),
+    ).optional(),
+    metrics: z.lazy(() => ListAgentsDataMetrics$inboundSchema).optional(),
+    variables: z.record(z.any()).optional(),
+    knowledge_bases: z.array(
+      z.lazy(() => ListAgentsDataKnowledgeBases$inboundSchema),
+    ).optional(),
+    source: ListAgentsDataSource$inboundSchema.optional(),
+    type: z.literal("a2a"),
+    role: z.string(),
+    description: z.string(),
+    system_prompt: z.string().optional(),
+    instructions: z.string(),
+    a2a: z.lazy(() => DataA2AAgentConfiguration$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "version_hash": "versionHash",
+      "memory_stores": "memoryStores",
+      "team_of_agents": "teamOfAgents",
+      "knowledge_bases": "knowledgeBases",
+      "system_prompt": "systemPrompt",
+    });
+  });
+
+export function data2FromJSON(
+  jsonString: string,
+): SafeParseResult<Data2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Data2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
+  .nativeEnum(DataStatus);
+
+/** @internal */
+export const DataTeamOfAgents$inboundSchema: z.ZodType<
+  DataTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+export function dataTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<DataTeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataMetrics$inboundSchema: z.ZodType<
+  DataMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function dataMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<DataMetrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataKnowledgeBases$inboundSchema: z.ZodType<
+  DataKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  knowledge_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "knowledge_id": "knowledgeId",
+  });
+});
+
+export function dataKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<DataKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DataKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const DataSource$inboundSchema: z.ZodNativeEnum<typeof DataSource> = z
+  .nativeEnum(DataSource);
+
+/** @internal */
+export const DataToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
+  typeof DataToolApprovalRequired
+> = z.nativeEnum(DataToolApprovalRequired);
+
+/** @internal */
+export const DataConditions$inboundSchema: z.ZodType<
+  DataConditions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1144,19 +1557,19 @@ export const ListAgentsConditions$inboundSchema: z.ZodType<
   value: z.string(),
 });
 
-export function listAgentsConditionsFromJSON(
+export function dataConditionsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsConditions, SDKValidationError> {
+): SafeParseResult<DataConditions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsConditions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsConditions' from JSON`,
+    (x) => DataConditions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataConditions' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsTools$inboundSchema: z.ZodType<
-  ListAgentsTools,
+export const DataTools$inboundSchema: z.ZodType<
+  DataTools,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1167,8 +1580,7 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
-  conditions: z.array(z.lazy(() => ListAgentsConditions$inboundSchema))
-    .optional(),
+  conditions: z.array(z.lazy(() => DataConditions$inboundSchema)).optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
@@ -1179,30 +1591,30 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsToolsFromJSON(
+export function dataToolsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsTools, SDKValidationError> {
+): SafeParseResult<DataTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsTools' from JSON`,
+    (x) => DataTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataTools' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsExecuteOn
-> = z.nativeEnum(ListAgentsExecuteOn);
+export const DataExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof DataExecuteOn
+> = z.nativeEnum(DataExecuteOn);
 
 /** @internal */
-export const ListAgentsEvaluators$inboundSchema: z.ZodType<
-  ListAgentsEvaluators,
+export const DataEvaluators$inboundSchema: z.ZodType<
+  DataEvaluators,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: ListAgentsExecuteOn$inboundSchema,
+  execute_on: DataExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -1210,30 +1622,30 @@ export const ListAgentsEvaluators$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsEvaluatorsFromJSON(
+export function dataEvaluatorsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsEvaluators, SDKValidationError> {
+): SafeParseResult<DataEvaluators, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsEvaluators$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsEvaluators' from JSON`,
+    (x) => DataEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataEvaluators' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsAgentsExecuteOn
-> = z.nativeEnum(ListAgentsAgentsExecuteOn);
+export const ListAgentsDataExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsDataExecuteOn
+> = z.nativeEnum(ListAgentsDataExecuteOn);
 
 /** @internal */
-export const ListAgentsGuardrails$inboundSchema: z.ZodType<
-  ListAgentsGuardrails,
+export const DataGuardrails$inboundSchema: z.ZodType<
+  DataGuardrails,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: ListAgentsAgentsExecuteOn$inboundSchema,
+  execute_on: ListAgentsDataExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -1241,33 +1653,31 @@ export const ListAgentsGuardrails$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsGuardrailsFromJSON(
+export function dataGuardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsGuardrails, SDKValidationError> {
+): SafeParseResult<DataGuardrails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsGuardrails' from JSON`,
+    (x) => DataGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataGuardrails' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsSettings$inboundSchema: z.ZodType<
-  ListAgentsSettings,
+export const DataSettings$inboundSchema: z.ZodType<
+  DataSettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(600),
   max_cost: z.number().default(0),
-  tool_approval_required: ListAgentsToolApprovalRequired$inboundSchema.default(
+  tool_approval_required: DataToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => ListAgentsTools$inboundSchema)).optional(),
-  evaluators: z.array(z.lazy(() => ListAgentsEvaluators$inboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => ListAgentsGuardrails$inboundSchema))
-    .optional(),
+  tools: z.array(z.lazy(() => DataTools$inboundSchema)).optional(),
+  evaluators: z.array(z.lazy(() => DataEvaluators$inboundSchema)).optional(),
+  guardrails: z.array(z.lazy(() => DataGuardrails$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -1277,13 +1687,13 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsSettingsFromJSON(
+export function dataSettingsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsSettings, SDKValidationError> {
+): SafeParseResult<DataSettings, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsSettings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsSettings' from JSON`,
+    (x) => DataSettings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataSettings' from JSON`,
   );
 }
 
@@ -1380,8 +1790,8 @@ export function listAgentsResponseFormatTextFromJSON(
 }
 
 /** @internal */
-export const ListAgentsResponseFormat$inboundSchema: z.ZodType<
-  ListAgentsResponseFormat,
+export const DataResponseFormat$inboundSchema: z.ZodType<
+  DataResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -1390,41 +1800,41 @@ export const ListAgentsResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
 ]);
 
-export function listAgentsResponseFormatFromJSON(
+export function dataResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsResponseFormat, SDKValidationError> {
+): SafeParseResult<DataResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsResponseFormat' from JSON`,
+    (x) => DataResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsReasoningEffort
-> = z.nativeEnum(ListAgentsReasoningEffort);
+export const DataReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof DataReasoningEffort
+> = z.nativeEnum(DataReasoningEffort);
 
 /** @internal */
-export const ListAgentsStop$inboundSchema: z.ZodType<
-  ListAgentsStop,
+export const DataStop$inboundSchema: z.ZodType<
+  DataStop,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
 
-export function listAgentsStopFromJSON(
+export function dataStopFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsStop, SDKValidationError> {
+): SafeParseResult<DataStop, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsStop' from JSON`,
+    (x) => DataStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataStop' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsThinking$inboundSchema: z.ZodType<
-  ListAgentsThinking,
+export const DataThinking$inboundSchema: z.ZodType<
+  DataThinking,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -1432,13 +1842,13 @@ export const ListAgentsThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigEnabledSchema$inboundSchema,
 ]);
 
-export function listAgentsThinkingFromJSON(
+export function dataThinkingFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsThinking, SDKValidationError> {
+): SafeParseResult<DataThinking, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsThinking' from JSON`,
+    (x) => DataThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataThinking' from JSON`,
   );
 }
 
@@ -1492,8 +1902,8 @@ export const ListAgentsToolChoice1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListAgentsToolChoice1);
 
 /** @internal */
-export const ListAgentsToolChoice$inboundSchema: z.ZodType<
-  ListAgentsToolChoice,
+export const DataToolChoice$inboundSchema: z.ZodType<
+  DataToolChoice,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -1501,20 +1911,20 @@ export const ListAgentsToolChoice$inboundSchema: z.ZodType<
   ListAgentsToolChoice1$inboundSchema,
 ]);
 
-export function listAgentsToolChoiceFromJSON(
+export function dataToolChoiceFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsToolChoice, SDKValidationError> {
+): SafeParseResult<DataToolChoice, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsToolChoice' from JSON`,
+    (x) => DataToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataToolChoice' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsModalities$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsModalities
-> = z.nativeEnum(ListAgentsModalities);
+export const DataModalities$inboundSchema: z.ZodNativeEnum<
+  typeof DataModalities
+> = z.nativeEnum(DataModalities);
 
 /** @internal */
 export const ListAgentsId1$inboundSchema: z.ZodNativeEnum<
@@ -1522,92 +1932,89 @@ export const ListAgentsId1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListAgentsId1);
 
 /** @internal */
-export const ListAgentsId$inboundSchema: z.ZodType<
-  ListAgentsId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([ListAgentsId1$inboundSchema, z.string()]);
+export const DataId$inboundSchema: z.ZodType<DataId, z.ZodTypeDef, unknown> = z
+  .union([ListAgentsId1$inboundSchema, z.string()]);
 
-export function listAgentsIdFromJSON(
+export function dataIdFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsId, SDKValidationError> {
+): SafeParseResult<DataId, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsId' from JSON`,
+    (x) => DataId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataId' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsAgentsResponseExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsAgentsResponseExecuteOn
-> = z.nativeEnum(ListAgentsAgentsResponseExecuteOn);
+export const ListAgentsDataAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsDataAgentsExecuteOn
+> = z.nativeEnum(ListAgentsDataAgentsExecuteOn);
 
 /** @internal */
-export const ListAgentsAgentsGuardrails$inboundSchema: z.ZodType<
-  ListAgentsAgentsGuardrails,
+export const ListAgentsDataGuardrails$inboundSchema: z.ZodType<
+  ListAgentsDataGuardrails,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.union([ListAgentsId1$inboundSchema, z.string()]),
-  execute_on: ListAgentsAgentsResponseExecuteOn$inboundSchema,
+  execute_on: ListAgentsDataAgentsExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "execute_on": "executeOn",
   });
 });
 
-export function listAgentsAgentsGuardrailsFromJSON(
+export function listAgentsDataGuardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsAgentsGuardrails, SDKValidationError> {
+): SafeParseResult<ListAgentsDataGuardrails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsAgentsGuardrails' from JSON`,
+    (x) => ListAgentsDataGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsDataGuardrails' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsFallbacks$inboundSchema: z.ZodType<
-  ListAgentsFallbacks,
+export const DataFallbacks$inboundSchema: z.ZodType<
+  DataFallbacks,
   z.ZodTypeDef,
   unknown
 > = z.object({
   model: z.string(),
 });
 
-export function listAgentsFallbacksFromJSON(
+export function dataFallbacksFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbacks, SDKValidationError> {
+): SafeParseResult<DataFallbacks, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsFallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbacks' from JSON`,
+    (x) => DataFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataFallbacks' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsType
-> = z.nativeEnum(ListAgentsType);
+export const ListAgentsDataAgentsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsDataAgentsResponseType
+> = z.nativeEnum(ListAgentsDataAgentsResponseType);
 
 /** @internal */
-export const ListAgentsCache$inboundSchema: z.ZodType<
-  ListAgentsCache,
+export const DataCache$inboundSchema: z.ZodType<
+  DataCache,
   z.ZodTypeDef,
   unknown
 > = z.object({
   ttl: z.number().default(1800),
-  type: ListAgentsType$inboundSchema,
+  type: ListAgentsDataAgentsResponseType$inboundSchema,
 });
 
-export function listAgentsCacheFromJSON(
+export function dataCacheFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsCache, SDKValidationError> {
+): SafeParseResult<DataCache, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsCache$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsCache' from JSON`,
+    (x) => DataCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataCache' from JSON`,
   );
 }
 
@@ -1657,25 +2064,25 @@ export function listAgentsLoadBalancer1FromJSON(
 }
 
 /** @internal */
-export const ListAgentsLoadBalancer$inboundSchema: z.ZodType<
-  ListAgentsLoadBalancer,
+export const DataLoadBalancer$inboundSchema: z.ZodType<
+  DataLoadBalancer,
   z.ZodTypeDef,
   unknown
 > = z.lazy(() => ListAgentsLoadBalancer1$inboundSchema);
 
-export function listAgentsLoadBalancerFromJSON(
+export function dataLoadBalancerFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsLoadBalancer, SDKValidationError> {
+): SafeParseResult<DataLoadBalancer, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsLoadBalancer$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsLoadBalancer' from JSON`,
+    (x) => DataLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataLoadBalancer' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsTimeout$inboundSchema: z.ZodType<
-  ListAgentsTimeout,
+export const DataTimeout$inboundSchema: z.ZodType<
+  DataTimeout,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1686,19 +2093,19 @@ export const ListAgentsTimeout$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsTimeoutFromJSON(
+export function dataTimeoutFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsTimeout, SDKValidationError> {
+): SafeParseResult<DataTimeout, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsTimeout$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsTimeout' from JSON`,
+    (x) => DataTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataTimeout' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsParameters$inboundSchema: z.ZodType<
-  ListAgentsParameters,
+export const DataParameters$inboundSchema: z.ZodType<
+  DataParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1712,7 +2119,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     z.lazy(() => ListAgentsResponseFormatJSONObject$inboundSchema),
     z.lazy(() => ListAgentsResponseFormatAgentsJSONSchema$inboundSchema),
   ]).optional(),
-  reasoning_effort: ListAgentsReasoningEffort$inboundSchema.optional(),
+  reasoning_effort: DataReasoningEffort$inboundSchema.optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -1728,15 +2135,13 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     ListAgentsToolChoice1$inboundSchema,
   ]).optional(),
   parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(ListAgentsModalities$inboundSchema))
+  modalities: z.nullable(z.array(DataModalities$inboundSchema)).optional(),
+  guardrails: z.array(z.lazy(() => ListAgentsDataGuardrails$inboundSchema))
     .optional(),
-  guardrails: z.array(z.lazy(() => ListAgentsAgentsGuardrails$inboundSchema))
-    .optional(),
-  fallbacks: z.array(z.lazy(() => ListAgentsFallbacks$inboundSchema))
-    .optional(),
-  cache: z.lazy(() => ListAgentsCache$inboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => DataFallbacks$inboundSchema)).optional(),
+  cache: z.lazy(() => DataCache$inboundSchema).optional(),
   load_balancer: z.lazy(() => ListAgentsLoadBalancer1$inboundSchema).optional(),
-  timeout: z.lazy(() => ListAgentsTimeout$inboundSchema).optional(),
+  timeout: z.lazy(() => DataTimeout$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -1753,19 +2158,19 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsParametersFromJSON(
+export function dataParametersFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsParameters, SDKValidationError> {
+): SafeParseResult<DataParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsParameters' from JSON`,
+    (x) => DataParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataParameters' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsRetry$inboundSchema: z.ZodType<
-  ListAgentsRetry,
+export const DataRetry$inboundSchema: z.ZodType<
+  DataRetry,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1777,13 +2182,13 @@ export const ListAgentsRetry$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsRetryFromJSON(
+export function dataRetryFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsRetry, SDKValidationError> {
+): SafeParseResult<DataRetry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsRetry' from JSON`,
+    (x) => DataRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataRetry' from JSON`,
   );
 }
 
@@ -2422,8 +2827,8 @@ export function listAgentsFallbackModelConfiguration2FromJSON(
 }
 
 /** @internal */
-export const ListAgentsFallbackModelConfiguration$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelConfiguration,
+export const DataFallbackModelConfiguration$inboundSchema: z.ZodType<
+  DataFallbackModelConfiguration,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -2431,27 +2836,26 @@ export const ListAgentsFallbackModelConfiguration$inboundSchema: z.ZodType<
   z.string(),
 ]);
 
-export function listAgentsFallbackModelConfigurationFromJSON(
+export function dataFallbackModelConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsFallbackModelConfiguration, SDKValidationError> {
+): SafeParseResult<DataFallbackModelConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsFallbackModelConfiguration' from JSON`,
+    (x) => DataFallbackModelConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataFallbackModelConfiguration' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsModel$inboundSchema: z.ZodType<
-  ListAgentsModel,
+export const DataModel$inboundSchema: z.ZodType<
+  DataModel,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => ListAgentsParameters$inboundSchema).optional(),
-  retry: z.lazy(() => ListAgentsRetry$inboundSchema).optional(),
+  parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
+  retry: z.lazy(() => DataRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() => ListAgentsFallbackModelConfiguration2$inboundSchema),
@@ -2465,129 +2869,77 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
   });
 });
 
-export function listAgentsModelFromJSON(
+export function dataModelFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsModel, SDKValidationError> {
+): SafeParseResult<DataModel, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsModel' from JSON`,
+    (x) => DataModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataModel' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsTeamOfAgents$inboundSchema: z.ZodType<
-  ListAgentsTeamOfAgents,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
-
-export function listAgentsTeamOfAgentsFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsTeamOfAgents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsTeamOfAgents' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsMetrics$inboundSchema: z.ZodType<
-  ListAgentsMetrics,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_cost: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "total_cost": "totalCost",
+export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    status: DataStatus$inboundSchema,
+    version_hash: z.string().optional(),
+    path: z.string(),
+    memory_stores: z.array(z.string()).optional(),
+    team_of_agents: z.array(z.lazy(() => DataTeamOfAgents$inboundSchema))
+      .optional(),
+    metrics: z.lazy(() => DataMetrics$inboundSchema).optional(),
+    variables: z.record(z.any()).optional(),
+    knowledge_bases: z.array(z.lazy(() => DataKnowledgeBases$inboundSchema))
+      .optional(),
+    source: DataSource$inboundSchema.optional(),
+    type: z.literal("internal"),
+    role: z.string(),
+    description: z.string(),
+    system_prompt: z.string().optional(),
+    instructions: z.string(),
+    settings: z.lazy(() => DataSettings$inboundSchema).optional(),
+    model: z.lazy(() => DataModel$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "version_hash": "versionHash",
+      "memory_stores": "memoryStores",
+      "team_of_agents": "teamOfAgents",
+      "knowledge_bases": "knowledgeBases",
+      "system_prompt": "systemPrompt",
+    });
   });
-});
 
-export function listAgentsMetricsFromJSON(
+export function data1FromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsMetrics, SDKValidationError> {
+): SafeParseResult<Data1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsMetrics' from JSON`,
+    (x) => Data1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data1' from JSON`,
   );
 }
-
-/** @internal */
-export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
-  ListAgentsKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
-
-export function listAgentsKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsKnowledgeBases' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsSource$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsSource
-> = z.nativeEnum(ListAgentsSource);
 
 /** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
   ListAgentsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  role: z.string(),
-  description: z.string(),
-  system_prompt: z.string().optional(),
-  instructions: z.string(),
-  status: ListAgentsStatus$inboundSchema,
-  settings: z.lazy(() => ListAgentsSettings$inboundSchema).optional(),
-  model: z.lazy(() => ListAgentsModel$inboundSchema),
-  version_hash: z.string().optional(),
-  path: z.string(),
-  memory_stores: z.array(z.string()),
-  team_of_agents: z.array(z.lazy(() => ListAgentsTeamOfAgents$inboundSchema)),
-  metrics: z.lazy(() => ListAgentsMetrics$inboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
-    .optional(),
-  source: ListAgentsSource$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "system_prompt": "systemPrompt",
-    "version_hash": "versionHash",
-    "memory_stores": "memoryStores",
-    "team_of_agents": "teamOfAgents",
-    "knowledge_bases": "knowledgeBases",
-  });
-});
+> = z.union([
+  z.lazy(() => Data1$inboundSchema),
+  z.lazy(() => Data2$inboundSchema),
+]);
 
 export function listAgentsDataFromJSON(
   jsonString: string,
@@ -2606,7 +2958,12 @@ export const ListAgentsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   object: ListAgentsObject$inboundSchema,
-  data: z.array(z.lazy(() => ListAgentsData$inboundSchema)),
+  data: z.array(
+    z.union([
+      z.lazy(() => Data1$inboundSchema),
+      z.lazy(() => Data2$inboundSchema),
+    ]),
+  ),
   has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

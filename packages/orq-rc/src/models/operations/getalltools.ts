@@ -35,7 +35,7 @@ export type GetAllToolsObject = ClosedEnum<typeof GetAllToolsObject>;
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const GetAllToolsDataToolsResponse200Status = {
+export const GetAllToolsDataToolsResponse200ApplicationJSONStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -44,8 +44,8 @@ export const GetAllToolsDataToolsResponse200Status = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type GetAllToolsDataToolsResponse200Status = ClosedEnum<
-  typeof GetAllToolsDataToolsResponse200Status
+export type GetAllToolsDataToolsResponse200ApplicationJSONStatus = ClosedEnum<
+  typeof GetAllToolsDataToolsResponse200ApplicationJSONStatus
 >;
 
 /**
@@ -65,7 +65,7 @@ export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type =
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
  */
-export type GetAllToolsDataParameters = {
+export type GetAllToolsDataToolsParameters = {
   /**
    * The type must be "object"
    */
@@ -90,7 +90,7 @@ export type DataCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: GetAllToolsDataParameters | undefined;
+  parameters?: GetAllToolsDataToolsParameters | undefined;
   language: DataLanguage;
   /**
    * The code to execute.
@@ -140,7 +140,7 @@ export type DataCodeExecutionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: GetAllToolsDataToolsResponse200Status;
+  status: GetAllToolsDataToolsResponse200ApplicationJSONStatus;
   versionHash?: string | undefined;
   type: "code";
   codeTool: DataCodeTool;
@@ -149,7 +149,7 @@ export type DataCodeExecutionTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const GetAllToolsDataToolsResponseStatus = {
+export const GetAllToolsDataToolsResponse200Status = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -158,11 +158,11 @@ export const GetAllToolsDataToolsResponseStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type GetAllToolsDataToolsResponseStatus = ClosedEnum<
-  typeof GetAllToolsDataToolsResponseStatus
+export type GetAllToolsDataToolsResponse200Status = ClosedEnum<
+  typeof GetAllToolsDataToolsResponse200Status
 >;
 
-export type DataHeaders = {
+export type GetAllToolsDataHeaders = {
   value: string;
   encrypted: boolean;
 };
@@ -181,7 +181,7 @@ export type GetAllToolsDataSchema = {
   required?: Array<string> | undefined;
 };
 
-export type DataTools = {
+export type GetAllToolsDataTools = {
   id: string;
   name: string;
   description?: string | undefined;
@@ -208,11 +208,11 @@ export type DataMcp = {
   /**
    * HTTP headers for MCP server requests with encryption support
    */
-  headers?: { [k: string]: DataHeaders } | undefined;
+  headers?: { [k: string]: GetAllToolsDataHeaders } | undefined;
   /**
    * Array of tools available from the MCP server
    */
-  tools: Array<DataTools>;
+  tools: Array<GetAllToolsDataTools>;
   /**
    * The connection type used by the MCP server
    */
@@ -261,7 +261,7 @@ export type DataMCPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: GetAllToolsDataToolsResponseStatus;
+  status: GetAllToolsDataToolsResponse200Status;
   versionHash?: string | undefined;
   type: "mcp";
   mcp: DataMcp;
@@ -270,7 +270,7 @@ export type DataMCPTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const GetAllToolsDataToolsStatus = {
+export const GetAllToolsDataToolsResponseStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -279,8 +279,8 @@ export const GetAllToolsDataToolsStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type GetAllToolsDataToolsStatus = ClosedEnum<
-  typeof GetAllToolsDataToolsStatus
+export type GetAllToolsDataToolsResponseStatus = ClosedEnum<
+  typeof GetAllToolsDataToolsResponseStatus
 >;
 
 /**
@@ -302,7 +302,7 @@ export type GetAllToolsHeaders2 = {
   encrypted: boolean;
 };
 
-export type GetAllToolsDataHeaders = GetAllToolsHeaders2 | string;
+export type GetAllToolsDataToolsHeaders = GetAllToolsHeaders2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -419,7 +419,7 @@ export type DataHTTPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: GetAllToolsDataToolsStatus;
+  status: GetAllToolsDataToolsResponseStatus;
   versionHash?: string | undefined;
   type: "http";
   http: GetAllToolsDataHttp;
@@ -428,7 +428,7 @@ export type DataHTTPTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const GetAllToolsDataStatus = {
+export const GetAllToolsDataToolsStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -437,7 +437,9 @@ export const GetAllToolsDataStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type GetAllToolsDataStatus = ClosedEnum<typeof GetAllToolsDataStatus>;
+export type GetAllToolsDataToolsStatus = ClosedEnum<
+  typeof GetAllToolsDataToolsStatus
+>;
 
 /**
  * The schema for the response format, described as a JSON Schema object. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -519,7 +521,7 @@ export type DataJSONSchemaTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: GetAllToolsDataStatus;
+  status: GetAllToolsDataToolsStatus;
   versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: DataJsonSchema;
@@ -528,7 +530,7 @@ export type DataJSONSchemaTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const DataStatus = {
+export const GetAllToolsDataStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -537,7 +539,7 @@ export const DataStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type DataStatus = ClosedEnum<typeof DataStatus>;
+export type GetAllToolsDataStatus = ClosedEnum<typeof GetAllToolsDataStatus>;
 
 /**
  * The type must be "object"
@@ -556,7 +558,7 @@ export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
  */
-export type DataParameters = {
+export type GetAllToolsDataParameters = {
   /**
    * The type must be "object"
    */
@@ -588,7 +590,7 @@ export type GetAllToolsDataFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: DataParameters | undefined;
+  parameters?: GetAllToolsDataParameters | undefined;
 };
 
 /**
@@ -633,7 +635,7 @@ export type DataFunctionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: DataStatus;
+  status: GetAllToolsDataStatus;
   versionHash?: string | undefined;
   type: "function";
   function: GetAllToolsDataFunction;
@@ -698,10 +700,9 @@ export const GetAllToolsObject$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetAllToolsObject);
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200Status$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> = z.nativeEnum(
-    GetAllToolsDataToolsResponse200Status,
-  );
+export const GetAllToolsDataToolsResponse200ApplicationJSONStatus$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONStatus> =
+    z.nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONStatus);
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema:
@@ -712,8 +713,8 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inb
   );
 
 /** @internal */
-export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
-  GetAllToolsDataParameters,
+export const GetAllToolsDataToolsParameters$inboundSchema: z.ZodType<
+  GetAllToolsDataToolsParameters,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -727,13 +728,13 @@ export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
   true,
 );
 
-export function getAllToolsDataParametersFromJSON(
+export function getAllToolsDataToolsParametersFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsDataParameters, SDKValidationError> {
+): SafeParseResult<GetAllToolsDataToolsParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsDataParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsDataParameters' from JSON`,
+    (x) => GetAllToolsDataToolsParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataToolsParameters' from JSON`,
   );
 }
 
@@ -747,7 +748,8 @@ export const DataCodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.lazy(() => GetAllToolsDataParameters$inboundSchema).optional(),
+  parameters: z.lazy(() => GetAllToolsDataToolsParameters$inboundSchema)
+    .optional(),
   language: DataLanguage$inboundSchema,
   code: z.string(),
 });
@@ -768,7 +770,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VK726WQ57Z78SKWW3PF"),
+  _id: z.string().default("tool_01KJZ6J37JSDXN1MJRB724H4H8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -779,7 +781,8 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: GetAllToolsDataToolsResponse200Status$inboundSchema.default("live"),
+  status: GetAllToolsDataToolsResponse200ApplicationJSONStatus$inboundSchema
+    .default("live"),
   version_hash: z.string().optional(),
   type: z.literal("code"),
   code_tool: z.lazy(() => DataCodeTool$inboundSchema),
@@ -807,13 +810,14 @@ export function dataCodeExecutionToolFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsResponseStatus
-> = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
+export const GetAllToolsDataToolsResponse200Status$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> = z.nativeEnum(
+    GetAllToolsDataToolsResponse200Status,
+  );
 
 /** @internal */
-export const DataHeaders$inboundSchema: z.ZodType<
-  DataHeaders,
+export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
+  GetAllToolsDataHeaders,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -821,13 +825,13 @@ export const DataHeaders$inboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 
-export function dataHeadersFromJSON(
+export function getAllToolsDataHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<DataHeaders, SDKValidationError> {
+): SafeParseResult<GetAllToolsDataHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DataHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataHeaders' from JSON`,
+    (x) => GetAllToolsDataHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataHeaders' from JSON`,
   );
 }
 
@@ -862,24 +866,24 @@ export function getAllToolsDataSchemaFromJSON(
 }
 
 /** @internal */
-export const DataTools$inboundSchema: z.ZodType<
-  DataTools,
+export const GetAllToolsDataTools$inboundSchema: z.ZodType<
+  GetAllToolsDataTools,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KJWE7VK6GGKDPF9B1XB9NNR3"),
+  id: z.string().default("01KJZ6J37JC83B9E90DA1YVW0N"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
 });
 
-export function dataToolsFromJSON(
+export function getAllToolsDataToolsFromJSON(
   jsonString: string,
-): SafeParseResult<DataTools, SDKValidationError> {
+): SafeParseResult<GetAllToolsDataTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DataTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataTools' from JSON`,
+    (x) => GetAllToolsDataTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataTools' from JSON`,
   );
 }
 
@@ -892,8 +896,9 @@ export const DataConnectionType$inboundSchema: z.ZodNativeEnum<
 export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
   z.object({
     server_url: z.string(),
-    headers: z.record(z.lazy(() => DataHeaders$inboundSchema)).optional(),
-    tools: z.array(z.lazy(() => DataTools$inboundSchema)),
+    headers: z.record(z.lazy(() => GetAllToolsDataHeaders$inboundSchema))
+      .optional(),
+    tools: z.array(z.lazy(() => GetAllToolsDataTools$inboundSchema)),
     connection_type: DataConnectionType$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
@@ -918,7 +923,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VK54C7VJVGF6PTRYSYC"),
+  _id: z.string().default("tool_01KJZ6J37G2NKC7BYFYHE3SSWB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -929,7 +934,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
+  status: GetAllToolsDataToolsResponse200Status$inboundSchema.default("live"),
   version_hash: z.string().optional(),
   type: z.literal("mcp"),
   mcp: z.lazy(() => DataMcp$inboundSchema),
@@ -956,9 +961,9 @@ export function dataMCPToolFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsStatus
-> = z.nativeEnum(GetAllToolsDataToolsStatus);
+export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllToolsDataToolsResponseStatus
+> = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
 
 /** @internal */
 export const GetAllToolsDataMethod$inboundSchema: z.ZodNativeEnum<
@@ -986,19 +991,19 @@ export function getAllToolsHeaders2FromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
-  GetAllToolsDataHeaders,
+export const GetAllToolsDataToolsHeaders$inboundSchema: z.ZodType<
+  GetAllToolsDataToolsHeaders,
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]);
 
-export function getAllToolsDataHeadersFromJSON(
+export function getAllToolsDataToolsHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsDataHeaders, SDKValidationError> {
+): SafeParseResult<GetAllToolsDataToolsHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsDataHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsDataHeaders' from JSON`,
+    (x) => GetAllToolsDataToolsHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataToolsHeaders' from JSON`,
   );
 }
 
@@ -1105,7 +1110,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VK3KAWGGFRKMVM5P6XX"),
+  _id: z.string().default("tool_01KJZ6J37D40SA944CG3D1APJ3"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1116,7 +1121,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
+  status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
   type: z.literal("http"),
   http: z.lazy(() => GetAllToolsDataHttp$inboundSchema),
@@ -1143,9 +1148,9 @@ export function dataHTTPToolFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataStatus
-> = z.nativeEnum(GetAllToolsDataStatus);
+export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllToolsDataToolsStatus
+> = z.nativeEnum(GetAllToolsDataToolsStatus);
 
 /** @internal */
 export const DataSchema$inboundSchema: z.ZodType<
@@ -1200,7 +1205,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VK114F731NFNDVYWTS4"),
+  _id: z.string().default("tool_01KJZ6J37AEAP3YQRY55AT2D5Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1211,7 +1216,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: GetAllToolsDataStatus$inboundSchema.default("live"),
+  status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
   type: z.literal("json_schema"),
   json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
@@ -1239,8 +1244,9 @@ export function dataJSONSchemaToolFromJSON(
 }
 
 /** @internal */
-export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
-  .nativeEnum(DataStatus);
+export const GetAllToolsDataStatus$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllToolsDataStatus
+> = z.nativeEnum(GetAllToolsDataStatus);
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
@@ -1251,8 +1257,8 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inbo
   );
 
 /** @internal */
-export const DataParameters$inboundSchema: z.ZodType<
-  DataParameters,
+export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
+  GetAllToolsDataParameters,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -1266,13 +1272,13 @@ export const DataParameters$inboundSchema: z.ZodType<
   true,
 );
 
-export function dataParametersFromJSON(
+export function getAllToolsDataParametersFromJSON(
   jsonString: string,
-): SafeParseResult<DataParameters, SDKValidationError> {
+): SafeParseResult<GetAllToolsDataParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DataParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataParameters' from JSON`,
+    (x) => GetAllToolsDataParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllToolsDataParameters' from JSON`,
   );
 }
 
@@ -1285,7 +1291,7 @@ export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
+  parameters: z.lazy(() => GetAllToolsDataParameters$inboundSchema).optional(),
 });
 
 export function getAllToolsDataFunctionFromJSON(
@@ -1304,7 +1310,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VK0HG2Y7656ATBVNDK5"),
+  _id: z.string().default("tool_01KJZ6J373SR84WVRDHG8N7BR7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1315,7 +1321,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: DataStatus$inboundSchema.default("live"),
+  status: GetAllToolsDataStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
   type: z.literal("function"),
   function: z.lazy(() => GetAllToolsDataFunction$inboundSchema),

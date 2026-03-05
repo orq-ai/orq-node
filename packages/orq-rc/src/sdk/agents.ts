@@ -6,6 +6,8 @@ import { agentsCreate } from "../funcs/agentsCreate.js";
 import { agentsDelete } from "../funcs/agentsDelete.js";
 import { agentsInvoke } from "../funcs/agentsInvoke.js";
 import { agentsList } from "../funcs/agentsList.js";
+import { agentsPostV2AgentsA2a } from "../funcs/agentsPostV2AgentsA2a.js";
+import { agentsPostV2AgentsKeyCardRefresh } from "../funcs/agentsPostV2AgentsKeyCardRefresh.js";
 import { agentsRetrieve } from "../funcs/agentsRetrieve.js";
 import { agentsRun } from "../funcs/agentsRun.js";
 import { agentsStream } from "../funcs/agentsStream.js";
@@ -21,6 +23,40 @@ export class Agents extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
+  }
+
+  /**
+   * Register external A2A agent
+   *
+   * @remarks
+   * Register an external A2A-compliant agent into Orquesta. The agent card will be fetched during registration to validate the agent and cache its capabilities.
+   */
+  async postV2AgentsA2a(
+    request?: operations.PostV2AgentsA2aRequestBody | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.PostV2AgentsA2aResponseBody> {
+    return unwrapAsync(agentsPostV2AgentsA2a(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Refresh A2A agent card
+   *
+   * @remarks
+   * Fetches the latest agent card from the external A2A agent and updates the cached card in the database. Similar to MCP server refresh functionality.
+   */
+  async postV2AgentsKeyCardRefresh(
+    request: operations.PostV2AgentsKeyCardRefreshRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostV2AgentsKeyCardRefreshResponseBody> {
+    return unwrapAsync(agentsPostV2AgentsKeyCardRefresh(
+      this,
+      request,
+      options,
+    ));
   }
 
   /**
@@ -50,6 +86,7 @@ export class Agents extends ClientSDK {
     limit?: number | undefined,
     startingAfter?: string | undefined,
     endingBefore?: string | undefined,
+    type?: operations.QueryParamType | undefined,
     options?: RequestOptions,
   ): Promise<operations.ListAgentsResponseBody> {
     return unwrapAsync(agentsList(
@@ -57,6 +94,7 @@ export class Agents extends ClientSDK {
       limit,
       startingAfter,
       endingBefore,
+      type,
       options,
     ));
   }
@@ -102,7 +140,7 @@ export class Agents extends ClientSDK {
    * Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations.
    */
   async update(
-    requestBody: operations.UpdateAgentUpdateAgentRequest,
+    requestBody: operations.UpdateAgentRequestBody,
     agentKey: string,
     options?: RequestOptions,
   ): Promise<operations.UpdateAgentResponseBody> {

@@ -66,6 +66,17 @@ export const Provider = {
  */
 export type Provider = ClosedEnum<typeof Provider>;
 
+export type Telemetry = {
+  /**
+   * The trace id for the request that generated this response
+   */
+  traceId: string;
+  /**
+   * The span id for the request that generated this response
+   */
+  spanId: string;
+};
+
 /**
  * Metadata of the retrieved chunk from the knowledge base
  */
@@ -294,6 +305,7 @@ export type DeploymentInvokeResponseBody = {
    * Indicates integration id used to generate the response
    */
   integrationId?: string | undefined;
+  telemetry: Telemetry;
   /**
    * A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601
    */
@@ -328,6 +340,31 @@ export const DeploymentInvokeObject$inboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
   .nativeEnum(Provider);
+
+/** @internal */
+export const Telemetry$inboundSchema: z.ZodType<
+  Telemetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  trace_id: z.string(),
+  span_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "trace_id": "traceId",
+    "span_id": "spanId",
+  });
+});
+
+export function telemetryFromJSON(
+  jsonString: string,
+): SafeParseResult<Telemetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Telemetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Telemetry' from JSON`,
+  );
+}
 
 /** @internal */
 export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
@@ -663,6 +700,7 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
   provider: Provider$inboundSchema,
   is_final: z.boolean(),
   integration_id: z.string().optional(),
+  telemetry: z.lazy(() => Telemetry$inboundSchema),
   finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   system_fingerprint: z.nullable(z.string()).optional(),

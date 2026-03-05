@@ -896,7 +896,7 @@ export type StreamRunAgentA2AMessage = {
    */
   role: StreamRunAgentRoleUserMessage | StreamRunAgentRoleToolMessage;
   /**
-   * A2A message parts (text, file, or tool_result only)
+   * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
   parts: Array<
     | components.TextPart
@@ -3646,7 +3646,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KJWE7V7XWG3CSMJNQ229AP6N"),
+  id: z.string().default("01KJZ6J2W74JBMWHXD7TM5M96B"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

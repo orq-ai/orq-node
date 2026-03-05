@@ -540,7 +540,7 @@ export type CreateToolRequestBody =
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolResponseBodyToolsResponse200Status = {
+export const CreateToolResponseBodyToolsResponse200ApplicationJSONStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -549,9 +549,10 @@ export const CreateToolResponseBodyToolsResponse200Status = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolResponseBodyToolsResponse200Status = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponse200Status
->;
+export type CreateToolResponseBodyToolsResponse200ApplicationJSONStatus =
+  ClosedEnum<
+    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONStatus
+  >;
 
 /**
  * The type must be "object"
@@ -568,7 +569,7 @@ export type CreateToolResponseBodyToolsResponse200ApplicationJson5Type =
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
  */
-export type CreateToolResponseBodyParameters = {
+export type CreateToolResponseBodyToolsParameters = {
   /**
    * The type must be "object"
    */
@@ -593,7 +594,7 @@ export type ResponseBodyCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: CreateToolResponseBodyParameters | undefined;
+  parameters?: CreateToolResponseBodyToolsParameters | undefined;
   language: ResponseBodyLanguage;
   /**
    * The code to execute.
@@ -643,7 +644,7 @@ export type ResponseBodyCodeExecutionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: CreateToolResponseBodyToolsResponse200Status;
+  status: CreateToolResponseBodyToolsResponse200ApplicationJSONStatus;
   versionHash?: string | undefined;
   type: "code";
   codeTool: ResponseBodyCodeTool;
@@ -652,7 +653,7 @@ export type ResponseBodyCodeExecutionTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolResponseBodyToolsResponseStatus = {
+export const CreateToolResponseBodyToolsResponse200Status = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -661,11 +662,11 @@ export const CreateToolResponseBodyToolsResponseStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolResponseBodyToolsResponseStatus = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponseStatus
+export type CreateToolResponseBodyToolsResponse200Status = ClosedEnum<
+  typeof CreateToolResponseBodyToolsResponse200Status
 >;
 
-export type ResponseBodyHeaders = {
+export type CreateToolResponseBodyHeaders = {
   value: string;
   encrypted: boolean;
 };
@@ -682,7 +683,7 @@ export type CreateToolResponseBodySchema = {
   required?: Array<string> | undefined;
 };
 
-export type ResponseBodyTools = {
+export type CreateToolResponseBodyTools = {
   id: string;
   name: string;
   description?: string | undefined;
@@ -711,11 +712,11 @@ export type ResponseBodyMcp = {
   /**
    * HTTP headers for MCP server requests with encryption support
    */
-  headers?: { [k: string]: ResponseBodyHeaders } | undefined;
+  headers?: { [k: string]: CreateToolResponseBodyHeaders } | undefined;
   /**
    * Array of tools available from the MCP server
    */
-  tools: Array<ResponseBodyTools>;
+  tools: Array<CreateToolResponseBodyTools>;
   /**
    * The connection type used by the MCP server
    */
@@ -764,7 +765,7 @@ export type ResponseBodyMCPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: CreateToolResponseBodyToolsResponseStatus;
+  status: CreateToolResponseBodyToolsResponse200Status;
   versionHash?: string | undefined;
   type: "mcp";
   mcp: ResponseBodyMcp;
@@ -773,7 +774,7 @@ export type ResponseBodyMCPTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolResponseBodyToolsStatus = {
+export const CreateToolResponseBodyToolsResponseStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -782,8 +783,8 @@ export const CreateToolResponseBodyToolsStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolResponseBodyToolsStatus = ClosedEnum<
-  typeof CreateToolResponseBodyToolsStatus
+export type CreateToolResponseBodyToolsResponseStatus = ClosedEnum<
+  typeof CreateToolResponseBodyToolsResponseStatus
 >;
 
 /**
@@ -807,7 +808,9 @@ export type CreateToolHeadersTools2 = {
   encrypted: boolean;
 };
 
-export type CreateToolResponseBodyHeaders = CreateToolHeadersTools2 | string;
+export type CreateToolResponseBodyToolsHeaders =
+  | CreateToolHeadersTools2
+  | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -922,7 +925,7 @@ export type ResponseBodyHTTPTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: CreateToolResponseBodyToolsStatus;
+  status: CreateToolResponseBodyToolsResponseStatus;
   versionHash?: string | undefined;
   type: "http";
   http: CreateToolResponseBodyHttp;
@@ -931,7 +934,7 @@ export type ResponseBodyHTTPTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolResponseBodyStatus = {
+export const CreateToolResponseBodyToolsStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -940,8 +943,8 @@ export const CreateToolResponseBodyStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolResponseBodyStatus = ClosedEnum<
-  typeof CreateToolResponseBodyStatus
+export type CreateToolResponseBodyToolsStatus = ClosedEnum<
+  typeof CreateToolResponseBodyToolsStatus
 >;
 
 /**
@@ -1024,7 +1027,7 @@ export type ResponseBodyJSONSchemaTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: CreateToolResponseBodyStatus;
+  status: CreateToolResponseBodyToolsStatus;
   versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: ResponseBodyJsonSchema;
@@ -1033,7 +1036,7 @@ export type ResponseBodyJSONSchemaTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const ResponseBodyStatus = {
+export const CreateToolResponseBodyStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -1042,7 +1045,9 @@ export const ResponseBodyStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type ResponseBodyStatus = ClosedEnum<typeof ResponseBodyStatus>;
+export type CreateToolResponseBodyStatus = ClosedEnum<
+  typeof CreateToolResponseBodyStatus
+>;
 
 /**
  * The type must be "object"
@@ -1059,7 +1064,7 @@ export type CreateToolResponseBodyToolsResponse200ApplicationJson1Type =
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
  */
-export type ResponseBodyParameters = {
+export type CreateToolResponseBodyParameters = {
   /**
    * The type must be "object"
    */
@@ -1091,7 +1096,7 @@ export type CreateToolResponseBodyFunction = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
-  parameters?: ResponseBodyParameters | undefined;
+  parameters?: CreateToolResponseBodyParameters | undefined;
 };
 
 /**
@@ -1136,7 +1141,7 @@ export type ResponseBodyFunctionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: ResponseBodyStatus;
+  status: CreateToolResponseBodyStatus;
   versionHash?: string | undefined;
   type: "function";
   function: CreateToolResponseBodyFunction;
@@ -1830,9 +1835,10 @@ export function createToolRequestBodyToJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponse200Status$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Status> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponse200Status);
+export const CreateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONStatus
+  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONStatus);
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
@@ -1841,8 +1847,8 @@ export const CreateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundS
   > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson5Type);
 
 /** @internal */
-export const CreateToolResponseBodyParameters$inboundSchema: z.ZodType<
-  CreateToolResponseBodyParameters,
+export const CreateToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
+  CreateToolResponseBodyToolsParameters,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -1856,13 +1862,14 @@ export const CreateToolResponseBodyParameters$inboundSchema: z.ZodType<
   true,
 );
 
-export function createToolResponseBodyParametersFromJSON(
+export function createToolResponseBodyToolsParametersFromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolResponseBodyParameters, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyToolsParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolResponseBodyParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolResponseBodyParameters' from JSON`,
+    (x) =>
+      CreateToolResponseBodyToolsParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyToolsParameters' from JSON`,
   );
 }
 
@@ -1877,7 +1884,7 @@ export const ResponseBodyCodeTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  parameters: z.lazy(() => CreateToolResponseBodyParameters$inboundSchema)
+  parameters: z.lazy(() => CreateToolResponseBodyToolsParameters$inboundSchema)
     .optional(),
   language: ResponseBodyLanguage$inboundSchema,
   code: z.string(),
@@ -1899,7 +1906,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VM9ETXNDV007NHX37QR"),
+  _id: z.string().default("tool_01KJZ6J38BHYE1NDNTV1303ZAM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1910,9 +1917,9 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: CreateToolResponseBodyToolsResponse200Status$inboundSchema.default(
-    "live",
-  ),
+  status:
+    CreateToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema
+      .default("live"),
   version_hash: z.string().optional(),
   type: z.literal("code"),
   code_tool: z.lazy(() => ResponseBodyCodeTool$inboundSchema),
@@ -1940,13 +1947,13 @@ export function responseBodyCodeExecutionToolFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponseStatus$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponseStatus);
+export const CreateToolResponseBodyToolsResponse200Status$inboundSchema:
+  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Status> = z
+    .nativeEnum(CreateToolResponseBodyToolsResponse200Status);
 
 /** @internal */
-export const ResponseBodyHeaders$inboundSchema: z.ZodType<
-  ResponseBodyHeaders,
+export const CreateToolResponseBodyHeaders$inboundSchema: z.ZodType<
+  CreateToolResponseBodyHeaders,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1954,13 +1961,13 @@ export const ResponseBodyHeaders$inboundSchema: z.ZodType<
   encrypted: z.boolean().default(false),
 });
 
-export function responseBodyHeadersFromJSON(
+export function createToolResponseBodyHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyHeaders, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyHeaders' from JSON`,
+    (x) => CreateToolResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyHeaders' from JSON`,
   );
 }
 
@@ -1993,24 +2000,24 @@ export function createToolResponseBodySchemaFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyTools$inboundSchema: z.ZodType<
-  ResponseBodyTools,
+export const CreateToolResponseBodyTools$inboundSchema: z.ZodType<
+  CreateToolResponseBodyTools,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KJWE7VM8VV51AKCPJZSGR7S4"),
+  id: z.string().default("01KJZ6J38AM3N30BZDWBNTE3SP"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
 });
 
-export function responseBodyToolsFromJSON(
+export function createToolResponseBodyToolsFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyTools, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyTools' from JSON`,
+    (x) => CreateToolResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyTools' from JSON`,
   );
 }
 
@@ -2026,8 +2033,9 @@ export const ResponseBodyMcp$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   server_url: z.string(),
-  headers: z.record(z.lazy(() => ResponseBodyHeaders$inboundSchema)).optional(),
-  tools: z.array(z.lazy(() => ResponseBodyTools$inboundSchema)),
+  headers: z.record(z.lazy(() => CreateToolResponseBodyHeaders$inboundSchema))
+    .optional(),
+  tools: z.array(z.lazy(() => CreateToolResponseBodyTools$inboundSchema)),
   connection_type: ResponseBodyConnectionType$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -2052,7 +2060,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VM68K8HXPAR82JAYWZZ"),
+  _id: z.string().default("tool_01KJZ6J3889JECXHQ44DJARJ7F"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2063,7 +2071,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
+  status: CreateToolResponseBodyToolsResponse200Status$inboundSchema.default(
     "live",
   ),
   version_hash: z.string().optional(),
@@ -2092,9 +2100,9 @@ export function responseBodyMCPToolFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CreateToolResponseBodyToolsStatus
-> = z.nativeEnum(CreateToolResponseBodyToolsStatus);
+export const CreateToolResponseBodyToolsResponseStatus$inboundSchema:
+  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> = z
+    .nativeEnum(CreateToolResponseBodyToolsResponseStatus);
 
 /** @internal */
 export const CreateToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
@@ -2122,19 +2130,20 @@ export function createToolHeadersTools2FromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyHeaders$inboundSchema: z.ZodType<
-  CreateToolResponseBodyHeaders,
+export const CreateToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
+  CreateToolResponseBodyToolsHeaders,
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => CreateToolHeadersTools2$inboundSchema), z.string()]);
 
-export function createToolResponseBodyHeadersFromJSON(
+export function createToolResponseBodyToolsHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolResponseBodyHeaders, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyToolsHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolResponseBodyHeaders' from JSON`,
+    (x) =>
+      CreateToolResponseBodyToolsHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyToolsHeaders' from JSON`,
   );
 }
 
@@ -2240,7 +2249,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VM157X00ZCZAEKB7X7F"),
+  _id: z.string().default("tool_01KJZ6J386WR4P58FPG5B5AXAF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2251,7 +2260,9 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
+  status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
+    "live",
+  ),
   version_hash: z.string().optional(),
   type: z.literal("http"),
   http: z.lazy(() => CreateToolResponseBodyHttp$inboundSchema),
@@ -2278,9 +2289,9 @@ export function responseBodyHTTPToolFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CreateToolResponseBodyStatus
-> = z.nativeEnum(CreateToolResponseBodyStatus);
+export const CreateToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CreateToolResponseBodyToolsStatus
+> = z.nativeEnum(CreateToolResponseBodyToolsStatus);
 
 /** @internal */
 export const ResponseBodySchema$inboundSchema: z.ZodType<
@@ -2335,7 +2346,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VKQ8HJSADY06XRJEW5Q"),
+  _id: z.string().default("tool_01KJZ6J37YDC4YXZ26DZ95A6P5"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2346,7 +2357,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: CreateToolResponseBodyStatus$inboundSchema.default("live"),
+  status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
   type: z.literal("json_schema"),
   json_schema: z.lazy(() => ResponseBodyJsonSchema$inboundSchema),
@@ -2374,9 +2385,9 @@ export function responseBodyJSONSchemaToolFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyStatus
-> = z.nativeEnum(ResponseBodyStatus);
+export const CreateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CreateToolResponseBodyStatus
+> = z.nativeEnum(CreateToolResponseBodyStatus);
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
@@ -2385,8 +2396,8 @@ export const CreateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundS
   > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson1Type);
 
 /** @internal */
-export const ResponseBodyParameters$inboundSchema: z.ZodType<
-  ResponseBodyParameters,
+export const CreateToolResponseBodyParameters$inboundSchema: z.ZodType<
+  CreateToolResponseBodyParameters,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -2400,13 +2411,13 @@ export const ResponseBodyParameters$inboundSchema: z.ZodType<
   true,
 );
 
-export function responseBodyParametersFromJSON(
+export function createToolResponseBodyParametersFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyParameters, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyParameters' from JSON`,
+    (x) => CreateToolResponseBodyParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyParameters' from JSON`,
   );
 }
 
@@ -2419,7 +2430,8 @@ export const CreateToolResponseBodyFunction$inboundSchema: z.ZodType<
   name: z.string(),
   description: z.string().optional(),
   strict: z.boolean().optional(),
-  parameters: z.lazy(() => ResponseBodyParameters$inboundSchema).optional(),
+  parameters: z.lazy(() => CreateToolResponseBodyParameters$inboundSchema)
+    .optional(),
 });
 
 export function createToolResponseBodyFunctionFromJSON(
@@ -2438,7 +2450,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KJWE7VKPT60T1DFK86P420H7"),
+  _id: z.string().default("tool_01KJZ6J37WH1G288EA0C5WDGEY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2449,7 +2461,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: ResponseBodyStatus$inboundSchema.default("live"),
+  status: CreateToolResponseBodyStatus$inboundSchema.default("live"),
   version_hash: z.string().optional(),
   type: z.literal("function"),
   function: z.lazy(() => CreateToolResponseBodyFunction$inboundSchema),

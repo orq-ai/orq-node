@@ -3,24 +3,24 @@
 
 ## Supported Types
 
-### `operations.Data1`
+### `operations.ListKnowledgeBasesData1`
 
 ```typescript
-const value: operations.Data1 = {
+const value: operations.ListKnowledgeBasesData1 = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
   path: "Default",
   updated: "<value>",
-  model: "Taurus",
+  model: "Wrangler",
 };
 ```
 
-### `operations.Data2`
+### `operations.ListKnowledgeBasesData2`
 
 ```typescript
-const value: operations.Data2 = {
+const value: operations.ListKnowledgeBasesData2 = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
@@ -29,7 +29,7 @@ const value: operations.Data2 = {
   updated: "<value>",
   externalConfig: {
     name: "<value>",
-    apiUrl: "https://spherical-marathon.net/",
+    apiUrl: "https://beneficial-newsletter.org",
   },
 };
 ```

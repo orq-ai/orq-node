@@ -20,6 +20,8 @@ export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
 export * from "./invokeeval.js";
 export * from "./orqerror.js";
+export * from "./postv2agentsa2a.js";
+export * from "./postv2agentskeycardrefresh.js";
 export * from "./responsevalidationerror.js";
 export * from "./retrieveagentrequest.js";
 export * from "./retrieveidentity.js";

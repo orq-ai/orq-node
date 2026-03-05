@@ -1,19 +1,18 @@
 # GetAllToolsDataHeaders
 
-
-## Supported Types
-
-### `string`
+## Example Usage
 
 ```typescript
-const value: string = "<value>";
-```
+import { GetAllToolsDataHeaders } from "@orq-ai/node/models/operations";
 
-### `operations.GetAllToolsHeaders2`
-
-```typescript
-const value: operations.GetAllToolsHeaders2 = {
+let value: GetAllToolsDataHeaders = {
   value: "<value>",
 };
 ```
 
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |
+| `encrypted`        | *boolean*          | :heavy_minus_sign: | N/A                |

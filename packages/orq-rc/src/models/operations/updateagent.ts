@@ -1415,10 +1415,33 @@ export type UpdateAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type UpdateAgentHeaders = {
+  /**
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
+   */
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
 /**
- * Request body for updating an existing agent via the API. Uses simplified tool input format.
+ * Update A2A agent configuration (only applicable to A2A agents)
  */
-export type UpdateAgentUpdateAgentRequest = {
+export type UpdateA2AConfiguration = {
+  /**
+   * Update the A2A agent endpoint URL
+   */
+  agentUrl?: string | undefined;
+  /**
+   * Update the explicit agent card URL
+   */
+  cardUrl?: string | undefined;
+  /**
+   * Update HTTP headers for authentication. **Credential preservation**: Use empty string ("") for encrypted header values to keep existing credentials without re-entry. Provide new values to rotate credentials. Omit headers entirely to remove them.
+   */
+  headers?: { [k: string]: UpdateAgentHeaders } | undefined;
+};
+
+export type UpdateAgentRequestBody = {
   key?: string | undefined;
   displayName?: string | undefined;
   projectId?: string | undefined;
@@ -1466,6 +1489,10 @@ export type UpdateAgentUpdateAgentRequest = {
    * Extracted variables from agent instructions
    */
   variables?: { [k: string]: any } | undefined;
+  /**
+   * Update A2A agent configuration (only applicable to A2A agents)
+   */
+  a2a?: UpdateA2AConfiguration | undefined;
 };
 
 export type UpdateAgentRequest = {
@@ -1473,13 +1500,13 @@ export type UpdateAgentRequest = {
    * The unique key of the agent to update
    */
   agentKey: string;
-  requestBody: UpdateAgentUpdateAgentRequest;
+  requestBody: UpdateAgentRequestBody;
 };
 
 /**
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const UpdateAgentStatus = {
+export const UpdateAgentResponseBodyAgentsStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -1488,12 +1515,192 @@ export const UpdateAgentStatus = {
 /**
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type UpdateAgentStatus = ClosedEnum<typeof UpdateAgentStatus>;
+export type UpdateAgentResponseBodyAgentsStatus = ClosedEnum<
+  typeof UpdateAgentResponseBodyAgentsStatus
+>;
+
+export type UpdateAgentResponseBodyAgentsTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type UpdateAgentResponseBodyAgentsMetrics = {
+  totalCost: number;
+};
+
+export type UpdateAgentResponseBodyAgentsKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const UpdateAgentResponseBodyAgentsSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type UpdateAgentResponseBodyAgentsSource = ClosedEnum<
+  typeof UpdateAgentResponseBodyAgentsSource
+>;
+
+export type UpdateAgentResponseBodyHeaders = {
+  /**
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
+   */
+  value: string;
+  encrypted: boolean;
+};
+
+/**
+ * A2A configuration with agent endpoint and authentication. External agents manage their own model/settings.
+ */
+export type UpdateAgentResponseBodyA2AAgentConfiguration = {
+  /**
+   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
+   */
+  agentUrl: string;
+  /**
+   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
+   */
+  cardUrl?: string | undefined;
+  /**
+   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
+   */
+  headers?: { [k: string]: UpdateAgentResponseBodyHeaders } | undefined;
+  /**
+   * Cached agent card from discovery. Refreshed periodically.
+   */
+  cachedCard?: any | undefined;
+};
+
+export type UpdateAgentResponseBody2 = {
+  id: string;
+  /**
+   * Unique identifier for the agent within the workspace
+   */
+  key: string;
+  displayName?: string | undefined;
+  projectId: string;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
+  created?: string | undefined;
+  updated?: string | undefined;
+  /**
+   * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+   */
+  status: UpdateAgentResponseBodyAgentsStatus;
+  versionHash?: string | undefined;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path: string;
+  /**
+   * Array of memory store identifiers. Accepts both memory store IDs and keys.
+   */
+  memoryStores?: Array<string> | undefined;
+  /**
+   * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
+   */
+  teamOfAgents?: Array<UpdateAgentResponseBodyAgentsTeamOfAgents> | undefined;
+  metrics?: UpdateAgentResponseBodyAgentsMetrics | undefined;
+  /**
+   * Extracted variables from agent instructions
+   */
+  variables?: { [k: string]: any } | undefined;
+  /**
+   * Agent knowledge bases reference
+   */
+  knowledgeBases?:
+    | Array<UpdateAgentResponseBodyAgentsKnowledgeBases>
+    | undefined;
+  source?: UpdateAgentResponseBodyAgentsSource | undefined;
+  /**
+   * External A2A-compliant agent
+   */
+  type: "a2a";
+  /**
+   * Role fetched from agent card name or user-provided
+   */
+  role: string;
+  /**
+   * Description fetched from agent card or user-provided
+   */
+  description: string;
+  systemPrompt?: string | undefined;
+  /**
+   * Instructions from agent card description or user-provided
+   */
+  instructions: string;
+  /**
+   * A2A configuration with agent endpoint and authentication. External agents manage their own model/settings.
+   */
+  a2a: UpdateAgentResponseBodyA2AAgentConfiguration;
+};
+
+/**
+ * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+ */
+export const UpdateAgentResponseBodyStatus = {
+  Live: "live",
+  Draft: "draft",
+  Pending: "pending",
+  Published: "published",
+} as const;
+/**
+ * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
+ */
+export type UpdateAgentResponseBodyStatus = ClosedEnum<
+  typeof UpdateAgentResponseBodyStatus
+>;
+
+export type UpdateAgentResponseBodyTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type UpdateAgentResponseBodyMetrics = {
+  totalCost: number;
+};
+
+export type UpdateAgentResponseBodyKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const UpdateAgentResponseBodySource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type UpdateAgentResponseBodySource = ClosedEnum<
+  typeof UpdateAgentResponseBodySource
+>;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
  */
-export const UpdateAgentAgentsToolApprovalRequired = {
+export const UpdateAgentResponseBodyToolApprovalRequired = {
   All: "all",
   RespectTool: "respect_tool",
   None: "none",
@@ -1501,11 +1708,11 @@ export const UpdateAgentAgentsToolApprovalRequired = {
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
  */
-export type UpdateAgentAgentsToolApprovalRequired = ClosedEnum<
-  typeof UpdateAgentAgentsToolApprovalRequired
+export type UpdateAgentResponseBodyToolApprovalRequired = ClosedEnum<
+  typeof UpdateAgentResponseBodyToolApprovalRequired
 >;
 
-export type UpdateAgentConditions = {
+export type UpdateAgentResponseBodyConditions = {
   /**
    * The argument of the tool call to evaluate
    */
@@ -1520,7 +1727,7 @@ export type UpdateAgentConditions = {
   value: string;
 };
 
-export type UpdateAgentTools = {
+export type UpdateAgentResponseBodyTools = {
   /**
    * The id of the resource
    */
@@ -1540,7 +1747,7 @@ export type UpdateAgentTools = {
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
   toolId?: string | undefined;
-  conditions?: Array<UpdateAgentConditions> | undefined;
+  conditions?: Array<UpdateAgentResponseBodyConditions> | undefined;
   /**
    * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
    */
@@ -1550,18 +1757,18 @@ export type UpdateAgentTools = {
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const UpdateAgentAgentsResponseExecuteOn = {
+export const UpdateAgentResponseBodyExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type UpdateAgentAgentsResponseExecuteOn = ClosedEnum<
-  typeof UpdateAgentAgentsResponseExecuteOn
+export type UpdateAgentResponseBodyExecuteOn = ClosedEnum<
+  typeof UpdateAgentResponseBodyExecuteOn
 >;
 
-export type UpdateAgentAgentsEvaluators = {
+export type UpdateAgentResponseBodyEvaluators = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -1573,24 +1780,24 @@ export type UpdateAgentAgentsEvaluators = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: UpdateAgentAgentsResponseExecuteOn;
+  executeOn: UpdateAgentResponseBodyExecuteOn;
 };
 
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const UpdateAgentAgentsResponse200ExecuteOn = {
+export const UpdateAgentResponseBodyAgentsExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type UpdateAgentAgentsResponse200ExecuteOn = ClosedEnum<
-  typeof UpdateAgentAgentsResponse200ExecuteOn
+export type UpdateAgentResponseBodyAgentsExecuteOn = ClosedEnum<
+  typeof UpdateAgentResponseBodyAgentsExecuteOn
 >;
 
-export type UpdateAgentAgentsGuardrails = {
+export type UpdateAgentResponseBodyGuardrails = {
   /**
    * Unique key or identifier of the evaluator
    */
@@ -1602,10 +1809,10 @@ export type UpdateAgentAgentsGuardrails = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: UpdateAgentAgentsResponse200ExecuteOn;
+  executeOn: UpdateAgentResponseBodyAgentsExecuteOn;
 };
 
-export type UpdateAgentAgentsSettings = {
+export type UpdateAgentResponseBodySettings = {
   /**
    * Maximum iterations(llm calls) before the agent will stop executing.
    */
@@ -1621,16 +1828,16 @@ export type UpdateAgentAgentsSettings = {
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
-  toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired;
-  tools?: Array<UpdateAgentTools> | undefined;
+  toolApprovalRequired: UpdateAgentResponseBodyToolApprovalRequired;
+  tools?: Array<UpdateAgentResponseBodyTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
    */
-  evaluators?: Array<UpdateAgentAgentsEvaluators> | undefined;
+  evaluators?: Array<UpdateAgentResponseBodyEvaluators> | undefined;
   /**
    * Configuration for a guardrail applied to the agent
    */
-  guardrails?: Array<UpdateAgentAgentsGuardrails> | undefined;
+  guardrails?: Array<UpdateAgentResponseBodyGuardrails> | undefined;
 };
 
 export type UpdateAgentResponseFormatAgentsResponseJsonSchema = {
@@ -1683,7 +1890,7 @@ export type UpdateAgentResponseFormatAgentsResponseText = {
 /**
  * An object specifying the format that the model must output
  */
-export type UpdateAgentResponseFormat =
+export type UpdateAgentResponseBodyResponseFormat =
   | UpdateAgentResponseFormatAgentsResponseText
   | UpdateAgentResponseFormatAgentsResponseJSONObject
   | UpdateAgentResponseFormatAgentsResponse200JSONSchema;
@@ -1700,7 +1907,7 @@ export type UpdateAgentResponseFormat =
  *
  * Any of "none", "minimal", "low", "medium", "high", "xhigh".
  */
-export const UpdateAgentReasoningEffort = {
+export const UpdateAgentResponseBodyReasoningEffort = {
   None: "none",
   Minimal: "minimal",
   Low: "low",
@@ -1720,16 +1927,16 @@ export const UpdateAgentReasoningEffort = {
  *
  * Any of "none", "minimal", "low", "medium", "high", "xhigh".
  */
-export type UpdateAgentReasoningEffort = ClosedEnum<
-  typeof UpdateAgentReasoningEffort
+export type UpdateAgentResponseBodyReasoningEffort = ClosedEnum<
+  typeof UpdateAgentResponseBodyReasoningEffort
 >;
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens.
  */
-export type UpdateAgentStop = string | Array<string>;
+export type UpdateAgentResponseBodyStop = string | Array<string>;
 
-export type UpdateAgentThinking =
+export type UpdateAgentResponseBodyThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema;
 
@@ -1773,15 +1980,17 @@ export type UpdateAgentToolChoiceAgentsResponse1 = ClosedEnum<
 /**
  * Controls which (if any) tool is called by the model.
  */
-export type UpdateAgentToolChoice =
+export type UpdateAgentResponseBodyToolChoice =
   | UpdateAgentToolChoiceAgentsResponse2
   | UpdateAgentToolChoiceAgentsResponse1;
 
-export const UpdateAgentModalities = {
+export const UpdateAgentResponseBodyModalities = {
   Text: "text",
   Audio: "audio",
 } as const;
-export type UpdateAgentModalities = ClosedEnum<typeof UpdateAgentModalities>;
+export type UpdateAgentResponseBodyModalities = ClosedEnum<
+  typeof UpdateAgentResponseBodyModalities
+>;
 
 /**
  * The key of the guardrail.
@@ -1798,51 +2007,53 @@ export type UpdateAgentIdAgentsResponse1 = ClosedEnum<
   typeof UpdateAgentIdAgentsResponse1
 >;
 
-export type UpdateAgentId = UpdateAgentIdAgentsResponse1 | string;
+export type UpdateAgentResponseBodyId = UpdateAgentIdAgentsResponse1 | string;
 
 /**
  * Determines whether the guardrail runs on the input (user message) or output (model response).
  */
-export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn = {
+export const UpdateAgentResponseBodyAgentsResponseExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the guardrail runs on the input (user message) or output (model response).
  */
-export type UpdateAgentAgentsResponse200ApplicationJSONExecuteOn = ClosedEnum<
-  typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn
+export type UpdateAgentResponseBodyAgentsResponseExecuteOn = ClosedEnum<
+  typeof UpdateAgentResponseBodyAgentsResponseExecuteOn
 >;
 
-export type UpdateAgentAgentsResponseGuardrails = {
+export type UpdateAgentResponseBodyAgentsGuardrails = {
   id: UpdateAgentIdAgentsResponse1 | string;
   /**
    * Determines whether the guardrail runs on the input (user message) or output (model response).
    */
-  executeOn: UpdateAgentAgentsResponse200ApplicationJSONExecuteOn;
+  executeOn: UpdateAgentResponseBodyAgentsResponseExecuteOn;
 };
 
-export type UpdateAgentFallbacks = {
+export type UpdateAgentResponseBodyFallbacks = {
   /**
    * Fallback model identifier
    */
   model: string;
 };
 
-export const UpdateAgentType = {
+export const UpdateAgentResponseBodyAgentsResponseType = {
   ExactMatch: "exact_match",
 } as const;
-export type UpdateAgentType = ClosedEnum<typeof UpdateAgentType>;
+export type UpdateAgentResponseBodyAgentsResponseType = ClosedEnum<
+  typeof UpdateAgentResponseBodyAgentsResponseType
+>;
 
 /**
  * Cache configuration for the request.
  */
-export type UpdateAgentCache = {
+export type UpdateAgentResponseBodyCache = {
   /**
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl: number;
-  type: UpdateAgentType;
+  type: UpdateAgentResponseBodyAgentsResponseType;
 };
 
 export const UpdateAgentLoadBalancerAgentsResponseType = {
@@ -1871,12 +2082,13 @@ export type UpdateAgentLoadBalancerAgentsResponse1 = {
 /**
  * Load balancer configuration for the request.
  */
-export type UpdateAgentLoadBalancer = UpdateAgentLoadBalancerAgentsResponse1;
+export type UpdateAgentResponseBodyLoadBalancer =
+  UpdateAgentLoadBalancerAgentsResponse1;
 
 /**
  * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
  */
-export type UpdateAgentTimeout = {
+export type UpdateAgentResponseBodyTimeout = {
   /**
    * Timeout value in milliseconds
    */
@@ -1886,7 +2098,7 @@ export type UpdateAgentTimeout = {
 /**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
-export type UpdateAgentParameters = {
+export type UpdateAgentResponseBodyParameters = {
   /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
@@ -1931,7 +2143,7 @@ export type UpdateAgentParameters = {
    *
    * Any of "none", "minimal", "low", "medium", "high", "xhigh".
    */
-  reasoningEffort?: UpdateAgentReasoningEffort | undefined;
+  reasoningEffort?: UpdateAgentResponseBodyReasoningEffort | undefined;
   /**
    * Adjusts response verbosity. Lower levels yield shorter answers.
    */
@@ -1974,19 +2186,19 @@ export type UpdateAgentParameters = {
   /**
    * Output types that you would like the model to generate. Most models are capable of generating text, which is the default: ["text"]. The gpt-4o-audio-preview model can also be used to generate audio. To request that this model generate both text and audio responses, you can use: ["text", "audio"].
    */
-  modalities?: Array<UpdateAgentModalities> | null | undefined;
+  modalities?: Array<UpdateAgentResponseBodyModalities> | null | undefined;
   /**
    * A list of guardrails to apply to the request.
    */
-  guardrails?: Array<UpdateAgentAgentsResponseGuardrails> | undefined;
+  guardrails?: Array<UpdateAgentResponseBodyAgentsGuardrails> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<UpdateAgentFallbacks> | undefined;
+  fallbacks?: Array<UpdateAgentResponseBodyFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
-  cache?: UpdateAgentCache | undefined;
+  cache?: UpdateAgentResponseBodyCache | undefined;
   /**
    * Load balancer configuration for the request.
    */
@@ -1994,13 +2206,13 @@ export type UpdateAgentParameters = {
   /**
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
-  timeout?: UpdateAgentTimeout | undefined;
+  timeout?: UpdateAgentResponseBodyTimeout | undefined;
 };
 
 /**
  * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
  */
-export type UpdateAgentRetry = {
+export type UpdateAgentResponseBodyRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -2432,11 +2644,11 @@ export type UpdateAgentFallbackModelConfigurationAgents2 = {
 /**
  * Fallback model for automatic failover when primary model request fails. Supports optional parameter overrides. Can be a simple model ID string or a configuration object with model-specific parameters. Fallbacks are tried in order.
  */
-export type UpdateAgentAgentsFallbackModelConfiguration =
+export type UpdateAgentResponseBodyFallbackModelConfiguration =
   | UpdateAgentFallbackModelConfigurationAgents2
   | string;
 
-export type UpdateAgentModel = {
+export type UpdateAgentResponseBodyModel = {
   /**
    * The database ID of the primary model
    */
@@ -2448,11 +2660,11 @@ export type UpdateAgentModel = {
   /**
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
-  parameters?: UpdateAgentParameters | undefined;
+  parameters?: UpdateAgentResponseBodyParameters | undefined;
   /**
    * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
    */
-  retry?: UpdateAgentRetry | undefined;
+  retry?: UpdateAgentResponseBodyRetry | undefined;
   /**
    * Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails
    */
@@ -2462,61 +2674,22 @@ export type UpdateAgentModel = {
     | undefined;
 };
 
-export type UpdateAgentAgentsTeamOfAgents = {
-  /**
-   * The unique key of the agent within the workspace
-   */
-  key: string;
-  /**
-   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
-   */
-  role?: string | undefined;
-};
-
-export type UpdateAgentMetrics = {
-  totalCost: number;
-};
-
-export type UpdateAgentAgentsKnowledgeBases = {
-  /**
-   * Unique identifier of the knowledge base to search
-   */
-  knowledgeId: string;
-};
-
-export const UpdateAgentSource = {
-  Internal: "internal",
-  External: "external",
-  Experiment: "experiment",
-} as const;
-export type UpdateAgentSource = ClosedEnum<typeof UpdateAgentSource>;
-
-/**
- * Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
- */
-export type UpdateAgentResponseBody = {
+export type UpdateAgentResponseBody1 = {
   id: string;
   /**
    * Unique identifier for the agent within the workspace
    */
   key: string;
   displayName?: string | undefined;
-  workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  role: string;
-  description: string;
-  systemPrompt?: string | undefined;
-  instructions: string;
   /**
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status: UpdateAgentStatus;
-  settings?: UpdateAgentAgentsSettings | undefined;
-  model: UpdateAgentModel;
+  status: UpdateAgentResponseBodyStatus;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2531,12 +2704,12 @@ export type UpdateAgentResponseBody = {
   /**
    * Array of memory store identifiers. Accepts both memory store IDs and keys.
    */
-  memoryStores: Array<string>;
+  memoryStores?: Array<string> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents: Array<UpdateAgentAgentsTeamOfAgents>;
-  metrics?: UpdateAgentMetrics | undefined;
+  teamOfAgents?: Array<UpdateAgentResponseBodyTeamOfAgents> | undefined;
+  metrics?: UpdateAgentResponseBodyMetrics | undefined;
   /**
    * Extracted variables from agent instructions
    */
@@ -2544,9 +2717,26 @@ export type UpdateAgentResponseBody = {
   /**
    * Agent knowledge bases reference
    */
-  knowledgeBases?: Array<UpdateAgentAgentsKnowledgeBases> | undefined;
-  source?: UpdateAgentSource | undefined;
+  knowledgeBases?: Array<UpdateAgentResponseBodyKnowledgeBases> | undefined;
+  source?: UpdateAgentResponseBodySource | undefined;
+  /**
+   * Orquesta-managed agent
+   */
+  type: "internal";
+  role: string;
+  description: string;
+  systemPrompt?: string | undefined;
+  instructions: string;
+  settings?: UpdateAgentResponseBodySettings | undefined;
+  model: UpdateAgentResponseBodyModel;
 };
+
+/**
+ * Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
+ */
+export type UpdateAgentResponseBody =
+  | UpdateAgentResponseBody1
+  | UpdateAgentResponseBody2;
 
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJsonSchema$Outbound = {
@@ -4901,7 +5091,62 @@ export function updateAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
-export type UpdateAgentUpdateAgentRequest$Outbound = {
+export type UpdateAgentHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const UpdateAgentHeaders$outboundSchema: z.ZodType<
+  UpdateAgentHeaders$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentHeaders
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function updateAgentHeadersToJSON(
+  updateAgentHeaders: UpdateAgentHeaders,
+): string {
+  return JSON.stringify(
+    UpdateAgentHeaders$outboundSchema.parse(updateAgentHeaders),
+  );
+}
+
+/** @internal */
+export type UpdateA2AConfiguration$Outbound = {
+  agent_url?: string | undefined;
+  card_url?: string | undefined;
+  headers?: { [k: string]: UpdateAgentHeaders$Outbound } | undefined;
+};
+
+/** @internal */
+export const UpdateA2AConfiguration$outboundSchema: z.ZodType<
+  UpdateA2AConfiguration$Outbound,
+  z.ZodTypeDef,
+  UpdateA2AConfiguration
+> = z.object({
+  agentUrl: z.string().optional(),
+  cardUrl: z.string().optional(),
+  headers: z.record(z.lazy(() => UpdateAgentHeaders$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    agentUrl: "agent_url",
+    cardUrl: "card_url",
+  });
+});
+
+export function updateA2AConfigurationToJSON(
+  updateA2AConfiguration: UpdateA2AConfiguration,
+): string {
+  return JSON.stringify(
+    UpdateA2AConfiguration$outboundSchema.parse(updateA2AConfiguration),
+  );
+}
+
+/** @internal */
+export type UpdateAgentRequestBody$Outbound = {
   key?: string | undefined;
   display_name?: string | undefined;
   project_id?: string | undefined;
@@ -4919,13 +5164,14 @@ export type UpdateAgentUpdateAgentRequest$Outbound = {
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
+  a2a?: UpdateA2AConfiguration$Outbound | undefined;
 };
 
 /** @internal */
-export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
-  UpdateAgentUpdateAgentRequest$Outbound,
+export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
+  UpdateAgentRequestBody$Outbound,
   z.ZodTypeDef,
-  UpdateAgentUpdateAgentRequest
+  UpdateAgentRequestBody
 > = z.object({
   key: z.string().optional(),
   displayName: z.string().optional(),
@@ -4953,6 +5199,7 @@ export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
   teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
     .optional(),
   variables: z.record(z.any()).optional(),
+  a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -4965,20 +5212,18 @@ export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentUpdateAgentRequestToJSON(
-  updateAgentUpdateAgentRequest: UpdateAgentUpdateAgentRequest,
+export function updateAgentRequestBodyToJSON(
+  updateAgentRequestBody: UpdateAgentRequestBody,
 ): string {
   return JSON.stringify(
-    UpdateAgentUpdateAgentRequest$outboundSchema.parse(
-      updateAgentUpdateAgentRequest,
-    ),
+    UpdateAgentRequestBody$outboundSchema.parse(updateAgentRequestBody),
   );
 }
 
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
-  RequestBody: UpdateAgentUpdateAgentRequest$Outbound;
+  RequestBody: UpdateAgentRequestBody$Outbound;
 };
 
 /** @internal */
@@ -4988,7 +5233,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   UpdateAgentRequest
 > = z.object({
   agentKey: z.string(),
-  requestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$outboundSchema),
+  requestBody: z.lazy(() => UpdateAgentRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     agentKey: "agent_key",
@@ -5005,19 +5250,297 @@ export function updateAgentRequestToJSON(
 }
 
 /** @internal */
-export const UpdateAgentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentStatus
-> = z.nativeEnum(UpdateAgentStatus);
+export const UpdateAgentResponseBodyAgentsStatus$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentResponseBodyAgentsStatus
+> = z.nativeEnum(UpdateAgentResponseBodyAgentsStatus);
 
 /** @internal */
-export const UpdateAgentAgentsToolApprovalRequired$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentsToolApprovalRequired> = z.nativeEnum(
-    UpdateAgentAgentsToolApprovalRequired,
+export const UpdateAgentResponseBodyAgentsTeamOfAgents$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyAgentsTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+export function updateAgentResponseBodyAgentsTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentResponseBodyAgentsTeamOfAgents,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentResponseBodyAgentsTeamOfAgents$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentResponseBodyAgentsTeamOfAgents' from JSON`,
   );
+}
 
 /** @internal */
-export const UpdateAgentConditions$inboundSchema: z.ZodType<
-  UpdateAgentConditions,
+export const UpdateAgentResponseBodyAgentsMetrics$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyAgentsMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function updateAgentResponseBodyAgentsMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBodyAgentsMetrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentResponseBodyAgentsMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyAgentsMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodyAgentsKnowledgeBases$inboundSchema:
+  z.ZodType<
+    UpdateAgentResponseBodyAgentsKnowledgeBases,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    knowledge_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "knowledge_id": "knowledgeId",
+    });
+  });
+
+export function updateAgentResponseBodyAgentsKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentResponseBodyAgentsKnowledgeBases,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentResponseBodyAgentsKnowledgeBases$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentResponseBodyAgentsKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodyAgentsSource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentResponseBodyAgentsSource
+> = z.nativeEnum(UpdateAgentResponseBodyAgentsSource);
+
+/** @internal */
+export const UpdateAgentResponseBodyHeaders$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyHeaders,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function updateAgentResponseBodyHeadersFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBodyHeaders, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyHeaders' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodyA2AAgentConfiguration$inboundSchema:
+  z.ZodType<
+    UpdateAgentResponseBodyA2AAgentConfiguration,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    agent_url: z.string(),
+    card_url: z.string().optional(),
+    headers: z.record(
+      z.lazy(() => UpdateAgentResponseBodyHeaders$inboundSchema),
+    ).optional(),
+    cached_card: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_url": "agentUrl",
+      "card_url": "cardUrl",
+      "cached_card": "cachedCard",
+    });
+  });
+
+export function updateAgentResponseBodyA2AAgentConfigurationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateAgentResponseBodyA2AAgentConfiguration,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentResponseBodyA2AAgentConfiguration$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentResponseBodyA2AAgentConfiguration' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBody2$inboundSchema: z.ZodType<
+  UpdateAgentResponseBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  key: z.string(),
+  display_name: z.string().optional(),
+  project_id: z.string(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  created: z.string().optional(),
+  updated: z.string().optional(),
+  status: UpdateAgentResponseBodyAgentsStatus$inboundSchema,
+  version_hash: z.string().optional(),
+  path: z.string(),
+  memory_stores: z.array(z.string()).optional(),
+  team_of_agents: z.array(
+    z.lazy(() => UpdateAgentResponseBodyAgentsTeamOfAgents$inboundSchema),
+  ).optional(),
+  metrics: z.lazy(() => UpdateAgentResponseBodyAgentsMetrics$inboundSchema)
+    .optional(),
+  variables: z.record(z.any()).optional(),
+  knowledge_bases: z.array(
+    z.lazy(() => UpdateAgentResponseBodyAgentsKnowledgeBases$inboundSchema),
+  ).optional(),
+  source: UpdateAgentResponseBodyAgentsSource$inboundSchema.optional(),
+  type: z.literal("a2a"),
+  role: z.string(),
+  description: z.string(),
+  system_prompt: z.string().optional(),
+  instructions: z.string(),
+  a2a: z.lazy(() => UpdateAgentResponseBodyA2AAgentConfiguration$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "project_id": "projectId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "version_hash": "versionHash",
+    "memory_stores": "memoryStores",
+    "team_of_agents": "teamOfAgents",
+    "knowledge_bases": "knowledgeBases",
+    "system_prompt": "systemPrompt",
+  });
+});
+
+export function updateAgentResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentResponseBodyStatus
+> = z.nativeEnum(UpdateAgentResponseBodyStatus);
+
+/** @internal */
+export const UpdateAgentResponseBodyTeamOfAgents$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+export function updateAgentResponseBodyTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBodyTeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentResponseBodyTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodyMetrics$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function updateAgentResponseBodyMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBodyMetrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentResponseBodyMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodyKnowledgeBases$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  knowledge_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "knowledge_id": "knowledgeId",
+  });
+});
+
+export function updateAgentResponseBodyKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBodyKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateAgentResponseBodyKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBodySource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentResponseBodySource
+> = z.nativeEnum(UpdateAgentResponseBodySource);
+
+/** @internal */
+export const UpdateAgentResponseBodyToolApprovalRequired$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentResponseBodyToolApprovalRequired> = z
+    .nativeEnum(UpdateAgentResponseBodyToolApprovalRequired);
+
+/** @internal */
+export const UpdateAgentResponseBodyConditions$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyConditions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5026,19 +5549,19 @@ export const UpdateAgentConditions$inboundSchema: z.ZodType<
   value: z.string(),
 });
 
-export function updateAgentConditionsFromJSON(
+export function updateAgentResponseBodyConditionsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentConditions, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyConditions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentConditions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentConditions' from JSON`,
+    (x) => UpdateAgentResponseBodyConditions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyConditions' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentTools$inboundSchema: z.ZodType<
-  UpdateAgentTools,
+export const UpdateAgentResponseBodyTools$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyTools,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5049,8 +5572,9 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
   description: z.string().optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
-  conditions: z.array(z.lazy(() => UpdateAgentConditions$inboundSchema))
-    .optional(),
+  conditions: z.array(
+    z.lazy(() => UpdateAgentResponseBodyConditions$inboundSchema),
+  ).optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
   return remap$(v, {
@@ -5061,30 +5585,30 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentToolsFromJSON(
+export function updateAgentResponseBodyToolsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentTools, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentTools' from JSON`,
+    (x) => UpdateAgentResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyTools' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentAgentsResponseExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentAgentsResponseExecuteOn
-> = z.nativeEnum(UpdateAgentAgentsResponseExecuteOn);
+export const UpdateAgentResponseBodyExecuteOn$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentResponseBodyExecuteOn
+> = z.nativeEnum(UpdateAgentResponseBodyExecuteOn);
 
 /** @internal */
-export const UpdateAgentAgentsEvaluators$inboundSchema: z.ZodType<
-  UpdateAgentAgentsEvaluators,
+export const UpdateAgentResponseBodyEvaluators$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyEvaluators,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: UpdateAgentAgentsResponseExecuteOn$inboundSchema,
+  execute_on: UpdateAgentResponseBodyExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -5092,31 +5616,31 @@ export const UpdateAgentAgentsEvaluators$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentAgentsEvaluatorsFromJSON(
+export function updateAgentResponseBodyEvaluatorsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentAgentsEvaluators, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyEvaluators, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentAgentsEvaluators$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsEvaluators' from JSON`,
+    (x) => UpdateAgentResponseBodyEvaluators$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyEvaluators' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentAgentsResponse200ExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ExecuteOn> = z.nativeEnum(
-    UpdateAgentAgentsResponse200ExecuteOn,
+export const UpdateAgentResponseBodyAgentsExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentResponseBodyAgentsExecuteOn> = z.nativeEnum(
+    UpdateAgentResponseBodyAgentsExecuteOn,
   );
 
 /** @internal */
-export const UpdateAgentAgentsGuardrails$inboundSchema: z.ZodType<
-  UpdateAgentAgentsGuardrails,
+export const UpdateAgentResponseBodyGuardrails$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyGuardrails,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: UpdateAgentAgentsResponse200ExecuteOn$inboundSchema,
+  execute_on: UpdateAgentResponseBodyAgentsExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -5124,32 +5648,37 @@ export const UpdateAgentAgentsGuardrails$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentAgentsGuardrailsFromJSON(
+export function updateAgentResponseBodyGuardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentAgentsGuardrails, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyGuardrails, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentAgentsGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsGuardrails' from JSON`,
+    (x) => UpdateAgentResponseBodyGuardrails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyGuardrails' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
-  UpdateAgentAgentsSettings,
+export const UpdateAgentResponseBodySettings$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodySettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
   max_iterations: z.number().int().default(100),
   max_execution_time: z.number().int().default(600),
   max_cost: z.number().default(0),
-  tool_approval_required: UpdateAgentAgentsToolApprovalRequired$inboundSchema
-    .default("respect_tool"),
-  tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)).optional(),
-  evaluators: z.array(z.lazy(() => UpdateAgentAgentsEvaluators$inboundSchema))
+  tool_approval_required:
+    UpdateAgentResponseBodyToolApprovalRequired$inboundSchema.default(
+      "respect_tool",
+    ),
+  tools: z.array(z.lazy(() => UpdateAgentResponseBodyTools$inboundSchema))
     .optional(),
-  guardrails: z.array(z.lazy(() => UpdateAgentAgentsGuardrails$inboundSchema))
-    .optional(),
+  evaluators: z.array(
+    z.lazy(() => UpdateAgentResponseBodyEvaluators$inboundSchema),
+  ).optional(),
+  guardrails: z.array(
+    z.lazy(() => UpdateAgentResponseBodyGuardrails$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -5159,13 +5688,13 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentAgentsSettingsFromJSON(
+export function updateAgentResponseBodySettingsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentAgentsSettings, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodySettings, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentAgentsSettings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsSettings' from JSON`,
+    (x) => UpdateAgentResponseBodySettings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodySettings' from JSON`,
   );
 }
 
@@ -5284,8 +5813,8 @@ export function updateAgentResponseFormatAgentsResponseTextFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentResponseFormat$inboundSchema: z.ZodType<
-  UpdateAgentResponseFormat,
+export const UpdateAgentResponseBodyResponseFormat$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -5296,41 +5825,43 @@ export const UpdateAgentResponseFormat$inboundSchema: z.ZodType<
   ),
 ]);
 
-export function updateAgentResponseFormatFromJSON(
+export function updateAgentResponseBodyResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentResponseFormat, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentResponseFormat' from JSON`,
+    (x) =>
+      UpdateAgentResponseBodyResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentReasoningEffort
-> = z.nativeEnum(UpdateAgentReasoningEffort);
+export const UpdateAgentResponseBodyReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentResponseBodyReasoningEffort> = z.nativeEnum(
+    UpdateAgentResponseBodyReasoningEffort,
+  );
 
 /** @internal */
-export const UpdateAgentStop$inboundSchema: z.ZodType<
-  UpdateAgentStop,
+export const UpdateAgentResponseBodyStop$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyStop,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.array(z.string())]);
 
-export function updateAgentStopFromJSON(
+export function updateAgentResponseBodyStopFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentStop, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyStop, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentStop$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentStop' from JSON`,
+    (x) => UpdateAgentResponseBodyStop$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyStop' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentThinking$inboundSchema: z.ZodType<
-  UpdateAgentThinking,
+export const UpdateAgentResponseBodyThinking$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyThinking,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -5338,13 +5869,13 @@ export const UpdateAgentThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigEnabledSchema$inboundSchema,
 ]);
 
-export function updateAgentThinkingFromJSON(
+export function updateAgentResponseBodyThinkingFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentThinking, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyThinking, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentThinking$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentThinking' from JSON`,
+    (x) => UpdateAgentResponseBodyThinking$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyThinking' from JSON`,
   );
 }
 
@@ -5409,8 +5940,8 @@ export const UpdateAgentToolChoiceAgentsResponse1$inboundSchema:
   );
 
 /** @internal */
-export const UpdateAgentToolChoice$inboundSchema: z.ZodType<
-  UpdateAgentToolChoice,
+export const UpdateAgentResponseBodyToolChoice$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyToolChoice,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -5418,20 +5949,20 @@ export const UpdateAgentToolChoice$inboundSchema: z.ZodType<
   UpdateAgentToolChoiceAgentsResponse1$inboundSchema,
 ]);
 
-export function updateAgentToolChoiceFromJSON(
+export function updateAgentResponseBodyToolChoiceFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentToolChoice, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyToolChoice, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentToolChoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentToolChoice' from JSON`,
+    (x) => UpdateAgentResponseBodyToolChoice$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyToolChoice' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentModalities$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentModalities
-> = z.nativeEnum(UpdateAgentModalities);
+export const UpdateAgentResponseBodyModalities$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentResponseBodyModalities
+> = z.nativeEnum(UpdateAgentResponseBodyModalities);
 
 /** @internal */
 export const UpdateAgentIdAgentsResponse1$inboundSchema: z.ZodNativeEnum<
@@ -5439,94 +5970,98 @@ export const UpdateAgentIdAgentsResponse1$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateAgentIdAgentsResponse1);
 
 /** @internal */
-export const UpdateAgentId$inboundSchema: z.ZodType<
-  UpdateAgentId,
+export const UpdateAgentResponseBodyId$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyId,
   z.ZodTypeDef,
   unknown
 > = z.union([UpdateAgentIdAgentsResponse1$inboundSchema, z.string()]);
 
-export function updateAgentIdFromJSON(
+export function updateAgentResponseBodyIdFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentId, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyId, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentId' from JSON`,
+    (x) => UpdateAgentResponseBodyId$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyId' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentAgentsResponse200ApplicationJSONExecuteOn> =
-    z.nativeEnum(UpdateAgentAgentsResponse200ApplicationJSONExecuteOn);
+export const UpdateAgentResponseBodyAgentsResponseExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentResponseBodyAgentsResponseExecuteOn> = z
+    .nativeEnum(UpdateAgentResponseBodyAgentsResponseExecuteOn);
 
 /** @internal */
-export const UpdateAgentAgentsResponseGuardrails$inboundSchema: z.ZodType<
-  UpdateAgentAgentsResponseGuardrails,
+export const UpdateAgentResponseBodyAgentsGuardrails$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyAgentsGuardrails,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.union([UpdateAgentIdAgentsResponse1$inboundSchema, z.string()]),
-  execute_on:
-    UpdateAgentAgentsResponse200ApplicationJSONExecuteOn$inboundSchema,
+  execute_on: UpdateAgentResponseBodyAgentsResponseExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "execute_on": "executeOn",
   });
 });
 
-export function updateAgentAgentsResponseGuardrailsFromJSON(
+export function updateAgentResponseBodyAgentsGuardrailsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentAgentsResponseGuardrails, SDKValidationError> {
+): SafeParseResult<
+  UpdateAgentResponseBodyAgentsGuardrails,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateAgentAgentsResponseGuardrails$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsResponseGuardrails' from JSON`,
+      UpdateAgentResponseBodyAgentsGuardrails$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentResponseBodyAgentsGuardrails' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentFallbacks$inboundSchema: z.ZodType<
-  UpdateAgentFallbacks,
+export const UpdateAgentResponseBodyFallbacks$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyFallbacks,
   z.ZodTypeDef,
   unknown
 > = z.object({
   model: z.string(),
 });
 
-export function updateAgentFallbacksFromJSON(
+export function updateAgentResponseBodyFallbacksFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentFallbacks, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyFallbacks, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentFallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentFallbacks' from JSON`,
+    (x) => UpdateAgentResponseBodyFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyFallbacks' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentType
-> = z.nativeEnum(UpdateAgentType);
+export const UpdateAgentResponseBodyAgentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateAgentResponseBodyAgentsResponseType> = z
+    .nativeEnum(UpdateAgentResponseBodyAgentsResponseType);
 
 /** @internal */
-export const UpdateAgentCache$inboundSchema: z.ZodType<
-  UpdateAgentCache,
+export const UpdateAgentResponseBodyCache$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyCache,
   z.ZodTypeDef,
   unknown
 > = z.object({
   ttl: z.number().default(1800),
-  type: UpdateAgentType$inboundSchema,
+  type: UpdateAgentResponseBodyAgentsResponseType$inboundSchema,
 });
 
-export function updateAgentCacheFromJSON(
+export function updateAgentResponseBodyCacheFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentCache, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyCache, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentCache$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentCache' from JSON`,
+    (x) => UpdateAgentResponseBodyCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyCache' from JSON`,
   );
 }
 
@@ -5586,25 +6121,26 @@ export function updateAgentLoadBalancerAgentsResponse1FromJSON(
 }
 
 /** @internal */
-export const UpdateAgentLoadBalancer$inboundSchema: z.ZodType<
-  UpdateAgentLoadBalancer,
+export const UpdateAgentResponseBodyLoadBalancer$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyLoadBalancer,
   z.ZodTypeDef,
   unknown
 > = z.lazy(() => UpdateAgentLoadBalancerAgentsResponse1$inboundSchema);
 
-export function updateAgentLoadBalancerFromJSON(
+export function updateAgentResponseBodyLoadBalancerFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentLoadBalancer, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyLoadBalancer, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentLoadBalancer$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentLoadBalancer' from JSON`,
+    (x) =>
+      UpdateAgentResponseBodyLoadBalancer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyLoadBalancer' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentTimeout$inboundSchema: z.ZodType<
-  UpdateAgentTimeout,
+export const UpdateAgentResponseBodyTimeout$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyTimeout,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5615,19 +6151,19 @@ export const UpdateAgentTimeout$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentTimeoutFromJSON(
+export function updateAgentResponseBodyTimeoutFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentTimeout, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyTimeout, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentTimeout$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentTimeout' from JSON`,
+    (x) => UpdateAgentResponseBodyTimeout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyTimeout' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentParameters$inboundSchema: z.ZodType<
-  UpdateAgentParameters,
+export const UpdateAgentResponseBodyParameters$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5645,7 +6181,8 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
       UpdateAgentResponseFormatAgentsResponse200JSONSchema$inboundSchema
     ),
   ]).optional(),
-  reasoning_effort: UpdateAgentReasoningEffort$inboundSchema.optional(),
+  reasoning_effort: UpdateAgentResponseBodyReasoningEffort$inboundSchema
+    .optional(),
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
@@ -5661,18 +6198,21 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
     UpdateAgentToolChoiceAgentsResponse1$inboundSchema,
   ]).optional(),
   parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(UpdateAgentModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => UpdateAgentAgentsResponseGuardrails$inboundSchema),
+  modalities: z.nullable(
+    z.array(UpdateAgentResponseBodyModalities$inboundSchema),
   ).optional(),
-  fallbacks: z.array(z.lazy(() => UpdateAgentFallbacks$inboundSchema))
-    .optional(),
-  cache: z.lazy(() => UpdateAgentCache$inboundSchema).optional(),
+  guardrails: z.array(
+    z.lazy(() => UpdateAgentResponseBodyAgentsGuardrails$inboundSchema),
+  ).optional(),
+  fallbacks: z.array(
+    z.lazy(() => UpdateAgentResponseBodyFallbacks$inboundSchema),
+  ).optional(),
+  cache: z.lazy(() => UpdateAgentResponseBodyCache$inboundSchema).optional(),
   load_balancer: z.lazy(() =>
     UpdateAgentLoadBalancerAgentsResponse1$inboundSchema
   ).optional(),
-  timeout: z.lazy(() => UpdateAgentTimeout$inboundSchema).optional(),
+  timeout: z.lazy(() => UpdateAgentResponseBodyTimeout$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -5689,19 +6229,19 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentParametersFromJSON(
+export function updateAgentResponseBodyParametersFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentParameters, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentParameters' from JSON`,
+    (x) => UpdateAgentResponseBodyParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyParameters' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentRetry$inboundSchema: z.ZodType<
-  UpdateAgentRetry,
+export const UpdateAgentResponseBodyRetry$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyRetry,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5713,13 +6253,13 @@ export const UpdateAgentRetry$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentRetryFromJSON(
+export function updateAgentResponseBodyRetryFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentRetry, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyRetry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentRetry' from JSON`,
+    (x) => UpdateAgentResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyRetry' from JSON`,
   );
 }
 
@@ -6418,9 +6958,9 @@ export function updateAgentFallbackModelConfigurationAgents2FromJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentsFallbackModelConfiguration$inboundSchema:
+export const UpdateAgentResponseBodyFallbackModelConfiguration$inboundSchema:
   z.ZodType<
-    UpdateAgentAgentsFallbackModelConfiguration,
+    UpdateAgentResponseBodyFallbackModelConfiguration,
     z.ZodTypeDef,
     unknown
   > = z.union([
@@ -6428,32 +6968,33 @@ export const UpdateAgentAgentsFallbackModelConfiguration$inboundSchema:
     z.string(),
   ]);
 
-export function updateAgentAgentsFallbackModelConfigurationFromJSON(
+export function updateAgentResponseBodyFallbackModelConfigurationFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateAgentAgentsFallbackModelConfiguration,
+  UpdateAgentResponseBodyFallbackModelConfiguration,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateAgentAgentsFallbackModelConfiguration$inboundSchema.parse(
+      UpdateAgentResponseBodyFallbackModelConfiguration$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'UpdateAgentAgentsFallbackModelConfiguration' from JSON`,
+    `Failed to parse 'UpdateAgentResponseBodyFallbackModelConfiguration' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentModel$inboundSchema: z.ZodType<
-  UpdateAgentModel,
+export const UpdateAgentResponseBodyModel$inboundSchema: z.ZodType<
+  UpdateAgentResponseBodyModel,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => UpdateAgentParameters$inboundSchema).optional(),
-  retry: z.lazy(() => UpdateAgentRetry$inboundSchema).optional(),
+  parameters: z.lazy(() => UpdateAgentResponseBodyParameters$inboundSchema)
+    .optional(),
+  retry: z.lazy(() => UpdateAgentResponseBodyRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([
       z.lazy(() => UpdateAgentFallbackModelConfigurationAgents2$inboundSchema),
@@ -6467,136 +7008,86 @@ export const UpdateAgentModel$inboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentModelFromJSON(
+export function updateAgentResponseBodyModelFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentModel, SDKValidationError> {
+): SafeParseResult<UpdateAgentResponseBodyModel, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentModel' from JSON`,
+    (x) => UpdateAgentResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBodyModel' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentAgentsTeamOfAgents$inboundSchema: z.ZodType<
-  UpdateAgentAgentsTeamOfAgents,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
-
-export function updateAgentAgentsTeamOfAgentsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAgentsTeamOfAgents, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsTeamOfAgents' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentMetrics$inboundSchema: z.ZodType<
-  UpdateAgentMetrics,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_cost: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "total_cost": "totalCost",
-  });
-});
-
-export function updateAgentMetricsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentMetrics, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentMetrics' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentAgentsKnowledgeBases$inboundSchema: z.ZodType<
-  UpdateAgentAgentsKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
-
-export function updateAgentAgentsKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAgentsKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAgentsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsKnowledgeBases' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentSource$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentSource
-> = z.nativeEnum(UpdateAgentSource);
-
-/** @internal */
-export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
-  UpdateAgentResponseBody,
+export const UpdateAgentResponseBody1$inboundSchema: z.ZodType<
+  UpdateAgentResponseBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
-  workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
+  status: UpdateAgentResponseBodyStatus$inboundSchema,
+  version_hash: z.string().optional(),
+  path: z.string(),
+  memory_stores: z.array(z.string()).optional(),
+  team_of_agents: z.array(
+    z.lazy(() => UpdateAgentResponseBodyTeamOfAgents$inboundSchema),
+  ).optional(),
+  metrics: z.lazy(() => UpdateAgentResponseBodyMetrics$inboundSchema)
+    .optional(),
+  variables: z.record(z.any()).optional(),
+  knowledge_bases: z.array(
+    z.lazy(() => UpdateAgentResponseBodyKnowledgeBases$inboundSchema),
+  ).optional(),
+  source: UpdateAgentResponseBodySource$inboundSchema.optional(),
+  type: z.literal("internal"),
   role: z.string(),
   description: z.string(),
   system_prompt: z.string().optional(),
   instructions: z.string(),
-  status: UpdateAgentStatus$inboundSchema,
-  settings: z.lazy(() => UpdateAgentAgentsSettings$inboundSchema).optional(),
-  model: z.lazy(() => UpdateAgentModel$inboundSchema),
-  version_hash: z.string().optional(),
-  path: z.string(),
-  memory_stores: z.array(z.string()),
-  team_of_agents: z.array(
-    z.lazy(() => UpdateAgentAgentsTeamOfAgents$inboundSchema),
-  ),
-  metrics: z.lazy(() => UpdateAgentMetrics$inboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  knowledge_bases: z.array(
-    z.lazy(() => UpdateAgentAgentsKnowledgeBases$inboundSchema),
-  ).optional(),
-  source: UpdateAgentSource$inboundSchema.optional(),
+  settings: z.lazy(() => UpdateAgentResponseBodySettings$inboundSchema)
+    .optional(),
+  model: z.lazy(() => UpdateAgentResponseBodyModel$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
-    "workspace_id": "workspaceId",
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "system_prompt": "systemPrompt",
     "version_hash": "versionHash",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
+    "system_prompt": "systemPrompt",
   });
 });
+
+export function updateAgentResponseBody1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentResponseBody1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentResponseBody1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
+  UpdateAgentResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateAgentResponseBody1$inboundSchema),
+  z.lazy(() => UpdateAgentResponseBody2$inboundSchema),
+]);
 
 export function updateAgentResponseBodyFromJSON(
   jsonString: string,
