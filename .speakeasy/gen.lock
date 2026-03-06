@@ -5,15 +5,15 @@ management:
   docVersion: "2.0"
   speakeasyVersion: 1.745.0
   generationVersion: 2.850.7
-  releaseVersion: 4.4.16
-  configChecksum: 3d3c88121817b71eabd71d4f4bf3ad59
+  releaseVersion: 4.4.17
+  configChecksum: 3b4122ac8235a9597d4da3d2d6f3ac08
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 persistentEdits:
-  generation_id: 57a0888f-7e24-4c07-a6bf-535e68216e50
-  pristine_commit_hash: fe064523483aef383240a16cf28a18c24237b5b7
-  pristine_tree_hash: f04fd2b79822c1856a3a5396f2c97e5079fcdd0b
+  generation_id: 672865ee-ae3d-4d0f-888d-bdf2d0f5ed95
+  pristine_commit_hash: 8b7abf25fa87aebe3b6310c9bf26b8acf7a4d663
+  pristine_tree_hash: 73e736fe7f58cc6370dab7f471cd6adb16365563
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -16108,12 +16108,12 @@ trackedFiles:
     pristine_git_object: 4cf0d2ceb6acaa225a9f3afe05e2913f263c3462
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:4119f45f2e697df86b1f1e9e53bb95adce1a0a79
-    pristine_git_object: 9499b231696700d9af2655191f20f683f319a26c
+    last_write_checksum: sha1:ef1e6be6ab2063bd3974f76510366fd9dd37b513
+    pristine_git_object: 4a2a18a67692aad97267c288f65c10965d3730ea
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:0a742fbc7ba169073ebcdff9e8b4a1aa76f4acf9
-    pristine_git_object: b5d008bcecb3ae56ef8c0517b77ca8aa29b8bd2e
+    last_write_checksum: sha1:4362969b64e168039e5af79f0eee963dc43ed60f
+    pristine_git_object: de0b80a92bd850c1d0c937d4f801801955bafbc4
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:06cbcf678f38adf43f7fa3f7c1cfbb7a536903c9
@@ -16576,8 +16576,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:f3fc37f90598e7236cf56457cda8b37495d3f87c
-    pristine_git_object: 2865a459ac3713e95554d0372451dce1bb4aa282
+    last_write_checksum: sha1:ad6c000f5f08293e4cad0c17f53fa6d50a04008d
+    pristine_git_object: c7ef2b95b917ab9d61b16e7ade1b7e419d5b9a2a
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
