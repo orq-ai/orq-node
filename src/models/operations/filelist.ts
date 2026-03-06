@@ -125,7 +125,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2026-03-05T21:45:27.068Z",
+    "2026-03-06T11:01:38.990Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
