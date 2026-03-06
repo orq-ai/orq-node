@@ -1441,6 +1441,19 @@ export type UpdateA2AConfiguration = {
   headers?: { [k: string]: UpdateAgentHeaders } | undefined;
 };
 
+/**
+ * Optional semantic version bump to create after a successful publish.
+ */
+export const VersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+/**
+ * Optional semantic version bump to create after a successful publish.
+ */
+export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
   displayName?: string | undefined;
@@ -1493,6 +1506,14 @@ export type UpdateAgentRequestBody = {
    * Update A2A agent configuration (only applicable to A2A agents)
    */
   a2a?: UpdateA2AConfiguration | undefined;
+  /**
+   * Optional semantic version bump to create after a successful publish.
+   */
+  versionIncrement?: VersionIncrement | undefined;
+  /**
+   * Optional description stored with the created version.
+   */
+  versionDescription?: string | undefined;
 };
 
 export type UpdateAgentRequest = {
@@ -5146,6 +5167,11 @@ export function updateA2AConfigurationToJSON(
 }
 
 /** @internal */
+export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof VersionIncrement
+> = z.nativeEnum(VersionIncrement);
+
+/** @internal */
 export type UpdateAgentRequestBody$Outbound = {
   key?: string | undefined;
   display_name?: string | undefined;
@@ -5165,6 +5191,8 @@ export type UpdateAgentRequestBody$Outbound = {
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
   a2a?: UpdateA2AConfiguration$Outbound | undefined;
+  versionIncrement?: string | undefined;
+  versionDescription?: string | undefined;
 };
 
 /** @internal */
@@ -5200,6 +5228,8 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   variables: z.record(z.any()).optional(),
   a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
+  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

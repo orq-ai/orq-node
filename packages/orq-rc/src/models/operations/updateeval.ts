@@ -338,12 +338,14 @@ export type Jury = {
   tieValue?: TieValue | undefined;
 };
 
-export const VersionIncrement = {
+export const UpdateEvalRequestBodyEvalsRequestVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
 } as const;
-export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+export type UpdateEvalRequestBodyEvalsRequestVersionIncrement = ClosedEnum<
+  typeof UpdateEvalRequestBodyEvalsRequestVersionIncrement
+>;
 
 export type RequestBodyLLM = {
   guardrailConfig?:
@@ -372,7 +374,9 @@ export type RequestBodyLLM = {
   model?: string | undefined;
   jury?: Jury | undefined;
   key?: string | undefined;
-  versionIncrement?: VersionIncrement | undefined;
+  versionIncrement?:
+    | UpdateEvalRequestBodyEvalsRequestVersionIncrement
+    | undefined;
   versionDescription?: string | undefined;
 };
 
@@ -1938,9 +1942,9 @@ export function juryToJSON(jury: Jury): string {
 }
 
 /** @internal */
-export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
-  typeof VersionIncrement
-> = z.nativeEnum(VersionIncrement);
+export const UpdateEvalRequestBodyEvalsRequestVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequestVersionIncrement> = z
+    .nativeEnum(UpdateEvalRequestBodyEvalsRequestVersionIncrement);
 
 /** @internal */
 export type RequestBodyLLM$Outbound = {
@@ -1982,7 +1986,8 @@ export const RequestBodyLLM$outboundSchema: z.ZodType<
   model: z.string().optional(),
   jury: z.lazy(() => Jury$outboundSchema).optional(),
   key: z.string().optional(),
-  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionIncrement:
+    UpdateEvalRequestBodyEvalsRequestVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2178,8 +2183,8 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean$inboundSchema
@@ -2332,8 +2337,8 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean$inboundSchema
@@ -3152,8 +3157,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
@@ -3334,8 +3339,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
@@ -3482,8 +3487,8 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
@@ -3619,8 +3624,8 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
@@ -3921,8 +3926,8 @@ export const UpdateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema
@@ -4065,8 +4070,8 @@ export const UpdateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-03-06T09:14:09.882Z"),
-  updated: z.string().default("2026-03-06T09:14:09.882Z"),
+  created: z.string().default("2026-03-06T12:45:25.312Z"),
+  updated: z.string().default("2026-03-06T12:45:25.312Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema
