@@ -1906,7 +1906,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KK1JX99BG7E4QNR0BX20YQRF"),
+  _id: z.string().default("tool_01KK426SKBWFYP2TAG9KAQNB02"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2005,7 +2005,7 @@ export const CreateToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KK1JX9995BVSEV18A6PDWCH9"),
+  id: z.string().default("01KK426SKA2J0CJYFY102SYF4Z"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2060,7 +2060,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KK1JX998QA30V13F3GC4BQ0W"),
+  _id: z.string().default("tool_01KK426SK8FJMPNBPA0EDQKNXA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2249,7 +2249,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KK1JX995JKYCHXAYS54FTXZS"),
+  _id: z.string().default("tool_01KK426SJXZ1YH1QKMHA36MAH5"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2346,7 +2346,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KK1JX9937ET2PN1GJ2RPWRB4"),
+  _id: z.string().default("tool_01KK426SJT93SCR0X2P1ADGP8F"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2450,7 +2450,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KK1JX9927DE79TJ1E85JA45X"),
+  _id: z.string().default("tool_01KK426SJRJJFT7MBR1WQ6F455"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
