@@ -11,7 +11,7 @@
 
 ## create
 
-Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/deploymentinvoke-1).
+Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/deployments/invoke).
 
 ### Example Usage
 
