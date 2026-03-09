@@ -13,11 +13,15 @@ let value: ListAgentsResponseBody = {
     {
       id: "<id>",
       key: "<key>",
-      status: "published",
+      status: "draft",
       path: "Default",
-      type: "internal",
+      knowledgeBases: [
+        {
+          knowledgeId: "customer-knowledge-base",
+        },
+      ],
       role: "<value>",
-      description: "tail draft alongside pish apologise readjust pfft until",
+      description: "between ick deflect once forenenst gee yet gah eek",
       instructions: "<value>",
       model: {
         id: "<id>",
@@ -45,7 +49,6 @@ let value: ListAgentsResponseBody = {
           },
         },
         retry: {
-          count: 3,
           onCodes: [
             429,
             500,
@@ -55,42 +58,7 @@ let value: ListAgentsResponseBody = {
           ],
         },
         fallbackModels: [
-          {
-            id: "<id>",
-            parameters: {
-              fallbacks: [
-                {
-                  model: "openai/gpt-4o-mini",
-                },
-              ],
-              cache: {
-                ttl: 3600,
-                type: "exact_match",
-              },
-              loadBalancer: {
-                type: "weight_based",
-                models: [
-                  {
-                    model: "openai/gpt-4o",
-                    weight: 0.7,
-                  },
-                ],
-              },
-              timeout: {
-                callTimeout: 30000,
-              },
-            },
-            retry: {
-              count: 3,
-              onCodes: [
-                429,
-                500,
-                502,
-                503,
-                504,
-              ],
-            },
-          },
+          "<value>",
         ],
       },
     },
@@ -104,5 +72,5 @@ let value: ListAgentsResponseBody = {
 | Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `object`                                                                   | [operations.ListAgentsObject](../../models/operations/listagentsobject.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `data`                                                                     | *operations.ListAgentsData*[]                                              | :heavy_check_mark:                                                         | N/A                                                                        |
+| `data`                                                                     | [operations.ListAgentsData](../../models/operations/listagentsdata.md)[]   | :heavy_check_mark:                                                         | N/A                                                                        |
 | `hasMore`                                                                  | *boolean*                                                                  | :heavy_check_mark:                                                         | N/A                                                                        |

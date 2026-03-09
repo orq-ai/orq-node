@@ -212,7 +212,7 @@ export type ResponseBodyExternalConfig = {
   apiUrl: string;
 };
 
-export type CreateKnowledgeResponseBody2 = {
+export type ResponseBody2 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -333,7 +333,7 @@ export type ResponseBodyRetrievalSettings = {
   agenticRagConfig?: ResponseBodyAgenticRagConfig | null | undefined;
 };
 
-export type CreateKnowledgeResponseBody1 = {
+export type ResponseBody1 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -384,9 +384,7 @@ export type CreateKnowledgeResponseBody1 = {
 /**
  * Knowledge successfully created
  */
-export type CreateKnowledgeResponseBody =
-  | CreateKnowledgeResponseBody1
-  | CreateKnowledgeResponseBody2;
+export type CreateKnowledgeResponseBody = ResponseBody1 | ResponseBody2;
 
 /** @internal */
 export const CreateKnowledgeRequestBodyKnowledgeType$outboundSchema:
@@ -752,8 +750,8 @@ export function responseBodyExternalConfigFromJSON(
 }
 
 /** @internal */
-export const CreateKnowledgeResponseBody2$inboundSchema: z.ZodType<
-  CreateKnowledgeResponseBody2,
+export const ResponseBody2$inboundSchema: z.ZodType<
+  ResponseBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -784,13 +782,13 @@ export const CreateKnowledgeResponseBody2$inboundSchema: z.ZodType<
   });
 });
 
-export function createKnowledgeResponseBody2FromJSON(
+export function responseBody2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateKnowledgeResponseBody2, SDKValidationError> {
+): SafeParseResult<ResponseBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateKnowledgeResponseBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeResponseBody2' from JSON`,
+    (x) => ResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody2' from JSON`,
   );
 }
 
@@ -887,8 +885,8 @@ export function responseBodyRetrievalSettingsFromJSON(
 }
 
 /** @internal */
-export const CreateKnowledgeResponseBody1$inboundSchema: z.ZodType<
-  CreateKnowledgeResponseBody1,
+export const ResponseBody1$inboundSchema: z.ZodType<
+  ResponseBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -915,13 +913,13 @@ export const CreateKnowledgeResponseBody1$inboundSchema: z.ZodType<
   });
 });
 
-export function createKnowledgeResponseBody1FromJSON(
+export function responseBody1FromJSON(
   jsonString: string,
-): SafeParseResult<CreateKnowledgeResponseBody1, SDKValidationError> {
+): SafeParseResult<ResponseBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateKnowledgeResponseBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeResponseBody1' from JSON`,
+    (x) => ResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody1' from JSON`,
   );
 }
 
@@ -931,8 +929,8 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateKnowledgeResponseBody1$inboundSchema),
-  z.lazy(() => CreateKnowledgeResponseBody2$inboundSchema),
+  z.lazy(() => ResponseBody1$inboundSchema),
+  z.lazy(() => ResponseBody2$inboundSchema),
 ]);
 
 export function createKnowledgeResponseBodyFromJSON(
