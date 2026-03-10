@@ -867,7 +867,7 @@ export type CreatePromptRequestBody = {
   /**
    * Prompt configuration with model and messages.
    */
-  prompt?: PromptInput | undefined;
+  prompt: PromptInput;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -3607,7 +3607,7 @@ export type CreatePromptRequestBody$Outbound = {
   display_name: string;
   description?: string | null | undefined;
   metadata?: CreatePromptMetadata$Outbound | undefined;
-  prompt?: PromptInput$Outbound | undefined;
+  prompt: PromptInput$Outbound;
   path: string;
 };
 
@@ -3620,7 +3620,7 @@ export const CreatePromptRequestBody$outboundSchema: z.ZodType<
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   metadata: z.lazy(() => CreatePromptMetadata$outboundSchema).optional(),
-  prompt: z.lazy(() => PromptInput$outboundSchema).optional(),
+  prompt: z.lazy(() => PromptInput$outboundSchema),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
