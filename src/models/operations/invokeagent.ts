@@ -65,7 +65,7 @@ export type InvokeAgentA2AMessage = {
    */
   role: InvokeAgentRoleUserMessage | InvokeAgentRoleToolMessage;
   /**
-   * A2A message parts (text, file, or tool_result only)
+   * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
   parts: Array<
     | components.TextPart
@@ -161,6 +161,16 @@ export type InvokeAgentMemory = {
   entityId: string;
 };
 
+/**
+ * Configuration options for the agent invocation
+ */
+export type InvokeAgentConfiguration = {
+  /**
+   * Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status.
+   */
+  blocking?: boolean | undefined;
+};
+
 export type InvokeAgentRequestBody = {
   /**
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
@@ -196,6 +206,10 @@ export type InvokeAgentRequestBody = {
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Configuration options for the agent invocation
+   */
+  configuration?: InvokeAgentConfiguration | undefined;
 };
 
 export type InvokeAgentRequest = {
@@ -320,6 +334,10 @@ export type InvokeAgentA2ATaskResponse = {
    * Current task status information
    */
   status: TaskStatus;
+  /**
+   * Array of messages in the task conversation. Only present when blocking mode is enabled.
+   */
+  messages?: Array<components.ExtendedMessage> | undefined;
   /**
    * Task metadata containing workspace_id and trace_id for feedback and tracking
    */
@@ -550,6 +568,28 @@ export function invokeAgentMemoryToJSON(
 }
 
 /** @internal */
+export type InvokeAgentConfiguration$Outbound = {
+  blocking: boolean;
+};
+
+/** @internal */
+export const InvokeAgentConfiguration$outboundSchema: z.ZodType<
+  InvokeAgentConfiguration$Outbound,
+  z.ZodTypeDef,
+  InvokeAgentConfiguration
+> = z.object({
+  blocking: z.boolean().default(false),
+});
+
+export function invokeAgentConfigurationToJSON(
+  invokeAgentConfiguration: InvokeAgentConfiguration,
+): string {
+  return JSON.stringify(
+    InvokeAgentConfiguration$outboundSchema.parse(invokeAgentConfiguration),
+  );
+}
+
+/** @internal */
 export type InvokeAgentRequestBody$Outbound = {
   task_id?: string | undefined;
   message: InvokeAgentA2AMessage$Outbound;
@@ -559,6 +599,7 @@ export type InvokeAgentRequestBody$Outbound = {
   thread?: InvokeAgentThread$Outbound | undefined;
   memory?: InvokeAgentMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
+  configuration?: InvokeAgentConfiguration$Outbound | undefined;
 };
 
 /** @internal */
@@ -575,6 +616,8 @@ export const InvokeAgentRequestBody$outboundSchema: z.ZodType<
   thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => InvokeAgentMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+  configuration: z.lazy(() => InvokeAgentConfiguration$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",
@@ -719,6 +762,7 @@ export const InvokeAgentA2ATaskResponse$inboundSchema: z.ZodType<
   contextId: z.string(),
   kind: Kind$inboundSchema,
   status: z.lazy(() => TaskStatus$inboundSchema),
+  messages: z.array(components.ExtendedMessage$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
 });
 

@@ -10,55 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const ModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type ModelConfigurationVoice = ClosedEnum<
-  typeof ModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const ModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type ModelConfigurationFormat = ClosedEnum<
-  typeof ModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type UpdateAgentModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: ModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: ModelConfigurationFormat;
-};
-
 export type UpdateAgentResponseFormatAgentsJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -154,16 +105,6 @@ export type ModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type ModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type ModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -263,20 +204,6 @@ export type ModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type UpdateAgentModelConfigurationRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const UpdateAgentModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -342,10 +269,6 @@ export type ModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: UpdateAgentModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -361,18 +284,6 @@ export type ModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -410,10 +321,6 @@ export type ModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: ModelConfigurationStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -451,10 +358,6 @@ export type ModelConfigurationParameters = {
    */
   fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: UpdateAgentModelConfigurationRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: ModelConfigurationCache | undefined;
@@ -471,7 +374,7 @@ export type ModelConfigurationParameters = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type UpdateAgentModelConfigurationAgentsRetry = {
+export type ModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -499,7 +402,7 @@ export type UpdateAgentModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: UpdateAgentModelConfigurationAgentsRetry | undefined;
+  retry?: ModelConfigurationRetry | undefined;
 };
 
 /**
@@ -508,55 +411,6 @@ export type UpdateAgentModelConfiguration2 = {
 export type UpdateAgentModelConfiguration =
   | UpdateAgentModelConfiguration2
   | string;
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const UpdateAgentFallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type UpdateAgentFallbackModelConfigurationVoice = ClosedEnum<
-  typeof UpdateAgentFallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const UpdateAgentFallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type UpdateAgentFallbackModelConfigurationFormat = ClosedEnum<
-  typeof UpdateAgentFallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type UpdateAgentFallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: UpdateAgentFallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: UpdateAgentFallbackModelConfigurationFormat;
-};
 
 export type UpdateAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
@@ -653,16 +507,6 @@ export type UpdateAgentFallbackModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type UpdateAgentFallbackModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type UpdateAgentFallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type UpdateAgentFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -766,20 +610,6 @@ export type UpdateAgentFallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type UpdateAgentFallbackModelConfigurationRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const UpdateAgentFallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -846,10 +676,6 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: UpdateAgentFallbackModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -865,18 +691,6 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -916,13 +730,6 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | UpdateAgentFallbackModelConfigurationStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -968,10 +775,6 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
    */
   fallbacks?: Array<UpdateAgentFallbackModelConfigurationFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: UpdateAgentFallbackModelConfigurationRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: UpdateAgentFallbackModelConfigurationCache | undefined;
@@ -988,7 +791,7 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type UpdateAgentFallbackModelConfigurationAgentsRetry = {
+export type UpdateAgentFallbackModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -1014,7 +817,7 @@ export type UpdateAgentFallbackModelConfiguration2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -1612,10 +1415,46 @@ export type UpdateAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type UpdateAgentHeaders = {
+  /**
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
+   */
+  value: string;
+  encrypted?: boolean | undefined;
+};
+
 /**
- * Request body for updating an existing agent via the API. Uses simplified tool input format.
+ * Update A2A agent configuration (only applicable to A2A agents)
  */
-export type UpdateAgentUpdateAgentRequest = {
+export type UpdateA2AConfiguration = {
+  /**
+   * Update the A2A agent endpoint URL
+   */
+  agentUrl?: string | undefined;
+  /**
+   * Update the explicit agent card URL
+   */
+  cardUrl?: string | undefined;
+  /**
+   * Update HTTP headers for authentication. **Credential preservation**: Use empty string ("") for encrypted header values to keep existing credentials without re-entry. Provide new values to rotate credentials. Omit headers entirely to remove them.
+   */
+  headers?: { [k: string]: UpdateAgentHeaders } | undefined;
+};
+
+/**
+ * Optional semantic version bump to create after a successful publish.
+ */
+export const VersionIncrement = {
+  Major: "major",
+  Minor: "minor",
+  Patch: "patch",
+} as const;
+/**
+ * Optional semantic version bump to create after a successful publish.
+ */
+export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+
+export type UpdateAgentRequestBody = {
   key?: string | undefined;
   displayName?: string | undefined;
   projectId?: string | undefined;
@@ -1663,6 +1502,18 @@ export type UpdateAgentUpdateAgentRequest = {
    * Extracted variables from agent instructions
    */
   variables?: { [k: string]: any } | undefined;
+  /**
+   * Update A2A agent configuration (only applicable to A2A agents)
+   */
+  a2a?: UpdateA2AConfiguration | undefined;
+  /**
+   * Optional semantic version bump to create after a successful publish.
+   */
+  versionIncrement?: VersionIncrement | undefined;
+  /**
+   * Optional description stored with the created version.
+   */
+  versionDescription?: string | undefined;
 };
 
 export type UpdateAgentRequest = {
@@ -1670,7 +1521,7 @@ export type UpdateAgentRequest = {
    * The unique key of the agent to update
    */
   agentKey: string;
-  requestBody: UpdateAgentUpdateAgentRequest;
+  requestBody: UpdateAgentRequestBody;
 };
 
 /**
@@ -1686,6 +1537,47 @@ export const UpdateAgentStatus = {
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
 export type UpdateAgentStatus = ClosedEnum<typeof UpdateAgentStatus>;
+
+export type UpdateAgentAgentsTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type UpdateAgentMetrics = {
+  totalCost: number;
+};
+
+export type UpdateAgentAgentsKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const UpdateAgentSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type UpdateAgentSource = ClosedEnum<typeof UpdateAgentSource>;
+
+/**
+ * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ */
+export const UpdateAgentType = {
+  Internal: "internal",
+  A2a: "a2a",
+} as const;
+/**
+ * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ */
+export type UpdateAgentType = ClosedEnum<typeof UpdateAgentType>;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
@@ -1830,51 +1722,6 @@ export type UpdateAgentAgentsSettings = {
   guardrails?: Array<UpdateAgentAgentsGuardrails> | undefined;
 };
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const UpdateAgentVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type UpdateAgentVoice = ClosedEnum<typeof UpdateAgentVoice>;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const UpdateAgentFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type UpdateAgentFormat = ClosedEnum<typeof UpdateAgentFormat>;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type UpdateAgentAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: UpdateAgentVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: UpdateAgentFormat;
-};
-
 export type UpdateAgentResponseFormatAgentsResponseJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -1970,16 +1817,6 @@ export type UpdateAgentReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type UpdateAgentStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type UpdateAgentStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type UpdateAgentThinking =
   | components.ThinkingConfigDisabledSchema
@@ -2081,24 +1918,10 @@ export type UpdateAgentFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type UpdateAgentAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
-export const UpdateAgentType = {
+export const UpdateAgentAgentsType = {
   ExactMatch: "exact_match",
 } as const;
-export type UpdateAgentType = ClosedEnum<typeof UpdateAgentType>;
+export type UpdateAgentAgentsType = ClosedEnum<typeof UpdateAgentAgentsType>;
 
 /**
  * Cache configuration for the request.
@@ -2108,7 +1931,7 @@ export type UpdateAgentCache = {
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl: number;
-  type: UpdateAgentType;
+  type: UpdateAgentAgentsType;
 };
 
 export const UpdateAgentLoadBalancerAgentsResponseType = {
@@ -2158,10 +1981,6 @@ export type UpdateAgentParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: UpdateAgentAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -2177,18 +1996,6 @@ export type UpdateAgentParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -2226,10 +2033,6 @@ export type UpdateAgentParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: UpdateAgentStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -2270,10 +2073,6 @@ export type UpdateAgentParameters = {
    */
   fallbacks?: Array<UpdateAgentFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: UpdateAgentAgentsRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: UpdateAgentCache | undefined;
@@ -2299,55 +2098,6 @@ export type UpdateAgentRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const UpdateAgentFallbackModelConfigurationAgentsVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type UpdateAgentFallbackModelConfigurationAgentsVoice = ClosedEnum<
-  typeof UpdateAgentFallbackModelConfigurationAgentsVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const UpdateAgentFallbackModelConfigurationAgentsFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type UpdateAgentFallbackModelConfigurationAgentsFormat = ClosedEnum<
-  typeof UpdateAgentFallbackModelConfigurationAgentsFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type UpdateAgentFallbackModelConfigurationAgentsAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: UpdateAgentFallbackModelConfigurationAgentsVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: UpdateAgentFallbackModelConfigurationAgentsFormat;
 };
 
 export type UpdateAgentResponseFormatAgentsResponse200ApplicationJSONJSONSchema =
@@ -2449,16 +2199,6 @@ export type UpdateAgentFallbackModelConfigurationAgentsReasoningEffort =
 export type UpdateAgentFallbackModelConfigurationAgentsStop =
   | string
   | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type UpdateAgentFallbackModelConfigurationAgentsStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type UpdateAgentFallbackModelConfigurationAgentsThinking =
   | components.ThinkingConfigDisabledSchema
@@ -2564,20 +2304,6 @@ export type UpdateAgentFallbackModelConfigurationAgentsFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type UpdateAgentFallbackModelConfigurationAgentsResponse200Retry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const UpdateAgentFallbackModelConfigurationAgentsType = {
   ExactMatch: "exact_match",
 } as const;
@@ -2644,10 +2370,6 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: UpdateAgentFallbackModelConfigurationAgentsAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -2663,18 +2385,6 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -2714,13 +2424,6 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | UpdateAgentFallbackModelConfigurationAgentsStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -2768,12 +2471,6 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
     | Array<UpdateAgentFallbackModelConfigurationAgentsFallbacks>
     | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?:
-    | UpdateAgentFallbackModelConfigurationAgentsResponse200Retry
-    | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: UpdateAgentFallbackModelConfigurationAgentsCache | undefined;
@@ -2790,7 +2487,7 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type UpdateAgentFallbackModelConfigurationAgentsResponseRetry = {
+export type UpdateAgentFallbackModelConfigurationAgentsRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -2818,7 +2515,7 @@ export type UpdateAgentFallbackModelConfigurationAgents2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: UpdateAgentFallbackModelConfigurationAgentsResponseRetry | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry | undefined;
 };
 
 /**
@@ -2854,34 +2551,35 @@ export type UpdateAgentModel = {
     | undefined;
 };
 
-export type UpdateAgentAgentsTeamOfAgents = {
+export type UpdateAgentAgentsHeaders = {
   /**
-   * The unique key of the agent within the workspace
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
    */
-  key: string;
-  /**
-   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
-   */
-  role?: string | undefined;
+  value: string;
+  encrypted: boolean;
 };
 
-export type UpdateAgentMetrics = {
-  totalCost: number;
-};
-
-export type UpdateAgentAgentsKnowledgeBases = {
+/**
+ * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
+ */
+export type UpdateAgentA2AAgentConfiguration = {
   /**
-   * Unique identifier of the knowledge base to search
+   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
    */
-  knowledgeId: string;
+  agentUrl: string;
+  /**
+   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
+   */
+  cardUrl?: string | undefined;
+  /**
+   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
+   */
+  headers?: { [k: string]: UpdateAgentAgentsHeaders } | undefined;
+  /**
+   * Cached agent card from discovery. Refreshed periodically.
+   */
+  cachedCard?: any | undefined;
 };
-
-export const UpdateAgentSource = {
-  Internal: "internal",
-  External: "external",
-  Experiment: "experiment",
-} as const;
-export type UpdateAgentSource = ClosedEnum<typeof UpdateAgentSource>;
 
 /**
  * Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
@@ -2893,22 +2591,15 @@ export type UpdateAgentResponseBody = {
    */
   key: string;
   displayName?: string | undefined;
-  workspaceId: string;
   projectId: string;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  role: string;
-  description: string;
-  systemPrompt?: string | undefined;
-  instructions: string;
   /**
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: UpdateAgentStatus;
-  settings?: UpdateAgentAgentsSettings | undefined;
-  model: UpdateAgentModel;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2923,11 +2614,11 @@ export type UpdateAgentResponseBody = {
   /**
    * Array of memory store identifiers. Accepts both memory store IDs and keys.
    */
-  memoryStores: Array<string>;
+  memoryStores?: Array<string> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents: Array<UpdateAgentAgentsTeamOfAgents>;
+  teamOfAgents?: Array<UpdateAgentAgentsTeamOfAgents> | undefined;
   metrics?: UpdateAgentMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -2938,43 +2629,21 @@ export type UpdateAgentResponseBody = {
    */
   knowledgeBases?: Array<UpdateAgentAgentsKnowledgeBases> | undefined;
   source?: UpdateAgentSource | undefined;
+  /**
+   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   */
+  type: UpdateAgentType;
+  role: string;
+  description: string;
+  systemPrompt?: string | undefined;
+  instructions: string;
+  settings?: UpdateAgentAgentsSettings | undefined;
+  model: UpdateAgentModel;
+  /**
+   * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
+   */
+  a2a?: UpdateAgentA2AAgentConfiguration | undefined;
 };
-
-/** @internal */
-export const ModelConfigurationVoice$outboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationVoice
-> = z.nativeEnum(ModelConfigurationVoice);
-
-/** @internal */
-export const ModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
-  typeof ModelConfigurationFormat
-> = z.nativeEnum(ModelConfigurationFormat);
-
-/** @internal */
-export type UpdateAgentModelConfigurationAudio$Outbound = {
-  voice: string;
-  format: string;
-};
-
-/** @internal */
-export const UpdateAgentModelConfigurationAudio$outboundSchema: z.ZodType<
-  UpdateAgentModelConfigurationAudio$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentModelConfigurationAudio
-> = z.object({
-  voice: ModelConfigurationVoice$outboundSchema,
-  format: ModelConfigurationFormat$outboundSchema,
-});
-
-export function updateAgentModelConfigurationAudioToJSON(
-  updateAgentModelConfigurationAudio: UpdateAgentModelConfigurationAudio,
-): string {
-  return JSON.stringify(
-    UpdateAgentModelConfigurationAudio$outboundSchema.parse(
-      updateAgentModelConfigurationAudio,
-    ),
-  );
-}
 
 /** @internal */
 export type UpdateAgentResponseFormatAgentsJsonSchema$Outbound = {
@@ -3135,34 +2804,6 @@ export function modelConfigurationStopToJSON(
 ): string {
   return JSON.stringify(
     ModelConfigurationStop$outboundSchema.parse(modelConfigurationStop),
-  );
-}
-
-/** @internal */
-export type ModelConfigurationStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
-
-/** @internal */
-export const ModelConfigurationStreamOptions$outboundSchema: z.ZodType<
-  ModelConfigurationStreamOptions$Outbound,
-  z.ZodTypeDef,
-  ModelConfigurationStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function modelConfigurationStreamOptionsToJSON(
-  modelConfigurationStreamOptions: ModelConfigurationStreamOptions,
-): string {
-  return JSON.stringify(
-    ModelConfigurationStreamOptions$outboundSchema.parse(
-      modelConfigurationStreamOptions,
-    ),
   );
 }
 
@@ -3360,36 +3001,6 @@ export function modelConfigurationFallbacksToJSON(
 }
 
 /** @internal */
-export type UpdateAgentModelConfigurationRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const UpdateAgentModelConfigurationRetry$outboundSchema: z.ZodType<
-  UpdateAgentModelConfigurationRetry$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentModelConfigurationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function updateAgentModelConfigurationRetryToJSON(
-  updateAgentModelConfigurationRetry: UpdateAgentModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    UpdateAgentModelConfigurationRetry$outboundSchema.parse(
-      updateAgentModelConfigurationRetry,
-    ),
-  );
-}
-
-/** @internal */
 export const UpdateAgentModelConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentModelConfigurationType
 > = z.nativeEnum(UpdateAgentModelConfigurationType);
@@ -3523,13 +3134,9 @@ export function modelConfigurationTimeoutToJSON(
 /** @internal */
 export type ModelConfigurationParameters$Outbound = {
   name?: string | undefined;
-  audio?: UpdateAgentModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
     | UpdateAgentResponseFormatText$Outbound
@@ -3540,7 +3147,6 @@ export type ModelConfigurationParameters$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?: ModelConfigurationStreamOptions$Outbound | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -3553,7 +3159,6 @@ export type ModelConfigurationParameters$Outbound = {
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<ModelConfigurationGuardrails$Outbound> | undefined;
   fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
-  retry?: UpdateAgentModelConfigurationRetry$Outbound | undefined;
   cache?: ModelConfigurationCache$Outbound | undefined;
   load_balancer?: UpdateAgentLoadBalancer1$Outbound | undefined;
   timeout?: ModelConfigurationTimeout$Outbound | undefined;
@@ -3566,15 +3171,9 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
   ModelConfigurationParameters
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => UpdateAgentModelConfigurationAudio$outboundSchema),
-  ).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
     z.lazy(() => UpdateAgentResponseFormatText$outboundSchema),
@@ -3585,9 +3184,6 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => ModelConfigurationStreamOptions$outboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -3606,8 +3202,6 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
     .optional(),
-  retry: z.lazy(() => UpdateAgentModelConfigurationRetry$outboundSchema)
-    .optional(),
   cache: z.lazy(() => ModelConfigurationCache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => UpdateAgentLoadBalancer1$outboundSchema)
     .optional(),
@@ -3617,11 +3211,9 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     frequencyPenalty: "frequency_penalty",
     maxTokens: "max_tokens",
     maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
     presencePenalty: "presence_penalty",
     responseFormat: "response_format",
     reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
     topP: "top_p",
     topK: "top_k",
     toolChoice: "tool_choice",
@@ -3641,16 +3233,16 @@ export function modelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type UpdateAgentModelConfigurationAgentsRetry$Outbound = {
+export type ModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const UpdateAgentModelConfigurationAgentsRetry$outboundSchema: z.ZodType<
-  UpdateAgentModelConfigurationAgentsRetry$Outbound,
+export const ModelConfigurationRetry$outboundSchema: z.ZodType<
+  ModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  UpdateAgentModelConfigurationAgentsRetry
+  ModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3660,14 +3252,11 @@ export const UpdateAgentModelConfigurationAgentsRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentModelConfigurationAgentsRetryToJSON(
-  updateAgentModelConfigurationAgentsRetry:
-    UpdateAgentModelConfigurationAgentsRetry,
+export function modelConfigurationRetryToJSON(
+  modelConfigurationRetry: ModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    UpdateAgentModelConfigurationAgentsRetry$outboundSchema.parse(
-      updateAgentModelConfigurationAgentsRetry,
-    ),
+    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
   );
 }
 
@@ -3675,7 +3264,7 @@ export function updateAgentModelConfigurationAgentsRetryToJSON(
 export type UpdateAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: ModelConfigurationParameters$Outbound | undefined;
-  retry?: UpdateAgentModelConfigurationAgentsRetry$Outbound | undefined;
+  retry?: ModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3687,8 +3276,7 @@ export const UpdateAgentModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => ModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() => UpdateAgentModelConfigurationAgentsRetry$outboundSchema)
-    .optional(),
+  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
 });
 
 export function updateAgentModelConfiguration2ToJSON(
@@ -3722,44 +3310,6 @@ export function updateAgentModelConfigurationToJSON(
   return JSON.stringify(
     UpdateAgentModelConfiguration$outboundSchema.parse(
       updateAgentModelConfiguration,
-    ),
-  );
-}
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationVoice$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationVoice> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationVoice);
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationFormat$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationFormat> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationFormat);
-
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationAudio$Outbound = {
-  voice: string;
-  format: string;
-};
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAudio$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAudio$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAudio
-  > = z.object({
-    voice: UpdateAgentFallbackModelConfigurationVoice$outboundSchema,
-    format: UpdateAgentFallbackModelConfigurationFormat$outboundSchema,
-  });
-
-export function updateAgentFallbackModelConfigurationAudioToJSON(
-  updateAgentFallbackModelConfigurationAudio:
-    UpdateAgentFallbackModelConfigurationAudio,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAudio$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAudio,
     ),
   );
 }
@@ -3937,36 +3487,6 @@ export function updateAgentFallbackModelConfigurationStopToJSON(
   return JSON.stringify(
     UpdateAgentFallbackModelConfigurationStop$outboundSchema.parse(
       updateAgentFallbackModelConfigurationStop,
-    ),
-  );
-}
-
-/** @internal */
-export type UpdateAgentFallbackModelConfigurationStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationStreamOptions$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationStreamOptions$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationStreamOptions
-  > = z.object({
-    includeUsage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      includeUsage: "include_usage",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationStreamOptionsToJSON(
-  updateAgentFallbackModelConfigurationStreamOptions:
-    UpdateAgentFallbackModelConfigurationStreamOptions,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationStreamOptions$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationStreamOptions,
     ),
   );
 }
@@ -4180,38 +3700,6 @@ export function updateAgentFallbackModelConfigurationFallbacksToJSON(
 }
 
 /** @internal */
-export type UpdateAgentFallbackModelConfigurationRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationRetry$outboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationRetry$Outbound,
-    z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationRetryToJSON(
-  updateAgentFallbackModelConfigurationRetry:
-    UpdateAgentFallbackModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationRetry$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationRetry,
-    ),
-  );
-}
-
-/** @internal */
 export const UpdateAgentFallbackModelConfigurationType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationType> = z
     .nativeEnum(UpdateAgentFallbackModelConfigurationType);
@@ -4359,16 +3847,9 @@ export function updateAgentFallbackModelConfigurationTimeoutToJSON(
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   name?: string | undefined;
-  audio?:
-    | UpdateAgentFallbackModelConfigurationAudio$Outbound
-    | null
-    | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
     | UpdateAgentResponseFormatAgentsText$Outbound
@@ -4379,10 +3860,6 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?:
-    | UpdateAgentFallbackModelConfigurationStreamOptions$Outbound
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -4399,7 +3876,6 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   fallbacks?:
     | Array<UpdateAgentFallbackModelConfigurationFallbacks$Outbound>
     | undefined;
-  retry?: UpdateAgentFallbackModelConfigurationRetry$Outbound | undefined;
   cache?: UpdateAgentFallbackModelConfigurationCache$Outbound | undefined;
   load_balancer?: UpdateAgentLoadBalancerAgents1$Outbound | undefined;
   timeout?: UpdateAgentFallbackModelConfigurationTimeout$Outbound | undefined;
@@ -4413,15 +3889,9 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
     UpdateAgentFallbackModelConfigurationParameters
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => UpdateAgentFallbackModelConfigurationAudio$outboundSchema),
-    ).optional(),
     frequencyPenalty: z.nullable(z.number()).optional(),
     maxTokens: z.nullable(z.number().int()).optional(),
     maxCompletionTokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    topLogprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presencePenalty: z.nullable(z.number()).optional(),
     responseFormat: z.union([
       z.lazy(() => UpdateAgentResponseFormatAgentsText$outboundSchema),
@@ -4436,11 +3906,6 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    streamOptions: z.nullable(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationStreamOptions$outboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -4466,9 +3931,6 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
         UpdateAgentFallbackModelConfigurationFallbacks$outboundSchema
       ),
     ).optional(),
-    retry: z.lazy(() =>
-      UpdateAgentFallbackModelConfigurationRetry$outboundSchema
-    ).optional(),
     cache: z.lazy(() =>
       UpdateAgentFallbackModelConfigurationCache$outboundSchema
     ).optional(),
@@ -4482,11 +3944,9 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
       frequencyPenalty: "frequency_penalty",
       maxTokens: "max_tokens",
       maxCompletionTokens: "max_completion_tokens",
-      topLogprobs: "top_logprobs",
       presencePenalty: "presence_penalty",
       responseFormat: "response_format",
       reasoningEffort: "reasoning_effort",
-      streamOptions: "stream_options",
       topP: "top_p",
       topK: "top_k",
       toolChoice: "tool_choice",
@@ -4507,17 +3967,17 @@ export function updateAgentFallbackModelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound = {
+export type UpdateAgentFallbackModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema:
+export const UpdateAgentFallbackModelConfigurationRetry$outboundSchema:
   z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound,
+    UpdateAgentFallbackModelConfigurationRetry$Outbound,
     z.ZodTypeDef,
-    UpdateAgentFallbackModelConfigurationAgentsRetry
+    UpdateAgentFallbackModelConfigurationRetry
   > = z.object({
     count: z.number().default(3),
     onCodes: z.array(z.number()).optional(),
@@ -4527,13 +3987,13 @@ export const UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema:
     });
   });
 
-export function updateAgentFallbackModelConfigurationAgentsRetryToJSON(
-  updateAgentFallbackModelConfigurationAgentsRetry:
-    UpdateAgentFallbackModelConfigurationAgentsRetry,
+export function updateAgentFallbackModelConfigurationRetryToJSON(
+  updateAgentFallbackModelConfigurationRetry:
+    UpdateAgentFallbackModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema.parse(
-      updateAgentFallbackModelConfigurationAgentsRetry,
+    UpdateAgentFallbackModelConfigurationRetry$outboundSchema.parse(
+      updateAgentFallbackModelConfigurationRetry,
     ),
   );
 }
@@ -4544,7 +4004,7 @@ export type UpdateAgentFallbackModelConfiguration2$Outbound = {
   parameters?:
     | UpdateAgentFallbackModelConfigurationParameters$Outbound
     | undefined;
-  retry?: UpdateAgentFallbackModelConfigurationAgentsRetry$Outbound | undefined;
+  retry?: UpdateAgentFallbackModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -4557,9 +4017,8 @@ export const UpdateAgentFallbackModelConfiguration2$outboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     UpdateAgentFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
-  retry: z.lazy(() =>
-    UpdateAgentFallbackModelConfigurationAgentsRetry$outboundSchema
-  ).optional(),
+  retry: z.lazy(() => UpdateAgentFallbackModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function updateAgentFallbackModelConfiguration2ToJSON(
@@ -5539,7 +4998,67 @@ export function updateAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
-export type UpdateAgentUpdateAgentRequest$Outbound = {
+export type UpdateAgentHeaders$Outbound = {
+  value: string;
+  encrypted: boolean;
+};
+
+/** @internal */
+export const UpdateAgentHeaders$outboundSchema: z.ZodType<
+  UpdateAgentHeaders$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentHeaders
+> = z.object({
+  value: z.string(),
+  encrypted: z.boolean().default(false),
+});
+
+export function updateAgentHeadersToJSON(
+  updateAgentHeaders: UpdateAgentHeaders,
+): string {
+  return JSON.stringify(
+    UpdateAgentHeaders$outboundSchema.parse(updateAgentHeaders),
+  );
+}
+
+/** @internal */
+export type UpdateA2AConfiguration$Outbound = {
+  agent_url?: string | undefined;
+  card_url?: string | undefined;
+  headers?: { [k: string]: UpdateAgentHeaders$Outbound } | undefined;
+};
+
+/** @internal */
+export const UpdateA2AConfiguration$outboundSchema: z.ZodType<
+  UpdateA2AConfiguration$Outbound,
+  z.ZodTypeDef,
+  UpdateA2AConfiguration
+> = z.object({
+  agentUrl: z.string().optional(),
+  cardUrl: z.string().optional(),
+  headers: z.record(z.lazy(() => UpdateAgentHeaders$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    agentUrl: "agent_url",
+    cardUrl: "card_url",
+  });
+});
+
+export function updateA2AConfigurationToJSON(
+  updateA2AConfiguration: UpdateA2AConfiguration,
+): string {
+  return JSON.stringify(
+    UpdateA2AConfiguration$outboundSchema.parse(updateA2AConfiguration),
+  );
+}
+
+/** @internal */
+export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof VersionIncrement
+> = z.nativeEnum(VersionIncrement);
+
+/** @internal */
+export type UpdateAgentRequestBody$Outbound = {
   key?: string | undefined;
   display_name?: string | undefined;
   project_id?: string | undefined;
@@ -5557,13 +5076,16 @@ export type UpdateAgentUpdateAgentRequest$Outbound = {
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
+  a2a?: UpdateA2AConfiguration$Outbound | undefined;
+  versionIncrement?: string | undefined;
+  versionDescription?: string | undefined;
 };
 
 /** @internal */
-export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
-  UpdateAgentUpdateAgentRequest$Outbound,
+export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
+  UpdateAgentRequestBody$Outbound,
   z.ZodTypeDef,
-  UpdateAgentUpdateAgentRequest
+  UpdateAgentRequestBody
 > = z.object({
   key: z.string().optional(),
   displayName: z.string().optional(),
@@ -5591,6 +5113,9 @@ export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
   teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
     .optional(),
   variables: z.record(z.any()).optional(),
+  a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
+  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -5603,20 +5128,18 @@ export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentUpdateAgentRequestToJSON(
-  updateAgentUpdateAgentRequest: UpdateAgentUpdateAgentRequest,
+export function updateAgentRequestBodyToJSON(
+  updateAgentRequestBody: UpdateAgentRequestBody,
 ): string {
   return JSON.stringify(
-    UpdateAgentUpdateAgentRequest$outboundSchema.parse(
-      updateAgentUpdateAgentRequest,
-    ),
+    UpdateAgentRequestBody$outboundSchema.parse(updateAgentRequestBody),
   );
 }
 
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
-  RequestBody: UpdateAgentUpdateAgentRequest$Outbound;
+  RequestBody: UpdateAgentRequestBody$Outbound;
 };
 
 /** @internal */
@@ -5626,7 +5149,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   UpdateAgentRequest
 > = z.object({
   agentKey: z.string(),
-  requestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$outboundSchema),
+  requestBody: z.lazy(() => UpdateAgentRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     agentKey: "agent_key",
@@ -5646,6 +5169,82 @@ export function updateAgentRequestToJSON(
 export const UpdateAgentStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentStatus
 > = z.nativeEnum(UpdateAgentStatus);
+
+/** @internal */
+export const UpdateAgentAgentsTeamOfAgents$inboundSchema: z.ZodType<
+  UpdateAgentAgentsTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+export function updateAgentAgentsTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentAgentsTeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentsTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentMetrics$inboundSchema: z.ZodType<
+  UpdateAgentMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function updateAgentMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentMetrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentAgentsKnowledgeBases$inboundSchema: z.ZodType<
+  UpdateAgentAgentsKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  knowledge_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "knowledge_id": "knowledgeId",
+  });
+});
+
+export function updateAgentAgentsKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentAgentsKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentAgentsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentsKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentSource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentSource
+> = z.nativeEnum(UpdateAgentSource);
+
+/** @internal */
+export const UpdateAgentType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentType
+> = z.nativeEnum(UpdateAgentType);
 
 /** @internal */
 export const UpdateAgentAgentsToolApprovalRequired$inboundSchema:
@@ -5808,36 +5407,6 @@ export function updateAgentAgentsSettingsFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentVoice$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentVoice
-> = z.nativeEnum(UpdateAgentVoice);
-
-/** @internal */
-export const UpdateAgentFormat$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentFormat
-> = z.nativeEnum(UpdateAgentFormat);
-
-/** @internal */
-export const UpdateAgentAudio$inboundSchema: z.ZodType<
-  UpdateAgentAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: UpdateAgentVoice$inboundSchema,
-  format: UpdateAgentFormat$inboundSchema,
-});
-
-export function updateAgentAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAudio' from JSON`,
-  );
-}
-
-/** @internal */
 export const UpdateAgentResponseFormatAgentsResponseJsonSchema$inboundSchema:
   z.ZodType<
     UpdateAgentResponseFormatAgentsResponseJsonSchema,
@@ -5993,29 +5562,6 @@ export function updateAgentStopFromJSON(
     jsonString,
     (x) => UpdateAgentStop$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateAgentStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentStreamOptions$inboundSchema: z.ZodType<
-  UpdateAgentStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
-
-export function updateAgentStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentStreamOptions' from JSON`,
   );
 }
 
@@ -6197,33 +5743,9 @@ export function updateAgentFallbacksFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentsRetry$inboundSchema: z.ZodType<
-  UpdateAgentAgentsRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function updateAgentAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAgentsRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAgentsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentType
-> = z.nativeEnum(UpdateAgentType);
+export const UpdateAgentAgentsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentAgentsType
+> = z.nativeEnum(UpdateAgentAgentsType);
 
 /** @internal */
 export const UpdateAgentCache$inboundSchema: z.ZodType<
@@ -6232,7 +5754,7 @@ export const UpdateAgentCache$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   ttl: z.number().default(1800),
-  type: UpdateAgentType$inboundSchema,
+  type: UpdateAgentAgentsType$inboundSchema,
 });
 
 export function updateAgentCacheFromJSON(
@@ -6347,13 +5869,9 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => UpdateAgentAudio$inboundSchema)).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
     z.lazy(() => UpdateAgentResponseFormatAgentsResponseText$inboundSchema),
@@ -6368,9 +5886,6 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => UpdateAgentStreamOptions$inboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -6390,7 +5905,6 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdateAgentFallbacks$inboundSchema))
     .optional(),
-  retry: z.lazy(() => UpdateAgentAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => UpdateAgentCache$inboundSchema).optional(),
   load_balancer: z.lazy(() =>
     UpdateAgentLoadBalancerAgentsResponse1$inboundSchema
@@ -6401,11 +5915,9 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
     "frequency_penalty": "frequencyPenalty",
     "max_tokens": "maxTokens",
     "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
     "presence_penalty": "presencePenalty",
     "response_format": "responseFormat",
     "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
     "top_p": "topP",
     "top_k": "topK",
     "tool_choice": "toolChoice",
@@ -6445,43 +5957,6 @@ export function updateAgentRetryFromJSON(
     jsonString,
     (x) => UpdateAgentRetry$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateAgentRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsVoice$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsVoice> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationAgentsVoice);
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsFormat$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsFormat> = z
-    .nativeEnum(UpdateAgentFallbackModelConfigurationAgentsFormat);
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsAudio$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsAudio,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    voice: UpdateAgentFallbackModelConfigurationAgentsVoice$inboundSchema,
-    format: UpdateAgentFallbackModelConfigurationAgentsFormat$inboundSchema,
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationAgentsAudio,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationAgentsAudio$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsAudio' from JSON`,
   );
 }
 
@@ -6655,35 +6130,6 @@ export function updateAgentFallbackModelConfigurationAgentsStopFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsStreamOptions$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsStreamOptions,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    include_usage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "include_usage": "includeUsage",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationAgentsStreamOptions,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationAgentsStreamOptions$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsStreamOptions' from JSON`,
   );
 }
 
@@ -6904,36 +6350,6 @@ export function updateAgentFallbackModelConfigurationAgentsFallbacksFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsResponse200Retry$inboundSchema:
-  z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsResponse200Retry,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
-
-export function updateAgentFallbackModelConfigurationAgentsResponse200RetryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationAgentsResponse200Retry,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateAgentFallbackModelConfigurationAgentsResponse200Retry$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsResponse200Retry' from JSON`,
-  );
-}
-
-/** @internal */
 export const UpdateAgentFallbackModelConfigurationAgentsType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateAgentFallbackModelConfigurationAgentsType> = z
     .nativeEnum(UpdateAgentFallbackModelConfigurationAgentsType);
@@ -7086,17 +6502,9 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     unknown
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationAgentsAudio$inboundSchema
-      ),
-    ).optional(),
     frequency_penalty: z.nullable(z.number()).optional(),
     max_tokens: z.nullable(z.number().int()).optional(),
     max_completion_tokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    top_logprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
       z.lazy(() =>
@@ -7115,11 +6523,6 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    stream_options: z.nullable(
-      z.lazy(() =>
-        UpdateAgentFallbackModelConfigurationAgentsStreamOptions$inboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -7147,9 +6550,6 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
         UpdateAgentFallbackModelConfigurationAgentsFallbacks$inboundSchema
       ),
     ).optional(),
-    retry: z.lazy(() =>
-      UpdateAgentFallbackModelConfigurationAgentsResponse200Retry$inboundSchema
-    ).optional(),
     cache: z.lazy(() =>
       UpdateAgentFallbackModelConfigurationAgentsCache$inboundSchema
     ).optional(),
@@ -7164,11 +6564,9 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
       "frequency_penalty": "frequencyPenalty",
       "max_tokens": "maxTokens",
       "max_completion_tokens": "maxCompletionTokens",
-      "top_logprobs": "topLogprobs",
       "presence_penalty": "presencePenalty",
       "response_format": "responseFormat",
       "reasoning_effort": "reasoningEffort",
-      "stream_options": "streamOptions",
       "top_p": "topP",
       "top_k": "topK",
       "tool_choice": "toolChoice",
@@ -7194,9 +6592,9 @@ export function updateAgentFallbackModelConfigurationAgentsParametersFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSchema:
+export const UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema:
   z.ZodType<
-    UpdateAgentFallbackModelConfigurationAgentsResponseRetry,
+    UpdateAgentFallbackModelConfigurationAgentsRetry,
     z.ZodTypeDef,
     unknown
   > = z.object({
@@ -7208,18 +6606,19 @@ export const UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSch
     });
   });
 
-export function updateAgentFallbackModelConfigurationAgentsResponseRetryFromJSON(
+export function updateAgentFallbackModelConfigurationAgentsRetryFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateAgentFallbackModelConfigurationAgentsResponseRetry,
+  UpdateAgentFallbackModelConfigurationAgentsRetry,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsResponseRetry' from JSON`,
+      UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateAgentFallbackModelConfigurationAgentsRetry' from JSON`,
   );
 }
 
@@ -7235,7 +6634,7 @@ export const UpdateAgentFallbackModelConfigurationAgents2$inboundSchema:
       UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     ).optional(),
     retry: z.lazy(() =>
-      UpdateAgentFallbackModelConfigurationAgentsResponseRetry$inboundSchema
+      UpdateAgentFallbackModelConfigurationAgentsRetry$inboundSchema
     ).optional(),
   });
 
@@ -7316,75 +6715,53 @@ export function updateAgentModelFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentsTeamOfAgents$inboundSchema: z.ZodType<
-  UpdateAgentAgentsTeamOfAgents,
+export const UpdateAgentAgentsHeaders$inboundSchema: z.ZodType<
+  UpdateAgentAgentsHeaders,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string(),
-  role: z.string().optional(),
+  value: z.string(),
+  encrypted: z.boolean().default(false),
 });
 
-export function updateAgentAgentsTeamOfAgentsFromJSON(
+export function updateAgentAgentsHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentAgentsTeamOfAgents, SDKValidationError> {
+): SafeParseResult<UpdateAgentAgentsHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsTeamOfAgents' from JSON`,
+    (x) => UpdateAgentAgentsHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentsHeaders' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateAgentMetrics$inboundSchema: z.ZodType<
-  UpdateAgentMetrics,
+export const UpdateAgentA2AAgentConfiguration$inboundSchema: z.ZodType<
+  UpdateAgentA2AAgentConfiguration,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total_cost: z.number().default(0),
+  agent_url: z.string(),
+  card_url: z.string().optional(),
+  headers: z.record(z.lazy(() => UpdateAgentAgentsHeaders$inboundSchema))
+    .optional(),
+  cached_card: z.any().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "total_cost": "totalCost",
+    "agent_url": "agentUrl",
+    "card_url": "cardUrl",
+    "cached_card": "cachedCard",
   });
 });
 
-export function updateAgentMetricsFromJSON(
+export function updateAgentA2AAgentConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentMetrics, SDKValidationError> {
+): SafeParseResult<UpdateAgentA2AAgentConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentMetrics' from JSON`,
+    (x) => UpdateAgentA2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentA2AAgentConfiguration' from JSON`,
   );
 }
-
-/** @internal */
-export const UpdateAgentAgentsKnowledgeBases$inboundSchema: z.ZodType<
-  UpdateAgentAgentsKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
-
-export function updateAgentAgentsKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAgentsKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAgentsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsKnowledgeBases' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentSource$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentSource
-> = z.nativeEnum(UpdateAgentSource);
 
 /** @internal */
 export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
@@ -7395,44 +6772,44 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   _id: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
-  workspace_id: z.string(),
   project_id: z.string(),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
-  role: z.string(),
-  description: z.string(),
-  system_prompt: z.string().optional(),
-  instructions: z.string(),
   status: UpdateAgentStatus$inboundSchema,
-  settings: z.lazy(() => UpdateAgentAgentsSettings$inboundSchema).optional(),
-  model: z.lazy(() => UpdateAgentModel$inboundSchema),
   version_hash: z.string().optional(),
   path: z.string(),
-  memory_stores: z.array(z.string()),
+  memory_stores: z.array(z.string()).optional(),
   team_of_agents: z.array(
     z.lazy(() => UpdateAgentAgentsTeamOfAgents$inboundSchema),
-  ),
+  ).optional(),
   metrics: z.lazy(() => UpdateAgentMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
     z.lazy(() => UpdateAgentAgentsKnowledgeBases$inboundSchema),
   ).optional(),
   source: UpdateAgentSource$inboundSchema.optional(),
+  type: UpdateAgentType$inboundSchema.default("internal"),
+  role: z.string(),
+  description: z.string(),
+  system_prompt: z.string().optional(),
+  instructions: z.string(),
+  settings: z.lazy(() => UpdateAgentAgentsSettings$inboundSchema).optional(),
+  model: z.lazy(() => UpdateAgentModel$inboundSchema),
+  a2a: z.lazy(() => UpdateAgentA2AAgentConfiguration$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
-    "workspace_id": "workspaceId",
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "system_prompt": "systemPrompt",
     "version_hash": "versionHash",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
+    "system_prompt": "systemPrompt",
   });
 });
 

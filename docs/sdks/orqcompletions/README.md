@@ -54,6 +54,10 @@ async function run() {
     timeout: {
       callTimeout: 30000,
     },
+    variables: {
+      "customer_name": "John Smith",
+      "product_name": "Premium Plan",
+    },
   });
 
   console.log(result);
@@ -109,6 +113,10 @@ async function run() {
     },
     timeout: {
       callTimeout: 30000,
+    },
+    variables: {
+      "customer_name": "John Smith",
+      "product_name": "Premium Plan",
     },
   });
   if (res.ok) {

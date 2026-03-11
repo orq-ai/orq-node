@@ -10,55 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const RunAgentModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type RunAgentModelConfigurationVoice = ClosedEnum<
-  typeof RunAgentModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const RunAgentModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type RunAgentModelConfigurationFormat = ClosedEnum<
-  typeof RunAgentModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type RunAgentModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: RunAgentModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: RunAgentModelConfigurationFormat;
-};
-
 export type RunAgentResponseFormatAgentsJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -154,16 +105,6 @@ export type RunAgentModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RunAgentModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type RunAgentModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type RunAgentModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -261,20 +202,6 @@ export type RunAgentModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type RunAgentModelConfigurationRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const RunAgentModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -340,10 +267,6 @@ export type RunAgentModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: RunAgentModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -359,18 +282,6 @@ export type RunAgentModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -408,10 +319,6 @@ export type RunAgentModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: RunAgentModelConfigurationStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -449,10 +356,6 @@ export type RunAgentModelConfigurationParameters = {
    */
   fallbacks?: Array<RunAgentModelConfigurationFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: RunAgentModelConfigurationRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: RunAgentModelConfigurationCache | undefined;
@@ -469,7 +372,7 @@ export type RunAgentModelConfigurationParameters = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type RunAgentModelConfigurationAgentsRetry = {
+export type RunAgentModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -497,62 +400,13 @@ export type RunAgentModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: RunAgentModelConfigurationAgentsRetry | undefined;
+  retry?: RunAgentModelConfigurationRetry | undefined;
 };
 
 /**
  * Model configuration for this execution. Can override the agent manifest defaults if the agent already exists.
  */
 export type RunAgentModelConfiguration = RunAgentModelConfiguration2 | string;
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const RunAgentFallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type RunAgentFallbackModelConfigurationVoice = ClosedEnum<
-  typeof RunAgentFallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const RunAgentFallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type RunAgentFallbackModelConfigurationFormat = ClosedEnum<
-  typeof RunAgentFallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type RunAgentFallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: RunAgentFallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: RunAgentFallbackModelConfigurationFormat;
-};
 
 export type RunAgentResponseFormatAgentsRequestRequestBodyJsonSchema = {
   /**
@@ -649,16 +503,6 @@ export type RunAgentFallbackModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type RunAgentFallbackModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type RunAgentFallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type RunAgentFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -760,20 +604,6 @@ export type RunAgentFallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type RunAgentFallbackModelConfigurationRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const RunAgentFallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -840,10 +670,6 @@ export type RunAgentFallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: RunAgentFallbackModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -859,18 +685,6 @@ export type RunAgentFallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -910,13 +724,6 @@ export type RunAgentFallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | RunAgentFallbackModelConfigurationStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -960,10 +767,6 @@ export type RunAgentFallbackModelConfigurationParameters = {
    */
   fallbacks?: Array<RunAgentFallbackModelConfigurationFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: RunAgentFallbackModelConfigurationRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: RunAgentFallbackModelConfigurationCache | undefined;
@@ -980,7 +783,7 @@ export type RunAgentFallbackModelConfigurationParameters = {
 /**
  * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
  */
-export type RunAgentFallbackModelConfigurationAgentsRetry = {
+export type RunAgentFallbackModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -1006,7 +809,7 @@ export type RunAgentFallbackModelConfiguration2 = {
   /**
    * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
    */
-  retry?: RunAgentFallbackModelConfigurationAgentsRetry | undefined;
+  retry?: RunAgentFallbackModelConfigurationRetry | undefined;
 };
 
 /**
@@ -1069,7 +872,7 @@ export type RunAgentA2AMessage = {
    */
   role: RunAgentRoleUserMessage | RunAgentRoleToolMessage;
   /**
-   * A2A message parts (text, file, or tool_result only)
+   * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
   parts: Array<
     | components.TextPart
@@ -1183,7 +986,7 @@ export type RunAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export type AgentToolInputRunHeaders = {
+export type RunAgentAgentToolInputRunHeaders = {
   value: string;
   encrypted?: boolean | undefined;
 };
@@ -1230,7 +1033,7 @@ export type Mcp = {
   /**
    * HTTP headers for MCP server requests with encryption support
    */
-  headers?: { [k: string]: AgentToolInputRunHeaders } | undefined;
+  headers?: { [k: string]: RunAgentAgentToolInputRunHeaders } | undefined;
   /**
    * Array of tools available from the MCP server
    */
@@ -1477,7 +1280,7 @@ export type Headers2 = {
   encrypted?: boolean | undefined;
 };
 
-export type Headers = Headers2 | string;
+export type AgentToolInputRunHeaders = Headers2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -2043,46 +1846,14 @@ export type RunAgentA2ATaskResponse = {
    */
   status: RunAgentTaskStatus;
   /**
+   * Array of messages in the task conversation. Only present when blocking mode is enabled.
+   */
+  messages?: Array<components.ExtendedMessage> | undefined;
+  /**
    * Task metadata containing workspace_id and trace_id for feedback and tracking
    */
   metadata?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const RunAgentModelConfigurationVoice$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentModelConfigurationVoice
-> = z.nativeEnum(RunAgentModelConfigurationVoice);
-
-/** @internal */
-export const RunAgentModelConfigurationFormat$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentModelConfigurationFormat
-> = z.nativeEnum(RunAgentModelConfigurationFormat);
-
-/** @internal */
-export type RunAgentModelConfigurationAudio$Outbound = {
-  voice: string;
-  format: string;
-};
-
-/** @internal */
-export const RunAgentModelConfigurationAudio$outboundSchema: z.ZodType<
-  RunAgentModelConfigurationAudio$Outbound,
-  z.ZodTypeDef,
-  RunAgentModelConfigurationAudio
-> = z.object({
-  voice: RunAgentModelConfigurationVoice$outboundSchema,
-  format: RunAgentModelConfigurationFormat$outboundSchema,
-});
-
-export function runAgentModelConfigurationAudioToJSON(
-  runAgentModelConfigurationAudio: RunAgentModelConfigurationAudio,
-): string {
-  return JSON.stringify(
-    RunAgentModelConfigurationAudio$outboundSchema.parse(
-      runAgentModelConfigurationAudio,
-    ),
-  );
-}
 
 /** @internal */
 export type RunAgentResponseFormatAgentsJsonSchema$Outbound = {
@@ -2242,35 +2013,6 @@ export function runAgentModelConfigurationStopToJSON(
   return JSON.stringify(
     RunAgentModelConfigurationStop$outboundSchema.parse(
       runAgentModelConfigurationStop,
-    ),
-  );
-}
-
-/** @internal */
-export type RunAgentModelConfigurationStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
-
-/** @internal */
-export const RunAgentModelConfigurationStreamOptions$outboundSchema: z.ZodType<
-  RunAgentModelConfigurationStreamOptions$Outbound,
-  z.ZodTypeDef,
-  RunAgentModelConfigurationStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
-
-export function runAgentModelConfigurationStreamOptionsToJSON(
-  runAgentModelConfigurationStreamOptions:
-    RunAgentModelConfigurationStreamOptions,
-): string {
-  return JSON.stringify(
-    RunAgentModelConfigurationStreamOptions$outboundSchema.parse(
-      runAgentModelConfigurationStreamOptions,
     ),
   );
 }
@@ -2472,36 +2214,6 @@ export function runAgentModelConfigurationFallbacksToJSON(
 }
 
 /** @internal */
-export type RunAgentModelConfigurationRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const RunAgentModelConfigurationRetry$outboundSchema: z.ZodType<
-  RunAgentModelConfigurationRetry$Outbound,
-  z.ZodTypeDef,
-  RunAgentModelConfigurationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function runAgentModelConfigurationRetryToJSON(
-  runAgentModelConfigurationRetry: RunAgentModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    RunAgentModelConfigurationRetry$outboundSchema.parse(
-      runAgentModelConfigurationRetry,
-    ),
-  );
-}
-
-/** @internal */
 export const RunAgentModelConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof RunAgentModelConfigurationType
 > = z.nativeEnum(RunAgentModelConfigurationType);
@@ -2638,13 +2350,9 @@ export function runAgentModelConfigurationTimeoutToJSON(
 /** @internal */
 export type RunAgentModelConfigurationParameters$Outbound = {
   name?: string | undefined;
-  audio?: RunAgentModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
     | RunAgentResponseFormatText$Outbound
@@ -2655,10 +2363,6 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?:
-    | RunAgentModelConfigurationStreamOptions$Outbound
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -2671,7 +2375,6 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<RunAgentModelConfigurationGuardrails$Outbound> | undefined;
   fallbacks?: Array<RunAgentModelConfigurationFallbacks$Outbound> | undefined;
-  retry?: RunAgentModelConfigurationRetry$Outbound | undefined;
   cache?: RunAgentModelConfigurationCache$Outbound | undefined;
   load_balancer?: RunAgentLoadBalancer1$Outbound | undefined;
   timeout?: RunAgentModelConfigurationTimeout$Outbound | undefined;
@@ -2684,15 +2387,9 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   RunAgentModelConfigurationParameters
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => RunAgentModelConfigurationAudio$outboundSchema),
-  ).optional(),
   frequencyPenalty: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presencePenalty: z.nullable(z.number()).optional(),
   responseFormat: z.union([
     z.lazy(() => RunAgentResponseFormatText$outboundSchema),
@@ -2704,9 +2401,6 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => RunAgentModelConfigurationStreamOptions$outboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -2728,8 +2422,6 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   fallbacks: z.array(
     z.lazy(() => RunAgentModelConfigurationFallbacks$outboundSchema),
   ).optional(),
-  retry: z.lazy(() => RunAgentModelConfigurationRetry$outboundSchema)
-    .optional(),
   cache: z.lazy(() => RunAgentModelConfigurationCache$outboundSchema)
     .optional(),
   loadBalancer: z.lazy(() => RunAgentLoadBalancer1$outboundSchema).optional(),
@@ -2740,11 +2432,9 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     frequencyPenalty: "frequency_penalty",
     maxTokens: "max_tokens",
     maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
     presencePenalty: "presence_penalty",
     responseFormat: "response_format",
     reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
     topP: "top_p",
     topK: "top_k",
     toolChoice: "tool_choice",
@@ -2764,16 +2454,16 @@ export function runAgentModelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type RunAgentModelConfigurationAgentsRetry$Outbound = {
+export type RunAgentModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const RunAgentModelConfigurationAgentsRetry$outboundSchema: z.ZodType<
-  RunAgentModelConfigurationAgentsRetry$Outbound,
+export const RunAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  RunAgentModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  RunAgentModelConfigurationAgentsRetry
+  RunAgentModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -2783,12 +2473,12 @@ export const RunAgentModelConfigurationAgentsRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function runAgentModelConfigurationAgentsRetryToJSON(
-  runAgentModelConfigurationAgentsRetry: RunAgentModelConfigurationAgentsRetry,
+export function runAgentModelConfigurationRetryToJSON(
+  runAgentModelConfigurationRetry: RunAgentModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    RunAgentModelConfigurationAgentsRetry$outboundSchema.parse(
-      runAgentModelConfigurationAgentsRetry,
+    RunAgentModelConfigurationRetry$outboundSchema.parse(
+      runAgentModelConfigurationRetry,
     ),
   );
 }
@@ -2797,7 +2487,7 @@ export function runAgentModelConfigurationAgentsRetryToJSON(
 export type RunAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: RunAgentModelConfigurationParameters$Outbound | undefined;
-  retry?: RunAgentModelConfigurationAgentsRetry$Outbound | undefined;
+  retry?: RunAgentModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -2809,7 +2499,7 @@ export const RunAgentModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => RunAgentModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() => RunAgentModelConfigurationAgentsRetry$outboundSchema)
+  retry: z.lazy(() => RunAgentModelConfigurationRetry$outboundSchema)
     .optional(),
 });
 
@@ -2843,43 +2533,6 @@ export function runAgentModelConfigurationToJSON(
 ): string {
   return JSON.stringify(
     RunAgentModelConfiguration$outboundSchema.parse(runAgentModelConfiguration),
-  );
-}
-
-/** @internal */
-export const RunAgentFallbackModelConfigurationVoice$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationVoice> = z
-    .nativeEnum(RunAgentFallbackModelConfigurationVoice);
-
-/** @internal */
-export const RunAgentFallbackModelConfigurationFormat$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationFormat> = z
-    .nativeEnum(RunAgentFallbackModelConfigurationFormat);
-
-/** @internal */
-export type RunAgentFallbackModelConfigurationAudio$Outbound = {
-  voice: string;
-  format: string;
-};
-
-/** @internal */
-export const RunAgentFallbackModelConfigurationAudio$outboundSchema: z.ZodType<
-  RunAgentFallbackModelConfigurationAudio$Outbound,
-  z.ZodTypeDef,
-  RunAgentFallbackModelConfigurationAudio
-> = z.object({
-  voice: RunAgentFallbackModelConfigurationVoice$outboundSchema,
-  format: RunAgentFallbackModelConfigurationFormat$outboundSchema,
-});
-
-export function runAgentFallbackModelConfigurationAudioToJSON(
-  runAgentFallbackModelConfigurationAudio:
-    RunAgentFallbackModelConfigurationAudio,
-): string {
-  return JSON.stringify(
-    RunAgentFallbackModelConfigurationAudio$outboundSchema.parse(
-      runAgentFallbackModelConfigurationAudio,
-    ),
   );
 }
 
@@ -3052,36 +2705,6 @@ export function runAgentFallbackModelConfigurationStopToJSON(
   return JSON.stringify(
     RunAgentFallbackModelConfigurationStop$outboundSchema.parse(
       runAgentFallbackModelConfigurationStop,
-    ),
-  );
-}
-
-/** @internal */
-export type RunAgentFallbackModelConfigurationStreamOptions$Outbound = {
-  include_usage?: boolean | undefined;
-};
-
-/** @internal */
-export const RunAgentFallbackModelConfigurationStreamOptions$outboundSchema:
-  z.ZodType<
-    RunAgentFallbackModelConfigurationStreamOptions$Outbound,
-    z.ZodTypeDef,
-    RunAgentFallbackModelConfigurationStreamOptions
-  > = z.object({
-    includeUsage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      includeUsage: "include_usage",
-    });
-  });
-
-export function runAgentFallbackModelConfigurationStreamOptionsToJSON(
-  runAgentFallbackModelConfigurationStreamOptions:
-    RunAgentFallbackModelConfigurationStreamOptions,
-): string {
-  return JSON.stringify(
-    RunAgentFallbackModelConfigurationStreamOptions$outboundSchema.parse(
-      runAgentFallbackModelConfigurationStreamOptions,
     ),
   );
 }
@@ -3292,37 +2915,6 @@ export function runAgentFallbackModelConfigurationFallbacksToJSON(
 }
 
 /** @internal */
-export type RunAgentFallbackModelConfigurationRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const RunAgentFallbackModelConfigurationRetry$outboundSchema: z.ZodType<
-  RunAgentFallbackModelConfigurationRetry$Outbound,
-  z.ZodTypeDef,
-  RunAgentFallbackModelConfigurationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function runAgentFallbackModelConfigurationRetryToJSON(
-  runAgentFallbackModelConfigurationRetry:
-    RunAgentFallbackModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    RunAgentFallbackModelConfigurationRetry$outboundSchema.parse(
-      runAgentFallbackModelConfigurationRetry,
-    ),
-  );
-}
-
-/** @internal */
 export const RunAgentFallbackModelConfigurationType$outboundSchema:
   z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationType> = z.nativeEnum(
     RunAgentFallbackModelConfigurationType,
@@ -3470,13 +3062,9 @@ export function runAgentFallbackModelConfigurationTimeoutToJSON(
 /** @internal */
 export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   name?: string | undefined;
-  audio?: RunAgentFallbackModelConfigurationAudio$Outbound | null | undefined;
   frequency_penalty?: number | null | undefined;
   max_tokens?: number | null | undefined;
   max_completion_tokens?: number | null | undefined;
-  logprobs?: boolean | null | undefined;
-  top_logprobs?: number | null | undefined;
-  n?: number | null | undefined;
   presence_penalty?: number | null | undefined;
   response_format?:
     | RunAgentResponseFormatAgentsText$Outbound
@@ -3487,10 +3075,6 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?:
-    | RunAgentFallbackModelConfigurationStreamOptions$Outbound
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -3507,7 +3091,6 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   fallbacks?:
     | Array<RunAgentFallbackModelConfigurationFallbacks$Outbound>
     | undefined;
-  retry?: RunAgentFallbackModelConfigurationRetry$Outbound | undefined;
   cache?: RunAgentFallbackModelConfigurationCache$Outbound | undefined;
   load_balancer?: RunAgentLoadBalancerAgents1$Outbound | undefined;
   timeout?: RunAgentFallbackModelConfigurationTimeout$Outbound | undefined;
@@ -3521,15 +3104,9 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     RunAgentFallbackModelConfigurationParameters
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => RunAgentFallbackModelConfigurationAudio$outboundSchema),
-    ).optional(),
     frequencyPenalty: z.nullable(z.number()).optional(),
     maxTokens: z.nullable(z.number().int()).optional(),
     maxCompletionTokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    topLogprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presencePenalty: z.nullable(z.number()).optional(),
     responseFormat: z.union([
       z.lazy(() => RunAgentResponseFormatAgentsText$outboundSchema),
@@ -3544,11 +3121,6 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    streamOptions: z.nullable(
-      z.lazy(() =>
-        RunAgentFallbackModelConfigurationStreamOptions$outboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -3570,8 +3142,6 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     fallbacks: z.array(
       z.lazy(() => RunAgentFallbackModelConfigurationFallbacks$outboundSchema),
     ).optional(),
-    retry: z.lazy(() => RunAgentFallbackModelConfigurationRetry$outboundSchema)
-      .optional(),
     cache: z.lazy(() => RunAgentFallbackModelConfigurationCache$outboundSchema)
       .optional(),
     loadBalancer: z.lazy(() => RunAgentLoadBalancerAgents1$outboundSchema)
@@ -3584,11 +3154,9 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       frequencyPenalty: "frequency_penalty",
       maxTokens: "max_tokens",
       maxCompletionTokens: "max_completion_tokens",
-      topLogprobs: "top_logprobs",
       presencePenalty: "presence_penalty",
       responseFormat: "response_format",
       reasoningEffort: "reasoning_effort",
-      streamOptions: "stream_options",
       topP: "top_p",
       topK: "top_k",
       toolChoice: "tool_choice",
@@ -3609,33 +3177,32 @@ export function runAgentFallbackModelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type RunAgentFallbackModelConfigurationAgentsRetry$Outbound = {
+export type RunAgentFallbackModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const RunAgentFallbackModelConfigurationAgentsRetry$outboundSchema:
-  z.ZodType<
-    RunAgentFallbackModelConfigurationAgentsRetry$Outbound,
-    z.ZodTypeDef,
-    RunAgentFallbackModelConfigurationAgentsRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
+export const RunAgentFallbackModelConfigurationRetry$outboundSchema: z.ZodType<
+  RunAgentFallbackModelConfigurationRetry$Outbound,
+  z.ZodTypeDef,
+  RunAgentFallbackModelConfigurationRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
   });
+});
 
-export function runAgentFallbackModelConfigurationAgentsRetryToJSON(
-  runAgentFallbackModelConfigurationAgentsRetry:
-    RunAgentFallbackModelConfigurationAgentsRetry,
+export function runAgentFallbackModelConfigurationRetryToJSON(
+  runAgentFallbackModelConfigurationRetry:
+    RunAgentFallbackModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    RunAgentFallbackModelConfigurationAgentsRetry$outboundSchema.parse(
-      runAgentFallbackModelConfigurationAgentsRetry,
+    RunAgentFallbackModelConfigurationRetry$outboundSchema.parse(
+      runAgentFallbackModelConfigurationRetry,
     ),
   );
 }
@@ -3646,7 +3213,7 @@ export type RunAgentFallbackModelConfiguration2$Outbound = {
   parameters?:
     | RunAgentFallbackModelConfigurationParameters$Outbound
     | undefined;
-  retry?: RunAgentFallbackModelConfigurationAgentsRetry$Outbound | undefined;
+  retry?: RunAgentFallbackModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3659,9 +3226,8 @@ export const RunAgentFallbackModelConfiguration2$outboundSchema: z.ZodType<
   parameters: z.lazy(() =>
     RunAgentFallbackModelConfigurationParameters$outboundSchema
   ).optional(),
-  retry: z.lazy(() =>
-    RunAgentFallbackModelConfigurationAgentsRetry$outboundSchema
-  ).optional(),
+  retry: z.lazy(() => RunAgentFallbackModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function runAgentFallbackModelConfiguration2ToJSON(
@@ -3959,26 +3525,28 @@ export function runAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
-export type AgentToolInputRunHeaders$Outbound = {
+export type RunAgentAgentToolInputRunHeaders$Outbound = {
   value: string;
   encrypted: boolean;
 };
 
 /** @internal */
-export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
-  AgentToolInputRunHeaders$Outbound,
+export const RunAgentAgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  RunAgentAgentToolInputRunHeaders$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunHeaders
+  RunAgentAgentToolInputRunHeaders
 > = z.object({
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
 
-export function agentToolInputRunHeadersToJSON(
-  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+export function runAgentAgentToolInputRunHeadersToJSON(
+  runAgentAgentToolInputRunHeaders: RunAgentAgentToolInputRunHeaders,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+    RunAgentAgentToolInputRunHeaders$outboundSchema.parse(
+      runAgentAgentToolInputRunHeaders,
+    ),
   );
 }
 
@@ -4031,7 +3599,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KK1CZ6DG8TXCEN4KABTCA3AJ"),
+  id: z.string().default("01KKE2Q0XZXBMCPQY3PEMQQ57H"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4049,7 +3617,9 @@ export const ConnectionType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type Mcp$Outbound = {
   server_url: string;
-  headers?: { [k: string]: AgentToolInputRunHeaders$Outbound } | undefined;
+  headers?:
+    | { [k: string]: RunAgentAgentToolInputRunHeaders$Outbound }
+    | undefined;
   tools: Array<Tools$Outbound>;
   connection_type: string;
 };
@@ -4058,8 +3628,9 @@ export type Mcp$Outbound = {
 export const Mcp$outboundSchema: z.ZodType<Mcp$Outbound, z.ZodTypeDef, Mcp> = z
   .object({
     serverUrl: z.string(),
-    headers: z.record(z.lazy(() => AgentToolInputRunHeaders$outboundSchema))
-      .optional(),
+    headers: z.record(
+      z.lazy(() => RunAgentAgentToolInputRunHeaders$outboundSchema),
+    ).optional(),
     tools: z.array(z.lazy(() => Tools$outboundSchema)),
     connectionType: ConnectionType$outboundSchema,
   }).transform((v) => {
@@ -4459,17 +4030,21 @@ export function headers2ToJSON(headers2: Headers2): string {
 }
 
 /** @internal */
-export type Headers$Outbound = Headers2$Outbound | string;
+export type AgentToolInputRunHeaders$Outbound = Headers2$Outbound | string;
 
 /** @internal */
-export const Headers$outboundSchema: z.ZodType<
-  Headers$Outbound,
+export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  AgentToolInputRunHeaders$Outbound,
   z.ZodTypeDef,
-  Headers
+  AgentToolInputRunHeaders
 > = z.union([z.lazy(() => Headers2$outboundSchema), z.string()]);
 
-export function headersToJSON(headers: Headers): string {
-  return JSON.stringify(Headers$outboundSchema.parse(headers));
+export function agentToolInputRunHeadersToJSON(
+  agentToolInputRunHeaders: AgentToolInputRunHeaders,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
+  );
 }
 
 /** @internal */
@@ -5337,6 +4912,7 @@ export const RunAgentA2ATaskResponse$inboundSchema: z.ZodType<
   contextId: z.string(),
   kind: RunAgentKind$inboundSchema,
   status: z.lazy(() => RunAgentTaskStatus$inboundSchema),
+  messages: z.array(components.ExtendedMessage$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
 });
 

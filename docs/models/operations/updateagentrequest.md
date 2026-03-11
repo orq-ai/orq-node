@@ -16,16 +16,6 @@ let value: UpdateAgentRequest = {
             model: "openai/gpt-4o-mini",
           },
         ],
-        retry: {
-          count: 3,
-          onCodes: [
-            429,
-            500,
-            502,
-            503,
-            504,
-          ],
-        },
         cache: {
           ttl: 3600,
           type: "exact_match",
@@ -63,16 +53,6 @@ let value: UpdateAgentRequest = {
               model: "openai/gpt-4o-mini",
             },
           ],
-          retry: {
-            count: 3,
-            onCodes: [
-              429,
-              500,
-              502,
-              503,
-              504,
-            ],
-          },
           cache: {
             ttl: 3600,
             type: "exact_match",
@@ -124,7 +104,7 @@ let value: UpdateAgentRequest = {
 
 ## Fields
 
-| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `agentKey`                                                                                           | *string*                                                                                             | :heavy_check_mark:                                                                                   | The unique key of the agent to update                                                                |
-| `requestBody`                                                                                        | [operations.UpdateAgentUpdateAgentRequest](../../models/operations/updateagentupdateagentrequest.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `agentKey`                                                                             | *string*                                                                               | :heavy_check_mark:                                                                     | The unique key of the agent to update                                                  |
+| `requestBody`                                                                          | [operations.UpdateAgentRequestBody](../../models/operations/updateagentrequestbody.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

@@ -10,6 +10,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+ */
+export const QueryParamType = {
+  Internal: "internal",
+  A2a: "a2a",
+} as const;
+/**
+ * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+ */
+export type QueryParamType = ClosedEnum<typeof QueryParamType>;
+
 export type ListAgentsRequest = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 200. When not provided, returns all agents without pagination.
@@ -23,6 +35,10 @@ export type ListAgentsRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+   */
+  type?: QueryParamType | undefined;
 };
 
 export const ListAgentsObject = {
@@ -43,6 +59,47 @@ export const ListAgentsStatus = {
  * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
 export type ListAgentsStatus = ClosedEnum<typeof ListAgentsStatus>;
+
+export type ListAgentsTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
+export type ListAgentsMetrics = {
+  totalCost: number;
+};
+
+export type ListAgentsKnowledgeBases = {
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+};
+
+export const ListAgentsSource = {
+  Internal: "internal",
+  External: "external",
+  Experiment: "experiment",
+} as const;
+export type ListAgentsSource = ClosedEnum<typeof ListAgentsSource>;
+
+/**
+ * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ */
+export const ListAgentsType = {
+  Internal: "internal",
+  A2a: "a2a",
+} as const;
+/**
+ * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ */
+export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
@@ -185,51 +242,6 @@ export type ListAgentsSettings = {
   guardrails?: Array<ListAgentsGuardrails> | undefined;
 };
 
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const ListAgentsVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type ListAgentsVoice = ClosedEnum<typeof ListAgentsVoice>;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const ListAgentsFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type ListAgentsFormat = ClosedEnum<typeof ListAgentsFormat>;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type ListAgentsAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: ListAgentsVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: ListAgentsFormat;
-};
-
 export type ListAgentsResponseFormatJsonSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
@@ -325,16 +337,6 @@ export type ListAgentsReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ListAgentsStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type ListAgentsStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type ListAgentsThinking =
   | components.ThinkingConfigDisabledSchema
@@ -432,24 +434,10 @@ export type ListAgentsFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type ListAgentsAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
-export const ListAgentsType = {
+export const ListAgentsAgentsType = {
   ExactMatch: "exact_match",
 } as const;
-export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
+export type ListAgentsAgentsType = ClosedEnum<typeof ListAgentsAgentsType>;
 
 /**
  * Cache configuration for the request.
@@ -459,7 +447,7 @@ export type ListAgentsCache = {
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl: number;
-  type: ListAgentsType;
+  type: ListAgentsAgentsType;
 };
 
 export const ListAgentsLoadBalancerType = {
@@ -509,10 +497,6 @@ export type ListAgentsParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: ListAgentsAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -528,18 +512,6 @@ export type ListAgentsParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -577,10 +549,6 @@ export type ListAgentsParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?: ListAgentsStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -618,10 +586,6 @@ export type ListAgentsParameters = {
    */
   fallbacks?: Array<ListAgentsFallbacks> | undefined;
   /**
-   * Retry configuration for the request
-   */
-  retry?: ListAgentsAgentsRetry | undefined;
-  /**
    * Cache configuration for the request.
    */
   cache?: ListAgentsCache | undefined;
@@ -647,55 +611,6 @@ export type ListAgentsRetry = {
    * HTTP status codes that trigger retry logic
    */
   onCodes?: Array<number> | undefined;
-};
-
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export const ListAgentsFallbackModelConfigurationVoice = {
-  Alloy: "alloy",
-  Echo: "echo",
-  Fable: "fable",
-  Onyx: "onyx",
-  Nova: "nova",
-  Shimmer: "shimmer",
-} as const;
-/**
- * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
- */
-export type ListAgentsFallbackModelConfigurationVoice = ClosedEnum<
-  typeof ListAgentsFallbackModelConfigurationVoice
->;
-
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export const ListAgentsFallbackModelConfigurationFormat = {
-  Wav: "wav",
-  Mp3: "mp3",
-  Flac: "flac",
-  Opus: "opus",
-  Pcm16: "pcm16",
-} as const;
-/**
- * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
- */
-export type ListAgentsFallbackModelConfigurationFormat = ClosedEnum<
-  typeof ListAgentsFallbackModelConfigurationFormat
->;
-
-/**
- * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
- */
-export type ListAgentsFallbackModelConfigurationAudio = {
-  /**
-   * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
-   */
-  voice: ListAgentsFallbackModelConfigurationVoice;
-  /**
-   * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
-   */
-  format: ListAgentsFallbackModelConfigurationFormat;
 };
 
 export type ListAgentsResponseFormatAgentsResponseJsonSchema = {
@@ -793,16 +708,6 @@ export type ListAgentsFallbackModelConfigurationReasoningEffort = ClosedEnum<
  * Up to 4 sequences where the API will stop generating further tokens.
  */
 export type ListAgentsFallbackModelConfigurationStop = string | Array<string>;
-
-/**
- * Options for streaming response. Only set this when you set stream: true.
- */
-export type ListAgentsFallbackModelConfigurationStreamOptions = {
-  /**
-   * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
-   */
-  includeUsage?: boolean | undefined;
-};
 
 export type ListAgentsFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
@@ -906,20 +811,6 @@ export type ListAgentsFallbackModelConfigurationFallbacks = {
   model: string;
 };
 
-/**
- * Retry configuration for the request
- */
-export type ListAgentsFallbackModelConfigurationAgentsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count: number;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
 export const ListAgentsFallbackModelConfigurationType = {
   ExactMatch: "exact_match",
 } as const;
@@ -986,10 +877,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    */
   name?: string | undefined;
   /**
-   * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
-   */
-  audio?: ListAgentsFallbackModelConfigurationAudio | null | undefined;
-  /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
    */
   frequencyPenalty?: number | null | undefined;
@@ -1005,18 +892,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and reasoning tokens
    */
   maxCompletionTokens?: number | null | undefined;
-  /**
-   * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the content of message.
-   */
-  logprobs?: boolean | null | undefined;
-  /**
-   * An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability. logprobs must be set to true if this parameter is used.
-   */
-  topLogprobs?: number | null | undefined;
-  /**
-   * How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep n as 1 to minimize costs.
-   */
-  n?: number | null | undefined;
   /**
    * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
    */
@@ -1056,13 +931,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * Up to 4 sequences where the API will stop generating further tokens.
    */
   stop?: string | Array<string> | null | undefined;
-  /**
-   * Options for streaming response. Only set this when you set stream: true.
-   */
-  streamOptions?:
-    | ListAgentsFallbackModelConfigurationStreamOptions
-    | null
-    | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -1107,10 +975,6 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<ListAgentsFallbackModelConfigurationFallbacks> | undefined;
-  /**
-   * Retry configuration for the request
-   */
-  retry?: ListAgentsFallbackModelConfigurationAgentsRetry | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -1190,34 +1054,35 @@ export type ListAgentsModel = {
     | undefined;
 };
 
-export type ListAgentsTeamOfAgents = {
+export type ListAgentsHeaders = {
   /**
-   * The unique key of the agent within the workspace
+   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
    */
-  key: string;
-  /**
-   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
-   */
-  role?: string | undefined;
+  value: string;
+  encrypted: boolean;
 };
 
-export type ListAgentsMetrics = {
-  totalCost: number;
-};
-
-export type ListAgentsKnowledgeBases = {
+/**
+ * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
+ */
+export type ListAgentsA2AAgentConfiguration = {
   /**
-   * Unique identifier of the knowledge base to search
+   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
    */
-  knowledgeId: string;
+  agentUrl: string;
+  /**
+   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
+   */
+  cardUrl?: string | undefined;
+  /**
+   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
+   */
+  headers?: { [k: string]: ListAgentsHeaders } | undefined;
+  /**
+   * Cached agent card from discovery. Refreshed periodically.
+   */
+  cachedCard?: any | undefined;
 };
-
-export const ListAgentsSource = {
-  Internal: "internal",
-  External: "external",
-  Experiment: "experiment",
-} as const;
-export type ListAgentsSource = ClosedEnum<typeof ListAgentsSource>;
 
 export type ListAgentsData = {
   id: string;
@@ -1230,16 +1095,10 @@ export type ListAgentsData = {
   updatedById?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  role: string;
-  description: string;
-  systemPrompt?: string | undefined;
-  instructions: string;
   /**
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: ListAgentsStatus;
-  settings?: ListAgentsSettings | undefined;
-  model: ListAgentsModel;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -1254,11 +1113,11 @@ export type ListAgentsData = {
   /**
    * Array of memory store identifiers. Accepts both memory store IDs and keys.
    */
-  memoryStores: Array<string>;
+  memoryStores?: Array<string> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents: Array<ListAgentsTeamOfAgents>;
+  teamOfAgents?: Array<ListAgentsTeamOfAgents> | undefined;
   metrics?: ListAgentsMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -1269,6 +1128,20 @@ export type ListAgentsData = {
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
   source?: ListAgentsSource | undefined;
+  /**
+   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   */
+  type: ListAgentsType;
+  role: string;
+  description: string;
+  systemPrompt?: string | undefined;
+  instructions: string;
+  settings?: ListAgentsSettings | undefined;
+  model: ListAgentsModel;
+  /**
+   * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
+   */
+  a2a?: ListAgentsA2AAgentConfiguration | undefined;
 };
 
 /**
@@ -1281,10 +1154,16 @@ export type ListAgentsResponseBody = {
 };
 
 /** @internal */
+export const QueryParamType$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamType
+> = z.nativeEnum(QueryParamType);
+
+/** @internal */
 export type ListAgentsRequest$Outbound = {
   limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  type?: string | undefined;
 };
 
 /** @internal */
@@ -1296,6 +1175,7 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   limit: z.number().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  type: QueryParamType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -1320,6 +1200,82 @@ export const ListAgentsObject$inboundSchema: z.ZodNativeEnum<
 export const ListAgentsStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsStatus
 > = z.nativeEnum(ListAgentsStatus);
+
+/** @internal */
+export const ListAgentsTeamOfAgents$inboundSchema: z.ZodType<
+  ListAgentsTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+export function listAgentsTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsTeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsMetrics$inboundSchema: z.ZodType<
+  ListAgentsMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+  });
+});
+
+export function listAgentsMetricsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsMetrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsMetrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
+  ListAgentsKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  knowledge_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "knowledge_id": "knowledgeId",
+  });
+});
+
+export function listAgentsKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsSource$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsSource
+> = z.nativeEnum(ListAgentsSource);
+
+/** @internal */
+export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsType
+> = z.nativeEnum(ListAgentsType);
 
 /** @internal */
 export const ListAgentsToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
@@ -1481,36 +1437,6 @@ export function listAgentsSettingsFromJSON(
 }
 
 /** @internal */
-export const ListAgentsVoice$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsVoice
-> = z.nativeEnum(ListAgentsVoice);
-
-/** @internal */
-export const ListAgentsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsFormat
-> = z.nativeEnum(ListAgentsFormat);
-
-/** @internal */
-export const ListAgentsAudio$inboundSchema: z.ZodType<
-  ListAgentsAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: ListAgentsVoice$inboundSchema,
-  format: ListAgentsFormat$inboundSchema,
-});
-
-export function listAgentsAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsAudio, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsAudio' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   ListAgentsResponseFormatJsonSchema,
   z.ZodTypeDef,
@@ -1642,29 +1568,6 @@ export function listAgentsStopFromJSON(
     jsonString,
     (x) => ListAgentsStop$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsStreamOptions$inboundSchema: z.ZodType<
-  ListAgentsStreamOptions,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
-
-export function listAgentsStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsStreamOptions, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsStreamOptions' from JSON`,
   );
 }
 
@@ -1833,33 +1736,9 @@ export function listAgentsFallbacksFromJSON(
 }
 
 /** @internal */
-export const ListAgentsAgentsRetry$inboundSchema: z.ZodType<
-  ListAgentsAgentsRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function listAgentsAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsAgentsRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsAgentsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsType
-> = z.nativeEnum(ListAgentsType);
+export const ListAgentsAgentsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsAgentsType
+> = z.nativeEnum(ListAgentsAgentsType);
 
 /** @internal */
 export const ListAgentsCache$inboundSchema: z.ZodType<
@@ -1868,7 +1747,7 @@ export const ListAgentsCache$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   ttl: z.number().default(1800),
-  type: ListAgentsType$inboundSchema,
+  type: ListAgentsAgentsType$inboundSchema,
 });
 
 export function listAgentsCacheFromJSON(
@@ -1973,13 +1852,9 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => ListAgentsAudio$inboundSchema)).optional(),
   frequency_penalty: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
   presence_penalty: z.nullable(z.number()).optional(),
   response_format: z.union([
     z.lazy(() => ListAgentsResponseFormatText$inboundSchema),
@@ -1990,9 +1865,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => ListAgentsStreamOptions$inboundSchema),
-  ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -2011,7 +1883,6 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     .optional(),
   fallbacks: z.array(z.lazy(() => ListAgentsFallbacks$inboundSchema))
     .optional(),
-  retry: z.lazy(() => ListAgentsAgentsRetry$inboundSchema).optional(),
   cache: z.lazy(() => ListAgentsCache$inboundSchema).optional(),
   load_balancer: z.lazy(() => ListAgentsLoadBalancer1$inboundSchema).optional(),
   timeout: z.lazy(() => ListAgentsTimeout$inboundSchema).optional(),
@@ -2020,11 +1891,9 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     "frequency_penalty": "frequencyPenalty",
     "max_tokens": "maxTokens",
     "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
     "presence_penalty": "presencePenalty",
     "response_format": "responseFormat",
     "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
     "top_p": "topP",
     "top_k": "topK",
     "tool_choice": "toolChoice",
@@ -2064,42 +1933,6 @@ export function listAgentsRetryFromJSON(
     jsonString,
     (x) => ListAgentsRetry$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationVoice$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationVoice> = z
-    .nativeEnum(ListAgentsFallbackModelConfigurationVoice);
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationFormat> = z
-    .nativeEnum(ListAgentsFallbackModelConfigurationFormat);
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationAudio$inboundSchema: z.ZodType<
-  ListAgentsFallbackModelConfigurationAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  voice: ListAgentsFallbackModelConfigurationVoice$inboundSchema,
-  format: ListAgentsFallbackModelConfigurationFormat$inboundSchema,
-});
-
-export function listAgentsFallbackModelConfigurationAudioFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsFallbackModelConfigurationAudio,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfigurationAudio$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListAgentsFallbackModelConfigurationAudio' from JSON`,
   );
 }
 
@@ -2265,36 +2098,6 @@ export function listAgentsFallbackModelConfigurationStopFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'ListAgentsFallbackModelConfigurationStop' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema:
-  z.ZodType<
-    ListAgentsFallbackModelConfigurationStreamOptions,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    include_usage: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "include_usage": "includeUsage",
-    });
-  });
-
-export function listAgentsFallbackModelConfigurationStreamOptionsFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsFallbackModelConfigurationStreamOptions,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListAgentsFallbackModelConfigurationStreamOptions' from JSON`,
   );
 }
 
@@ -2493,37 +2296,6 @@ export function listAgentsFallbackModelConfigurationFallbacksFromJSON(
 }
 
 /** @internal */
-export const ListAgentsFallbackModelConfigurationAgentsRetry$inboundSchema:
-  z.ZodType<
-    ListAgentsFallbackModelConfigurationAgentsRetry,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
-
-export function listAgentsFallbackModelConfigurationAgentsRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsFallbackModelConfigurationAgentsRetry,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsFallbackModelConfigurationAgentsRetry$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ListAgentsFallbackModelConfigurationAgentsRetry' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsFallbackModelConfigurationType$inboundSchema:
   z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationType> = z
     .nativeEnum(ListAgentsFallbackModelConfigurationType);
@@ -2664,15 +2436,9 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     unknown
   > = z.object({
     name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => ListAgentsFallbackModelConfigurationAudio$inboundSchema),
-    ).optional(),
     frequency_penalty: z.nullable(z.number()).optional(),
     max_tokens: z.nullable(z.number().int()).optional(),
     max_completion_tokens: z.nullable(z.number().int()).optional(),
-    logprobs: z.nullable(z.boolean()).optional(),
-    top_logprobs: z.nullable(z.number().int()).optional(),
-    n: z.nullable(z.number().int()).optional(),
     presence_penalty: z.nullable(z.number()).optional(),
     response_format: z.union([
       z.lazy(() => ListAgentsResponseFormatAgentsText$inboundSchema),
@@ -2687,11 +2453,6 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     verbosity: z.string().optional(),
     seed: z.nullable(z.number()).optional(),
     stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    stream_options: z.nullable(
-      z.lazy(() =>
-        ListAgentsFallbackModelConfigurationStreamOptions$inboundSchema
-      ),
-    ).optional(),
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
@@ -2715,9 +2476,6 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     fallbacks: z.array(
       z.lazy(() => ListAgentsFallbackModelConfigurationFallbacks$inboundSchema),
     ).optional(),
-    retry: z.lazy(() =>
-      ListAgentsFallbackModelConfigurationAgentsRetry$inboundSchema
-    ).optional(),
     cache: z.lazy(() => ListAgentsFallbackModelConfigurationCache$inboundSchema)
       .optional(),
     load_balancer: z.lazy(() => ListAgentsLoadBalancerAgents1$inboundSchema)
@@ -2730,11 +2488,9 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       "frequency_penalty": "frequencyPenalty",
       "max_tokens": "maxTokens",
       "max_completion_tokens": "maxCompletionTokens",
-      "top_logprobs": "topLogprobs",
       "presence_penalty": "presencePenalty",
       "response_format": "responseFormat",
       "reasoning_effort": "reasoningEffort",
-      "stream_options": "streamOptions",
       "top_p": "topP",
       "top_k": "topK",
       "tool_choice": "toolChoice",
@@ -2869,75 +2625,52 @@ export function listAgentsModelFromJSON(
 }
 
 /** @internal */
-export const ListAgentsTeamOfAgents$inboundSchema: z.ZodType<
-  ListAgentsTeamOfAgents,
+export const ListAgentsHeaders$inboundSchema: z.ZodType<
+  ListAgentsHeaders,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string(),
-  role: z.string().optional(),
+  value: z.string(),
+  encrypted: z.boolean().default(false),
 });
 
-export function listAgentsTeamOfAgentsFromJSON(
+export function listAgentsHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsTeamOfAgents, SDKValidationError> {
+): SafeParseResult<ListAgentsHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsTeamOfAgents' from JSON`,
+    (x) => ListAgentsHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsHeaders' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAgentsMetrics$inboundSchema: z.ZodType<
-  ListAgentsMetrics,
+export const ListAgentsA2AAgentConfiguration$inboundSchema: z.ZodType<
+  ListAgentsA2AAgentConfiguration,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total_cost: z.number().default(0),
+  agent_url: z.string(),
+  card_url: z.string().optional(),
+  headers: z.record(z.lazy(() => ListAgentsHeaders$inboundSchema)).optional(),
+  cached_card: z.any().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "total_cost": "totalCost",
+    "agent_url": "agentUrl",
+    "card_url": "cardUrl",
+    "cached_card": "cachedCard",
   });
 });
 
-export function listAgentsMetricsFromJSON(
+export function listAgentsA2AAgentConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<ListAgentsMetrics, SDKValidationError> {
+): SafeParseResult<ListAgentsA2AAgentConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAgentsMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsMetrics' from JSON`,
+    (x) => ListAgentsA2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsA2AAgentConfiguration' from JSON`,
   );
 }
-
-/** @internal */
-export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
-  ListAgentsKnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
-
-export function listAgentsKnowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsKnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsKnowledgeBases' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsSource$inboundSchema: z.ZodNativeEnum<
-  typeof ListAgentsSource
-> = z.nativeEnum(ListAgentsSource);
 
 /** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
@@ -2952,33 +2685,36 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
-  role: z.string(),
-  description: z.string(),
-  system_prompt: z.string().optional(),
-  instructions: z.string(),
   status: ListAgentsStatus$inboundSchema,
-  settings: z.lazy(() => ListAgentsSettings$inboundSchema).optional(),
-  model: z.lazy(() => ListAgentsModel$inboundSchema),
   version_hash: z.string().optional(),
   path: z.string(),
-  memory_stores: z.array(z.string()),
-  team_of_agents: z.array(z.lazy(() => ListAgentsTeamOfAgents$inboundSchema)),
+  memory_stores: z.array(z.string()).optional(),
+  team_of_agents: z.array(z.lazy(() => ListAgentsTeamOfAgents$inboundSchema))
+    .optional(),
   metrics: z.lazy(() => ListAgentsMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
   source: ListAgentsSource$inboundSchema.optional(),
+  type: ListAgentsType$inboundSchema.default("internal"),
+  role: z.string(),
+  description: z.string(),
+  system_prompt: z.string().optional(),
+  instructions: z.string(),
+  settings: z.lazy(() => ListAgentsSettings$inboundSchema).optional(),
+  model: z.lazy(() => ListAgentsModel$inboundSchema),
+  a2a: z.lazy(() => ListAgentsA2AAgentConfiguration$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "system_prompt": "systemPrompt",
     "version_hash": "versionHash",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",
+    "system_prompt": "systemPrompt",
   });
 });
 

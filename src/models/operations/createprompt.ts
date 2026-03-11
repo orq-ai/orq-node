@@ -394,7 +394,7 @@ export type CreatePromptMessages =
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export const CreatePromptVoice = {
+export const Voice = {
   Alloy: "alloy",
   Echo: "echo",
   Fable: "fable",
@@ -405,12 +405,12 @@ export const CreatePromptVoice = {
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export type CreatePromptVoice = ClosedEnum<typeof CreatePromptVoice>;
+export type Voice = ClosedEnum<typeof Voice>;
 
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const CreatePromptFormat = {
+export const Format = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -420,7 +420,7 @@ export const CreatePromptFormat = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
+export type Format = ClosedEnum<typeof Format>;
 
 /**
  * Parameters for audio output. Required when audio output is requested with modalities: ["audio"]. Learn more.
@@ -429,11 +429,11 @@ export type CreatePromptAudio = {
   /**
    * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
    */
-  voice: CreatePromptVoice;
+  voice: Voice;
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: CreatePromptFormat;
+  format: Format;
 };
 
 export type CreatePromptResponseFormatPromptsJsonSchema = {
@@ -535,7 +535,7 @@ export type CreatePromptStop = string | Array<string>;
 /**
  * Options for streaming response. Only set this when you set stream: true.
  */
-export type CreatePromptStreamOptions = {
+export type StreamOptions = {
   /**
    * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
    */
@@ -799,7 +799,7 @@ export type PromptInput = {
   /**
    * Options for streaming response. Only set this when you set stream: true.
    */
-  streamOptions?: CreatePromptStreamOptions | null | undefined;
+  streamOptions?: StreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -867,7 +867,7 @@ export type CreatePromptRequestBody = {
   /**
    * Prompt configuration with model and messages.
    */
-  prompt?: PromptInput | undefined;
+  prompt: PromptInput;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -910,7 +910,7 @@ export type ModelType = ClosedEnum<typeof ModelType>;
 /**
  * Only supported on `image` models.
  */
-export const CreatePromptPromptsFormat = {
+export const CreatePromptFormat = {
   Url: "url",
   B64Json: "b64_json",
   Text: "text",
@@ -919,9 +919,7 @@ export const CreatePromptPromptsFormat = {
 /**
  * Only supported on `image` models.
  */
-export type CreatePromptPromptsFormat = ClosedEnum<
-  typeof CreatePromptPromptsFormat
->;
+export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
 
 export const CreatePromptResponseFormat6 = {
   Json: "json",
@@ -1138,7 +1136,7 @@ export type ModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  format?: CreatePromptPromptsFormat | undefined;
+  format?: CreatePromptFormat | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -1224,6 +1222,7 @@ export const CreatePromptProvider = {
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",
+  Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
 } as const;
@@ -1387,7 +1386,7 @@ export type PromptConfig = {
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export const CreatePromptPromptsVoice = {
+export const CreatePromptVoice = {
   Alloy: "alloy",
   Echo: "echo",
   Fable: "fable",
@@ -1398,14 +1397,12 @@ export const CreatePromptPromptsVoice = {
 /**
  * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
  */
-export type CreatePromptPromptsVoice = ClosedEnum<
-  typeof CreatePromptPromptsVoice
->;
+export type CreatePromptVoice = ClosedEnum<typeof CreatePromptVoice>;
 
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export const CreatePromptPromptsResponse200Format = {
+export const CreatePromptPromptsFormat = {
   Wav: "wav",
   Mp3: "mp3",
   Flac: "flac",
@@ -1415,8 +1412,8 @@ export const CreatePromptPromptsResponse200Format = {
 /**
  * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
  */
-export type CreatePromptPromptsResponse200Format = ClosedEnum<
-  typeof CreatePromptPromptsResponse200Format
+export type CreatePromptPromptsFormat = ClosedEnum<
+  typeof CreatePromptPromptsFormat
 >;
 
 /**
@@ -1426,11 +1423,11 @@ export type CreatePromptPromptsAudio = {
   /**
    * The voice the model uses to respond. Supported voices are alloy, echo, fable, onyx, nova, and shimmer.
    */
-  voice: CreatePromptPromptsVoice;
+  voice: CreatePromptVoice;
   /**
    * Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
    */
-  format: CreatePromptPromptsResponse200Format;
+  format: CreatePromptPromptsFormat;
 };
 
 export type CreatePromptResponseFormatPromptsResponseJsonSchema = {
@@ -1532,7 +1529,7 @@ export type CreatePromptPromptsStop = string | Array<string>;
 /**
  * Options for streaming response. Only set this when you set stream: true.
  */
-export type CreatePromptPromptsStreamOptions = {
+export type CreatePromptStreamOptions = {
   /**
    * If set, an additional chunk will be streamed before the data: [DONE] message. The usage field on this chunk shows the token usage statistics for the entire request, and the choices field will always be an empty array. All other chunks will also include a usage field, but with a null value.
    */
@@ -2122,7 +2119,7 @@ export type PromptField = {
   /**
    * Options for streaming response. Only set this when you set stream: true.
    */
-  streamOptions?: CreatePromptPromptsStreamOptions | null | undefined;
+  streamOptions?: CreatePromptStreamOptions | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
@@ -2925,14 +2922,13 @@ export function createPromptMessagesToJSON(
 }
 
 /** @internal */
-export const CreatePromptVoice$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptVoice
-> = z.nativeEnum(CreatePromptVoice);
+export const Voice$outboundSchema: z.ZodNativeEnum<typeof Voice> = z.nativeEnum(
+  Voice,
+);
 
 /** @internal */
-export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = z.nativeEnum(CreatePromptFormat);
+export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> = z
+  .nativeEnum(Format);
 
 /** @internal */
 export type CreatePromptAudio$Outbound = {
@@ -2946,8 +2942,8 @@ export const CreatePromptAudio$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptAudio
 > = z.object({
-  voice: CreatePromptVoice$outboundSchema,
-  format: CreatePromptFormat$outboundSchema,
+  voice: Voice$outboundSchema,
+  format: Format$outboundSchema,
 });
 
 export function createPromptAudioToJSON(
@@ -3119,15 +3115,15 @@ export function createPromptStopToJSON(
 }
 
 /** @internal */
-export type CreatePromptStreamOptions$Outbound = {
+export type StreamOptions$Outbound = {
   include_usage?: boolean | undefined;
 };
 
 /** @internal */
-export const CreatePromptStreamOptions$outboundSchema: z.ZodType<
-  CreatePromptStreamOptions$Outbound,
+export const StreamOptions$outboundSchema: z.ZodType<
+  StreamOptions$Outbound,
   z.ZodTypeDef,
-  CreatePromptStreamOptions
+  StreamOptions
 > = z.object({
   includeUsage: z.boolean().optional(),
 }).transform((v) => {
@@ -3136,12 +3132,8 @@ export const CreatePromptStreamOptions$outboundSchema: z.ZodType<
   });
 });
 
-export function createPromptStreamOptionsToJSON(
-  createPromptStreamOptions: CreatePromptStreamOptions,
-): string {
-  return JSON.stringify(
-    CreatePromptStreamOptions$outboundSchema.parse(createPromptStreamOptions),
-  );
+export function streamOptionsToJSON(streamOptions: StreamOptions): string {
+  return JSON.stringify(StreamOptions$outboundSchema.parse(streamOptions));
 }
 
 /** @internal */
@@ -3511,7 +3503,7 @@ export type PromptInput$Outbound = {
   verbosity?: string | undefined;
   seed?: number | null | undefined;
   stop?: string | Array<string> | null | undefined;
-  stream_options?: CreatePromptStreamOptions$Outbound | null | undefined;
+  stream_options?: StreamOptions$Outbound | null | undefined;
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
@@ -3563,9 +3555,8 @@ export const PromptInput$outboundSchema: z.ZodType<
   verbosity: z.string().optional(),
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => CreatePromptStreamOptions$outboundSchema),
-  ).optional(),
+  streamOptions: z.nullable(z.lazy(() => StreamOptions$outboundSchema))
+    .optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
@@ -3616,7 +3607,7 @@ export type CreatePromptRequestBody$Outbound = {
   display_name: string;
   description?: string | null | undefined;
   metadata?: CreatePromptMetadata$Outbound | undefined;
-  prompt?: PromptInput$Outbound | undefined;
+  prompt: PromptInput$Outbound;
   path: string;
 };
 
@@ -3629,7 +3620,7 @@ export const CreatePromptRequestBody$outboundSchema: z.ZodType<
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   metadata: z.lazy(() => CreatePromptMetadata$outboundSchema).optional(),
-  prompt: z.lazy(() => PromptInput$outboundSchema).optional(),
+  prompt: z.lazy(() => PromptInput$outboundSchema),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -3655,9 +3646,9 @@ export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> = z
   .nativeEnum(ModelType);
 
 /** @internal */
-export const CreatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsFormat
-> = z.nativeEnum(CreatePromptPromptsFormat);
+export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptFormat
+> = z.nativeEnum(CreatePromptFormat);
 
 /** @internal */
 export const CreatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
@@ -3864,7 +3855,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptPromptsFormat$inboundSchema.optional(),
+  format: CreatePromptFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
   quality: z.string().optional(),
   style: z.string().optional(),
@@ -4187,15 +4178,14 @@ export function promptConfigFromJSON(
 }
 
 /** @internal */
-export const CreatePromptPromptsVoice$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsVoice
-> = z.nativeEnum(CreatePromptPromptsVoice);
+export const CreatePromptVoice$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptVoice
+> = z.nativeEnum(CreatePromptVoice);
 
 /** @internal */
-export const CreatePromptPromptsResponse200Format$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptPromptsResponse200Format> = z.nativeEnum(
-    CreatePromptPromptsResponse200Format,
-  );
+export const CreatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsFormat
+> = z.nativeEnum(CreatePromptPromptsFormat);
 
 /** @internal */
 export const CreatePromptPromptsAudio$inboundSchema: z.ZodType<
@@ -4203,8 +4193,8 @@ export const CreatePromptPromptsAudio$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  voice: CreatePromptPromptsVoice$inboundSchema,
-  format: CreatePromptPromptsResponse200Format$inboundSchema,
+  voice: CreatePromptVoice$inboundSchema,
+  format: CreatePromptPromptsFormat$inboundSchema,
 });
 
 export function createPromptPromptsAudioFromJSON(
@@ -4370,8 +4360,8 @@ export function createPromptPromptsStopFromJSON(
 }
 
 /** @internal */
-export const CreatePromptPromptsStreamOptions$inboundSchema: z.ZodType<
-  CreatePromptPromptsStreamOptions,
+export const CreatePromptStreamOptions$inboundSchema: z.ZodType<
+  CreatePromptStreamOptions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4382,13 +4372,13 @@ export const CreatePromptPromptsStreamOptions$inboundSchema: z.ZodType<
   });
 });
 
-export function createPromptPromptsStreamOptionsFromJSON(
+export function createPromptStreamOptionsFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsStreamOptions, SDKValidationError> {
+): SafeParseResult<CreatePromptStreamOptions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptsStreamOptions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsStreamOptions' from JSON`,
+    (x) => CreatePromptStreamOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptStreamOptions' from JSON`,
   );
 }
 
@@ -5263,7 +5253,7 @@ export const PromptField$inboundSchema: z.ZodType<
   seed: z.nullable(z.number()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
   stream_options: z.nullable(
-    z.lazy(() => CreatePromptPromptsStreamOptions$inboundSchema),
+    z.lazy(() => CreatePromptStreamOptions$inboundSchema),
   ).optional(),
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,

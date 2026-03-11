@@ -35,6 +35,7 @@ export function agentsList(
   limit?: number | undefined,
   startingAfter?: string | undefined,
   endingBefore?: string | undefined,
+  type?: operations.QueryParamType | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,6 +55,7 @@ export function agentsList(
     limit,
     startingAfter,
     endingBefore,
+    type,
     options,
   ));
 }
@@ -63,6 +65,7 @@ async function $do(
   limit?: number | undefined,
   startingAfter?: string | undefined,
   endingBefore?: string | undefined,
+  type?: operations.QueryParamType | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -84,6 +87,7 @@ async function $do(
     limit: limit,
     startingAfter: startingAfter,
     endingBefore: endingBefore,
+    type: type,
   };
 
   const parsed = safeParse(
@@ -104,6 +108,7 @@ async function $do(
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
     "starting_after": payload?.starting_after,
+    "type": payload?.type,
   });
 
   const headers = new Headers(compactMap({

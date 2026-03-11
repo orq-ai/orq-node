@@ -1,17 +1,17 @@
 # CreatePromptPromptsFormat
 
-Only supported on `image` models.
+Specifies the output audio format. Must be one of wav, mp3, flac, opus, or pcm16.
 
 ## Example Usage
 
 ```typescript
 import { CreatePromptPromptsFormat } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsFormat = "url";
+let value: CreatePromptPromptsFormat = "wav";
 ```
 
 ## Values
 
 ```typescript
-"url" | "b64_json" | "text" | "json_object"
+"wav" | "mp3" | "flac" | "opus" | "pcm16"
 ```

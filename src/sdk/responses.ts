@@ -6,7 +6,9 @@ import {
   agentsResponsesCreate,
   CreateAcceptEnum,
 } from "../funcs/agentsResponsesCreate.js";
+import { agentsResponsesGet } from "../funcs/agentsResponsesGet.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -28,6 +30,23 @@ export class Responses extends ClientSDK {
       this,
       requestBody,
       agentKey,
+      options,
+    ));
+  }
+
+  /**
+   * Get response
+   *
+   * @remarks
+   * Retrieves the current state of an agent response by task ID. Returns the response output, model information, token usage, and execution status. When the agent is still processing, the output array will be empty and status will be `in_progress`. Once completed, the response includes the full output, usage statistics, and finish reason.
+   */
+  async get(
+    request: operations.GetAgentResponseRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetAgentResponse> {
+    return unwrapAsync(agentsResponsesGet(
+      this,
+      request,
       options,
     ));
   }

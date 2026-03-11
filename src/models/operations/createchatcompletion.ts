@@ -818,7 +818,9 @@ export type Inputs2 = {
 };
 
 /**
- * Values to replace in the prompt messages using {{variableName}} syntax
+ * @deprecated Use top-level `variables` field instead. Values to replace in the prompt messages using {{variableName}} syntax.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type Inputs = { [k: string]: any } | Array<Inputs2>;
 
@@ -1374,7 +1376,9 @@ export type Orq = {
    */
   thread?: CreateChatCompletionThread | undefined;
   /**
-   * Values to replace in the prompt messages using {{variableName}} syntax
+   * @deprecated Use top-level `variables` field instead. Values to replace in the prompt messages using {{variableName}} syntax.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   inputs?: { [k: string]: any } | Array<Inputs2> | undefined;
   /**
@@ -1549,6 +1553,10 @@ export type CreateChatCompletionRequestBody = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: CreateChatCompletionTimeout | undefined;
+  /**
+   * Variables to substitute in message templates. Uses f-string syntax ({{variableName}}) by default. For advanced templating with Jinja or Mustache syntax, use in conjunction with `template_engine`.
+   */
+  variables?: { [k: string]: any } | undefined;
   /**
    * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
    *
@@ -5308,6 +5316,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
   cache?: CreateChatCompletionCache$Outbound | undefined;
   load_balancer?: CreateChatCompletionLoadBalancer1$Outbound | undefined;
   timeout?: CreateChatCompletionTimeout$Outbound | undefined;
+  variables?: { [k: string]: any } | undefined;
   orq?: Orq$Outbound | undefined;
   stream: boolean;
 };
@@ -5380,6 +5389,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   loadBalancer: z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateChatCompletionTimeout$outboundSchema).optional(),
+  variables: z.record(z.any()).optional(),
   orq: z.lazy(() => Orq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {

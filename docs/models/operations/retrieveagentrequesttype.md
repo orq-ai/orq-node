@@ -1,15 +1,17 @@
 # RetrieveAgentRequestType
 
+Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+
 ## Example Usage
 
 ```typescript
 import { RetrieveAgentRequestType } from "@orq-ai/node/models/operations";
 
-let value: RetrieveAgentRequestType = "exact_match";
+let value: RetrieveAgentRequestType = "internal";
 ```
 
 ## Values
 
 ```typescript
-"exact_match"
+"internal" | "a2a"
 ```

@@ -13,10 +13,16 @@ let value: ListAgentsResponseBody = {
     {
       id: "<id>",
       key: "<key>",
-      role: "<value>",
-      description: "stock coincide ah agreement presume",
-      instructions: "<value>",
       status: "draft",
+      path: "Default",
+      knowledgeBases: [
+        {
+          knowledgeId: "customer-knowledge-base",
+        },
+      ],
+      role: "<value>",
+      description: "between ick deflect once forenenst gee yet gah eek",
+      instructions: "<value>",
       model: {
         id: "<id>",
         parameters: {
@@ -25,15 +31,6 @@ let value: ListAgentsResponseBody = {
               model: "openai/gpt-4o-mini",
             },
           ],
-          retry: {
-            onCodes: [
-              429,
-              500,
-              502,
-              503,
-              504,
-            ],
-          },
           cache: {
             ttl: 3600,
             type: "exact_match",
@@ -60,19 +57,13 @@ let value: ListAgentsResponseBody = {
             504,
           ],
         },
-        fallbackModels: null,
+        fallbackModels: [
+          "<value>",
+        ],
       },
-      path: "Default",
-      memoryStores: [],
-      teamOfAgents: [],
-      knowledgeBases: [
-        {
-          knowledgeId: "customer-knowledge-base",
-        },
-      ],
     },
   ],
-  hasMore: true,
+  hasMore: false,
 };
 ```
 

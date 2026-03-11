@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,48 +28,11 @@ export type UpdateMemoryStoreRequest = {
   requestBody?: UpdateMemoryStoreRequestBody | undefined;
 };
 
-export const UpdateMemoryStoreProvider = {
-  Openai: "openai",
-  Groq: "groq",
-  Cohere: "cohere",
-  Azure: "azure",
-  Aws: "aws",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Huggingface: "huggingface",
-  Togetherai: "togetherai",
-  Perplexity: "perplexity",
-  Anthropic: "anthropic",
-  Leonardoai: "leonardoai",
-  Fal: "fal",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Elevenlabs: "elevenlabs",
-  Litellm: "litellm",
-  Cerebras: "cerebras",
-  Openailike: "openailike",
-  Bytedance: "bytedance",
-  Mistral: "mistral",
-  Deepseek: "deepseek",
-  Contextualai: "contextualai",
-  Moonshotai: "moonshotai",
-  Zai: "zai",
-  Minimax: "minimax",
-  Alibaba: "alibaba",
-  Slack: "slack",
-} as const;
-export type UpdateMemoryStoreProvider = ClosedEnum<
-  typeof UpdateMemoryStoreProvider
->;
-
 export type UpdateMemoryStoreEmbeddingConfig = {
-  modelId: string;
-  integrationId?: string | undefined;
   /**
-   * Number of results to return
+   * The embeddings model to use for the knowledge base in the format "provider/model" for public models or "workspaceKey@provider/model" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models.
    */
-  topK?: number | undefined;
-  provider: UpdateMemoryStoreProvider;
+  model: string;
 };
 
 /**
@@ -85,10 +47,6 @@ export type UpdateMemoryStoreResponseBody = {
    * The unique key of the memory store. The key is unique and inmmutable and cannot be repeated within the same workspace.
    */
   key: string;
-  /**
-   * The project unique identifier. This entity is assigned based on the provided `path` property
-   */
-  projectId: string;
   /**
    * The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store.
    */
@@ -175,26 +133,12 @@ export function updateMemoryStoreRequestToJSON(
 }
 
 /** @internal */
-export const UpdateMemoryStoreProvider$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreProvider
-> = z.nativeEnum(UpdateMemoryStoreProvider);
-
-/** @internal */
 export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
   UpdateMemoryStoreEmbeddingConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model_id: z.string(),
-  integration_id: z.string().optional(),
-  top_k: z.number().optional(),
-  provider: UpdateMemoryStoreProvider$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "integration_id": "integrationId",
-    "top_k": "topK",
-  });
+  model: z.string(),
 });
 
 export function updateMemoryStoreEmbeddingConfigFromJSON(
@@ -215,7 +159,6 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   key: z.string(),
-  project_id: z.string(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -228,7 +171,6 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "embedding_config": "embeddingConfig",

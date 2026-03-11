@@ -5,11 +5,11 @@
 ```typescript
 import { UpdatePromptProvider } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptProvider = "moonshotai";
+let value: UpdatePromptProvider = "zai";
 ```
 
 ## Values
 
 ```typescript
-"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai" | "zai" | "minimax" | "alibaba" | "slack"
+"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai" | "zai" | "minimax" | "xai" | "alibaba" | "slack"
 ```

@@ -65,7 +65,7 @@ export type StreamAgentA2AMessage = {
    */
   role: StreamAgentRoleUserMessage | StreamAgentRoleToolMessage;
   /**
-   * A2A message parts (text, file, or tool_result only)
+   * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
   parts: Array<
     | components.TextPart
@@ -161,6 +161,16 @@ export type StreamAgentMemory = {
   entityId: string;
 };
 
+/**
+ * Configuration options for the agent invocation
+ */
+export type StreamAgentConfiguration = {
+  /**
+   * Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status.
+   */
+  blocking?: boolean | undefined;
+};
+
 export type StreamAgentRequestBody = {
   /**
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
@@ -196,6 +206,10 @@ export type StreamAgentRequestBody = {
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Configuration options for the agent invocation
+   */
+  configuration?: StreamAgentConfiguration | undefined;
   /**
    * Stream timeout in seconds (1-3600). Default: 1800 (30 minutes)
    */
@@ -477,6 +491,28 @@ export function streamAgentMemoryToJSON(
 }
 
 /** @internal */
+export type StreamAgentConfiguration$Outbound = {
+  blocking: boolean;
+};
+
+/** @internal */
+export const StreamAgentConfiguration$outboundSchema: z.ZodType<
+  StreamAgentConfiguration$Outbound,
+  z.ZodTypeDef,
+  StreamAgentConfiguration
+> = z.object({
+  blocking: z.boolean().default(false),
+});
+
+export function streamAgentConfigurationToJSON(
+  streamAgentConfiguration: StreamAgentConfiguration,
+): string {
+  return JSON.stringify(
+    StreamAgentConfiguration$outboundSchema.parse(streamAgentConfiguration),
+  );
+}
+
+/** @internal */
 export type StreamAgentRequestBody$Outbound = {
   task_id?: string | undefined;
   message: StreamAgentA2AMessage$Outbound;
@@ -486,6 +522,7 @@ export type StreamAgentRequestBody$Outbound = {
   thread?: StreamAgentThread$Outbound | undefined;
   memory?: StreamAgentMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
+  configuration?: StreamAgentConfiguration$Outbound | undefined;
   stream_timeout_seconds?: number | undefined;
 };
 
@@ -503,6 +540,8 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   thread: z.lazy(() => StreamAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => StreamAgentMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+  configuration: z.lazy(() => StreamAgentConfiguration$outboundSchema)
+    .optional(),
   streamTimeoutSeconds: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -82,7 +82,7 @@ export function annotationsToJSON(annotations: Annotations): string {
 
 /** @internal */
 export type CreateAnnotationMetadata$Outbound = {
-  identityId?: string | undefined;
+  identity_id?: string | undefined;
 };
 
 /** @internal */
@@ -92,6 +92,10 @@ export const CreateAnnotationMetadata$outboundSchema: z.ZodType<
   CreateAnnotationMetadata
 > = z.object({
   identityId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    identityId: "identity_id",
+  });
 });
 
 export function createAnnotationMetadataToJSON(

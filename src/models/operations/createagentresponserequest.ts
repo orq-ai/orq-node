@@ -60,7 +60,7 @@ export type A2AMessage = {
    */
   role: RoleUserMessage | RoleToolMessage;
   /**
-   * A2A message parts (text, file, or tool_result only)
+   * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
   parts: Array<
     | components.TextPart
@@ -157,6 +157,16 @@ export type Memory = {
 };
 
 /**
+ * Configuration options for the agent invocation
+ */
+export type Configuration = {
+  /**
+   * Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status.
+   */
+  blocking?: boolean | undefined;
+};
+
+/**
  * Conversation context for chat studio integration
  */
 export type Conversation = {
@@ -201,6 +211,10 @@ export type CreateAgentResponseRequestRequestBody = {
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Configuration options for the agent invocation
+   */
+  configuration?: Configuration | undefined;
   /**
    * If true, returns immediately without waiting for completion. If false (default), waits until the agent becomes inactive or errors.
    */
@@ -446,6 +460,24 @@ export function memoryToJSON(memory: Memory): string {
 }
 
 /** @internal */
+export type Configuration$Outbound = {
+  blocking: boolean;
+};
+
+/** @internal */
+export const Configuration$outboundSchema: z.ZodType<
+  Configuration$Outbound,
+  z.ZodTypeDef,
+  Configuration
+> = z.object({
+  blocking: z.boolean().default(false),
+});
+
+export function configurationToJSON(configuration: Configuration): string {
+  return JSON.stringify(Configuration$outboundSchema.parse(configuration));
+}
+
+/** @internal */
 export type Conversation$Outbound = {
   _id: string;
 };
@@ -477,6 +509,7 @@ export type CreateAgentResponseRequestRequestBody$Outbound = {
   thread?: CreateAgentResponseRequestThread$Outbound | undefined;
   memory?: Memory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
+  configuration?: Configuration$Outbound | undefined;
   background: boolean;
   stream: boolean;
   conversation?: Conversation$Outbound | undefined;
@@ -497,6 +530,7 @@ export const CreateAgentResponseRequestRequestBody$outboundSchema: z.ZodType<
     .optional(),
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+  configuration: z.lazy(() => Configuration$outboundSchema).optional(),
   background: z.boolean().default(false),
   stream: z.boolean().default(false),
   conversation: z.lazy(() => Conversation$outboundSchema).optional(),

@@ -15,15 +15,6 @@ let value: FallbackModelConfiguration2 = {
         model: "openai/gpt-4o-mini",
       },
     ],
-    retry: {
-      onCodes: [
-        429,
-        500,
-        502,
-        503,
-        504,
-      ],
-    },
     cache: {
       ttl: 3600,
       type: "exact_match",
@@ -55,8 +46,8 @@ let value: FallbackModelConfiguration2 = {
 
 ## Fields
 
-| Field                                                                                                                                        | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                                                         | *string*                                                                                                                                     | :heavy_check_mark:                                                                                                                           | A fallback model ID string. Must support tool calling.                                                                                       |
-| `parameters`                                                                                                                                 | [operations.FallbackModelConfigurationParameters](../../models/operations/fallbackmodelconfigurationparameters.md)                           | :heavy_minus_sign:                                                                                                                           | Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.                      |
-| `retry`                                                                                                                                      | [operations.CreateAgentRequestFallbackModelConfigurationRetry](../../models/operations/createagentrequestfallbackmodelconfigurationretry.md) | :heavy_minus_sign:                                                                                                                           | Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.                |
+| Field                                                                                                                         | Type                                                                                                                          | Required                                                                                                                      | Description                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                          | *string*                                                                                                                      | :heavy_check_mark:                                                                                                            | A fallback model ID string. Must support tool calling.                                                                        |
+| `parameters`                                                                                                                  | [operations.FallbackModelConfigurationParameters](../../models/operations/fallbackmodelconfigurationparameters.md)            | :heavy_minus_sign:                                                                                                            | Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.       |
+| `retry`                                                                                                                       | [operations.FallbackModelConfigurationRetry](../../models/operations/fallbackmodelconfigurationretry.md)                      | :heavy_minus_sign:                                                                                                            | Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. |
