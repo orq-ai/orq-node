@@ -5,15 +5,15 @@ management:
   docVersion: "2.0"
   speakeasyVersion: 1.751.0
   generationVersion: 2.858.2
-  releaseVersion: 4.5.2
-  configChecksum: a60d52213d071a33b6cfd0c6c8afddc4
+  releaseVersion: 4.5.3
+  configChecksum: 99466ad90fea3f53e56ec2b9e16bb536
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 persistentEdits:
-  generation_id: f5f76149-e7ac-4d2d-8c24-e3d0e8283c07
-  pristine_commit_hash: 43936dffffc2cbaf27e55089b71b96677fb9c893
-  pristine_tree_hash: 990e7239adbb0d7d14c9cc1980022c8e381cf692
+  generation_id: 456cad9e-a407-4a6b-b91f-6509a55c0d33
+  pristine_commit_hash: 660a667c18996f40c7d5c44ed9803bd865022169
+  pristine_tree_hash: fb6e4b25da163723e6a2180782028241b848dab3
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -16016,12 +16016,12 @@ trackedFiles:
     pristine_git_object: 4cf0d2ceb6acaa225a9f3afe05e2913f263c3462
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:63d4f2fd0751149495911565ca18c264c5e34674
-    pristine_git_object: 0e9c1a645557a859ad875c0d6eda7cdaf582917b
+    last_write_checksum: sha1:502875c9249d1b1214b0d93e7546c06183623001
+    pristine_git_object: 0e1d1dead149ec639832de43668c8f65168f2650
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:0c93af6528d824923f10865993885b777ea784dd
-    pristine_git_object: 5a204035c2a3828427e804bb80d00972dae0329f
+    last_write_checksum: sha1:cc3f6e6d64db494b3bf4bcca842472ba141baf9b
+    pristine_git_object: d62ef602349913321ca43fb95e19642ee7eade32
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:06cbcf678f38adf43f7fa3f7c1cfbb7a536903c9
@@ -16496,8 +16496,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:144e5d5480d0129ef8d7f5bb3738c28fe3490e38
-    pristine_git_object: 6c0b4dd1314a2ca05b7762333150e283497bd7e9
+    last_write_checksum: sha1:b0e4a7ab2678be7b16e3628169900e9933ac943a
+    pristine_git_object: 7d61ba2c9fb035058aab61a886771268eb30361c
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -19158,7 +19158,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `orq.deployments.invoke()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.annotations.create()`: \n  *  `request.requestBody.metadata` **Changed** (Breaking ⚠️)\n* `orq.memoryStores.update()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.prompts.getVersion()`:  `response.promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.prompts.listVersions()`:  `response.data[].promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.prompts.update()`:  `response.promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.prompts.retrieve()`:  `response.promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.prompts.create()`: \n  *  `request.prompt` **Changed** (Breaking ⚠️)\n  *  `response.promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.prompts.list()`:  `response.data[].promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.deployments.stream()`:  `response.[].data` **Changed** (Breaking ⚠️)\n* `orq.deployments.list()`:  `response.data[].promptConfig.provider.enum(xai)` **Added** (Breaking ⚠️)\n* `orq.agents.streamRun()`: **Added**\n* `orq.agents.responses.create()`: **Added**\n* `orq.agents.create()`: **Removed** (Breaking ⚠️)\n* `orq.agents.list()`: **Removed** (Breaking ⚠️)\n* `orq.agents.delete()`: **Removed** (Breaking ⚠️)\n* `orq.agents.retrieve()`: **Removed** (Breaking ⚠️)\n* `orq.agents.update()`: **Removed** (Breaking ⚠️)\n* `orq.agents.invoke()`: **Removed** (Breaking ⚠️)\n* `orq.agents.run()`: **Removed** (Breaking ⚠️)\n* `orq.agents.streamRun()`: **Removed** (Breaking ⚠️)\n* `orq.agents.stream()`: **Removed** (Breaking ⚠️)\n* `orq.agents.responses.create()`: **Removed** (Breaking ⚠️)\n* `orq.evals.update()`: \n  *  `request.requestBody` **Changed**\n* `orq.agents.responses.get()`: **Added**\n* `orq.agents.stream()`: **Added**\n* `orq.agents.post/v2/agents/a2a()`: **Added**\n* `orq.agents.run()`: **Added**\n* `orq.agents.invoke()`: **Added**\n* `orq.agents.update()`: **Added**\n* `orq.agents.retrieve()`: **Added**\n* `orq.agents.delete()`: **Added**\n* `orq.agents.list()`: **Added**\n* `orq.tools.update()`: \n  *  `request.requestBody` **Changed**\n* `orq.agents.create()`: **Added**\n* `orq.router.chat.completions.create()`: \n  *  `request.variables` **Added**\n* `orq.agents.post/v2/agents/{key}/card/refresh()`: **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
