@@ -172,7 +172,7 @@ async function $do(
               value: operations.DeploymentStreamResponseBody$inboundSchema
                 .parse(rawEvent),
             };
-          });
+          }, { dataRequired: false });
         }),
     ),
     M.fail("4XX"),
