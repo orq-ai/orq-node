@@ -1,14 +1,19 @@
-# Deployments.Metrics
+# ~~Deployments.Metrics~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Add metrics
+* [~~create~~](#create) - Add metrics :warning: **Deprecated**
 
-## create
+## ~~create~~
 
 Add metrics to a deployment
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

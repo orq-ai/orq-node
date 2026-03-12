@@ -220,9 +220,9 @@ run();
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [stream](docs/sdks/deployments/README.md#stream) - Stream
 
-#### [Deployments.Metrics](docs/sdks/metrics/README.md)
+#### [~~Deployments.Metrics~~](docs/sdks/metrics/README.md)
 
-* [create](docs/sdks/metrics/README.md#create) - Add metrics
+* [~~create~~](docs/sdks/metrics/README.md#create) - Add metrics :warning: **Deprecated**
 
 ### [Evals](docs/sdks/evals/README.md)
 
@@ -420,7 +420,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
-- [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
 - [`deploymentsStream`](docs/sdks/deployments/README.md#stream) - Stream
 - [`evalsAll`](docs/sdks/evals/README.md#all) - Get all Evaluators
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
@@ -505,6 +504,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`agentsRun`](docs/sdks/agents/README.md#run)~~ - Run an agent with configuration :warning: **Deprecated**
 - ~~[`agentsStream`](docs/sdks/agents/README.md#stream)~~ - Stream agent execution in real-time :warning: **Deprecated**
 - ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
+- ~~[`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create)~~ - Add metrics :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->

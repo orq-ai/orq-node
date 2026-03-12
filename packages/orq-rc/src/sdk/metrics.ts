@@ -13,6 +13,8 @@ export class Metrics extends ClientSDK {
    *
    * @remarks
    * Add metrics to a deployment
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async create(
     request: operations.DeploymentCreateMetricRequest,
