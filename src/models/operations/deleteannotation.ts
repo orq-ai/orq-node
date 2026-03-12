@@ -6,6 +6,9 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteAnnotationRequestBody = {
+  /**
+   * Unique keys of the reviews to remove
+   */
   keys: Array<string>;
 };
 

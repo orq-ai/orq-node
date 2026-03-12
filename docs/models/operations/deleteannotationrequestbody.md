@@ -14,6 +14,6 @@ let value: DeleteAnnotationRequestBody = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `keys`             | *string*[]         | :heavy_check_mark: | N/A                |
+| Field                                | Type                                 | Required                             | Description                          |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `keys`                               | *string*[]                           | :heavy_check_mark:                   | Unique keys of the reviews to remove |

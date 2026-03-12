@@ -3,55 +3,17 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * Type discriminator indicating this is a reasoning part
- */
-export const PartKind = {
-  Reasoning: "reasoning",
-} as const;
-/**
- * Type discriminator indicating this is a reasoning part
- */
-export type PartKind = ClosedEnum<typeof PartKind>;
-
-/**
- * A message part containing reasoning or chain-of-thought content
- */
-export type PartReasoningPart = {
-  /**
-   * Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)
-   */
-  id: string;
-  /**
-   * Optional metadata associated with the message part. Can store arbitrary key-value pairs for custom data. Maximum size of 50KB and maximum of 20 keys.
-   */
-  metadata?: { [k: string]: any } | undefined;
-  /**
-   * Type discriminator indicating this is a reasoning part
-   */
-  kind: PartKind;
-  /**
-   * The reasoning or thought process behind the response. Used for chain-of-thought or extended thinking.
-   */
-  reasoning: string;
-  /**
-   * Optional cryptographic signature to verify the authenticity and integrity of the reasoning content
-   */
-  signature?: string | undefined;
-};
+import { PartDelta, PartDelta$inboundSchema } from "./partdelta.js";
 
 export type PartDoneEventData = {
   /**
    * Unique identifier for this part. Matches the partId from part.delta events.
    */
   partId: string;
-  part?: any | undefined;
+  part: PartDelta;
 };
 
 /**
@@ -67,44 +29,13 @@ export type PartDoneEvent = {
 };
 
 /** @internal */
-export const PartKind$inboundSchema: z.ZodNativeEnum<typeof PartKind> = z
-  .nativeEnum(PartKind);
-
-/** @internal */
-export const PartReasoningPart$inboundSchema: z.ZodType<
-  PartReasoningPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("reasoning_01kkh3amxzgzckh10n43x2n4sq"),
-  metadata: z.record(z.any()).optional(),
-  kind: PartKind$inboundSchema,
-  reasoning: z.string(),
-  signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-  });
-});
-
-export function partReasoningPartFromJSON(
-  jsonString: string,
-): SafeParseResult<PartReasoningPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PartReasoningPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PartReasoningPart' from JSON`,
-  );
-}
-
-/** @internal */
 export const PartDoneEventData$inboundSchema: z.ZodType<
   PartDoneEventData,
   z.ZodTypeDef,
   unknown
 > = z.object({
   partId: z.string(),
-  part: z.any().optional(),
+  part: PartDelta$inboundSchema,
 });
 
 export function partDoneEventDataFromJSON(
