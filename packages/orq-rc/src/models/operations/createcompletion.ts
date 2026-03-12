@@ -3403,7 +3403,7 @@ export const CreateCompletionResponse$inboundSchema: z.ZodType<
             CreateCompletionRouterCompletionsResponseBody$inboundSchema
           ).parse(rawEvent),
         };
-      });
+      }, { dataRequired: false });
     }),
 ]);
 

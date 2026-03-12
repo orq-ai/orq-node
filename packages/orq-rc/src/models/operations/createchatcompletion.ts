@@ -6377,7 +6377,7 @@ export const CreateChatCompletionResponse$inboundSchema: z.ZodType<
             CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema
           ).parse(rawEvent),
         };
-      });
+      }, { dataRequired: false });
     }),
 ]);
 

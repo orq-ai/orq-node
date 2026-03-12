@@ -628,7 +628,7 @@ export const CreateAgentResponseRequestResponse$inboundSchema: z.ZodType<
             CreateAgentResponseRequestResponseBody$inboundSchema
           ).parse(rawEvent),
         };
-      });
+      }, { dataRequired: false });
     }),
 ]);
 

@@ -58,7 +58,7 @@ export type DeploymentsParameters = {
   type: DeploymentsDeploymentsResponseType;
   properties: { [k: string]: any };
   required?: Array<string> | undefined;
-  additionalProperties?: boolean | undefined;
+  additionalProperties?: false | undefined;
 };
 
 export type DeploymentsFunction = {
@@ -648,7 +648,7 @@ export const DeploymentsParameters$inboundSchema: z.ZodType<
   type: DeploymentsDeploymentsResponseType$inboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()).optional(),
-  additionalProperties: z.boolean().optional(),
+  additionalProperties: z.literal(false).optional(),
 });
 
 export function deploymentsParametersFromJSON(

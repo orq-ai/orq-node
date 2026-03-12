@@ -3310,7 +3310,7 @@ export const CreateResponseResponse$inboundSchema: z.ZodType<
             CreateResponseRouterResponsesResponseBody$inboundSchema
           ).parse(rawEvent),
         };
-      });
+      }, { dataRequired: false });
     }),
 ]);
 
