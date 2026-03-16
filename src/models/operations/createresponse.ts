@@ -11,6 +11,7 @@ import {
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -35,6 +36,14 @@ export type Reasoning = {
    */
   effort?: Effort | undefined;
 };
+
+/**
+ * Configuration for thinking mode. Use `adaptive` for models that support it (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control.
+ */
+export type CreateResponseThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 export type Format3 = {
   /**
@@ -587,6 +596,15 @@ export type CreateResponseRequestBody = {
    * Configuration for reasoning models
    */
   reasoning?: Reasoning | null | undefined;
+  /**
+   * Configuration for thinking mode. Use `adaptive` for models that support it (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control.
+   */
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
+    | null
+    | undefined;
   /**
    * The maximum number of tokens that can be generated in the response
    */
@@ -1469,6 +1487,31 @@ export function reasoningToJSON(reasoning: Reasoning): string {
 }
 
 /** @internal */
+export type CreateResponseThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
+
+/** @internal */
+export const CreateResponseThinking$outboundSchema: z.ZodType<
+  CreateResponseThinking$Outbound,
+  z.ZodTypeDef,
+  CreateResponseThinking
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+  components.ThinkingConfigAdaptiveSchema$outboundSchema,
+]);
+
+export function createResponseThinkingToJSON(
+  createResponseThinking: CreateResponseThinking,
+): string {
+  return JSON.stringify(
+    CreateResponseThinking$outboundSchema.parse(createResponseThinking),
+  );
+}
+
+/** @internal */
 export type Format3$Outbound = {
   type: "json_schema";
   name: string;
@@ -2255,6 +2298,12 @@ export type CreateResponseRequestBody$Outbound = {
   previous_response_id?: string | null | undefined;
   instructions?: string | null | undefined;
   reasoning?: Reasoning$Outbound | null | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
+    | null
+    | undefined;
   max_output_tokens?: number | null | undefined;
   text?: CreateResponseText$Outbound | null | undefined;
   input:
@@ -2293,6 +2342,13 @@ export const CreateResponseRequestBody$outboundSchema: z.ZodType<
   previousResponseId: z.nullable(z.string()).optional(),
   instructions: z.nullable(z.string()).optional(),
   reasoning: z.nullable(z.lazy(() => Reasoning$outboundSchema)).optional(),
+  thinking: z.nullable(
+    z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    ]),
+  ).optional(),
   maxOutputTokens: z.nullable(z.number().int()).optional(),
   text: z.nullable(z.lazy(() => CreateResponseText$outboundSchema)).optional(),
   input: z.union([

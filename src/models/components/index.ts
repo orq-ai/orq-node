@@ -44,6 +44,7 @@ export * from "./security.js";
 export * from "./telemetry.js";
 export * from "./textcontentpartschema.js";
 export * from "./textpart.js";
+export * from "./thinkingconfigadaptiveschema.js";
 export * from "./thinkingconfigdisabledschema.js";
 export * from "./thinkingconfigenabledschema.js";
 export * from "./timeoutstreamingevent.js";

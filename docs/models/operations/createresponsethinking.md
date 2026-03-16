@@ -1,4 +1,6 @@
-# RetrieveAgentRequestThinking
+# CreateResponseThinking
+
+Configuration for thinking mode. Use `adaptive` for models that support it (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control.
 
 
 ## Supported Types
