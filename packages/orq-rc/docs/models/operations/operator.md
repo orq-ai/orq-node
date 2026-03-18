@@ -5,11 +5,11 @@
 ```typescript
 import { Operator } from "@orq-ai/node/models/operations";
 
-let value: Operator = "gte";
+let value: Operator = "or";
 ```
 
 ## Values
 
 ```typescript
-"eq" | "ne" | "gt" | "gte" | "lt" | "lte"
+"and" | "or"
 ```

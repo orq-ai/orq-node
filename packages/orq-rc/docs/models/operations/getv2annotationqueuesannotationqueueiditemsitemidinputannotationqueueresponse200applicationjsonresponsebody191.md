@@ -1,0 +1,24 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdInputAnnotationQueueResponse200ApplicationJSONResponseBody191
+
+An internal identifier for an item to reference.
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdInputAnnotationQueueResponse200ApplicationJSONResponseBody191,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdInputAnnotationQueueResponse200ApplicationJSONResponseBody191 =
+    {
+      id: "<id>",
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                                                       | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdInputAnnotationQueueResponse200ApplicationJSONResponseBody19Type](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidinputannotationqueueresponse200applicationjsonresponsebody19type.md) | :heavy_minus_sign:                                                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                                                          |
+| `id`                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                           | The ID of the item to reference.                                                                                                                                                                                                                                             |

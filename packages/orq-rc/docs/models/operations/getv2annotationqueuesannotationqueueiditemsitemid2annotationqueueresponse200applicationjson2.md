@@ -1,0 +1,26 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemId2AnnotationQueueResponse200ApplicationJson2
+
+An image input content part.
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemId2AnnotationQueueResponse200ApplicationJson2,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemId2AnnotationQueueResponse200ApplicationJson2 =
+    {
+      type: "input_image",
+    };
+```
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `type`                                                       | *"input_image"*                                              | :heavy_check_mark:                                           | The type of input content part                               |
+| `detail`                                                     | [operations.TwoDetail](../../models/operations/twodetail.md) | :heavy_minus_sign:                                           | Level of detail for image analysis                           |
+| `fileId`                                                     | *string*                                                     | :heavy_minus_sign:                                           | File ID for the image                                        |
+| `imageUrl`                                                   | *string*                                                     | :heavy_minus_sign:                                           | URL of the image (can be http URL or data URL)               |

@@ -1,0 +1,41 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody20AttributesLogprobs
+
+The log probability of a token.
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody20AttributesLogprobs,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody20AttributesLogprobs =
+    {
+      token: "<value>",
+      logprob: 9317.46,
+      bytes: [
+        51454,
+        981719,
+        682856,
+      ],
+      topLogprobs: [
+        {
+          token: "<value>",
+          logprob: 4343.55,
+          bytes: [
+            868606,
+          ],
+        },
+      ],
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `token`                                                                                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                                                                                                  |
+| `logprob`                                                                                                                                                                                                                                                                                                            | *number*                                                                                                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                                                                                                  |
+| `bytes`                                                                                                                                                                                                                                                                                                              | *number*[]                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                                                                                                  |
+| `topLogprobs`                                                                                                                                                                                                                                                                                                        | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody20AttributesTopLogprobs](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidcontentannotationqueueresponse200applicationjsonresponsebody20attributestoplogprobs.md)[] | :heavy_check_mark:                                                                                                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                                                                                                  |

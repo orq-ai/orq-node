@@ -12,7 +12,7 @@ let value: UpdateEvalRequest = {
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `id`                               | *string*                           | :heavy_check_mark:                 | N/A                                |
-| `requestBody`                      | *operations.UpdateEvalRequestBody* | :heavy_minus_sign:                 | N/A                                |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `id`                                                                                 | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `requestBody`                                                                        | [operations.UpdateEvalRequestBody](../../models/operations/updateevalrequestbody.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |

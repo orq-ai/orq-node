@@ -1,0 +1,20 @@
+# Summary4
+
+A summary text from the model.
+
+## Example Usage
+
+```typescript
+import { Summary4 } from "@orq-ai/node/models/operations";
+
+let value: Summary4 = {
+  text: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                            | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                           | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdSummaryAnnotationQueueResponseType](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidsummaryannotationqueueresponsetype.md) | :heavy_minus_sign:                                                                                                                                                                                               | The type of the object. Always `summary_text`.                                                                                                                                                                   |
+| `text`                                                                                                                                                                                                           | *string*                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                               | A summary of the reasoning output from the model so far.                                                                                                                                                         |

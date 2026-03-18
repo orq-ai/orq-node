@@ -6,7 +6,7 @@
 import { DeploymentsMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentsMessages = {
-  role: "exception",
+  role: "user",
   content: null,
 };
 ```

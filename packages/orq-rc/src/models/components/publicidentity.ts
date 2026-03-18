@@ -4,6 +4,9 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Information about the identity making the request. If the identity does not exist, it will be created automatically.
@@ -36,6 +39,24 @@ export type PublicIdentity = {
 };
 
 /** @internal */
+export const PublicIdentity$inboundSchema: z.ZodType<
+  PublicIdentity,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
+  });
+});
+/** @internal */
 export type PublicIdentity$Outbound = {
   id: string;
   display_name?: string | undefined;
@@ -66,4 +87,13 @@ export const PublicIdentity$outboundSchema: z.ZodType<
 
 export function publicIdentityToJSON(publicIdentity: PublicIdentity): string {
   return JSON.stringify(PublicIdentity$outboundSchema.parse(publicIdentity));
+}
+export function publicIdentityFromJSON(
+  jsonString: string,
+): SafeParseResult<PublicIdentity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PublicIdentity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicIdentity' from JSON`,
+  );
 }

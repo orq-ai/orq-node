@@ -1,0 +1,24 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueResponse200ApplicationJson14Input
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueResponse200ApplicationJson14Input,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueResponse200ApplicationJson14Input =
+    {
+      messages: [],
+      variables: [],
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                   | Required                                                                                                                                                                                                               | Description                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `messages`                                                                                                                                                                                                             | [operations.ResponseBodyMessages](../../models/operations/responsebodymessages.md)[]                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                    |
+| `variables`                                                                                                                                                                                                            | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueVariables](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidresponsebodyannotationqueuevariables.md)[] | :heavy_check_mark:                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                    |
+| `tools`                                                                                                                                                                                                                | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyTools](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidresponsebodytools.md)[]                                       | :heavy_minus_sign:                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                    |

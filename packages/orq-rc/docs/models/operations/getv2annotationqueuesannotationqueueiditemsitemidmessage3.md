@@ -1,0 +1,19 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdMessage3
+
+## Example Usage
+
+```typescript
+import { GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdMessage3 } from "@orq-ai/node/models/operations";
+
+let value: GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdMessage3 = {
+  role: "tool",
+  url: "https://broken-commodity.name",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                            | Type                                                                                                                                                                                                             | Required                                                                                                                                                                                                         | Description                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                                                                                                           | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdMessageAnnotationQueueResponseRole](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidmessageannotationqueueresponserole.md) | :heavy_check_mark:                                                                                                                                                                                               | The role of the prompt message                                                                                                                                                                                   |
+| `url`                                                                                                                                                                                                            | *string*                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                               | N/A                                                                                                                                                                                                              |

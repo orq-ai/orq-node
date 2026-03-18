@@ -108,7 +108,8 @@ export type StreamRunAgentModelConfigurationStop = string | Array<string>;
 
 export type StreamRunAgentModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -327,6 +328,7 @@ export type StreamRunAgentModelConfigurationParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -520,7 +522,8 @@ export type StreamRunAgentFallbackModelConfigurationStop =
 
 export type StreamRunAgentFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -745,6 +748,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -1986,7 +1990,8 @@ export function streamRunAgentModelConfigurationStopToJSON(
 /** @internal */
 export type StreamRunAgentModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
 
 /** @internal */
 export const StreamRunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
@@ -1996,6 +2001,7 @@ export const StreamRunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
+  components.ThinkingConfigAdaptiveSchema$outboundSchema,
 ]);
 
 export function streamRunAgentModelConfigurationThinkingToJSON(
@@ -2349,6 +2355,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -2392,6 +2399,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
@@ -2712,7 +2720,8 @@ export function streamRunAgentFallbackModelConfigurationStopToJSON(
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationThinking$outboundSchema:
@@ -2723,6 +2732,7 @@ export const StreamRunAgentFallbackModelConfigurationThinking$outboundSchema:
   > = z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
   ]);
 
 export function streamRunAgentFallbackModelConfigurationThinkingToJSON(
@@ -3087,6 +3097,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -3135,6 +3146,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
@@ -3646,7 +3658,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KKJ1PZYRP3XZMBKTFXE5WWFQ"),
+  id: z.string().default("01KM0W5E8FEQEWYHP0JQ40K158"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

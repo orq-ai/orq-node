@@ -108,7 +108,8 @@ export type ModelConfigurationStop = string | Array<string>;
 
 export type ModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -197,7 +198,7 @@ export type ModelConfigurationGuardrails = {
   executeOn: ModelConfigurationExecuteOn;
 };
 
-export type ModelConfigurationFallbacks = {
+export type UpdateAgentModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -324,6 +325,7 @@ export type ModelConfigurationParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -356,7 +358,7 @@ export type ModelConfigurationParameters = {
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
+  fallbacks?: Array<UpdateAgentModelConfigurationFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -374,7 +376,7 @@ export type ModelConfigurationParameters = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type ModelConfigurationRetry = {
+export type UpdateAgentModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -402,7 +404,7 @@ export type UpdateAgentModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: ModelConfigurationRetry | undefined;
+  retry?: UpdateAgentModelConfigurationRetry | undefined;
 };
 
 /**
@@ -510,7 +512,8 @@ export type UpdateAgentFallbackModelConfigurationStop = string | Array<string>;
 
 export type UpdateAgentFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -733,6 +736,7 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -1444,7 +1448,7 @@ export type UpdateA2AConfiguration = {
 /**
  * Optional semantic version bump to create after a successful publish.
  */
-export const VersionIncrement = {
+export const UpdateAgentVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
@@ -1452,7 +1456,9 @@ export const VersionIncrement = {
 /**
  * Optional semantic version bump to create after a successful publish.
  */
-export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+export type UpdateAgentVersionIncrement = ClosedEnum<
+  typeof UpdateAgentVersionIncrement
+>;
 
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
@@ -1509,7 +1515,7 @@ export type UpdateAgentRequestBody = {
   /**
    * Optional semantic version bump to create after a successful publish.
    */
-  versionIncrement?: VersionIncrement | undefined;
+  versionIncrement?: UpdateAgentVersionIncrement | undefined;
   /**
    * Optional description stored with the created version.
    */
@@ -1820,7 +1826,8 @@ export type UpdateAgentStop = string | Array<string>;
 
 export type UpdateAgentThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -2036,6 +2043,7 @@ export type UpdateAgentParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -2202,7 +2210,8 @@ export type UpdateAgentFallbackModelConfigurationAgentsStop =
 
 export type UpdateAgentFallbackModelConfigurationAgentsThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -2427,6 +2436,7 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -2600,6 +2610,10 @@ export type UpdateAgentResponseBody = {
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: UpdateAgentStatus;
+  /**
+   * Current semantic version of the agent manifest.
+   */
+  version?: string | undefined;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2810,7 +2824,8 @@ export function modelConfigurationStopToJSON(
 /** @internal */
 export type ModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
 
 /** @internal */
 export const ModelConfigurationThinking$outboundSchema: z.ZodType<
@@ -2820,6 +2835,7 @@ export const ModelConfigurationThinking$outboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
+  components.ThinkingConfigAdaptiveSchema$outboundSchema,
 ]);
 
 export function modelConfigurationThinkingToJSON(
@@ -2977,25 +2993,26 @@ export function modelConfigurationGuardrailsToJSON(
 }
 
 /** @internal */
-export type ModelConfigurationFallbacks$Outbound = {
+export type UpdateAgentModelConfigurationFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
-  ModelConfigurationFallbacks$Outbound,
+export const UpdateAgentModelConfigurationFallbacks$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationFallbacks$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationFallbacks
+  UpdateAgentModelConfigurationFallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function modelConfigurationFallbacksToJSON(
-  modelConfigurationFallbacks: ModelConfigurationFallbacks,
+export function updateAgentModelConfigurationFallbacksToJSON(
+  updateAgentModelConfigurationFallbacks:
+    UpdateAgentModelConfigurationFallbacks,
 ): string {
   return JSON.stringify(
-    ModelConfigurationFallbacks$outboundSchema.parse(
-      modelConfigurationFallbacks,
+    UpdateAgentModelConfigurationFallbacks$outboundSchema.parse(
+      updateAgentModelConfigurationFallbacks,
     ),
   );
 }
@@ -3150,6 +3167,7 @@ export type ModelConfigurationParameters$Outbound = {
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -3158,7 +3176,9 @@ export type ModelConfigurationParameters$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<ModelConfigurationGuardrails$Outbound> | undefined;
-  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
+  fallbacks?:
+    | Array<UpdateAgentModelConfigurationFallbacks$Outbound>
+    | undefined;
   cache?: ModelConfigurationCache$Outbound | undefined;
   load_balancer?: UpdateAgentLoadBalancer1$Outbound | undefined;
   timeout?: ModelConfigurationTimeout$Outbound | undefined;
@@ -3187,6 +3207,7 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
@@ -3200,8 +3221,9 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => ModelConfigurationGuardrails$outboundSchema))
     .optional(),
-  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
-    .optional(),
+  fallbacks: z.array(
+    z.lazy(() => UpdateAgentModelConfigurationFallbacks$outboundSchema),
+  ).optional(),
   cache: z.lazy(() => ModelConfigurationCache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => UpdateAgentLoadBalancer1$outboundSchema)
     .optional(),
@@ -3233,16 +3255,16 @@ export function modelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type ModelConfigurationRetry$Outbound = {
+export type UpdateAgentModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const ModelConfigurationRetry$outboundSchema: z.ZodType<
-  ModelConfigurationRetry$Outbound,
+export const UpdateAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationRetry
+  UpdateAgentModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3252,11 +3274,13 @@ export const ModelConfigurationRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function modelConfigurationRetryToJSON(
-  modelConfigurationRetry: ModelConfigurationRetry,
+export function updateAgentModelConfigurationRetryToJSON(
+  updateAgentModelConfigurationRetry: UpdateAgentModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
+    UpdateAgentModelConfigurationRetry$outboundSchema.parse(
+      updateAgentModelConfigurationRetry,
+    ),
   );
 }
 
@@ -3264,7 +3288,7 @@ export function modelConfigurationRetryToJSON(
 export type UpdateAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: ModelConfigurationParameters$Outbound | undefined;
-  retry?: ModelConfigurationRetry$Outbound | undefined;
+  retry?: UpdateAgentModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3276,7 +3300,8 @@ export const UpdateAgentModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => ModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
+  retry: z.lazy(() => UpdateAgentModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function updateAgentModelConfiguration2ToJSON(
@@ -3494,7 +3519,8 @@ export function updateAgentFallbackModelConfigurationStopToJSON(
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationThinking$outboundSchema:
@@ -3505,6 +3531,7 @@ export const UpdateAgentFallbackModelConfigurationThinking$outboundSchema:
   > = z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
   ]);
 
 export function updateAgentFallbackModelConfigurationThinkingToJSON(
@@ -3863,6 +3890,7 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -3909,6 +3937,7 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
@@ -5053,9 +5082,9 @@ export function updateA2AConfigurationToJSON(
 }
 
 /** @internal */
-export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
-  typeof VersionIncrement
-> = z.nativeEnum(VersionIncrement);
+export const UpdateAgentVersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentVersionIncrement
+> = z.nativeEnum(UpdateAgentVersionIncrement);
 
 /** @internal */
 export type UpdateAgentRequestBody$Outbound = {
@@ -5114,7 +5143,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   variables: z.record(z.any()).optional(),
   a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
-  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionIncrement: UpdateAgentVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -5573,6 +5602,7 @@ export const UpdateAgentThinking$inboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
+  components.ThinkingConfigAdaptiveSchema$inboundSchema,
 ]);
 
 export function updateAgentThinkingFromJSON(
@@ -5889,6 +5919,7 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
@@ -6142,6 +6173,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsThinking$inboundSchema:
   > = z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
   ]);
 
 export function updateAgentFallbackModelConfigurationAgentsThinkingFromJSON(
@@ -6526,6 +6558,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     top_p: z.nullable(z.number()).optional(),
@@ -6778,6 +6811,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   created: z.string().optional(),
   updated: z.string().optional(),
   status: UpdateAgentStatus$inboundSchema,
+  version: z.string().optional(),
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()).optional(),

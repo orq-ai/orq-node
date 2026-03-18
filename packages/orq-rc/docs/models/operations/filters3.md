@@ -1,0 +1,31 @@
+# Filters3
+
+## Example Usage
+
+```typescript
+import { Filters3 } from "@orq-ai/node/models/operations";
+
+let value: Filters3 = {
+  operator: "is_on_or_before",
+  value: {
+    criteria: null,
+    mode: "datetime",
+  },
+  id: "<id>",
+  type: "number",
+  name: "<value>",
+  path: "/sbin",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                          | Type                                                                                                                                                           | Required                                                                                                                                                       | Description                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `operator`                                                                                                                                                     | [operations.PostV2AnnotationQueuesQueryFiltersAnnotationQueuesOperator](../../models/operations/postv2annotationqueuesqueryfiltersannotationqueuesoperator.md) | :heavy_check_mark:                                                                                                                                             | N/A                                                                                                                                                            |
+| `value`                                                                                                                                                        | [operations.FiltersValue](../../models/operations/filtersvalue.md)                                                                                             | :heavy_check_mark:                                                                                                                                             | N/A                                                                                                                                                            |
+| `id`                                                                                                                                                           | *string*                                                                                                                                                       | :heavy_check_mark:                                                                                                                                             | N/A                                                                                                                                                            |
+| `type`                                                                                                                                                         | [operations.PostV2AnnotationQueuesQueryFiltersAnnotationQueuesType](../../models/operations/postv2annotationqueuesqueryfiltersannotationqueuestype.md)         | :heavy_check_mark:                                                                                                                                             | N/A                                                                                                                                                            |
+| `name`                                                                                                                                                         | *string*                                                                                                                                                       | :heavy_check_mark:                                                                                                                                             | N/A                                                                                                                                                            |
+| `path`                                                                                                                                                         | *string*                                                                                                                                                       | :heavy_check_mark:                                                                                                                                             | N/A                                                                                                                                                            |
+| `hideOperators`                                                                                                                                                | *operations.PostV2AnnotationQueuesQueryFiltersHideOperators*[]                                                                                                 | :heavy_minus_sign:                                                                                                                                             | N/A                                                                                                                                                            |

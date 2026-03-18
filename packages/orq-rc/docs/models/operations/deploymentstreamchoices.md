@@ -9,7 +9,7 @@ let value: DeploymentStreamChoices = {
   index: 5993.96,
   message: {
     type: "image",
-    role: "user",
+    role: "assistant",
     url: "https://hard-to-find-napkin.info",
   },
 };

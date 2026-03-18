@@ -5,7 +5,6 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,41 +16,15 @@ export type FileGetRequest = {
 };
 
 /**
- * The intended purpose of the uploaded file.
- */
-export const FileGetPurpose = {
-  Retrieval: "retrieval",
-  KnowledgeDatasource: "knowledge_datasource",
-  Batch: "batch",
-} as const;
-/**
- * The intended purpose of the uploaded file.
- */
-export type FileGetPurpose = ClosedEnum<typeof FileGetPurpose>;
-
-/**
  * File details retrieved successfully
  */
 export type FileGetResponseBody = {
   id: string;
-  /**
-   * path to the file in the storage
-   */
-  objectName: string;
-  /**
-   * The intended purpose of the uploaded file.
-   */
-  purpose: FileGetPurpose;
   bytes: number;
+  created: string;
   fileName: string;
-  /**
-   * The id of the resource
-   */
+  purpose: string;
   workspaceId: string;
-  /**
-   * The date and time the resource was created
-   */
-  created: Date;
 };
 
 /** @internal */
@@ -77,29 +50,20 @@ export function fileGetRequestToJSON(fileGetRequest: FileGetRequest): string {
 }
 
 /** @internal */
-export const FileGetPurpose$inboundSchema: z.ZodNativeEnum<
-  typeof FileGetPurpose
-> = z.nativeEnum(FileGetPurpose);
-
-/** @internal */
 export const FileGetResponseBody$inboundSchema: z.ZodType<
   FileGetResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
-  object_name: z.string(),
-  purpose: FileGetPurpose$inboundSchema,
-  bytes: z.number(),
+  bytes: z.number().int(),
+  created: z.string(),
   file_name: z.string(),
+  purpose: z.string(),
   workspace_id: z.string(),
-  created: z.string().datetime({ offset: true }).default(
-    "2026-03-12T22:12:00.933Z",
-  ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "object_name": "objectName",
     "file_name": "fileName",
     "workspace_id": "workspaceId",
   });

@@ -1,0 +1,18 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdFormatAnnotationQueue2
+
+## Example Usage
+
+```typescript
+import { GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdFormatAnnotationQueue2 } from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdFormatAnnotationQueue2 = {
+    type: "json_object",
+  };
+```
+
+## Fields
+
+| Field                                       | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `type`                                      | *"json_object"*                             | :heavy_check_mark:                          | Ensures the response is a valid JSON object |

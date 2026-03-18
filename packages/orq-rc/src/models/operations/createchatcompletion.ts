@@ -523,7 +523,8 @@ export type CreateChatCompletionStreamOptions = {
 
 export type CreateChatCompletionThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -1497,6 +1498,7 @@ export type CreateChatCompletionRequestBody = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -3080,7 +3082,8 @@ export function createChatCompletionStreamOptionsToJSON(
 /** @internal */
 export type CreateChatCompletionThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
 
 /** @internal */
 export const CreateChatCompletionThinking$outboundSchema: z.ZodType<
@@ -3090,6 +3093,7 @@ export const CreateChatCompletionThinking$outboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
+  components.ThinkingConfigAdaptiveSchema$outboundSchema,
 ]);
 
 export function createChatCompletionThinkingToJSON(
@@ -5302,6 +5306,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -5366,6 +5371,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),

@@ -1,0 +1,27 @@
+# RequestT
+
+## Example Usage
+
+```typescript
+import { RequestT } from "@orq-ai/node/models/operations";
+
+let value: RequestT = {};
+```
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `model`                                                              | *string*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `frequencyPenalty`                                                   | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `maxTokens`                                                          | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `presencePenalty`                                                    | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `seed`                                                               | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `temperature`                                                        | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `topP`                                                               | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `topK`                                                               | *number*                                                             | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `stream`                                                             | *boolean*                                                            | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `choice`                                                             | [operations.Choice](../../models/operations/choice.md)               | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `stopSequences`                                                      | *string*[]                                                           | :heavy_minus_sign:                                                   | Array of sequences that stop token generation                        |
+| `encodingFormats`                                                    | *string*[]                                                           | :heavy_minus_sign:                                                   | Encoding formats for embeddings requests                             |
+| `responseFormat`                                                     | *any*                                                                | :heavy_minus_sign:                                                   | Response format configuration (e.g., json_object, json_schema, text) |

@@ -1,0 +1,24 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdToolChoiceAnnotationQueueResponse2002
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdToolChoiceAnnotationQueueResponse2002,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdToolChoiceAnnotationQueueResponse2002 =
+    {
+      function: {
+        name: "<value>",
+      },
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                                                             | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdToolChoiceAnnotationQueueResponse200ApplicationJSONResponseBodyType](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidtoolchoiceannotationqueueresponse200applicationjsonresponsebodytype.md) | :heavy_minus_sign:                                                                                                                                                                                                                                                                 | The type of the tool. Currently, only function is supported.                                                                                                                                                                                                                       |
+| `function`                                                                                                                                                                                                                                                                         | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdToolChoiceAnnotationQueueFunction](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidtoolchoiceannotationqueuefunction.md)                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                                                                |

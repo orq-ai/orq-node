@@ -27,7 +27,7 @@ let value: DeploymentsData = {
     model: "LeBaron",
     modelType: "rerank",
     modelParameters: {},
-    provider: "aws",
+    provider: "google",
     messages: [],
   },
   version: "<value>",

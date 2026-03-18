@@ -3,23 +3,23 @@
 
 ## Supported Types
 
-### `operations.UpdateEvalGuardrailConfigEvalsResponse200Boolean`
+### `operations.UpdateEvalGuardrailConfigEvalsBoolean`
 
 ```typescript
-const value: operations.UpdateEvalGuardrailConfigEvalsResponse200Boolean = {
-  enabled: true,
+const value: operations.UpdateEvalGuardrailConfigEvalsBoolean = {
+  enabled: false,
   type: "boolean",
   value: true,
 };
 ```
 
-### `operations.UpdateEvalGuardrailConfigEvalsResponse200Number`
+### `operations.UpdateEvalGuardrailConfigEvalsNumber`
 
 ```typescript
-const value: operations.UpdateEvalGuardrailConfigEvalsResponse200Number = {
-  enabled: true,
+const value: operations.UpdateEvalGuardrailConfigEvalsNumber = {
+  enabled: false,
   type: "number",
-  value: 5469.04,
+  value: 9944.67,
   operator: "gte",
 };
 ```

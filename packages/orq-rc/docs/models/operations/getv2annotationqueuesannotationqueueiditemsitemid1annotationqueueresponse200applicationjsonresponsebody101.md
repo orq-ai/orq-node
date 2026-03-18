@@ -1,0 +1,24 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody101
+
+A text input to the model.
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody101,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody101 =
+    {
+      text: "<value>",
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                                               | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody10Type](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemid1annotationqueueresponse200applicationjsonresponsebody10type.md) | :heavy_minus_sign:                                                                                                                                                                                                                                                   | The type of the input item. Always `input_text`.                                                                                                                                                                                                                     |
+| `text`                                                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                   | The text input to the model.                                                                                                                                                                                                                                         |

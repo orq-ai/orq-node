@@ -1,0 +1,17 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyOtel
+
+## Example Usage
+
+```typescript
+import { GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyOtel } from "@orq-ai/node/models/operations";
+
+let value: GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyOtel =
+  {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                    | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `statusCode`                                                                                                                                                                             | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyStatusCode](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidresponsebodystatuscode.md) | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `statusDescription`                                                                                                                                                                      | *string*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |

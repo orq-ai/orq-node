@@ -340,7 +340,8 @@ export type ListAgentsStop = string | Array<string>;
 
 export type ListAgentsThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -552,6 +553,7 @@ export type ListAgentsParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -711,7 +713,8 @@ export type ListAgentsFallbackModelConfigurationStop = string | Array<string>;
 
 export type ListAgentsFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -934,6 +937,7 @@ export type ListAgentsFallbackModelConfigurationParameters = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -1099,6 +1103,10 @@ export type ListAgentsData = {
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: ListAgentsStatus;
+  /**
+   * Current semantic version of the agent manifest.
+   */
+  version?: string | undefined;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -1579,6 +1587,7 @@ export const ListAgentsThinking$inboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
+  components.ThinkingConfigAdaptiveSchema$inboundSchema,
 ]);
 
 export function listAgentsThinkingFromJSON(
@@ -1868,6 +1877,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
@@ -2110,6 +2120,7 @@ export const ListAgentsFallbackModelConfigurationThinking$inboundSchema:
   > = z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
   ]);
 
 export function listAgentsFallbackModelConfigurationThinkingFromJSON(
@@ -2456,6 +2467,7 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     thinking: z.union([
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     top_p: z.nullable(z.number()).optional(),
@@ -2686,6 +2698,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   created: z.string().optional(),
   updated: z.string().optional(),
   status: ListAgentsStatus$inboundSchema,
+  version: z.string().optional(),
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()).optional(),

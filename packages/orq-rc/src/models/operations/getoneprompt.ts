@@ -353,6 +353,7 @@ export const GetOnePromptProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
 
@@ -361,6 +362,7 @@ export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
  */
 export const GetOnePromptRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",
@@ -666,7 +668,8 @@ export type GetOnePromptStreamOptions = {
 
 export type GetOnePromptThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -1243,6 +1246,7 @@ export type GetOnePromptPromptField = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -2148,6 +2152,7 @@ export const GetOnePromptThinking$inboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
+  components.ThinkingConfigAdaptiveSchema$inboundSchema,
 ]);
 
 export function getOnePromptThinkingFromJSON(
@@ -2956,6 +2961,7 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),

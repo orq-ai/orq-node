@@ -5,29 +5,14 @@
 import { filesCreate } from "../funcs/filesCreate.js";
 import { filesDelete } from "../funcs/filesDelete.js";
 import { filesGet } from "../funcs/filesGet.js";
+import { filesGetContent } from "../funcs/filesGetContent.js";
 import { filesList } from "../funcs/filesList.js";
+import { filesUpdate } from "../funcs/filesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Files extends ClientSDK {
-  /**
-   * Create file
-   *
-   * @remarks
-   * Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/deployments/invoke).
-   */
-  async create(
-    request: operations.FileUploadRequestBody,
-    options?: RequestOptions,
-  ): Promise<operations.FileUploadResponseBody> {
-    return unwrapAsync(filesCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
   /**
    * List all files
    *
@@ -46,16 +31,16 @@ export class Files extends ClientSDK {
   }
 
   /**
-   * Retrieve a file
+   * Create file
    *
    * @remarks
-   * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object
+   * Files are used to upload documents that can be used with features like Deployments.
    */
-  async get(
-    request: operations.FileGetRequest,
+  async create(
+    request: operations.FileUploadRequestBody,
     options?: RequestOptions,
-  ): Promise<operations.FileGetResponseBody> {
-    return unwrapAsync(filesGet(
+  ): Promise<operations.FileUploadResponseBody> {
+    return unwrapAsync(filesCreate(
       this,
       request,
       options,
@@ -70,6 +55,57 @@ export class Files extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(filesDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a file
+   *
+   * @remarks
+   * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object.
+   */
+  async get(
+    request: operations.FileGetRequest,
+    options?: RequestOptions,
+  ): Promise<operations.FileGetResponseBody> {
+    return unwrapAsync(filesGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update file
+   *
+   * @remarks
+   * Updates the metadata of an existing file object.
+   */
+  async update(
+    request: operations.FileUpdateRequest,
+    options?: RequestOptions,
+  ): Promise<operations.FileUpdateResponseBody> {
+    return unwrapAsync(filesUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Download file content
+   *
+   * @remarks
+   * Signs the object name and redirects to a presigned URL for downloading the file content.
+   */
+  async getContent(
+    request: operations.FileContentRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(filesGetContent(
       this,
       request,
       options,

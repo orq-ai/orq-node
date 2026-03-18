@@ -92,6 +92,14 @@ export type CreateCompletionTimeout = {
 };
 
 /**
+ * Configuration for the thinking mode capability. Set type to `adaptive` for models that support adaptive thinking (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control.
+ */
+export type CreateCompletionThinking =
+  | components.ThinkingConfigDisabledSchema
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
+
+/**
  * Retry configuration for the request
  */
 export type CreateCompletionRouterCompletionsRetry = {
@@ -772,6 +780,15 @@ export type CreateCompletionRequestBody = {
    */
   timeout?: CreateCompletionTimeout | undefined;
   /**
+   * Configuration for the thinking mode capability. Set type to `adaptive` for models that support adaptive thinking (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control.
+   */
+  thinking?:
+    | components.ThinkingConfigDisabledSchema
+    | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
+    | null
+    | undefined;
+  /**
    * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -1209,6 +1226,31 @@ export function createCompletionTimeoutToJSON(
 ): string {
   return JSON.stringify(
     CreateCompletionTimeout$outboundSchema.parse(createCompletionTimeout),
+  );
+}
+
+/** @internal */
+export type CreateCompletionThinking$Outbound =
+  | components.ThinkingConfigDisabledSchema$Outbound
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
+
+/** @internal */
+export const CreateCompletionThinking$outboundSchema: z.ZodType<
+  CreateCompletionThinking$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionThinking
+> = z.union([
+  components.ThinkingConfigDisabledSchema$outboundSchema,
+  components.ThinkingConfigEnabledSchema$outboundSchema,
+  components.ThinkingConfigAdaptiveSchema$outboundSchema,
+]);
+
+export function createCompletionThinkingToJSON(
+  createCompletionThinking: CreateCompletionThinking,
+): string {
+  return JSON.stringify(
+    CreateCompletionThinking$outboundSchema.parse(createCompletionThinking),
   );
 }
 
@@ -2935,6 +2977,12 @@ export type CreateCompletionRequestBody$Outbound = {
   cache?: CreateCompletionCache$Outbound | undefined;
   load_balancer?: CreateCompletionLoadBalancer1$Outbound | undefined;
   timeout?: CreateCompletionTimeout$Outbound | undefined;
+  thinking?:
+    | components.ThinkingConfigDisabledSchema$Outbound
+    | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
+    | null
+    | undefined;
   orq?: CreateCompletionOrq$Outbound | undefined;
   stream: boolean;
 };
@@ -2965,6 +3013,13 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
   loadBalancer: z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateCompletionTimeout$outboundSchema).optional(),
+  thinking: z.nullable(
+    z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    ]),
+  ).optional(),
   orq: z.lazy(() => CreateCompletionOrq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {

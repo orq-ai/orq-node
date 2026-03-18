@@ -60,6 +60,7 @@ export const Provider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 /**
  * The provider used to generate the response
@@ -138,6 +139,7 @@ export type DeploymentInvokeUsage = {
  */
 export const DeploymentInvokeMessageDeploymentsRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",
@@ -167,6 +169,7 @@ export type Message3 = {
  */
 export const DeploymentInvokeMessageRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",
@@ -208,6 +211,7 @@ export type Message2 = {
  */
 export const MessageRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

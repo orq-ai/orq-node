@@ -143,14 +143,14 @@ export type Threshold = number | Threshold2;
 /**
  * Chunking mode: window-based or sentence-based similarity
  */
-export const Mode = {
+export const ChunkingRequestMode = {
   Window: "window",
   Sentence: "sentence",
 } as const;
 /**
  * Chunking mode: window-based or sentence-based similarity
  */
-export type Mode = ClosedEnum<typeof Mode>;
+export type ChunkingRequestMode = ClosedEnum<typeof ChunkingRequestMode>;
 
 /**
  * Groups semantically similar sentences using embeddings. Excellent for maintaining topic coherence and context within chunks.
@@ -192,7 +192,7 @@ export type SemanticChunkerStrategy = {
   /**
    * Chunking mode: window-based or sentence-based similarity
    */
-  mode?: Mode | undefined;
+  mode?: ChunkingRequestMode | undefined;
   /**
    * Window size for similarity comparison
    */
@@ -492,9 +492,9 @@ export function thresholdToJSON(threshold: Threshold): string {
 }
 
 /** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
+export const ChunkingRequestMode$outboundSchema: z.ZodNativeEnum<
+  typeof ChunkingRequestMode
+> = z.nativeEnum(ChunkingRequestMode);
 
 /** @internal */
 export type SemanticChunkerStrategy$Outbound = {
@@ -528,7 +528,7 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
   embeddingModel: z.string(),
   dimensions: z.number().int().optional(),
   maxTokens: z.number().int().optional(),
-  mode: Mode$outboundSchema.default("window"),
+  mode: ChunkingRequestMode$outboundSchema.default("window"),
   similarityWindow: z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {

@@ -20,3 +20,11 @@ const value: components.ThinkingConfigEnabledSchema = {
 };
 ```
 
+### `components.ThinkingConfigAdaptiveSchema`
+
+```typescript
+const value: components.ThinkingConfigAdaptiveSchema = {
+  type: "adaptive",
+};
+```
+

@@ -492,7 +492,8 @@ export type UpdatePromptStreamOptions = {
 
 export type UpdatePromptThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -753,6 +754,7 @@ export type UpdatePromptPromptInput = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -1243,6 +1245,7 @@ export const UpdatePromptProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -1251,6 +1254,7 @@ export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
  */
 export const UpdatePromptRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",
@@ -1558,7 +1562,8 @@ export type UpdatePromptPromptsStreamOptions = {
 
 export type UpdatePromptPromptsThinking =
   | components.ThinkingConfigDisabledSchema
-  | components.ThinkingConfigEnabledSchema;
+  | components.ThinkingConfigEnabledSchema
+  | components.ThinkingConfigAdaptiveSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -2143,6 +2148,7 @@ export type UpdatePromptPromptField = {
   thinking?:
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
+    | components.ThinkingConfigAdaptiveSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -3129,7 +3135,8 @@ export function updatePromptStreamOptionsToJSON(
 /** @internal */
 export type UpdatePromptThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
-  | components.ThinkingConfigEnabledSchema$Outbound;
+  | components.ThinkingConfigEnabledSchema$Outbound
+  | components.ThinkingConfigAdaptiveSchema$Outbound;
 
 /** @internal */
 export const UpdatePromptThinking$outboundSchema: z.ZodType<
@@ -3139,6 +3146,7 @@ export const UpdatePromptThinking$outboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
+  components.ThinkingConfigAdaptiveSchema$outboundSchema,
 ]);
 
 export function updatePromptThinkingToJSON(
@@ -3499,6 +3507,7 @@ export type UpdatePromptPromptInput$Outbound = {
   thinking?:
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
+    | components.ThinkingConfigAdaptiveSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -3553,6 +3562,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
@@ -4471,6 +4481,7 @@ export const UpdatePromptPromptsThinking$inboundSchema: z.ZodType<
 > = z.union([
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
+  components.ThinkingConfigAdaptiveSchema$inboundSchema,
 ]);
 
 export function updatePromptPromptsThinkingFromJSON(
@@ -5339,6 +5350,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
   thinking: z.union([
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),

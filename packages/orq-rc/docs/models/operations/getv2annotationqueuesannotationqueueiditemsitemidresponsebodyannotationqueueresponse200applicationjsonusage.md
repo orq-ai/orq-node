@@ -1,0 +1,32 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueResponse200ApplicationJSONUsage
+
+The token usage information for the image generation.
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueResponse200ApplicationJSONUsage,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueResponse200ApplicationJSONUsage =
+    {
+      totalTokens: 7194.98,
+      inputTokens: 1745.56,
+      outputTokens: 3480.95,
+      inputTokensDetails: {
+        textTokens: 316.7,
+        imageTokens: 9837.56,
+      },
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `totalTokens`                                                                                                                                                                                                                          | *number*                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                     | The total number of tokens (images and text) used for the image generation.                                                                                                                                                            |
+| `inputTokens`                                                                                                                                                                                                                          | *number*                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                     | The number of tokens (images and text) in the input prompt.                                                                                                                                                                            |
+| `outputTokens`                                                                                                                                                                                                                         | *number*                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                     | The number of output tokens generated by the model.                                                                                                                                                                                    |
+| `inputTokensDetails`                                                                                                                                                                                                                   | [operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdResponseBodyAnnotationQueueInputTokensDetails](../../models/operations/getv2annotationqueuesannotationqueueiditemsitemidresponsebodyannotationqueueinputtokensdetails.md) | :heavy_check_mark:                                                                                                                                                                                                                     | The input tokens detailed information for the image generation.                                                                                                                                                                        |

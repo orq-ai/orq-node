@@ -15,10 +15,12 @@ export class Models extends ClientSDK {
    * Lists the currently available models, and provides basic information about each one such as the owner and availability.
    */
   async list(
+    request?: operations.ListModelsRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.ListModelsResponseBody> {
     return unwrapAsync(modelsList(
       this,
+      request,
       options,
     ));
   }

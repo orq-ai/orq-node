@@ -9,6 +9,10 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type ListModelsRequest = {
+  autorouter?: boolean | null | undefined;
+};
+
 export const ListModelsObject = {
   List: "list",
 } as const;
@@ -76,6 +80,28 @@ export type ListModelsResponseBody = {
   data: Array<ListModelsData>;
   hasMore: boolean;
 };
+
+/** @internal */
+export type ListModelsRequest$Outbound = {
+  autorouter?: boolean | null | undefined;
+};
+
+/** @internal */
+export const ListModelsRequest$outboundSchema: z.ZodType<
+  ListModelsRequest$Outbound,
+  z.ZodTypeDef,
+  ListModelsRequest
+> = z.object({
+  autorouter: z.nullable(z.boolean()).optional(),
+});
+
+export function listModelsRequestToJSON(
+  listModelsRequest: ListModelsRequest,
+): string {
+  return JSON.stringify(
+    ListModelsRequest$outboundSchema.parse(listModelsRequest),
+  );
+}
 
 /** @internal */
 export const ListModelsObject$inboundSchema: z.ZodNativeEnum<

@@ -1,0 +1,21 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody23AttributesOpenresponsesOutput42AnnotationsType
+
+The type of the URL citation. Always `url_citation`.
+
+## Example Usage
+
+```typescript
+import {
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody23AttributesOpenresponsesOutput42AnnotationsType,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody23AttributesOpenresponsesOutput42AnnotationsType =
+    "url_citation";
+```
+
+## Values
+
+```typescript
+"url_citation"
+```

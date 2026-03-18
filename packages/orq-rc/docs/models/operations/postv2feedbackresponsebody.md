@@ -1,0 +1,25 @@
+# PostV2FeedbackResponseBody
+
+Event has been dispatched to delete the feedback
+
+## Example Usage
+
+```typescript
+import { PostV2FeedbackResponseBody } from "@orq-ai/node/models/operations";
+
+let value: PostV2FeedbackResponseBody = {
+  property: "<value>",
+  value: 716.44,
+  traceId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                 | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                  | *string*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                    | Unique identifier for the feedback                                                                                                                                    |
+| `property`                                                                                                                                                            | *string*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | A string describing the specific property or aspect rated.                                                                                                            |
+| `value`                                                                                                                                                               | *operations.PostV2FeedbackValue*                                                                                                                                      | :heavy_check_mark:                                                                                                                                                    | The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.                 |
+| `traceId`                                                                                                                                                             | *string*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints |
+| `product`                                                                                                                                                             | [operations.PostV2FeedbackProduct](../../models/operations/postv2feedbackproduct.md)                                                                                  | :heavy_minus_sign:                                                                                                                                                    | N/A                                                                                                                                                                   |

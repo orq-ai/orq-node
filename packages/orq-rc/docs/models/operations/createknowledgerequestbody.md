@@ -3,24 +3,24 @@
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.CreateKnowledgeRequestBody1`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.CreateKnowledgeRequestBody1 = {
   key: "<key>",
   embeddingModel: "<value>",
   path: "Default",
 };
 ```
 
-### `operations.RequestBody2`
+### `operations.CreateKnowledgeRequestBody2`
 
 ```typescript
-const value: operations.RequestBody2 = {
+const value: operations.CreateKnowledgeRequestBody2 = {
   key: "<key>",
   externalConfig: {
     name: "<value>",
-    apiUrl: "https://somber-schnitzel.name/",
+    apiUrl: "https://which-igloo.com",
     apiKey: "<value>",
   },
 };

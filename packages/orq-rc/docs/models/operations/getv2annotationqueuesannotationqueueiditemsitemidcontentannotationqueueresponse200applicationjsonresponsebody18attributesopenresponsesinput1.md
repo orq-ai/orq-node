@@ -1,0 +1,27 @@
+# GetV2AnnotationQueuesAnnotationQueueIdItemsItemIdContentAnnotationQueueResponse200ApplicationJSONResponseBody18AttributesOpenresponsesInput1
+
+A piece of assistant message content, such as text or a refusal.
+
+
+## Supported Types
+
+### `operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody18Attributes1`
+
+```typescript
+const value:
+  operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody18Attributes1 =
+    {
+      text: "<value>",
+    };
+```
+
+### `operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody18Attributes2`
+
+```typescript
+const value:
+  operations.GetV2AnnotationQueuesAnnotationQueueIdItemsItemId1AnnotationQueueResponse200ApplicationJSONResponseBody18Attributes2 =
+    {
+      refusal: "<value>",
+    };
+```
+

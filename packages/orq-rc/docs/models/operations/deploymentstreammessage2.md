@@ -7,7 +7,7 @@ import { DeploymentStreamMessage2 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessage2 = {
   type: "content",
-  role: "expected_output",
+  role: "correction",
   content: "<value>",
 };
 ```

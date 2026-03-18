@@ -841,13 +841,15 @@ export type Evaluations2 = {
 /**
  * The type of evaluation
  */
-export const EvaluationType = {
+export const CreateDatasetItemEvaluationsDatasetsEvaluationType = {
   HumanReview: "human_review",
 } as const;
 /**
  * The type of evaluation
  */
-export type EvaluationType = ClosedEnum<typeof EvaluationType>;
+export type CreateDatasetItemEvaluationsDatasetsEvaluationType = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsEvaluationType
+>;
 
 export const EvaluationsSource = {
   Orq: "orq",
@@ -863,7 +865,7 @@ export type Evaluations1 = {
   /**
    * The type of evaluation
    */
-  evaluationType: EvaluationType;
+  evaluationType: CreateDatasetItemEvaluationsDatasetsEvaluationType;
   /**
    * The unique identifier of the human review
    */
@@ -2353,7 +2355,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-03-12T22:12:13.879Z",
+    "2026-03-18T16:23:52.293Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2398,7 +2400,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-03-12T22:12:13.878Z",
+    "2026-03-18T16:23:52.292Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2422,9 +2424,9 @@ export function evaluations2FromJSON(
 }
 
 /** @internal */
-export const EvaluationType$inboundSchema: z.ZodNativeEnum<
-  typeof EvaluationType
-> = z.nativeEnum(EvaluationType);
+export const CreateDatasetItemEvaluationsDatasetsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsEvaluationType> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsEvaluationType);
 
 /** @internal */
 export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
@@ -2438,12 +2440,13 @@ export const Evaluations1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  evaluation_type: EvaluationType$inboundSchema,
+  evaluation_type:
+    CreateDatasetItemEvaluationsDatasetsEvaluationType$inboundSchema,
   human_review_id: z.string(),
   source: EvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-03-12T22:12:13.878Z",
+    "2026-03-18T16:23:52.292Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2526,7 +2529,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-03-12T22:11:57.143Z",
+    "2026-03-18T16:23:36.078Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

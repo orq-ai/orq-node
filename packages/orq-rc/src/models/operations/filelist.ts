@@ -5,72 +5,29 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FileListRequest = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   * A cursor for use in pagination. Defines your place in the list for the next page.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   * A cursor for use in pagination. Defines your place in the list for the previous page.
    */
   endingBefore?: string | undefined;
-};
-
-export const FileListObject = {
-  List: "list",
-} as const;
-export type FileListObject = ClosedEnum<typeof FileListObject>;
-
-/**
- * The intended purpose of the uploaded file.
- */
-export const FileListPurpose = {
-  Retrieval: "retrieval",
-  KnowledgeDatasource: "knowledge_datasource",
-  Batch: "batch",
-} as const;
-/**
- * The intended purpose of the uploaded file.
- */
-export type FileListPurpose = ClosedEnum<typeof FileListPurpose>;
-
-export type FileListData = {
-  id: string;
-  /**
-   * path to the file in the storage
-   */
-  objectName: string;
-  /**
-   * The intended purpose of the uploaded file.
-   */
-  purpose: FileListPurpose;
-  bytes: number;
-  fileName: string;
-  /**
-   * The id of the resource
-   */
-  workspaceId: string;
-  /**
-   * The date and time the resource was created
-   */
-  created: Date;
 };
 
 /**
  * Files retrieved successfully
  */
 export type FileListResponseBody = {
-  object: FileListObject;
-  data: Array<FileListData>;
+  data: Array<components.FileDocument> | null;
   hasMore: boolean;
+  object: string;
 };
 
 /** @internal */
@@ -103,58 +60,14 @@ export function fileListRequestToJSON(
 }
 
 /** @internal */
-export const FileListObject$inboundSchema: z.ZodNativeEnum<
-  typeof FileListObject
-> = z.nativeEnum(FileListObject);
-
-/** @internal */
-export const FileListPurpose$inboundSchema: z.ZodNativeEnum<
-  typeof FileListPurpose
-> = z.nativeEnum(FileListPurpose);
-
-/** @internal */
-export const FileListData$inboundSchema: z.ZodType<
-  FileListData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  object_name: z.string(),
-  purpose: FileListPurpose$inboundSchema,
-  bytes: z.number(),
-  file_name: z.string(),
-  workspace_id: z.string(),
-  created: z.string().datetime({ offset: true }).default(
-    "2026-03-12T22:12:00.933Z",
-  ).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "object_name": "objectName",
-    "file_name": "fileName",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function fileListDataFromJSON(
-  jsonString: string,
-): SafeParseResult<FileListData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileListData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileListData' from JSON`,
-  );
-}
-
-/** @internal */
 export const FileListResponseBody$inboundSchema: z.ZodType<
   FileListResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: FileListObject$inboundSchema,
-  data: z.array(z.lazy(() => FileListData$inboundSchema)),
+  data: z.nullable(z.array(components.FileDocument$inboundSchema)),
   has_more: z.boolean(),
+  object: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
