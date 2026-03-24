@@ -162,6 +162,19 @@ export type StreamAgentMemory = {
 };
 
 /**
+ * Override template engine for this invocation. If not provided, uses the agent default.
+ */
+export const StreamAgentEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+/**
+ * Override template engine for this invocation. If not provided, uses the agent default.
+ */
+export type StreamAgentEngine = ClosedEnum<typeof StreamAgentEngine>;
+
+/**
  * Configuration options for the agent invocation
  */
 export type StreamAgentConfiguration = {
@@ -206,6 +219,10 @@ export type StreamAgentRequestBody = {
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Override template engine for this invocation. If not provided, uses the agent default.
+   */
+  engine?: StreamAgentEngine | undefined;
   /**
    * Configuration options for the agent invocation
    */
@@ -491,6 +508,11 @@ export function streamAgentMemoryToJSON(
 }
 
 /** @internal */
+export const StreamAgentEngine$outboundSchema: z.ZodNativeEnum<
+  typeof StreamAgentEngine
+> = z.nativeEnum(StreamAgentEngine);
+
+/** @internal */
 export type StreamAgentConfiguration$Outbound = {
   blocking: boolean;
 };
@@ -522,6 +544,7 @@ export type StreamAgentRequestBody$Outbound = {
   thread?: StreamAgentThread$Outbound | undefined;
   memory?: StreamAgentMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
+  engine?: string | undefined;
   configuration?: StreamAgentConfiguration$Outbound | undefined;
   stream_timeout_seconds?: number | undefined;
 };
@@ -540,6 +563,7 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   thread: z.lazy(() => StreamAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => StreamAgentMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+  engine: StreamAgentEngine$outboundSchema.optional(),
   configuration: z.lazy(() => StreamAgentConfiguration$outboundSchema)
     .optional(),
   streamTimeoutSeconds: z.number().optional(),

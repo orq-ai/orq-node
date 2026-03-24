@@ -73,13 +73,14 @@ const value: operations.RequestBody5 = {
 };
 ```
 
-### `operations.RequestBody6`
+### `operations.Six`
 
 ```typescript
-const value: operations.RequestBody6 = {
+const value: operations.Six = {
   type: "text",
-  displayName: "Caleb13",
-  description: "whenever like whoa marimba kookily rebound infatuated focalise",
+  displayName: "Zoe.Thompson96",
+  description:
+    "before dilate ah diagram quarrelsomely cannon sedately sleepy excepting gee",
 };
 ```
 

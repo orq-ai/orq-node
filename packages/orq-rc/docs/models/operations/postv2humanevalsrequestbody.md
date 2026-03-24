@@ -46,42 +46,42 @@ const value: operations.RequestBody4 = {
   options: [
     {
       value: "<value>",
-      sentiment: "negative",
-      description: "cantaloupe yahoo afore unethically",
+      sentiment: "neutral",
+      description: "construe hm ick though intensely offensively",
       icon: "<value>",
     },
   ],
-  displayName: "Michale_Feil",
-  description: "yogurt scornful afterwards wry indelible pish scar issue",
+  displayName: "Maximillia14",
+  description: "righteously drat switch help observe whose",
 };
 ```
 
-### `operations.PostV2HumanEvalsRequestBody5`
+### `operations.Five`
 
 ```typescript
-const value: operations.PostV2HumanEvalsRequestBody5 = {
+const value: operations.Five = {
   type: "single_select",
   options: [
     {
       value: "<value>",
-      sentiment: "negative",
-      description: "curly magnificent jealously",
+      sentiment: "positive",
+      description:
+        "foolishly defendant however tune helplessly populist finally",
       icon: "<value>",
     },
   ],
-  displayName: "Brody.Stamm26",
-  description:
-    "loosely calculating primary against daughter but authentic kiddingly permafrost",
+  displayName: "Terry_Mohr",
+  description: "cautious duh gymnast coolly scented sup fray brr",
 };
 ```
 
-### `operations.PostV2HumanEvalsRequestBody6`
+### `operations.RequestBody6`
 
 ```typescript
-const value: operations.PostV2HumanEvalsRequestBody6 = {
+const value: operations.RequestBody6 = {
   type: "text",
-  displayName: "Gladyce10",
-  description: "scotch second meanwhile",
+  displayName: "Caleb13",
+  description: "whenever like whoa marimba kookily rebound infatuated focalise",
 };
 ```
 

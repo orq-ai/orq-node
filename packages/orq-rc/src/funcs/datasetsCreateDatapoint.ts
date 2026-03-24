@@ -92,7 +92,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/datasets/{dataset_id}/datapoints")(pathParams);
 
   const headers = new Headers(compactMap({

@@ -101,7 +101,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/tools/{tool_id}/versions/{version_id}")(
     pathParams,
   );

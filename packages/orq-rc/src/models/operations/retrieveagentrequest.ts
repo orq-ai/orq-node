@@ -64,6 +64,15 @@ export type RetrieveAgentRequestSource = ClosedEnum<
   typeof RetrieveAgentRequestSource
 >;
 
+export const RetrieveAgentRequestEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+export type RetrieveAgentRequestEngine = ClosedEnum<
+  typeof RetrieveAgentRequestEngine
+>;
+
 /**
  * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
  */
@@ -1138,6 +1147,7 @@ export type RetrieveAgentRequestResponseBody = {
    */
   knowledgeBases?: Array<RetrieveAgentRequestKnowledgeBases> | undefined;
   source?: RetrieveAgentRequestSource | undefined;
+  engine: RetrieveAgentRequestEngine;
   /**
    * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
    */
@@ -1258,6 +1268,11 @@ export function retrieveAgentRequestKnowledgeBasesFromJSON(
 export const RetrieveAgentRequestSource$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestSource
 > = z.nativeEnum(RetrieveAgentRequestSource);
+
+/** @internal */
+export const RetrieveAgentRequestEngine$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveAgentRequestEngine
+> = z.nativeEnum(RetrieveAgentRequestEngine);
 
 /** @internal */
 export const RetrieveAgentRequestType$inboundSchema: z.ZodNativeEnum<
@@ -2792,6 +2807,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => RetrieveAgentRequestKnowledgeBases$inboundSchema),
   ).optional(),
   source: RetrieveAgentRequestSource$inboundSchema.optional(),
+  engine: RetrieveAgentRequestEngine$inboundSchema.default("text"),
   type: RetrieveAgentRequestType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),

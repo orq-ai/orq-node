@@ -166,22 +166,6 @@ run();
 * [create](docs/sdks/responses/README.md#create) - Create response
 * [get](docs/sdks/responses/README.md#get) - Get response
 
-### [AnnotationQueue](docs/sdks/annotationqueue/README.md)
-
-* [patchV2AnnotationQueuesAnnotationQueueId](docs/sdks/annotationqueue/README.md#patchv2annotationqueuesannotationqueueid) - Edit an annotation queue
-* [deleteV2AnnotationQueuesAnnotationQueueId](docs/sdks/annotationqueue/README.md#deletev2annotationqueuesannotationqueueid) - Delete an annotation queue
-* [postV2AnnotationQueues](docs/sdks/annotationqueue/README.md#postv2annotationqueues) - Create an annotation queue
-* [getV2AnnotationQueuesAnnotationQueueIdItems](docs/sdks/annotationqueue/README.md#getv2annotationqueuesannotationqueueiditems) - Query items from an annotation queue
-* [postV2AnnotationQueuesAnnotationQueueIdItemsAdd](docs/sdks/annotationqueue/README.md#postv2annotationqueuesannotationqueueiditemsadd) - Add items to an annotation queue
-* [postV2AnnotationQueuesAnnotationQueueIdItemsRemove](docs/sdks/annotationqueue/README.md#postv2annotationqueuesannotationqueueiditemsremove) - Remove annotation queue items
-* [getV2AnnotationQueuesAnnotationQueueIdItemsItemId](docs/sdks/annotationqueue/README.md#getv2annotationqueuesannotationqueueiditemsitemid) - Retrieve an annotation queue item
-
-### [AnnotationQueues](docs/sdks/annotationqueues/README.md)
-
-* [postV2AnnotationQueuesQuery](docs/sdks/annotationqueues/README.md#postv2annotationqueuesquery) - List annotation queues
-* [getV2AnnotationQueuesAnnotationQueueId](docs/sdks/annotationqueues/README.md#getv2annotationqueuesannotationqueueid) - Retrieve an annotation queue
-* [deleteV2AnnotationQueuesAnnotationQueueIdClear](docs/sdks/annotationqueues/README.md#deletev2annotationqueuesannotationqueueidclear) - Delete all items
-
 ### [Annotations](docs/sdks/annotations/README.md)
 
 * [create](docs/sdks/annotations/README.md#create) - Annotate a span
@@ -404,16 +388,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsResponsesGet`](docs/sdks/responses/README.md#get) - Get response
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
 - [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update agent
-- [`annotationQueueDeleteV2AnnotationQueuesAnnotationQueueId`](docs/sdks/annotationqueue/README.md#deletev2annotationqueuesannotationqueueid) - Delete an annotation queue
-- [`annotationQueueGetV2AnnotationQueuesAnnotationQueueIdItems`](docs/sdks/annotationqueue/README.md#getv2annotationqueuesannotationqueueiditems) - Query items from an annotation queue
-- [`annotationQueueGetV2AnnotationQueuesAnnotationQueueIdItemsItemId`](docs/sdks/annotationqueue/README.md#getv2annotationqueuesannotationqueueiditemsitemid) - Retrieve an annotation queue item
-- [`annotationQueuePatchV2AnnotationQueuesAnnotationQueueId`](docs/sdks/annotationqueue/README.md#patchv2annotationqueuesannotationqueueid) - Edit an annotation queue
-- [`annotationQueuePostV2AnnotationQueues`](docs/sdks/annotationqueue/README.md#postv2annotationqueues) - Create an annotation queue
-- [`annotationQueuePostV2AnnotationQueuesAnnotationQueueIdItemsAdd`](docs/sdks/annotationqueue/README.md#postv2annotationqueuesannotationqueueiditemsadd) - Add items to an annotation queue
-- [`annotationQueuePostV2AnnotationQueuesAnnotationQueueIdItemsRemove`](docs/sdks/annotationqueue/README.md#postv2annotationqueuesannotationqueueiditemsremove) - Remove annotation queue items
-- [`annotationQueuesDeleteV2AnnotationQueuesAnnotationQueueIdClear`](docs/sdks/annotationqueues/README.md#deletev2annotationqueuesannotationqueueidclear) - Delete all items
-- [`annotationQueuesGetV2AnnotationQueuesAnnotationQueueId`](docs/sdks/annotationqueues/README.md#getv2annotationqueuesannotationqueueid) - Retrieve an annotation queue
-- [`annotationQueuesPostV2AnnotationQueuesQuery`](docs/sdks/annotationqueues/README.md#postv2annotationqueuesquery) - List annotation queues
 - [`annotationsCreate`](docs/sdks/annotations/README.md#create) - Annotate a span
 - [`annotationsDelete`](docs/sdks/annotations/README.md#delete) - Remove an annotation from a span
 - [`chunkingParse`](docs/sdks/chunking/README.md#parse) - Parse text
@@ -842,44 +816,44 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 137 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 137 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 137 methods.*
-* [`PostV2AgentsA2aResponseBody`](./src/models/errors/postv2agentsa2aresponsebody.ts): Invalid request or agent card fetch failed. Status code `400`. Applicable to 1 of 137 methods.*
-* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 137 methods.*
-* [`PostV2FeedbackResponseResponseBody`](./src/models/errors/postv2feedbackresponseresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetV2HumanEvalsResponseBody`](./src/models/errors/getv2humanevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`PostV2HumanEvalsResponseBody`](./src/models/errors/postv2humanevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetV2HumanEvalsIdResponseBody`](./src/models/errors/getv2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`PatchV2HumanEvalsIdResponseBody`](./src/models/errors/patchv2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`DeleteV2HumanEvalsIdResponseBody`](./src/models/errors/deletev2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 137 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 137 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 137 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 137 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 137 methods.*
-* [`PostV2AgentsA2aAgentsResponseBody`](./src/models/errors/postv2agentsa2aagentsresponsebody.ts): Agent with this key already exists. Status code `409`. Applicable to 1 of 137 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 137 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 137 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 137 methods.*
-* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 137 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 127 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 127 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsA2aResponseBody`](./src/models/errors/postv2agentsa2aresponsebody.ts): Invalid request or agent card fetch failed. Status code `400`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 127 methods.*
+* [`PostV2FeedbackResponseResponseBody`](./src/models/errors/postv2feedbackresponseresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2HumanEvalsResponseBody`](./src/models/errors/getv2humanevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2HumanEvalsResponseBody`](./src/models/errors/postv2humanevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2HumanEvalsIdResponseBody`](./src/models/errors/getv2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PatchV2HumanEvalsIdResponseBody`](./src/models/errors/patchv2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteV2HumanEvalsIdResponseBody`](./src/models/errors/deletev2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 127 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 127 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsA2aAgentsResponseBody`](./src/models/errors/postv2agentsa2aagentsresponsebody.ts): Agent with this key already exists. Status code `409`. Applicable to 1 of 127 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 127 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 127 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 127 methods.*
+* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 127 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

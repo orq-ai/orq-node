@@ -15,8 +15,6 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { Agents } from "./agents.js";
-import { AnnotationQueue } from "./annotationqueue.js";
-import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
@@ -119,16 +117,6 @@ export class Orq extends ClientSDK {
   private _humanReviewSets?: HumanReviewSets;
   get humanReviewSets(): HumanReviewSets {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
-  }
-
-  private _annotationQueues?: AnnotationQueues;
-  get annotationQueues(): AnnotationQueues {
-    return (this._annotationQueues ??= new AnnotationQueues(this._options));
-  }
-
-  private _annotationQueue?: AnnotationQueue;
-  get annotationQueue(): AnnotationQueue {
-    return (this._annotationQueue ??= new AnnotationQueue(this._options));
   }
 
   private _files?: Files;

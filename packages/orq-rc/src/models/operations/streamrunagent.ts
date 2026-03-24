@@ -1680,6 +1680,19 @@ export type StreamRunAgentSettings = {
   guardrails?: Array<StreamRunAgentGuardrails> | undefined;
 };
 
+/**
+ * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
+ */
+export const StreamRunAgentEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+/**
+ * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
+ */
+export type StreamRunAgentEngine = ClosedEnum<typeof StreamRunAgentEngine>;
+
 export type StreamRunAgentRequestBody = {
   /**
    * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed.
@@ -1768,6 +1781,10 @@ export type StreamRunAgentRequestBody = {
    * Optional metadata for the agent run as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
+   */
+  engine?: StreamRunAgentEngine | undefined;
   /**
    * Stream timeout in seconds (1-3600). Default: 1800 (30 minutes)
    */
@@ -3658,7 +3675,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KM0W5E8FEQEWYHP0JQ40K158"),
+  id: z.string().default("01KMFG28RRNTRCDEE160NH43HX"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -4935,6 +4952,11 @@ export function streamRunAgentSettingsToJSON(
 }
 
 /** @internal */
+export const StreamRunAgentEngine$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentEngine
+> = z.nativeEnum(StreamRunAgentEngine);
+
+/** @internal */
 export type StreamRunAgentRequestBody$Outbound = {
   key: string;
   task_id?: string | undefined;
@@ -4958,6 +4980,7 @@ export type StreamRunAgentRequestBody$Outbound = {
   team_of_agents?: Array<StreamRunAgentTeamOfAgents$Outbound> | undefined;
   settings: StreamRunAgentSettings$Outbound;
   metadata?: { [k: string]: any } | undefined;
+  engine: string;
   stream_timeout_seconds?: number | undefined;
 };
 
@@ -4998,6 +5021,7 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   settings: z.lazy(() => StreamRunAgentSettings$outboundSchema),
   metadata: z.record(z.any()).optional(),
+  engine: StreamRunAgentEngine$outboundSchema.default("text"),
   streamTimeoutSeconds: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {

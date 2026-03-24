@@ -99,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/agents/{agent_key}/responses/{task_id}")(
     pathParams,
   );
