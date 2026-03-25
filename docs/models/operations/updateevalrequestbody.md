@@ -1,41 +1,35 @@
 # UpdateEvalRequestBody
 
-
-## Supported Types
-
-### `operations.RequestBodyLLM`
+## Example Usage
 
 ```typescript
-const value: operations.RequestBodyLLM = {
-  type: "llm_eval",
+import { UpdateEvalRequestBody } from "@orq-ai/node/models/operations";
+
+let value: UpdateEvalRequestBody = {
   path: "Default",
 };
 ```
 
-### `operations.RequestBodyJSON`
+## Fields
 
-```typescript
-const value: operations.RequestBodyJSON = {
-  type: "json_schema",
-  path: "Default",
-};
-```
-
-### `operations.RequestBodyHTTP`
-
-```typescript
-const value: operations.RequestBodyHTTP = {
-  type: "http_eval",
-  path: "Default",
-};
-```
-
-### `operations.RequestBodyPython`
-
-```typescript
-const value: operations.RequestBodyPython = {
-  type: "python_eval",
-  path: "Default",
-};
-```
-
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `type`                                                                     | *string*                                                                   | :heavy_minus_sign:                                                         | Evaluator type. Optional on update — inferred from existing evaluator.     |                                                                            |
+| `path`                                                                     | *string*                                                                   | :heavy_minus_sign:                                                         | Project path. Optional on update — uses existing project if omitted.       | Default                                                                    |
+| `key`                                                                      | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `description`                                                              | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `prompt`                                                                   | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `outputType`                                                               | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `categories`                                                               | *string*[]                                                                 | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `repetitions`                                                              | *number*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `mode`                                                                     | [operations.Mode](../../models/operations/mode.md)                         | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `model`                                                                    | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `jury`                                                                     | [operations.Jury](../../models/operations/jury.md)                         | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `schema`                                                                   | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `url`                                                                      | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `method`                                                                   | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `headers`                                                                  | Record<string, *string*>                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `payload`                                                                  | Record<string, *any*>                                                      | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `code`                                                                     | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `versionIncrement`                                                         | [operations.VersionIncrement](../../models/operations/versionincrement.md) | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |
+| `versionDescription`                                                       | *string*                                                                   | :heavy_minus_sign:                                                         | N/A                                                                        |                                                                            |

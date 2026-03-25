@@ -200,13 +200,13 @@ export type UpdateToolRequestBodyMcp = {
   connectionType?: UpdateToolRequestBodyConnectionType | undefined;
 };
 
-export const UpdateToolRequestBodyToolsRequest4VersionIncrement = {
+export const UpdateToolRequestBodyToolsRequestVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
 } as const;
-export type UpdateToolRequestBodyToolsRequest4VersionIncrement = ClosedEnum<
-  typeof UpdateToolRequestBodyToolsRequest4VersionIncrement
+export type UpdateToolRequestBodyToolsRequestVersionIncrement = ClosedEnum<
+  typeof UpdateToolRequestBodyToolsRequestVersionIncrement
 >;
 
 /**
@@ -242,7 +242,7 @@ export type UpdateMCPTool = {
   type: "mcp";
   mcp?: UpdateToolRequestBodyMcp | undefined;
   versionIncrement?:
-    | UpdateToolRequestBodyToolsRequest4VersionIncrement
+    | UpdateToolRequestBodyToolsRequestVersionIncrement
     | undefined;
   versionDescription?: string | undefined;
 };
@@ -358,13 +358,13 @@ export type UpdateToolRequestBodyHttp = {
   arguments?: { [k: string]: UpdateToolRequestBodyArguments } | undefined;
 };
 
-export const UpdateToolRequestBodyToolsRequestVersionIncrement = {
+export const UpdateToolRequestBodyToolsVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
 } as const;
-export type UpdateToolRequestBodyToolsRequestVersionIncrement = ClosedEnum<
-  typeof UpdateToolRequestBodyToolsRequestVersionIncrement
+export type UpdateToolRequestBodyToolsVersionIncrement = ClosedEnum<
+  typeof UpdateToolRequestBodyToolsVersionIncrement
 >;
 
 /**
@@ -399,9 +399,7 @@ export type UpdateHTTPTool = {
   status?: UpdateToolRequestBodyToolsRequestStatus | undefined;
   type: "http";
   http?: UpdateToolRequestBodyHttp | undefined;
-  versionIncrement?:
-    | UpdateToolRequestBodyToolsRequestVersionIncrement
-    | undefined;
+  versionIncrement?: UpdateToolRequestBodyToolsVersionIncrement | undefined;
   versionDescription?: string | undefined;
 };
 
@@ -459,13 +457,13 @@ export type UpdateToolRequestBodyJsonSchema = {
   strict?: boolean | undefined;
 };
 
-export const UpdateToolRequestBodyToolsVersionIncrement = {
+export const UpdateToolRequestBodyVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
 } as const;
-export type UpdateToolRequestBodyToolsVersionIncrement = ClosedEnum<
-  typeof UpdateToolRequestBodyToolsVersionIncrement
+export type UpdateToolRequestBodyVersionIncrement = ClosedEnum<
+  typeof UpdateToolRequestBodyVersionIncrement
 >;
 
 /**
@@ -500,7 +498,7 @@ export type UpdateJSONSchemaTool = {
   status?: UpdateToolRequestBodyToolsStatus | undefined;
   type: "json_schema";
   jsonSchema?: UpdateToolRequestBodyJsonSchema | undefined;
-  versionIncrement?: UpdateToolRequestBodyToolsVersionIncrement | undefined;
+  versionIncrement?: UpdateToolRequestBodyVersionIncrement | undefined;
   versionDescription?: string | undefined;
 };
 
@@ -571,13 +569,13 @@ export type UpdateToolRequestBodyFunction = {
   parameters?: UpdateToolRequestBodyParameters | undefined;
 };
 
-export const UpdateToolRequestBodyVersionIncrement = {
+export const RequestBodyVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
 } as const;
-export type UpdateToolRequestBodyVersionIncrement = ClosedEnum<
-  typeof UpdateToolRequestBodyVersionIncrement
+export type RequestBodyVersionIncrement = ClosedEnum<
+  typeof RequestBodyVersionIncrement
 >;
 
 /**
@@ -612,7 +610,7 @@ export type UpdateFunctionTool = {
   status?: UpdateToolRequestBodyStatus | undefined;
   type: "function";
   function?: UpdateToolRequestBodyFunction | undefined;
-  versionIncrement?: UpdateToolRequestBodyVersionIncrement | undefined;
+  versionIncrement?: RequestBodyVersionIncrement | undefined;
   versionDescription?: string | undefined;
 };
 
@@ -1474,7 +1472,7 @@ export const RequestBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestBodyTools
 > = z.object({
-  id: z.string().default("01KKYP3HVR2KDW1HJ8177AX5K6"),
+  id: z.string().default("01KMJY30Y6ABN1JMTV736DG167"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolRequestBodyToolsSchema$outboundSchema),
@@ -1529,9 +1527,9 @@ export function updateToolRequestBodyMcpToJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBodyToolsRequest4VersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4VersionIncrement> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequest4VersionIncrement);
+export const UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestVersionIncrement> = z
+    .nativeEnum(UpdateToolRequestBodyToolsRequestVersionIncrement);
 
 /** @internal */
 export type UpdateMCPTool$Outbound = {
@@ -1562,8 +1560,7 @@ export const UpdateMCPTool$outboundSchema: z.ZodType<
   type: z.literal("mcp"),
   mcp: z.lazy(() => UpdateToolRequestBodyMcp$outboundSchema).optional(),
   versionIncrement:
-    UpdateToolRequestBodyToolsRequest4VersionIncrement$outboundSchema
-      .optional(),
+    UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1756,9 +1753,9 @@ export function updateToolRequestBodyHttpToJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestVersionIncrement> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequestVersionIncrement);
+export const UpdateToolRequestBodyToolsVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsVersionIncrement> = z
+    .nativeEnum(UpdateToolRequestBodyToolsVersionIncrement);
 
 /** @internal */
 export type UpdateHTTPTool$Outbound = {
@@ -1788,8 +1785,8 @@ export const UpdateHTTPTool$outboundSchema: z.ZodType<
   ),
   type: z.literal("http"),
   http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
-  versionIncrement:
-    UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema.optional(),
+  versionIncrement: UpdateToolRequestBodyToolsVersionIncrement$outboundSchema
+    .optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1874,9 +1871,10 @@ export function updateToolRequestBodyJsonSchemaToJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBodyToolsVersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsVersionIncrement> = z
-    .nativeEnum(UpdateToolRequestBodyToolsVersionIncrement);
+export const UpdateToolRequestBodyVersionIncrement$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyVersionIncrement> = z.nativeEnum(
+    UpdateToolRequestBodyVersionIncrement,
+  );
 
 /** @internal */
 export type UpdateJSONSchemaTool$Outbound = {
@@ -1905,7 +1903,7 @@ export const UpdateJSONSchemaTool$outboundSchema: z.ZodType<
   type: z.literal("json_schema"),
   jsonSchema: z.lazy(() => UpdateToolRequestBodyJsonSchema$outboundSchema)
     .optional(),
-  versionIncrement: UpdateToolRequestBodyToolsVersionIncrement$outboundSchema
+  versionIncrement: UpdateToolRequestBodyVersionIncrement$outboundSchema
     .optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
@@ -2003,10 +2001,9 @@ export function updateToolRequestBodyFunctionToJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBodyVersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyVersionIncrement> = z.nativeEnum(
-    UpdateToolRequestBodyVersionIncrement,
-  );
+export const RequestBodyVersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyVersionIncrement
+> = z.nativeEnum(RequestBodyVersionIncrement);
 
 /** @internal */
 export type UpdateFunctionTool$Outbound = {
@@ -2035,8 +2032,7 @@ export const UpdateFunctionTool$outboundSchema: z.ZodType<
   type: z.literal("function"),
   function: z.lazy(() => UpdateToolRequestBodyFunction$outboundSchema)
     .optional(),
-  versionIncrement: UpdateToolRequestBodyVersionIncrement$outboundSchema
-    .optional(),
+  versionIncrement: RequestBodyVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2194,7 +2190,7 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KKYP3HVJ5CP8KATJ4SN50EAK"),
+  _id: z.string().default("tool_01KMJY30Y1W8TQKYPB0RGWKYDX"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2299,7 +2295,7 @@ export const UpdateToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KKYP3HVH2P9AGCBH73EC20AX"),
+  id: z.string().default("01KMJY30Y01G5B6JDRKAM5S1WK"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolResponseBodyToolsSchema$inboundSchema),
@@ -2355,7 +2351,7 @@ export const UpdateToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KKYP3HVGC29EXCTN3SGZ6B2K"),
+  _id: z.string().default("tool_01KMJY30XZDJ3W5QK3N600HEQT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2546,7 +2542,7 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KKYP3HVEGSXNHEVR5DT355DE"),
+  _id: z.string().default("tool_01KMJY30XXR1Q7AC8TWBJEW7KQ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2643,7 +2639,7 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KKYP3HVDT246Z60GEW38EN5J"),
+  _id: z.string().default("tool_01KMJY30XV4ZK8WEY6MG87PQQB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2748,7 +2744,7 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KKYP3HVBNPF3VFQ5CW8DHMPE"),
+  _id: z.string().default("tool_01KMJY30XTHQD73R1162SVB7MG"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

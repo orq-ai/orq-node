@@ -13,5 +13,5 @@ let value: DeploymentsRole = "correction";
 ## Values
 
 ```typescript
-"system" | "assistant" | "user" | "exception" | "tool" | "prompt" | "correction" | "expected_output"
+"system" | "developer" | "assistant" | "user" | "exception" | "tool" | "prompt" | "correction" | "expected_output"
 ```

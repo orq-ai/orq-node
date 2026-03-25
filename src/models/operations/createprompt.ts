@@ -1227,6 +1227,7 @@ export const CreatePromptProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
 
@@ -1235,6 +1236,7 @@ export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
  */
 export const CreatePromptRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

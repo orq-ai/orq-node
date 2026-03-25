@@ -371,6 +371,7 @@ export const ListPromptVersionsProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type ListPromptVersionsProvider = ClosedEnum<
   typeof ListPromptVersionsProvider
@@ -381,6 +382,7 @@ export type ListPromptVersionsProvider = ClosedEnum<
  */
 export const ListPromptVersionsRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

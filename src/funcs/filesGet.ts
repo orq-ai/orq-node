@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a file
  *
  * @remarks
- * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object
+ * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object.
  */
 export function filesGet(
   client: OrqCore,
@@ -91,7 +91,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/files/{file_id}")(pathParams);
 
   const headers = new Headers(compactMap({

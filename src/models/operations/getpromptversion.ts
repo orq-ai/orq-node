@@ -357,6 +357,7 @@ export const GetPromptVersionProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type GetPromptVersionProvider = ClosedEnum<
   typeof GetPromptVersionProvider
@@ -367,6 +368,7 @@ export type GetPromptVersionProvider = ClosedEnum<
  */
 export const GetPromptVersionRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

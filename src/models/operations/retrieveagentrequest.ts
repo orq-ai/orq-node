@@ -1105,6 +1105,10 @@ export type RetrieveAgentRequestResponseBody = {
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveAgentRequestStatus;
+  /**
+   * Current semantic version of the agent manifest.
+   */
+  version?: string | undefined;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2775,6 +2779,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
   created: z.string().optional(),
   updated: z.string().optional(),
   status: RetrieveAgentRequestStatus$inboundSchema,
+  version: z.string().optional(),
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()).optional(),

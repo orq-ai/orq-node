@@ -353,6 +353,7 @@ export const GetOnePromptProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
 
@@ -361,6 +362,7 @@ export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
  */
 export const GetOnePromptRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

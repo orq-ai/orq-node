@@ -185,7 +185,7 @@ export type Guardrails = {
   executeOn: ExecuteOn;
 };
 
-export type Fallbacks = {
+export type ModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -337,7 +337,7 @@ export type ParametersT = {
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<Fallbacks> | undefined;
+  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -355,7 +355,7 @@ export type ParametersT = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type Retry = {
+export type ModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -383,7 +383,7 @@ export type ModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: Retry | undefined;
+  retry?: ModelConfigurationRetry | undefined;
 };
 
 /**
@@ -2551,6 +2551,10 @@ export type CreateAgentRequestResponseBody = {
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: CreateAgentRequestStatus;
+  /**
+   * Current semantic version of the agent manifest.
+   */
+  version?: string | undefined;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2856,21 +2860,27 @@ export function guardrailsToJSON(guardrails: Guardrails): string {
 }
 
 /** @internal */
-export type Fallbacks$Outbound = {
+export type ModelConfigurationFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const Fallbacks$outboundSchema: z.ZodType<
-  Fallbacks$Outbound,
+export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
+  ModelConfigurationFallbacks$Outbound,
   z.ZodTypeDef,
-  Fallbacks
+  ModelConfigurationFallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function fallbacksToJSON(fallbacks: Fallbacks): string {
-  return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
+export function modelConfigurationFallbacksToJSON(
+  modelConfigurationFallbacks: ModelConfigurationFallbacks,
+): string {
+  return JSON.stringify(
+    ModelConfigurationFallbacks$outboundSchema.parse(
+      modelConfigurationFallbacks,
+    ),
+  );
 }
 
 /** @internal */
@@ -3007,7 +3017,7 @@ export type ParametersT$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<Guardrails$Outbound> | undefined;
-  fallbacks?: Array<Fallbacks$Outbound> | undefined;
+  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
   cache?: Cache$Outbound | undefined;
   load_balancer?: LoadBalancer1$Outbound | undefined;
   timeout?: Timeout$Outbound | undefined;
@@ -3048,7 +3058,8 @@ export const ParametersT$outboundSchema: z.ZodType<
   parallelToolCalls: z.boolean().optional(),
   modalities: z.nullable(z.array(Modalities$outboundSchema)).optional(),
   guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
-  fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
+  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
+    .optional(),
   cache: z.lazy(() => Cache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => Timeout$outboundSchema).optional(),
@@ -3073,16 +3084,16 @@ export function parametersToJSON(parametersT: ParametersT): string {
 }
 
 /** @internal */
-export type Retry$Outbound = {
+export type ModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const Retry$outboundSchema: z.ZodType<
-  Retry$Outbound,
+export const ModelConfigurationRetry$outboundSchema: z.ZodType<
+  ModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  Retry
+  ModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3092,15 +3103,19 @@ export const Retry$outboundSchema: z.ZodType<
   });
 });
 
-export function retryToJSON(retry: Retry): string {
-  return JSON.stringify(Retry$outboundSchema.parse(retry));
+export function modelConfigurationRetryToJSON(
+  modelConfigurationRetry: ModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
+  );
 }
 
 /** @internal */
 export type ModelConfiguration2$Outbound = {
   id: string;
   parameters?: ParametersT$Outbound | undefined;
-  retry?: Retry$Outbound | undefined;
+  retry?: ModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3111,7 +3126,7 @@ export const ModelConfiguration2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
-  retry: z.lazy(() => Retry$outboundSchema).optional(),
+  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
 });
 
 export function modelConfiguration2ToJSON(
@@ -6367,6 +6382,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   created: z.string().optional(),
   updated: z.string().optional(),
   status: CreateAgentRequestStatus$inboundSchema,
+  version: z.string().optional(),
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()).optional(),

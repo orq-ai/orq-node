@@ -1146,6 +1146,7 @@ export type DeploymentGetConfigType = ClosedEnum<
  */
 export const DeploymentGetConfigRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

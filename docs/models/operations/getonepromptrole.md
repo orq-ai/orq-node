@@ -7,11 +7,11 @@ The role of the prompt message
 ```typescript
 import { GetOnePromptRole } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptRole = "assistant";
+let value: GetOnePromptRole = "developer";
 ```
 
 ## Values
 
 ```typescript
-"system" | "assistant" | "user" | "exception" | "tool" | "prompt" | "correction" | "expected_output"
+"system" | "developer" | "assistant" | "user" | "exception" | "tool" | "prompt" | "correction" | "expected_output"
 ```

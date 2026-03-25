@@ -1,0 +1,35 @@
+# PostV2HumanEvalSetsResponseBody2
+
+## Example Usage
+
+```typescript
+import { PostV2HumanEvalSetsResponseBody2 } from "@orq-ai/node/models/operations";
+
+let value: PostV2HumanEvalSetsResponseBody2 = {
+  id: "<id>",
+  displayName: "Camron_Schimmel",
+  humanEvalIds: [
+    "<id 1>",
+  ],
+  workspaceId: "<id>",
+  filterType: "name",
+  filterValue: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | The id of the resource                                                                        |
+| `displayName`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | Display name of the human review set                                                          |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | Detailed description of the human review set                                                  |
+| `humanEvalIds`                                                                                | *string*[]                                                                                    | :heavy_check_mark:                                                                            | Array of human review IDs to be applied to matching spans                                     |
+| `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `projectId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | Optional project ID to scope this human review set to a specific project                      |
+| `createdById`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `updatedById`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `created`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The date and time the resource was created                                                    |
+| `updated`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The date and time the resource was last updated                                               |
+| `filterType`                                                                                  | *"name"*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `filterValue`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | Name pattern to match                                                                         |

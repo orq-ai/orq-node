@@ -91,7 +91,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/knowledge/{knowledge_id}/search")(pathParams);
 
   const headers = new Headers(compactMap({

@@ -29,6 +29,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Add metrics to a deployment
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function deploymentsMetricsCreate(
   client: OrqCore,
@@ -92,7 +94,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/deployments/{id}/metrics")(pathParams);
 
   const headers = new Headers(compactMap({

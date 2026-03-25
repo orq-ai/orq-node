@@ -92,7 +92,7 @@ async function $do(
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
     "starting_after": payload?.starting_after,
-  });
+  }, { explode: false });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

@@ -1245,6 +1245,7 @@ export const UpdatePromptProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -1253,6 +1254,7 @@ export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
  */
 export const UpdatePromptRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

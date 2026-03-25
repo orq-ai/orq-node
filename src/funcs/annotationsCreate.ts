@@ -93,7 +93,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v2/traces/{trace_id}/spans/{span_id}/annotation")(
     pathParams,
   );

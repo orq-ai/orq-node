@@ -92,7 +92,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/v2/memory-stores/{memory_store_key}/memories")(
     pathParams,
   );

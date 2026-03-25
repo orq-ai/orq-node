@@ -18,7 +18,7 @@ const value: operations.DeploymentStreamMessage1 = {
 ```typescript
 const value: operations.DeploymentStreamMessage2 = {
   type: "content",
-  role: "expected_output",
+  role: "correction",
   content: "<value>",
 };
 ```

@@ -1207,6 +1207,7 @@ export const DeploymentStreamProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 /**
  * The provider used to generate the response
@@ -1290,6 +1291,7 @@ export type DeploymentStreamUsage = {
  */
 export const DeploymentStreamMessageDeploymentsResponseRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",
@@ -1319,6 +1321,7 @@ export type DeploymentStreamMessage3 = {
  */
 export const DeploymentStreamMessageDeploymentsRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",
@@ -1360,6 +1363,7 @@ export type DeploymentStreamMessage2 = {
  */
 export const DeploymentStreamMessageRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

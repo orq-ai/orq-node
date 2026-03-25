@@ -40,41 +40,15 @@ export type FileUploadRequestBody = {
 };
 
 /**
- * The intended purpose of the uploaded file.
- */
-export const FileUploadPurpose = {
-  Retrieval: "retrieval",
-  KnowledgeDatasource: "knowledge_datasource",
-  Batch: "batch",
-} as const;
-/**
- * The intended purpose of the uploaded file.
- */
-export type FileUploadPurpose = ClosedEnum<typeof FileUploadPurpose>;
-
-/**
  * File uploaded successfully
  */
 export type FileUploadResponseBody = {
   id: string;
-  /**
-   * path to the file in the storage
-   */
-  objectName: string;
-  /**
-   * The intended purpose of the uploaded file.
-   */
-  purpose: FileUploadPurpose;
   bytes: number;
+  created: string;
   fileName: string;
-  /**
-   * The id of the resource
-   */
+  purpose: string;
   workspaceId: string;
-  /**
-   * The date and time the resource was created
-   */
-  created: Date;
 };
 
 /** @internal */
@@ -131,29 +105,20 @@ export function fileUploadRequestBodyToJSON(
 }
 
 /** @internal */
-export const FileUploadPurpose$inboundSchema: z.ZodNativeEnum<
-  typeof FileUploadPurpose
-> = z.nativeEnum(FileUploadPurpose);
-
-/** @internal */
 export const FileUploadResponseBody$inboundSchema: z.ZodType<
   FileUploadResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
-  object_name: z.string(),
-  purpose: FileUploadPurpose$inboundSchema,
-  bytes: z.number(),
+  bytes: z.number().int(),
+  created: z.string(),
   file_name: z.string(),
+  purpose: z.string(),
   workspace_id: z.string(),
-  created: z.string().datetime({ offset: true }).default(
-    "2026-03-17T19:59:16.609Z",
-  ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "object_name": "objectName",
     "file_name": "fileName",
     "workspace_id": "workspaceId",
   });

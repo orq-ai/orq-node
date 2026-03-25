@@ -89,23 +89,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.contacts.create({
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
-    ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
-  });
+  const result = await orq.postV2Feedback();
 
   console.log(result);
 }
@@ -135,23 +119,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.contacts.create({
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
-    ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
-  });
+  const result = await orq.postV2Feedback();
 
   console.log(result);
 }
@@ -166,6 +134,18 @@ run();
 
 <details open>
 <summary>Available methods</summary>
+
+### [Orq SDK](docs/sdks/orq/README.md)
+
+* [postV2Feedback](docs/sdks/orq/README.md#postv2feedback)
+* [postV2FeedbackEvaluationRemove](docs/sdks/orq/README.md#postv2feedbackevaluationremove)
+* [postV2FeedbackEvaluation](docs/sdks/orq/README.md#postv2feedbackevaluation)
+* [postV2FeedbackRemove](docs/sdks/orq/README.md#postv2feedbackremove)
+* [getV2HumanEvals](docs/sdks/orq/README.md#getv2humanevals)
+* [postV2HumanEvals](docs/sdks/orq/README.md#postv2humanevals)
+* [getV2HumanEvalsId](docs/sdks/orq/README.md#getv2humanevalsid)
+* [patchV2HumanEvalsId](docs/sdks/orq/README.md#patchv2humanevalsid)
+* [deleteV2HumanEvalsId](docs/sdks/orq/README.md#deletev2humanevalsid)
 
 ### [Agents](docs/sdks/agents/README.md)
 
@@ -220,9 +200,9 @@ run();
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [stream](docs/sdks/deployments/README.md#stream) - Stream
 
-#### [Deployments.Metrics](docs/sdks/metrics/README.md)
+#### [~~Deployments.Metrics~~](docs/sdks/metrics/README.md)
 
-* [create](docs/sdks/metrics/README.md#create) - Add metrics
+* [~~create~~](docs/sdks/metrics/README.md#create) - Add metrics :warning: **Deprecated**
 
 ### [Evals](docs/sdks/evals/README.md)
 
@@ -236,16 +216,22 @@ run();
 
 * [getV2EvaluatorsIdVersions](docs/sdks/evaluators/README.md#getv2evaluatorsidversions) - List evaluator versions
 
-### [Feedback](docs/sdks/feedback/README.md)
-
-* [create](docs/sdks/feedback/README.md#create) - Submit feedback
-
 ### [Files](docs/sdks/files/README.md)
 
-* [create](docs/sdks/files/README.md#create) - Create file
 * [list](docs/sdks/files/README.md#list) - List all files
-* [get](docs/sdks/files/README.md#get) - Retrieve a file
+* [create](docs/sdks/files/README.md#create) - Create file
 * [delete](docs/sdks/files/README.md#delete) - Delete file
+* [get](docs/sdks/files/README.md#get) - Retrieve a file
+* [update](docs/sdks/files/README.md#update) - Update file
+* [getContent](docs/sdks/files/README.md#getcontent) - Download file content
+
+### [HumanReviewSets](docs/sdks/humanreviewsets/README.md)
+
+* [getV2HumanEvalSets](docs/sdks/humanreviewsets/README.md#getv2humanevalsets) - Get all human review sets
+* [postV2HumanEvalSets](docs/sdks/humanreviewsets/README.md#postv2humanevalsets) - Create a human review set
+* [getV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#getv2humanevalsetsid) - Get a human review set by ID
+* [patchV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#patchv2humanevalsetsid) - Update a human review set
+* [deleteV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#deletev2humanevalsetsid) - Delete a human review set
 
 ### [Identities](docs/sdks/identities/README.md)
 
@@ -417,10 +403,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`datasetsRetrieveDatapoint`](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
 - [`datasetsUpdate`](docs/sdks/datasets/README.md#update) - Update a dataset
 - [`datasetsUpdateDatapoint`](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
+- [`deleteV2HumanEvalsId`](docs/sdks/orq/README.md#deletev2humanevalsid)
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
-- [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
 - [`deploymentsStream`](docs/sdks/deployments/README.md#stream) - Stream
 - [`evalsAll`](docs/sdks/evals/README.md#all) - Get all Evaluators
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
@@ -428,11 +414,19 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
 - [`evaluatorsGetV2EvaluatorsIdVersions`](docs/sdks/evaluators/README.md#getv2evaluatorsidversions) - List evaluator versions
-- [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Create file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
 - [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
+- [`filesGetContent`](docs/sdks/files/README.md#getcontent) - Download file content
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
+- [`filesUpdate`](docs/sdks/files/README.md#update) - Update file
+- [`getV2HumanEvals`](docs/sdks/orq/README.md#getv2humanevals)
+- [`getV2HumanEvalsId`](docs/sdks/orq/README.md#getv2humanevalsid)
+- [`humanReviewSetsDeleteV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#deletev2humanevalsetsid) - Delete a human review set
+- [`humanReviewSetsGetV2HumanEvalSets`](docs/sdks/humanreviewsets/README.md#getv2humanevalsets) - Get all human review sets
+- [`humanReviewSetsGetV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#getv2humanevalsetsid) - Get a human review set by ID
+- [`humanReviewSetsPatchV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#patchv2humanevalsetsid) - Update a human review set
+- [`humanReviewSetsPostV2HumanEvalSets`](docs/sdks/humanreviewsets/README.md#postv2humanevalsets) - Create a human review set
 - [`identitiesCreate`](docs/sdks/identities/README.md#create) - Create an identity
 - [`identitiesDelete`](docs/sdks/identities/README.md#delete) - Delete an identity
 - [`identitiesList`](docs/sdks/identities/README.md#list) - List identities
@@ -473,6 +467,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`memoryStoresUpdateDocument`](docs/sdks/memorystores/README.md#updatedocument) - Update a specific memory document
 - [`memoryStoresUpdateMemory`](docs/sdks/memorystores/README.md#updatememory) - Update a specific memory
 - [`modelsList`](docs/sdks/models/README.md#list) - List models
+- [`patchV2HumanEvalsId`](docs/sdks/orq/README.md#patchv2humanevalsid)
+- [`postV2Feedback`](docs/sdks/orq/README.md#postv2feedback)
+- [`postV2FeedbackEvaluation`](docs/sdks/orq/README.md#postv2feedbackevaluation)
+- [`postV2FeedbackEvaluationRemove`](docs/sdks/orq/README.md#postv2feedbackevaluationremove)
+- [`postV2FeedbackRemove`](docs/sdks/orq/README.md#postv2feedbackremove)
+- [`postV2HumanEvals`](docs/sdks/orq/README.md#postv2humanevals)
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
 - [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
@@ -505,6 +505,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`agentsRun`](docs/sdks/agents/README.md#run)~~ - Run an agent with configuration :warning: **Deprecated**
 - ~~[`agentsStream`](docs/sdks/agents/README.md#stream)~~ - Stream agent execution in real-time :warning: **Deprecated**
 - ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
+- ~~[`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create)~~ - Add metrics :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -595,15 +596,88 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 
 ```typescript
 import { Orq } from "@orq-ai/node";
-import { openAsBlob } from "node:fs";
 
 const orq = new Orq({
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await orq.files.create({
-    file: await openAsBlob("example.file"),
+  const result = await orq.router.audio.transcriptions.create({
+    model: "Malibu",
+    temperature: 0.5,
+    timestampGranularities: [
+      "word",
+      "segment",
+    ],
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    loadBalancer: {
+      type: "weight_based",
+      models: [
+        {
+          model: "openai/gpt-4o",
+          weight: 0.7,
+        },
+      ],
+    },
+    timeout: {
+      callTimeout: 30000,
+    },
+    orq: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      identity: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      loadBalancer: {
+        type: "weight_based",
+        models: [
+          {
+            model: "openai/gpt-4o",
+            weight: 0.7,
+          },
+          {
+            model: "anthropic/claude-3-5-sonnet",
+            weight: 0.3,
+          },
+        ],
+      },
+      timeout: {
+        callTimeout: 30000,
+      },
+    },
   });
 
   console.log(result);
@@ -628,23 +702,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.contacts.create({
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
-    ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
-  }, {
+  const result = await orq.postV2Feedback(undefined, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -683,23 +741,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.contacts.create({
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
-    ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
-  });
+  const result = await orq.postV2Feedback();
 
   console.log(result);
 }
@@ -734,7 +776,7 @@ const orq = new Orq({
 
 async function run() {
   try {
-    const result = await orq.evals.all({});
+    const result = await orq.postV2Feedback();
 
     console.log(result);
   } catch (error) {
@@ -746,7 +788,7 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.GetEvalsResponseBody) {
+      if (error instanceof errors.PostV2FeedbackResponseBody) {
         console.log(error.data$.message); // string
       }
     }
@@ -761,7 +803,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (36)</summary>
+<details><summary>Less common errors (44)</summary>
 
 <br />
 
@@ -774,36 +816,44 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 112 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 112 methods.*
-* [`PostV2AgentsA2aResponseBody`](./src/models/errors/postv2agentsa2aresponsebody.ts): Invalid request or agent card fetch failed. Status code `400`. Applicable to 1 of 112 methods.*
-* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 112 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 112 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 112 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 112 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 112 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 112 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 112 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 112 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 112 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 112 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 112 methods.*
-* [`PostV2AgentsA2aAgentsResponseBody`](./src/models/errors/postv2agentsa2aagentsresponsebody.ts): Agent with this key already exists. Status code `409`. Applicable to 1 of 112 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 112 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 112 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 112 methods.*
-* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 112 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 127 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 127 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsA2aResponseBody`](./src/models/errors/postv2agentsa2aresponsebody.ts): Invalid request or agent card fetch failed. Status code `400`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 127 methods.*
+* [`PostV2FeedbackResponseResponseBody`](./src/models/errors/postv2feedbackresponseresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2HumanEvalsResponseBody`](./src/models/errors/getv2humanevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2HumanEvalsResponseBody`](./src/models/errors/postv2humanevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2HumanEvalsIdResponseBody`](./src/models/errors/getv2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PatchV2HumanEvalsIdResponseBody`](./src/models/errors/patchv2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteV2HumanEvalsIdResponseBody`](./src/models/errors/deletev2humanevalsidresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 127 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 127 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 127 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 127 methods.*
+* [`PostV2AgentsA2aAgentsResponseBody`](./src/models/errors/postv2agentsa2aagentsresponsebody.ts): Agent with this key already exists. Status code `409`. Applicable to 1 of 127 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 127 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 127 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 127 methods.*
+* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 127 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -826,23 +876,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.contacts.create({
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
-    ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
-  });
+  const result = await orq.postV2Feedback();
 
   console.log(result);
 }

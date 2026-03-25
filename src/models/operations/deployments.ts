@@ -418,6 +418,7 @@ export const DeploymentsProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 
@@ -426,6 +427,7 @@ export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
  */
 export const DeploymentsRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

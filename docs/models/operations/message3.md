@@ -7,7 +7,7 @@ import { Message3 } from "@orq-ai/node/models/operations";
 
 let value: Message3 = {
   type: "image",
-  role: "user",
+  role: "assistant",
   url: "https://massive-hunt.biz",
 };
 ```

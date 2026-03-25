@@ -200,7 +200,6 @@ async function run() {
   const result = await orq.evals.update({
     id: "<id>",
     requestBody: {
-      type: "llm_eval",
       path: "Default",
     },
   });
@@ -229,7 +228,6 @@ async function run() {
   const res = await evalsUpdate(orq, {
     id: "<id>",
     requestBody: {
-      type: "llm_eval",
       path: "Default",
     },
   });

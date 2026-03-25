@@ -198,7 +198,7 @@ export type ModelConfigurationGuardrails = {
   executeOn: ModelConfigurationExecuteOn;
 };
 
-export type ModelConfigurationFallbacks = {
+export type UpdateAgentModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -358,7 +358,7 @@ export type ModelConfigurationParameters = {
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
+  fallbacks?: Array<UpdateAgentModelConfigurationFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -376,7 +376,7 @@ export type ModelConfigurationParameters = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type ModelConfigurationRetry = {
+export type UpdateAgentModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -404,7 +404,7 @@ export type UpdateAgentModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: ModelConfigurationRetry | undefined;
+  retry?: UpdateAgentModelConfigurationRetry | undefined;
 };
 
 /**
@@ -1448,7 +1448,7 @@ export type UpdateA2AConfiguration = {
 /**
  * Optional semantic version bump to create after a successful publish.
  */
-export const VersionIncrement = {
+export const UpdateAgentVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
@@ -1456,7 +1456,9 @@ export const VersionIncrement = {
 /**
  * Optional semantic version bump to create after a successful publish.
  */
-export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+export type UpdateAgentVersionIncrement = ClosedEnum<
+  typeof UpdateAgentVersionIncrement
+>;
 
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
@@ -1513,7 +1515,7 @@ export type UpdateAgentRequestBody = {
   /**
    * Optional semantic version bump to create after a successful publish.
    */
-  versionIncrement?: VersionIncrement | undefined;
+  versionIncrement?: UpdateAgentVersionIncrement | undefined;
   /**
    * Optional description stored with the created version.
    */
@@ -2608,6 +2610,10 @@ export type UpdateAgentResponseBody = {
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: UpdateAgentStatus;
+  /**
+   * Current semantic version of the agent manifest.
+   */
+  version?: string | undefined;
   versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -2987,25 +2993,26 @@ export function modelConfigurationGuardrailsToJSON(
 }
 
 /** @internal */
-export type ModelConfigurationFallbacks$Outbound = {
+export type UpdateAgentModelConfigurationFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
-  ModelConfigurationFallbacks$Outbound,
+export const UpdateAgentModelConfigurationFallbacks$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationFallbacks$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationFallbacks
+  UpdateAgentModelConfigurationFallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function modelConfigurationFallbacksToJSON(
-  modelConfigurationFallbacks: ModelConfigurationFallbacks,
+export function updateAgentModelConfigurationFallbacksToJSON(
+  updateAgentModelConfigurationFallbacks:
+    UpdateAgentModelConfigurationFallbacks,
 ): string {
   return JSON.stringify(
-    ModelConfigurationFallbacks$outboundSchema.parse(
-      modelConfigurationFallbacks,
+    UpdateAgentModelConfigurationFallbacks$outboundSchema.parse(
+      updateAgentModelConfigurationFallbacks,
     ),
   );
 }
@@ -3169,7 +3176,9 @@ export type ModelConfigurationParameters$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<ModelConfigurationGuardrails$Outbound> | undefined;
-  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
+  fallbacks?:
+    | Array<UpdateAgentModelConfigurationFallbacks$Outbound>
+    | undefined;
   cache?: ModelConfigurationCache$Outbound | undefined;
   load_balancer?: UpdateAgentLoadBalancer1$Outbound | undefined;
   timeout?: ModelConfigurationTimeout$Outbound | undefined;
@@ -3212,8 +3221,9 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => ModelConfigurationGuardrails$outboundSchema))
     .optional(),
-  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
-    .optional(),
+  fallbacks: z.array(
+    z.lazy(() => UpdateAgentModelConfigurationFallbacks$outboundSchema),
+  ).optional(),
   cache: z.lazy(() => ModelConfigurationCache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => UpdateAgentLoadBalancer1$outboundSchema)
     .optional(),
@@ -3245,16 +3255,16 @@ export function modelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type ModelConfigurationRetry$Outbound = {
+export type UpdateAgentModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const ModelConfigurationRetry$outboundSchema: z.ZodType<
-  ModelConfigurationRetry$Outbound,
+export const UpdateAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationRetry
+  UpdateAgentModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3264,11 +3274,13 @@ export const ModelConfigurationRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function modelConfigurationRetryToJSON(
-  modelConfigurationRetry: ModelConfigurationRetry,
+export function updateAgentModelConfigurationRetryToJSON(
+  updateAgentModelConfigurationRetry: UpdateAgentModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
+    UpdateAgentModelConfigurationRetry$outboundSchema.parse(
+      updateAgentModelConfigurationRetry,
+    ),
   );
 }
 
@@ -3276,7 +3288,7 @@ export function modelConfigurationRetryToJSON(
 export type UpdateAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: ModelConfigurationParameters$Outbound | undefined;
-  retry?: ModelConfigurationRetry$Outbound | undefined;
+  retry?: UpdateAgentModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3288,7 +3300,8 @@ export const UpdateAgentModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => ModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
+  retry: z.lazy(() => UpdateAgentModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function updateAgentModelConfiguration2ToJSON(
@@ -5069,9 +5082,9 @@ export function updateA2AConfigurationToJSON(
 }
 
 /** @internal */
-export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
-  typeof VersionIncrement
-> = z.nativeEnum(VersionIncrement);
+export const UpdateAgentVersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentVersionIncrement
+> = z.nativeEnum(UpdateAgentVersionIncrement);
 
 /** @internal */
 export type UpdateAgentRequestBody$Outbound = {
@@ -5130,7 +5143,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   variables: z.record(z.any()).optional(),
   a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
-  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionIncrement: UpdateAgentVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -6798,6 +6811,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   created: z.string().optional(),
   updated: z.string().optional(),
   status: UpdateAgentStatus$inboundSchema,
+  version: z.string().optional(),
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()).optional(),

@@ -367,6 +367,7 @@ export const GetAllPromptsProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Slack: "slack",
+  Orq: "orq",
 } as const;
 export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
 
@@ -375,6 +376,7 @@ export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
  */
 export const GetAllPromptsRole = {
   System: "system",
+  Developer: "developer",
   Assistant: "assistant",
   User: "user",
   Exception: "exception",

@@ -22,6 +22,7 @@ export * from "./executionreviewedstreamingevent.js";
 export * from "./executionreviewrequiredstreamingevent.js";
 export * from "./extendedmessage.js";
 export * from "./filecontentpartschema.js";
+export * from "./filedocument.js";
 export * from "./filepart.js";
 export * from "./getagentresponse.js";
 export * from "./imagecontentpartschema.js";
