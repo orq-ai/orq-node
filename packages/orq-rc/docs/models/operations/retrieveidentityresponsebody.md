@@ -24,6 +24,12 @@ let value: RetrieveIdentityResponseBody = {
     "subscription_tier": "premium",
     "last_login": "2024-01-15T10:30:00Z",
   },
+  metrics: {
+    totalCost: 100,
+    totalTokens: 1000,
+    totalRequests: 1000,
+    errorRate: 22,
+  },
 };
 ```
 
@@ -40,3 +46,4 @@ let value: RetrieveIdentityResponseBody = {
 | `metadata`                                                                                                                                           | Record<string, *any*>                                                                                                                                | :heavy_minus_sign:                                                                                                                                   | Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application.     | {<br/>"department": "Engineering",<br/>"role": "Senior Developer",<br/>"subscription_tier": "premium",<br/>"last_login": "2024-01-15T10:30:00Z"<br/>} |
 | `created`                                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                        | :heavy_minus_sign:                                                                                                                                   | The date and time the resource was created                                                                                                           |                                                                                                                                                      |
 | `updated`                                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                        | :heavy_minus_sign:                                                                                                                                   | The date and time the resource was last updated                                                                                                      |                                                                                                                                                      |
+| `metrics`                                                                                                                                            | [operations.Metrics](../../models/operations/metrics.md)                                                                                             | :heavy_minus_sign:                                                                                                                                   | N/A                                                                                                                                                  |                                                                                                                                                      |
