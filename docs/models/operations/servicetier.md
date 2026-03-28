@@ -13,5 +13,5 @@ let value: ServiceTier = "auto";
 ## Values
 
 ```typescript
-"auto" | "default" | "flex" | "priority"
+"auto" | "default" | "flex" | "scale" | "priority"
 ```

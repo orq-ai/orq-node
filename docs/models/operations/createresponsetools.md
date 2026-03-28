@@ -9,14 +9,6 @@
 const value: operations.Tools1 = {
   type: "function",
   name: "<value>",
-  parameters: {
-    type: "object",
-    properties: {
-      "key": {
-        type: "<value>",
-      },
-    },
-  },
 };
 ```
 
@@ -32,6 +24,14 @@ const value: operations.Tools2 = {
 
 ```typescript
 const value: operations.Tools3 = {
+  type: "web_search",
+};
+```
+
+### `operations.Tools4`
+
+```typescript
+const value: operations.Tools4 = {
   type: "file_search",
 };
 ```

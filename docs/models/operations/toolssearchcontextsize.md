@@ -7,11 +7,11 @@ Amount of context to retrieve for each search result
 ```typescript
 import { ToolsSearchContextSize } from "@orq-ai/node/models/operations";
 
-let value: ToolsSearchContextSize = "small";
+let value: ToolsSearchContextSize = "low";
 ```
 
 ## Values
 
 ```typescript
-"small" | "medium" | "large"
+"low" | "medium" | "high"
 ```

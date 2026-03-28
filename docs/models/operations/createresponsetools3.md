@@ -1,6 +1,6 @@
 # CreateResponseTools3
 
-Configuration for file search tool
+Configuration for web search tool
 
 ## Example Usage
 
@@ -8,16 +8,15 @@ Configuration for file search tool
 import { CreateResponseTools3 } from "@orq-ai/node/models/operations";
 
 let value: CreateResponseTools3 = {
-  type: "file_search",
+  type: "web_search",
 };
 ```
 
 ## Fields
 
-| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `type`                                                                           | *"file_search"*                                                                  | :heavy_check_mark:                                                               | The type of tool                                                                 |
-| `vectorStoreIds`                                                                 | *string*[]                                                                       | :heavy_minus_sign:                                                               | The vector stores to search                                                      |
-| `maxNumResults`                                                                  | *number*                                                                         | :heavy_minus_sign:                                                               | Maximum number of results to return                                              |
-| `filters`                                                                        | *any*                                                                            | :heavy_minus_sign:                                                               | Filters to apply to the search                                                   |
-| `rankingOptions`                                                                 | [operations.ToolsRankingOptions](../../models/operations/toolsrankingoptions.md) | :heavy_minus_sign:                                                               | Options for ranking search results                                               |
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                           | *"web_search"*                                                                                                                                   | :heavy_check_mark:                                                                                                                               | The type of tool                                                                                                                                 |
+| `searchContextSize`                                                                                                                              | [operations.CreateResponseToolsRouterResponsesSearchContextSize](../../models/operations/createresponsetoolsrouterresponsessearchcontextsize.md) | :heavy_minus_sign:                                                                                                                               | Amount of context to retrieve for each search result                                                                                             |
+| `userLocation`                                                                                                                                   | [operations.CreateResponseToolsRouterResponsesUserLocation](../../models/operations/createresponsetoolsrouterresponsesuserlocation.md)           | :heavy_minus_sign:                                                                                                                               | User location for search localization                                                                                                            |
+| `filters`                                                                                                                                        | [operations.ToolsFilters](../../models/operations/toolsfilters.md)                                                                               | :heavy_minus_sign:                                                                                                                               | Filters for the web search                                                                                                                       |

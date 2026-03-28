@@ -13,5 +13,5 @@ let value: CreateResponseServiceTier = "priority";
 ## Values
 
 ```typescript
-"auto" | "default" | "flex" | "priority"
+"auto" | "default" | "flex" | "scale" | "priority"
 ```

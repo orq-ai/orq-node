@@ -1,17 +1,17 @@
 # Effort
 
-The effort level for reasoning (o3-mini model only)
+The effort level for reasoning
 
 ## Example Usage
 
 ```typescript
 import { Effort } from "@orq-ai/node/models/operations";
 
-let value: Effort = "low";
+let value: Effort = "minimal";
 ```
 
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"none" | "minimal" | "low" | "medium" | "high" | "xhigh"
 ```
