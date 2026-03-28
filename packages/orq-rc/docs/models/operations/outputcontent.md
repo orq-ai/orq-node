@@ -12,3 +12,12 @@ const value: operations.Content1 = {
 };
 ```
 
+### `operations.CreateResponseContentRouterResponses2`
+
+```typescript
+const value: operations.CreateResponseContentRouterResponses2 = {
+  type: "refusal",
+  refusal: "<value>",
+};
+```
+

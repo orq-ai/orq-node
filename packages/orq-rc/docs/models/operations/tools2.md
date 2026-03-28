@@ -1,6 +1,6 @@
 # Tools2
 
-Configuration for web search tool
+Configuration for web search preview tool
 
 ## Example Usage
 

@@ -15,26 +15,46 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The effort level for reasoning (o3-mini model only)
+ * The effort level for reasoning
  */
 export const Effort = {
+  None: "none",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
 } as const;
 /**
- * The effort level for reasoning (o3-mini model only)
+ * The effort level for reasoning
  */
 export type Effort = ClosedEnum<typeof Effort>;
+
+/**
+ * The summary mode for reasoning output
+ */
+export const Summary = {
+  Auto: "auto",
+  Concise: "concise",
+  Detailed: "detailed",
+} as const;
+/**
+ * The summary mode for reasoning output
+ */
+export type Summary = ClosedEnum<typeof Summary>;
 
 /**
  * Configuration for reasoning models
  */
 export type Reasoning = {
   /**
-   * The effort level for reasoning (o3-mini model only)
+   * The effort level for reasoning
    */
   effort?: Effort | undefined;
+  /**
+   * The summary mode for reasoning output
+   */
+  summary?: Summary | null | undefined;
 };
 
 /**
@@ -289,6 +309,8 @@ export const Include = {
   MessageInputImageImageUrl: "message.input_image.image_url",
   MessageOutputTextLogprobs: "message.output_text.logprobs",
   ReasoningEncryptedContent: "reasoning.encrypted_content",
+  WebSearchCallResults: "web_search_call.results",
+  WebSearchCallActionSources: "web_search_call.action.sources",
 } as const;
 export type Include = ClosedEnum<typeof Include>;
 
@@ -299,6 +321,7 @@ export const ServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
+  Scale: "scale",
   Priority: "priority",
 } as const;
 /**
@@ -335,7 +358,7 @@ export type RankingOptions = {
 /**
  * Configuration for file search tool
  */
-export type Tools3 = {
+export type Tools4 = {
   /**
    * The type of tool
    */
@@ -361,38 +384,37 @@ export type Tools3 = {
 /**
  * Amount of context to retrieve for each search result
  */
-export const SearchContextSize = {
-  Small: "small",
+export const ToolsSearchContextSize = {
+  Low: "low",
   Medium: "medium",
-  Large: "large",
+  High: "high",
 } as const;
 /**
  * Amount of context to retrieve for each search result
  */
-export type SearchContextSize = ClosedEnum<typeof SearchContextSize>;
+export type ToolsSearchContextSize = ClosedEnum<typeof ToolsSearchContextSize>;
 
 /**
  * The type of location
  */
-export const CreateResponseToolsRouterResponsesRequestType = {
+export const CreateResponseToolsRouterResponsesRequestRequestBodyType = {
   Approximate: "approximate",
   Exact: "exact",
 } as const;
 /**
  * The type of location
  */
-export type CreateResponseToolsRouterResponsesRequestType = ClosedEnum<
-  typeof CreateResponseToolsRouterResponsesRequestType
->;
+export type CreateResponseToolsRouterResponsesRequestRequestBodyType =
+  ClosedEnum<typeof CreateResponseToolsRouterResponsesRequestRequestBodyType>;
 
 /**
  * User location for search localization
  */
-export type UserLocation = {
+export type ToolsUserLocation = {
   /**
    * The type of location
    */
-  type?: CreateResponseToolsRouterResponsesRequestType | undefined;
+  type?: CreateResponseToolsRouterResponsesRequestRequestBodyType | undefined;
   /**
    * The city name
    */
@@ -412,7 +434,92 @@ export type UserLocation = {
 };
 
 /**
+ * Filters for the web search
+ */
+export type Filters = {
+  /**
+   * List of allowed domains for search
+   */
+  allowedDomains?: Array<string> | null | undefined;
+};
+
+/**
  * Configuration for web search tool
+ */
+export type Tools3 = {
+  /**
+   * The type of tool
+   */
+  type: "web_search";
+  /**
+   * Amount of context to retrieve for each search result
+   */
+  searchContextSize?: ToolsSearchContextSize | undefined;
+  /**
+   * User location for search localization
+   */
+  userLocation?: ToolsUserLocation | undefined;
+  /**
+   * Filters for the web search
+   */
+  filters?: Filters | null | undefined;
+};
+
+/**
+ * Amount of context to retrieve for each search result
+ */
+export const SearchContextSize = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Amount of context to retrieve for each search result
+ */
+export type SearchContextSize = ClosedEnum<typeof SearchContextSize>;
+
+/**
+ * The type of location
+ */
+export const CreateResponseToolsRouterResponsesType = {
+  Approximate: "approximate",
+  Exact: "exact",
+} as const;
+/**
+ * The type of location
+ */
+export type CreateResponseToolsRouterResponsesType = ClosedEnum<
+  typeof CreateResponseToolsRouterResponsesType
+>;
+
+/**
+ * User location for search localization
+ */
+export type UserLocation = {
+  /**
+   * The type of location
+   */
+  type?: CreateResponseToolsRouterResponsesType | undefined;
+  /**
+   * The city name
+   */
+  city?: string | null | undefined;
+  /**
+   * The country code
+   */
+  country?: string | undefined;
+  /**
+   * The region/state
+   */
+  region?: string | null | undefined;
+  /**
+   * The timezone
+   */
+  timezone?: string | null | undefined;
+};
+
+/**
+ * Configuration for web search preview tool
  */
 export type Tools2 = {
   /**
@@ -434,48 +541,6 @@ export type Tools2 = {
 };
 
 /**
- * The type of the parameters object
- */
-export const CreateResponseToolsType = {
-  Object: "object",
-} as const;
-/**
- * The type of the parameters object
- */
-export type CreateResponseToolsType = ClosedEnum<
-  typeof CreateResponseToolsType
->;
-
-export type Properties = {
-  type: string;
-  description?: string | undefined;
-  enum?: Array<string> | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
-};
-
-/**
- * The parameters the function accepts
- */
-export type ToolsParameters = {
-  /**
-   * The type of the parameters object
-   */
-  type: CreateResponseToolsType;
-  /**
-   * The parameters the function accepts, described as a JSON Schema object
-   */
-  properties: { [k: string]: Properties };
-  /**
-   * List of required parameter names
-   */
-  required?: Array<string> | undefined;
-  /**
-   * Whether to allow properties not defined in the schema
-   */
-  additionalProperties?: boolean | undefined;
-};
-
-/**
  * A function tool definition
  */
 export type Tools1 = {
@@ -492,16 +557,16 @@ export type Tools1 = {
    */
   description?: string | null | undefined;
   /**
-   * The parameters the function accepts
+   * The parameters the function accepts as a JSON Schema object
    */
-  parameters: ToolsParameters;
+  parameters?: { [k: string]: any } | null | undefined;
   /**
    * Whether to enable strict schema adherence when generating function calls
    */
-  strict?: boolean | undefined;
+  strict?: boolean | null | undefined;
 };
 
-export type CreateResponseTools = Tools1 | Tools2 | Tools3;
+export type CreateResponseTools = Tools1 | Tools2 | Tools3 | Tools4;
 
 export const CreateResponseToolChoiceRouterResponsesRequestType = {
   Mcp: "mcp",
@@ -531,7 +596,11 @@ export type ToolChoice3 = {
 export const CreateResponseToolChoiceType = {
   FileSearch: "file_search",
   WebSearchPreview: "web_search_preview",
+  WebSearchPreview20250311: "web_search_preview_2025_03_11",
+  WebSearch: "web_search",
   ComputerUsePreview: "computer_use_preview",
+  ComputerUse: "computer_use",
+  Computer: "computer",
   CodeInterpreter: "code_interpreter",
   ImageGeneration: "image_generation",
 } as const;
@@ -617,15 +686,7 @@ export type CreateResponseRequestBody = {
     | string
     | Array<CreateResponse23 | CreateResponse2RouterResponses2 | Two1>;
   /**
-   * Specifies which (potentially large) fields to include in the response. By default, the results of Code Interpreter and file searches are excluded. Available options:
-   *
-   * @remarks
-   * - code_interpreter_call.outputs: Include the outputs of Code Interpreter tool calls
-   * - computer_call_output.output.image_url: Include the image URLs from computer use tool calls
-   * - file_search_call.results: Include the results of file search tool calls
-   * - message.input_image.image_url: Include URLs of input images
-   * - message.output_text.logprobs: Include log probabilities for output text (when logprobs is enabled)
-   * - reasoning.encrypted_content: Include encrypted reasoning content for reasoning models
+   * Specifies which (potentially large) fields to include in the response.
    */
   include?: Array<Include> | null | undefined;
   /**
@@ -643,7 +704,7 @@ export type CreateResponseRequestBody = {
   /**
    * A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for.
    */
-  tools?: Array<Tools1 | Tools2 | Tools3> | undefined;
+  tools?: Array<Tools1 | Tools2 | Tools3 | Tools4> | undefined;
   /**
    * How the model should select which tool (or tools) to use when generating a response. Can be a string (`none`, `auto`, `required`) or an object to force a specific tool.
    */
@@ -695,6 +756,8 @@ export const CreateResponseStatus = {
   Completed: "completed",
   Failed: "failed",
   InProgress: "in_progress",
+  Cancelled: "cancelled",
+  Queued: "queued",
   Incomplete: "incomplete",
 } as const;
 /**
@@ -843,6 +906,60 @@ export type CreateResponseOutputStatus = ClosedEnum<
 >;
 
 /**
+ * The type of web search action
+ */
+export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONType =
+  {
+    Search: "search",
+    OpenPage: "open_page",
+    Find: "find",
+  } as const;
+/**
+ * The type of web search action
+ */
+export type CreateResponseOutputRouterResponsesResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONType
+  >;
+
+export type Sources = {
+  /**
+   * The source URL
+   */
+  url: string;
+  /**
+   * The source title
+   */
+  title: string;
+};
+
+/**
+ * The action performed by the web search
+ */
+export type Action = {
+  /**
+   * The type of web search action
+   */
+  type: CreateResponseOutputRouterResponsesResponse200ApplicationJSONType;
+  /**
+   * The search query (for search action)
+   */
+  query?: string | undefined;
+  /**
+   * The URL opened (for open_page action)
+   */
+  url?: string | undefined;
+  /**
+   * The pattern to find (for find action)
+   */
+  pattern?: string | undefined;
+  /**
+   * Sources from the web search
+   */
+  sources?: Array<Sources> | undefined;
+};
+
+/**
  * A web search tool call output
  */
 export type Output2 = {
@@ -858,6 +975,10 @@ export type Output2 = {
    * The status of the web search
    */
   status: CreateResponseOutputStatus;
+  /**
+   * The action performed by the web search
+   */
+  action?: Action | undefined;
 };
 
 /**
@@ -886,15 +1007,18 @@ export const OutputStatus = {
 export type OutputStatus = ClosedEnum<typeof OutputStatus>;
 
 /**
- * The type of content part
+ * A refusal content part from the model
  */
-export const ContentType = {
-  OutputText: "output_text",
-} as const;
-/**
- * The type of content part
- */
-export type ContentType = ClosedEnum<typeof ContentType>;
+export type CreateResponseContentRouterResponses2 = {
+  /**
+   * The type of content part
+   */
+  type: "refusal";
+  /**
+   * The refusal message
+   */
+  refusal: string;
+};
 
 /**
  * A citation to a file
@@ -950,7 +1074,7 @@ export type Content1 = {
   /**
    * The type of content part
    */
-  type: ContentType;
+  type: "output_text";
   /**
    * The text content
    */
@@ -965,7 +1089,7 @@ export type Content1 = {
   logprobs?: Array<any> | undefined;
 };
 
-export type OutputContent = Content1;
+export type OutputContent = Content1 | CreateResponseContentRouterResponses2;
 
 /**
  * An assistant message output
@@ -990,7 +1114,7 @@ export type Output1 = {
   /**
    * The content parts of the message
    */
-  content?: Array<Content1> | undefined;
+  content?: Array<Content1 | CreateResponseContentRouterResponses2> | undefined;
 };
 
 export type Output = Output1 | Output2 | Output3 | Output4;
@@ -1110,7 +1234,7 @@ export type ToolsRankingOptions = {
 /**
  * Configuration for file search tool
  */
-export type CreateResponseTools3 = {
+export type CreateResponseTools4 = {
   /**
    * The type of tool
    */
@@ -1136,20 +1260,22 @@ export type CreateResponseTools3 = {
 /**
  * Amount of context to retrieve for each search result
  */
-export const ToolsSearchContextSize = {
-  Small: "small",
+export const CreateResponseToolsRouterResponsesSearchContextSize = {
+  Low: "low",
   Medium: "medium",
-  Large: "large",
+  High: "high",
 } as const;
 /**
  * Amount of context to retrieve for each search result
  */
-export type ToolsSearchContextSize = ClosedEnum<typeof ToolsSearchContextSize>;
+export type CreateResponseToolsRouterResponsesSearchContextSize = ClosedEnum<
+  typeof CreateResponseToolsRouterResponsesSearchContextSize
+>;
 
 /**
  * The type of location
  */
-export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType =
+export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type =
   {
     Approximate: "approximate",
     Exact: "exact",
@@ -1157,20 +1283,20 @@ export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONRespons
 /**
  * The type of location
  */
-export type CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType =
+export type CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type =
   ClosedEnum<
-    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType
+    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type
   >;
 
 /**
  * User location for search localization
  */
-export type ToolsUserLocation = {
+export type CreateResponseToolsRouterResponsesUserLocation = {
   /**
    * The type of location
    */
   type?:
-    | CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType
+    | CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type
     | undefined;
   /**
    * The city name
@@ -1191,7 +1317,98 @@ export type ToolsUserLocation = {
 };
 
 /**
+ * Filters for the web search
+ */
+export type ToolsFilters = {
+  /**
+   * List of allowed domains for search
+   */
+  allowedDomains?: Array<string> | null | undefined;
+};
+
+/**
  * Configuration for web search tool
+ */
+export type CreateResponseTools3 = {
+  /**
+   * The type of tool
+   */
+  type: "web_search";
+  /**
+   * Amount of context to retrieve for each search result
+   */
+  searchContextSize: CreateResponseToolsRouterResponsesSearchContextSize;
+  /**
+   * User location for search localization
+   */
+  userLocation?: CreateResponseToolsRouterResponsesUserLocation | undefined;
+  /**
+   * Filters for the web search
+   */
+  filters?: ToolsFilters | null | undefined;
+};
+
+/**
+ * Amount of context to retrieve for each search result
+ */
+export const CreateResponseToolsSearchContextSize = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Amount of context to retrieve for each search result
+ */
+export type CreateResponseToolsSearchContextSize = ClosedEnum<
+  typeof CreateResponseToolsSearchContextSize
+>;
+
+/**
+ * The type of location
+ */
+export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type =
+  {
+    Approximate: "approximate",
+    Exact: "exact",
+  } as const;
+/**
+ * The type of location
+ */
+export type CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type =
+  ClosedEnum<
+    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type
+  >;
+
+/**
+ * User location for search localization
+ */
+export type CreateResponseToolsUserLocation = {
+  /**
+   * The type of location
+   */
+  type?:
+    | CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type
+    | undefined;
+  /**
+   * The city name
+   */
+  city?: string | null | undefined;
+  /**
+   * The country code
+   */
+  country?: string | undefined;
+  /**
+   * The region/state
+   */
+  region?: string | null | undefined;
+  /**
+   * The timezone
+   */
+  timezone?: string | null | undefined;
+};
+
+/**
+ * Configuration for web search preview tool
  */
 export type CreateResponseTools2 = {
   /**
@@ -1205,56 +1422,11 @@ export type CreateResponseTools2 = {
   /**
    * Amount of context to retrieve for each search result
    */
-  searchContextSize: ToolsSearchContextSize;
+  searchContextSize: CreateResponseToolsSearchContextSize;
   /**
    * User location for search localization
    */
-  userLocation?: ToolsUserLocation | undefined;
-};
-
-/**
- * The type of the parameters object
- */
-export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type =
-  {
-    Object: "object",
-  } as const;
-/**
- * The type of the parameters object
- */
-export type CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type =
-  ClosedEnum<
-    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type
-  >;
-
-export type ToolsProperties = {
-  type: string;
-  description?: string | undefined;
-  enum?: Array<string> | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
-};
-
-/**
- * The parameters the function accepts
- */
-export type CreateResponseToolsParameters = {
-  /**
-   * The type of the parameters object
-   */
-  type:
-    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type;
-  /**
-   * The parameters the function accepts, described as a JSON Schema object
-   */
-  properties: { [k: string]: ToolsProperties };
-  /**
-   * List of required parameter names
-   */
-  required?: Array<string> | undefined;
-  /**
-   * Whether to allow properties not defined in the schema
-   */
-  additionalProperties?: boolean | undefined;
+  userLocation?: CreateResponseToolsUserLocation | undefined;
 };
 
 /**
@@ -1274,19 +1446,20 @@ export type CreateResponseTools1 = {
    */
   description?: string | null | undefined;
   /**
-   * The parameters the function accepts
+   * The parameters the function accepts as a JSON Schema object
    */
-  parameters: CreateResponseToolsParameters;
+  parameters?: { [k: string]: any } | null | undefined;
   /**
    * Whether to enable strict schema adherence when generating function calls
    */
-  strict: boolean;
+  strict: boolean | null;
 };
 
 export type CreateResponseRouterResponsesTools =
   | CreateResponseTools1
   | CreateResponseTools2
-  | CreateResponseTools3;
+  | CreateResponseTools3
+  | CreateResponseTools4;
 
 export type CreateResponseReasoning = {
   effort?: string | null | undefined;
@@ -1358,6 +1531,7 @@ export const CreateResponseServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
+  Scale: "scale",
   Priority: "priority",
 } as const;
 /**
@@ -1429,7 +1603,12 @@ export type CreateResponseResponseBody = {
     | CreateResponseToolChoiceRouterResponses1
     | undefined;
   tools?:
-    | Array<CreateResponseTools1 | CreateResponseTools2 | CreateResponseTools3>
+    | Array<
+      | CreateResponseTools1
+      | CreateResponseTools2
+      | CreateResponseTools3
+      | CreateResponseTools4
+    >
     | undefined;
   reasoning?: CreateResponseReasoning | null | undefined;
   store?: boolean | undefined;
@@ -1469,8 +1648,13 @@ export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> = z
   .nativeEnum(Effort);
 
 /** @internal */
+export const Summary$outboundSchema: z.ZodNativeEnum<typeof Summary> = z
+  .nativeEnum(Summary);
+
+/** @internal */
 export type Reasoning$Outbound = {
   effort?: string | undefined;
+  summary?: string | null | undefined;
 };
 
 /** @internal */
@@ -1480,6 +1664,7 @@ export const Reasoning$outboundSchema: z.ZodType<
   Reasoning
 > = z.object({
   effort: Effort$outboundSchema.optional(),
+  summary: z.nullable(Summary$outboundSchema).optional(),
 });
 
 export function reasoningToJSON(reasoning: Reasoning): string {
@@ -1965,7 +2150,7 @@ export function rankingOptionsToJSON(rankingOptions: RankingOptions): string {
 }
 
 /** @internal */
-export type Tools3$Outbound = {
+export type Tools4$Outbound = {
   type: "file_search";
   vector_store_ids?: Array<string> | undefined;
   max_num_results: number;
@@ -1974,10 +2159,10 @@ export type Tools3$Outbound = {
 };
 
 /** @internal */
-export const Tools3$outboundSchema: z.ZodType<
-  Tools3$Outbound,
+export const Tools4$outboundSchema: z.ZodType<
+  Tools4$Outbound,
   z.ZodTypeDef,
-  Tools3
+  Tools4
 > = z.object({
   type: z.literal("file_search"),
   vectorStoreIds: z.array(z.string()).optional(),
@@ -1992,6 +2177,99 @@ export const Tools3$outboundSchema: z.ZodType<
   });
 });
 
+export function tools4ToJSON(tools4: Tools4): string {
+  return JSON.stringify(Tools4$outboundSchema.parse(tools4));
+}
+
+/** @internal */
+export const ToolsSearchContextSize$outboundSchema: z.ZodNativeEnum<
+  typeof ToolsSearchContextSize
+> = z.nativeEnum(ToolsSearchContextSize);
+
+/** @internal */
+export const CreateResponseToolsRouterResponsesRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateResponseToolsRouterResponsesRequestRequestBodyType
+  > = z.nativeEnum(CreateResponseToolsRouterResponsesRequestRequestBodyType);
+
+/** @internal */
+export type ToolsUserLocation$Outbound = {
+  type?: string | undefined;
+  city?: string | null | undefined;
+  country?: string | undefined;
+  region?: string | null | undefined;
+  timezone?: string | null | undefined;
+};
+
+/** @internal */
+export const ToolsUserLocation$outboundSchema: z.ZodType<
+  ToolsUserLocation$Outbound,
+  z.ZodTypeDef,
+  ToolsUserLocation
+> = z.object({
+  type: CreateResponseToolsRouterResponsesRequestRequestBodyType$outboundSchema
+    .optional(),
+  city: z.nullable(z.string()).optional(),
+  country: z.string().optional(),
+  region: z.nullable(z.string()).optional(),
+  timezone: z.nullable(z.string()).optional(),
+});
+
+export function toolsUserLocationToJSON(
+  toolsUserLocation: ToolsUserLocation,
+): string {
+  return JSON.stringify(
+    ToolsUserLocation$outboundSchema.parse(toolsUserLocation),
+  );
+}
+
+/** @internal */
+export type Filters$Outbound = {
+  allowed_domains?: Array<string> | null | undefined;
+};
+
+/** @internal */
+export const Filters$outboundSchema: z.ZodType<
+  Filters$Outbound,
+  z.ZodTypeDef,
+  Filters
+> = z.object({
+  allowedDomains: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    allowedDomains: "allowed_domains",
+  });
+});
+
+export function filtersToJSON(filters: Filters): string {
+  return JSON.stringify(Filters$outboundSchema.parse(filters));
+}
+
+/** @internal */
+export type Tools3$Outbound = {
+  type: "web_search";
+  search_context_size: string;
+  user_location?: ToolsUserLocation$Outbound | undefined;
+  filters?: Filters$Outbound | null | undefined;
+};
+
+/** @internal */
+export const Tools3$outboundSchema: z.ZodType<
+  Tools3$Outbound,
+  z.ZodTypeDef,
+  Tools3
+> = z.object({
+  type: z.literal("web_search"),
+  searchContextSize: ToolsSearchContextSize$outboundSchema.default("medium"),
+  userLocation: z.lazy(() => ToolsUserLocation$outboundSchema).optional(),
+  filters: z.nullable(z.lazy(() => Filters$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    searchContextSize: "search_context_size",
+    userLocation: "user_location",
+  });
+});
+
 export function tools3ToJSON(tools3: Tools3): string {
   return JSON.stringify(Tools3$outboundSchema.parse(tools3));
 }
@@ -2002,9 +2280,10 @@ export const SearchContextSize$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(SearchContextSize);
 
 /** @internal */
-export const CreateResponseToolsRouterResponsesRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateResponseToolsRouterResponsesRequestType> = z
-    .nativeEnum(CreateResponseToolsRouterResponsesRequestType);
+export const CreateResponseToolsRouterResponsesType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateResponseToolsRouterResponsesType> = z.nativeEnum(
+    CreateResponseToolsRouterResponsesType,
+  );
 
 /** @internal */
 export type UserLocation$Outbound = {
@@ -2021,7 +2300,7 @@ export const UserLocation$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserLocation
 > = z.object({
-  type: CreateResponseToolsRouterResponsesRequestType$outboundSchema.optional(),
+  type: CreateResponseToolsRouterResponsesType$outboundSchema.optional(),
   city: z.nullable(z.string()).optional(),
   country: z.string().optional(),
   region: z.nullable(z.string()).optional(),
@@ -2062,74 +2341,12 @@ export function tools2ToJSON(tools2: Tools2): string {
 }
 
 /** @internal */
-export const CreateResponseToolsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateResponseToolsType
-> = z.nativeEnum(CreateResponseToolsType);
-
-/** @internal */
-export type Properties$Outbound = {
-  type: string;
-  description?: string | undefined;
-  enum?: Array<string> | undefined;
-  [additionalProperties: string]: unknown;
-};
-
-/** @internal */
-export const Properties$outboundSchema: z.ZodType<
-  Properties$Outbound,
-  z.ZodTypeDef,
-  Properties
-> = z.object({
-  type: z.string(),
-  description: z.string().optional(),
-  enum: z.array(z.string()).optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
-
-export function propertiesToJSON(properties: Properties): string {
-  return JSON.stringify(Properties$outboundSchema.parse(properties));
-}
-
-/** @internal */
-export type ToolsParameters$Outbound = {
-  type: string;
-  properties: { [k: string]: Properties$Outbound };
-  required?: Array<string> | undefined;
-  additionalProperties?: boolean | undefined;
-};
-
-/** @internal */
-export const ToolsParameters$outboundSchema: z.ZodType<
-  ToolsParameters$Outbound,
-  z.ZodTypeDef,
-  ToolsParameters
-> = z.object({
-  type: CreateResponseToolsType$outboundSchema,
-  properties: z.record(z.lazy(() => Properties$outboundSchema)),
-  required: z.array(z.string()).optional(),
-  additionalProperties: z.boolean().optional(),
-});
-
-export function toolsParametersToJSON(
-  toolsParameters: ToolsParameters,
-): string {
-  return JSON.stringify(ToolsParameters$outboundSchema.parse(toolsParameters));
-}
-
-/** @internal */
 export type Tools1$Outbound = {
   type: "function";
   name: string;
   description?: string | null | undefined;
-  parameters: ToolsParameters$Outbound;
-  strict: boolean;
+  parameters?: { [k: string]: any } | null | undefined;
+  strict: boolean | null;
 };
 
 /** @internal */
@@ -2141,8 +2358,8 @@ export const Tools1$outboundSchema: z.ZodType<
   type: z.literal("function"),
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => ToolsParameters$outboundSchema),
-  strict: z.boolean().default(true),
+  parameters: z.nullable(z.record(z.any())).optional(),
+  strict: z.nullable(z.boolean().default(true)),
 });
 
 export function tools1ToJSON(tools1: Tools1): string {
@@ -2153,7 +2370,8 @@ export function tools1ToJSON(tools1: Tools1): string {
 export type CreateResponseTools$Outbound =
   | Tools1$Outbound
   | Tools2$Outbound
-  | Tools3$Outbound;
+  | Tools3$Outbound
+  | Tools4$Outbound;
 
 /** @internal */
 export const CreateResponseTools$outboundSchema: z.ZodType<
@@ -2164,6 +2382,7 @@ export const CreateResponseTools$outboundSchema: z.ZodType<
   z.lazy(() => Tools1$outboundSchema),
   z.lazy(() => Tools2$outboundSchema),
   z.lazy(() => Tools3$outboundSchema),
+  z.lazy(() => Tools4$outboundSchema),
 ]);
 
 export function createResponseToolsToJSON(
@@ -2318,7 +2537,9 @@ export type CreateResponseRequestBody$Outbound = {
   store: boolean | null;
   service_tier?: string | null | undefined;
   tools?:
-    | Array<Tools1$Outbound | Tools2$Outbound | Tools3$Outbound>
+    | Array<
+      Tools1$Outbound | Tools2$Outbound | Tools3$Outbound | Tools4$Outbound
+    >
     | undefined;
   tool_choice?:
     | ToolChoice3$Outbound
@@ -2368,6 +2589,7 @@ export const CreateResponseRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => Tools1$outboundSchema),
       z.lazy(() => Tools2$outboundSchema),
       z.lazy(() => Tools3$outboundSchema),
+      z.lazy(() => Tools4$outboundSchema),
     ]),
   ).optional(),
   toolChoice: z.union([
@@ -2563,11 +2785,58 @@ export const CreateResponseOutputStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateResponseOutputStatus);
 
 /** @internal */
+export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    CreateResponseOutputRouterResponsesResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const Sources$inboundSchema: z.ZodType<Sources, z.ZodTypeDef, unknown> =
+  z.object({
+    url: z.string(),
+    title: z.string(),
+  });
+
+export function sourcesFromJSON(
+  jsonString: string,
+): SafeParseResult<Sources, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Sources$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Sources' from JSON`,
+  );
+}
+
+/** @internal */
+export const Action$inboundSchema: z.ZodType<Action, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      CreateResponseOutputRouterResponsesResponse200ApplicationJSONType$inboundSchema,
+    query: z.string().optional(),
+    url: z.string().optional(),
+    pattern: z.string().optional(),
+    sources: z.array(z.lazy(() => Sources$inboundSchema)).optional(),
+  });
+
+export function actionFromJSON(
+  jsonString: string,
+): SafeParseResult<Action, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Action$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Action' from JSON`,
+  );
+}
+
+/** @internal */
 export const Output2$inboundSchema: z.ZodType<Output2, z.ZodTypeDef, unknown> =
   z.object({
     id: z.string(),
     type: z.literal("web_search_call"),
     status: CreateResponseOutputStatus$inboundSchema,
+    action: z.lazy(() => Action$inboundSchema).optional(),
   });
 
 export function output2FromJSON(
@@ -2589,8 +2858,25 @@ export const OutputStatus$inboundSchema: z.ZodNativeEnum<typeof OutputStatus> =
   z.nativeEnum(OutputStatus);
 
 /** @internal */
-export const ContentType$inboundSchema: z.ZodNativeEnum<typeof ContentType> = z
-  .nativeEnum(ContentType);
+export const CreateResponseContentRouterResponses2$inboundSchema: z.ZodType<
+  CreateResponseContentRouterResponses2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("refusal"),
+  refusal: z.string(),
+});
+
+export function createResponseContentRouterResponses2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateResponseContentRouterResponses2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateResponseContentRouterResponses2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateResponseContentRouterResponses2' from JSON`,
+  );
+}
 
 /** @internal */
 export const Annotations2$inboundSchema: z.ZodType<
@@ -2672,7 +2958,7 @@ export const Content1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ContentType$inboundSchema,
+  type: z.literal("output_text"),
   text: z.string(),
   annotations: z.array(
     z.union([
@@ -2698,7 +2984,10 @@ export const OutputContent$inboundSchema: z.ZodType<
   OutputContent,
   z.ZodTypeDef,
   unknown
-> = z.lazy(() => Content1$inboundSchema);
+> = z.union([
+  z.lazy(() => Content1$inboundSchema),
+  z.lazy(() => CreateResponseContentRouterResponses2$inboundSchema),
+]);
 
 export function outputContentFromJSON(
   jsonString: string,
@@ -2717,7 +3006,12 @@ export const Output1$inboundSchema: z.ZodType<Output1, z.ZodTypeDef, unknown> =
     type: z.literal("message"),
     role: OutputRole$inboundSchema,
     status: OutputStatus$inboundSchema,
-    content: z.array(z.lazy(() => Content1$inboundSchema)).optional(),
+    content: z.array(
+      z.union([
+        z.lazy(() => Content1$inboundSchema),
+        z.lazy(() => CreateResponseContentRouterResponses2$inboundSchema),
+      ]),
+    ).optional(),
   });
 
 export function output1FromJSON(
@@ -2943,8 +3237,8 @@ export function toolsRankingOptionsFromJSON(
 }
 
 /** @internal */
-export const CreateResponseTools3$inboundSchema: z.ZodType<
-  CreateResponseTools3,
+export const CreateResponseTools4$inboundSchema: z.ZodType<
+  CreateResponseTools4,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2961,6 +3255,106 @@ export const CreateResponseTools3$inboundSchema: z.ZodType<
   });
 });
 
+export function createResponseTools4FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateResponseTools4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateResponseTools4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateResponseTools4' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateResponseToolsRouterResponsesSearchContextSize$inboundSchema:
+  z.ZodNativeEnum<typeof CreateResponseToolsRouterResponsesSearchContextSize> =
+    z.nativeEnum(CreateResponseToolsRouterResponsesSearchContextSize);
+
+/** @internal */
+export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type
+  > = z.nativeEnum(
+    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type,
+  );
+
+/** @internal */
+export const CreateResponseToolsRouterResponsesUserLocation$inboundSchema:
+  z.ZodType<
+    CreateResponseToolsRouterResponsesUserLocation,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody3Type$inboundSchema
+        .optional(),
+    city: z.nullable(z.string()).optional(),
+    country: z.string().optional(),
+    region: z.nullable(z.string()).optional(),
+    timezone: z.nullable(z.string()).optional(),
+  });
+
+export function createResponseToolsRouterResponsesUserLocationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateResponseToolsRouterResponsesUserLocation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateResponseToolsRouterResponsesUserLocation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateResponseToolsRouterResponsesUserLocation' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolsFilters$inboundSchema: z.ZodType<
+  ToolsFilters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  allowed_domains: z.nullable(z.array(z.string())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "allowed_domains": "allowedDomains",
+  });
+});
+
+export function toolsFiltersFromJSON(
+  jsonString: string,
+): SafeParseResult<ToolsFilters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ToolsFilters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolsFilters' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateResponseTools3$inboundSchema: z.ZodType<
+  CreateResponseTools3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("web_search"),
+  search_context_size:
+    CreateResponseToolsRouterResponsesSearchContextSize$inboundSchema.default(
+      "medium",
+    ),
+  user_location: z.lazy(() =>
+    CreateResponseToolsRouterResponsesUserLocation$inboundSchema
+  ).optional(),
+  filters: z.nullable(z.lazy(() => ToolsFilters$inboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "search_context_size": "searchContextSize",
+    "user_location": "userLocation",
+  });
+});
+
 export function createResponseTools3FromJSON(
   jsonString: string,
 ): SafeParseResult<CreateResponseTools3, SDKValidationError> {
@@ -2972,26 +3366,27 @@ export function createResponseTools3FromJSON(
 }
 
 /** @internal */
-export const ToolsSearchContextSize$inboundSchema: z.ZodNativeEnum<
-  typeof ToolsSearchContextSize
-> = z.nativeEnum(ToolsSearchContextSize);
-
-/** @internal */
-export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType,
+export const CreateResponseToolsSearchContextSize$inboundSchema:
+  z.ZodNativeEnum<typeof CreateResponseToolsSearchContextSize> = z.nativeEnum(
+    CreateResponseToolsSearchContextSize,
   );
 
 /** @internal */
-export const ToolsUserLocation$inboundSchema: z.ZodType<
-  ToolsUserLocation,
+export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type
+  > = z.nativeEnum(
+    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type,
+  );
+
+/** @internal */
+export const CreateResponseToolsUserLocation$inboundSchema: z.ZodType<
+  CreateResponseToolsUserLocation,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type:
-    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBodyType$inboundSchema
+    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody2Type$inboundSchema
       .optional(),
   city: z.nullable(z.string()).optional(),
   country: z.string().optional(),
@@ -2999,13 +3394,13 @@ export const ToolsUserLocation$inboundSchema: z.ZodType<
   timezone: z.nullable(z.string()).optional(),
 });
 
-export function toolsUserLocationFromJSON(
+export function createResponseToolsUserLocationFromJSON(
   jsonString: string,
-): SafeParseResult<ToolsUserLocation, SDKValidationError> {
+): SafeParseResult<CreateResponseToolsUserLocation, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ToolsUserLocation$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolsUserLocation' from JSON`,
+    (x) => CreateResponseToolsUserLocation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateResponseToolsUserLocation' from JSON`,
   );
 }
 
@@ -3017,8 +3412,10 @@ export const CreateResponseTools2$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("web_search_preview"),
   domains: z.array(z.string()).optional(),
-  search_context_size: ToolsSearchContextSize$inboundSchema.default("medium"),
-  user_location: z.lazy(() => ToolsUserLocation$inboundSchema).optional(),
+  search_context_size: CreateResponseToolsSearchContextSize$inboundSchema
+    .default("medium"),
+  user_location: z.lazy(() => CreateResponseToolsUserLocation$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "search_context_size": "searchContextSize",
@@ -3037,62 +3434,6 @@ export function createResponseTools2FromJSON(
 }
 
 /** @internal */
-export const CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type
-  > = z.nativeEnum(
-    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type,
-  );
-
-/** @internal */
-export const ToolsProperties$inboundSchema: z.ZodType<
-  ToolsProperties,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string(),
-    description: z.string().optional(),
-    enum: z.array(z.string()).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
-
-export function toolsPropertiesFromJSON(
-  jsonString: string,
-): SafeParseResult<ToolsProperties, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolsProperties$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolsProperties' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateResponseToolsParameters$inboundSchema: z.ZodType<
-  CreateResponseToolsParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateResponseToolsRouterResponsesResponse200ApplicationJSONResponseBody1Type$inboundSchema,
-  properties: z.record(z.lazy(() => ToolsProperties$inboundSchema)),
-  required: z.array(z.string()).optional(),
-  additionalProperties: z.boolean().optional(),
-});
-
-export function createResponseToolsParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateResponseToolsParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateResponseToolsParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateResponseToolsParameters' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateResponseTools1$inboundSchema: z.ZodType<
   CreateResponseTools1,
   z.ZodTypeDef,
@@ -3101,8 +3442,8 @@ export const CreateResponseTools1$inboundSchema: z.ZodType<
   type: z.literal("function"),
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => CreateResponseToolsParameters$inboundSchema),
-  strict: z.boolean().default(true),
+  parameters: z.nullable(z.record(z.any())).optional(),
+  strict: z.nullable(z.boolean().default(true)),
 });
 
 export function createResponseTools1FromJSON(
@@ -3124,6 +3465,7 @@ export const CreateResponseRouterResponsesTools$inboundSchema: z.ZodType<
   z.lazy(() => CreateResponseTools1$inboundSchema),
   z.lazy(() => CreateResponseTools2$inboundSchema),
   z.lazy(() => CreateResponseTools3$inboundSchema),
+  z.lazy(() => CreateResponseTools4$inboundSchema),
 ]);
 
 export function createResponseRouterResponsesToolsFromJSON(
@@ -3311,6 +3653,7 @@ export const CreateResponseResponseBody$inboundSchema: z.ZodType<
       z.lazy(() => CreateResponseTools1$inboundSchema),
       z.lazy(() => CreateResponseTools2$inboundSchema),
       z.lazy(() => CreateResponseTools3$inboundSchema),
+      z.lazy(() => CreateResponseTools4$inboundSchema),
     ]),
   ).optional(),
   reasoning: z.nullable(z.lazy(() => CreateResponseReasoning$inboundSchema))

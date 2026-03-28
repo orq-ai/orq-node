@@ -7,11 +7,11 @@ The status of the response
 ```typescript
 import { CreateResponseStatus } from "@orq-ai/node/models/operations";
 
-let value: CreateResponseStatus = "failed";
+let value: CreateResponseStatus = "in_progress";
 ```
 
 ## Values
 
 ```typescript
-"completed" | "failed" | "in_progress" | "incomplete"
+"completed" | "failed" | "in_progress" | "cancelled" | "queued" | "incomplete"
 ```
