@@ -25,3 +25,4 @@ let value: Annotations1 = {
 | `endIndex`                                  | *number*                                    | :heavy_check_mark:                          | The end index of the citation in the text   |
 | `url`                                       | *string*                                    | :heavy_check_mark:                          | The URL being cited                         |
 | `title`                                     | *string*                                    | :heavy_check_mark:                          | The title of the cited resource             |
+| `text`                                      | *string*                                    | :heavy_minus_sign:                          | The text of the citation                    |

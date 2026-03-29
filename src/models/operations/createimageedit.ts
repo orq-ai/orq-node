@@ -907,7 +907,7 @@ export const CreateImageEditRequestBody$outboundSchema: z.ZodType<
   model: z.string(),
   image: z.any().optional(),
   prompt: z.string(),
-  n: z.nullable(z.number().int().default(1)),
+  n: z.nullable(z.number().default(1)),
   size: z.nullable(z.string()).optional(),
   quality: z.nullable(CreateImageEditQuality$outboundSchema).optional(),
   responseFormat: CreateImageEditResponseFormat$outboundSchema.optional(),

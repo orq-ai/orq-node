@@ -12,23 +12,17 @@ let value: CreateResponseResponseBody = {
   object: "response",
   createdAt: 7960.72,
   status: "incomplete",
-  error: {
-    code: "<value>",
-    message: "<value>",
+  incompleteDetails: {
+    reason: "max_output_tokens",
   },
-  incompleteDetails: null,
   model: "911",
   output: [
     {
       id: "<id>",
-      type: "function_call",
-      callId: "<id>",
-      name: "<value>",
-      arguments: "<value>",
-      status: "incomplete",
+      type: "reasoning",
     },
   ],
-  parallelToolCalls: true,
+  parallelToolCalls: false,
 };
 ```
 
@@ -40,7 +34,7 @@ let value: CreateResponseResponseBody = {
 | `object`                                                                                                     | [operations.CreateResponseObject](../../models/operations/createresponseobject.md)                           | :heavy_check_mark:                                                                                           | The object type, which is always "response"                                                                  |
 | `createdAt`                                                                                                  | *number*                                                                                                     | :heavy_check_mark:                                                                                           | The Unix timestamp (in seconds) of when the response was created                                             |
 | `status`                                                                                                     | [operations.CreateResponseStatus](../../models/operations/createresponsestatus.md)                           | :heavy_check_mark:                                                                                           | The status of the response                                                                                   |
-| `error`                                                                                                      | [operations.ErrorT](../../models/operations/errort.md)                                                       | :heavy_check_mark:                                                                                           | The error that occurred, if any                                                                              |
+| `error`                                                                                                      | [operations.ErrorT](../../models/operations/errort.md)                                                       | :heavy_minus_sign:                                                                                           | The error that occurred, if any                                                                              |
 | `incompleteDetails`                                                                                          | [operations.IncompleteDetails](../../models/operations/incompletedetails.md)                                 | :heavy_check_mark:                                                                                           | Details about why the response is incomplete                                                                 |
 | `model`                                                                                                      | *string*                                                                                                     | :heavy_check_mark:                                                                                           | The model used to generate the response                                                                      |
 | `instructions`                                                                                               | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The instructions provided for the response                                                                   |
