@@ -802,6 +802,78 @@ export type IncompleteDetails = {
 };
 
 /**
+ * The type of summary part
+ */
+export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type =
+  {
+    SummaryText: "summary_text",
+  } as const;
+/**
+ * The type of summary part
+ */
+export type CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type =
+  ClosedEnum<
+    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type
+  >;
+
+/**
+ * A text summary of the reasoning
+ */
+export type OutputSummary = {
+  /**
+   * The type of summary part
+   */
+  type:
+    CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type;
+  /**
+   * The summary text
+   */
+  text: string;
+};
+
+/**
+ * The status of the reasoning item
+ */
+export const CreateResponseOutputRouterResponsesResponse200Status = {
+  InProgress: "in_progress",
+  Completed: "completed",
+  Incomplete: "incomplete",
+  Failed: "failed",
+} as const;
+/**
+ * The status of the reasoning item
+ */
+export type CreateResponseOutputRouterResponsesResponse200Status = ClosedEnum<
+  typeof CreateResponseOutputRouterResponsesResponse200Status
+>;
+
+/**
+ * A reasoning output item from the model
+ */
+export type Output5 = {
+  /**
+   * The unique identifier for this reasoning item
+   */
+  id: string;
+  /**
+   * The type of output item
+   */
+  type: "reasoning";
+  /**
+   * Summary of the reasoning
+   */
+  summary?: Array<OutputSummary> | undefined;
+  /**
+   * Encrypted reasoning content
+   */
+  encryptedContent?: string | null | undefined;
+  /**
+   * The status of the reasoning item
+   */
+  status?: CreateResponseOutputRouterResponsesResponse200Status | undefined;
+};
+
+/**
  * The status of the function call
  */
 export const CreateResponseOutputRouterResponsesResponseStatus = {
@@ -908,7 +980,7 @@ export type CreateResponseOutputStatus = ClosedEnum<
 /**
  * The type of web search action
  */
-export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONType =
+export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType =
   {
     Search: "search",
     OpenPage: "open_page",
@@ -917,9 +989,9 @@ export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONType =
 /**
  * The type of web search action
  */
-export type CreateResponseOutputRouterResponsesResponse200ApplicationJSONType =
+export type CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType =
   ClosedEnum<
-    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONType
+    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType
   >;
 
 export type Sources = {
@@ -940,7 +1012,8 @@ export type Action = {
   /**
    * The type of web search action
    */
-  type: CreateResponseOutputRouterResponsesResponse200ApplicationJSONType;
+  type:
+    CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType;
   /**
    * The search query (for search action)
    */
@@ -1060,6 +1133,10 @@ export type Annotations1 = {
    * The title of the cited resource
    */
   title: string;
+  /**
+   * The text of the citation
+   */
+  text?: string | undefined;
 };
 
 /**
@@ -1086,7 +1163,7 @@ export type Content1 = {
   /**
    * Log probabilities of the output tokens if requested
    */
-  logprobs?: Array<any> | undefined;
+  logprobs?: Array<any> | null | undefined;
 };
 
 export type OutputContent = Content1 | CreateResponseContentRouterResponses2;
@@ -1117,7 +1194,7 @@ export type Output1 = {
   content?: Array<Content1 | CreateResponseContentRouterResponses2> | undefined;
 };
 
-export type Output = Output1 | Output2 | Output3 | Output4;
+export type Output = Output1 | Output2 | Output3 | Output4 | Output5;
 
 /**
  * Breakdown of input token usage
@@ -1224,11 +1301,11 @@ export type ToolsRankingOptions = {
   /**
    * The ranking algorithm
    */
-  ranker: ToolsRanker;
+  ranker?: ToolsRanker | undefined;
   /**
    * Minimum relevance score
    */
-  scoreThreshold: number;
+  scoreThreshold?: number | undefined;
 };
 
 /**
@@ -1246,7 +1323,7 @@ export type CreateResponseTools4 = {
   /**
    * Maximum number of results to return
    */
-  maxNumResults: number;
+  maxNumResults?: number | undefined;
   /**
    * Filters to apply to the search
    */
@@ -1337,7 +1414,9 @@ export type CreateResponseTools3 = {
   /**
    * Amount of context to retrieve for each search result
    */
-  searchContextSize: CreateResponseToolsRouterResponsesSearchContextSize;
+  searchContextSize?:
+    | CreateResponseToolsRouterResponsesSearchContextSize
+    | undefined;
   /**
    * User location for search localization
    */
@@ -1422,7 +1501,7 @@ export type CreateResponseTools2 = {
   /**
    * Amount of context to retrieve for each search result
    */
-  searchContextSize: CreateResponseToolsSearchContextSize;
+  searchContextSize?: CreateResponseToolsSearchContextSize | undefined;
   /**
    * User location for search localization
    */
@@ -1564,7 +1643,7 @@ export type CreateResponseResponseBody = {
   /**
    * The error that occurred, if any
    */
-  error: ErrorT | null;
+  error?: ErrorT | null | undefined;
   /**
    * Details about why the response is incomplete
    */
@@ -1580,7 +1659,7 @@ export type CreateResponseResponseBody = {
   /**
    * The list of output items generated by the model
    */
-  output: Array<Output1 | Output2 | Output3 | Output4>;
+  output: Array<Output1 | Output2 | Output3 | Output4 | Output5>;
   /**
    * A convenience field with the concatenated text from all text content parts
    */
@@ -1616,7 +1695,7 @@ export type CreateResponseResponseBody = {
   /**
    * Controls how the model handles inputs longer than the maximum token length
    */
-  truncation: Truncation | null;
+  truncation?: Truncation | null | undefined;
   /**
    * A unique identifier representing your end-user
    */
@@ -2127,8 +2206,8 @@ export const Ranker$outboundSchema: z.ZodNativeEnum<typeof Ranker> = z
 
 /** @internal */
 export type RankingOptions$Outbound = {
-  ranker: string;
-  score_threshold: number;
+  ranker?: string | undefined;
+  score_threshold?: number | undefined;
 };
 
 /** @internal */
@@ -2137,8 +2216,8 @@ export const RankingOptions$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RankingOptions
 > = z.object({
-  ranker: Ranker$outboundSchema.default("auto"),
-  scoreThreshold: z.number().default(0),
+  ranker: Ranker$outboundSchema.optional(),
+  scoreThreshold: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     scoreThreshold: "score_threshold",
@@ -2153,7 +2232,7 @@ export function rankingOptionsToJSON(rankingOptions: RankingOptions): string {
 export type Tools4$Outbound = {
   type: "file_search";
   vector_store_ids?: Array<string> | undefined;
-  max_num_results: number;
+  max_num_results?: number | undefined;
   filters?: any | undefined;
   ranking_options?: RankingOptions$Outbound | undefined;
 };
@@ -2166,7 +2245,7 @@ export const Tools4$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file_search"),
   vectorStoreIds: z.array(z.string()).optional(),
-  maxNumResults: z.number().int().default(20),
+  maxNumResults: z.number().int().optional(),
   filters: z.any().optional(),
   rankingOptions: z.lazy(() => RankingOptions$outboundSchema).optional(),
 }).transform((v) => {
@@ -2248,7 +2327,7 @@ export function filtersToJSON(filters: Filters): string {
 /** @internal */
 export type Tools3$Outbound = {
   type: "web_search";
-  search_context_size: string;
+  search_context_size?: string | undefined;
   user_location?: ToolsUserLocation$Outbound | undefined;
   filters?: Filters$Outbound | null | undefined;
 };
@@ -2260,7 +2339,7 @@ export const Tools3$outboundSchema: z.ZodType<
   Tools3
 > = z.object({
   type: z.literal("web_search"),
-  searchContextSize: ToolsSearchContextSize$outboundSchema.default("medium"),
+  searchContextSize: ToolsSearchContextSize$outboundSchema.optional(),
   userLocation: z.lazy(() => ToolsUserLocation$outboundSchema).optional(),
   filters: z.nullable(z.lazy(() => Filters$outboundSchema)).optional(),
 }).transform((v) => {
@@ -2315,7 +2394,7 @@ export function userLocationToJSON(userLocation: UserLocation): string {
 export type Tools2$Outbound = {
   type: "web_search_preview";
   domains?: Array<string> | undefined;
-  search_context_size: string;
+  search_context_size?: string | undefined;
   user_location?: UserLocation$Outbound | undefined;
 };
 
@@ -2327,7 +2406,7 @@ export const Tools2$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("web_search_preview"),
   domains: z.array(z.string()).optional(),
-  searchContextSize: SearchContextSize$outboundSchema.default("medium"),
+  searchContextSize: SearchContextSize$outboundSchema.optional(),
   userLocation: z.lazy(() => UserLocation$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2534,7 +2613,7 @@ export type CreateResponseRequestBody$Outbound = {
     >;
   include?: Array<string> | null | undefined;
   parallel_tool_calls?: boolean | null | undefined;
-  store: boolean | null;
+  store?: boolean | null | undefined;
   service_tier?: string | null | undefined;
   tools?:
     | Array<
@@ -2582,7 +2661,7 @@ export const CreateResponseRequestBody$outboundSchema: z.ZodType<
   ]),
   include: z.nullable(z.array(Include$outboundSchema)).optional(),
   parallelToolCalls: z.nullable(z.boolean()).optional(),
-  store: z.nullable(z.boolean().default(true)),
+  store: z.nullable(z.boolean()).optional(),
   serviceTier: z.nullable(ServiceTier$outboundSchema).optional(),
   tools: z.array(
     z.union([
@@ -2725,6 +2804,65 @@ export function incompleteDetailsFromJSON(
 }
 
 /** @internal */
+export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type
+  > = z.nativeEnum(
+    CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type,
+  );
+
+/** @internal */
+export const OutputSummary$inboundSchema: z.ZodType<
+  OutputSummary,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBody5Type$inboundSchema,
+  text: z.string(),
+});
+
+export function outputSummaryFromJSON(
+  jsonString: string,
+): SafeParseResult<OutputSummary, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OutputSummary$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OutputSummary' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateResponseOutputRouterResponsesResponse200Status$inboundSchema:
+  z.ZodNativeEnum<typeof CreateResponseOutputRouterResponsesResponse200Status> =
+    z.nativeEnum(CreateResponseOutputRouterResponsesResponse200Status);
+
+/** @internal */
+export const Output5$inboundSchema: z.ZodType<Output5, z.ZodTypeDef, unknown> =
+  z.object({
+    id: z.string(),
+    type: z.literal("reasoning"),
+    summary: z.array(z.lazy(() => OutputSummary$inboundSchema)).optional(),
+    encrypted_content: z.nullable(z.string()).optional(),
+    status: CreateResponseOutputRouterResponsesResponse200Status$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+    });
+  });
+
+export function output5FromJSON(
+  jsonString: string,
+): SafeParseResult<Output5, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Output5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Output5' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateResponseOutputRouterResponsesResponseStatus$inboundSchema:
   z.ZodNativeEnum<typeof CreateResponseOutputRouterResponsesResponseStatus> = z
     .nativeEnum(CreateResponseOutputRouterResponsesResponseStatus);
@@ -2785,11 +2923,11 @@ export const CreateResponseOutputStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateResponseOutputStatus);
 
 /** @internal */
-export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONType$inboundSchema:
+export const CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONType
+    typeof CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType
   > = z.nativeEnum(
-    CreateResponseOutputRouterResponsesResponse200ApplicationJSONType,
+    CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType,
   );
 
 /** @internal */
@@ -2813,7 +2951,7 @@ export function sourcesFromJSON(
 export const Action$inboundSchema: z.ZodType<Action, z.ZodTypeDef, unknown> = z
   .object({
     type:
-      CreateResponseOutputRouterResponsesResponse200ApplicationJSONType$inboundSchema,
+      CreateResponseOutputRouterResponsesResponse200ApplicationJSONResponseBodyType$inboundSchema,
     query: z.string().optional(),
     url: z.string().optional(),
     pattern: z.string().optional(),
@@ -2915,6 +3053,7 @@ export const Annotations1$inboundSchema: z.ZodType<
   end_index: z.number(),
   url: z.string(),
   title: z.string(),
+  text: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "start_index": "startIndex",
@@ -2966,7 +3105,7 @@ export const Content1$inboundSchema: z.ZodType<
       z.lazy(() => Annotations2$inboundSchema),
     ]),
   ).optional(),
-  logprobs: z.array(z.any()).optional(),
+  logprobs: z.nullable(z.array(z.any())).optional(),
 });
 
 export function content1FromJSON(
@@ -3031,6 +3170,7 @@ export const Output$inboundSchema: z.ZodType<Output, z.ZodTypeDef, unknown> = z
     z.lazy(() => Output2$inboundSchema),
     z.lazy(() => Output3$inboundSchema),
     z.lazy(() => Output4$inboundSchema),
+    z.lazy(() => Output5$inboundSchema),
   ]);
 
 export function outputFromJSON(
@@ -3218,8 +3358,8 @@ export const ToolsRankingOptions$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ranker: ToolsRanker$inboundSchema.default("auto"),
-  score_threshold: z.number().default(0),
+  ranker: ToolsRanker$inboundSchema.optional(),
+  score_threshold: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "score_threshold": "scoreThreshold",
@@ -3244,7 +3384,7 @@ export const CreateResponseTools4$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file_search"),
   vector_store_ids: z.array(z.string()).optional(),
-  max_num_results: z.number().int().default(20),
+  max_num_results: z.number().int().optional(),
   filters: z.any().optional(),
   ranking_options: z.lazy(() => ToolsRankingOptions$inboundSchema).optional(),
 }).transform((v) => {
@@ -3341,9 +3481,8 @@ export const CreateResponseTools3$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("web_search"),
   search_context_size:
-    CreateResponseToolsRouterResponsesSearchContextSize$inboundSchema.default(
-      "medium",
-    ),
+    CreateResponseToolsRouterResponsesSearchContextSize$inboundSchema
+      .optional(),
   user_location: z.lazy(() =>
     CreateResponseToolsRouterResponsesUserLocation$inboundSchema
   ).optional(),
@@ -3413,7 +3552,7 @@ export const CreateResponseTools2$inboundSchema: z.ZodType<
   type: z.literal("web_search_preview"),
   domains: z.array(z.string()).optional(),
   search_context_size: CreateResponseToolsSearchContextSize$inboundSchema
-    .default("medium"),
+    .optional(),
   user_location: z.lazy(() => CreateResponseToolsUserLocation$inboundSchema)
     .optional(),
 }).transform((v) => {
@@ -3624,7 +3763,7 @@ export const CreateResponseResponseBody$inboundSchema: z.ZodType<
   object: CreateResponseObject$inboundSchema,
   created_at: z.number(),
   status: CreateResponseStatus$inboundSchema,
-  error: z.nullable(z.lazy(() => ErrorT$inboundSchema)),
+  error: z.nullable(z.lazy(() => ErrorT$inboundSchema)).optional(),
   incomplete_details: z.nullable(z.lazy(() => IncompleteDetails$inboundSchema)),
   model: z.string(),
   instructions: z.nullable(z.string()).optional(),
@@ -3634,6 +3773,7 @@ export const CreateResponseResponseBody$inboundSchema: z.ZodType<
       z.lazy(() => Output2$inboundSchema),
       z.lazy(() => Output3$inboundSchema),
       z.lazy(() => Output4$inboundSchema),
+      z.lazy(() => Output5$inboundSchema),
     ]),
   ),
   output_text: z.nullable(z.string()).optional(),
@@ -3661,7 +3801,7 @@ export const CreateResponseResponseBody$inboundSchema: z.ZodType<
   store: z.boolean().optional(),
   text: z.lazy(() => CreateResponseRouterResponsesText$inboundSchema)
     .optional(),
-  truncation: z.nullable(Truncation$inboundSchema.default("disabled")),
+  truncation: z.nullable(Truncation$inboundSchema).optional(),
   user: z.nullable(z.string()).optional(),
   service_tier: z.nullable(CreateResponseServiceTier$inboundSchema).optional(),
   background: z.nullable(z.boolean()).optional(),

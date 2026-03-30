@@ -11,23 +11,17 @@ const value: operations.CreateResponseResponseBody = {
   object: "response",
   createdAt: 7960.72,
   status: "incomplete",
-  error: {
-    code: "<value>",
-    message: "<value>",
+  incompleteDetails: {
+    reason: "max_output_tokens",
   },
-  incompleteDetails: null,
   model: "911",
   output: [
     {
       id: "<id>",
-      type: "function_call",
-      callId: "<id>",
-      name: "<value>",
-      arguments: "<value>",
-      status: "incomplete",
+      type: "reasoning",
     },
   ],
-  parallelToolCalls: true,
+  parallelToolCalls: false,
 };
 ```
 

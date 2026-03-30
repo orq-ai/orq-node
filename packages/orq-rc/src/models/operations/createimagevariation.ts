@@ -925,7 +925,7 @@ export const CreateImageVariationRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   image: z.any().optional(),
   model: z.string(),
-  n: z.nullable(z.number().int().default(1)),
+  n: z.nullable(z.number().default(1)),
   responseFormat: CreateImageVariationResponseFormat$outboundSchema.default(
     "url",
   ),
