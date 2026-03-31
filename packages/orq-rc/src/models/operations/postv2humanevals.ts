@@ -548,7 +548,7 @@ export const RequestBody6$outboundSchema: z.ZodType<
   RequestBody6
 > = z.object({
   type: z.literal("text"),
-  key: z.string().default("orq_01kn1em1s6"),
+  key: z.string().default("orq_01kn1qewn1"),
   displayName: z.string(),
   description: z.string(),
   projectId: z.string().optional(),
@@ -611,7 +611,7 @@ export const Five$outboundSchema: z.ZodType<Five$Outbound, z.ZodTypeDef, Five> =
   z.object({
     type: z.literal("single_select"),
     options: z.array(z.lazy(() => RequestBodyOptions$outboundSchema)),
-    key: z.string().default("orq_01kn1em1s4"),
+    key: z.string().default("orq_01kn1qewn0"),
     displayName: z.string(),
     description: z.string(),
     projectId: z.string().optional(),
@@ -672,7 +672,7 @@ export const RequestBody4$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("multi_select"),
   options: z.array(z.lazy(() => Options$outboundSchema)),
-  key: z.string().default("orq_01kn1em1s3"),
+  key: z.string().default("orq_01kn1qewmy"),
   displayName: z.string(),
   description: z.string(),
   projectId: z.string().optional(),
@@ -725,7 +725,7 @@ export const PostV2HumanEvalsRequestBody3$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("range"),
   config: z.lazy(() => Config$outboundSchema),
-  key: z.string().default("orq_01kn1em1s1"),
+  key: z.string().default("orq_01kn1qewmx"),
   displayName: z.string(),
   description: z.string(),
   projectId: z.string().optional(),
@@ -762,7 +762,7 @@ export const PostV2HumanEvalsRequestBody2$outboundSchema: z.ZodType<
   PostV2HumanEvalsRequestBody2
 > = z.object({
   type: z.literal("correction"),
-  key: z.string().default("orq_01kn1em1s0"),
+  key: z.string().default("orq_01kn1qewmv"),
   displayName: z.string(),
   description: z.string(),
   projectId: z.string().optional(),
@@ -799,7 +799,7 @@ export const PostV2HumanEvalsRequestBody1$outboundSchema: z.ZodType<
   PostV2HumanEvalsRequestBody1
 > = z.object({
   type: z.literal("boolean"),
-  key: z.string().default("orq_01kn1em1rz"),
+  key: z.string().default("orq_01kn1qewmt"),
   displayName: z.string(),
   description: z.string(),
   projectId: z.string().optional(),
@@ -861,7 +861,7 @@ export const PostV2HumanEvalsResponseBody6$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("text"),
   id: z.string(),
-  key: z.string().default("orq_01kn1em1rx"),
+  key: z.string().default("orq_01kn1qewms"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -936,7 +936,7 @@ export const PostV2HumanEvalsResponseBody5$inboundSchema: z.ZodType<
     z.lazy(() => PostV2HumanEvalsResponseBodyResponseOptions$inboundSchema),
   ),
   id: z.string(),
-  key: z.string().default("orq_01kn1em1rv"),
+  key: z.string().default("orq_01kn1qewmp"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1006,7 +1006,7 @@ export const PostV2HumanEvalsResponseBody4$inboundSchema: z.ZodType<
     z.lazy(() => PostV2HumanEvalsResponseBodyOptions$inboundSchema),
   ),
   id: z.string(),
-  key: z.string().default("orq_01kn1em1rq"),
+  key: z.string().default("orq_01kn1qewmj"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1065,7 +1065,7 @@ export const PostV2HumanEvalsResponseBody3$inboundSchema: z.ZodType<
   type: z.literal("range"),
   config: z.lazy(() => PostV2HumanEvalsResponseBodyConfig$inboundSchema),
   id: z.string(),
-  key: z.string().default("orq_01kn1em1rn"),
+  key: z.string().default("orq_01kn1qewmg"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1102,7 +1102,7 @@ export const PostV2HumanEvalsResponseBody2$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("correction"),
   id: z.string(),
-  key: z.string().default("orq_01kn1em1rk"),
+  key: z.string().default("orq_01kn1qewme"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1139,7 +1139,7 @@ export const PostV2HumanEvalsResponseBody1$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("boolean"),
   id: z.string(),
-  key: z.string().default("orq_01kn1em1rj"),
+  key: z.string().default("orq_01kn1qewmd"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
