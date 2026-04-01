@@ -206,6 +206,10 @@ export type RetrieveToolResponseBodyMcp = {
    * The connection type used by the MCP server
    */
   connectionType: RetrieveToolResponseBodyConnectionType;
+  /**
+   * Names of template variables detected in server_url and headers. Used by the FE to prompt for one-time values on sync/refresh.
+   */
+  templateVariables?: Array<string> | null | undefined;
 };
 
 /**
@@ -754,7 +758,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKRGE3WK98YVXVJGQP2M"),
+  _id: z.string().default("tool_01KN4PGYM3A0HQWJHRZ2QS1XPV"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -862,7 +866,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KN46CKRF13W831S8QE2896J3"),
+  id: z.string().default("01KN4PGYM2NN3PRQDWJXMQ8ZEM"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -895,10 +899,12 @@ export const RetrieveToolResponseBodyMcp$inboundSchema: z.ZodType<
     .optional(),
   tools: z.array(z.lazy(() => RetrieveToolResponseBodyTools$inboundSchema)),
   connection_type: RetrieveToolResponseBodyConnectionType$inboundSchema,
+  template_variables: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_url": "serverUrl",
     "connection_type": "connectionType",
+    "template_variables": "templateVariables",
   });
 });
 
@@ -918,7 +924,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKRE7ES7MGZ22A67VM0H"),
+  _id: z.string().default("tool_01KN4PGYM1PHF5QXT0ETYJ469Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1111,7 +1117,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKRC1D8KVB0AX6R35XTS"),
+  _id: z.string().default("tool_01KN4PGYKZ8Q53FGY84QFG2K2P"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1209,7 +1215,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKRAWFJYMJZXNAYZV424"),
+  _id: z.string().default("tool_01KN4PGYKX0NXWXW2JN3THA5N7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1317,7 +1323,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKR8FVXY6ECWZ9W4FP93"),
+  _id: z.string().default("tool_01KN4PGYKVRDNDAJCGRJDD1FKM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

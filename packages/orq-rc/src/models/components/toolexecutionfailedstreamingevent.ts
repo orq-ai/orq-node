@@ -59,6 +59,8 @@ export type ToolExecutionFailedStreamingEventToolExecutionContext = {
   product: ToolExecutionFailedStreamingEventProduct;
   memory?: ToolExecutionFailedStreamingEventMemory | undefined;
   parentId?: string | undefined;
+  variables?: { [k: string]: any } | undefined;
+  secretKeys?: Array<string> | undefined;
 };
 
 export type ToolExecutionFailedStreamingEventData = {
@@ -149,6 +151,8 @@ export const ToolExecutionFailedStreamingEventToolExecutionContext$inboundSchema
     memory: z.lazy(() => ToolExecutionFailedStreamingEventMemory$inboundSchema)
       .optional(),
     parent_id: z.string().optional(),
+    variables: z.record(z.any()).optional(),
+    secret_keys: z.array(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "action_id": "actionId",
@@ -157,6 +161,7 @@ export const ToolExecutionFailedStreamingEventToolExecutionContext$inboundSchema
       "agent_manifest_id": "agentManifestId",
       "agent_execution_id": "agentExecutionId",
       "parent_id": "parentId",
+      "secret_keys": "secretKeys",
     });
   });
 

@@ -217,6 +217,10 @@ export type DataMcp = {
    * The connection type used by the MCP server
    */
   connectionType: DataConnectionType;
+  /**
+   * Names of template variables detected in server_url and headers. Used by the FE to prompt for one-time values on sync/refresh.
+   */
+  templateVariables?: Array<string> | null | undefined;
 };
 
 /**
@@ -768,7 +772,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKPQBJCKQTDPB5D6HZVY"),
+  _id: z.string().default("tool_01KN4PGYJ2BND4H90Q2S7YP2T0"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -867,7 +871,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KN46CKPPJH5WKEERMDPN2TEB"),
+  id: z.string().default("01KN4PGYJ1V564TZ52F0KW3Z0H"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -895,10 +899,12 @@ export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
     headers: z.record(z.lazy(() => DataHeaders$inboundSchema)).optional(),
     tools: z.array(z.lazy(() => DataTools$inboundSchema)),
     connection_type: DataConnectionType$inboundSchema,
+    template_variables: z.nullable(z.array(z.string())).optional(),
   }).transform((v) => {
     return remap$(v, {
       "server_url": "serverUrl",
       "connection_type": "connectionType",
+      "template_variables": "templateVariables",
     });
   });
 
@@ -918,7 +924,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKPN6A6Q695FT4DBAZWW"),
+  _id: z.string().default("tool_01KN4PGYJ02FQB9RCHM8FXTDW4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1105,7 +1111,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKPK8097MMWWAC6DPHEQ"),
+  _id: z.string().default("tool_01KN4PGYHYPHJDWRVHV5QSFR8X"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1200,7 +1206,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKPJ6RV4B7JQK8PQW8NG"),
+  _id: z.string().default("tool_01KN4PGYHWAJ0DHSVTPH43TZQV"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1304,7 +1310,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KN46CKPGWE1JH5K4KDGERN4F"),
+  _id: z.string().default("tool_01KN4PGYHVSYPQC3ZT05X9JXXP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
