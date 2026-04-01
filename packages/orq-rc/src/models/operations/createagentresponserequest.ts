@@ -157,6 +157,21 @@ export type Memory = {
 };
 
 /**
+ * Override template engine for this invocation. If not provided, uses the agent default.
+ */
+export const CreateAgentResponseRequestEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+/**
+ * Override template engine for this invocation. If not provided, uses the agent default.
+ */
+export type CreateAgentResponseRequestEngine = ClosedEnum<
+  typeof CreateAgentResponseRequestEngine
+>;
+
+/**
  * Configuration options for the agent invocation
  */
 export type Configuration = {
@@ -211,6 +226,10 @@ export type CreateAgentResponseRequestRequestBody = {
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Override template engine for this invocation. If not provided, uses the agent default.
+   */
+  engine?: CreateAgentResponseRequestEngine | undefined;
   /**
    * Configuration options for the agent invocation
    */
@@ -460,6 +479,11 @@ export function memoryToJSON(memory: Memory): string {
 }
 
 /** @internal */
+export const CreateAgentResponseRequestEngine$outboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentResponseRequestEngine
+> = z.nativeEnum(CreateAgentResponseRequestEngine);
+
+/** @internal */
 export type Configuration$Outbound = {
   blocking: boolean;
 };
@@ -509,6 +533,7 @@ export type CreateAgentResponseRequestRequestBody$Outbound = {
   thread?: CreateAgentResponseRequestThread$Outbound | undefined;
   memory?: Memory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
+  engine?: string | undefined;
   configuration?: Configuration$Outbound | undefined;
   background: boolean;
   stream: boolean;
@@ -530,6 +555,7 @@ export const CreateAgentResponseRequestRequestBody$outboundSchema: z.ZodType<
     .optional(),
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+  engine: CreateAgentResponseRequestEngine$outboundSchema.optional(),
   configuration: z.lazy(() => Configuration$outboundSchema).optional(),
   background: z.boolean().default(false),
   stream: z.boolean().default(false),

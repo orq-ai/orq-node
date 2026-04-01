@@ -13,6 +13,29 @@ export type RetrieveIdentityRequest = {
    * Unique identity id or external id
    */
   id: string;
+  /**
+   * Include usage metrics of the last 30 days for the identity.
+   */
+  includeMetrics?: boolean | null | undefined;
+};
+
+export type Metrics = {
+  /**
+   * Total cost in dollars of the last 30 days
+   */
+  totalCost: number;
+  /**
+   * Total tokens of the last 30 days
+   */
+  totalTokens: number;
+  /**
+   * Total requests of the last 30 days
+   */
+  totalRequests: number;
+  /**
+   * Error rate of the last 30 days as a ratio (0–1)
+   */
+  errorRate: number;
 };
 
 /**
@@ -55,11 +78,13 @@ export type RetrieveIdentityResponseBody = {
    * The date and time the resource was last updated
    */
   updated: Date;
+  metrics?: Metrics | null | undefined;
 };
 
 /** @internal */
 export type RetrieveIdentityRequest$Outbound = {
   id: string;
+  include_metrics: boolean | null;
 };
 
 /** @internal */
@@ -69,6 +94,11 @@ export const RetrieveIdentityRequest$outboundSchema: z.ZodType<
   RetrieveIdentityRequest
 > = z.object({
   id: z.string(),
+  includeMetrics: z.nullable(z.boolean().default(false)),
+}).transform((v) => {
+  return remap$(v, {
+    includeMetrics: "include_metrics",
+  });
 });
 
 export function retrieveIdentityRequestToJSON(
@@ -76,6 +106,32 @@ export function retrieveIdentityRequestToJSON(
 ): string {
   return JSON.stringify(
     RetrieveIdentityRequest$outboundSchema.parse(retrieveIdentityRequest),
+  );
+}
+
+/** @internal */
+export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
+  z.object({
+    total_cost: z.number(),
+    total_tokens: z.number(),
+    total_requests: z.number(),
+    error_rate: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+      "total_tokens": "totalTokens",
+      "total_requests": "totalRequests",
+      "error_rate": "errorRate",
+    });
+  });
+
+export function metricsFromJSON(
+  jsonString: string,
+): SafeParseResult<Metrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Metrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metrics' from JSON`,
   );
 }
 
@@ -95,8 +151,9 @@ export const RetrieveIdentityResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-04-01T06:57:21.910Z",
+    "2026-04-01T09:35:42.364Z",
   ).transform(v => new Date(v)),
+  metrics: z.nullable(z.lazy(() => Metrics$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

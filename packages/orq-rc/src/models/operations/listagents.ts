@@ -89,6 +89,13 @@ export const ListAgentsSource = {
 } as const;
 export type ListAgentsSource = ClosedEnum<typeof ListAgentsSource>;
 
+export const ListAgentsEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+export type ListAgentsEngine = ClosedEnum<typeof ListAgentsEngine>;
+
 /**
  * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
  */
@@ -1136,6 +1143,7 @@ export type ListAgentsData = {
    */
   knowledgeBases?: Array<ListAgentsKnowledgeBases> | undefined;
   source?: ListAgentsSource | undefined;
+  engine: ListAgentsEngine;
   /**
    * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
    */
@@ -1279,6 +1287,11 @@ export function listAgentsKnowledgeBasesFromJSON(
 export const ListAgentsSource$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsSource
 > = z.nativeEnum(ListAgentsSource);
+
+/** @internal */
+export const ListAgentsEngine$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsEngine
+> = z.nativeEnum(ListAgentsEngine);
 
 /** @internal */
 export const ListAgentsType$inboundSchema: z.ZodNativeEnum<
@@ -2709,6 +2722,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
     .optional(),
   source: ListAgentsSource$inboundSchema.optional(),
+  engine: ListAgentsEngine$inboundSchema.default("text"),
   type: ListAgentsType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),

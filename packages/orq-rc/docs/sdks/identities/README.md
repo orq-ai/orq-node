@@ -265,10 +265,11 @@ run();
 
 ### Errors
 
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.RetrieveIdentityResponseBody | 404                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+| Error Type                                    | Status Code                                   | Content Type                                  |
+| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| errors.RetrieveIdentityResponseBody           | 404                                           | application/json                              |
+| errors.RetrieveIdentityIdentitiesResponseBody | 500                                           | application/json                              |
+| errors.APIError                               | 4XX, 5XX                                      | \*/\*                                         |
 
 ## update
 

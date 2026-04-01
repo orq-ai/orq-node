@@ -147,6 +147,7 @@ export type ResponseBodyTypescript = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
+    | null
     | undefined;
   code: string;
   type: UpdateEvalResponseBodyEvalsResponse200ApplicationJson7Type;
@@ -218,6 +219,7 @@ export type ResponseBodyRagas = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
+    | null
     | undefined;
   type: UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType;
   ragasMetric: ResponseBodyRagasMetric;
@@ -445,6 +447,7 @@ export type ResponseBodyFunction = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsResponse200Boolean
     | UpdateEvalGuardrailConfigEvalsResponse200Number
+    | null
     | undefined;
   type: UpdateEvalResponseBodyEvalsResponse200Type;
   functionParams:
@@ -529,6 +532,7 @@ export type UpdateEvalResponseBodyPython = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsResponseBoolean
     | UpdateEvalGuardrailConfigEvalsResponseNumber
+    | null
     | undefined;
   code: string;
   type: UpdateEvalResponseBodyEvalsResponseType;
@@ -589,6 +593,7 @@ export type UpdateEvalResponseBodyHTTP = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsBoolean
     | UpdateEvalGuardrailConfigEvalsNumber
+    | null
     | undefined;
   type: UpdateEvalResponseBodyEvalsType;
   url: string;
@@ -644,6 +649,7 @@ export type UpdateEvalResponseBodyJSON = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigBoolean
     | UpdateEvalGuardrailConfigNumber
+    | null
     | undefined;
   type: UpdateEvalResponseBodyType;
   schema: string;
@@ -741,6 +747,7 @@ export type UpdateEvalLlm2 = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber
+    | null
     | undefined;
   type: UpdateEvalLLMEvalsType;
   repetitions?: number | undefined;
@@ -799,6 +806,7 @@ export type UpdateEvalLlm1 = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number
+    | null
     | undefined;
   type: UpdateEvalLLMType;
   repetitions?: number | undefined;
@@ -1212,16 +1220,18 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
-    ),
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
-    ),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
+      ),
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
+      ),
+    ]),
+  ).optional(),
   code: z.string(),
   type:
     UpdateEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema,
@@ -1366,16 +1376,18 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
-    ),
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
-    ),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
+      ),
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
+      ),
+    ]),
+  ).optional(),
   type: UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema,
   ragas_metric: ResponseBodyRagasMetric$inboundSchema,
   key: z.string(),
@@ -2182,14 +2194,18 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
-    ),
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
+      ),
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema
+      ),
+    ]),
+  ).optional(),
   type: UpdateEvalResponseBodyEvalsResponse200Type$inboundSchema,
   function_params: z.union([
     z.lazy(() => UpdateEvalFunctionParams1$inboundSchema),
@@ -2356,12 +2372,14 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
+      z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
+    ]),
+  ).optional(),
   code: z.string(),
   type: UpdateEvalResponseBodyEvalsResponseType$inboundSchema,
   key: z.string(),
@@ -2485,12 +2503,14 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$inboundSchema),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
+      z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$inboundSchema),
+    ]),
+  ).optional(),
   type: UpdateEvalResponseBodyEvalsType$inboundSchema,
   url: z.string(),
   method: UpdateEvalResponseBodyMethod$inboundSchema,
@@ -2606,12 +2626,14 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
-    z.lazy(() => UpdateEvalGuardrailConfigNumber$inboundSchema),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
+      z.lazy(() => UpdateEvalGuardrailConfigNumber$inboundSchema),
+    ]),
+  ).optional(),
   type: UpdateEvalResponseBodyType$inboundSchema,
   schema: z.string(),
   key: z.string(),
@@ -2908,16 +2930,18 @@ export const UpdateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema
-    ),
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber$inboundSchema
-    ),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean$inboundSchema
+      ),
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber$inboundSchema
+      ),
+    ]),
+  ).optional(),
   type: UpdateEvalLLMEvalsType$inboundSchema,
   repetitions: z.number().int().optional(),
   prompt: z.string(),
@@ -3052,16 +3076,18 @@ export const UpdateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-04-01T06:57:24.533Z"),
-  updated: z.string().default("2026-04-01T06:57:24.533Z"),
-  guardrail_config: z.union([
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema
-    ),
-    z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number$inboundSchema
-    ),
-  ]).optional(),
+  created: z.string().default("2026-04-01T09:35:44.562Z"),
+  updated: z.string().default("2026-04-01T09:35:44.562Z"),
+  guardrail_config: z.nullable(
+    z.union([
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean$inboundSchema
+      ),
+      z.lazy(() =>
+        UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number$inboundSchema
+      ),
+    ]),
+  ).optional(),
   type: UpdateEvalLLMType$inboundSchema,
   repetitions: z.number().int().optional(),
   prompt: z.string(),

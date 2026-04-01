@@ -6,6 +6,43 @@ import * as z from "zod/v3";
 import { OrqError } from "./orqerror.js";
 
 /**
+ * Failed to fetch metrics
+ */
+export type RetrieveIdentityIdentitiesResponseBodyData = {
+  /**
+   * Error message
+   */
+  error: string;
+};
+
+/**
+ * Failed to fetch metrics
+ */
+export class RetrieveIdentityIdentitiesResponseBody extends OrqError {
+  /**
+   * Error message
+   */
+  error: string;
+
+  /** The original data that was passed to this error instance. */
+  data$: RetrieveIdentityIdentitiesResponseBodyData;
+
+  constructor(
+    err: RetrieveIdentityIdentitiesResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = "message" in err && typeof err.message === "string"
+      ? err.message
+      : `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "RetrieveIdentityIdentitiesResponseBody";
+  }
+}
+
+/**
  * Identity not found
  */
 export type RetrieveIdentityResponseBodyData = {
@@ -41,6 +78,25 @@ export class RetrieveIdentityResponseBody extends OrqError {
     this.name = "RetrieveIdentityResponseBody";
   }
 }
+
+/** @internal */
+export const RetrieveIdentityIdentitiesResponseBody$inboundSchema: z.ZodType<
+  RetrieveIdentityIdentitiesResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  error: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
+})
+  .transform((v) => {
+    return new RetrieveIdentityIdentitiesResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
+  });
 
 /** @internal */
 export const RetrieveIdentityResponseBody$inboundSchema: z.ZodType<
