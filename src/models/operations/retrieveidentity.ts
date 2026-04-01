@@ -95,7 +95,7 @@ export const RetrieveIdentityResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-03-29T20:30:04.643Z",
+    "2026-04-01T06:57:21.910Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

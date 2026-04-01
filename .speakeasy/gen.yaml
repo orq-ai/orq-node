@@ -50,6 +50,7 @@ typescript:
   enumFormat: union
   envVarPrefix: ORQ
   exportZodModelNamespace: false
+  fixEnumNameSanitization: false
   flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: body-first
