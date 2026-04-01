@@ -329,10 +329,6 @@ export type CreateImageRequestBody = {
    */
   style?: Style | null | undefined;
   /**
-   * Optional metadata for the request. This metadata will be stored in the trace and can be used for filtering.
-   */
-  metadata?: { [k: string]: string } | undefined;
-  /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
@@ -877,7 +873,6 @@ export type CreateImageRequestBody$Outbound = {
   response_format?: string | null | undefined;
   size?: string | null | undefined;
   style?: string | null | undefined;
-  metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
   fallbacks?: Array<CreateImageFallbacks$Outbound> | undefined;
   retry?: CreateImageRetry$Outbound | undefined;
@@ -905,7 +900,6 @@ export const CreateImageRequestBody$outboundSchema: z.ZodType<
     .optional(),
   size: z.nullable(z.string()).optional(),
   style: z.nullable(Style$outboundSchema).optional(),
-  metadata: z.record(z.string()).optional(),
   name: z.string().optional(),
   fallbacks: z.array(z.lazy(() => CreateImageFallbacks$outboundSchema))
     .optional(),

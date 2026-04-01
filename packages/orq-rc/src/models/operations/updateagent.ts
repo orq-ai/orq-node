@@ -1419,13 +1419,6 @@ export type UpdateAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export const UpdateAgentEngine = {
-  Text: "text",
-  Jinja: "jinja",
-  Mustache: "mustache",
-} as const;
-export type UpdateAgentEngine = ClosedEnum<typeof UpdateAgentEngine>;
-
 export type UpdateAgentHeaders = {
   /**
    * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
@@ -1515,7 +1508,6 @@ export type UpdateAgentRequestBody = {
    * Extracted variables from agent instructions
    */
   variables?: { [k: string]: any } | undefined;
-  engine?: UpdateAgentEngine | undefined;
   /**
    * Update A2A agent configuration (only applicable to A2A agents)
    */
@@ -1580,15 +1572,6 @@ export const UpdateAgentSource = {
   Experiment: "experiment",
 } as const;
 export type UpdateAgentSource = ClosedEnum<typeof UpdateAgentSource>;
-
-export const UpdateAgentAgentsEngine = {
-  Text: "text",
-  Jinja: "jinja",
-  Mustache: "mustache",
-} as const;
-export type UpdateAgentAgentsEngine = ClosedEnum<
-  typeof UpdateAgentAgentsEngine
->;
 
 /**
  * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
@@ -2660,7 +2643,6 @@ export type UpdateAgentResponseBody = {
    */
   knowledgeBases?: Array<UpdateAgentAgentsKnowledgeBases> | undefined;
   source?: UpdateAgentSource | undefined;
-  engine: UpdateAgentAgentsEngine;
   /**
    * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
    */
@@ -5045,11 +5027,6 @@ export function updateAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
-export const UpdateAgentEngine$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentEngine
-> = z.nativeEnum(UpdateAgentEngine);
-
-/** @internal */
 export type UpdateAgentHeaders$Outbound = {
   value: string;
   encrypted: boolean;
@@ -5128,7 +5105,6 @@ export type UpdateAgentRequestBody$Outbound = {
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
-  engine?: string | undefined;
   a2a?: UpdateA2AConfiguration$Outbound | undefined;
   versionIncrement?: string | undefined;
   versionDescription?: string | undefined;
@@ -5166,7 +5142,6 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
     .optional(),
   variables: z.record(z.any()).optional(),
-  engine: UpdateAgentEngine$outboundSchema.optional(),
   a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
   versionIncrement: UpdateAgentVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
@@ -5294,11 +5269,6 @@ export function updateAgentAgentsKnowledgeBasesFromJSON(
 export const UpdateAgentSource$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentSource
 > = z.nativeEnum(UpdateAgentSource);
-
-/** @internal */
-export const UpdateAgentAgentsEngine$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateAgentAgentsEngine
-> = z.nativeEnum(UpdateAgentAgentsEngine);
 
 /** @internal */
 export const UpdateAgentType$inboundSchema: z.ZodNativeEnum<
@@ -6854,7 +6824,6 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => UpdateAgentAgentsKnowledgeBases$inboundSchema),
   ).optional(),
   source: UpdateAgentSource$inboundSchema.optional(),
-  engine: UpdateAgentAgentsEngine$inboundSchema.default("text"),
   type: UpdateAgentType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),

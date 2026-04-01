@@ -1643,19 +1643,6 @@ export type RunAgentSettings = {
   guardrails?: Array<RunAgentGuardrails> | undefined;
 };
 
-/**
- * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
- */
-export const RunAgentEngine = {
-  Text: "text",
-  Jinja: "jinja",
-  Mustache: "mustache",
-} as const;
-/**
- * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
- */
-export type RunAgentEngine = ClosedEnum<typeof RunAgentEngine>;
-
 export type RunAgentRequestBody = {
   /**
    * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed.
@@ -1744,10 +1731,6 @@ export type RunAgentRequestBody = {
    * Optional metadata for the agent run as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
-  /**
-   * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
-   */
-  engine?: RunAgentEngine | undefined;
 };
 
 /**
@@ -3628,7 +3611,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KN3FYZXEP8ET1XJ4PRZF5RE4"),
+  id: z.string().default("01KN3XARBNRNPWM3J08JQKJKGF"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4756,11 +4739,6 @@ export function runAgentSettingsToJSON(
 }
 
 /** @internal */
-export const RunAgentEngine$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentEngine
-> = z.nativeEnum(RunAgentEngine);
-
-/** @internal */
 export type RunAgentRequestBody$Outbound = {
   key: string;
   task_id?: string | undefined;
@@ -4784,7 +4762,6 @@ export type RunAgentRequestBody$Outbound = {
   team_of_agents?: Array<RunAgentTeamOfAgents$Outbound> | undefined;
   settings: RunAgentSettings$Outbound;
   metadata?: { [k: string]: any } | undefined;
-  engine: string;
 };
 
 /** @internal */
@@ -4823,7 +4800,6 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   settings: z.lazy(() => RunAgentSettings$outboundSchema),
   metadata: z.record(z.any()).optional(),
-  engine: RunAgentEngine$outboundSchema.default("text"),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",

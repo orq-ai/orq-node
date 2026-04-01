@@ -162,19 +162,6 @@ export type InvokeAgentMemory = {
 };
 
 /**
- * Override template engine for this invocation. If not provided, uses the agent default.
- */
-export const InvokeAgentEngine = {
-  Text: "text",
-  Jinja: "jinja",
-  Mustache: "mustache",
-} as const;
-/**
- * Override template engine for this invocation. If not provided, uses the agent default.
- */
-export type InvokeAgentEngine = ClosedEnum<typeof InvokeAgentEngine>;
-
-/**
  * Configuration options for the agent invocation
  */
 export type InvokeAgentConfiguration = {
@@ -219,10 +206,6 @@ export type InvokeAgentRequestBody = {
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
-  /**
-   * Override template engine for this invocation. If not provided, uses the agent default.
-   */
-  engine?: InvokeAgentEngine | undefined;
   /**
    * Configuration options for the agent invocation
    */
@@ -585,11 +568,6 @@ export function invokeAgentMemoryToJSON(
 }
 
 /** @internal */
-export const InvokeAgentEngine$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentEngine
-> = z.nativeEnum(InvokeAgentEngine);
-
-/** @internal */
 export type InvokeAgentConfiguration$Outbound = {
   blocking: boolean;
 };
@@ -621,7 +599,6 @@ export type InvokeAgentRequestBody$Outbound = {
   thread?: InvokeAgentThread$Outbound | undefined;
   memory?: InvokeAgentMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
-  engine?: string | undefined;
   configuration?: InvokeAgentConfiguration$Outbound | undefined;
 };
 
@@ -639,7 +616,6 @@ export const InvokeAgentRequestBody$outboundSchema: z.ZodType<
   thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => InvokeAgentMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
-  engine: InvokeAgentEngine$outboundSchema.optional(),
   configuration: z.lazy(() => InvokeAgentConfiguration$outboundSchema)
     .optional(),
 }).transform((v) => {

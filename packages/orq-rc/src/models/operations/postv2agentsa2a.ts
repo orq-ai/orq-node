@@ -54,7 +54,7 @@ export const PostV2AgentsA2aType = {
 } as const;
 export type PostV2AgentsA2aType = ClosedEnum<typeof PostV2AgentsA2aType>;
 
-export type PostV2AgentsA2aMetrics = {
+export type Metrics = {
   totalCost: number;
 };
 
@@ -83,7 +83,7 @@ export type PostV2AgentsA2aResponseBody = {
   status: string;
   versionHash?: string | undefined;
   path: string;
-  metrics: PostV2AgentsA2aMetrics;
+  metrics: Metrics;
   memoryStores: Array<string>;
   teamOfAgents: Array<any>;
   created?: string | undefined;
@@ -157,25 +157,22 @@ export const PostV2AgentsA2aType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PostV2AgentsA2aType);
 
 /** @internal */
-export const PostV2AgentsA2aMetrics$inboundSchema: z.ZodType<
-  PostV2AgentsA2aMetrics,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_cost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_cost": "totalCost",
+export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
+  z.object({
+    total_cost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+    });
   });
-});
 
-export function postV2AgentsA2aMetricsFromJSON(
+export function metricsFromJSON(
   jsonString: string,
-): SafeParseResult<PostV2AgentsA2aMetrics, SDKValidationError> {
+): SafeParseResult<Metrics, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostV2AgentsA2aMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV2AgentsA2aMetrics' from JSON`,
+    (x) => Metrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metrics' from JSON`,
   );
 }
 
@@ -224,7 +221,7 @@ export const PostV2AgentsA2aResponseBody$inboundSchema: z.ZodType<
   status: z.string(),
   version_hash: z.string().optional(),
   path: z.string(),
-  metrics: z.lazy(() => PostV2AgentsA2aMetrics$inboundSchema),
+  metrics: z.lazy(() => Metrics$inboundSchema),
   memory_stores: z.array(z.string()),
   team_of_agents: z.array(z.any()),
   created: z.string().optional(),

@@ -114,10 +114,6 @@ export type AgenticChunkerStrategy = {
    * Minimum characters allowed per chunk
    */
   minCharactersPerChunk?: number | undefined;
-  /**
-   * Custom system prompt for the agentic chunker LLM. Overrides the default prompt that instructs the model how to identify chunk boundaries. Maximum 20,000 tokens.
-   */
-  systemPrompt?: string | undefined;
 };
 
 /**
@@ -437,7 +433,6 @@ export type AgenticChunkerStrategy$Outbound = {
   chunk_size: number;
   candidate_size: number;
   min_characters_per_chunk: number;
-  system_prompt?: string | undefined;
 };
 
 /** @internal */
@@ -455,14 +450,12 @@ export const AgenticChunkerStrategy$outboundSchema: z.ZodType<
   chunkSize: z.number().int().default(1024),
   candidateSize: z.number().int().default(128),
   minCharactersPerChunk: z.number().int().default(24),
-  systemPrompt: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     returnType: "return_type",
     chunkSize: "chunk_size",
     candidateSize: "candidate_size",
     minCharactersPerChunk: "min_characters_per_chunk",
-    systemPrompt: "system_prompt",
   });
 });
 
