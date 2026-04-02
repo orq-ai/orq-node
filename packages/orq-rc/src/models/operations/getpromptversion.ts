@@ -357,6 +357,7 @@ export const GetPromptVersionProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Tensorix: "tensorix",
+  Hcompany: "hcompany",
   Slack: "slack",
   Orq: "orq",
 } as const;

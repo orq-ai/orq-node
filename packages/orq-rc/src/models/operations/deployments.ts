@@ -418,6 +418,7 @@ export const DeploymentsProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Tensorix: "tensorix",
+  Hcompany: "hcompany",
   Slack: "slack",
   Orq: "orq",
 } as const;
