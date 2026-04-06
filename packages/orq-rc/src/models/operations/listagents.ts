@@ -1150,7 +1150,7 @@ export type ListAgentsData = {
   type: ListAgentsType;
   role: string;
   description: string;
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   instructions: string;
   settings?: ListAgentsSettings | undefined;
   model: ListAgentsModel;
@@ -2726,7 +2726,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   type: ListAgentsType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),
-  system_prompt: z.string().optional(),
+  system_prompt: z.nullable(z.string()).optional(),
   instructions: z.string(),
   settings: z.lazy(() => ListAgentsSettings$inboundSchema).optional(),
   model: z.lazy(() => ListAgentsModel$inboundSchema),

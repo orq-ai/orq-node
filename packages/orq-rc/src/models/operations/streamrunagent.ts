@@ -1763,7 +1763,7 @@ export type StreamRunAgentRequestBody = {
   /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   /**
    * Array of memory store identifiers that are accessible to the agent. Accepts both memory store IDs and keys.
    */
@@ -3675,7 +3675,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KN9Z7D2NBRTJ9MQFF857QQH9"),
+  id: z.string().default("01KNGMV8HSSJXB318C5DYCQMCQ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -4974,7 +4974,7 @@ export type StreamRunAgentRequestBody$Outbound = {
   memory?: StreamRunAgentMemory$Outbound | undefined;
   path: string;
   description?: string | undefined;
-  system_prompt?: string | undefined;
+  system_prompt?: string | null | undefined;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<StreamRunAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<StreamRunAgentTeamOfAgents$Outbound> | undefined;
@@ -5012,7 +5012,7 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   memory: z.lazy(() => StreamRunAgentMemory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
-  systemPrompt: z.string().optional(),
+  systemPrompt: z.nullable(z.string()).optional(),
   memoryStores: z.array(z.string()).optional(),
   knowledgeBases: z.array(
     z.lazy(() => StreamRunAgentKnowledgeBases$outboundSchema),

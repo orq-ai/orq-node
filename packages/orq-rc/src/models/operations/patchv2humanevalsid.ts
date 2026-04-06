@@ -614,7 +614,7 @@ export type Six$Outbound = {
 export const Six$outboundSchema: z.ZodType<Six$Outbound, z.ZodTypeDef, Six> = z
   .object({
     type: z.literal("text"),
-    key: z.string().default("orq_01kn9z7dqf"),
+    key: z.string().default("orq_01kngmv97e"),
     displayName: z.string(),
     description: z.string(),
     createdById: z.string().optional(),
@@ -692,7 +692,7 @@ export const RequestBody5$outboundSchema: z.ZodType<
   options: z.array(
     z.lazy(() => PatchV2HumanEvalsIdRequestBodyOptionsInput$outboundSchema),
   ),
-  key: z.string().default("orq_01kn9z7dqe"),
+  key: z.string().default("orq_01kngmv97d"),
   displayName: z.string(),
   description: z.string(),
   createdById: z.string().optional(),
@@ -768,7 +768,7 @@ export const PatchV2HumanEvalsIdRequestBody4$outboundSchema: z.ZodType<
   options: z.array(
     z.lazy(() => PatchV2HumanEvalsIdRequestBodyOptions$outboundSchema),
   ),
-  key: z.string().default("orq_01kn9z7dqd"),
+  key: z.string().default("orq_01kngmv97c"),
   displayName: z.string(),
   description: z.string(),
   createdById: z.string().optional(),
@@ -837,7 +837,7 @@ export const PatchV2HumanEvalsIdRequestBody3$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("range"),
   config: z.lazy(() => RequestBodyConfig$outboundSchema),
-  key: z.string().default("orq_01kn9z7dqb"),
+  key: z.string().default("orq_01kngmv97a"),
   displayName: z.string(),
   description: z.string(),
   createdById: z.string().optional(),
@@ -880,7 +880,7 @@ export const PatchV2HumanEvalsIdRequestBody2$outboundSchema: z.ZodType<
   PatchV2HumanEvalsIdRequestBody2
 > = z.object({
   type: z.literal("correction"),
-  key: z.string().default("orq_01kn9z7dqa"),
+  key: z.string().default("orq_01kngmv978"),
   displayName: z.string(),
   description: z.string(),
   createdById: z.string().optional(),
@@ -923,7 +923,7 @@ export const PatchV2HumanEvalsIdRequestBody1$outboundSchema: z.ZodType<
   PatchV2HumanEvalsIdRequestBody1
 > = z.object({
   type: z.literal("boolean"),
-  key: z.string().default("orq_01kn9z7dq9"),
+  key: z.string().default("orq_01kngmv977"),
   displayName: z.string(),
   description: z.string(),
   createdById: z.string().optional(),
@@ -1031,7 +1031,7 @@ export const PatchV2HumanEvalsIdResponseBody6$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("text"),
   id: z.string(),
-  key: z.string().default("orq_01kn9z7dq7"),
+  key: z.string().default("orq_01kngmv975"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1106,7 +1106,7 @@ export const PatchV2HumanEvalsIdResponseBody5$inboundSchema: z.ZodType<
     z.lazy(() => PatchV2HumanEvalsIdResponseBodyResponseOptions$inboundSchema),
   ),
   id: z.string(),
-  key: z.string().default("orq_01kn9z7dq6"),
+  key: z.string().default("orq_01kngmv974"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1175,7 +1175,7 @@ export const PatchV2HumanEvalsIdResponseBody4$inboundSchema: z.ZodType<
     z.lazy(() => PatchV2HumanEvalsIdResponseBodyOptions$inboundSchema),
   ),
   id: z.string(),
-  key: z.string().default("orq_01kn9z7dq4"),
+  key: z.string().default("orq_01kngmv972"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1234,7 +1234,7 @@ export const PatchV2HumanEvalsIdResponseBody3$inboundSchema: z.ZodType<
   type: z.literal("range"),
   config: z.lazy(() => PatchV2HumanEvalsIdResponseBodyConfig$inboundSchema),
   id: z.string(),
-  key: z.string().default("orq_01kn9z7dq2"),
+  key: z.string().default("orq_01kngmv970"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1271,7 +1271,7 @@ export const PatchV2HumanEvalsIdResponseBody2$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("correction"),
   id: z.string(),
-  key: z.string().default("orq_01kn9z7dq0"),
+  key: z.string().default("orq_01kngmv96y"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),
@@ -1308,7 +1308,7 @@ export const PatchV2HumanEvalsIdResponseBody1$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("boolean"),
   id: z.string(),
-  key: z.string().default("orq_01kn9z7dpz"),
+  key: z.string().default("orq_01kngmv96x"),
   display_name: z.string(),
   description: z.string(),
   domain_id: z.string().optional(),

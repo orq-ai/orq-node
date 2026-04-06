@@ -1429,7 +1429,7 @@ export type CreateAgentRequestRequestBody = {
   /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   /**
    * The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).
    *
@@ -2608,7 +2608,7 @@ export type CreateAgentRequestResponseBody = {
   type: CreateAgentRequestType;
   role: string;
   description: string;
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   instructions: string;
   settings?: CreateAgentRequestSettings | undefined;
   model: Model;
@@ -4743,7 +4743,7 @@ export type CreateAgentRequestRequestBody$Outbound = {
   role: string;
   description: string;
   instructions: string;
-  system_prompt?: string | undefined;
+  system_prompt?: string | null | undefined;
   path: string;
   model: ModelConfiguration2$Outbound | string;
   fallback_models?:
@@ -4769,7 +4769,7 @@ export const CreateAgentRequestRequestBody$outboundSchema: z.ZodType<
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
-  systemPrompt: z.string().optional(),
+  systemPrompt: z.nullable(z.string()).optional(),
   path: z.string(),
   model: z.union([
     z.lazy(() => ModelConfiguration2$outboundSchema),
@@ -6428,7 +6428,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   type: CreateAgentRequestType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),
-  system_prompt: z.string().optional(),
+  system_prompt: z.nullable(z.string()).optional(),
   instructions: z.string(),
   settings: z.lazy(() => CreateAgentRequestSettings$inboundSchema).optional(),
   model: z.lazy(() => Model$inboundSchema),

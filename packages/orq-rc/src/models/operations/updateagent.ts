@@ -1480,7 +1480,7 @@ export type UpdateAgentRequestBody = {
   /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   /**
    * Model configuration for agent execution. Can be a simple model ID string or a configuration object with optional behavior parameters and retry settings.
    */
@@ -2667,7 +2667,7 @@ export type UpdateAgentResponseBody = {
   type: UpdateAgentType;
   role: string;
   description: string;
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   instructions: string;
   settings?: UpdateAgentAgentsSettings | undefined;
   model: UpdateAgentModel;
@@ -5117,7 +5117,7 @@ export type UpdateAgentRequestBody$Outbound = {
   role?: string | undefined;
   description?: string | undefined;
   instructions?: string | undefined;
-  system_prompt?: string | undefined;
+  system_prompt?: string | null | undefined;
   model?: UpdateAgentModelConfiguration2$Outbound | string | undefined;
   fallback_models?:
     | Array<UpdateAgentFallbackModelConfiguration2$Outbound | string>
@@ -5146,7 +5146,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   role: z.string().optional(),
   description: z.string().optional(),
   instructions: z.string().optional(),
-  systemPrompt: z.string().optional(),
+  systemPrompt: z.nullable(z.string()).optional(),
   model: z.union([
     z.lazy(() => UpdateAgentModelConfiguration2$outboundSchema),
     z.string(),
@@ -6858,7 +6858,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   type: UpdateAgentType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),
-  system_prompt: z.string().optional(),
+  system_prompt: z.nullable(z.string()).optional(),
   instructions: z.string(),
   settings: z.lazy(() => UpdateAgentAgentsSettings$inboundSchema).optional(),
   model: z.lazy(() => UpdateAgentModel$inboundSchema),
