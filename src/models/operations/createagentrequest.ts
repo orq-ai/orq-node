@@ -1398,6 +1398,13 @@ export const Source = {
 } as const;
 export type Source = ClosedEnum<typeof Source>;
 
+export const Engine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+export type Engine = ClosedEnum<typeof Engine>;
+
 export type CreateAgentRequestRequestBody = {
   /**
    * Unique identifier for the agent within the workspace
@@ -1422,7 +1429,7 @@ export type CreateAgentRequestRequestBody = {
   /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   /**
    * The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).
    *
@@ -1457,6 +1464,7 @@ export type CreateAgentRequestRequestBody = {
   teamOfAgents?: Array<TeamOfAgents> | undefined;
   variables?: { [k: string]: any } | undefined;
   source?: Source | undefined;
+  engine?: Engine | undefined;
 };
 
 /**
@@ -1504,6 +1512,15 @@ export const CreateAgentRequestSource = {
 } as const;
 export type CreateAgentRequestSource = ClosedEnum<
   typeof CreateAgentRequestSource
+>;
+
+export const CreateAgentRequestEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+export type CreateAgentRequestEngine = ClosedEnum<
+  typeof CreateAgentRequestEngine
 >;
 
 /**
@@ -2584,13 +2601,14 @@ export type CreateAgentRequestResponseBody = {
    */
   knowledgeBases?: Array<CreateAgentRequestKnowledgeBases> | undefined;
   source?: CreateAgentRequestSource | undefined;
+  engine: CreateAgentRequestEngine;
   /**
    * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
    */
   type: CreateAgentRequestType;
   role: string;
   description: string;
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   instructions: string;
   settings?: CreateAgentRequestSettings | undefined;
   model: Model;
@@ -4715,13 +4733,17 @@ export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> = z
   .nativeEnum(Source);
 
 /** @internal */
+export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> = z
+  .nativeEnum(Engine);
+
+/** @internal */
 export type CreateAgentRequestRequestBody$Outbound = {
   key: string;
   display_name?: string | undefined;
   role: string;
   description: string;
   instructions: string;
-  system_prompt?: string | undefined;
+  system_prompt?: string | null | undefined;
   path: string;
   model: ModelConfiguration2$Outbound | string;
   fallback_models?:
@@ -4733,6 +4755,7 @@ export type CreateAgentRequestRequestBody$Outbound = {
   team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
   source?: string | undefined;
+  engine: string;
 };
 
 /** @internal */
@@ -4746,7 +4769,7 @@ export const CreateAgentRequestRequestBody$outboundSchema: z.ZodType<
   role: z.string(),
   description: z.string(),
   instructions: z.string(),
-  systemPrompt: z.string().optional(),
+  systemPrompt: z.nullable(z.string()).optional(),
   path: z.string(),
   model: z.union([
     z.lazy(() => ModelConfiguration2$outboundSchema),
@@ -4765,6 +4788,7 @@ export const CreateAgentRequestRequestBody$outboundSchema: z.ZodType<
   teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
   variables: z.record(z.any()).optional(),
   source: Source$outboundSchema.optional(),
+  engine: Engine$outboundSchema.default("text"),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -4861,6 +4885,11 @@ export function createAgentRequestKnowledgeBasesFromJSON(
 export const CreateAgentRequestSource$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestSource
 > = z.nativeEnum(CreateAgentRequestSource);
+
+/** @internal */
+export const CreateAgentRequestEngine$inboundSchema: z.ZodNativeEnum<
+  typeof CreateAgentRequestEngine
+> = z.nativeEnum(CreateAgentRequestEngine);
 
 /** @internal */
 export const CreateAgentRequestType$inboundSchema: z.ZodNativeEnum<
@@ -6395,10 +6424,11 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => CreateAgentRequestKnowledgeBases$inboundSchema),
   ).optional(),
   source: CreateAgentRequestSource$inboundSchema.optional(),
+  engine: CreateAgentRequestEngine$inboundSchema.default("text"),
   type: CreateAgentRequestType$inboundSchema.default("internal"),
   role: z.string(),
   description: z.string(),
-  system_prompt: z.string().optional(),
+  system_prompt: z.nullable(z.string()).optional(),
   instructions: z.string(),
   settings: z.lazy(() => CreateAgentRequestSettings$inboundSchema).optional(),
   model: z.lazy(() => Model$inboundSchema),

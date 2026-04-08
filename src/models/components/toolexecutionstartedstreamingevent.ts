@@ -52,6 +52,8 @@ export type ToolExecutionContext = {
   product: Product;
   memory?: Memory | undefined;
   parentId?: string | undefined;
+  variables?: { [k: string]: any } | undefined;
+  secretKeys?: Array<string> | undefined;
 };
 
 export type ToolExecutionStartedStreamingEventData = {
@@ -117,6 +119,8 @@ export const ToolExecutionContext$inboundSchema: z.ZodType<
   product: Product$inboundSchema,
   memory: z.lazy(() => Memory$inboundSchema).optional(),
   parent_id: z.string().optional(),
+  variables: z.record(z.any()).optional(),
+  secret_keys: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "action_id": "actionId",
@@ -125,6 +129,7 @@ export const ToolExecutionContext$inboundSchema: z.ZodType<
     "agent_manifest_id": "agentManifestId",
     "agent_execution_id": "agentExecutionId",
     "parent_id": "parentId",
+    "secret_keys": "secretKeys",
   });
 });
 

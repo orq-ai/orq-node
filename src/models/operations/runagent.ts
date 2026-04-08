@@ -1643,6 +1643,19 @@ export type RunAgentSettings = {
   guardrails?: Array<RunAgentGuardrails> | undefined;
 };
 
+/**
+ * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
+ */
+export const RunAgentEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+/**
+ * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
+ */
+export type RunAgentEngine = ClosedEnum<typeof RunAgentEngine>;
+
 export type RunAgentRequestBody = {
   /**
    * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed.
@@ -1713,7 +1726,7 @@ export type RunAgentRequestBody = {
   /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
-  systemPrompt?: string | undefined;
+  systemPrompt?: string | null | undefined;
   /**
    * Array of memory store identifiers that are accessible to the agent. Accepts both memory store IDs and keys.
    */
@@ -1731,6 +1744,10 @@ export type RunAgentRequestBody = {
    * Optional metadata for the agent run as key-value pairs that will be included in traces
    */
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * Template engine for variable interpolation. Text uses {{variable}} syntax, Jinja supports loops/conditionals/filters, Mustache uses {{#section}} syntax.
+   */
+  engine?: RunAgentEngine | undefined;
 };
 
 /**
@@ -3611,7 +3628,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KN7YD609QK1JXSPRST0K1KVB"),
+  id: z.string().default("01KNQDR151Y62D621HNDXH8C87"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4739,6 +4756,11 @@ export function runAgentSettingsToJSON(
 }
 
 /** @internal */
+export const RunAgentEngine$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentEngine
+> = z.nativeEnum(RunAgentEngine);
+
+/** @internal */
 export type RunAgentRequestBody$Outbound = {
   key: string;
   task_id?: string | undefined;
@@ -4756,12 +4778,13 @@ export type RunAgentRequestBody$Outbound = {
   memory?: RunAgentMemory$Outbound | undefined;
   path: string;
   description?: string | undefined;
-  system_prompt?: string | undefined;
+  system_prompt?: string | null | undefined;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<RunAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<RunAgentTeamOfAgents$Outbound> | undefined;
   settings: RunAgentSettings$Outbound;
   metadata?: { [k: string]: any } | undefined;
+  engine: string;
 };
 
 /** @internal */
@@ -4792,7 +4815,7 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   memory: z.lazy(() => RunAgentMemory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
-  systemPrompt: z.string().optional(),
+  systemPrompt: z.nullable(z.string()).optional(),
   memoryStores: z.array(z.string()).optional(),
   knowledgeBases: z.array(z.lazy(() => RunAgentKnowledgeBases$outboundSchema))
     .optional(),
@@ -4800,6 +4823,7 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   settings: z.lazy(() => RunAgentSettings$outboundSchema),
   metadata: z.record(z.any()).optional(),
+  engine: RunAgentEngine$outboundSchema.default("text"),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",
