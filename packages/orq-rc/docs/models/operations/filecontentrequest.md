@@ -6,12 +6,12 @@
 import { FileContentRequest } from "@orq-ai/node/models/operations";
 
 let value: FileContentRequest = {
-  fileId: "<id>",
+  fileIdOrPath: "<value>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `fileId`           | *string*           | :heavy_check_mark: | The ID of the file |
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `fileIdOrPath`                                              | *string*                                                    | :heavy_check_mark:                                          | The file ID or object storage path to retrieve content for. |

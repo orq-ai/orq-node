@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Download file content
  *
  * @remarks
- * Signs the object name and redirects to a presigned URL for downloading the file content.
+ * Signs the object name and redirects to a presigned URL for downloading the file content. Accepts either a file ID or an object storage path (URL-encoded).
  */
 export function filesGetContent(
   client: OrqCore,
@@ -87,12 +87,12 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    file_id: encodeSimple("file_id", payload.file_id, {
+    file_id_or_path: encodeSimple("file_id_or_path", payload.file_id_or_path, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/files/{file_id}/content")(pathParams);
+  const path = pathToFunc("/v2/files/{file_id_or_path}/content")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "*/*",

@@ -7,14 +7,14 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FileContentRequest = {
   /**
-   * The ID of the file
+   * The file ID or object storage path to retrieve content for.
    */
-  fileId: string;
+  fileIdOrPath: string;
 };
 
 /** @internal */
 export type FileContentRequest$Outbound = {
-  file_id: string;
+  file_id_or_path: string;
 };
 
 /** @internal */
@@ -23,10 +23,10 @@ export const FileContentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileContentRequest
 > = z.object({
-  fileId: z.string(),
+  fileIdOrPath: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    fileId: "file_id",
+    fileIdOrPath: "file_id_or_path",
   });
 });
 

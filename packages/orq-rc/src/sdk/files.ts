@@ -48,6 +48,23 @@ export class Files extends ClientSDK {
   }
 
   /**
+   * Download file content
+   *
+   * @remarks
+   * Signs the object name and redirects to a presigned URL for downloading the file content. Accepts either a file ID or an object storage path (URL-encoded).
+   */
+  async getContent(
+    request: operations.FileContentRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(filesGetContent(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Delete file
    */
   async delete(
@@ -89,23 +106,6 @@ export class Files extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.FileUpdateResponseBody> {
     return unwrapAsync(filesUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Download file content
-   *
-   * @remarks
-   * Signs the object name and redirects to a presigned URL for downloading the file content.
-   */
-  async getContent(
-    request: operations.FileContentRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(filesGetContent(
       this,
       request,
       options,
