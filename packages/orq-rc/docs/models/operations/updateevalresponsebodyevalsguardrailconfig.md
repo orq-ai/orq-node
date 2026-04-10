@@ -13,6 +13,16 @@ const value: operations.UpdateEvalGuardrailConfigEvalsBoolean = {
 };
 ```
 
+### `operations.UpdateEvalGuardrailConfigEvalsCategorical`
+
+```typescript
+const value: operations.UpdateEvalGuardrailConfigEvalsCategorical = {
+  enabled: false,
+  type: "categorical",
+  values: [],
+};
+```
+
 ### `operations.UpdateEvalGuardrailConfigEvalsNumber`
 
 ```typescript

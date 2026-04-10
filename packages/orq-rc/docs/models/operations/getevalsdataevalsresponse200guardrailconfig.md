@@ -13,6 +13,20 @@ const value: operations.GetEvalsGuardrailConfigEvalsResponse200Boolean = {
 };
 ```
 
+### `operations.GetEvalsGuardrailConfigEvalsResponse200Categorical`
+
+```typescript
+const value: operations.GetEvalsGuardrailConfigEvalsResponse200Categorical = {
+  enabled: true,
+  type: "categorical",
+  values: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+};
+```
+
 ### `operations.GetEvalsGuardrailConfigEvalsResponse200Number`
 
 ```typescript

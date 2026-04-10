@@ -13,6 +13,18 @@ const value: operations.Boolean = {
 };
 ```
 
+### `operations.Categorical`
+
+```typescript
+const value: operations.Categorical = {
+  enabled: true,
+  type: "categorical",
+  values: [
+    "<value 1>",
+  ],
+};
+```
+
 ### `operations.NumberT`
 
 ```typescript
