@@ -14,11 +14,9 @@
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {
-    
-  },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
+    "@langchain/core": "^1.1.39",
     "eslint": "^9.26.0",
     "globals": "^15.14.0",
     "typescript": "~5.8.3",

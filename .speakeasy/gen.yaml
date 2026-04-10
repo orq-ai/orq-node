@@ -33,7 +33,8 @@ typescript:
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
-    devDependencies: {}
+    devDependencies:
+      '@langchain/core': ^0.3.0
     peerDependencies:
       zod: '>= 3 <4'
   additionalPackageJSON: {}
