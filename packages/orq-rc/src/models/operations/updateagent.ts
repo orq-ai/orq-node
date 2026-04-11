@@ -2631,7 +2631,6 @@ export type UpdateAgentResponseBody = {
    * Current semantic version of the agent manifest.
    */
   version?: string | undefined;
-  versionHash?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -6842,7 +6841,6 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   updated: z.string().optional(),
   status: UpdateAgentStatus$inboundSchema,
   version: z.string().optional(),
-  version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()).optional(),
   team_of_agents: z.array(
@@ -6870,7 +6868,6 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "version_hash": "versionHash",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
     "knowledge_bases": "knowledgeBases",

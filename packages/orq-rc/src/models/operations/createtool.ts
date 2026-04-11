@@ -645,7 +645,6 @@ export type ResponseBodyCodeExecutionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: CreateToolResponseBodyToolsResponse200Status;
-  versionHash?: string | undefined;
   type: "code";
   codeTool: ResponseBodyCodeTool;
 };
@@ -770,7 +769,6 @@ export type ResponseBodyMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: CreateToolResponseBodyToolsResponseStatus;
-  versionHash?: string | undefined;
   type: "mcp";
   mcp: ResponseBodyMcp;
 };
@@ -928,7 +926,6 @@ export type ResponseBodyHTTPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: CreateToolResponseBodyToolsStatus;
-  versionHash?: string | undefined;
   type: "http";
   http: CreateToolResponseBodyHttp;
 };
@@ -1030,7 +1027,6 @@ export type ResponseBodyJSONSchemaTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: CreateToolResponseBodyStatus;
-  versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: ResponseBodyJsonSchema;
 };
@@ -1142,7 +1138,6 @@ export type ResponseBodyFunctionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: ResponseBodyStatus;
-  versionHash?: string | undefined;
   type: "function";
   function: CreateToolResponseBodyFunction;
 };
@@ -1907,7 +1902,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KNVVT6DTTRFTRF9ZVHTESXHY"),
+  _id: z.string().default("tool_01KNXVFNQTHJAJPG588R4K8VW0"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1921,7 +1916,6 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   status: CreateToolResponseBodyToolsResponse200Status$inboundSchema.default(
     "live",
   ),
-  version_hash: z.string().optional(),
   type: z.literal("code"),
   code_tool: z.lazy(() => ResponseBodyCodeTool$inboundSchema),
 }).transform((v) => {
@@ -1932,7 +1926,6 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
     "code_tool": "codeTool",
   });
 });
@@ -2006,7 +1999,7 @@ export const ResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KNVVT6DST721JKY5FJRR44XT"),
+  id: z.string().default("01KNXVFNQSDER6MXFSQD74R1PZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2062,7 +2055,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KNVVT6DRC0K2GE6BHAQE2F8X"),
+  _id: z.string().default("tool_01KNXVFNQRHSCF7DVTX5QF3JP4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2076,7 +2069,6 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
     "live",
   ),
-  version_hash: z.string().optional(),
   type: z.literal("mcp"),
   mcp: z.lazy(() => ResponseBodyMcp$inboundSchema),
 }).transform((v) => {
@@ -2087,7 +2079,6 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
@@ -2250,7 +2241,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KNVVT6DPGDSKSAE8J6DGJG41"),
+  _id: z.string().default("tool_01KNXVFNQPXY0MAWSSKWPRHSTH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2262,7 +2253,6 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("http"),
   http: z.lazy(() => CreateToolResponseBodyHttp$inboundSchema),
 }).transform((v) => {
@@ -2273,7 +2263,6 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
@@ -2345,7 +2334,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KNVVT6DN9SK08CG9KY40TZB7"),
+  _id: z.string().default("tool_01KNXVFNQNCJ5PWCC9PKCBX765"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2357,7 +2346,6 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: CreateToolResponseBodyStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("json_schema"),
   json_schema: z.lazy(() => ResponseBodyJsonSchema$inboundSchema),
 }).transform((v) => {
@@ -2368,7 +2356,6 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
     "json_schema": "jsonSchema",
   });
 });
@@ -2448,7 +2435,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KNVVT6DKCD3H7TMBAJ7T3M44"),
+  _id: z.string().default("tool_01KNXVFNQM7WWKRERM7MFRRAB1"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2460,7 +2447,6 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: ResponseBodyStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("function"),
   function: z.lazy(() => CreateToolResponseBodyFunction$inboundSchema),
 }).transform((v) => {
@@ -2471,7 +2457,6 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
