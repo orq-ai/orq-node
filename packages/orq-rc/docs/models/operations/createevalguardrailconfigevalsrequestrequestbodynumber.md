@@ -1,0 +1,24 @@
+# CreateEvalGuardrailConfigEvalsRequestRequestBodyNumber
+
+## Example Usage
+
+```typescript
+import { CreateEvalGuardrailConfigEvalsRequestRequestBodyNumber } from "@orq-ai/node/models/operations";
+
+let value: CreateEvalGuardrailConfigEvalsRequestRequestBodyNumber = {
+  enabled: true,
+  type: "number",
+  value: 1720.89,
+  operator: "gt",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`                                                                                                                                                  | *boolean*                                                                                                                                                  | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `alertOnFailure`                                                                                                                                           | *boolean*                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
+| `type`                                                                                                                                                     | *"number"*                                                                                                                                                 | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `value`                                                                                                                                                    | *number*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `operator`                                                                                                                                                 | [operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyOperator](../../models/operations/createevalguardrailconfigevalsrequestrequestbodyoperator.md) | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
