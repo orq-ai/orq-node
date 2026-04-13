@@ -29,3 +29,4 @@
 /.tshy
 /.tshy-*
 /__tests__
+*.tgz

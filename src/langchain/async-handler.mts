@@ -1,5 +1,5 @@
 /**
- * Sync (fire-and-forget) LangChain callback handler.
+ * Async LangChain callback handler that properly awaits span sending.
  */
 
 import { BaseCallbackHandler } from "@langchain/core/callbacks/base";
@@ -10,10 +10,10 @@ import type { LLMResult } from "@langchain/core/outputs";
 import type { DocumentInterface } from "@langchain/core/documents";
 import type { NewTokenIndices } from "@langchain/core/callbacks/base";
 
-import { OrqTracesClient } from "./client.js";
-import { Events } from "./events.js";
-import { EventType, InFlightEvent, createInFlightEvent } from "./models.js";
-import { buildOtlpSpan } from "./span-builder.js";
+import { AsyncOrqTracesClient } from "./client.mjs";
+import { Events } from "./events.mjs";
+import { EventType, InFlightEvent, createInFlightEvent } from "./models.mjs";
+import { buildOtlpSpan } from "./span-builder.mjs";
 import {
   extractModelName,
   extractModelParameters,
@@ -22,7 +22,7 @@ import {
   nanoTimestamp,
   normalizeMessages,
   resolveSpanName,
-} from "./utils.js";
+} from "./utils.mjs";
 
 /** Internal LangGraph.js chain names that should not produce spans. */
 const _INTERNAL_CHAIN_PREFIXES = [
@@ -36,16 +36,16 @@ function _isInternalChain(name: string | undefined): boolean {
   return _INTERNAL_CHAIN_PREFIXES.some((p) => name.startsWith(p));
 }
 
-export class OrqLangchainCallback extends BaseCallbackHandler {
-  name = "OrqLangchainCallback";
+export class AsyncOrqLangchainCallback extends BaseCallbackHandler {
+  name = "AsyncOrqLangchainCallback";
 
   private _events = new Events();
-  private _client: OrqTracesClient;
+  private _client: AsyncOrqTracesClient;
   private _ignoredRunIds = new Set<string>();
 
   constructor(apiKey: string, apiUrl: string = "https://my.orq.ai") {
     super();
-    this._client = new OrqTracesClient(apiKey, apiUrl);
+    this._client = new AsyncOrqTracesClient(apiKey, apiUrl);
   }
 
   private _startEvent(
@@ -79,20 +79,20 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     return event;
   }
 
-  private _finishAndSend(runId: string): void {
+  private async _finishAndSend(runId: string): Promise<void> {
     const event = this._events.get(runId);
     if (!event) return;
     if (!event.endTimeNs) {
       event.endTimeNs = nanoTimestamp();
     }
     const span = buildOtlpSpan(event);
-    this._client.sendSpan(span);
+    await this._client.sendSpan(span);
     this._events.remove(runId);
   }
 
   // ── LLM callbacks ──────────────────────────────────────────────
 
-  override handleLLMStart(
+  override async handleLLMStart(
     llm: Serialized,
     prompts: string[],
     runId: string,
@@ -101,7 +101,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     tags?: string[],
     metadata?: Record<string, unknown>,
     _runName?: string,
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._startEvent(
         runId,
@@ -122,7 +122,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleChatModelStart(
+  override async handleChatModelStart(
     llm: Serialized,
     messages: BaseMessage[][],
     runId: string,
@@ -131,7 +131,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     tags?: string[],
     metadata?: Record<string, unknown>,
     _runName?: string,
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._startEvent(
         runId,
@@ -152,13 +152,13 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleLLMNewToken(
+  override async handleLLMNewToken(
     token: string,
     _idx: NewTokenIndices,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (event) {
@@ -172,12 +172,12 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleLLMEnd(
+  override async handleLLMEnd(
     output: LLMResult,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
@@ -211,18 +211,18 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         }
       }
       event.responseChoices = choices;
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
   }
 
-  override handleLLMError(
+  override async handleLLMError(
     err: Error,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
@@ -233,7 +233,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         message: formatted.message,
         traceback: formatted.traceback,
       };
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
@@ -241,7 +241,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
 
   // ── Chain callbacks ────────────────────────────────────────────
 
-  override handleChainStart(
+  override async handleChainStart(
     chain: Serialized,
     inputs: Record<string, unknown>,
     runId: string,
@@ -250,7 +250,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     metadata?: Record<string, unknown>,
     _runType?: string,
     runName?: string,
-  ): void {
+  ): Promise<void> {
     try {
       if (_isInternalChain(runName)) {
         this._ignoredRunIds.add(runId);
@@ -274,12 +274,12 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleChainEnd(
+  override async handleChainEnd(
     outputs: Record<string, unknown>,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       if (this._ignoredRunIds.delete(runId)) return;
       const event = this._events.get(runId);
@@ -291,18 +291,18 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         !Array.isArray(outputs)
           ? outputs
           : { outputs };
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
   }
 
-  override handleChainError(
+  override async handleChainError(
     err: Error,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       if (this._ignoredRunIds.delete(runId)) return;
       const event = this._events.get(runId);
@@ -314,7 +314,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         message: formatted.message,
         traceback: formatted.traceback,
       };
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
@@ -322,7 +322,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
 
   // ── Tool callbacks ─────────────────────────────────────────────
 
-  override handleToolStart(
+  override async handleToolStart(
     tool: Serialized,
     input: string,
     runId: string,
@@ -330,7 +330,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     tags?: string[],
     metadata?: Record<string, unknown>,
     _runName?: string,
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._startEvent(
         runId,
@@ -346,29 +346,29 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleToolEnd(
+  override async handleToolEnd(
     output: string,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
       event.endTimeNs = nanoTimestamp();
       event.toolOutput = String(output);
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
   }
 
-  override handleToolError(
+  override async handleToolError(
     err: Error,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
@@ -379,7 +379,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         message: formatted.message,
         traceback: formatted.traceback,
       };
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
@@ -387,7 +387,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
 
   // ── Retriever callbacks ────────────────────────────────────────
 
-  override handleRetrieverStart(
+  override async handleRetrieverStart(
     retriever: Serialized,
     query: string,
     runId: string,
@@ -395,7 +395,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     tags?: string[],
     metadata?: Record<string, unknown>,
     _name?: string,
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._startEvent(
         runId,
@@ -411,12 +411,12 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleRetrieverEnd(
+  override async handleRetrieverEnd(
     documents: DocumentInterface[],
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
@@ -425,18 +425,18 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         page_content: doc.pageContent,
         metadata: doc.metadata,
       }));
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
   }
 
-  override handleRetrieverError(
+  override async handleRetrieverError(
     err: Error,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
@@ -447,7 +447,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         message: formatted.message,
         traceback: formatted.traceback,
       };
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
@@ -455,12 +455,12 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
 
   // ── Agent callbacks ────────────────────────────────────────────
 
-  override handleAgentAction(
+  override async handleAgentAction(
     action: AgentAction,
     runId: string,
     parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       let event = this._events.get(runId);
       if (!event) {
@@ -487,12 +487,12 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     }
   }
 
-  override handleAgentEnd(
+  override async handleAgentEnd(
     finish: AgentFinish,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
-  ): void {
+  ): Promise<void> {
     try {
       const event = this._events.get(runId);
       if (!event) return;
@@ -502,13 +502,13 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         log: finish.log,
       };
       event.outputs = finish.returnValues;
-      this._finishAndSend(runId);
+      await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
     }
   }
 
-  close(): Promise<void> {
-    return this._client.close();
+  async close(): Promise<void> {
+    await this._client.close();
   }
 }

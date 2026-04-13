@@ -4,7 +4,7 @@
  * Uses LangChain UUIDs directly (hyphens stripped) as trace/span IDs.
  */
 
-import { InFlightEvent } from "./models.js";
+import { InFlightEvent } from "./models.mjs";
 
 export class Events {
   private _events = new Map<string, InFlightEvent>();
