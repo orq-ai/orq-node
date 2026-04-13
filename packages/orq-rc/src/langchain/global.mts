@@ -1,12 +1,18 @@
 /**
  * Global handler registration for automatic LangChain tracing.
  *
- * Unlike the Python SDK, LangChain.js does not have `register_configure_hook`.
- * Users must pass the handler to LangChain calls manually or retrieve it
- * via `getHandler()`.
+ * Uses LangChain's `registerConfigureHook` and `setContextVariable` from
+ * `@langchain/core/context` to automatically inject the handler into all
+ * LangChain/LangGraph calls without requiring users to pass callbacks manually.
  */
 
-import { OrqLangchainCallback } from "./handler.js";
+import {
+  registerConfigureHook,
+  setContextVariable,
+} from "@langchain/core/context";
+import { OrqLangchainCallback } from "./handler.mjs";
+
+const ORQ_HANDLER_CONTEXT_VAR = "orq_langchain_handler";
 
 let _handler: OrqLangchainCallback | null = null;
 let _exitHookRegistered = false;
@@ -55,6 +61,15 @@ export function setup(options?: {
   }
   const apiUrl = options?.apiUrl ?? "https://my.orq.ai";
   _handler = new OrqLangchainCallback(key, apiUrl);
+
+  // Register the handler globally so all LangChain/LangGraph calls
+  // automatically pick it up without passing callbacks manually.
+  setContextVariable(ORQ_HANDLER_CONTEXT_VAR, _handler);
+  registerConfigureHook({
+    contextVar: ORQ_HANDLER_CONTEXT_VAR,
+    inheritable: true,
+  });
+
   _registerExitHook();
 }
 

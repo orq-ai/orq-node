@@ -33,10 +33,21 @@ typescript:
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
-    devDependencies:
-      '@langchain/core': ^0.3.0
-    peerDependencies: {}
-  additionalPackageJSON: {}
+    devDependencies: {}
+    peerDependencies:
+      zod: '>= 3 <4'
+      '@langchain/core': ^1.1.39
+  additionalPackageJSON:
+    exports:
+      ".":
+        import: "./index.js"
+        require: "./index.js"
+        types: "./index.d.ts"
+      "./langchain":
+        import: "./langchain/index.mjs"
+        require: "./langchain/index.js"
+        types: "./langchain/index.d.mts"
+      "./*": "./*"
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Orq

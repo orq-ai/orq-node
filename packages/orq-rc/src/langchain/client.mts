@@ -2,7 +2,7 @@
  * Traces clients for sending OTLP-formatted spans to the Orq API.
  */
 
-import { wrapInOtlpEnvelope } from "./span-builder.js";
+import { wrapInOtlpEnvelope } from "./span-builder.mjs";
 
 /**
  * Fire-and-forget client that batches spans and posts OTLP JSON to /v2/otel/v1/traces.

@@ -7,8 +7,8 @@
  * and root span with empty parentSpanId -> SpanTypes.Trace.
  */
 
-import { EventType, InFlightEvent } from "./models.js";
-import { nanoTimestamp } from "./utils.js";
+import { EventType, InFlightEvent } from "./models.mjs";
+import { nanoTimestamp } from "./utils.mjs";
 
 // ── OTLP attribute encoding ──────────────────────────────────────
 
