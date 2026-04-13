@@ -23,14 +23,17 @@ import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
 import { Evaluators } from "./evaluators.js";
 import { Files } from "./files.js";
+import { GuardrailRules } from "./guardrailrules.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
+import { Policies } from "./policies.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
 import { Router } from "./router.js";
+import { RoutingRules } from "./routingrules.js";
 import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
@@ -122,6 +125,21 @@ export class Orq extends ClientSDK {
   private _files?: Files;
   get files(): Files {
     return (this._files ??= new Files(this._options));
+  }
+
+  private _guardrailRules?: GuardrailRules;
+  get guardrailRules(): GuardrailRules {
+    return (this._guardrailRules ??= new GuardrailRules(this._options));
+  }
+
+  private _policies?: Policies;
+  get policies(): Policies {
+    return (this._policies ??= new Policies(this._options));
+  }
+
+  private _routingRules?: RoutingRules;
+  get routingRules(): RoutingRules {
+    return (this._routingRules ??= new RoutingRules(this._options));
   }
 
   async postV2Feedback(
