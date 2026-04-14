@@ -18,30 +18,20 @@ import {
   extractModelName,
   extractModelParameters,
   extractTokenUsage,
+  extractToolName,
   formatError,
   nanoTimestamp,
   normalizeMessages,
   resolveSpanName,
+  stringifyToolOutput,
 } from "./utils.mjs";
 
-/** Internal LangGraph.js chain names that should not produce spans. */
-const _INTERNAL_CHAIN_PREFIXES = [
-  "ChannelWrite",
-  "ChannelRead",
-  "__start__",
-];
-
-function _isInternalChain(name: string | undefined): boolean {
-  if (!name) return false;
-  return _INTERNAL_CHAIN_PREFIXES.some((p) => name.startsWith(p));
-}
 
 export class OrqLangchainCallback extends BaseCallbackHandler {
   name = "OrqLangchainCallback";
 
   private _events = new Events();
   private _client: OrqTracesClient;
-  private _ignoredRunIds = new Set<string>();
 
   constructor(apiKey: string, apiUrl: string = "https://my.orq.ai") {
     super();
@@ -252,10 +242,6 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     runName?: string,
   ): void {
     try {
-      if (_isInternalChain(runName)) {
-        this._ignoredRunIds.add(runId);
-        return;
-      }
       const event = this._startEvent(
         runId,
         parentRunId,
@@ -281,7 +267,6 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     _tags?: string[],
   ): void {
     try {
-      if (this._ignoredRunIds.delete(runId)) return;
       const event = this._events.get(runId);
       if (!event) return;
       event.endTimeNs = nanoTimestamp();
@@ -304,7 +289,6 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     _tags?: string[],
   ): void {
     try {
-      if (this._ignoredRunIds.delete(runId)) return;
       const event = this._events.get(runId);
       if (!event) return;
       event.endTimeNs = nanoTimestamp();
@@ -329,16 +313,19 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     parentRunId?: string,
     tags?: string[],
     metadata?: Record<string, unknown>,
-    _runName?: string,
+    runName?: string,
   ): void {
     try {
+      const serialized = tool as unknown as Record<string, unknown>;
+      const toolName = runName ?? extractToolName(serialized) ?? undefined;
       const event = this._startEvent(
         runId,
         parentRunId,
         EventType.TOOL,
-        tool as unknown as Record<string, unknown>,
+        serialized,
         metadata,
         tags,
+        toolName,
       );
       event.toolInput = input;
     } catch {
@@ -347,7 +334,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
   }
 
   override handleToolEnd(
-    output: string,
+    output: unknown,
     runId: string,
     _parentRunId?: string,
     _tags?: string[],
@@ -356,7 +343,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
       const event = this._events.get(runId);
       if (!event) return;
       event.endTimeNs = nanoTimestamp();
-      event.toolOutput = String(output);
+      event.toolOutput = stringifyToolOutput(output);
       this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors

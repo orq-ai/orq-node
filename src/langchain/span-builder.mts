@@ -44,20 +44,33 @@ function arrayAttr(key: string, values: string[]): OtlpAttribute {
   };
 }
 
-function encodeAttr(key: string, value: unknown): OtlpAttribute {
+function encodeAttr(key: string, value: unknown): OtlpAttribute | null {
+  if (value == null) return null;
   if (typeof value === "boolean") return boolAttr(key, value);
   if (typeof value === "number") {
+    if (!Number.isFinite(value)) return null;
     return Number.isInteger(value)
       ? intAttr(key, value)
       : doubleAttr(key, value);
   }
   if (Array.isArray(value)) {
-    return arrayAttr(
-      key,
-      value.map((v: unknown) => String(v)),
-    );
+    const filtered = value.filter((v) => v != null).map((v) => String(v));
+    if (filtered.length === 0) return null;
+    return arrayAttr(key, filtered);
+  }
+  if (typeof value === "object") {
+    return strAttr(key, JSON.stringify(value));
   }
   return strAttr(key, String(value));
+}
+
+function pushAttr(
+  attrs: OtlpAttribute[],
+  key: string,
+  value: unknown,
+): void {
+  const encoded = encodeAttr(key, value);
+  if (encoded) attrs.push(encoded);
 }
 
 // ── Span kind mapping ────────────────────────────────────────────
@@ -177,7 +190,7 @@ function buildAttributes(
 
   if (event.metadata) {
     for (const [k, v] of Object.entries(event.metadata)) {
-      attrs.push(encodeAttr(`langsmith.metadata.${k}`, v));
+      pushAttr(attrs, `langsmith.metadata.${k}`, v);
     }
   }
 
@@ -222,7 +235,7 @@ function addLlmAttributes(
   if (event.modelParameters) {
     for (const [k, v] of Object.entries(event.modelParameters)) {
       if (v != null) {
-        attrs.push(encodeAttr(`langsmith.metadata.${k}`, v));
+        pushAttr(attrs, `langsmith.metadata.${k}`, v);
       }
     }
   }
