@@ -1980,7 +1980,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kp5h1m4q53jxhw0zna3drnrd"
+              default: "reasoning_01kp5jtawvdv4a0zn2mt9xfc1y"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3629,30 +3629,6 @@ components:
         - "id"
       description: "@deprecated Use identity instead. Information about the contact making the request."
       deprecated: true
-    BudgetLimit:
-      additionalProperties: false
-      properties:
-        amount:
-          format: "double"
-          maximum: 1000000
-          minimum: 0.01
-          type: "number"
-        currency:
-          enum:
-            - "usd"
-          type: "string"
-        period:
-          enum:
-            - "hour"
-            - "day"
-            - "week"
-            - "month"
-          type: "string"
-      required:
-        - "amount"
-        - "period"
-        - "currency"
-      type: "object"
     CreateFileFormFields:
       additionalProperties: false
       properties:
@@ -3672,131 +3648,6 @@ components:
           type: "string"
       required:
         - "file"
-      type: "object"
-    CreateGuardrailRuleRequest:
-      additionalProperties: false
-      properties:
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        expression:
-          $ref: "#/components/schemas/Expression"
-        guardrails:
-          items:
-            $ref: "#/components/schemas/GuardrailRef"
-          type:
-            - "array"
-            - "null"
-        project_id:
-          description: "Optional project ID. If null/omitted, the entity is global (workspace-wide)."
-          type: "string"
-        timeout:
-          format: "int64"
-          minimum: 1000
-          type: "integer"
-      required:
-        - "display_name"
-      type: "object"
-    CreatePolicyRequest:
-      additionalProperties: false
-      properties:
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        evaluators:
-          items:
-            $ref: "#/components/schemas/EvaluatorRef"
-          type:
-            - "array"
-            - "null"
-        limits:
-          $ref: "#/components/schemas/Limits"
-        models_config:
-          $ref: "#/components/schemas/ModelsConfig"
-        project_id:
-          description: "Optional project ID. If null/omitted, the entity is global (workspace-wide)."
-          type: "string"
-        retry_config:
-          $ref: "#/components/schemas/RetryConfig"
-        timeout:
-          format: "int64"
-          minimum: 1000
-          type: "integer"
-      required:
-        - "display_name"
-      type: "object"
-    CreateRoutingRuleRequest:
-      additionalProperties: false
-      properties:
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        expression:
-          $ref: "#/components/schemas/Expression"
-        models_config:
-          $ref: "#/components/schemas/ModelsConfig"
-        priority:
-          format: "int64"
-          minimum: 0
-          type: "integer"
-        project_id:
-          description: "Optional project ID. If null/omitted, the entity is global (workspace-wide)."
-          type: "string"
-      required:
-        - "display_name"
-      type: "object"
-    EvaluatorRef:
-      additionalProperties: false
-      properties:
-        execute_on:
-          enum:
-            - "input"
-            - "output"
-            - "both"
-          type: "string"
-        id:
-          minLength: 1
-          type: "string"
-        is_guardrail:
-          type: "boolean"
-        sample_rate:
-          format: "double"
-          maximum: 1
-          minimum: 0
-          type: "number"
-      required:
-        - "id"
-        - "execute_on"
-      type: "object"
-    Expression:
-      additionalProperties: false
-      properties:
-        cel:
-          minLength: 1
-          type: "string"
-        config:
-          additionalProperties: {}
-          type: "object"
-      required:
-        - "cel"
       type: "object"
     FileDocument:
       additionalProperties: false
@@ -3830,346 +3681,6 @@ components:
           type: "string"
       required:
         - "file_name"
-      type: "object"
-    GuardrailRef:
-      additionalProperties: false
-      properties:
-        execute_on:
-          enum:
-            - "input"
-            - "output"
-            - "both"
-          type: "string"
-        id:
-          minLength: 1
-          type: "string"
-      required:
-        - "id"
-        - "execute_on"
-      type: "object"
-    GuardrailRuleDocument:
-      additionalProperties: false
-      properties:
-        _id:
-          type: "string"
-        created_at:
-          format: "date-time"
-          type: "string"
-        created_by_id:
-          type: "string"
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        expression:
-          $ref: "#/components/schemas/Expression"
-        guardrails:
-          items:
-            $ref: "#/components/schemas/GuardrailRef"
-          type:
-            - "array"
-            - "null"
-        project_id:
-          type: "string"
-        timeout:
-          format: "int64"
-          minimum: 1000
-          type: "integer"
-        updated_at:
-          format: "date-time"
-          type: "string"
-        updated_by_id:
-          type: "string"
-      required:
-        - "_id"
-        - "created_at"
-        - "updated_at"
-        - "created_by_id"
-        - "updated_by_id"
-        - "project_id"
-        - "display_name"
-        - "enabled"
-        - "timeout"
-      type: "object"
-    Limits:
-      additionalProperties: false
-      properties:
-        budget:
-          $ref: "#/components/schemas/BudgetLimit"
-        requests:
-          $ref: "#/components/schemas/RequestLimit"
-        tokens:
-          $ref: "#/components/schemas/TokenLimit"
-      type: "object"
-    ModelRef:
-      additionalProperties: false
-      properties:
-        integration_id:
-          type: "string"
-        model:
-          minLength: 1
-          type: "string"
-        weight:
-          format: "double"
-          maximum: 1
-          minimum: 0
-          type: "number"
-      required:
-        - "model"
-      type: "object"
-    ModelsConfig:
-      additionalProperties: false
-      properties:
-        mode:
-          enum:
-            - "fallback"
-            - "weighted"
-            - "round_robin"
-          type: "string"
-        models:
-          items:
-            $ref: "#/components/schemas/ModelRef"
-          minItems: 1
-          type:
-            - "array"
-            - "null"
-      required:
-        - "mode"
-        - "models"
-      type: "object"
-    PolicyDocument:
-      additionalProperties: false
-      properties:
-        _id:
-          type: "string"
-        created_at:
-          format: "date-time"
-          type: "string"
-        created_by_id:
-          type: "string"
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        evaluators:
-          items:
-            $ref: "#/components/schemas/EvaluatorRef"
-          type:
-            - "array"
-            - "null"
-        limits:
-          $ref: "#/components/schemas/Limits"
-        models_config:
-          $ref: "#/components/schemas/ModelsConfig"
-        project_id:
-          type: "string"
-        retry_config:
-          $ref: "#/components/schemas/RetryConfig"
-        slug:
-          minLength: 1
-          type: "string"
-        timeout:
-          format: "int64"
-          minimum: 1000
-          type: "integer"
-        updated_at:
-          format: "date-time"
-          type: "string"
-        updated_by_id:
-          type: "string"
-      required:
-        - "_id"
-        - "created_at"
-        - "updated_at"
-        - "created_by_id"
-        - "updated_by_id"
-        - "project_id"
-        - "display_name"
-        - "slug"
-        - "enabled"
-        - "timeout"
-      type: "object"
-    RequestLimit:
-      additionalProperties: false
-      properties:
-        amount:
-          format: "int64"
-          maximum: 1000000000
-          minimum: 1
-          type: "integer"
-        period:
-          enum:
-            - "hour"
-            - "day"
-            - "week"
-            - "month"
-          type: "string"
-      required:
-        - "amount"
-        - "period"
-      type: "object"
-    RetryConfig:
-      additionalProperties: false
-      properties:
-        count:
-          format: "int64"
-          maximum: 5
-          minimum: 1
-          type: "integer"
-        on_codes:
-          items:
-            format: "int64"
-            type: "integer"
-          type:
-            - "array"
-            - "null"
-      required:
-        - "count"
-      type: "object"
-    RoutingRuleDocument:
-      additionalProperties: false
-      properties:
-        _id:
-          type: "string"
-        created_at:
-          format: "date-time"
-          type: "string"
-        created_by_id:
-          type: "string"
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        expression:
-          $ref: "#/components/schemas/Expression"
-        models_config:
-          $ref: "#/components/schemas/ModelsConfig"
-        priority:
-          format: "int64"
-          minimum: 0
-          type: "integer"
-        project_id:
-          type: "string"
-        updated_at:
-          format: "date-time"
-          type: "string"
-        updated_by_id:
-          type: "string"
-      required:
-        - "_id"
-        - "created_at"
-        - "updated_at"
-        - "created_by_id"
-        - "updated_by_id"
-        - "project_id"
-        - "display_name"
-        - "enabled"
-        - "priority"
-      type: "object"
-    TokenLimit:
-      additionalProperties: false
-      properties:
-        amount:
-          format: "int64"
-          maximum: 1000000000
-          minimum: 1
-          type: "integer"
-        period:
-          enum:
-            - "hour"
-            - "day"
-            - "week"
-            - "month"
-          type: "string"
-      required:
-        - "amount"
-        - "period"
-      type: "object"
-    UpdateGuardrailRuleRequest:
-      additionalProperties: false
-      properties:
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        expression:
-          $ref: "#/components/schemas/Expression"
-        guardrails:
-          items:
-            $ref: "#/components/schemas/GuardrailRef"
-          type: "array"
-        timeout:
-          format: "int64"
-          minimum: 1000
-          type: "integer"
-      type: "object"
-    UpdatePolicyRequest:
-      additionalProperties: false
-      properties:
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        evaluators:
-          items:
-            $ref: "#/components/schemas/EvaluatorRef"
-          type: "array"
-        limits:
-          $ref: "#/components/schemas/Limits"
-        models_config:
-          $ref: "#/components/schemas/ModelsConfig"
-        retry_config:
-          $ref: "#/components/schemas/RetryConfig"
-        timeout:
-          format: "int64"
-          minimum: 1000
-          type: "integer"
-      type: "object"
-    UpdateRoutingRuleRequest:
-      additionalProperties: false
-      properties:
-        description:
-          maxLength: 2048
-          type: "string"
-        display_name:
-          maxLength: 256
-          minLength: 1
-          type: "string"
-        enabled:
-          type: "boolean"
-        expression:
-          $ref: "#/components/schemas/Expression"
-        models_config:
-          $ref: "#/components/schemas/ModelsConfig"
-        priority:
-          format: "int64"
-          minimum: 0
-          type: "integer"
       type: "object"
   parameters: {}
 paths:
@@ -4298,7 +3809,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -4306,7 +3817,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -4502,10 +4013,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-04-14T08:16:54.654Z"
+                                  default: "2026-04-14T08:47:52.166Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-04-14T08:16:54.654Z"
+                                  default: "2026-04-14T08:47:52.166Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -4526,27 +4037,6 @@ paths:
                                         - "type"
                                         - "value"
                                       title: "Boolean"
-                                    - type: "object"
-                                      properties:
-                                        enabled:
-                                          type: "boolean"
-                                        alert_on_failure:
-                                          type: "boolean"
-                                          default: false
-                                        type:
-                                          type: "string"
-                                          enum:
-                                            - "categorical"
-                                        values:
-                                          type: "array"
-                                          items:
-                                            type: "string"
-                                            minLength: 1
-                                      required:
-                                        - "enabled"
-                                        - "type"
-                                        - "values"
-                                      title: "Categorical"
                                     - type: "object"
                                       properties:
                                         enabled:
@@ -4586,22 +4076,6 @@ paths:
                                   maximum: 3
                                 prompt:
                                   type: "string"
-                                categories:
-                                  type: "array"
-                                  items:
-                                    type: "string"
-                                categorical_labels:
-                                  type: "array"
-                                  items:
-                                    type: "object"
-                                    properties:
-                                      value:
-                                        type: "string"
-                                        minLength: 1
-                                      description:
-                                        type: "string"
-                                    required:
-                                      - "value"
                                 key:
                                   type: "string"
                                   minLength: 1
@@ -4628,10 +4102,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-04-14T08:16:54.654Z"
+                                  default: "2026-04-14T08:47:52.166Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-04-14T08:16:54.654Z"
+                                  default: "2026-04-14T08:47:52.166Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -4652,27 +4126,6 @@ paths:
                                         - "type"
                                         - "value"
                                       title: "Boolean"
-                                    - type: "object"
-                                      properties:
-                                        enabled:
-                                          type: "boolean"
-                                        alert_on_failure:
-                                          type: "boolean"
-                                          default: false
-                                        type:
-                                          type: "string"
-                                          enum:
-                                            - "categorical"
-                                        values:
-                                          type: "array"
-                                          items:
-                                            type: "string"
-                                            minLength: 1
-                                      required:
-                                        - "enabled"
-                                        - "type"
-                                        - "values"
-                                      title: "Categorical"
                                     - type: "object"
                                       properties:
                                         enabled:
@@ -4712,22 +4165,6 @@ paths:
                                   maximum: 3
                                 prompt:
                                   type: "string"
-                                categories:
-                                  type: "array"
-                                  items:
-                                    type: "string"
-                                categorical_labels:
-                                  type: "array"
-                                  items:
-                                    type: "object"
-                                    properties:
-                                      value:
-                                        type: "string"
-                                        minLength: 1
-                                      description:
-                                        type: "string"
-                                    required:
-                                      - "value"
                                 key:
                                   type: "string"
                                   minLength: 1
@@ -4849,10 +4286,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             updated:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4873,27 +4310,6 @@ paths:
                                     - "type"
                                     - "value"
                                   title: "Boolean"
-                                - type: "object"
-                                  properties:
-                                    enabled:
-                                      type: "boolean"
-                                    alert_on_failure:
-                                      type: "boolean"
-                                      default: false
-                                    type:
-                                      type: "string"
-                                      enum:
-                                        - "categorical"
-                                    values:
-                                      type: "array"
-                                      items:
-                                        type: "string"
-                                        minLength: 1
-                                  required:
-                                    - "enabled"
-                                    - "type"
-                                    - "values"
-                                  title: "Categorical"
                                 - type: "object"
                                   properties:
                                     enabled:
@@ -4948,10 +4364,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             updated:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -4972,27 +4388,6 @@ paths:
                                     - "type"
                                     - "value"
                                   title: "Boolean"
-                                - type: "object"
-                                  properties:
-                                    enabled:
-                                      type: "boolean"
-                                    alert_on_failure:
-                                      type: "boolean"
-                                      default: false
-                                    type:
-                                      type: "string"
-                                      enum:
-                                        - "categorical"
-                                    values:
-                                      type: "array"
-                                      items:
-                                        type: "string"
-                                        minLength: 1
-                                  required:
-                                    - "enabled"
-                                    - "type"
-                                    - "values"
-                                  title: "Categorical"
                                 - type: "object"
                                   properties:
                                     enabled:
@@ -5062,10 +4457,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             updated:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5086,27 +4481,6 @@ paths:
                                     - "type"
                                     - "value"
                                   title: "Boolean"
-                                - type: "object"
-                                  properties:
-                                    enabled:
-                                      type: "boolean"
-                                    alert_on_failure:
-                                      type: "boolean"
-                                      default: false
-                                    type:
-                                      type: "string"
-                                      enum:
-                                        - "categorical"
-                                    values:
-                                      type: "array"
-                                      items:
-                                        type: "string"
-                                        minLength: 1
-                                  required:
-                                    - "enabled"
-                                    - "type"
-                                    - "values"
-                                  title: "Categorical"
                                 - type: "object"
                                   properties:
                                     enabled:
@@ -5161,10 +4535,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             updated:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5185,27 +4559,6 @@ paths:
                                     - "type"
                                     - "value"
                                   title: "Boolean"
-                                - type: "object"
-                                  properties:
-                                    enabled:
-                                      type: "boolean"
-                                    alert_on_failure:
-                                      type: "boolean"
-                                      default: false
-                                    type:
-                                      type: "string"
-                                      enum:
-                                        - "categorical"
-                                    values:
-                                      type: "array"
-                                      items:
-                                        type: "string"
-                                        minLength: 1
-                                  required:
-                                    - "enabled"
-                                    - "type"
-                                    - "values"
-                                  title: "Categorical"
                                 - type: "object"
                                   properties:
                                     enabled:
@@ -5560,10 +4913,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             updated:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5584,27 +4937,6 @@ paths:
                                     - "type"
                                     - "value"
                                   title: "Boolean"
-                                - type: "object"
-                                  properties:
-                                    enabled:
-                                      type: "boolean"
-                                    alert_on_failure:
-                                      type: "boolean"
-                                      default: false
-                                    type:
-                                      type: "string"
-                                      enum:
-                                        - "categorical"
-                                    values:
-                                      type: "array"
-                                      items:
-                                        type: "string"
-                                        minLength: 1
-                                  required:
-                                    - "enabled"
-                                    - "type"
-                                    - "values"
-                                  title: "Categorical"
                                 - type: "object"
                                   properties:
                                     enabled:
@@ -5675,10 +5007,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             updated:
                               type: "string"
-                              default: "2026-04-14T08:16:54.654Z"
+                              default: "2026-04-14T08:47:52.166Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5699,27 +5031,6 @@ paths:
                                     - "type"
                                     - "value"
                                   title: "Boolean"
-                                - type: "object"
-                                  properties:
-                                    enabled:
-                                      type: "boolean"
-                                    alert_on_failure:
-                                      type: "boolean"
-                                      default: false
-                                    type:
-                                      type: "string"
-                                      enum:
-                                        - "categorical"
-                                    values:
-                                      type: "array"
-                                      items:
-                                        type: "string"
-                                        minLength: 1
-                                  required:
-                                    - "enabled"
-                                    - "type"
-                                    - "values"
-                                  title: "Categorical"
                                 - type: "object"
                                   properties:
                                     enabled:
@@ -5830,27 +5141,6 @@ paths:
                                 type:
                                   type: "string"
                                   enum:
-                                    - "categorical"
-                                values:
-                                  type: "array"
-                                  items:
-                                    type: "string"
-                                    minLength: 1
-                              required:
-                                - "enabled"
-                                - "type"
-                                - "values"
-                              title: "Categorical"
-                            - type: "object"
-                              properties:
-                                enabled:
-                                  type: "boolean"
-                                alert_on_failure:
-                                  type: "boolean"
-                                  default: false
-                                type:
-                                  type: "string"
-                                  enum:
                                     - "number"
                                 value:
                                   type: "number"
@@ -5888,22 +5178,6 @@ paths:
                           maximum: 3
                         prompt:
                           type: "string"
-                        categories:
-                          type: "array"
-                          items:
-                            type: "string"
-                        categorical_labels:
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              value:
-                                type: "string"
-                                minLength: 1
-                              description:
-                                type: "string"
-                            required:
-                              - "value"
                         path:
                           type: "string"
                           description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -5960,27 +5234,6 @@ paths:
                                 type:
                                   type: "string"
                                   enum:
-                                    - "categorical"
-                                values:
-                                  type: "array"
-                                  items:
-                                    type: "string"
-                                    minLength: 1
-                              required:
-                                - "enabled"
-                                - "type"
-                                - "values"
-                              title: "Categorical"
-                            - type: "object"
-                              properties:
-                                enabled:
-                                  type: "boolean"
-                                alert_on_failure:
-                                  type: "boolean"
-                                  default: false
-                                type:
-                                  type: "string"
-                                  enum:
                                     - "number"
                                 value:
                                   type: "number"
@@ -6018,22 +5271,6 @@ paths:
                           maximum: 3
                         prompt:
                           type: "string"
-                        categories:
-                          type: "array"
-                          items:
-                            type: "string"
-                        categorical_labels:
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              value:
-                                type: "string"
-                                minLength: 1
-                              description:
-                                type: "string"
-                            required:
-                              - "value"
                         path:
                           type: "string"
                           description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -6185,27 +5422,6 @@ paths:
                             type:
                               type: "string"
                               enum:
-                                - "categorical"
-                            values:
-                              type: "array"
-                              items:
-                                type: "string"
-                                minLength: 1
-                          required:
-                            - "enabled"
-                            - "type"
-                            - "values"
-                          title: "Categorical"
-                        - type: "object"
-                          properties:
-                            enabled:
-                              type: "boolean"
-                            alert_on_failure:
-                              type: "boolean"
-                              default: false
-                            type:
-                              type: "string"
-                              enum:
                                 - "number"
                             value:
                               type: "number"
@@ -6274,27 +5490,6 @@ paths:
                             - "type"
                             - "value"
                           title: "Boolean"
-                        - type: "object"
-                          properties:
-                            enabled:
-                              type: "boolean"
-                            alert_on_failure:
-                              type: "boolean"
-                              default: false
-                            type:
-                              type: "string"
-                              enum:
-                                - "categorical"
-                            values:
-                              type: "array"
-                              items:
-                                type: "string"
-                                minLength: 1
-                          required:
-                            - "enabled"
-                            - "type"
-                            - "values"
-                          title: "Categorical"
                         - type: "object"
                           properties:
                             enabled:
@@ -6402,27 +5597,6 @@ paths:
                             type:
                               type: "string"
                               enum:
-                                - "categorical"
-                            values:
-                              type: "array"
-                              items:
-                                type: "string"
-                                minLength: 1
-                          required:
-                            - "enabled"
-                            - "type"
-                            - "values"
-                          title: "Categorical"
-                        - type: "object"
-                          properties:
-                            enabled:
-                              type: "boolean"
-                            alert_on_failure:
-                              type: "boolean"
-                              default: false
-                            type:
-                              type: "string"
-                              enum:
                                 - "number"
                             value:
                               type: "number"
@@ -6486,10 +5660,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           updated:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -6510,27 +5684,6 @@ paths:
                                   - "type"
                                   - "value"
                                 title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "categorical"
-                                  values:
-                                    type: "array"
-                                    items:
-                                      type: "string"
-                                      minLength: 1
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "values"
-                                title: "Categorical"
                               - type: "object"
                                 properties:
                                   enabled:
@@ -6570,22 +5723,6 @@ paths:
                             maximum: 3
                           prompt:
                             type: "string"
-                          categories:
-                            type: "array"
-                            items:
-                              type: "string"
-                          categorical_labels:
-                            type: "array"
-                            items:
-                              type: "object"
-                              properties:
-                                value:
-                                  type: "string"
-                                  minLength: 1
-                                description:
-                                  type: "string"
-                              required:
-                                - "value"
                           key:
                             type: "string"
                             minLength: 1
@@ -6612,10 +5749,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           updated:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -6636,27 +5773,6 @@ paths:
                                   - "type"
                                   - "value"
                                 title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "categorical"
-                                  values:
-                                    type: "array"
-                                    items:
-                                      type: "string"
-                                      minLength: 1
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "values"
-                                title: "Categorical"
                               - type: "object"
                                 properties:
                                   enabled:
@@ -6696,22 +5812,6 @@ paths:
                             maximum: 3
                           prompt:
                             type: "string"
-                          categories:
-                            type: "array"
-                            items:
-                              type: "string"
-                          categorical_labels:
-                            type: "array"
-                            items:
-                              type: "object"
-                              properties:
-                                value:
-                                  type: "string"
-                                  minLength: 1
-                                description:
-                                  type: "string"
-                              required:
-                                - "value"
                           key:
                             type: "string"
                             minLength: 1
@@ -6833,10 +5933,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6857,27 +5957,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -6932,10 +6011,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -6956,27 +6035,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -7046,10 +6104,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7070,27 +6128,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -7145,10 +6182,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7169,27 +6206,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -7544,10 +6560,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7568,27 +6584,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -7659,10 +6654,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7683,27 +6678,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -7806,18 +6780,6 @@ paths:
                   type: "array"
                   items:
                     type: "string"
-                categorical_labels:
-                  type: "array"
-                  items:
-                    type: "object"
-                    properties:
-                      value:
-                        type: "string"
-                        minLength: 1
-                      description:
-                        type: "string"
-                    required:
-                      - "value"
                 repetitions:
                   type: "number"
                 mode:
@@ -7938,76 +6900,6 @@ paths:
                   additionalProperties: {}
                 code:
                   type: "string"
-                guardrail_config:
-                  oneOf:
-                    - type: "object"
-                      properties:
-                        enabled:
-                          type: "boolean"
-                        alert_on_failure:
-                          type: "boolean"
-                          default: false
-                        type:
-                          type: "string"
-                          enum:
-                            - "boolean"
-                        value:
-                          type: "boolean"
-                      required:
-                        - "enabled"
-                        - "type"
-                        - "value"
-                      title: "Boolean"
-                    - type: "object"
-                      properties:
-                        enabled:
-                          type: "boolean"
-                        alert_on_failure:
-                          type: "boolean"
-                          default: false
-                        type:
-                          type: "string"
-                          enum:
-                            - "categorical"
-                        values:
-                          type: "array"
-                          items:
-                            type: "string"
-                            minLength: 1
-                      required:
-                        - "enabled"
-                        - "type"
-                        - "values"
-                      title: "Categorical"
-                    - type: "object"
-                      properties:
-                        enabled:
-                          type: "boolean"
-                        alert_on_failure:
-                          type: "boolean"
-                          default: false
-                        type:
-                          type: "string"
-                          enum:
-                            - "number"
-                        value:
-                          type: "number"
-                        operator:
-                          type: "string"
-                          enum:
-                            - "eq"
-                            - "ne"
-                            - "gt"
-                            - "gte"
-                            - "lt"
-                            - "lte"
-                      required:
-                        - "enabled"
-                        - "type"
-                        - "value"
-                        - "operator"
-                      title: "Number"
-                    - type: "null"
                 versionIncrement:
                   type: "string"
                   enum:
@@ -8032,10 +6924,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           updated:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -8056,27 +6948,6 @@ paths:
                                   - "type"
                                   - "value"
                                 title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "categorical"
-                                  values:
-                                    type: "array"
-                                    items:
-                                      type: "string"
-                                      minLength: 1
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "values"
-                                title: "Categorical"
                               - type: "object"
                                 properties:
                                   enabled:
@@ -8116,22 +6987,6 @@ paths:
                             maximum: 3
                           prompt:
                             type: "string"
-                          categories:
-                            type: "array"
-                            items:
-                              type: "string"
-                          categorical_labels:
-                            type: "array"
-                            items:
-                              type: "object"
-                              properties:
-                                value:
-                                  type: "string"
-                                  minLength: 1
-                                description:
-                                  type: "string"
-                              required:
-                                - "value"
                           key:
                             type: "string"
                             minLength: 1
@@ -8158,10 +7013,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           updated:
                             type: "string"
-                            default: "2026-04-14T08:16:54.654Z"
+                            default: "2026-04-14T08:47:52.166Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -8182,27 +7037,6 @@ paths:
                                   - "type"
                                   - "value"
                                 title: "Boolean"
-                              - type: "object"
-                                properties:
-                                  enabled:
-                                    type: "boolean"
-                                  alert_on_failure:
-                                    type: "boolean"
-                                    default: false
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "categorical"
-                                  values:
-                                    type: "array"
-                                    items:
-                                      type: "string"
-                                      minLength: 1
-                                required:
-                                  - "enabled"
-                                  - "type"
-                                  - "values"
-                                title: "Categorical"
                               - type: "object"
                                 properties:
                                   enabled:
@@ -8242,22 +7076,6 @@ paths:
                             maximum: 3
                           prompt:
                             type: "string"
-                          categories:
-                            type: "array"
-                            items:
-                              type: "string"
-                          categorical_labels:
-                            type: "array"
-                            items:
-                              type: "object"
-                              properties:
-                                value:
-                                  type: "string"
-                                  minLength: 1
-                                description:
-                                  type: "string"
-                              required:
-                                - "value"
                           key:
                             type: "string"
                             minLength: 1
@@ -8379,10 +7197,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8403,27 +7221,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -8478,10 +7275,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8502,27 +7299,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -8592,10 +7368,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8616,27 +7392,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -8691,10 +7446,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8715,27 +7470,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -9090,10 +7824,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9114,27 +7848,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -9205,10 +7918,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       updated:
                         type: "string"
-                        default: "2026-04-14T08:16:54.654Z"
+                        default: "2026-04-14T08:47:52.166Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9229,27 +7942,6 @@ paths:
                               - "type"
                               - "value"
                             title: "Boolean"
-                          - type: "object"
-                            properties:
-                              enabled:
-                                type: "boolean"
-                              alert_on_failure:
-                                type: "boolean"
-                                default: false
-                              type:
-                                type: "string"
-                                enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
-                            required:
-                              - "enabled"
-                              - "type"
-                              - "values"
-                            title: "Categorical"
                           - type: "object"
                             properties:
                               enabled:
@@ -10102,7 +8794,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-04-14T08:16:52.325Z"
+                          default: "2026-04-14T08:47:49.740Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -10110,7 +8802,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:16:52.325Z"
+                              default: "2026-04-14T08:47:49.740Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -10315,7 +9007,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -10323,7 +9015,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -10448,7 +9140,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -10456,7 +9148,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -10667,7 +9359,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -10675,7 +9367,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -14789,6 +13481,8 @@ paths:
                     type: "string"
                   status:
                     type: "string"
+                  version_hash:
+                    type: "string"
                   path:
                     type: "string"
                   metrics:
@@ -16006,6 +14700,8 @@ paths:
                   version:
                     type: "string"
                     description: "Current semantic version of the agent manifest."
+                  version_hash:
+                    type: "string"
                   path:
                     type: "string"
                     description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -16914,8 +15610,6 @@ paths:
                   - "description"
                   - "instructions"
                   - "model"
-        "409":
-          description: "An agent with the same key already exists in this workspace."
       security:
         - ApiKey: []
     get:
@@ -17009,6 +15703,8 @@ paths:
                         version:
                           type: "string"
                           description: "Current semantic version of the agent manifest."
+                        version_hash:
+                          type: "string"
                         path:
                           type: "string"
                           description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -18310,6 +17006,8 @@ paths:
                   version:
                     type: "string"
                     description: "Current semantic version of the agent manifest."
+                  version_hash:
+                    type: "string"
                   path:
                     type: "string"
                     description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -20399,6 +19097,8 @@ paths:
                   version:
                     type: "string"
                     description: "Current semantic version of the agent manifest."
+                  version_hash:
+                    type: "string"
                   path:
                     type: "string"
                     description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23078,7 +21778,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KP5H1M8YMG8M59DMMTNNSR7E"
+                                          default: "01KP5JTB10GPG69KRE6BNHR5WT"
                                         name:
                                           type: "string"
                                         description:
@@ -24721,7 +23421,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KP5H1MAPTQHWY8HBZJ1C65D0"
+                                          default: "01KP5JTB2TWEDXE1MZGP6EF85J"
                                         name:
                                           type: "string"
                                         description:
@@ -33208,7 +31908,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KP5H1MK07ZAKEN8807Y4PGQR"
+                              default: "tool_01KP5JTBBD3B2CKHBWS6EGDJNZ"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33248,6 +31948,8 @@ paths:
                                 - "published"
                               default: "live"
                               description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                            version_hash:
+                              type: "string"
                             type:
                               type: "string"
                               enum:
@@ -33305,7 +32007,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KP5H1MK8G19A6QD140PHS17C"
+                              default: "tool_01KP5JTBBE78M9GF34Y6R1E7C6"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33345,6 +32047,8 @@ paths:
                                 - "published"
                               default: "live"
                               description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                            version_hash:
+                              type: "string"
                             type:
                               type: "string"
                               enum:
@@ -33404,7 +32108,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KP5H1MK916QCX79JPA84T7Y4"
+                              default: "tool_01KP5JTBBG7EE3E19ZP4HCRBWG"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33444,6 +32148,8 @@ paths:
                                 - "published"
                               default: "live"
                               description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                            version_hash:
+                              type: "string"
                             type:
                               type: "string"
                               enum:
@@ -33539,7 +32245,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KP5H1MKC4NZDGYDCXKBXXWKK"
+                              default: "tool_01KP5JTBBSAYTYDYQRHAPBJF4A"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33579,6 +32285,8 @@ paths:
                                 - "published"
                               default: "live"
                               description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                            version_hash:
+                              type: "string"
                             type:
                               type: "string"
                               enum:
@@ -33611,7 +32319,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KP5H1MKD7SNMTE7KTN8T8FE9"
+                                        default: "01KP5JTBBTPJT3WXH5F0TCXSAS"
                                       name:
                                         type: "string"
                                       description:
@@ -33670,7 +32378,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KP5H1MKED6SJMQRZ72GZD6M4"
+                              default: "tool_01KP5JTBBVZ8RH4EVS47KG5QXB"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -33710,6 +32418,8 @@ paths:
                                 - "published"
                               default: "live"
                               description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                            version_hash:
+                              type: "string"
                             type:
                               type: "string"
                               enum:
@@ -34219,7 +32929,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MKR75KQF3TGW9K2RGXC"
+                        default: "tool_01KP5JTBC6SBY96D1ZXGDSJV4W"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34259,6 +32969,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -34316,7 +33028,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MKSZX30SNZ8D5G356QN"
+                        default: "tool_01KP5JTBC7C9J78Y21PFBA4Y9C"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34356,6 +33068,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -34415,7 +33129,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MKT8DMCXWY902TGV0VH"
+                        default: "tool_01KP5JTBC89HK5PZS4F8Z9N9S7"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34455,6 +33169,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -34550,7 +33266,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MKW8QSNESVGFVVWE1W7"
+                        default: "tool_01KP5JTBCB86FF6G757QPKPXEC"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34590,6 +33306,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -34622,7 +33340,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KP5H1MKX3WR6ZBR1JVZRJN6S"
+                                  default: "01KP5JTBCC7J06QJ8B8X3NETAB"
                                 name:
                                   type: "string"
                                 description:
@@ -34681,7 +33399,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MKY5HR34D0PGPV2EXF7"
+                        default: "tool_01KP5JTBCDYQEZHR9CW19NWBP6"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34721,6 +33439,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35136,7 +33856,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KP5H1MMR9E1DVX93BX5C9YP2"
+                                default: "01KP5JTBD732YXSJQ34GEF971C"
                               name:
                                 type: "string"
                               description:
@@ -35282,7 +34002,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MM54F8CSJZV3T2QCN6K"
+                        default: "tool_01KP5JTBCK0PZ89GXKYMZRCDD1"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35322,6 +34042,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35379,7 +34101,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MM6K733C7D93HE4EB4A"
+                        default: "tool_01KP5JTBCM1JHBKJGFY8DTGE65"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35419,6 +34141,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35478,7 +34202,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MM7ZNESEW8CBVNHF60Y"
+                        default: "tool_01KP5JTBCPDJ7B6WFGX2CRAP4A"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35518,6 +34242,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35613,7 +34339,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MM9YEX1DE9ZRJEDTXTS"
+                        default: "tool_01KP5JTBCRZ55WA8Y33464SH44"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35653,6 +34379,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35685,7 +34413,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KP5H1MMA4B9H3DCS7YQHT16G"
+                                  default: "01KP5JTBCSFGRFB1BRX9GECP3C"
                                 name:
                                   type: "string"
                                 description:
@@ -35744,7 +34472,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MMHXTJP46A0EFEKWH3R"
+                        default: "tool_01KP5JTBCTBMV1APPWZ51REDF6"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35784,6 +34512,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35897,7 +34627,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MN2RZP54SJX3QBJ7V1R"
+                        default: "tool_01KP5JTBDJ2M8GAP7PJNW70G5V"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35937,6 +34667,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -35994,7 +34726,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MN40RHFG21KX79J20HV"
+                        default: "tool_01KP5JTBDMFGW7WGKBTX4V3V7G"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36034,6 +34766,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -36093,7 +34827,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MN5QR3KT1MSC3TA1RMJ"
+                        default: "tool_01KP5JTBDNRX5M01CV0MNB5JRW"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36133,6 +34867,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -36228,7 +34964,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MN75B32ZW2YPT3JR6QN"
+                        default: "tool_01KP5JTBDQ31AC9EE7Y5DHP1H3"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36268,6 +35004,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -36300,7 +35038,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KP5H1MN8BQQKY4930CH8FKS5"
+                                  default: "01KP5JTBDRZZED9SRJEW1B9KH9"
                                 name:
                                   type: "string"
                                 description:
@@ -36359,7 +35097,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KP5H1MN9MSYFAMAMPKCJ9TKH"
+                        default: "tool_01KP5JTBDSXKE4WGB5H565YVZM"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36399,6 +35137,8 @@ paths:
                           - "published"
                         default: "live"
                         description: "The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version."
+                      version_hash:
+                        type: "string"
                       type:
                         type: "string"
                         enum:
@@ -38493,7 +37233,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KP5H1MRB3G7J01JAXJT6SZBJ"
+                          default: "01KP5JTBGTXCJ1NM7EDBK0HPWA"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -38659,7 +37399,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KP5H1MRRY989YET5NN946Q5Q"
+                    default: "01KP5JTBGXFP6Q6KGA8BNFVY9A"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -38755,7 +37495,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KP5H1MRP1NAWRBV3C58T9KW2"
+                    default: "01KP5JTBGWWFTV0ZJAPKBAN7YN"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -38887,7 +37627,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KP5H1MRW47V4KTAA0J5B3ETG"
+                    default: "01KP5JTBH57V9M022WQ4DH0QDN"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -41362,8 +40102,6 @@ paths:
                           description: "The unique identifier of the dataset"
                         display_name:
                           type: "string"
-                          minLength: 1
-                          maxLength: 128
                           description: "The display name of the dataset"
                         project_id:
                           anyOf:
@@ -41433,7 +40171,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-04-14T08:16:52.325Z"
+                          default: "2026-04-14T08:47:49.740Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41441,7 +40179,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:16:52.325Z"
+                              default: "2026-04-14T08:47:49.740Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -41477,8 +40215,6 @@ paths:
               properties:
                 display_name:
                   type: "string"
-                  minLength: 1
-                  maxLength: 128
                   description: "The display name of the dataset"
                 path:
                   type: "string"
@@ -41510,8 +40246,6 @@ paths:
                     description: "The unique identifier of the dataset"
                   display_name:
                     type: "string"
-                    minLength: 1
-                    maxLength: 128
                     description: "The display name of the dataset"
                   project_id:
                     anyOf:
@@ -41581,7 +40315,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41589,7 +40323,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41643,8 +40377,6 @@ paths:
                     description: "The unique identifier of the dataset"
                   display_name:
                     type: "string"
-                    minLength: 1
-                    maxLength: 128
                     description: "The display name of the dataset"
                   project_id:
                     anyOf:
@@ -41714,7 +40446,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41722,7 +40454,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41766,8 +40498,6 @@ paths:
               properties:
                 display_name:
                   type: "string"
-                  minLength: 1
-                  maxLength: 128
                   description: "The display name of the dataset"
                 project_id:
                   anyOf:
@@ -41809,8 +40539,6 @@ paths:
                     description: "The unique identifier of the dataset"
                   display_name:
                     type: "string"
-                    minLength: 1
-                    maxLength: 128
                     description: "The display name of the dataset"
                   project_id:
                     anyOf:
@@ -41880,7 +40608,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41888,7 +40616,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42265,7 +40993,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-04-14T08:17:08.944Z"
+                                    default: "2026-04-14T08:48:07.261Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42305,7 +41033,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-04-14T08:17:08.945Z"
+                                    default: "2026-04-14T08:48:07.262Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42345,7 +41073,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-04-14T08:17:08.945Z"
+                                    default: "2026-04-14T08:48:07.262Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42381,7 +41109,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-04-14T08:16:52.325Z"
+                          default: "2026-04-14T08:47:49.740Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42389,7 +41117,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:16:52.325Z"
+                              default: "2026-04-14T08:47:49.740Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -42961,7 +41689,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-04-14T08:17:08.956Z"
+                                default: "2026-04-14T08:48:07.273Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43001,7 +41729,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-04-14T08:17:08.956Z"
+                                default: "2026-04-14T08:48:07.274Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43041,7 +41769,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-04-14T08:17:08.957Z"
+                                default: "2026-04-14T08:48:07.274Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43077,7 +41805,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-04-14T08:16:52.325Z"
+                      default: "2026-04-14T08:47:49.740Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43085,7 +41813,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-04-14T08:16:52.325Z"
+                          default: "2026-04-14T08:47:49.740Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -43405,7 +42133,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:17:08.950Z"
+                              default: "2026-04-14T08:48:07.267Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43445,7 +42173,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:17:08.951Z"
+                              default: "2026-04-14T08:48:07.268Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43485,7 +42213,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:17:08.951Z"
+                              default: "2026-04-14T08:48:07.268Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43521,7 +42249,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43529,7 +42257,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44100,7 +42828,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:17:08.980Z"
+                              default: "2026-04-14T08:48:07.299Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44140,7 +42868,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:17:08.980Z"
+                              default: "2026-04-14T08:48:07.299Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44180,7 +42908,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:17:08.981Z"
+                              default: "2026-04-14T08:48:07.299Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44216,7 +42944,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-04-14T08:16:52.325Z"
+                    default: "2026-04-14T08:47:49.740Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44224,7 +42952,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -51988,7 +50716,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-04-14T08:17:09.107Z"
+                      default: "2026-04-14T08:48:07.430Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52027,7 +50755,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-04-14T08:17:09.108Z"
+                      default: "2026-04-14T08:48:07.430Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52066,7 +50794,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-04-14T08:17:09.108Z"
+                      default: "2026-04-14T08:48:07.431Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52260,7 +50988,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-04-14T08:16:52.325Z"
+                          default: "2026-04-14T08:47:49.740Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52268,7 +50996,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:16:52.325Z"
+                              default: "2026-04-14T08:47:49.740Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52342,7 +51070,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-04-14T08:16:52.325Z"
+                          default: "2026-04-14T08:47:49.740Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52350,7 +51078,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-04-14T08:16:52.325Z"
+                              default: "2026-04-14T08:47:49.740Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52534,7 +51262,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52542,7 +51270,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-04-14T08:16:52.325Z"
+                            default: "2026-04-14T08:47:49.740Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52616,7 +51344,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52624,7 +51352,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-04-14T08:16:52.325Z"
+                            default: "2026-04-14T08:47:49.740Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52718,7 +51446,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52726,7 +51454,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-04-14T08:16:52.325Z"
+                            default: "2026-04-14T08:47:49.740Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52800,7 +51528,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52808,7 +51536,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-04-14T08:16:52.325Z"
+                            default: "2026-04-14T08:47:49.740Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53000,7 +51728,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53008,7 +51736,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-04-14T08:16:52.325Z"
+                            default: "2026-04-14T08:47:49.740Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53082,7 +51810,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-04-14T08:16:52.325Z"
+                        default: "2026-04-14T08:47:49.740Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53090,7 +51818,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-04-14T08:16:52.325Z"
+                            default: "2026-04-14T08:47:49.740Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53173,7 +51901,7 @@ paths:
                           description: "The id of the resource"
                         key:
                           type: "string"
-                          default: "orq_01kp5h1n05"
+                          default: "orq_01kp5jtbrn"
                           description: "Unique key for the feedback. It is autogenerated by the system always"
                         display_name:
                           type: "string"
@@ -53235,7 +51963,7 @@ paths:
                           description: "The id of the resource"
                         key:
                           type: "string"
-                          default: "orq_01kp5h1n06"
+                          default: "orq_01kp5jtbrp"
                           description: "Unique key for the feedback. It is autogenerated by the system always"
                         display_name:
                           type: "string"
@@ -53312,7 +52040,7 @@ paths:
                           description: "The id of the resource"
                         key:
                           type: "string"
-                          default: "orq_01kp5h1n08"
+                          default: "orq_01kp5jtbrq"
                           description: "Unique key for the feedback. It is autogenerated by the system always"
                         display_name:
                           type: "string"
@@ -53408,7 +52136,7 @@ paths:
                           description: "The id of the resource"
                         key:
                           type: "string"
-                          default: "orq_01kp5h1n0a"
+                          default: "orq_01kp5jtbrs"
                           description: "Unique key for the feedback. It is autogenerated by the system always"
                         display_name:
                           type: "string"
@@ -53504,7 +52232,7 @@ paths:
                           description: "The id of the resource"
                         key:
                           type: "string"
-                          default: "orq_01kp5h1n0b"
+                          default: "orq_01kp5jtbrt"
                           description: "Unique key for the feedback. It is autogenerated by the system always"
                         display_name:
                           type: "string"
@@ -53567,7 +52295,7 @@ paths:
                           description: "The id of the resource"
                         key:
                           type: "string"
-                          default: "orq_01kp5h1n0c"
+                          default: "orq_01kp5jtbrv"
                           description: "Unique key for the feedback. It is autogenerated by the system always"
                         display_name:
                           type: "string"
@@ -53648,7 +52376,7 @@ paths:
                       description: "The id of the resource"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n11"
+                      default: "orq_01kp5jtbsp"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -53689,7 +52417,7 @@ paths:
                       description: "The id of the resource"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n11"
+                      default: "orq_01kp5jtbsq"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -53745,7 +52473,7 @@ paths:
                       description: "The id of the resource"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n12"
+                      default: "orq_01kp5jtbsr"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -53820,7 +52548,7 @@ paths:
                       description: "The id of the resource"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n13"
+                      default: "orq_01kp5jtbst"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -53895,7 +52623,7 @@ paths:
                       description: "The id of the resource"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n14"
+                      default: "orq_01kp5jtbsw"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -53937,7 +52665,7 @@ paths:
                       description: "The id of the resource"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n15"
+                      default: "orq_01kp5jtbsx"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -53985,7 +52713,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0t"
+                        default: "orq_01kp5jtbs9"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54047,7 +52775,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0v"
+                        default: "orq_01kp5jtbsb"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54124,7 +52852,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0w"
+                        default: "orq_01kp5jtbse"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54220,7 +52948,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0y"
+                        default: "orq_01kp5jtbsg"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54316,7 +53044,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0z"
+                        default: "orq_01kp5jtbsk"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54379,7 +53107,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n10"
+                        default: "orq_01kp5jtbsm"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54474,7 +53202,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0d"
+                        default: "orq_01kp5jtbrw"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54536,7 +53264,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0e"
+                        default: "orq_01kp5jtbrx"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54613,7 +53341,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0f"
+                        default: "orq_01kp5jtbry"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54709,7 +53437,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0q"
+                        default: "orq_01kp5jtbrz"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54805,7 +53533,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0r"
+                        default: "orq_01kp5jtbs0"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54868,7 +53596,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n0s"
+                        default: "orq_01kp5jtbs1"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -54954,7 +53682,7 @@ paths:
                         - "boolean"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n1c"
+                      default: "orq_01kp5jtbt8"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -54996,7 +53724,7 @@ paths:
                         - "correction"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n1c"
+                      default: "orq_01kp5jtbta"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -55053,7 +53781,7 @@ paths:
                       description: "The configuration for a range human review"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n1d"
+                      default: "orq_01kp5jtbtb"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -55129,7 +53857,7 @@ paths:
                         description: "Model representing specific values and attributes of feedback."
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n1e"
+                      default: "orq_01kp5jtbtc"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -55205,7 +53933,7 @@ paths:
                         description: "Model representing specific values and attributes of feedback."
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n1f"
+                      default: "orq_01kp5jtbtd"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -55248,7 +53976,7 @@ paths:
                         - "text"
                     key:
                       type: "string"
-                      default: "orq_01kp5h1n1g"
+                      default: "orq_01kp5jtbte"
                       description: "Unique key for the feedback. It is autogenerated by the system always"
                     display_name:
                       type: "string"
@@ -55303,7 +54031,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n15"
+                        default: "orq_01kp5jtbsy"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -55365,7 +54093,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n16"
+                        default: "orq_01kp5jtbsz"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -55442,7 +54170,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n17"
+                        default: "orq_01kp5jtbt1"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -55538,7 +54266,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n18"
+                        default: "orq_01kp5jtbt3"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -55634,7 +54362,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n1a"
+                        default: "orq_01kp5jtbt5"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -55697,7 +54425,7 @@ paths:
                         description: "The id of the resource"
                       key:
                         type: "string"
-                        default: "orq_01kp5h1n1b"
+                        default: "orq_01kp5jtbt7"
                         description: "Unique key for the feedback. It is autogenerated by the system always"
                       display_name:
                         type: "string"
@@ -56088,1128 +54816,9 @@ paths:
       x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
-  /v2/guardrail-rules:
-    get:
-      description: "Returns a paginated list of guardrail rules for the current project."
-      operationId: "GuardrailRuleList"
-      parameters:
-        - explode: false
-          in: "query"
-          name: "limit"
-          schema:
-            default: 10
-            format: "int64"
-            maximum: 25
-            minimum: 1
-            type: "integer"
-        - description: "A cursor for use in pagination."
-          explode: false
-          in: "query"
-          name: "starting_after"
-          schema:
-            description: "A cursor for use in pagination."
-            type: "string"
-        - description: "A cursor for use in pagination."
-          explode: false
-          in: "query"
-          name: "ending_before"
-          schema:
-            description: "A cursor for use in pagination."
-            type: "string"
-        - description: "Optional filter by project ID."
-          explode: false
-          in: "query"
-          name: "project_id"
-          schema:
-            description: "Optional filter by project ID."
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  data:
-                    items:
-                      $ref: "#/components/schemas/GuardrailRuleDocument"
-                    type:
-                      - "array"
-                      - "null"
-                  has_more:
-                    type: "boolean"
-                  object:
-                    type: "string"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
-                type: "object"
-          description: "Guardrail rules retrieved successfully"
-      summary: "List guardrail rules"
-      tags:
-        - "Guardrail Rules"
-      x-speakeasy-group: "guardrailRules"
-      x-speakeasy-name-override: "list"
-      security:
-        - ApiKey: []
-    post:
-      description: "Creates a new guardrail rule with expression, guardrails configuration, and timeout settings."
-      operationId: "GuardrailRuleCreate"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                description:
-                  maxLength: 2048
-                  type: "string"
-                display_name:
-                  maxLength: 256
-                  minLength: 1
-                  type: "string"
-                enabled:
-                  type: "boolean"
-                expression:
-                  $ref: "#/components/schemas/Expression"
-                guardrails:
-                  items:
-                    $ref: "#/components/schemas/GuardrailRef"
-                  type:
-                    - "array"
-                    - "null"
-                project_id:
-                  description: "Optional project ID. If null/omitted, the entity is global (workspace-wide)."
-                  type: "string"
-                timeout:
-                  format: "int64"
-                  minimum: 1000
-                  type: "integer"
-              required:
-                - "display_name"
-              type: "object"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  expression:
-                    $ref: "#/components/schemas/Expression"
-                  guardrails:
-                    items:
-                      $ref: "#/components/schemas/GuardrailRef"
-                    type:
-                      - "array"
-                      - "null"
-                  project_id:
-                    type: "string"
-                  timeout:
-                    format: "int64"
-                    minimum: 1000
-                    type: "integer"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "enabled"
-                  - "timeout"
-                type: "object"
-          description: "Guardrail rule created successfully"
-        "400":
-          description: "Bad request"
-      summary: "Create guardrail rule"
-      tags:
-        - "Guardrail Rules"
-      x-speakeasy-group: "guardrailRules"
-      x-speakeasy-name-override: "create"
-      security:
-        - ApiKey: []
-  /v2/guardrail-rules/{guardrail_rule_id}:
-    delete:
-      description: "Deletes an existing guardrail rule by ID."
-      operationId: "GuardrailRuleDelete"
-      parameters:
-        - description: "The ID of the guardrail rule"
-          in: "path"
-          name: "guardrail_rule_id"
-          required: true
-          schema:
-            description: "The ID of the guardrail rule"
-            type: "string"
-      responses:
-        "204":
-          description: "Guardrail rule deleted successfully"
-        "404":
-          description: "Guardrail rule not found"
-      summary: "Delete guardrail rule"
-      tags:
-        - "Guardrail Rules"
-      x-speakeasy-group: "guardrailRules"
-      x-speakeasy-name-override: "delete"
-      security:
-        - ApiKey: []
-    get:
-      description: "Retrieves the details of an existing guardrail rule by ID."
-      operationId: "GuardrailRuleGet"
-      parameters:
-        - description: "The ID of the guardrail rule"
-          in: "path"
-          name: "guardrail_rule_id"
-          required: true
-          schema:
-            description: "The ID of the guardrail rule"
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  expression:
-                    $ref: "#/components/schemas/Expression"
-                  guardrails:
-                    items:
-                      $ref: "#/components/schemas/GuardrailRef"
-                    type:
-                      - "array"
-                      - "null"
-                  project_id:
-                    type: "string"
-                  timeout:
-                    format: "int64"
-                    minimum: 1000
-                    type: "integer"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "enabled"
-                  - "timeout"
-                type: "object"
-          description: "Guardrail rule retrieved successfully"
-        "404":
-          description: "Guardrail rule not found"
-      summary: "Get guardrail rule"
-      tags:
-        - "Guardrail Rules"
-      x-speakeasy-group: "guardrailRules"
-      x-speakeasy-name-override: "get"
-      security:
-        - ApiKey: []
-    patch:
-      description: "Partially updates an existing guardrail rule. Only provided fields are updated."
-      operationId: "GuardrailRuleUpdate"
-      parameters:
-        - description: "The ID of the guardrail rule"
-          in: "path"
-          name: "guardrail_rule_id"
-          required: true
-          schema:
-            description: "The ID of the guardrail rule"
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                description:
-                  maxLength: 2048
-                  type: "string"
-                display_name:
-                  maxLength: 256
-                  minLength: 1
-                  type: "string"
-                enabled:
-                  type: "boolean"
-                expression:
-                  $ref: "#/components/schemas/Expression"
-                guardrails:
-                  items:
-                    $ref: "#/components/schemas/GuardrailRef"
-                  type: "array"
-                timeout:
-                  format: "int64"
-                  minimum: 1000
-                  type: "integer"
-              type: "object"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  expression:
-                    $ref: "#/components/schemas/Expression"
-                  guardrails:
-                    items:
-                      $ref: "#/components/schemas/GuardrailRef"
-                    type:
-                      - "array"
-                      - "null"
-                  project_id:
-                    type: "string"
-                  timeout:
-                    format: "int64"
-                    minimum: 1000
-                    type: "integer"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "enabled"
-                  - "timeout"
-                type: "object"
-          description: "Guardrail rule updated successfully"
-        "400":
-          description: "Bad request"
-        "404":
-          description: "Guardrail rule not found"
-      summary: "Update guardrail rule"
-      tags:
-        - "Guardrail Rules"
-      x-speakeasy-group: "guardrailRules"
-      x-speakeasy-name-override: "update"
-      security:
-        - ApiKey: []
-  /v2/policies:
-    get:
-      description: "Returns a paginated list of policies for the current project."
-      operationId: "PolicyList"
-      parameters:
-        - explode: false
-          in: "query"
-          name: "limit"
-          schema:
-            default: 10
-            format: "int64"
-            maximum: 200
-            minimum: 1
-            type: "integer"
-        - description: "A cursor for use in pagination."
-          explode: false
-          in: "query"
-          name: "starting_after"
-          schema:
-            description: "A cursor for use in pagination."
-            type: "string"
-        - description: "A cursor for use in pagination."
-          explode: false
-          in: "query"
-          name: "ending_before"
-          schema:
-            description: "A cursor for use in pagination."
-            type: "string"
-        - description: "Optional filter by project ID."
-          explode: false
-          in: "query"
-          name: "project_id"
-          schema:
-            description: "Optional filter by project ID."
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  data:
-                    items:
-                      $ref: "#/components/schemas/PolicyDocument"
-                    type:
-                      - "array"
-                      - "null"
-                  has_more:
-                    type: "boolean"
-                  object:
-                    type: "string"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
-                type: "object"
-          description: "Policies retrieved successfully"
-      summary: "List policies"
-      tags:
-        - "Policies"
-      x-speakeasy-group: "policies"
-      x-speakeasy-name-override: "list"
-      security:
-        - ApiKey: []
-    post:
-      description: "Creates a new router policy with model configuration, evaluators, retry settings, and limits."
-      operationId: "PolicyCreate"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                description:
-                  maxLength: 2048
-                  type: "string"
-                display_name:
-                  maxLength: 256
-                  minLength: 1
-                  type: "string"
-                enabled:
-                  type: "boolean"
-                evaluators:
-                  items:
-                    $ref: "#/components/schemas/EvaluatorRef"
-                  type:
-                    - "array"
-                    - "null"
-                limits:
-                  $ref: "#/components/schemas/Limits"
-                models_config:
-                  $ref: "#/components/schemas/ModelsConfig"
-                project_id:
-                  description: "Optional project ID. If null/omitted, the entity is global (workspace-wide)."
-                  type: "string"
-                retry_config:
-                  $ref: "#/components/schemas/RetryConfig"
-                timeout:
-                  format: "int64"
-                  minimum: 1000
-                  type: "integer"
-              required:
-                - "display_name"
-              type: "object"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  evaluators:
-                    items:
-                      $ref: "#/components/schemas/EvaluatorRef"
-                    type:
-                      - "array"
-                      - "null"
-                  limits:
-                    $ref: "#/components/schemas/Limits"
-                  models_config:
-                    $ref: "#/components/schemas/ModelsConfig"
-                  project_id:
-                    type: "string"
-                  retry_config:
-                    $ref: "#/components/schemas/RetryConfig"
-                  slug:
-                    minLength: 1
-                    type: "string"
-                  timeout:
-                    format: "int64"
-                    minimum: 1000
-                    type: "integer"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "slug"
-                  - "enabled"
-                  - "timeout"
-                type: "object"
-          description: "Policy created successfully"
-        "400":
-          description: "Bad request"
-        "409":
-          description: "Slug conflict"
-      summary: "Create policy"
-      tags:
-        - "Policies"
-      x-speakeasy-group: "policies"
-      x-speakeasy-name-override: "create"
-      security:
-        - ApiKey: []
-  /v2/policies/{policy_id}:
-    delete:
-      description: "Deletes an existing policy by ID."
-      operationId: "PolicyDelete"
-      parameters:
-        - description: "The ID of the policy"
-          in: "path"
-          name: "policy_id"
-          required: true
-          schema:
-            description: "The ID of the policy"
-            type: "string"
-      responses:
-        "204":
-          description: "Policy deleted successfully"
-        "404":
-          description: "Policy not found"
-      summary: "Delete policy"
-      tags:
-        - "Policies"
-      x-speakeasy-group: "policies"
-      x-speakeasy-name-override: "delete"
-      security:
-        - ApiKey: []
-    get:
-      description: "Retrieves the details of an existing policy by ID."
-      operationId: "PolicyGet"
-      parameters:
-        - description: "The ID of the policy"
-          in: "path"
-          name: "policy_id"
-          required: true
-          schema:
-            description: "The ID of the policy"
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  evaluators:
-                    items:
-                      $ref: "#/components/schemas/EvaluatorRef"
-                    type:
-                      - "array"
-                      - "null"
-                  limits:
-                    $ref: "#/components/schemas/Limits"
-                  models_config:
-                    $ref: "#/components/schemas/ModelsConfig"
-                  project_id:
-                    type: "string"
-                  retry_config:
-                    $ref: "#/components/schemas/RetryConfig"
-                  slug:
-                    minLength: 1
-                    type: "string"
-                  timeout:
-                    format: "int64"
-                    minimum: 1000
-                    type: "integer"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "slug"
-                  - "enabled"
-                  - "timeout"
-                type: "object"
-          description: "Policy retrieved successfully"
-        "404":
-          description: "Policy not found"
-      summary: "Get policy"
-      tags:
-        - "Policies"
-      x-speakeasy-group: "policies"
-      x-speakeasy-name-override: "get"
-      security:
-        - ApiKey: []
-    patch:
-      description: "Partially updates an existing policy. Only provided fields are updated."
-      operationId: "PolicyUpdate"
-      parameters:
-        - description: "The ID of the policy"
-          in: "path"
-          name: "policy_id"
-          required: true
-          schema:
-            description: "The ID of the policy"
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                description:
-                  maxLength: 2048
-                  type: "string"
-                display_name:
-                  maxLength: 256
-                  minLength: 1
-                  type: "string"
-                enabled:
-                  type: "boolean"
-                evaluators:
-                  items:
-                    $ref: "#/components/schemas/EvaluatorRef"
-                  type: "array"
-                limits:
-                  $ref: "#/components/schemas/Limits"
-                models_config:
-                  $ref: "#/components/schemas/ModelsConfig"
-                retry_config:
-                  $ref: "#/components/schemas/RetryConfig"
-                timeout:
-                  format: "int64"
-                  minimum: 1000
-                  type: "integer"
-              type: "object"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  evaluators:
-                    items:
-                      $ref: "#/components/schemas/EvaluatorRef"
-                    type:
-                      - "array"
-                      - "null"
-                  limits:
-                    $ref: "#/components/schemas/Limits"
-                  models_config:
-                    $ref: "#/components/schemas/ModelsConfig"
-                  project_id:
-                    type: "string"
-                  retry_config:
-                    $ref: "#/components/schemas/RetryConfig"
-                  slug:
-                    minLength: 1
-                    type: "string"
-                  timeout:
-                    format: "int64"
-                    minimum: 1000
-                    type: "integer"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "slug"
-                  - "enabled"
-                  - "timeout"
-                type: "object"
-          description: "Policy updated successfully"
-        "400":
-          description: "Bad request"
-        "404":
-          description: "Policy not found"
-        "409":
-          description: "Slug conflict"
-      summary: "Update policy"
-      tags:
-        - "Policies"
-      x-speakeasy-group: "policies"
-      x-speakeasy-name-override: "update"
-      security:
-        - ApiKey: []
-  /v2/routing-rules:
-    get:
-      description: "Returns a paginated list of routing rules for the current project, ordered by priority ascending."
-      operationId: "RoutingRuleList"
-      parameters:
-        - explode: false
-          in: "query"
-          name: "limit"
-          schema:
-            default: 10
-            format: "int64"
-            maximum: 200
-            minimum: 1
-            type: "integer"
-        - description: "A cursor for use in pagination."
-          explode: false
-          in: "query"
-          name: "starting_after"
-          schema:
-            description: "A cursor for use in pagination."
-            type: "string"
-        - description: "A cursor for use in pagination."
-          explode: false
-          in: "query"
-          name: "ending_before"
-          schema:
-            description: "A cursor for use in pagination."
-            type: "string"
-        - description: "Optional filter by project ID."
-          explode: false
-          in: "query"
-          name: "project_id"
-          schema:
-            description: "Optional filter by project ID."
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  data:
-                    items:
-                      $ref: "#/components/schemas/RoutingRuleDocument"
-                    type:
-                      - "array"
-                      - "null"
-                  has_more:
-                    type: "boolean"
-                  object:
-                    type: "string"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
-                type: "object"
-          description: "Routing rules retrieved successfully"
-      summary: "List routing rules"
-      tags:
-        - "Routing Rules"
-      x-speakeasy-group: "routingRules"
-      x-speakeasy-name-override: "list"
-      security:
-        - ApiKey: []
-    post:
-      description: "Creates a new routing rule with expression, models configuration, and priority settings."
-      operationId: "RoutingRuleCreate"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                description:
-                  maxLength: 2048
-                  type: "string"
-                display_name:
-                  maxLength: 256
-                  minLength: 1
-                  type: "string"
-                enabled:
-                  type: "boolean"
-                expression:
-                  $ref: "#/components/schemas/Expression"
-                models_config:
-                  $ref: "#/components/schemas/ModelsConfig"
-                priority:
-                  format: "int64"
-                  minimum: 0
-                  type: "integer"
-                project_id:
-                  description: "Optional project ID. If null/omitted, the entity is global (workspace-wide)."
-                  type: "string"
-              required:
-                - "display_name"
-              type: "object"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  expression:
-                    $ref: "#/components/schemas/Expression"
-                  models_config:
-                    $ref: "#/components/schemas/ModelsConfig"
-                  priority:
-                    format: "int64"
-                    minimum: 0
-                    type: "integer"
-                  project_id:
-                    type: "string"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "enabled"
-                  - "priority"
-                type: "object"
-          description: "Routing rule created successfully"
-        "400":
-          description: "Bad request"
-      summary: "Create routing rule"
-      tags:
-        - "Routing Rules"
-      x-speakeasy-group: "routingRules"
-      x-speakeasy-name-override: "create"
-      security:
-        - ApiKey: []
-  /v2/routing-rules/{routing_rule_id}:
-    delete:
-      description: "Deletes an existing routing rule by ID."
-      operationId: "RoutingRuleDelete"
-      parameters:
-        - description: "The ID of the routing rule"
-          in: "path"
-          name: "routing_rule_id"
-          required: true
-          schema:
-            description: "The ID of the routing rule"
-            type: "string"
-      responses:
-        "204":
-          description: "Routing rule deleted successfully"
-        "404":
-          description: "Routing rule not found"
-      summary: "Delete routing rule"
-      tags:
-        - "Routing Rules"
-      x-speakeasy-group: "routingRules"
-      x-speakeasy-name-override: "delete"
-      security:
-        - ApiKey: []
-    get:
-      description: "Retrieves the details of an existing routing rule by ID."
-      operationId: "RoutingRuleGet"
-      parameters:
-        - description: "The ID of the routing rule"
-          in: "path"
-          name: "routing_rule_id"
-          required: true
-          schema:
-            description: "The ID of the routing rule"
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  expression:
-                    $ref: "#/components/schemas/Expression"
-                  models_config:
-                    $ref: "#/components/schemas/ModelsConfig"
-                  priority:
-                    format: "int64"
-                    minimum: 0
-                    type: "integer"
-                  project_id:
-                    type: "string"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "enabled"
-                  - "priority"
-                type: "object"
-          description: "Routing rule retrieved successfully"
-        "404":
-          description: "Routing rule not found"
-      summary: "Get routing rule"
-      tags:
-        - "Routing Rules"
-      x-speakeasy-group: "routingRules"
-      x-speakeasy-name-override: "get"
-      security:
-        - ApiKey: []
-    patch:
-      description: "Partially updates an existing routing rule. Only provided fields are updated."
-      operationId: "RoutingRuleUpdate"
-      parameters:
-        - description: "The ID of the routing rule"
-          in: "path"
-          name: "routing_rule_id"
-          required: true
-          schema:
-            description: "The ID of the routing rule"
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                description:
-                  maxLength: 2048
-                  type: "string"
-                display_name:
-                  maxLength: 256
-                  minLength: 1
-                  type: "string"
-                enabled:
-                  type: "boolean"
-                expression:
-                  $ref: "#/components/schemas/Expression"
-                models_config:
-                  $ref: "#/components/schemas/ModelsConfig"
-                priority:
-                  format: "int64"
-                  minimum: 0
-                  type: "integer"
-              type: "object"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  created_at:
-                    format: "date-time"
-                    type: "string"
-                  created_by_id:
-                    type: "string"
-                  description:
-                    maxLength: 2048
-                    type: "string"
-                  display_name:
-                    maxLength: 256
-                    minLength: 1
-                    type: "string"
-                  enabled:
-                    type: "boolean"
-                  expression:
-                    $ref: "#/components/schemas/Expression"
-                  models_config:
-                    $ref: "#/components/schemas/ModelsConfig"
-                  priority:
-                    format: "int64"
-                    minimum: 0
-                    type: "integer"
-                  project_id:
-                    type: "string"
-                  updated_at:
-                    format: "date-time"
-                    type: "string"
-                  updated_by_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "created_at"
-                  - "updated_at"
-                  - "created_by_id"
-                  - "updated_by_id"
-                  - "project_id"
-                  - "display_name"
-                  - "enabled"
-                  - "priority"
-                type: "object"
-          description: "Routing rule updated successfully"
-        "400":
-          description: "Bad request"
-        "404":
-          description: "Routing rule not found"
-      summary: "Update routing rule"
-      tags:
-        - "Routing Rules"
-      x-speakeasy-group: "routingRules"
-      x-speakeasy-name-override: "update"
-      security:
-        - ApiKey: []
 webhooks: {}
 tags:
   - name: "Files"
-  - name: "Policies"
-  - name: "Guardrail Rules"
-  - name: "Routing Rules"
 x-speakeasy-globals:
   parameters:
     - name: contactId
