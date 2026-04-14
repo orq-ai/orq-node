@@ -5,11 +5,11 @@
 ```typescript
 import { GetPromptVersionProvider } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionProvider = "huggingface";
+let value: GetPromptVersionProvider = "togetherai";
 ```
 
 ## Values
 
 ```typescript
-"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai" | "zai" | "minimax" | "xai" | "alibaba" | "tensorix" | "hcompany" | "slack" | "orq"
+"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "contextualai" | "moonshotai" | "zai" | "minimax" | "xai" | "alibaba" | "tensorix" | "hcompany" | "inceptron" | "slack" | "orq"
 ```

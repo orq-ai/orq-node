@@ -1246,6 +1246,7 @@ export const UpdatePromptProvider = {
   Alibaba: "alibaba",
   Tensorix: "tensorix",
   Hcompany: "hcompany",
+  Inceptron: "inceptron",
   Slack: "slack",
   Orq: "orq",
 } as const;
