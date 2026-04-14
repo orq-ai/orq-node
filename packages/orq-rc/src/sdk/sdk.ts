@@ -28,7 +28,6 @@ import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
-import { Models } from "./models.js";
 import { Policies } from "./policies.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
@@ -75,11 +74,6 @@ export class Orq extends ClientSDK {
   private _remoteconfigs?: Remoteconfigs;
   get remoteconfigs(): Remoteconfigs {
     return (this._remoteconfigs ??= new Remoteconfigs(this._options));
-  }
-
-  private _models?: Models;
-  get models(): Models {
-    return (this._models ??= new Models(this._options));
   }
 
   private _tools?: Tools;

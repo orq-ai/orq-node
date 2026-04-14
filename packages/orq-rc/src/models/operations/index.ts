@@ -93,7 +93,6 @@ export * from "./listdatasets.js";
 export * from "./listdatasources.js";
 export * from "./listidentities.js";
 export * from "./listknowledgebases.js";
-export * from "./listmodels.js";
 export * from "./listpromptversions.js";
 export * from "./parse.js";
 export * from "./patchv2humanevalsetsid.js";
