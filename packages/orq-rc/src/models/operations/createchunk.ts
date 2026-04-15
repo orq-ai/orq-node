@@ -55,7 +55,7 @@ export const CreateChunkStatus = {
  */
 export type CreateChunkStatus = ClosedEnum<typeof CreateChunkStatus>;
 
-export type CreateChunkResponseBody = {
+export type ResponseBody = {
   /**
    * The unique identifier of the chunk
    */
@@ -189,8 +189,8 @@ export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateChunkStatus);
 
 /** @internal */
-export const CreateChunkResponseBody$inboundSchema: z.ZodType<
-  CreateChunkResponseBody,
+export const ResponseBody$inboundSchema: z.ZodType<
+  ResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -211,12 +211,12 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
   });
 });
 
-export function createChunkResponseBodyFromJSON(
+export function responseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChunkResponseBody, SDKValidationError> {
+): SafeParseResult<ResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateChunkResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkResponseBody' from JSON`,
+    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

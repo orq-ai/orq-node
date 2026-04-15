@@ -52,10 +52,10 @@ const value: operations.CreateEvalFunctionParams5 = {
 };
 ```
 
-### `operations.CreateEvalFunctionParams6`
+### `operations.Six`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams6 = {
+const value: operations.Six = {
   type: "contains_url",
 };
 ```

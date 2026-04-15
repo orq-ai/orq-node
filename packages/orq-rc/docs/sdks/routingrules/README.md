@@ -7,7 +7,7 @@
 * [list](#list) - List routing rules
 * [create](#create) - Create routing rule
 * [delete](#delete) - Delete routing rule
-* [get](#get) - Get routing rule
+* [retrieve](#retrieve) - Get routing rule
 * [update](#update) - Update routing rule
 
 ## list
@@ -225,7 +225,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get
+## retrieve
 
 Retrieves the details of an existing routing rule by ID.
 
@@ -240,7 +240,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.routingRules.get({
+  const result = await orq.routingRules.retrieve({
     routingRuleId: "<id>",
   });
 
@@ -256,7 +256,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { routingRulesGet } from "@orq-ai/node/funcs/routingRulesGet.js";
+import { routingRulesRetrieve } from "@orq-ai/node/funcs/routingRulesRetrieve.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -265,14 +265,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await routingRulesGet(orq, {
+  const res = await routingRulesRetrieve(orq, {
     routingRuleId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("routingRulesGet failed:", res.error);
+    console.log("routingRulesRetrieve failed:", res.error);
   }
 }
 

@@ -7,7 +7,7 @@
 * [list](#list) - List guardrail rules
 * [create](#create) - Create guardrail rule
 * [delete](#delete) - Delete guardrail rule
-* [get](#get) - Get guardrail rule
+* [retrieve](#retrieve) - Get guardrail rule
 * [update](#update) - Update guardrail rule
 
 ## list
@@ -225,7 +225,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get
+## retrieve
 
 Retrieves the details of an existing guardrail rule by ID.
 
@@ -240,7 +240,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.guardrailRules.get({
+  const result = await orq.guardrailRules.retrieve({
     guardrailRuleId: "<id>",
   });
 
@@ -256,7 +256,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { guardrailRulesGet } from "@orq-ai/node/funcs/guardrailRulesGet.js";
+import { guardrailRulesRetrieve } from "@orq-ai/node/funcs/guardrailRulesRetrieve.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -265,14 +265,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await guardrailRulesGet(orq, {
+  const res = await guardrailRulesRetrieve(orq, {
     guardrailRuleId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("guardrailRulesGet failed:", res.error);
+    console.log("guardrailRulesRetrieve failed:", res.error);
   }
 }
 

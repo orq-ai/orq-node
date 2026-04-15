@@ -7,7 +7,7 @@
 * [list](#list) - List policies
 * [create](#create) - Create policy
 * [delete](#delete) - Delete policy
-* [get](#get) - Get policy
+* [retrieve](#retrieve) - Get policy
 * [update](#update) - Update policy
 
 ## list
@@ -225,7 +225,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get
+## retrieve
 
 Retrieves the details of an existing policy by ID.
 
@@ -240,7 +240,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.policies.get({
+  const result = await orq.policies.retrieve({
     policyId: "<id>",
   });
 
@@ -256,7 +256,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { policiesGet } from "@orq-ai/node/funcs/policiesGet.js";
+import { policiesRetrieve } from "@orq-ai/node/funcs/policiesRetrieve.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -265,14 +265,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await policiesGet(orq, {
+  const res = await policiesRetrieve(orq, {
     policyId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("policiesGet failed:", res.error);
+    console.log("policiesRetrieve failed:", res.error);
   }
 }
 

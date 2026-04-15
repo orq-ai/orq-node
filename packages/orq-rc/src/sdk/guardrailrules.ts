@@ -4,8 +4,8 @@
 
 import { guardrailRulesCreate } from "../funcs/guardrailRulesCreate.js";
 import { guardrailRulesDelete } from "../funcs/guardrailRulesDelete.js";
-import { guardrailRulesGet } from "../funcs/guardrailRulesGet.js";
 import { guardrailRulesList } from "../funcs/guardrailRulesList.js";
+import { guardrailRulesRetrieve } from "../funcs/guardrailRulesRetrieve.js";
 import { guardrailRulesUpdate } from "../funcs/guardrailRulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -69,11 +69,11 @@ export class GuardrailRules extends ClientSDK {
    * @remarks
    * Retrieves the details of an existing guardrail rule by ID.
    */
-  async get(
+  async retrieve(
     request: operations.GuardrailRuleGetRequest,
     options?: RequestOptions,
   ): Promise<operations.GuardrailRuleGetResponseBody> {
-    return unwrapAsync(guardrailRulesGet(
+    return unwrapAsync(guardrailRulesRetrieve(
       this,
       request,
       options,

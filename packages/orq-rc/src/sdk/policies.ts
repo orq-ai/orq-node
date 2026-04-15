@@ -4,8 +4,8 @@
 
 import { policiesCreate } from "../funcs/policiesCreate.js";
 import { policiesDelete } from "../funcs/policiesDelete.js";
-import { policiesGet } from "../funcs/policiesGet.js";
 import { policiesList } from "../funcs/policiesList.js";
+import { policiesRetrieve } from "../funcs/policiesRetrieve.js";
 import { policiesUpdate } from "../funcs/policiesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -69,11 +69,11 @@ export class Policies extends ClientSDK {
    * @remarks
    * Retrieves the details of an existing policy by ID.
    */
-  async get(
+  async retrieve(
     request: operations.PolicyGetRequest,
     options?: RequestOptions,
   ): Promise<operations.PolicyGetResponseBody> {
-    return unwrapAsync(policiesGet(
+    return unwrapAsync(policiesRetrieve(
       this,
       request,
       options,

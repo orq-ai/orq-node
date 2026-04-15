@@ -8,26 +8,26 @@ import { OrqError } from "./orqerror.js";
 /**
  * Workspace ID is not found on the request
  */
-export type PostV2FeedbackResponseResponseBodyData = {
+export type PostV2FeedbackFeedbackResponseBodyData = {
   message: string;
 };
 
 /**
  * Workspace ID is not found on the request
  */
-export class PostV2FeedbackResponseResponseBody extends OrqError {
+export class PostV2FeedbackFeedbackResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
-  data$: PostV2FeedbackResponseResponseBodyData;
+  data$: PostV2FeedbackFeedbackResponseBodyData;
 
   constructor(
-    err: PostV2FeedbackResponseResponseBodyData,
+    err: PostV2FeedbackFeedbackResponseBodyData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
     const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
 
-    this.name = "PostV2FeedbackResponseResponseBody";
+    this.name = "PostV2FeedbackFeedbackResponseBody";
   }
 }
 
@@ -58,8 +58,8 @@ export class PostV2FeedbackResponseBody extends OrqError {
 }
 
 /** @internal */
-export const PostV2FeedbackResponseResponseBody$inboundSchema: z.ZodType<
-  PostV2FeedbackResponseResponseBody,
+export const PostV2FeedbackFeedbackResponseBody$inboundSchema: z.ZodType<
+  PostV2FeedbackFeedbackResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -69,7 +69,7 @@ export const PostV2FeedbackResponseResponseBody$inboundSchema: z.ZodType<
   body$: z.string(),
 })
   .transform((v) => {
-    return new PostV2FeedbackResponseResponseBody(v, {
+    return new PostV2FeedbackFeedbackResponseBody(v, {
       request: v.request$,
       response: v.response$,
       body: v.body$,

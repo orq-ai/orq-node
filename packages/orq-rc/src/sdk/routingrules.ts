@@ -4,8 +4,8 @@
 
 import { routingRulesCreate } from "../funcs/routingRulesCreate.js";
 import { routingRulesDelete } from "../funcs/routingRulesDelete.js";
-import { routingRulesGet } from "../funcs/routingRulesGet.js";
 import { routingRulesList } from "../funcs/routingRulesList.js";
+import { routingRulesRetrieve } from "../funcs/routingRulesRetrieve.js";
 import { routingRulesUpdate } from "../funcs/routingRulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -69,11 +69,11 @@ export class RoutingRules extends ClientSDK {
    * @remarks
    * Retrieves the details of an existing routing rule by ID.
    */
-  async get(
+  async retrieve(
     request: operations.RoutingRuleGetRequest,
     options?: RequestOptions,
   ): Promise<operations.RoutingRuleGetResponseBody> {
-    return unwrapAsync(routingRulesGet(
+    return unwrapAsync(routingRulesRetrieve(
       this,
       request,
       options,

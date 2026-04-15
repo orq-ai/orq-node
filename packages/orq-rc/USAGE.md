@@ -7,9 +7,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2Feedback();
-
-  console.log(result);
+  await orq.postV2FeedbackEvaluationRemove();
 }
 
 run();
