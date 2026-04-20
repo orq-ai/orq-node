@@ -1472,7 +1472,7 @@ export const RequestBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestBodyTools
 > = z.object({
-  id: z.string().default("01KPMRFDAFZFXJSC4A166SSHG4"),
+  id: z.string().default("01KPN9RG7P1123AQMKV3YTN9W4"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolRequestBodyToolsSchema$outboundSchema),
@@ -2193,7 +2193,7 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPMRFDA9M37HJRDRH9WAC0X5"),
+  _id: z.string().default("tool_01KPN9RG7GA37TRG352C81Q0P8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2296,7 +2296,7 @@ export const UpdateToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KPMRFDA8EN770J5442X94VG5"),
+  id: z.string().default("01KPN9RG7GHFMKQMFM2ETT07QM"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolResponseBodyToolsSchema$inboundSchema),
@@ -2354,7 +2354,7 @@ export const UpdateToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPMRFDA782W6K198C2F0N6QB"),
+  _id: z.string().default("tool_01KPN9RG7FHPHJCDXCQJ0SHFF4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2543,7 +2543,7 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPMRFDA5XH2E1YE91E2K6TFP"),
+  _id: z.string().default("tool_01KPN9RG7DZDMP1MK280MV52S2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2638,7 +2638,7 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPMRFDA48YTZVH5GH4MDY53R"),
+  _id: z.string().default("tool_01KPN9RG75WYJK0QT05NZVQGQT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2741,7 +2741,7 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPMRFDA3P5D6J0GHM8D71K1B"),
+  _id: z.string().default("tool_01KPN9RG7495TSJA9NQTEYKJPK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

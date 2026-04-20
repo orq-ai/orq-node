@@ -20,9 +20,13 @@ export type PolicyListRequest = {
    */
   endingBefore?: string | undefined;
   /**
-   * Optional filter by project ID.
+   * Serialized filter string. Format: name:operator:value joined by +. Supported fields: display_name, project_id, enabled.
    */
-  projectId?: string | undefined;
+  filters?: string | undefined;
+  /**
+   * Free-text search on display name (case-insensitive substring match).
+   */
+  q?: string | undefined;
 };
 
 /**
@@ -39,7 +43,8 @@ export type PolicyListRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
-  project_id?: string | undefined;
+  filters?: string | undefined;
+  q?: string | undefined;
 };
 
 /** @internal */
@@ -51,12 +56,12 @@ export const PolicyListRequest$outboundSchema: z.ZodType<
   limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
-  projectId: z.string().optional(),
+  filters: z.string().optional(),
+  q: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
-    projectId: "project_id",
   });
 });
 
