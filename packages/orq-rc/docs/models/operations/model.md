@@ -24,6 +24,10 @@ let value: Model = {
           model: "openai/gpt-4o",
           weight: 0.7,
         },
+        {
+          model: "anthropic/claude-3-5-sonnet",
+          weight: 0.3,
+        },
       ],
     },
     timeout: {

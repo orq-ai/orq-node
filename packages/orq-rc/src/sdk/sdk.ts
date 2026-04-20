@@ -27,6 +27,7 @@ import { Remoteconfigs } from "./remoteconfigs.js";
 import { Responses } from "./responses.js";
 import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
+import { Schedules } from "./schedules.js";
 import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
@@ -128,6 +129,11 @@ export class Orq extends ClientSDK {
   private _routingRules?: RoutingRules;
   get routingRules(): RoutingRules {
     return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
+  private _schedules?: Schedules;
+  get schedules(): Schedules {
+    return (this._schedules ??= new Schedules(this._options));
   }
 
   private _responses?: Responses;

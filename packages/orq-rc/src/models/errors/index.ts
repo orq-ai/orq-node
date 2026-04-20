@@ -3,11 +3,13 @@
  */
 
 export * from "./apierror.js";
+export * from "./createagentschedule.js";
 export * from "./createeval.js";
 export * from "./createmoderation.js";
 export * from "./createtranscription.js";
 export * from "./createtranslation.js";
 export * from "./deleteagent.js";
+export * from "./deleteagentschedule.js";
 export * from "./deleteeval.js";
 export * from "./deleteidentity.js";
 export * from "./deleteprompt.js";
@@ -26,11 +28,14 @@ export * from "./postv2feedback.js";
 export * from "./postv2feedbackremove.js";
 export * from "./responsevalidationerror.js";
 export * from "./retrieveagentrequest.js";
+export * from "./retrieveagentschedule.js";
 export * from "./retrieveidentity.js";
 export * from "./sdkvalidationerror.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
+export * from "./triggeragentschedule.js";
 export * from "./updateagent.js";
+export * from "./updateagentschedule.js";
 export * from "./updateeval.js";
 export * from "./updateidentity.js";
 export * from "./updateprompt.js";

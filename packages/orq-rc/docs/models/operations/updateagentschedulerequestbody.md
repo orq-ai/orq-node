@@ -1,0 +1,19 @@
+# UpdateAgentScheduleRequestBody
+
+## Example Usage
+
+```typescript
+import { UpdateAgentScheduleRequestBody } from "@orq-ai/node/models/operations";
+
+let value: UpdateAgentScheduleRequestBody = {};
+```
+
+## Fields
+
+| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `agentTag`                                                                                                             | *string*                                                                                                               | :heavy_minus_sign:                                                                                                     | Change the pinned agent version.                                                                                       |
+| `expression`                                                                                                           | *string*                                                                                                               | :heavy_minus_sign:                                                                                                     | Update the schedule expression. Minimum firing cadence is 1 hour for cron and interval.                                |
+| `isActive`                                                                                                             | *boolean*                                                                                                              | :heavy_minus_sign:                                                                                                     | Activate or deactivate the schedule. Deactivating removes the NATS entry; activating re-publishes with current values. |
+| `payload`                                                                                                              | [components.PublicSchedulePayload](../../models/components/publicschedulepayload.md)                                   | :heavy_minus_sign:                                                                                                     | N/A                                                                                                                    |
+| `type`                                                                                                                 | [operations.UpdateAgentScheduleType](../../models/operations/updateagentscheduletype.md)                               | :heavy_minus_sign:                                                                                                     | Change the schedule type. Changing type or expression resets the NATS schedule and bumps generation.                   |
