@@ -10,7 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EvaluatorRef, EvaluatorRef$inboundSchema } from "./evaluatorref.js";
 import { Limits, Limits$inboundSchema } from "./limits.js";
 import { ModelsConfig, ModelsConfig$inboundSchema } from "./modelsconfig.js";
-import { RetryConfig, RetryConfig$inboundSchema } from "./retryconfig.js";
+import {
+  PolicyRetryConfig,
+  PolicyRetryConfig$inboundSchema,
+} from "./policyretryconfig.js";
 
 export type Policy = {
   id: string;
@@ -23,7 +26,7 @@ export type Policy = {
   limits?: Limits | undefined;
   modelsConfig?: ModelsConfig | undefined;
   projectId: string;
-  retryConfig?: RetryConfig | undefined;
+  retryConfig?: PolicyRetryConfig | undefined;
   slug: string;
   timeout: number;
   updatedAt: Date;
@@ -45,7 +48,7 @@ export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
     limits: Limits$inboundSchema.optional(),
     models_config: ModelsConfig$inboundSchema.optional(),
     project_id: z.string(),
-    retry_config: RetryConfig$inboundSchema.optional(),
+    retry_config: PolicyRetryConfig$inboundSchema.optional(),
     slug: z.string(),
     timeout: z.number().int(),
     updated_at: z.string().datetime({ offset: true }).transform(v =>

@@ -13,7 +13,7 @@ export type RoutingRuleCreateRequestBody = {
   description?: string | undefined;
   displayName: string;
   enabled?: boolean | undefined;
-  expression?: components.Expression | undefined;
+  expression?: components.ExpressionInput | undefined;
   modelsConfig?: components.ModelsConfig | undefined;
   priority?: number | undefined;
   /**
@@ -45,7 +45,7 @@ export type RoutingRuleCreateRequestBody$Outbound = {
   description?: string | undefined;
   display_name: string;
   enabled?: boolean | undefined;
-  expression?: components.Expression$Outbound | undefined;
+  expression?: components.ExpressionInput$Outbound | undefined;
   models_config?: components.ModelsConfig$Outbound | undefined;
   priority?: number | undefined;
   project_id?: string | undefined;
@@ -60,7 +60,7 @@ export const RoutingRuleCreateRequestBody$outboundSchema: z.ZodType<
   description: z.string().optional(),
   displayName: z.string(),
   enabled: z.boolean().optional(),
-  expression: components.Expression$outboundSchema.optional(),
+  expression: components.ExpressionInput$outboundSchema.optional(),
   modelsConfig: components.ModelsConfig$outboundSchema.optional(),
   priority: z.number().int().optional(),
   projectId: z.string().optional(),

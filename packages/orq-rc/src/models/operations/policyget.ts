@@ -30,7 +30,7 @@ export type PolicyGetResponseBody = {
   limits?: components.Limits | undefined;
   modelsConfig?: components.ModelsConfig | undefined;
   projectId: string;
-  retryConfig?: components.RetryConfig | undefined;
+  retryConfig?: components.PolicyRetryConfig | undefined;
   slug: string;
   timeout: number;
   updatedAt: Date;
@@ -80,7 +80,7 @@ export const PolicyGetResponseBody$inboundSchema: z.ZodType<
   limits: components.Limits$inboundSchema.optional(),
   models_config: components.ModelsConfig$inboundSchema.optional(),
   project_id: z.string(),
-  retry_config: components.RetryConfig$inboundSchema.optional(),
+  retry_config: components.PolicyRetryConfig$inboundSchema.optional(),
   slug: z.string(),
   timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),

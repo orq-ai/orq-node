@@ -21,25 +21,7 @@ export const Expression$inboundSchema: z.ZodType<
   cel: z.string(),
   config: z.record(z.any()).optional(),
 });
-/** @internal */
-export type Expression$Outbound = {
-  cel: string;
-  config?: { [k: string]: any } | undefined;
-};
 
-/** @internal */
-export const Expression$outboundSchema: z.ZodType<
-  Expression$Outbound,
-  z.ZodTypeDef,
-  Expression
-> = z.object({
-  cel: z.string(),
-  config: z.record(z.any()).optional(),
-});
-
-export function expressionToJSON(expression: Expression): string {
-  return JSON.stringify(Expression$outboundSchema.parse(expression));
-}
 export function expressionFromJSON(
   jsonString: string,
 ): SafeParseResult<Expression, SDKValidationError> {

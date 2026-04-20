@@ -16,7 +16,7 @@ export type PolicyUpdateRequestBody = {
   evaluators?: Array<components.EvaluatorRef> | undefined;
   limits?: components.Limits | undefined;
   modelsConfig?: components.ModelsConfig | undefined;
-  retryConfig?: components.RetryConfig | undefined;
+  retryConfig?: components.PolicyRetryConfig | undefined;
   timeout?: number | undefined;
 };
 
@@ -42,7 +42,7 @@ export type PolicyUpdateResponseBody = {
   limits?: components.Limits | undefined;
   modelsConfig?: components.ModelsConfig | undefined;
   projectId: string;
-  retryConfig?: components.RetryConfig | undefined;
+  retryConfig?: components.PolicyRetryConfig | undefined;
   slug: string;
   timeout: number;
   updatedAt: Date;
@@ -57,7 +57,7 @@ export type PolicyUpdateRequestBody$Outbound = {
   evaluators?: Array<components.EvaluatorRef$Outbound> | undefined;
   limits?: components.Limits$Outbound | undefined;
   models_config?: components.ModelsConfig$Outbound | undefined;
-  retry_config?: components.RetryConfig$Outbound | undefined;
+  retry_config?: components.PolicyRetryConfig$Outbound | undefined;
   timeout?: number | undefined;
 };
 
@@ -73,7 +73,7 @@ export const PolicyUpdateRequestBody$outboundSchema: z.ZodType<
   evaluators: z.array(components.EvaluatorRef$outboundSchema).optional(),
   limits: components.Limits$outboundSchema.optional(),
   modelsConfig: components.ModelsConfig$outboundSchema.optional(),
-  retryConfig: components.RetryConfig$outboundSchema.optional(),
+  retryConfig: components.PolicyRetryConfig$outboundSchema.optional(),
   timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -137,7 +137,7 @@ export const PolicyUpdateResponseBody$inboundSchema: z.ZodType<
   limits: components.Limits$inboundSchema.optional(),
   models_config: components.ModelsConfig$inboundSchema.optional(),
   project_id: z.string(),
-  retry_config: components.RetryConfig$inboundSchema.optional(),
+  retry_config: components.PolicyRetryConfig$inboundSchema.optional(),
   slug: z.string(),
   timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),

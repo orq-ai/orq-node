@@ -13,7 +13,7 @@ export type GuardrailRuleCreateRequestBody = {
   description?: string | undefined;
   displayName: string;
   enabled?: boolean | undefined;
-  expression?: components.Expression | undefined;
+  expression: components.ExpressionInput;
   guardrails?: Array<components.GuardrailRef> | null | undefined;
   /**
    * Optional project ID. If null/omitted, the entity is global (workspace-wide).
@@ -45,7 +45,7 @@ export type GuardrailRuleCreateRequestBody$Outbound = {
   description?: string | undefined;
   display_name: string;
   enabled?: boolean | undefined;
-  expression?: components.Expression$Outbound | undefined;
+  expression: components.ExpressionInput$Outbound;
   guardrails?: Array<components.GuardrailRef$Outbound> | null | undefined;
   project_id?: string | undefined;
   timeout?: number | undefined;
@@ -60,7 +60,7 @@ export const GuardrailRuleCreateRequestBody$outboundSchema: z.ZodType<
   description: z.string().optional(),
   displayName: z.string(),
   enabled: z.boolean().optional(),
-  expression: components.Expression$outboundSchema.optional(),
+  expression: components.ExpressionInput$outboundSchema,
   guardrails: z.nullable(z.array(components.GuardrailRef$outboundSchema))
     .optional(),
   projectId: z.string().optional(),

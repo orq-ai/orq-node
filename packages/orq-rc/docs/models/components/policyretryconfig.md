@@ -1,12 +1,12 @@
-# RetryConfig
+# PolicyRetryConfig
 
 ## Example Usage
 
 ```typescript
-import { RetryConfig } from "@orq-ai/node/models/components";
+import { PolicyRetryConfig } from "@orq-ai/node/models/components";
 
-let value: RetryConfig = {
-  count: 856402,
+let value: PolicyRetryConfig = {
+  count: 80788,
 };
 ```
 

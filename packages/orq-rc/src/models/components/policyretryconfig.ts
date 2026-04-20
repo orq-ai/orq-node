@@ -8,14 +8,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RetryConfig = {
+export type PolicyRetryConfig = {
   count: number;
   onCodes?: Array<number> | null | undefined;
 };
 
 /** @internal */
-export const RetryConfig$inboundSchema: z.ZodType<
-  RetryConfig,
+export const PolicyRetryConfig$inboundSchema: z.ZodType<
+  PolicyRetryConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -27,16 +27,16 @@ export const RetryConfig$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type RetryConfig$Outbound = {
+export type PolicyRetryConfig$Outbound = {
   count: number;
   on_codes?: Array<number> | null | undefined;
 };
 
 /** @internal */
-export const RetryConfig$outboundSchema: z.ZodType<
-  RetryConfig$Outbound,
+export const PolicyRetryConfig$outboundSchema: z.ZodType<
+  PolicyRetryConfig$Outbound,
   z.ZodTypeDef,
-  RetryConfig
+  PolicyRetryConfig
 > = z.object({
   count: z.number().int(),
   onCodes: z.nullable(z.array(z.number().int())).optional(),
@@ -46,15 +46,19 @@ export const RetryConfig$outboundSchema: z.ZodType<
   });
 });
 
-export function retryConfigToJSON(retryConfig: RetryConfig): string {
-  return JSON.stringify(RetryConfig$outboundSchema.parse(retryConfig));
+export function policyRetryConfigToJSON(
+  policyRetryConfig: PolicyRetryConfig,
+): string {
+  return JSON.stringify(
+    PolicyRetryConfig$outboundSchema.parse(policyRetryConfig),
+  );
 }
-export function retryConfigFromJSON(
+export function policyRetryConfigFromJSON(
   jsonString: string,
-): SafeParseResult<RetryConfig, SDKValidationError> {
+): SafeParseResult<PolicyRetryConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetryConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetryConfig' from JSON`,
+    (x) => PolicyRetryConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PolicyRetryConfig' from JSON`,
   );
 }

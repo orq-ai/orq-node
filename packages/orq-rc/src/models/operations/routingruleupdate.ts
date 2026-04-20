@@ -13,7 +13,7 @@ export type RoutingRuleUpdateRequestBody = {
   description?: string | undefined;
   displayName?: string | undefined;
   enabled?: boolean | undefined;
-  expression?: components.Expression | undefined;
+  expression?: components.ExpressionInput | undefined;
   modelsConfig?: components.ModelsConfig | undefined;
   priority?: number | undefined;
 };
@@ -49,7 +49,7 @@ export type RoutingRuleUpdateRequestBody$Outbound = {
   description?: string | undefined;
   display_name?: string | undefined;
   enabled?: boolean | undefined;
-  expression?: components.Expression$Outbound | undefined;
+  expression?: components.ExpressionInput$Outbound | undefined;
   models_config?: components.ModelsConfig$Outbound | undefined;
   priority?: number | undefined;
 };
@@ -63,7 +63,7 @@ export const RoutingRuleUpdateRequestBody$outboundSchema: z.ZodType<
   description: z.string().optional(),
   displayName: z.string().optional(),
   enabled: z.boolean().optional(),
-  expression: components.Expression$outboundSchema.optional(),
+  expression: components.ExpressionInput$outboundSchema.optional(),
   modelsConfig: components.ModelsConfig$outboundSchema.optional(),
   priority: z.number().int().optional(),
 }).transform((v) => {
