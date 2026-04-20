@@ -96,9 +96,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.guardrailRules.create({
     displayName: "Rosemarie_Wisoky",
-    expression: {
-      cel: "<value>",
-    },
   });
 
   console.log(result);
@@ -124,9 +121,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await guardrailRulesCreate(orq, {
     displayName: "Rosemarie_Wisoky",
-    expression: {
-      cel: "<value>",
-    },
   });
   if (res.ok) {
     const { value: result } = res;
