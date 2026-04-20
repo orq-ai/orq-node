@@ -34,8 +34,20 @@ typescript:
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
-    peerDependencies: {}
-  additionalPackageJSON: {}
+    peerDependencies:
+      zod: '>= 3 <4'
+      '@langchain/core': ^1.1.39
+  additionalPackageJSON:
+    exports:
+      ".":
+        import: "./index.js"
+        require: "./index.js"
+        types: "./index.d.ts"
+      "./langchain":
+        import: "./langchain/index.mjs"
+        require: "./langchain/index.js"
+        types: "./langchain/index.d.mts"
+      "./*": "./*"
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   author: Orq

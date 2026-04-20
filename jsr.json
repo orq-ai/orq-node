@@ -13,7 +13,8 @@
     "./lib/retries": "./src/lib/retries.ts",
     "./lib/sdks": "./src/lib/sdks.ts",
     "./lib/event-streams": "./src/lib/event-streams.ts",
-    "./types": "./src/types/index.ts"
+    "./types": "./src/types/index.ts",
+    "./langchain": "./src/langchain/index.ts"
   },
   "publish": {
     "include": [

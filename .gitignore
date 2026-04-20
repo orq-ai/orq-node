@@ -19,6 +19,7 @@
 /sdk
 /funcs
 /hooks
+/langchain
 /index.*
 /core.*
 /cjs
@@ -28,3 +29,4 @@
 /.tshy
 /.tshy-*
 /__tests__
+*.tgz
