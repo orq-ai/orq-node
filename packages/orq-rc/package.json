@@ -1,9 +1,7 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.8.0-rc.19",
+  "version": "4.8.0-rc.28",
   "author": "Orq",
-  "main": "./index.js",
-  "sideEffects": false,
   "exports": {
     ".": {
       "import": "./index.js",
@@ -17,10 +15,8 @@
     },
     "./*": "./*"
   },
-  "peerDependencies": {
-    "zod": ">= 3 <4",
-    "@langchain/core": "^1.1.39"
-  },
+  "main": "./index.js",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/orq-ai/orq-node.git",
@@ -30,6 +26,10 @@
     "lint": "eslint --cache --max-warnings=0 src",
     "build": "tsc",
     "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@langchain/core": "^1.1.39",
+    "zod": ">= 3 <4"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",

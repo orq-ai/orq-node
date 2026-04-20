@@ -1,19 +1,19 @@
-# RoutingRuleDocument
+# RoutingRule
 
 ## Example Usage
 
 ```typescript
-import { RoutingRuleDocument } from "@orq-ai/node/models/components";
+import { RoutingRule } from "@orq-ai/node/models/components";
 
-let value: RoutingRuleDocument = {
+let value: RoutingRule = {
   id: "<id>",
-  createdAt: new Date("2025-10-08T16:17:48.770Z"),
+  createdAt: new Date("2025-08-11T13:53:30.664Z"),
   createdById: "<id>",
-  displayName: "Gillian21",
-  enabled: false,
-  priority: 848067,
+  displayName: "Gladyce96",
+  enabled: true,
+  priority: 986209,
   projectId: "<id>",
-  updatedAt: new Date("2024-09-12T14:26:22.592Z"),
+  updatedAt: new Date("2024-07-10T21:28:27.240Z"),
   updatedById: "<id>",
 };
 ```

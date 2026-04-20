@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Expression, Expression$inboundSchema } from "./expression.js";
 import { ModelsConfig, ModelsConfig$inboundSchema } from "./modelsconfig.js";
 
-export type RoutingRuleDocument = {
+export type RoutingRule = {
   id: string;
   createdAt: Date;
   createdById: string;
@@ -26,8 +26,8 @@ export type RoutingRuleDocument = {
 };
 
 /** @internal */
-export const RoutingRuleDocument$inboundSchema: z.ZodType<
-  RoutingRuleDocument,
+export const RoutingRule$inboundSchema: z.ZodType<
+  RoutingRule,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -56,12 +56,12 @@ export const RoutingRuleDocument$inboundSchema: z.ZodType<
   });
 });
 
-export function routingRuleDocumentFromJSON(
+export function routingRuleFromJSON(
   jsonString: string,
-): SafeParseResult<RoutingRuleDocument, SDKValidationError> {
+): SafeParseResult<RoutingRule, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RoutingRuleDocument$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RoutingRuleDocument' from JSON`,
+    (x) => RoutingRule$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoutingRule' from JSON`,
   );
 }

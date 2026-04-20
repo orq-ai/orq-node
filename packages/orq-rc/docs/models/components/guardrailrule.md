@@ -1,20 +1,19 @@
-# PolicyDocument
+# GuardrailRule
 
 ## Example Usage
 
 ```typescript
-import { PolicyDocument } from "@orq-ai/node/models/components";
+import { GuardrailRule } from "@orq-ai/node/models/components";
 
-let value: PolicyDocument = {
+let value: GuardrailRule = {
   id: "<id>",
-  createdAt: new Date("2024-01-27T02:53:48.846Z"),
+  createdAt: new Date("2026-08-07T05:20:53.545Z"),
   createdById: "<id>",
-  displayName: "Thaddeus_Borer",
-  enabled: false,
+  displayName: "Gonzalo36",
+  enabled: true,
   projectId: "<id>",
-  slug: "<value>",
-  timeout: 43588,
-  updatedAt: new Date("2026-06-17T19:33:51.713Z"),
+  timeout: 808821,
+  updatedAt: new Date("2025-07-21T19:36:42.349Z"),
   updatedById: "<id>",
 };
 ```
@@ -29,12 +28,9 @@ let value: PolicyDocument = {
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `displayName`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `enabled`                                                                                     | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `evaluators`                                                                                  | [components.EvaluatorRef](../../models/components/evaluatorref.md)[]                          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `limits`                                                                                      | [components.Limits](../../models/components/limits.md)                                        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `modelsConfig`                                                                                | [components.ModelsConfig](../../models/components/modelsconfig.md)                            | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `expression`                                                                                  | [components.Expression](../../models/components/expression.md)                                | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `guardrails`                                                                                  | [components.GuardrailRef](../../models/components/guardrailref.md)[]                          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `projectId`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `retryConfig`                                                                                 | [components.RetryConfig](../../models/components/retryconfig.md)                              | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `slug`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `timeout`                                                                                     | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `updatedById`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

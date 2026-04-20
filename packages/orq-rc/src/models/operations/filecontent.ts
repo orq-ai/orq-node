@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FileContentRequest = {
   /**
-   * The file ID or object storage path to retrieve content for.
+   * The file ID to retrieve content for.
    */
   fileIdOrPath: string;
 };

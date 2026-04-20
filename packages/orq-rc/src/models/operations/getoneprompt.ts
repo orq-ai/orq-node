@@ -353,6 +353,7 @@ export const GetOnePromptProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Tensorix: "tensorix",
+  Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inceptron: "inceptron",
   Slack: "slack",

@@ -29,7 +29,7 @@ export type GuardrailRuleListRequest = {
  * Guardrail rules retrieved successfully
  */
 export type GuardrailRuleListResponseBody = {
-  data: Array<components.GuardrailRuleDocument> | null;
+  data: Array<components.GuardrailRule> | null;
   hasMore: boolean;
   object: string;
 };
@@ -74,7 +74,7 @@ export const GuardrailRuleListResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.nullable(z.array(components.GuardrailRuleDocument$inboundSchema)),
+  data: z.nullable(z.array(components.GuardrailRule$inboundSchema)),
   has_more: z.boolean(),
   object: z.string(),
 }).transform((v) => {

@@ -7,32 +7,27 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { EvaluatorRef, EvaluatorRef$inboundSchema } from "./evaluatorref.js";
-import { Limits, Limits$inboundSchema } from "./limits.js";
-import { ModelsConfig, ModelsConfig$inboundSchema } from "./modelsconfig.js";
-import { RetryConfig, RetryConfig$inboundSchema } from "./retryconfig.js";
+import { Expression, Expression$inboundSchema } from "./expression.js";
+import { GuardrailRef, GuardrailRef$inboundSchema } from "./guardrailref.js";
 
-export type PolicyDocument = {
+export type GuardrailRule = {
   id: string;
   createdAt: Date;
   createdById: string;
   description?: string | undefined;
   displayName: string;
   enabled: boolean;
-  evaluators?: Array<EvaluatorRef> | null | undefined;
-  limits?: Limits | undefined;
-  modelsConfig?: ModelsConfig | undefined;
+  expression?: Expression | undefined;
+  guardrails?: Array<GuardrailRef> | null | undefined;
   projectId: string;
-  retryConfig?: RetryConfig | undefined;
-  slug: string;
   timeout: number;
   updatedAt: Date;
   updatedById: string;
 };
 
 /** @internal */
-export const PolicyDocument$inboundSchema: z.ZodType<
-  PolicyDocument,
+export const GuardrailRule$inboundSchema: z.ZodType<
+  GuardrailRule,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -42,12 +37,9 @@ export const PolicyDocument$inboundSchema: z.ZodType<
   description: z.string().optional(),
   display_name: z.string(),
   enabled: z.boolean(),
-  evaluators: z.nullable(z.array(EvaluatorRef$inboundSchema)).optional(),
-  limits: Limits$inboundSchema.optional(),
-  models_config: ModelsConfig$inboundSchema.optional(),
+  expression: Expression$inboundSchema.optional(),
+  guardrails: z.nullable(z.array(GuardrailRef$inboundSchema)).optional(),
   project_id: z.string(),
-  retry_config: RetryConfig$inboundSchema.optional(),
-  slug: z.string(),
   timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_by_id: z.string(),
@@ -57,20 +49,18 @@ export const PolicyDocument$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "created_by_id": "createdById",
     "display_name": "displayName",
-    "models_config": "modelsConfig",
     "project_id": "projectId",
-    "retry_config": "retryConfig",
     "updated_at": "updatedAt",
     "updated_by_id": "updatedById",
   });
 });
 
-export function policyDocumentFromJSON(
+export function guardrailRuleFromJSON(
   jsonString: string,
-): SafeParseResult<PolicyDocument, SDKValidationError> {
+): SafeParseResult<GuardrailRule, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PolicyDocument$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PolicyDocument' from JSON`,
+    (x) => GuardrailRule$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GuardrailRule' from JSON`,
   );
 }

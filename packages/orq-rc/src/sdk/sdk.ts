@@ -24,6 +24,7 @@ import { MemoryStores } from "./memorystores.js";
 import { Policies } from "./policies.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
+import { Responses } from "./responses.js";
 import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Tools } from "./tools.js";
@@ -127,6 +128,11 @@ export class Orq extends ClientSDK {
   private _routingRules?: RoutingRules;
   get routingRules(): RoutingRules {
     return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
+  private _responses?: Responses;
+  get responses(): Responses {
+    return (this._responses ??= new Responses(this._options));
   }
 
   async postV2FeedbackEvaluationRemove(

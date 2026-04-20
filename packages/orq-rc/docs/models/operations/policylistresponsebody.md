@@ -29,8 +29,8 @@ let value: PolicyListResponseBody = {
 
 ## Fields
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `data`                                                                   | [components.PolicyDocument](../../models/components/policydocument.md)[] | :heavy_check_mark:                                                       | N/A                                                                      |
-| `hasMore`                                                                | *boolean*                                                                | :heavy_check_mark:                                                       | N/A                                                                      |
-| `object`                                                                 | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `data`                                                   | [components.Policy](../../models/components/policy.md)[] | :heavy_check_mark:                                       | N/A                                                      |
+| `hasMore`                                                | *boolean*                                                | :heavy_check_mark:                                       | N/A                                                      |
+| `object`                                                 | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |

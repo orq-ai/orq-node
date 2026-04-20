@@ -1162,7 +1162,7 @@ export type DeploymentGetConfigRole = ClosedEnum<
   typeof DeploymentGetConfigRole
 >;
 
-export type TwoFile = {
+export type DeploymentGetConfig2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
@@ -1186,7 +1186,7 @@ export type DeploymentGetConfig23 = {
    * The type of the content part. Always `file`.
    */
   type: "file";
-  file: TwoFile;
+  file: DeploymentGetConfig2File;
 };
 
 export type TwoImageUrl = {
@@ -1422,7 +1422,7 @@ export type DeploymentGetConfigReasoningEffort = ClosedEnum<
 /**
  * Controls the verbosity of the model output.
  */
-export const Verbosity = {
+export const DeploymentGetConfigVerbosity = {
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -1430,7 +1430,9 @@ export const Verbosity = {
 /**
  * Controls the verbosity of the model output.
  */
-export type Verbosity = ClosedEnum<typeof Verbosity>;
+export type DeploymentGetConfigVerbosity = ClosedEnum<
+  typeof DeploymentGetConfigVerbosity
+>;
 
 /**
  * The level of thinking to use for the model. Only supported by `Google AI`
@@ -1535,7 +1537,7 @@ export type DeploymentGetConfigParameters = {
   /**
    * Controls the verbosity of the model output.
    */
-  verbosity?: Verbosity | undefined;
+  verbosity?: DeploymentGetConfigVerbosity | undefined;
   /**
    * The level of thinking to use for the model. Only supported by `Google AI`
    */
@@ -3973,25 +3975,28 @@ export const DeploymentGetConfigRole$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentGetConfigRole);
 
 /** @internal */
-export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
-  z.object({
-    file_data: z.string().optional(),
-    uri: z.string().optional(),
-    mimeType: z.string().optional(),
-    filename: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_data": "fileData",
-    });
+export const DeploymentGetConfig2File$inboundSchema: z.ZodType<
+  DeploymentGetConfig2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
   });
+});
 
-export function twoFileFromJSON(
+export function deploymentGetConfig2FileFromJSON(
   jsonString: string,
-): SafeParseResult<TwoFile, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfig2File, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwoFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwoFile' from JSON`,
+    (x) => DeploymentGetConfig2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig2File' from JSON`,
   );
 }
 
@@ -4002,7 +4007,7 @@ export const DeploymentGetConfig23$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("file"),
-  file: z.lazy(() => TwoFile$inboundSchema),
+  file: z.lazy(() => DeploymentGetConfig2File$inboundSchema),
 });
 
 export function deploymentGetConfig23FromJSON(
@@ -4392,8 +4397,9 @@ export const DeploymentGetConfigReasoningEffort$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentGetConfigReasoningEffort);
 
 /** @internal */
-export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
-  .nativeEnum(Verbosity);
+export const DeploymentGetConfigVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigVerbosity
+> = z.nativeEnum(DeploymentGetConfigVerbosity);
 
 /** @internal */
 export const ThinkingLevel$inboundSchema: z.ZodNativeEnum<
@@ -4432,7 +4438,7 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
   encoding_format: DeploymentGetConfigEncodingFormat$inboundSchema.optional(),
   reasoningEffort: DeploymentGetConfigReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
-  verbosity: Verbosity$inboundSchema.optional(),
+  verbosity: DeploymentGetConfigVerbosity$inboundSchema.optional(),
   thinkingLevel: ThinkingLevel$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -367,6 +367,7 @@ export const GetAllPromptsProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Tensorix: "tensorix",
+  Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inceptron: "inceptron",
   Slack: "slack",

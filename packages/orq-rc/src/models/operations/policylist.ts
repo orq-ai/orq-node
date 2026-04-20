@@ -29,7 +29,7 @@ export type PolicyListRequest = {
  * Policies retrieved successfully
  */
 export type PolicyListResponseBody = {
-  data: Array<components.PolicyDocument> | null;
+  data: Array<components.Policy> | null;
   hasMore: boolean;
   object: string;
 };
@@ -74,7 +74,7 @@ export const PolicyListResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.nullable(z.array(components.PolicyDocument$inboundSchema)),
+  data: z.nullable(z.array(components.Policy$inboundSchema)),
   has_more: z.boolean(),
   object: z.string(),
 }).transform((v) => {

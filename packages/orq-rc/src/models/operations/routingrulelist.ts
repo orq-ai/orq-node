@@ -29,7 +29,7 @@ export type RoutingRuleListRequest = {
  * Routing rules retrieved successfully
  */
 export type RoutingRuleListResponseBody = {
-  data: Array<components.RoutingRuleDocument> | null;
+  data: Array<components.RoutingRule> | null;
   hasMore: boolean;
   object: string;
 };
@@ -74,7 +74,7 @@ export const RoutingRuleListResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.nullable(z.array(components.RoutingRuleDocument$inboundSchema)),
+  data: z.nullable(z.array(components.RoutingRule$inboundSchema)),
   has_more: z.boolean(),
   object: z.string(),
 }).transform((v) => {
