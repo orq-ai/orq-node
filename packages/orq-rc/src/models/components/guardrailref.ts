@@ -19,6 +19,8 @@ export type ExecuteOn = ClosedEnum<typeof ExecuteOn>;
 export type GuardrailRef = {
   executeOn: ExecuteOn;
   id: string;
+  isGuardrail?: boolean | undefined;
+  sampleRate?: number | undefined;
 };
 
 /** @internal */
@@ -36,15 +38,21 @@ export const GuardrailRef$inboundSchema: z.ZodType<
 > = z.object({
   execute_on: ExecuteOn$inboundSchema,
   id: z.string(),
+  is_guardrail: z.boolean().optional(),
+  sample_rate: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "execute_on": "executeOn",
+    "is_guardrail": "isGuardrail",
+    "sample_rate": "sampleRate",
   });
 });
 /** @internal */
 export type GuardrailRef$Outbound = {
   execute_on: string;
   id: string;
+  is_guardrail?: boolean | undefined;
+  sample_rate?: number | undefined;
 };
 
 /** @internal */
@@ -55,9 +63,13 @@ export const GuardrailRef$outboundSchema: z.ZodType<
 > = z.object({
   executeOn: ExecuteOn$outboundSchema,
   id: z.string(),
+  isGuardrail: z.boolean().optional(),
+  sampleRate: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     executeOn: "execute_on",
+    isGuardrail: "is_guardrail",
+    sampleRate: "sample_rate",
   });
 });
 
