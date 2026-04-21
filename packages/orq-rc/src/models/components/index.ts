@@ -41,7 +41,6 @@ export * from "./limits.js";
 export * from "./memoryparam.js";
 export * from "./modelref.js";
 export * from "./modelsconfig.js";
-export * from "./optionalexpressioninput.js";
 export * from "./outputtokensdetails.js";
 export * from "./partdelta.js";
 export * from "./partdeltaevent.js";

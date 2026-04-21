@@ -13,7 +13,7 @@ export type GuardrailRuleUpdateRequestBody = {
   description?: string | undefined;
   displayName?: string | undefined;
   enabled?: boolean | undefined;
-  expression?: components.OptionalExpressionInput | undefined;
+  expression?: components.ExpressionInput | undefined;
   guardrails?: Array<components.GuardrailRef> | undefined;
   timeout?: number | undefined;
 };
@@ -49,7 +49,7 @@ export type GuardrailRuleUpdateRequestBody$Outbound = {
   description?: string | undefined;
   display_name?: string | undefined;
   enabled?: boolean | undefined;
-  expression?: components.OptionalExpressionInput$Outbound | undefined;
+  expression?: components.ExpressionInput$Outbound | undefined;
   guardrails?: Array<components.GuardrailRef$Outbound> | undefined;
   timeout?: number | undefined;
 };
@@ -63,7 +63,7 @@ export const GuardrailRuleUpdateRequestBody$outboundSchema: z.ZodType<
   description: z.string().optional(),
   displayName: z.string().optional(),
   enabled: z.boolean().optional(),
-  expression: components.OptionalExpressionInput$outboundSchema.optional(),
+  expression: components.ExpressionInput$outboundSchema.optional(),
   guardrails: z.array(components.GuardrailRef$outboundSchema).optional(),
   timeout: z.number().int().optional(),
 }).transform((v) => {
