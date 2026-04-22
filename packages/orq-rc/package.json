@@ -1,19 +1,19 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.8.0-rc.43",
+  "version": "4.8.0-rc.44",
   "author": "Orq",
   "exports": {
-    "./langchain": {
-      "require": "./langchain/index.js",
-      "types": "./langchain/index.d.mts",
-      "import": "./langchain/index.mjs"
-    },
     ".": {
       "import": "./index.js",
       "require": "./index.js",
       "types": "./index.d.ts"
     },
-    "./*": "./*"
+    "./*": "./*",
+    "./langchain": {
+      "import": "./langchain/index.mjs",
+      "require": "./langchain/index.js",
+      "types": "./langchain/index.d.mts"
+    }
   },
   "main": "./index.js",
   "sideEffects": false,
