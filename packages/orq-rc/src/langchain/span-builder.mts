@@ -210,6 +210,10 @@ function buildAttributes(
     attrs.push(strAttr("gen_ai.completion", JSON.stringify(completion)));
   }
 
+  if (event.graphJson) {
+    attrs.push(strAttr("langsmith.trace.graph", event.graphJson));
+  }
+
   return attrs;
 }
 

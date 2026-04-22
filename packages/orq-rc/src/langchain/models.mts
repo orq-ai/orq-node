@@ -55,6 +55,9 @@ export interface InFlightEvent {
 
   // Error
   error: { type: string; message: string; traceback: string } | null;
+
+  // Graph (attached to root trace span only)
+  graphJson?: string;
 }
 
 export function createInFlightEvent(

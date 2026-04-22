@@ -4,11 +4,14 @@
  * Uses LangChain UUIDs directly (hyphens stripped) as trace/span IDs.
  */
 
+import { GraphTracker } from "./graph.mjs";
 import { InFlightEvent } from "./models.mjs";
 
 export class Events {
   private _events = new Map<string, InFlightEvent>();
   private _parentMap = new Map<string, string | undefined>();
+  private _rootRunId: string | null = null;
+  readonly graph = new GraphTracker();
 
   store(runId: string, event: InFlightEvent): void {
     this._events.set(runId, event);
@@ -33,6 +36,23 @@ export class Events {
 
   getSpanId(runId: string): string {
     return runId.replace(/-/g, "");
+  }
+
+  setRootIfNeeded(runId: string): void {
+    if (this._rootRunId === null) this._rootRunId = runId;
+  }
+
+  isRoot(runId: string): boolean {
+    return runId === this._rootRunId;
+  }
+
+  isGraphNode(runId: string): boolean {
+    const parent = this._parentMap.get(runId);
+    return parent != null && parent === this._rootRunId;
+  }
+
+  get rootRunId(): string | null {
+    return this._rootRunId;
   }
 
   private _getRoot(runId: string): string {

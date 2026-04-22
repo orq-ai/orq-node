@@ -255,6 +255,14 @@ export class AsyncOrqLangchainCallback extends BaseCallbackHandler {
         typeof inputs === "object" && inputs !== null && !Array.isArray(inputs)
           ? inputs
           : { inputs };
+
+      if (parentRunId == null) {
+        this._events.setRootIfNeeded(runId);
+      } else if (this._events.isGraphNode(runId)) {
+        const spanId = this._events.getSpanId(runId);
+        const rootRunId = this._events.rootRunId!;
+        this._events.graph.onNodeStart(event.name, spanId, rootRunId);
+      }
     } catch {
       // silently ignore tracing errors
     }
@@ -276,6 +284,18 @@ export class AsyncOrqLangchainCallback extends BaseCallbackHandler {
         !Array.isArray(outputs)
           ? outputs
           : { outputs };
+
+      if (this._events.isGraphNode(runId)) {
+        this._events.graph.onNodeEnd(event.name, this._events.rootRunId!);
+      }
+
+      if (this._events.isRoot(runId) && this._events.graph.hasNodes()) {
+        event.graphJson = this._events.graph.build(
+          runId,
+          this._events.getSpanId(runId),
+        );
+      }
+
       await this._finishAndSend(runId);
     } catch {
       // silently ignore tracing errors
