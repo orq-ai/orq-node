@@ -152,7 +152,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, operations.GuardrailRuleCreateResponseBody$inboundSchema),
-    M.fail([400, "4XX"]),
+    M.fail([400, 409, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {
