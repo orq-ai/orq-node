@@ -16,6 +16,10 @@ export type PolicyUpdateRequestBody = {
   evaluators?: Array<components.EvaluatorRef> | undefined;
   limits?: components.Limits | undefined;
   modelsConfig?: components.ModelsConfig | undefined;
+  /**
+   * Optional project ID to assign the policy to.
+   */
+  projectId?: string | undefined;
   retryConfig?: components.PolicyRetryConfig | undefined;
   timeout?: number | undefined;
 };
@@ -57,6 +61,7 @@ export type PolicyUpdateRequestBody$Outbound = {
   evaluators?: Array<components.EvaluatorRef$Outbound> | undefined;
   limits?: components.Limits$Outbound | undefined;
   models_config?: components.ModelsConfig$Outbound | undefined;
+  project_id?: string | undefined;
   retry_config?: components.PolicyRetryConfig$Outbound | undefined;
   timeout?: number | undefined;
 };
@@ -73,12 +78,14 @@ export const PolicyUpdateRequestBody$outboundSchema: z.ZodType<
   evaluators: z.array(components.EvaluatorRef$outboundSchema).optional(),
   limits: components.Limits$outboundSchema.optional(),
   modelsConfig: components.ModelsConfig$outboundSchema.optional(),
+  projectId: z.string().optional(),
   retryConfig: components.PolicyRetryConfig$outboundSchema.optional(),
   timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     modelsConfig: "models_config",
+    projectId: "project_id",
     retryConfig: "retry_config",
   });
 });
