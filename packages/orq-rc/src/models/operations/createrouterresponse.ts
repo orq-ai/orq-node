@@ -156,6 +156,19 @@ export type CreateRouterResponseInput =
   | Array<CreateRouterResponseInput2>;
 
 /**
+ * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
+ */
+export const TemplateEngine = {
+  Text: "text",
+  Jinja: "jinja",
+  Mustache: "mustache",
+} as const;
+/**
+ * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
+ */
+export type TemplateEngine = ClosedEnum<typeof TemplateEngine>;
+
+/**
  * The JSON Schema the output must conform to.
  */
 export type FormatSchema = {};
@@ -367,6 +380,7 @@ export type CreateRouterResponseRequestBody = {
    * System prompt / instructions for the model.
    */
   instructions?: string | undefined;
+  limits?: components.ResponseExecutionLimits | undefined;
   /**
    * Maximum number of tokens in the response output.
    */
@@ -377,9 +391,9 @@ export type CreateRouterResponseRequestBody = {
   maxToolCalls?: number | undefined;
   memory?: components.MemoryParam | undefined;
   /**
-   * Developer-defined key-value pairs attached to the response.
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>). Non-string values are rejected with a 400.
    */
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: { [k: string]: string } | undefined;
   /**
    * The model to use in provider/model format (e.g. openai/gpt-4o). Use agent/<key> to invoke a pre-configured agent from the orq.ai platform.
    */
@@ -419,6 +433,10 @@ export type CreateRouterResponseRequestBody = {
    * Sampling temperature between 0 and 2.
    */
   temperature?: number | undefined;
+  /**
+   * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
+   */
+  templateEngine?: TemplateEngine | undefined;
   /**
    * Configuration for text output.
    */
@@ -565,7 +583,10 @@ export type CreateRouterResponseResponseBody = {
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
   memory?: components.MemoryParam | undefined;
-  metadata: { [k: string]: any };
+  /**
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>).
+   */
+  metadata: { [k: string]: string };
   model: string;
   /**
    * Always "response"
@@ -824,6 +845,11 @@ export function createRouterResponseInputToJSON(
     CreateRouterResponseInput$outboundSchema.parse(createRouterResponseInput),
   );
 }
+
+/** @internal */
+export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
+  typeof TemplateEngine
+> = z.nativeEnum(TemplateEngine);
 
 /** @internal */
 export type FormatSchema$Outbound = {};
@@ -1185,10 +1211,11 @@ export type CreateRouterResponseRequestBody$Outbound = {
   identity?: components.ResponseIdentity$Outbound | undefined;
   input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
   instructions?: string | undefined;
+  limits?: components.ResponseExecutionLimits$Outbound | undefined;
   max_output_tokens?: number | undefined;
   max_tool_calls?: number | undefined;
   memory?: components.MemoryParam$Outbound | undefined;
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: { [k: string]: string } | undefined;
   model?: string | undefined;
   parallel_tool_calls?: boolean | undefined;
   presence_penalty?: number | undefined;
@@ -1201,6 +1228,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
   temperature?: number | undefined;
+  template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
   thread?: components.ResponseThread$Outbound | undefined;
   tool_choice?: SpecificFunction$Outbound | string | undefined;
@@ -1237,10 +1265,11 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
   ]).optional(),
   instructions: z.string().optional(),
+  limits: components.ResponseExecutionLimits$outboundSchema.optional(),
   maxOutputTokens: z.number().int().optional(),
   maxToolCalls: z.number().int().optional(),
   memory: components.MemoryParam$outboundSchema.optional(),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string()).optional(),
   model: z.string().optional(),
   parallelToolCalls: z.boolean().optional(),
   presencePenalty: z.number().optional(),
@@ -1253,6 +1282,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
   temperature: z.number().optional(),
+  templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
   thread: components.ResponseThread$outboundSchema.optional(),
   toolChoice: z.union([
@@ -1297,6 +1327,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     promptCacheKey: "prompt_cache_key",
     safetyIdentifier: "safety_identifier",
     streamOptions: "stream_options",
+    templateEngine: "template_engine",
     toolChoice: "tool_choice",
     topLogprobs: "top_logprobs",
     topP: "top_p",
@@ -1409,7 +1440,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),
   memory: components.MemoryParam$inboundSchema.optional(),
-  metadata: z.record(z.any()),
+  metadata: z.record(z.string()),
   model: z.string(),
   object: z.string(),
   output: z.nullable(z.array(z.any())),

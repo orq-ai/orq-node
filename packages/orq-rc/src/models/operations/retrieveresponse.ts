@@ -65,7 +65,10 @@ export type RetrieveResponseResponseBody = {
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
   memory?: components.MemoryParam | undefined;
-  metadata: { [k: string]: any };
+  /**
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>).
+   */
+  metadata: { [k: string]: string };
   model: string;
   /**
    * Always "response"
@@ -166,7 +169,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),
   memory: components.MemoryParam$inboundSchema.optional(),
-  metadata: z.record(z.any()),
+  metadata: z.record(z.string()),
   model: z.string(),
   object: z.string(),
   output: z.nullable(z.array(z.any())),
