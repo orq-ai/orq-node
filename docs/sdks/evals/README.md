@@ -9,6 +9,7 @@
 * [update](#update) - Update an Evaluator
 * [delete](#delete) - Delete an Evaluator
 * [invoke](#invoke) - Invoke a Custom Evaluator
+* [getV2EvaluatorsIdVersions](#getv2evaluatorsidversions) - List evaluator versions
 
 ## all
 
@@ -427,3 +428,77 @@ run();
 | errors.InvokeEvalEvalsResponseBody         | 404                                        | application/json                           |
 | errors.InvokeEvalEvalsResponseResponseBody | 500                                        | application/json                           |
 | errors.APIError                            | 4XX, 5XX                                   | \*/\*                                      |
+
+## getV2EvaluatorsIdVersions
+
+Returns version history for a specific evaluator
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get_/v2/evaluators/{id}/versions" method="get" path="/v2/evaluators/{id}/versions" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.evals.getV2EvaluatorsIdVersions({
+    id: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsGetV2EvaluatorsIdVersions } from "@orq-ai/node/funcs/evalsGetV2EvaluatorsIdVersions.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsGetV2EvaluatorsIdVersions(orq, {
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsGetV2EvaluatorsIdVersions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV2EvaluatorsIdVersionsRequest](../../models/operations/getv2evaluatorsidversionsrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV2EvaluatorsIdVersionsResponseBody](../../models/operations/getv2evaluatorsidversionsresponsebody.md)\>**
+
+### Errors
+
+| Error Type                                   | Status Code                                  | Content Type                                 |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| errors.GetV2EvaluatorsIdVersionsResponseBody | 404                                          | application/json                             |
+| errors.APIError                              | 4XX, 5XX                                     | \*/\*                                        |

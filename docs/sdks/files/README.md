@@ -157,7 +157,7 @@ run();
 
 ## getContent
 
-Signs the object name and redirects to a presigned URL for downloading the file content. Accepts either a file ID or an object storage path (URL-encoded).
+Redirects to a presigned URL for downloading the file content by file ID.
 
 ### Example Usage
 

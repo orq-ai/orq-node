@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Download file content
  *
  * @remarks
- * Signs the object name and redirects to a presigned URL for downloading the file content. Accepts either a file ID or an object storage path (URL-encoded).
+ * Redirects to a presigned URL for downloading the file content by file ID.
  */
 export function filesGetContent(
   client: OrqCore,

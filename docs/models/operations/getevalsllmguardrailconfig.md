@@ -15,6 +15,21 @@ const value:
     };
 ```
 
+### `operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataCategorical`
+
+```typescript
+const value:
+  operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataCategorical =
+    {
+      enabled: true,
+      type: "categorical",
+      values: [
+        "<value 1>",
+        "<value 2>",
+      ],
+    };
+```
+
 ### `operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber`
 
 ```typescript

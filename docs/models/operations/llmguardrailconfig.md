@@ -3,24 +3,40 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsBoolean`
+### `operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyBoolean`
 
 ```typescript
-const value: operations.CreateEvalGuardrailConfigEvalsBoolean = {
-  enabled: true,
-  type: "boolean",
-  value: false,
-};
+const value:
+  operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyBoolean = {
+    enabled: true,
+    type: "boolean",
+    value: false,
+  };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsNumber`
+### `operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyCategorical`
 
 ```typescript
-const value: operations.CreateEvalGuardrailConfigEvalsNumber = {
-  enabled: true,
-  type: "number",
-  value: 5525.08,
-  operator: "lte",
-};
+const value:
+  operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyCategorical = {
+    enabled: true,
+    type: "categorical",
+    values: [
+      "<value 1>",
+      "<value 2>",
+    ],
+  };
+```
+
+### `operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyNumber`
+
+```typescript
+const value: operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyNumber =
+  {
+    enabled: true,
+    type: "number",
+    value: 1720.89,
+    operator: "gt",
+  };
 ```
 

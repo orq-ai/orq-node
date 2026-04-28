@@ -128,7 +128,6 @@ export type RetrieveToolResponseBodyCodeExecutionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus;
-  versionHash?: string | undefined;
   type: "code";
   codeTool: RetrieveToolResponseBodyCodeTool;
 };
@@ -255,7 +254,6 @@ export type RetrieveToolResponseBodyMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveToolResponseBodyToolsResponse200Status;
-  versionHash?: string | undefined;
   type: "mcp";
   mcp: RetrieveToolResponseBodyMcp;
 };
@@ -417,7 +415,6 @@ export type RetrieveToolResponseBodyHTTPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveToolResponseBodyToolsResponseStatus;
-  versionHash?: string | undefined;
   type: "http";
   http: RetrieveToolResponseBodyHttp;
 };
@@ -519,7 +516,6 @@ export type RetrieveToolResponseBodyJSONSchemaTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveToolResponseBodyToolsStatus;
-  versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: RetrieveToolResponseBodyJsonSchema;
 };
@@ -635,7 +631,6 @@ export type RetrieveToolResponseBodyFunctionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveToolResponseBodyStatus;
-  versionHash?: string | undefined;
   type: "function";
   function: RetrieveToolResponseBodyFunction;
 };
@@ -758,7 +753,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD16649CAAW30TS0VA1Z16"),
+  _id: z.string().default("tool_01KQ9C5PZT60WSM6EX8Q2XGHDM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -772,7 +767,6 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   status:
     RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema
       .default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("code"),
   code_tool: z.lazy(() => RetrieveToolResponseBodyCodeTool$inboundSchema),
 }).transform((v) => {
@@ -783,7 +777,6 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
     "code_tool": "codeTool",
   });
 });
@@ -866,7 +859,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KPPD16638QA9ZWCH8EQF3P1N"),
+  id: z.string().default("01KQ9C5PZSFZKHM9BV18T3B8SD"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -924,7 +917,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD1663Z6NQS0S7YE3C3S78"),
+  _id: z.string().default("tool_01KQ9C5PZSTGMQNNCWMHE0YNSW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -938,7 +931,6 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   status: RetrieveToolResponseBodyToolsResponse200Status$inboundSchema.default(
     "live",
   ),
-  version_hash: z.string().optional(),
   type: z.literal("mcp"),
   mcp: z.lazy(() => RetrieveToolResponseBodyMcp$inboundSchema),
 }).transform((v) => {
@@ -949,7 +941,6 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
@@ -1117,7 +1108,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD1662KSWVYZQ5VRANVCZ3"),
+  _id: z.string().default("tool_01KQ9C5PZQ9NPX4H5S3V624FN7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1131,7 +1122,6 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   status: RetrieveToolResponseBodyToolsResponseStatus$inboundSchema.default(
     "live",
   ),
-  version_hash: z.string().optional(),
   type: z.literal("http"),
   http: z.lazy(() => RetrieveToolResponseBodyHttp$inboundSchema),
 }).transform((v) => {
@@ -1142,7 +1132,6 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
@@ -1215,7 +1204,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD166133NY6TRTJVMFN0VG"),
+  _id: z.string().default("tool_01KQ9C5PZPEB5ZDDKFG0E1K5E5"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1227,7 +1216,6 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: RetrieveToolResponseBodyToolsStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("json_schema"),
   json_schema: z.lazy(() => RetrieveToolResponseBodyJsonSchema$inboundSchema),
 }).transform((v) => {
@@ -1238,7 +1226,6 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
     "json_schema": "jsonSchema",
   });
 });
@@ -1323,7 +1310,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD1660RA5FV55MWRGC6CGT"),
+  _id: z.string().default("tool_01KQ9C5PZN0RMNJ3N9WSS1PPGF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1335,7 +1322,6 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: RetrieveToolResponseBodyStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("function"),
   function: z.lazy(() => RetrieveToolResponseBodyFunction$inboundSchema),
 }).transform((v) => {
@@ -1346,7 +1332,6 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 

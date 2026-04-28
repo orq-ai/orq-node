@@ -15,6 +15,22 @@ const value:
     };
 ```
 
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical`
+
+```typescript
+const value:
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical =
+    {
+      enabled: true,
+      type: "categorical",
+      values: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
+    };
+```
+
 ### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber`
 
 ```typescript

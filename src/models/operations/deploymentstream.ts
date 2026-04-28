@@ -1207,7 +1207,9 @@ export const DeploymentStreamProvider = {
   Xai: "xai",
   Alibaba: "alibaba",
   Tensorix: "tensorix",
+  Scaleway: "scaleway",
   Hcompany: "hcompany",
+  Inceptron: "inceptron",
   Slack: "slack",
   Orq: "orq",
 } as const;

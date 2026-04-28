@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { postV2Feedback } from "@orq-ai/node/funcs/postV2Feedback.js";
+import { postV2FeedbackEvaluationRemove } from "@orq-ai/node/funcs/postV2FeedbackEvaluationRemove.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,12 +29,12 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await postV2Feedback(orq);
+  const res = await postV2FeedbackEvaluationRemove(orq);
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
-    console.log("postV2Feedback failed:", res.error);
+    console.log("postV2FeedbackEvaluationRemove failed:", res.error);
   }
 }
 

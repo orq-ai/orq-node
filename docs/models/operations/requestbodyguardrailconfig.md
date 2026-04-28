@@ -13,6 +13,18 @@ const value: operations.GuardrailConfigBoolean = {
 };
 ```
 
+### `operations.GuardrailConfigCategorical`
+
+```typescript
+const value: operations.GuardrailConfigCategorical = {
+  enabled: false,
+  type: "categorical",
+  values: [
+    "<value 1>",
+  ],
+};
+```
+
 ### `operations.GuardrailConfigNumber`
 
 ```typescript

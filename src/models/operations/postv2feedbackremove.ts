@@ -38,7 +38,7 @@ export type PostV2FeedbackRemoveRequestBody = {
   product: PostV2FeedbackRemoveProduct;
 };
 
-export const PostV2FeedbackRemoveResponseProduct = {
+export const PostV2FeedbackRemoveFeedbackProduct = {
   Remoteconfigs: "remoteconfigs",
   Deployments: "deployments",
   Experiments: "experiments",
@@ -57,8 +57,8 @@ export const PostV2FeedbackRemoveResponseProduct = {
   Otel: "otel",
   AiChat: "ai-chat",
 } as const;
-export type PostV2FeedbackRemoveResponseProduct = ClosedEnum<
-  typeof PostV2FeedbackRemoveResponseProduct
+export type PostV2FeedbackRemoveFeedbackProduct = ClosedEnum<
+  typeof PostV2FeedbackRemoveFeedbackProduct
 >;
 
 /**
@@ -67,7 +67,7 @@ export type PostV2FeedbackRemoveResponseProduct = ClosedEnum<
 export type PostV2FeedbackRemoveResponseBody = {
   id: string;
   traceId: string;
-  product: PostV2FeedbackRemoveResponseProduct;
+  product: PostV2FeedbackRemoveFeedbackProduct;
 };
 
 /** @internal */
@@ -108,9 +108,9 @@ export function postV2FeedbackRemoveRequestBodyToJSON(
 }
 
 /** @internal */
-export const PostV2FeedbackRemoveResponseProduct$inboundSchema: z.ZodNativeEnum<
-  typeof PostV2FeedbackRemoveResponseProduct
-> = z.nativeEnum(PostV2FeedbackRemoveResponseProduct);
+export const PostV2FeedbackRemoveFeedbackProduct$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2FeedbackRemoveFeedbackProduct
+> = z.nativeEnum(PostV2FeedbackRemoveFeedbackProduct);
 
 /** @internal */
 export const PostV2FeedbackRemoveResponseBody$inboundSchema: z.ZodType<
@@ -120,7 +120,7 @@ export const PostV2FeedbackRemoveResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   trace_id: z.string(),
-  product: PostV2FeedbackRemoveResponseProduct$inboundSchema,
+  product: PostV2FeedbackRemoveFeedbackProduct$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "trace_id": "traceId",

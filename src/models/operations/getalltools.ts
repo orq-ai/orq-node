@@ -141,7 +141,6 @@ export type DataCodeExecutionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: GetAllToolsDataToolsResponse200Status;
-  versionHash?: string | undefined;
   type: "code";
   codeTool: DataCodeTool;
 };
@@ -266,7 +265,6 @@ export type DataMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: GetAllToolsDataToolsResponseStatus;
-  versionHash?: string | undefined;
   type: "mcp";
   mcp: DataMcp;
 };
@@ -424,7 +422,6 @@ export type DataHTTPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: GetAllToolsDataToolsStatus;
-  versionHash?: string | undefined;
   type: "http";
   http: GetAllToolsDataHttp;
 };
@@ -524,7 +521,6 @@ export type DataJSONSchemaTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: GetAllToolsDataStatus;
-  versionHash?: string | undefined;
   type: "json_schema";
   jsonSchema: DataJsonSchema;
 };
@@ -638,7 +634,6 @@ export type DataFunctionTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: DataStatus;
-  versionHash?: string | undefined;
   type: "function";
   function: GetAllToolsDataFunction;
 };
@@ -772,7 +767,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD164YA3YMS2CR49BY5NHV"),
+  _id: z.string().default("tool_01KQ9C5PYBR93Y009JFND3Q899"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -784,7 +779,6 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: GetAllToolsDataToolsResponse200Status$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("code"),
   code_tool: z.lazy(() => DataCodeTool$inboundSchema),
 }).transform((v) => {
@@ -795,7 +789,6 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
     "code_tool": "codeTool",
   });
 });
@@ -871,7 +864,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KPPD164X2JW9YR455K11JCYK"),
+  id: z.string().default("01KQ9C5PYA1852RPCNM023DR29"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -924,7 +917,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD164XDGPQD9S3M3GR4HV6"),
+  _id: z.string().default("tool_01KQ9C5PY9H8WTNXJHN15KXC05"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -936,7 +929,6 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("mcp"),
   mcp: z.lazy(() => DataMcp$inboundSchema),
 }).transform((v) => {
@@ -947,7 +939,6 @@ export const DataMCPTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
@@ -1111,7 +1102,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD164QG34BCE9WT8QFDT11"),
+  _id: z.string().default("tool_01KQ9C5PY8HNPTCEB7MB4BWBPG"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1123,7 +1114,6 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("http"),
   http: z.lazy(() => GetAllToolsDataHttp$inboundSchema),
 }).transform((v) => {
@@ -1134,7 +1124,6 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 
@@ -1206,7 +1195,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD164PAZ986KC50BWNXRZM"),
+  _id: z.string().default("tool_01KQ9C5PY64G0HXN050EYXRN7E"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1218,7 +1207,6 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: GetAllToolsDataStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("json_schema"),
   json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
 }).transform((v) => {
@@ -1229,7 +1217,6 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
     "json_schema": "jsonSchema",
   });
 });
@@ -1310,7 +1297,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KPPD164NCPNGMY3RZCFERZEF"),
+  _id: z.string().default("tool_01KQ9C5PY5T5K3D2GS0RMVJDJ7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1322,7 +1309,6 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   status: DataStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: z.literal("function"),
   function: z.lazy(() => GetAllToolsDataFunction$inboundSchema),
 }).transform((v) => {
@@ -1333,7 +1319,6 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
   });
 });
 

@@ -81,7 +81,6 @@ export type PostV2AgentsA2aResponseBody = {
   role?: string | undefined;
   instructions?: string | undefined;
   status: string;
-  versionHash?: string | undefined;
   path: string;
   metrics: PostV2AgentsA2aMetrics;
   memoryStores: Array<string>;
@@ -222,7 +221,6 @@ export const PostV2AgentsA2aResponseBody$inboundSchema: z.ZodType<
   role: z.string().optional(),
   instructions: z.string().optional(),
   status: z.string(),
-  version_hash: z.string().optional(),
   path: z.string(),
   metrics: z.lazy(() => PostV2AgentsA2aMetrics$inboundSchema),
   memory_stores: z.array(z.string()),
@@ -238,7 +236,6 @@ export const PostV2AgentsA2aResponseBody$inboundSchema: z.ZodType<
     "project_id": "projectId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "version_hash": "versionHash",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
   });

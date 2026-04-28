@@ -112,14 +112,16 @@ export type Tools = {
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export const ExecuteOn = {
+export const AgentStartedStreamingEventDataExecuteOn = {
   Input: "input",
   Output: "output",
 } as const;
 /**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
-export type ExecuteOn = ClosedEnum<typeof ExecuteOn>;
+export type AgentStartedStreamingEventDataExecuteOn = ClosedEnum<
+  typeof AgentStartedStreamingEventDataExecuteOn
+>;
 
 export type Evaluators = {
   /**
@@ -133,7 +135,7 @@ export type Evaluators = {
   /**
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
-  executeOn: ExecuteOn;
+  executeOn: AgentStartedStreamingEventDataExecuteOn;
 };
 
 /**
@@ -352,8 +354,9 @@ export function toolsFromJSON(
 }
 
 /** @internal */
-export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
-  .nativeEnum(ExecuteOn);
+export const AgentStartedStreamingEventDataExecuteOn$inboundSchema:
+  z.ZodNativeEnum<typeof AgentStartedStreamingEventDataExecuteOn> = z
+    .nativeEnum(AgentStartedStreamingEventDataExecuteOn);
 
 /** @internal */
 export const Evaluators$inboundSchema: z.ZodType<
@@ -363,7 +366,7 @@ export const Evaluators$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   sample_rate: z.number().default(50),
-  execute_on: ExecuteOn$inboundSchema,
+  execute_on: AgentStartedStreamingEventDataExecuteOn$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",

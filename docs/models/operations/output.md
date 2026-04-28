@@ -47,10 +47,10 @@ const value: operations.Output4 = {
 };
 ```
 
-### `operations.Output5`
+### `operations.Five`
 
 ```typescript
-const value: operations.Output5 = {
+const value: operations.Five = {
   id: "<id>",
   type: "reasoning",
 };
