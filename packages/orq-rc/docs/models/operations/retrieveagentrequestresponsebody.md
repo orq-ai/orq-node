@@ -13,13 +13,16 @@ let value: RetrieveAgentRequestResponseBody = {
   projectId: "<id>",
   status: "live",
   path: "Default",
+  skills: [
+    "<value 1>",
+  ],
   knowledgeBases: [
     {
       knowledgeId: "customer-knowledge-base",
     },
   ],
   role: "<value>",
-  description: "after amongst sans eek humidity",
+  description: "vice beyond whereas second incidentally nor",
   instructions: "<value>",
   model: {
     id: "<id>",
@@ -60,7 +63,46 @@ let value: RetrieveAgentRequestResponseBody = {
       ],
     },
     fallbackModels: [
-      "<value>",
+      {
+        id: "<id>",
+        parameters: {
+          fallbacks: [
+            {
+              model: "openai/gpt-4o-mini",
+            },
+          ],
+          cache: {
+            ttl: 3600,
+            type: "exact_match",
+          },
+          loadBalancer: {
+            type: "weight_based",
+            models: [
+              {
+                model: "openai/gpt-4o",
+                weight: 0.7,
+              },
+              {
+                model: "anthropic/claude-3-5-sonnet",
+                weight: 0.3,
+              },
+            ],
+          },
+          timeout: {
+            callTimeout: 30000,
+          },
+        },
+        retry: {
+          count: 3,
+          onCodes: [
+            429,
+            500,
+            502,
+            503,
+            504,
+          ],
+        },
+      },
     ],
   },
 };
@@ -83,6 +125,7 @@ let value: RetrieveAgentRequestResponseBody = {
 | `path`                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Entity storage path in the format: `project/folder/subfolder/...`<br/><br/>The first element identifies the project, followed by nested folders (auto-created as needed).<br/><br/>With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key. | Default                                                                                                                                                                                                                                                                                        |
 | `memoryStores`                                                                                                                                                                                                                                                                                 | *string*[]                                                                                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Array of memory store identifiers. Accepts both memory store IDs and keys.                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                |
 | `teamOfAgents`                                                                                                                                                                                                                                                                                 | [operations.RetrieveAgentRequestTeamOfAgents](../../models/operations/retrieveagentrequestteamofagents.md)[]                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                |
+| `skills`                                                                                                                                                                                                                                                                                       | *string*[]                                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                                             | List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.                                                                                                                                  |                                                                                                                                                                                                                                                                                                |
 | `metrics`                                                                                                                                                                                                                                                                                      | [operations.RetrieveAgentRequestMetrics](../../models/operations/retrieveagentrequestmetrics.md)                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `variables`                                                                                                                                                                                                                                                                                    | Record<string, *any*>                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Extracted variables from agent instructions                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                |
 | `knowledgeBases`                                                                                                                                                                                                                                                                               | [operations.RetrieveAgentRequestKnowledgeBases](../../models/operations/retrieveagentrequestknowledgebases.md)[]                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Agent knowledge bases reference                                                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                |

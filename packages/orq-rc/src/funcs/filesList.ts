@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -37,7 +38,7 @@ export function filesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.FileListResponseBody,
+    components.ListFilesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.FileListResponseBody,
+      components.ListFilesResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -93,7 +94,7 @@ async function $do(
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
     "starting_after": payload?.starting_after,
-  }, { explode: false });
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -147,7 +148,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.FileListResponseBody,
+    components.ListFilesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -157,7 +158,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.FileListResponseBody$inboundSchema),
+    M.json(200, components.ListFilesResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

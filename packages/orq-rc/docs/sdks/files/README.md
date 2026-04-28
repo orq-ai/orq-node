@@ -5,11 +5,11 @@
 ### Available Operations
 
 * [list](#list) - List all files
-* [create](#create) - Create file
+* [create](#create) - Upload a file
 * [getContent](#getcontent) - Download file content
-* [delete](#delete) - Delete file
 * [get](#get) - Retrieve a file
-* [update](#update) - Update file
+* [delete](#delete) - Delete a file
+* [update](#update) - Update a file
 
 ## list
 
@@ -26,7 +26,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.files.list({});
+  const result = await orq.files.list({
+    limit: 10,
+  });
 
   console.log(result);
 }
@@ -49,7 +51,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await filesList(orq, {});
+  const res = await filesList(orq, {
+    limit: 10,
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -72,7 +76,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.FileListResponseBody](../../models/operations/filelistresponsebody.md)\>**
+**Promise\<[components.ListFilesResponse](../../models/components/listfilesresponse.md)\>**
 
 ### Errors
 
@@ -89,7 +93,6 @@ Files are used to upload documents that can be used with features like Deploymen
 <!-- UsageSnippet language="typescript" operationID="FileUpload" method="post" path="/v2/files" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
-import { openAsBlob } from "node:fs";
 
 const orq = new Orq({
   apiKey: process.env["ORQ_API_KEY"] ?? "",
@@ -97,7 +100,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.files.create({
-    file: await openAsBlob("example.file"),
+    purpose: retrieval,
   });
 
   console.log(result);
@@ -113,7 +116,6 @@ The standalone function version of this method:
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
 import { filesCreate } from "@orq-ai/node/funcs/filesCreate.js";
-import { openAsBlob } from "node:fs";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -123,7 +125,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await filesCreate(orq, {
-    file: await openAsBlob("example.file"),
+    purpose: retrieval,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -140,14 +142,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.FileUploadRequestBody](../../models/operations/fileuploadrequestbody.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateFileRequest](../../models/components/createfilerequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.FileUploadResponseBody](../../models/operations/fileuploadresponsebody.md)\>**
+**Promise\<[components.CreateFileResponse](../../models/components/createfileresponse.md)\>**
 
 ### Errors
 
@@ -157,7 +159,7 @@ run();
 
 ## getContent
 
-Redirects to a presigned URL for downloading the file content by file ID.
+Returns a presigned URL for downloading the file content by file ID.
 
 ### Example Usage
 
@@ -170,11 +172,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.files.getContent({
+  const result = await orq.files.getContent({
     fileIdOrPath: "<value>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -200,7 +202,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("filesGetContent failed:", res.error);
   }
@@ -220,80 +222,7 @@ run();
 
 ### Response
 
-**Promise\<void\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## delete
-
-Delete file
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="FileDelete" method="delete" path="/v2/files/{file_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  await orq.files.delete({
-    fileId: "<id>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { filesDelete } from "@orq-ai/node/funcs/filesDelete.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await filesDelete(orq, {
-    fileId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    
-  } else {
-    console.log("filesDelete failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.FileDeleteRequest](../../models/operations/filedeleterequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
+**Promise\<[components.GetFileContentResponse](../../models/components/getfilecontentresponse.md)\>**
 
 ### Errors
 
@@ -366,7 +295,80 @@ run();
 
 ### Response
 
-**Promise\<[operations.FileGetResponseBody](../../models/operations/filegetresponsebody.md)\>**
+**Promise\<[components.GetFileResponse](../../models/components/getfileresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## delete
+
+Delete a file
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="FileDelete" method="delete" path="/v2/files/{file_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.files.delete({
+    fileId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { filesDelete } from "@orq-ai/node/funcs/filesDelete.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await filesDelete(orq, {
+    fileId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.FileDeleteRequest](../../models/operations/filedeleterequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.DeleteFileResponse](../../models/components/deletefileresponse.md)\>**
 
 ### Errors
 
@@ -391,9 +393,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.files.update({
     fileId: "<id>",
-    requestBody: {
-      fileName: "example.file",
-    },
+    updateFileRequest: {},
   });
 
   console.log(result);
@@ -419,9 +419,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await filesUpdate(orq, {
     fileId: "<id>",
-    requestBody: {
-      fileName: "example.file",
-    },
+    updateFileRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -445,7 +443,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.FileUpdateResponseBody](../../models/operations/fileupdateresponsebody.md)\>**
+**Promise\<[components.UpdateFileResponse](../../models/components/updatefileresponse.md)\>**
 
 ### Errors
 

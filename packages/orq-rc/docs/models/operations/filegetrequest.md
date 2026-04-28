@@ -14,4 +14,4 @@ let value: FileGetRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `fileId`           | *string*           | :heavy_check_mark: | The ID of the file |
+| `fileId`           | *string*           | :heavy_check_mark: | N/A                |

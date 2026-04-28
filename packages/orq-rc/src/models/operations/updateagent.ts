@@ -1512,6 +1512,10 @@ export type UpdateAgentRequestBody = {
    */
   teamOfAgents?: Array<UpdateAgentTeamOfAgents> | undefined;
   /**
+   * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
+   */
+  skills?: Array<string> | null | undefined;
+  /**
    * Extracted variables from agent instructions
    */
   variables?: { [k: string]: any } | undefined;
@@ -2649,6 +2653,10 @@ export type UpdateAgentResponseBody = {
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents?: Array<UpdateAgentAgentsTeamOfAgents> | undefined;
+  /**
+   * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
+   */
+  skills: Array<string>;
   metrics?: UpdateAgentMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -5126,6 +5134,7 @@ export type UpdateAgentRequestBody$Outbound = {
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
+  skills?: Array<string> | null | undefined;
   variables?: { [k: string]: any } | undefined;
   engine?: string | undefined;
   a2a?: UpdateA2AConfiguration$Outbound | undefined;
@@ -5164,6 +5173,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
     .optional(),
+  skills: z.nullable(z.array(z.string())).optional(),
   variables: z.record(z.any()).optional(),
   engine: UpdateAgentEngine$outboundSchema.optional(),
   a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
@@ -6846,6 +6856,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   team_of_agents: z.array(
     z.lazy(() => UpdateAgentAgentsTeamOfAgents$inboundSchema),
   ).optional(),
+  skills: z.array(z.string()),
   metrics: z.lazy(() => UpdateAgentMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(

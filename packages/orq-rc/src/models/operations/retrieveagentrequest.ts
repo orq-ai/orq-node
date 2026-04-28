@@ -1136,6 +1136,10 @@ export type RetrieveAgentRequestResponseBody = {
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents?: Array<RetrieveAgentRequestTeamOfAgents> | undefined;
+  /**
+   * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
+   */
+  skills: Array<string>;
   metrics?: RetrieveAgentRequestMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -2799,6 +2803,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
   team_of_agents: z.array(
     z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
+  skills: z.array(z.string()),
   metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(

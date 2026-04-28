@@ -4,64 +4,17 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type FileUpdateRequestBody = {
-  fileName: string;
-};
+import * as components from "../components/index.js";
 
 export type FileUpdateRequest = {
-  /**
-   * The ID of the file
-   */
   fileId: string;
-  requestBody: FileUpdateRequestBody;
+  updateFileRequest: components.UpdateFileRequest;
 };
-
-/**
- * File updated successfully
- */
-export type FileUpdateResponseBody = {
-  id: string;
-  bytes: number;
-  created: string;
-  fileName: string;
-  purpose: string;
-  workspaceId: string;
-};
-
-/** @internal */
-export type FileUpdateRequestBody$Outbound = {
-  file_name: string;
-};
-
-/** @internal */
-export const FileUpdateRequestBody$outboundSchema: z.ZodType<
-  FileUpdateRequestBody$Outbound,
-  z.ZodTypeDef,
-  FileUpdateRequestBody
-> = z.object({
-  fileName: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileName: "file_name",
-  });
-});
-
-export function fileUpdateRequestBodyToJSON(
-  fileUpdateRequestBody: FileUpdateRequestBody,
-): string {
-  return JSON.stringify(
-    FileUpdateRequestBody$outboundSchema.parse(fileUpdateRequestBody),
-  );
-}
 
 /** @internal */
 export type FileUpdateRequest$Outbound = {
   file_id: string;
-  RequestBody: FileUpdateRequestBody$Outbound;
+  UpdateFileRequest: components.UpdateFileRequest$Outbound;
 };
 
 /** @internal */
@@ -71,11 +24,11 @@ export const FileUpdateRequest$outboundSchema: z.ZodType<
   FileUpdateRequest
 > = z.object({
   fileId: z.string(),
-  requestBody: z.lazy(() => FileUpdateRequestBody$outboundSchema),
+  updateFileRequest: components.UpdateFileRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     fileId: "file_id",
-    requestBody: "RequestBody",
+    updateFileRequest: "UpdateFileRequest",
   });
 });
 
@@ -84,35 +37,5 @@ export function fileUpdateRequestToJSON(
 ): string {
   return JSON.stringify(
     FileUpdateRequest$outboundSchema.parse(fileUpdateRequest),
-  );
-}
-
-/** @internal */
-export const FileUpdateResponseBody$inboundSchema: z.ZodType<
-  FileUpdateResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  bytes: z.number().int(),
-  created: z.string(),
-  file_name: z.string(),
-  purpose: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "file_name": "fileName",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function fileUpdateResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<FileUpdateResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileUpdateResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileUpdateResponseBody' from JSON`,
   );
 }

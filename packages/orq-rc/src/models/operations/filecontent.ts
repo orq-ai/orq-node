@@ -6,9 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FileContentRequest = {
-  /**
-   * The file ID to retrieve content for.
-   */
   fileIdOrPath: string;
 };
 

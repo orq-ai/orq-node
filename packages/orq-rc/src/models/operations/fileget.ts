@@ -4,27 +4,9 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FileGetRequest = {
-  /**
-   * The ID of the file
-   */
   fileId: string;
-};
-
-/**
- * File details retrieved successfully
- */
-export type FileGetResponseBody = {
-  id: string;
-  bytes: number;
-  created: string;
-  fileName: string;
-  purpose: string;
-  workspaceId: string;
 };
 
 /** @internal */
@@ -47,34 +29,4 @@ export const FileGetRequest$outboundSchema: z.ZodType<
 
 export function fileGetRequestToJSON(fileGetRequest: FileGetRequest): string {
   return JSON.stringify(FileGetRequest$outboundSchema.parse(fileGetRequest));
-}
-
-/** @internal */
-export const FileGetResponseBody$inboundSchema: z.ZodType<
-  FileGetResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  bytes: z.number().int(),
-  created: z.string(),
-  file_name: z.string(),
-  purpose: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "file_name": "fileName",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function fileGetResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<FileGetResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileGetResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileGetResponseBody' from JSON`,
-  );
 }
