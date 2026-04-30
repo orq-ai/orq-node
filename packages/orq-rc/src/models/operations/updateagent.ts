@@ -831,17 +831,11 @@ export type UpdateAgentFallbackModelConfiguration =
   | UpdateAgentFallbackModelConfiguration2
   | string;
 
-/**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
- */
 export const UpdateAgentToolApprovalRequired = {
   All: "all",
   RespectTool: "respect_tool",
   None: "none",
 } as const;
-/**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
- */
 export type UpdateAgentToolApprovalRequired = ClosedEnum<
   typeof UpdateAgentToolApprovalRequired
 >;
@@ -1351,25 +1345,10 @@ export type UpdateAgentGuardrails = {
 };
 
 export type UpdateAgentSettings = {
-  /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
-   */
   maxIterations?: number | undefined;
-  /**
-   * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
-   */
   maxExecutionTime?: number | undefined;
-  /**
-   * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
-   */
   maxCost?: number | undefined;
-  /**
-   * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
-   */
   toolApprovalRequired?: UpdateAgentToolApprovalRequired | undefined;
-  /**
-   * Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id.
-   */
   tools?:
     | Array<
       | AgentToolInputCRUDGoogleSearchTool
@@ -4918,10 +4897,10 @@ export function updateAgentGuardrailsToJSON(
 
 /** @internal */
 export type UpdateAgentSettings$Outbound = {
-  max_iterations: number;
-  max_execution_time: number;
-  max_cost: number;
-  tool_approval_required: string;
+  max_iterations?: number | undefined;
+  max_execution_time?: number | undefined;
+  max_cost?: number | undefined;
+  tool_approval_required?: string | undefined;
   tools?:
     | Array<
       | AgentToolInputCRUDGoogleSearchTool$Outbound
@@ -4953,12 +4932,11 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateAgentSettings
 > = z.object({
-  maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
-  maxCost: z.number().default(0),
-  toolApprovalRequired: UpdateAgentToolApprovalRequired$outboundSchema.default(
-    "respect_tool",
-  ),
+  maxIterations: z.number().int().optional(),
+  maxExecutionTime: z.number().int().optional(),
+  maxCost: z.number().optional(),
+  toolApprovalRequired: UpdateAgentToolApprovalRequired$outboundSchema
+    .optional(),
   tools: z.array(
     z.union([
       z.lazy(() => AgentToolInputCRUDGoogleSearchTool$outboundSchema),
