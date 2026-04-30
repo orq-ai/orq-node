@@ -13,5 +13,5 @@ let value: ListPromptVersionsThinkingLevel = "low";
 ## Values
 
 ```typescript
-"low" | "high"
+"low" | "medium" | "high"
 ```

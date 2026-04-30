@@ -13,5 +13,5 @@ let value: UpdatePromptThinkingLevel = "high";
 ## Values
 
 ```typescript
-"low" | "high"
+"low" | "medium" | "high"
 ```

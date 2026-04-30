@@ -230,6 +230,7 @@ export type GetAllPromptsVerbosity = ClosedEnum<typeof GetAllPromptsVerbosity>;
  */
 export const GetAllPromptsThinkingLevel = {
   Low: "low",
+  Medium: "medium",
   High: "high",
 } as const;
 /**

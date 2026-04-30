@@ -220,6 +220,7 @@ export type GetPromptVersionVerbosity = ClosedEnum<
  */
 export const GetPromptVersionThinkingLevel = {
   Low: "low",
+  Medium: "medium",
   High: "high",
 } as const;
 /**

@@ -281,6 +281,7 @@ export type DeploymentsVerbosity = ClosedEnum<typeof DeploymentsVerbosity>;
  */
 export const DeploymentsThinkingLevel = {
   Low: "low",
+  Medium: "medium",
   High: "high",
 } as const;
 /**

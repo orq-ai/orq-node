@@ -1439,6 +1439,7 @@ export type DeploymentGetConfigVerbosity = ClosedEnum<
  */
 export const ThinkingLevel = {
   Low: "low",
+  Medium: "medium",
   High: "high",
 } as const;
 /**
