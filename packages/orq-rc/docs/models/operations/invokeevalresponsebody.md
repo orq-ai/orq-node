@@ -84,7 +84,6 @@ const value: operations.BERTScore = {
 const value: operations.InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator",
   value: {
-    workflowRunId: "<id>",
     value: 2734.06,
   },
 };

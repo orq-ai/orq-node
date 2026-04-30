@@ -8,7 +8,6 @@ import { InvokeEvalResponseBodyLLM } from "@orq-ai/node/models/operations";
 let value: InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator",
   value: {
-    workflowRunId: "<id>",
     value: 2734.06,
   },
 };
