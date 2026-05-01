@@ -216,6 +216,7 @@ export type GetOnePromptVerbosity = ClosedEnum<typeof GetOnePromptVerbosity>;
  */
 export const GetOnePromptThinkingLevel = {
   Low: "low",
+  Medium: "medium",
   High: "high",
 } as const;
 /**

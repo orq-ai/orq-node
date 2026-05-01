@@ -1090,6 +1090,7 @@ export type CreatePromptVerbosity = ClosedEnum<typeof CreatePromptVerbosity>;
  */
 export const CreatePromptThinkingLevel = {
   Low: "low",
+  Medium: "medium",
   High: "high",
 } as const;
 /**
