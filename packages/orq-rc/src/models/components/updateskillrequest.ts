@@ -13,6 +13,7 @@ export type UpdateSkillRequest = {
   tags?: Array<string> | undefined;
   path?: string | undefined;
   instructions?: string | undefined;
+  projectId?: string | undefined;
 };
 
 /** @internal */
@@ -24,6 +25,7 @@ export type UpdateSkillRequest$Outbound = {
   tags?: Array<string> | undefined;
   path?: string | undefined;
   instructions?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -39,10 +41,12 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
   path: z.string().optional(),
   instructions: z.string().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     skillId: "skill_id",
     displayName: "display_name",
+    projectId: "project_id",
   });
 });
 

@@ -19,3 +19,4 @@ let value: UpdateSkillRequest = {};
 | `tags`             | *string*[]         | :heavy_minus_sign: | N/A                |
 | `path`             | *string*           | :heavy_minus_sign: | N/A                |
 | `instructions`     | *string*           | :heavy_minus_sign: | N/A                |
+| `projectId`        | *string*           | :heavy_minus_sign: | N/A                |
