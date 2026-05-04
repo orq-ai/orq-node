@@ -108,7 +108,6 @@ export type CreateAgentScheduleResponseBody = {
    */
   type: CreateAgentScheduleSchedulesType;
   updated: Date;
-  workspaceId: string;
 };
 
 /** @internal */
@@ -205,7 +204,6 @@ export const CreateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   trigger_count: z.number().int(),
   type: CreateAgentScheduleSchedulesType$inboundSchema,
   updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  workspace_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -215,7 +213,6 @@ export const CreateAgentScheduleResponseBody$inboundSchema: z.ZodType<
     "is_active": "isActive",
     "last_triggered_at": "lastTriggeredAt",
     "trigger_count": "triggerCount",
-    "workspace_id": "workspaceId",
   });
 });
 

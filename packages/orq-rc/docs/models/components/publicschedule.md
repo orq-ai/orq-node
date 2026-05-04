@@ -17,7 +17,6 @@ let value: PublicSchedule = {
   triggerCount: 225839,
   type: "cron",
   updated: new Date("2025-02-27T08:25:58.755Z"),
-  workspaceId: "<id>",
 };
 ```
 
@@ -38,4 +37,3 @@ let value: PublicSchedule = {
 | `triggerCount`                                                                                                                       | *number*                                                                                                                             | :heavy_check_mark:                                                                                                                   | Total firings since creation or last expression/type change.                                                                         |
 | `type`                                                                                                                               | [components.PublicScheduleType](../../models/components/publicscheduletype.md)                                                       | :heavy_check_mark:                                                                                                                   | Schedule type.                                                                                                                       |
 | `updated`                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                        | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
-| `workspaceId`                                                                                                                        | *string*                                                                                                                             | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
