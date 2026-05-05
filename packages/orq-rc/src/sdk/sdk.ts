@@ -22,6 +22,7 @@ import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
 import { Policies } from "./policies.js";
+import { Projects } from "./projects.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
 import { Responses } from "./responses.js";
@@ -130,6 +131,11 @@ export class Orq extends ClientSDK {
   private _files?: Files;
   get files(): Files {
     return (this._files ??= new Files(this._options));
+  }
+
+  private _projects?: Projects;
+  get projects(): Projects {
+    return (this._projects ??= new Projects(this._options));
   }
 
   private _skills?: Skills;
