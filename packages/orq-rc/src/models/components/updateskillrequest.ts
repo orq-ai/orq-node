@@ -9,7 +9,6 @@ export type UpdateSkillRequest = {
   skillId?: string | undefined;
   displayName?: string | undefined;
   description?: string | undefined;
-  enabled?: boolean | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
   instructions?: string | undefined;
@@ -21,7 +20,6 @@ export type UpdateSkillRequest$Outbound = {
   skill_id?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
-  enabled?: boolean | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
   instructions?: string | undefined;
@@ -37,7 +35,6 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   skillId: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
-  enabled: z.boolean().optional(),
   tags: z.array(z.string()).optional(),
   path: z.string().optional(),
   instructions: z.string().optional(),

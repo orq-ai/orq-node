@@ -12,7 +12,6 @@ export type Skill = {
   skillId?: string | undefined;
   displayName?: string | undefined;
   description?: string | undefined;
-  enabled?: boolean | undefined;
   tags?: Array<string> | undefined;
   projectId?: string | undefined;
   path?: string | undefined;
@@ -38,7 +37,6 @@ export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
     skill_id: z.string().optional(),
     display_name: z.string().optional(),
     description: z.string().optional(),
-    enabled: z.boolean().optional(),
     tags: z.array(z.string()).optional(),
     project_id: z.string().optional(),
     path: z.string().optional(),

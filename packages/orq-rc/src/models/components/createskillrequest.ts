@@ -8,7 +8,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type CreateSkillRequest = {
   displayName?: string | undefined;
   description?: string | undefined;
-  enabled?: boolean | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
   projectId?: string | undefined;
@@ -19,7 +18,6 @@ export type CreateSkillRequest = {
 export type CreateSkillRequest$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
-  enabled?: boolean | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
   project_id?: string | undefined;
@@ -34,7 +32,6 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string().optional(),
   description: z.string().optional(),
-  enabled: z.boolean().optional(),
   tags: z.array(z.string()).optional(),
   path: z.string().optional(),
   projectId: z.string().optional(),
