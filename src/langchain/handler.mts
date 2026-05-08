@@ -15,6 +15,7 @@ import { Events } from "./events.mjs";
 import { EventType, InFlightEvent, createInFlightEvent } from "./models.mjs";
 import { buildOtlpSpan } from "./span-builder.mjs";
 import {
+  extractAssistantToolCalls,
   extractModelName,
   extractModelParameters,
   extractTokenUsage,
@@ -192,9 +193,20 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
               content = event.streamingTokens.join("");
             }
 
+            const message: Record<string, unknown> = {
+              role: "assistant",
+              content,
+            };
+            const toolCalls = extractAssistantToolCalls(
+              (gen as unknown as Record<string, unknown>)["message"],
+            );
+            if (toolCalls) {
+              message["tool_calls"] = toolCalls;
+            }
+
             choices.push({
               index: idx,
-              message: { role: "assistant", content },
+              message,
               finish_reason: finishReason,
             });
           }
