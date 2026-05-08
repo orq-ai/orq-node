@@ -117,6 +117,30 @@ export function normalizeMessages(
   return result;
 }
 
+export function extractAssistantToolCalls(
+  message: unknown,
+): unknown[] | null {
+  if (message == null || typeof message !== "object") return null;
+  const msg = message as Record<string, unknown>;
+
+  const additionalKwargs = msg["additional_kwargs"];
+  if (additionalKwargs != null && typeof additionalKwargs === "object") {
+    const fromKwargs = (additionalKwargs as Record<string, unknown>)[
+      "tool_calls"
+    ];
+    if (Array.isArray(fromKwargs) && fromKwargs.length > 0) {
+      return fromKwargs;
+    }
+  }
+
+  const fromMessage = msg["tool_calls"];
+  if (Array.isArray(fromMessage) && fromMessage.length > 0) {
+    return fromMessage;
+  }
+
+  return null;
+}
+
 function readUsage(
   usage: Record<string, unknown> | undefined,
 ): Record<string, number> | null {
