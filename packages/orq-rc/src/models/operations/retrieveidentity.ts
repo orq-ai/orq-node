@@ -151,7 +151,7 @@ export const RetrieveIdentityResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-05-08T15:45:49.947Z",
+    "2026-05-09T13:10:43.586Z",
   ).transform(v => new Date(v)),
   metrics: z.nullable(z.lazy(() => Metrics$inboundSchema)).optional(),
 }).transform((v) => {
