@@ -17,10 +17,22 @@ import {
 } from "./outputtokensdetails.js";
 
 export type PublicUsage = {
+  /**
+   * Cost (USD) of input tokens. Present when billing was computed for this response.
+   */
+  inputCost?: number | undefined;
   inputTokens: number;
   inputTokensDetails: InputTokensDetails;
+  /**
+   * Cost (USD) of output tokens. Present when billing was computed for this response.
+   */
+  outputCost?: number | undefined;
   outputTokens: number;
   outputTokensDetails: OutputTokensDetails;
+  /**
+   * Total cost (USD) of the response. Present when billing was computed for this response.
+   */
+  totalCost?: number | undefined;
   totalTokens: number;
   webSearchRequests?: number | undefined;
 };
@@ -31,18 +43,24 @@ export const PublicUsage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  input_cost: z.number().optional(),
   input_tokens: z.number().int(),
   input_tokens_details: InputTokensDetails$inboundSchema,
+  output_cost: z.number().optional(),
   output_tokens: z.number().int(),
   output_tokens_details: OutputTokensDetails$inboundSchema,
+  total_cost: z.number().optional(),
   total_tokens: z.number().int(),
   web_search_requests: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "input_cost": "inputCost",
     "input_tokens": "inputTokens",
     "input_tokens_details": "inputTokensDetails",
+    "output_cost": "outputCost",
     "output_tokens": "outputTokens",
     "output_tokens_details": "outputTokensDetails",
+    "total_cost": "totalCost",
     "total_tokens": "totalTokens",
     "web_search_requests": "webSearchRequests",
   });
