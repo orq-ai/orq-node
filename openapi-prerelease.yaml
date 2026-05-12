@@ -1981,7 +1981,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01krdv0snfk011hdq4z1and49j"
+              default: "reasoning_01krdy2zkvnh09d6epj5j7fb72"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3654,26 +3654,6 @@ components:
         - "period"
         - "currency"
       type: "object"
-    CreateFileFormFields:
-      additionalProperties: false
-      properties:
-        file:
-          contentEncoding: "binary"
-          contentMediaType: "application/octet-stream"
-          description: "The file to be uploaded."
-          format: "binary"
-          type: "string"
-        purpose:
-          default: "retrieval"
-          description: "The intended purpose of the uploaded file."
-          enum:
-            - "retrieval"
-            - "knowledge_datasource"
-            - "batch"
-          type: "string"
-      required:
-        - "file"
-      type: "object"
     CreateGuardrailRuleRequest:
       additionalProperties: false
       properties:
@@ -3808,39 +3788,6 @@ components:
           type: "string"
       required:
         - "cel"
-      type: "object"
-    FileDocument:
-      additionalProperties: false
-      properties:
-        _id:
-          type: "string"
-        bytes:
-          format: "int64"
-          type: "integer"
-        created:
-          type: "string"
-        file_name:
-          type: "string"
-        purpose:
-          type: "string"
-        workspace_id:
-          type: "string"
-      required:
-        - "_id"
-        - "purpose"
-        - "file_name"
-        - "workspace_id"
-        - "bytes"
-        - "created"
-      type: "object"
-    FileUpdateRequest:
-      additionalProperties: false
-      properties:
-        file_name:
-          minLength: 1
-          type: "string"
-      required:
-        - "file_name"
       type: "object"
     GuardrailRef:
       additionalProperties: false
@@ -4192,6 +4139,271 @@ components:
           minimum: 0
           type: "integer"
       type: "object"
+    ListFilesResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/File"
+        has_more:
+          type: "boolean"
+    CreateFileRequest:
+      type: "object"
+      properties:
+        filename:
+          type: "string"
+        content:
+          type: "string"
+          format: "bytes"
+        purpose:
+          type: "integer"
+          format: "enum"
+        content_type:
+          type: "string"
+    CreateFileResponse:
+      type: "object"
+      properties:
+        file:
+          $ref: "#/components/schemas/File"
+    GetFileContentResponse:
+      type: "object"
+      properties:
+        download_url:
+          type: "string"
+    GetFileResponse:
+      type: "object"
+      properties:
+        file:
+          $ref: "#/components/schemas/File"
+    DeleteFileResponse:
+      type: "object"
+      properties: {}
+    UpdateFileRequest:
+      type: "object"
+      properties:
+        file_id:
+          type: "string"
+        file_name:
+          type: "string"
+    UpdateFileResponse:
+      type: "object"
+      properties:
+        file:
+          $ref: "#/components/schemas/File"
+    File:
+      type: "object"
+      properties:
+        file_id:
+          type: "string"
+        purpose:
+          type: "integer"
+          format: "enum"
+        file_name:
+          type: "string"
+        workspace_id:
+          type: "string"
+        bytes:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+    ListProjectsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Project"
+        has_more:
+          type: "boolean"
+    CreateProjectRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        teams:
+          type: "array"
+          items:
+            type: "string"
+    CreateProjectResponse:
+      type: "object"
+      properties:
+        project:
+          $ref: "#/components/schemas/Project"
+    GetProjectResponse:
+      type: "object"
+      properties:
+        project:
+          $ref: "#/components/schemas/Project"
+    DeleteProjectResponse:
+      type: "object"
+      properties: {}
+    UpdateProjectRequest:
+      type: "object"
+      properties:
+        project_id:
+          type: "string"
+        name:
+          type: "string"
+        teams:
+          type: "array"
+          items:
+            type: "string"
+    UpdateProjectResponse:
+      type: "object"
+      properties:
+        project:
+          $ref: "#/components/schemas/Project"
+    Project:
+      type: "object"
+      properties:
+        project_id:
+          type: "string"
+        name:
+          type: "string"
+        key:
+          type: "string"
+        workspace_id:
+          type: "string"
+        is_archived:
+          type: "boolean"
+        is_default:
+          type: "boolean"
+        teams:
+          type: "array"
+          items:
+            type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        created_by_id:
+          type: "string"
+        updated_by_id:
+          type: "string"
+    ListSkillsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Skill"
+        has_more:
+          type: "boolean"
+    CreateSkillRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        path:
+          type: "string"
+        project_id:
+          type: "string"
+        instructions:
+          type: "string"
+    CreateSkillResponse:
+      type: "object"
+      properties:
+        skill:
+          $ref: "#/components/schemas/Skill"
+    GetSkillResponse:
+      type: "object"
+      properties:
+        skill:
+          $ref: "#/components/schemas/Skill"
+    DeleteSkillResponse:
+      type: "object"
+      properties: {}
+    UpdateSkillRequest:
+      type: "object"
+      properties:
+        skill_id:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        path:
+          type: "string"
+        instructions:
+          type: "string"
+        project_id:
+          type: "string"
+    UpdateSkillResponse:
+      type: "object"
+      properties:
+        skill:
+          $ref: "#/components/schemas/Skill"
+    CheckSkillDisplayNameAvailabilityRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        skill_id:
+          type: "string"
+          description: "Skill to exclude from the check. Set when renaming so the skill's\n current name does not conflict with itself; leave empty when creating."
+    CheckSkillDisplayNameAvailabilityResponse:
+      type: "object"
+      properties:
+        available:
+          type: "boolean"
+          description: "Whether the display name is available within the workspace."
+        conflicting_skill_id:
+          type: "string"
+          description: "ID of the skill currently using this display name. Empty when\n `available` is true."
+    Skill:
+      type: "object"
+      properties:
+        skill_id:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        project_id:
+          type: "string"
+        path:
+          type: "string"
+        workspace_id:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        created_by_id:
+          type: "string"
+        updated_by_id:
+          type: "string"
+        instructions:
+          type: "string"
+        version:
+          type: "string"
+          description: "Latest semver assigned by the activity log. Stamped on the document\n by CreateSkill / UpdateSkill so reads return it without joining\n workspaces.activities."
     ConversationParam:
       additionalProperties: false
       properties:
@@ -4676,11 +4888,8 @@ components:
         updated:
           format: "date-time"
           type: "string"
-        workspace_id:
-          type: "string"
       required:
         - "_id"
-        - "workspace_id"
         - "agent_key"
         - "type"
         - "expression"
@@ -5028,7 +5237,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -5036,7 +5245,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -5238,10 +5447,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-12T10:16:33.274Z"
+                                  default: "2026-05-12T11:10:11.507Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-12T10:16:33.274Z"
+                                  default: "2026-05-12T11:10:11.507Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -5364,10 +5573,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-12T10:16:33.274Z"
+                                  default: "2026-05-12T11:10:11.507Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-12T10:16:33.274Z"
+                                  default: "2026-05-12T11:10:11.507Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -5585,10 +5794,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             updated:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5684,10 +5893,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             updated:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5798,10 +6007,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             updated:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5897,10 +6106,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             updated:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6296,10 +6505,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             updated:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6411,10 +6620,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             updated:
                               type: "string"
-                              default: "2026-05-12T10:16:33.274Z"
+                              default: "2026-05-12T11:10:11.507Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -7224,10 +7433,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           updated:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7350,10 +7559,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           updated:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7571,10 +7780,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7670,10 +7879,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7784,10 +7993,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7883,10 +8092,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8282,10 +8491,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8397,10 +8606,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8772,10 +8981,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           updated:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -8898,10 +9107,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           updated:
                             type: "string"
-                            default: "2026-05-12T10:16:33.274Z"
+                            default: "2026-05-12T11:10:11.507Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9119,10 +9328,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9218,10 +9427,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9332,10 +9541,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9431,10 +9640,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9830,10 +10039,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9945,10 +10154,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       updated:
                         type: "string"
-                        default: "2026-05-12T10:16:33.274Z"
+                        default: "2026-05-12T11:10:11.507Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10436,6 +10645,8 @@ paths:
                         properties:
                           workflow_run_id:
                             type: "string"
+                          trace_id:
+                            type: "string"
                           value:
                             anyOf:
                               - type: "number"
@@ -10515,7 +10726,6 @@ paths:
                               - "tie"
                               - "votes"
                         required:
-                          - "workflow_run_id"
                           - "value"
                     required:
                       - "type"
@@ -10850,7 +11060,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-12T10:16:31.117Z"
+                          default: "2026-05-12T11:10:09.375Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -10858,7 +11068,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:31.117Z"
+                              default: "2026-05-12T11:10:09.376Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -11065,7 +11275,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -11073,7 +11283,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -11200,7 +11410,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -11208,7 +11418,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -11421,7 +11631,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -11429,7 +11639,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -15644,7 +15854,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "agents"
       x-cli-name: "create"
-      x-speakeasy-max-method-params: 16
+      x-speakeasy-max-method-params: 17
       operationId: "CreateAgentRequest"
       summary: "Create agent"
       description: "Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage."
@@ -16715,6 +16925,13 @@ paths:
                   default: []
                   title: "Team of agents"
                   description: "The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks."
+                skills:
+                  type:
+                    - "array"
+                    - "null"
+                  items:
+                    type: "string"
+                  description: "List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior."
                 variables:
                   type: "object"
                   additionalProperties: {}
@@ -16805,6 +17022,11 @@ paths:
                         - "key"
                     default: []
                     description: "The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks."
+                  skills:
+                    type: "array"
+                    items:
+                      type: "string"
+                    description: "List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior."
                   metrics:
                     type: "object"
                     properties:
@@ -17680,6 +17902,7 @@ paths:
                   - "project_id"
                   - "status"
                   - "path"
+                  - "skills"
                   - "role"
                   - "description"
                   - "instructions"
@@ -17806,6 +18029,11 @@ paths:
                               - "key"
                           default: []
                           description: "The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks."
+                        skills:
+                          type: "array"
+                          items:
+                            type: "string"
+                          description: "List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior."
                         metrics:
                           type: "object"
                           properties:
@@ -18680,6 +18908,7 @@ paths:
                         - "key"
                         - "status"
                         - "path"
+                        - "skills"
                         - "role"
                         - "description"
                         - "instructions"
@@ -19111,6 +19340,11 @@ paths:
                         - "key"
                     default: []
                     description: "The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks."
+                  skills:
+                    type: "array"
+                    items:
+                      type: "string"
+                    description: "List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior."
                   metrics:
                     type: "object"
                     properties:
@@ -19986,6 +20220,7 @@ paths:
                   - "project_id"
                   - "status"
                   - "path"
+                  - "skills"
                   - "role"
                   - "description"
                   - "instructions"
@@ -20010,7 +20245,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "agents"
       x-cli-name: "update"
-      x-speakeasy-max-method-params: 20
+      x-speakeasy-max-method-params: 21
       operationId: "UpdateAgent"
       summary: "Update agent"
       description: "Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations."
@@ -20696,28 +20931,20 @@ paths:
                       exclusiveMinimum: 0
                       maximum: 100
                       minimum: 1
-                      default: 100
-                      description: "Maximum iterations(llm calls) before the agent will stop executing."
                     max_execution_time:
                       type: "integer"
                       minimum: 2
                       exclusiveMinimum: 0
                       maximum: 600
-                      default: 600
-                      description: "Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned."
                     max_cost:
                       type: "number"
                       minimum: 0
-                      default: 0
-                      description: "Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses"
                     tool_approval_required:
                       type: "string"
                       enum:
                         - "all"
                         - "respect_tool"
                         - "none"
-                      default: "respect_tool"
-                      description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
                     tools:
                       type: "array"
                       items:
@@ -20992,8 +21219,6 @@ paths:
                               type: "openai:web_search"
                         description: "Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id. Provider-prefixed tools (e.g., openai:web_search) are passed through to the provider."
                         title: "Agent Tool Input (CRUD)"
-                      default: []
-                      description: "Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id."
                     evaluators:
                       type: "array"
                       items:
@@ -21079,6 +21304,13 @@ paths:
                       - "key"
                   title: "Team of agents"
                   description: "The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks."
+                skills:
+                  type:
+                    - "array"
+                    - "null"
+                  items:
+                    type: "string"
+                  description: "List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior."
                 variables:
                   type: "object"
                   additionalProperties: {}
@@ -21194,6 +21426,11 @@ paths:
                         - "key"
                     default: []
                     description: "The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks."
+                  skills:
+                    type: "array"
+                    items:
+                      type: "string"
+                    description: "List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior."
                   metrics:
                     type: "object"
                     properties:
@@ -22069,6 +22306,7 @@ paths:
                   - "project_id"
                   - "status"
                   - "path"
+                  - "skills"
                   - "role"
                   - "description"
                   - "instructions"
@@ -23846,7 +24084,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KRDV0SSAV244ZYZ94SPRK66X"
+                                          default: "01KRDY2ZQXVPW22FXW47HRMDA1"
                                         name:
                                           type: "string"
                                         description:
@@ -25487,7 +25725,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KRDV0STRDQK7WYMZMVG586R1"
+                                          default: "01KRDY2ZSGEAETPMEMDPX0ZNP4"
                                         name:
                                           type: "string"
                                         description:
@@ -33922,7 +34160,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRDV0T2AV8VSZ5VRAQSHB89Y"
+                              default: "tool_01KRDY30208SATYRZBV5NTEPFA"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34019,7 +34257,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRDV0T2CJ3D0QRD7BHA04VMQ"
+                              default: "tool_01KRDY302102Y9SVP3QXGN5Q39"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34118,7 +34356,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRDV0T2D1Y9CX7ERC353MCFK"
+                              default: "tool_01KRDY3023R92STYEJJJD5A1BN"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34253,7 +34491,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRDV0T2PE24DRPFNZM8KJ4AB"
+                              default: "tool_01KRDY3025MSZWJ2G4F3XXAVYW"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34325,7 +34563,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KRDV0T2QAFS44RVAEHTQ3N6G"
+                                        default: "01KRDY3026GP2MVJGW7V74BVTF"
                                       name:
                                         type: "string"
                                       description:
@@ -34384,7 +34622,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRDV0T2RGPCRJYTCTHWR36MM"
+                              default: "tool_01KRDY3027DNNYPAPMGJJPE35Y"
                             path:
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -34935,7 +35173,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T308RHTBGX7FJSA2Y7C"
+                        default: "tool_01KRDY302H9M3CGYZCQZZVF7T5"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35032,7 +35270,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T32SDR4Q5BHB0D6SRC7"
+                        default: "tool_01KRDY302KB5DQJRXY006R2D3N"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35131,7 +35369,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T333Z1DECHGEXXVSD48"
+                        default: "tool_01KRDY302MP4B5ZBFXHJ5GMV5G"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35266,7 +35504,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T3542KWZVVREAVP3CHG"
+                        default: "tool_01KRDY302PNGN2TFJVPKMG3RD4"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35338,7 +35576,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KRDV0T36464DVNDSS3H7ADV0"
+                                  default: "01KRDY302QG0RP41DXY21T42NY"
                                 name:
                                   type: "string"
                                 description:
@@ -35397,7 +35635,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T36132Z51ZQKR4MH0XZ"
+                        default: "tool_01KRDY302R1SKNRFXRR8REA4SC"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -35854,7 +36092,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KRDV0T3XKGMY4E72N6HRY6KK"
+                                default: "01KRDY303H5836SEBFWPQ614D3"
                               name:
                                 type: "string"
                               description:
@@ -36000,7 +36238,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T3CNX8K7KN54X3Y3QZY"
+                        default: "tool_01KRDY302YVCZ4ADCHRTDCW977"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36097,7 +36335,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T3DPKBSMGK05A1T52VR"
+                        default: "tool_01KRDY302Z126XHZJSY3Q7M96V"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36196,7 +36434,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T3EGGVNYR2N52X3YESD"
+                        default: "tool_01KRDY3037KV3HD02F12HSF1M7"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36331,7 +36569,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T3GW68CK8PCG0RQAN66"
+                        default: "tool_01KRDY3039S5FJ5XXNN3BHQNDH"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36403,7 +36641,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KRDV0T3G452HC67GB3WGP8MT"
+                                  default: "01KRDY303ABRXABXSDK5XBWJE9"
                                 name:
                                   type: "string"
                                 description:
@@ -36462,7 +36700,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T3H095XHX0XP8D3XEPF"
+                        default: "tool_01KRDY303BPQFGR50GGSY2K558"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36619,7 +36857,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T478V0JPC60VGSFC17Y"
+                        default: "tool_01KRDY303VB59G3ACXH8RZ9MA1"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36716,7 +36954,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T48HBMD66BG139WDR39"
+                        default: "tool_01KRDY303X8Z6AMWWQBDK6840C"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36815,7 +37053,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T49CGXA2CF02VGK3Y8S"
+                        default: "tool_01KRDY303Y87ERE0VVBWJ431V0"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -36950,7 +37188,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T4BHNFVB0RC8QJ855C8"
+                        default: "tool_01KRDY3040FB5SF2G02JWDX9RW"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -37022,7 +37260,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KRDV0T4B3S7FN0YJEGEGBQEV"
+                                  default: "01KRDY30414407DWSBGG5S7695"
                                 name:
                                   type: "string"
                                 description:
@@ -37081,7 +37319,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRDV0T4CVSP3WB0QY3Q9MNAF"
+                        default: "tool_01KRDY30428FKBJ910GWFNA5JW"
                       path:
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -39233,7 +39471,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KRDV0T6YT2WHK2WTZZBZP0JH"
+                          default: "01KRDY30KZAC68HTXSKNBBM3G5"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -39401,7 +39639,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KRDV0T70MYEX1P4C1KVDJBRB"
+                    default: "01KRDY30M7P44Z3M5FFWQB2S0X"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39499,7 +39737,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KRDV0T709S3WCANQN56WJERS"
+                    default: "01KRDY30M36D0YY2DAJ0ADXWFQ"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39635,7 +39873,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KRDV0T72Q1HES6Z4C9J8Q6FW"
+                    default: "01KRDY30MENT5GGRGJHMEDFMJ9"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42232,7 +42470,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-12T10:16:31.117Z"
+                          default: "2026-05-12T11:10:09.375Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42240,7 +42478,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:31.117Z"
+                              default: "2026-05-12T11:10:09.376Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -42382,7 +42620,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42390,7 +42628,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42517,7 +42755,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42525,7 +42763,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42685,7 +42923,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42693,7 +42931,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -43074,7 +43312,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-12T10:16:46.615Z"
+                                    default: "2026-05-12T11:10:24.478Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43114,7 +43352,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-12T10:16:46.616Z"
+                                    default: "2026-05-12T11:10:24.479Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43154,7 +43392,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-12T10:16:46.616Z"
+                                    default: "2026-05-12T11:10:24.479Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43190,7 +43428,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-12T10:16:31.117Z"
+                          default: "2026-05-12T11:10:09.375Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -43198,7 +43436,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:31.117Z"
+                              default: "2026-05-12T11:10:09.376Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43772,7 +44010,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-12T10:16:46.625Z"
+                                default: "2026-05-12T11:10:24.488Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43812,7 +44050,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-12T10:16:46.625Z"
+                                default: "2026-05-12T11:10:24.489Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43852,7 +44090,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-12T10:16:46.625Z"
+                                default: "2026-05-12T11:10:24.489Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43888,7 +44126,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-05-12T10:16:31.117Z"
+                      default: "2026-05-12T11:10:09.375Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43896,7 +44134,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-05-12T10:16:31.117Z"
+                          default: "2026-05-12T11:10:09.376Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -44218,7 +44456,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:46.620Z"
+                              default: "2026-05-12T11:10:24.483Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44258,7 +44496,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:46.620Z"
+                              default: "2026-05-12T11:10:24.484Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44298,7 +44536,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:46.621Z"
+                              default: "2026-05-12T11:10:24.484Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44334,7 +44572,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44342,7 +44580,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44915,7 +45153,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:46.651Z"
+                              default: "2026-05-12T11:10:24.508Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44955,7 +45193,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:46.651Z"
+                              default: "2026-05-12T11:10:24.509Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44995,7 +45233,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:46.651Z"
+                              default: "2026-05-12T11:10:24.509Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45031,7 +45269,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-12T10:16:31.117Z"
+                    default: "2026-05-12T11:10:09.375Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45039,7 +45277,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.376Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -51345,1335 +51583,6 @@ paths:
                   - "usage"
       security:
         - ApiKey: []
-  /v2/router/responses:
-    post:
-      tags:
-        - "Responses"
-      x-speakeasy-group: "router.responses"
-      x-speakeasy-name-override: "create"
-      x-cli-group: "responses"
-      x-cli-name: "create"
-      x-speakeasy-ignore: false
-      x-orq-gateway-group: "true"
-      operationId: "createResponse"
-      summary: "Create response"
-      description: "Creates a model response for the given input."
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              allOf:
-                - type: "object"
-                  properties:
-                    model:
-                      type: "string"
-                      description: "ID of the model to use. You can use the List models API to see all of your available models."
-                    metadata:
-                      type: "object"
-                      additionalProperties:
-                        type: "string"
-                      description: "Developer-defined key-value pairs that will be included in response objects"
-                    temperature:
-                      type:
-                        - "number"
-                        - "null"
-                      minimum: 0
-                      maximum: 2
-                      description: "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic."
-                    top_p:
-                      type:
-                        - "number"
-                        - "null"
-                      minimum: 0
-                      maximum: 1
-                      description: "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered."
-                    previous_response_id:
-                      type:
-                        - "string"
-                        - "null"
-                      description: "The ID of a previous response to continue the conversation from. The model will have access to the previous response context."
-                    instructions:
-                      type:
-                        - "string"
-                        - "null"
-                      description: "Developer-provided instructions that the model should follow. Overwrites the default system message."
-                    reasoning:
-                      type:
-                        - "object"
-                        - "null"
-                      properties:
-                        effort:
-                          type: "string"
-                          enum:
-                            - "none"
-                            - "minimal"
-                            - "low"
-                            - "medium"
-                            - "high"
-                            - "xhigh"
-                          description: "The effort level for reasoning"
-                        summary:
-                          type:
-                            - "string"
-                            - "null"
-                          enum:
-                            - "auto"
-                            - "concise"
-                            - "detailed"
-                            - null
-                          description: "The summary mode for reasoning output"
-                      description: "Configuration for reasoning models"
-                    thinking:
-                      oneOf:
-                        - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
-                        - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
-                        - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                        - type: "null"
-                      description: "Configuration for thinking mode. Use `adaptive` for models that support it (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control."
-                    max_output_tokens:
-                      type:
-                        - "integer"
-                        - "null"
-                      description: "The maximum number of tokens that can be generated in the response"
-                    text:
-                      type:
-                        - "object"
-                        - "null"
-                      properties:
-                        format:
-                          oneOf:
-                            - type: "object"
-                              properties:
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "text"
-                                  description: "Plain text response format"
-                              required:
-                                - "type"
-                            - type: "object"
-                              properties:
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "json_object"
-                                  description: "Ensures the response is a valid JSON object"
-                              required:
-                                - "type"
-                            - type: "object"
-                              properties:
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "json_schema"
-                                  description: "Ensures the response matches a supplied JSON schema"
-                                name:
-                                  type: "string"
-                                  description: "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
-                                description:
-                                  type: "string"
-                                  description: "A description of what the response format is for, used by the model to determine how to respond in the format."
-                                schema:
-                                  type: "object"
-                                  additionalProperties: {}
-                                  description: "The JSON schema to validate the response against"
-                                strict:
-                                  type: "boolean"
-                                  default: true
-                                  description: "Whether to enable strict `schema` adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when `strict` is `true`"
-                              required:
-                                - "type"
-                                - "name"
-                                - "schema"
-                      required:
-                        - "format"
-                    input:
-                      anyOf:
-                        - type: "string"
-                        - type: "array"
-                          items:
-                            anyOf:
-                              - type: "object"
-                                properties:
-                                  role:
-                                    type: "string"
-                                    enum:
-                                      - "user"
-                                      - "assistant"
-                                      - "system"
-                                      - "developer"
-                                    description: "The role of the message author"
-                                  content:
-                                    anyOf:
-                                      - type: "string"
-                                      - type: "array"
-                                        items:
-                                          anyOf:
-                                            - type: "object"
-                                              properties:
-                                                type:
-                                                  type: "string"
-                                                  enum:
-                                                    - "input_text"
-                                                  description: "The type of input content"
-                                                text:
-                                                  type: "string"
-                                                  description: "The text content"
-                                              required:
-                                                - "type"
-                                                - "text"
-                                              description: "A text input content part"
-                                            - type: "object"
-                                              properties:
-                                                type:
-                                                  type: "string"
-                                                  enum:
-                                                    - "input_image"
-                                                  description: "The type of input content part"
-                                                detail:
-                                                  type: "string"
-                                                  enum:
-                                                    - "high"
-                                                    - "low"
-                                                    - "auto"
-                                                  default: "auto"
-                                                  description: "Level of detail for image analysis"
-                                                file_id:
-                                                  type:
-                                                    - "string"
-                                                    - "null"
-                                                  description: "File ID for the image"
-                                                image_url:
-                                                  type:
-                                                    - "string"
-                                                    - "null"
-                                                  description: "URL of the image (can be http URL or data URL)"
-                                              required:
-                                                - "type"
-                                              description: "An image input content part."
-                                            - type: "object"
-                                              properties:
-                                                type:
-                                                  type: "string"
-                                                  enum:
-                                                    - "input_file"
-                                                  description: "The type of input content part"
-                                                file_data:
-                                                  type: "string"
-                                                  description: "Base64 encoded file data"
-                                                file_id:
-                                                  type: "string"
-                                                  description: "File ID from the Files API"
-                                                filename:
-                                                  type: "string"
-                                                  description: "Name of the file"
-                                                file_url:
-                                                  type: "string"
-                                                  description: "URL of the file to fetch"
-                                              required:
-                                                - "type"
-                                              description: "A file input content part."
-                                    description: "The content of the message, either a string or an array of content parts"
-                                required:
-                                  - "role"
-                                  - "content"
-                                description: "Represents a message in the conversation, with a role and content (string or rich content parts)."
-                              - type: "object"
-                                properties:
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "function_call_output"
-                                    description: "The type of input item"
-                                  call_id:
-                                    type: "string"
-                                    description: "The ID of the function call this output is for"
-                                  output:
-                                    type: "string"
-                                    description: "The output from the function call"
-                                required:
-                                  - "type"
-                                  - "call_id"
-                                  - "output"
-                                description: "Represents the output of a function tool call, provided as input to the model."
-                              - type: "object"
-                                properties:
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "function_call"
-                                    description: "The type of input item"
-                                  call_id:
-                                    type: "string"
-                                    description: "The ID of the function call"
-                                  id:
-                                    type: "string"
-                                    description: "The unique identifier for this function call"
-                                  name:
-                                    type: "string"
-                                    description: "The name of the function being called"
-                                  arguments:
-                                    type: "string"
-                                    description: "The arguments to the function as a JSON string"
-                                  status:
-                                    type: "string"
-                                    description: "The status of the function call"
-                                required:
-                                  - "type"
-                                  - "call_id"
-                                  - "id"
-                                  - "name"
-                                  - "arguments"
-                                  - "status"
-                                description: "Represents a function tool call, provided as input to the model."
-                      description: "The actual user input(s) for the model. Can be a simple string, or an array of structured input items (messages, tool outputs) representing a conversation history or complex input."
-                    include:
-                      type:
-                        - "array"
-                        - "null"
-                      items:
-                        type: "string"
-                        enum:
-                          - "code_interpreter_call.outputs"
-                          - "computer_call_output.output.image_url"
-                          - "file_search_call.results"
-                          - "message.input_image.image_url"
-                          - "message.output_text.logprobs"
-                          - "reasoning.encrypted_content"
-                          - "web_search_call.results"
-                          - "web_search_call.action.sources"
-                      description: "Specifies which (potentially large) fields to include in the response."
-                    parallel_tool_calls:
-                      type:
-                        - "boolean"
-                        - "null"
-                      description: "Whether to enable parallel function calling during tool use."
-                    store:
-                      type:
-                        - "boolean"
-                        - "null"
-                      description: "Whether to store this response for use in distillations or evals."
-                    service_tier:
-                      type:
-                        - "string"
-                        - "null"
-                      enum:
-                        - "auto"
-                        - "default"
-                        - "flex"
-                        - "scale"
-                        - "priority"
-                        - null
-                      description: "Specifies the latency tier to use for processing the request. Defaults to \"auto\"."
-                    tools:
-                      type: "array"
-                      items:
-                        oneOf:
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "function"
-                                description: "The type of tool"
-                              name:
-                                type: "string"
-                                description: "The name of the function to be called"
-                              description:
-                                type:
-                                  - "string"
-                                  - "null"
-                                description: "A description of what the function does"
-                              parameters:
-                                type:
-                                  - "object"
-                                  - "null"
-                                additionalProperties: {}
-                                description: "The parameters the function accepts as a JSON Schema object"
-                              strict:
-                                type:
-                                  - "boolean"
-                                  - "null"
-                                default: true
-                                description: "Whether to enable strict schema adherence when generating function calls"
-                            required:
-                              - "type"
-                              - "name"
-                            description: "A function tool definition"
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "web_search_preview"
-                                description: "The type of tool"
-                              domains:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                description: "List of domains to restrict search to"
-                              search_context_size:
-                                type: "string"
-                                enum:
-                                  - "low"
-                                  - "medium"
-                                  - "high"
-                                description: "Amount of context to retrieve for each search result"
-                              user_location:
-                                type: "object"
-                                properties:
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "approximate"
-                                      - "exact"
-                                    description: "The type of location"
-                                  city:
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    description: "The city name"
-                                  country:
-                                    type: "string"
-                                    description: "The country code"
-                                  region:
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    description: "The region/state"
-                                  timezone:
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    description: "The timezone"
-                                description: "User location for search localization"
-                            required:
-                              - "type"
-                            description: "Configuration for web search preview tool"
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "web_search"
-                                description: "The type of tool"
-                              search_context_size:
-                                type: "string"
-                                enum:
-                                  - "low"
-                                  - "medium"
-                                  - "high"
-                                description: "Amount of context to retrieve for each search result"
-                              user_location:
-                                type: "object"
-                                properties:
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "approximate"
-                                      - "exact"
-                                    description: "The type of location"
-                                  city:
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    description: "The city name"
-                                  country:
-                                    type: "string"
-                                    description: "The country code"
-                                  region:
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    description: "The region/state"
-                                  timezone:
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    description: "The timezone"
-                                description: "User location for search localization"
-                              filters:
-                                type:
-                                  - "object"
-                                  - "null"
-                                properties:
-                                  allowed_domains:
-                                    type:
-                                      - "array"
-                                      - "null"
-                                    items:
-                                      type: "string"
-                                    description: "List of allowed domains for search"
-                                description: "Filters for the web search"
-                            required:
-                              - "type"
-                            description: "Configuration for web search tool"
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "file_search"
-                                description: "The type of tool"
-                              vector_store_ids:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                description: "The vector stores to search"
-                              max_num_results:
-                                type: "integer"
-                                minimum: 1
-                                maximum: 50
-                                description: "Maximum number of results to return"
-                              filters:
-                                description: "Filters to apply to the search"
-                              ranking_options:
-                                type: "object"
-                                properties:
-                                  ranker:
-                                    type: "string"
-                                    enum:
-                                      - "auto"
-                                      - "default_2024_08_21"
-                                    description: "The ranking algorithm"
-                                  score_threshold:
-                                    type: "number"
-                                    minimum: 0
-                                    maximum: 1
-                                    description: "Minimum relevance score"
-                                description: "Options for ranking search results"
-                            required:
-                              - "type"
-                            description: "Configuration for file search tool"
-                      description: "A list of tools the model may call. Use this to provide a list of functions the model may generate JSON inputs for."
-                    tool_choice:
-                      anyOf:
-                        - type: "string"
-                          enum:
-                            - "none"
-                            - "auto"
-                            - "required"
-                          description: "Controls which (if any) tool is called by the model. `none` means the model will not call any tool. `auto` means the model can pick between generating a message or calling a tool. `required` means the model must call a tool."
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "file_search"
-                                - "web_search_preview"
-                                - "web_search_preview_2025_03_11"
-                                - "web_search"
-                                - "computer_use_preview"
-                                - "computer_use"
-                                - "computer"
-                                - "code_interpreter"
-                                - "image_generation"
-                          required:
-                            - "type"
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "function"
-                            name:
-                              type: "string"
-                          required:
-                            - "type"
-                            - "name"
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "mcp"
-                            server_label:
-                              type: "string"
-                            name:
-                              type:
-                                - "string"
-                                - "null"
-                          required:
-                            - "type"
-                            - "server_label"
-                      description: "How the model should select which tool (or tools) to use when generating a response. Can be a string (`none`, `auto`, `required`) or an object to force a specific tool."
-                  required:
-                    - "model"
-                    - "input"
-                - type: "object"
-                  properties:
-                    stream:
-                      type: "boolean"
-                      default: false
-      responses:
-        "200":
-          description: "Returns a response object or a stream of events."
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  id:
-                    type: "string"
-                    description: "The unique identifier for the response"
-                  object:
-                    type: "string"
-                    enum:
-                      - "response"
-                    description: "The object type, which is always \"response\""
-                  created_at:
-                    type: "number"
-                    description: "The Unix timestamp (in seconds) of when the response was created"
-                  status:
-                    type: "string"
-                    enum:
-                      - "completed"
-                      - "failed"
-                      - "in_progress"
-                      - "cancelled"
-                      - "queued"
-                      - "incomplete"
-                    description: "The status of the response"
-                  error:
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      code:
-                        type: "string"
-                        description: "The error code"
-                      message:
-                        type: "string"
-                        description: "The error message"
-                    required:
-                      - "code"
-                      - "message"
-                    description: "The error that occurred, if any"
-                  incomplete_details:
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      reason:
-                        type: "string"
-                        enum:
-                          - "max_output_tokens"
-                          - "content_filter"
-                        description: "The reason the response is incomplete"
-                    required:
-                      - "reason"
-                    description: "Details about why the response is incomplete"
-                  model:
-                    type: "string"
-                    description: "The model used to generate the response"
-                  instructions:
-                    type:
-                      - "string"
-                      - "null"
-                    description: "The instructions provided for the response"
-                  output:
-                    type: "array"
-                    items:
-                      oneOf:
-                        - type: "object"
-                          properties:
-                            id:
-                              type: "string"
-                              description: "The unique identifier for this message"
-                            type:
-                              type: "string"
-                              enum:
-                                - "message"
-                              description: "The type of output item"
-                            role:
-                              type: "string"
-                              enum:
-                                - "assistant"
-                              description: "The role of the message author"
-                            status:
-                              type: "string"
-                              enum:
-                                - "in_progress"
-                                - "completed"
-                                - "incomplete"
-                                - "failed"
-                              description: "The status of the message"
-                            content:
-                              type: "array"
-                              items:
-                                oneOf:
-                                  - type: "object"
-                                    properties:
-                                      type:
-                                        type: "string"
-                                        enum:
-                                          - "output_text"
-                                        description: "The type of content part"
-                                      text:
-                                        type: "string"
-                                        description: "The text content"
-                                      annotations:
-                                        type: "array"
-                                        items:
-                                          oneOf:
-                                            - type: "object"
-                                              properties:
-                                                type:
-                                                  type: "string"
-                                                  enum:
-                                                    - "url_citation"
-                                                start_index:
-                                                  type: "number"
-                                                  description: "The start index of the citation in the text"
-                                                end_index:
-                                                  type: "number"
-                                                  description: "The end index of the citation in the text"
-                                                url:
-                                                  type: "string"
-                                                  description: "The URL being cited"
-                                                title:
-                                                  type: "string"
-                                                  description: "The title of the cited resource"
-                                                text:
-                                                  type: "string"
-                                                  description: "The text of the citation"
-                                              required:
-                                                - "type"
-                                                - "start_index"
-                                                - "end_index"
-                                                - "url"
-                                                - "title"
-                                              description: "A citation to a URL"
-                                            - type: "object"
-                                              properties:
-                                                type:
-                                                  type: "string"
-                                                  enum:
-                                                    - "file_citation"
-                                                index:
-                                                  type: "number"
-                                                  description: "The index in the text where the citation appears"
-                                                file_id:
-                                                  type: "string"
-                                                  description: "The ID of the file being cited"
-                                                filename:
-                                                  type: "string"
-                                                  description: "The name of the file being cited"
-                                              required:
-                                                - "type"
-                                                - "index"
-                                                - "file_id"
-                                                - "filename"
-                                              description: "A citation to a file"
-                                          description: "An annotation in the output text"
-                                        default: []
-                                        description: "Annotations in the text such as citations"
-                                      logprobs:
-                                        type:
-                                          - "array"
-                                          - "null"
-                                        items: {}
-                                        description: "Log probabilities of the output tokens if requested"
-                                    required:
-                                      - "type"
-                                      - "text"
-                                    description: "Text output from the model"
-                                  - type: "object"
-                                    properties:
-                                      type:
-                                        type: "string"
-                                        enum:
-                                          - "refusal"
-                                        description: "The type of content part"
-                                      refusal:
-                                        type: "string"
-                                        description: "The refusal message"
-                                    required:
-                                      - "type"
-                                      - "refusal"
-                                    description: "A refusal content part from the model"
-                              default: []
-                              description: "The content parts of the message"
-                          required:
-                            - "id"
-                            - "type"
-                            - "role"
-                            - "status"
-                          description: "An assistant message output"
-                        - type: "object"
-                          properties:
-                            id:
-                              type: "string"
-                              description: "The unique identifier for this output item"
-                            type:
-                              type: "string"
-                              enum:
-                                - "web_search_call"
-                              description: "The type of output item"
-                            status:
-                              type: "string"
-                              enum:
-                                - "in_progress"
-                                - "completed"
-                                - "incomplete"
-                                - "failed"
-                              description: "The status of the web search"
-                            action:
-                              type: "object"
-                              properties:
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "search"
-                                    - "open_page"
-                                    - "find"
-                                  description: "The type of web search action"
-                                query:
-                                  type: "string"
-                                  description: "The search query (for search action)"
-                                url:
-                                  type: "string"
-                                  description: "The URL opened (for open_page action)"
-                                pattern:
-                                  type: "string"
-                                  description: "The pattern to find (for find action)"
-                                sources:
-                                  type: "array"
-                                  items:
-                                    type: "object"
-                                    properties:
-                                      url:
-                                        type: "string"
-                                        description: "The source URL"
-                                      title:
-                                        type: "string"
-                                        description: "The source title"
-                                    required:
-                                      - "url"
-                                      - "title"
-                                  description: "Sources from the web search"
-                              required:
-                                - "type"
-                              description: "The action performed by the web search"
-                          required:
-                            - "id"
-                            - "type"
-                            - "status"
-                          description: "A web search tool call output"
-                        - type: "object"
-                          properties:
-                            id:
-                              type: "string"
-                              description: "The unique identifier for this output item"
-                            type:
-                              type: "string"
-                              enum:
-                                - "file_search_call"
-                              description: "The type of output item"
-                            status:
-                              type: "string"
-                              enum:
-                                - "in_progress"
-                                - "completed"
-                                - "incomplete"
-                                - "failed"
-                              description: "The status of the file search"
-                            queries:
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The search queries used"
-                            results:
-                              description: "The file search results"
-                          required:
-                            - "id"
-                            - "type"
-                            - "status"
-                          description: "A file search tool call output"
-                        - type: "object"
-                          properties:
-                            id:
-                              type: "string"
-                              description: "The unique identifier for this output item"
-                            type:
-                              type: "string"
-                              enum:
-                                - "function_call"
-                              description: "The type of output item"
-                            call_id:
-                              type: "string"
-                              description: "The ID of the function call"
-                            name:
-                              type: "string"
-                              description: "The name of the function being called"
-                            arguments:
-                              type: "string"
-                              description: "The arguments to the function as a JSON string"
-                            status:
-                              type: "string"
-                              enum:
-                                - "in_progress"
-                                - "completed"
-                                - "incomplete"
-                                - "failed"
-                              description: "The status of the function call"
-                          required:
-                            - "id"
-                            - "type"
-                            - "call_id"
-                            - "name"
-                            - "arguments"
-                            - "status"
-                          description: "A function tool call output"
-                        - type: "object"
-                          properties:
-                            id:
-                              type: "string"
-                              description: "The unique identifier for this reasoning item"
-                            type:
-                              type: "string"
-                              enum:
-                                - "reasoning"
-                              description: "The type of output item"
-                            summary:
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  type:
-                                    type: "string"
-                                    enum:
-                                      - "summary_text"
-                                    description: "The type of summary part"
-                                  text:
-                                    type: "string"
-                                    description: "The summary text"
-                                required:
-                                  - "type"
-                                  - "text"
-                                description: "A text summary of the reasoning"
-                              default: []
-                              description: "Summary of the reasoning"
-                            encrypted_content:
-                              type:
-                                - "string"
-                                - "null"
-                              description: "Encrypted reasoning content"
-                            status:
-                              type: "string"
-                              enum:
-                                - "in_progress"
-                                - "completed"
-                                - "incomplete"
-                                - "failed"
-                              description: "The status of the reasoning item"
-                          required:
-                            - "id"
-                            - "type"
-                          description: "A reasoning output item from the model"
-                    description: "The list of output items generated by the model"
-                  output_text:
-                    type:
-                      - "string"
-                      - "null"
-                    description: "A convenience field with the concatenated text from all text content parts"
-                  usage:
-                    type: "object"
-                    properties:
-                      input_tokens:
-                        type: "number"
-                        description: "Number of tokens in the input"
-                      output_tokens:
-                        type: "number"
-                        description: "Number of tokens in the generated output"
-                      total_tokens:
-                        type: "number"
-                        description: "Total number of tokens used in the request (input + output)"
-                      input_tokens_details:
-                        type: "object"
-                        properties:
-                          cached_tokens:
-                            type: "integer"
-                            description: "Number of tokens from cache"
-                        description: "Breakdown of input token usage"
-                      output_tokens_details:
-                        type: "object"
-                        properties:
-                          reasoning_tokens:
-                            type: "integer"
-                            description: "Number of tokens used for reasoning (o3 models)"
-                          accepted_prediction_tokens:
-                            type: "integer"
-                            description: "Number of tokens generated by automatic prediction that were accepted"
-                          rejected_prediction_tokens:
-                            type: "integer"
-                            description: "Number of tokens generated by automatic prediction that were rejected"
-                        description: "Breakdown of output token usage"
-                    description: "Usage statistics for the response"
-                  temperature:
-                    type:
-                      - "number"
-                      - "null"
-                  top_p:
-                    type:
-                      - "number"
-                      - "null"
-                  max_output_tokens:
-                    type:
-                      - "integer"
-                      - "null"
-                  parallel_tool_calls:
-                    type: "boolean"
-                  previous_response_id:
-                    type:
-                      - "string"
-                      - "null"
-                  metadata:
-                    type: "object"
-                    additionalProperties:
-                      type: "string"
-                  tool_choice:
-                    anyOf:
-                      - type: "string"
-                        enum:
-                          - "none"
-                          - "auto"
-                          - "required"
-                      - type: "object"
-                        properties:
-                          type:
-                            type: "string"
-                            enum:
-                              - "function"
-                          function:
-                            type: "object"
-                            properties:
-                              name:
-                                type: "string"
-                            required:
-                              - "name"
-                        required:
-                          - "type"
-                          - "function"
-                    description: "Controls which (if any) tool is called by the model"
-                  tools:
-                    type: "array"
-                    items:
-                      oneOf:
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "function"
-                              description: "The type of tool"
-                            name:
-                              type: "string"
-                              description: "The name of the function to be called"
-                            description:
-                              type:
-                                - "string"
-                                - "null"
-                              description: "A description of what the function does"
-                            parameters:
-                              type:
-                                - "object"
-                                - "null"
-                              additionalProperties: {}
-                              description: "The parameters the function accepts as a JSON Schema object"
-                            strict:
-                              type:
-                                - "boolean"
-                                - "null"
-                              default: true
-                              description: "Whether to enable strict schema adherence when generating function calls"
-                          required:
-                            - "type"
-                            - "name"
-                          description: "A function tool definition"
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "web_search_preview"
-                              description: "The type of tool"
-                            domains:
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "List of domains to restrict search to"
-                            search_context_size:
-                              type: "string"
-                              enum:
-                                - "low"
-                                - "medium"
-                                - "high"
-                              description: "Amount of context to retrieve for each search result"
-                            user_location:
-                              type: "object"
-                              properties:
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "approximate"
-                                    - "exact"
-                                  description: "The type of location"
-                                city:
-                                  type:
-                                    - "string"
-                                    - "null"
-                                  description: "The city name"
-                                country:
-                                  type: "string"
-                                  description: "The country code"
-                                region:
-                                  type:
-                                    - "string"
-                                    - "null"
-                                  description: "The region/state"
-                                timezone:
-                                  type:
-                                    - "string"
-                                    - "null"
-                                  description: "The timezone"
-                              description: "User location for search localization"
-                          required:
-                            - "type"
-                          description: "Configuration for web search preview tool"
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "web_search"
-                              description: "The type of tool"
-                            search_context_size:
-                              type: "string"
-                              enum:
-                                - "low"
-                                - "medium"
-                                - "high"
-                              description: "Amount of context to retrieve for each search result"
-                            user_location:
-                              type: "object"
-                              properties:
-                                type:
-                                  type: "string"
-                                  enum:
-                                    - "approximate"
-                                    - "exact"
-                                  description: "The type of location"
-                                city:
-                                  type:
-                                    - "string"
-                                    - "null"
-                                  description: "The city name"
-                                country:
-                                  type: "string"
-                                  description: "The country code"
-                                region:
-                                  type:
-                                    - "string"
-                                    - "null"
-                                  description: "The region/state"
-                                timezone:
-                                  type:
-                                    - "string"
-                                    - "null"
-                                  description: "The timezone"
-                              description: "User location for search localization"
-                            filters:
-                              type:
-                                - "object"
-                                - "null"
-                              properties:
-                                allowed_domains:
-                                  type:
-                                    - "array"
-                                    - "null"
-                                  items:
-                                    type: "string"
-                                  description: "List of allowed domains for search"
-                              description: "Filters for the web search"
-                          required:
-                            - "type"
-                          description: "Configuration for web search tool"
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "file_search"
-                              description: "The type of tool"
-                            vector_store_ids:
-                              type: "array"
-                              items:
-                                type: "string"
-                              description: "The vector stores to search"
-                            max_num_results:
-                              type: "integer"
-                              minimum: 1
-                              maximum: 50
-                              description: "Maximum number of results to return"
-                            filters:
-                              description: "Filters to apply to the search"
-                            ranking_options:
-                              type: "object"
-                              properties:
-                                ranker:
-                                  type: "string"
-                                  enum:
-                                    - "auto"
-                                    - "default_2024_08_21"
-                                  description: "The ranking algorithm"
-                                score_threshold:
-                                  type: "number"
-                                  minimum: 0
-                                  maximum: 1
-                                  description: "Minimum relevance score"
-                              description: "Options for ranking search results"
-                          required:
-                            - "type"
-                          description: "Configuration for file search tool"
-                  reasoning:
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      effort:
-                        type:
-                          - "string"
-                          - "null"
-                      summary:
-                        type:
-                          - "string"
-                          - "null"
-                  store:
-                    type: "boolean"
-                  text:
-                    type: "object"
-                    properties:
-                      format:
-                        oneOf:
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "text"
-                                description: "Plain text response format"
-                            required:
-                              - "type"
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "json_object"
-                                description: "Ensures the response is a valid JSON object"
-                            required:
-                              - "type"
-                          - type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                  - "json_schema"
-                                description: "Ensures the response matches a supplied JSON schema"
-                              name:
-                                type: "string"
-                                description: "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
-                              description:
-                                type: "string"
-                                description: "A description of what the response format is for, used by the model to determine how to respond in the format."
-                              schema:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "The JSON schema to validate the response against"
-                              strict:
-                                type: "boolean"
-                                default: true
-                                description: "Whether to enable strict `schema` adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when `strict` is `true`"
-                            required:
-                              - "type"
-                              - "name"
-                              - "schema"
-                    required:
-                      - "format"
-                  truncation:
-                    type:
-                      - "string"
-                      - "null"
-                    enum:
-                      - "auto"
-                      - "disabled"
-                      - null
-                    description: "Controls how the model handles inputs longer than the maximum token length"
-                  user:
-                    type:
-                      - "string"
-                      - "null"
-                    description: "A unique identifier representing your end-user"
-                  service_tier:
-                    type:
-                      - "string"
-                      - "null"
-                    enum:
-                      - "auto"
-                      - "default"
-                      - "flex"
-                      - "scale"
-                      - "priority"
-                      - null
-                    description: "The service tier used for processing the request"
-                  background:
-                    type:
-                      - "boolean"
-                      - "null"
-                    description: "Whether the response was processed in the background"
-                  top_logprobs:
-                    type:
-                      - "integer"
-                      - "null"
-                    minimum: 0
-                    maximum: 20
-                    description: "The number of top log probabilities to return for each output token"
-                  logprobs:
-                    type:
-                      - "boolean"
-                      - "null"
-                    description: "Whether to return log probabilities of the output tokens"
-                required:
-                  - "id"
-                  - "object"
-                  - "created_at"
-                  - "status"
-                  - "incomplete_details"
-                  - "model"
-                  - "output"
-                  - "parallel_tool_calls"
-                description: "Represents the completed model response returned when `stream` is false"
-            text/event-stream:
-              schema:
-                type: "object"
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        description: The type of streaming event
-                    required:
-                      - type
-                    additionalProperties: {}
-                    description: One server-sent event emitted while the response streams
-                additionalProperties: {}
-                description: "One server-sent event emitted while the response streams"
-              x-speakeasy-sse-sentinel: "[DONE]"
-      security:
-        - ApiKey: []
   /v2/traces/{trace_id}/spans/{span_id}/annotation:
     post:
       tags:
@@ -52835,7 +51744,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-12T10:16:46.765Z"
+                      default: "2026-05-12T11:10:24.601Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52874,7 +51783,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-12T10:16:46.765Z"
+                      default: "2026-05-12T11:10:24.601Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52913,7 +51822,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-12T10:16:46.765Z"
+                      default: "2026-05-12T11:10:24.602Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -53114,7 +52023,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-12T10:16:31.117Z"
+                          default: "2026-05-12T11:10:09.375Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53122,7 +52031,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:31.117Z"
+                              default: "2026-05-12T11:10:09.376Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53196,7 +52105,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-12T10:16:31.117Z"
+                          default: "2026-05-12T11:10:09.375Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53204,7 +52113,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-12T10:16:31.117Z"
+                              default: "2026-05-12T11:10:09.376Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53391,7 +52300,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.375Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53399,7 +52308,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-12T10:16:31.117Z"
+                            default: "2026-05-12T11:10:09.376Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53473,7 +52382,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.375Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53481,7 +52390,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-12T10:16:31.117Z"
+                            default: "2026-05-12T11:10:09.376Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53578,7 +52487,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.375Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53586,7 +52495,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-12T10:16:31.117Z"
+                            default: "2026-05-12T11:10:09.376Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53660,7 +52569,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.375Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53668,7 +52577,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-12T10:16:31.117Z"
+                            default: "2026-05-12T11:10:09.376Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53863,7 +52772,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.375Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53871,7 +52780,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-12T10:16:31.117Z"
+                            default: "2026-05-12T11:10:09.376Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53945,7 +52854,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-12T10:16:31.117Z"
+                        default: "2026-05-12T11:10:09.375Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53953,7 +52862,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-12T10:16:31.117Z"
+                            default: "2026-05-12T11:10:09.376Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53994,308 +52903,6 @@ paths:
       responses:
         "200":
           description: "Successfully deleted the human review set"
-      security:
-        - ApiKey: []
-  /v2/files:
-    get:
-      description: "Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top."
-      operationId: "FileList"
-      parameters:
-        - explode: false
-          in: "query"
-          name: "limit"
-          schema:
-            default: 10
-            format: "int64"
-            maximum: 200
-            minimum: 1
-            type: "integer"
-        - description: "A cursor for use in pagination. Defines your place in the list for the next page."
-          explode: false
-          in: "query"
-          name: "starting_after"
-          schema:
-            description: "A cursor for use in pagination. Defines your place in the list for the next page."
-            type: "string"
-        - description: "A cursor for use in pagination. Defines your place in the list for the previous page."
-          explode: false
-          in: "query"
-          name: "ending_before"
-          schema:
-            description: "A cursor for use in pagination. Defines your place in the list for the previous page."
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  data:
-                    items:
-                      $ref: "#/components/schemas/FileDocument"
-                    type:
-                      - "array"
-                      - "null"
-                  has_more:
-                    type: "boolean"
-                  object:
-                    type: "string"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
-                type: "object"
-          description: "Files retrieved successfully"
-      summary: "List all files"
-      tags:
-        - "Files"
-      x-cli-group: "files"
-      x-cli-name: "list"
-      x-speakeasy-group: "files"
-      x-speakeasy-name-override: "list"
-      security:
-        - ApiKey: []
-    post:
-      description: "Files are used to upload documents that can be used with features like Deployments."
-      operationId: "FileUpload"
-      requestBody:
-        content:
-          multipart/form-data:
-            encoding:
-              file:
-                contentType: "application/octet-stream"
-              purpose:
-                contentType: "text/plain"
-            schema:
-              additionalProperties: false
-              properties:
-                file:
-                  contentEncoding: "binary"
-                  contentMediaType: "application/octet-stream"
-                  description: "The file to be uploaded."
-                  format: "binary"
-                  type: "string"
-                purpose:
-                  default: "retrieval"
-                  description: "The intended purpose of the uploaded file."
-                  enum:
-                    - "retrieval"
-                    - "knowledge_datasource"
-                    - "batch"
-                  type: "string"
-              required:
-                - "file"
-              type: "object"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  bytes:
-                    format: "int64"
-                    type: "integer"
-                  created:
-                    type: "string"
-                  file_name:
-                    type: "string"
-                  purpose:
-                    type: "string"
-                  workspace_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "purpose"
-                  - "file_name"
-                  - "workspace_id"
-                  - "bytes"
-                  - "created"
-                type: "object"
-          description: "File uploaded successfully"
-        "400":
-          description: "Bad request"
-      summary: "Create file"
-      tags:
-        - "Files"
-      x-cli-group: "files"
-      x-cli-name: "create"
-      x-speakeasy-group: "files"
-      x-speakeasy-name-override: "create"
-      security:
-        - ApiKey: []
-  /v2/files/{file_id_or_path}/content:
-    get:
-      description: "Redirects to a presigned URL for downloading the file content by file ID."
-      operationId: "FileContent"
-      parameters:
-        - description: "The file ID to retrieve content for."
-          in: "path"
-          name: "file_id_or_path"
-          required: true
-          schema:
-            description: "The file ID to retrieve content for."
-            type: "string"
-      responses:
-        "307":
-          description: "Redirects to the presigned download URL"
-        "400":
-          description: "Bad request"
-        "404":
-          description: "File not found"
-        "500":
-          description: "Internal server error"
-      summary: "Download file content"
-      tags:
-        - "Files"
-      x-cli-group: "files"
-      x-cli-name: "getContent"
-      x-speakeasy-group: "files"
-      x-speakeasy-name-override: "getContent"
-      security:
-        - ApiKey: []
-  /v2/files/{file_id}:
-    delete:
-      operationId: "FileDelete"
-      parameters:
-        - description: "The ID of the file"
-          in: "path"
-          name: "file_id"
-          required: true
-          schema:
-            description: "The ID of the file"
-            type: "string"
-      responses:
-        "204":
-          description: "File deleted successfully"
-        "404":
-          description: "File not found"
-      summary: "Delete file"
-      tags:
-        - "Files"
-      x-cli-group: "files"
-      x-cli-name: "delete"
-      x-speakeasy-group: "files"
-      x-speakeasy-name-override: "delete"
-      security:
-        - ApiKey: []
-    get:
-      description: "Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object."
-      operationId: "FileGet"
-      parameters:
-        - description: "The ID of the file"
-          in: "path"
-          name: "file_id"
-          required: true
-          schema:
-            description: "The ID of the file"
-            type: "string"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  bytes:
-                    format: "int64"
-                    type: "integer"
-                  created:
-                    type: "string"
-                  file_name:
-                    type: "string"
-                  purpose:
-                    type: "string"
-                  workspace_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "purpose"
-                  - "file_name"
-                  - "workspace_id"
-                  - "bytes"
-                  - "created"
-                type: "object"
-          description: "File details retrieved successfully"
-        "404":
-          description: "File not found"
-      summary: "Retrieve a file"
-      tags:
-        - "Files"
-      x-cli-group: "files"
-      x-cli-name: "get"
-      x-speakeasy-group: "files"
-      x-speakeasy-name-override: "get"
-      security:
-        - ApiKey: []
-    patch:
-      description: "Updates the metadata of an existing file object."
-      operationId: "FileUpdate"
-      parameters:
-        - description: "The ID of the file"
-          in: "path"
-          name: "file_id"
-          required: true
-          schema:
-            description: "The ID of the file"
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: false
-              properties:
-                file_name:
-                  minLength: 1
-                  type: "string"
-              required:
-                - "file_name"
-              type: "object"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                additionalProperties: false
-                properties:
-                  _id:
-                    type: "string"
-                  bytes:
-                    format: "int64"
-                    type: "integer"
-                  created:
-                    type: "string"
-                  file_name:
-                    type: "string"
-                  purpose:
-                    type: "string"
-                  workspace_id:
-                    type: "string"
-                required:
-                  - "_id"
-                  - "purpose"
-                  - "file_name"
-                  - "workspace_id"
-                  - "bytes"
-                  - "created"
-                type: "object"
-          description: "File updated successfully"
-        "404":
-          description: "File not found"
-      summary: "Update file"
-      tags:
-        - "Files"
-      x-cli-group: "files"
-      x-cli-name: "update"
-      x-speakeasy-group: "files"
-      x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
   /v2/guardrail-rules:
@@ -55470,6 +54077,463 @@ paths:
       x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
+  /v2/files:
+    get:
+      tags:
+        - "FilesService"
+        - "Files"
+      summary: "List all files"
+      description: "Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top."
+      operationId: "FileList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListFilesResponse"
+      x-speakeasy-group: "files"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "FilesService"
+        - "Files"
+      summary: "Upload a file"
+      description: "Files are used to upload documents that can be used with features like Deployments."
+      operationId: "FileUpload"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFileRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateFileResponse"
+      x-speakeasy-group: "files"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/files/{file_id_or_path}/content:
+    get:
+      tags:
+        - "FilesService"
+        - "Files"
+      summary: "Download file content"
+      description: "Returns a presigned URL for downloading the file content by file ID."
+      operationId: "FileContent"
+      parameters:
+        - name: "file_id_or_path"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetFileContentResponse"
+      x-speakeasy-group: "files"
+      x-speakeasy-name-override: "getContent"
+      security:
+        - ApiKey: []
+  /v2/files/{file_id}:
+    get:
+      tags:
+        - "FilesService"
+        - "Files"
+      summary: "Retrieve a file"
+      description: "Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object."
+      operationId: "FileGet"
+      parameters:
+        - name: "file_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetFileResponse"
+      x-speakeasy-group: "files"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "FilesService"
+        - "Files"
+      summary: "Delete a file"
+      operationId: "FileDelete"
+      parameters:
+        - name: "file_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteFileResponse"
+      x-speakeasy-group: "files"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "FilesService"
+        - "Files"
+      summary: "Update a file"
+      description: "Updates the metadata of an existing file object."
+      operationId: "FileUpdate"
+      parameters:
+        - name: "file_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFileRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateFileResponse"
+      x-speakeasy-group: "files"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/projects:
+    get:
+      tags:
+        - "ProjectsService"
+        - "Projects"
+      summary: "List all projects"
+      description: "Returns a list of projects. Projects are sorted by creation date, with the most recently created projects appearing first."
+      operationId: "ProjectList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListProjectsResponse"
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "ProjectsService"
+        - "Projects"
+      summary: "Create a new project"
+      description: "Creates a new project within the workspace. Projects organize resources like skills, deployments, and datasets."
+      operationId: "ProjectCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateProjectResponse"
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/projects/{project_id}:
+    get:
+      tags:
+        - "ProjectsService"
+        - "Projects"
+      summary: "Retrieve a project"
+      description: "Retrieves the details of an existing project by its unique project ID."
+      operationId: "ProjectGet"
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProjectResponse"
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "ProjectsService"
+        - "Projects"
+      summary: "Delete a project"
+      operationId: "ProjectDelete"
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteProjectResponse"
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "ProjectsService"
+        - "Projects"
+      summary: "Update a project"
+      description: "Updates the specified project by setting the values of the parameters passed."
+      operationId: "ProjectUpdate"
+      parameters:
+        - name: "project_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProjectRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateProjectResponse"
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/skills:
+    get:
+      tags:
+        - "SkillsService"
+        - "Skills"
+      summary: "List all skills"
+      description: "Returns a list of skills. Skills are sorted by creation date, with the most recently created skills appearing first."
+      operationId: "SkillList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          description: "Page size, 1–200. Unset uses the server default (25); explicit 0\n (or anything outside the range) is rejected by buf.validate."
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSkillsResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "SkillsService"
+        - "Skills"
+      summary: "Create a new skill"
+      description: "Skills are modular instructions you can use to codify processes and conventions"
+      operationId: "SkillCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSkillRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateSkillResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}:
+    get:
+      tags:
+        - "SkillsService"
+        - "Skills"
+      summary: "Retrieve a skill"
+      description: "Retrieves an existing skill by its unique skill ID or its display name (display names are unique within a workspace)."
+      operationId: "SkillGet"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Accepts either the skill's ID (e.g. \"skill_01H...\") or its display\n name. Display names are unique within a workspace."
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSkillResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "SkillsService"
+        - "Skills"
+      summary: "Delete a skill"
+      operationId: "SkillDelete"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteSkillResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "SkillsService"
+        - "Skills"
+      summary: "Update a skill"
+      description: "Updates the specified skill by setting the values of the parameters passed."
+      operationId: "SkillUpdate"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSkillRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateSkillResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/skills:checkDisplayNameAvailability:
+    post:
+      tags:
+        - "SkillsService"
+        - "Skills"
+      summary: "Check skill display name availability"
+      description: "Checks whether a display name is available within the workspace. Returns the `conflicting_skill_id` when the name is taken. Pass `skill_id` to exclude a skill from the check, useful when renaming."
+      operationId: "SkillCheckDisplayNameAvailability"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckSkillDisplayNameAvailabilityRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckSkillDisplayNameAvailabilityResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-ignore: true
+      security:
+        - ApiKey: []
   /v3/agents/{agent_key}/schedules:
     get:
       description: "Lists all schedules attached to the specified agent, most recent first."
@@ -55627,11 +54691,8 @@ paths:
                   updated:
                     format: "date-time"
                     type: "string"
-                  workspace_id:
-                    type: "string"
                 required:
                   - "_id"
-                  - "workspace_id"
                   - "agent_key"
                   - "type"
                   - "expression"
@@ -55791,11 +54852,8 @@ paths:
                   updated:
                     format: "date-time"
                     type: "string"
-                  workspace_id:
-                    type: "string"
                 required:
                   - "_id"
-                  - "workspace_id"
                   - "agent_key"
                   - "type"
                   - "expression"
@@ -55942,11 +55000,8 @@ paths:
                   updated:
                     format: "date-time"
                     type: "string"
-                  workspace_id:
-                    type: "string"
                 required:
                   - "_id"
-                  - "workspace_id"
                   - "agent_key"
                   - "type"
                   - "expression"
@@ -56862,10 +55917,18 @@ paths:
         - ApiKey: []
 webhooks: {}
 tags:
-  - name: "Files"
-  - name: "Policies"
   - name: "Guardrail Rules"
+  - name: "Policies"
   - name: "Routing Rules"
+  - name: "Files"
+    description: "File upload and retrieval operations."
+  - name: "FilesService"
+  - name: "Projects"
+    description: "Projects organize resources within a workspace"
+  - name: "ProjectsService"
+  - name: "Skills"
+    description: "Skills are modular instructions you can use to codify processes and conventions"
+  - name: "SkillsService"
   - name: "Responses"
   - description: "Run agents on a cadence — cron, interval, or one-off. Minimum firing interval is 1 hour."
     name: "Agent Schedules"
