@@ -1,17 +1,15 @@
 # Truncation
 
-Controls how the model handles inputs longer than the maximum token length
-
 ## Example Usage
 
 ```typescript
 import { Truncation } from "@orq-ai/node/models/operations";
 
-let value: Truncation = "disabled";
+let value: Truncation = "auto";
 ```
 
 ## Values
 
 ```typescript
-"auto" | "disabled"
+"disabled" | "auto"
 ```

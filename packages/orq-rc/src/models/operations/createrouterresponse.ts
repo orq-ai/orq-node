@@ -41,7 +41,7 @@ export type TwoFile = {
 /**
  * The detail level for image understanding.
  */
-export const TwoDetail = {
+export const Detail = {
   Auto: "auto",
   Low: "low",
   High: "high",
@@ -49,7 +49,7 @@ export const TwoDetail = {
 /**
  * The detail level for image understanding.
  */
-export type TwoDetail = ClosedEnum<typeof TwoDetail>;
+export type Detail = ClosedEnum<typeof Detail>;
 
 /**
  * An image content part.
@@ -58,7 +58,7 @@ export type Image = {
   /**
    * The detail level for image understanding.
    */
-  detail?: TwoDetail | undefined;
+  detail?: Detail | undefined;
   /**
    * The ID of a previously uploaded file.
    */
@@ -121,7 +121,7 @@ export type InputType = ClosedEnum<typeof InputType>;
 /**
  * An input item. The "type" field determines the item kind: "message", "function_call_output", "item_reference", etc.
  */
-export type CreateRouterResponseInput2 = {
+export type Input2 = {
   /**
    * The ID of the function call being responded to (for function_call_output type).
    */
@@ -151,9 +151,7 @@ export type CreateRouterResponseInput2 = {
 /**
  * Input to the model: a string or an array of input items (messages, files, etc.).
  */
-export type CreateRouterResponseInput =
-  | string
-  | Array<CreateRouterResponseInput2>;
+export type CreateRouterResponseInput = string | Array<Input2>;
 
 /**
  * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
@@ -291,7 +289,7 @@ export type ToolsMCPTool = {
 /**
  * The orq.ai tool type.
  */
-export const CreateRouterResponseToolsResponsesType = {
+export const CreateRouterResponseToolsType = {
   OrqCurrentDate: "orq:current_date",
   OrqGoogleSearch: "orq:google_search",
   OrqWebScraper: "orq:web_scraper",
@@ -302,8 +300,8 @@ export const CreateRouterResponseToolsResponsesType = {
 /**
  * The orq.ai tool type.
  */
-export type CreateRouterResponseToolsResponsesType = ClosedEnum<
-  typeof CreateRouterResponseToolsResponsesType
+export type CreateRouterResponseToolsType = ClosedEnum<
+  typeof CreateRouterResponseToolsType
 >;
 
 /**
@@ -317,7 +315,7 @@ export type OrqAiTool = {
   /**
    * The orq.ai tool type.
    */
-  type: CreateRouterResponseToolsResponsesType;
+  type: CreateRouterResponseToolsType;
 };
 
 /**
@@ -375,7 +373,7 @@ export type CreateRouterResponseRequestBody = {
   /**
    * Input to the model: a string or an array of input items (messages, files, etc.).
    */
-  input?: string | Array<CreateRouterResponseInput2> | undefined;
+  input?: string | Array<Input2> | undefined;
   /**
    * System prompt / instructions for the model.
    */
@@ -533,15 +531,13 @@ export type CreateRouterResponseResponsesResponseBody = {
   data?: CreateRouterResponseData | undefined;
 };
 
-export const CreateRouterResponseServiceTier = {
+export const ServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
   Priority: "priority",
 } as const;
-export type CreateRouterResponseServiceTier = ClosedEnum<
-  typeof CreateRouterResponseServiceTier
->;
+export type ServiceTier = ClosedEnum<typeof ServiceTier>;
 
 export const CreateRouterResponseStatus = {
   Queued: "queued",
@@ -555,13 +551,11 @@ export type CreateRouterResponseStatus = ClosedEnum<
   typeof CreateRouterResponseStatus
 >;
 
-export const CreateRouterResponseTruncation = {
+export const Truncation = {
   Disabled: "disabled",
   Auto: "auto",
 } as const;
-export type CreateRouterResponseTruncation = ClosedEnum<
-  typeof CreateRouterResponseTruncation
->;
+export type Truncation = ClosedEnum<typeof Truncation>;
 
 /**
  * Returns a response object or a stream of events.
@@ -603,7 +597,7 @@ export type CreateRouterResponseResponseBody = {
   promptCacheRetention: string | null;
   reasoning: components.Reasoning;
   safetyIdentifier: string | null;
-  serviceTier: CreateRouterResponseServiceTier;
+  serviceTier: ServiceTier;
   status: CreateRouterResponseStatus;
   store: boolean;
   temperature: number;
@@ -621,7 +615,7 @@ export type CreateRouterResponseResponseBody = {
   tools: Array<any> | null;
   topLogprobs: number;
   topP: number;
-  truncation: CreateRouterResponseTruncation;
+  truncation: Truncation;
   usage: components.PublicUsage;
   user: string | null;
   variables?: { [k: string]: any } | undefined;
@@ -667,8 +661,8 @@ export function twoFileToJSON(twoFile: TwoFile): string {
 }
 
 /** @internal */
-export const TwoDetail$outboundSchema: z.ZodNativeEnum<typeof TwoDetail> = z
-  .nativeEnum(TwoDetail);
+export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
+  .nativeEnum(Detail);
 
 /** @internal */
 export type Image$Outbound = {
@@ -684,7 +678,7 @@ export const Image$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Image
 > = z.object({
-  detail: TwoDetail$outboundSchema.optional(),
+  detail: Detail$outboundSchema.optional(),
   fileId: z.string().optional(),
   imageUrl: z.string().optional(),
   type: z.literal("input_image"),
@@ -778,7 +772,7 @@ export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
   .nativeEnum(InputType);
 
 /** @internal */
-export type CreateRouterResponseInput2$Outbound = {
+export type Input2$Outbound = {
   call_id?: string | undefined;
   content?:
     | string
@@ -791,10 +785,10 @@ export type CreateRouterResponseInput2$Outbound = {
 };
 
 /** @internal */
-export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
-  CreateRouterResponseInput2$Outbound,
+export const Input2$outboundSchema: z.ZodType<
+  Input2$Outbound,
   z.ZodTypeDef,
-  CreateRouterResponseInput2
+  Input2
 > = z.object({
   callId: z.string().optional(),
   content: z.union([
@@ -815,28 +809,21 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   });
 });
 
-export function createRouterResponseInput2ToJSON(
-  createRouterResponseInput2: CreateRouterResponseInput2,
-): string {
-  return JSON.stringify(
-    CreateRouterResponseInput2$outboundSchema.parse(createRouterResponseInput2),
-  );
+export function input2ToJSON(input2: Input2): string {
+  return JSON.stringify(Input2$outboundSchema.parse(input2));
 }
 
 /** @internal */
 export type CreateRouterResponseInput$Outbound =
   | string
-  | Array<CreateRouterResponseInput2$Outbound>;
+  | Array<Input2$Outbound>;
 
 /** @internal */
 export const CreateRouterResponseInput$outboundSchema: z.ZodType<
   CreateRouterResponseInput$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseInput
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
-]);
+> = z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]);
 
 export function createRouterResponseInputToJSON(
   createRouterResponseInput: CreateRouterResponseInput,
@@ -1085,10 +1072,9 @@ export function toolsMCPToolToJSON(toolsMCPTool: ToolsMCPTool): string {
 }
 
 /** @internal */
-export const CreateRouterResponseToolsResponsesType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesType> = z.nativeEnum(
-    CreateRouterResponseToolsResponsesType,
-  );
+export const CreateRouterResponseToolsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseToolsType
+> = z.nativeEnum(CreateRouterResponseToolsType);
 
 /** @internal */
 export type OrqAiTool$Outbound = {
@@ -1103,7 +1089,7 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   OrqAiTool
 > = z.object({
   toolId: z.string().optional(),
-  type: CreateRouterResponseToolsResponsesType$outboundSchema,
+  type: CreateRouterResponseToolsType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     toolId: "tool_id",
@@ -1209,7 +1195,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
-  input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
+  input?: string | Array<Input2$Outbound> | undefined;
   instructions?: string | undefined;
   limits?: components.ResponseExecutionLimits$Outbound | undefined;
   max_output_tokens?: number | undefined;
@@ -1260,10 +1246,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     .optional(),
   frequencyPenalty: z.number().optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
-  ]).optional(),
+  input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
+    .optional(),
   instructions: z.string().optional(),
   limits: components.ResponseExecutionLimits$outboundSchema.optional(),
   maxOutputTokens: z.number().int().optional(),
@@ -1407,9 +1391,8 @@ export function createRouterResponseResponsesResponseBodyFromJSON(
 }
 
 /** @internal */
-export const CreateRouterResponseServiceTier$inboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponseServiceTier
-> = z.nativeEnum(CreateRouterResponseServiceTier);
+export const ServiceTier$inboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
+  .nativeEnum(ServiceTier);
 
 /** @internal */
 export const CreateRouterResponseStatus$inboundSchema: z.ZodNativeEnum<
@@ -1417,9 +1400,8 @@ export const CreateRouterResponseStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateRouterResponseStatus);
 
 /** @internal */
-export const CreateRouterResponseTruncation$inboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponseTruncation
-> = z.nativeEnum(CreateRouterResponseTruncation);
+export const Truncation$inboundSchema: z.ZodNativeEnum<typeof Truncation> = z
+  .nativeEnum(Truncation);
 
 /** @internal */
 export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
@@ -1451,7 +1433,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   prompt_cache_retention: z.nullable(z.string()),
   reasoning: components.Reasoning$inboundSchema,
   safety_identifier: z.nullable(z.string()),
-  service_tier: CreateRouterResponseServiceTier$inboundSchema,
+  service_tier: ServiceTier$inboundSchema,
   status: CreateRouterResponseStatus$inboundSchema,
   store: z.boolean(),
   temperature: z.number(),
@@ -1460,7 +1442,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   tools: z.nullable(z.array(z.any())),
   top_logprobs: z.number().int(),
   top_p: z.number(),
-  truncation: CreateRouterResponseTruncation$inboundSchema,
+  truncation: Truncation$inboundSchema,
   usage: components.PublicUsage$inboundSchema,
   user: z.nullable(z.string()),
   variables: z.record(z.any()).optional(),

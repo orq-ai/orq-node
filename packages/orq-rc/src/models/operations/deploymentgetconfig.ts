@@ -1181,7 +1181,7 @@ export type DeploymentGetConfig2File = {
   filename?: string | undefined;
 };
 
-export type DeploymentGetConfig23 = {
+export type Two3 = {
   /**
    * The type of the content part. Always `file`.
    */
@@ -1215,24 +1215,22 @@ export type DeploymentGetConfig22 = {
 /**
  * Text content part of a prompt message
  */
-export type DeploymentGetConfig21 = {
+export type Two1 = {
   type: "text";
   text: string;
 };
 
 export type DeploymentGetConfigContentDeploymentsResponse2 =
-  | DeploymentGetConfig21
+  | Two1
   | DeploymentGetConfig22
-  | DeploymentGetConfig23;
+  | Two3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
  */
 export type DeploymentGetConfigContent =
   | string
-  | Array<
-    DeploymentGetConfig21 | DeploymentGetConfig22 | DeploymentGetConfig23
-  >;
+  | Array<Two1 | DeploymentGetConfig22 | Two3>;
 
 export const DeploymentGetConfigDeploymentsResponseType = {
   Function: "function",
@@ -1264,12 +1262,7 @@ export type DeploymentGetConfigDeploymentsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Can be null for tool messages in certain scenarios.
    */
-  content:
-    | string
-    | Array<
-      DeploymentGetConfig21 | DeploymentGetConfig22 | DeploymentGetConfig23
-    >
-    | null;
+  content: string | Array<Two1 | DeploymentGetConfig22 | Two3> | null;
   toolCalls?: Array<DeploymentGetConfigToolCalls> | undefined;
   toolCallId?: string | null | undefined;
 };
@@ -4002,22 +3995,19 @@ export function deploymentGetConfig2FileFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig23$inboundSchema: z.ZodType<
-  DeploymentGetConfig23,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => DeploymentGetConfig2File$inboundSchema),
-});
+export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("file"),
+    file: z.lazy(() => DeploymentGetConfig2File$inboundSchema),
+  });
 
-export function deploymentGetConfig23FromJSON(
+export function two3FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig23, SDKValidationError> {
+): SafeParseResult<Two3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig23$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig23' from JSON`,
+    (x) => Two3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two3' from JSON`,
   );
 }
 
@@ -4067,22 +4057,19 @@ export function deploymentGetConfig22FromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig21$inboundSchema: z.ZodType<
-  DeploymentGetConfig21,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("text"),
+    text: z.string(),
+  });
 
-export function deploymentGetConfig21FromJSON(
+export function two1FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig21, SDKValidationError> {
+): SafeParseResult<Two1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig21' from JSON`,
+    (x) => Two1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two1' from JSON`,
   );
 }
 
@@ -4093,9 +4080,9 @@ export const DeploymentGetConfigContentDeploymentsResponse2$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => DeploymentGetConfig21$inboundSchema),
+    z.lazy(() => Two1$inboundSchema),
     z.lazy(() => DeploymentGetConfig22$inboundSchema),
-    z.lazy(() => DeploymentGetConfig23$inboundSchema),
+    z.lazy(() => Two3$inboundSchema),
   ]);
 
 export function deploymentGetConfigContentDeploymentsResponse2FromJSON(
@@ -4122,9 +4109,9 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig21$inboundSchema),
+    z.lazy(() => Two1$inboundSchema),
     z.lazy(() => DeploymentGetConfig22$inboundSchema),
-    z.lazy(() => DeploymentGetConfig23$inboundSchema),
+    z.lazy(() => Two3$inboundSchema),
   ])),
 ]);
 
@@ -4196,13 +4183,11 @@ export const DeploymentGetConfigDeploymentsMessages$inboundSchema: z.ZodType<
   content: z.nullable(
     z.union([
       z.string(),
-      z.array(
-        z.union([
-          z.lazy(() => DeploymentGetConfig21$inboundSchema),
-          z.lazy(() => DeploymentGetConfig22$inboundSchema),
-          z.lazy(() => DeploymentGetConfig23$inboundSchema),
-        ]),
-      ),
+      z.array(z.union([
+        z.lazy(() => Two1$inboundSchema),
+        z.lazy(() => DeploymentGetConfig22$inboundSchema),
+        z.lazy(() => Two3$inboundSchema),
+      ])),
     ]),
   ),
   tool_calls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$inboundSchema))

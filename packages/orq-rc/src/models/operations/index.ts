@@ -27,7 +27,6 @@ export * from "./creatememorystore.js";
 export * from "./createmoderation.js";
 export * from "./createprompt.js";
 export * from "./creatererank.js";
-export * from "./createresponse.js";
 export * from "./createrouterresponse.js";
 export * from "./createspeech.js";
 export * from "./createtool.js";

@@ -1,37 +1,22 @@
 # Input2
 
+An input item. The "type" field determines the item kind: "message", "function_call_output", "item_reference", etc.
 
-## Supported Types
-
-### `operations.Two1`
-
-```typescript
-const value: operations.Two1 = {
-  role: "assistant",
-  content: "<value>",
-};
-```
-
-### `operations.CreateResponse2RouterResponses2`
+## Example Usage
 
 ```typescript
-const value: operations.CreateResponse2RouterResponses2 = {
-  type: "function_call_output",
-  callId: "<id>",
-  output: "<value>",
-};
+import { Input2 } from "@orq-ai/node/models/operations";
+
+let value: Input2 = {};
 ```
 
-### `operations.CreateResponse23`
+## Fields
 
-```typescript
-const value: operations.CreateResponse23 = {
-  type: "function_call",
-  callId: "<id>",
-  id: "<id>",
-  name: "<value>",
-  arguments: "<value>",
-  status: "<value>",
-};
-```
-
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `callId`                                                                        | *string*                                                                        | :heavy_minus_sign:                                                              | The ID of the function call being responded to (for function_call_output type). |
+| `content`                                                                       | *operations.InputContent*                                                       | :heavy_minus_sign:                                                              | The content of the item: a string or an array of content parts.                 |
+| `id`                                                                            | *string*                                                                        | :heavy_minus_sign:                                                              | The ID of the item (for item_reference type).                                   |
+| `output`                                                                        | *string*                                                                        | :heavy_minus_sign:                                                              | The output of the function call (for function_call_output type).                |
+| `role`                                                                          | [operations.InputRole](../../models/operations/inputrole.md)                    | :heavy_minus_sign:                                                              | The role of the message sender (for message items).                             |
+| `type`                                                                          | [operations.InputType](../../models/operations/inputtype.md)                    | :heavy_minus_sign:                                                              | The type of item.                                                               |

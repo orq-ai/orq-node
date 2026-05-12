@@ -1,7 +1,5 @@
 # ServiceTier
 
-Specifies the latency tier to use for processing the request. Defaults to "auto".
-
 ## Example Usage
 
 ```typescript
@@ -13,5 +11,5 @@ let value: ServiceTier = "auto";
 ## Values
 
 ```typescript
-"auto" | "default" | "flex" | "scale" | "priority"
+"auto" | "default" | "flex" | "priority"
 ```

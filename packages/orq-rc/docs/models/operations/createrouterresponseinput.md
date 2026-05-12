@@ -11,11 +11,9 @@ Input to the model: a string or an array of input items (messages, files, etc.).
 const value: string = "<value>";
 ```
 
-### `operations.CreateRouterResponseInput2[]`
+### `operations.Input2[]`
 
 ```typescript
-const value: operations.CreateRouterResponseInput2[] = [
-  {},
-];
+const value: operations.Input2[] = [];
 ```
 

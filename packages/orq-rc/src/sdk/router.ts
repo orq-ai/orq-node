@@ -12,7 +12,6 @@ import { Completions } from "./completions.js";
 import { Embeddings } from "./embeddings.js";
 import { Images } from "./images.js";
 import { Moderations } from "./moderations.js";
-import { OrqResponses } from "./orqresponses.js";
 import { Rerank } from "./rerank.js";
 
 export class Router extends ClientSDK {
@@ -49,11 +48,6 @@ export class Router extends ClientSDK {
   private _images?: Images;
   get images(): Images {
     return (this._images ??= new Images(this._options));
-  }
-
-  private _responses?: OrqResponses;
-  get responses(): OrqResponses {
-    return (this._responses ??= new OrqResponses(this._options));
   }
 
   /**
