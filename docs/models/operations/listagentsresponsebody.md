@@ -15,13 +15,18 @@ let value: ListAgentsResponseBody = {
       key: "<key>",
       status: "draft",
       path: "Default",
+      skills: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
       knowledgeBases: [
         {
           knowledgeId: "customer-knowledge-base",
         },
       ],
       role: "<value>",
-      description: "between ick deflect once forenenst gee yet gah eek",
+      description: "tail draft alongside pish apologise readjust pfft until",
       instructions: "<value>",
       model: {
         id: "<id>",
@@ -61,9 +66,7 @@ let value: ListAgentsResponseBody = {
             504,
           ],
         },
-        fallbackModels: [
-          "<value>",
-        ],
+        fallbackModels: null,
       },
     },
   ],

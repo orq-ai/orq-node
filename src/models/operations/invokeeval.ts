@@ -213,7 +213,8 @@ export type ResponseBodyJury = {
 };
 
 export type InvokeEvalResponseBodyEvalsResponseValue = {
-  workflowRunId: string;
+  workflowRunId?: string | undefined;
+  traceId?: string | undefined;
   value: number | boolean | string | null;
   explanation?: string | null | undefined;
   originalValue?: number | boolean | string | null | undefined;
@@ -853,7 +854,8 @@ export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workflow_run_id: z.string(),
+  workflow_run_id: z.string().optional(),
+  trace_id: z.string().optional(),
   value: z.nullable(z.union([z.number(), z.boolean(), z.string()])),
   explanation: z.nullable(z.string()).optional(),
   original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
@@ -863,6 +865,7 @@ export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "workflow_run_id": "workflowRunId",
+    "trace_id": "traceId",
     "original_value": "originalValue",
     "original_explanation": "originalExplanation",
   });

@@ -9,6 +9,7 @@ import { filesGetContent } from "../funcs/filesGetContent.js";
 import { filesList } from "../funcs/filesList.js";
 import { filesUpdate } from "../funcs/filesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -22,7 +23,7 @@ export class Files extends ClientSDK {
   async list(
     request?: operations.FileListRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.FileListResponseBody> {
+  ): Promise<components.ListFilesResponse> {
     return unwrapAsync(filesList(
       this,
       request,
@@ -31,15 +32,15 @@ export class Files extends ClientSDK {
   }
 
   /**
-   * Create file
+   * Upload a file
    *
    * @remarks
    * Files are used to upload documents that can be used with features like Deployments.
    */
   async create(
-    request: operations.FileUploadRequestBody,
+    request: components.CreateFileRequest,
     options?: RequestOptions,
-  ): Promise<operations.FileUploadResponseBody> {
+  ): Promise<components.CreateFileResponse> {
     return unwrapAsync(filesCreate(
       this,
       request,
@@ -51,27 +52,13 @@ export class Files extends ClientSDK {
    * Download file content
    *
    * @remarks
-   * Redirects to a presigned URL for downloading the file content by file ID.
+   * Returns a presigned URL for downloading the file content by file ID.
    */
   async getContent(
     request: operations.FileContentRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<components.GetFileContentResponse> {
     return unwrapAsync(filesGetContent(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete file
-   */
-  async delete(
-    request: operations.FileDeleteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(filesDelete(
       this,
       request,
       options,
@@ -87,7 +74,7 @@ export class Files extends ClientSDK {
   async get(
     request: operations.FileGetRequest,
     options?: RequestOptions,
-  ): Promise<operations.FileGetResponseBody> {
+  ): Promise<components.GetFileResponse> {
     return unwrapAsync(filesGet(
       this,
       request,
@@ -96,7 +83,21 @@ export class Files extends ClientSDK {
   }
 
   /**
-   * Update file
+   * Delete a file
+   */
+  async delete(
+    request: operations.FileDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteFileResponse> {
+    return unwrapAsync(filesDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a file
    *
    * @remarks
    * Updates the metadata of an existing file object.
@@ -104,7 +105,7 @@ export class Files extends ClientSDK {
   async update(
     request: operations.FileUpdateRequest,
     options?: RequestOptions,
-  ): Promise<operations.FileUpdateResponseBody> {
+  ): Promise<components.UpdateFileResponse> {
     return unwrapAsync(filesUpdate(
       this,
       request,

@@ -43,7 +43,7 @@ export type BinaryFormat = {
   name?: string | undefined;
 };
 
-export type FileT = BinaryFormat | FileInURIFormat;
+export type FilePartFile = BinaryFormat | FileInURIFormat;
 
 /**
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
@@ -139,34 +139,39 @@ export function binaryFormatFromJSON(
 }
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .union([
-    z.lazy(() => BinaryFormat$inboundSchema),
-    z.lazy(() => FileInURIFormat$inboundSchema),
-  ]);
+export const FilePartFile$inboundSchema: z.ZodType<
+  FilePartFile,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => BinaryFormat$inboundSchema),
+  z.lazy(() => FileInURIFormat$inboundSchema),
+]);
 /** @internal */
-export type FileT$Outbound = BinaryFormat$Outbound | FileInURIFormat$Outbound;
+export type FilePartFile$Outbound =
+  | BinaryFormat$Outbound
+  | FileInURIFormat$Outbound;
 
 /** @internal */
-export const FileT$outboundSchema: z.ZodType<
-  FileT$Outbound,
+export const FilePartFile$outboundSchema: z.ZodType<
+  FilePartFile$Outbound,
   z.ZodTypeDef,
-  FileT
+  FilePartFile
 > = z.union([
   z.lazy(() => BinaryFormat$outboundSchema),
   z.lazy(() => FileInURIFormat$outboundSchema),
 ]);
 
-export function fileToJSON(fileT: FileT): string {
-  return JSON.stringify(FileT$outboundSchema.parse(fileT));
+export function filePartFileToJSON(filePartFile: FilePartFile): string {
+  return JSON.stringify(FilePartFile$outboundSchema.parse(filePartFile));
 }
-export function fileFromJSON(
+export function filePartFileFromJSON(
   jsonString: string,
-): SafeParseResult<FileT, SDKValidationError> {
+): SafeParseResult<FilePartFile, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FileT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileT' from JSON`,
+    (x) => FilePartFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilePartFile' from JSON`,
   );
 }
 

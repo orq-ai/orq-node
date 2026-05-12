@@ -44,10 +44,10 @@ const value: operations.CreateEvalFunctionParams4 = {
 };
 ```
 
-### `operations.CreateEvalFunctionParams5`
+### `operations.Five`
 
 ```typescript
-const value: operations.CreateEvalFunctionParams5 = {
+const value: operations.Five = {
   type: "contains_email",
 };
 ```

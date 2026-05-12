@@ -4,35 +4,16 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FileListRequest = {
   limit?: number | undefined;
-  /**
-   * A cursor for use in pagination. Defines your place in the list for the next page.
-   */
   startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. Defines your place in the list for the previous page.
-   */
   endingBefore?: string | undefined;
-};
-
-/**
- * Files retrieved successfully
- */
-export type FileListResponseBody = {
-  data: Array<components.FileDocument> | null;
-  hasMore: boolean;
-  object: string;
 };
 
 /** @internal */
 export type FileListRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
 };
@@ -43,7 +24,7 @@ export const FileListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileListRequest
 > = z.object({
-  limit: z.number().int().default(10),
+  limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -57,29 +38,4 @@ export function fileListRequestToJSON(
   fileListRequest: FileListRequest,
 ): string {
   return JSON.stringify(FileListRequest$outboundSchema.parse(fileListRequest));
-}
-
-/** @internal */
-export const FileListResponseBody$inboundSchema: z.ZodType<
-  FileListResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.nullable(z.array(components.FileDocument$inboundSchema)),
-  has_more: z.boolean(),
-  object: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function fileListResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<FileListResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileListResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileListResponseBody' from JSON`,
-  );
 }

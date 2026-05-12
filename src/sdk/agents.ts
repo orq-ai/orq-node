@@ -17,12 +17,12 @@ import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-import { OrqAgentsResponses } from "./orqagentsresponses.js";
+import { OrqResponses } from "./orqresponses.js";
 
 export class Agents extends ClientSDK {
-  private _responses?: OrqAgentsResponses;
-  get responses(): OrqAgentsResponses {
-    return (this._responses ??= new OrqAgentsResponses(this._options));
+  private _responses?: OrqResponses;
+  get responses(): OrqResponses {
+    return (this._responses ??= new OrqResponses(this._options));
   }
 
   /**

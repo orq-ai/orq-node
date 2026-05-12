@@ -1462,6 +1462,10 @@ export type CreateAgentRequestRequestBody = {
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents?: Array<TeamOfAgents> | undefined;
+  /**
+   * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
+   */
+  skills?: Array<string> | null | undefined;
   variables?: { [k: string]: any } | undefined;
   source?: Source | undefined;
   engine?: Engine | undefined;
@@ -2590,6 +2594,10 @@ export type CreateAgentRequestResponseBody = {
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents?: Array<CreateAgentRequestTeamOfAgents> | undefined;
+  /**
+   * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
+   */
+  skills: Array<string>;
   metrics?: CreateAgentRequestMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -4752,6 +4760,7 @@ export type CreateAgentRequestRequestBody$Outbound = {
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
+  skills?: Array<string> | null | undefined;
   variables?: { [k: string]: any } | undefined;
   source?: string | undefined;
   engine: string;
@@ -4785,6 +4794,7 @@ export const CreateAgentRequestRequestBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
     .optional(),
   teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
+  skills: z.nullable(z.array(z.string())).optional(),
   variables: z.record(z.any()).optional(),
   source: Source$outboundSchema.optional(),
   engine: Engine$outboundSchema.default("text"),
@@ -6416,6 +6426,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   team_of_agents: z.array(
     z.lazy(() => CreateAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
+  skills: z.array(z.string()),
   metrics: z.lazy(() => CreateAgentRequestMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(

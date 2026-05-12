@@ -22,12 +22,14 @@ import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
 import { Policies } from "./policies.js";
+import { Projects } from "./projects.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
 import { Responses } from "./responses.js";
 import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
+import { Skills } from "./skills.js";
 import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
@@ -111,11 +113,6 @@ export class Orq extends ClientSDK {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
   }
 
-  private _files?: Files;
-  get files(): Files {
-    return (this._files ??= new Files(this._options));
-  }
-
   private _guardrailRules?: GuardrailRules;
   get guardrailRules(): GuardrailRules {
     return (this._guardrailRules ??= new GuardrailRules(this._options));
@@ -129,6 +126,21 @@ export class Orq extends ClientSDK {
   private _routingRules?: RoutingRules;
   get routingRules(): RoutingRules {
     return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
+  private _files?: Files;
+  get files(): Files {
+    return (this._files ??= new Files(this._options));
+  }
+
+  private _projects?: Projects;
+  get projects(): Projects {
+    return (this._projects ??= new Projects(this._options));
+  }
+
+  private _skills?: Skills;
+  get skills(): Skills {
+    return (this._skills ??= new Skills(this._options));
   }
 
   private _schedules?: Schedules;

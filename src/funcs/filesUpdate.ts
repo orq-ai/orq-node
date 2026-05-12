@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -26,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update file
+ * Update a file
  *
  * @remarks
  * Updates the metadata of an existing file object.
@@ -37,7 +38,7 @@ export function filesUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.FileUpdateResponseBody,
+    components.UpdateFileResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.FileUpdateResponseBody,
+      components.UpdateFileResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -84,7 +85,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.UpdateFileRequest, { explode: true });
 
   const pathParams = {
     file_id: encodeSimple("file_id", payload.file_id, {
@@ -146,7 +147,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.FileUpdateResponseBody,
+    components.UpdateFileResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -156,8 +157,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.FileUpdateResponseBody$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.json(200, components.UpdateFileResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

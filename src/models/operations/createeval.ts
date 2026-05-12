@@ -820,7 +820,7 @@ export type Six = {
   type: "contains_url";
 };
 
-export type CreateEvalFunctionParams5 = {
+export type Five = {
   type: "contains_email";
 };
 
@@ -849,7 +849,7 @@ export type FunctionParams =
   | FunctionParams2
   | CreateEvalFunctionParams3
   | CreateEvalFunctionParams4
-  | CreateEvalFunctionParams5
+  | Five
   | Six
   | Seven
   | Eight
@@ -895,7 +895,7 @@ export type CreateEvalResponseBodyFunction = {
     | FunctionParams2
     | CreateEvalFunctionParams3
     | CreateEvalFunctionParams4
-    | CreateEvalFunctionParams5
+    | Five
     | Six
     | Seven
     | Eight
@@ -2776,8 +2776,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2965,8 +2965,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-05-12T10:16:33.274Z"),
-    updated: z.string().default("2026-05-12T10:16:33.274Z"),
+    created: z.string().default("2026-05-12T21:48:01.074Z"),
+    updated: z.string().default("2026-05-12T21:48:01.074Z"),
     guardrail_config: z.nullable(
       z.union([
         z.lazy(() =>
@@ -3636,21 +3636,18 @@ export function sixFromJSON(
 }
 
 /** @internal */
-export const CreateEvalFunctionParams5$inboundSchema: z.ZodType<
-  CreateEvalFunctionParams5,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("contains_email"),
-});
+export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("contains_email"),
+  });
 
-export function createEvalFunctionParams5FromJSON(
+export function fiveFromJSON(
   jsonString: string,
-): SafeParseResult<CreateEvalFunctionParams5, SDKValidationError> {
+): SafeParseResult<Five, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateEvalFunctionParams5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEvalFunctionParams5' from JSON`,
+    (x) => Five$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Five' from JSON`,
   );
 }
 
@@ -3744,7 +3741,7 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => FunctionParams2$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams3$inboundSchema),
   z.lazy(() => CreateEvalFunctionParams4$inboundSchema),
-  z.lazy(() => CreateEvalFunctionParams5$inboundSchema),
+  z.lazy(() => Five$inboundSchema),
   z.lazy(() => Six$inboundSchema),
   z.lazy(() => Seven$inboundSchema),
   z.lazy(() => Eight$inboundSchema),
@@ -3792,8 +3789,8 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3813,7 +3810,7 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
     z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams3$inboundSchema),
     z.lazy(() => CreateEvalFunctionParams4$inboundSchema),
-    z.lazy(() => CreateEvalFunctionParams5$inboundSchema),
+    z.lazy(() => Five$inboundSchema),
     z.lazy(() => Six$inboundSchema),
     z.lazy(() => Seven$inboundSchema),
     z.lazy(() => Eight$inboundSchema),
@@ -4011,8 +4008,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4193,8 +4190,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4370,8 +4367,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -4741,8 +4738,8 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4957,8 +4954,8 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-12T10:16:33.274Z"),
-  updated: z.string().default("2026-05-12T10:16:33.274Z"),
+  created: z.string().default("2026-05-12T21:48:01.074Z"),
+  updated: z.string().default("2026-05-12T21:48:01.074Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>

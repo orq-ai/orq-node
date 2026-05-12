@@ -6,9 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FileDeleteRequest = {
-  /**
-   * The ID of the file
-   */
   fileId: string;
 };
 

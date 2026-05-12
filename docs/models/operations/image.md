@@ -14,9 +14,9 @@ let value: Image = {
 
 ## Fields
 
-| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `detail`                                                     | [operations.TwoDetail](../../models/operations/twodetail.md) | :heavy_minus_sign:                                           | The detail level for image understanding.                    |
-| `fileId`                                                     | *string*                                                     | :heavy_minus_sign:                                           | The ID of a previously uploaded file.                        |
-| `imageUrl`                                                   | *string*                                                     | :heavy_minus_sign:                                           | The URL of the image.                                        |
-| `type`                                                       | *"input_image"*                                              | :heavy_check_mark:                                           | N/A                                                          |
+| Field                                                  | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `detail`                                               | [operations.Detail](../../models/operations/detail.md) | :heavy_minus_sign:                                     | The detail level for image understanding.              |
+| `fileId`                                               | *string*                                               | :heavy_minus_sign:                                     | The ID of a previously uploaded file.                  |
+| `imageUrl`                                             | *string*                                               | :heavy_minus_sign:                                     | The URL of the image.                                  |
+| `type`                                                 | *"input_image"*                                        | :heavy_check_mark:                                     | N/A                                                    |

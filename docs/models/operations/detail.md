@@ -1,6 +1,6 @@
 # Detail
 
-Level of detail for image analysis
+The detail level for image understanding.
 
 ## Example Usage
 
@@ -13,5 +13,5 @@ let value: Detail = "low";
 ## Values
 
 ```typescript
-"high" | "low" | "auto"
+"auto" | "low" | "high"
 ```

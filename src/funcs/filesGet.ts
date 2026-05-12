@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -37,7 +38,7 @@ export function filesGet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.FileGetResponseBody,
+    components.GetFileResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.FileGetResponseBody,
+      components.GetFileResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -145,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.FileGetResponseBody,
+    components.GetFileResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -155,8 +156,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.FileGetResponseBody$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.json(200, components.GetFileResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

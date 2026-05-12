@@ -12,6 +12,6 @@ let value: FileContentRequest = {
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `fileIdOrPath`                       | *string*                             | :heavy_check_mark:                   | The file ID to retrieve content for. |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `fileIdOrPath`     | *string*           | :heavy_check_mark: | N/A                |

@@ -19,7 +19,6 @@ let value: RetrieveAgentScheduleResponseBody = {
   triggerCount: 938495,
   type: "interval",
   updated: new Date("2025-12-07T13:58:06.705Z"),
-  workspaceId: "<id>",
 };
 ```
 
@@ -40,4 +39,3 @@ let value: RetrieveAgentScheduleResponseBody = {
 | `triggerCount`                                                                                                                       | *number*                                                                                                                             | :heavy_check_mark:                                                                                                                   | Total firings since creation or last expression/type change.                                                                         |
 | `type`                                                                                                                               | [operations.RetrieveAgentScheduleType](../../models/operations/retrieveagentscheduletype.md)                                         | :heavy_check_mark:                                                                                                                   | Schedule type.                                                                                                                       |
 | `updated`                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                        | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
-| `workspaceId`                                                                                                                        | *string*                                                                                                                             | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
