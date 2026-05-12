@@ -56,16 +56,16 @@ let value: RetrieveResponseResponseBody = {
   topP: 1686.88,
   truncation: "disabled",
   usage: {
-    inputTokens: 670908,
+    inputTokens: 349676,
     inputTokensDetails: {
-      cacheCreationTokens: 221916,
-      cachedTokens: 959224,
+      cacheCreationTokens: 786005,
+      cachedTokens: 763695,
     },
-    outputTokens: 349676,
+    outputTokens: 732588,
     outputTokensDetails: {
-      reasoningTokens: 786005,
+      reasoningTokens: 376439,
     },
-    totalTokens: 763695,
+    totalTokens: 349904,
   },
   user: null,
 };
