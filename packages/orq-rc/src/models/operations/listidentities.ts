@@ -227,7 +227,7 @@ export const ListIdentitiesData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-05-11T16:00:13.133Z",
+    "2026-05-12T01:05:29.487Z",
   ).transform(v => new Date(v)),
   metrics: z.lazy(() => ListIdentitiesMetrics$inboundSchema),
 }).transform((v) => {
