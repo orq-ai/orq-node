@@ -11,7 +11,7 @@ export class Events {
   private _events = new Map<string, InFlightEvent>();
   private _parentMap = new Map<string, string | undefined>();
   private _rootRunId: string | null = null;
-  readonly graph = new GraphTracker();
+  graph = new GraphTracker();
 
   store(runId: string, event: InFlightEvent): void {
     this._events.set(runId, event);
@@ -44,6 +44,19 @@ export class Events {
 
   isRoot(runId: string): boolean {
     return runId === this._rootRunId;
+  }
+
+  /**
+   * Clear root tracking when the current root chain finishes.
+   * Allows subsequent top-level invocations on the same handler to
+   * be correctly identified as roots, and resets graph state so node
+   * tracking from the previous run doesn't leak into the next.
+   */
+  clearRoot(runId: string): void {
+    if (runId === this._rootRunId) {
+      this._rootRunId = null;
+      this.graph = new GraphTracker();
+    }
   }
 
   isGraphNode(runId: string): boolean {

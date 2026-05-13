@@ -15,6 +15,7 @@ import { Events } from "./events.mjs";
 import { EventType, InFlightEvent, createInFlightEvent } from "./models.mjs";
 import { buildOtlpSpan } from "./span-builder.mjs";
 import {
+  coerceChainPayload,
   extractAssistantToolCalls,
   extractModelName,
   extractModelParameters,
@@ -24,6 +25,7 @@ import {
   nanoTimestamp,
   normalizeMessages,
   resolveSpanName,
+  rootOutputDelta,
   stringifyToolOutput,
 } from "./utils.mjs";
 
@@ -79,6 +81,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
     const span = buildOtlpSpan(event);
     this._client.sendSpan(span);
     this._events.remove(runId);
+    this._events.clearRoot(runId);
   }
 
   // ── LLM callbacks ──────────────────────────────────────────────
@@ -263,10 +266,7 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
         tags,
         runName,
       );
-      event.inputs =
-        typeof inputs === "object" && inputs !== null && !Array.isArray(inputs)
-          ? inputs
-          : { inputs };
+      event.inputs = coerceChainPayload(inputs);
 
       if (parentRunId == null) {
         this._events.setRootIfNeeded(runId);
@@ -290,12 +290,11 @@ export class OrqLangchainCallback extends BaseCallbackHandler {
       const event = this._events.get(runId);
       if (!event) return;
       event.endTimeNs = nanoTimestamp();
-      event.outputs =
-        typeof outputs === "object" &&
-        outputs !== null &&
-        !Array.isArray(outputs)
-          ? outputs
-          : { outputs };
+      let outputsDict = coerceChainPayload(outputs);
+      if (this._events.isRoot(runId)) {
+        outputsDict = rootOutputDelta(event.inputs, outputsDict);
+      }
+      event.outputs = outputsDict;
 
       if (this._events.isGraphNode(runId)) {
         this._events.graph.onNodeEnd(event.name, this._events.rootRunId!);
