@@ -8,7 +8,7 @@
  */
 
 import { EventType, InFlightEvent } from "./models.mjs";
-import { nanoTimestamp } from "./utils.mjs";
+import { maybeNormalizeChainMessages, nanoTimestamp } from "./utils.mjs";
 
 // ── OTLP attribute encoding ──────────────────────────────────────
 
@@ -290,7 +290,7 @@ function buildPrompt(event: InFlightEvent): unknown {
     event.eventType === EventType.CHAIN ||
     event.eventType === EventType.AGENT
   ) {
-    return event.inputs;
+    return maybeNormalizeChainMessages(event.inputs);
   }
   if (event.eventType === EventType.TOOL) {
     if (event.toolInput != null) return { input: event.toolInput };
@@ -312,7 +312,7 @@ function buildCompletion(event: InFlightEvent): unknown {
     event.eventType === EventType.CHAIN ||
     event.eventType === EventType.AGENT
   ) {
-    return event.outputs;
+    return maybeNormalizeChainMessages(event.outputs);
   }
   if (event.eventType === EventType.TOOL) {
     if (event.toolOutput != null) return { output: event.toolOutput };

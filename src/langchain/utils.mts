@@ -117,6 +117,137 @@ export function normalizeMessages(
   return result;
 }
 
+function isBaseMessage(value: unknown): value is BaseMessage {
+  return (
+    value != null &&
+    typeof value === "object" &&
+    typeof (value as { _getType?: unknown })._getType === "function"
+  );
+}
+
+function normalizeChainMessageItem(item: unknown): unknown {
+  if (isBaseMessage(item)) {
+    return normalizeMessages([[item]])[0];
+  }
+  if (
+    Array.isArray(item) &&
+    item.length === 2 &&
+    typeof item[0] === "string"
+  ) {
+    const aliases: Record<string, string> = { human: "user", ai: "assistant" };
+    const raw = (item[0] as string).toLowerCase();
+    return { role: aliases[raw] ?? raw, content: item[1] };
+  }
+  return item;
+}
+
+function isNormalizableArray(value: unknown): value is unknown[] {
+  if (!Array.isArray(value) || value.length === 0) return false;
+  return value.some(
+    (m) =>
+      isBaseMessage(m) ||
+      (Array.isArray(m) && m.length === 2 && typeof m[0] === "string"),
+  );
+}
+
+/**
+ * Normalize a chain payload's message arrays to role-typed dicts.
+ *
+ * Handles raw BaseMessage objects (from LangGraph state) and
+ * `[role, content]` tuples (the form accepted by agent.invoke). Scans every
+ * top-level key — common variants are `messages`, `output`, `outputs`,
+ * `input`, `inputs` — so prompt template / RunnableSequence outputs render
+ * with structured roles instead of the lc-serialized blob.
+ */
+export function maybeNormalizeChainMessages(payload: unknown): unknown {
+  if (payload == null || typeof payload !== "object" || Array.isArray(payload)) {
+    return payload;
+  }
+  const obj = payload as Record<string, unknown>;
+  let changed = false;
+  const next: Record<string, unknown> = { ...obj };
+  for (const [key, value] of Object.entries(obj)) {
+    if (isNormalizableArray(value)) {
+      next[key] = (value as unknown[]).map(normalizeChainMessageItem);
+      changed = true;
+    } else if (isBaseMessage(value)) {
+      next[key] = normalizeChainMessageItem(value);
+      changed = true;
+    }
+  }
+  return changed ? next : payload;
+}
+
+/**
+ * Wrap chain inputs/outputs into a dict suitable for the span normalizer.
+ *
+ * LangChain hands callbacks raw BaseMessage objects (or lists thereof) for
+ * chains like RunnableSequence wrapping a chat model. Without coercion they
+ * get stored as `{outputs: <AIMessage>}` and serialized via the default
+ * stringifier, producing an unreadable repr in the trace. Wrapping them as
+ * `{messages: [...]}` routes through the normal role/tool_calls path.
+ */
+export function coerceChainPayload(payload: unknown): Record<string, unknown> {
+  // Check BaseMessage first — a BaseMessage IS an object, so the plain-dict
+  // branch below would otherwise swallow it and ship the raw lc-serialized
+  // form (via toJSON) instead of normalized {role, content, tool_calls}.
+  if (isBaseMessage(payload)) {
+    return { messages: [payload] };
+  }
+  if (Array.isArray(payload) && payload.length > 0 && payload.every(isBaseMessage)) {
+    return { messages: payload };
+  }
+  if (payload != null && typeof payload === "object" && !Array.isArray(payload)) {
+    return payload as Record<string, unknown>;
+  }
+  return { outputs: payload };
+}
+
+function messageId(msg: unknown): string | undefined {
+  if (msg == null || typeof msg !== "object") return undefined;
+  const m = msg as Record<string, unknown>;
+  const id = m["id"];
+  return typeof id === "string" ? id : undefined;
+}
+
+/**
+ * Return outputs with input messages stripped from outputs.messages.
+ *
+ * LangGraph's root on_chain_end receives the full merged state, so the
+ * input turns reappear in outputs.messages. Use message ids when every
+ * input has one (handles RemoveMessage correctly); otherwise fall back to
+ * positional trimming, which is safe under the append-only add_messages
+ * reducer LangGraph uses by default.
+ */
+export function rootOutputDelta(
+  inputs: Record<string, unknown> | null | undefined,
+  outputs: Record<string, unknown>,
+): Record<string, unknown> {
+  if (inputs == null || typeof inputs !== "object" || Array.isArray(inputs)) {
+    return outputs;
+  }
+  const inMsgs = (inputs as Record<string, unknown>)["messages"];
+  const outMsgs = outputs["messages"];
+  if (!Array.isArray(inMsgs) || !Array.isArray(outMsgs) || outMsgs.length === 0) {
+    return outputs;
+  }
+
+  const inIds = inMsgs.map(messageId);
+  if (inIds.length > 0 && inIds.every((id): id is string => id != null)) {
+    const inputIdSet = new Set<string>(inIds);
+    const delta = outMsgs.filter((m) => {
+      const id = messageId(m);
+      return id == null || !inputIdSet.has(id);
+    });
+    return { ...outputs, messages: delta };
+  }
+
+  if (outMsgs.length >= inMsgs.length) {
+    return { ...outputs, messages: outMsgs.slice(inMsgs.length) };
+  }
+  return outputs;
+}
+
 export function extractAssistantToolCalls(
   message: unknown,
 ): unknown[] | null {
