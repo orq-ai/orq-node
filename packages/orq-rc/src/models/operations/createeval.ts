@@ -74,13 +74,13 @@ export type Python = {
   code: string;
   type: CreateEvalRequestBodyType;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   description?: string | undefined;
@@ -170,13 +170,13 @@ export type RequestBodyHTTP = {
   headers: { [k: string]: string };
   payload: { [k: string]: any };
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   description?: string | undefined;
@@ -245,13 +245,13 @@ export type Json = {
   type: CreateEvalRequestBodyEvalsType;
   schema: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   description?: string | undefined;
@@ -379,13 +379,13 @@ export type Llm2 = {
   categories?: Array<string> | undefined;
   categoricalLabels?: Array<LLMCategoricalLabels> | undefined;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   description?: string | undefined;
@@ -476,13 +476,13 @@ export type Llm1 = {
   categories?: Array<string> | undefined;
   categoricalLabels?: Array<CreateEvalLLMCategoricalLabels> | undefined;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   description?: string | undefined;
@@ -2776,8 +2776,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2965,8 +2965,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-05-13T12:08:29.916Z"),
-    updated: z.string().default("2026-05-13T12:08:29.917Z"),
+    created: z.string().default("2026-05-14T06:16:18.634Z"),
+    updated: z.string().default("2026-05-14T06:16:18.635Z"),
     guardrail_config: z.nullable(
       z.union([
         z.lazy(() =>
@@ -3789,8 +3789,8 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4008,8 +4008,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4190,8 +4190,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4367,8 +4367,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -4738,8 +4738,8 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4954,8 +4954,8 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-13T12:08:29.916Z"),
-  updated: z.string().default("2026-05-13T12:08:29.917Z"),
+  created: z.string().default("2026-05-14T06:16:18.634Z"),
+  updated: z.string().default("2026-05-14T06:16:18.635Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
