@@ -319,11 +319,6 @@ export type OrqAiTool = {
 };
 
 /**
- * The parameters the function accepts, as a JSON Schema object.
- */
-export type ToolsParameters = {};
-
-/**
  * A function tool the model can call.
  */
 export type ToolsFunction = {
@@ -338,7 +333,7 @@ export type ToolsFunction = {
   /**
    * The parameters the function accepts, as a JSON Schema object.
    */
-  parameters?: ToolsParameters | undefined;
+  parameters?: { [k: string]: any } | undefined;
   /**
    * Whether to enforce strict parameter validation.
    */
@@ -1101,26 +1096,10 @@ export function orqAiToolToJSON(orqAiTool: OrqAiTool): string {
 }
 
 /** @internal */
-export type ToolsParameters$Outbound = {};
-
-/** @internal */
-export const ToolsParameters$outboundSchema: z.ZodType<
-  ToolsParameters$Outbound,
-  z.ZodTypeDef,
-  ToolsParameters
-> = z.object({});
-
-export function toolsParametersToJSON(
-  toolsParameters: ToolsParameters,
-): string {
-  return JSON.stringify(ToolsParameters$outboundSchema.parse(toolsParameters));
-}
-
-/** @internal */
 export type ToolsFunction$Outbound = {
   description?: string | undefined;
   name: string;
-  parameters?: ToolsParameters$Outbound | undefined;
+  parameters?: { [k: string]: any } | undefined;
   strict?: boolean | undefined;
   type: "function";
 };
@@ -1133,7 +1112,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
 > = z.object({
   description: z.string().optional(),
   name: z.string(),
-  parameters: z.lazy(() => ToolsParameters$outboundSchema).optional(),
+  parameters: z.record(z.any()).optional(),
   strict: z.boolean().optional(),
   type: z.literal("function"),
 });
