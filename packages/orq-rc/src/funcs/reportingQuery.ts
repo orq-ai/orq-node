@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -21,20 +22,22 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a remote config
+ * Query reporting metrics
+ *
+ * @remarks
+ * Returns time-series analytics for AI usage, cost, latency, evaluator results, and guardrail outcomes. Select a metric and time range, break results down by supported dimensions, apply filters, and optionally include totals for the full range.
  */
-export function remoteconfigsRetrieve(
+export function reportingQuery(
   client: OrqCore,
-  request?: operations.RemoteConfigsGetConfigRequestBody | undefined,
+  request: components.QueryReportRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RemoteConfigsGetConfigResponseBody,
+    components.QueryReportResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -54,12 +57,12 @@ export function remoteconfigsRetrieve(
 
 async function $do(
   client: OrqCore,
-  request?: operations.RemoteConfigsGetConfigRequestBody | undefined,
+  request: components.QueryReportRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.RemoteConfigsGetConfigResponseBody,
+      components.QueryReportResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -74,20 +77,16 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.RemoteConfigsGetConfigRequestBody$outboundSchema.optional()
-        .parse(value),
+    (value) => components.QueryReportRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/remoteconfigs")();
+  const path = pathToFunc("/v2/reporting")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -101,7 +100,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "RemoteConfigsGetConfig",
+    operationID: "ReportingQuery",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -141,7 +140,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RemoteConfigsGetConfigResponseBody,
+    components.QueryReportResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -151,9 +150,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RemoteConfigsGetConfigResponseBody$inboundSchema),
-    M.fail([400, 401, 404, "4XX"]),
-    M.fail([500, "5XX"]),
+    M.json(200, components.QueryReportResponse$inboundSchema),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

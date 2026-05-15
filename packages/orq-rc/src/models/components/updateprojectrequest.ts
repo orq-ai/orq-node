@@ -6,8 +6,20 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateProjectRequest = {
+  /**
+   * Project ID to update.
+   */
   projectId?: string | undefined;
+  /**
+   * New project name. Omit to keep the current name.
+   */
   name?: string | undefined;
+  /**
+   * Replacement list of team identifiers associated with the project.
+   *
+   * @remarks
+   *  Leave empty to remove all team associations.
+   */
   teams?: Array<string> | undefined;
 };
 

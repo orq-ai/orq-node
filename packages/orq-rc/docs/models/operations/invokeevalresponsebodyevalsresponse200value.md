@@ -1,19 +1,23 @@
 # InvokeEvalResponseBodyEvalsResponse200Value
 
-## Example Usage
+
+## Supported Types
+
+### `boolean`
 
 ```typescript
-import { InvokeEvalResponseBodyEvalsResponse200Value } from "@orq-ai/node/models/operations";
-
-let value: InvokeEvalResponseBodyEvalsResponse200Value = {
-  type: "<value>",
-  value: 4454.14,
-};
+const value: boolean = true;
 ```
 
-## Fields
+### `string`
 
-| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `type`                                                                  | *string*                                                                | :heavy_check_mark:                                                      | N/A                                                                     |
-| `value`                                                                 | *operations.InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue* | :heavy_check_mark:                                                      | N/A                                                                     |
+```typescript
+const value: string = "<value>";
+```
+
+### `number`
+
+```typescript
+const value: number = 1284.03;
+```
+

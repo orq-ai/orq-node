@@ -1,11 +1,11 @@
-# PostV2FeedbackRemoveFeedbackProduct
+# PostV2FeedbackFeedbackProduct
 
 ## Example Usage
 
 ```typescript
-import { PostV2FeedbackRemoveFeedbackProduct } from "@orq-ai/node/models/operations";
+import { PostV2FeedbackFeedbackProduct } from "@orq-ai/node/models/operations";
 
-let value: PostV2FeedbackRemoveFeedbackProduct = "ai-chat";
+let value: PostV2FeedbackFeedbackProduct = "memory-stores";
 ```
 
 ## Values

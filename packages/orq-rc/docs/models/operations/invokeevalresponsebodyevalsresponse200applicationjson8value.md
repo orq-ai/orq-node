@@ -1,4 +1,4 @@
-# InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue
+# InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value
 
 
 ## Supported Types
@@ -13,11 +13,5 @@ const value: number = 1284.03;
 
 ```typescript
 const value: boolean = true;
-```
-
-### `string`
-
-```typescript
-const value: string = "<value>";
 ```
 

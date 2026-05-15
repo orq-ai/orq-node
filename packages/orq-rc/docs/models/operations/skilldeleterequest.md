@@ -12,6 +12,6 @@ let value: SkillDeleteRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `skillId`          | *string*           | :heavy_check_mark: | N/A                |
+| Field               | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `skillId`           | *string*            | :heavy_check_mark:  | Skill ID to delete. |

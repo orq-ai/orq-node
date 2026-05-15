@@ -6,8 +6,23 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ProjectListRequest = {
+  /**
+   * Page size, 1-200. Unset uses the server default.
+   */
   limit?: number | undefined;
+  /**
+   * Cursor for forward pagination. Set to the `project_id` of the last
+   *
+   * @remarks
+   *  item from the previous page.
+   */
   startingAfter?: string | undefined;
+  /**
+   * Cursor for backward pagination. Set to the `project_id` of the first
+   *
+   * @remarks
+   *  item from the previous page.
+   */
   endingBefore?: string | undefined;
 };
 

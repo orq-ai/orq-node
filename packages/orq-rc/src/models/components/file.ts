@@ -12,7 +12,6 @@ export type FileT = {
   fileId?: string | undefined;
   purpose?: number | undefined;
   fileName?: string | undefined;
-  workspaceId?: string | undefined;
   bytes?: string | undefined;
   createdAt?: Date | undefined;
 };
@@ -23,7 +22,6 @@ export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
     file_id: z.string().optional(),
     purpose: z.number().int().optional(),
     file_name: z.string().optional(),
-    workspace_id: z.string().optional(),
     bytes: z.string().optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
@@ -32,7 +30,6 @@ export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
     return remap$(v, {
       "file_id": "fileId",
       "file_name": "fileName",
-      "workspace_id": "workspaceId",
       "created_at": "createdAt",
     });
   });

@@ -10,8 +10,20 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Skill, Skill$inboundSchema } from "./skill.js";
 
 export type ListSkillsResponse = {
+  /**
+   * Object discriminator for list responses; always `list`.
+   */
   object?: string | undefined;
+  /**
+   * Page of skills, ordered newest first.
+   */
   data?: Array<Skill> | undefined;
+  /**
+   * Whether more skills are available in the selected pagination
+   *
+   * @remarks
+   *  direction.
+   */
   hasMore?: boolean | undefined;
 };
 

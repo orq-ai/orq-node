@@ -6,6 +6,9 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type SkillDeleteRequest = {
+  /**
+   * Skill ID to delete.
+   */
   skillId: string;
 };
 
