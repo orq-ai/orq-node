@@ -5,9 +5,6 @@
 import * as z from "zod/v3";
 
 export type DeleteIdentityRequest = {
-  /**
-   * Identity ID or External ID
-   */
   id: string;
 };
 

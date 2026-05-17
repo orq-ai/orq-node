@@ -37,11 +37,6 @@ export class Orq extends ClientSDK {
     return (this._evals ??= new Evals(this._options));
   }
 
-  private _identities?: Identities;
-  get identities(): Identities {
-    return (this._identities ??= new Identities(this._options));
-  }
-
   private _deployments?: Deployments;
   get deployments(): Deployments {
     return (this._deployments ??= new Deployments(this._options));
@@ -120,6 +115,11 @@ export class Orq extends ClientSDK {
   private _files?: Files;
   get files(): Files {
     return (this._files ??= new Files(this._options));
+  }
+
+  private _identities?: Identities;
+  get identities(): Identities {
+    return (this._identities ??= new Identities(this._options));
   }
 
   private _projects?: Projects;

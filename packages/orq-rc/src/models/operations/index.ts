@@ -15,7 +15,6 @@ export * from "./createdatasetitem.js";
 export * from "./createdatasource.js";
 export * from "./createembedding.js";
 export * from "./createeval.js";
-export * from "./createidentity.js";
 export * from "./createimage.js";
 export * from "./createimageedit.js";
 export * from "./createimagevariation.js";

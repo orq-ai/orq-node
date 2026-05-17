@@ -233,8 +233,8 @@ run();
 * [list](docs/sdks/identities/README.md#list) - List identities
 * [create](docs/sdks/identities/README.md#create) - Create an identity
 * [retrieve](docs/sdks/identities/README.md#retrieve) - Retrieve an identity
-* [update](docs/sdks/identities/README.md#update) - Update an identity
 * [delete](docs/sdks/identities/README.md#delete) - Delete an identity
+* [update](docs/sdks/identities/README.md#update) - Update an identity
 
 ### [Knowledge](docs/sdks/knowledge/README.md)
 
@@ -857,7 +857,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (48)</summary>
+<details><summary>Less common errors (44)</summary>
 
 <br />
 
@@ -884,9 +884,6 @@ run();
 * [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 152 methods.*
 * [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 152 methods.*
 * [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 152 methods.*
-* [`RetrieveIdentityResponseBody`](./src/models/errors/retrieveidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 152 methods.*
-* [`UpdateIdentityResponseBody`](./src/models/errors/updateidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 152 methods.*
-* [`DeleteIdentityResponseBody`](./src/models/errors/deleteidentityresponsebody.ts): Identity not found. Status code `404`. Applicable to 1 of 152 methods.*
 * [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 152 methods.*
 * [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 152 methods.*
 * [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 152 methods.*
@@ -911,7 +908,6 @@ run();
 * [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 152 methods.*
 * [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 152 methods.*
 * [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 152 methods.*
-* [`RetrieveIdentityIdentitiesResponseBody`](./src/models/errors/retrieveidentityidentitiesresponsebody.ts): Failed to fetch metrics. Status code `500`. Applicable to 1 of 152 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
