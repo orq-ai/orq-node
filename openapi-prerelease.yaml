@@ -1981,7 +1981,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01krrb9gr3fr8qzfx75hac8fd5"
+              default: "reasoning_01krtzz2q8b9q7j2px9fnwjqjz"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -4210,6 +4210,111 @@ components:
         created_at:
           type: "string"
           format: "date-time"
+    ListIdentitiesResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Identity"
+        has_more:
+          type: "boolean"
+    CreateIdentityRequest:
+      type: "object"
+      properties:
+        external_id:
+          type: "string"
+        display_name:
+          type: "string"
+        email:
+          type: "string"
+        avatar_url:
+          type: "string"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        metadata:
+          type: "object"
+    CreateIdentityResponse:
+      type: "object"
+      properties:
+        identity:
+          $ref: "#/components/schemas/Identity"
+    RetrieveIdentityResponse:
+      type: "object"
+      properties:
+        identity:
+          $ref: "#/components/schemas/Identity"
+    DeleteIdentityResponse:
+      type: "object"
+      properties: {}
+    UpdateIdentityRequest:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        display_name:
+          type: "string"
+        email:
+          type: "string"
+        avatar_url:
+          type: "string"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        metadata:
+          type: "object"
+    UpdateIdentityResponse:
+      type: "object"
+      properties:
+        identity:
+          $ref: "#/components/schemas/Identity"
+    Identity:
+      type: "object"
+      properties:
+        _id:
+          type: "string"
+        external_id:
+          type: "string"
+        workspace_id:
+          type: "string"
+        display_name:
+          type: "string"
+        email:
+          type: "string"
+        avatar_url:
+          type: "string"
+        tags:
+          type: "array"
+          items:
+            type: "string"
+        metadata:
+          type: "object"
+        created:
+          type: "string"
+        updated:
+          type: "string"
+        metrics:
+          $ref: "#/components/schemas/IdentityMetrics"
+    IdentityMetrics:
+      type: "object"
+      properties:
+        total_tokens:
+          type: "number"
+          format: "double"
+        total_cost:
+          type: "number"
+          format: "double"
+        total_requests:
+          type: "number"
+          format: "double"
+        error_rate:
+          type: "number"
+          format: "double"
     ListProjectsResponse:
       type: "object"
       properties:
@@ -5472,10 +5577,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-16T12:13:21.426Z"
+                                  default: "2026-05-17T12:53:06.560Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-16T12:13:21.426Z"
+                                  default: "2026-05-17T12:53:06.560Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -5598,10 +5703,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-16T12:13:21.426Z"
+                                  default: "2026-05-17T12:53:06.560Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-16T12:13:21.426Z"
+                                  default: "2026-05-17T12:53:06.560Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -5819,10 +5924,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             updated:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -5918,10 +6023,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             updated:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6032,10 +6137,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             updated:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6131,10 +6236,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             updated:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6530,10 +6635,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             updated:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6645,10 +6750,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             updated:
                               type: "string"
-                              default: "2026-05-16T12:13:21.426Z"
+                              default: "2026-05-17T12:53:06.560Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -7458,10 +7563,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           updated:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7584,10 +7689,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           updated:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7805,10 +7910,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -7904,10 +8009,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8018,10 +8123,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8117,10 +8222,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8516,10 +8621,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8631,10 +8736,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9006,10 +9111,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           updated:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9132,10 +9237,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           updated:
                             type: "string"
-                            default: "2026-05-16T12:13:21.426Z"
+                            default: "2026-05-17T12:53:06.560Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9353,10 +9458,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9452,10 +9557,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9566,10 +9671,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9665,10 +9770,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10064,10 +10169,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10179,10 +10284,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       updated:
                         type: "string"
-                        default: "2026-05-16T12:13:21.426Z"
+                        default: "2026-05-17T12:53:06.560Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10934,818 +11039,6 @@ paths:
                     type: "string"
                 required:
                   - "message"
-      security:
-        - ApiKey: []
-  /v2/identities:
-    get:
-      tags:
-        - "Identities"
-      x-speakeasy-group: "identities"
-      x-speakeasy-name-override: "list"
-      x-cli-group: "identities"
-      x-cli-name: "list"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst identities = await orq.identities.list({\n  limit: 50,\n  search: \"john\",\n  startingAfter: \"contact_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n});\n\nconsole.log(identities.data);\nconsole.log('Has more:', identities.hasMore);"
-        - lang: "python"
-          label: "Python"
-          source: "from orq_ai_sdk import Orq\nimport os\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nidentities = orq.identities.list(\n    limit=50,\n    search=\"john\",\n    starting_after=\"contact_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n)\n\nprint(identities.data)\nprint(f\"Has more: {identities.has_more}\")"
-      operationId: "ListIdentities"
-      summary: "List identities"
-      description: "Retrieves a paginated list of identities in your workspace. Use pagination parameters to navigate through large identity lists efficiently."
-      parameters:
-        - schema:
-            type: "integer"
-            minimum: 1
-            maximum: 50
-            default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
-          required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
-          name: "limit"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
-          required: false
-          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
-          name: "starting_after"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
-          required: false
-          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
-          name: "ending_before"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "Search identities by display name or email address. Minimum 2 characters required."
-            example: "john"
-          required: false
-          description: "Search identities by display name or email address. Minimum 2 characters required."
-          name: "search"
-          in: "query"
-        - schema:
-            type: "object"
-            properties:
-              tags:
-                type: "array"
-                items:
-                  type: "string"
-            description: "Filter identities by tags. Can be provided as JSON object {\"tags\": [\"premium\", \"beta-user\"]} or as query format \"tags=premium,beta-user\""
-            example:
-              tags:
-                - "premium"
-                - "beta-user"
-          required: false
-          description: "Filter identities by tags. Can be provided as JSON object {\"tags\": [\"premium\", \"beta-user\"]} or as query format \"tags=premium,beta-user\""
-          name: "filter_by"
-          in: "query"
-        - schema:
-            type:
-              - "boolean"
-              - "null"
-            default: false
-            description: "Include usage metrics of the last 30 days for each identity."
-          required: false
-          description: "Include usage metrics of the last 30 days for each identity."
-          name: "include_metrics"
-          in: "query"
-      responses:
-        "200":
-          description: "List of identities"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  object:
-                    type: "string"
-                    enum:
-                      - "list"
-                  data:
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        _id:
-                          type: "string"
-                          format: "ulid"
-                          description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact"
-                          example: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                        external_id:
-                          type: "string"
-                          minLength: 1
-                          maxLength: 120
-                          description: "Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user."
-                          example: "user_12345"
-                        display_name:
-                          type:
-                            - "string"
-                            - "null"
-                          description: "Display name or nickname of the contact user. This is typically shown in user interfaces."
-                          example: "Jane Smith"
-                        email:
-                          type:
-                            - "string"
-                            - "null"
-                          format: "email"
-                          description: "Email address of the contact user"
-                          example: "jane.smith@example.com"
-                        avatar_url:
-                          type:
-                            - "string"
-                            - "null"
-                          format: "uri"
-                          description: "URL linking to the contact user's avatar image"
-                          example: "https://example.com/avatars/jane-smith.jpg"
-                        tags:
-                          type: "array"
-                          items:
-                            type: "string"
-                          description: "Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications."
-                          example:
-                            - "premium"
-                            - "beta-user"
-                            - "enterprise"
-                        metadata:
-                          type: "object"
-                          additionalProperties: {}
-                          description: "Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application."
-                          example:
-                            department: "Engineering"
-                            role: "Senior Developer"
-                            subscription_tier: "premium"
-                            last_login: "2024-01-15T10:30:00Z"
-                        created:
-                          anyOf:
-                            - type: "string"
-                              format: "date-time"
-                            - type: "string"
-                              format: "date-time"
-                          default: "2026-05-16T12:13:19.225Z"
-                          readOnly: true
-                          format: "date-time"
-                          description: "The date and time the resource was created"
-                        updated:
-                          anyOf:
-                            - type: "string"
-                              format: "date-time"
-                              default: "2026-05-16T12:13:19.225Z"
-                            - type: "string"
-                              format: "date-time"
-                          readOnly: true
-                          format: "date-time"
-                          description: "The date and time the resource was last updated"
-                        metrics:
-                          type: "object"
-                          properties:
-                            total_cost:
-                              type: "number"
-                              description: "Total cost in dollars of the last 30 days"
-                              example: 100
-                            total_tokens:
-                              type: "number"
-                              description: "Total tokens of the last 30 days"
-                              example: 1000
-                            total_requests:
-                              type: "number"
-                              description: "Total requests of the last 30 days"
-                              example: 1000
-                            error_rate:
-                              type: "number"
-                              description: "P50 error rate of the last 30 days"
-                              example: 22
-                          required:
-                            - "total_cost"
-                            - "total_tokens"
-                            - "total_requests"
-                            - "error_rate"
-                      required:
-                        - "_id"
-                        - "external_id"
-                        - "metrics"
-                  has_more:
-                    type: "boolean"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
-              example:
-                data:
-                  - _id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                    external_id: "user_12345"
-                    display_name: "Jane Smith"
-                    email: "jane.smith@example.com"
-                    avatar_url: "https://example.com/avatars/jane-smith.jpg"
-                    tags:
-                      - "premium"
-                      - "beta-user"
-                    metadata:
-                      department: "Engineering"
-                      role: "Senior Developer"
-                    created: "2024-01-15T10:30:00Z"
-                    updated: "2024-01-15T10:30:00Z"
-                  - _id: "contact_01ARZ3NDEKTSV4RRFFQ69G5XY"
-                    external_id: "user_67890"
-                    display_name: "John Doe"
-                    email: "john.doe@example.com"
-                    tags:
-                      - "enterprise"
-                    metadata:
-                      department: "Sales"
-                      role: "Account Manager"
-                    created: "2024-01-14T09:15:00Z"
-                    updated: "2024-01-14T09:15:00Z"
-                has_more: false
-      security:
-        - ApiKey: []
-    post:
-      tags:
-        - "Identities"
-      x-speakeasy-group: "identities"
-      x-speakeasy-name-override: "create"
-      x-cli-group: "identities"
-      x-cli-name: "create"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst identity = await orq.identities.create({\n  externalId: \"user_12345\",\n  displayName: \"Jane Smith\",\n  email: \"jane.smith@example.com\",\n  tags: [\"premium\", \"beta-user\"],\n  metadata: {\n    department: \"Engineering\",\n    role: \"Senior Developer\"\n  }\n});\n\nconsole.log(identity);"
-        - lang: "python"
-          label: "Python"
-          source: "from orq_ai_sdk import Orq\nimport os\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nidentity = orq.identities.create(\n    external_id=\"user_12345\",\n    display_name=\"Jane Smith\",\n    email=\"jane.smith@example.com\",\n    tags=[\"premium\", \"beta-user\"],\n    metadata={\n        \"department\": \"Engineering\",\n        \"role\": \"Senior Developer\"\n    }\n)\n\nprint(identity)"
-      operationId: "CreateIdentity"
-      summary: "Create an identity"
-      description: "Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement."
-      requestBody:
-        description: "Identity profile information"
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                external_id:
-                  type: "string"
-                  minLength: 1
-                  maxLength: 120
-                  description: "Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user."
-                  example: "user_12345"
-                display_name:
-                  type:
-                    - "string"
-                    - "null"
-                  description: "Display name or nickname of the contact user. This is typically shown in user interfaces."
-                  example: "Jane Smith"
-                email:
-                  type:
-                    - "string"
-                    - "null"
-                  format: "email"
-                  description: "Email address of the contact user"
-                  example: "jane.smith@example.com"
-                avatar_url:
-                  type:
-                    - "string"
-                    - "null"
-                  format: "uri"
-                  description: "URL linking to the contact user's avatar image"
-                  example: "https://example.com/avatars/jane-smith.jpg"
-                tags:
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications."
-                  example:
-                    - "premium"
-                    - "beta-user"
-                    - "enterprise"
-                metadata:
-                  type: "object"
-                  additionalProperties: {}
-                  description: "Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application."
-                  example:
-                    department: "Engineering"
-                    role: "Senior Developer"
-                    subscription_tier: "premium"
-                    last_login: "2024-01-15T10:30:00Z"
-              required:
-                - "external_id"
-      responses:
-        "201":
-          description: "Created Identity"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  _id:
-                    type: "string"
-                    format: "ulid"
-                    description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact"
-                    example: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                  external_id:
-                    type: "string"
-                    minLength: 1
-                    maxLength: 120
-                    description: "Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user."
-                    example: "user_12345"
-                  workspace_id:
-                    type: "string"
-                    format: "uuid"
-                    description: "Unique identifier for the workspace to which the contact belongs"
-                    example: "550e8400-e29b-41d4-a716-446655440000"
-                  display_name:
-                    type:
-                      - "string"
-                      - "null"
-                    description: "Display name or nickname of the contact user. This is typically shown in user interfaces."
-                    example: "Jane Smith"
-                  email:
-                    type:
-                      - "string"
-                      - "null"
-                    format: "email"
-                    description: "Email address of the contact user"
-                    example: "jane.smith@example.com"
-                  avatar_url:
-                    type:
-                      - "string"
-                      - "null"
-                    format: "uri"
-                    description: "URL linking to the contact user's avatar image"
-                    example: "https://example.com/avatars/jane-smith.jpg"
-                  tags:
-                    type: "array"
-                    items:
-                      type: "string"
-                    description: "Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications."
-                    example:
-                      - "premium"
-                      - "beta-user"
-                      - "enterprise"
-                  metadata:
-                    type: "object"
-                    additionalProperties: {}
-                    description: "Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application."
-                    example:
-                      department: "Engineering"
-                      role: "Senior Developer"
-                      subscription_tier: "premium"
-                      last_login: "2024-01-15T10:30:00Z"
-                  created:
-                    anyOf:
-                      - type: "string"
-                        format: "date-time"
-                      - type: "string"
-                        format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
-                    readOnly: true
-                    format: "date-time"
-                    description: "The date and time the resource was created"
-                  updated:
-                    anyOf:
-                      - type: "string"
-                        format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
-                      - type: "string"
-                        format: "date-time"
-                    readOnly: true
-                    format: "date-time"
-                    description: "The date and time the resource was last updated"
-                required:
-                  - "_id"
-                  - "external_id"
-                  - "workspace_id"
-              example:
-                _id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                external_id: "user_12345"
-                workspace_id: "550e8400-e29b-41d4-a716-446655440000"
-                display_name: "Jane Smith"
-                email: "jane.smith@example.com"
-                avatar_url: "https://example.com/avatars/jane-smith.jpg"
-                tags:
-                  - "premium"
-                  - "beta-user"
-                metadata:
-                  department: "Engineering"
-                  role: "Senior Developer"
-                  subscription_tier: "premium"
-                created: "2024-01-15T10:30:00Z"
-                updated: "2024-01-15T10:30:00Z"
-      security:
-        - ApiKey: []
-  /v2/identities/{id}:
-    get:
-      tags:
-        - "Identities"
-      x-speakeasy-group: "identities"
-      x-speakeasy-name-override: "retrieve"
-      x-cli-group: "identities"
-      x-cli-name: "retrieve"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\n// Retrieve by identity ID\nconst identity = await orq.identities.retrieve(\"contact_01ARZ3NDEKTSV4RRFFQ69G5FAV\");\n\n// Or retrieve by external ID\nconst identityByExternalId = await orq.identities.retrieve(\"user_12345\");\n\nconsole.log(identity);"
-        - lang: "python"
-          label: "Python"
-          source: "from orq_ai_sdk import Orq\nimport os\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\n# Retrieve by identity ID\nidentity = orq.identities.retrieve(\"contact_01ARZ3NDEKTSV4RRFFQ69G5FAV\")\n\n# Or retrieve by external ID\nidentity_by_external_id = orq.identities.retrieve(\"user_12345\")\n\nprint(identity)"
-      operationId: "RetrieveIdentity"
-      summary: "Retrieve an identity"
-      description: "Retrieves detailed information about a specific identity using their identity ID or external ID from your system."
-      parameters:
-        - schema:
-            type: "string"
-            description: "Unique identity id or external id"
-          required: true
-          description: "Unique identity id or external id"
-          name: "id"
-          in: "path"
-        - schema:
-            type:
-              - "boolean"
-              - "null"
-            default: false
-            description: "Include usage metrics of the last 30 days for the identity."
-          required: false
-          description: "Include usage metrics of the last 30 days for the identity."
-          name: "include_metrics"
-          in: "query"
-      responses:
-        "200":
-          description: "Identity details"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  _id:
-                    type: "string"
-                    format: "ulid"
-                    description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact"
-                    example: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                  external_id:
-                    type: "string"
-                    minLength: 1
-                    maxLength: 120
-                    description: "Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user."
-                    example: "user_12345"
-                  display_name:
-                    type:
-                      - "string"
-                      - "null"
-                    description: "Display name or nickname of the contact user. This is typically shown in user interfaces."
-                    example: "Jane Smith"
-                  email:
-                    type:
-                      - "string"
-                      - "null"
-                    format: "email"
-                    description: "Email address of the contact user"
-                    example: "jane.smith@example.com"
-                  avatar_url:
-                    type:
-                      - "string"
-                      - "null"
-                    format: "uri"
-                    description: "URL linking to the contact user's avatar image"
-                    example: "https://example.com/avatars/jane-smith.jpg"
-                  tags:
-                    type: "array"
-                    items:
-                      type: "string"
-                    description: "Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications."
-                    example:
-                      - "premium"
-                      - "beta-user"
-                      - "enterprise"
-                  metadata:
-                    type: "object"
-                    additionalProperties: {}
-                    description: "Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application."
-                    example:
-                      department: "Engineering"
-                      role: "Senior Developer"
-                      subscription_tier: "premium"
-                      last_login: "2024-01-15T10:30:00Z"
-                  created:
-                    anyOf:
-                      - type: "string"
-                        format: "date-time"
-                      - type: "string"
-                        format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
-                    readOnly: true
-                    format: "date-time"
-                    description: "The date and time the resource was created"
-                  updated:
-                    anyOf:
-                      - type: "string"
-                        format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
-                      - type: "string"
-                        format: "date-time"
-                    readOnly: true
-                    format: "date-time"
-                    description: "The date and time the resource was last updated"
-                  metrics:
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      total_cost:
-                        type: "number"
-                        description: "Total cost in dollars of the last 30 days"
-                        example: 100
-                      total_tokens:
-                        type: "number"
-                        description: "Total tokens of the last 30 days"
-                        example: 1000
-                      total_requests:
-                        type: "number"
-                        description: "Total requests of the last 30 days"
-                        example: 1000
-                      error_rate:
-                        type: "number"
-                        description: "Error rate of the last 30 days as a ratio (0–1)"
-                        example: 22
-                    required:
-                      - "total_cost"
-                      - "total_tokens"
-                      - "total_requests"
-                      - "error_rate"
-                required:
-                  - "_id"
-                  - "external_id"
-              example:
-                _id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                external_id: "user_12345"
-                display_name: "Jane Smith"
-                email: "jane.smith@example.com"
-                avatar_url: "https://example.com/avatars/jane-smith.jpg"
-                tags:
-                  - "premium"
-                  - "beta-user"
-                metadata:
-                  department: "Engineering"
-                  role: "Senior Developer"
-                  subscription_tier: "premium"
-                created: "2024-01-15T10:30:00Z"
-                updated: "2024-01-15T10:30:00Z"
-        "404":
-          description: "Identity not found"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  error:
-                    type: "string"
-                    description: "Error message"
-                required:
-                  - "error"
-              example:
-                error: "Identity not found"
-        "500":
-          description: "Failed to fetch metrics"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  error:
-                    type: "string"
-                    description: "Error message"
-                required:
-                  - "error"
-              example:
-                error: "Failed to fetch metrics"
-      security:
-        - ApiKey: []
-    patch:
-      tags:
-        - "Identities"
-      x-speakeasy-group: "identities"
-      x-speakeasy-name-override: "update"
-      x-cli-group: "identities"
-      x-cli-name: "update"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst updatedIdentity = await orq.identities.update(\"user_12345\", {\n  displayName: \"Jane Smith-Wilson\",\n  tags: [\"premium\", \"beta-user\", \"enterprise\"],\n  metadata: {\n    department: \"Engineering\",\n    role: \"Senior Developer\",\n    subscriptionTier: \"enterprise\"\n  }\n});\n\nconsole.log(updatedIdentity);"
-        - lang: "python"
-          label: "Python"
-          source: "from orq_ai_sdk import Orq\nimport os\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nupdated_identity = orq.identities.update(\n    \"user_12345\",\n    display_name=\"Jane Smith-Wilson\",\n    tags=[\"premium\", \"beta-user\", \"enterprise\"],\n    metadata={\n        \"department\": \"Engineering\",\n        \"role\": \"Senior Developer\",\n        \"subscription_tier\": \"enterprise\"\n    }\n)\n\nprint(updated_identity)"
-      operationId: "UpdateIdentity"
-      summary: "Update an identity"
-      description: "Updates specific fields of an existing identity. Only the fields provided in the request body will be updated."
-      parameters:
-        - schema:
-            type: "string"
-            description: "Unique identity id or external id"
-          required: true
-          description: "Unique identity id or external id"
-          name: "id"
-          in: "path"
-      requestBody:
-        description: "Identity fields to update"
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                display_name:
-                  type:
-                    - "string"
-                    - "null"
-                  description: "Display name or nickname of the contact user. This is typically shown in user interfaces."
-                  example: "Jane Smith"
-                email:
-                  type:
-                    - "string"
-                    - "null"
-                  format: "email"
-                  description: "Email address of the contact user"
-                  example: "jane.smith@example.com"
-                avatar_url:
-                  type:
-                    - "string"
-                    - "null"
-                  format: "uri"
-                  description: "URL linking to the contact user's avatar image"
-                  example: "https://example.com/avatars/jane-smith.jpg"
-                tags:
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications."
-                  example:
-                    - "premium"
-                    - "beta-user"
-                    - "enterprise"
-                metadata:
-                  type: "object"
-                  additionalProperties: {}
-                  description: "Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application."
-                  example:
-                    department: "Engineering"
-                    role: "Senior Developer"
-                    subscription_tier: "premium"
-                    last_login: "2024-01-15T10:30:00Z"
-      responses:
-        "200":
-          description: "Updated identity"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  _id:
-                    type: "string"
-                    format: "ulid"
-                    description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact"
-                    example: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                  external_id:
-                    type: "string"
-                    minLength: 1
-                    maxLength: 120
-                    description: "Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user."
-                    example: "user_12345"
-                  display_name:
-                    type:
-                      - "string"
-                      - "null"
-                    description: "Display name or nickname of the contact user. This is typically shown in user interfaces."
-                    example: "Jane Smith"
-                  email:
-                    type:
-                      - "string"
-                      - "null"
-                    format: "email"
-                    description: "Email address of the contact user"
-                    example: "jane.smith@example.com"
-                  avatar_url:
-                    type:
-                      - "string"
-                      - "null"
-                    format: "uri"
-                    description: "URL linking to the contact user's avatar image"
-                    example: "https://example.com/avatars/jane-smith.jpg"
-                  tags:
-                    type: "array"
-                    items:
-                      type: "string"
-                    description: "Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications."
-                    example:
-                      - "premium"
-                      - "beta-user"
-                      - "enterprise"
-                  metadata:
-                    type: "object"
-                    additionalProperties: {}
-                    description: "Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application."
-                    example:
-                      department: "Engineering"
-                      role: "Senior Developer"
-                      subscription_tier: "premium"
-                      last_login: "2024-01-15T10:30:00Z"
-                  created:
-                    anyOf:
-                      - type: "string"
-                        format: "date-time"
-                      - type: "string"
-                        format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
-                    readOnly: true
-                    format: "date-time"
-                    description: "The date and time the resource was created"
-                  updated:
-                    anyOf:
-                      - type: "string"
-                        format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
-                      - type: "string"
-                        format: "date-time"
-                    readOnly: true
-                    format: "date-time"
-                    description: "The date and time the resource was last updated"
-                required:
-                  - "_id"
-                  - "external_id"
-              example:
-                id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
-                external_id: "user_12345"
-                display_name: "Jane Smith-Wilson"
-                email: "jane.smith-wilson@example.com"
-                avatar_url: "https://example.com/avatars/jane-smith.jpg"
-                tags:
-                  - "premium"
-                  - "beta-user"
-                  - "enterprise"
-                metadata:
-                  department: "Engineering"
-                  role: "Senior Developer"
-                  subscription_tier: "enterprise"
-                  last_updated: "2024-01-15T10:30:00Z"
-                created: "2024-01-15T10:30:00Z"
-                updated: "2024-01-16T14:45:00Z"
-        "404":
-          description: "Identity not found"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  message:
-                    type: "string"
-                    description: "Error message"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-    delete:
-      tags:
-        - "Identities"
-      x-speakeasy-group: "identities"
-      x-speakeasy-name-override: "delete"
-      x-cli-group: "identities"
-      x-cli-name: "delete"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\n// Delete by identity ID\nawait orq.identities.delete(\"identity_01ARZ3NDEKTSV4RRFFQ69G5FAV\");\n\n// Or delete by external ID\nawait orq.identities.delete(\"user_12345\");\n\nconsole.log(\"Identity deleted successfully\");"
-        - lang: "python"
-          label: "Python"
-          source: "from orq_ai_sdk import Orq\nimport os\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\n# Delete by identity ID\norq.identities.delete(\"identity_01ARZ3NDEKTSV4RRFFQ69G5FAV\")\n\n# Or delete by external ID\norq.identities.delete(\"user_12345\")\n\nprint(\"Identity deleted successfully\")"
-      operationId: "DeleteIdentity"
-      summary: "Delete an identity"
-      description: "Permanently deletes an identity from your workspace and cleans up associated budget configurations. This action cannot be undone."
-      parameters:
-        - schema:
-            type: "string"
-            description: "Identity ID or External ID"
-          required: true
-          description: "Identity ID or External ID"
-          name: "id"
-          in: "path"
-      responses:
-        "204":
-          description: "Identity successfully deleted"
-        "404":
-          description: "Identity not found"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  error:
-                    type: "string"
-                    description: "Error message"
-                required:
-                  - "error"
-              example:
-                error: "Identity not found"
       security:
         - ApiKey: []
   /v2/deployments/invoke:
@@ -24109,7 +23402,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KRRB9GWHNP8BVM0SPSH28NDX"
+                                          default: "01KRTZZ2VJJ6ZGATSQY0SCJ086"
                                         name:
                                           type: "string"
                                         description:
@@ -25750,7 +25043,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KRRB9GYF42KTK9KW2DDRS77A"
+                                          default: "01KRTZZ2XMPF4JP8VM6W0QY3PP"
                                         name:
                                           type: "string"
                                         description:
@@ -34124,7 +33417,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRRB9H78PTTNEG6PQEZ4RGCC"
+                              default: "tool_01KRTZZ379SQF6MZ7P4H5H13XK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34221,7 +33514,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRRB9H7A3JE1T310YDJNSR7D"
+                              default: "tool_01KRTZZ37A2Y5HDV4SAE8BMHGK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34320,7 +33613,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRRB9H7BA1H5ZHK87V937P3Q"
+                              default: "tool_01KRTZZ37CH8XES4S1JAB3VES3"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34455,7 +33748,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRRB9H7D1PJEB7DGMKC6XQMY"
+                              default: "tool_01KRTZZ37E8Z2XD5AWPV0THBVW"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34527,7 +33820,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KRRB9H7F8N7ZXDBNN1YHDC36"
+                                        default: "01KRTZZ37FH885YDXFVTK41PQH"
                                       name:
                                         type: "string"
                                       description:
@@ -34586,7 +33879,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KRRB9H7FVNP9Z6M889CE2X7F"
+                              default: "tool_01KRTZZ37GEF41VHCCQ6RYAERK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35137,7 +34430,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H7T0HPWRZ7DF6MW914A"
+                        default: "tool_01KRTZZ37TA6SY7SRFYQFH3JGM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35234,7 +34527,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H7VF0GFFX37HT9A30DY"
+                        default: "tool_01KRTZZ37WJZ1E726J9J63M4ZH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35333,7 +34626,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H7WDS29B4BVSME15A65"
+                        default: "tool_01KRTZZ37XZ6C8N62EG9AM9JPB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35468,7 +34761,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H7YC8H6TWH3J5H5WS7G"
+                        default: "tool_01KRTZZ37Z2YANE34GHRYVJZKF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35540,7 +34833,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KRRB9H80AAZW409VDMHMT414"
+                                  default: "01KRTZZ380X7CBF6B91PMD5DDX"
                                 name:
                                   type: "string"
                                 description:
@@ -35599,7 +34892,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H81W6XXD6QCVQ819T5B"
+                        default: "tool_01KRTZZ381ATHY9G154KYZ8NP0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36056,7 +35349,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KRRB9H8XMNMKBKD4WW54D3HY"
+                                default: "01KRTZZ38ZN445TV9BRHKPA90F"
                               name:
                                 type: "string"
                               description:
@@ -36202,7 +35495,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H89DVEBD2JVQ9NQQ83M"
+                        default: "tool_01KRTZZ38FJA37N0J0Y3X6XBND"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36299,7 +35592,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H8HBSE3JKNVP0KFFE7W"
+                        default: "tool_01KRTZZ38HCQJAQ08FZRFHEGQ1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36398,7 +35691,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H8K8RVT31HX8136YST6"
+                        default: "tool_01KRTZZ38J5PS8H2NPAF6NKFYS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36533,7 +35826,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H8N6K7FE8M0BAFDBSHN"
+                        default: "tool_01KRTZZ38M6VQ0ZN45FQ9PAW90"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36605,7 +35898,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KRRB9H8PSM3TG5FK3JXZ4TRH"
+                                  default: "01KRTZZ38NNJKA6X8MCBPFQXZZ"
                                 name:
                                   type: "string"
                                 description:
@@ -36664,7 +35957,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H8Q11W25CSFT36PDRHT"
+                        default: "tool_01KRTZZ38P7CD4HQYNFNHPAS80"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36821,7 +36114,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H98EZ297E0VD2ABQBYJ"
+                        default: "tool_01KRTZZ399YRGV5S2PRT0WBBTJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36918,7 +36211,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H99Z1XVSHNBFZX1PFVY"
+                        default: "tool_01KRTZZ39B70SJH2YN2HH7D1EV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37017,7 +36310,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H9AED4S7FGMTPQA4HSK"
+                        default: "tool_01KRTZZ39CBDEZDP612SPD5CWS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37152,7 +36445,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H9C4ZW021A2F7ZMR5Z7"
+                        default: "tool_01KRTZZ39EWJRYJMFRGJ2Y7RES"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37224,7 +36517,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KRRB9H9DPD3V608YGNH18P48"
+                                  default: "01KRTZZ39FCFNN1QC2MQZXHVY6"
                                 name:
                                   type: "string"
                                 description:
@@ -37283,7 +36576,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KRRB9H9FSERA8Y868B4MGJBT"
+                        default: "tool_01KRTZZ39H1H7P8TVQG1MQ5Z6R"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39435,7 +38728,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KRRB9HCMTBPNWHJ3ZZAQF8TP"
+                          default: "01KRTZZ3CXGM7V2J85C7QTGJ8V"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -39603,7 +38896,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KRRB9HCQGCHBS2KJRR0FRSH7"
+                    default: "01KRTZZ3D0YN8C0TP7NFF3XKK2"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39701,7 +38994,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KRRB9HCPRXQ55ZGH201CR7SF"
+                    default: "01KRTZZ3CZZ2WV5Y92BQAGNG5N"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39837,7 +39130,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KRRB9HCS4V2ZQX8SKBCDWKXE"
+                    default: "01KRTZZ3D2SJFNAK6BV8JBBRKY"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42434,7 +41727,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-16T12:13:19.225Z"
+                          default: "2026-05-17T12:53:05.297Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42442,7 +41735,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:19.225Z"
+                              default: "2026-05-17T12:53:05.298Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -42584,7 +41877,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
+                    default: "2026-05-17T12:53:05.297Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42592,7 +41885,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.298Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42719,7 +42012,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
+                    default: "2026-05-17T12:53:05.297Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42727,7 +42020,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.298Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42887,7 +42180,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
+                    default: "2026-05-17T12:53:05.297Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42895,7 +42188,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.298Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -43276,7 +42569,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-16T12:13:34.033Z"
+                                    default: "2026-05-17T12:53:20.987Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43316,7 +42609,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-16T12:13:34.034Z"
+                                    default: "2026-05-17T12:53:20.988Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43356,7 +42649,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-16T12:13:34.034Z"
+                                    default: "2026-05-17T12:53:20.989Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43392,7 +42685,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-16T12:13:19.225Z"
+                          default: "2026-05-17T12:53:05.297Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -43400,7 +42693,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:19.225Z"
+                              default: "2026-05-17T12:53:05.298Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43974,7 +43267,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-16T12:13:34.045Z"
+                                default: "2026-05-17T12:53:21.026Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -44014,7 +43307,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-16T12:13:34.045Z"
+                                default: "2026-05-17T12:53:21.029Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -44054,7 +43347,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-16T12:13:34.046Z"
+                                default: "2026-05-17T12:53:21.030Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -44090,7 +43383,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-05-16T12:13:19.225Z"
+                      default: "2026-05-17T12:53:05.297Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -44098,7 +43391,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-05-16T12:13:19.225Z"
+                          default: "2026-05-17T12:53:05.298Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -44420,7 +43713,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:34.039Z"
+                              default: "2026-05-17T12:53:20.996Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44460,7 +43753,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:34.040Z"
+                              default: "2026-05-17T12:53:20.997Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44500,7 +43793,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:34.040Z"
+                              default: "2026-05-17T12:53:20.997Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44536,7 +43829,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
+                    default: "2026-05-17T12:53:05.297Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44544,7 +43837,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.298Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45117,7 +44410,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:34.070Z"
+                              default: "2026-05-17T12:53:21.130Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45157,7 +44450,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:34.071Z"
+                              default: "2026-05-17T12:53:21.133Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45197,7 +44490,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:34.071Z"
+                              default: "2026-05-17T12:53:21.137Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45233,7 +44526,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-16T12:13:19.225Z"
+                    default: "2026-05-17T12:53:05.297Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45241,7 +44534,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.298Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -51708,7 +51001,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-16T12:13:34.183Z"
+                      default: "2026-05-17T12:53:21.612Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51747,7 +51040,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-16T12:13:34.184Z"
+                      default: "2026-05-17T12:53:21.615Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51786,7 +51079,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-16T12:13:34.184Z"
+                      default: "2026-05-17T12:53:21.616Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52118,7 +51411,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-16T12:13:19.225Z"
+                          default: "2026-05-17T12:53:05.297Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52126,7 +51419,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:19.225Z"
+                              default: "2026-05-17T12:53:05.298Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52200,7 +51493,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-16T12:13:19.225Z"
+                          default: "2026-05-17T12:53:05.297Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52208,7 +51501,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-16T12:13:19.225Z"
+                              default: "2026-05-17T12:53:05.298Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52395,7 +51688,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.297Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52403,7 +51696,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-16T12:13:19.225Z"
+                            default: "2026-05-17T12:53:05.298Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52477,7 +51770,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.297Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52485,7 +51778,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-16T12:13:19.225Z"
+                            default: "2026-05-17T12:53:05.298Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52582,7 +51875,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.297Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52590,7 +51883,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-16T12:13:19.225Z"
+                            default: "2026-05-17T12:53:05.298Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52664,7 +51957,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.297Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52672,7 +51965,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-16T12:13:19.225Z"
+                            default: "2026-05-17T12:53:05.298Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52867,7 +52160,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.297Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52875,7 +52168,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-16T12:13:19.225Z"
+                            default: "2026-05-17T12:53:05.298Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52949,7 +52242,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-16T12:13:19.225Z"
+                        default: "2026-05-17T12:53:05.297Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52957,7 +52250,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-16T12:13:19.225Z"
+                            default: "2026-05-17T12:53:05.298Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -54330,6 +53623,170 @@ paths:
                 $ref: "#/components/schemas/UpdateFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/identities:
+    get:
+      tags:
+        - "IdentitiesService"
+        - "Identities"
+      summary: "List identities"
+      description: "Retrieves a paginated list of identities in your workspace. Use pagination parameters to navigate through large identity lists efficiently."
+      operationId: "ListIdentities"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "filter_by.tags"
+          in: "query"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "include_metrics"
+          in: "query"
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIdentitiesResponse"
+      x-speakeasy-group: "identities"
+      x-speakeasy-name-override: "list"
+      x-cli-group: "identities"
+      x-cli-name: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "IdentitiesService"
+        - "Identities"
+      summary: "Create an identity"
+      description: "Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail."
+      operationId: "CreateIdentity"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIdentityRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateIdentityResponse"
+      x-speakeasy-group: "identities"
+      x-speakeasy-name-override: "create"
+      x-cli-group: "identities"
+      x-cli-name: "create"
+      security:
+        - ApiKey: []
+  /v2/identities/{id}:
+    get:
+      tags:
+        - "IdentitiesService"
+        - "Identities"
+      summary: "Retrieve an identity"
+      description: "Retrieves detailed information about a specific identity using their identity ID or external ID from your system."
+      operationId: "RetrieveIdentity"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "include_metrics"
+          in: "query"
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetrieveIdentityResponse"
+      x-speakeasy-group: "identities"
+      x-speakeasy-name-override: "retrieve"
+      x-cli-group: "identities"
+      x-cli-name: "retrieve"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "IdentitiesService"
+        - "Identities"
+      summary: "Delete an identity"
+      description: "Permanently deletes an identity from your workspace and cleans up associated budget configurations."
+      operationId: "DeleteIdentity"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteIdentityResponse"
+      x-speakeasy-group: "identities"
+      x-speakeasy-name-override: "delete"
+      x-cli-group: "identities"
+      x-cli-name: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "IdentitiesService"
+        - "Identities"
+      summary: "Update an identity"
+      description: "Updates specific fields of an existing identity. Only the fields provided in the request body will be updated."
+      operationId: "UpdateIdentity"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateIdentityRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateIdentityResponse"
+      x-speakeasy-group: "identities"
+      x-speakeasy-name-override: "update"
+      x-cli-group: "identities"
+      x-cli-name: "update"
       security:
         - ApiKey: []
   /v2/projects:
@@ -56062,6 +55519,9 @@ tags:
   - name: "Files"
     description: "File upload and retrieval operations."
   - name: "FilesService"
+  - name: "Identities"
+    description: "Identities represent end users from your system for usage and engagement tracking."
+  - name: "IdentitiesService"
   - name: "Projects"
     description: "Projects organize resources within a workspace"
   - name: "ProjectsService"
