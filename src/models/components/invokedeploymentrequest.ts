@@ -739,7 +739,7 @@ export type Messages =
 /**
  * Metadata about the document
  */
-export type Metadata = {
+export type InvokeDeploymentRequestMetadata = {
   /**
    * Name of the file the text is from.
    */
@@ -762,7 +762,7 @@ export type Documents = {
   /**
    * Metadata about the document
    */
-  metadata?: Metadata | undefined;
+  metadata?: InvokeDeploymentRequestMetadata | undefined;
 };
 
 export type InvokeOptions = {
@@ -2342,17 +2342,17 @@ export function messagesToJSON(messages: Messages): string {
 }
 
 /** @internal */
-export type Metadata$Outbound = {
+export type InvokeDeploymentRequestMetadata$Outbound = {
   file_name?: string | undefined;
   file_type?: string | undefined;
   page_number?: number | undefined;
 };
 
 /** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
+export const InvokeDeploymentRequestMetadata$outboundSchema: z.ZodType<
+  InvokeDeploymentRequestMetadata$Outbound,
   z.ZodTypeDef,
-  Metadata
+  InvokeDeploymentRequestMetadata
 > = z.object({
   fileName: z.string().optional(),
   fileType: z.string().optional(),
@@ -2365,14 +2365,20 @@ export const Metadata$outboundSchema: z.ZodType<
   });
 });
 
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
+export function invokeDeploymentRequestMetadataToJSON(
+  invokeDeploymentRequestMetadata: InvokeDeploymentRequestMetadata,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequestMetadata$outboundSchema.parse(
+      invokeDeploymentRequestMetadata,
+    ),
+  );
 }
 
 /** @internal */
 export type Documents$Outbound = {
   text: string;
-  metadata?: Metadata$Outbound | undefined;
+  metadata?: InvokeDeploymentRequestMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -2382,7 +2388,8 @@ export const Documents$outboundSchema: z.ZodType<
   Documents
 > = z.object({
   text: z.string(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
+  metadata: z.lazy(() => InvokeDeploymentRequestMetadata$outboundSchema)
+    .optional(),
 });
 
 export function documentsToJSON(documents: Documents): string {

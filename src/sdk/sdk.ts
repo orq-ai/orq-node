@@ -10,7 +10,6 @@ import { unwrapAsync } from "../types/fp.js";
 import { Agents } from "./agents.js";
 import { Annotations } from "./annotations.js";
 import { Chunking } from "./chunking.js";
-import { Contacts } from "./contacts.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
@@ -24,7 +23,7 @@ import { MemoryStores } from "./memorystores.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
 import { Prompts } from "./prompts.js";
-import { Remoteconfigs } from "./remoteconfigs.js";
+import { Reporting } from "./reporting.js";
 import { Responses } from "./responses.js";
 import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
@@ -33,24 +32,9 @@ import { Skills } from "./skills.js";
 import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
-  private _contacts?: Contacts;
-  get contacts(): Contacts {
-    return (this._contacts ??= new Contacts(this._options));
-  }
-
-  private _feedback?: Feedback;
-  get feedback(): Feedback {
-    return (this._feedback ??= new Feedback(this._options));
-  }
-
   private _evals?: Evals;
   get evals(): Evals {
     return (this._evals ??= new Evals(this._options));
-  }
-
-  private _identities?: Identities;
-  get identities(): Identities {
-    return (this._identities ??= new Identities(this._options));
   }
 
   private _deployments?: Deployments;
@@ -66,11 +50,6 @@ export class Orq extends ClientSDK {
   private _prompts?: Prompts;
   get prompts(): Prompts {
     return (this._prompts ??= new Prompts(this._options));
-  }
-
-  private _remoteconfigs?: Remoteconfigs;
-  get remoteconfigs(): Remoteconfigs {
-    return (this._remoteconfigs ??= new Remoteconfigs(this._options));
   }
 
   private _tools?: Tools;
@@ -108,6 +87,11 @@ export class Orq extends ClientSDK {
     return (this._annotations ??= new Annotations(this._options));
   }
 
+  private _feedback?: Feedback;
+  get feedback(): Feedback {
+    return (this._feedback ??= new Feedback(this._options));
+  }
+
   private _humanReviewSets?: HumanReviewSets;
   get humanReviewSets(): HumanReviewSets {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
@@ -133,6 +117,11 @@ export class Orq extends ClientSDK {
     return (this._files ??= new Files(this._options));
   }
 
+  private _identities?: Identities;
+  get identities(): Identities {
+    return (this._identities ??= new Identities(this._options));
+  }
+
   private _projects?: Projects;
   get projects(): Projects {
     return (this._projects ??= new Projects(this._options));
@@ -151,6 +140,11 @@ export class Orq extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
+  }
+
+  private _reporting?: Reporting;
+  get reporting(): Reporting {
+    return (this._reporting ??= new Reporting(this._options));
   }
 
   async postV2FeedbackEvaluationRemove(

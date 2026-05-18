@@ -9,6 +9,33 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const Product = {
+  Remoteconfigs: "remoteconfigs",
+  Deployments: "deployments",
+  Experiments: "experiments",
+  Playgrounds: "playgrounds",
+  Spreadsheets: "spreadsheets",
+  SpreadsheetRun: "spreadsheet_run",
+  LlmEvaluator: "llm_evaluator",
+  Knowledge: "knowledge",
+  Router: "router",
+  Workflows: "workflows",
+  ExternalEvents: "external_events",
+  Agents: "agents",
+  MemoryStores: "memory-stores",
+  Generic: "generic",
+  Evaluators: "evaluators",
+  Otel: "otel",
+  AiChat: "ai-chat",
+} as const;
+export type Product = ClosedEnum<typeof Product>;
+
+export type PostV2FeedbackRemoveRequestBody = {
+  id: string;
+  traceId: string;
+  product: Product;
+};
+
 export const PostV2FeedbackRemoveProduct = {
   Remoteconfigs: "remoteconfigs",
   Deployments: "deployments",
@@ -32,48 +59,18 @@ export type PostV2FeedbackRemoveProduct = ClosedEnum<
   typeof PostV2FeedbackRemoveProduct
 >;
 
-export type PostV2FeedbackRemoveRequestBody = {
-  id: string;
-  traceId: string;
-  product: PostV2FeedbackRemoveProduct;
-};
-
-export const PostV2FeedbackRemoveFeedbackProduct = {
-  Remoteconfigs: "remoteconfigs",
-  Deployments: "deployments",
-  Experiments: "experiments",
-  Playgrounds: "playgrounds",
-  Spreadsheets: "spreadsheets",
-  SpreadsheetRun: "spreadsheet_run",
-  LlmEvaluator: "llm_evaluator",
-  Knowledge: "knowledge",
-  Router: "router",
-  Workflows: "workflows",
-  ExternalEvents: "external_events",
-  Agents: "agents",
-  MemoryStores: "memory-stores",
-  Generic: "generic",
-  Evaluators: "evaluators",
-  Otel: "otel",
-  AiChat: "ai-chat",
-} as const;
-export type PostV2FeedbackRemoveFeedbackProduct = ClosedEnum<
-  typeof PostV2FeedbackRemoveFeedbackProduct
->;
-
 /**
  * Event has been dispatched to delete the feedback
  */
 export type PostV2FeedbackRemoveResponseBody = {
   id: string;
   traceId: string;
-  product: PostV2FeedbackRemoveFeedbackProduct;
+  product: PostV2FeedbackRemoveProduct;
 };
 
 /** @internal */
-export const PostV2FeedbackRemoveProduct$outboundSchema: z.ZodNativeEnum<
-  typeof PostV2FeedbackRemoveProduct
-> = z.nativeEnum(PostV2FeedbackRemoveProduct);
+export const Product$outboundSchema: z.ZodNativeEnum<typeof Product> = z
+  .nativeEnum(Product);
 
 /** @internal */
 export type PostV2FeedbackRemoveRequestBody$Outbound = {
@@ -90,7 +87,7 @@ export const PostV2FeedbackRemoveRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   traceId: z.string(),
-  product: PostV2FeedbackRemoveProduct$outboundSchema,
+  product: Product$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     traceId: "trace_id",
@@ -108,9 +105,9 @@ export function postV2FeedbackRemoveRequestBodyToJSON(
 }
 
 /** @internal */
-export const PostV2FeedbackRemoveFeedbackProduct$inboundSchema: z.ZodNativeEnum<
-  typeof PostV2FeedbackRemoveFeedbackProduct
-> = z.nativeEnum(PostV2FeedbackRemoveFeedbackProduct);
+export const PostV2FeedbackRemoveProduct$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2FeedbackRemoveProduct
+> = z.nativeEnum(PostV2FeedbackRemoveProduct);
 
 /** @internal */
 export const PostV2FeedbackRemoveResponseBody$inboundSchema: z.ZodType<
@@ -120,7 +117,7 @@ export const PostV2FeedbackRemoveResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   trace_id: z.string(),
-  product: PostV2FeedbackRemoveFeedbackProduct$inboundSchema,
+  product: PostV2FeedbackRemoveProduct$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "trace_id": "traceId",

@@ -7,12 +7,13 @@ import { UpdateIdentityRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdateIdentityRequest = {
   id: "<id>",
+  updateIdentityRequest: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `id`                                                                                         | *string*                                                                                     | :heavy_check_mark:                                                                           | Unique identity id or external id                                                            |
-| `requestBody`                                                                                | [operations.UpdateIdentityRequestBody](../../models/operations/updateidentityrequestbody.md) | :heavy_minus_sign:                                                                           | Identity fields to update                                                                    |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `id`                                                                                 | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `updateIdentityRequest`                                                              | [components.UpdateIdentityRequest](../../models/components/updateidentityrequest.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |

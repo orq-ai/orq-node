@@ -15,3 +15,9 @@ const value: number = 1284.03;
 const value: boolean = true;
 ```
 
+### `string`
+
+```typescript
+const value: string = "<value>";
+```
+
