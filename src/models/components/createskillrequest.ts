@@ -6,29 +6,11 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type CreateSkillRequest = {
-  /**
-   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, underscores, and hyphens.
-   */
   displayName?: string | undefined;
-  /**
-   * Short human-readable summary of what the skill is for.
-   */
   description?: string | undefined;
-  /**
-   * Free-form labels for organizing the skill.
-   */
   tags?: Array<string> | undefined;
-  /**
-   * Project path where the skill should be stored.
-   */
   path?: string | undefined;
-  /**
-   * Project that should contain the skill.
-   */
   projectId?: string | undefined;
-  /**
-   * Instruction body for the skill. Omit to create metadata first and fill instructions later.
-   */
   instructions?: string | undefined;
 };
 

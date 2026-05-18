@@ -28,9 +28,6 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete a skill
- *
- * @remarks
- * Deletes a skill from the workspace. The response body is empty when the delete succeeds.
  */
 export function skillsDelete(
   client: OrqCore,

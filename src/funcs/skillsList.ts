@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List all skills
  *
  * @remarks
- * Returns the skills visible to the current workspace, ordered by creation time with the newest skill first. Use `starting_after` or `ending_before` to page through large collections.
+ * Returns a list of skills. Skills are sorted by creation date, with the most recently created skills appearing first.
  */
 export function skillsList(
   client: OrqCore,

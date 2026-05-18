@@ -28,9 +28,6 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete a project
- *
- * @remarks
- * Deletes a project from the workspace. The response body is empty when the delete succeeds.
  */
 export function projectsDelete(
   client: OrqCore,

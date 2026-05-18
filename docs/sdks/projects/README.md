@@ -12,7 +12,7 @@
 
 ## list
 
-Returns projects visible to the current workspace, ordered by creation time with the newest project first. Use `starting_after` or `ending_before` to page through large collections.
+Returns a list of projects. Projects are sorted by creation date, with the most recently created projects appearing first.
 
 ### Example Usage
 
@@ -81,7 +81,7 @@ run();
 
 ## create
 
-Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
+Creates a new project within the workspace. Projects organize resources like skills, deployments, and datasets.
 
 ### Example Usage
 
@@ -223,7 +223,7 @@ run();
 
 ## delete
 
-Deletes a project from the workspace. The response body is empty when the delete succeeds.
+Delete a project
 
 ### Example Usage
 

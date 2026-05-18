@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Create a new project
  *
  * @remarks
- * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
+ * Creates a new project within the workspace. Projects organize resources like skills, deployments, and datasets.
  */
 export function projectsCreate(
   client: OrqCore,

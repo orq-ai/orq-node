@@ -162,28 +162,28 @@ export type Structured = {
   value: { [k: string]: any };
 };
 
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value =
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
   | number
   | boolean;
 
-export type InvokeEvalResponseBodyEvalsResponseValue = {
+export type InvokeEvalResponseBodyEvalsResponse200Value = {
   type: string;
   value: number | boolean;
 };
 
 export type InvokeEvalResponseBodyHTTP = {
   type: "http_eval";
-  value?: InvokeEvalResponseBodyEvalsResponseValue | null | undefined;
+  value?: InvokeEvalResponseBodyEvalsResponse200Value | null | undefined;
 };
 
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value =
   | number
   | boolean
   | string;
 
 export type OriginalValue = number | boolean | string;
 
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value =
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue =
   | number
   | boolean
   | string;
@@ -212,7 +212,7 @@ export type ResponseBodyJury = {
   stats?: Stats | undefined;
 };
 
-export type InvokeEvalResponseBodyEvalsValue = {
+export type InvokeEvalResponseBodyEvalsResponseValue = {
   workflowRunId?: string | undefined;
   traceId?: string | undefined;
   value: number | boolean | string | null;
@@ -224,10 +224,10 @@ export type InvokeEvalResponseBodyEvalsValue = {
 
 export type InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator";
-  value: InvokeEvalResponseBodyEvalsValue | null;
+  value: InvokeEvalResponseBodyEvalsResponseValue | null;
 };
 
-export type InvokeEvalResponseBodyValue = {
+export type InvokeEvalResponseBodyEvalsValue = {
   f1: number;
   precision: number;
   recall: number;
@@ -235,7 +235,7 @@ export type InvokeEvalResponseBodyValue = {
 
 export type BERTScore = {
   type: "bert_score";
-  value: InvokeEvalResponseBodyValue;
+  value: InvokeEvalResponseBodyEvalsValue;
 };
 
 export type Rouge1 = {
@@ -256,7 +256,7 @@ export type RougeL = {
   recall: number;
 };
 
-export type ResponseBodyValue = {
+export type InvokeEvalResponseBodyValue = {
   rouge1: Rouge1;
   rouge2: Rouge2;
   rougeL: RougeL;
@@ -264,7 +264,7 @@ export type ResponseBodyValue = {
 
 export type RougeN = {
   type: "rouge_n";
-  value: ResponseBodyValue;
+  value: InvokeEvalResponseBodyValue;
 };
 
 export type StringArray = {
@@ -272,10 +272,7 @@ export type StringArray = {
   values: Array<string | null>;
 };
 
-export type InvokeEvalResponseBodyEvalsResponse200Value =
-  | boolean
-  | string
-  | number;
+export type ResponseBodyValue = boolean | string | number;
 
 export type ResponseBodyBoolean = {
   type: "boolean";
@@ -647,83 +644,12 @@ export function structuredFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value$inboundSchema:
-  z.ZodType<
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([z.number(), z.boolean()]);
-
-export function invokeEvalResponseBodyEvalsResponse200ApplicationJSON8ValueFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
-  InvokeEvalResponseBodyEvalsResponseValue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.string(),
-  value: z.union([z.number(), z.boolean()]),
-});
-
-export function invokeEvalResponseBodyEvalsResponseValueFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  InvokeEvalResponseBodyEvalsResponseValue,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      InvokeEvalResponseBodyEvalsResponseValue$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeEvalResponseBodyEvalsResponseValue' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeEvalResponseBodyHTTP$inboundSchema: z.ZodType<
-  InvokeEvalResponseBodyHTTP,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("http_eval"),
-  value: z.nullable(
-    z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
-  ).optional(),
-});
-
-export function invokeEvalResponseBodyHTTPFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeEvalResponseBodyHTTP, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeEvalResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalResponseBodyHTTP' from JSON`,
-  );
-}
-
-/** @internal */
 export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue$inboundSchema:
   z.ZodType<
     InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue,
     z.ZodTypeDef,
     unknown
-  > = z.union([z.number(), z.boolean(), z.string()]);
+  > = z.union([z.number(), z.boolean()]);
 
 export function invokeEvalResponseBodyEvalsResponse200ApplicationJSONValueFromJSON(
   jsonString: string,
@@ -741,19 +667,51 @@ export function invokeEvalResponseBodyEvalsResponse200ApplicationJSONValueFromJS
 }
 
 /** @internal */
-export const OriginalValue$inboundSchema: z.ZodType<
-  OriginalValue,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.number(), z.boolean(), z.string()]);
+export const InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema:
+  z.ZodType<
+    InvokeEvalResponseBodyEvalsResponse200Value,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.string(),
+    value: z.union([z.number(), z.boolean()]),
+  });
 
-export function originalValueFromJSON(
+export function invokeEvalResponseBodyEvalsResponse200ValueFromJSON(
   jsonString: string,
-): SafeParseResult<OriginalValue, SDKValidationError> {
+): SafeParseResult<
+  InvokeEvalResponseBodyEvalsResponse200Value,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => OriginalValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OriginalValue' from JSON`,
+    (x) =>
+      InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'InvokeEvalResponseBodyEvalsResponse200Value' from JSON`,
+  );
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyHTTP$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyHTTP,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("http_eval"),
+  value: z.nullable(
+    z.lazy(() => InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema),
+  ).optional(),
+});
+
+export function invokeEvalResponseBodyHTTPFromJSON(
+  jsonString: string,
+): SafeParseResult<InvokeEvalResponseBodyHTTP, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InvokeEvalResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyHTTP' from JSON`,
   );
 }
 
@@ -777,6 +735,46 @@ export function invokeEvalResponseBodyEvalsResponse200ApplicationJSON7ValueFromJ
       InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value$inboundSchema
         .parse(JSON.parse(x)),
     `Failed to parse 'InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value' from JSON`,
+  );
+}
+
+/** @internal */
+export const OriginalValue$inboundSchema: z.ZodType<
+  OriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+export function originalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<OriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue$inboundSchema:
+  z.ZodType<
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.number(), z.boolean(), z.string()]);
+
+export function invokeEvalResponseBodyEvalsResponse200ApplicationJSON7ValueValueFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyEvalsResponse200ApplicationJson7ValueValue' from JSON`,
   );
 }
 
@@ -851,8 +849,8 @@ export function responseBodyJuryFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
-  InvokeEvalResponseBodyEvalsValue,
+export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyEvalsResponseValue,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -873,13 +871,19 @@ export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
   });
 });
 
-export function invokeEvalResponseBodyEvalsValueFromJSON(
+export function invokeEvalResponseBodyEvalsResponseValueFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalResponseBodyEvalsValue, SDKValidationError> {
+): SafeParseResult<
+  InvokeEvalResponseBodyEvalsResponseValue,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalResponseBodyEvalsValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalResponseBodyEvalsValue' from JSON`,
+    (x) =>
+      InvokeEvalResponseBodyEvalsResponseValue$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'InvokeEvalResponseBodyEvalsResponseValue' from JSON`,
   );
 }
 
@@ -891,7 +895,7 @@ export const InvokeEvalResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("llm_evaluator"),
   value: z.nullable(
-    z.lazy(() => InvokeEvalResponseBodyEvalsValue$inboundSchema),
+    z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
   ),
 });
 
@@ -906,8 +910,8 @@ export function invokeEvalResponseBodyLLMFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyValue$inboundSchema: z.ZodType<
-  InvokeEvalResponseBodyValue,
+export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyEvalsValue,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -916,13 +920,13 @@ export const InvokeEvalResponseBodyValue$inboundSchema: z.ZodType<
   recall: z.number(),
 });
 
-export function invokeEvalResponseBodyValueFromJSON(
+export function invokeEvalResponseBodyEvalsValueFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalResponseBodyValue, SDKValidationError> {
+): SafeParseResult<InvokeEvalResponseBodyEvalsValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalResponseBodyValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalResponseBodyValue' from JSON`,
+    (x) => InvokeEvalResponseBodyEvalsValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyEvalsValue' from JSON`,
   );
 }
 
@@ -933,7 +937,7 @@ export const BERTScore$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("bert_score"),
-  value: z.lazy(() => InvokeEvalResponseBodyValue$inboundSchema),
+  value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$inboundSchema),
 });
 
 export function bertScoreFromJSON(
@@ -1001,8 +1005,8 @@ export function rougeLFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyValue$inboundSchema: z.ZodType<
-  ResponseBodyValue,
+export const InvokeEvalResponseBodyValue$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyValue,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1017,13 +1021,13 @@ export const ResponseBodyValue$inboundSchema: z.ZodType<
   });
 });
 
-export function responseBodyValueFromJSON(
+export function invokeEvalResponseBodyValueFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyValue, SDKValidationError> {
+): SafeParseResult<InvokeEvalResponseBodyValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyValue' from JSON`,
+    (x) => InvokeEvalResponseBodyValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyValue' from JSON`,
   );
 }
 
@@ -1031,7 +1035,7 @@ export function responseBodyValueFromJSON(
 export const RougeN$inboundSchema: z.ZodType<RougeN, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("rouge_n"),
-    value: z.lazy(() => ResponseBodyValue$inboundSchema),
+    value: z.lazy(() => InvokeEvalResponseBodyValue$inboundSchema),
   });
 
 export function rougeNFromJSON(
@@ -1065,26 +1069,19 @@ export function stringArrayFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema:
-  z.ZodType<
-    InvokeEvalResponseBodyEvalsResponse200Value,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([z.boolean(), z.string(), z.number()]);
+export const ResponseBodyValue$inboundSchema: z.ZodType<
+  ResponseBodyValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.boolean(), z.string(), z.number()]);
 
-export function invokeEvalResponseBodyEvalsResponse200ValueFromJSON(
+export function responseBodyValueFromJSON(
   jsonString: string,
-): SafeParseResult<
-  InvokeEvalResponseBodyEvalsResponse200Value,
-  SDKValidationError
-> {
+): SafeParseResult<ResponseBodyValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'InvokeEvalResponseBodyEvalsResponse200Value' from JSON`,
+    (x) => ResponseBodyValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyValue' from JSON`,
   );
 }
 

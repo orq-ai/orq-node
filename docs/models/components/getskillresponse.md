@@ -12,4 +12,4 @@ let value: GetSkillResponse = {};
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `skill`                                              | [components.Skill](../../models/components/skill.md) | :heavy_minus_sign:                                   | Requested skill.                                     |
+| `skill`                                              | [components.Skill](../../models/components/skill.md) | :heavy_minus_sign:                                   | N/A                                                  |
