@@ -1,19 +1,19 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.9.11",
+  "version": "4.9.12",
   "author": "Orq",
   "exports": {
-    "./*": "./*",
     "./langchain": {
+      "import": "./langchain/index.mjs",
       "require": "./langchain/index.js",
-      "types": "./langchain/index.d.mts",
-      "import": "./langchain/index.mjs"
+      "types": "./langchain/index.d.mts"
     },
     ".": {
+      "import": "./index.js",
       "require": "./index.js",
-      "types": "./index.d.ts",
-      "import": "./index.js"
-    }
+      "types": "./index.d.ts"
+    },
+    "./*": "./*"
   },
   "main": "./index.js",
   "sideEffects": false,
