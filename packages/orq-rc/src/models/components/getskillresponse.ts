@@ -9,9 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Skill, Skill$inboundSchema } from "./skill.js";
 
 export type GetSkillResponse = {
-  /**
-   * Requested skill.
-   */
   skill?: Skill | undefined;
 };
 

@@ -748,7 +748,6 @@ export type GetEvalsLlm2 = {
   prompt: string;
   categories?: Array<string> | undefined;
   categoricalLabels?: Array<GetEvalsLLMEvalsCategoricalLabels> | undefined;
-  datasetId?: string | undefined;
   key: string;
   mode: "jury";
   jury: GetEvalsLLMJury;
@@ -825,7 +824,6 @@ export type GetEvalsLlm1 = {
   prompt: string;
   categories?: Array<string> | undefined;
   categoricalLabels?: Array<GetEvalsLLMCategoricalLabels> | undefined;
-  datasetId?: string | undefined;
   key: string;
   mode: "single";
   model: string;
@@ -1042,8 +1040,8 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -1222,8 +1220,8 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -2052,8 +2050,8 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
@@ -2234,8 +2232,8 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
@@ -2412,8 +2410,8 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2602,8 +2600,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2968,8 +2966,8 @@ export const GetEvalsLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2990,7 +2988,6 @@ export const GetEvalsLlm2$inboundSchema: z.ZodType<
   categorical_labels: z.array(
     z.lazy(() => GetEvalsLLMEvalsCategoricalLabels$inboundSchema),
   ).optional(),
-  dataset_id: z.string().optional(),
   key: z.string(),
   mode: z.literal("jury"),
   jury: z.lazy(() => GetEvalsLLMJury$inboundSchema),
@@ -2999,7 +2996,6 @@ export const GetEvalsLlm2$inboundSchema: z.ZodType<
     "_id": "id",
     "guardrail_config": "guardrailConfig",
     "categorical_labels": "categoricalLabels",
-    "dataset_id": "datasetId",
   });
 });
 
@@ -3179,8 +3175,8 @@ export const GetEvalsLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-19T12:48:05.358Z"),
-  updated: z.string().default("2026-05-19T12:48:05.358Z"),
+  created: z.string().default("2026-05-19T14:38:14.326Z"),
+  updated: z.string().default("2026-05-19T14:38:14.326Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3201,7 +3197,6 @@ export const GetEvalsLlm1$inboundSchema: z.ZodType<
   categorical_labels: z.array(
     z.lazy(() => GetEvalsLLMCategoricalLabels$inboundSchema),
   ).optional(),
-  dataset_id: z.string().optional(),
   key: z.string(),
   mode: z.literal("single"),
   model: z.string(),
@@ -3210,7 +3205,6 @@ export const GetEvalsLlm1$inboundSchema: z.ZodType<
     "_id": "id",
     "guardrail_config": "guardrailConfig",
     "categorical_labels": "categoricalLabels",
-    "dataset_id": "datasetId",
   });
 });
 

@@ -9,7 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelRef = {
-  displayName?: string | undefined;
   integrationId?: string | undefined;
   model: string;
   weight?: number | undefined;
@@ -21,19 +20,16 @@ export const ModelRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  display_name: z.string().optional(),
   integration_id: z.string().optional(),
   model: z.string(),
   weight: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "display_name": "displayName",
     "integration_id": "integrationId",
   });
 });
 /** @internal */
 export type ModelRef$Outbound = {
-  display_name?: string | undefined;
   integration_id?: string | undefined;
   model: string;
   weight?: number | undefined;
@@ -45,13 +41,11 @@ export const ModelRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelRef
 > = z.object({
-  displayName: z.string().optional(),
   integrationId: z.string().optional(),
   model: z.string(),
   weight: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
-    displayName: "display_name",
     integrationId: "integration_id",
   });
 });

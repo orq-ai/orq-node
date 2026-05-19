@@ -4,16 +4,87 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveIdentityRequest = {
+  /**
+   * Unique identity id or external id
+   */
   id: string;
-  includeMetrics?: boolean | undefined;
+  /**
+   * Include usage metrics of the last 30 days for the identity.
+   */
+  includeMetrics?: boolean | null | undefined;
+};
+
+export type Metrics = {
+  /**
+   * Total cost in dollars of the last 30 days
+   */
+  totalCost: number;
+  /**
+   * Total tokens of the last 30 days
+   */
+  totalTokens: number;
+  /**
+   * Total requests of the last 30 days
+   */
+  totalRequests: number;
+  /**
+   * Error rate of the last 30 days as a ratio (0–1)
+   */
+  errorRate: number;
+};
+
+/**
+ * Identity details
+ */
+export type RetrieveIdentityResponseBody = {
+  /**
+   * Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact
+   */
+  id: string;
+  /**
+   * Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user.
+   */
+  externalId: string;
+  /**
+   * Display name or nickname of the contact user. This is typically shown in user interfaces.
+   */
+  displayName?: string | null | undefined;
+  /**
+   * Email address of the contact user
+   */
+  email?: string | null | undefined;
+  /**
+   * URL linking to the contact user's avatar image
+   */
+  avatarUrl?: string | null | undefined;
+  /**
+   * Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications.
+   */
+  tags?: Array<string> | undefined;
+  /**
+   * Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application.
+   */
+  metadata?: { [k: string]: any } | undefined;
+  /**
+   * The date and time the resource was created
+   */
+  created?: Date | undefined;
+  /**
+   * The date and time the resource was last updated
+   */
+  updated: Date;
+  metrics?: Metrics | null | undefined;
 };
 
 /** @internal */
 export type RetrieveIdentityRequest$Outbound = {
   id: string;
-  include_metrics?: boolean | undefined;
+  include_metrics: boolean | null;
 };
 
 /** @internal */
@@ -23,7 +94,7 @@ export const RetrieveIdentityRequest$outboundSchema: z.ZodType<
   RetrieveIdentityRequest
 > = z.object({
   id: z.string(),
-  includeMetrics: z.boolean().optional(),
+  includeMetrics: z.nullable(z.boolean().default(false)),
 }).transform((v) => {
   return remap$(v, {
     includeMetrics: "include_metrics",
@@ -35,5 +106,69 @@ export function retrieveIdentityRequestToJSON(
 ): string {
   return JSON.stringify(
     RetrieveIdentityRequest$outboundSchema.parse(retrieveIdentityRequest),
+  );
+}
+
+/** @internal */
+export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
+  z.object({
+    total_cost: z.number(),
+    total_tokens: z.number(),
+    total_requests: z.number(),
+    error_rate: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+      "total_tokens": "totalTokens",
+      "total_requests": "totalRequests",
+      "error_rate": "errorRate",
+    });
+  });
+
+export function metricsFromJSON(
+  jsonString: string,
+): SafeParseResult<Metrics, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Metrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metrics' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveIdentityResponseBody$inboundSchema: z.ZodType<
+  RetrieveIdentityResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  external_id: z.string(),
+  display_name: z.nullable(z.string()).optional(),
+  email: z.nullable(z.string()).optional(),
+  avatar_url: z.nullable(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
+  metadata: z.record(z.any()).optional(),
+  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  updated: z.string().datetime({ offset: true }).default(
+    "2026-05-19T14:38:12.201Z",
+  ).transform(v => new Date(v)),
+  metrics: z.nullable(z.lazy(() => Metrics$inboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "external_id": "externalId",
+    "display_name": "displayName",
+    "avatar_url": "avatarUrl",
+  });
+});
+
+export function retrieveIdentityResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveIdentityResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveIdentityResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveIdentityResponseBody' from JSON`,
   );
 }

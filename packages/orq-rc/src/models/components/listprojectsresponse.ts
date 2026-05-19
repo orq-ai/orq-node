@@ -10,20 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Project, Project$inboundSchema } from "./project.js";
 
 export type ListProjectsResponse = {
-  /**
-   * Object discriminator for list responses; always `list`.
-   */
   object?: string | undefined;
-  /**
-   * Page of projects, ordered newest first.
-   */
   data?: Array<Project> | undefined;
-  /**
-   * Whether more projects are available in the selected pagination
-   *
-   * @remarks
-   *  direction.
-   */
   hasMore?: boolean | undefined;
 };
 

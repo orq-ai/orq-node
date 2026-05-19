@@ -17,7 +17,7 @@ export class Projects extends ClientSDK {
    * List all projects
    *
    * @remarks
-   * Returns projects visible to the current workspace, ordered by creation time with the newest project first. Use `starting_after` or `ending_before` to page through large collections.
+   * Returns a list of projects. Projects are sorted by creation date, with the most recently created projects appearing first.
    */
   async list(
     request?: operations.ProjectListRequest | undefined,
@@ -34,7 +34,7 @@ export class Projects extends ClientSDK {
    * Create a new project
    *
    * @remarks
-   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
+   * Creates a new project within the workspace. Projects organize resources like skills, deployments, and datasets.
    */
   async create(
     request: components.CreateProjectRequest,
@@ -66,9 +66,6 @@ export class Projects extends ClientSDK {
 
   /**
    * Delete a project
-   *
-   * @remarks
-   * Deletes a project from the workspace. The response body is empty when the delete succeeds.
    */
   async delete(
     request: operations.ProjectDeleteRequest,

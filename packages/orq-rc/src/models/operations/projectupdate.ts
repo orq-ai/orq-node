@@ -7,9 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type ProjectUpdateRequest = {
-  /**
-   * Project ID to update.
-   */
   projectId: string;
   updateProjectRequest: components.UpdateProjectRequest;
 };

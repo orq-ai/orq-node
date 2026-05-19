@@ -9,22 +9,22 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Feedback extends ClientSDK {
-  async postV2FeedbackRemove(
-    request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
+  async postV2Feedback(
+    request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.PostV2FeedbackRemoveResponseBody> {
-    return unwrapAsync(feedbackPostV2FeedbackRemove(
+  ): Promise<operations.PostV2FeedbackResponseBody> {
+    return unwrapAsync(feedbackPostV2Feedback(
       this,
       request,
       options,
     ));
   }
 
-  async postV2Feedback(
-    request?: operations.PostV2FeedbackRequestBody | undefined,
+  async postV2FeedbackRemove(
+    request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.PostV2FeedbackResponseBody> {
-    return unwrapAsync(feedbackPostV2Feedback(
+  ): Promise<operations.PostV2FeedbackRemoveResponseBody> {
+    return unwrapAsync(feedbackPostV2FeedbackRemove(
       this,
       request,
       options,

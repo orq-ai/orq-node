@@ -12,4 +12,4 @@ let value: UpdateSkillResponse = {};
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `skill`                                              | [components.Skill](../../models/components/skill.md) | :heavy_minus_sign:                                   | Updated skill.                                       |
+| `skill`                                              | [components.Skill](../../models/components/skill.md) | :heavy_minus_sign:                                   | N/A                                                  |

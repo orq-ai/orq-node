@@ -14,7 +14,6 @@ let value: ModelRef = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `displayName`      | *string*           | :heavy_minus_sign: | N/A                |
 | `integrationId`    | *string*           | :heavy_minus_sign: | N/A                |
 | `model`            | *string*           | :heavy_check_mark: | N/A                |
 | `weight`           | *number*           | :heavy_minus_sign: | N/A                |

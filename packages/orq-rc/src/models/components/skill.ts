@@ -9,53 +9,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Skill = {
-  /**
-   * Unique skill identifier assigned by ORQ, for example
-   *
-   * @remarks
-   *  `skill_01H...`. Use this value in retrieve, update, and delete
-   *  requests.
-   */
   skillId?: string | undefined;
-  /**
-   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, underscores, and hyphens.
-   */
   displayName?: string | undefined;
-  /**
-   * Short human-readable summary of what the skill is for.
-   */
   description?: string | undefined;
-  /**
-   * Free-form labels used for organization and filtering in clients.
-   */
   tags?: Array<string> | undefined;
-  /**
-   * Project that owns or contains the skill.
-   */
   projectId?: string | undefined;
-  /**
-   * Project path where the skill is stored in the workspace.
-   */
   path?: string | undefined;
-  /**
-   * Time when the skill was created.
-   */
+  workspaceId?: string | undefined;
   createdAt?: Date | undefined;
-  /**
-   * Time when the skill was last updated.
-   */
   updatedAt?: Date | undefined;
-  /**
-   * User ID that created the skill.
-   */
   createdById?: string | undefined;
-  /**
-   * User ID that last updated the skill.
-   */
   updatedById?: string | undefined;
-  /**
-   * Instruction body executed or reused by clients that load this skill.
-   */
   instructions?: string | undefined;
   /**
    * Latest semver assigned by the activity log. Stamped on the document
@@ -76,6 +40,7 @@ export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
     tags: z.array(z.string()).optional(),
     project_id: z.string().optional(),
     path: z.string().optional(),
+    workspace_id: z.string().optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ).optional(),
@@ -91,6 +56,7 @@ export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
       "skill_id": "skillId",
       "display_name": "displayName",
       "project_id": "projectId",
+      "workspace_id": "workspaceId",
       "created_at": "createdAt",
       "updated_at": "updatedAt",
       "created_by_id": "createdById",

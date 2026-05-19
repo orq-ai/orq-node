@@ -12,4 +12,4 @@ let value: GetProjectResponse = {};
 
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `project`                                                | [components.Project](../../models/components/project.md) | :heavy_minus_sign:                                       | Requested project.                                       |
+| `project`                                                | [components.Project](../../models/components/project.md) | :heavy_minus_sign:                                       | N/A                                                      |
