@@ -1981,7 +1981,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01ks04fapebva9ehq7055x35p5"
+              default: "reasoning_01ks0ar23rh63qzwfay9pear4a"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -5577,10 +5577,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-19T12:48:05.358Z"
+                                  default: "2026-05-19T14:37:43.823Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-19T12:48:05.358Z"
+                                  default: "2026-05-19T14:37:43.823Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -5705,10 +5705,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-19T12:48:05.358Z"
+                                  default: "2026-05-19T14:37:43.823Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-19T12:48:05.358Z"
+                                  default: "2026-05-19T14:37:43.823Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -5928,10 +5928,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             updated:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6027,10 +6027,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             updated:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6141,10 +6141,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             updated:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6240,10 +6240,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             updated:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6639,10 +6639,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             updated:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6754,10 +6754,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             updated:
                               type: "string"
-                              default: "2026-05-19T12:48:05.358Z"
+                              default: "2026-05-19T14:37:43.823Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -7571,10 +7571,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           updated:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7699,10 +7699,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           updated:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -7922,10 +7922,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8021,10 +8021,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8135,10 +8135,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8234,10 +8234,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8633,10 +8633,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8748,10 +8748,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9127,10 +9127,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           updated:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9255,10 +9255,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           updated:
                             type: "string"
-                            default: "2026-05-19T12:48:05.358Z"
+                            default: "2026-05-19T14:37:43.823Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9478,10 +9478,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9577,10 +9577,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9691,10 +9691,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9790,10 +9790,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10189,10 +10189,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10304,10 +10304,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       updated:
                         type: "string"
-                        default: "2026-05-19T12:48:05.358Z"
+                        default: "2026-05-19T14:37:43.823Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -23422,7 +23422,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KS04FATMGBVGD154Y5GH941R"
+                                          default: "01KS0AR27Y02KZXFQDZRWG3DWZ"
                                         name:
                                           type: "string"
                                         description:
@@ -25063,7 +25063,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KS04FAWHEQK0RHMDZ68EN7G5"
+                                          default: "01KS0AR29JPJN8GSPCPNJYJH14"
                                         name:
                                           type: "string"
                                         description:
@@ -33437,7 +33437,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KS04FB5RQWT7B5CF30SGN7X3"
+                              default: "tool_01KS0AR2J290FB170D35SQQCQQ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -33534,7 +33534,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KS04FB5T1SRRN784SSA5SJ13"
+                              default: "tool_01KS0AR2J33R0TBFFFFS2ZXEMH"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -33633,7 +33633,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KS04FB5VKHR95JTBW2Z30ZP5"
+                              default: "tool_01KS0AR2J40CTQZ4ZRJCNWWGGD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -33768,7 +33768,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KS04FB5XP6HXZXG6BJW5MD7M"
+                              default: "tool_01KS0AR2J6TGJQPFDV01AQ5V70"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -33840,7 +33840,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KS04FB5YX979RT1K5N39VNQR"
+                                        default: "01KS0AR2J7YMM04SX6FJK92W8M"
                                       name:
                                         type: "string"
                                       description:
@@ -33899,7 +33899,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KS04FB5ZZVQW8AEXY0TVEXCZ"
+                              default: "tool_01KS0AR2J8GR9YSRT2NFY7V5NY"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34450,7 +34450,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB6HBA750M1SREZK39WM"
+                        default: "tool_01KS0AR2JSYW4W23BAC0D0TE9G"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34547,7 +34547,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB6JAGJ7M8X1WGAQNBP6"
+                        default: "tool_01KS0AR2JTAK5DFMFZHQGBTYSW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34646,7 +34646,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB6M49BFRE60K764W57Y"
+                        default: "tool_01KS0AR2JVZB1PRG1DEREXGVHQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34781,7 +34781,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB6PB0EKSM4A8XPPXZ80"
+                        default: "tool_01KS0AR2JXAZAQNEVPZ0W3D6MF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34853,7 +34853,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KS04FB6QZE3DX8BZZGBGCTAV"
+                                  default: "01KS0AR2JYRHMSKY3Q8P7TTJ8N"
                                 name:
                                   type: "string"
                                 description:
@@ -34912,7 +34912,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB6RR85R841Q94SA2MGE"
+                        default: "tool_01KS0AR2JZNV5JAF8ZHYGZTCJF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35369,7 +35369,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KS04FB7CHDJZ0JM2NVC84A2C"
+                                default: "01KS0AR2KH8MXVVMDFVXRDRQYS"
                               name:
                                 type: "string"
                               description:
@@ -35515,7 +35515,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB6Z20MWE0WQ6SKQJ18Y"
+                        default: "tool_01KS0AR2K5WP5E7H5QGSNH92GZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35612,7 +35612,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB709J0Q0EGCVWCX3VCE"
+                        default: "tool_01KS0AR2K63X3ZSRGCZ3Y8FSDX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35711,7 +35711,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB72M0JYD1XCHKVEY6BT"
+                        default: "tool_01KS0AR2K7GHE2N5WGMF8YA4DT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35846,7 +35846,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB73060QTSTK80VPAXTH"
+                        default: "tool_01KS0AR2K9KE4ZMFS5BQZA2KZX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35918,7 +35918,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KS04FB7501SH24X2DHKDG70A"
+                                  default: "01KS0AR2KA2NW46781G0K6T2MM"
                                 name:
                                   type: "string"
                                 description:
@@ -35977,7 +35977,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB75E26N1S9DMAAEX6XA"
+                        default: "tool_01KS0AR2KBZ335BRFNRG3REESK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36134,7 +36134,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB7YMG6HSHWQT4X8BY54"
+                        default: "tool_01KS0AR2M20R6DWR9MNC5FSGYX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36231,7 +36231,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB807ZFCQZJ5H1R5E8PW"
+                        default: "tool_01KS0AR2M46AKKEKPMQNJFDMW3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36330,7 +36330,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB818PNCEBP08ZW3EMHQ"
+                        default: "tool_01KS0AR2M696ZBNBVNCNYW43PD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36465,7 +36465,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB83HDHEGCKG6D66H20Z"
+                        default: "tool_01KS0AR2M9ERCQ1DK75HE7R3Z9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36537,7 +36537,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KS04FB84VBC8B8ZB502MY5VQ"
+                                  default: "01KS0AR2MA2S9VX3Y7PSNCFVZT"
                                 name:
                                   type: "string"
                                 description:
@@ -36596,7 +36596,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KS04FB85XKJ0TKMJH9HY3X83"
+                        default: "tool_01KS0AR2MB488GVVT6XAZ59VB7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38748,7 +38748,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KS04FBBA4X9Y4MD1Q6X943ZX"
+                          default: "01KS0AR2Q3M8S5WB3XD8495YV2"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -38916,7 +38916,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KS04FBBDJR1ABEPWEAM4VPPJ"
+                    default: "01KS0AR2Q6DKCRKWE9C12CHHWT"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39014,7 +39014,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KS04FBBCWERWKYFC1ZD1XTWC"
+                    default: "01KS0AR2Q567D09N2FNX6SE8G6"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39150,7 +39150,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KS04FBBFW0T156QF1G4EG60Z"
+                    default: "01KS0AR2Q8YXC2Q0NEZFRJGXX7"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -41747,7 +41747,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-19T12:48:04.099Z"
+                          default: "2026-05-19T14:37:42.647Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41755,7 +41755,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:04.100Z"
+                              default: "2026-05-19T14:37:42.652Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -41897,7 +41897,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-19T12:48:04.099Z"
+                    default: "2026-05-19T14:37:42.647Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41905,7 +41905,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-19T12:48:04.100Z"
+                        default: "2026-05-19T14:37:42.652Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42032,7 +42032,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-19T12:48:04.099Z"
+                    default: "2026-05-19T14:37:42.647Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42040,7 +42040,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-19T12:48:04.100Z"
+                        default: "2026-05-19T14:37:42.652Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42200,7 +42200,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-19T12:48:04.099Z"
+                    default: "2026-05-19T14:37:42.647Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42208,7 +42208,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-19T12:48:04.100Z"
+                        default: "2026-05-19T14:37:42.652Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42589,7 +42589,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-19T12:48:19.886Z"
+                                    default: "2026-05-19T14:37:57.413Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42629,7 +42629,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-19T12:48:19.887Z"
+                                    default: "2026-05-19T14:37:57.413Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42669,7 +42669,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-19T12:48:19.887Z"
+                                    default: "2026-05-19T14:37:57.414Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42705,7 +42705,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-19T12:48:04.099Z"
+                          default: "2026-05-19T14:37:42.647Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42713,7 +42713,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:04.100Z"
+                              default: "2026-05-19T14:37:42.652Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43287,7 +43287,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-19T12:48:19.898Z"
+                                default: "2026-05-19T14:37:57.423Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43327,7 +43327,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-19T12:48:19.898Z"
+                                default: "2026-05-19T14:37:57.424Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43367,7 +43367,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-19T12:48:19.899Z"
+                                default: "2026-05-19T14:37:57.424Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43403,7 +43403,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-05-19T12:48:04.099Z"
+                      default: "2026-05-19T14:37:42.647Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43411,7 +43411,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-05-19T12:48:04.100Z"
+                          default: "2026-05-19T14:37:42.652Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -43733,7 +43733,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:19.892Z"
+                              default: "2026-05-19T14:37:57.418Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43773,7 +43773,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:19.893Z"
+                              default: "2026-05-19T14:37:57.419Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43813,7 +43813,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:19.893Z"
+                              default: "2026-05-19T14:37:57.419Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -43849,7 +43849,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-19T12:48:04.099Z"
+                    default: "2026-05-19T14:37:42.647Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43857,7 +43857,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-19T12:48:04.100Z"
+                        default: "2026-05-19T14:37:42.652Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44430,7 +44430,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:19.924Z"
+                              default: "2026-05-19T14:37:57.450Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44470,7 +44470,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:19.924Z"
+                              default: "2026-05-19T14:37:57.451Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44510,7 +44510,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:19.925Z"
+                              default: "2026-05-19T14:37:57.451Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44546,7 +44546,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-19T12:48:04.099Z"
+                    default: "2026-05-19T14:37:42.647Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44554,7 +44554,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-19T12:48:04.100Z"
+                        default: "2026-05-19T14:37:42.652Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -51021,7 +51021,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-19T12:48:20.338Z"
+                      default: "2026-05-19T14:37:57.663Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51060,7 +51060,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-19T12:48:20.343Z"
+                      default: "2026-05-19T14:37:57.665Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51099,7 +51099,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-19T12:48:20.345Z"
+                      default: "2026-05-19T14:37:57.668Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51431,7 +51431,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-19T12:48:04.099Z"
+                          default: "2026-05-19T14:37:42.647Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51439,7 +51439,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:04.100Z"
+                              default: "2026-05-19T14:37:42.652Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51513,7 +51513,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-19T12:48:04.099Z"
+                          default: "2026-05-19T14:37:42.647Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51521,7 +51521,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-19T12:48:04.100Z"
+                              default: "2026-05-19T14:37:42.652Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51708,7 +51708,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-19T12:48:04.099Z"
+                        default: "2026-05-19T14:37:42.647Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51716,7 +51716,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-19T12:48:04.100Z"
+                            default: "2026-05-19T14:37:42.652Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51790,7 +51790,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-19T12:48:04.099Z"
+                        default: "2026-05-19T14:37:42.647Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51798,7 +51798,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-19T12:48:04.100Z"
+                            default: "2026-05-19T14:37:42.652Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51895,7 +51895,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-19T12:48:04.099Z"
+                        default: "2026-05-19T14:37:42.647Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51903,7 +51903,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-19T12:48:04.100Z"
+                            default: "2026-05-19T14:37:42.652Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51977,7 +51977,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-19T12:48:04.099Z"
+                        default: "2026-05-19T14:37:42.647Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51985,7 +51985,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-19T12:48:04.100Z"
+                            default: "2026-05-19T14:37:42.652Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52180,7 +52180,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-19T12:48:04.099Z"
+                        default: "2026-05-19T14:37:42.647Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52188,7 +52188,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-19T12:48:04.100Z"
+                            default: "2026-05-19T14:37:42.652Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52262,7 +52262,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-19T12:48:04.099Z"
+                        default: "2026-05-19T14:37:42.647Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52270,7 +52270,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-19T12:48:04.100Z"
+                            default: "2026-05-19T14:37:42.652Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
