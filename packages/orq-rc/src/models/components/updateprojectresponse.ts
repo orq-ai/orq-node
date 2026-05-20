@@ -9,6 +9,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Project, Project$inboundSchema } from "./project.js";
 
 export type UpdateProjectResponse = {
+  /**
+   * Updated project.
+   */
   project?: Project | undefined;
 };
 

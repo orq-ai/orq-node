@@ -9,16 +9,57 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Project = {
+  /**
+   * Unique project identifier assigned by ORQ. Use this value in
+   *
+   * @remarks
+   *  retrieve, update, and delete requests.
+   */
   projectId?: string | undefined;
+  /**
+   * Human-readable project name.
+   */
   name?: string | undefined;
+  /**
+   * Stable project key generated from the name and used by internal
+   *
+   * @remarks
+   *  workspace navigation.
+   */
   key?: string | undefined;
-  workspaceId?: string | undefined;
+  /**
+   * Whether the project is archived and hidden from normal active
+   *
+   * @remarks
+   *  project lists.
+   */
   isArchived?: boolean | undefined;
+  /**
+   * Whether this is the workspace default project.
+   */
   isDefault?: boolean | undefined;
+  /**
+   * Team identifiers associated with the project for access and
+   *
+   * @remarks
+   *  organization.
+   */
   teams?: Array<string> | undefined;
+  /**
+   * Time when the project was created.
+   */
   createdAt?: Date | undefined;
+  /**
+   * Time when the project was last updated.
+   */
   updatedAt?: Date | undefined;
+  /**
+   * User ID that created the project.
+   */
   createdById?: string | undefined;
+  /**
+   * User ID that last updated the project.
+   */
   updatedById?: string | undefined;
 };
 
@@ -28,7 +69,6 @@ export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
     project_id: z.string().optional(),
     name: z.string().optional(),
     key: z.string().optional(),
-    workspace_id: z.string().optional(),
     is_archived: z.boolean().optional(),
     is_default: z.boolean().optional(),
     teams: z.array(z.string()).optional(),
@@ -43,7 +83,6 @@ export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
   }).transform((v) => {
     return remap$(v, {
       "project_id": "projectId",
-      "workspace_id": "workspaceId",
       "is_archived": "isArchived",
       "is_default": "isDefault",
       "created_at": "createdAt",

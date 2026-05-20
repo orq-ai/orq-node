@@ -8,7 +8,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 /**
  * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For text/correction, provide a string.
  */
-export type CreateAnnotationValue = string | number | Array<string>;
+export type Value = string | number | Array<string>;
 
 export type Annotations = {
   /**
@@ -43,21 +43,17 @@ export type CreateAnnotationRequest = {
 };
 
 /** @internal */
-export type CreateAnnotationValue$Outbound = string | number | Array<string>;
+export type Value$Outbound = string | number | Array<string>;
 
 /** @internal */
-export const CreateAnnotationValue$outboundSchema: z.ZodType<
-  CreateAnnotationValue$Outbound,
+export const Value$outboundSchema: z.ZodType<
+  Value$Outbound,
   z.ZodTypeDef,
-  CreateAnnotationValue
+  Value
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-export function createAnnotationValueToJSON(
-  createAnnotationValue: CreateAnnotationValue,
-): string {
-  return JSON.stringify(
-    CreateAnnotationValue$outboundSchema.parse(createAnnotationValue),
-  );
+export function valueToJSON(value: Value): string {
+  return JSON.stringify(Value$outboundSchema.parse(value));
 }
 
 /** @internal */

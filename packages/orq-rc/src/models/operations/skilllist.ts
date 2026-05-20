@@ -13,7 +13,19 @@ export type SkillListRequest = {
    *  (or anything outside the range) is rejected by buf.validate.
    */
   limit?: number | undefined;
+  /**
+   * Cursor for forward pagination. Set to the `skill_id` of the last
+   *
+   * @remarks
+   *  item from the previous page.
+   */
   startingAfter?: string | undefined;
+  /**
+   * Cursor for backward pagination. Set to the `skill_id` of the first
+   *
+   * @remarks
+   *  item from the previous page.
+   */
   endingBefore?: string | undefined;
 };
 

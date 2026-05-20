@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Create a new skill
  *
  * @remarks
- * Skills are modular instructions you can use to codify processes and conventions
+ * Creates a reusable skill in the workspace. Skills store instructions, metadata, and an optional project location so teams can standardize repeatable AI workflows.
  */
 export function skillsCreate(
   client: OrqCore,
