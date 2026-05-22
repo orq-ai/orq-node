@@ -12,6 +12,11 @@ export type UpdateSkillRequest = {
   skillId?: string | undefined;
   /**
    * New workspace-unique display name. Omit to keep the current name.
+   *
+   * @remarks
+   *  Must start with a letter and may contain letters, numbers, and
+   *  underscores. Dashes and dots are not allowed because skill names
+   *  are referenced as template variables.
    */
   displayName?: string | undefined;
   /**
