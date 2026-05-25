@@ -99,9 +99,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.files.create({
-    purpose: retrieval,
-  });
+  const result = await orq.files.create({});
 
   console.log(result);
 }
@@ -124,9 +122,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await filesCreate(orq, {
-    purpose: retrieval,
-  });
+  const res = await filesCreate(orq, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

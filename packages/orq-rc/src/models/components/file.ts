@@ -7,30 +7,37 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { FilePurpose, FilePurpose$inboundSchema } from "./filepurpose.js";
 
 export type FileT = {
   fileId?: string | undefined;
-  purpose?: number | undefined;
+  purpose?: FilePurpose | undefined;
   fileName?: string | undefined;
   bytes?: string | undefined;
   createdAt?: Date | undefined;
+  /**
+   * Identifier of the project the file belongs to. Files are project-scoped; an API key may only access files in projects it is authorized for.
+   */
+  projectId?: string | undefined;
 };
 
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
     file_id: z.string().optional(),
-    purpose: z.number().int().optional(),
+    purpose: FilePurpose$inboundSchema.optional(),
     file_name: z.string().optional(),
     bytes: z.string().optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ).optional(),
+    project_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "file_id": "fileId",
       "file_name": "fileName",
       "created_at": "createdAt",
+      "project_id": "projectId",
     });
   });
 

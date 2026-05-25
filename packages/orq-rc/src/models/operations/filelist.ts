@@ -9,6 +9,7 @@ export type FileListRequest = {
   limit?: number | undefined;
   startingAfter?: string | undefined;
   endingBefore?: string | undefined;
+  projectId?: string | undefined;
 };
 
 /** @internal */
@@ -16,6 +17,7 @@ export type FileListRequest$Outbound = {
   limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -27,10 +29,12 @@ export const FileListRequest$outboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
+    projectId: "project_id",
   });
 });
 

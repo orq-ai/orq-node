@@ -906,7 +906,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
@@ -940,7 +940,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200Categorical$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("categorical"),
     values: z.array(z.string()),
@@ -973,7 +973,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
@@ -1042,8 +1042,8 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -1084,7 +1084,7 @@ export const GetEvalsGuardrailConfigEvalsResponseOperator$inboundSchema:
 export const GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema:
   z.ZodType<GetEvalsGuardrailConfigEvalsResponseNumber, z.ZodTypeDef, unknown> =
     z.object({
-      enabled: z.boolean(),
+      enabled: z.boolean().default(true),
       alert_on_failure: z.boolean().default(false),
       type: z.literal("number"),
       value: z.number(),
@@ -1118,7 +1118,7 @@ export const GetEvalsGuardrailConfigEvalsResponseCategorical$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("categorical"),
     values: z.array(z.string()),
@@ -1151,7 +1151,7 @@ export const GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
@@ -1222,8 +1222,8 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -1267,7 +1267,7 @@ export const GetEvalsGuardrailConfigEvalsNumber$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean(),
+  enabled: z.boolean().default(true),
   alert_on_failure: z.boolean().default(false),
   type: z.literal("number"),
   value: z.number(),
@@ -1295,7 +1295,7 @@ export const GetEvalsGuardrailConfigEvalsCategorical$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean(),
+  enabled: z.boolean().default(true),
   alert_on_failure: z.boolean().default(false),
   type: z.literal("categorical"),
   values: z.array(z.string()),
@@ -1327,7 +1327,7 @@ export const GetEvalsGuardrailConfigEvalsBoolean$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean(),
+  enabled: z.boolean().default(true),
   alert_on_failure: z.boolean().default(false),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2052,8 +2052,8 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
@@ -2126,7 +2126,7 @@ export const GetEvalsGuardrailConfigNumber$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean(),
+  enabled: z.boolean().default(true),
   alert_on_failure: z.boolean().default(false),
   type: z.literal("number"),
   value: z.number(),
@@ -2153,7 +2153,7 @@ export const GetEvalsGuardrailConfigCategorical$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean(),
+  enabled: z.boolean().default(true),
   alert_on_failure: z.boolean().default(false),
   type: z.literal("categorical"),
   values: z.array(z.string()),
@@ -2180,7 +2180,7 @@ export const GetEvalsGuardrailConfigBoolean$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean(),
+  enabled: z.boolean().default(true),
   alert_on_failure: z.boolean().default(false),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2234,8 +2234,8 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
@@ -2278,7 +2278,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
@@ -2312,7 +2312,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyC
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("categorical"),
     values: z.array(z.string()),
@@ -2344,7 +2344,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
@@ -2412,8 +2412,8 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2465,7 +2465,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboun
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
@@ -2499,7 +2499,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONCategorical$i
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("categorical"),
     values: z.array(z.string()),
@@ -2531,7 +2531,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inbou
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
@@ -2602,8 +2602,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2652,7 +2652,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
@@ -2686,7 +2686,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("categorical"),
     values: z.array(z.string()),
@@ -2718,7 +2718,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
@@ -2968,8 +2968,8 @@ export const GetEvalsLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3028,7 +3028,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("number"),
     value: z.number(),
@@ -3062,7 +3062,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("categorical"),
     values: z.array(z.string()),
@@ -3094,7 +3094,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyD
     z.ZodTypeDef,
     unknown
   > = z.object({
-    enabled: z.boolean(),
+    enabled: z.boolean().default(true),
     alert_on_failure: z.boolean().default(false),
     type: z.literal("boolean"),
     value: z.boolean(),
@@ -3179,8 +3179,8 @@ export const GetEvalsLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-25T07:24:03.664Z"),
-  updated: z.string().default("2026-05-25T07:24:03.665Z"),
+  created: z.string().default("2026-05-25T11:28:12.993Z"),
+  updated: z.string().default("2026-05-25T11:28:12.993Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>

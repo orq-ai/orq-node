@@ -9,6 +9,7 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { Agents } from "./agents.js";
 import { Annotations } from "./annotations.js";
+import { ApiKeys } from "./apikeys.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
@@ -111,6 +112,11 @@ export class Orq extends ClientSDK {
   private _routingRules?: RoutingRules;
   get routingRules(): RoutingRules {
     return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
+  private _apiKeys?: ApiKeys;
+  get apiKeys(): ApiKeys {
+    return (this._apiKeys ??= new ApiKeys(this._options));
   }
 
   private _files?: Files;

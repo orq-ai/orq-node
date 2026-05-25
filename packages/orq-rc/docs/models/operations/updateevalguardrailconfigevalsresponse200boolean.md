@@ -6,7 +6,6 @@
 import { UpdateEvalGuardrailConfigEvalsResponse200Boolean } from "@orq-ai/node/models/operations";
 
 let value: UpdateEvalGuardrailConfigEvalsResponse200Boolean = {
-  enabled: true,
   type: "boolean",
   value: true,
 };
@@ -16,7 +15,7 @@ let value: UpdateEvalGuardrailConfigEvalsResponse200Boolean = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
+| `enabled`          | *boolean*          | :heavy_minus_sign: | N/A                |
 | `alertOnFailure`   | *boolean*          | :heavy_minus_sign: | N/A                |
 | `type`             | *"boolean"*        | :heavy_check_mark: | N/A                |
 | `value`            | *boolean*          | :heavy_check_mark: | N/A                |

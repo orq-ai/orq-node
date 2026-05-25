@@ -7,9 +7,8 @@ import { GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoole
 
 let value:
   GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean = {
-    enabled: true,
     type: "boolean",
-    value: false,
+    value: true,
   };
 ```
 
@@ -17,7 +16,7 @@ let value:
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
+| `enabled`          | *boolean*          | :heavy_minus_sign: | N/A                |
 | `alertOnFailure`   | *boolean*          | :heavy_minus_sign: | N/A                |
 | `type`             | *"boolean"*        | :heavy_check_mark: | N/A                |
 | `value`            | *boolean*          | :heavy_check_mark: | N/A                |
