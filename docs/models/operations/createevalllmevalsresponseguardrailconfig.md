@@ -9,6 +9,7 @@
 const value:
   operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean =
     {
+      enabled: false,
       type: "boolean",
       value: false,
     };
@@ -20,9 +21,12 @@ const value:
 const value:
   operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical =
     {
+      enabled: true,
       type: "categorical",
       values: [
         "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
     };
 ```
@@ -33,8 +37,9 @@ const value:
 const value:
   operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber =
     {
+      enabled: true,
       type: "number",
-      value: 2751.87,
+      value: 7065,
       operator: "lt",
     };
 ```

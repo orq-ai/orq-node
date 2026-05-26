@@ -6,9 +6,10 @@
 import { UpdateEvalGuardrailConfigNumber } from "@orq-ai/node/models/operations";
 
 let value: UpdateEvalGuardrailConfigNumber = {
+  enabled: false,
   type: "number",
-  value: 8160.55,
-  operator: "gte",
+  value: 5351.48,
+  operator: "ne",
 };
 ```
 
@@ -16,7 +17,7 @@ let value: UpdateEvalGuardrailConfigNumber = {
 
 | Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `enabled`                                                                                                    | *boolean*                                                                                                    | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |
+| `enabled`                                                                                                    | *boolean*                                                                                                    | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
 | `alertOnFailure`                                                                                             | *boolean*                                                                                                    | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |
 | `type`                                                                                                       | *"number"*                                                                                                   | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
 | `value`                                                                                                      | *number*                                                                                                     | :heavy_check_mark:                                                                                           | N/A                                                                                                          |

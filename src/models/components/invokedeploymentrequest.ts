@@ -739,7 +739,7 @@ export type Messages =
 /**
  * Metadata about the document
  */
-export type InvokeDeploymentRequestMetadata = {
+export type Metadata = {
   /**
    * Name of the file the text is from.
    */
@@ -762,7 +762,7 @@ export type Documents = {
   /**
    * Metadata about the document
    */
-  metadata?: InvokeDeploymentRequestMetadata | undefined;
+  metadata?: Metadata | undefined;
 };
 
 export type InvokeOptions = {
@@ -2342,17 +2342,17 @@ export function messagesToJSON(messages: Messages): string {
 }
 
 /** @internal */
-export type InvokeDeploymentRequestMetadata$Outbound = {
+export type Metadata$Outbound = {
   file_name?: string | undefined;
   file_type?: string | undefined;
   page_number?: number | undefined;
 };
 
 /** @internal */
-export const InvokeDeploymentRequestMetadata$outboundSchema: z.ZodType<
-  InvokeDeploymentRequestMetadata$Outbound,
+export const Metadata$outboundSchema: z.ZodType<
+  Metadata$Outbound,
   z.ZodTypeDef,
-  InvokeDeploymentRequestMetadata
+  Metadata
 > = z.object({
   fileName: z.string().optional(),
   fileType: z.string().optional(),
@@ -2365,20 +2365,14 @@ export const InvokeDeploymentRequestMetadata$outboundSchema: z.ZodType<
   });
 });
 
-export function invokeDeploymentRequestMetadataToJSON(
-  invokeDeploymentRequestMetadata: InvokeDeploymentRequestMetadata,
-): string {
-  return JSON.stringify(
-    InvokeDeploymentRequestMetadata$outboundSchema.parse(
-      invokeDeploymentRequestMetadata,
-    ),
-  );
+export function metadataToJSON(metadata: Metadata): string {
+  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
 }
 
 /** @internal */
 export type Documents$Outbound = {
   text: string;
-  metadata?: InvokeDeploymentRequestMetadata$Outbound | undefined;
+  metadata?: Metadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -2388,8 +2382,7 @@ export const Documents$outboundSchema: z.ZodType<
   Documents
 > = z.object({
   text: z.string(),
-  metadata: z.lazy(() => InvokeDeploymentRequestMetadata$outboundSchema)
-    .optional(),
+  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
 });
 
 export function documentsToJSON(documents: Documents): string {

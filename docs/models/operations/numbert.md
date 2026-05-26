@@ -6,9 +6,10 @@
 import { NumberT } from "@orq-ai/node/models/operations";
 
 let value: NumberT = {
+  enabled: true,
   type: "number",
-  value: 3883.98,
-  operator: "ne",
+  value: 3019.07,
+  operator: "gte",
 };
 ```
 
@@ -16,7 +17,7 @@ let value: NumberT = {
 
 | Field                                                      | Type                                                       | Required                                                   | Description                                                |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `enabled`                                                  | *boolean*                                                  | :heavy_minus_sign:                                         | N/A                                                        |
+| `enabled`                                                  | *boolean*                                                  | :heavy_check_mark:                                         | N/A                                                        |
 | `alertOnFailure`                                           | *boolean*                                                  | :heavy_minus_sign:                                         | N/A                                                        |
 | `type`                                                     | *"number"*                                                 | :heavy_check_mark:                                         | N/A                                                        |
 | `value`                                                    | *number*                                                   | :heavy_check_mark:                                         | N/A                                                        |

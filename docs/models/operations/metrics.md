@@ -6,12 +6,18 @@
 import { Metrics } from "@orq-ai/node/models/operations";
 
 let value: Metrics = {
-  totalCost: 5975.43,
+  totalCost: 100,
+  totalTokens: 1000,
+  totalRequests: 1000,
+  errorRate: 22,
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `totalCost`        | *number*           | :heavy_check_mark: | N/A                |
+| Field                                           | Type                                            | Required                                        | Description                                     | Example                                         |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `totalCost`                                     | *number*                                        | :heavy_check_mark:                              | Total cost in dollars of the last 30 days       | 100                                             |
+| `totalTokens`                                   | *number*                                        | :heavy_check_mark:                              | Total tokens of the last 30 days                | 1000                                            |
+| `totalRequests`                                 | *number*                                        | :heavy_check_mark:                              | Total requests of the last 30 days              | 1000                                            |
+| `errorRate`                                     | *number*                                        | :heavy_check_mark:                              | Error rate of the last 30 days as a ratio (0–1) | 22                                              |

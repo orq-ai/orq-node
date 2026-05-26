@@ -7,8 +7,9 @@
 
 ```typescript
 const value: operations.CreateEvalGuardrailConfigEvalsBoolean = {
+  enabled: true,
   type: "boolean",
-  value: true,
+  value: false,
 };
 ```
 
@@ -16,6 +17,7 @@ const value: operations.CreateEvalGuardrailConfigEvalsBoolean = {
 
 ```typescript
 const value: operations.CreateEvalGuardrailConfigEvalsCategorical = {
+  enabled: false,
   type: "categorical",
   values: [
     "<value 1>",
@@ -29,9 +31,10 @@ const value: operations.CreateEvalGuardrailConfigEvalsCategorical = {
 
 ```typescript
 const value: operations.CreateEvalGuardrailConfigEvalsNumber = {
+  enabled: true,
   type: "number",
-  value: 2626.43,
-  operator: "gte",
+  value: 5525.08,
+  operator: "lte",
 };
 ```
 

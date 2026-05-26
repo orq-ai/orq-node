@@ -6,9 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ProjectDeleteRequest = {
-  /**
-   * Project ID to delete.
-   */
   projectId: string;
 };
 

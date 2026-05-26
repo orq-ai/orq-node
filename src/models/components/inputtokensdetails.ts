@@ -9,8 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type InputTokensDetails = {
-  cacheCreation1hTokens?: number | undefined;
-  cacheCreation5mTokens?: number | undefined;
   cacheCreationTokens: number;
   cachedTokens: number;
 };
@@ -21,14 +19,10 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cache_creation_1h_tokens: z.number().int().optional(),
-  cache_creation_5m_tokens: z.number().int().optional(),
   cache_creation_tokens: z.number().int(),
   cached_tokens: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
-    "cache_creation_1h_tokens": "cacheCreation1hTokens",
-    "cache_creation_5m_tokens": "cacheCreation5mTokens",
     "cache_creation_tokens": "cacheCreationTokens",
     "cached_tokens": "cachedTokens",
   });

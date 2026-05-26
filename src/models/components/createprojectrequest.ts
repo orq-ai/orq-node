@@ -5,13 +5,7 @@
 import * as z from "zod/v3";
 
 export type CreateProjectRequest = {
-  /**
-   * Project name. Names must be non-empty and at most 128 characters.
-   */
   name?: string | undefined;
-  /**
-   * Team identifiers to associate with the project.
-   */
   teams?: Array<string> | undefined;
 };
 

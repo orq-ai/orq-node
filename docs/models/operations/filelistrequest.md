@@ -15,4 +15,3 @@ let value: FileListRequest = {};
 | `limit`            | *number*           | :heavy_minus_sign: | N/A                |
 | `startingAfter`    | *string*           | :heavy_minus_sign: | N/A                |
 | `endingBefore`     | *string*           | :heavy_minus_sign: | N/A                |
-| `projectId`        | *string*           | :heavy_minus_sign: | N/A                |

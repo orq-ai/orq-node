@@ -12,7 +12,7 @@
 
 ## list
 
-Returns the skills visible to the current workspace, ordered by creation time with the newest skill first. Use `starting_after` or `ending_before` to page through large collections.
+Returns a list of skills. Skills are sorted by creation date, with the most recently created skills appearing first.
 
 ### Example Usage
 
@@ -81,7 +81,7 @@ run();
 
 ## create
 
-Creates a reusable skill in the workspace. Skills store instructions, metadata, and an optional project location so teams can standardize repeatable AI workflows.
+Skills are modular instructions you can use to codify processes and conventions
 
 ### Example Usage
 
@@ -150,7 +150,7 @@ run();
 
 ## get
 
-Retrieves an existing skill by skill ID. Display names are also accepted for compatibility because they are unique within a workspace.
+Retrieves an existing skill by its unique skill ID or its display name (display names are unique within a workspace).
 
 ### Example Usage
 
@@ -223,7 +223,7 @@ run();
 
 ## delete
 
-Deletes a skill from the workspace. The response body is empty when the delete succeeds.
+Delete a skill
 
 ### Example Usage
 
@@ -296,7 +296,7 @@ run();
 
 ## update
 
-Updates mutable skill fields. Omitted optional fields keep their current values. Repeated fields such as `tags` replace the existing collection when provided.
+Updates the specified skill by setting the values of the parameters passed.
 
 ### Example Usage
 

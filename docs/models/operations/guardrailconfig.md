@@ -7,6 +7,7 @@
 
 ```typescript
 const value: operations.Boolean = {
+  enabled: false,
   type: "boolean",
   value: false,
 };
@@ -16,6 +17,7 @@ const value: operations.Boolean = {
 
 ```typescript
 const value: operations.Categorical = {
+  enabled: true,
   type: "categorical",
   values: [
     "<value 1>",
@@ -27,9 +29,10 @@ const value: operations.Categorical = {
 
 ```typescript
 const value: operations.NumberT = {
+  enabled: true,
   type: "number",
-  value: 3883.98,
-  operator: "ne",
+  value: 3019.07,
+  operator: "gte",
 };
 ```
 

@@ -6,9 +6,12 @@
 import { CreateEvalGuardrailConfigEvalsResponseCategorical } from "@orq-ai/node/models/operations";
 
 let value: CreateEvalGuardrailConfigEvalsResponseCategorical = {
+  enabled: true,
   type: "categorical",
   values: [
     "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```
@@ -17,7 +20,7 @@ let value: CreateEvalGuardrailConfigEvalsResponseCategorical = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `enabled`          | *boolean*          | :heavy_minus_sign: | N/A                |
+| `enabled`          | *boolean*          | :heavy_check_mark: | N/A                |
 | `alertOnFailure`   | *boolean*          | :heavy_minus_sign: | N/A                |
 | `type`             | *"categorical"*    | :heavy_check_mark: | N/A                |
 | `values`           | *string*[]         | :heavy_check_mark: | N/A                |

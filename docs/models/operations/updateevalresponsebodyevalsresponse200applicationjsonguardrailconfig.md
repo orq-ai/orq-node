@@ -8,8 +8,9 @@
 ```typescript
 const value:
   operations.UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
+    enabled: false,
     type: "boolean",
-    value: false,
+    value: true,
   };
 ```
 
@@ -19,11 +20,10 @@ const value:
 const value:
   operations.UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONCategorical =
     {
+      enabled: false,
       type: "categorical",
       values: [
         "<value 1>",
-        "<value 2>",
-        "<value 3>",
       ],
     };
 ```
@@ -33,9 +33,10 @@ const value:
 ```typescript
 const value:
   operations.UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
+    enabled: false,
     type: "number",
-    value: 8567.58,
-    operator: "gt",
+    value: 3479.19,
+    operator: "ne",
   };
 ```
 

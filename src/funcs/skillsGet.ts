@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a skill
  *
  * @remarks
- * Retrieves an existing skill by skill ID. Display names are also accepted for compatibility because they are unique within a workspace.
+ * Retrieves an existing skill by its unique skill ID or its display name (display names are unique within a workspace).
  */
 export function skillsGet(
   client: OrqCore,

@@ -8,8 +8,9 @@
 ```typescript
 const value:
   operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyBoolean = {
+    enabled: true,
     type: "boolean",
-    value: true,
+    value: false,
   };
 ```
 
@@ -18,8 +19,12 @@ const value:
 ```typescript
 const value:
   operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyCategorical = {
+    enabled: true,
     type: "categorical",
-    values: [],
+    values: [
+      "<value 1>",
+      "<value 2>",
+    ],
   };
 ```
 
@@ -28,9 +33,10 @@ const value:
 ```typescript
 const value: operations.CreateEvalGuardrailConfigEvalsRequestRequestBodyNumber =
   {
+    enabled: true,
     type: "number",
-    value: 1707.54,
-    operator: "ne",
+    value: 1720.89,
+    operator: "gt",
   };
 ```
 

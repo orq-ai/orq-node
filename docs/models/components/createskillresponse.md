@@ -12,4 +12,4 @@ let value: CreateSkillResponse = {};
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `skill`                                              | [components.Skill](../../models/components/skill.md) | :heavy_minus_sign:                                   | Newly created skill.                                 |
+| `skill`                                              | [components.Skill](../../models/components/skill.md) | :heavy_minus_sign:                                   | N/A                                                  |
