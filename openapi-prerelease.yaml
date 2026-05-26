@@ -1981,7 +1981,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01ksfyhcesynycmnqq79fqhzq2"
+              default: "reasoning_01kshfb43z873c659178gtf895"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3630,6 +3630,93 @@ components:
         - "id"
       description: "@deprecated Use identity instead. Information about the contact making the request."
       deprecated: true
+    AutoRouterConfig:
+      additionalProperties: false
+      properties:
+        economical_model:
+          type: "string"
+        id:
+          type: "string"
+        profile:
+          type: "string"
+        strong_model:
+          type: "string"
+        version:
+          type: "string"
+      type: "object"
+    AzureFoundryDeployment:
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+        master_data:
+          $ref: "#/components/schemas/AzureFoundryDeploymentMasterData"
+        model:
+          type: "string"
+      required:
+        - "id"
+        - "model"
+      type: "object"
+    AzureFoundryDeploymentMasterData:
+      additionalProperties: false
+      properties:
+        has_functions:
+          type: "boolean"
+        id:
+          type: "string"
+        input_cost:
+          format: "double"
+          type: "number"
+        metadata:
+          additionalProperties: {}
+          type: "object"
+        model_developer:
+          type:
+            - "string"
+            - "null"
+        model_family:
+          type:
+            - "string"
+            - "null"
+        model_id:
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        parameters:
+          items: {}
+          type:
+            - "array"
+            - "null"
+      required:
+        - "input_cost"
+        - "output_cost"
+        - "has_functions"
+        - "model_type"
+        - "id"
+        - "model_id"
+        - "parameters"
+        - "model_developer"
+        - "model_family"
+      type: "object"
+    AzureFoundryDeploymentsRequest:
+      additionalProperties: false
+      properties:
+        api_key:
+          type: "string"
+        api_version:
+          type: "string"
+        base_url:
+          type: "string"
+        provider:
+          type: "string"
+      required:
+        - "provider"
+        - "base_url"
+        - "api_key"
+      type: "object"
     BudgetLimit:
       additionalProperties: false
       properties:
@@ -3653,6 +3740,79 @@ components:
         - "amount"
         - "period"
         - "currency"
+      type: "object"
+    CreateAutorouterModelRequest:
+      additionalProperties: false
+      properties:
+        economical_model:
+          type: "string"
+        key:
+          type: "string"
+        profile:
+          type: "string"
+        strong_model:
+          type: "string"
+      required:
+        - "key"
+        - "strong_model"
+        - "economical_model"
+      type: "object"
+    CreateAwsBedrockModelRequest:
+      additionalProperties: false
+      properties:
+        assume_role_arn:
+          type: "string"
+        assume_role_external_id:
+          type: "string"
+        auth_mode:
+          type: "string"
+        description:
+          type: "string"
+        display_name:
+          maxLength: 128
+          type: "string"
+        has_reasoning:
+          type: "boolean"
+        input_cost:
+          format: "double"
+          type: "number"
+        integration_id:
+          type: "string"
+        max_tokens:
+          format: "int64"
+          type: "integer"
+        model_developer:
+          type: "string"
+        model_family:
+          type: "string"
+        model_id:
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        region:
+          type: "string"
+        supports_json_mode:
+          type: "boolean"
+        supports_json_schema:
+          type: "boolean"
+        supports_strict_tool:
+          type: "boolean"
+        supports_tool_calling:
+          type: "boolean"
+        supports_vision:
+          type: "boolean"
+        temperature:
+          format: "double"
+          type: "number"
+      required:
+        - "display_name"
+        - "model_id"
+        - "region"
+        - "model_developer"
+        - "auth_mode"
       type: "object"
     CreateGuardrailRuleRequest:
       additionalProperties: false
@@ -3683,6 +3843,135 @@ components:
           type: "integer"
       required:
         - "display_name"
+      type: "object"
+    CreateModelParameter:
+      additionalProperties: false
+      properties:
+        config:
+          additionalProperties: {}
+          type: "object"
+        description:
+          type: "string"
+        hints:
+          type: "string"
+        name:
+          type: "string"
+        parameter:
+          type: "string"
+        parameter_type:
+          type: "string"
+        position:
+          format: "int64"
+          type: "integer"
+      required:
+        - "name"
+        - "parameter"
+        - "config"
+        - "parameter_type"
+      type: "object"
+    CreateModelRequest:
+      additionalProperties: false
+      properties:
+        configuration:
+          additionalProperties: {}
+          type: "object"
+        display_name:
+          maxLength: 128
+          type: "string"
+        has_functions:
+          type: "boolean"
+        id:
+          type: "string"
+        input_cost:
+          format: "double"
+          type: "number"
+        metadata:
+          $ref: "#/components/schemas/ModelMetadata"
+        model_developer:
+          type: "string"
+        model_family:
+          type: "string"
+        model_id:
+          maxLength: 256
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        parameters:
+          items:
+            $ref: "#/components/schemas/CreateModelParameter"
+          type:
+            - "array"
+            - "null"
+        provider:
+          type: "string"
+      required:
+        - "id"
+        - "display_name"
+        - "model_id"
+        - "model_developer"
+        - "model_family"
+        - "model_type"
+        - "provider"
+        - "has_functions"
+        - "input_cost"
+        - "output_cost"
+        - "metadata"
+        - "parameters"
+        - "configuration"
+      type: "object"
+    CreateOpenAILikeModelRequest:
+      additionalProperties: false
+      properties:
+        api_key:
+          type: "string"
+        base_url:
+          type: "string"
+        cost_per_image:
+          format: "double"
+          type: "number"
+        description:
+          type: "string"
+        display_name:
+          maxLength: 128
+          type: "string"
+        has_reasoning:
+          type: "boolean"
+        input_cost:
+          format: "double"
+          type: "number"
+        max_tokens:
+          format: "int64"
+          type: "integer"
+        model_id:
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        region:
+          type: "string"
+        supports_image_edit:
+          type: "boolean"
+        supports_strict_tool:
+          type: "boolean"
+        supports_tool_calling:
+          type: "boolean"
+        supports_vision:
+          type: "boolean"
+        temperature:
+          format: "double"
+          type: "number"
+      required:
+        - "display_name"
+        - "region"
+        - "base_url"
+        - "model_id"
+        - "api_key"
+        - "model_type"
       type: "object"
     CreatePolicyRequest:
       additionalProperties: false
@@ -3743,6 +4032,25 @@ components:
           type: "string"
       required:
         - "display_name"
+      type: "object"
+    CreateVertexModelRequest:
+      additionalProperties: false
+      properties:
+        configuration:
+          $ref: "#/components/schemas/VertexConfiguration"
+        display_name:
+          type: "string"
+      required:
+        - "display_name"
+        - "configuration"
+      type: "object"
+    EnableModelRequest:
+      additionalProperties: false
+      properties:
+        model_id:
+          type: "string"
+      required:
+        - "model_id"
       type: "object"
     EvaluatorRef:
       additionalProperties: false
@@ -3871,6 +4179,521 @@ components:
         tokens:
           $ref: "#/components/schemas/TokenLimit"
       type: "object"
+    LiteLLMModel:
+      additionalProperties: false
+      properties:
+        litellm_params:
+          $ref: "#/components/schemas/LiteLLMParams"
+        model_info:
+          $ref: "#/components/schemas/LiteLLMModelInfo"
+        model_name:
+          type: "string"
+      required:
+        - "model_name"
+        - "litellm_params"
+        - "model_info"
+      type: "object"
+    LiteLLMModelInfo:
+      additionalProperties: false
+      properties:
+        db_model:
+          type:
+            - "boolean"
+            - "null"
+        id:
+          type:
+            - "string"
+            - "null"
+        input_cost_per_token:
+          format: "double"
+          type: "number"
+        key:
+          type:
+            - "string"
+            - "null"
+        litellm_provider:
+          type:
+            - "string"
+            - "null"
+        max_input_tokens:
+          format: "int64"
+          type: "integer"
+        max_output_tokens:
+          format: "int64"
+          type: "integer"
+        mode:
+          type:
+            - "string"
+            - "null"
+        output_cost_per_token:
+          format: "double"
+          type: "number"
+        supported_openai_params:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        supports_function_calling:
+          type: "boolean"
+        supports_native_streaming:
+          type: "boolean"
+        supports_reasoning:
+          type: "boolean"
+        supports_response_schema:
+          type: "boolean"
+        supports_system_messages:
+          type: "boolean"
+        supports_tool_choice:
+          type: "boolean"
+        supports_vision:
+          type: "boolean"
+      required:
+        - "id"
+        - "db_model"
+        - "key"
+        - "litellm_provider"
+        - "mode"
+      type: "object"
+    LiteLLMParams:
+      additionalProperties: false
+      properties:
+        merge_reasoning_content_in_choices:
+          type: "boolean"
+        model:
+          type: "string"
+        use_in_pass_through:
+          type: "boolean"
+        use_litellm_proxy:
+          type: "boolean"
+      required:
+        - "use_in_pass_through"
+        - "use_litellm_proxy"
+        - "merge_reasoning_content_in_choices"
+        - "model"
+      type: "object"
+    ModelConfigurationResponse:
+      additionalProperties: false
+      properties:
+        api_key_env:
+          type: "string"
+        api_version:
+          type: "string"
+        auth_mode:
+          type: "string"
+        auth_type:
+          type: "string"
+        base_url:
+          type: "string"
+        deployment_name:
+          type: "string"
+        endpoint:
+          type: "string"
+        inference_profile_arn:
+          type: "string"
+        integration_id:
+          type: "string"
+        is_openai_compatible:
+          type: "boolean"
+        is_tuned_model:
+          type: "boolean"
+        location:
+          type: "string"
+        project_id:
+          type: "string"
+        provider:
+          type: "string"
+        region:
+          type: "string"
+        should_use_beta_features:
+          type: "boolean"
+        subtype:
+          type: "string"
+        workspace_id:
+          type: "string"
+      required:
+        - "provider"
+      type: "object"
+    ModelDocument:
+      additionalProperties: false
+      properties:
+        configuration:
+          $ref: "#/components/schemas/ModelConfigurationResponse"
+        created:
+          format: "date-time"
+          type: "string"
+        description:
+          type:
+            - "string"
+            - "null"
+        display_name:
+          type: "string"
+        docs_url:
+          type:
+            - "string"
+            - "null"
+        enabled:
+          type: "boolean"
+        enabled_for_endpoints:
+          type: "boolean"
+        enabled_for_playground:
+          type: "boolean"
+        has_cpu_pricing:
+          type: "boolean"
+        has_functions:
+          type: "boolean"
+        id:
+          type: "string"
+        input_cost:
+          format: "double"
+          type:
+            - "number"
+            - "null"
+        input_currency:
+          type: "string"
+        is_active:
+          type: "boolean"
+        metadata:
+          $ref: "#/components/schemas/ModelMetadata"
+        model_developer:
+          type: "string"
+        model_family:
+          type: "string"
+        model_id:
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type:
+            - "number"
+            - "null"
+        output_currency:
+          type: "string"
+        owner:
+          type: "string"
+        parameters:
+          items:
+            $ref: "#/components/schemas/ModelParameterDocument"
+          type:
+            - "array"
+            - "null"
+        pricing_url:
+          type:
+            - "string"
+            - "null"
+        provider:
+          type: "string"
+        refId:
+          type: "string"
+        updated:
+          format: "date-time"
+          type: "string"
+      required:
+        - "id"
+        - "created"
+        - "updated"
+        - "display_name"
+        - "model_id"
+        - "is_active"
+        - "provider"
+        - "owner"
+        - "input_cost"
+        - "input_currency"
+        - "output_cost"
+        - "output_currency"
+        - "description"
+        - "pricing_url"
+        - "docs_url"
+        - "model_type"
+        - "has_functions"
+        - "has_cpu_pricing"
+        - "enabled_for_playground"
+        - "enabled_for_endpoints"
+        - "configuration"
+        - "metadata"
+        - "parameters"
+        - "enabled"
+        - "refId"
+      type: "object"
+    ModelMetadata:
+      additionalProperties: false
+      properties:
+        allowed_passthrough_parameters:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        autorouter:
+          $ref: "#/components/schemas/AutoRouterConfig"
+        context_window:
+          format: "int64"
+          type: "integer"
+        cost_efficiency_rating:
+          format: "int64"
+          type: "integer"
+        cost_per_image:
+          format: "double"
+          type: "number"
+        extended_context_pricing_mode:
+          type: "string"
+        extended_context_threshold:
+          format: "int64"
+          type: "integer"
+        generate_audio:
+          type: "boolean"
+        image_token_cost:
+          format: "double"
+          type: "number"
+        intelligence_rating:
+          format: "int64"
+          type: "integer"
+        is_private:
+          type: "boolean"
+        knowledge_cutoff:
+          type: "string"
+        max_input_tokens:
+          format: "int64"
+          type: "integer"
+        max_output_tokens:
+          format: "int64"
+          type: "integer"
+        million_searches_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_128k_cache_read_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_128k_cache_write_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_128k_input_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_128k_output_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_200k_cache_read_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_200k_cache_write_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_200k_input_cost:
+          format: "double"
+          type: "number"
+        million_tokens_above_200k_output_cost:
+          format: "double"
+          type: "number"
+        million_tokens_audio_input_cost:
+          format: "double"
+          type: "number"
+        million_tokens_audio_output_cost:
+          format: "double"
+          type: "number"
+        million_tokens_batches_input_cost:
+          format: "double"
+          type: "number"
+        million_tokens_batches_output_cost:
+          format: "double"
+          type: "number"
+        million_tokens_cache_read_cost:
+          format: "double"
+          type: "number"
+        million_tokens_cache_write_1h_cost:
+          format: "double"
+          type: "number"
+        million_tokens_cache_write_5m_cost:
+          format: "double"
+          type: "number"
+        million_tokens_cache_write_cost:
+          format: "double"
+          type: "number"
+        million_tokens_input_cost:
+          format: "double"
+          type: "number"
+        million_tokens_output_cost:
+          format: "double"
+          type: "number"
+        million_tokens_reasoning_cost:
+          format: "double"
+          type: "number"
+        per_video_second_cost:
+          format: "double"
+          type: "number"
+        per_video_second_cost_1080p:
+          format: "double"
+          type: "number"
+        pricing:
+          $ref: "#/components/schemas/Pricing"
+        region:
+          type: "string"
+        speed_rating:
+          format: "int64"
+          type: "integer"
+        supported_video_aspect_ratios:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        supported_video_durations:
+          items:
+            format: "int64"
+            type: "integer"
+          type:
+            - "array"
+            - "null"
+        supported_video_frame_images:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        supported_video_resolutions:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        supported_video_sizes:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        supports_adaptive_reasoning:
+          type: "boolean"
+        supports_audio_input:
+          type: "boolean"
+        supports_audio_output:
+          type: "boolean"
+        supports_b64_json_response_format:
+          type: "boolean"
+        supports_batch_api:
+          type: "boolean"
+        supports_code_execution:
+          type: "boolean"
+        supports_computer_use:
+          type: "boolean"
+        supports_developer_message:
+          type: "boolean"
+        supports_direct_cost:
+          type: "boolean"
+        supports_distillation:
+          type: "boolean"
+        supports_extended_thinking:
+          type: "boolean"
+        supports_fine_tuning:
+          type: "boolean"
+        supports_image_edit:
+          type: "boolean"
+        supports_image_input:
+          type: "boolean"
+        supports_image_output:
+          type: "boolean"
+        supports_json_mode_response_format:
+          type: "boolean"
+        supports_json_schema_response_format:
+          type: "boolean"
+        supports_max_completion_tokens:
+          type: "boolean"
+        supports_openai_sdk:
+          type: "boolean"
+        supports_parallel_tool_calls:
+          type: "boolean"
+        supports_pdf_input:
+          type: "boolean"
+        supports_prompt_caching:
+          type: "boolean"
+        supports_reasoning:
+          type: "boolean"
+        supports_reasoning_effort_default:
+          type: "boolean"
+        supports_reasoning_effort_high:
+          type: "boolean"
+        supports_reasoning_effort_low:
+          type: "boolean"
+        supports_reasoning_effort_medium:
+          type: "boolean"
+        supports_reasoning_effort_minimal:
+          type: "boolean"
+        supports_reasoning_effort_none:
+          type: "boolean"
+        supports_reasoning_effort_xhigh:
+          type: "boolean"
+        supports_responses_api:
+          type: "boolean"
+        supports_sampling_params:
+          type: "boolean"
+        supports_streaming:
+          type: "boolean"
+        supports_strict_tool:
+          type: "boolean"
+        supports_system_message:
+          type: "boolean"
+        supports_text_input:
+          type: "boolean"
+        supports_text_output:
+          type: "boolean"
+        supports_tool_calling:
+          type: "boolean"
+        supports_tool_choice:
+          type: "boolean"
+        supports_url_context:
+          type: "boolean"
+        supports_url_response_format:
+          type: "boolean"
+        supports_video_input:
+          type: "boolean"
+        supports_video_output:
+          type: "boolean"
+        supports_video_seed:
+          type: "boolean"
+        supports_vision:
+          type: "boolean"
+        supports_web_search:
+          type: "boolean"
+        thinking_enforced:
+          type: "boolean"
+      required:
+        - "is_private"
+      type: "object"
+    ModelParameterDocument:
+      additionalProperties: false
+      properties:
+        config:
+          additionalProperties: {}
+          type: "object"
+        description:
+          type:
+            - "string"
+            - "null"
+        hints:
+          type: "string"
+        id:
+          type: "string"
+        is_active:
+          type: "boolean"
+        name:
+          type: "string"
+        parameter:
+          type: "string"
+        parameter_type:
+          type: "string"
+        position:
+          format: "int64"
+          type: "integer"
+      required:
+        - "id"
+        - "name"
+        - "parameter"
+        - "description"
+        - "config"
+        - "parameter_type"
+        - "is_active"
+      type: "object"
     ModelRef:
       additionalProperties: false
       properties:
@@ -3984,6 +4807,67 @@ components:
       required:
         - "count"
       type: "object"
+    Price:
+      additionalProperties: false
+      properties:
+        cost:
+          format: "double"
+          type: "number"
+        currency:
+          type: "string"
+        per:
+          format: "int64"
+          type: "integer"
+        unit:
+          type: "string"
+      required:
+        - "cost"
+        - "currency"
+        - "unit"
+        - "per"
+      type: "object"
+    Pricing:
+      additionalProperties: false
+      properties:
+        cache_read:
+          $ref: "#/components/schemas/Price"
+        cache_write_1h:
+          $ref: "#/components/schemas/Price"
+        cache_write_5m:
+          $ref: "#/components/schemas/Price"
+        input:
+          $ref: "#/components/schemas/Price"
+        output:
+          $ref: "#/components/schemas/Price"
+        reasoning:
+          $ref: "#/components/schemas/Price"
+        variants:
+          items:
+            $ref: "#/components/schemas/PricingVariant"
+          type:
+            - "array"
+            - "null"
+      type: "object"
+    PricingVariant:
+      additionalProperties: false
+      properties:
+        cache_read:
+          $ref: "#/components/schemas/Price"
+        cache_write_1h:
+          $ref: "#/components/schemas/Price"
+        cache_write_5m:
+          $ref: "#/components/schemas/Price"
+        input:
+          $ref: "#/components/schemas/Price"
+        output:
+          $ref: "#/components/schemas/Price"
+        reasoning:
+          $ref: "#/components/schemas/Price"
+        when:
+          type: "string"
+      required:
+        - "when"
+      type: "object"
     RequestLimit:
       additionalProperties: false
       properties:
@@ -4067,6 +4951,65 @@ components:
         - "amount"
         - "period"
       type: "object"
+    UpdateAutorouterModelRequest:
+      additionalProperties: false
+      properties:
+        economical_model:
+          type: "string"
+        key:
+          type: "string"
+        profile:
+          type: "string"
+        strong_model:
+          type: "string"
+      type: "object"
+    UpdateAwsBedrockModelRequest:
+      additionalProperties: false
+      properties:
+        assume_role_arn:
+          type: "string"
+        assume_role_external_id:
+          type: "string"
+        description:
+          type: "string"
+        display_name:
+          maxLength: 128
+          type: "string"
+        has_reasoning:
+          type: "boolean"
+        input_cost:
+          format: "double"
+          type: "number"
+        max_tokens:
+          format: "int64"
+          type: "integer"
+        model_developer:
+          type: "string"
+        model_family:
+          type: "string"
+        model_id:
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        region:
+          type: "string"
+        supports_json_mode:
+          type: "boolean"
+        supports_json_schema:
+          type: "boolean"
+        supports_strict_tool:
+          type: "boolean"
+        supports_tool_calling:
+          type: "boolean"
+        supports_vision:
+          type: "boolean"
+        temperature:
+          format: "double"
+          type: "number"
+      type: "object"
     UpdateGuardrailRuleRequest:
       additionalProperties: false
       properties:
@@ -4089,6 +5032,101 @@ components:
           format: "int64"
           minimum: 1000
           type: "integer"
+      type: "object"
+    UpdateModelParameter:
+      additionalProperties: false
+      properties:
+        config:
+          additionalProperties: {}
+          type: "object"
+        description:
+          type: "string"
+        hints:
+          type: "string"
+        id:
+          type: "string"
+        is_active:
+          type: "boolean"
+        name:
+          type: "string"
+        parameter:
+          type: "string"
+        parameter_type:
+          type: "string"
+        position:
+          format: "int64"
+          type: "integer"
+      required:
+        - "id"
+      type: "object"
+    UpdateModelRequest:
+      additionalProperties: false
+      properties:
+        display_name:
+          maxLength: 128
+          type: "string"
+        has_functions:
+          type: "boolean"
+        input_cost:
+          format: "double"
+          type: "number"
+        metadata:
+          $ref: "#/components/schemas/ModelMetadata"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        parameters:
+          items:
+            $ref: "#/components/schemas/UpdateModelParameter"
+          type: "array"
+      type: "object"
+    UpdateOpenAILikeModelRequest:
+      additionalProperties: false
+      properties:
+        base_url:
+          type: "string"
+        cost_per_image:
+          format: "double"
+          type: "number"
+        description:
+          type: "string"
+        display_name:
+          maxLength: 128
+          type: "string"
+        has_reasoning:
+          type: "boolean"
+        input_cost:
+          format: "double"
+          type: "number"
+        max_tokens:
+          format: "int64"
+          type: "integer"
+        model_id:
+          type: "string"
+        model_type:
+          type: "string"
+        output_cost:
+          format: "double"
+          type: "number"
+        region:
+          type: "string"
+        supports_image_edit:
+          type: "boolean"
+        supports_strict_tool:
+          type: "boolean"
+        supports_tool_calling:
+          type: "boolean"
+        supports_vision:
+          type: "boolean"
+        temperature:
+          format: "double"
+          type: "number"
+      required:
+        - "display_name"
+        - "region"
+        - "model_type"
       type: "object"
     UpdatePolicyRequest:
       additionalProperties: false
@@ -4140,6 +5178,141 @@ components:
           format: "int64"
           minimum: 0
           type: "integer"
+      type: "object"
+    ValidateAwsBedrockRequest:
+      additionalProperties: false
+      properties:
+        assume_role_arn:
+          type: "string"
+        assume_role_external_id:
+          type: "string"
+        auth_mode:
+          type: "string"
+        inference_profile_arn:
+          type: "string"
+        integration_id:
+          type: "string"
+        region:
+          type: "string"
+      required:
+        - "inference_profile_arn"
+        - "region"
+        - "auth_mode"
+      type: "object"
+    ValidateModelRequest:
+      additionalProperties: false
+      properties:
+        api_key:
+          type: "string"
+        api_version:
+          type: "string"
+        base_url:
+          type: "string"
+        deployment_name:
+          type: "string"
+        endpoint:
+          type: "string"
+        provider:
+          type: "string"
+        subtype:
+          type: "string"
+      required:
+        - "provider"
+        - "api_key"
+      type: "object"
+    VertexCapabilities:
+      additionalProperties: false
+      properties:
+        structuredOutput:
+          type: "boolean"
+        supportToolCalling:
+          type: "boolean"
+        vision:
+          type: "boolean"
+      required:
+        - "supportToolCalling"
+        - "structuredOutput"
+        - "vision"
+      type: "object"
+    VertexConfiguration:
+      additionalProperties: false
+      properties:
+        location:
+          type: "string"
+        modelConfiguration:
+          $ref: "#/components/schemas/VertexModelConfiguration"
+        projectId:
+          type: "string"
+        serviceAccount:
+          additionalProperties: {}
+          type: "object"
+      required:
+        - "projectId"
+        - "location"
+        - "serviceAccount"
+        - "modelConfiguration"
+      type: "object"
+    VertexModelConfiguration:
+      additionalProperties: false
+      properties:
+        capabilities:
+          $ref: "#/components/schemas/VertexCapabilities"
+        id:
+          type: "string"
+        inputCost:
+          format: "double"
+          type: "number"
+        outputCost:
+          format: "double"
+          type: "number"
+        parameters:
+          $ref: "#/components/schemas/VertexParameters"
+      required:
+        - "id"
+        - "inputCost"
+        - "outputCost"
+        - "parameters"
+        - "capabilities"
+      type: "object"
+    VertexParamRange:
+      additionalProperties: false
+      properties:
+        max:
+          format: "double"
+          type: "number"
+        min:
+          format: "double"
+          type: "number"
+      required:
+        - "min"
+        - "max"
+      type: "object"
+    VertexParamRangeInt:
+      additionalProperties: false
+      properties:
+        max:
+          format: "int64"
+          type: "integer"
+        min:
+          format: "int64"
+          type: "integer"
+      required:
+        - "min"
+        - "max"
+      type: "object"
+    VertexParameters:
+      additionalProperties: false
+      properties:
+        maxTokens:
+          $ref: "#/components/schemas/VertexParamRangeInt"
+        temperature:
+          $ref: "#/components/schemas/VertexParamRange"
+        topP:
+          $ref: "#/components/schemas/VertexParamRange"
+      required:
+        - "temperature"
+        - "maxTokens"
+        - "topP"
       type: "object"
     ApiKeyStatus:
       type: "string"
@@ -5883,10 +7056,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-25T16:12:13.080Z"
+                                  default: "2026-05-26T06:25:07.553Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-25T16:12:13.080Z"
+                                  default: "2026-05-26T06:25:07.553Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -6011,10 +7184,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-05-25T16:12:13.080Z"
+                                  default: "2026-05-26T06:25:07.553Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-05-25T16:12:13.080Z"
+                                  default: "2026-05-26T06:25:07.553Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
@@ -6234,10 +7407,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             updated:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6333,10 +7506,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             updated:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6447,10 +7620,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             updated:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6546,10 +7719,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             updated:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -6945,10 +8118,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             updated:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -7060,10 +8233,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             updated:
                               type: "string"
-                              default: "2026-05-25T16:12:13.080Z"
+                              default: "2026-05-26T06:25:07.553Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
@@ -7877,10 +9050,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           updated:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -8005,10 +9178,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           updated:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -8228,10 +9401,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8327,10 +9500,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8441,10 +9614,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8540,10 +9713,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -8939,10 +10112,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9054,10 +10227,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9433,10 +10606,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           updated:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9561,10 +10734,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           updated:
                             type: "string"
-                            default: "2026-05-25T16:12:13.080Z"
+                            default: "2026-05-26T06:25:07.553Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
@@ -9784,10 +10957,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9883,10 +11056,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -9997,10 +11170,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10096,10 +11269,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10495,10 +11668,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -10610,10 +11783,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       updated:
                         type: "string"
-                        default: "2026-05-25T16:12:13.080Z"
+                        default: "2026-05-26T06:25:07.553Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
@@ -15323,173 +16496,6 @@ paths:
           in: header
           schema:
             type: string
-  /v2/agents/a2a:
-    post:
-      tags:
-        - "Agents"
-      x-cli-group: "agents"
-      x-cli-name: "createA2aAgent"
-      summary: "Register external A2A agent"
-      description: "Register an external A2A-compliant agent into Orquesta. The agent card will be fetched during registration to validate the agent and cache its capabilities."
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                key:
-                  type: "string"
-                  pattern: "^[A-Za-z][A-Za-z0-9]*([._-][A-Za-z0-9]+)*$"
-                  description: "Unique identifier for the agent"
-                display_name:
-                  type: "string"
-                  minLength: 1
-                  description: "Display name for the agent"
-                description:
-                  type: "string"
-                  description: "Description of the agent"
-                path:
-                  type: "string"
-                  description: "Project path for organizing the agent"
-                agent_url:
-                  type: "string"
-                  format: "uri"
-                  description: "The A2A agent endpoint URL"
-                card_url:
-                  type: "string"
-                  format: "uri"
-                  description: "Optional explicit agent card URL (must be different from agent_url)"
-                headers:
-                  type: "object"
-                  description: "Authentication headers for the A2A agent"
-                  additionalProperties:
-                    type: "object"
-                    properties:
-                      value:
-                        type: "string"
-                        maxLength: 2048
-                        description: "Header value. **Update behavior**: Provide empty string (\"\") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove."
-                      encrypted:
-                        type: "boolean"
-                        default: false
-                    required:
-                      - "value"
-              required:
-                - "key"
-                - "display_name"
-                - "description"
-                - "path"
-                - "agent_url"
-      responses:
-        "201":
-          description: "A2A agent registered successfully"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  _id:
-                    type: "string"
-                  type:
-                    type: "string"
-                    enum:
-                      - "a2a"
-                      - "internal"
-                  key:
-                    type: "string"
-                  display_name:
-                    type: "string"
-                  description:
-                    type: "string"
-                  workspace_id:
-                    type: "string"
-                  project_id:
-                    type: "string"
-                  created_by_id:
-                    type:
-                      - "string"
-                      - "null"
-                  updated_by_id:
-                    type:
-                      - "string"
-                      - "null"
-                  role:
-                    type: "string"
-                  instructions:
-                    type: "string"
-                  status:
-                    type: "string"
-                  path:
-                    type: "string"
-                  metrics:
-                    type: "object"
-                    properties:
-                      total_cost:
-                        type: "number"
-                    required:
-                      - "total_cost"
-                  memory_stores:
-                    type: "array"
-                    items:
-                      type: "string"
-                  team_of_agents:
-                    type: "array"
-                    items: {}
-                  created:
-                    type: "string"
-                  updated:
-                    type: "string"
-                  a2a:
-                    type: "object"
-                    properties:
-                      agent_url:
-                        type: "string"
-                      card_url:
-                        type: "string"
-                      headers:
-                        type: "object"
-                        additionalProperties: {}
-                      cached_card: {}
-                    required:
-                      - "agent_url"
-                      - "headers"
-                required:
-                  - "_id"
-                  - "type"
-                  - "key"
-                  - "display_name"
-                  - "description"
-                  - "workspace_id"
-                  - "project_id"
-                  - "status"
-                  - "path"
-                  - "metrics"
-                  - "memory_stores"
-                  - "team_of_agents"
-        "400":
-          description: "Invalid request or agent card fetch failed"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  message:
-                    type: "string"
-                required:
-                  - "message"
-        "409":
-          description: "Agent with this key already exists"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  message:
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
   /v2/agents:
     post:
       tags:
@@ -17508,38 +18514,6 @@ paths:
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                     required:
                       - "id"
-                  a2a:
-                    type: "object"
-                    properties:
-                      agent_url:
-                        type: "string"
-                        format: "uri"
-                        description: "The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)"
-                      card_url:
-                        type: "string"
-                        format: "uri"
-                        description: "Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided"
-                      headers:
-                        type: "object"
-                        description: "HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry."
-                        additionalProperties:
-                          type: "object"
-                          properties:
-                            value:
-                              type: "string"
-                              maxLength: 2048
-                              description: "Header value. **Update behavior**: Provide empty string (\"\") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove."
-                            encrypted:
-                              type: "boolean"
-                              default: false
-                          required:
-                            - "value"
-                      cached_card:
-                        description: "Cached agent card from discovery. Refreshed periodically."
-                    required:
-                      - "agent_url"
-                    title: "A2A Agent Configuration"
-                    description: "A2A configuration with agent endpoint and authentication. Only present for A2A agents."
                 required:
                   - "_id"
                   - "key"
@@ -17594,10 +18568,9 @@ paths:
             type: "string"
             enum:
               - "internal"
-              - "a2a"
-            description: "Filter agents by type: \"internal\" for Orquesta-managed agents, \"a2a\" for external A2A-compliant agents"
+            description: "Filter agents by type"
           required: false
-          description: "Filter agents by type: \"internal\" for Orquesta-managed agents, \"a2a\" for external A2A-compliant agents"
+          description: "Filter agents by type"
           name: "type"
           in: "query"
       responses:
@@ -18515,38 +19488,6 @@ paths:
                               description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                           required:
                             - "id"
-                        a2a:
-                          type: "object"
-                          properties:
-                            agent_url:
-                              type: "string"
-                              format: "uri"
-                              description: "The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)"
-                            card_url:
-                              type: "string"
-                              format: "uri"
-                              description: "Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided"
-                            headers:
-                              type: "object"
-                              description: "HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry."
-                              additionalProperties:
-                                type: "object"
-                                properties:
-                                  value:
-                                    type: "string"
-                                    maxLength: 2048
-                                    description: "Header value. **Update behavior**: Provide empty string (\"\") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove."
-                                  encrypted:
-                                    type: "boolean"
-                                    default: false
-                                required:
-                                  - "value"
-                            cached_card:
-                              description: "Cached agent card from discovery. Refreshed periodically."
-                          required:
-                            - "agent_url"
-                          title: "A2A Agent Configuration"
-                          description: "A2A configuration with agent endpoint and authentication. Only present for A2A agents."
                       required:
                         - "_id"
                         - "key"
@@ -19826,38 +20767,6 @@ paths:
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                     required:
                       - "id"
-                  a2a:
-                    type: "object"
-                    properties:
-                      agent_url:
-                        type: "string"
-                        format: "uri"
-                        description: "The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)"
-                      card_url:
-                        type: "string"
-                        format: "uri"
-                        description: "Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided"
-                      headers:
-                        type: "object"
-                        description: "HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry."
-                        additionalProperties:
-                          type: "object"
-                          properties:
-                            value:
-                              type: "string"
-                              maxLength: 2048
-                              description: "Header value. **Update behavior**: Provide empty string (\"\") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove."
-                            encrypted:
-                              type: "boolean"
-                              default: false
-                          required:
-                            - "value"
-                      cached_card:
-                        description: "Cached agent card from discovery. Refreshed periodically."
-                    required:
-                      - "agent_url"
-                    title: "A2A Agent Configuration"
-                    description: "A2A configuration with agent endpoint and authentication. Only present for A2A agents."
                 required:
                   - "_id"
                   - "key"
@@ -19889,7 +20798,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "agents"
       x-cli-name: "update"
-      x-speakeasy-max-method-params: 21
+      x-speakeasy-max-method-params: 20
       operationId: "UpdateAgent"
       summary: "Update agent"
       description: "Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations."
@@ -20965,34 +21874,6 @@ paths:
                     - "text"
                     - "jinja"
                     - "mustache"
-                a2a:
-                  type: "object"
-                  properties:
-                    agent_url:
-                      type: "string"
-                      format: "uri"
-                      description: "Update the A2A agent endpoint URL"
-                    card_url:
-                      type: "string"
-                      format: "uri"
-                      description: "Update the explicit agent card URL"
-                    headers:
-                      type: "object"
-                      description: "Update HTTP headers for authentication. **Credential preservation**: Use empty string (\"\") for encrypted header values to keep existing credentials without re-entry. Provide new values to rotate credentials. Omit headers entirely to remove them."
-                      additionalProperties:
-                        type: "object"
-                        properties:
-                          value:
-                            type: "string"
-                            maxLength: 2048
-                            description: "Header value. **Update behavior**: Provide empty string (\"\") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove."
-                          encrypted:
-                            type: "boolean"
-                            default: false
-                        required:
-                          - "value"
-                  title: "Update A2A Configuration"
-                  description: "Update A2A agent configuration (only applicable to A2A agents)"
                 versionIncrement:
                   type: "string"
                   enum:
@@ -21912,38 +22793,6 @@ paths:
                         description: "Optional array of fallback models (string IDs or config objects) that will be used automatically in order if the primary model fails"
                     required:
                       - "id"
-                  a2a:
-                    type: "object"
-                    properties:
-                      agent_url:
-                        type: "string"
-                        format: "uri"
-                        description: "The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)"
-                      card_url:
-                        type: "string"
-                        format: "uri"
-                        description: "Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided"
-                      headers:
-                        type: "object"
-                        description: "HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry."
-                        additionalProperties:
-                          type: "object"
-                          properties:
-                            value:
-                              type: "string"
-                              maxLength: 2048
-                              description: "Header value. **Update behavior**: Provide empty string (\"\") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove."
-                            encrypted:
-                              type: "boolean"
-                              default: false
-                          required:
-                            - "value"
-                      cached_card:
-                        description: "Cached agent card from discovery. Refreshed periodically."
-                    required:
-                      - "agent_url"
-                    title: "A2A Agent Configuration"
-                    description: "A2A configuration with agent endpoint and authentication. Only present for A2A agents."
                 required:
                   - "_id"
                   - "key"
@@ -23728,7 +24577,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KSFYHCJXYPS08Y8GW67GJF7Q"
+                                          default: "01KSHFB4870997MTE0J9K1BQGC"
                                         name:
                                           type: "string"
                                         description:
@@ -25369,7 +26218,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KSFYHCM9ZSFJ0B390YTAEZW1"
+                                          default: "01KSHFB49MSFJ24C48B4FSAFT0"
                                         name:
                                           type: "string"
                                         description:
@@ -33743,7 +34592,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KSFYHCYEEYHYF7DZ446EPG1E"
+                              default: "tool_01KSHFB4DGE81J78HNWDMRFTWF"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -33840,7 +34689,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KSFYHCYFHFVE28Z5SVTP06X4"
+                              default: "tool_01KSHFB4DJV70ACTC69N55657G"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -33939,7 +34788,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KSFYHCYG4D053DWVQSRR216J"
+                              default: "tool_01KSHFB4DKBKGVKH3GFCC35WP3"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34074,7 +34923,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KSFYHCYJX8W3GM4CN4JQRT6J"
+                              default: "tool_01KSHFB4DNHB67DR5TC1RGC6RM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34146,7 +34995,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KSFYHCYKNTDYZYB0TZA4WQAW"
+                                        default: "01KSHFB4DP48TCXDN3F50P3BXW"
                                       name:
                                         type: "string"
                                       description:
@@ -34205,7 +35054,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KSFYHCYMJ3KMHQP66EN18YHP"
+                              default: "tool_01KSHFB4DQF759TVK14G8XZ61Y"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34756,7 +35605,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZ4WGGH881EF61KWBV4"
+                        default: "tool_01KSHFB4E3D78X01Q5D28CZRY4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34853,7 +35702,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZ5EV2J1A9WKYATW0JM"
+                        default: "tool_01KSHFB4E6359G4M29YH7B0G8S"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34952,7 +35801,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZ6KBR6HA0RAH5Z8TDS"
+                        default: "tool_01KSHFB4EF1M7CJTGBBH04JZNY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35087,7 +35936,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZ8WAMPE197A9F9WEQK"
+                        default: "tool_01KSHFB4EKFA38VXEH8Z1G59HP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35159,7 +36008,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KSFYHCZ9XVKTRSKK2B6DRA6Z"
+                                  default: "01KSHFB4EM3YB0XQVS9KYSCGRH"
                                 name:
                                   type: "string"
                                 description:
@@ -35218,7 +36067,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZA9MRKZZRWWQ22T137"
+                        default: "tool_01KSHFB4EPPBYQGCTRFGAWH5A5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35675,7 +36524,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KSFYHCZV3TNSJMDSKYETHSJK"
+                                default: "01KSHFB4FEF5H1044CP04G0HA0"
                               name:
                                 type: "string"
                               description:
@@ -35821,7 +36670,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZG5VTF27RXZEZ9W9ZJ"
+                        default: "tool_01KSHFB4EYK10RFG7RG6CRRNMZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35918,7 +36767,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZHJEWD0GC0BF94QPAM"
+                        default: "tool_01KSHFB4EZG9A83Y6A2MYTFYGH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36017,7 +36866,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZJX4HMN1DNM8WF6BDB"
+                        default: "tool_01KSHFB4F0CBZD0701C228F9M7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36152,7 +37001,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZMBXNASX0YNPM493T0"
+                        default: "tool_01KSHFB4F325KYCM5X4B2ATYZZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36224,7 +37073,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KSFYHCZNQKB5Q2NNSV437DH2"
+                                  default: "01KSHFB4F4AFXH2JFW9GR0EZTC"
                                 name:
                                   type: "string"
                                 description:
@@ -36283,7 +37132,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHCZPN02GES7C8MXJNEEX"
+                        default: "tool_01KSHFB4F66CZGGJMWYKZXN1P7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36440,7 +37289,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHD0CX33V0K7YBS988GMM"
+                        default: "tool_01KSHFB4G2MCTYM9PWANRDVEV1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36537,7 +37386,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHD0DN8FDCNRVTYM0ZERJ"
+                        default: "tool_01KSHFB4G4K7H00NR33EGWPZ5R"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36636,7 +37485,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHD0FFDBTM48P6F7V50P4"
+                        default: "tool_01KSHFB4G5HKJBPF4V4HJ94J0V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36771,7 +37620,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHD0G28CRRNW4ZKV1R3FA"
+                        default: "tool_01KSHFB4G7E764CGZC7WGJ2MT5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36843,7 +37692,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KSFYHD0HDMZND2CF42XY4APH"
+                                  default: "01KSHFB4G860C8KX9JPXHTGVTK"
                                 name:
                                   type: "string"
                                 description:
@@ -36902,7 +37751,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KSFYHD0JVSQ1WWYE0KEJ2GBS"
+                        default: "tool_01KSHFB4G902E4JAAFSHT4JZPN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39054,7 +39903,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KSFYHD383GAR720SG0AR0MCR"
+                          default: "01KSHFB4K30X0NPEKKR31XR537"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -39146,6 +39995,9 @@ paths:
                 display_name:
                   type: "string"
                   description: "The display name for the datasource visible in the UI. If omitted, the display name is derived from the uploaded file. When both `display_name` and `file_id` are provided, the provided `display_name` is prioritized."
+                description:
+                  type: "string"
+                  description: "The description of the knowledge base"
                 file_id:
                   type: "string"
                   description: "The unique identifier of the file used for datasource creation. If provided, the file is immediately queued for chunking."
@@ -39222,7 +40074,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KSFYHD3BZFBJH31YQSQGJY66"
+                    default: "01KSHFB4K61CEFCD9GHN2E9SCE"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39320,7 +40172,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KSFYHD3AT5V6P8W4006N8NAC"
+                    default: "01KSHFB4K5N48SV1AD9RPDDDBJ"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -39456,7 +40308,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KSFYHD3DEYPD4T8CB6N1YHZ0"
+                    default: "01KSHFB4K8YT8Z3PGFHCEH61EB"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42055,7 +42907,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-25T16:12:11.969Z"
+                          default: "2026-05-26T06:25:06.390Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42063,7 +42915,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:11.970Z"
+                              default: "2026-05-26T06:25:06.390Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -42205,7 +43057,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-25T16:12:11.969Z"
+                    default: "2026-05-26T06:25:06.390Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42213,7 +43065,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-25T16:12:11.970Z"
+                        default: "2026-05-26T06:25:06.390Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42350,7 +43202,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-25T16:12:11.969Z"
+                    default: "2026-05-26T06:25:06.390Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42358,7 +43210,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-25T16:12:11.970Z"
+                        default: "2026-05-26T06:25:06.390Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42528,7 +43380,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-25T16:12:11.969Z"
+                    default: "2026-05-26T06:25:06.390Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42536,7 +43388,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-25T16:12:11.970Z"
+                        default: "2026-05-26T06:25:06.390Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42937,7 +43789,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-25T16:12:26.663Z"
+                                    default: "2026-05-26T06:25:21.564Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -42977,7 +43829,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-25T16:12:26.663Z"
+                                    default: "2026-05-26T06:25:21.565Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43017,7 +43869,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-05-25T16:12:26.664Z"
+                                    default: "2026-05-26T06:25:21.565Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -43053,7 +43905,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-25T16:12:11.969Z"
+                          default: "2026-05-26T06:25:06.390Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -43061,7 +43913,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:11.970Z"
+                              default: "2026-05-26T06:25:06.390Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43645,7 +44497,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-25T16:12:26.674Z"
+                                default: "2026-05-26T06:25:21.583Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43685,7 +44537,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-25T16:12:26.675Z"
+                                default: "2026-05-26T06:25:21.584Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43725,7 +44577,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-05-25T16:12:26.675Z"
+                                default: "2026-05-26T06:25:21.584Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -43761,7 +44613,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-05-25T16:12:11.969Z"
+                      default: "2026-05-26T06:25:06.390Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43769,7 +44621,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-05-25T16:12:11.970Z"
+                          default: "2026-05-26T06:25:06.390Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -44101,7 +44953,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:26.669Z"
+                              default: "2026-05-26T06:25:21.578Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44141,7 +44993,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:26.669Z"
+                              default: "2026-05-26T06:25:21.578Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44181,7 +45033,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:26.670Z"
+                              default: "2026-05-26T06:25:21.579Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44217,7 +45069,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-25T16:12:11.969Z"
+                    default: "2026-05-26T06:25:06.390Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44225,7 +45077,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-25T16:12:11.970Z"
+                        default: "2026-05-26T06:25:06.390Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44808,7 +45660,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:26.698Z"
+                              default: "2026-05-26T06:25:21.605Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44848,7 +45700,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:26.698Z"
+                              default: "2026-05-26T06:25:21.606Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44888,7 +45740,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:26.699Z"
+                              default: "2026-05-26T06:25:21.606Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -44924,7 +45776,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-05-25T16:12:11.969Z"
+                    default: "2026-05-26T06:25:06.390Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44932,7 +45784,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-05-25T16:12:11.970Z"
+                        default: "2026-05-26T06:25:06.390Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -51419,7 +52271,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-25T16:12:26.791Z"
+                      default: "2026-05-26T06:25:21.707Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51458,7 +52310,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-25T16:12:26.791Z"
+                      default: "2026-05-26T06:25:21.707Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51497,7 +52349,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-05-25T16:12:26.792Z"
+                      default: "2026-05-26T06:25:21.708Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -51829,7 +52681,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-25T16:12:11.969Z"
+                          default: "2026-05-26T06:25:06.390Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51837,7 +52689,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:11.970Z"
+                              default: "2026-05-26T06:25:06.390Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51911,7 +52763,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-05-25T16:12:11.969Z"
+                          default: "2026-05-26T06:25:06.390Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51919,7 +52771,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-05-25T16:12:11.970Z"
+                              default: "2026-05-26T06:25:06.390Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52106,7 +52958,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-25T16:12:11.969Z"
+                        default: "2026-05-26T06:25:06.390Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52114,7 +52966,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-25T16:12:11.970Z"
+                            default: "2026-05-26T06:25:06.390Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52188,7 +53040,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-25T16:12:11.969Z"
+                        default: "2026-05-26T06:25:06.390Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52196,7 +53048,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-25T16:12:11.970Z"
+                            default: "2026-05-26T06:25:06.390Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52293,7 +53145,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-25T16:12:11.969Z"
+                        default: "2026-05-26T06:25:06.390Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52301,7 +53153,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-25T16:12:11.970Z"
+                            default: "2026-05-26T06:25:06.390Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52375,7 +53227,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-25T16:12:11.969Z"
+                        default: "2026-05-26T06:25:06.390Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52383,7 +53235,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-25T16:12:11.970Z"
+                            default: "2026-05-26T06:25:06.390Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52578,7 +53430,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-25T16:12:11.969Z"
+                        default: "2026-05-26T06:25:06.390Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52586,7 +53438,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-25T16:12:11.970Z"
+                            default: "2026-05-26T06:25:06.390Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52660,7 +53512,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-05-25T16:12:11.969Z"
+                        default: "2026-05-26T06:25:06.390Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52668,7 +53520,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-05-25T16:12:11.970Z"
+                            default: "2026-05-26T06:25:06.390Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53093,6 +53945,1829 @@ paths:
       x-cli-hidden: true
       x-cli-name: "update"
       x-speakeasy-group: "guardrailRules"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/models:
+    get:
+      description: "Lists all available models for the workspace, including system and custom models with their enabled status."
+      operationId: "ModelList"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ModelDocument"
+                type:
+                  - "array"
+                  - "null"
+          description: "Models retrieved successfully"
+      summary: "List models"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "list"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "const models = await orq.models.list();"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      description: "Creates a new custom model for the workspace. Provider credentials in the configuration are encrypted using the workspace encryption key before being persisted."
+      operationId: "ModelCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                configuration:
+                  additionalProperties: {}
+                  type: "object"
+                display_name:
+                  maxLength: 128
+                  type: "string"
+                has_functions:
+                  type: "boolean"
+                id:
+                  type: "string"
+                input_cost:
+                  format: "double"
+                  type: "number"
+                metadata:
+                  $ref: "#/components/schemas/ModelMetadata"
+                model_developer:
+                  type: "string"
+                model_family:
+                  type: "string"
+                model_id:
+                  maxLength: 256
+                  type: "string"
+                model_type:
+                  type: "string"
+                output_cost:
+                  format: "double"
+                  type: "number"
+                parameters:
+                  items:
+                    $ref: "#/components/schemas/CreateModelParameter"
+                  type:
+                    - "array"
+                    - "null"
+                provider:
+                  type: "string"
+              required:
+                - "id"
+                - "display_name"
+                - "model_id"
+                - "model_developer"
+                - "model_family"
+                - "model_type"
+                - "provider"
+                - "has_functions"
+                - "input_cost"
+                - "output_cost"
+                - "metadata"
+                - "parameters"
+                - "configuration"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "Model created successfully"
+        "400":
+          description: "Invalid model configuration"
+        "404":
+          description: "Workspace not found"
+      summary: "Create custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "create"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.create({\n  id: \"...\",\n  display_name: \"My custom model\",\n  model_id: \"my-model\",\n  provider: \"openai\",\n  model_type: \"chat\",\n  model_developer: \"openai\",\n  model_family: \"gpt\",\n  input_cost: 0,\n  output_cost: 0,\n  has_functions: false,\n  metadata: { is_private: true, region: \"us\" },\n  parameters: [],\n  configuration: { provider: \"openai\", api_key: \"sk-...\" },\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/models/autorouter:
+    post:
+      description: "Creates an autorouter model that routes between a strong and economical source model based on the requested profile. Both source models must already exist for the workspace and be marked autorouter-eligible in master data."
+      operationId: "ModelCreateAutorouter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                economical_model:
+                  type: "string"
+                key:
+                  type: "string"
+                profile:
+                  type: "string"
+                strong_model:
+                  type: "string"
+              required:
+                - "key"
+                - "strong_model"
+                - "economical_model"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "Autorouter model created successfully"
+        "400":
+          description: "Invalid request or duplicate model"
+        "404":
+          description: "Source model not found"
+      summary: "Create autorouter custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "createAutorouter"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.createAutorouter({\n  key: \"my-router\",\n  strong_model: \"openai/gpt-4o\",\n  economical_model: \"openai/gpt-4o-mini\",\n  profile: \"balanced\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "createAutorouter"
+      security:
+        - ApiKey: []
+  /v2/models/autorouter/{id}:
+    patch:
+      description: "Re-configures an autorouter model. Each of key/strong_model/economical_model/profile falls back to the existing value when omitted. Changing the key enforces uniqueness and rewrites PRICING_KV."
+      operationId: "ModelUpdateAutorouter"
+      parameters:
+        - description: "The ID of the model"
+          in: "path"
+          name: "id"
+          required: true
+          schema:
+            description: "The ID of the model"
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                economical_model:
+                  type: "string"
+                key:
+                  type: "string"
+                profile:
+                  type: "string"
+                strong_model:
+                  type: "string"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "Autorouter model updated successfully"
+        "400":
+          description: "Invalid request or duplicate key"
+        "404":
+          description: "Model or source model not found"
+      summary: "Update autorouter custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "updateAutorouter"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.updateAutorouter({\n  id: \"019d...\",\n  profile: \"cost\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "updateAutorouter"
+      security:
+        - ApiKey: []
+  /v2/models/aws-bedrock:
+    post:
+      description: "Registers an AWS Bedrock inference profile as a custom model for the workspace. Credentials are resolved at request time via either the integration reference or pod-identity — nothing is stored with the model."
+      operationId: "ModelCreateAwsBedrock"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                assume_role_arn:
+                  type: "string"
+                assume_role_external_id:
+                  type: "string"
+                auth_mode:
+                  type: "string"
+                description:
+                  type: "string"
+                display_name:
+                  maxLength: 128
+                  type: "string"
+                has_reasoning:
+                  type: "boolean"
+                input_cost:
+                  format: "double"
+                  type: "number"
+                integration_id:
+                  type: "string"
+                max_tokens:
+                  format: "int64"
+                  type: "integer"
+                model_developer:
+                  type: "string"
+                model_family:
+                  type: "string"
+                model_id:
+                  type: "string"
+                model_type:
+                  type: "string"
+                output_cost:
+                  format: "double"
+                  type: "number"
+                region:
+                  type: "string"
+                supports_json_mode:
+                  type: "boolean"
+                supports_json_schema:
+                  type: "boolean"
+                supports_strict_tool:
+                  type: "boolean"
+                supports_tool_calling:
+                  type: "boolean"
+                supports_vision:
+                  type: "boolean"
+                temperature:
+                  format: "double"
+                  type: "number"
+              required:
+                - "display_name"
+                - "model_id"
+                - "region"
+                - "model_developer"
+                - "auth_mode"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "AWS Bedrock model created successfully"
+        "400":
+          description: "Invalid model configuration"
+        "404":
+          description: "Workspace not found"
+      summary: "Create AWS Bedrock custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "createAwsBedrock"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.createAwsBedrock({\n  display_name: \"My Bedrock Model\",\n  model_id: \"arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0\",\n  region: \"us-east-1\",\n  model_developer: \"anthropic\",\n  auth_mode: \"integration\",\n  integration_id: \"int_...\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "createAwsBedrock"
+      security:
+        - ApiKey: []
+  /v2/models/aws-bedrock/validate:
+    post:
+      description: "Performs a live Bedrock Converse probe to verify the inference profile ARN and credentials, then best-effort enriches the response from known system models."
+      operationId: "ModelValidateAwsBedrock"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                assume_role_arn:
+                  type: "string"
+                assume_role_external_id:
+                  type: "string"
+                auth_mode:
+                  type: "string"
+                inference_profile_arn:
+                  type: "string"
+                integration_id:
+                  type: "string"
+                region:
+                  type: "string"
+              required:
+                - "inference_profile_arn"
+                - "region"
+                - "auth_mode"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          description: "Validation result"
+        "400":
+          description: "Validation failed"
+        "404":
+          description: "Integration not found"
+      summary: "Validate AWS Bedrock inference profile"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "validateAwsBedrock"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.validateAwsBedrock({\n  inference_profile_arn: \"arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0\",\n  region: \"us-east-1\",\n  auth_mode: \"pod-identity\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "validateAwsBedrock"
+      security:
+        - ApiKey: []
+  /v2/models/aws-bedrock/{id}:
+    patch:
+      description: "Updates an AWS Bedrock custom model. ARN changes are format-validated (live AWS validation lives in the dedicated validate endpoint). Configuration and metadata are spread-merged. Parameters are replaced only when the request produces a non-empty list."
+      operationId: "ModelUpdateAwsBedrock"
+      parameters:
+        - description: "The ID of the model"
+          in: "path"
+          name: "id"
+          required: true
+          schema:
+            description: "The ID of the model"
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                assume_role_arn:
+                  type: "string"
+                assume_role_external_id:
+                  type: "string"
+                description:
+                  type: "string"
+                display_name:
+                  maxLength: 128
+                  type: "string"
+                has_reasoning:
+                  type: "boolean"
+                input_cost:
+                  format: "double"
+                  type: "number"
+                max_tokens:
+                  format: "int64"
+                  type: "integer"
+                model_developer:
+                  type: "string"
+                model_family:
+                  type: "string"
+                model_id:
+                  type: "string"
+                model_type:
+                  type: "string"
+                output_cost:
+                  format: "double"
+                  type: "number"
+                region:
+                  type: "string"
+                supports_json_mode:
+                  type: "boolean"
+                supports_json_schema:
+                  type: "boolean"
+                supports_strict_tool:
+                  type: "boolean"
+                supports_tool_calling:
+                  type: "boolean"
+                supports_vision:
+                  type: "boolean"
+                temperature:
+                  format: "double"
+                  type: "number"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "AWS Bedrock model updated successfully"
+        "400":
+          description: "Invalid ARN format or request"
+        "404":
+          description: "Model not found or not accessible in this workspace"
+      summary: "Update AWS Bedrock custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "updateAwsBedrock"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.updateAwsBedrock({\n  id: \"019d...\",\n  display_name: \"Updated name\",\n  region: \"us-east-1\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "updateAwsBedrock"
+      security:
+        - ApiKey: []
+  /v2/models/azure-foundry/deployments:
+    post:
+      description: "Lists Azure Foundry deployments under the given base_url and joins each entry with the Orq master-data row. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned."
+      operationId: "ModelAzureFoundryDeployments"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                api_key:
+                  type: "string"
+                api_version:
+                  type: "string"
+                base_url:
+                  type: "string"
+                provider:
+                  type: "string"
+              required:
+                - "provider"
+                - "base_url"
+                - "api_key"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  deployments:
+                    items:
+                      $ref: "#/components/schemas/AzureFoundryDeployment"
+                    type:
+                      - "array"
+                      - "null"
+                  region:
+                    type: "string"
+                required:
+                  - "region"
+                  - "deployments"
+                type: "object"
+          description: "Azure Foundry deployments listed"
+        "400":
+          description: "Invalid request or base_url"
+      summary: "List Azure Foundry deployments under a resource"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "azureFoundryDeployments"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.azureFoundryDeployments({\n  provider: \"azure\",\n  base_url: \"https://my-resource.openai.azure.com/openai/v1\",\n  api_key: \"...\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "azureFoundryDeployments"
+      security:
+        - ApiKey: []
+  /v2/models/litellm/import:
+    post:
+      description: "Bulk-imports a list of LiteLLM model definitions into the workspace model garden."
+      operationId: "ModelLiteLLMImport"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/LiteLLMModel"
+              type:
+                - "array"
+                - "null"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ModelDocument"
+                type:
+                  - "array"
+                  - "null"
+          description: "LiteLLM models imported successfully"
+        "400":
+          description: "Invalid request"
+        "404":
+          description: "Workspace not found"
+      summary: "Import models from LiteLLM"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "importLitellm"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.importLitellm([\n  {\n    model_name: \"gpt-4o-proxy\",\n    litellm_params: {\n      use_in_pass_through: false,\n      use_litellm_proxy: true,\n      merge_reasoning_content_in_choices: false,\n      model: \"openai/gpt-4o\",\n    },\n    model_info: {\n      id: null, db_model: null, key: null, litellm_provider: \"openai\", mode: \"chat\",\n      input_cost_per_token: 0.0000025, output_cost_per_token: 0.00001,\n      supports_function_calling: true,\n      supported_openai_params: [\"temperature\", \"max_tokens\", \"top_p\"],\n    },\n  },\n]);"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "importLitellm"
+      security:
+        - ApiKey: []
+  /v2/models/litellm/models:
+    get:
+      description: "Fetches the list of models from the LiteLLM instance configured for the workspace. Requires a stored LiteLLM integration."
+      operationId: "ModelListLitellm"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  additionalProperties: {}
+                  type: "object"
+                type:
+                  - "array"
+                  - "null"
+          description: "LiteLLM models retrieved"
+        "404":
+          description: "LiteLLM integration not found"
+        "500":
+          description: "Error fetching models from LiteLLM"
+      summary: "List models from configured LiteLLM instance"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "listLitellm"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.listLitellm();"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "listLitellm"
+      security:
+        - ApiKey: []
+  /v2/models/openai-like:
+    post:
+      description: "Creates a custom model backed by any OpenAI-compatible endpoint. The handler probes the target API with the supplied credentials before persisting the model."
+      operationId: "ModelCreateOpenAILike"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                api_key:
+                  type: "string"
+                base_url:
+                  type: "string"
+                cost_per_image:
+                  format: "double"
+                  type: "number"
+                description:
+                  type: "string"
+                display_name:
+                  maxLength: 128
+                  type: "string"
+                has_reasoning:
+                  type: "boolean"
+                input_cost:
+                  format: "double"
+                  type: "number"
+                max_tokens:
+                  format: "int64"
+                  type: "integer"
+                model_id:
+                  type: "string"
+                model_type:
+                  type: "string"
+                output_cost:
+                  format: "double"
+                  type: "number"
+                region:
+                  type: "string"
+                supports_image_edit:
+                  type: "boolean"
+                supports_strict_tool:
+                  type: "boolean"
+                supports_tool_calling:
+                  type: "boolean"
+                supports_vision:
+                  type: "boolean"
+                temperature:
+                  format: "double"
+                  type: "number"
+              required:
+                - "display_name"
+                - "region"
+                - "base_url"
+                - "model_id"
+                - "api_key"
+                - "model_type"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "OpenAI-like model created successfully"
+        "400":
+          description: "Invalid model configuration or validation failed"
+        "404":
+          description: "Workspace not found"
+      summary: "Create OpenAI-compatible custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "createOpenaiLike"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.createOpenaiLike({\n  display_name: \"My Local Model\",\n  region: \"us\",\n  base_url: \"https://api.example.com\",\n  model_id: \"my-model\",\n  api_key: \"sk-...\",\n  model_type: \"chat\",\n  input_cost: 0,\n  output_cost: 0,\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "createOpenaiLike"
+      security:
+        - ApiKey: []
+  /v2/models/openai-like/{id}:
+    patch:
+      description: "Updates an OpenAI-compatible custom model. Live-re-probes the target API when base_url or model_id changes, using the stored encrypted api_key. Metadata is merged (existing preserved, new overrides)."
+      operationId: "ModelUpdateOpenAILike"
+      parameters:
+        - description: "The ID of the model"
+          in: "path"
+          name: "id"
+          required: true
+          schema:
+            description: "The ID of the model"
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                base_url:
+                  type: "string"
+                cost_per_image:
+                  format: "double"
+                  type: "number"
+                description:
+                  type: "string"
+                display_name:
+                  maxLength: 128
+                  type: "string"
+                has_reasoning:
+                  type: "boolean"
+                input_cost:
+                  format: "double"
+                  type: "number"
+                max_tokens:
+                  format: "int64"
+                  type: "integer"
+                model_id:
+                  type: "string"
+                model_type:
+                  type: "string"
+                output_cost:
+                  format: "double"
+                  type: "number"
+                region:
+                  type: "string"
+                supports_image_edit:
+                  type: "boolean"
+                supports_strict_tool:
+                  type: "boolean"
+                supports_tool_calling:
+                  type: "boolean"
+                supports_vision:
+                  type: "boolean"
+                temperature:
+                  format: "double"
+                  type: "number"
+              required:
+                - "display_name"
+                - "region"
+                - "model_type"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "OpenAI-like model updated successfully"
+        "400":
+          description: "Invalid request or validation failed"
+        "404":
+          description: "Model not found or not accessible in this workspace"
+      summary: "Update OpenAI-compatible custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "updateOpenaiLike"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.updateOpenaiLike({\n  id: \"019d...\",\n  display_name: \"My Renamed Model\",\n  region: \"us\",\n  model_type: \"chat\",\n  input_cost: 0.002,\n  output_cost: 0.004,\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "updateOpenaiLike"
+      security:
+        - ApiKey: []
+  /v2/models/validate:
+    post:
+      description: "Validates a provider endpoint by performing a minimal live probe. Currently supports Azure OpenAI. Response includes the resolved region, whether the model is known to Orq, and either the full model document or a synthesized default."
+      operationId: "ModelValidate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                api_key:
+                  type: "string"
+                api_version:
+                  type: "string"
+                base_url:
+                  type: "string"
+                deployment_name:
+                  type: "string"
+                endpoint:
+                  type: "string"
+                provider:
+                  type: "string"
+                subtype:
+                  type: "string"
+              required:
+                - "provider"
+                - "api_key"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          description: "Model validated"
+        "400":
+          description: "Invalid request or unsupported provider"
+        "415":
+          description: "Image models not supported"
+      summary: "Validate model endpoint"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "validate"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.validate({\n  provider: \"azure\",\n  endpoint: \"https://my-deployment.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-06-01\",\n  api_key: \"...\",\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "validate"
+      security:
+        - ApiKey: []
+  /v2/models/vertex:
+    post:
+      description: "Registers a Google Vertex AI model as a custom model for the workspace. The service account credentials are probed against Vertex AI with a minimal GenerateContent call before persisting."
+      operationId: "ModelCreateVertex"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                configuration:
+                  $ref: "#/components/schemas/VertexConfiguration"
+                display_name:
+                  type: "string"
+              required:
+                - "display_name"
+                - "configuration"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "Vertex AI model created successfully"
+        "400":
+          description: "Invalid model configuration or validation failed"
+        "404":
+          description: "Workspace not found"
+      summary: "Create Vertex AI custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "createVertex"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.createVertex({\n  display_name: \"My Vertex Gemini\",\n  configuration: {\n    projectId: \"my-gcp-project\",\n    location: \"us-central1\",\n    serviceAccount: { type: \"service_account\", project_id: \"...\" },\n    modelConfiguration: {\n      id: \"gemini-2.0-flash\",\n      inputCost: 0,\n      outputCost: 0,\n      parameters: {\n        temperature: { min: 0, max: 2 },\n        maxTokens: { min: 1, max: 8192 },\n        topP: { min: 0, max: 1 },\n      },\n      capabilities: { supportToolCalling: true, structuredOutput: true, vision: false },\n    },\n  },\n});"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "createVertex"
+      security:
+        - ApiKey: []
+  /v2/models/{id}:
+    delete:
+      description: "Deletes a custom model from the workspace. System models cannot be deleted. Returns 200 with an explanatory message if the model is a system model or is still referenced by experiments."
+      operationId: "ModelDelete"
+      parameters:
+        - description: "The ID of the model"
+          in: "path"
+          name: "id"
+          required: true
+          schema:
+            description: "The ID of the model"
+            type: "string"
+      responses:
+        "200":
+          description: "Model deleted, or deletion refused with reason"
+        "401":
+          description: "Workspace ID required"
+      summary: "Delete custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "delete"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.delete({ id: \"019d...\" });"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      description: "Updates a custom model. Only fields present in the request body are modified, except for `metadata` and `parameters`, which are fully replaced when present (preserved from the legacy handler's behavior)."
+      operationId: "ModelUpdate"
+      parameters:
+        - description: "The ID of the model"
+          in: "path"
+          name: "id"
+          required: true
+          schema:
+            description: "The ID of the model"
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                display_name:
+                  maxLength: 128
+                  type: "string"
+                has_functions:
+                  type: "boolean"
+                input_cost:
+                  format: "double"
+                  type: "number"
+                metadata:
+                  $ref: "#/components/schemas/ModelMetadata"
+                model_type:
+                  type: "string"
+                output_cost:
+                  format: "double"
+                  type: "number"
+                parameters:
+                  items:
+                    $ref: "#/components/schemas/UpdateModelParameter"
+                  type: "array"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  configuration:
+                    $ref: "#/components/schemas/ModelConfigurationResponse"
+                  created:
+                    format: "date-time"
+                    type: "string"
+                  description:
+                    type:
+                      - "string"
+                      - "null"
+                  display_name:
+                    type: "string"
+                  docs_url:
+                    type:
+                      - "string"
+                      - "null"
+                  enabled:
+                    type: "boolean"
+                  enabled_for_endpoints:
+                    type: "boolean"
+                  enabled_for_playground:
+                    type: "boolean"
+                  has_cpu_pricing:
+                    type: "boolean"
+                  has_functions:
+                    type: "boolean"
+                  id:
+                    type: "string"
+                  input_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  input_currency:
+                    type: "string"
+                  is_active:
+                    type: "boolean"
+                  metadata:
+                    $ref: "#/components/schemas/ModelMetadata"
+                  model_developer:
+                    type: "string"
+                  model_family:
+                    type: "string"
+                  model_id:
+                    type: "string"
+                  model_type:
+                    type: "string"
+                  output_cost:
+                    format: "double"
+                    type:
+                      - "number"
+                      - "null"
+                  output_currency:
+                    type: "string"
+                  owner:
+                    type: "string"
+                  parameters:
+                    items:
+                      $ref: "#/components/schemas/ModelParameterDocument"
+                    type:
+                      - "array"
+                      - "null"
+                  pricing_url:
+                    type:
+                      - "string"
+                      - "null"
+                  provider:
+                    type: "string"
+                  refId:
+                    type: "string"
+                  updated:
+                    format: "date-time"
+                    type: "string"
+                required:
+                  - "id"
+                  - "created"
+                  - "updated"
+                  - "display_name"
+                  - "model_id"
+                  - "is_active"
+                  - "provider"
+                  - "owner"
+                  - "input_cost"
+                  - "input_currency"
+                  - "output_cost"
+                  - "output_currency"
+                  - "description"
+                  - "pricing_url"
+                  - "docs_url"
+                  - "model_type"
+                  - "has_functions"
+                  - "has_cpu_pricing"
+                  - "enabled_for_playground"
+                  - "enabled_for_endpoints"
+                  - "configuration"
+                  - "metadata"
+                  - "parameters"
+                  - "enabled"
+                  - "refId"
+                type: "object"
+          description: "Model updated successfully"
+        "400":
+          description: "Invalid request"
+        "404":
+          description: "Model not found or not accessible in this workspace"
+      summary: "Update custom model"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "update"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.update({\n  id: \"019d...\",\n  displayName: \"New display name\",\n  hasFunctions: true,\n});"
+      x-speakeasy-group: "models"
       x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
@@ -53881,6 +56556,76 @@ paths:
       x-cli-name: "update"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/workspace-models:
+    post:
+      description: "Adds the model to the workspace's enabled set. Idempotent — re-enabling an already-enabled model returns 204 with no state change."
+      operationId: "ModelEnable"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                model_id:
+                  type: "string"
+              required:
+                - "model_id"
+              type: "object"
+        required: true
+      responses:
+        "204":
+          description: "Model enabled"
+        "400":
+          description: "Invalid request body"
+        "404":
+          description: "Model not found"
+        "500":
+          description: "Internal server error"
+      summary: "Enable model for workspace"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "enable"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.enable({ modelId: \"model_123\" });"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "enable"
+      security:
+        - ApiKey: []
+  /v2/workspace-models/{model_id}:
+    delete:
+      description: "Removes the model from the workspace's enabled set. Idempotent — disabling an already-disabled model returns 204."
+      operationId: "ModelDisable"
+      parameters:
+        - description: "The ID of the model to disable"
+          in: "path"
+          name: "model_id"
+          required: true
+          schema:
+            description: "The ID of the model to disable"
+            type: "string"
+      responses:
+        "204":
+          description: "Model disabled"
+        "400":
+          description: "Invalid request"
+        "500":
+          description: "Internal server error"
+      summary: "Disable model for workspace"
+      tags:
+        - "Models"
+      x-cli-group: "models"
+      x-cli-name: "disable"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "await orq.models.disable({ modelId: \"model_123\" });"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "disable"
       security:
         - ApiKey: []
   /v2/api-keys:
@@ -56134,6 +58879,8 @@ paths:
         - ApiKey: []
 webhooks: {}
 tags:
+  - description: "List models available through the AI Router."
+    name: "Models"
   - name: "Guardrail Rules"
   - name: "Policies"
   - name: "Routing Rules"
@@ -56150,8 +58897,6 @@ tags:
   - name: "Responses"
   - description: "Run agents on a cadence — cron, interval, or one-off. Minimum firing interval is 1 hour."
     name: "Agent Schedules"
-  - description: "List models available through the AI Router."
-    name: "Models"
   - name: "Reporting"
     description: "GenAI reporting API over canonical analytics rollups. Accepts a metric name, time range, grain, group-by, and filters; returns a typed time series and optional totals."
 x-speakeasy-globals:
