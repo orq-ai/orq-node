@@ -4,20 +4,26 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { FilePurpose, FilePurpose$outboundSchema } from "./filepurpose.js";
 
 export type CreateFileRequest = {
   filename?: string | undefined;
   content?: string | undefined;
-  purpose?: number | undefined;
+  purpose?: FilePurpose | undefined;
   contentType?: string | undefined;
+  /**
+   * Project the file is created in. Optional for project-scoped API keys (defaults to the key's bound project); required for workspace-scoped callers.
+   */
+  projectId?: string | undefined;
 };
 
 /** @internal */
 export type CreateFileRequest$Outbound = {
   filename?: string | undefined;
   content?: string | undefined;
-  purpose?: number | undefined;
+  purpose?: string | undefined;
   content_type?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -28,11 +34,13 @@ export const CreateFileRequest$outboundSchema: z.ZodType<
 > = z.object({
   filename: z.string().optional(),
   content: z.string().optional(),
-  purpose: z.number().int().optional(),
+  purpose: FilePurpose$outboundSchema.optional(),
   contentType: z.string().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "content_type",
+    projectId: "project_id",
   });
 });
 

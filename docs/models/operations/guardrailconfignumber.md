@@ -6,10 +6,9 @@
 import { GuardrailConfigNumber } from "@orq-ai/node/models/operations";
 
 let value: GuardrailConfigNumber = {
-  enabled: false,
   type: "number",
-  value: 1669.19,
-  operator: "lte",
+  value: 8372.37,
+  operator: "ne",
 };
 ```
 
@@ -17,7 +16,7 @@ let value: GuardrailConfigNumber = {
 
 | Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `enabled`                                                                                | *boolean*                                                                                | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `enabled`                                                                                | *boolean*                                                                                | :heavy_minus_sign:                                                                       | N/A                                                                                      |
 | `alertOnFailure`                                                                         | *boolean*                                                                                | :heavy_minus_sign:                                                                       | N/A                                                                                      |
 | `type`                                                                                   | *"number"*                                                                               | :heavy_check_mark:                                                                       | N/A                                                                                      |
 | `value`                                                                                  | *number*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |

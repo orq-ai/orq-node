@@ -6,12 +6,38 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateSkillRequest = {
+  /**
+   * Skill ID to update.
+   */
   skillId?: string | undefined;
+  /**
+   * New workspace-unique display name. Omit to keep the current name.
+   *
+   * @remarks
+   *  Must start with a letter and may contain letters, numbers, and
+   *  underscores. Dashes and dots are not allowed because skill names
+   *  are referenced as template variables.
+   */
   displayName?: string | undefined;
+  /**
+   * New description. Omit to keep the current description.
+   */
   description?: string | undefined;
+  /**
+   * Replacement tag list. Leave empty to clear tags.
+   */
   tags?: Array<string> | undefined;
+  /**
+   * New project path. Omit to keep the current path.
+   */
   path?: string | undefined;
+  /**
+   * New instruction body. Omit to keep the current instructions.
+   */
   instructions?: string | undefined;
+  /**
+   * New containing project. Omit to keep the current project.
+   */
   projectId?: string | undefined;
 };
 
