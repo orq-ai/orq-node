@@ -104,6 +104,11 @@ export class Orq extends ClientSDK {
     return (this._guardrailRules ??= new GuardrailRules(this._options));
   }
 
+  private _models?: Models;
+  get models(): Models {
+    return (this._models ??= new Models(this._options));
+  }
+
   private _policies?: Policies;
   get policies(): Policies {
     return (this._policies ??= new Policies(this._options));
@@ -142,11 +147,6 @@ export class Orq extends ClientSDK {
   private _schedules?: Schedules;
   get schedules(): Schedules {
     return (this._schedules ??= new Schedules(this._options));
-  }
-
-  private _models?: Models;
-  get models(): Models {
-    return (this._models ??= new Models(this._options));
   }
 
   private _responses?: Responses;

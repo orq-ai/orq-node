@@ -1181,7 +1181,7 @@ run();
 
 ## getChunksCount
 
-Get chunks total count
+Returns the total count of chunks in a datasource. When `q` is provided, the count reflects indexed chunks only — recently created chunks may not be counted until embedding completes.
 
 ### Example Usage
 

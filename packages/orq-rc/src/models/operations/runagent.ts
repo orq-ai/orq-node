@@ -990,7 +990,7 @@ export type RunAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export type RunAgentAgentToolInputRunHeaders = {
+export type AgentToolInputRunHeaders = {
   value: string;
   encrypted?: boolean | undefined;
 };
@@ -1037,7 +1037,7 @@ export type Mcp = {
   /**
    * HTTP headers for MCP server requests with encryption support
    */
-  headers?: { [k: string]: RunAgentAgentToolInputRunHeaders } | undefined;
+  headers?: { [k: string]: AgentToolInputRunHeaders } | undefined;
   /**
    * Array of tools available from the MCP server
    */
@@ -1284,7 +1284,7 @@ export type Headers2 = {
   encrypted?: boolean | undefined;
 };
 
-export type AgentToolInputRunHeaders = Headers2 | string;
+export type Headers = Headers2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -3554,28 +3554,26 @@ export function runAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
-export type RunAgentAgentToolInputRunHeaders$Outbound = {
+export type AgentToolInputRunHeaders$Outbound = {
   value: string;
   encrypted: boolean;
 };
 
 /** @internal */
-export const RunAgentAgentToolInputRunHeaders$outboundSchema: z.ZodType<
-  RunAgentAgentToolInputRunHeaders$Outbound,
+export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
+  AgentToolInputRunHeaders$Outbound,
   z.ZodTypeDef,
-  RunAgentAgentToolInputRunHeaders
+  AgentToolInputRunHeaders
 > = z.object({
   value: z.string(),
   encrypted: z.boolean().default(false),
 });
 
-export function runAgentAgentToolInputRunHeadersToJSON(
-  runAgentAgentToolInputRunHeaders: RunAgentAgentToolInputRunHeaders,
+export function agentToolInputRunHeadersToJSON(
+  agentToolInputRunHeaders: AgentToolInputRunHeaders,
 ): string {
   return JSON.stringify(
-    RunAgentAgentToolInputRunHeaders$outboundSchema.parse(
-      runAgentAgentToolInputRunHeaders,
-    ),
+    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
   );
 }
 
@@ -3628,7 +3626,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KSFYHCJXYPS08Y8GW67GJF7Q"),
+  id: z.string().default("01KSMDBSHVZ5CSBECD3PW3GJXW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -3646,9 +3644,7 @@ export const ConnectionType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type Mcp$Outbound = {
   server_url: string;
-  headers?:
-    | { [k: string]: RunAgentAgentToolInputRunHeaders$Outbound }
-    | undefined;
+  headers?: { [k: string]: AgentToolInputRunHeaders$Outbound } | undefined;
   tools: Array<Tools$Outbound>;
   connection_type: string;
 };
@@ -3657,9 +3653,8 @@ export type Mcp$Outbound = {
 export const Mcp$outboundSchema: z.ZodType<Mcp$Outbound, z.ZodTypeDef, Mcp> = z
   .object({
     serverUrl: z.string(),
-    headers: z.record(
-      z.lazy(() => RunAgentAgentToolInputRunHeaders$outboundSchema),
-    ).optional(),
+    headers: z.record(z.lazy(() => AgentToolInputRunHeaders$outboundSchema))
+      .optional(),
     tools: z.array(z.lazy(() => Tools$outboundSchema)),
     connectionType: ConnectionType$outboundSchema,
   }).transform((v) => {
@@ -4059,21 +4054,17 @@ export function headers2ToJSON(headers2: Headers2): string {
 }
 
 /** @internal */
-export type AgentToolInputRunHeaders$Outbound = Headers2$Outbound | string;
+export type Headers$Outbound = Headers2$Outbound | string;
 
 /** @internal */
-export const AgentToolInputRunHeaders$outboundSchema: z.ZodType<
-  AgentToolInputRunHeaders$Outbound,
+export const Headers$outboundSchema: z.ZodType<
+  Headers$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunHeaders
+  Headers
 > = z.union([z.lazy(() => Headers2$outboundSchema), z.string()]);
 
-export function agentToolInputRunHeadersToJSON(
-  agentToolInputRunHeaders: AgentToolInputRunHeaders,
-): string {
-  return JSON.stringify(
-    AgentToolInputRunHeaders$outboundSchema.parse(agentToolInputRunHeaders),
-  );
+export function headersToJSON(headers: Headers): string {
+  return JSON.stringify(Headers$outboundSchema.parse(headers));
 }
 
 /** @internal */

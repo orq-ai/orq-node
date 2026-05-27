@@ -1498,7 +1498,7 @@ export type CreateAgentRequestTeamOfAgents = {
   role?: string | undefined;
 };
 
-export type CreateAgentRequestMetrics = {
+export type Metrics = {
   totalCost: number;
 };
 
@@ -2523,36 +2523,6 @@ export type Model = {
     | undefined;
 };
 
-export type CreateAgentRequestHeaders = {
-  /**
-   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
-   */
-  value: string;
-  encrypted: boolean;
-};
-
-/**
- * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
- */
-export type A2AAgentConfiguration = {
-  /**
-   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
-   */
-  agentUrl: string;
-  /**
-   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
-   */
-  cardUrl?: string | undefined;
-  /**
-   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
-   */
-  headers?: { [k: string]: CreateAgentRequestHeaders } | undefined;
-  /**
-   * Cached agent card from discovery. Refreshed periodically.
-   */
-  cachedCard?: any | undefined;
-};
-
 /**
  * Agent successfully created and ready for use. Returns the complete agent manifest including the generated ID, configuration, and all settings.
  */
@@ -2598,7 +2568,7 @@ export type CreateAgentRequestResponseBody = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills: Array<string>;
-  metrics?: CreateAgentRequestMetrics | undefined;
+  metrics?: Metrics | undefined;
   /**
    * Extracted variables from agent instructions
    */
@@ -2619,10 +2589,6 @@ export type CreateAgentRequestResponseBody = {
   instructions: string;
   settings?: CreateAgentRequestSettings | undefined;
   model: Model;
-  /**
-   * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
-   */
-  a2a?: A2AAgentConfiguration | undefined;
 };
 
 /** @internal */
@@ -4845,25 +4811,22 @@ export function createAgentRequestTeamOfAgentsFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestMetrics$inboundSchema: z.ZodType<
-  CreateAgentRequestMetrics,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_cost: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "total_cost": "totalCost",
+export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
+  z.object({
+    total_cost: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+    });
   });
-});
 
-export function createAgentRequestMetricsFromJSON(
+export function metricsFromJSON(
   jsonString: string,
-): SafeParseResult<CreateAgentRequestMetrics, SDKValidationError> {
+): SafeParseResult<Metrics, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateAgentRequestMetrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestMetrics' from JSON`,
+    (x) => Metrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metrics' from JSON`,
   );
 }
 
@@ -6357,55 +6320,6 @@ export function modelFromJSON(
 }
 
 /** @internal */
-export const CreateAgentRequestHeaders$inboundSchema: z.ZodType<
-  CreateAgentRequestHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function createAgentRequestHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateAgentRequestHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateAgentRequestHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateAgentRequestHeaders' from JSON`,
-  );
-}
-
-/** @internal */
-export const A2AAgentConfiguration$inboundSchema: z.ZodType<
-  A2AAgentConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_url: z.string(),
-  card_url: z.string().optional(),
-  headers: z.record(z.lazy(() => CreateAgentRequestHeaders$inboundSchema))
-    .optional(),
-  cached_card: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_url": "agentUrl",
-    "card_url": "cardUrl",
-    "cached_card": "cachedCard",
-  });
-});
-
-export function a2AAgentConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<A2AAgentConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => A2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'A2AAgentConfiguration' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   CreateAgentRequestResponseBody,
   z.ZodTypeDef,
@@ -6427,7 +6341,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => CreateAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
   skills: z.array(z.string()),
-  metrics: z.lazy(() => CreateAgentRequestMetrics$inboundSchema).optional(),
+  metrics: z.lazy(() => Metrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
     z.lazy(() => CreateAgentRequestKnowledgeBases$inboundSchema),
@@ -6441,7 +6355,6 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   settings: z.lazy(() => CreateAgentRequestSettings$inboundSchema).optional(),
   model: z.lazy(() => Model$inboundSchema),
-  a2a: z.lazy(() => A2AAgentConfiguration$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

@@ -91,6 +91,7 @@ typescript:
   packageName: '@orq-ai/node'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

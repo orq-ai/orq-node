@@ -27,6 +27,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Get chunks total count
+ *
+ * @remarks
+ * Returns the total count of chunks in a datasource. When `q` is provided, the count reflects indexed chunks only — recently created chunks may not be counted until embedding completes.
  */
 export function knowledgeGetChunksCount(
   client: OrqCore,

@@ -9,11 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeploymentInvokeGlobals = {
-  environment?: string | undefined;
-  contactId?: string | undefined;
-};
-
 /**
  * Indicates the type of model used to generate the response
  */

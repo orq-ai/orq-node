@@ -10,11 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeploymentStreamGlobals = {
-  environment?: string | undefined;
-  contactId?: string | undefined;
-};
-
 export type DeploymentStreamContentDeploymentsRequest2 =
   components.TextContentPartSchema;
 

@@ -1,19 +1,18 @@
 # AgentToolInputRunHeaders
 
-
-## Supported Types
-
-### `string`
+## Example Usage
 
 ```typescript
-const value: string = "<value>";
-```
+import { AgentToolInputRunHeaders } from "@orq-ai/node/models/operations";
 
-### `operations.Headers2`
-
-```typescript
-const value: operations.Headers2 = {
+let value: AgentToolInputRunHeaders = {
   value: "<value>",
 };
 ```
 
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |
+| `encrypted`        | *boolean*          | :heavy_minus_sign: | N/A                |

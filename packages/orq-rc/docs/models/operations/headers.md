@@ -1,18 +1,19 @@
 # Headers
 
-## Example Usage
+
+## Supported Types
+
+### `string`
 
 ```typescript
-import { Headers } from "@orq-ai/node/models/operations";
+const value: string = "<value>";
+```
 
-let value: Headers = {
+### `operations.Headers2`
+
+```typescript
+const value: operations.Headers2 = {
   value: "<value>",
 };
 ```
 
-## Fields
-
-| Field                                                                                                                                                                                           | Type                                                                                                                                                                                            | Required                                                                                                                                                                                        | Description                                                                                                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `value`                                                                                                                                                                                         | *string*                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                              | Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove. |
-| `encrypted`                                                                                                                                                                                     | *boolean*                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                              | N/A                                                                                                                                                                                             |

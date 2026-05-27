@@ -1405,32 +1405,6 @@ export const UpdateAgentEngine = {
 } as const;
 export type UpdateAgentEngine = ClosedEnum<typeof UpdateAgentEngine>;
 
-export type UpdateAgentHeaders = {
-  /**
-   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
-   */
-  value: string;
-  encrypted?: boolean | undefined;
-};
-
-/**
- * Update A2A agent configuration (only applicable to A2A agents)
- */
-export type UpdateA2AConfiguration = {
-  /**
-   * Update the A2A agent endpoint URL
-   */
-  agentUrl?: string | undefined;
-  /**
-   * Update the explicit agent card URL
-   */
-  cardUrl?: string | undefined;
-  /**
-   * Update HTTP headers for authentication. **Credential preservation**: Use empty string ("") for encrypted header values to keep existing credentials without re-entry. Provide new values to rotate credentials. Omit headers entirely to remove them.
-   */
-  headers?: { [k: string]: UpdateAgentHeaders } | undefined;
-};
-
 /**
  * Optional semantic version bump to create after a successful publish.
  */
@@ -1499,10 +1473,6 @@ export type UpdateAgentRequestBody = {
    */
   variables?: { [k: string]: any } | undefined;
   engine?: UpdateAgentEngine | undefined;
-  /**
-   * Update A2A agent configuration (only applicable to A2A agents)
-   */
-  a2a?: UpdateA2AConfiguration | undefined;
   /**
    * Optional semantic version bump to create after a successful publish.
    */
@@ -2561,36 +2531,6 @@ export type UpdateAgentModel = {
     | undefined;
 };
 
-export type UpdateAgentAgentsHeaders = {
-  /**
-   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
-   */
-  value: string;
-  encrypted: boolean;
-};
-
-/**
- * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
- */
-export type UpdateAgentA2AAgentConfiguration = {
-  /**
-   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
-   */
-  agentUrl: string;
-  /**
-   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
-   */
-  cardUrl?: string | undefined;
-  /**
-   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
-   */
-  headers?: { [k: string]: UpdateAgentAgentsHeaders } | undefined;
-  /**
-   * Cached agent card from discovery. Refreshed periodically.
-   */
-  cachedCard?: any | undefined;
-};
-
 /**
  * Agent configuration successfully updated. Returns the complete updated agent manifest reflecting all changes made.
  */
@@ -2657,10 +2597,6 @@ export type UpdateAgentResponseBody = {
   instructions: string;
   settings?: UpdateAgentAgentsSettings | undefined;
   model: UpdateAgentModel;
-  /**
-   * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
-   */
-  a2a?: UpdateAgentA2AAgentConfiguration | undefined;
 };
 
 /** @internal */
@@ -5035,61 +4971,6 @@ export const UpdateAgentEngine$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateAgentEngine);
 
 /** @internal */
-export type UpdateAgentHeaders$Outbound = {
-  value: string;
-  encrypted: boolean;
-};
-
-/** @internal */
-export const UpdateAgentHeaders$outboundSchema: z.ZodType<
-  UpdateAgentHeaders$Outbound,
-  z.ZodTypeDef,
-  UpdateAgentHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function updateAgentHeadersToJSON(
-  updateAgentHeaders: UpdateAgentHeaders,
-): string {
-  return JSON.stringify(
-    UpdateAgentHeaders$outboundSchema.parse(updateAgentHeaders),
-  );
-}
-
-/** @internal */
-export type UpdateA2AConfiguration$Outbound = {
-  agent_url?: string | undefined;
-  card_url?: string | undefined;
-  headers?: { [k: string]: UpdateAgentHeaders$Outbound } | undefined;
-};
-
-/** @internal */
-export const UpdateA2AConfiguration$outboundSchema: z.ZodType<
-  UpdateA2AConfiguration$Outbound,
-  z.ZodTypeDef,
-  UpdateA2AConfiguration
-> = z.object({
-  agentUrl: z.string().optional(),
-  cardUrl: z.string().optional(),
-  headers: z.record(z.lazy(() => UpdateAgentHeaders$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentUrl: "agent_url",
-    cardUrl: "card_url",
-  });
-});
-
-export function updateA2AConfigurationToJSON(
-  updateA2AConfiguration: UpdateA2AConfiguration,
-): string {
-  return JSON.stringify(
-    UpdateA2AConfiguration$outboundSchema.parse(updateA2AConfiguration),
-  );
-}
-
-/** @internal */
 export const UpdateAgentVersionIncrement$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentVersionIncrement
 > = z.nativeEnum(UpdateAgentVersionIncrement);
@@ -5115,7 +4996,6 @@ export type UpdateAgentRequestBody$Outbound = {
   skills?: Array<string> | null | undefined;
   variables?: { [k: string]: any } | undefined;
   engine?: string | undefined;
-  a2a?: UpdateA2AConfiguration$Outbound | undefined;
   versionIncrement?: string | undefined;
   versionDescription?: string | undefined;
 };
@@ -5154,7 +5034,6 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   skills: z.nullable(z.array(z.string())).optional(),
   variables: z.record(z.any()).optional(),
   engine: UpdateAgentEngine$outboundSchema.optional(),
-  a2a: z.lazy(() => UpdateA2AConfiguration$outboundSchema).optional(),
   versionIncrement: UpdateAgentVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
@@ -6765,55 +6644,6 @@ export function updateAgentModelFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentsHeaders$inboundSchema: z.ZodType<
-  UpdateAgentAgentsHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function updateAgentAgentsHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentAgentsHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentAgentsHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentAgentsHeaders' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAgentA2AAgentConfiguration$inboundSchema: z.ZodType<
-  UpdateAgentA2AAgentConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_url: z.string(),
-  card_url: z.string().optional(),
-  headers: z.record(z.lazy(() => UpdateAgentAgentsHeaders$inboundSchema))
-    .optional(),
-  cached_card: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_url": "agentUrl",
-    "card_url": "cardUrl",
-    "cached_card": "cachedCard",
-  });
-});
-
-export function updateAgentA2AAgentConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAgentA2AAgentConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAgentA2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentA2AAgentConfiguration' from JSON`,
-  );
-}
-
-/** @internal */
 export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   UpdateAgentResponseBody,
   z.ZodTypeDef,
@@ -6849,7 +6679,6 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   settings: z.lazy(() => UpdateAgentAgentsSettings$inboundSchema).optional(),
   model: z.lazy(() => UpdateAgentModel$inboundSchema),
-  a2a: z.lazy(() => UpdateAgentA2AAgentConfiguration$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
