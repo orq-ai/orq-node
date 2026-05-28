@@ -3,22 +3,22 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean =
     {
       type: "boolean",
       value: false,
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Categorical`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Categorical =
     {
       type: "categorical",
       values: [
@@ -27,14 +27,14 @@ const value:
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number =
     {
       type: "number",
-      value: 2751.87,
+      value: 1389.45,
       operator: "lt",
     };
 ```

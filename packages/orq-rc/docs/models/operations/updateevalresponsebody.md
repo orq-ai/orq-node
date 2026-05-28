@@ -11,8 +11,8 @@ Successfully updated an eval
 const value: operations.UpdateEvalResponseBodyLLM = {
   id: "<id>",
   description: "once supposing abnegate extremely deploy cosset ravel",
-  created: "2026-05-28T08:16:49.302Z",
-  updated: "2026-05-28T08:16:49.302Z",
+  created: "2026-05-28T23:42:19.964Z",
+  updated: "2026-05-28T23:42:19.964Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
@@ -21,12 +21,12 @@ const value: operations.UpdateEvalResponseBodyLLM = {
 };
 ```
 
-### `operations.UpdateEvalResponseBodyJSON`
+### `operations.ResponseBodyJSON`
 
 ```typescript
-const value: operations.UpdateEvalResponseBodyJSON = {
+const value: operations.ResponseBodyJSON = {
   id: "<id>",
-  description: "option fail yahoo circa",
+  description: "qua but till diagram",
   type: "json_schema",
   schema: "<value>",
   key: "<key>",

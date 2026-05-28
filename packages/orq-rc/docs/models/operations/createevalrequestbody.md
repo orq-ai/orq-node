@@ -17,17 +17,6 @@ const value: operations.Llm = {
 };
 ```
 
-### `operations.Json`
-
-```typescript
-const value: operations.Json = {
-  type: "json_schema",
-  schema: "<value>",
-  path: "Default",
-  key: "<key>",
-};
-```
-
 ### `operations.Python`
 
 ```typescript

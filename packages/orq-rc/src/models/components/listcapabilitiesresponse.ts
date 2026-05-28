@@ -13,8 +13,7 @@ export type ListCapabilitiesResponse = {
    * Full capability catalog. Order is stable: workspace-admin first,
    *
    * @remarks
-   *  then platform, then gateway. Within a group, entries are sorted
-   *  alphabetically by display_name.
+   *  then platform, then gateway.
    */
   domains?: Array<Domain> | undefined;
 };

@@ -11,8 +11,8 @@ Successfully created an evaluator
 const value: operations.ResponseBodyLLM = {
   id: "<id>",
   description: "considerate amid crystallize thorny gracious",
-  created: "2026-05-28T08:16:49.302Z",
-  updated: "2026-05-28T08:16:49.302Z",
+  created: "2026-05-28T23:42:19.964Z",
+  updated: "2026-05-28T23:42:19.964Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
@@ -21,12 +21,12 @@ const value: operations.ResponseBodyLLM = {
 };
 ```
 
-### `operations.ResponseBodyJSON`
+### `operations.Json`
 
 ```typescript
-const value: operations.ResponseBodyJSON = {
+const value: operations.Json = {
   id: "<id>",
-  description: "qua but till diagram",
+  description: "thunderbolt circa except cosset ick delicious",
   type: "json_schema",
   schema: "<value>",
   key: "<key>",

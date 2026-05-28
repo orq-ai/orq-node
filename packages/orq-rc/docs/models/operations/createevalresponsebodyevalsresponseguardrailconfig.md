@@ -3,40 +3,37 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
-    {
-      type: "boolean",
-      value: false,
-    };
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
+    type: "boolean",
+    value: true,
+  };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyCategorical`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONCategorical`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyCategorical =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONCategorical =
     {
       type: "categorical",
       values: [
         "<value 1>",
-        "<value 2>",
       ],
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
-    {
-      type: "number",
-      value: 2504.52,
-      operator: "gte",
-    };
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
+    type: "number",
+    value: 3420.76,
+    operator: "lt",
+  };
 ```
 

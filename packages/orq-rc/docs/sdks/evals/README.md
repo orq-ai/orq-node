@@ -97,8 +97,8 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.evals.create({
-    type: "json_schema",
-    schema: "<value>",
+    code: "<value>",
+    type: "python_eval",
     path: "Default",
     description: "",
     key: "<key>",
@@ -126,8 +126,8 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsCreate(orq, {
-    type: "json_schema",
-    schema: "<value>",
+    code: "<value>",
+    type: "python_eval",
     path: "Default",
     description: "",
     key: "<key>",

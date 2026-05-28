@@ -735,7 +735,7 @@ export type UpdateEvalResponseBodyType = ClosedEnum<
   typeof UpdateEvalResponseBodyType
 >;
 
-export type UpdateEvalResponseBodyJSON = {
+export type ResponseBodyJSON = {
   id: string;
   description: string;
   created: string;
@@ -955,7 +955,7 @@ export type UpdateEvalResponseBodyLLM = UpdateEvalLlm1 | UpdateEvalLlm2;
 export type UpdateEvalResponseBody =
   | ResponseBodyHTTP
   | ResponseBodyRagas
-  | UpdateEvalResponseBodyJSON
+  | ResponseBodyJSON
   | UpdateEvalResponseBodyPython
   | ResponseBodyFunction
   | ResponseBodyTypescript
@@ -1542,8 +1542,8 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -1736,8 +1736,8 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2593,8 +2593,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2810,8 +2810,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -2977,8 +2977,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
@@ -3122,15 +3122,15 @@ export const UpdateEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateEvalResponseBodyType);
 
 /** @internal */
-export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
-  UpdateEvalResponseBodyJSON,
+export const ResponseBodyJSON$inboundSchema: z.ZodType<
+  ResponseBodyJSON,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
@@ -3148,13 +3148,13 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
   });
 });
 
-export function updateEvalResponseBodyJSONFromJSON(
+export function responseBodyJSONFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalResponseBodyJSON, SDKValidationError> {
+): SafeParseResult<ResponseBodyJSON, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalResponseBodyJSON$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalResponseBodyJSON' from JSON`,
+    (x) => ResponseBodyJSON$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyJSON' from JSON`,
   );
 }
 
@@ -3490,8 +3490,8 @@ export const UpdateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3701,8 +3701,8 @@ export const UpdateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-05-28T08:16:49.302Z"),
-  updated: z.string().default("2026-05-28T08:16:49.302Z"),
+  created: z.string().default("2026-05-28T23:42:19.964Z"),
+  updated: z.string().default("2026-05-28T23:42:19.964Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3774,7 +3774,7 @@ export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ResponseBodyHTTP$inboundSchema),
   z.lazy(() => ResponseBodyRagas$inboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyJSON$inboundSchema),
+  z.lazy(() => ResponseBodyJSON$inboundSchema),
   z.lazy(() => UpdateEvalResponseBodyPython$inboundSchema),
   z.lazy(() => ResponseBodyFunction$inboundSchema),
   z.lazy(() => ResponseBodyTypescript$inboundSchema),

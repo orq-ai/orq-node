@@ -7,16 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { DomainGroup, DomainGroup$inboundSchema } from "./domaingroup.js";
-import { ScopeMode, ScopeMode$inboundSchema } from "./scopemode.js";
 
 /**
- * Domain describes a permission domain that can be granted to an API
+ * Domain describes a permission domain that can be granted to an
  *
  * @remarks
- *  key. The capability catalog is the registry consulted by
- *  ResolvePermissions() at authorize() time. Verbs are derived by
- *  convention from `id` + `group` + `readable` / `writable` flags.
+ *  API key. Verbs are derived from id + group + readable/writable.
  */
 export type Domain = {
   /**
@@ -28,29 +24,26 @@ export type Domain = {
    */
   id?: string | undefined;
   /**
-   * Human-readable label for UI.
+   * Human-readable label for the dashboard.
    */
   displayName?: string | undefined;
-  group?: DomainGroup | undefined;
   /**
-   * Project scopes this domain may be granted under. A workspace-admin
-   *
-   * @remarks
-   *  domain like `member` is typically SCOPE_MODE_ALL only.
+   * Logical group used by the UI to render this entry.
    */
-  allowedScopes?: Array<ScopeMode> | undefined;
+  group?: number | undefined;
   /**
-   * Whether this domain can be granted read access. When false the UI
+   * Project scopes this domain may be granted under. A workspace-
    *
    * @remarks
-   *  disables the Read segment (e.g. write-only gateway endpoints).
+   *  admin domain like `member` is typically SCOPE_MODE_ALL only.
+   */
+  allowedScopes?: Array<number> | undefined;
+  /**
+   * Whether this domain can be granted read access.
    */
   readable?: boolean | undefined;
   /**
-   * Whether this domain can be granted write access. When false the UI
-   *
-   * @remarks
-   *  disables the Write segment (e.g. read-only `model` listing).
+   * Whether this domain can be granted write access.
    */
   writable?: boolean | undefined;
 };
@@ -60,8 +53,8 @@ export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string().optional(),
     display_name: z.string().optional(),
-    group: DomainGroup$inboundSchema.optional(),
-    allowed_scopes: z.array(ScopeMode$inboundSchema).optional(),
+    group: z.number().int().optional(),
+    allowed_scopes: z.array(z.number().int()).optional(),
     readable: z.boolean().optional(),
     writable: z.boolean().optional(),
   }).transform((v) => {
