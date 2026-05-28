@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Annotate a span
+ *
+ * @remarks
+ * Attach one or more annotations to a specific span. Each annotation references an evaluator by key and supplies a value (string for text/single-select, number for range, array for multi-select).
  */
 export function annotationsCreate(
   client: OrqCore,

@@ -28,20 +28,6 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.RequestBodyHTTP`
-
-```typescript
-const value: operations.RequestBodyHTTP = {
-  type: "http_eval",
-  url: "https://marvelous-jump.name/",
-  method: "POST",
-  headers: {},
-  payload: {},
-  path: "Default",
-  key: "<key>",
-};
-```
-
 ### `operations.Python`
 
 ```typescript

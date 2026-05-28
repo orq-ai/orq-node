@@ -97,18 +97,8 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.evals.create({
-    outputType: "string",
-    type: "http_eval",
-    url: "https://total-unit.name",
-    method: "GET",
-    headers: {
-      "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
-    },
-    payload: {
-      "key": "<value>",
-    },
+    type: "json_schema",
+    schema: "<value>",
     path: "Default",
     description: "",
     key: "<key>",
@@ -136,18 +126,8 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsCreate(orq, {
-    outputType: "string",
-    type: "http_eval",
-    url: "https://total-unit.name",
-    method: "GET",
-    headers: {
-      "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
-    },
-    payload: {
-      "key": "<value>",
-    },
+    type: "json_schema",
+    schema: "<value>",
     path: "Default",
     description: "",
     key: "<key>",

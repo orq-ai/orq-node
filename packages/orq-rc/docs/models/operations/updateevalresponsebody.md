@@ -11,8 +11,8 @@ Successfully updated an eval
 const value: operations.UpdateEvalResponseBodyLLM = {
   id: "<id>",
   description: "once supposing abnegate extremely deploy cosset ravel",
-  created: "2026-05-27T10:03:36.185Z",
-  updated: "2026-05-27T10:03:36.185Z",
+  created: "2026-05-28T05:20:55.252Z",
+  updated: "2026-05-28T05:20:55.252Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
@@ -33,20 +33,20 @@ const value: operations.UpdateEvalResponseBodyJSON = {
 };
 ```
 
-### `operations.UpdateEvalResponseBodyHTTP`
+### `operations.ResponseBodyHTTP`
 
 ```typescript
-const value: operations.UpdateEvalResponseBodyHTTP = {
+const value: operations.ResponseBodyHTTP = {
   id: "<id>",
-  description: "carefully beyond ack excluding clearly",
+  description: "how which eek overload respectful clear",
   type: "http_eval",
-  url: "https://deserted-horst.name",
-  method: "GET",
-  headers: {
+  url: "https://terrible-backbone.info",
+  method: "POST",
+  headers: {},
+  payload: {
     "key": "<value>",
     "key1": "<value>",
   },
-  payload: {},
   key: "<key>",
 };
 ```

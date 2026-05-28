@@ -11,6 +11,9 @@ import { unwrapAsync } from "../types/fp.js";
 export class Annotations extends ClientSDK {
   /**
    * Annotate a span
+   *
+   * @remarks
+   * Attach one or more annotations to a specific span. Each annotation references an evaluator by key and supplies a value (string for text/single-select, number for range, array for multi-select).
    */
   async create(
     request: operations.CreateAnnotationRequest,
@@ -25,6 +28,9 @@ export class Annotations extends ClientSDK {
 
   /**
    * Remove an annotation from a span
+   *
+   * @remarks
+   * Remove one or more annotations from a specific span by their evaluator keys.
    */
   async delete(
     request: operations.DeleteAnnotationRequest,

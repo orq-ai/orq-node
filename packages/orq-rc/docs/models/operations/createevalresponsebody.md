@@ -11,8 +11,8 @@ Successfully created an evaluator
 const value: operations.ResponseBodyLLM = {
   id: "<id>",
   description: "considerate amid crystallize thorny gracious",
-  created: "2026-05-27T10:03:36.185Z",
-  updated: "2026-05-27T10:03:36.185Z",
+  created: "2026-05-28T05:20:55.252Z",
+  updated: "2026-05-28T05:20:55.252Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
@@ -33,19 +33,22 @@ const value: operations.ResponseBodyJSON = {
 };
 ```
 
-### `operations.ResponseBodyHTTP`
+### `operations.CreateEvalResponseBodyHTTP`
 
 ```typescript
-const value: operations.ResponseBodyHTTP = {
+const value: operations.CreateEvalResponseBodyHTTP = {
   id: "<id>",
-  description: "how which eek overload respectful clear",
+  description: "agile discontinue perspire fiercely nervously yahoo regarding",
   type: "http_eval",
-  url: "https://terrible-backbone.info",
+  url: "https://far-flung-scholarship.org",
   method: "POST",
-  headers: {},
-  payload: {
+  headers: {
     "key": "<value>",
     "key1": "<value>",
+    "key2": "<value>",
+  },
+  payload: {
+    "key": "<value>",
   },
   key: "<key>",
 };

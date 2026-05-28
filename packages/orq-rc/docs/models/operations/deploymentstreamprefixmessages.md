@@ -3,47 +3,55 @@
 
 ## Supported Types
 
-### `operations.PrefixMessagesSystemMessage`
+### `operations.DeploymentStreamPrefixMessagesSystemMessage`
 
 ```typescript
-const value: operations.PrefixMessagesSystemMessage = {
+const value: operations.DeploymentStreamPrefixMessagesSystemMessage = {
   role: "system",
+  content: [],
+};
+```
+
+### `operations.DeploymentStreamPrefixMessagesDeveloperMessage`
+
+```typescript
+const value: operations.DeploymentStreamPrefixMessagesDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-### `operations.PrefixMessagesDeveloperMessage`
+### `operations.DeploymentStreamPrefixMessagesUserMessage`
 
 ```typescript
-const value: operations.PrefixMessagesDeveloperMessage = {
-  role: "developer",
-  content: [],
-};
-```
-
-### `operations.PrefixMessagesUserMessage`
-
-```typescript
-const value: operations.PrefixMessagesUserMessage = {
+const value: operations.DeploymentStreamPrefixMessagesUserMessage = {
   role: "user",
-  content: [],
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "mp3",
+      },
+    },
+  ],
 };
 ```
 
-### `operations.PrefixMessagesAssistantMessage`
+### `operations.DeploymentStreamPrefixMessagesAssistantMessage`
 
 ```typescript
-const value: operations.PrefixMessagesAssistantMessage = {
+const value: operations.DeploymentStreamPrefixMessagesAssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `operations.PrefixMessagesToolMessage`
+### `operations.DeploymentStreamPrefixMessagesToolMessage`
 
 ```typescript
-const value: operations.PrefixMessagesToolMessage = {
+const value: operations.DeploymentStreamPrefixMessagesToolMessage = {
   role: "tool",
-  content: [],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

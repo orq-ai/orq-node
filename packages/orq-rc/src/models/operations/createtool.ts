@@ -215,7 +215,7 @@ export type CreateToolRequestBodyStatus = ClosedEnum<
 /**
  * The HTTP method to use.
  */
-export const CreateToolRequestBodyMethod = {
+export const RequestBodyMethod = {
   Get: "GET",
   Post: "POST",
   Put: "PUT",
@@ -224,9 +224,7 @@ export const CreateToolRequestBodyMethod = {
 /**
  * The HTTP method to use.
  */
-export type CreateToolRequestBodyMethod = ClosedEnum<
-  typeof CreateToolRequestBodyMethod
->;
+export type RequestBodyMethod = ClosedEnum<typeof RequestBodyMethod>;
 
 export type CreateToolHeaders2 = {
   value: string;
@@ -246,7 +244,7 @@ export type RequestBodyBlueprint = {
   /**
    * The HTTP method to use.
    */
-  method: CreateToolRequestBodyMethod;
+  method: RequestBodyMethod;
   /**
    * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
@@ -296,7 +294,7 @@ export type RequestBodyArguments = {
   defaultValue?: string | number | boolean | undefined;
 };
 
-export type CreateToolRequestBodyHttp = {
+export type RequestBodyHttp = {
   /**
    * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
    */
@@ -338,7 +336,7 @@ export type RequestBodyHTTPTool = {
    */
   status?: CreateToolRequestBodyStatus | undefined;
   type: "http";
-  http: CreateToolRequestBodyHttp;
+  http: RequestBodyHttp;
 };
 
 /**
@@ -1382,9 +1380,9 @@ export const CreateToolRequestBodyStatus$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateToolRequestBodyStatus);
 
 /** @internal */
-export const CreateToolRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyMethod
-> = z.nativeEnum(CreateToolRequestBodyMethod);
+export const RequestBodyMethod$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyMethod
+> = z.nativeEnum(RequestBodyMethod);
 
 /** @internal */
 export type CreateToolHeaders2$Outbound = {
@@ -1447,7 +1445,7 @@ export const RequestBodyBlueprint$outboundSchema: z.ZodType<
   RequestBodyBlueprint
 > = z.object({
   url: z.string(),
-  method: CreateToolRequestBodyMethod$outboundSchema,
+  method: RequestBodyMethod$outboundSchema,
   headers: z.record(
     z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]),
   ).optional(),
@@ -1520,28 +1518,26 @@ export function requestBodyArgumentsToJSON(
 }
 
 /** @internal */
-export type CreateToolRequestBodyHttp$Outbound = {
+export type RequestBodyHttp$Outbound = {
   blueprint: RequestBodyBlueprint$Outbound;
   arguments?: { [k: string]: RequestBodyArguments$Outbound } | undefined;
 };
 
 /** @internal */
-export const CreateToolRequestBodyHttp$outboundSchema: z.ZodType<
-  CreateToolRequestBodyHttp$Outbound,
+export const RequestBodyHttp$outboundSchema: z.ZodType<
+  RequestBodyHttp$Outbound,
   z.ZodTypeDef,
-  CreateToolRequestBodyHttp
+  RequestBodyHttp
 > = z.object({
   blueprint: z.lazy(() => RequestBodyBlueprint$outboundSchema),
   arguments: z.record(z.lazy(() => RequestBodyArguments$outboundSchema))
     .optional(),
 });
 
-export function createToolRequestBodyHttpToJSON(
-  createToolRequestBodyHttp: CreateToolRequestBodyHttp,
+export function requestBodyHttpToJSON(
+  requestBodyHttp: RequestBodyHttp,
 ): string {
-  return JSON.stringify(
-    CreateToolRequestBodyHttp$outboundSchema.parse(createToolRequestBodyHttp),
-  );
+  return JSON.stringify(RequestBodyHttp$outboundSchema.parse(requestBodyHttp));
 }
 
 /** @internal */
@@ -1552,7 +1548,7 @@ export type RequestBodyHTTPTool$Outbound = {
   description: string;
   status: string;
   type: "http";
-  http: CreateToolRequestBodyHttp$Outbound;
+  http: RequestBodyHttp$Outbound;
 };
 
 /** @internal */
@@ -1567,7 +1563,7 @@ export const RequestBodyHTTPTool$outboundSchema: z.ZodType<
   description: z.string(),
   status: CreateToolRequestBodyStatus$outboundSchema.default("live"),
   type: z.literal("http"),
-  http: z.lazy(() => CreateToolRequestBodyHttp$outboundSchema),
+  http: z.lazy(() => RequestBodyHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -1902,7 +1898,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KSME7X0JQ9HCG0PKH2WZVGSG"),
+  _id: z.string().default("tool_01KSPGF040CCKPP2Q21DQM02KR"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1999,7 +1995,7 @@ export const ResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KSME7X0HWTYCMZ0FNF4T3KJD"),
+  id: z.string().default("01KSPGF03ZXTKBH6ZYJQFHAZP0"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2055,7 +2051,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KSME7X0G46X59QRQT8BPEA9P"),
+  _id: z.string().default("tool_01KSPGF03YRX6SZ5BT4A432JB7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2241,7 +2237,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KSME7X0D0VEJ8SS8810FGE44"),
+  _id: z.string().default("tool_01KSPGF03WTSSY7QCD1S39FZ39"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2334,7 +2330,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KSME7X0C154RRVWHH1QPEVGC"),
+  _id: z.string().default("tool_01KSPGF03T2ABBF159D32W0Q8Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2435,7 +2431,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KSME7X0A5MTGZRR0X2F6QX5A"),
+  _id: z.string().default("tool_01KSPGF03SQED1A2R188XFR5CG"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

@@ -23,16 +23,26 @@ import {
 export type ModelMetadata = {
   allowedPassthroughParameters?: Array<string> | null | undefined;
   autorouter?: AutoRouterConfig | undefined;
+  cachedImageInputCost?: number | undefined;
+  cachedInputCost?: number | undefined;
+  chainOfThought?: boolean | undefined;
+  contextLength?: number | undefined;
   contextWindow?: number | undefined;
   costEfficiencyRating?: number | undefined;
   costPerImage?: number | undefined;
+  deprecationDate?: string | undefined;
+  embeddingDimensions?: number | undefined;
   extendedContextPricingMode?: string | undefined;
   extendedContextThreshold?: number | undefined;
   generateAudio?: boolean | undefined;
+  imageInputCost?: number | undefined;
+  imageOutputCost?: number | undefined;
   imageTokenCost?: number | undefined;
   intelligenceRating?: number | undefined;
   isPrivate: boolean;
+  isRealtime?: boolean | undefined;
   knowledgeCutoff?: string | undefined;
+  maxImagesPerRequest?: number | undefined;
   maxInputTokens?: number | undefined;
   maxOutputTokens?: number | undefined;
   millionSearchesCost?: number | undefined;
@@ -55,9 +65,13 @@ export type ModelMetadata = {
   millionTokensInputCost?: number | undefined;
   millionTokensOutputCost?: number | undefined;
   millionTokensReasoningCost?: number | undefined;
+  multilingual?: boolean | undefined;
+  offline?: boolean | undefined;
   perVideoSecondCost?: number | undefined;
   perVideoSecondCost1080p?: number | undefined;
   pricing?: Pricing | undefined;
+  reasoningCost?: number | undefined;
+  reasoningTokens?: number | undefined;
   region?: string | undefined;
   speedRating?: number | undefined;
   supportedVideoAspectRatios?: Array<string> | null | undefined;
@@ -71,6 +85,7 @@ export type ModelMetadata = {
   supportsB64JsonResponseFormat?: boolean | undefined;
   supportsBatchApi?: boolean | undefined;
   supportsCodeExecution?: boolean | undefined;
+  supportsCommercialUse?: boolean | undefined;
   supportsComputerUse?: boolean | undefined;
   supportsDeveloperMessage?: boolean | undefined;
   supportsDirectCost?: boolean | undefined;
@@ -80,6 +95,7 @@ export type ModelMetadata = {
   supportsImageEdit?: boolean | undefined;
   supportsImageInput?: boolean | undefined;
   supportsImageOutput?: boolean | undefined;
+  supportsImages?: boolean | undefined;
   supportsJsonModeResponseFormat?: boolean | undefined;
   supportsJsonSchemaResponseFormat?: boolean | undefined;
   supportsMaxCompletionTokens?: boolean | undefined;
@@ -99,7 +115,9 @@ export type ModelMetadata = {
   supportsSamplingParams?: boolean | undefined;
   supportsStreaming?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
+  supportsStructuredOutputs?: boolean | undefined;
   supportsSystemMessage?: boolean | undefined;
+  supportsText?: boolean | undefined;
   supportsTextInput?: boolean | undefined;
   supportsTextOutput?: boolean | undefined;
   supportsToolCalling?: boolean | undefined;
@@ -111,6 +129,7 @@ export type ModelMetadata = {
   supportsVideoSeed?: boolean | undefined;
   supportsVision?: boolean | undefined;
   supportsWebSearch?: boolean | undefined;
+  supportsZdr?: boolean | undefined;
   thinkingEnforced?: boolean | undefined;
 };
 
@@ -122,16 +141,26 @@ export const ModelMetadata$inboundSchema: z.ZodType<
 > = z.object({
   allowed_passthrough_parameters: z.nullable(z.array(z.string())).optional(),
   autorouter: AutoRouterConfig$inboundSchema.optional(),
+  cached_image_input_cost: z.number().optional(),
+  cached_input_cost: z.number().optional(),
+  chain_of_thought: z.boolean().optional(),
+  context_length: z.number().int().optional(),
   context_window: z.number().int().optional(),
   cost_efficiency_rating: z.number().int().optional(),
   cost_per_image: z.number().optional(),
+  deprecation_date: z.string().optional(),
+  embedding_dimensions: z.number().int().optional(),
   extended_context_pricing_mode: z.string().optional(),
   extended_context_threshold: z.number().int().optional(),
   generate_audio: z.boolean().optional(),
+  image_input_cost: z.number().optional(),
+  image_output_cost: z.number().optional(),
   image_token_cost: z.number().optional(),
   intelligence_rating: z.number().int().optional(),
   is_private: z.boolean(),
+  is_realtime: z.boolean().optional(),
   knowledge_cutoff: z.string().optional(),
+  max_images_per_request: z.number().int().optional(),
   max_input_tokens: z.number().int().optional(),
   max_output_tokens: z.number().int().optional(),
   million_searches_cost: z.number().optional(),
@@ -154,9 +183,13 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   million_tokens_input_cost: z.number().optional(),
   million_tokens_output_cost: z.number().optional(),
   million_tokens_reasoning_cost: z.number().optional(),
+  multilingual: z.boolean().optional(),
+  offline: z.boolean().optional(),
   per_video_second_cost: z.number().optional(),
   per_video_second_cost_1080p: z.number().optional(),
   pricing: Pricing$inboundSchema.optional(),
+  reasoning_cost: z.number().optional(),
+  reasoning_tokens: z.number().int().optional(),
   region: z.string().optional(),
   speed_rating: z.number().int().optional(),
   supported_video_aspect_ratios: z.nullable(z.array(z.string())).optional(),
@@ -170,6 +203,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_b64_json_response_format: z.boolean().optional(),
   supports_batch_api: z.boolean().optional(),
   supports_code_execution: z.boolean().optional(),
+  supports_commercial_use: z.boolean().optional(),
   supports_computer_use: z.boolean().optional(),
   supports_developer_message: z.boolean().optional(),
   supports_direct_cost: z.boolean().optional(),
@@ -179,6 +213,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_image_edit: z.boolean().optional(),
   supports_image_input: z.boolean().optional(),
   supports_image_output: z.boolean().optional(),
+  supports_images: z.boolean().optional(),
   supports_json_mode_response_format: z.boolean().optional(),
   supports_json_schema_response_format: z.boolean().optional(),
   supports_max_completion_tokens: z.boolean().optional(),
@@ -198,7 +233,9 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_sampling_params: z.boolean().optional(),
   supports_streaming: z.boolean().optional(),
   supports_strict_tool: z.boolean().optional(),
+  supports_structured_outputs: z.boolean().optional(),
   supports_system_message: z.boolean().optional(),
+  supports_text: z.boolean().optional(),
   supports_text_input: z.boolean().optional(),
   supports_text_output: z.boolean().optional(),
   supports_tool_calling: z.boolean().optional(),
@@ -210,20 +247,31 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_video_seed: z.boolean().optional(),
   supports_vision: z.boolean().optional(),
   supports_web_search: z.boolean().optional(),
+  supports_zdr: z.boolean().optional(),
   thinking_enforced: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "allowed_passthrough_parameters": "allowedPassthroughParameters",
+    "cached_image_input_cost": "cachedImageInputCost",
+    "cached_input_cost": "cachedInputCost",
+    "chain_of_thought": "chainOfThought",
+    "context_length": "contextLength",
     "context_window": "contextWindow",
     "cost_efficiency_rating": "costEfficiencyRating",
     "cost_per_image": "costPerImage",
+    "deprecation_date": "deprecationDate",
+    "embedding_dimensions": "embeddingDimensions",
     "extended_context_pricing_mode": "extendedContextPricingMode",
     "extended_context_threshold": "extendedContextThreshold",
     "generate_audio": "generateAudio",
+    "image_input_cost": "imageInputCost",
+    "image_output_cost": "imageOutputCost",
     "image_token_cost": "imageTokenCost",
     "intelligence_rating": "intelligenceRating",
     "is_private": "isPrivate",
+    "is_realtime": "isRealtime",
     "knowledge_cutoff": "knowledgeCutoff",
+    "max_images_per_request": "maxImagesPerRequest",
     "max_input_tokens": "maxInputTokens",
     "max_output_tokens": "maxOutputTokens",
     "million_searches_cost": "millionSearchesCost",
@@ -252,6 +300,8 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "million_tokens_reasoning_cost": "millionTokensReasoningCost",
     "per_video_second_cost": "perVideoSecondCost",
     "per_video_second_cost_1080p": "perVideoSecondCost1080p",
+    "reasoning_cost": "reasoningCost",
+    "reasoning_tokens": "reasoningTokens",
     "speed_rating": "speedRating",
     "supported_video_aspect_ratios": "supportedVideoAspectRatios",
     "supported_video_durations": "supportedVideoDurations",
@@ -264,6 +314,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_b64_json_response_format": "supportsB64JsonResponseFormat",
     "supports_batch_api": "supportsBatchApi",
     "supports_code_execution": "supportsCodeExecution",
+    "supports_commercial_use": "supportsCommercialUse",
     "supports_computer_use": "supportsComputerUse",
     "supports_developer_message": "supportsDeveloperMessage",
     "supports_direct_cost": "supportsDirectCost",
@@ -273,6 +324,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_image_edit": "supportsImageEdit",
     "supports_image_input": "supportsImageInput",
     "supports_image_output": "supportsImageOutput",
+    "supports_images": "supportsImages",
     "supports_json_mode_response_format": "supportsJsonModeResponseFormat",
     "supports_json_schema_response_format": "supportsJsonSchemaResponseFormat",
     "supports_max_completion_tokens": "supportsMaxCompletionTokens",
@@ -292,7 +344,9 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_sampling_params": "supportsSamplingParams",
     "supports_streaming": "supportsStreaming",
     "supports_strict_tool": "supportsStrictTool",
+    "supports_structured_outputs": "supportsStructuredOutputs",
     "supports_system_message": "supportsSystemMessage",
+    "supports_text": "supportsText",
     "supports_text_input": "supportsTextInput",
     "supports_text_output": "supportsTextOutput",
     "supports_tool_calling": "supportsToolCalling",
@@ -304,6 +358,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_video_seed": "supportsVideoSeed",
     "supports_vision": "supportsVision",
     "supports_web_search": "supportsWebSearch",
+    "supports_zdr": "supportsZdr",
     "thinking_enforced": "thinkingEnforced",
   });
 });
@@ -311,16 +366,26 @@ export const ModelMetadata$inboundSchema: z.ZodType<
 export type ModelMetadata$Outbound = {
   allowed_passthrough_parameters?: Array<string> | null | undefined;
   autorouter?: AutoRouterConfig$Outbound | undefined;
+  cached_image_input_cost?: number | undefined;
+  cached_input_cost?: number | undefined;
+  chain_of_thought?: boolean | undefined;
+  context_length?: number | undefined;
   context_window?: number | undefined;
   cost_efficiency_rating?: number | undefined;
   cost_per_image?: number | undefined;
+  deprecation_date?: string | undefined;
+  embedding_dimensions?: number | undefined;
   extended_context_pricing_mode?: string | undefined;
   extended_context_threshold?: number | undefined;
   generate_audio?: boolean | undefined;
+  image_input_cost?: number | undefined;
+  image_output_cost?: number | undefined;
   image_token_cost?: number | undefined;
   intelligence_rating?: number | undefined;
   is_private: boolean;
+  is_realtime?: boolean | undefined;
   knowledge_cutoff?: string | undefined;
+  max_images_per_request?: number | undefined;
   max_input_tokens?: number | undefined;
   max_output_tokens?: number | undefined;
   million_searches_cost?: number | undefined;
@@ -343,9 +408,13 @@ export type ModelMetadata$Outbound = {
   million_tokens_input_cost?: number | undefined;
   million_tokens_output_cost?: number | undefined;
   million_tokens_reasoning_cost?: number | undefined;
+  multilingual?: boolean | undefined;
+  offline?: boolean | undefined;
   per_video_second_cost?: number | undefined;
   per_video_second_cost_1080p?: number | undefined;
   pricing?: Pricing$Outbound | undefined;
+  reasoning_cost?: number | undefined;
+  reasoning_tokens?: number | undefined;
   region?: string | undefined;
   speed_rating?: number | undefined;
   supported_video_aspect_ratios?: Array<string> | null | undefined;
@@ -359,6 +428,7 @@ export type ModelMetadata$Outbound = {
   supports_b64_json_response_format?: boolean | undefined;
   supports_batch_api?: boolean | undefined;
   supports_code_execution?: boolean | undefined;
+  supports_commercial_use?: boolean | undefined;
   supports_computer_use?: boolean | undefined;
   supports_developer_message?: boolean | undefined;
   supports_direct_cost?: boolean | undefined;
@@ -368,6 +438,7 @@ export type ModelMetadata$Outbound = {
   supports_image_edit?: boolean | undefined;
   supports_image_input?: boolean | undefined;
   supports_image_output?: boolean | undefined;
+  supports_images?: boolean | undefined;
   supports_json_mode_response_format?: boolean | undefined;
   supports_json_schema_response_format?: boolean | undefined;
   supports_max_completion_tokens?: boolean | undefined;
@@ -387,7 +458,9 @@ export type ModelMetadata$Outbound = {
   supports_sampling_params?: boolean | undefined;
   supports_streaming?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
+  supports_structured_outputs?: boolean | undefined;
   supports_system_message?: boolean | undefined;
+  supports_text?: boolean | undefined;
   supports_text_input?: boolean | undefined;
   supports_text_output?: boolean | undefined;
   supports_tool_calling?: boolean | undefined;
@@ -399,6 +472,7 @@ export type ModelMetadata$Outbound = {
   supports_video_seed?: boolean | undefined;
   supports_vision?: boolean | undefined;
   supports_web_search?: boolean | undefined;
+  supports_zdr?: boolean | undefined;
   thinking_enforced?: boolean | undefined;
 };
 
@@ -410,16 +484,26 @@ export const ModelMetadata$outboundSchema: z.ZodType<
 > = z.object({
   allowedPassthroughParameters: z.nullable(z.array(z.string())).optional(),
   autorouter: AutoRouterConfig$outboundSchema.optional(),
+  cachedImageInputCost: z.number().optional(),
+  cachedInputCost: z.number().optional(),
+  chainOfThought: z.boolean().optional(),
+  contextLength: z.number().int().optional(),
   contextWindow: z.number().int().optional(),
   costEfficiencyRating: z.number().int().optional(),
   costPerImage: z.number().optional(),
+  deprecationDate: z.string().optional(),
+  embeddingDimensions: z.number().int().optional(),
   extendedContextPricingMode: z.string().optional(),
   extendedContextThreshold: z.number().int().optional(),
   generateAudio: z.boolean().optional(),
+  imageInputCost: z.number().optional(),
+  imageOutputCost: z.number().optional(),
   imageTokenCost: z.number().optional(),
   intelligenceRating: z.number().int().optional(),
   isPrivate: z.boolean(),
+  isRealtime: z.boolean().optional(),
   knowledgeCutoff: z.string().optional(),
+  maxImagesPerRequest: z.number().int().optional(),
   maxInputTokens: z.number().int().optional(),
   maxOutputTokens: z.number().int().optional(),
   millionSearchesCost: z.number().optional(),
@@ -442,9 +526,13 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   millionTokensInputCost: z.number().optional(),
   millionTokensOutputCost: z.number().optional(),
   millionTokensReasoningCost: z.number().optional(),
+  multilingual: z.boolean().optional(),
+  offline: z.boolean().optional(),
   perVideoSecondCost: z.number().optional(),
   perVideoSecondCost1080p: z.number().optional(),
   pricing: Pricing$outboundSchema.optional(),
+  reasoningCost: z.number().optional(),
+  reasoningTokens: z.number().int().optional(),
   region: z.string().optional(),
   speedRating: z.number().int().optional(),
   supportedVideoAspectRatios: z.nullable(z.array(z.string())).optional(),
@@ -458,6 +546,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsB64JsonResponseFormat: z.boolean().optional(),
   supportsBatchApi: z.boolean().optional(),
   supportsCodeExecution: z.boolean().optional(),
+  supportsCommercialUse: z.boolean().optional(),
   supportsComputerUse: z.boolean().optional(),
   supportsDeveloperMessage: z.boolean().optional(),
   supportsDirectCost: z.boolean().optional(),
@@ -467,6 +556,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsImageEdit: z.boolean().optional(),
   supportsImageInput: z.boolean().optional(),
   supportsImageOutput: z.boolean().optional(),
+  supportsImages: z.boolean().optional(),
   supportsJsonModeResponseFormat: z.boolean().optional(),
   supportsJsonSchemaResponseFormat: z.boolean().optional(),
   supportsMaxCompletionTokens: z.boolean().optional(),
@@ -486,7 +576,9 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsSamplingParams: z.boolean().optional(),
   supportsStreaming: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
+  supportsStructuredOutputs: z.boolean().optional(),
   supportsSystemMessage: z.boolean().optional(),
+  supportsText: z.boolean().optional(),
   supportsTextInput: z.boolean().optional(),
   supportsTextOutput: z.boolean().optional(),
   supportsToolCalling: z.boolean().optional(),
@@ -498,20 +590,31 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsVideoSeed: z.boolean().optional(),
   supportsVision: z.boolean().optional(),
   supportsWebSearch: z.boolean().optional(),
+  supportsZdr: z.boolean().optional(),
   thinkingEnforced: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     allowedPassthroughParameters: "allowed_passthrough_parameters",
+    cachedImageInputCost: "cached_image_input_cost",
+    cachedInputCost: "cached_input_cost",
+    chainOfThought: "chain_of_thought",
+    contextLength: "context_length",
     contextWindow: "context_window",
     costEfficiencyRating: "cost_efficiency_rating",
     costPerImage: "cost_per_image",
+    deprecationDate: "deprecation_date",
+    embeddingDimensions: "embedding_dimensions",
     extendedContextPricingMode: "extended_context_pricing_mode",
     extendedContextThreshold: "extended_context_threshold",
     generateAudio: "generate_audio",
+    imageInputCost: "image_input_cost",
+    imageOutputCost: "image_output_cost",
     imageTokenCost: "image_token_cost",
     intelligenceRating: "intelligence_rating",
     isPrivate: "is_private",
+    isRealtime: "is_realtime",
     knowledgeCutoff: "knowledge_cutoff",
+    maxImagesPerRequest: "max_images_per_request",
     maxInputTokens: "max_input_tokens",
     maxOutputTokens: "max_output_tokens",
     millionSearchesCost: "million_searches_cost",
@@ -540,6 +643,8 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     millionTokensReasoningCost: "million_tokens_reasoning_cost",
     perVideoSecondCost: "per_video_second_cost",
     perVideoSecondCost1080p: "per_video_second_cost_1080p",
+    reasoningCost: "reasoning_cost",
+    reasoningTokens: "reasoning_tokens",
     speedRating: "speed_rating",
     supportedVideoAspectRatios: "supported_video_aspect_ratios",
     supportedVideoDurations: "supported_video_durations",
@@ -552,6 +657,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsB64JsonResponseFormat: "supports_b64_json_response_format",
     supportsBatchApi: "supports_batch_api",
     supportsCodeExecution: "supports_code_execution",
+    supportsCommercialUse: "supports_commercial_use",
     supportsComputerUse: "supports_computer_use",
     supportsDeveloperMessage: "supports_developer_message",
     supportsDirectCost: "supports_direct_cost",
@@ -561,6 +667,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsImageEdit: "supports_image_edit",
     supportsImageInput: "supports_image_input",
     supportsImageOutput: "supports_image_output",
+    supportsImages: "supports_images",
     supportsJsonModeResponseFormat: "supports_json_mode_response_format",
     supportsJsonSchemaResponseFormat: "supports_json_schema_response_format",
     supportsMaxCompletionTokens: "supports_max_completion_tokens",
@@ -580,7 +687,9 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsSamplingParams: "supports_sampling_params",
     supportsStreaming: "supports_streaming",
     supportsStrictTool: "supports_strict_tool",
+    supportsStructuredOutputs: "supports_structured_outputs",
     supportsSystemMessage: "supports_system_message",
+    supportsText: "supports_text",
     supportsTextInput: "supports_text_input",
     supportsTextOutput: "supports_text_output",
     supportsToolCalling: "supports_tool_calling",
@@ -592,6 +701,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsVideoSeed: "supports_video_seed",
     supportsVision: "supports_vision",
     supportsWebSearch: "supports_web_search",
+    supportsZdr: "supports_zdr",
     thinkingEnforced: "thinking_enforced",
   });
 });

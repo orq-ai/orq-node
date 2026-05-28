@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.MessagesSystemMessage`
+### `operations.DeploymentGetConfigMessagesSystemMessage`
 
 ```typescript
-const value: operations.MessagesSystemMessage = {
+const value: operations.DeploymentGetConfigMessagesSystemMessage = {
   role: "system",
-  content: "<value>",
+  content: [],
 };
 ```
 
-### `operations.MessagesDeveloperMessage`
+### `operations.DeploymentGetConfigMessagesDeveloperMessage`
 
 ```typescript
-const value: operations.MessagesDeveloperMessage = {
+const value: operations.DeploymentGetConfigMessagesDeveloperMessage = {
   role: "developer",
   content: [
     {
@@ -26,30 +26,35 @@ const value: operations.MessagesDeveloperMessage = {
 };
 ```
 
-### `operations.MessagesUserMessage`
+### `operations.DeploymentGetConfigMessagesUserMessage`
 
 ```typescript
-const value: operations.MessagesUserMessage = {
+const value: operations.DeploymentGetConfigMessagesUserMessage = {
   role: "user",
-  content: [],
+  content: [
+    {
+      type: "file",
+      file: {},
+    },
+  ],
 };
 ```
 
-### `operations.MessagesAssistantMessage`
+### `operations.DeploymentGetConfigMessagesAssistantMessage`
 
 ```typescript
-const value: operations.MessagesAssistantMessage = {
+const value: operations.DeploymentGetConfigMessagesAssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `operations.MessagesToolMessage`
+### `operations.DeploymentGetConfigMessagesToolMessage`
 
 ```typescript
-const value: operations.MessagesToolMessage = {
+const value: operations.DeploymentGetConfigMessagesToolMessage = {
   role: "tool",
   content: "<value>",
-  toolCallId: null,
+  toolCallId: "<id>",
 };
 ```
 

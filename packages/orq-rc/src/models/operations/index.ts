@@ -51,7 +51,6 @@ export * from "./deletememorystore.js";
 export * from "./deleteprompt.js";
 export * from "./deletetool.js";
 export * from "./deletev2humanevalsetsid.js";
-export * from "./deploymentcreatemetric.js";
 export * from "./deploymentgetconfig.js";
 export * from "./deploymentinvoke.js";
 export * from "./deployments.js";

@@ -71,7 +71,6 @@ export * from "./identitymetrics.js";
 export * from "./imagecontentpartschema.js";
 export * from "./incompletedetails.js";
 export * from "./inputtokensdetails.js";
-export * from "./invokedeploymentrequest.js";
 export * from "./legacytokenfamily.js";
 export * from "./limits.js";
 export * from "./listapikeysresponse.js";

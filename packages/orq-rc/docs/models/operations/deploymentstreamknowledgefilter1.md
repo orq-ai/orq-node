@@ -19,35 +19,35 @@ const value: operations.DeploymentStream1Ne = {
 };
 ```
 
-### `operations.OneGt`
+### `operations.DeploymentStream1Gt`
 
 ```typescript
-const value: operations.OneGt = {
-  gt: 7862.95,
+const value: operations.DeploymentStream1Gt = {
+  gt: 5758.85,
 };
 ```
 
-### `operations.OneGte`
+### `operations.DeploymentStream1Gte`
 
 ```typescript
-const value: operations.OneGte = {
-  gte: 6469.31,
+const value: operations.DeploymentStream1Gte = {
+  gte: 7786.21,
 };
 ```
 
-### `operations.OneLt`
+### `operations.DeploymentStream1Lt`
 
 ```typescript
-const value: operations.OneLt = {
-  lt: 5264,
+const value: operations.DeploymentStream1Lt = {
+  lt: 9112.09,
 };
 ```
 
-### `operations.OneLte`
+### `operations.DeploymentStream1Lte`
 
 ```typescript
-const value: operations.OneLte = {
-  lte: 8379.2,
+const value: operations.DeploymentStream1Lte = {
+  lte: 4742.8,
 };
 ```
 
@@ -67,11 +67,11 @@ const value: operations.DeploymentStream1Nin = {
 };
 ```
 
-### `operations.OneExists`
+### `operations.DeploymentStream1Exists`
 
 ```typescript
-const value: operations.OneExists = {
-  exists: false,
+const value: operations.DeploymentStream1Exists = {
+  exists: true,
 };
 ```
 
