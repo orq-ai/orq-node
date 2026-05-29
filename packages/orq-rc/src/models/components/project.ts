@@ -61,6 +61,10 @@ export type Project = {
    * User ID that last updated the project.
    */
   updatedById?: string | undefined;
+  /**
+   * Optional human-readable description of the project.
+   */
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -80,6 +84,7 @@ export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
     ).optional(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
+    description: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "project_id": "projectId",

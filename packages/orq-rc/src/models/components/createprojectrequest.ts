@@ -13,12 +13,17 @@ export type CreateProjectRequest = {
    * Team identifiers to associate with the project.
    */
   teams?: Array<string> | undefined;
+  /**
+   * Optional human-readable description, at most 500 characters.
+   */
+  description?: string | undefined;
 };
 
 /** @internal */
 export type CreateProjectRequest$Outbound = {
   name?: string | undefined;
   teams?: Array<string> | undefined;
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -29,6 +34,7 @@ export const CreateProjectRequest$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   teams: z.array(z.string()).optional(),
+  description: z.string().optional(),
 });
 
 export function createProjectRequestToJSON(

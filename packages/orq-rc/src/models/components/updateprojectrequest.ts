@@ -21,6 +21,10 @@ export type UpdateProjectRequest = {
    *  Leave empty to remove all team associations.
    */
   teams?: Array<string> | undefined;
+  /**
+   * New project description. Omit to keep the current description.
+   */
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -28,6 +32,7 @@ export type UpdateProjectRequest$Outbound = {
   project_id?: string | undefined;
   name?: string | undefined;
   teams?: Array<string> | undefined;
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -39,6 +44,7 @@ export const UpdateProjectRequest$outboundSchema: z.ZodType<
   projectId: z.string().optional(),
   name: z.string().optional(),
   teams: z.array(z.string()).optional(),
+  description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",
