@@ -55,18 +55,9 @@ export type ApiKey = {
    *  keys and the per-domain read / write semantics are exposed at
    *  runtime via the `ListCapabilities` RPC.
    *
-   *  Valid keys (Domain.id) currently in the catalog:
-   *    Workspace-admin: "api-key", "member", "billing", "sso", "group",
-   *                     "audit-log", "workspace"
-   *    Platform:        "agent", "agent-schedule", "annotation",
-   *                     "chunking", "dataset", "deployment", "eval",
-   *                     "file", "guardrail-rule", "identity",
-   *                     "knowledge", "memory-store", "policy",
-   *                     "project", "prompt", "routing-rule", "skill",
-   *                     "tool"
-   *    Gateway:         "chat_completions", "embeddings", "responses",
-   *                     "moderations", "images", "audio_speech",
-   *                     "audio_transcription", "realtime", "model"
+   *  Valid keys are the Domain.id values in the capability catalog —
+   *  see libs/catalog/orq/apikeys/v1/catalog.textpb for the canonical
+   *  list. The ids are intentionally not duplicated here to avoid drift.
    *
    *  Values are AccessLevel enum names on the JSON wire:
    *    "ACCESS_LEVEL_NONE"  — capability not granted
