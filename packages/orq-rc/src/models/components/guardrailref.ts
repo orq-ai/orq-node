@@ -20,6 +20,7 @@ export type GuardrailRef = {
   executeOn: ExecuteOn;
   id: string;
   isGuardrail?: boolean | undefined;
+  options?: { [k: string]: any } | undefined;
   sampleRate?: number | undefined;
 };
 
@@ -39,6 +40,7 @@ export const GuardrailRef$inboundSchema: z.ZodType<
   execute_on: ExecuteOn$inboundSchema,
   id: z.string(),
   is_guardrail: z.boolean().optional(),
+  options: z.record(z.any()).optional(),
   sample_rate: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -52,6 +54,7 @@ export type GuardrailRef$Outbound = {
   execute_on: string;
   id: string;
   is_guardrail?: boolean | undefined;
+  options?: { [k: string]: any } | undefined;
   sample_rate?: number | undefined;
 };
 
@@ -64,6 +67,7 @@ export const GuardrailRef$outboundSchema: z.ZodType<
   executeOn: ExecuteOn$outboundSchema,
   id: z.string(),
   isGuardrail: z.boolean().optional(),
+  options: z.record(z.any()).optional(),
   sampleRate: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {

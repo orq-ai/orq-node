@@ -364,6 +364,10 @@ export type CreateRouterResponseRequestBody = {
    * Penalize new tokens based on their frequency in the text so far. Between -2.0 and 2.0.
    */
   frequencyPenalty?: number | undefined;
+  /**
+   * Guardrails to evaluate the request against.
+   */
+  guardrails?: Array<components.EvaluatorRef> | undefined;
   identity?: components.ResponseIdentity | undefined;
   /**
    * Input to the model: a string or an array of input items (messages, files, etc.).
@@ -1173,6 +1177,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   conversation?: components.ConversationParam$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
+  guardrails?: Array<components.EvaluatorRef$Outbound> | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
   input?: string | Array<Input2$Outbound> | undefined;
   instructions?: string | undefined;
@@ -1224,6 +1229,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   frequencyPenalty: z.number().optional(),
+  guardrails: z.array(components.EvaluatorRef$outboundSchema).optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
   input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
     .optional(),
@@ -1342,8 +1348,9 @@ export const CreateRouterResponseResponsesResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.string().optional().transform((v, ctx) => {
+  data: z.unknown().optional().transform((v, ctx) => {
     if (v === undefined) return undefined;
+    if (typeof v !== "string") return v;
     try {
       return JSON.parse(v);
     } catch (err) {

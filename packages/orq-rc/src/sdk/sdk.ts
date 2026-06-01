@@ -22,6 +22,7 @@ import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
+import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
 import { Prompts } from "./prompts.js";
@@ -97,6 +98,11 @@ export class Orq extends ClientSDK {
   private _humanReviewSets?: HumanReviewSets;
   get humanReviewSets(): HumanReviewSets {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
+  }
+
+  private _pii?: Pii;
+  get pii(): Pii {
+    return (this._pii ??= new Pii(this._options));
   }
 
   private _guardrailRules?: GuardrailRules;
