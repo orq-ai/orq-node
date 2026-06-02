@@ -10,9 +10,9 @@
 
 Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
 
-### Example Usage
+### Example Usage: array_of_strings
 
-<!-- UsageSnippet language="typescript" operationID="createEmbedding" method="post" path="/v2/router/embeddings" -->
+<!-- UsageSnippet language="typescript" operationID="createEmbedding" method="post" path="/v2/router/embeddings" example="array_of_strings" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -23,92 +23,10 @@ const orq = new Orq({
 async function run() {
   const result = await orq.router.embeddings.create({
     input: [
-      "<value 1>",
-      "<value 2>",
+      "The food was delicious",
+      "And the waiter was friendly",
     ],
-    model: "V90",
-    fallbacks: [
-      {
-        model: "openai/text-embedding-3-small",
-      },
-    ],
-    retry: {
-      onCodes: [
-        429,
-        500,
-        502,
-        503,
-        504,
-      ],
-    },
-    cache: {
-      ttl: 3600,
-      type: "exact_match",
-    },
-    loadBalancer: {
-      type: "weight_based",
-      models: [
-        {
-          model: "openai/gpt-4o",
-          weight: 0.7,
-        },
-      ],
-    },
-    timeout: {
-      callTimeout: 30000,
-    },
-    orq: {
-      fallbacks: [
-        {
-          model: "openai/gpt-4o-mini",
-        },
-      ],
-      cache: {
-        ttl: 3600,
-        type: "exact_match",
-      },
-      retry: {
-        onCodes: [
-          429,
-          500,
-          502,
-          503,
-          504,
-        ],
-      },
-      identity: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        displayName: "Jane Doe",
-        email: "jane.doe@example.com",
-        metadata: [
-          {
-            "department": "Engineering",
-            "role": "Senior Developer",
-          },
-        ],
-        logoUrl: "https://example.com/avatars/jane-doe.jpg",
-        tags: [
-          "hr",
-          "engineering",
-        ],
-      },
-      loadBalancer: {
-        type: "weight_based",
-        models: [
-          {
-            model: "openai/gpt-4o",
-            weight: 0.7,
-          },
-          {
-            model: "anthropic/claude-3-5-sonnet",
-            weight: 0.3,
-          },
-        ],
-      },
-      timeout: {
-        callTimeout: 30000,
-      },
-    },
+    model: "openai/text-embedding-3-small",
   });
 
   console.log(result);
@@ -134,92 +52,61 @@ const orq = new OrqCore({
 async function run() {
   const res = await routerEmbeddingsCreate(orq, {
     input: [
-      "<value 1>",
-      "<value 2>",
+      "The food was delicious",
+      "And the waiter was friendly",
     ],
-    model: "V90",
-    fallbacks: [
-      {
-        model: "openai/text-embedding-3-small",
-      },
-    ],
-    retry: {
-      onCodes: [
-        429,
-        500,
-        502,
-        503,
-        504,
-      ],
-    },
-    cache: {
-      ttl: 3600,
-      type: "exact_match",
-    },
-    loadBalancer: {
-      type: "weight_based",
-      models: [
-        {
-          model: "openai/gpt-4o",
-          weight: 0.7,
-        },
-      ],
-    },
-    timeout: {
-      callTimeout: 30000,
-    },
-    orq: {
-      fallbacks: [
-        {
-          model: "openai/gpt-4o-mini",
-        },
-      ],
-      cache: {
-        ttl: 3600,
-        type: "exact_match",
-      },
-      retry: {
-        onCodes: [
-          429,
-          500,
-          502,
-          503,
-          504,
-        ],
-      },
-      identity: {
-        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        displayName: "Jane Doe",
-        email: "jane.doe@example.com",
-        metadata: [
-          {
-            "department": "Engineering",
-            "role": "Senior Developer",
-          },
-        ],
-        logoUrl: "https://example.com/avatars/jane-doe.jpg",
-        tags: [
-          "hr",
-          "engineering",
-        ],
-      },
-      loadBalancer: {
-        type: "weight_based",
-        models: [
-          {
-            model: "openai/gpt-4o",
-            weight: 0.7,
-          },
-          {
-            model: "anthropic/claude-3-5-sonnet",
-            weight: 0.3,
-          },
-        ],
-      },
-      timeout: {
-        callTimeout: 30000,
-      },
-    },
+    model: "openai/text-embedding-3-small",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("routerEmbeddingsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: single_string
+
+<!-- UsageSnippet language="typescript" operationID="createEmbedding" method="post" path="/v2/router/embeddings" example="single_string" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.router.embeddings.create({
+    input: "The food was delicious and the waiter...",
+    model: "openai/text-embedding-3-small",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { routerEmbeddingsCreate } from "@orq-ai/node/funcs/routerEmbeddingsCreate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await routerEmbeddingsCreate(orq, {
+    input: "The food was delicious and the waiter...",
+    model: "openai/text-embedding-3-small",
   });
   if (res.ok) {
     const { value: result } = res;

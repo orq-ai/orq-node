@@ -1,22 +1,22 @@
 # QueryParamStatus
 
-Filter datasources by status.
+Filter chunks by status.
 
 
 ## Supported Types
 
-### `string[]`
+### `operations.QueryParam1[]`
 
 ```typescript
-const value: string[] = [
+const value: operations.QueryParam1[] = [
   "completed",
   "failed",
 ];
 ```
 
-### `string`
+### `operations.QueryParam2`
 
 ```typescript
-const value: string = "completed";
+const value: operations.QueryParam2 = "completed";
 ```
 

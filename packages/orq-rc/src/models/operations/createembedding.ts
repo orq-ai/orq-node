@@ -11,340 +11,123 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Input text to embed, encoded as a string or array of tokens.
- */
-export type CreateEmbeddingInput = string | Array<string>;
-
-/**
- * Type of the document element
+ * The format to return the embeddings in. Can be either float or base64.
  */
 export const EncodingFormat = {
-  Base64: "base64",
   Float: "float",
+  Base64: "base64",
 } as const;
 /**
- * Type of the document element
+ * The format to return the embeddings in. Can be either float or base64.
  */
 export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
 
-export type CreateEmbeddingFallbacks = {
-  /**
-   * Fallback model identifier
-   */
-  model: string;
-};
+export type Input2 = string | Array<number>;
 
 /**
- * Retry configuration for the request
+ * Input text to embed, encoded as a string or array of tokens.
  */
-export type CreateEmbeddingRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
+export type CreateEmbeddingInput = string | Array<string | Array<number>>;
 
-export const CreateEmbeddingType = {
-  ExactMatch: "exact_match",
-} as const;
-export type CreateEmbeddingType = ClosedEnum<typeof CreateEmbeddingType>;
-
-/**
- * Cache configuration for the request.
- */
-export type CreateEmbeddingCache = {
-  /**
-   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
-   */
-  ttl?: number | undefined;
-  type: CreateEmbeddingType;
-};
-
-export const CreateEmbeddingLoadBalancerType = {
-  WeightBased: "weight_based",
-} as const;
-export type CreateEmbeddingLoadBalancerType = ClosedEnum<
-  typeof CreateEmbeddingLoadBalancerType
->;
-
-export type CreateEmbeddingLoadBalancerModels = {
-  /**
-   * Model identifier for load balancing
-   */
-  model: string;
-  /**
-   * Weight assigned to this model for load balancing
-   */
-  weight?: number | undefined;
-};
-
-export type CreateEmbeddingLoadBalancer1 = {
-  type: CreateEmbeddingLoadBalancerType;
-  models: Array<CreateEmbeddingLoadBalancerModels>;
-};
-
-/**
- * Load balancer configuration for the request.
- */
-export type CreateEmbeddingLoadBalancer = CreateEmbeddingLoadBalancer1;
-
-/**
- * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
- */
-export type CreateEmbeddingTimeout = {
-  /**
-   * Timeout value in milliseconds
-   */
-  callTimeout: number;
-};
-
-export type CreateEmbeddingRouterEmbeddingsFallbacks = {
-  /**
-   * Fallback model identifier
-   */
-  model: string;
-};
-
-export const CreateEmbeddingRouterEmbeddingsType = {
-  ExactMatch: "exact_match",
-} as const;
-export type CreateEmbeddingRouterEmbeddingsType = ClosedEnum<
-  typeof CreateEmbeddingRouterEmbeddingsType
->;
-
-/**
- * Cache configuration for the request.
- */
-export type CreateEmbeddingRouterEmbeddingsCache = {
-  /**
-   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
-   */
-  ttl?: number | undefined;
-  type: CreateEmbeddingRouterEmbeddingsType;
-};
-
-/**
- * Retry configuration for the request
- */
-export type CreateEmbeddingRouterEmbeddingsRetry = {
-  /**
-   * Number of retry attempts (1-5)
-   */
-  count?: number | undefined;
-  /**
-   * HTTP status codes that trigger retry logic
-   */
-  onCodes?: Array<number> | undefined;
-};
-
-export const CreateEmbeddingLoadBalancerRouterEmbeddingsType = {
-  WeightBased: "weight_based",
-} as const;
-export type CreateEmbeddingLoadBalancerRouterEmbeddingsType = ClosedEnum<
-  typeof CreateEmbeddingLoadBalancerRouterEmbeddingsType
->;
-
-export type CreateEmbeddingLoadBalancerRouterEmbeddingsModels = {
-  /**
-   * Model identifier for load balancing
-   */
-  model: string;
-  /**
-   * Weight assigned to this model for load balancing
-   */
-  weight?: number | undefined;
-};
-
-export type CreateEmbeddingLoadBalancerRouterEmbeddings1 = {
-  type: CreateEmbeddingLoadBalancerRouterEmbeddingsType;
-  models: Array<CreateEmbeddingLoadBalancerRouterEmbeddingsModels>;
-};
-
-/**
- * Array of models with weights for load balancing requests
- */
-export type CreateEmbeddingRouterEmbeddingsLoadBalancer =
-  CreateEmbeddingLoadBalancerRouterEmbeddings1;
-
-/**
- * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
- */
-export type CreateEmbeddingRouterEmbeddingsTimeout = {
-  /**
-   * Timeout value in milliseconds
-   */
-  callTimeout: number;
-};
-
-export type CreateEmbeddingOrq = {
-  /**
-   * The name to display on the trace. If not specified, the default system name will be used.
-   */
-  name?: string | undefined;
-  /**
-   * Array of fallback models to use if primary model fails
-   */
-  fallbacks?: Array<CreateEmbeddingRouterEmbeddingsFallbacks> | undefined;
-  /**
-   * Cache configuration for the request.
-   */
-  cache?: CreateEmbeddingRouterEmbeddingsCache | undefined;
-  /**
-   * Retry configuration for the request
-   */
-  retry?: CreateEmbeddingRouterEmbeddingsRetry | undefined;
-  /**
-   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
-   */
-  identity?: components.PublicIdentity | undefined;
-  /**
-   * @deprecated Use identity instead. Information about the contact making the request.
-   *
-   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  contact?: components.PublicContact | undefined;
-  /**
-   * Array of models with weights for load balancing requests
-   */
-  loadBalancer?: CreateEmbeddingLoadBalancerRouterEmbeddings1 | undefined;
-  /**
-   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
-   */
-  timeout?: CreateEmbeddingRouterEmbeddingsTimeout | undefined;
-};
-
-/**
- * input
- */
 export type CreateEmbeddingRequestBody = {
-  /**
-   * Input text to embed, encoded as a string or array of tokens.
-   */
-  input: string | Array<string>;
-  /**
-   * ID of the model to use
-   */
-  model: string;
-  /**
-   * Type of the document element
-   */
-  encodingFormat?: EncodingFormat | undefined;
+  cache?: components.EmbeddingCacheConfig | undefined;
   /**
    * The number of dimensions the resulting output embeddings should have.
    */
   dimensions?: number | undefined;
   /**
-   * A unique identifier representing your end-user
+   * The format to return the embeddings in. Can be either float or base64.
    */
-  user?: string | undefined;
+  encodingFormat?: EncodingFormat | undefined;
+  /**
+   * Array of fallback models to use if primary model fails.
+   */
+  fallbacks?: Array<components.FallbackConfig> | null | undefined;
+  /**
+   * Input text to embed, encoded as a string or array of tokens.
+   */
+  input: string | Array<string | Array<number>>;
+  loadBalancer?: components.EmbeddingLoadBalancerConfig | undefined;
+  /**
+   * ID of the model to use.
+   */
+  model: string;
   /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
+  orq?: components.EmbeddingOrqParams | undefined;
+  retry?: components.EmbeddingRetryConfig | undefined;
+  timeout?: components.EmbeddingTimeoutConfig | undefined;
   /**
-   * Array of fallback models to use if primary model fails
+   * A unique identifier representing your end-user.
    */
-  fallbacks?: Array<CreateEmbeddingFallbacks> | undefined;
-  /**
-   * Retry configuration for the request
-   */
-  retry?: CreateEmbeddingRetry | undefined;
-  /**
-   * Cache configuration for the request.
-   */
-  cache?: CreateEmbeddingCache | undefined;
-  /**
-   * Load balancer configuration for the request.
-   */
-  loadBalancer?: CreateEmbeddingLoadBalancer1 | undefined;
-  /**
-   * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
-   */
-  timeout?: CreateEmbeddingTimeout | undefined;
-  orq?: CreateEmbeddingOrq | undefined;
+  user?: string | undefined;
 };
 
+/**
+ * Always "list".
+ */
 export const CreateEmbeddingObject = {
   List: "list",
 } as const;
+/**
+ * Always "list".
+ */
 export type CreateEmbeddingObject = ClosedEnum<typeof CreateEmbeddingObject>;
-
-/**
- * The object type, which is always `embedding`.
- */
-export const CreateEmbeddingRouterEmbeddingsObject = {
-  Embedding: "embedding",
-} as const;
-/**
- * The object type, which is always `embedding`.
- */
-export type CreateEmbeddingRouterEmbeddingsObject = ClosedEnum<
-  typeof CreateEmbeddingRouterEmbeddingsObject
->;
-
-/**
- * The embedding vector, which is a list of floats. The length of vector depends on the model.
- */
-export type Embedding = Array<number> | string;
-
-export type CreateEmbeddingData = {
-  /**
-   * The object type, which is always `embedding`.
-   */
-  object: CreateEmbeddingRouterEmbeddingsObject;
-  /**
-   * The embedding vector, which is a list of floats. The length of vector depends on the model.
-   */
-  embedding: Array<number> | string;
-  /**
-   * The index of the embedding in the list of embeddings.
-   */
-  index: number;
-};
-
-/**
- * The usage information for the request.
- */
-export type CreateEmbeddingUsage = {
-  /**
-   * The number of tokens used by the prompt.
-   */
-  promptTokens: number;
-  /**
-   * The total number of tokens used by the request.
-   */
-  totalTokens: number;
-};
 
 /**
  * Returns the embedding vector.
  */
 export type CreateEmbeddingResponseBody = {
-  object: CreateEmbeddingObject;
-  data: Array<CreateEmbeddingData>;
   /**
-   * ID of the model to used.
+   * List of embedding objects.
+   */
+  data: Array<components.PublicEmbeddingData> | null;
+  /**
+   * ID of the model used.
    */
   model: string;
   /**
-   * The usage information for the request.
+   * Always "list".
    */
-  usage: CreateEmbeddingUsage;
+  object: CreateEmbeddingObject;
+  usage: components.PublicEmbeddingUsage;
 };
 
 /** @internal */
-export type CreateEmbeddingInput$Outbound = string | Array<string>;
+export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
+  typeof EncodingFormat
+> = z.nativeEnum(EncodingFormat);
+
+/** @internal */
+export type Input2$Outbound = string | Array<number>;
+
+/** @internal */
+export const Input2$outboundSchema: z.ZodType<
+  Input2$Outbound,
+  z.ZodTypeDef,
+  Input2
+> = z.union([z.string(), z.array(z.number().int())]);
+
+export function input2ToJSON(input2: Input2): string {
+  return JSON.stringify(Input2$outboundSchema.parse(input2));
+}
+
+/** @internal */
+export type CreateEmbeddingInput$Outbound =
+  | string
+  | Array<string | Array<number>>;
 
 /** @internal */
 export const CreateEmbeddingInput$outboundSchema: z.ZodType<
   CreateEmbeddingInput$Outbound,
   z.ZodTypeDef,
   CreateEmbeddingInput
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([
+  z.string(),
+  z.array(z.union([z.string(), z.array(z.number().int())])),
+]);
 
 export function createEmbeddingInputToJSON(
   createEmbeddingInput: CreateEmbeddingInput,
@@ -355,464 +138,19 @@ export function createEmbeddingInputToJSON(
 }
 
 /** @internal */
-export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof EncodingFormat
-> = z.nativeEnum(EncodingFormat);
-
-/** @internal */
-export type CreateEmbeddingFallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const CreateEmbeddingFallbacks$outboundSchema: z.ZodType<
-  CreateEmbeddingFallbacks$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingFallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function createEmbeddingFallbacksToJSON(
-  createEmbeddingFallbacks: CreateEmbeddingFallbacks,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingFallbacks$outboundSchema.parse(createEmbeddingFallbacks),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const CreateEmbeddingRetry$outboundSchema: z.ZodType<
-  CreateEmbeddingRetry$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function createEmbeddingRetryToJSON(
-  createEmbeddingRetry: CreateEmbeddingRetry,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingRetry$outboundSchema.parse(createEmbeddingRetry),
-  );
-}
-
-/** @internal */
-export const CreateEmbeddingType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEmbeddingType
-> = z.nativeEnum(CreateEmbeddingType);
-
-/** @internal */
-export type CreateEmbeddingCache$Outbound = {
-  ttl: number;
-  type: string;
-};
-
-/** @internal */
-export const CreateEmbeddingCache$outboundSchema: z.ZodType<
-  CreateEmbeddingCache$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingCache
-> = z.object({
-  ttl: z.number().default(1800),
-  type: CreateEmbeddingType$outboundSchema,
-});
-
-export function createEmbeddingCacheToJSON(
-  createEmbeddingCache: CreateEmbeddingCache,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingCache$outboundSchema.parse(createEmbeddingCache),
-  );
-}
-
-/** @internal */
-export const CreateEmbeddingLoadBalancerType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEmbeddingLoadBalancerType
-> = z.nativeEnum(CreateEmbeddingLoadBalancerType);
-
-/** @internal */
-export type CreateEmbeddingLoadBalancerModels$Outbound = {
-  model: string;
-  weight: number;
-};
-
-/** @internal */
-export const CreateEmbeddingLoadBalancerModels$outboundSchema: z.ZodType<
-  CreateEmbeddingLoadBalancerModels$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
-
-export function createEmbeddingLoadBalancerModelsToJSON(
-  createEmbeddingLoadBalancerModels: CreateEmbeddingLoadBalancerModels,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingLoadBalancerModels$outboundSchema.parse(
-      createEmbeddingLoadBalancerModels,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingLoadBalancer1$Outbound = {
-  type: string;
-  models: Array<CreateEmbeddingLoadBalancerModels$Outbound>;
-};
-
-/** @internal */
-export const CreateEmbeddingLoadBalancer1$outboundSchema: z.ZodType<
-  CreateEmbeddingLoadBalancer1$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingLoadBalancer1
-> = z.object({
-  type: CreateEmbeddingLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateEmbeddingLoadBalancerModels$outboundSchema),
-  ),
-});
-
-export function createEmbeddingLoadBalancer1ToJSON(
-  createEmbeddingLoadBalancer1: CreateEmbeddingLoadBalancer1,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingLoadBalancer1$outboundSchema.parse(
-      createEmbeddingLoadBalancer1,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingLoadBalancer$Outbound =
-  CreateEmbeddingLoadBalancer1$Outbound;
-
-/** @internal */
-export const CreateEmbeddingLoadBalancer$outboundSchema: z.ZodType<
-  CreateEmbeddingLoadBalancer$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingLoadBalancer
-> = z.lazy(() => CreateEmbeddingLoadBalancer1$outboundSchema);
-
-export function createEmbeddingLoadBalancerToJSON(
-  createEmbeddingLoadBalancer: CreateEmbeddingLoadBalancer,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingLoadBalancer$outboundSchema.parse(
-      createEmbeddingLoadBalancer,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingTimeout$Outbound = {
-  call_timeout: number;
-};
-
-/** @internal */
-export const CreateEmbeddingTimeout$outboundSchema: z.ZodType<
-  CreateEmbeddingTimeout$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
-
-export function createEmbeddingTimeoutToJSON(
-  createEmbeddingTimeout: CreateEmbeddingTimeout,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingTimeout$outboundSchema.parse(createEmbeddingTimeout),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingRouterEmbeddingsFallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const CreateEmbeddingRouterEmbeddingsFallbacks$outboundSchema: z.ZodType<
-  CreateEmbeddingRouterEmbeddingsFallbacks$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingRouterEmbeddingsFallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function createEmbeddingRouterEmbeddingsFallbacksToJSON(
-  createEmbeddingRouterEmbeddingsFallbacks:
-    CreateEmbeddingRouterEmbeddingsFallbacks,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingRouterEmbeddingsFallbacks$outboundSchema.parse(
-      createEmbeddingRouterEmbeddingsFallbacks,
-    ),
-  );
-}
-
-/** @internal */
-export const CreateEmbeddingRouterEmbeddingsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEmbeddingRouterEmbeddingsType> = z.nativeEnum(
-    CreateEmbeddingRouterEmbeddingsType,
-  );
-
-/** @internal */
-export type CreateEmbeddingRouterEmbeddingsCache$Outbound = {
-  ttl: number;
-  type: string;
-};
-
-/** @internal */
-export const CreateEmbeddingRouterEmbeddingsCache$outboundSchema: z.ZodType<
-  CreateEmbeddingRouterEmbeddingsCache$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingRouterEmbeddingsCache
-> = z.object({
-  ttl: z.number().default(1800),
-  type: CreateEmbeddingRouterEmbeddingsType$outboundSchema,
-});
-
-export function createEmbeddingRouterEmbeddingsCacheToJSON(
-  createEmbeddingRouterEmbeddingsCache: CreateEmbeddingRouterEmbeddingsCache,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingRouterEmbeddingsCache$outboundSchema.parse(
-      createEmbeddingRouterEmbeddingsCache,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingRouterEmbeddingsRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const CreateEmbeddingRouterEmbeddingsRetry$outboundSchema: z.ZodType<
-  CreateEmbeddingRouterEmbeddingsRetry$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingRouterEmbeddingsRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function createEmbeddingRouterEmbeddingsRetryToJSON(
-  createEmbeddingRouterEmbeddingsRetry: CreateEmbeddingRouterEmbeddingsRetry,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingRouterEmbeddingsRetry$outboundSchema.parse(
-      createEmbeddingRouterEmbeddingsRetry,
-    ),
-  );
-}
-
-/** @internal */
-export const CreateEmbeddingLoadBalancerRouterEmbeddingsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEmbeddingLoadBalancerRouterEmbeddingsType> = z
-    .nativeEnum(CreateEmbeddingLoadBalancerRouterEmbeddingsType);
-
-/** @internal */
-export type CreateEmbeddingLoadBalancerRouterEmbeddingsModels$Outbound = {
-  model: string;
-  weight: number;
-};
-
-/** @internal */
-export const CreateEmbeddingLoadBalancerRouterEmbeddingsModels$outboundSchema:
-  z.ZodType<
-    CreateEmbeddingLoadBalancerRouterEmbeddingsModels$Outbound,
-    z.ZodTypeDef,
-    CreateEmbeddingLoadBalancerRouterEmbeddingsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
-
-export function createEmbeddingLoadBalancerRouterEmbeddingsModelsToJSON(
-  createEmbeddingLoadBalancerRouterEmbeddingsModels:
-    CreateEmbeddingLoadBalancerRouterEmbeddingsModels,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingLoadBalancerRouterEmbeddingsModels$outboundSchema.parse(
-      createEmbeddingLoadBalancerRouterEmbeddingsModels,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingLoadBalancerRouterEmbeddings1$Outbound = {
-  type: string;
-  models: Array<CreateEmbeddingLoadBalancerRouterEmbeddingsModels$Outbound>;
-};
-
-/** @internal */
-export const CreateEmbeddingLoadBalancerRouterEmbeddings1$outboundSchema:
-  z.ZodType<
-    CreateEmbeddingLoadBalancerRouterEmbeddings1$Outbound,
-    z.ZodTypeDef,
-    CreateEmbeddingLoadBalancerRouterEmbeddings1
-  > = z.object({
-    type: CreateEmbeddingLoadBalancerRouterEmbeddingsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
-        CreateEmbeddingLoadBalancerRouterEmbeddingsModels$outboundSchema
-      ),
-    ),
-  });
-
-export function createEmbeddingLoadBalancerRouterEmbeddings1ToJSON(
-  createEmbeddingLoadBalancerRouterEmbeddings1:
-    CreateEmbeddingLoadBalancerRouterEmbeddings1,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingLoadBalancerRouterEmbeddings1$outboundSchema.parse(
-      createEmbeddingLoadBalancerRouterEmbeddings1,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingRouterEmbeddingsLoadBalancer$Outbound =
-  CreateEmbeddingLoadBalancerRouterEmbeddings1$Outbound;
-
-/** @internal */
-export const CreateEmbeddingRouterEmbeddingsLoadBalancer$outboundSchema:
-  z.ZodType<
-    CreateEmbeddingRouterEmbeddingsLoadBalancer$Outbound,
-    z.ZodTypeDef,
-    CreateEmbeddingRouterEmbeddingsLoadBalancer
-  > = z.lazy(() => CreateEmbeddingLoadBalancerRouterEmbeddings1$outboundSchema);
-
-export function createEmbeddingRouterEmbeddingsLoadBalancerToJSON(
-  createEmbeddingRouterEmbeddingsLoadBalancer:
-    CreateEmbeddingRouterEmbeddingsLoadBalancer,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingRouterEmbeddingsLoadBalancer$outboundSchema.parse(
-      createEmbeddingRouterEmbeddingsLoadBalancer,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingRouterEmbeddingsTimeout$Outbound = {
-  call_timeout: number;
-};
-
-/** @internal */
-export const CreateEmbeddingRouterEmbeddingsTimeout$outboundSchema: z.ZodType<
-  CreateEmbeddingRouterEmbeddingsTimeout$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingRouterEmbeddingsTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
-
-export function createEmbeddingRouterEmbeddingsTimeoutToJSON(
-  createEmbeddingRouterEmbeddingsTimeout:
-    CreateEmbeddingRouterEmbeddingsTimeout,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingRouterEmbeddingsTimeout$outboundSchema.parse(
-      createEmbeddingRouterEmbeddingsTimeout,
-    ),
-  );
-}
-
-/** @internal */
-export type CreateEmbeddingOrq$Outbound = {
-  name?: string | undefined;
-  fallbacks?:
-    | Array<CreateEmbeddingRouterEmbeddingsFallbacks$Outbound>
-    | undefined;
-  cache?: CreateEmbeddingRouterEmbeddingsCache$Outbound | undefined;
-  retry?: CreateEmbeddingRouterEmbeddingsRetry$Outbound | undefined;
-  identity?: components.PublicIdentity$Outbound | undefined;
-  contact?: components.PublicContact$Outbound | undefined;
-  load_balancer?:
-    | CreateEmbeddingLoadBalancerRouterEmbeddings1$Outbound
-    | undefined;
-  timeout?: CreateEmbeddingRouterEmbeddingsTimeout$Outbound | undefined;
-};
-
-/** @internal */
-export const CreateEmbeddingOrq$outboundSchema: z.ZodType<
-  CreateEmbeddingOrq$Outbound,
-  z.ZodTypeDef,
-  CreateEmbeddingOrq
-> = z.object({
-  name: z.string().optional(),
-  fallbacks: z.array(
-    z.lazy(() => CreateEmbeddingRouterEmbeddingsFallbacks$outboundSchema),
-  ).optional(),
-  cache: z.lazy(() => CreateEmbeddingRouterEmbeddingsCache$outboundSchema)
-    .optional(),
-  retry: z.lazy(() => CreateEmbeddingRouterEmbeddingsRetry$outboundSchema)
-    .optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  loadBalancer: z.lazy(() =>
-    CreateEmbeddingLoadBalancerRouterEmbeddings1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() => CreateEmbeddingRouterEmbeddingsTimeout$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    loadBalancer: "load_balancer",
-  });
-});
-
-export function createEmbeddingOrqToJSON(
-  createEmbeddingOrq: CreateEmbeddingOrq,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingOrq$outboundSchema.parse(createEmbeddingOrq),
-  );
-}
-
-/** @internal */
 export type CreateEmbeddingRequestBody$Outbound = {
-  input: string | Array<string>;
-  model: string;
-  encoding_format: string;
+  cache?: components.EmbeddingCacheConfig$Outbound | undefined;
   dimensions?: number | undefined;
-  user?: string | undefined;
+  encoding_format?: string | undefined;
+  fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
+  input: string | Array<string | Array<number>>;
+  load_balancer?: components.EmbeddingLoadBalancerConfig$Outbound | undefined;
+  model: string;
   name?: string | undefined;
-  fallbacks?: Array<CreateEmbeddingFallbacks$Outbound> | undefined;
-  retry?: CreateEmbeddingRetry$Outbound | undefined;
-  cache?: CreateEmbeddingCache$Outbound | undefined;
-  load_balancer?: CreateEmbeddingLoadBalancer1$Outbound | undefined;
-  timeout?: CreateEmbeddingTimeout$Outbound | undefined;
-  orq?: CreateEmbeddingOrq$Outbound | undefined;
+  orq?: components.EmbeddingOrqParams$Outbound | undefined;
+  retry?: components.EmbeddingRetryConfig$Outbound | undefined;
+  timeout?: components.EmbeddingTimeoutConfig$Outbound | undefined;
+  user?: string | undefined;
 };
 
 /** @internal */
@@ -821,20 +159,23 @@ export const CreateEmbeddingRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateEmbeddingRequestBody
 > = z.object({
-  input: z.union([z.string(), z.array(z.string())]),
+  cache: components.EmbeddingCacheConfig$outboundSchema.optional(),
+  dimensions: z.number().int().optional(),
+  encodingFormat: EncodingFormat$outboundSchema.optional(),
+  fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
+    .optional(),
+  input: z.union([
+    z.string(),
+    z.array(z.union([z.string(), z.array(z.number().int())])),
+  ]),
+  loadBalancer: components.EmbeddingLoadBalancerConfig$outboundSchema
+    .optional(),
   model: z.string(),
-  encodingFormat: EncodingFormat$outboundSchema.default("float"),
-  dimensions: z.number().optional(),
-  user: z.string().optional(),
   name: z.string().optional(),
-  fallbacks: z.array(z.lazy(() => CreateEmbeddingFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateEmbeddingRetry$outboundSchema).optional(),
-  cache: z.lazy(() => CreateEmbeddingCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateEmbeddingLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateEmbeddingTimeout$outboundSchema).optional(),
-  orq: z.lazy(() => CreateEmbeddingOrq$outboundSchema).optional(),
+  orq: components.EmbeddingOrqParams$outboundSchema.optional(),
+  retry: components.EmbeddingRetryConfig$outboundSchema.optional(),
+  timeout: components.EmbeddingTimeoutConfig$outboundSchema.optional(),
+  user: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -856,84 +197,15 @@ export const CreateEmbeddingObject$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateEmbeddingObject);
 
 /** @internal */
-export const CreateEmbeddingRouterEmbeddingsObject$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEmbeddingRouterEmbeddingsObject> = z.nativeEnum(
-    CreateEmbeddingRouterEmbeddingsObject,
-  );
-
-/** @internal */
-export const Embedding$inboundSchema: z.ZodType<
-  Embedding,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.array(z.number()), z.string()]);
-
-export function embeddingFromJSON(
-  jsonString: string,
-): SafeParseResult<Embedding, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Embedding$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Embedding' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateEmbeddingData$inboundSchema: z.ZodType<
-  CreateEmbeddingData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: CreateEmbeddingRouterEmbeddingsObject$inboundSchema,
-  embedding: z.union([z.array(z.number()), z.string()]),
-  index: z.number(),
-});
-
-export function createEmbeddingDataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateEmbeddingData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateEmbeddingData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEmbeddingData' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateEmbeddingUsage$inboundSchema: z.ZodType<
-  CreateEmbeddingUsage,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  prompt_tokens: z.number(),
-  total_tokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-  });
-});
-
-export function createEmbeddingUsageFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateEmbeddingUsage, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateEmbeddingUsage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateEmbeddingUsage' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateEmbeddingResponseBody$inboundSchema: z.ZodType<
   CreateEmbeddingResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: CreateEmbeddingObject$inboundSchema,
-  data: z.array(z.lazy(() => CreateEmbeddingData$inboundSchema)),
+  data: z.nullable(z.array(components.PublicEmbeddingData$inboundSchema)),
   model: z.string(),
-  usage: z.lazy(() => CreateEmbeddingUsage$inboundSchema),
+  object: CreateEmbeddingObject$inboundSchema,
+  usage: components.PublicEmbeddingUsage$inboundSchema,
 });
 
 export function createEmbeddingResponseBodyFromJSON(

@@ -8,12 +8,12 @@ Returns the embedding vector.
 import { CreateEmbeddingResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreateEmbeddingResponseBody = {
-  object: "list",
-  data: [],
+  data: null,
   model: "Taurus",
+  object: "list",
   usage: {
-    promptTokens: 8216.92,
-    totalTokens: 1165.7,
+    promptTokens: 821692,
+    totalTokens: 116570,
   },
 };
 ```
@@ -22,7 +22,7 @@ let value: CreateEmbeddingResponseBody = {
 
 | Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `object`                                                                             | [operations.CreateEmbeddingObject](../../models/operations/createembeddingobject.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `data`                                                                               | [operations.CreateEmbeddingData](../../models/operations/createembeddingdata.md)[]   | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `model`                                                                              | *string*                                                                             | :heavy_check_mark:                                                                   | ID of the model to used.                                                             |
-| `usage`                                                                              | [operations.CreateEmbeddingUsage](../../models/operations/createembeddingusage.md)   | :heavy_check_mark:                                                                   | The usage information for the request.                                               |
+| `data`                                                                               | [components.PublicEmbeddingData](../../models/components/publicembeddingdata.md)[]   | :heavy_check_mark:                                                                   | List of embedding objects.                                                           |
+| `model`                                                                              | *string*                                                                             | :heavy_check_mark:                                                                   | ID of the model used.                                                                |
+| `object`                                                                             | [operations.CreateEmbeddingObject](../../models/operations/createembeddingobject.md) | :heavy_check_mark:                                                                   | Always "list".                                                                       |
+| `usage`                                                                              | [components.PublicEmbeddingUsage](../../models/components/publicembeddingusage.md)   | :heavy_check_mark:                                                                   | N/A                                                                                  |

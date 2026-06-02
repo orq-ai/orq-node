@@ -12,13 +12,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Always "model".
  */
-export const ObjectT = {
+export const PublicModelEntryObject = {
   Model: "model",
 } as const;
 /**
  * Always "model".
  */
-export type ObjectT = ClosedEnum<typeof ObjectT>;
+export type PublicModelEntryObject = ClosedEnum<typeof PublicModelEntryObject>;
 
 export type PublicModelEntry = {
   /**
@@ -32,7 +32,7 @@ export type PublicModelEntry = {
   /**
    * Always "model".
    */
-  object: ObjectT;
+  object: PublicModelEntryObject;
   /**
    * The provider that owns the model (e.g. openai, anthropic).
    */
@@ -40,8 +40,9 @@ export type PublicModelEntry = {
 };
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const PublicModelEntryObject$inboundSchema: z.ZodNativeEnum<
+  typeof PublicModelEntryObject
+> = z.nativeEnum(PublicModelEntryObject);
 
 /** @internal */
 export const PublicModelEntry$inboundSchema: z.ZodType<
@@ -51,7 +52,7 @@ export const PublicModelEntry$inboundSchema: z.ZodType<
 > = z.object({
   created: z.number().int(),
   id: z.string(),
-  object: ObjectT$inboundSchema,
+  object: PublicModelEntryObject$inboundSchema,
   owned_by: z.string(),
 }).transform((v) => {
   return remap$(v, {

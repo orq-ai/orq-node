@@ -1,15 +1,13 @@
-# CreateEmbeddingUsage
-
-The usage information for the request.
+# PublicEmbeddingUsage
 
 ## Example Usage
 
 ```typescript
-import { CreateEmbeddingUsage } from "@orq-ai/node/models/operations";
+import { PublicEmbeddingUsage } from "@orq-ai/node/models/components";
 
-let value: CreateEmbeddingUsage = {
-  promptTokens: 2291.22,
-  totalTokens: 6488.07,
+let value: PublicEmbeddingUsage = {
+  promptTokens: 876954,
+  totalTokens: 783688,
 };
 ```
 

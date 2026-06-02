@@ -25,11 +25,6 @@ export class Router extends ClientSDK {
     return (this._moderations ??= new Moderations(this._options));
   }
 
-  private _embeddings?: Embeddings;
-  get embeddings(): Embeddings {
-    return (this._embeddings ??= new Embeddings(this._options));
-  }
-
   private _rerank?: Rerank;
   get rerank(): Rerank {
     return (this._rerank ??= new Rerank(this._options));
@@ -48,6 +43,11 @@ export class Router extends ClientSDK {
   private _images?: Images;
   get images(): Images {
     return (this._images ??= new Images(this._options));
+  }
+
+  private _embeddings?: Embeddings;
+  get embeddings(): Embeddings {
+    return (this._embeddings ??= new Embeddings(this._options));
   }
 
   /**

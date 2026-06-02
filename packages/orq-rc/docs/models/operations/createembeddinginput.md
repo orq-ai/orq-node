@@ -11,12 +11,9 @@ Input text to embed, encoded as a string or array of tokens.
 const value: string = "<value>";
 ```
 
-### `string[]`
+### `operations.Input2[]`
 
 ```typescript
-const value: string[] = [
-  "<value 1>",
-  "<value 2>",
-];
+const value: operations.Input2[] = [];
 ```
 

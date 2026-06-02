@@ -150,7 +150,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.CreateIdentityResponse$inboundSchema),
+    M.json(201, components.CreateIdentityResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
