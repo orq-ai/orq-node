@@ -1047,7 +1047,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kt1t90dhwdrtzaq6gpr9vhew"
+              default: "reasoning_01kt2z4nny4kke3h1tvqvpk623"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -6184,6 +6184,140 @@ components:
       required:
         - "id"
       type: "object"
+    EmbeddingCacheConfig:
+      additionalProperties: false
+      properties:
+        ttl:
+          description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+          format: "int64"
+          type: "integer"
+        type:
+          description: "Cache type."
+          enum:
+            - "exact_match"
+          type: "string"
+      required:
+        - "type"
+      type: "object"
+    EmbeddingContactParams:
+      additionalProperties: false
+      properties:
+        display_name:
+          type: "string"
+        email:
+          type: "string"
+        id:
+          type: "string"
+        metadata:
+          items:
+            additionalProperties: {}
+            type: "object"
+          type:
+            - "array"
+            - "null"
+        tags:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+      required:
+        - "id"
+      type: "object"
+    EmbeddingLoadBalancerConfig:
+      additionalProperties: false
+      properties:
+        models:
+          description: "Array of models with weights for load balancing requests."
+          items:
+            $ref: "#/components/schemas/EmbeddingLoadBalancerModelConfig"
+          type:
+            - "array"
+            - "null"
+        type:
+          description: "Load balancer type."
+          enum:
+            - "weight_based"
+          type: "string"
+      required:
+        - "type"
+        - "models"
+      type: "object"
+    EmbeddingLoadBalancerModelConfig:
+      additionalProperties: false
+      properties:
+        model:
+          description: "Model identifier for load balancing."
+          type: "string"
+        weight:
+          description: "Weight assigned to this model for load balancing."
+          format: "double"
+          type: "number"
+      required:
+        - "model"
+        - "weight"
+      type: "object"
+    EmbeddingOrqParams:
+      additionalProperties: false
+      properties:
+        cache:
+          $ref: "#/components/schemas/EmbeddingCacheConfig"
+          description: "Deprecated: use top-level cache instead."
+        contact:
+          $ref: "#/components/schemas/EmbeddingContactParams"
+          description: "Deprecated: use identity instead. Information about the contact making the request."
+        fallbacks:
+          description: "Deprecated: use top-level fallbacks instead."
+          items:
+            $ref: "#/components/schemas/FallbackConfig"
+          type:
+            - "array"
+            - "null"
+        identity:
+          $ref: "#/components/schemas/PublicIdentity"
+          description: "Information about the identity making the request."
+        load_balancer:
+          $ref: "#/components/schemas/EmbeddingLoadBalancerConfig"
+          description: "Deprecated: use top-level load_balancer instead."
+        name:
+          description: "Deprecated: use top-level name instead."
+          type: "string"
+        retry:
+          $ref: "#/components/schemas/EmbeddingRetryConfig"
+          description: "Deprecated: use top-level retry instead."
+        timeout:
+          $ref: "#/components/schemas/EmbeddingTimeoutConfig"
+          description: "Deprecated: use top-level timeout instead."
+      type: "object"
+    EmbeddingRetryConfig:
+      additionalProperties: false
+      properties:
+        count:
+          description: "Number of retry attempts (1-5)."
+          format: "int64"
+          type: "integer"
+        on_codes:
+          description: "HTTP status codes that trigger retry logic."
+          items:
+            format: "int64"
+            type: "integer"
+          type:
+            - "array"
+            - "null"
+      required:
+        - "count"
+        - "on_codes"
+      type: "object"
+    EmbeddingTimeoutConfig:
+      additionalProperties: false
+      properties:
+        call_timeout:
+          description: "Timeout value in milliseconds."
+          format: "int64"
+          type: "integer"
+      required:
+        - "call_timeout"
+      type: "object"
     FallbackConfig:
       additionalProperties: false
       properties:
@@ -6235,6 +6369,73 @@ components:
           type: "integer"
       required:
         - "reasoning_tokens"
+      type: "object"
+    PublicCreateEmbeddingBody:
+      additionalProperties: false
+      properties:
+        cache:
+          $ref: "#/components/schemas/EmbeddingCacheConfig"
+          description: "Cache configuration for the request."
+        dimensions:
+          description: "The number of dimensions the resulting output embeddings should have."
+          format: "int64"
+          type: "integer"
+        encoding_format:
+          description: "The format to return the embeddings in. Can be either float or base64."
+          enum:
+            - "float"
+            - "base64"
+          type: "string"
+        fallbacks:
+          description: "Array of fallback models to use if primary model fails."
+          items:
+            $ref: "#/components/schemas/FallbackConfig"
+          type:
+            - "array"
+            - "null"
+        input:
+          anyOf:
+            - description: "A single text string to embed. Must be non-empty."
+              minLength: 1
+              title: "String"
+              type: "string"
+            - description: "An array of strings or token arrays to embed. Must be non-empty."
+              items:
+                anyOf:
+                  - minLength: 1
+                    type: "string"
+                  - items:
+                      type: "integer"
+                    minItems: 1
+                    type: "array"
+              minItems: 1
+              title: "Array"
+              type: "array"
+          description: "Input text to embed, encoded as a string or array of tokens."
+        load_balancer:
+          $ref: "#/components/schemas/EmbeddingLoadBalancerConfig"
+          description: "Load balancer configuration for the request."
+        model:
+          description: "ID of the model to use."
+          type: "string"
+        name:
+          description: "The name to display on the trace. If not specified, the default system name will be used."
+          type: "string"
+        orq:
+          $ref: "#/components/schemas/EmbeddingOrqParams"
+          description: "Orq platform extension parameters. Top-level equivalents take priority when both are set."
+        retry:
+          $ref: "#/components/schemas/EmbeddingRetryConfig"
+          description: "Retry configuration for the request."
+        timeout:
+          $ref: "#/components/schemas/EmbeddingTimeoutConfig"
+          description: "Timeout configuration to apply to the request."
+        user:
+          description: "A unique identifier representing your end-user."
+          type: "string"
+      required:
+        - "model"
+        - "input"
       type: "object"
     PublicCreateResponseBody:
       additionalProperties: false
@@ -6624,6 +6825,40 @@ components:
         - "type"
         - "expression"
         - "payload"
+      type: "object"
+    PublicEmbeddingData:
+      additionalProperties: false
+      properties:
+        embedding:
+          description: "The embedding vector, which is a list of floats. The length of vector depends on the model. Can also be a base64-encoded string when encoding_format is base64."
+        index:
+          description: "The index of the embedding in the list of embeddings."
+          format: "int64"
+          type: "integer"
+        object:
+          description: "The object type, which is always \"embedding\"."
+          enum:
+            - "embedding"
+          type: "string"
+      required:
+        - "object"
+        - "index"
+        - "embedding"
+      type: "object"
+    PublicEmbeddingUsage:
+      additionalProperties: false
+      properties:
+        prompt_tokens:
+          description: "The number of tokens used by the prompt."
+          format: "int64"
+          type: "integer"
+        total_tokens:
+          description: "The total number of tokens used by the request."
+          format: "int64"
+          type: "integer"
+      required:
+        - "prompt_tokens"
+        - "total_tokens"
       type: "object"
     PublicModelEntry:
       additionalProperties: false
@@ -7225,17 +7460,14 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-01T14:43:54.503Z"
+                                  default: "2026-06-02T01:28:13.013Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-01T14:43:54.503Z"
+                                  default: "2026-06-02T01:28:13.013Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
                                       properties:
-                                        enabled:
-                                          type: "boolean"
-                                          default: true
                                         alert_on_failure:
                                           type: "boolean"
                                           default: false
@@ -7251,9 +7483,6 @@ paths:
                                       title: "Boolean"
                                     - type: "object"
                                       properties:
-                                        enabled:
-                                          type: "boolean"
-                                          default: true
                                         alert_on_failure:
                                           type: "boolean"
                                           default: false
@@ -7272,9 +7501,6 @@ paths:
                                       title: "Categorical"
                                     - type: "object"
                                       properties:
-                                        enabled:
-                                          type: "boolean"
-                                          default: true
                                         alert_on_failure:
                                           type: "boolean"
                                           default: false
@@ -7353,17 +7579,14 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-01T14:43:54.503Z"
+                                  default: "2026-06-02T01:28:13.013Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-01T14:43:54.503Z"
+                                  default: "2026-06-02T01:28:13.013Z"
                                 guardrail_config:
                                   oneOf:
                                     - type: "object"
                                       properties:
-                                        enabled:
-                                          type: "boolean"
-                                          default: true
                                         alert_on_failure:
                                           type: "boolean"
                                           default: false
@@ -7379,9 +7602,6 @@ paths:
                                       title: "Boolean"
                                     - type: "object"
                                       properties:
-                                        enabled:
-                                          type: "boolean"
-                                          default: true
                                         alert_on_failure:
                                           type: "boolean"
                                           default: false
@@ -7400,9 +7620,6 @@ paths:
                                       title: "Categorical"
                                     - type: "object"
                                       properties:
-                                        enabled:
-                                          type: "boolean"
-                                          default: true
                                         alert_on_failure:
                                           type: "boolean"
                                           default: false
@@ -7576,17 +7793,14 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             updated:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7602,9 +7816,6 @@ paths:
                                   title: "Boolean"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7623,9 +7834,6 @@ paths:
                                   title: "Categorical"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7675,17 +7883,14 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             updated:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7701,9 +7906,6 @@ paths:
                                   title: "Boolean"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7722,9 +7924,6 @@ paths:
                                   title: "Categorical"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7789,17 +7988,14 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             updated:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7815,9 +8011,6 @@ paths:
                                   title: "Boolean"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7836,9 +8029,6 @@ paths:
                                   title: "Categorical"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7888,17 +8078,14 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             updated:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7914,9 +8101,6 @@ paths:
                                   title: "Boolean"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -7935,9 +8119,6 @@ paths:
                                   title: "Categorical"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8287,17 +8468,14 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             updated:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8313,9 +8491,6 @@ paths:
                                   title: "Boolean"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8334,9 +8509,6 @@ paths:
                                   title: "Categorical"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8402,17 +8574,14 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             updated:
                               type: "string"
-                              default: "2026-06-01T14:43:54.503Z"
+                              default: "2026-06-02T01:28:13.013Z"
                             guardrail_config:
                               oneOf:
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8428,9 +8597,6 @@ paths:
                                   title: "Boolean"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8449,9 +8615,6 @@ paths:
                                   title: "Categorical"
                                 - type: "object"
                                   properties:
-                                    enabled:
-                                      type: "boolean"
-                                      default: true
                                     alert_on_failure:
                                       type: "boolean"
                                       default: false
@@ -8533,9 +8696,6 @@ paths:
                           oneOf:
                             - type: "object"
                               properties:
-                                enabled:
-                                  type: "boolean"
-                                  default: true
                                 alert_on_failure:
                                   type: "boolean"
                                   default: false
@@ -8551,9 +8711,6 @@ paths:
                               title: "Boolean"
                             - type: "object"
                               properties:
-                                enabled:
-                                  type: "boolean"
-                                  default: true
                                 alert_on_failure:
                                   type: "boolean"
                                   default: false
@@ -8572,9 +8729,6 @@ paths:
                               title: "Categorical"
                             - type: "object"
                               properties:
-                                enabled:
-                                  type: "boolean"
-                                  default: true
                                 alert_on_failure:
                                   type: "boolean"
                                   default: false
@@ -8665,9 +8819,6 @@ paths:
                           oneOf:
                             - type: "object"
                               properties:
-                                enabled:
-                                  type: "boolean"
-                                  default: true
                                 alert_on_failure:
                                   type: "boolean"
                                   default: false
@@ -8683,9 +8834,6 @@ paths:
                               title: "Boolean"
                             - type: "object"
                               properties:
-                                enabled:
-                                  type: "boolean"
-                                  default: true
                                 alert_on_failure:
                                   type: "boolean"
                                   default: false
@@ -8704,9 +8852,6 @@ paths:
                               title: "Categorical"
                             - type: "object"
                               properties:
-                                enabled:
-                                  type: "boolean"
-                                  default: true
                                 alert_on_failure:
                                   type: "boolean"
                                   default: false
@@ -8892,9 +9037,6 @@ paths:
                       oneOf:
                         - type: "object"
                           properties:
-                            enabled:
-                              type: "boolean"
-                              default: true
                             alert_on_failure:
                               type: "boolean"
                               default: false
@@ -8910,9 +9052,6 @@ paths:
                           title: "Boolean"
                         - type: "object"
                           properties:
-                            enabled:
-                              type: "boolean"
-                              default: true
                             alert_on_failure:
                               type: "boolean"
                               default: false
@@ -8931,9 +9070,6 @@ paths:
                           title: "Categorical"
                         - type: "object"
                           properties:
-                            enabled:
-                              type: "boolean"
-                              default: true
                             alert_on_failure:
                               type: "boolean"
                               default: false
@@ -9002,17 +9138,14 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           updated:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -9028,9 +9161,6 @@ paths:
                                 title: "Boolean"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -9049,9 +9179,6 @@ paths:
                                 title: "Categorical"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -9130,17 +9257,14 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           updated:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -9156,9 +9280,6 @@ paths:
                                 title: "Boolean"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -9177,9 +9298,6 @@ paths:
                                 title: "Categorical"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -9353,17 +9471,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9379,9 +9494,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9400,9 +9512,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9452,17 +9561,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9478,9 +9584,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9499,9 +9602,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9566,17 +9666,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9592,9 +9689,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9613,9 +9707,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9665,17 +9756,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9691,9 +9779,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -9712,9 +9797,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10064,17 +10146,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10090,9 +10169,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10111,9 +10187,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10179,17 +10252,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10205,9 +10275,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10226,9 +10293,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10468,9 +10532,6 @@ paths:
                   oneOf:
                     - type: "object"
                       properties:
-                        enabled:
-                          type: "boolean"
-                          default: true
                         alert_on_failure:
                           type: "boolean"
                           default: false
@@ -10486,9 +10547,6 @@ paths:
                       title: "Boolean"
                     - type: "object"
                       properties:
-                        enabled:
-                          type: "boolean"
-                          default: true
                         alert_on_failure:
                           type: "boolean"
                           default: false
@@ -10507,9 +10565,6 @@ paths:
                       title: "Categorical"
                     - type: "object"
                       properties:
-                        enabled:
-                          type: "boolean"
-                          default: true
                         alert_on_failure:
                           type: "boolean"
                           default: false
@@ -10558,17 +10613,14 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           updated:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -10584,9 +10636,6 @@ paths:
                                 title: "Boolean"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -10605,9 +10654,6 @@ paths:
                                 title: "Categorical"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -10686,17 +10732,14 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           updated:
                             type: "string"
-                            default: "2026-06-01T14:43:54.503Z"
+                            default: "2026-06-02T01:28:13.013Z"
                           guardrail_config:
                             oneOf:
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -10712,9 +10755,6 @@ paths:
                                 title: "Boolean"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -10733,9 +10773,6 @@ paths:
                                 title: "Categorical"
                               - type: "object"
                                 properties:
-                                  enabled:
-                                    type: "boolean"
-                                    default: true
                                   alert_on_failure:
                                     type: "boolean"
                                     default: false
@@ -10909,17 +10946,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10935,9 +10969,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -10956,9 +10987,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11008,17 +11036,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11034,9 +11059,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11055,9 +11077,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11122,17 +11141,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11148,9 +11164,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11169,9 +11182,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11221,17 +11231,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11247,9 +11254,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11268,9 +11272,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11620,17 +11621,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11646,9 +11644,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11667,9 +11662,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11735,17 +11727,14 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       updated:
                         type: "string"
-                        default: "2026-06-01T14:43:54.503Z"
+                        default: "2026-06-02T01:28:13.013Z"
                       guardrail_config:
                         oneOf:
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11761,9 +11750,6 @@ paths:
                             title: "Boolean"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -11782,9 +11768,6 @@ paths:
                             title: "Categorical"
                           - type: "object"
                             properties:
-                              enabled:
-                                type: "boolean"
-                                default: true
                               alert_on_failure:
                                 type: "boolean"
                                 default: false
@@ -24883,7 +24866,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KT1T90J3Z3G4HNQK5HJVKXEF"
+                                          default: "01KT2Z4NT89N8Q8WFPR5T406T1"
                                         name:
                                           type: "string"
                                         description:
@@ -26524,7 +26507,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KT1T90KK80N02YY5SRWE59EA"
+                                          default: "01KT2Z4NVWX4FWQKQZ978SA186"
                                         name:
                                           type: "string"
                                         description:
@@ -34898,7 +34881,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KT1T90QRPH3JYQ3BB1AA2DZV"
+                              default: "tool_01KT2Z4P04F93A13D35RMSFMNN"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -34995,7 +34978,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KT1T90QT1WVH7PWG2EAJWY6K"
+                              default: "tool_01KT2Z4P06CD75KG6Y1ZS0R4Q2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35094,7 +35077,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KT1T90QW1E7WM6S1S5X0XCVB"
+                              default: "tool_01KT2Z4P08T3B67YXA5MY3PX5V"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35229,7 +35212,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KT1T90QZFQG3ZH058J9PVEPE"
+                              default: "tool_01KT2Z4P0B1388PG7A39WZ9C51"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35301,7 +35284,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KT1T90R1XPYPJA5E4GN34NHA"
+                                        default: "01KT2Z4P0CHAFQCKNBCT7K9NYT"
                                       name:
                                         type: "string"
                                       description:
@@ -35360,7 +35343,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KT1T90R2ZF5RWR3TBR2RQFGQ"
+                              default: "tool_01KT2Z4P0DVHY2HWC985N6CNVS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35911,7 +35894,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90RHP2B3X5Q851NTCP2G"
+                        default: "tool_01KT2Z4P0SCBJPMQH8QQS4VNN6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36008,7 +35991,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90RKKBRPQRW41EFENVEE"
+                        default: "tool_01KT2Z4P0W650XPWABSZSFJYWJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36107,7 +36090,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90RMXCB21SE2BHXWXATC"
+                        default: "tool_01KT2Z4P0X19EVTN9FJGD6Q1TB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36242,7 +36225,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90RQTDFS3PE6Y4ZM0ZXN"
+                        default: "tool_01KT2Z4P10KZ8QKY20A72E13NP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36314,7 +36297,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KT1T90RRGS13JGGFZJACDD77"
+                                  default: "01KT2Z4P11BF9N3GN04DPZGQMF"
                                 name:
                                   type: "string"
                                 description:
@@ -36373,7 +36356,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90RSKFJ3M71DEZM3C0FP"
+                        default: "tool_01KT2Z4P12JST3R5Q607MT1QSF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36830,7 +36813,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KT1T90SHB9PYKE7AQKWRK0EC"
+                                default: "01KT2Z4P1Z13SRE7ZW422382HZ"
                               name:
                                 type: "string"
                               description:
@@ -36976,7 +36959,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90S2A5PQ42Z97AAXY86K"
+                        default: "tool_01KT2Z4P1CBXK20086RYW1A49X"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37073,7 +37056,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90S3PZF2XWREZDP5EAWS"
+                        default: "tool_01KT2Z4P1F9181ECQ1C52SYRQF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37172,7 +37155,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90S5Y85BJMVEBW6T3RTR"
+                        default: "tool_01KT2Z4P1HH0098RGABN27FVHV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37307,7 +37290,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90S7J1ZY8W5622GCN2RE"
+                        default: "tool_01KT2Z4P1MGHVXRV6ATPYBXH2Y"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37379,7 +37362,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KT1T90S9T46NN90QVTHWSG01"
+                                  default: "01KT2Z4P1NPNDM5K27ZREJT950"
                                 name:
                                   type: "string"
                                 description:
@@ -37438,7 +37421,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90SAZRHKTHE46MQHXC4X"
+                        default: "tool_01KT2Z4P1P20TKGC6VRSYWT18H"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37595,7 +37578,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90SY5BKDKDW9FJ3W3JZS"
+                        default: "tool_01KT2Z4P2VHA9Y2JMYA8KQ2XVV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37692,7 +37675,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90SZ27S2A5TMPYS0JPN4"
+                        default: "tool_01KT2Z4P2X11XASM09AR0KWJTC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37791,7 +37774,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90T1AE75MN229275NW9G"
+                        default: "tool_01KT2Z4P30PCPKXZDYPQSK0K4D"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37926,7 +37909,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90T3DMHEYKX92ZK6P0H9"
+                        default: "tool_01KT2Z4P32N7BJFEQSF6C99NYA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37998,7 +37981,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KT1T90T5RM9WHC54MF7SV837"
+                                  default: "01KT2Z4P34M1P1BKCNF3NQ1166"
                                 name:
                                   type: "string"
                                 description:
@@ -38057,7 +38040,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KT1T90T6NE32S10AKSGER4EK"
+                        default: "tool_01KT2Z4P35XY7GQR4F8VMXPE0F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39654,6 +39637,7 @@ paths:
               properties:
                 query:
                   type: "string"
+                  minLength: 1
                   description: "The query to use to search the knowledge base"
                 top_k:
                   type: "integer"
@@ -40209,7 +40193,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KT1T90XAMN29NDXVN72JF8FV"
+                          default: "01KT2Z4P6AM4CHF8EN7EDA0FPY"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -40380,7 +40364,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KT1T90XW5K4GTJBTRQKKN9F6"
+                    default: "01KT2Z4P6ENTGDN15WMA741G44"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -40478,7 +40462,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KT1T90XC39T1CQ2V9E7Z207X"
+                    default: "01KT2Z4P6CZNSQHD8JHV9F4NYW"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -40600,6 +40584,7 @@ paths:
               properties:
                 display_name:
                   type: "string"
+                  minLength: 1
               required:
                 - "display_name"
       responses:
@@ -40614,7 +40599,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KT1T90XZDDQZY3HDVQS4H4RY"
+                    default: "01KT2Z4P6HTJE1W5KF3D9RRGRX"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -40853,14 +40838,26 @@ paths:
               - type: "array"
                 items:
                   type: "string"
+                  enum:
+                    - "pending"
+                    - "processing"
+                    - "completed"
+                    - "failed"
+                    - "queued"
                 example:
                   - "completed"
                   - "failed"
               - type: "string"
+                enum:
+                  - "pending"
+                  - "processing"
+                  - "completed"
+                  - "failed"
+                  - "queued"
                 example: "completed"
-            description: "Filter datasources by status."
+            description: "Filter chunks by status."
           required: false
-          description: "Filter datasources by status."
+          description: "Filter chunks by status."
           name: "status"
           in: "query"
       responses:
@@ -43214,7 +43211,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-01T14:43:52.578Z"
+                          default: "2026-06-02T01:28:11.212Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -43222,7 +43219,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:43:52.579Z"
+                              default: "2026-06-02T01:28:11.213Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43364,7 +43361,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-01T14:43:52.578Z"
+                    default: "2026-06-02T01:28:11.212Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43372,7 +43369,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-01T14:43:52.579Z"
+                        default: "2026-06-02T01:28:11.213Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -43509,7 +43506,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-01T14:43:52.578Z"
+                    default: "2026-06-02T01:28:11.212Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43517,7 +43514,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-01T14:43:52.579Z"
+                        default: "2026-06-02T01:28:11.213Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -43687,7 +43684,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-01T14:43:52.578Z"
+                    default: "2026-06-02T01:28:11.212Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43695,7 +43692,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-01T14:43:52.579Z"
+                        default: "2026-06-02T01:28:11.213Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44096,7 +44093,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-01T14:44:17.529Z"
+                                    default: "2026-06-02T01:28:32.777Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -44136,7 +44133,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-01T14:44:17.530Z"
+                                    default: "2026-06-02T01:28:32.778Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -44176,7 +44173,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-01T14:44:17.530Z"
+                                    default: "2026-06-02T01:28:32.779Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -44212,7 +44209,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-01T14:43:52.578Z"
+                          default: "2026-06-02T01:28:11.212Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -44220,7 +44217,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:43:52.579Z"
+                              default: "2026-06-02T01:28:11.213Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -44804,7 +44801,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-01T14:44:17.544Z"
+                                default: "2026-06-02T01:28:32.817Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -44844,7 +44841,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-01T14:44:17.545Z"
+                                default: "2026-06-02T01:28:32.818Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -44884,7 +44881,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-01T14:44:17.545Z"
+                                default: "2026-06-02T01:28:32.820Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -44920,7 +44917,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-06-01T14:43:52.578Z"
+                      default: "2026-06-02T01:28:11.212Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -44928,7 +44925,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-06-01T14:43:52.579Z"
+                          default: "2026-06-02T01:28:11.213Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -45260,7 +45257,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:44:17.536Z"
+                              default: "2026-06-02T01:28:32.791Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45300,7 +45297,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:44:17.537Z"
+                              default: "2026-06-02T01:28:32.792Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45340,7 +45337,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:44:17.537Z"
+                              default: "2026-06-02T01:28:32.793Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45376,7 +45373,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-01T14:43:52.578Z"
+                    default: "2026-06-02T01:28:11.212Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45384,7 +45381,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-01T14:43:52.579Z"
+                        default: "2026-06-02T01:28:11.213Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45967,7 +45964,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:44:17.566Z"
+                              default: "2026-06-02T01:28:32.860Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46007,7 +46004,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:44:17.566Z"
+                              default: "2026-06-02T01:28:32.861Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46047,7 +46044,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:44:17.567Z"
+                              default: "2026-06-02T01:28:32.862Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46083,7 +46080,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-01T14:43:52.578Z"
+                    default: "2026-06-02T01:28:11.212Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46091,7 +46088,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-01T14:43:52.579Z"
+                        default: "2026-06-02T01:28:11.213Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -48474,329 +48471,6 @@ paths:
                       - "code"
                 required:
                   - "error"
-      security:
-        - ApiKey: []
-  /v2/router/embeddings:
-    post:
-      operationId: "createEmbedding"
-      summary: "Create embeddings"
-      tags:
-        - "Embeddings"
-      x-speakeasy-group: "router.embeddings"
-      x-speakeasy-name-override: "create"
-      x-cli-group: "embeddings"
-      x-cli-name: "create"
-      x-speakeasy-ignore: false
-      x-orq-gateway-group: "true"
-      description: "Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms."
-      requestBody:
-        required: true
-        description: "input"
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                input:
-                  anyOf:
-                    - type: "string"
-                      minLength: 1
-                    - type: "array"
-                      items:
-                        type: "string"
-                        minLength: 1
-                      minItems: 1
-                  description: "Input text to embed, encoded as a string or array of tokens."
-                model:
-                  type: "string"
-                  description: "ID of the model to use"
-                encoding_format:
-                  type: "string"
-                  enum:
-                    - "base64"
-                    - "float"
-                  default: "float"
-                  description: "Type of the document element"
-                dimensions:
-                  type: "number"
-                  description: "The number of dimensions the resulting output embeddings should have."
-                user:
-                  type: "string"
-                  description: "A unique identifier representing your end-user"
-                name:
-                  type: "string"
-                  description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallbacks:
-                  type: "array"
-                  items:
-                    type: "object"
-                    properties:
-                      model:
-                        type: "string"
-                        description: "Fallback model identifier"
-                        example: "openai/text-embedding-3-small"
-                    required:
-                      - "model"
-                  description: "Array of fallback models to use if primary model fails"
-                retry:
-                  type: "object"
-                  properties:
-                    count:
-                      type: "number"
-                      minimum: 1
-                      maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
-                    on_codes:
-                      type: "array"
-                      items:
-                        type: "number"
-                        minimum: 100
-                        maximum: 599
-                      minItems: 1
-                      default:
-                        - 429
-                      description: "HTTP status codes that trigger retry logic"
-                      example:
-                        - 429
-                        - 500
-                        - 502
-                        - 503
-                        - 504
-                  description: "Retry configuration for the request"
-                cache:
-                  type: "object"
-                  properties:
-                    ttl:
-                      type: "number"
-                      minimum: 1
-                      maximum: 259200
-                      default: 1800
-                      description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
-                      example: 3600
-                    type:
-                      type: "string"
-                      enum:
-                        - "exact_match"
-                  required:
-                    - "type"
-                  description: "Cache configuration for the request."
-                load_balancer:
-                  oneOf:
-                    - type: "object"
-                      properties:
-                        type:
-                          type: "string"
-                          enum:
-                            - "weight_based"
-                        models:
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              model:
-                                type: "string"
-                                description: "Model identifier for load balancing"
-                                example: "openai/gpt-4o"
-                              weight:
-                                type: "number"
-                                minimum: 0.001
-                                maximum: 1
-                                default: 0.5
-                                description: "Weight assigned to this model for load balancing"
-                                example: 0.7
-                            required:
-                              - "model"
-                      required:
-                        - "type"
-                        - "models"
-                  description: "Load balancer configuration for the request."
-                timeout:
-                  type: "object"
-                  properties:
-                    call_timeout:
-                      type: "number"
-                      minimum: 1
-                      description: "Timeout value in milliseconds"
-                      example: 30000
-                  required:
-                    - "call_timeout"
-                  description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
-                orq:
-                  type: "object"
-                  properties:
-                    name:
-                      type: "string"
-                      description: "The name to display on the trace. If not specified, the default system name will be used."
-                    fallbacks:
-                      type: "array"
-                      items:
-                        type: "object"
-                        properties:
-                          model:
-                            type: "string"
-                            description: "Fallback model identifier"
-                            example: "openai/gpt-4o-mini"
-                        required:
-                          - "model"
-                      description: "Array of fallback models to use if primary model fails"
-                    cache:
-                      type: "object"
-                      properties:
-                        ttl:
-                          type: "number"
-                          minimum: 1
-                          maximum: 259200
-                          default: 1800
-                          description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
-                          example: 3600
-                        type:
-                          type: "string"
-                          enum:
-                            - "exact_match"
-                      required:
-                        - "type"
-                      description: "Cache configuration for the request."
-                    retry:
-                      type: "object"
-                      properties:
-                        count:
-                          type: "number"
-                          minimum: 1
-                          maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
-                        on_codes:
-                          type: "array"
-                          items:
-                            type: "number"
-                            minimum: 100
-                            maximum: 599
-                          minItems: 1
-                          default:
-                            - 429
-                          description: "HTTP status codes that trigger retry logic"
-                          example:
-                            - 429
-                            - 500
-                            - 502
-                            - 503
-                            - 504
-                      description: "Retry configuration for the request"
-                    identity:
-                      $ref: "#/components/schemas/PublicIdentity"
-                    contact:
-                      $ref: "#/components/schemas/PublicContact"
-                    load_balancer:
-                      oneOf:
-                        - type: "object"
-                          properties:
-                            type:
-                              type: "string"
-                              enum:
-                                - "weight_based"
-                            models:
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  model:
-                                    type: "string"
-                                    description: "Model identifier for load balancing"
-                                    example: "openai/gpt-4o"
-                                  weight:
-                                    type: "number"
-                                    minimum: 0.001
-                                    maximum: 1
-                                    default: 0.5
-                                    description: "Weight assigned to this model for load balancing"
-                                    example: 0.7
-                                required:
-                                  - "model"
-                          required:
-                            - "type"
-                            - "models"
-                      description: "Array of models with weights for load balancing requests"
-                      example:
-                        type: "weight_based"
-                        models:
-                          - model: "openai/gpt-4o"
-                            weight: 0.7
-                          - model: "anthropic/claude-3-5-sonnet"
-                            weight: 0.3
-                    timeout:
-                      type: "object"
-                      properties:
-                        call_timeout:
-                          type: "number"
-                          minimum: 1
-                          description: "Timeout value in milliseconds"
-                          example: 30000
-                      required:
-                        - "call_timeout"
-                      description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
-              required:
-                - "input"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the embedding vector."
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  object:
-                    type: "string"
-                    enum:
-                      - "list"
-                  data:
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        object:
-                          type: "string"
-                          enum:
-                            - "embedding"
-                          description: "The object type, which is always `embedding`."
-                        embedding:
-                          anyOf:
-                            - type: "array"
-                              items:
-                                type: "number"
-                            - type: "string"
-                          description: "The embedding vector, which is a list of floats. The length of vector depends on the model."
-                        index:
-                          type: "number"
-                          description: "The index of the embedding in the list of embeddings."
-                      required:
-                        - "object"
-                        - "embedding"
-                        - "index"
-                  model:
-                    type: "string"
-                    description: "ID of the model to used."
-                  usage:
-                    type: "object"
-                    properties:
-                      prompt_tokens:
-                        type: "number"
-                        description: "The number of tokens used by the prompt."
-                      total_tokens:
-                        type: "number"
-                        description: "The total number of tokens used by the request."
-                    required:
-                      - "prompt_tokens"
-                      - "total_tokens"
-                    description: "The usage information for the request."
-                required:
-                  - "object"
-                  - "data"
-                  - "model"
-                  - "usage"
       security:
         - ApiKey: []
   /v2/router/rerank:
@@ -52580,7 +52254,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-01T14:44:17.686Z"
+                      default: "2026-06-02T01:28:33.025Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52619,7 +52293,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-01T14:44:17.687Z"
+                      default: "2026-06-02T01:28:33.026Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52658,7 +52332,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-01T14:44:17.687Z"
+                      default: "2026-06-02T01:28:33.027Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52990,7 +52664,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-01T14:43:52.578Z"
+                          default: "2026-06-02T01:28:11.212Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52998,7 +52672,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:43:52.579Z"
+                              default: "2026-06-02T01:28:11.213Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53072,7 +52746,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-01T14:43:52.578Z"
+                          default: "2026-06-02T01:28:11.212Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53080,7 +52754,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-01T14:43:52.579Z"
+                              default: "2026-06-02T01:28:11.213Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53267,7 +52941,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-01T14:43:52.578Z"
+                        default: "2026-06-02T01:28:11.212Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53275,7 +52949,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-01T14:43:52.579Z"
+                            default: "2026-06-02T01:28:11.213Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53349,7 +53023,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-01T14:43:52.578Z"
+                        default: "2026-06-02T01:28:11.212Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53357,7 +53031,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-01T14:43:52.579Z"
+                            default: "2026-06-02T01:28:11.213Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53454,7 +53128,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-01T14:43:52.578Z"
+                        default: "2026-06-02T01:28:11.212Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53462,7 +53136,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-01T14:43:52.579Z"
+                            default: "2026-06-02T01:28:11.213Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53536,7 +53210,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-01T14:43:52.578Z"
+                        default: "2026-06-02T01:28:11.212Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53544,7 +53218,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-01T14:43:52.579Z"
+                            default: "2026-06-02T01:28:11.213Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53739,7 +53413,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-01T14:43:52.578Z"
+                        default: "2026-06-02T01:28:11.212Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53747,7 +53421,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-01T14:43:52.579Z"
+                            default: "2026-06-02T01:28:11.213Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53821,7 +53495,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-01T14:43:52.578Z"
+                        default: "2026-06-02T01:28:11.212Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53829,7 +53503,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-01T14:43:52.579Z"
+                            default: "2026-06-02T01:28:11.213Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -57438,8 +57112,8 @@ paths:
               $ref: "#/components/schemas/CreateIdentityRequest"
         required: true
       responses:
-        "200":
-          description: "OK"
+        "201":
+          description: "Identity created successfully."
           content:
             application/json:
               schema:
@@ -57832,6 +57506,137 @@ paths:
                 $ref: "#/components/schemas/CheckSkillDisplayNameAvailabilityResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-ignore: true
+      security:
+        - ApiKey: []
+  /v2/router/embeddings:
+    post:
+      description: "Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms."
+      operationId: "createEmbedding"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              array_of_strings:
+                summary: "Array of strings input"
+                value:
+                  input:
+                    - "The food was delicious"
+                    - "And the waiter was friendly"
+                  model: "openai/text-embedding-3-small"
+              single_string:
+                summary: "Single string input"
+                value:
+                  input: "The food was delicious and the waiter..."
+                  model: "openai/text-embedding-3-small"
+            schema:
+              additionalProperties: false
+              properties:
+                cache:
+                  $ref: "#/components/schemas/EmbeddingCacheConfig"
+                  description: "Cache configuration for the request."
+                dimensions:
+                  description: "The number of dimensions the resulting output embeddings should have."
+                  format: "int64"
+                  type: "integer"
+                encoding_format:
+                  description: "The format to return the embeddings in. Can be either float or base64."
+                  enum:
+                    - "float"
+                    - "base64"
+                  type: "string"
+                fallbacks:
+                  description: "Array of fallback models to use if primary model fails."
+                  items:
+                    $ref: "#/components/schemas/FallbackConfig"
+                  type:
+                    - "array"
+                    - "null"
+                input:
+                  anyOf:
+                    - description: "A single text string to embed. Must be non-empty."
+                      minLength: 1
+                      title: "String"
+                      type: "string"
+                    - description: "An array of strings or token arrays to embed. Must be non-empty."
+                      items:
+                        anyOf:
+                          - minLength: 1
+                            type: "string"
+                          - items:
+                              type: "integer"
+                            minItems: 1
+                            type: "array"
+                      minItems: 1
+                      title: "Array"
+                      type: "array"
+                  description: "Input text to embed, encoded as a string or array of tokens."
+                load_balancer:
+                  $ref: "#/components/schemas/EmbeddingLoadBalancerConfig"
+                  description: "Load balancer configuration for the request."
+                model:
+                  description: "ID of the model to use."
+                  type: "string"
+                name:
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                  type: "string"
+                orq:
+                  $ref: "#/components/schemas/EmbeddingOrqParams"
+                  description: "Orq platform extension parameters. Top-level equivalents take priority when both are set."
+                retry:
+                  $ref: "#/components/schemas/EmbeddingRetryConfig"
+                  description: "Retry configuration for the request."
+                timeout:
+                  $ref: "#/components/schemas/EmbeddingTimeoutConfig"
+                  description: "Timeout configuration to apply to the request."
+                user:
+                  description: "A unique identifier representing your end-user."
+                  type: "string"
+              required:
+                - "model"
+                - "input"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    description: "List of embedding objects."
+                    items:
+                      $ref: "#/components/schemas/PublicEmbeddingData"
+                    minItems: 0
+                    type:
+                      - "array"
+                      - "null"
+                  model:
+                    description: "ID of the model used."
+                    type: "string"
+                  object:
+                    description: "Always \"list\"."
+                    enum:
+                      - "list"
+                    type: "string"
+                  usage:
+                    $ref: "#/components/schemas/PublicEmbeddingUsage"
+                    description: "The usage information for the request."
+                required:
+                  - "object"
+                  - "data"
+                  - "model"
+                  - "usage"
+                type: "object"
+          description: "Returns the embedding vector."
+      summary: "Create embeddings"
+      tags:
+        - "Embeddings"
+      x-cli-group: "embeddings"
+      x-cli-name: "create"
+      x-orq-gateway-group: true
+      x-speakeasy-group: "router.embeddings"
+      x-speakeasy-name-override: "create"
       security:
         - ApiKey: []
   /v3/agents/{agent_key}/schedules:
@@ -59311,5 +59116,6 @@ tags:
   - name: "Responses"
   - description: "Run agents on a cadence — cron, interval, or one-off. Minimum firing interval is 1 hour."
     name: "Agent Schedules"
+  - name: "Embeddings"
   - name: "Reporting"
     description: "GenAI reporting API over canonical analytics rollups. Accepts a metric name, time range, grain, group-by, and filters; returns a typed time series and optional totals."
