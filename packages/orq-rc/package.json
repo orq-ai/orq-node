@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.10.0-rc.67",
+  "version": "4.10.0-rc.68",
   "author": "Orq",
   "exports": {
     ".": {
