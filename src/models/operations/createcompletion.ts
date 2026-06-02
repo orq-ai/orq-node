@@ -3243,8 +3243,9 @@ export const CreateCompletionRouterCompletionsResponseBody$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    data: z.string().optional().transform((v, ctx) => {
+    data: z.unknown().optional().transform((v, ctx) => {
       if (v === undefined) return undefined;
+      if (typeof v !== "string") return v;
       try {
         return JSON.parse(v);
       } catch (err) {

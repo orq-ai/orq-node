@@ -126,7 +126,7 @@ export const RetrieveDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-05-30T09:05:45.233Z",
+    "2026-06-02T06:47:23.998Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

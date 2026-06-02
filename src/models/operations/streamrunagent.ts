@@ -3675,7 +3675,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KSW243JAHKDGFT59VJ4BDGZ8"),
+  id: z.string().default("01KT3HCYXA943ZW07SHQJVTMT6"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -5084,7 +5084,8 @@ export const StreamRunAgentResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.string().transform((v, ctx) => {
+  data: z.unknown().transform((v, ctx) => {
+    if (typeof v !== "string") return v;
     try {
       return JSON.parse(v);
     } catch (err) {
