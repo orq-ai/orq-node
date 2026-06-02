@@ -4,11 +4,12 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { FilePurpose, FilePurpose$outboundSchema } from "./filepurpose.js";
 
 export type CreateFileRequest = {
   filename?: string | undefined;
   content?: string | undefined;
-  purpose?: number | undefined;
+  purpose?: FilePurpose | undefined;
   contentType?: string | undefined;
 };
 
@@ -16,7 +17,7 @@ export type CreateFileRequest = {
 export type CreateFileRequest$Outbound = {
   filename?: string | undefined;
   content?: string | undefined;
-  purpose?: number | undefined;
+  purpose?: string | undefined;
   content_type?: string | undefined;
 };
 
@@ -28,7 +29,7 @@ export const CreateFileRequest$outboundSchema: z.ZodType<
 > = z.object({
   filename: z.string().optional(),
   content: z.string().optional(),
-  purpose: z.number().int().optional(),
+  purpose: FilePurpose$outboundSchema.optional(),
   contentType: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

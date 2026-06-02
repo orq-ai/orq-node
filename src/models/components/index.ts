@@ -39,6 +39,7 @@ export * from "./fallbackconfig.js";
 export * from "./file.js";
 export * from "./filecontentpartschema.js";
 export * from "./filepart.js";
+export * from "./filepurpose.js";
 export * from "./getagentresponse.js";
 export * from "./getfilecontentresponse.js";
 export * from "./getfileresponse.js";

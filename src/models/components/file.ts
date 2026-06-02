@@ -7,10 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { FilePurpose, FilePurpose$inboundSchema } from "./filepurpose.js";
 
 export type FileT = {
   fileId?: string | undefined;
-  purpose?: number | undefined;
+  purpose?: FilePurpose | undefined;
   fileName?: string | undefined;
   workspaceId?: string | undefined;
   bytes?: string | undefined;
@@ -21,7 +22,7 @@ export type FileT = {
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
     file_id: z.string().optional(),
-    purpose: z.number().int().optional(),
+    purpose: FilePurpose$inboundSchema.optional(),
     file_name: z.string().optional(),
     workspace_id: z.string().optional(),
     bytes: z.string().optional(),
