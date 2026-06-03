@@ -9,6 +9,12 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const Sort = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+export type Sort = ClosedEnum<typeof Sort>;
+
 export type GetEvalsRequest = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
@@ -22,6 +28,8 @@ export type GetEvalsRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  search?: string | undefined;
+  sort?: Sort | undefined;
 };
 
 export const ObjectT = {
@@ -862,10 +870,17 @@ export type GetEvalsResponseBody = {
 };
 
 /** @internal */
+export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
+  Sort,
+);
+
+/** @internal */
 export type GetEvalsRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  search?: string | undefined;
+  sort?: string | undefined;
 };
 
 /** @internal */
@@ -877,6 +892,8 @@ export const GetEvalsRequest$outboundSchema: z.ZodType<
   limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  search: z.string().optional(),
+  sort: Sort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -1042,8 +1059,8 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -1222,8 +1239,8 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -2052,8 +2069,8 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
@@ -2234,8 +2251,8 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
@@ -2412,8 +2429,8 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2602,8 +2619,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2968,8 +2985,8 @@ export const GetEvalsLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3179,8 +3196,8 @@ export const GetEvalsLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-03T14:57:44.971Z"),
-  updated: z.string().default("2026-06-03T14:57:44.971Z"),
+  created: z.string().default("2026-06-03T19:59:15.847Z"),
+  updated: z.string().default("2026-06-03T19:59:15.847Z"),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
