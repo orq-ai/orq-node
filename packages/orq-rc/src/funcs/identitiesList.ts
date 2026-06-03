@@ -96,6 +96,7 @@ async function $do(
     "include_metrics": payload?.include_metrics,
     "limit": payload?.limit,
     "search": payload?.search,
+    "sort_by": payload?.sort_by,
     "starting_after": payload?.starting_after,
   });
 

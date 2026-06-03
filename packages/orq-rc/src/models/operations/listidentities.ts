@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import * as components from "../components/index.js";
 
 export type ListIdentitiesRequest = {
   limit?: number | undefined;
@@ -12,6 +13,7 @@ export type ListIdentitiesRequest = {
   search?: string | undefined;
   filterByTags?: Array<string> | undefined;
   includeMetrics?: boolean | undefined;
+  sortBy?: components.IdentitySortField | undefined;
 };
 
 /** @internal */
@@ -22,6 +24,7 @@ export type ListIdentitiesRequest$Outbound = {
   search?: string | undefined;
   "filter_by.tags"?: Array<string> | undefined;
   include_metrics?: boolean | undefined;
+  sort_by?: string | undefined;
 };
 
 /** @internal */
@@ -36,12 +39,14 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
   search: z.string().optional(),
   filterByTags: z.array(z.string()).optional(),
   includeMetrics: z.boolean().optional(),
+  sortBy: components.IdentitySortField$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
     filterByTags: "filter_by.tags",
     includeMetrics: "include_metrics",
+    sortBy: "sort_by",
   });
 });
 

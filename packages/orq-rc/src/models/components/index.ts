@@ -76,6 +76,7 @@ export * from "./guardrailref.js";
 export * from "./guardrailrule.js";
 export * from "./identity.js";
 export * from "./identitymetrics.js";
+export * from "./identitysortfield.js";
 export * from "./imagecontentpartschema.js";
 export * from "./incompletedetails.js";
 export * from "./inputtokensdetails.js";
