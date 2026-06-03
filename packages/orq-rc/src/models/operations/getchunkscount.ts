@@ -5,8 +5,24 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Filter chunks by processing status
+ */
+export const GetChunksCountStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * Filter chunks by processing status
+ */
+export type GetChunksCountStatus = ClosedEnum<typeof GetChunksCountStatus>;
 
 export type GetChunksCountRequestBody = {
   /**
@@ -20,7 +36,7 @@ export type GetChunksCountRequestBody = {
   /**
    * Filter chunks by processing status
    */
-  status?: string | undefined;
+  status?: GetChunksCountStatus | undefined;
 };
 
 export type GetChunksCountRequest = {
@@ -43,6 +59,11 @@ export type GetChunksCountResponseBody = {
 };
 
 /** @internal */
+export const GetChunksCountStatus$outboundSchema: z.ZodNativeEnum<
+  typeof GetChunksCountStatus
+> = z.nativeEnum(GetChunksCountStatus);
+
+/** @internal */
 export type GetChunksCountRequestBody$Outbound = {
   q: string;
   enabled?: boolean | undefined;
@@ -57,7 +78,7 @@ export const GetChunksCountRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   q: z.string().default(""),
   enabled: z.boolean().optional(),
-  status: z.string().optional(),
+  status: GetChunksCountStatus$outboundSchema.optional(),
 });
 
 export function getChunksCountRequestBodyToJSON(

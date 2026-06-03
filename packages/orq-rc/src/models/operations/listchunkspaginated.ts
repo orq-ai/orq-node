@@ -9,6 +9,21 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Filter chunks by processing status
+ */
+export const Status = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * Filter chunks by processing status
+ */
+export type Status = ClosedEnum<typeof Status>;
+
 export type ListChunksPaginatedRequestBody = {
   /**
    * Search query to find chunks by text content
@@ -21,7 +36,7 @@ export type ListChunksPaginatedRequestBody = {
   /**
    * Filter chunks by processing status
    */
-  status?: string | undefined;
+  status?: Status | undefined;
   limit?: number | undefined;
   page?: number | undefined;
 };
@@ -113,6 +128,10 @@ export type ListChunksPaginatedResponseBody = {
 };
 
 /** @internal */
+export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
+  .nativeEnum(Status);
+
+/** @internal */
 export type ListChunksPaginatedRequestBody$Outbound = {
   q: string;
   enabled?: boolean | undefined;
@@ -129,7 +148,7 @@ export const ListChunksPaginatedRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   q: z.string().default(""),
   enabled: z.boolean().optional(),
-  status: z.string().optional(),
+  status: Status$outboundSchema.optional(),
   limit: z.number().int().default(100),
   page: z.number().int().default(1),
 });

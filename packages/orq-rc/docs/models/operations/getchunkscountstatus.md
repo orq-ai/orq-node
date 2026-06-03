@@ -1,13 +1,13 @@
-# Status
+# GetChunksCountStatus
 
 Filter chunks by processing status
 
 ## Example Usage
 
 ```typescript
-import { Status } from "@orq-ai/node/models/operations";
+import { GetChunksCountStatus } from "@orq-ai/node/models/operations";
 
-let value: Status = "failed";
+let value: GetChunksCountStatus = "queued";
 ```
 
 ## Values
