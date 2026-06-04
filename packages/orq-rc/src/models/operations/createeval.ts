@@ -381,6 +381,7 @@ export type Typescript = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Boolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Categorical
@@ -465,6 +466,7 @@ export type Ragas = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyCategorical
@@ -705,6 +707,7 @@ export type CreateEvalResponseBodyFunction = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONCategorical
@@ -799,6 +802,7 @@ export type ResponseBodyPython = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponse200Boolean
     | CreateEvalGuardrailConfigEvalsResponse200Categorical
@@ -869,6 +873,7 @@ export type CreateEvalResponseBodyHTTP = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponseBoolean
     | CreateEvalGuardrailConfigEvalsResponseCategorical
@@ -932,6 +937,7 @@ export type Json = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsBoolean
     | CreateEvalGuardrailConfigEvalsCategorical
@@ -1047,6 +1053,7 @@ export type CreateEvalLlm2 = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Categorical
@@ -1124,6 +1131,7 @@ export type CreateEvalLlm1 = {
   description: string;
   created: string;
   updated: string;
+  updatedById?: string | null | undefined;
   guardrailConfig?:
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean
     | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical
@@ -2182,8 +2190,9 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-04T08:36:52.025Z"),
-  updated: z.string().default("2026-06-04T08:36:52.025Z"),
+  created: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -2203,6 +2212,7 @@ export const Typescript$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "updated_by_id": "updatedById",
     "guardrail_config": "guardrailConfig",
   });
 });
@@ -2371,8 +2381,9 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-06-04T08:36:52.025Z"),
-    updated: z.string().default("2026-06-04T08:36:52.025Z"),
+    created: z.string().default("2026-06-04T09:24:03.156Z"),
+    updated: z.string().default("2026-06-04T09:24:03.156Z"),
+    updated_by_id: z.nullable(z.string()).optional(),
     guardrail_config: z.nullable(
       z.union([
         z.lazy(() =>
@@ -2393,6 +2404,7 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   }).transform((v) => {
     return remap$(v, {
       "_id": "id",
+      "updated_by_id": "updatedById",
       "guardrail_config": "guardrailConfig",
       "ragas_metric": "ragasMetric",
     });
@@ -3195,8 +3207,9 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-04T08:36:52.025Z"),
-  updated: z.string().default("2026-06-04T08:36:52.025Z"),
+  created: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3249,6 +3262,7 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "updated_by_id": "updatedById",
     "guardrail_config": "guardrailConfig",
     "function_params": "functionParams",
   });
@@ -3413,8 +3427,9 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-04T08:36:52.025Z"),
-  updated: z.string().default("2026-06-04T08:36:52.025Z"),
+  created: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -3434,6 +3449,7 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "updated_by_id": "updatedById",
     "guardrail_config": "guardrailConfig",
   });
 });
@@ -3593,8 +3609,9 @@ export const CreateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-04T08:36:52.025Z"),
-  updated: z.string().default("2026-06-04T08:36:52.025Z"),
+  created: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -3613,6 +3630,7 @@ export const CreateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "updated_by_id": "updatedById",
     "guardrail_config": "guardrailConfig",
   });
 });
@@ -3751,8 +3769,9 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-06-04T08:36:52.025Z"),
-    updated: z.string().default("2026-06-04T08:36:52.025Z"),
+    created: z.string().default("2026-06-04T09:24:03.156Z"),
+    updated: z.string().default("2026-06-04T09:24:03.156Z"),
+    updated_by_id: z.nullable(z.string()).optional(),
     guardrail_config: z.nullable(
       z.union([
         z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$inboundSchema),
@@ -3766,6 +3785,7 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   }).transform((v) => {
     return remap$(v, {
       "_id": "id",
+      "updated_by_id": "updatedById",
       "guardrail_config": "guardrailConfig",
     });
   });
@@ -4120,8 +4140,9 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-04T08:36:52.025Z"),
-  updated: z.string().default("2026-06-04T08:36:52.025Z"),
+  created: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4149,6 +4170,7 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "updated_by_id": "updatedById",
     "guardrail_config": "guardrailConfig",
     "categorical_labels": "categoricalLabels",
     "dataset_id": "datasetId",
@@ -4338,8 +4360,9 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-04T08:36:52.025Z"),
-  updated: z.string().default("2026-06-04T08:36:52.025Z"),
+  created: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated: z.string().default("2026-06-04T09:24:03.156Z"),
+  updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
       z.lazy(() =>
@@ -4367,6 +4390,7 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "updated_by_id": "updatedById",
     "guardrail_config": "guardrailConfig",
     "categorical_labels": "categoricalLabels",
     "dataset_id": "datasetId",
