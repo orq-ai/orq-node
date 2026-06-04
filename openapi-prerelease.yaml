@@ -1047,7 +1047,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kta6y55zkmnpj5x11phdyanh"
+              default: "reasoning_01kta7v3rxraqw1v4bsxqwv0py"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -5451,6 +5451,10 @@ components:
         - "PERMISSION_MODE_RESTRICTED"
         - "PERMISSION_MODE_READ_ONLY"
     ListApiKeysResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
       type: "object"
       properties:
         object:
@@ -5465,6 +5469,8 @@ components:
           type: "boolean"
           description: "Whether more api-keys are available in the selected pagination\n direction."
     CreateApiKeyRequest:
+      required:
+        - "name"
       type: "object"
       properties:
         name:
@@ -5486,12 +5492,15 @@ components:
           additionalProperties:
             type: "integer"
             format: "enum"
-          description: "Per-domain access map. Required when `permission_mode` =\n `PERMISSION_MODE_RESTRICTED`. See `ApiKey.access` for the full\n catalog of valid keys (Domain.id) and AccessLevel string values,\n or fetch the live catalog via the `ListCapabilities` RPC."
+          description: "Per-domain access map. Required when `permission_mode` =\n `PERMISSION_MODE_RESTRICTED`. See `ApiKey.access` for the full\n catalog of valid keys (Domain.id) and AccessLevel string values,\n or fetch the live catalog via the capability catalog endpoint."
         expires_at:
           type: "string"
           description: "Optional expiration. When set, the authenticate hot-path rejects\n the key once `expires_at` is in the past. Unset means the key\n never expires."
           format: "date-time"
     CreateApiKeyResponse:
+      required:
+        - "api_key"
+        - "token"
       type: "object"
       properties:
         api_key:
@@ -5502,6 +5511,8 @@ components:
           type: "string"
           description: "Raw bearer token in the form `sk-orq-<api_key_id>-<secret>`.\n Returned ONCE; the API never exposes this value again. Clients\n must persist it immediately on receipt."
     ListCapabilitiesResponse:
+      required:
+        - "domains"
       type: "object"
       properties:
         domains:
@@ -5510,6 +5521,8 @@ components:
             $ref: "#/components/schemas/Domain"
           description: "Full capability catalog. Order is stable: workspace-admin first,\n then platform, then gateway."
     GetApiKeyResponse:
+      required:
+        - "api_key"
       type: "object"
       properties:
         api_key:
@@ -5520,11 +5533,9 @@ components:
       type: "object"
       properties: {}
     UpdateApiKeyRequest:
+      required: []
       type: "object"
       properties:
-        api_key_id:
-          type: "string"
-          description: "API key id to update."
         name:
           type: "string"
           description: "New name. Omit to keep current."
@@ -5539,7 +5550,7 @@ components:
           additionalProperties:
             type: "integer"
             format: "enum"
-          description: "Replacement access map. Required when changing to\n `PERMISSION_MODE_RESTRICTED`; ignored otherwise. Provide an empty\n map to clear. See `ApiKey.access` for the full catalog of valid\n keys (Domain.id) and AccessLevel string values, or fetch the\n live catalog via the `ListCapabilities` RPC."
+          description: "Replacement access map. Required when changing to\n `PERMISSION_MODE_RESTRICTED`; ignored otherwise. Provide an empty\n map to clear. See `ApiKey.access` for the full catalog of valid\n keys (Domain.id) and AccessLevel string values, or fetch the\n live catalog via the capability catalog endpoint."
         project_scope:
           allOf:
             - $ref: "#/components/schemas/ProjectScope"
@@ -5552,6 +5563,8 @@ components:
           type: "boolean"
           description: "Force-clear the expiration. Mutually exclusive with `expires_at`."
     UpdateApiKeyResponse:
+      required:
+        - "api_key"
       type: "object"
       properties:
         api_key:
@@ -5559,6 +5572,16 @@ components:
             - $ref: "#/components/schemas/ApiKey"
           description: "Updated api-key."
     ApiKey:
+      required:
+        - "api_key_id"
+        - "name"
+        - "owner"
+        - "project_scope"
+        - "permission_mode"
+        - "token_prefix"
+        - "status"
+        - "created_at"
+        - "updated_at"
       type: "object"
       properties:
         api_key_id:
@@ -5583,7 +5606,7 @@ components:
           additionalProperties:
             type: "integer"
             format: "enum"
-          description: "Per-domain access map. Only populated when `permission_mode` is\n `PERMISSION_MODE_RESTRICTED`. The authoritative list of valid\n keys and the per-domain read / write semantics are exposed at\n runtime via the `ListCapabilities` RPC.\n\n Valid keys are the Domain.id values in the capability catalog —\n see libs/catalog/orq/apikeys/v1/catalog.textpb for the canonical\n list. The ids are intentionally not duplicated here to avoid drift.\n\n Values are AccessLevel enum names on the JSON wire:\n   \"ACCESS_LEVEL_NONE\"  — capability not granted\n   \"ACCESS_LEVEL_READ\"  — list / view verbs\n   \"ACCESS_LEVEL_WRITE\" — list / view + mutating / execute verbs"
+          description: "Per-domain access map. Only populated when `permission_mode` is\n `PERMISSION_MODE_RESTRICTED`. The authoritative list of valid\n keys and the per-domain read / write semantics are exposed at\n runtime via the capability catalog endpoint.\n\n Valid keys are the Domain.id values in the capability catalog —\n see libs/catalog/orq/apikeys/v1/catalog.textpb for the canonical\n list. The ids are intentionally not duplicated here to avoid drift.\n\n Values are AccessLevel enum names on the JSON wire:\n   \"ACCESS_LEVEL_NONE\"  — capability not granted\n   \"ACCESS_LEVEL_READ\"  — list / view verbs\n   \"ACCESS_LEVEL_WRITE\" — list / view + mutating / execute verbs"
         token_prefix:
           type: "string"
           description: "Displayable prefix for UI listings (e.g. \"sk-orq-01HXY...\"). Safe\n to expose."
@@ -5669,10 +5692,13 @@ components:
         - "LEGACY_TOKEN_FAMILY_PROJECT_JWT"
         - "LEGACY_TOKEN_FAMILY_WORKSPACE_JWT"
     UserOwner:
+      required:
+        - "user_id"
       type: "object"
       properties:
         user_id:
           type: "string"
+          description: "User ID that owns the API key."
     ServiceAccountOwner:
       type: "object"
       properties: {}
@@ -5680,11 +5706,16 @@ components:
       type: "object"
       properties: {}
     SingleProject:
+      required:
+        - "project_id"
       type: "object"
       properties:
         project_id:
           type: "string"
+          description: "Project ID this API key is scoped to."
     SearchDocumentationRequest:
+      required:
+        - "query"
       type: "object"
       properties:
         query:
@@ -5699,6 +5730,8 @@ components:
           description: "Minimum relevance score (0-1). Defaults to 0.6."
           format: "double"
     SearchDocumentationResponse:
+      required:
+        - "results"
       type: "object"
       properties:
         results:
@@ -5707,6 +5740,10 @@ components:
             $ref: "#/components/schemas/DocumentationSearchResult"
           description: "Documentation pages matching the query, ordered by relevance."
     DocumentationSearchResult:
+      required:
+        - "content"
+        - "path"
+        - "metadata"
       type: "object"
       properties:
         content:
@@ -5720,6 +5757,10 @@ components:
             - $ref: "#/components/schemas/DocumentationSearchResultMetadata"
           description: "Display metadata for rendering the result."
     DocumentationSearchResultMetadata:
+      required:
+        - "title"
+        - "description"
+        - "href"
       type: "object"
       properties:
         title:
@@ -5735,74 +5776,116 @@ components:
           type: "string"
           description: "Optional icon identifier for the page."
     ListFilesResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
       type: "object"
       properties:
         object:
           type: "string"
+          description: "Object discriminator for list responses; always `list`."
         data:
           type: "array"
           items:
             $ref: "#/components/schemas/File"
+          description: "Page of files."
         has_more:
           type: "boolean"
+          description: "Whether more files are available in the selected pagination direction."
     CreateFileRequest:
+      required:
+        - "filename"
+        - "content"
       type: "object"
       properties:
         filename:
           type: "string"
+          description: "Name to store for the uploaded file, including extension when available."
         content:
           type: "string"
+          description: "Base64-encoded file contents."
           format: "bytes"
         purpose:
+          description: "Intended usage category for the uploaded file. Defaults to retrieval\n when omitted."
           $ref: "#/components/schemas/FilePurpose"
         content_type:
           type: "string"
+          description: "MIME type of the uploaded content, for example `application/pdf`."
         project_id:
           type: "string"
           description: "Project the file is created in. Optional for project-scoped API keys (defaults to the key's bound project); required for workspace-scoped callers."
     CreateFileResponse:
+      required:
+        - "file"
       type: "object"
       properties:
         file:
-          $ref: "#/components/schemas/File"
+          allOf:
+            - $ref: "#/components/schemas/File"
+          description: "Newly created file."
     GetFileContentResponse:
+      required:
+        - "download_url"
       type: "object"
       properties:
         download_url:
           type: "string"
+          description: "Presigned URL that can be used to download the file content."
     GetFileResponse:
+      required:
+        - "file"
       type: "object"
       properties:
         file:
-          $ref: "#/components/schemas/File"
+          allOf:
+            - $ref: "#/components/schemas/File"
+          description: "Requested file metadata."
     DeleteFileResponse:
       type: "object"
       properties: {}
     UpdateFileRequest:
+      required:
+        - "file_name"
       type: "object"
       properties:
-        file_id:
-          type: "string"
         file_name:
           type: "string"
+          description: "New display file name, including extension when available."
     UpdateFileResponse:
+      required:
+        - "file"
       type: "object"
       properties:
         file:
-          $ref: "#/components/schemas/File"
+          allOf:
+            - $ref: "#/components/schemas/File"
+          description: "Updated file metadata."
     File:
+      required:
+        - "file_id"
+        - "purpose"
+        - "file_name"
+        - "bytes"
+        - "created_at"
+        - "project_id"
       type: "object"
       properties:
         file_id:
           type: "string"
+          description: "Unique file identifier assigned by ORQ."
         purpose:
+          description: "Declared usage category for the file."
           $ref: "#/components/schemas/FilePurpose"
         file_name:
           type: "string"
+          description: "Display file name, including extension when available."
         bytes:
           type: "string"
+          description: "Size of the uploaded file in bytes."
         created_at:
           type: "string"
+          description: "Time when the file was created."
           format: "date-time"
         project_id:
           type: "string"
@@ -5821,111 +5904,173 @@ components:
         - "IDENTITY_SORT_FIELD_DISPLAY_NAME"
         - "IDENTITY_SORT_FIELD_UPDATED"
     ListIdentitiesResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
       type: "object"
       properties:
         object:
           type: "string"
+          description: "Object discriminator for list responses; always `list`."
         data:
           type: "array"
           items:
             $ref: "#/components/schemas/Identity"
+          description: "Page of identities."
         has_more:
           type: "boolean"
+          description: "Whether more identities are available in the selected pagination\n direction."
     CreateIdentityRequest:
+      required:
+        - "external_id"
       type: "object"
       properties:
         external_id:
           type: "string"
+          description: "Customer-provided stable identifier for this identity. Must be unique\n within the workspace."
         display_name:
           type: "string"
+          description: "Human-readable display name for the identity."
         email:
           type: "string"
+          description: "Email address associated with the identity."
         avatar_url:
           type: "string"
+          description: "URL of the identity avatar image."
         tags:
           type: "array"
           items:
             type: "string"
+          description: "Free-form labels used to organize and filter identities."
         metadata:
           type: "object"
+          description: "Custom JSON metadata stored with the identity."
     CreateIdentityResponse:
+      required:
+        - "identity"
       type: "object"
       properties:
         identity:
-          $ref: "#/components/schemas/Identity"
+          allOf:
+            - $ref: "#/components/schemas/Identity"
+          description: "Newly created identity."
     RetrieveIdentityResponse:
+      required:
+        - "identity"
       type: "object"
       properties:
         identity:
-          $ref: "#/components/schemas/Identity"
+          allOf:
+            - $ref: "#/components/schemas/Identity"
+          description: "Requested identity."
     DeleteIdentityResponse:
       type: "object"
       properties: {}
     UpdateIdentityRequest:
+      required: []
       type: "object"
       properties:
-        id:
-          type: "string"
         display_name:
           type: "string"
+          description: "New display name. Omit to keep the current display name."
         email:
           type: "string"
+          description: "New email address. Omit to keep the current email."
         avatar_url:
           type: "string"
+          description: "New avatar image URL. Omit to keep the current avatar URL."
         tags:
           type: "array"
           items:
             type: "string"
+          description: "Replacement tag list. Leave empty to clear tags."
         metadata:
           type: "object"
+          description: "Replacement custom JSON metadata."
     UpdateIdentityResponse:
+      required:
+        - "identity"
       type: "object"
       properties:
         identity:
-          $ref: "#/components/schemas/Identity"
+          allOf:
+            - $ref: "#/components/schemas/Identity"
+          description: "Updated identity."
     Identity:
+      required:
+        - "_id"
+        - "external_id"
+        - "workspace_id"
+        - "created"
+        - "updated"
       type: "object"
       properties:
         _id:
           type: "string"
+          description: "Unique identity identifier assigned by ORQ. Returned as `_id` for\n compatibility with the v1 identity API."
         external_id:
           type: "string"
+          description: "Customer-provided stable identifier for this identity. This value is\n required on create and is unique within the workspace."
         workspace_id:
           type: "string"
+          description: "Workspace that owns the identity."
         display_name:
           type: "string"
+          description: "Human-readable display name for the identity."
         email:
           type: "string"
+          description: "Email address associated with the identity."
         avatar_url:
           type: "string"
+          description: "URL of the identity avatar image."
         tags:
           type: "array"
           items:
             type: "string"
+          description: "Free-form labels used to organize and filter identities."
         metadata:
           type: "object"
+          description: "Custom JSON metadata stored with the identity."
         created:
           type: "string"
+          description: "ISO timestamp for when the identity was created."
         updated:
           type: "string"
+          description: "ISO timestamp for when the identity was last updated."
         metrics:
-          $ref: "#/components/schemas/IdentityMetrics"
+          allOf:
+            - $ref: "#/components/schemas/IdentityMetrics"
+          description: "Optional usage and cost metrics. Present only when requested with\n `include_metrics`."
     IdentityMetrics:
+      required:
+        - "total_tokens"
+        - "total_cost"
+        - "total_requests"
+        - "error_rate"
       type: "object"
       properties:
         total_tokens:
           type: "number"
+          description: "Total token count attributed to the identity."
           format: "double"
         total_cost:
           type: "number"
+          description: "Total cost attributed to the identity."
           format: "double"
         total_requests:
           type: "number"
+          description: "Total request count attributed to the identity."
           format: "double"
         error_rate:
           type: "number"
+          description: "Fraction of attributed requests that failed."
           format: "double"
     ListProjectsResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
       type: "object"
       properties:
         object:
@@ -5940,6 +6085,8 @@ components:
           type: "boolean"
           description: "Whether more projects are available in the selected pagination\n direction."
     CreateProjectRequest:
+      required:
+        - "name"
       type: "object"
       properties:
         name:
@@ -5954,6 +6101,8 @@ components:
           type: "string"
           description: "Optional human-readable description, at most 500 characters."
     CreateProjectResponse:
+      required:
+        - "project"
       type: "object"
       properties:
         project:
@@ -5961,6 +6110,8 @@ components:
             - $ref: "#/components/schemas/Project"
           description: "Newly created project."
     GetProjectResponse:
+      required:
+        - "project"
       type: "object"
       properties:
         project:
@@ -5971,11 +6122,9 @@ components:
       type: "object"
       properties: {}
     UpdateProjectRequest:
+      required: []
       type: "object"
       properties:
-        project_id:
-          type: "string"
-          description: "Project ID to update."
         name:
           type: "string"
           description: "New project name. Omit to keep the current name."
@@ -5988,6 +6137,8 @@ components:
           type: "string"
           description: "New project description. Omit to keep the current description."
     UpdateProjectResponse:
+      required:
+        - "project"
       type: "object"
       properties:
         project:
@@ -5995,6 +6146,15 @@ components:
             - $ref: "#/components/schemas/Project"
           description: "Updated project."
     Project:
+      required:
+        - "project_id"
+        - "name"
+        - "key"
+        - "is_archived"
+        - "is_default"
+        - "teams"
+        - "created_at"
+        - "updated_at"
       type: "object"
       properties:
         project_id:
@@ -6035,6 +6195,10 @@ components:
           type: "string"
           description: "Optional human-readable description of the project."
     ListSkillsResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
       type: "object"
       properties:
         object:
@@ -6049,6 +6213,8 @@ components:
           type: "boolean"
           description: "Whether more skills are available in the selected pagination\n direction."
     CreateSkillRequest:
+      required:
+        - "display_name"
       type: "object"
       properties:
         display_name:
@@ -6072,6 +6238,8 @@ components:
           type: "string"
           description: "Instruction body for the skill. Omit to create metadata first and fill instructions later."
     CreateSkillResponse:
+      required:
+        - "skill"
       type: "object"
       properties:
         skill:
@@ -6079,6 +6247,8 @@ components:
             - $ref: "#/components/schemas/Skill"
           description: "Newly created skill."
     GetSkillResponse:
+      required:
+        - "skill"
       type: "object"
       properties:
         skill:
@@ -6089,11 +6259,9 @@ components:
       type: "object"
       properties: {}
     UpdateSkillRequest:
+      required: []
       type: "object"
       properties:
-        skill_id:
-          type: "string"
-          description: "Skill ID to update."
         display_name:
           type: "string"
           description: "New workspace-unique display name. Omit to keep the current name.\n Must start with a letter and may contain letters, numbers, and\n underscores. Dashes and dots are not allowed because skill names\n are referenced as template variables."
@@ -6115,6 +6283,8 @@ components:
           type: "string"
           description: "New containing project. Omit to keep the current project."
     UpdateSkillResponse:
+      required:
+        - "skill"
       type: "object"
       properties:
         skill:
@@ -6122,6 +6292,8 @@ components:
             - $ref: "#/components/schemas/Skill"
           description: "Updated skill."
     CheckSkillDisplayNameAvailabilityRequest:
+      required:
+        - "display_name"
       type: "object"
       properties:
         display_name:
@@ -6131,6 +6303,8 @@ components:
           type: "string"
           description: "Skill to exclude from the check. Set when renaming so the skill's\n current name does not conflict with itself; leave empty when creating."
     CheckSkillDisplayNameAvailabilityResponse:
+      required:
+        - "available"
       type: "object"
       properties:
         available:
@@ -6140,6 +6314,19 @@ components:
           type: "string"
           description: "ID of the skill currently using this display name. Empty when\n `available` is true."
     Skill:
+      required:
+        - "skill_id"
+        - "display_name"
+        - "description"
+        - "tags"
+        - "project_id"
+        - "path"
+        - "created_at"
+        - "updated_at"
+        - "created_by_id"
+        - "updated_by_id"
+        - "instructions"
+        - "version"
       type: "object"
       properties:
         skill_id:
@@ -6147,7 +6334,7 @@ components:
           description: "Unique skill identifier assigned by ORQ, for example\n `skill_01H...`. Use this value in retrieve, update, and delete\n requests."
         display_name:
           type: "string"
-          description: "Workspace-unique display name. Must start with a letter and may contain letters, numbers, underscores, and hyphens."
+          description: "Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed."
         description:
           type: "string"
           description: "Short human-readable summary of what the skill is for."
@@ -7479,10 +7666,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-04T20:59:01.562Z"
+                                  default: "2026-06-04T21:14:55.227Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-04T20:59:01.562Z"
+                                  default: "2026-06-04T21:14:55.227Z"
                                 updated_by_id:
                                   type:
                                     - "string"
@@ -7611,10 +7798,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-04T20:59:01.562Z"
+                                  default: "2026-06-04T21:14:55.227Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-04T20:59:01.562Z"
+                                  default: "2026-06-04T21:14:55.227Z"
                                 updated_by_id:
                                   type:
                                     - "string"
@@ -7838,10 +8025,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -7941,10 +8128,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8059,10 +8246,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8162,10 +8349,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8565,10 +8752,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8684,10 +8871,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated:
                               type: "string"
-                              default: "2026-06-04T20:59:01.562Z"
+                              default: "2026-06-04T21:14:55.227Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -9288,10 +9475,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -9420,10 +9607,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -9647,10 +9834,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -9750,10 +9937,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -9868,10 +10055,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -9971,10 +10158,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10374,10 +10561,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10493,10 +10680,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10876,10 +11063,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -11008,10 +11195,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated:
                             type: "string"
-                            default: "2026-06-04T20:59:01.562Z"
+                            default: "2026-06-04T21:14:55.227Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -11235,10 +11422,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11338,10 +11525,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11456,10 +11643,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11559,10 +11746,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11962,10 +12149,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -12081,10 +12268,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated:
                         type: "string"
-                        default: "2026-06-04T20:59:01.562Z"
+                        default: "2026-06-04T21:14:55.227Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -25205,7 +25392,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KTA6Y59Z02H1YWAT2B5E13H9"
+                                          default: "01KTA7V3XNTES2FR7MYM76M7MS"
                                         name:
                                           type: "string"
                                         description:
@@ -26842,7 +27029,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KTA6Y5B8Q3S1376MXKMG082E"
+                                          default: "01KTA7V3Z414TVCEBAAPD906CM"
                                         name:
                                           type: "string"
                                         description:
@@ -35200,7 +35387,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTA6Y5ETJC99VZWP9KMT7ZHN"
+                              default: "tool_01KTA7V42YT1NTZQFV960NK98S"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35297,7 +35484,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTA6Y5EWY3T9R5E55FQZ71BR"
+                              default: "tool_01KTA7V42ZJ7ZSHGF9NCQ54JHP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35396,7 +35583,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTA6Y5EX9ZRABDBTWHCWK5AK"
+                              default: "tool_01KTA7V431CVAPKAZ52DVS78DB"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35531,7 +35718,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTA6Y5EZK6332E2E5T5WNBT8"
+                              default: "tool_01KTA7V4331PY4H89VZ51CZ6YM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -35603,7 +35790,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KTA6Y5F162Y980GBXHDTKXWN"
+                                        default: "01KTA7V435G5SKDH8EAVK1BNNN"
                                       name:
                                         type: "string"
                                       description:
@@ -35662,7 +35849,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTA6Y5F2P3R624TME7PKXWTQ"
+                              default: "tool_01KTA7V436CE0MTSPF17QXPBV7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36213,7 +36400,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FD662M6QFE11GYASJN"
+                        default: "tool_01KTA7V43JBZDA0PHBM9GRSREG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36310,7 +36497,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FEH1XX1403JXK1NNTM"
+                        default: "tool_01KTA7V43KNZAWD1MA569EE58A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36409,7 +36596,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FGEJ1289S71A2GSHQ4"
+                        default: "tool_01KTA7V43NBX41BVBYJF2CBX7M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36544,7 +36731,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FJS8KQB02PX821EB86"
+                        default: "tool_01KTA7V43Q71SVXYADQPHPAY18"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36616,7 +36803,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KTA6Y5FKCBYRQ0SWJP2AGF3F"
+                                  default: "01KTA7V43R6JJ292QFR1022XGH"
                                 name:
                                   type: "string"
                                 description:
@@ -36675,7 +36862,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FM9CP8V6BA77CN4D6T"
+                        default: "tool_01KTA7V43SSA21MS08SSNB5658"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37132,7 +37319,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KTA6Y5G8PMNP1CWTY4Y7V0BA"
+                                default: "01KTA7V44G7NRNDRKX69AZFZPA"
                               name:
                                 type: "string"
                               description:
@@ -37278,7 +37465,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FVAKYXSGHP6AVWPCRH"
+                        default: "tool_01KTA7V4417GT8R9RDGVFKEX5N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37375,7 +37562,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FXW5ZEB0W9V23FM79F"
+                        default: "tool_01KTA7V443DJ9244WKSKHJ3KNM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37474,7 +37661,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5FYYP58PHTTJYRXJB2B"
+                        default: "tool_01KTA7V4453K7DDAM066WSW4KZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37609,7 +37796,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5G02G3FNRFGXKH5T3XW"
+                        default: "tool_01KTA7V447YP3DC584CBPM77JJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37681,7 +37868,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KTA6Y5G12QZ4WKC5JRZNGV97"
+                                  default: "01KTA7V448K6B9M98XRQ4QFFAD"
                                 name:
                                   type: "string"
                                 description:
@@ -37740,7 +37927,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5G2FWKZQAF7TSWXB313"
+                        default: "tool_01KTA7V449BV1JBJ0W4QAQS8DK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37897,7 +38084,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5GMWS9K90PM985Y9T6G"
+                        default: "tool_01KTA7V44X8C6BXK4FJ5FP8NJC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37994,7 +38181,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5GP4JV6RCTY2YT93XVW"
+                        default: "tool_01KTA7V44YCYTKT6XA9WNM1D6G"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38093,7 +38280,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5GQS4N5PC2T7WDMTE3S"
+                        default: "tool_01KTA7V450Y04KYVP9C1A2KSQ0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38228,7 +38415,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5GS7YMRHNWAD8075JSA"
+                        default: "tool_01KTA7V452JMFV4KV25J7XZDT6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38300,7 +38487,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KTA6Y5GT7M56GPHTRA5G13V2"
+                                  default: "01KTA7V453453BAXSN7AQPS8W0"
                                 name:
                                   type: "string"
                                 description:
@@ -38359,7 +38546,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTA6Y5GVYTS1RT6TNJG1ZCCD"
+                        default: "tool_01KTA7V454Z852QG46SKY3N4NJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40512,7 +40699,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KTA6Y5KQKWEX6Z05DG989MQH"
+                          default: "01KTA7V488W27WCC4XQN514RWR"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -40683,7 +40870,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KTA6Y5KTJPV350V3S28N5ZCJ"
+                    default: "01KTA7V48B1EH2T8ZW42CEZQ8G"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -40781,7 +40968,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KTA6Y5KS0XBX5DM45NBT6W1K"
+                    default: "01KTA7V48A8T2F9NWVWSZ44K3N"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -40918,7 +41105,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KTA6Y5KWZJ1YJK9WF7C48ASY"
+                    default: "01KTA7V48E90ETVTDX3GQC2J1B"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -43576,7 +43763,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-04T20:58:59.272Z"
+                          default: "2026-06-04T21:14:53.954Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -43584,7 +43771,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:58:59.272Z"
+                              default: "2026-06-04T21:14:53.954Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43728,7 +43915,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-04T20:58:59.272Z"
+                    default: "2026-06-04T21:14:53.954Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43736,7 +43923,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -43875,7 +44062,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-04T20:58:59.272Z"
+                    default: "2026-06-04T21:14:53.954Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43883,7 +44070,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44055,7 +44242,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-04T20:58:59.272Z"
+                    default: "2026-06-04T21:14:53.954Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44063,7 +44250,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44464,7 +44651,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-04T20:59:28.813Z"
+                                    default: "2026-06-04T21:15:17.705Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -44504,7 +44691,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-04T20:59:28.813Z"
+                                    default: "2026-06-04T21:15:17.706Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -44544,7 +44731,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-04T20:59:28.814Z"
+                                    default: "2026-06-04T21:15:17.707Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -44584,7 +44771,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-04T20:58:59.272Z"
+                          default: "2026-06-04T21:14:53.954Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -44592,7 +44779,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:58:59.272Z"
+                              default: "2026-06-04T21:14:53.954Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -45176,7 +45363,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-04T20:59:28.828Z"
+                                default: "2026-06-04T21:15:17.721Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -45216,7 +45403,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-04T20:59:28.828Z"
+                                default: "2026-06-04T21:15:17.722Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -45256,7 +45443,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-04T20:59:28.829Z"
+                                default: "2026-06-04T21:15:17.722Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -45296,7 +45483,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-06-04T20:58:59.272Z"
+                      default: "2026-06-04T21:14:53.954Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -45304,7 +45491,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-06-04T20:58:59.272Z"
+                          default: "2026-06-04T21:14:53.954Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -45636,7 +45823,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:59:28.820Z"
+                              default: "2026-06-04T21:15:17.714Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45676,7 +45863,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:59:28.820Z"
+                              default: "2026-06-04T21:15:17.714Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45716,7 +45903,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:59:28.821Z"
+                              default: "2026-06-04T21:15:17.715Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -45756,7 +45943,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-04T20:58:59.272Z"
+                    default: "2026-06-04T21:14:53.954Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45764,7 +45951,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46347,7 +46534,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:59:28.847Z"
+                              default: "2026-06-04T21:15:17.743Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46387,7 +46574,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:59:28.848Z"
+                              default: "2026-06-04T21:15:17.744Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46427,7 +46614,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:59:28.848Z"
+                              default: "2026-06-04T21:15:17.744Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46467,7 +46654,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-04T20:58:59.272Z"
+                    default: "2026-06-04T21:14:53.954Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46475,7 +46662,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -52605,7 +52792,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-04T20:59:28.952Z"
+                      default: "2026-06-04T21:15:17.855Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52644,7 +52831,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-04T20:59:28.952Z"
+                      default: "2026-06-04T21:15:17.855Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -52683,7 +52870,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-04T20:59:28.953Z"
+                      default: "2026-06-04T21:15:17.856Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -53015,7 +53202,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-04T20:58:59.272Z"
+                          default: "2026-06-04T21:14:53.954Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53023,7 +53210,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:58:59.272Z"
+                              default: "2026-06-04T21:14:53.954Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53097,7 +53284,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-04T20:58:59.272Z"
+                          default: "2026-06-04T21:14:53.954Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53105,7 +53292,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-04T20:58:59.272Z"
+                              default: "2026-06-04T21:14:53.954Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53292,7 +53479,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53300,7 +53487,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-04T20:58:59.272Z"
+                            default: "2026-06-04T21:14:53.954Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53374,7 +53561,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53382,7 +53569,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-04T20:58:59.272Z"
+                            default: "2026-06-04T21:14:53.954Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53479,7 +53666,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53487,7 +53674,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-04T20:58:59.272Z"
+                            default: "2026-06-04T21:14:53.954Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53561,7 +53748,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53569,7 +53756,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-04T20:58:59.272Z"
+                            default: "2026-06-04T21:14:53.954Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53764,7 +53951,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53772,7 +53959,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-04T20:58:59.272Z"
+                            default: "2026-06-04T21:14:53.954Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53846,7 +54033,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-04T20:58:59.272Z"
+                        default: "2026-06-04T21:14:53.954Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53854,7 +54041,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-04T20:58:59.272Z"
+                            default: "2026-06-04T21:14:53.954Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -57094,6 +57281,16 @@ paths:
                 $ref: "#/components/schemas/ListApiKeysResponse"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List active project keys"
+          source: "curl --get 'https://api.orq.ai/v2/api-keys' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25' \\\n  --data-urlencode 'project_id=proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --data-urlencode 'status=API_KEY_STATUS_ACTIVE'\n"
+        - lang: "python"
+          label: "Python - List active project keys"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.api_keys.list(\n    limit=25,\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    status=\"API_KEY_STATUS_ACTIVE\",\n)\n\nfor api_key in page.data:\n    print(api_key.name, api_key.token_prefix)\n"
+        - lang: "typescript"
+          label: "Node.js - List active project keys"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.apiKeys.list({\n  limit: 25,\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'API_KEY_STATUS_ACTIVE',\n});\n\nfor (const apiKey of page.data) {\n  console.log(apiKey.name, apiKey.tokenPrefix);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -57117,6 +57314,25 @@ paths:
                 $ref: "#/components/schemas/CreateApiKeyResponse"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create service account key"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/api-keys' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Production service key\",\n    \"owner\": {\n      \"service_account\": {}\n    },\n    \"project_scope\": {\n      \"all\": {}\n    },\n    \"permission_mode\": \"PERMISSION_MODE_ALL\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Create service account key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Production service key\",\n    owner={\"service_account\": {}},\n    project_scope={\"all\": {}},\n    permission_mode=\"PERMISSION_MODE_ALL\",\n)\n\n# Store the token immediately. It is only returned once.\nprint(result.token)\n"
+        - lang: "typescript"
+          label: "Node.js - Create service account key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Production service key',\n  owner: {\n    serviceAccount: {},\n  },\n  projectScope: {\n    all: {},\n  },\n  permissionMode: 'PERMISSION_MODE_ALL',\n});\n\n// Store the token immediately. It is only returned once.\nconsole.log(result.token);\n"
+        - lang: "curl"
+          label: "Core - Create restricted project key"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/api-keys' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Support automation key\",\n    \"project_scope\": {\n      \"single\": {\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n      }\n    },\n    \"permission_mode\": \"PERMISSION_MODE_RESTRICTED\",\n    \"access\": {\n      \"agents\": \"ACCESS_LEVEL_WRITE\",\n      \"deployments\": \"ACCESS_LEVEL_READ\"\n    }\n  }'\n"
+        - lang: "python"
+          label: "Python - Create restricted project key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Support automation key\",\n    project_scope={\n        \"single\": {\n            \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n        },\n    },\n    permission_mode=\"PERMISSION_MODE_RESTRICTED\",\n    access={\n        \"agents\": \"ACCESS_LEVEL_WRITE\",\n        \"deployments\": \"ACCESS_LEVEL_READ\",\n    },\n)\n\nprint(result.api_key.api_key_id)\nprint(result.token)\n"
+        - lang: "typescript"
+          label: "Node.js - Create restricted project key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Support automation key',\n  projectScope: {\n    single: {\n      projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n    },\n  },\n  permissionMode: 'PERMISSION_MODE_RESTRICTED',\n  access: {\n    agents: 'ACCESS_LEVEL_WRITE',\n    deployments: 'ACCESS_LEVEL_READ',\n  },\n});\n\nconsole.log(result.apiKey.apiKeyId);\nconsole.log(result.token);\n"
       security:
         - ApiKey: []
   /v2/api-keys/capabilities:
@@ -57135,6 +57351,16 @@ paths:
                 $ref: "#/components/schemas/ListCapabilitiesResponse"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "listCapabilities"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List capability catalog"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/api-keys/capabilities' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - List capability catalog"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncatalog = client.api_keys.list_capabilities()\n\nfor domain in catalog.domains:\n    print(domain.id, domain.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List capability catalog"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst catalog = await client.apiKeys.listCapabilities();\n\nfor (const domain of catalog.domains) {\n  console.log(domain.id, domain.displayName);\n}\n"
       security:
         - ApiKey: []
   /v2/api-keys/{api_key_id}:
@@ -57160,6 +57386,16 @@ paths:
                 $ref: "#/components/schemas/GetApiKeyResponse"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve key metadata"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Retrieve key metadata"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.get(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.api_key.name)\nprint(result.api_key.token_prefix)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve key metadata"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.get({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.apiKey.name);\nconsole.log(result.apiKey.tokenPrefix);\n"
       security:
         - ApiKey: []
     delete:
@@ -57184,6 +57420,16 @@ paths:
                 $ref: "#/components/schemas/DeleteApiKeyResponse"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete a key"
+          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Delete a key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.api_keys.delete(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete a key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.apiKeys.delete({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
       security:
         - ApiKey: []
     patch:
@@ -57214,6 +57460,16 @@ paths:
                 $ref: "#/components/schemas/UpdateApiKeyResponse"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Disable a key"
+          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"status\": \"API_KEY_STATUS_DISABLED\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Disable a key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.update(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    status=\"API_KEY_STATUS_DISABLED\",\n)\n\nprint(result.api_key.status)\n"
+        - lang: "typescript"
+          label: "Node.js - Disable a key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'API_KEY_STATUS_DISABLED',\n});\n\nconsole.log(result.apiKey.status);\n"
       security:
         - ApiKey: []
   /v2/documentation/search:
@@ -57242,6 +57498,16 @@ paths:
       x-cli-name: "search"
       x-cli-hidden: true
       x-speakeasy-ignore: true
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Search documentation"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/documentation/search' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"query\": \"How do I create an API key?\",\n    \"limit\": 5,\n    \"score_threshold\": 0.65\n  }'\n"
+        - lang: "python"
+          label: "Python - Search documentation"
+          source: "import os\nimport requests\n\nresponse = requests.post(\n    \"https://api.orq.ai/v2/documentation/search\",\n    headers={\n        \"Authorization\": f\"Bearer {os.environ['ORQ_API_KEY']}\",\n        \"Content-Type\": \"application/json\",\n    },\n    json={\n        \"query\": \"How do I create an API key?\",\n        \"limit\": 5,\n        \"score_threshold\": 0.65,\n    },\n    timeout=30,\n)\nresponse.raise_for_status()\n\nfor result in response.json()[\"results\"]:\n    print(result[\"metadata\"][\"title\"], result[\"metadata\"][\"href\"])\n"
+        - lang: "typescript"
+          label: "Node.js - Search documentation"
+          source: "const response = await fetch('https://api.orq.ai/v2/documentation/search', {\n  method: 'POST',\n  headers: {\n    Authorization: `Bearer ${process.env.ORQ_API_KEY}`,\n    'Content-Type': 'application/json',\n  },\n  body: JSON.stringify({\n    query: 'How do I create an API key?',\n    limit: 5,\n    score_threshold: 0.65,\n  }),\n});\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst { results } = await response.json();\nfor (const result of results) {\n  console.log(result.metadata.title, result.metadata.href);\n}\n"
       security:
         - ApiKey: []
   /v2/files:
@@ -57254,15 +57520,18 @@ paths:
       parameters:
         - name: "limit"
           in: "query"
+          description: "Page size. Unset uses the server default."
           schema:
             type: "integer"
             format: "int32"
         - name: "starting_after"
           in: "query"
+          description: "Cursor for forward pagination. Set to the `file_id` of the last item\n from the previous page."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
+          description: "Cursor for backward pagination. Set to the `file_id` of the first item\n from the previous page."
           schema:
             type: "string"
         - name: "project_id"
@@ -57278,6 +57547,16 @@ paths:
                 $ref: "#/components/schemas/ListFilesResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List project files"
+          source: "curl --get 'https://api.orq.ai/v2/files' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25' \\\n  --data-urlencode 'project_id=proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V'\n"
+        - lang: "python"
+          label: "Python - List project files"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.files.list(\n    limit=25,\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nfor file in page.data:\n    print(file.file_id, file.file_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List project files"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.files.list({\n  limit: 25,\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nfor (const file of page.data) {\n  console.log(file.fileId, file.fileName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -57301,6 +57580,16 @@ paths:
                 $ref: "#/components/schemas/CreateFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Upload retrieval file"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/files' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"filename\": \"support-faq.md\",\n    \"content\": \"IyBTdXBwb3J0IEZBUQoKQ29tbW9uIHJlc29sdXRpb25zIGFuZCBlc2NhbGF0aW9uIHBhdGhzLg==\",\n    \"content_type\": \"text/markdown\",\n    \"purpose\": \"FILE_PURPOSE_RETRIEVAL\",\n    \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Upload retrieval file"
+          source: "import base64\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncontent = base64.b64encode(\n    b\"# Support FAQ\\n\\nCommon resolutions and escalation paths.\"\n).decode(\"utf-8\")\n\nresult = client.files.create(\n    filename=\"support-faq.md\",\n    content=content,\n    content_type=\"text/markdown\",\n    purpose=\"FILE_PURPOSE_RETRIEVAL\",\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.file.file_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Upload retrieval file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst content = Buffer.from(\n  '# Support FAQ\\n\\nCommon resolutions and escalation paths.',\n).toString('base64');\n\nconst result = await client.files.create({\n  filename: 'support-faq.md',\n  content,\n  contentType: 'text/markdown',\n  purpose: 'FILE_PURPOSE_RETRIEVAL',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.file.fileId);\n"
       security:
         - ApiKey: []
   /v2/files/{file_id_or_path}/content:
@@ -57313,6 +57602,7 @@ paths:
       parameters:
         - name: "file_id_or_path"
           in: "path"
+          description: "File ID or path used to locate the file content."
           required: true
           schema:
             type: "string"
@@ -57325,6 +57615,16 @@ paths:
                 $ref: "#/components/schemas/GetFileContentResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "getContent"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Get download URL"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/files/file_01HZXW2K7Y8Q9M0N1P2R3S4T5V/content' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Get download URL"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.files.get_content(\n    file_id_or_path=\"file_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.download_url)\n"
+        - lang: "typescript"
+          label: "Node.js - Get download URL"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.files.getContent({\n  fileIdOrPath: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.downloadUrl);\n"
       security:
         - ApiKey: []
   /v2/files/{file_id}:
@@ -57337,6 +57637,7 @@ paths:
       parameters:
         - name: "file_id"
           in: "path"
+          description: "File ID to retrieve."
           required: true
           schema:
             type: "string"
@@ -57349,16 +57650,28 @@ paths:
                 $ref: "#/components/schemas/GetFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve file metadata"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/files/file_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Retrieve file metadata"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.files.get(\n    file_id=\"file_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.file.file_name)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve file metadata"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.files.get({\n  fileId: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.file.fileName);\n"
       security:
         - ApiKey: []
     delete:
       tags:
         - "Files"
       summary: "Delete a file"
+      description: "Permanently deletes a file and its stored content from the project."
       operationId: "FileDelete"
       parameters:
         - name: "file_id"
           in: "path"
+          description: "File ID to delete."
           required: true
           schema:
             type: "string"
@@ -57371,6 +57684,16 @@ paths:
                 $ref: "#/components/schemas/DeleteFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete file"
+          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/files/file_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Delete file"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.files.delete(\n    file_id=\"file_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.files.delete({\n  fileId: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
       security:
         - ApiKey: []
     patch:
@@ -57382,6 +57705,7 @@ paths:
       parameters:
         - name: "file_id"
           in: "path"
+          description: "File ID to update."
           required: true
           schema:
             type: "string"
@@ -57400,6 +57724,16 @@ paths:
                 $ref: "#/components/schemas/UpdateFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Rename file"
+          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/files/file_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"file_name\": \"support-faq-v2.md\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Rename file"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.files.update(\n    file_id=\"file_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    file_name=\"support-faq-v2.md\",\n)\n\nprint(result.file.file_name)\n"
+        - lang: "typescript"
+          label: "Node.js - Rename file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.files.update({\n  fileId: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  fileName: 'support-faq-v2.md',\n});\n\nconsole.log(result.file.fileName);\n"
       security:
         - ApiKey: []
   /v2/identities:
@@ -57417,28 +57751,34 @@ paths:
             format: "int32"
         - name: "starting_after"
           in: "query"
+          description: "Cursor for forward pagination. Set to the `_id` of the last item from\n the previous page."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
+          description: "Cursor for backward pagination. Set to the `_id` of the first item from\n the previous page."
           schema:
             type: "string"
         - name: "search"
           in: "query"
+          description: "Case-insensitive search text matched against identity profile fields."
           schema:
             type: "string"
         - name: "filter_by.tags"
           in: "query"
+          description: "Return only identities that have at least one of these tags."
           schema:
             type: "array"
             items:
               type: "string"
         - name: "include_metrics"
           in: "query"
+          description: "Include aggregate usage metrics on each returned identity."
           schema:
             type: "boolean"
         - name: "sort_by"
           in: "query"
+          description: "Field used to order the list."
           schema:
             $ref: "#/components/schemas/IdentitySortField"
       responses:
@@ -57452,6 +57792,16 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "identities"
       x-cli-name: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List identities by tag"
+          source: "curl --get 'https://api.orq.ai/v2/identities' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25' \\\n  --data-urlencode 'search=acme' \\\n  --data-urlencode 'filter_by.tags=enterprise' \\\n  --data-urlencode 'include_metrics=true'\n"
+        - lang: "python"
+          label: "Python - List identities by tag"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.identities.list(\n    limit=25,\n    search=\"acme\",\n    filter_by={\"tags\": [\"enterprise\"]},\n    include_metrics=True,\n)\n\nfor identity in page.data:\n    print(identity.external_id, identity.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List identities by tag"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.identities.list({\n  limit: 25,\n  search: 'acme',\n  filterBy: {\n    tags: ['enterprise'],\n  },\n  includeMetrics: true,\n});\n\nfor (const identity of page.data) {\n  console.log(identity.externalId, identity.displayName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -57477,6 +57827,25 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "identities"
       x-cli-name: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create customer identity"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/identities' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"external_id\": \"customer_12345\",\n    \"display_name\": \"Ada Lovelace\",\n    \"email\": \"ada@example.com\",\n    \"tags\": [\"enterprise\", \"beta\"],\n    \"metadata\": {\n      \"plan\": \"enterprise\",\n      \"region\": \"eu\"\n    }\n  }'\n"
+        - lang: "python"
+          label: "Python - Create customer identity"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.create(\n    external_id=\"customer_12345\",\n    display_name=\"Ada Lovelace\",\n    email=\"ada@example.com\",\n    tags=[\"enterprise\", \"beta\"],\n    metadata={\n        \"plan\": \"enterprise\",\n        \"region\": \"eu\",\n    },\n)\n\nprint(result.identity.external_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Create customer identity"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.create({\n  externalId: 'customer_12345',\n  displayName: 'Ada Lovelace',\n  email: 'ada@example.com',\n  tags: ['enterprise', 'beta'],\n  metadata: {\n    plan: 'enterprise',\n    region: 'eu',\n  },\n});\n\nconsole.log(result.identity.externalId);\n"
+        - lang: "curl"
+          label: "Core - Create minimal identity"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/identities' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"external_id\": \"user_9f4b2a\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Create minimal identity"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.create(\n    external_id=\"user_9f4b2a\",\n)\n\nprint(result.identity.external_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Create minimal identity"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.create({\n  externalId: 'user_9f4b2a',\n});\n\nconsole.log(result.identity.externalId);\n"
       security:
         - ApiKey: []
   /v2/identities/{id}:
@@ -57489,11 +57858,13 @@ paths:
       parameters:
         - name: "id"
           in: "path"
+          description: "Identity ID to retrieve."
           required: true
           schema:
             type: "string"
         - name: "include_metrics"
           in: "query"
+          description: "Include aggregate usage metrics on the returned identity."
           schema:
             type: "boolean"
       responses:
@@ -57507,6 +57878,16 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "identities"
       x-cli-name: "retrieve"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve identity with metrics"
+          source: "curl --get 'https://api.orq.ai/v2/identities/customer_12345' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'include_metrics=true'\n"
+        - lang: "python"
+          label: "Python - Retrieve identity with metrics"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.retrieve(\n    id=\"customer_12345\",\n    include_metrics=True,\n)\n\nprint(result.identity.display_name)\nprint(result.identity.metrics.total_requests)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve identity with metrics"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.retrieve({\n  id: 'customer_12345',\n  includeMetrics: true,\n});\n\nconsole.log(result.identity.displayName);\nconsole.log(result.identity.metrics.totalRequests);\n"
       security:
         - ApiKey: []
     delete:
@@ -57518,6 +57899,7 @@ paths:
       parameters:
         - name: "id"
           in: "path"
+          description: "Identity ID to delete."
           required: true
           schema:
             type: "string"
@@ -57532,6 +57914,16 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "identities"
       x-cli-name: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete identity"
+          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/identities/customer_12345' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Delete identity"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.identities.delete(\n    id=\"customer_12345\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete identity"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.identities.delete({\n  id: 'customer_12345',\n});\n"
       security:
         - ApiKey: []
     patch:
@@ -57543,6 +57935,7 @@ paths:
       parameters:
         - name: "id"
           in: "path"
+          description: "Identity ID to update."
           required: true
           schema:
             type: "string"
@@ -57563,6 +57956,16 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "identities"
       x-cli-name: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Update identity profile"
+          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/identities/customer_12345' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Ada L.\",\n    \"tags\": [\"enterprise\", \"priority\"],\n    \"metadata\": {\n      \"plan\": \"enterprise\",\n      \"lifecycle\": \"renewal\"\n    }\n  }'\n"
+        - lang: "python"
+          label: "Python - Update identity profile"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.update(\n    id=\"customer_12345\",\n    display_name=\"Ada L.\",\n    tags=[\"enterprise\", \"priority\"],\n    metadata={\n        \"plan\": \"enterprise\",\n        \"lifecycle\": \"renewal\",\n    },\n)\n\nprint(result.identity.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - Update identity profile"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.update({\n  id: 'customer_12345',\n  displayName: 'Ada L.',\n  tags: ['enterprise', 'priority'],\n  metadata: {\n    plan: 'enterprise',\n    lifecycle: 'renewal',\n  },\n});\n\nconsole.log(result.identity.displayName);\n"
       security:
         - ApiKey: []
   /v2/projects:
@@ -57598,6 +58001,16 @@ paths:
                 $ref: "#/components/schemas/ListProjectsResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List projects"
+          source: "curl --get 'https://api.orq.ai/v2/projects' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25'\n"
+        - lang: "python"
+          label: "Python - List projects"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.projects.list(\n    limit=25,\n)\n\nfor project in page.data:\n    print(project.project_id, project.name)\n"
+        - lang: "typescript"
+          label: "Node.js - List projects"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.projects.list({\n  limit: 25,\n});\n\nfor (const project of page.data) {\n  console.log(project.projectId, project.name);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -57621,6 +58034,16 @@ paths:
                 $ref: "#/components/schemas/CreateProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create project"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/projects' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Customer Success\",\n    \"description\": \"Production automations for customer success workflows\",\n    \"teams\": [\"team_support\", \"team_growth\"]\n  }'\n"
+        - lang: "python"
+          label: "Python - Create project"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.projects.create(\n    name=\"Customer Success\",\n    description=\"Production automations for customer success workflows\",\n    teams=[\"team_support\", \"team_growth\"],\n)\n\nprint(result.project.project_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Create project"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.projects.create({\n  name: 'Customer Success',\n  description: 'Production automations for customer success workflows',\n  teams: ['team_support', 'team_growth'],\n});\n\nconsole.log(result.project.projectId);\n"
       security:
         - ApiKey: []
   /v2/projects/{project_id}:
@@ -57646,6 +58069,16 @@ paths:
                 $ref: "#/components/schemas/GetProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve project"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/projects/proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Retrieve project"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.projects.get(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.project.name)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve project"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.projects.get({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.project.name);\n"
       security:
         - ApiKey: []
     delete:
@@ -57670,6 +58103,16 @@ paths:
                 $ref: "#/components/schemas/DeleteProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete project"
+          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/projects/proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Delete project"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.projects.delete(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete project"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.projects.delete({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
       security:
         - ApiKey: []
     patch:
@@ -57700,6 +58143,16 @@ paths:
                 $ref: "#/components/schemas/UpdateProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Update project"
+          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/projects/proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Customer Success Production\",\n    \"description\": \"Production support and retention automations\",\n    \"teams\": [\"team_support\"]\n  }'\n"
+        - lang: "python"
+          label: "Python - Update project"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.projects.update(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    name=\"Customer Success Production\",\n    description=\"Production support and retention automations\",\n    teams=[\"team_support\"],\n)\n\nprint(result.project.name)\n"
+        - lang: "typescript"
+          label: "Node.js - Update project"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.projects.update({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  name: 'Customer Success Production',\n  description: 'Production support and retention automations',\n  teams: ['team_support'],\n});\n\nconsole.log(result.project.name);\n"
       security:
         - ApiKey: []
   /v2/skills:
@@ -57735,6 +58188,16 @@ paths:
                 $ref: "#/components/schemas/ListSkillsResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List skills"
+          source: "curl --get 'https://api.orq.ai/v2/skills' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25'\n"
+        - lang: "python"
+          label: "Python - List skills"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.skills.list(\n    limit=25,\n)\n\nfor skill in page.data:\n    print(skill.skill_id, skill.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List skills"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.skills.list({\n  limit: 25,\n});\n\nfor (const skill of page.data) {\n  console.log(skill.skillId, skill.displayName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -57758,6 +58221,16 @@ paths:
                 $ref: "#/components/schemas/CreateSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create project skill"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/skills' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"summarize_support_ticket\",\n    \"description\": \"Summarize support tickets into concise resolution notes.\",\n    \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    \"path\": \"/customer-success/skills/summarize-support-ticket\",\n    \"tags\": [\"support\", \"summarization\"],\n    \"instructions\": \"Read the ticket conversation and return the problem, customer sentiment, and proposed next step.\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Create project skill"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.skills.create(\n    display_name=\"summarize_support_ticket\",\n    description=\"Summarize support tickets into concise resolution notes.\",\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    path=\"/customer-success/skills/summarize-support-ticket\",\n    tags=[\"support\", \"summarization\"],\n    instructions=(\n        \"Read the ticket conversation and return the problem, \"\n        \"customer sentiment, and proposed next step.\"\n    ),\n)\n\nprint(result.skill.skill_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Create project skill"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.create({\n  displayName: 'summarize_support_ticket',\n  description: 'Summarize support tickets into concise resolution notes.',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: '/customer-success/skills/summarize-support-ticket',\n  tags: ['support', 'summarization'],\n  instructions:\n    'Read the ticket conversation and return the problem, customer sentiment, and proposed next step.',\n});\n\nconsole.log(result.skill.skillId);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}:
@@ -57783,6 +58256,16 @@ paths:
                 $ref: "#/components/schemas/GetSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve skill"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/skills/skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Retrieve skill"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.skills.get(\n    skill_id=\"skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.skill.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve skill"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.get({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.skill.displayName);\n"
       security:
         - ApiKey: []
     delete:
@@ -57807,6 +58290,16 @@ paths:
                 $ref: "#/components/schemas/DeleteSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete skill"
+          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/skills/skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Delete skill"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.skills.delete(\n    skill_id=\"skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete skill"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.skills.delete({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
       security:
         - ApiKey: []
     patch:
@@ -57837,6 +58330,16 @@ paths:
                 $ref: "#/components/schemas/UpdateSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Update skill instructions"
+          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/skills/skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"description\": \"Summarize support tickets for escalation handoff.\",\n    \"tags\": [\"support\", \"handoff\"],\n    \"instructions\": \"Return the issue summary, urgency, attempted fixes, and recommended owner.\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Update skill instructions"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.skills.update(\n    skill_id=\"skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    description=\"Summarize support tickets for escalation handoff.\",\n    tags=[\"support\", \"handoff\"],\n    instructions=(\n        \"Return the issue summary, urgency, attempted fixes, \"\n        \"and recommended owner.\"\n    ),\n)\n\nprint(result.skill.version)\n"
+        - lang: "typescript"
+          label: "Node.js - Update skill instructions"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.update({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  description: 'Summarize support tickets for escalation handoff.',\n  tags: ['support', 'handoff'],\n  instructions:\n    'Return the issue summary, urgency, attempted fixes, and recommended owner.',\n});\n\nconsole.log(result.skill.version);\n"
       security:
         - ApiKey: []
   /v2/skills:checkDisplayNameAvailability:
@@ -57861,6 +58364,16 @@ paths:
                 $ref: "#/components/schemas/CheckSkillDisplayNameAvailabilityResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-ignore: true
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Check display name availability"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/skills:checkDisplayNameAvailability' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"summarize_support_ticket\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Check display name availability"
+          source: "import os\nimport requests\n\nresponse = requests.post(\n    \"https://api.orq.ai/v2/skills:checkDisplayNameAvailability\",\n    headers={\n        \"Authorization\": f\"Bearer {os.environ['ORQ_API_KEY']}\",\n        \"Content-Type\": \"application/json\",\n    },\n    json={\n        \"display_name\": \"summarize_support_ticket\",\n    },\n    timeout=30,\n)\nresponse.raise_for_status()\n\nresult = response.json()\nprint(result[\"available\"])\n"
+        - lang: "typescript"
+          label: "Node.js - Check display name availability"
+          source: "const response = await fetch(\n  'https://api.orq.ai/v2/skills:checkDisplayNameAvailability',\n  {\n    method: 'POST',\n    headers: {\n      Authorization: `Bearer ${process.env.ORQ_API_KEY}`,\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify({\n      display_name: 'summarize_support_ticket',\n    }),\n  },\n);\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst result = await response.json();\nconsole.log(result.available);\n"
       security:
         - ApiKey: []
   /v2/router/embeddings:
