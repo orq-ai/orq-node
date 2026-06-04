@@ -13,9 +13,12 @@ export type FileT = {
   fileId?: string | undefined;
   purpose?: FilePurpose | undefined;
   fileName?: string | undefined;
-  workspaceId?: string | undefined;
   bytes?: string | undefined;
   createdAt?: Date | undefined;
+  /**
+   * Identifier of the project the file belongs to. Files are project-scoped; an API key may only access files in projects it is authorized for.
+   */
+  projectId?: string | undefined;
 };
 
 /** @internal */
@@ -24,17 +27,17 @@ export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
     file_id: z.string().optional(),
     purpose: FilePurpose$inboundSchema.optional(),
     file_name: z.string().optional(),
-    workspace_id: z.string().optional(),
     bytes: z.string().optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ).optional(),
+    project_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "file_id": "fileId",
       "file_name": "fileName",
-      "workspace_id": "workspaceId",
       "created_at": "createdAt",
+      "project_id": "projectId",
     });
   });
 

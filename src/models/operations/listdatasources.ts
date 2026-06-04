@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter datasources by status.
  */
-export type Status = Array<string> | string;
+export type ListDatasourcesQueryParamStatus = Array<string> | string;
 
 export type ListDatasourcesRequest = {
   /**
@@ -109,17 +109,23 @@ export type ListDatasourcesResponseBody = {
 };
 
 /** @internal */
-export type Status$Outbound = Array<string> | string;
+export type ListDatasourcesQueryParamStatus$Outbound = Array<string> | string;
 
 /** @internal */
-export const Status$outboundSchema: z.ZodType<
-  Status$Outbound,
+export const ListDatasourcesQueryParamStatus$outboundSchema: z.ZodType<
+  ListDatasourcesQueryParamStatus$Outbound,
   z.ZodTypeDef,
-  Status
+  ListDatasourcesQueryParamStatus
 > = z.union([z.array(z.string()), z.string()]);
 
-export function statusToJSON(status: Status): string {
-  return JSON.stringify(Status$outboundSchema.parse(status));
+export function listDatasourcesQueryParamStatusToJSON(
+  listDatasourcesQueryParamStatus: ListDatasourcesQueryParamStatus,
+): string {
+  return JSON.stringify(
+    ListDatasourcesQueryParamStatus$outboundSchema.parse(
+      listDatasourcesQueryParamStatus,
+    ),
+  );
 }
 
 /** @internal */
@@ -176,7 +182,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KT4C7MMC7CV84VPKM4Q1AA0F"),
+  _id: z.string().default("01KTA6Y5KQKWEX6Z05DG989MQH"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,

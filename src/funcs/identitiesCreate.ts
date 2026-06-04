@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -21,7 +22,6 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -29,15 +29,15 @@ import { Result } from "../types/fp.js";
  * Create an identity
  *
  * @remarks
- * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
+ * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail.
  */
 export function identitiesCreate(
   client: OrqCore,
-  request?: operations.CreateIdentityRequestBody | undefined,
+  request: components.CreateIdentityRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateIdentityResponseBody,
+    components.CreateIdentityResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function identitiesCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.CreateIdentityRequestBody | undefined,
+  request: components.CreateIdentityRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateIdentityResponseBody,
+      components.CreateIdentityResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,19 +77,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.CreateIdentityRequestBody$outboundSchema.optional().parse(
-        value,
-      ),
+    (value) => components.CreateIdentityRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/identities")();
 
@@ -145,7 +140,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateIdentityResponseBody,
+    components.CreateIdentityResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -155,7 +150,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, operations.CreateIdentityResponseBody$inboundSchema),
+    M.json(201, components.CreateIdentityResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

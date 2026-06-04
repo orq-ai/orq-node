@@ -99,6 +99,10 @@ export type CreateDatasourceRequestBody = {
    */
   displayName?: string | undefined;
   /**
+   * The description of the knowledge base
+   */
+  description?: string | undefined;
+  /**
    * The unique identifier of the file used for datasource creation. If provided, the file is immediately queued for chunking.
    */
   fileId?: string | undefined;
@@ -332,6 +336,7 @@ export function chunkingOptionsToJSON(
 /** @internal */
 export type CreateDatasourceRequestBody$Outbound = {
   display_name?: string | undefined;
+  description?: string | undefined;
   file_id?: string | undefined;
   chunking_options?: ChunkingOptions$Outbound | undefined;
 };
@@ -343,6 +348,7 @@ export const CreateDatasourceRequestBody$outboundSchema: z.ZodType<
   CreateDatasourceRequestBody
 > = z.object({
   displayName: z.string().optional(),
+  description: z.string().optional(),
   fileId: z.string().optional(),
   chunkingOptions: z.lazy(() => ChunkingOptions$outboundSchema).optional(),
 }).transform((v) => {
@@ -403,7 +409,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KT4C7MMFPWYV72AHGPXTRNF5"),
+  _id: z.string().default("01KTA6Y5KTJPV350V3S28N5ZCJ"),
   display_name: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$inboundSchema,

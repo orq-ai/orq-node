@@ -8,6 +8,7 @@ import { identitiesList } from "../funcs/identitiesList.js";
 import { identitiesRetrieve } from "../funcs/identitiesRetrieve.js";
 import { identitiesUpdate } from "../funcs/identitiesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -21,7 +22,7 @@ export class Identities extends ClientSDK {
   async list(
     request?: operations.ListIdentitiesRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.ListIdentitiesResponseBody> {
+  ): Promise<components.ListIdentitiesResponse> {
     return unwrapAsync(identitiesList(
       this,
       request,
@@ -33,12 +34,12 @@ export class Identities extends ClientSDK {
    * Create an identity
    *
    * @remarks
-   * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
+   * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail.
    */
   async create(
-    request?: operations.CreateIdentityRequestBody | undefined,
+    request: components.CreateIdentityRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateIdentityResponseBody> {
+  ): Promise<components.CreateIdentityResponse> {
     return unwrapAsync(identitiesCreate(
       this,
       request,
@@ -55,8 +56,25 @@ export class Identities extends ClientSDK {
   async retrieve(
     request: operations.RetrieveIdentityRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveIdentityResponseBody> {
+  ): Promise<components.RetrieveIdentityResponse> {
     return unwrapAsync(identitiesRetrieve(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an identity
+   *
+   * @remarks
+   * Permanently deletes an identity from your workspace and cleans up associated budget configurations.
+   */
+  async delete(
+    request: operations.DeleteIdentityRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteIdentityResponse> {
+    return unwrapAsync(identitiesDelete(
       this,
       request,
       options,
@@ -72,25 +90,8 @@ export class Identities extends ClientSDK {
   async update(
     request: operations.UpdateIdentityRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateIdentityResponseBody> {
+  ): Promise<components.UpdateIdentityResponse> {
     return unwrapAsync(identitiesUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete an identity
-   *
-   * @remarks
-   * Permanently deletes an identity from your workspace and cleans up associated budget configurations. This action cannot be undone.
-   */
-  async delete(
-    request: operations.DeleteIdentityRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(identitiesDelete(
       this,
       request,
       options,

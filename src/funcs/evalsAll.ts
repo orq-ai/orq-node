@@ -92,6 +92,8 @@ async function $do(
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
+    "search": payload?.search,
+    "sort": payload?.sort,
     "starting_after": payload?.starting_after,
   });
 

@@ -11,14 +11,13 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+ * Filter agents by type
  */
 export const QueryParamType = {
   Internal: "internal",
-  A2a: "a2a",
 } as const;
 /**
- * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+ * Filter agents by type
  */
 export type QueryParamType = ClosedEnum<typeof QueryParamType>;
 
@@ -36,7 +35,7 @@ export type ListAgentsRequest = {
    */
   endingBefore?: string | undefined;
   /**
-   * Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+   * Filter agents by type
    */
   type?: QueryParamType | undefined;
 };
@@ -1065,36 +1064,6 @@ export type ListAgentsModel = {
     | undefined;
 };
 
-export type ListAgentsHeaders = {
-  /**
-   * Header value. **Update behavior**: Provide empty string ("") to preserve existing encrypted value without re-entering credentials. Provide new value to rotate. Omit header entirely to remove.
-   */
-  value: string;
-  encrypted: boolean;
-};
-
-/**
- * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
- */
-export type ListAgentsA2AAgentConfiguration = {
-  /**
-   * The A2A agent endpoint URL (e.g., https://example.com/agent/a2a)
-   */
-  agentUrl: string;
-  /**
-   * Optional explicit URL to fetch agent card. Defaults to {agent_url}/card if not provided
-   */
-  cardUrl?: string | undefined;
-  /**
-   * HTTP headers for A2A agent requests with encryption support (max 20 headers). **Update behavior**: Empty string values preserve existing encrypted headers, allowing partial updates without credential re-entry.
-   */
-  headers?: { [k: string]: ListAgentsHeaders } | undefined;
-  /**
-   * Cached agent card from discovery. Refreshed periodically.
-   */
-  cachedCard?: any | undefined;
-};
-
 export type ListAgentsData = {
   id: string;
   /**
@@ -1115,13 +1084,13 @@ export type ListAgentsData = {
    */
   version?: string | undefined;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -1157,10 +1126,6 @@ export type ListAgentsData = {
   instructions: string;
   settings?: ListAgentsSettings | undefined;
   model: ListAgentsModel;
-  /**
-   * A2A configuration with agent endpoint and authentication. Only present for A2A agents.
-   */
-  a2a?: ListAgentsA2AAgentConfiguration | undefined;
 };
 
 /**
@@ -2653,54 +2618,6 @@ export function listAgentsModelFromJSON(
 }
 
 /** @internal */
-export const ListAgentsHeaders$inboundSchema: z.ZodType<
-  ListAgentsHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function listAgentsHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsHeaders' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsA2AAgentConfiguration$inboundSchema: z.ZodType<
-  ListAgentsA2AAgentConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  agent_url: z.string(),
-  card_url: z.string().optional(),
-  headers: z.record(z.lazy(() => ListAgentsHeaders$inboundSchema)).optional(),
-  cached_card: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_url": "agentUrl",
-    "card_url": "cardUrl",
-    "cached_card": "cachedCard",
-  });
-});
-
-export function listAgentsA2AAgentConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsA2AAgentConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAgentsA2AAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsA2AAgentConfiguration' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsData$inboundSchema: z.ZodType<
   ListAgentsData,
   z.ZodTypeDef,
@@ -2733,7 +2650,6 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   instructions: z.string(),
   settings: z.lazy(() => ListAgentsSettings$inboundSchema).optional(),
   model: z.lazy(() => ListAgentsModel$inboundSchema),
-  a2a: z.lazy(() => ListAgentsA2AAgentConfiguration$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

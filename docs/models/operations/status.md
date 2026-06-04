@@ -1,22 +1,17 @@
 # Status
 
-Filter datasources by status.
+Filter chunks by processing status
 
-
-## Supported Types
-
-### `string[]`
+## Example Usage
 
 ```typescript
-const value: string[] = [
-  "completed",
-  "failed",
-];
+import { Status } from "@orq-ai/node/models/operations";
+
+let value: Status = "failed";
 ```
 
-### `string`
+## Values
 
 ```typescript
-const value: string = "completed";
+"pending" | "processing" | "completed" | "failed" | "queued"
 ```
-

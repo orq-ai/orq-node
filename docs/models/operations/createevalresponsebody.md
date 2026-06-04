@@ -11,8 +11,8 @@ Successfully created an evaluator
 const value: operations.ResponseBodyLLM = {
   id: "<id>",
   description: "considerate amid crystallize thorny gracious",
-  created: "2026-06-02T14:36:23.550Z",
-  updated: "2026-06-02T14:36:23.550Z",
+  created: "2026-06-04T20:59:01.562Z",
+  updated: "2026-06-04T20:59:01.562Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
@@ -21,31 +21,34 @@ const value: operations.ResponseBodyLLM = {
 };
 ```
 
-### `operations.ResponseBodyJSON`
+### `operations.Json`
 
 ```typescript
-const value: operations.ResponseBodyJSON = {
+const value: operations.Json = {
   id: "<id>",
-  description: "qua but till diagram",
+  description: "thunderbolt circa except cosset ick delicious",
   type: "json_schema",
   schema: "<value>",
   key: "<key>",
 };
 ```
 
-### `operations.ResponseBodyHTTP`
+### `operations.CreateEvalResponseBodyHTTP`
 
 ```typescript
-const value: operations.ResponseBodyHTTP = {
+const value: operations.CreateEvalResponseBodyHTTP = {
   id: "<id>",
-  description: "how which eek overload respectful clear",
+  description: "agile discontinue perspire fiercely nervously yahoo regarding",
   type: "http_eval",
-  url: "https://terrible-backbone.info",
+  url: "https://far-flung-scholarship.org",
   method: "POST",
-  headers: {},
-  payload: {
+  headers: {
     "key": "<value>",
     "key1": "<value>",
+    "key2": "<value>",
+  },
+  payload: {
+    "key": "<value>",
   },
   key: "<key>",
 };

@@ -14,6 +14,6 @@ let value: OrEq = {
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `eq`                                 | *operations.DeploymentGetConfigOrEq* | :heavy_check_mark:                   | N/A                                  |
+| Field                             | Type                              | Required                          | Description                       |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| `eq`                              | *operations.DeploymentInvokeOrEq* | :heavy_check_mark:                | N/A                               |

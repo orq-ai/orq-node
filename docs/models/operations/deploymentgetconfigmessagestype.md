@@ -1,17 +1,17 @@
 # DeploymentGetConfigMessagesType
 
-Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+The type of the tool. Currently, only `function` is supported.
 
 ## Example Usage
 
 ```typescript
 import { DeploymentGetConfigMessagesType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigMessagesType = "ephemeral";
+let value: DeploymentGetConfigMessagesType = "function";
 ```
 
 ## Values
 
 ```typescript
-"ephemeral"
+"function"
 ```

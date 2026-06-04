@@ -51,8 +51,8 @@ const value: operations.RequestBodyHTTPTool = {
   type: "http",
   http: {
     blueprint: {
-      url: "https://hefty-gazebo.com",
-      method: "POST",
+      url: "https://darling-laughter.com",
+      method: "GET",
     },
   },
 };

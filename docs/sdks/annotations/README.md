@@ -9,7 +9,7 @@
 
 ## create
 
-Annotate a span
+Attach one or more annotations to a specific span. Each annotation references an evaluator by key and supplies a value (string for text/single-select, number for range, array for multi-select).
 
 ### Example Usage
 
@@ -84,7 +84,7 @@ run();
 
 ## delete
 
-Remove an annotation from a span
+Remove one or more annotations from a specific span by their evaluator keys.
 
 ### Example Usage
 

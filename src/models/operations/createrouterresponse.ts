@@ -121,7 +121,7 @@ export type InputType = ClosedEnum<typeof InputType>;
 /**
  * An input item. The "type" field determines the item kind: "message", "function_call_output", "item_reference", etc.
  */
-export type Input2 = {
+export type CreateRouterResponseInput2 = {
   /**
    * The ID of the function call being responded to (for function_call_output type).
    */
@@ -151,7 +151,9 @@ export type Input2 = {
 /**
  * Input to the model: a string or an array of input items (messages, files, etc.).
  */
-export type CreateRouterResponseInput = string | Array<Input2>;
+export type CreateRouterResponseInput =
+  | string
+  | Array<CreateRouterResponseInput2>;
 
 /**
  * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
@@ -364,11 +366,15 @@ export type CreateRouterResponseRequestBody = {
    * Penalize new tokens based on their frequency in the text so far. Between -2.0 and 2.0.
    */
   frequencyPenalty?: number | undefined;
+  /**
+   * Guardrails to evaluate the request against.
+   */
+  guardrails?: Array<components.EvaluatorRef> | undefined;
   identity?: components.ResponseIdentity | undefined;
   /**
    * Input to the model: a string or an array of input items (messages, files, etc.).
    */
-  input?: string | Array<Input2> | undefined;
+  input?: string | Array<CreateRouterResponseInput2> | undefined;
   /**
    * System prompt / instructions for the model.
    */
@@ -767,7 +773,7 @@ export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
   .nativeEnum(InputType);
 
 /** @internal */
-export type Input2$Outbound = {
+export type CreateRouterResponseInput2$Outbound = {
   call_id?: string | undefined;
   content?:
     | string
@@ -780,10 +786,10 @@ export type Input2$Outbound = {
 };
 
 /** @internal */
-export const Input2$outboundSchema: z.ZodType<
-  Input2$Outbound,
+export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
+  CreateRouterResponseInput2$Outbound,
   z.ZodTypeDef,
-  Input2
+  CreateRouterResponseInput2
 > = z.object({
   callId: z.string().optional(),
   content: z.union([
@@ -804,21 +810,28 @@ export const Input2$outboundSchema: z.ZodType<
   });
 });
 
-export function input2ToJSON(input2: Input2): string {
-  return JSON.stringify(Input2$outboundSchema.parse(input2));
+export function createRouterResponseInput2ToJSON(
+  createRouterResponseInput2: CreateRouterResponseInput2,
+): string {
+  return JSON.stringify(
+    CreateRouterResponseInput2$outboundSchema.parse(createRouterResponseInput2),
+  );
 }
 
 /** @internal */
 export type CreateRouterResponseInput$Outbound =
   | string
-  | Array<Input2$Outbound>;
+  | Array<CreateRouterResponseInput2$Outbound>;
 
 /** @internal */
 export const CreateRouterResponseInput$outboundSchema: z.ZodType<
   CreateRouterResponseInput$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseInput
-> = z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]);
+> = z.union([
+  z.string(),
+  z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
+]);
 
 export function createRouterResponseInputToJSON(
   createRouterResponseInput: CreateRouterResponseInput,
@@ -1173,8 +1186,9 @@ export type CreateRouterResponseRequestBody$Outbound = {
   conversation?: components.ConversationParam$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
+  guardrails?: Array<components.EvaluatorRef$Outbound> | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
-  input?: string | Array<Input2$Outbound> | undefined;
+  input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
   instructions?: string | undefined;
   limits?: components.ResponseExecutionLimits$Outbound | undefined;
   max_output_tokens?: number | undefined;
@@ -1224,9 +1238,12 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   frequencyPenalty: z.number().optional(),
+  guardrails: z.array(components.EvaluatorRef$outboundSchema).optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
-  input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
-    .optional(),
+  input: z.union([
+    z.string(),
+    z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
+  ]).optional(),
   instructions: z.string().optional(),
   limits: components.ResponseExecutionLimits$outboundSchema.optional(),
   maxOutputTokens: z.number().int().optional(),

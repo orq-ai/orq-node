@@ -15,7 +15,7 @@ import { ERR, OK, Result } from "../types/fp.js";
 import { stringToBase64 } from "./base64.js";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "./config.js";
 import { encodeForm } from "./encodings.js";
-import { env, fillGlobals } from "./env.js";
+import { env } from "./env.js";
 import {
   HTTPClient,
   isAbortError,
@@ -108,7 +108,7 @@ export class ClientSDK {
     this._baseURL = baseURL;
     this.#httpClient = client;
 
-    this._options = { ...fillGlobals(options), hooks: this.#hooks };
+    this._options = { ...options, hooks: this.#hooks };
 
     this.#logger = this._options.debugLogger;
     if (!this.#logger && env().ORQ_DEBUG) {

@@ -55,11 +55,11 @@ export type ListDatasetsData = {
   /**
    * The unique identifier of the user who created the dataset
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The unique identifier of the user who last updated the dataset
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The date and time the resource was created
    */
@@ -151,12 +151,12 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   project_id: z.string(),
   workspace_id: z.string(),
   metadata: z.lazy(() => ListDatasetsMetadata$inboundSchema),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-02T14:36:21.484Z",
+    "2026-06-04T20:58:59.272Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

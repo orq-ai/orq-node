@@ -1,6 +1,6 @@
 # DeploymentGetConfigPrefixMessagesDeploymentsRequestContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the user message.
 
 
 ## Supported Types
@@ -16,9 +16,11 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentGetConfigContent2[] = [
   {
-    type: "reasoning",
-    reasoning: "<value>",
-    signature: "<value>",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "mp3",
+    },
   },
 ];
 ```

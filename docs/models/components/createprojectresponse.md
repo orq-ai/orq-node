@@ -12,4 +12,4 @@ let value: CreateProjectResponse = {};
 
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `project`                                                | [components.Project](../../models/components/project.md) | :heavy_minus_sign:                                       | N/A                                                      |
+| `project`                                                | [components.Project](../../models/components/project.md) | :heavy_minus_sign:                                       | Newly created project.                                   |

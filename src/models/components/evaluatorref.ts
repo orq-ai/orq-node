@@ -20,6 +20,7 @@ export type EvaluatorRef = {
   executeOn: EvaluatorRefExecuteOn;
   id: string;
   isGuardrail?: boolean | undefined;
+  options?: { [k: string]: any } | undefined;
   sampleRate?: number | undefined;
 };
 
@@ -41,6 +42,7 @@ export const EvaluatorRef$inboundSchema: z.ZodType<
   execute_on: EvaluatorRefExecuteOn$inboundSchema,
   id: z.string(),
   is_guardrail: z.boolean().optional(),
+  options: z.record(z.any()).optional(),
   sample_rate: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -54,6 +56,7 @@ export type EvaluatorRef$Outbound = {
   execute_on: string;
   id: string;
   is_guardrail?: boolean | undefined;
+  options?: { [k: string]: any } | undefined;
   sample_rate?: number | undefined;
 };
 
@@ -66,6 +69,7 @@ export const EvaluatorRef$outboundSchema: z.ZodType<
   executeOn: EvaluatorRefExecuteOn$outboundSchema,
   id: z.string(),
   isGuardrail: z.boolean().optional(),
+  options: z.record(z.any()).optional(),
   sampleRate: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -11,6 +11,10 @@ export type CreateFileRequest = {
   content?: string | undefined;
   purpose?: FilePurpose | undefined;
   contentType?: string | undefined;
+  /**
+   * Project the file is created in. Optional for project-scoped API keys (defaults to the key's bound project); required for workspace-scoped callers.
+   */
+  projectId?: string | undefined;
 };
 
 /** @internal */
@@ -19,6 +23,7 @@ export type CreateFileRequest$Outbound = {
   content?: string | undefined;
   purpose?: string | undefined;
   content_type?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -31,9 +36,11 @@ export const CreateFileRequest$outboundSchema: z.ZodType<
   content: z.string().optional(),
   purpose: FilePurpose$outboundSchema.optional(),
   contentType: z.string().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     contentType: "content_type",
+    projectId: "project_id",
   });
 });
 

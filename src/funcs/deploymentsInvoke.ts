@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -34,7 +33,7 @@ import { Result } from "../types/fp.js";
  */
 export function deploymentsInvoke(
   client: OrqCore,
-  request: components.InvokeDeploymentRequest,
+  request: operations.DeploymentInvokeRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +57,7 @@ export function deploymentsInvoke(
 
 async function $do(
   client: OrqCore,
-  request: components.InvokeDeploymentRequest,
+  request: operations.DeploymentInvokeRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,7 +77,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.InvokeDeploymentRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.DeploymentInvokeRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -92,14 +92,6 @@ async function $do(
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
-    "contactId": encodeSimple("contactId", client._options.contactId, {
-      explode: false,
-      charEncoding: "none",
-    }),
-    "environment": encodeSimple("environment", client._options.environment, {
-      explode: false,
-      charEncoding: "none",
-    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);

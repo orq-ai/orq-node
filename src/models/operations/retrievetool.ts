@@ -91,13 +91,13 @@ export type RetrieveToolResponseBodyCodeTool = {
 export type RetrieveToolResponseBodyCodeExecutionTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -217,13 +217,13 @@ export type RetrieveToolResponseBodyMcp = {
 export type RetrieveToolResponseBodyMCPTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -378,13 +378,13 @@ export type RetrieveToolResponseBodyHttp = {
 export type RetrieveToolResponseBodyHTTPTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -479,13 +479,13 @@ export type RetrieveToolResponseBodyJsonSchema = {
 export type RetrieveToolResponseBodyJSONSchemaTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -594,13 +594,13 @@ export type RetrieveToolResponseBodyFunction = {
 export type RetrieveToolResponseBodyFunctionTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -753,7 +753,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MHT5P8TT0E6P6S45XMS"),
+  _id: z.string().default("tool_01KTA6Y5GVYTS1RT6TNJG1ZCCD"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -859,7 +859,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KT4C7MHT39QFD1J0PEER1Q36"),
+  id: z.string().default("01KTA6Y5GT7M56GPHTRA5G13V2"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -917,7 +917,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MHSKT34QCBYT1XWEGB5"),
+  _id: z.string().default("tool_01KTA6Y5GS7YMRHNWAD8075JSA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1108,7 +1108,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MHQYEC92XWZPWSE7MV6"),
+  _id: z.string().default("tool_01KTA6Y5GQS4N5PC2T7WDMTE3S"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1204,7 +1204,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MHPFN3P7EBX3MR5YN0F"),
+  _id: z.string().default("tool_01KTA6Y5GP4JV6RCTY2YT93XVW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1310,7 +1310,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MHN6F85JNY7R0GK1JA5"),
+  _id: z.string().default("tool_01KTA6Y5GMWS9K90PM985Y9T6G"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

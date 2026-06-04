@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -37,7 +38,7 @@ export function identitiesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ListIdentitiesResponseBody,
+    components.ListIdentitiesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.ListIdentitiesResponseBody,
+      components.ListIdentitiesResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -91,10 +92,11 @@ async function $do(
 
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,
-    "filter_by": payload?.filter_by,
+    "filter_by.tags": payload?.["filter_by.tags"],
     "include_metrics": payload?.include_metrics,
     "limit": payload?.limit,
     "search": payload?.search,
+    "sort_by": payload?.sort_by,
     "starting_after": payload?.starting_after,
   });
 
@@ -150,7 +152,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.ListIdentitiesResponseBody,
+    components.ListIdentitiesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -160,7 +162,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListIdentitiesResponseBody$inboundSchema),
+    M.json(200, components.ListIdentitiesResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

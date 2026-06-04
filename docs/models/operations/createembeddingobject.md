@@ -1,5 +1,7 @@
 # CreateEmbeddingObject
 
+Always "list".
+
 ## Example Usage
 
 ```typescript

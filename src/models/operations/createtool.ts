@@ -82,13 +82,13 @@ export type RequestBodyCodeTool = {
  */
 export type RequestBodyCodeExecutionTool = {
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -166,13 +166,13 @@ export type RequestBodyMcp = {
  */
 export type RequestBodyMCPTool = {
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -215,7 +215,7 @@ export type CreateToolRequestBodyStatus = ClosedEnum<
 /**
  * The HTTP method to use.
  */
-export const CreateToolRequestBodyMethod = {
+export const RequestBodyMethod = {
   Get: "GET",
   Post: "POST",
   Put: "PUT",
@@ -224,9 +224,7 @@ export const CreateToolRequestBodyMethod = {
 /**
  * The HTTP method to use.
  */
-export type CreateToolRequestBodyMethod = ClosedEnum<
-  typeof CreateToolRequestBodyMethod
->;
+export type RequestBodyMethod = ClosedEnum<typeof RequestBodyMethod>;
 
 export type CreateToolHeaders2 = {
   value: string;
@@ -246,7 +244,7 @@ export type RequestBodyBlueprint = {
   /**
    * The HTTP method to use.
    */
-  method: CreateToolRequestBodyMethod;
+  method: RequestBodyMethod;
   /**
    * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
@@ -296,7 +294,7 @@ export type RequestBodyArguments = {
   defaultValue?: string | number | boolean | undefined;
 };
 
-export type CreateToolRequestBodyHttp = {
+export type RequestBodyHttp = {
   /**
    * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
    */
@@ -312,13 +310,13 @@ export type CreateToolRequestBodyHttp = {
  */
 export type RequestBodyHTTPTool = {
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -338,7 +336,7 @@ export type RequestBodyHTTPTool = {
    */
   status?: CreateToolRequestBodyStatus | undefined;
   type: "http";
-  http: CreateToolRequestBodyHttp;
+  http: RequestBodyHttp;
 };
 
 /**
@@ -398,13 +396,13 @@ export type RequestBodyJsonSchema = {
  */
 export type RequestBodyJSONSchemaTool = {
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -499,13 +497,13 @@ export type RequestBodyFunction = {
  */
 export type RequestBodyFunctionTool = {
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -608,13 +606,13 @@ export type ResponseBodyCodeTool = {
 export type ResponseBodyCodeExecutionTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -732,13 +730,13 @@ export type ResponseBodyMcp = {
 export type ResponseBodyMCPTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -889,13 +887,13 @@ export type CreateToolResponseBodyHttp = {
 export type ResponseBodyHTTPTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -990,13 +988,13 @@ export type ResponseBodyJsonSchema = {
 export type ResponseBodyJSONSchemaTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -1101,13 +1099,13 @@ export type CreateToolResponseBodyFunction = {
 export type ResponseBodyFunctionTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -1382,9 +1380,9 @@ export const CreateToolRequestBodyStatus$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateToolRequestBodyStatus);
 
 /** @internal */
-export const CreateToolRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyMethod
-> = z.nativeEnum(CreateToolRequestBodyMethod);
+export const RequestBodyMethod$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyMethod
+> = z.nativeEnum(RequestBodyMethod);
 
 /** @internal */
 export type CreateToolHeaders2$Outbound = {
@@ -1447,7 +1445,7 @@ export const RequestBodyBlueprint$outboundSchema: z.ZodType<
   RequestBodyBlueprint
 > = z.object({
   url: z.string(),
-  method: CreateToolRequestBodyMethod$outboundSchema,
+  method: RequestBodyMethod$outboundSchema,
   headers: z.record(
     z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]),
   ).optional(),
@@ -1520,28 +1518,26 @@ export function requestBodyArgumentsToJSON(
 }
 
 /** @internal */
-export type CreateToolRequestBodyHttp$Outbound = {
+export type RequestBodyHttp$Outbound = {
   blueprint: RequestBodyBlueprint$Outbound;
   arguments?: { [k: string]: RequestBodyArguments$Outbound } | undefined;
 };
 
 /** @internal */
-export const CreateToolRequestBodyHttp$outboundSchema: z.ZodType<
-  CreateToolRequestBodyHttp$Outbound,
+export const RequestBodyHttp$outboundSchema: z.ZodType<
+  RequestBodyHttp$Outbound,
   z.ZodTypeDef,
-  CreateToolRequestBodyHttp
+  RequestBodyHttp
 > = z.object({
   blueprint: z.lazy(() => RequestBodyBlueprint$outboundSchema),
   arguments: z.record(z.lazy(() => RequestBodyArguments$outboundSchema))
     .optional(),
 });
 
-export function createToolRequestBodyHttpToJSON(
-  createToolRequestBodyHttp: CreateToolRequestBodyHttp,
+export function requestBodyHttpToJSON(
+  requestBodyHttp: RequestBodyHttp,
 ): string {
-  return JSON.stringify(
-    CreateToolRequestBodyHttp$outboundSchema.parse(createToolRequestBodyHttp),
-  );
+  return JSON.stringify(RequestBodyHttp$outboundSchema.parse(requestBodyHttp));
 }
 
 /** @internal */
@@ -1552,7 +1548,7 @@ export type RequestBodyHTTPTool$Outbound = {
   description: string;
   status: string;
   type: "http";
-  http: CreateToolRequestBodyHttp$Outbound;
+  http: RequestBodyHttp$Outbound;
 };
 
 /** @internal */
@@ -1567,7 +1563,7 @@ export const RequestBodyHTTPTool$outboundSchema: z.ZodType<
   description: z.string(),
   status: CreateToolRequestBodyStatus$outboundSchema.default("live"),
   type: z.literal("http"),
-  http: z.lazy(() => CreateToolRequestBodyHttp$outboundSchema),
+  http: z.lazy(() => RequestBodyHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -1902,7 +1898,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MGMJPX97QVJ9M1GW378"),
+  _id: z.string().default("tool_01KTA6Y5FM9CP8V6BA77CN4D6T"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1999,7 +1995,7 @@ export const ResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KT4C7MGKJX7CHKZPBAV6JJCG"),
+  id: z.string().default("01KTA6Y5FKCBYRQ0SWJP2AGF3F"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2055,7 +2051,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MGJXNQW9Z4VD8A48RCQ"),
+  _id: z.string().default("tool_01KTA6Y5FJS8KQB02PX821EB86"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2241,7 +2237,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MGGENG26JYZEKRVDGME"),
+  _id: z.string().default("tool_01KTA6Y5FGEJ1289S71A2GSHQ4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2334,7 +2330,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MGFQCB88XY7TJSWZ6AC"),
+  _id: z.string().default("tool_01KTA6Y5FEH1XX1403JXK1NNTM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2435,7 +2431,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MGEJX7FVPCJJVS8TP6W"),
+  _id: z.string().default("tool_01KTA6Y5FD662M6QFE11GYASJN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

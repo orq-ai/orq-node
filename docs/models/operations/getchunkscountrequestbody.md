@@ -10,8 +10,8 @@ let value: GetChunksCountRequestBody = {};
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `q`                                         | *string*                                    | :heavy_minus_sign:                          | Search query to find chunks by text content |
-| `enabled`                                   | *boolean*                                   | :heavy_minus_sign:                          | Filter chunks by enabled status             |
-| `status`                                    | *string*                                    | :heavy_minus_sign:                          | Filter chunks by processing status          |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `q`                                                                                | *string*                                                                           | :heavy_minus_sign:                                                                 | Search query to find chunks by text content                                        |
+| `enabled`                                                                          | *boolean*                                                                          | :heavy_minus_sign:                                                                 | Filter chunks by enabled status                                                    |
+| `status`                                                                           | [operations.GetChunksCountStatus](../../models/operations/getchunkscountstatus.md) | :heavy_minus_sign:                                                                 | Filter chunks by processing status                                                 |

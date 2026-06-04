@@ -1,60 +1,24 @@
 # Choices
 
-
-## Supported Types
-
-### `operations.ChoicesSystemMessage`
+## Example Usage
 
 ```typescript
-const value: operations.ChoicesSystemMessage = {
-  role: "system",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+import { Choices } from "@orq-ai/node/models/operations";
+
+let value: Choices = {
+  index: 5149.39,
+  message: {
+    type: "image",
+    role: "system",
+    url: "https://amazing-sweatshop.net/",
+  },
 };
 ```
 
-### `operations.ChoicesDeveloperMessage`
+## Fields
 
-```typescript
-const value: operations.ChoicesDeveloperMessage = {
-  role: "developer",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
-};
-```
-
-### `operations.ChoicesUserMessage`
-
-```typescript
-const value: operations.ChoicesUserMessage = {
-  role: "user",
-  content: "<value>",
-};
-```
-
-### `operations.ChoicesAssistantMessage`
-
-```typescript
-const value: operations.ChoicesAssistantMessage = {
-  role: "assistant",
-};
-```
-
-### `operations.ChoicesToolMessage`
-
-```typescript
-const value: operations.ChoicesToolMessage = {
-  role: "tool",
-  content: "<value>",
-  toolCallId: "<id>",
-};
-```
-
+| Field                | Type                 | Required             | Description          |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `index`              | *number*             | :heavy_check_mark:   | N/A                  |
+| `message`            | *operations.Message* | :heavy_check_mark:   | N/A                  |
+| `finishReason`       | *string*             | :heavy_minus_sign:   | N/A                  |

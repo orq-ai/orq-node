@@ -3,40 +3,39 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Boolean =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMBoolean =
     {
-      enabled: false,
       type: "boolean",
       value: false,
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Categorical`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Categorical =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMCategorical =
     {
-      enabled: true,
       type: "categorical",
-      values: [],
+      values: [
+        "<value 1>",
+      ],
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1Number =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody1LLMNumber =
     {
-      enabled: true,
       type: "number",
-      value: 7513.93,
-      operator: "lte",
+      value: 2751.87,
+      operator: "lt",
     };
 ```
 

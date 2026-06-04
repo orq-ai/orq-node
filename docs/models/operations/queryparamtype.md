@@ -1,6 +1,6 @@
 # QueryParamType
 
-Filter agents by type: "internal" for Orquesta-managed agents, "a2a" for external A2A-compliant agents
+Filter agents by type
 
 ## Example Usage
 
@@ -13,5 +13,5 @@ let value: QueryParamType = "internal";
 ## Values
 
 ```typescript
-"internal" | "a2a"
+"internal"
 ```

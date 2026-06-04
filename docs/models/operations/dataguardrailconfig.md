@@ -9,9 +9,8 @@
 const value:
   operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
     {
-      enabled: true,
       type: "boolean",
-      value: false,
+      value: true,
     };
 ```
 
@@ -21,12 +20,8 @@ const value:
 const value:
   operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyCategorical =
     {
-      enabled: true,
       type: "categorical",
-      values: [
-        "<value 1>",
-        "<value 2>",
-      ],
+      values: [],
     };
 ```
 
@@ -36,9 +31,8 @@ const value:
 const value:
   operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
     {
-      enabled: false,
       type: "number",
-      value: 2899.83,
+      value: 8613.1,
       operator: "ne",
     };
 ```

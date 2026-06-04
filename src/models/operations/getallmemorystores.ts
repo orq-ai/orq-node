@@ -54,11 +54,11 @@ export type GetAllMemoryStoresData = {
   /**
    * The user ID of the creator
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The user ID of the last updater
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The creation date of the memory store
    */
@@ -147,8 +147,8 @@ export const GetAllMemoryStoresData$inboundSchema: z.ZodType<
   _id: z.string(),
   key: z.string(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
   ttl: z.number().optional(),

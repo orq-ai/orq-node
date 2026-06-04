@@ -9,10 +9,28 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const QueryParam2 = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type QueryParam2 = ClosedEnum<typeof QueryParam2>;
+
+export const QueryParam1 = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type QueryParam1 = ClosedEnum<typeof QueryParam1>;
+
 /**
- * Filter datasources by status.
+ * Filter chunks by status.
  */
-export type QueryParamStatus = Array<string> | string;
+export type QueryParamStatus = Array<QueryParam1> | QueryParam2;
 
 export type ListChunksRequest = {
   /**
@@ -40,9 +58,9 @@ export type ListChunksRequest = {
    */
   q?: string | undefined;
   /**
-   * Filter datasources by status.
+   * Filter chunks by status.
    */
-  status?: Array<string> | string | undefined;
+  status?: Array<QueryParam1> | QueryParam2 | undefined;
 };
 
 export const ListChunksObject = {
@@ -116,6 +134,14 @@ export type ListChunksResponseBody = {
 };
 
 /** @internal */
+export const QueryParam2$outboundSchema: z.ZodNativeEnum<typeof QueryParam2> = z
+  .nativeEnum(QueryParam2);
+
+/** @internal */
+export const QueryParam1$outboundSchema: z.ZodNativeEnum<typeof QueryParam1> = z
+  .nativeEnum(QueryParam1);
+
+/** @internal */
 export type QueryParamStatus$Outbound = Array<string> | string;
 
 /** @internal */
@@ -123,7 +149,7 @@ export const QueryParamStatus$outboundSchema: z.ZodType<
   QueryParamStatus$Outbound,
   z.ZodTypeDef,
   QueryParamStatus
-> = z.union([z.array(z.string()), z.string()]);
+> = z.union([z.array(QueryParam1$outboundSchema), QueryParam2$outboundSchema]);
 
 export function queryParamStatusToJSON(
   queryParamStatus: QueryParamStatus,
@@ -156,7 +182,10 @@ export const ListChunksRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   q: z.string().optional(),
-  status: z.union([z.array(z.string()), z.string()]).optional(),
+  status: z.union([
+    z.array(QueryParam1$outboundSchema),
+    QueryParam2$outboundSchema,
+  ]).optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",

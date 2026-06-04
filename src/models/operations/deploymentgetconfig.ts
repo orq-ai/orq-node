@@ -10,27 +10,27 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeploymentGetConfigContentDeployments2 =
+export type DeploymentGetConfigContentDeploymentsRequest2 =
   components.TextContentPartSchema;
 
 /**
  * The contents of the tool message.
  */
-export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent =
+export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content =
   | string
   | Array<components.TextContentPartSchema>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const DeploymentGetConfigPrefixMessagesType = {
+export const DeploymentGetConfigPrefixMessagesDeploymentsType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type DeploymentGetConfigPrefixMessagesType = ClosedEnum<
-  typeof DeploymentGetConfigPrefixMessagesType
+export type DeploymentGetConfigPrefixMessagesDeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfigPrefixMessagesDeploymentsType
 >;
 
 /**
@@ -43,7 +43,7 @@ export type DeploymentGetConfigPrefixMessagesType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const PrefixMessagesTtl = {
+export const DeploymentGetConfigPrefixMessagesTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -57,13 +57,15 @@ export const PrefixMessagesTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type PrefixMessagesTtl = ClosedEnum<typeof PrefixMessagesTtl>;
+export type DeploymentGetConfigPrefixMessagesTtl = ClosedEnum<
+  typeof DeploymentGetConfigPrefixMessagesTtl
+>;
 
-export type PrefixMessagesCacheControl = {
+export type DeploymentGetConfigPrefixMessagesCacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: DeploymentGetConfigPrefixMessagesType;
+  type: DeploymentGetConfigPrefixMessagesDeploymentsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -74,10 +76,10 @@ export type PrefixMessagesCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: PrefixMessagesTtl | undefined;
+  ttl?: DeploymentGetConfigPrefixMessagesTtl | undefined;
 };
 
-export type ToolMessage = {
+export type PrefixMessagesToolMessage = {
   /**
    * The role of the messages author, in this case tool.
    */
@@ -90,10 +92,10 @@ export type ToolMessage = {
    * Tool call that this message is responding to.
    */
   toolCallId: string | null;
-  cacheControl?: PrefixMessagesCacheControl | undefined;
+  cacheControl?: DeploymentGetConfigPrefixMessagesCacheControl | undefined;
 };
 
-export type DeploymentGetConfigContent2 =
+export type DeploymentGetConfigContentDeployments2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
@@ -102,7 +104,7 @@ export type DeploymentGetConfigContent2 =
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
  */
-export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent =
+export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent =
   | string
   | Array<
     | (components.TextContentPartSchema & { type: "text" })
@@ -114,7 +116,7 @@ export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent =
 /**
  * Data about a previous audio response from the model.
  */
-export type Audio = {
+export type PrefixMessagesAudio = {
   /**
    * Unique identifier for a previous audio response from the model.
    */
@@ -124,15 +126,17 @@ export type Audio = {
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export const PrefixMessagesType = {
+export const DeploymentGetConfigPrefixMessagesType = {
   Function: "function",
 } as const;
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export type PrefixMessagesType = ClosedEnum<typeof PrefixMessagesType>;
+export type DeploymentGetConfigPrefixMessagesType = ClosedEnum<
+  typeof DeploymentGetConfigPrefixMessagesType
+>;
 
-export type PrefixMessagesFunction = {
+export type DeploymentGetConfigPrefixMessagesFunction = {
   /**
    * The name of the function to call.
    */
@@ -143,7 +147,7 @@ export type PrefixMessagesFunction = {
   arguments?: string | undefined;
 };
 
-export type PrefixMessagesToolCalls = {
+export type DeploymentGetConfigPrefixMessagesToolCalls = {
   /**
    * The ID of the tool call.
    */
@@ -151,15 +155,15 @@ export type PrefixMessagesToolCalls = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
-  type: PrefixMessagesType;
-  function: PrefixMessagesFunction;
+  type: DeploymentGetConfigPrefixMessagesType;
+  function: DeploymentGetConfigPrefixMessagesFunction;
   /**
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
 };
 
-export type AssistantMessage = {
+export type PrefixMessagesAssistantMessage = {
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -188,11 +192,11 @@ export type AssistantMessage = {
   /**
    * Data about a previous audio response from the model.
    */
-  audio?: Audio | null | undefined;
+  audio?: PrefixMessagesAudio | null | undefined;
   /**
    * The tool calls generated by the model, such as function calls.
    */
-  toolCalls?: Array<PrefixMessagesToolCalls> | undefined;
+  toolCalls?: Array<DeploymentGetConfigPrefixMessagesToolCalls> | undefined;
 };
 
 /**
@@ -218,7 +222,7 @@ export type DeploymentGetConfig2DeploymentsType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const Ttl = {
+export const DeploymentGetConfig2Ttl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -232,9 +236,11 @@ export const Ttl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type Ttl = ClosedEnum<typeof Ttl>;
+export type DeploymentGetConfig2Ttl = ClosedEnum<
+  typeof DeploymentGetConfig2Ttl
+>;
 
-export type CacheControl = {
+export type DeploymentGetConfig2CacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
@@ -249,40 +255,40 @@ export type CacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: Ttl | undefined;
+  ttl?: DeploymentGetConfig2Ttl | undefined;
 };
 
-export type Four = {
+export type DeploymentGetConfig24 = {
   /**
    * The type of the content part. Always `file`.
    */
   type: "file";
-  cacheControl?: CacheControl | undefined;
+  cacheControl?: DeploymentGetConfig2CacheControl | undefined;
   /**
    * File data for the content part. Must contain either file_data or uri, but not both.
    */
   file: components.FileContentPartSchema;
 };
 
-export type Content2 =
+export type DeploymentGetConfigContent2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
-  | Four;
+  | DeploymentGetConfig24;
 
 /**
  * The contents of the user message.
  */
-export type DeploymentGetConfigPrefixMessagesDeploymentsContent =
+export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent =
   | string
   | Array<
     | (components.TextContentPartSchema & { type: "text" })
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
-    | Four
+    | DeploymentGetConfig24
   >;
 
-export type UserMessage = {
+export type PrefixMessagesUserMessage = {
   /**
    * The role of the messages author, in this case `user`.
    */
@@ -300,18 +306,18 @@ export type UserMessage = {
       | (components.TextContentPartSchema & { type: "text" })
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
-      | Four
+      | DeploymentGetConfig24
     >;
 };
 
 /**
  * The contents of the developer message.
  */
-export type DeploymentGetConfigPrefixMessagesContent =
+export type DeploymentGetConfigPrefixMessagesDeploymentsContent =
   | string
   | Array<components.TextContentPartSchema>;
 
-export type DeveloperMessage = {
+export type PrefixMessagesDeveloperMessage = {
   /**
    * The role of the messages author, in this case  `developer`.
    */
@@ -329,14 +335,14 @@ export type DeveloperMessage = {
 /**
  * The contents of the system message.
  */
-export type PrefixMessagesContent =
+export type DeploymentGetConfigPrefixMessagesContent =
   | string
   | Array<components.TextContentPartSchema>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
  */
-export type SystemMessage = {
+export type PrefixMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
    */
@@ -351,34 +357,34 @@ export type SystemMessage = {
   name?: string | undefined;
 };
 
-export type PrefixMessages =
-  | SystemMessage
-  | DeveloperMessage
-  | UserMessage
-  | AssistantMessage
-  | ToolMessage;
+export type DeploymentGetConfigPrefixMessages =
+  | PrefixMessagesSystemMessage
+  | PrefixMessagesDeveloperMessage
+  | PrefixMessagesUserMessage
+  | PrefixMessagesAssistantMessage
+  | PrefixMessagesToolMessage;
 
-export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2 =
+export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52 =
   components.TextContentPartSchema;
 
 /**
  * The contents of the tool message.
  */
-export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent =
+export type DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content =
   | string
   | Array<components.TextContentPartSchema>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const DeploymentGetConfigMessagesType = {
+export const DeploymentGetConfigMessagesDeploymentsType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type DeploymentGetConfigMessagesType = ClosedEnum<
-  typeof DeploymentGetConfigMessagesType
+export type DeploymentGetConfigMessagesDeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfigMessagesDeploymentsType
 >;
 
 /**
@@ -391,7 +397,7 @@ export type DeploymentGetConfigMessagesType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const MessagesTtl = {
+export const DeploymentGetConfigMessagesTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -405,13 +411,15 @@ export const MessagesTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type MessagesTtl = ClosedEnum<typeof MessagesTtl>;
+export type DeploymentGetConfigMessagesTtl = ClosedEnum<
+  typeof DeploymentGetConfigMessagesTtl
+>;
 
-export type MessagesCacheControl = {
+export type DeploymentGetConfigMessagesCacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: DeploymentGetConfigMessagesType;
+  type: DeploymentGetConfigMessagesDeploymentsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -422,10 +430,10 @@ export type MessagesCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: MessagesTtl | undefined;
+  ttl?: DeploymentGetConfigMessagesTtl | undefined;
 };
 
-export type MessagesToolMessage = {
+export type DeploymentGetConfigMessagesToolMessage = {
   /**
    * The role of the messages author, in this case tool.
    */
@@ -438,10 +446,10 @@ export type MessagesToolMessage = {
    * Tool call that this message is responding to.
    */
   toolCallId: string | null;
-  cacheControl?: MessagesCacheControl | undefined;
+  cacheControl?: DeploymentGetConfigMessagesCacheControl | undefined;
 };
 
-export type DeploymentGetConfigContentDeploymentsRequestRequestBody2 =
+export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.RefusalPartSchema
   | components.ReasoningPartSchema
@@ -450,7 +458,7 @@ export type DeploymentGetConfigContentDeploymentsRequestRequestBody2 =
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
  */
-export type DeploymentGetConfigMessagesDeploymentsRequestContent =
+export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent =
   | string
   | Array<
     | (components.TextContentPartSchema & { type: "text" })
@@ -462,7 +470,7 @@ export type DeploymentGetConfigMessagesDeploymentsRequestContent =
 /**
  * Data about a previous audio response from the model.
  */
-export type MessagesAudio = {
+export type DeploymentGetConfigMessagesAudio = {
   /**
    * Unique identifier for a previous audio response from the model.
    */
@@ -472,15 +480,17 @@ export type MessagesAudio = {
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export const MessagesType = {
+export const DeploymentGetConfigMessagesType = {
   Function: "function",
 } as const;
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export type MessagesType = ClosedEnum<typeof MessagesType>;
+export type DeploymentGetConfigMessagesType = ClosedEnum<
+  typeof DeploymentGetConfigMessagesType
+>;
 
-export type MessagesFunction = {
+export type DeploymentGetConfigMessagesFunction = {
   /**
    * The name of the function to call.
    */
@@ -491,7 +501,7 @@ export type MessagesFunction = {
   arguments?: string | undefined;
 };
 
-export type MessagesToolCalls = {
+export type DeploymentGetConfigMessagesToolCalls = {
   /**
    * The ID of the tool call.
    */
@@ -499,15 +509,15 @@ export type MessagesToolCalls = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
-  type: MessagesType;
-  function: MessagesFunction;
+  type: DeploymentGetConfigMessagesType;
+  function: DeploymentGetConfigMessagesFunction;
   /**
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
 };
 
-export type MessagesAssistantMessage = {
+export type DeploymentGetConfigMessagesAssistantMessage = {
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -536,11 +546,11 @@ export type MessagesAssistantMessage = {
   /**
    * Data about a previous audio response from the model.
    */
-  audio?: MessagesAudio | null | undefined;
+  audio?: DeploymentGetConfigMessagesAudio | null | undefined;
   /**
    * The tool calls generated by the model, such as function calls.
    */
-  toolCalls?: Array<MessagesToolCalls> | undefined;
+  toolCalls?: Array<DeploymentGetConfigMessagesToolCalls> | undefined;
 };
 
 /**
@@ -566,7 +576,7 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const TwoTtl = {
+export const DeploymentGetConfig2DeploymentsTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -580,9 +590,11 @@ export const TwoTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type TwoTtl = ClosedEnum<typeof TwoTtl>;
+export type DeploymentGetConfig2DeploymentsTtl = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsTtl
+>;
 
-export type TwoCacheControl = {
+export type DeploymentGetConfig2DeploymentsCacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
@@ -597,40 +609,40 @@ export type TwoCacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: TwoTtl | undefined;
+  ttl?: DeploymentGetConfig2DeploymentsTtl | undefined;
 };
 
-export type Two4 = {
+export type DeploymentGetConfig2Deployments4 = {
   /**
    * The type of the content part. Always `file`.
    */
   type: "file";
-  cacheControl?: TwoCacheControl | undefined;
+  cacheControl?: DeploymentGetConfig2DeploymentsCacheControl | undefined;
   /**
    * File data for the content part. Must contain either file_data or uri, but not both.
    */
   file: components.FileContentPartSchema;
 };
 
-export type DeploymentGetConfigContentDeploymentsRequest2 =
+export type DeploymentGetConfigContentDeploymentsRequestRequestBody2 =
   | (components.TextContentPartSchema & { type: "text" })
   | components.ImageContentPartSchema
   | components.AudioContentPartSchema
-  | Two4;
+  | DeploymentGetConfig2Deployments4;
 
 /**
  * The contents of the user message.
  */
-export type DeploymentGetConfigMessagesDeploymentsContent =
+export type DeploymentGetConfigMessagesDeploymentsRequestContent =
   | string
   | Array<
     | (components.TextContentPartSchema & { type: "text" })
     | components.ImageContentPartSchema
     | components.AudioContentPartSchema
-    | Two4
+    | DeploymentGetConfig2Deployments4
   >;
 
-export type MessagesUserMessage = {
+export type DeploymentGetConfigMessagesUserMessage = {
   /**
    * The role of the messages author, in this case `user`.
    */
@@ -648,18 +660,18 @@ export type MessagesUserMessage = {
       | (components.TextContentPartSchema & { type: "text" })
       | components.ImageContentPartSchema
       | components.AudioContentPartSchema
-      | Two4
+      | DeploymentGetConfig2Deployments4
     >;
 };
 
 /**
  * The contents of the developer message.
  */
-export type DeploymentGetConfigMessagesContent =
+export type DeploymentGetConfigMessagesDeploymentsContent =
   | string
   | Array<components.TextContentPartSchema>;
 
-export type MessagesDeveloperMessage = {
+export type DeploymentGetConfigMessagesDeveloperMessage = {
   /**
    * The role of the messages author, in this case  `developer`.
    */
@@ -677,12 +689,14 @@ export type MessagesDeveloperMessage = {
 /**
  * The contents of the system message.
  */
-export type MessagesContent = string | Array<components.TextContentPartSchema>;
+export type DeploymentGetConfigMessagesContent =
+  | string
+  | Array<components.TextContentPartSchema>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
  */
-export type MessagesSystemMessage = {
+export type DeploymentGetConfigMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
    */
@@ -698,16 +712,16 @@ export type MessagesSystemMessage = {
 };
 
 export type DeploymentGetConfigMessages =
-  | MessagesSystemMessage
-  | MessagesDeveloperMessage
-  | MessagesUserMessage
-  | MessagesAssistantMessage
-  | MessagesToolMessage;
+  | DeploymentGetConfigMessagesSystemMessage
+  | DeploymentGetConfigMessagesDeveloperMessage
+  | DeploymentGetConfigMessagesUserMessage
+  | DeploymentGetConfigMessagesAssistantMessage
+  | DeploymentGetConfigMessagesToolMessage;
 
 /**
  * Metadata about the document
  */
-export type Metadata = {
+export type DeploymentGetConfigMetadata = {
   /**
    * Name of the file the text is from.
    */
@@ -722,7 +736,7 @@ export type Metadata = {
   pageNumber?: number | undefined;
 };
 
-export type Documents = {
+export type DeploymentGetConfigDocuments = {
   /**
    * The text content of the document
    */
@@ -730,10 +744,10 @@ export type Documents = {
   /**
    * Metadata about the document
    */
-  metadata?: Metadata | undefined;
+  metadata?: DeploymentGetConfigMetadata | undefined;
 };
 
-export type InvokeOptions = {
+export type DeploymentGetConfigInvokeOptions = {
   /**
    * Whether to include the retrieved knowledge chunks in the response.
    */
@@ -748,7 +762,7 @@ export type InvokeOptions = {
   mockResponse?: string | undefined;
 };
 
-export type Thread = {
+export type DeploymentGetConfigThread = {
   /**
    * Unique thread identifier to group related invocations.
    */
@@ -762,101 +776,101 @@ export type Thread = {
 /**
  * Exists
  */
-export type OrExists = {
+export type DeploymentGetConfigOrExists = {
   exists: boolean;
 };
 
-export type DeploymentGetConfigOrNin = string | number | boolean;
+export type DeploymentGetConfigOrDeploymentsNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type OrNin = {
+export type DeploymentGetConfigOrNin = {
   nin: Array<string | number | boolean>;
 };
 
-export type DeploymentGetConfigOrIn = string | number | boolean;
+export type DeploymentGetConfigOrDeploymentsIn = string | number | boolean;
 
 /**
  * In
  */
-export type OrIn = {
+export type DeploymentGetConfigOrIn = {
   in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type OrLte = {
+export type DeploymentGetConfigOrLte = {
   lte: number;
 };
 
 /**
  * Less than
  */
-export type OrLt = {
+export type DeploymentGetConfigOrLt = {
   lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type OrGte = {
+export type DeploymentGetConfigOrGte = {
   gte: number;
 };
 
 /**
  * Greater than
  */
-export type OrGt = {
+export type DeploymentGetConfigOrGt = {
   gt: number;
 };
 
-export type DeploymentGetConfigOrNe = string | number | boolean;
+export type DeploymentGetConfigOrDeploymentsNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type OrNe = {
+export type DeploymentGetConfigOrNe = {
   ne: string | number | boolean;
 };
 
-export type DeploymentGetConfigOrEq = string | number | boolean;
+export type DeploymentGetConfigOrDeploymentsEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type OrEq = {
+export type DeploymentGetConfigOrEq = {
   eq: string | number | boolean;
 };
 
-export type KnowledgeFilterOr =
-  | OrEq
-  | OrNe
-  | OrGt
-  | OrGte
-  | OrLt
-  | OrLte
-  | OrIn
-  | OrNin
-  | OrExists;
+export type DeploymentGetConfigKnowledgeFilterDeploymentsOr =
+  | DeploymentGetConfigOrEq
+  | DeploymentGetConfigOrNe
+  | DeploymentGetConfigOrGt
+  | DeploymentGetConfigOrGte
+  | DeploymentGetConfigOrLt
+  | DeploymentGetConfigOrLte
+  | DeploymentGetConfigOrIn
+  | DeploymentGetConfigOrNin
+  | DeploymentGetConfigOrExists;
 
 /**
  * Or
  */
-export type Or = {
+export type DeploymentGetConfigKnowledgeFilterOr = {
   or: Array<
     {
       [k: string]:
-        | OrEq
-        | OrNe
-        | OrGt
-        | OrGte
-        | OrLt
-        | OrLte
-        | OrIn
-        | OrNin
-        | OrExists;
+        | DeploymentGetConfigOrEq
+        | DeploymentGetConfigOrNe
+        | DeploymentGetConfigOrGt
+        | DeploymentGetConfigOrGte
+        | DeploymentGetConfigOrLt
+        | DeploymentGetConfigOrLte
+        | DeploymentGetConfigOrIn
+        | DeploymentGetConfigOrNin
+        | DeploymentGetConfigOrExists;
     }
   >;
 };
@@ -864,101 +878,101 @@ export type Or = {
 /**
  * Exists
  */
-export type AndExists = {
+export type DeploymentGetConfigAndExists = {
   exists: boolean;
 };
 
-export type DeploymentGetConfigAndNin = string | number | boolean;
+export type DeploymentGetConfigAndDeploymentsNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type AndNin = {
+export type DeploymentGetConfigAndNin = {
   nin: Array<string | number | boolean>;
 };
 
-export type DeploymentGetConfigAndIn = string | number | boolean;
+export type DeploymentGetConfigAndDeploymentsIn = string | number | boolean;
 
 /**
  * In
  */
-export type AndIn = {
+export type DeploymentGetConfigAndIn = {
   in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type AndLte = {
+export type DeploymentGetConfigAndLte = {
   lte: number;
 };
 
 /**
  * Less than
  */
-export type AndLt = {
+export type DeploymentGetConfigAndLt = {
   lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type AndGte = {
+export type DeploymentGetConfigAndGte = {
   gte: number;
 };
 
 /**
  * Greater than
  */
-export type AndGt = {
+export type DeploymentGetConfigAndGt = {
   gt: number;
 };
 
-export type DeploymentGetConfigAndNe = string | number | boolean;
+export type DeploymentGetConfigAndDeploymentsNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type AndNe = {
+export type DeploymentGetConfigAndNe = {
   ne: string | number | boolean;
 };
 
-export type DeploymentGetConfigAndEq = string | number | boolean;
+export type DeploymentGetConfigAndDeploymentsEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type AndEq = {
+export type DeploymentGetConfigAndEq = {
   eq: string | number | boolean;
 };
 
-export type KnowledgeFilterAnd =
-  | AndEq
-  | AndNe
-  | AndGt
-  | AndGte
-  | AndLt
-  | AndLte
-  | AndIn
-  | AndNin
-  | AndExists;
+export type DeploymentGetConfigKnowledgeFilterDeploymentsAnd =
+  | DeploymentGetConfigAndEq
+  | DeploymentGetConfigAndNe
+  | DeploymentGetConfigAndGt
+  | DeploymentGetConfigAndGte
+  | DeploymentGetConfigAndLt
+  | DeploymentGetConfigAndLte
+  | DeploymentGetConfigAndIn
+  | DeploymentGetConfigAndNin
+  | DeploymentGetConfigAndExists;
 
 /**
  * And
  */
-export type And = {
+export type DeploymentGetConfigKnowledgeFilterAnd = {
   and: Array<
     {
       [k: string]:
-        | AndEq
-        | AndNe
-        | AndGt
-        | AndGte
-        | AndLt
-        | AndLte
-        | AndIn
-        | AndNin
-        | AndExists;
+        | DeploymentGetConfigAndEq
+        | DeploymentGetConfigAndNe
+        | DeploymentGetConfigAndGt
+        | DeploymentGetConfigAndGte
+        | DeploymentGetConfigAndLt
+        | DeploymentGetConfigAndLte
+        | DeploymentGetConfigAndIn
+        | DeploymentGetConfigAndNin
+        | DeploymentGetConfigAndExists;
     }
   >;
 };
@@ -966,91 +980,103 @@ export type And = {
 /**
  * Exists
  */
-export type Exists = {
+export type OneExists = {
   exists: boolean;
 };
 
-export type OneNin = string | number | boolean;
+export type DeploymentGetConfig1DeploymentsNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type Nin = {
+export type DeploymentGetConfig1Nin = {
   nin: Array<string | number | boolean>;
 };
 
-export type OneIn = string | number | boolean;
+export type DeploymentGetConfig1DeploymentsIn = string | number | boolean;
 
 /**
  * In
  */
-export type In = {
+export type DeploymentGetConfig1In = {
   in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type Lte = {
+export type OneLte = {
   lte: number;
 };
 
 /**
  * Less than
  */
-export type Lt = {
+export type OneLt = {
   lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type Gte = {
+export type OneGte = {
   gte: number;
 };
 
 /**
  * Greater than
  */
-export type Gt = {
+export type OneGt = {
   gt: number;
 };
 
-export type OneNe = string | number | boolean;
+export type DeploymentGetConfig1DeploymentsNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type Ne = {
+export type DeploymentGetConfig1Ne = {
   ne: string | number | boolean;
 };
 
-export type OneEq = string | number | boolean;
+export type DeploymentGetConfig1DeploymentsEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type Eq = {
+export type DeploymentGetConfig1Eq = {
   eq: string | number | boolean;
 };
 
-export type KnowledgeFilter1 =
-  | Eq
-  | Ne
-  | Gt
-  | Gte
-  | Lt
-  | Lte
-  | In
-  | Nin
-  | Exists;
+export type DeploymentGetConfigKnowledgeFilter1 =
+  | DeploymentGetConfig1Eq
+  | DeploymentGetConfig1Ne
+  | OneGt
+  | OneGte
+  | OneLt
+  | OneLte
+  | DeploymentGetConfig1In
+  | DeploymentGetConfig1Nin
+  | OneExists;
 
 /**
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
  */
-export type KnowledgeFilter = And | Or | {
-  [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
-};
+export type DeploymentGetConfigKnowledgeFilter =
+  | DeploymentGetConfigKnowledgeFilterAnd
+  | DeploymentGetConfigKnowledgeFilterOr
+  | {
+    [k: string]:
+      | DeploymentGetConfig1Eq
+      | DeploymentGetConfig1Ne
+      | OneGt
+      | OneGte
+      | OneLt
+      | OneLte
+      | DeploymentGetConfig1In
+      | DeploymentGetConfig1Nin
+      | OneExists;
+  };
 
 export type DeploymentGetConfigRequestBody = {
   /**
@@ -1070,11 +1096,11 @@ export type DeploymentGetConfigRequestBody = {
    */
   prefixMessages?:
     | Array<
-      | SystemMessage
-      | DeveloperMessage
-      | UserMessage
-      | AssistantMessage
-      | ToolMessage
+      | PrefixMessagesSystemMessage
+      | PrefixMessagesDeveloperMessage
+      | PrefixMessagesUserMessage
+      | PrefixMessagesAssistantMessage
+      | PrefixMessagesToolMessage
     >
     | undefined;
   /**
@@ -1082,11 +1108,11 @@ export type DeploymentGetConfigRequestBody = {
    */
   messages?:
     | Array<
-      | MessagesSystemMessage
-      | MessagesDeveloperMessage
-      | MessagesUserMessage
-      | MessagesAssistantMessage
-      | MessagesToolMessage
+      | DeploymentGetConfigMessagesSystemMessage
+      | DeploymentGetConfigMessagesDeveloperMessage
+      | DeploymentGetConfigMessagesUserMessage
+      | DeploymentGetConfigMessagesAssistantMessage
+      | DeploymentGetConfigMessagesToolMessage
     >
     | undefined;
   /**
@@ -1108,15 +1134,28 @@ export type DeploymentGetConfigRequestBody = {
   /**
    * A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context.
    */
-  documents?: Array<Documents> | undefined;
-  invokeOptions?: InvokeOptions | undefined;
-  thread?: Thread | undefined;
+  documents?: Array<DeploymentGetConfigDocuments> | undefined;
+  invokeOptions?: DeploymentGetConfigInvokeOptions | undefined;
+  thread?: DeploymentGetConfigThread | undefined;
   /**
    * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
    */
-  knowledgeFilter?: And | Or | {
-    [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
-  } | undefined;
+  knowledgeFilter?:
+    | DeploymentGetConfigKnowledgeFilterAnd
+    | DeploymentGetConfigKnowledgeFilterOr
+    | {
+      [k: string]:
+        | DeploymentGetConfig1Eq
+        | DeploymentGetConfig1Ne
+        | OneGt
+        | OneGte
+        | OneLt
+        | OneLte
+        | DeploymentGetConfig1In
+        | DeploymentGetConfig1Nin
+        | OneExists;
+    }
+    | undefined;
 };
 
 /**
@@ -1614,15 +1653,155 @@ export type DeploymentGetConfigResponseBody = {
 };
 
 /** @internal */
-export type DeploymentGetConfigContentDeployments2$Outbound =
+export type DeploymentGetConfigContentDeploymentsRequest2$Outbound =
   components.TextContentPartSchema$Outbound;
+
+/** @internal */
+export const DeploymentGetConfigContentDeploymentsRequest2$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigContentDeploymentsRequest2$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigContentDeploymentsRequest2
+  > = components.TextContentPartSchema$outboundSchema;
+
+export function deploymentGetConfigContentDeploymentsRequest2ToJSON(
+  deploymentGetConfigContentDeploymentsRequest2:
+    DeploymentGetConfigContentDeploymentsRequest2,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigContentDeploymentsRequest2$outboundSchema.parse(
+      deploymentGetConfigContentDeploymentsRequest2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]);
+
+export function deploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5ContentToJSON(
+  deploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content:
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content$outboundSchema
+      .parse(
+        deploymentGetConfigPrefixMessagesDeploymentsRequestRequestBody5Content,
+      ),
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesDeploymentsType> = z
+    .nativeEnum(DeploymentGetConfigPrefixMessagesDeploymentsType);
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesTtl$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesTtl> = z.nativeEnum(
+    DeploymentGetConfigPrefixMessagesTtl,
+  );
+
+/** @internal */
+export type DeploymentGetConfigPrefixMessagesCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigPrefixMessagesCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigPrefixMessagesCacheControl
+  > = z.object({
+    type: DeploymentGetConfigPrefixMessagesDeploymentsType$outboundSchema,
+    ttl: DeploymentGetConfigPrefixMessagesTtl$outboundSchema.default("5m"),
+  });
+
+export function deploymentGetConfigPrefixMessagesCacheControlToJSON(
+  deploymentGetConfigPrefixMessagesCacheControl:
+    DeploymentGetConfigPrefixMessagesCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigPrefixMessagesCacheControl$outboundSchema.parse(
+      deploymentGetConfigPrefixMessagesCacheControl,
+    ),
+  );
+}
+
+/** @internal */
+export type PrefixMessagesToolMessage$Outbound = {
+  role: "tool";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  tool_call_id: string | null;
+  cache_control?:
+    | DeploymentGetConfigPrefixMessagesCacheControl$Outbound
+    | undefined;
+};
+
+/** @internal */
+export const PrefixMessagesToolMessage$outboundSchema: z.ZodType<
+  PrefixMessagesToolMessage$Outbound,
+  z.ZodTypeDef,
+  PrefixMessagesToolMessage
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]),
+  toolCallId: z.nullable(z.string()),
+  cacheControl: z.lazy(() =>
+    DeploymentGetConfigPrefixMessagesCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+    cacheControl: "cache_control",
+  });
+});
+
+export function prefixMessagesToolMessageToJSON(
+  prefixMessagesToolMessage: PrefixMessagesToolMessage,
+): string {
+  return JSON.stringify(
+    PrefixMessagesToolMessage$outboundSchema.parse(prefixMessagesToolMessage),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigContentDeployments2$Outbound =
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
+  | components.RefusalPartSchema$Outbound
+  | components.ReasoningPartSchema$Outbound
+  | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigContentDeployments2$outboundSchema: z.ZodType<
   DeploymentGetConfigContentDeployments2$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigContentDeployments2
-> = components.TextContentPartSchema$outboundSchema;
+> = z.union([
+  components.TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  components.RefusalPartSchema$outboundSchema,
+  components.ReasoningPartSchema$outboundSchema,
+  components.RedactedReasoningPartSchema$outboundSchema,
+]);
 
 export function deploymentGetConfigContentDeployments2ToJSON(
   deploymentGetConfigContentDeployments2:
@@ -1638,7 +1817,12 @@ export function deploymentGetConfigContentDeployments2ToJSON(
 /** @internal */
 export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | components.RefusalPartSchema$Outbound
+    | components.ReasoningPartSchema$Outbound
+    | components.RedactedReasoningPartSchema$Outbound
+  >;
 
 /** @internal */
 export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent$outboundSchema:
@@ -1648,7 +1832,16 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyConte
     DeploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$outboundSchema,
+        components.ReasoningPartSchema$outboundSchema,
+        components.RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
   ]);
 
 export function deploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyContentToJSON(
@@ -1664,225 +1857,101 @@ export function deploymentGetConfigPrefixMessagesDeploymentsRequestRequestBodyCo
 }
 
 /** @internal */
+export type PrefixMessagesAudio$Outbound = {
+  id: string;
+};
+
+/** @internal */
+export const PrefixMessagesAudio$outboundSchema: z.ZodType<
+  PrefixMessagesAudio$Outbound,
+  z.ZodTypeDef,
+  PrefixMessagesAudio
+> = z.object({
+  id: z.string(),
+});
+
+export function prefixMessagesAudioToJSON(
+  prefixMessagesAudio: PrefixMessagesAudio,
+): string {
+  return JSON.stringify(
+    PrefixMessagesAudio$outboundSchema.parse(prefixMessagesAudio),
+  );
+}
+
+/** @internal */
 export const DeploymentGetConfigPrefixMessagesType$outboundSchema:
   z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesType> = z.nativeEnum(
     DeploymentGetConfigPrefixMessagesType,
   );
 
 /** @internal */
-export const PrefixMessagesTtl$outboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesTtl
-> = z.nativeEnum(PrefixMessagesTtl);
-
-/** @internal */
-export type PrefixMessagesCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const PrefixMessagesCacheControl$outboundSchema: z.ZodType<
-  PrefixMessagesCacheControl$Outbound,
-  z.ZodTypeDef,
-  PrefixMessagesCacheControl
-> = z.object({
-  type: DeploymentGetConfigPrefixMessagesType$outboundSchema,
-  ttl: PrefixMessagesTtl$outboundSchema.default("5m"),
-});
-
-export function prefixMessagesCacheControlToJSON(
-  prefixMessagesCacheControl: PrefixMessagesCacheControl,
-): string {
-  return JSON.stringify(
-    PrefixMessagesCacheControl$outboundSchema.parse(prefixMessagesCacheControl),
-  );
-}
-
-/** @internal */
-export type ToolMessage$Outbound = {
-  role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string | null;
-  cache_control?: PrefixMessagesCacheControl$Outbound | undefined;
-};
-
-/** @internal */
-export const ToolMessage$outboundSchema: z.ZodType<
-  ToolMessage$Outbound,
-  z.ZodTypeDef,
-  ToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() => PrefixMessagesCacheControl$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
-
-export function toolMessageToJSON(toolMessage: ToolMessage): string {
-  return JSON.stringify(ToolMessage$outboundSchema.parse(toolMessage));
-}
-
-/** @internal */
-export type DeploymentGetConfigContent2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
-
-/** @internal */
-export const DeploymentGetConfigContent2$outboundSchema: z.ZodType<
-  DeploymentGetConfigContent2$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfigContent2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
-
-export function deploymentGetConfigContent2ToJSON(
-  deploymentGetConfigContent2: DeploymentGetConfigContent2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContent2$outboundSchema.parse(
-      deploymentGetConfigContent2,
-    ),
-  );
-}
-
-/** @internal */
-export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$Outbound =
-  | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.RefusalPartSchema$Outbound
-    | components.ReasoningPartSchema$Outbound
-    | components.RedactedReasoningPartSchema$Outbound
-  >;
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
-
-export function deploymentGetConfigPrefixMessagesDeploymentsRequestContentToJSON(
-  deploymentGetConfigPrefixMessagesDeploymentsRequestContent:
-    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$outboundSchema
-      .parse(deploymentGetConfigPrefixMessagesDeploymentsRequestContent),
-  );
-}
-
-/** @internal */
-export type Audio$Outbound = {
-  id: string;
-};
-
-/** @internal */
-export const Audio$outboundSchema: z.ZodType<
-  Audio$Outbound,
-  z.ZodTypeDef,
-  Audio
-> = z.object({
-  id: z.string(),
-});
-
-export function audioToJSON(audio: Audio): string {
-  return JSON.stringify(Audio$outboundSchema.parse(audio));
-}
-
-/** @internal */
-export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesType
-> = z.nativeEnum(PrefixMessagesType);
-
-/** @internal */
-export type PrefixMessagesFunction$Outbound = {
+export type DeploymentGetConfigPrefixMessagesFunction$Outbound = {
   name?: string | undefined;
   arguments?: string | undefined;
 };
 
 /** @internal */
-export const PrefixMessagesFunction$outboundSchema: z.ZodType<
-  PrefixMessagesFunction$Outbound,
-  z.ZodTypeDef,
-  PrefixMessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+export const DeploymentGetConfigPrefixMessagesFunction$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigPrefixMessagesFunction$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigPrefixMessagesFunction
+  > = z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  });
 
-export function prefixMessagesFunctionToJSON(
-  prefixMessagesFunction: PrefixMessagesFunction,
+export function deploymentGetConfigPrefixMessagesFunctionToJSON(
+  deploymentGetConfigPrefixMessagesFunction:
+    DeploymentGetConfigPrefixMessagesFunction,
 ): string {
   return JSON.stringify(
-    PrefixMessagesFunction$outboundSchema.parse(prefixMessagesFunction),
+    DeploymentGetConfigPrefixMessagesFunction$outboundSchema.parse(
+      deploymentGetConfigPrefixMessagesFunction,
+    ),
   );
 }
 
 /** @internal */
-export type PrefixMessagesToolCalls$Outbound = {
+export type DeploymentGetConfigPrefixMessagesToolCalls$Outbound = {
   id: string;
   type: string;
-  function: PrefixMessagesFunction$Outbound;
+  function: DeploymentGetConfigPrefixMessagesFunction$Outbound;
   thought_signature?: string | undefined;
 };
 
 /** @internal */
-export const PrefixMessagesToolCalls$outboundSchema: z.ZodType<
-  PrefixMessagesToolCalls$Outbound,
-  z.ZodTypeDef,
-  PrefixMessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: PrefixMessagesType$outboundSchema,
-  function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
+export const DeploymentGetConfigPrefixMessagesToolCalls$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigPrefixMessagesToolCalls$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigPrefixMessagesToolCalls
+  > = z.object({
+    id: z.string(),
+    type: DeploymentGetConfigPrefixMessagesType$outboundSchema,
+    function: z.lazy(() =>
+      DeploymentGetConfigPrefixMessagesFunction$outboundSchema
+    ),
+    thoughtSignature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+    });
   });
-});
 
-export function prefixMessagesToolCallsToJSON(
-  prefixMessagesToolCalls: PrefixMessagesToolCalls,
+export function deploymentGetConfigPrefixMessagesToolCallsToJSON(
+  deploymentGetConfigPrefixMessagesToolCalls:
+    DeploymentGetConfigPrefixMessagesToolCalls,
 ): string {
   return JSON.stringify(
-    PrefixMessagesToolCalls$outboundSchema.parse(prefixMessagesToolCalls),
+    DeploymentGetConfigPrefixMessagesToolCalls$outboundSchema.parse(
+      deploymentGetConfigPrefixMessagesToolCalls,
+    ),
   );
 }
 
 /** @internal */
-export type AssistantMessage$Outbound = {
+export type PrefixMessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
@@ -1896,15 +1965,17 @@ export type AssistantMessage$Outbound = {
   refusal?: string | null | undefined;
   role: "assistant";
   name?: string | undefined;
-  audio?: Audio$Outbound | null | undefined;
-  tool_calls?: Array<PrefixMessagesToolCalls$Outbound> | undefined;
+  audio?: PrefixMessagesAudio$Outbound | null | undefined;
+  tool_calls?:
+    | Array<DeploymentGetConfigPrefixMessagesToolCalls$Outbound>
+    | undefined;
 };
 
 /** @internal */
-export const AssistantMessage$outboundSchema: z.ZodType<
-  AssistantMessage$Outbound,
+export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
+  PrefixMessagesAssistantMessage$Outbound,
   z.ZodTypeDef,
-  AssistantMessage
+  PrefixMessagesAssistantMessage
 > = z.object({
   content: z.nullable(
     z.union([
@@ -1924,20 +1995,24 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   refusal: z.nullable(z.string()).optional(),
   role: z.literal("assistant"),
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => Audio$outboundSchema)).optional(),
-  toolCalls: z.array(z.lazy(() => PrefixMessagesToolCalls$outboundSchema))
+  audio: z.nullable(z.lazy(() => PrefixMessagesAudio$outboundSchema))
     .optional(),
+  toolCalls: z.array(
+    z.lazy(() => DeploymentGetConfigPrefixMessagesToolCalls$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
   });
 });
 
-export function assistantMessageToJSON(
-  assistantMessage: AssistantMessage,
+export function prefixMessagesAssistantMessageToJSON(
+  prefixMessagesAssistantMessage: PrefixMessagesAssistantMessage,
 ): string {
   return JSON.stringify(
-    AssistantMessage$outboundSchema.parse(assistantMessage),
+    PrefixMessagesAssistantMessage$outboundSchema.parse(
+      prefixMessagesAssistantMessage,
+    ),
   );
 }
 
@@ -1948,94 +2023,114 @@ export const DeploymentGetConfig2DeploymentsType$outboundSchema:
   );
 
 /** @internal */
-export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(
-  Ttl,
-);
+export const DeploymentGetConfig2Ttl$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig2Ttl
+> = z.nativeEnum(DeploymentGetConfig2Ttl);
 
 /** @internal */
-export type CacheControl$Outbound = {
+export type DeploymentGetConfig2CacheControl$Outbound = {
   type: string;
   ttl: string;
 };
 
 /** @internal */
-export const CacheControl$outboundSchema: z.ZodType<
-  CacheControl$Outbound,
+export const DeploymentGetConfig2CacheControl$outboundSchema: z.ZodType<
+  DeploymentGetConfig2CacheControl$Outbound,
   z.ZodTypeDef,
-  CacheControl
+  DeploymentGetConfig2CacheControl
 > = z.object({
   type: DeploymentGetConfig2DeploymentsType$outboundSchema,
-  ttl: Ttl$outboundSchema.default("5m"),
+  ttl: DeploymentGetConfig2Ttl$outboundSchema.default("5m"),
 });
 
-export function cacheControlToJSON(cacheControl: CacheControl): string {
-  return JSON.stringify(CacheControl$outboundSchema.parse(cacheControl));
+export function deploymentGetConfig2CacheControlToJSON(
+  deploymentGetConfig2CacheControl: DeploymentGetConfig2CacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig2CacheControl$outboundSchema.parse(
+      deploymentGetConfig2CacheControl,
+    ),
+  );
 }
 
 /** @internal */
-export type Four$Outbound = {
+export type DeploymentGetConfig24$Outbound = {
   type: "file";
-  cache_control?: CacheControl$Outbound | undefined;
+  cache_control?: DeploymentGetConfig2CacheControl$Outbound | undefined;
   file: components.FileContentPartSchema$Outbound;
 };
 
 /** @internal */
-export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
-  z.object({
-    type: z.literal("file"),
-    cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
-    file: components.FileContentPartSchema$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
+export const DeploymentGetConfig24$outboundSchema: z.ZodType<
+  DeploymentGetConfig24$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig24
+> = z.object({
+  type: z.literal("file"),
+  cacheControl: z.lazy(() => DeploymentGetConfig2CacheControl$outboundSchema)
+    .optional(),
+  file: components.FileContentPartSchema$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
   });
+});
 
-export function fourToJSON(four: Four): string {
-  return JSON.stringify(Four$outboundSchema.parse(four));
+export function deploymentGetConfig24ToJSON(
+  deploymentGetConfig24: DeploymentGetConfig24,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig24$outboundSchema.parse(deploymentGetConfig24),
+  );
 }
 
 /** @internal */
-export type Content2$Outbound =
+export type DeploymentGetConfigContent2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
   | components.ImageContentPartSchema$Outbound
   | components.AudioContentPartSchema$Outbound
-  | Four$Outbound;
+  | DeploymentGetConfig24$Outbound;
 
 /** @internal */
-export const Content2$outboundSchema: z.ZodType<
-  Content2$Outbound,
+export const DeploymentGetConfigContent2$outboundSchema: z.ZodType<
+  DeploymentGetConfigContent2$Outbound,
   z.ZodTypeDef,
-  Content2
+  DeploymentGetConfigContent2
 > = z.union([
   components.TextContentPartSchema$outboundSchema.and(
     z.object({ type: z.literal("text") }),
   ),
   components.ImageContentPartSchema$outboundSchema,
   components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => Four$outboundSchema),
+  z.lazy(() => DeploymentGetConfig24$outboundSchema),
 ]);
 
-export function content2ToJSON(content2: Content2): string {
-  return JSON.stringify(Content2$outboundSchema.parse(content2));
+export function deploymentGetConfigContent2ToJSON(
+  deploymentGetConfigContent2: DeploymentGetConfigContent2,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigContent2$outboundSchema.parse(
+      deploymentGetConfigContent2,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigPrefixMessagesDeploymentsContent$Outbound =
+export type DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$Outbound =
   | string
   | Array<
     | (components.TextContentPartSchema$Outbound & { type: "text" })
     | components.ImageContentPartSchema$Outbound
     | components.AudioContentPartSchema$Outbound
-    | Four$Outbound
+    | DeploymentGetConfig24$Outbound
   >;
 
 /** @internal */
-export const DeploymentGetConfigPrefixMessagesDeploymentsContent$outboundSchema:
+export const DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$outboundSchema:
   z.ZodType<
-    DeploymentGetConfigPrefixMessagesDeploymentsContent$Outbound,
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$Outbound,
     z.ZodTypeDef,
-    DeploymentGetConfigPrefixMessagesDeploymentsContent
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent
   > = z.union([
     z.string(),
     z.array(
@@ -2045,9 +2140,80 @@ export const DeploymentGetConfigPrefixMessagesDeploymentsContent$outboundSchema:
         ),
         components.ImageContentPartSchema$outboundSchema,
         components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Four$outboundSchema),
+        z.lazy(() => DeploymentGetConfig24$outboundSchema),
       ]),
     ),
+  ]);
+
+export function deploymentGetConfigPrefixMessagesDeploymentsRequestContentToJSON(
+  deploymentGetConfigPrefixMessagesDeploymentsRequestContent:
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestContent$outboundSchema
+      .parse(deploymentGetConfigPrefixMessagesDeploymentsRequestContent),
+  );
+}
+
+/** @internal */
+export type PrefixMessagesUserMessage$Outbound = {
+  role: "user";
+  name?: string | undefined;
+  content:
+    | string
+    | Array<
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | components.ImageContentPartSchema$Outbound
+      | components.AudioContentPartSchema$Outbound
+      | DeploymentGetConfig24$Outbound
+    >;
+};
+
+/** @internal */
+export const PrefixMessagesUserMessage$outboundSchema: z.ZodType<
+  PrefixMessagesUserMessage$Outbound,
+  z.ZodTypeDef,
+  PrefixMessagesUserMessage
+> = z.object({
+  role: z.literal("user"),
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => DeploymentGetConfig24$outboundSchema),
+      ]),
+    ),
+  ]),
+});
+
+export function prefixMessagesUserMessageToJSON(
+  prefixMessagesUserMessage: PrefixMessagesUserMessage,
+): string {
+  return JSON.stringify(
+    PrefixMessagesUserMessage$outboundSchema.parse(prefixMessagesUserMessage),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigPrefixMessagesDeploymentsContent$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsContent$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigPrefixMessagesDeploymentsContent$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigPrefixMessagesDeploymentsContent
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]);
 
 export function deploymentGetConfigPrefixMessagesDeploymentsContentToJSON(
@@ -2062,44 +2228,34 @@ export function deploymentGetConfigPrefixMessagesDeploymentsContentToJSON(
 }
 
 /** @internal */
-export type UserMessage$Outbound = {
-  role: "user";
+export type PrefixMessagesDeveloperMessage$Outbound = {
+  role: "developer";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
-  content:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.ImageContentPartSchema$Outbound
-      | components.AudioContentPartSchema$Outbound
-      | Four$Outbound
-    >;
 };
 
 /** @internal */
-export const UserMessage$outboundSchema: z.ZodType<
-  UserMessage$Outbound,
+export const PrefixMessagesDeveloperMessage$outboundSchema: z.ZodType<
+  PrefixMessagesDeveloperMessage$Outbound,
   z.ZodTypeDef,
-  UserMessage
+  PrefixMessagesDeveloperMessage
 > = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
+  role: z.literal("developer"),
   content: z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Four$outboundSchema),
-      ]),
-    ),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]),
+  name: z.string().optional(),
 });
 
-export function userMessageToJSON(userMessage: UserMessage): string {
-  return JSON.stringify(UserMessage$outboundSchema.parse(userMessage));
+export function prefixMessagesDeveloperMessageToJSON(
+  prefixMessagesDeveloperMessage: PrefixMessagesDeveloperMessage,
+): string {
+  return JSON.stringify(
+    PrefixMessagesDeveloperMessage$outboundSchema.parse(
+      prefixMessagesDeveloperMessage,
+    ),
+  );
 }
 
 /** @internal */
@@ -2129,69 +2285,17 @@ export function deploymentGetConfigPrefixMessagesContentToJSON(
 }
 
 /** @internal */
-export type DeveloperMessage$Outbound = {
-  role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const DeveloperMessage$outboundSchema: z.ZodType<
-  DeveloperMessage$Outbound,
-  z.ZodTypeDef,
-  DeveloperMessage
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  name: z.string().optional(),
-});
-
-export function developerMessageToJSON(
-  developerMessage: DeveloperMessage,
-): string {
-  return JSON.stringify(
-    DeveloperMessage$outboundSchema.parse(developerMessage),
-  );
-}
-
-/** @internal */
-export type PrefixMessagesContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
-
-/** @internal */
-export const PrefixMessagesContent$outboundSchema: z.ZodType<
-  PrefixMessagesContent$Outbound,
-  z.ZodTypeDef,
-  PrefixMessagesContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
-
-export function prefixMessagesContentToJSON(
-  prefixMessagesContent: PrefixMessagesContent,
-): string {
-  return JSON.stringify(
-    PrefixMessagesContent$outboundSchema.parse(prefixMessagesContent),
-  );
-}
-
-/** @internal */
-export type SystemMessage$Outbound = {
+export type PrefixMessagesSystemMessage$Outbound = {
   role: "system";
   content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
 };
 
 /** @internal */
-export const SystemMessage$outboundSchema: z.ZodType<
-  SystemMessage$Outbound,
+export const PrefixMessagesSystemMessage$outboundSchema: z.ZodType<
+  PrefixMessagesSystemMessage$Outbound,
   z.ZodTypeDef,
-  SystemMessage
+  PrefixMessagesSystemMessage
 > = z.object({
   role: z.literal("system"),
   content: z.union([
@@ -2201,38 +2305,179 @@ export const SystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-export function systemMessageToJSON(systemMessage: SystemMessage): string {
-  return JSON.stringify(SystemMessage$outboundSchema.parse(systemMessage));
+export function prefixMessagesSystemMessageToJSON(
+  prefixMessagesSystemMessage: PrefixMessagesSystemMessage,
+): string {
+  return JSON.stringify(
+    PrefixMessagesSystemMessage$outboundSchema.parse(
+      prefixMessagesSystemMessage,
+    ),
+  );
 }
 
 /** @internal */
-export type PrefixMessages$Outbound =
-  | SystemMessage$Outbound
-  | DeveloperMessage$Outbound
-  | UserMessage$Outbound
-  | AssistantMessage$Outbound
-  | ToolMessage$Outbound;
+export type DeploymentGetConfigPrefixMessages$Outbound =
+  | PrefixMessagesSystemMessage$Outbound
+  | PrefixMessagesDeveloperMessage$Outbound
+  | PrefixMessagesUserMessage$Outbound
+  | PrefixMessagesAssistantMessage$Outbound
+  | PrefixMessagesToolMessage$Outbound;
 
 /** @internal */
-export const PrefixMessages$outboundSchema: z.ZodType<
-  PrefixMessages$Outbound,
+export const DeploymentGetConfigPrefixMessages$outboundSchema: z.ZodType<
+  DeploymentGetConfigPrefixMessages$Outbound,
   z.ZodTypeDef,
-  PrefixMessages
+  DeploymentGetConfigPrefixMessages
 > = z.union([
-  z.lazy(() => SystemMessage$outboundSchema),
-  z.lazy(() => DeveloperMessage$outboundSchema),
-  z.lazy(() => UserMessage$outboundSchema),
-  z.lazy(() => AssistantMessage$outboundSchema),
-  z.lazy(() => ToolMessage$outboundSchema),
+  z.lazy(() => PrefixMessagesSystemMessage$outboundSchema),
+  z.lazy(() => PrefixMessagesDeveloperMessage$outboundSchema),
+  z.lazy(() => PrefixMessagesUserMessage$outboundSchema),
+  z.lazy(() => PrefixMessagesAssistantMessage$outboundSchema),
+  z.lazy(() => PrefixMessagesToolMessage$outboundSchema),
 ]);
 
-export function prefixMessagesToJSON(prefixMessages: PrefixMessages): string {
-  return JSON.stringify(PrefixMessages$outboundSchema.parse(prefixMessages));
+export function deploymentGetConfigPrefixMessagesToJSON(
+  deploymentGetConfigPrefixMessages: DeploymentGetConfigPrefixMessages,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigPrefixMessages$outboundSchema.parse(
+      deploymentGetConfigPrefixMessages,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$Outbound =
+  components.TextContentPartSchema$Outbound;
+
+/** @internal */
+export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52
+  > = components.TextContentPartSchema$outboundSchema;
+
+export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52ToJSON(
+  deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52:
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages52$outboundSchema
+      .parse(deploymentGetConfigContentDeploymentsRequestRequestBodyMessages52),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content$Outbound =
+  | string
+  | Array<components.TextContentPartSchema$Outbound>;
+
+/** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content
+  > = z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]);
+
+export function deploymentGetConfigMessagesDeploymentsRequestRequestBody5ContentToJSON(
+  deploymentGetConfigMessagesDeploymentsRequestRequestBody5Content:
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBody5Content$outboundSchema
+      .parse(deploymentGetConfigMessagesDeploymentsRequestRequestBody5Content),
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfigMessagesDeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsType> = z
+    .nativeEnum(DeploymentGetConfigMessagesDeploymentsType);
+
+/** @internal */
+export const DeploymentGetConfigMessagesTtl$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigMessagesTtl
+> = z.nativeEnum(DeploymentGetConfigMessagesTtl);
+
+/** @internal */
+export type DeploymentGetConfigMessagesCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesCacheControl$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesCacheControl$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesCacheControl
+> = z.object({
+  type: DeploymentGetConfigMessagesDeploymentsType$outboundSchema,
+  ttl: DeploymentGetConfigMessagesTtl$outboundSchema.default("5m"),
+});
+
+export function deploymentGetConfigMessagesCacheControlToJSON(
+  deploymentGetConfigMessagesCacheControl:
+    DeploymentGetConfigMessagesCacheControl,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesCacheControl$outboundSchema.parse(
+      deploymentGetConfigMessagesCacheControl,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigMessagesToolMessage$Outbound = {
+  role: "tool";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
+  tool_call_id: string | null;
+  cache_control?: DeploymentGetConfigMessagesCacheControl$Outbound | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesToolMessage$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesToolMessage$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesToolMessage
+> = z.object({
+  role: z.literal("tool"),
+  content: z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ]),
+  toolCallId: z.nullable(z.string()),
+  cacheControl: z.lazy(() =>
+    DeploymentGetConfigMessagesCacheControl$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+    cacheControl: "cache_control",
+  });
+});
+
+export function deploymentGetConfigMessagesToolMessageToJSON(
+  deploymentGetConfigMessagesToolMessage:
+    DeploymentGetConfigMessagesToolMessage,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesToolMessage$outboundSchema.parse(
+      deploymentGetConfigMessagesToolMessage,
+    ),
+  );
 }
 
 /** @internal */
 export type DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound =
-  components.TextContentPartSchema$Outbound;
+  | (components.TextContentPartSchema$Outbound & { type: "text" })
+  | components.RefusalPartSchema$Outbound
+  | components.ReasoningPartSchema$Outbound
+  | components.RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$outboundSchema:
@@ -2240,7 +2485,14 @@ export const DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$ou
     DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2$Outbound,
     z.ZodTypeDef,
     DeploymentGetConfigContentDeploymentsRequestRequestBodyMessages2
-  > = components.TextContentPartSchema$outboundSchema;
+  > = z.union([
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.RefusalPartSchema$outboundSchema,
+    components.ReasoningPartSchema$outboundSchema,
+    components.RedactedReasoningPartSchema$outboundSchema,
+  ]);
 
 export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2ToJSON(
   deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2:
@@ -2255,7 +2507,12 @@ export function deploymentGetConfigContentDeploymentsRequestRequestBodyMessages2
 /** @internal */
 export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$Outbound =
   | string
-  | Array<components.TextContentPartSchema$Outbound>;
+  | Array<
+    | (components.TextContentPartSchema$Outbound & { type: "text" })
+    | components.RefusalPartSchema$Outbound
+    | components.ReasoningPartSchema$Outbound
+    | components.RedactedReasoningPartSchema$Outbound
+  >;
 
 /** @internal */
 export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$outboundSchema:
@@ -2265,7 +2522,16 @@ export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent$out
     DeploymentGetConfigMessagesDeploymentsRequestRequestBodyContent
   > = z.union([
     z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.RefusalPartSchema$outboundSchema,
+        components.ReasoningPartSchema$outboundSchema,
+        components.RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
   ]);
 
 export function deploymentGetConfigMessagesDeploymentsRequestRequestBodyContentToJSON(
@@ -2279,80 +2545,242 @@ export function deploymentGetConfigMessagesDeploymentsRequestRequestBodyContentT
 }
 
 /** @internal */
+export type DeploymentGetConfigMessagesAudio$Outbound = {
+  id: string;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesAudio$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesAudio$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesAudio
+> = z.object({
+  id: z.string(),
+});
+
+export function deploymentGetConfigMessagesAudioToJSON(
+  deploymentGetConfigMessagesAudio: DeploymentGetConfigMessagesAudio,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesAudio$outboundSchema.parse(
+      deploymentGetConfigMessagesAudio,
+    ),
+  );
+}
+
+/** @internal */
 export const DeploymentGetConfigMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentGetConfigMessagesType
 > = z.nativeEnum(DeploymentGetConfigMessagesType);
 
 /** @internal */
-export const MessagesTtl$outboundSchema: z.ZodNativeEnum<typeof MessagesTtl> = z
-  .nativeEnum(MessagesTtl);
+export type DeploymentGetConfigMessagesFunction$Outbound = {
+  name?: string | undefined;
+  arguments?: string | undefined;
+};
 
 /** @internal */
-export type MessagesCacheControl$Outbound = {
+export const DeploymentGetConfigMessagesFunction$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesFunction$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesFunction
+> = z.object({
+  name: z.string().optional(),
+  arguments: z.string().optional(),
+});
+
+export function deploymentGetConfigMessagesFunctionToJSON(
+  deploymentGetConfigMessagesFunction: DeploymentGetConfigMessagesFunction,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesFunction$outboundSchema.parse(
+      deploymentGetConfigMessagesFunction,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigMessagesToolCalls$Outbound = {
+  id: string;
+  type: string;
+  function: DeploymentGetConfigMessagesFunction$Outbound;
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesToolCalls$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesToolCalls$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesToolCalls
+> = z.object({
+  id: z.string(),
+  type: DeploymentGetConfigMessagesType$outboundSchema,
+  function: z.lazy(() => DeploymentGetConfigMessagesFunction$outboundSchema),
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function deploymentGetConfigMessagesToolCallsToJSON(
+  deploymentGetConfigMessagesToolCalls: DeploymentGetConfigMessagesToolCalls,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesToolCalls$outboundSchema.parse(
+      deploymentGetConfigMessagesToolCalls,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigMessagesAssistantMessage$Outbound = {
+  content?:
+    | string
+    | Array<
+      | (components.TextContentPartSchema$Outbound & { type: "text" })
+      | components.RefusalPartSchema$Outbound
+      | components.ReasoningPartSchema$Outbound
+      | components.RedactedReasoningPartSchema$Outbound
+    >
+    | null
+    | undefined;
+  refusal?: string | null | undefined;
+  role: "assistant";
+  name?: string | undefined;
+  audio?: DeploymentGetConfigMessagesAudio$Outbound | null | undefined;
+  tool_calls?: Array<DeploymentGetConfigMessagesToolCalls$Outbound> | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesAssistantMessage$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigMessagesAssistantMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigMessagesAssistantMessage
+  > = z.object({
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            components.TextContentPartSchema$outboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            components.RefusalPartSchema$outboundSchema,
+            components.ReasoningPartSchema$outboundSchema,
+            components.RedactedReasoningPartSchema$outboundSchema,
+          ]),
+        ),
+      ]),
+    ).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role: z.literal("assistant"),
+    name: z.string().optional(),
+    audio: z.nullable(
+      z.lazy(() => DeploymentGetConfigMessagesAudio$outboundSchema),
+    ).optional(),
+    toolCalls: z.array(
+      z.lazy(() => DeploymentGetConfigMessagesToolCalls$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCalls: "tool_calls",
+    });
+  });
+
+export function deploymentGetConfigMessagesAssistantMessageToJSON(
+  deploymentGetConfigMessagesAssistantMessage:
+    DeploymentGetConfigMessagesAssistantMessage,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesAssistantMessage$outboundSchema.parse(
+      deploymentGetConfigMessagesAssistantMessage,
+    ),
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+  > = z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyType);
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsTtl$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig2DeploymentsTtl
+> = z.nativeEnum(DeploymentGetConfig2DeploymentsTtl);
+
+/** @internal */
+export type DeploymentGetConfig2DeploymentsCacheControl$Outbound = {
   type: string;
   ttl: string;
 };
 
 /** @internal */
-export const MessagesCacheControl$outboundSchema: z.ZodType<
-  MessagesCacheControl$Outbound,
-  z.ZodTypeDef,
-  MessagesCacheControl
-> = z.object({
-  type: DeploymentGetConfigMessagesType$outboundSchema,
-  ttl: MessagesTtl$outboundSchema.default("5m"),
-});
+export const DeploymentGetConfig2DeploymentsCacheControl$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfig2DeploymentsCacheControl$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfig2DeploymentsCacheControl
+  > = z.object({
+    type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema,
+    ttl: DeploymentGetConfig2DeploymentsTtl$outboundSchema.default("5m"),
+  });
 
-export function messagesCacheControlToJSON(
-  messagesCacheControl: MessagesCacheControl,
+export function deploymentGetConfig2DeploymentsCacheControlToJSON(
+  deploymentGetConfig2DeploymentsCacheControl:
+    DeploymentGetConfig2DeploymentsCacheControl,
 ): string {
   return JSON.stringify(
-    MessagesCacheControl$outboundSchema.parse(messagesCacheControl),
+    DeploymentGetConfig2DeploymentsCacheControl$outboundSchema.parse(
+      deploymentGetConfig2DeploymentsCacheControl,
+    ),
   );
 }
 
 /** @internal */
-export type MessagesToolMessage$Outbound = {
-  role: "tool";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  tool_call_id: string | null;
-  cache_control?: MessagesCacheControl$Outbound | undefined;
+export type DeploymentGetConfig2Deployments4$Outbound = {
+  type: "file";
+  cache_control?:
+    | DeploymentGetConfig2DeploymentsCacheControl$Outbound
+    | undefined;
+  file: components.FileContentPartSchema$Outbound;
 };
 
 /** @internal */
-export const MessagesToolMessage$outboundSchema: z.ZodType<
-  MessagesToolMessage$Outbound,
+export const DeploymentGetConfig2Deployments4$outboundSchema: z.ZodType<
+  DeploymentGetConfig2Deployments4$Outbound,
   z.ZodTypeDef,
-  MessagesToolMessage
+  DeploymentGetConfig2Deployments4
 > = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() => MessagesCacheControl$outboundSchema).optional(),
+  type: z.literal("file"),
+  cacheControl: z.lazy(() =>
+    DeploymentGetConfig2DeploymentsCacheControl$outboundSchema
+  ).optional(),
+  file: components.FileContentPartSchema$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
-    toolCallId: "tool_call_id",
     cacheControl: "cache_control",
   });
 });
 
-export function messagesToolMessageToJSON(
-  messagesToolMessage: MessagesToolMessage,
+export function deploymentGetConfig2Deployments4ToJSON(
+  deploymentGetConfig2Deployments4: DeploymentGetConfig2Deployments4,
 ): string {
   return JSON.stringify(
-    MessagesToolMessage$outboundSchema.parse(messagesToolMessage),
+    DeploymentGetConfig2Deployments4$outboundSchema.parse(
+      deploymentGetConfig2Deployments4,
+    ),
   );
 }
 
 /** @internal */
 export type DeploymentGetConfigContentDeploymentsRequestRequestBody2$Outbound =
   | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.RefusalPartSchema$Outbound
-  | components.ReasoningPartSchema$Outbound
-  | components.RedactedReasoningPartSchema$Outbound;
+  | components.ImageContentPartSchema$Outbound
+  | components.AudioContentPartSchema$Outbound
+  | DeploymentGetConfig2Deployments4$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigContentDeploymentsRequestRequestBody2$outboundSchema:
@@ -2364,9 +2792,9 @@ export const DeploymentGetConfigContentDeploymentsRequestRequestBody2$outboundSc
     components.TextContentPartSchema$outboundSchema.and(
       z.object({ type: z.literal("text") }),
     ),
-    components.RefusalPartSchema$outboundSchema,
-    components.ReasoningPartSchema$outboundSchema,
-    components.RedactedReasoningPartSchema$outboundSchema,
+    components.ImageContentPartSchema$outboundSchema,
+    components.AudioContentPartSchema$outboundSchema,
+    z.lazy(() => DeploymentGetConfig2Deployments4$outboundSchema),
   ]);
 
 export function deploymentGetConfigContentDeploymentsRequestRequestBody2ToJSON(
@@ -2384,9 +2812,9 @@ export type DeploymentGetConfigMessagesDeploymentsRequestContent$Outbound =
   | string
   | Array<
     | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.RefusalPartSchema$Outbound
-    | components.ReasoningPartSchema$Outbound
-    | components.RedactedReasoningPartSchema$Outbound
+    | components.ImageContentPartSchema$Outbound
+    | components.AudioContentPartSchema$Outbound
+    | DeploymentGetConfig2Deployments4$Outbound
   >;
 
 /** @internal */
@@ -2402,9 +2830,9 @@ export const DeploymentGetConfigMessagesDeploymentsRequestContent$outboundSchema
         components.TextContentPartSchema$outboundSchema.and(
           z.object({ type: z.literal("text") }),
         ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => DeploymentGetConfig2Deployments4$outboundSchema),
       ]),
     ),
   ]);
@@ -2421,226 +2849,49 @@ export function deploymentGetConfigMessagesDeploymentsRequestContentToJSON(
 }
 
 /** @internal */
-export type MessagesAudio$Outbound = {
-  id: string;
-};
-
-/** @internal */
-export const MessagesAudio$outboundSchema: z.ZodType<
-  MessagesAudio$Outbound,
-  z.ZodTypeDef,
-  MessagesAudio
-> = z.object({
-  id: z.string(),
-});
-
-export function messagesAudioToJSON(messagesAudio: MessagesAudio): string {
-  return JSON.stringify(MessagesAudio$outboundSchema.parse(messagesAudio));
-}
-
-/** @internal */
-export const MessagesType$outboundSchema: z.ZodNativeEnum<typeof MessagesType> =
-  z.nativeEnum(MessagesType);
-
-/** @internal */
-export type MessagesFunction$Outbound = {
+export type DeploymentGetConfigMessagesUserMessage$Outbound = {
+  role: "user";
   name?: string | undefined;
-  arguments?: string | undefined;
-};
-
-/** @internal */
-export const MessagesFunction$outboundSchema: z.ZodType<
-  MessagesFunction$Outbound,
-  z.ZodTypeDef,
-  MessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
-
-export function messagesFunctionToJSON(
-  messagesFunction: MessagesFunction,
-): string {
-  return JSON.stringify(
-    MessagesFunction$outboundSchema.parse(messagesFunction),
-  );
-}
-
-/** @internal */
-export type MessagesToolCalls$Outbound = {
-  id: string;
-  type: string;
-  function: MessagesFunction$Outbound;
-  thought_signature?: string | undefined;
-};
-
-/** @internal */
-export const MessagesToolCalls$outboundSchema: z.ZodType<
-  MessagesToolCalls$Outbound,
-  z.ZodTypeDef,
-  MessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: MessagesType$outboundSchema,
-  function: z.lazy(() => MessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
-
-export function messagesToolCallsToJSON(
-  messagesToolCalls: MessagesToolCalls,
-): string {
-  return JSON.stringify(
-    MessagesToolCalls$outboundSchema.parse(messagesToolCalls),
-  );
-}
-
-/** @internal */
-export type MessagesAssistantMessage$Outbound = {
-  content?:
+  content:
     | string
     | Array<
       | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.RefusalPartSchema$Outbound
-      | components.ReasoningPartSchema$Outbound
-      | components.RedactedReasoningPartSchema$Outbound
-    >
-    | null
-    | undefined;
-  refusal?: string | null | undefined;
-  role: "assistant";
-  name?: string | undefined;
-  audio?: MessagesAudio$Outbound | null | undefined;
-  tool_calls?: Array<MessagesToolCalls$Outbound> | undefined;
+      | components.ImageContentPartSchema$Outbound
+      | components.AudioContentPartSchema$Outbound
+      | DeploymentGetConfig2Deployments4$Outbound
+    >;
 };
 
 /** @internal */
-export const MessagesAssistantMessage$outboundSchema: z.ZodType<
-  MessagesAssistantMessage$Outbound,
+export const DeploymentGetConfigMessagesUserMessage$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesUserMessage$Outbound,
   z.ZodTypeDef,
-  MessagesAssistantMessage
+  DeploymentGetConfigMessagesUserMessage
 > = z.object({
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$outboundSchema,
-          components.ReasoningPartSchema$outboundSchema,
-          components.RedactedReasoningPartSchema$outboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
+  role: z.literal("user"),
   name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => MessagesAudio$outboundSchema)).optional(),
-  toolCalls: z.array(z.lazy(() => MessagesToolCalls$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
-  });
-});
-
-export function messagesAssistantMessageToJSON(
-  messagesAssistantMessage: MessagesAssistantMessage,
-): string {
-  return JSON.stringify(
-    MessagesAssistantMessage$outboundSchema.parse(messagesAssistantMessage),
-  );
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
-  > = z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyType);
-
-/** @internal */
-export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> = z
-  .nativeEnum(TwoTtl);
-
-/** @internal */
-export type TwoCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const TwoCacheControl$outboundSchema: z.ZodType<
-  TwoCacheControl$Outbound,
-  z.ZodTypeDef,
-  TwoCacheControl
-> = z.object({
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema,
-  ttl: TwoTtl$outboundSchema.default("5m"),
-});
-
-export function twoCacheControlToJSON(
-  twoCacheControl: TwoCacheControl,
-): string {
-  return JSON.stringify(TwoCacheControl$outboundSchema.parse(twoCacheControl));
-}
-
-/** @internal */
-export type Two4$Outbound = {
-  type: "file";
-  cache_control?: TwoCacheControl$Outbound | undefined;
-  file: components.FileContentPartSchema$Outbound;
-};
-
-/** @internal */
-export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
-  z.object({
-    type: z.literal("file"),
-    cacheControl: z.lazy(() => TwoCacheControl$outboundSchema).optional(),
-    file: components.FileContentPartSchema$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
-
-export function two4ToJSON(two4: Two4): string {
-  return JSON.stringify(Two4$outboundSchema.parse(two4));
-}
-
-/** @internal */
-export type DeploymentGetConfigContentDeploymentsRequest2$Outbound =
-  | (components.TextContentPartSchema$Outbound & { type: "text" })
-  | components.ImageContentPartSchema$Outbound
-  | components.AudioContentPartSchema$Outbound
-  | Two4$Outbound;
-
-/** @internal */
-export const DeploymentGetConfigContentDeploymentsRequest2$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequest2$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequest2
-  > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
+  content: z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => DeploymentGetConfig2Deployments4$outboundSchema),
+      ]),
     ),
-    components.ImageContentPartSchema$outboundSchema,
-    components.AudioContentPartSchema$outboundSchema,
-    z.lazy(() => Two4$outboundSchema),
-  ]);
+  ]),
+});
 
-export function deploymentGetConfigContentDeploymentsRequest2ToJSON(
-  deploymentGetConfigContentDeploymentsRequest2:
-    DeploymentGetConfigContentDeploymentsRequest2,
+export function deploymentGetConfigMessagesUserMessageToJSON(
+  deploymentGetConfigMessagesUserMessage:
+    DeploymentGetConfigMessagesUserMessage,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequest2$outboundSchema.parse(
-      deploymentGetConfigContentDeploymentsRequest2,
+    DeploymentGetConfigMessagesUserMessage$outboundSchema.parse(
+      deploymentGetConfigMessagesUserMessage,
     ),
   );
 }
@@ -2648,12 +2899,7 @@ export function deploymentGetConfigContentDeploymentsRequest2ToJSON(
 /** @internal */
 export type DeploymentGetConfigMessagesDeploymentsContent$Outbound =
   | string
-  | Array<
-    | (components.TextContentPartSchema$Outbound & { type: "text" })
-    | components.ImageContentPartSchema$Outbound
-    | components.AudioContentPartSchema$Outbound
-    | Two4$Outbound
-  >;
+  | Array<components.TextContentPartSchema$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigMessagesDeploymentsContent$outboundSchema:
@@ -2663,16 +2909,7 @@ export const DeploymentGetConfigMessagesDeploymentsContent$outboundSchema:
     DeploymentGetConfigMessagesDeploymentsContent
   > = z.union([
     z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Two4$outboundSchema),
-      ]),
-    ),
+    z.array(components.TextContentPartSchema$outboundSchema),
   ]);
 
 export function deploymentGetConfigMessagesDeploymentsContentToJSON(
@@ -2687,47 +2924,35 @@ export function deploymentGetConfigMessagesDeploymentsContentToJSON(
 }
 
 /** @internal */
-export type MessagesUserMessage$Outbound = {
-  role: "user";
+export type DeploymentGetConfigMessagesDeveloperMessage$Outbound = {
+  role: "developer";
+  content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
-  content:
-    | string
-    | Array<
-      | (components.TextContentPartSchema$Outbound & { type: "text" })
-      | components.ImageContentPartSchema$Outbound
-      | components.AudioContentPartSchema$Outbound
-      | Two4$Outbound
-    >;
 };
 
 /** @internal */
-export const MessagesUserMessage$outboundSchema: z.ZodType<
-  MessagesUserMessage$Outbound,
-  z.ZodTypeDef,
-  MessagesUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Two4$outboundSchema),
-      ]),
-    ),
-  ]),
-});
+export const DeploymentGetConfigMessagesDeveloperMessage$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigMessagesDeveloperMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigMessagesDeveloperMessage
+  > = z.object({
+    role: z.literal("developer"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ]),
+    name: z.string().optional(),
+  });
 
-export function messagesUserMessageToJSON(
-  messagesUserMessage: MessagesUserMessage,
+export function deploymentGetConfigMessagesDeveloperMessageToJSON(
+  deploymentGetConfigMessagesDeveloperMessage:
+    DeploymentGetConfigMessagesDeveloperMessage,
 ): string {
   return JSON.stringify(
-    MessagesUserMessage$outboundSchema.parse(messagesUserMessage),
+    DeploymentGetConfigMessagesDeveloperMessage$outboundSchema.parse(
+      deploymentGetConfigMessagesDeveloperMessage,
+    ),
   );
 }
 
@@ -2757,67 +2982,17 @@ export function deploymentGetConfigMessagesContentToJSON(
 }
 
 /** @internal */
-export type MessagesDeveloperMessage$Outbound = {
-  role: "developer";
-  content: string | Array<components.TextContentPartSchema$Outbound>;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const MessagesDeveloperMessage$outboundSchema: z.ZodType<
-  MessagesDeveloperMessage$Outbound,
-  z.ZodTypeDef,
-  MessagesDeveloperMessage
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  name: z.string().optional(),
-});
-
-export function messagesDeveloperMessageToJSON(
-  messagesDeveloperMessage: MessagesDeveloperMessage,
-): string {
-  return JSON.stringify(
-    MessagesDeveloperMessage$outboundSchema.parse(messagesDeveloperMessage),
-  );
-}
-
-/** @internal */
-export type MessagesContent$Outbound =
-  | string
-  | Array<components.TextContentPartSchema$Outbound>;
-
-/** @internal */
-export const MessagesContent$outboundSchema: z.ZodType<
-  MessagesContent$Outbound,
-  z.ZodTypeDef,
-  MessagesContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
-
-export function messagesContentToJSON(
-  messagesContent: MessagesContent,
-): string {
-  return JSON.stringify(MessagesContent$outboundSchema.parse(messagesContent));
-}
-
-/** @internal */
-export type MessagesSystemMessage$Outbound = {
+export type DeploymentGetConfigMessagesSystemMessage$Outbound = {
   role: "system";
   content: string | Array<components.TextContentPartSchema$Outbound>;
   name?: string | undefined;
 };
 
 /** @internal */
-export const MessagesSystemMessage$outboundSchema: z.ZodType<
-  MessagesSystemMessage$Outbound,
+export const DeploymentGetConfigMessagesSystemMessage$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesSystemMessage$Outbound,
   z.ZodTypeDef,
-  MessagesSystemMessage
+  DeploymentGetConfigMessagesSystemMessage
 > = z.object({
   role: z.literal("system"),
   content: z.union([
@@ -2827,21 +3002,24 @@ export const MessagesSystemMessage$outboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 
-export function messagesSystemMessageToJSON(
-  messagesSystemMessage: MessagesSystemMessage,
+export function deploymentGetConfigMessagesSystemMessageToJSON(
+  deploymentGetConfigMessagesSystemMessage:
+    DeploymentGetConfigMessagesSystemMessage,
 ): string {
   return JSON.stringify(
-    MessagesSystemMessage$outboundSchema.parse(messagesSystemMessage),
+    DeploymentGetConfigMessagesSystemMessage$outboundSchema.parse(
+      deploymentGetConfigMessagesSystemMessage,
+    ),
   );
 }
 
 /** @internal */
 export type DeploymentGetConfigMessages$Outbound =
-  | MessagesSystemMessage$Outbound
-  | MessagesDeveloperMessage$Outbound
-  | MessagesUserMessage$Outbound
-  | MessagesAssistantMessage$Outbound
-  | MessagesToolMessage$Outbound;
+  | DeploymentGetConfigMessagesSystemMessage$Outbound
+  | DeploymentGetConfigMessagesDeveloperMessage$Outbound
+  | DeploymentGetConfigMessagesUserMessage$Outbound
+  | DeploymentGetConfigMessagesAssistantMessage$Outbound
+  | DeploymentGetConfigMessagesToolMessage$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigMessages$outboundSchema: z.ZodType<
@@ -2849,11 +3027,11 @@ export const DeploymentGetConfigMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentGetConfigMessages
 > = z.union([
-  z.lazy(() => MessagesSystemMessage$outboundSchema),
-  z.lazy(() => MessagesDeveloperMessage$outboundSchema),
-  z.lazy(() => MessagesUserMessage$outboundSchema),
-  z.lazy(() => MessagesAssistantMessage$outboundSchema),
-  z.lazy(() => MessagesToolMessage$outboundSchema),
+  z.lazy(() => DeploymentGetConfigMessagesSystemMessage$outboundSchema),
+  z.lazy(() => DeploymentGetConfigMessagesDeveloperMessage$outboundSchema),
+  z.lazy(() => DeploymentGetConfigMessagesUserMessage$outboundSchema),
+  z.lazy(() => DeploymentGetConfigMessagesAssistantMessage$outboundSchema),
+  z.lazy(() => DeploymentGetConfigMessagesToolMessage$outboundSchema),
 ]);
 
 export function deploymentGetConfigMessagesToJSON(
@@ -2867,17 +3045,17 @@ export function deploymentGetConfigMessagesToJSON(
 }
 
 /** @internal */
-export type Metadata$Outbound = {
+export type DeploymentGetConfigMetadata$Outbound = {
   file_name?: string | undefined;
   file_type?: string | undefined;
   page_number?: number | undefined;
 };
 
 /** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
+export const DeploymentGetConfigMetadata$outboundSchema: z.ZodType<
+  DeploymentGetConfigMetadata$Outbound,
   z.ZodTypeDef,
-  Metadata
+  DeploymentGetConfigMetadata
 > = z.object({
   fileName: z.string().optional(),
   fileType: z.string().optional(),
@@ -2890,42 +3068,54 @@ export const Metadata$outboundSchema: z.ZodType<
   });
 });
 
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
+export function deploymentGetConfigMetadataToJSON(
+  deploymentGetConfigMetadata: DeploymentGetConfigMetadata,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMetadata$outboundSchema.parse(
+      deploymentGetConfigMetadata,
+    ),
+  );
 }
 
 /** @internal */
-export type Documents$Outbound = {
+export type DeploymentGetConfigDocuments$Outbound = {
   text: string;
-  metadata?: Metadata$Outbound | undefined;
+  metadata?: DeploymentGetConfigMetadata$Outbound | undefined;
 };
 
 /** @internal */
-export const Documents$outboundSchema: z.ZodType<
-  Documents$Outbound,
+export const DeploymentGetConfigDocuments$outboundSchema: z.ZodType<
+  DeploymentGetConfigDocuments$Outbound,
   z.ZodTypeDef,
-  Documents
+  DeploymentGetConfigDocuments
 > = z.object({
   text: z.string(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
+  metadata: z.lazy(() => DeploymentGetConfigMetadata$outboundSchema).optional(),
 });
 
-export function documentsToJSON(documents: Documents): string {
-  return JSON.stringify(Documents$outboundSchema.parse(documents));
+export function deploymentGetConfigDocumentsToJSON(
+  deploymentGetConfigDocuments: DeploymentGetConfigDocuments,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigDocuments$outboundSchema.parse(
+      deploymentGetConfigDocuments,
+    ),
+  );
 }
 
 /** @internal */
-export type InvokeOptions$Outbound = {
+export type DeploymentGetConfigInvokeOptions$Outbound = {
   include_retrievals: boolean;
   include_usage: boolean;
   mock_response?: string | undefined;
 };
 
 /** @internal */
-export const InvokeOptions$outboundSchema: z.ZodType<
-  InvokeOptions$Outbound,
+export const DeploymentGetConfigInvokeOptions$outboundSchema: z.ZodType<
+  DeploymentGetConfigInvokeOptions$Outbound,
   z.ZodTypeDef,
-  InvokeOptions
+  DeploymentGetConfigInvokeOptions
 > = z.object({
   includeRetrievals: z.boolean().default(false),
   includeUsage: z.boolean().default(false),
@@ -2938,57 +3128,100 @@ export const InvokeOptions$outboundSchema: z.ZodType<
   });
 });
 
-export function invokeOptionsToJSON(invokeOptions: InvokeOptions): string {
-  return JSON.stringify(InvokeOptions$outboundSchema.parse(invokeOptions));
+export function deploymentGetConfigInvokeOptionsToJSON(
+  deploymentGetConfigInvokeOptions: DeploymentGetConfigInvokeOptions,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigInvokeOptions$outboundSchema.parse(
+      deploymentGetConfigInvokeOptions,
+    ),
+  );
 }
 
 /** @internal */
-export type Thread$Outbound = {
+export type DeploymentGetConfigThread$Outbound = {
   id: string;
   tags?: Array<string> | undefined;
 };
 
 /** @internal */
-export const Thread$outboundSchema: z.ZodType<
-  Thread$Outbound,
+export const DeploymentGetConfigThread$outboundSchema: z.ZodType<
+  DeploymentGetConfigThread$Outbound,
   z.ZodTypeDef,
-  Thread
+  DeploymentGetConfigThread
 > = z.object({
   id: z.string(),
   tags: z.array(z.string()).optional(),
 });
 
-export function threadToJSON(thread: Thread): string {
-  return JSON.stringify(Thread$outboundSchema.parse(thread));
+export function deploymentGetConfigThreadToJSON(
+  deploymentGetConfigThread: DeploymentGetConfigThread,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigThread$outboundSchema.parse(deploymentGetConfigThread),
+  );
 }
 
 /** @internal */
-export type OrExists$Outbound = {
+export type DeploymentGetConfigOrExists$Outbound = {
   exists: boolean;
 };
 
 /** @internal */
-export const OrExists$outboundSchema: z.ZodType<
-  OrExists$Outbound,
+export const DeploymentGetConfigOrExists$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrExists$Outbound,
   z.ZodTypeDef,
-  OrExists
+  DeploymentGetConfigOrExists
 > = z.object({
   exists: z.boolean(),
 });
 
-export function orExistsToJSON(orExists: OrExists): string {
-  return JSON.stringify(OrExists$outboundSchema.parse(orExists));
+export function deploymentGetConfigOrExistsToJSON(
+  deploymentGetConfigOrExists: DeploymentGetConfigOrExists,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrExists$outboundSchema.parse(
+      deploymentGetConfigOrExists,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigOrNin$Outbound = string | number | boolean;
+export type DeploymentGetConfigOrDeploymentsNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfigOrDeploymentsNin$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrDeploymentsNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigOrDeploymentsNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfigOrDeploymentsNinToJSON(
+  deploymentGetConfigOrDeploymentsNin: DeploymentGetConfigOrDeploymentsNin,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrDeploymentsNin$outboundSchema.parse(
+      deploymentGetConfigOrDeploymentsNin,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigOrNin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
 
 /** @internal */
 export const DeploymentGetConfigOrNin$outboundSchema: z.ZodType<
   DeploymentGetConfigOrNin$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigOrNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
 export function deploymentGetConfigOrNinToJSON(
   deploymentGetConfigOrNin: DeploymentGetConfigOrNin,
@@ -2999,32 +3232,41 @@ export function deploymentGetConfigOrNinToJSON(
 }
 
 /** @internal */
-export type OrNin$Outbound = {
-  nin: Array<string | number | boolean>;
-};
+export type DeploymentGetConfigOrDeploymentsIn$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const OrNin$outboundSchema: z.ZodType<
-  OrNin$Outbound,
+export const DeploymentGetConfigOrDeploymentsIn$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrDeploymentsIn$Outbound,
   z.ZodTypeDef,
-  OrNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+  DeploymentGetConfigOrDeploymentsIn
+> = z.union([z.string(), z.number(), z.boolean()]);
 
-export function orNinToJSON(orNin: OrNin): string {
-  return JSON.stringify(OrNin$outboundSchema.parse(orNin));
+export function deploymentGetConfigOrDeploymentsInToJSON(
+  deploymentGetConfigOrDeploymentsIn: DeploymentGetConfigOrDeploymentsIn,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrDeploymentsIn$outboundSchema.parse(
+      deploymentGetConfigOrDeploymentsIn,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigOrIn$Outbound = string | number | boolean;
+export type DeploymentGetConfigOrIn$Outbound = {
+  in: Array<string | number | boolean>;
+};
 
 /** @internal */
 export const DeploymentGetConfigOrIn$outboundSchema: z.ZodType<
   DeploymentGetConfigOrIn$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigOrIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
 export function deploymentGetConfigOrInToJSON(
   deploymentGetConfigOrIn: DeploymentGetConfigOrIn,
@@ -3035,95 +3277,129 @@ export function deploymentGetConfigOrInToJSON(
 }
 
 /** @internal */
-export type OrIn$Outbound = {
-  in: Array<string | number | boolean>;
-};
-
-/** @internal */
-export const OrIn$outboundSchema: z.ZodType<OrIn$Outbound, z.ZodTypeDef, OrIn> =
-  z.object({
-    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-  });
-
-export function orInToJSON(orIn: OrIn): string {
-  return JSON.stringify(OrIn$outboundSchema.parse(orIn));
-}
-
-/** @internal */
-export type OrLte$Outbound = {
+export type DeploymentGetConfigOrLte$Outbound = {
   lte: number;
 };
 
 /** @internal */
-export const OrLte$outboundSchema: z.ZodType<
-  OrLte$Outbound,
+export const DeploymentGetConfigOrLte$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrLte$Outbound,
   z.ZodTypeDef,
-  OrLte
+  DeploymentGetConfigOrLte
 > = z.object({
   lte: z.number(),
 });
 
-export function orLteToJSON(orLte: OrLte): string {
-  return JSON.stringify(OrLte$outboundSchema.parse(orLte));
+export function deploymentGetConfigOrLteToJSON(
+  deploymentGetConfigOrLte: DeploymentGetConfigOrLte,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrLte$outboundSchema.parse(deploymentGetConfigOrLte),
+  );
 }
 
 /** @internal */
-export type OrLt$Outbound = {
+export type DeploymentGetConfigOrLt$Outbound = {
   lt: number;
 };
 
 /** @internal */
-export const OrLt$outboundSchema: z.ZodType<OrLt$Outbound, z.ZodTypeDef, OrLt> =
-  z.object({
-    lt: z.number(),
-  });
+export const DeploymentGetConfigOrLt$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrLt$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigOrLt
+> = z.object({
+  lt: z.number(),
+});
 
-export function orLtToJSON(orLt: OrLt): string {
-  return JSON.stringify(OrLt$outboundSchema.parse(orLt));
+export function deploymentGetConfigOrLtToJSON(
+  deploymentGetConfigOrLt: DeploymentGetConfigOrLt,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrLt$outboundSchema.parse(deploymentGetConfigOrLt),
+  );
 }
 
 /** @internal */
-export type OrGte$Outbound = {
+export type DeploymentGetConfigOrGte$Outbound = {
   gte: number;
 };
 
 /** @internal */
-export const OrGte$outboundSchema: z.ZodType<
-  OrGte$Outbound,
+export const DeploymentGetConfigOrGte$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrGte$Outbound,
   z.ZodTypeDef,
-  OrGte
+  DeploymentGetConfigOrGte
 > = z.object({
   gte: z.number(),
 });
 
-export function orGteToJSON(orGte: OrGte): string {
-  return JSON.stringify(OrGte$outboundSchema.parse(orGte));
+export function deploymentGetConfigOrGteToJSON(
+  deploymentGetConfigOrGte: DeploymentGetConfigOrGte,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrGte$outboundSchema.parse(deploymentGetConfigOrGte),
+  );
 }
 
 /** @internal */
-export type OrGt$Outbound = {
+export type DeploymentGetConfigOrGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const OrGt$outboundSchema: z.ZodType<OrGt$Outbound, z.ZodTypeDef, OrGt> =
-  z.object({
-    gt: z.number(),
-  });
+export const DeploymentGetConfigOrGt$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrGt$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigOrGt
+> = z.object({
+  gt: z.number(),
+});
 
-export function orGtToJSON(orGt: OrGt): string {
-  return JSON.stringify(OrGt$outboundSchema.parse(orGt));
+export function deploymentGetConfigOrGtToJSON(
+  deploymentGetConfigOrGt: DeploymentGetConfigOrGt,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrGt$outboundSchema.parse(deploymentGetConfigOrGt),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigOrNe$Outbound = string | number | boolean;
+export type DeploymentGetConfigOrDeploymentsNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfigOrDeploymentsNe$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrDeploymentsNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigOrDeploymentsNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfigOrDeploymentsNeToJSON(
+  deploymentGetConfigOrDeploymentsNe: DeploymentGetConfigOrDeploymentsNe,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrDeploymentsNe$outboundSchema.parse(
+      deploymentGetConfigOrDeploymentsNe,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigOrNe$Outbound = {
+  ne: string | number | boolean;
+};
 
 /** @internal */
 export const DeploymentGetConfigOrNe$outboundSchema: z.ZodType<
   DeploymentGetConfigOrNe$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigOrNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
 
 export function deploymentGetConfigOrNeToJSON(
   deploymentGetConfigOrNe: DeploymentGetConfigOrNe,
@@ -3134,29 +3410,41 @@ export function deploymentGetConfigOrNeToJSON(
 }
 
 /** @internal */
-export type OrNe$Outbound = {
-  ne: string | number | boolean;
-};
+export type DeploymentGetConfigOrDeploymentsEq$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const OrNe$outboundSchema: z.ZodType<OrNe$Outbound, z.ZodTypeDef, OrNe> =
-  z.object({
-    ne: z.union([z.string(), z.number(), z.boolean()]),
-  });
+export const DeploymentGetConfigOrDeploymentsEq$outboundSchema: z.ZodType<
+  DeploymentGetConfigOrDeploymentsEq$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigOrDeploymentsEq
+> = z.union([z.string(), z.number(), z.boolean()]);
 
-export function orNeToJSON(orNe: OrNe): string {
-  return JSON.stringify(OrNe$outboundSchema.parse(orNe));
+export function deploymentGetConfigOrDeploymentsEqToJSON(
+  deploymentGetConfigOrDeploymentsEq: DeploymentGetConfigOrDeploymentsEq,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigOrDeploymentsEq$outboundSchema.parse(
+      deploymentGetConfigOrDeploymentsEq,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigOrEq$Outbound = string | number | boolean;
+export type DeploymentGetConfigOrEq$Outbound = {
+  eq: string | number | boolean;
+};
 
 /** @internal */
 export const DeploymentGetConfigOrEq$outboundSchema: z.ZodType<
   DeploymentGetConfigOrEq$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigOrEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
 
 export function deploymentGetConfigOrEqToJSON(
   deploymentGetConfigOrEq: DeploymentGetConfigOrEq,
@@ -3167,126 +3455,157 @@ export function deploymentGetConfigOrEqToJSON(
 }
 
 /** @internal */
-export type OrEq$Outbound = {
-  eq: string | number | boolean;
-};
+export type DeploymentGetConfigKnowledgeFilterDeploymentsOr$Outbound =
+  | DeploymentGetConfigOrEq$Outbound
+  | DeploymentGetConfigOrNe$Outbound
+  | DeploymentGetConfigOrGt$Outbound
+  | DeploymentGetConfigOrGte$Outbound
+  | DeploymentGetConfigOrLt$Outbound
+  | DeploymentGetConfigOrLte$Outbound
+  | DeploymentGetConfigOrIn$Outbound
+  | DeploymentGetConfigOrNin$Outbound
+  | DeploymentGetConfigOrExists$Outbound;
 
 /** @internal */
-export const OrEq$outboundSchema: z.ZodType<OrEq$Outbound, z.ZodTypeDef, OrEq> =
-  z.object({
-    eq: z.union([z.string(), z.number(), z.boolean()]),
-  });
+export const DeploymentGetConfigKnowledgeFilterDeploymentsOr$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigKnowledgeFilterDeploymentsOr$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigKnowledgeFilterDeploymentsOr
+  > = z.union([
+    z.lazy(() => DeploymentGetConfigOrEq$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrNe$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrGt$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrGte$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrLt$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrLte$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrIn$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrNin$outboundSchema),
+    z.lazy(() => DeploymentGetConfigOrExists$outboundSchema),
+  ]);
 
-export function orEqToJSON(orEq: OrEq): string {
-  return JSON.stringify(OrEq$outboundSchema.parse(orEq));
-}
-
-/** @internal */
-export type KnowledgeFilterOr$Outbound =
-  | OrEq$Outbound
-  | OrNe$Outbound
-  | OrGt$Outbound
-  | OrGte$Outbound
-  | OrLt$Outbound
-  | OrLte$Outbound
-  | OrIn$Outbound
-  | OrNin$Outbound
-  | OrExists$Outbound;
-
-/** @internal */
-export const KnowledgeFilterOr$outboundSchema: z.ZodType<
-  KnowledgeFilterOr$Outbound,
-  z.ZodTypeDef,
-  KnowledgeFilterOr
-> = z.union([
-  z.lazy(() => OrEq$outboundSchema),
-  z.lazy(() => OrNe$outboundSchema),
-  z.lazy(() => OrGt$outboundSchema),
-  z.lazy(() => OrGte$outboundSchema),
-  z.lazy(() => OrLt$outboundSchema),
-  z.lazy(() => OrLte$outboundSchema),
-  z.lazy(() => OrIn$outboundSchema),
-  z.lazy(() => OrNin$outboundSchema),
-  z.lazy(() => OrExists$outboundSchema),
-]);
-
-export function knowledgeFilterOrToJSON(
-  knowledgeFilterOr: KnowledgeFilterOr,
+export function deploymentGetConfigKnowledgeFilterDeploymentsOrToJSON(
+  deploymentGetConfigKnowledgeFilterDeploymentsOr:
+    DeploymentGetConfigKnowledgeFilterDeploymentsOr,
 ): string {
   return JSON.stringify(
-    KnowledgeFilterOr$outboundSchema.parse(knowledgeFilterOr),
+    DeploymentGetConfigKnowledgeFilterDeploymentsOr$outboundSchema.parse(
+      deploymentGetConfigKnowledgeFilterDeploymentsOr,
+    ),
   );
 }
 
 /** @internal */
-export type Or$Outbound = {
+export type DeploymentGetConfigKnowledgeFilterOr$Outbound = {
   or: Array<
     {
       [k: string]:
-        | OrEq$Outbound
-        | OrNe$Outbound
-        | OrGt$Outbound
-        | OrGte$Outbound
-        | OrLt$Outbound
-        | OrLte$Outbound
-        | OrIn$Outbound
-        | OrNin$Outbound
-        | OrExists$Outbound;
+        | DeploymentGetConfigOrEq$Outbound
+        | DeploymentGetConfigOrNe$Outbound
+        | DeploymentGetConfigOrGt$Outbound
+        | DeploymentGetConfigOrGte$Outbound
+        | DeploymentGetConfigOrLt$Outbound
+        | DeploymentGetConfigOrLte$Outbound
+        | DeploymentGetConfigOrIn$Outbound
+        | DeploymentGetConfigOrNin$Outbound
+        | DeploymentGetConfigOrExists$Outbound;
     }
   >;
 };
 
 /** @internal */
-export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
-  .object({
-    or: z.array(
-      z.record(z.union([
-        z.lazy(() => OrEq$outboundSchema),
-        z.lazy(() =>
-          OrNe$outboundSchema
-        ),
-        z.lazy(() => OrGt$outboundSchema),
-        z.lazy(() => OrGte$outboundSchema),
-        z.lazy(() => OrLt$outboundSchema),
-        z.lazy(() => OrLte$outboundSchema),
-        z.lazy(() => OrIn$outboundSchema),
-        z.lazy(() => OrNin$outboundSchema),
-        z.lazy(() => OrExists$outboundSchema),
-      ])),
-    ),
-  });
+export const DeploymentGetConfigKnowledgeFilterOr$outboundSchema: z.ZodType<
+  DeploymentGetConfigKnowledgeFilterOr$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigKnowledgeFilterOr
+> = z.object({
+  or: z.array(
+    z.record(z.union([
+      z.lazy(() => DeploymentGetConfigOrEq$outboundSchema),
+      z.lazy(() =>
+        DeploymentGetConfigOrNe$outboundSchema
+      ),
+      z.lazy(() => DeploymentGetConfigOrGt$outboundSchema),
+      z.lazy(() => DeploymentGetConfigOrGte$outboundSchema),
+      z.lazy(() => DeploymentGetConfigOrLt$outboundSchema),
+      z.lazy(() => DeploymentGetConfigOrLte$outboundSchema),
+      z.lazy(() => DeploymentGetConfigOrIn$outboundSchema),
+      z.lazy(() => DeploymentGetConfigOrNin$outboundSchema),
+      z.lazy(() => DeploymentGetConfigOrExists$outboundSchema),
+    ])),
+  ),
+});
 
-export function orToJSON(or: Or): string {
-  return JSON.stringify(Or$outboundSchema.parse(or));
+export function deploymentGetConfigKnowledgeFilterOrToJSON(
+  deploymentGetConfigKnowledgeFilterOr: DeploymentGetConfigKnowledgeFilterOr,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigKnowledgeFilterOr$outboundSchema.parse(
+      deploymentGetConfigKnowledgeFilterOr,
+    ),
+  );
 }
 
 /** @internal */
-export type AndExists$Outbound = {
+export type DeploymentGetConfigAndExists$Outbound = {
   exists: boolean;
 };
 
 /** @internal */
-export const AndExists$outboundSchema: z.ZodType<
-  AndExists$Outbound,
+export const DeploymentGetConfigAndExists$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndExists$Outbound,
   z.ZodTypeDef,
-  AndExists
+  DeploymentGetConfigAndExists
 > = z.object({
   exists: z.boolean(),
 });
 
-export function andExistsToJSON(andExists: AndExists): string {
-  return JSON.stringify(AndExists$outboundSchema.parse(andExists));
+export function deploymentGetConfigAndExistsToJSON(
+  deploymentGetConfigAndExists: DeploymentGetConfigAndExists,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndExists$outboundSchema.parse(
+      deploymentGetConfigAndExists,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigAndNin$Outbound = string | number | boolean;
+export type DeploymentGetConfigAndDeploymentsNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfigAndDeploymentsNin$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndDeploymentsNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigAndDeploymentsNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfigAndDeploymentsNinToJSON(
+  deploymentGetConfigAndDeploymentsNin: DeploymentGetConfigAndDeploymentsNin,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndDeploymentsNin$outboundSchema.parse(
+      deploymentGetConfigAndDeploymentsNin,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigAndNin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
 
 /** @internal */
 export const DeploymentGetConfigAndNin$outboundSchema: z.ZodType<
   DeploymentGetConfigAndNin$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigAndNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
 export function deploymentGetConfigAndNinToJSON(
   deploymentGetConfigAndNin: DeploymentGetConfigAndNin,
@@ -3297,32 +3616,41 @@ export function deploymentGetConfigAndNinToJSON(
 }
 
 /** @internal */
-export type AndNin$Outbound = {
-  nin: Array<string | number | boolean>;
-};
+export type DeploymentGetConfigAndDeploymentsIn$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const AndNin$outboundSchema: z.ZodType<
-  AndNin$Outbound,
+export const DeploymentGetConfigAndDeploymentsIn$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndDeploymentsIn$Outbound,
   z.ZodTypeDef,
-  AndNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+  DeploymentGetConfigAndDeploymentsIn
+> = z.union([z.string(), z.number(), z.boolean()]);
 
-export function andNinToJSON(andNin: AndNin): string {
-  return JSON.stringify(AndNin$outboundSchema.parse(andNin));
+export function deploymentGetConfigAndDeploymentsInToJSON(
+  deploymentGetConfigAndDeploymentsIn: DeploymentGetConfigAndDeploymentsIn,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndDeploymentsIn$outboundSchema.parse(
+      deploymentGetConfigAndDeploymentsIn,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigAndIn$Outbound = string | number | boolean;
+export type DeploymentGetConfigAndIn$Outbound = {
+  in: Array<string | number | boolean>;
+};
 
 /** @internal */
 export const DeploymentGetConfigAndIn$outboundSchema: z.ZodType<
   DeploymentGetConfigAndIn$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigAndIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
 export function deploymentGetConfigAndInToJSON(
   deploymentGetConfigAndIn: DeploymentGetConfigAndIn,
@@ -3333,104 +3661,129 @@ export function deploymentGetConfigAndInToJSON(
 }
 
 /** @internal */
-export type AndIn$Outbound = {
-  in: Array<string | number | boolean>;
-};
-
-/** @internal */
-export const AndIn$outboundSchema: z.ZodType<
-  AndIn$Outbound,
-  z.ZodTypeDef,
-  AndIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
-
-export function andInToJSON(andIn: AndIn): string {
-  return JSON.stringify(AndIn$outboundSchema.parse(andIn));
-}
-
-/** @internal */
-export type AndLte$Outbound = {
+export type DeploymentGetConfigAndLte$Outbound = {
   lte: number;
 };
 
 /** @internal */
-export const AndLte$outboundSchema: z.ZodType<
-  AndLte$Outbound,
+export const DeploymentGetConfigAndLte$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndLte$Outbound,
   z.ZodTypeDef,
-  AndLte
+  DeploymentGetConfigAndLte
 > = z.object({
   lte: z.number(),
 });
 
-export function andLteToJSON(andLte: AndLte): string {
-  return JSON.stringify(AndLte$outboundSchema.parse(andLte));
+export function deploymentGetConfigAndLteToJSON(
+  deploymentGetConfigAndLte: DeploymentGetConfigAndLte,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndLte$outboundSchema.parse(deploymentGetConfigAndLte),
+  );
 }
 
 /** @internal */
-export type AndLt$Outbound = {
+export type DeploymentGetConfigAndLt$Outbound = {
   lt: number;
 };
 
 /** @internal */
-export const AndLt$outboundSchema: z.ZodType<
-  AndLt$Outbound,
+export const DeploymentGetConfigAndLt$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndLt$Outbound,
   z.ZodTypeDef,
-  AndLt
+  DeploymentGetConfigAndLt
 > = z.object({
   lt: z.number(),
 });
 
-export function andLtToJSON(andLt: AndLt): string {
-  return JSON.stringify(AndLt$outboundSchema.parse(andLt));
+export function deploymentGetConfigAndLtToJSON(
+  deploymentGetConfigAndLt: DeploymentGetConfigAndLt,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndLt$outboundSchema.parse(deploymentGetConfigAndLt),
+  );
 }
 
 /** @internal */
-export type AndGte$Outbound = {
+export type DeploymentGetConfigAndGte$Outbound = {
   gte: number;
 };
 
 /** @internal */
-export const AndGte$outboundSchema: z.ZodType<
-  AndGte$Outbound,
+export const DeploymentGetConfigAndGte$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndGte$Outbound,
   z.ZodTypeDef,
-  AndGte
+  DeploymentGetConfigAndGte
 > = z.object({
   gte: z.number(),
 });
 
-export function andGteToJSON(andGte: AndGte): string {
-  return JSON.stringify(AndGte$outboundSchema.parse(andGte));
+export function deploymentGetConfigAndGteToJSON(
+  deploymentGetConfigAndGte: DeploymentGetConfigAndGte,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndGte$outboundSchema.parse(deploymentGetConfigAndGte),
+  );
 }
 
 /** @internal */
-export type AndGt$Outbound = {
+export type DeploymentGetConfigAndGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const AndGt$outboundSchema: z.ZodType<
-  AndGt$Outbound,
+export const DeploymentGetConfigAndGt$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndGt$Outbound,
   z.ZodTypeDef,
-  AndGt
+  DeploymentGetConfigAndGt
 > = z.object({
   gt: z.number(),
 });
 
-export function andGtToJSON(andGt: AndGt): string {
-  return JSON.stringify(AndGt$outboundSchema.parse(andGt));
+export function deploymentGetConfigAndGtToJSON(
+  deploymentGetConfigAndGt: DeploymentGetConfigAndGt,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndGt$outboundSchema.parse(deploymentGetConfigAndGt),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigAndNe$Outbound = string | number | boolean;
+export type DeploymentGetConfigAndDeploymentsNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfigAndDeploymentsNe$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndDeploymentsNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigAndDeploymentsNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfigAndDeploymentsNeToJSON(
+  deploymentGetConfigAndDeploymentsNe: DeploymentGetConfigAndDeploymentsNe,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndDeploymentsNe$outboundSchema.parse(
+      deploymentGetConfigAndDeploymentsNe,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigAndNe$Outbound = {
+  ne: string | number | boolean;
+};
 
 /** @internal */
 export const DeploymentGetConfigAndNe$outboundSchema: z.ZodType<
   DeploymentGetConfigAndNe$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigAndNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
 
 export function deploymentGetConfigAndNeToJSON(
   deploymentGetConfigAndNe: DeploymentGetConfigAndNe,
@@ -3441,32 +3794,41 @@ export function deploymentGetConfigAndNeToJSON(
 }
 
 /** @internal */
-export type AndNe$Outbound = {
-  ne: string | number | boolean;
-};
+export type DeploymentGetConfigAndDeploymentsEq$Outbound =
+  | string
+  | number
+  | boolean;
 
 /** @internal */
-export const AndNe$outboundSchema: z.ZodType<
-  AndNe$Outbound,
+export const DeploymentGetConfigAndDeploymentsEq$outboundSchema: z.ZodType<
+  DeploymentGetConfigAndDeploymentsEq$Outbound,
   z.ZodTypeDef,
-  AndNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+  DeploymentGetConfigAndDeploymentsEq
+> = z.union([z.string(), z.number(), z.boolean()]);
 
-export function andNeToJSON(andNe: AndNe): string {
-  return JSON.stringify(AndNe$outboundSchema.parse(andNe));
+export function deploymentGetConfigAndDeploymentsEqToJSON(
+  deploymentGetConfigAndDeploymentsEq: DeploymentGetConfigAndDeploymentsEq,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAndDeploymentsEq$outboundSchema.parse(
+      deploymentGetConfigAndDeploymentsEq,
+    ),
+  );
 }
 
 /** @internal */
-export type DeploymentGetConfigAndEq$Outbound = string | number | boolean;
+export type DeploymentGetConfigAndEq$Outbound = {
+  eq: string | number | boolean;
+};
 
 /** @internal */
 export const DeploymentGetConfigAndEq$outboundSchema: z.ZodType<
   DeploymentGetConfigAndEq$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigAndEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
 
 export function deploymentGetConfigAndEqToJSON(
   deploymentGetConfigAndEq: DeploymentGetConfigAndEq,
@@ -3477,372 +3839,452 @@ export function deploymentGetConfigAndEqToJSON(
 }
 
 /** @internal */
-export type AndEq$Outbound = {
-  eq: string | number | boolean;
-};
+export type DeploymentGetConfigKnowledgeFilterDeploymentsAnd$Outbound =
+  | DeploymentGetConfigAndEq$Outbound
+  | DeploymentGetConfigAndNe$Outbound
+  | DeploymentGetConfigAndGt$Outbound
+  | DeploymentGetConfigAndGte$Outbound
+  | DeploymentGetConfigAndLt$Outbound
+  | DeploymentGetConfigAndLte$Outbound
+  | DeploymentGetConfigAndIn$Outbound
+  | DeploymentGetConfigAndNin$Outbound
+  | DeploymentGetConfigAndExists$Outbound;
 
 /** @internal */
-export const AndEq$outboundSchema: z.ZodType<
-  AndEq$Outbound,
-  z.ZodTypeDef,
-  AndEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+export const DeploymentGetConfigKnowledgeFilterDeploymentsAnd$outboundSchema:
+  z.ZodType<
+    DeploymentGetConfigKnowledgeFilterDeploymentsAnd$Outbound,
+    z.ZodTypeDef,
+    DeploymentGetConfigKnowledgeFilterDeploymentsAnd
+  > = z.union([
+    z.lazy(() => DeploymentGetConfigAndEq$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndNe$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndGt$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndGte$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndLt$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndLte$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndIn$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndNin$outboundSchema),
+    z.lazy(() => DeploymentGetConfigAndExists$outboundSchema),
+  ]);
 
-export function andEqToJSON(andEq: AndEq): string {
-  return JSON.stringify(AndEq$outboundSchema.parse(andEq));
-}
-
-/** @internal */
-export type KnowledgeFilterAnd$Outbound =
-  | AndEq$Outbound
-  | AndNe$Outbound
-  | AndGt$Outbound
-  | AndGte$Outbound
-  | AndLt$Outbound
-  | AndLte$Outbound
-  | AndIn$Outbound
-  | AndNin$Outbound
-  | AndExists$Outbound;
-
-/** @internal */
-export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
-  KnowledgeFilterAnd$Outbound,
-  z.ZodTypeDef,
-  KnowledgeFilterAnd
-> = z.union([
-  z.lazy(() => AndEq$outboundSchema),
-  z.lazy(() => AndNe$outboundSchema),
-  z.lazy(() => AndGt$outboundSchema),
-  z.lazy(() => AndGte$outboundSchema),
-  z.lazy(() => AndLt$outboundSchema),
-  z.lazy(() => AndLte$outboundSchema),
-  z.lazy(() => AndIn$outboundSchema),
-  z.lazy(() => AndNin$outboundSchema),
-  z.lazy(() => AndExists$outboundSchema),
-]);
-
-export function knowledgeFilterAndToJSON(
-  knowledgeFilterAnd: KnowledgeFilterAnd,
+export function deploymentGetConfigKnowledgeFilterDeploymentsAndToJSON(
+  deploymentGetConfigKnowledgeFilterDeploymentsAnd:
+    DeploymentGetConfigKnowledgeFilterDeploymentsAnd,
 ): string {
   return JSON.stringify(
-    KnowledgeFilterAnd$outboundSchema.parse(knowledgeFilterAnd),
+    DeploymentGetConfigKnowledgeFilterDeploymentsAnd$outboundSchema.parse(
+      deploymentGetConfigKnowledgeFilterDeploymentsAnd,
+    ),
   );
 }
 
 /** @internal */
-export type And$Outbound = {
+export type DeploymentGetConfigKnowledgeFilterAnd$Outbound = {
   and: Array<
     {
       [k: string]:
-        | AndEq$Outbound
-        | AndNe$Outbound
-        | AndGt$Outbound
-        | AndGte$Outbound
-        | AndLt$Outbound
-        | AndLte$Outbound
-        | AndIn$Outbound
-        | AndNin$Outbound
-        | AndExists$Outbound;
+        | DeploymentGetConfigAndEq$Outbound
+        | DeploymentGetConfigAndNe$Outbound
+        | DeploymentGetConfigAndGt$Outbound
+        | DeploymentGetConfigAndGte$Outbound
+        | DeploymentGetConfigAndLt$Outbound
+        | DeploymentGetConfigAndLte$Outbound
+        | DeploymentGetConfigAndIn$Outbound
+        | DeploymentGetConfigAndNin$Outbound
+        | DeploymentGetConfigAndExists$Outbound;
     }
   >;
 };
 
 /** @internal */
-export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
-  .object({
-    and: z.array(
-      z.record(z.union([
-        z.lazy(() => AndEq$outboundSchema),
-        z.lazy(() =>
-          AndNe$outboundSchema
-        ),
-        z.lazy(() => AndGt$outboundSchema),
-        z.lazy(() => AndGte$outboundSchema),
-        z.lazy(() => AndLt$outboundSchema),
-        z.lazy(() => AndLte$outboundSchema),
-        z.lazy(() => AndIn$outboundSchema),
-        z.lazy(() => AndNin$outboundSchema),
-        z.lazy(() => AndExists$outboundSchema),
-      ])),
-    ),
-  });
-
-export function andToJSON(and: And): string {
-  return JSON.stringify(And$outboundSchema.parse(and));
-}
-
-/** @internal */
-export type Exists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const Exists$outboundSchema: z.ZodType<
-  Exists$Outbound,
+export const DeploymentGetConfigKnowledgeFilterAnd$outboundSchema: z.ZodType<
+  DeploymentGetConfigKnowledgeFilterAnd$Outbound,
   z.ZodTypeDef,
-  Exists
+  DeploymentGetConfigKnowledgeFilterAnd
 > = z.object({
-  exists: z.boolean(),
+  and: z.array(
+    z.record(z.union([
+      z.lazy(() => DeploymentGetConfigAndEq$outboundSchema),
+      z.lazy(() =>
+        DeploymentGetConfigAndNe$outboundSchema
+      ),
+      z.lazy(() => DeploymentGetConfigAndGt$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAndGte$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAndLt$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAndLte$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAndIn$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAndNin$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAndExists$outboundSchema),
+    ])),
+  ),
 });
 
-export function existsToJSON(exists: Exists): string {
-  return JSON.stringify(Exists$outboundSchema.parse(exists));
-}
-
-/** @internal */
-export type OneNin$Outbound = string | number | boolean;
-
-/** @internal */
-export const OneNin$outboundSchema: z.ZodType<
-  OneNin$Outbound,
-  z.ZodTypeDef,
-  OneNin
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function oneNinToJSON(oneNin: OneNin): string {
-  return JSON.stringify(OneNin$outboundSchema.parse(oneNin));
-}
-
-/** @internal */
-export type Nin$Outbound = {
-  nin: Array<string | number | boolean>;
-};
-
-/** @internal */
-export const Nin$outboundSchema: z.ZodType<Nin$Outbound, z.ZodTypeDef, Nin> = z
-  .object({
-    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-  });
-
-export function ninToJSON(nin: Nin): string {
-  return JSON.stringify(Nin$outboundSchema.parse(nin));
-}
-
-/** @internal */
-export type OneIn$Outbound = string | number | boolean;
-
-/** @internal */
-export const OneIn$outboundSchema: z.ZodType<
-  OneIn$Outbound,
-  z.ZodTypeDef,
-  OneIn
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function oneInToJSON(oneIn: OneIn): string {
-  return JSON.stringify(OneIn$outboundSchema.parse(oneIn));
-}
-
-/** @internal */
-export type In$Outbound = {
-  in: Array<string | number | boolean>;
-};
-
-/** @internal */
-export const In$outboundSchema: z.ZodType<In$Outbound, z.ZodTypeDef, In> = z
-  .object({
-    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-  });
-
-export function inToJSON(value: In): string {
-  return JSON.stringify(In$outboundSchema.parse(value));
-}
-
-/** @internal */
-export type Lte$Outbound = {
-  lte: number;
-};
-
-/** @internal */
-export const Lte$outboundSchema: z.ZodType<Lte$Outbound, z.ZodTypeDef, Lte> = z
-  .object({
-    lte: z.number(),
-  });
-
-export function lteToJSON(lte: Lte): string {
-  return JSON.stringify(Lte$outboundSchema.parse(lte));
-}
-
-/** @internal */
-export type Lt$Outbound = {
-  lt: number;
-};
-
-/** @internal */
-export const Lt$outboundSchema: z.ZodType<Lt$Outbound, z.ZodTypeDef, Lt> = z
-  .object({
-    lt: z.number(),
-  });
-
-export function ltToJSON(lt: Lt): string {
-  return JSON.stringify(Lt$outboundSchema.parse(lt));
-}
-
-/** @internal */
-export type Gte$Outbound = {
-  gte: number;
-};
-
-/** @internal */
-export const Gte$outboundSchema: z.ZodType<Gte$Outbound, z.ZodTypeDef, Gte> = z
-  .object({
-    gte: z.number(),
-  });
-
-export function gteToJSON(gte: Gte): string {
-  return JSON.stringify(Gte$outboundSchema.parse(gte));
-}
-
-/** @internal */
-export type Gt$Outbound = {
-  gt: number;
-};
-
-/** @internal */
-export const Gt$outboundSchema: z.ZodType<Gt$Outbound, z.ZodTypeDef, Gt> = z
-  .object({
-    gt: z.number(),
-  });
-
-export function gtToJSON(gt: Gt): string {
-  return JSON.stringify(Gt$outboundSchema.parse(gt));
-}
-
-/** @internal */
-export type OneNe$Outbound = string | number | boolean;
-
-/** @internal */
-export const OneNe$outboundSchema: z.ZodType<
-  OneNe$Outbound,
-  z.ZodTypeDef,
-  OneNe
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function oneNeToJSON(oneNe: OneNe): string {
-  return JSON.stringify(OneNe$outboundSchema.parse(oneNe));
-}
-
-/** @internal */
-export type Ne$Outbound = {
-  ne: string | number | boolean;
-};
-
-/** @internal */
-export const Ne$outboundSchema: z.ZodType<Ne$Outbound, z.ZodTypeDef, Ne> = z
-  .object({
-    ne: z.union([z.string(), z.number(), z.boolean()]),
-  });
-
-export function neToJSON(ne: Ne): string {
-  return JSON.stringify(Ne$outboundSchema.parse(ne));
-}
-
-/** @internal */
-export type OneEq$Outbound = string | number | boolean;
-
-/** @internal */
-export const OneEq$outboundSchema: z.ZodType<
-  OneEq$Outbound,
-  z.ZodTypeDef,
-  OneEq
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function oneEqToJSON(oneEq: OneEq): string {
-  return JSON.stringify(OneEq$outboundSchema.parse(oneEq));
-}
-
-/** @internal */
-export type Eq$Outbound = {
-  eq: string | number | boolean;
-};
-
-/** @internal */
-export const Eq$outboundSchema: z.ZodType<Eq$Outbound, z.ZodTypeDef, Eq> = z
-  .object({
-    eq: z.union([z.string(), z.number(), z.boolean()]),
-  });
-
-export function eqToJSON(eq: Eq): string {
-  return JSON.stringify(Eq$outboundSchema.parse(eq));
-}
-
-/** @internal */
-export type KnowledgeFilter1$Outbound =
-  | Eq$Outbound
-  | Ne$Outbound
-  | Gt$Outbound
-  | Gte$Outbound
-  | Lt$Outbound
-  | Lte$Outbound
-  | In$Outbound
-  | Nin$Outbound
-  | Exists$Outbound;
-
-/** @internal */
-export const KnowledgeFilter1$outboundSchema: z.ZodType<
-  KnowledgeFilter1$Outbound,
-  z.ZodTypeDef,
-  KnowledgeFilter1
-> = z.union([
-  z.lazy(() => Eq$outboundSchema),
-  z.lazy(() => Ne$outboundSchema),
-  z.lazy(() => Gt$outboundSchema),
-  z.lazy(() => Gte$outboundSchema),
-  z.lazy(() => Lt$outboundSchema),
-  z.lazy(() => Lte$outboundSchema),
-  z.lazy(() => In$outboundSchema),
-  z.lazy(() => Nin$outboundSchema),
-  z.lazy(() => Exists$outboundSchema),
-]);
-
-export function knowledgeFilter1ToJSON(
-  knowledgeFilter1: KnowledgeFilter1,
+export function deploymentGetConfigKnowledgeFilterAndToJSON(
+  deploymentGetConfigKnowledgeFilterAnd: DeploymentGetConfigKnowledgeFilterAnd,
 ): string {
   return JSON.stringify(
-    KnowledgeFilter1$outboundSchema.parse(knowledgeFilter1),
+    DeploymentGetConfigKnowledgeFilterAnd$outboundSchema.parse(
+      deploymentGetConfigKnowledgeFilterAnd,
+    ),
   );
 }
 
 /** @internal */
-export type KnowledgeFilter$Outbound = And$Outbound | Or$Outbound | {
-  [k: string]:
-    | Eq$Outbound
-    | Ne$Outbound
-    | Gt$Outbound
-    | Gte$Outbound
-    | Lt$Outbound
-    | Lte$Outbound
-    | In$Outbound
-    | Nin$Outbound
-    | Exists$Outbound;
+export type OneExists$Outbound = {
+  exists: boolean;
 };
 
 /** @internal */
-export const KnowledgeFilter$outboundSchema: z.ZodType<
-  KnowledgeFilter$Outbound,
+export const OneExists$outboundSchema: z.ZodType<
+  OneExists$Outbound,
   z.ZodTypeDef,
-  KnowledgeFilter
+  OneExists
+> = z.object({
+  exists: z.boolean(),
+});
+
+export function oneExistsToJSON(oneExists: OneExists): string {
+  return JSON.stringify(OneExists$outboundSchema.parse(oneExists));
+}
+
+/** @internal */
+export type DeploymentGetConfig1DeploymentsNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfig1DeploymentsNin$outboundSchema: z.ZodType<
+  DeploymentGetConfig1DeploymentsNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1DeploymentsNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfig1DeploymentsNinToJSON(
+  deploymentGetConfig1DeploymentsNin: DeploymentGetConfig1DeploymentsNin,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1DeploymentsNin$outboundSchema.parse(
+      deploymentGetConfig1DeploymentsNin,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfig1Nin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentGetConfig1Nin$outboundSchema: z.ZodType<
+  DeploymentGetConfig1Nin$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1Nin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+export function deploymentGetConfig1NinToJSON(
+  deploymentGetConfig1Nin: DeploymentGetConfig1Nin,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1Nin$outboundSchema.parse(deploymentGetConfig1Nin),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfig1DeploymentsIn$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfig1DeploymentsIn$outboundSchema: z.ZodType<
+  DeploymentGetConfig1DeploymentsIn$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1DeploymentsIn
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfig1DeploymentsInToJSON(
+  deploymentGetConfig1DeploymentsIn: DeploymentGetConfig1DeploymentsIn,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1DeploymentsIn$outboundSchema.parse(
+      deploymentGetConfig1DeploymentsIn,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfig1In$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentGetConfig1In$outboundSchema: z.ZodType<
+  DeploymentGetConfig1In$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1In
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+export function deploymentGetConfig1InToJSON(
+  deploymentGetConfig1In: DeploymentGetConfig1In,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1In$outboundSchema.parse(deploymentGetConfig1In),
+  );
+}
+
+/** @internal */
+export type OneLte$Outbound = {
+  lte: number;
+};
+
+/** @internal */
+export const OneLte$outboundSchema: z.ZodType<
+  OneLte$Outbound,
+  z.ZodTypeDef,
+  OneLte
+> = z.object({
+  lte: z.number(),
+});
+
+export function oneLteToJSON(oneLte: OneLte): string {
+  return JSON.stringify(OneLte$outboundSchema.parse(oneLte));
+}
+
+/** @internal */
+export type OneLt$Outbound = {
+  lt: number;
+};
+
+/** @internal */
+export const OneLt$outboundSchema: z.ZodType<
+  OneLt$Outbound,
+  z.ZodTypeDef,
+  OneLt
+> = z.object({
+  lt: z.number(),
+});
+
+export function oneLtToJSON(oneLt: OneLt): string {
+  return JSON.stringify(OneLt$outboundSchema.parse(oneLt));
+}
+
+/** @internal */
+export type OneGte$Outbound = {
+  gte: number;
+};
+
+/** @internal */
+export const OneGte$outboundSchema: z.ZodType<
+  OneGte$Outbound,
+  z.ZodTypeDef,
+  OneGte
+> = z.object({
+  gte: z.number(),
+});
+
+export function oneGteToJSON(oneGte: OneGte): string {
+  return JSON.stringify(OneGte$outboundSchema.parse(oneGte));
+}
+
+/** @internal */
+export type OneGt$Outbound = {
+  gt: number;
+};
+
+/** @internal */
+export const OneGt$outboundSchema: z.ZodType<
+  OneGt$Outbound,
+  z.ZodTypeDef,
+  OneGt
+> = z.object({
+  gt: z.number(),
+});
+
+export function oneGtToJSON(oneGt: OneGt): string {
+  return JSON.stringify(OneGt$outboundSchema.parse(oneGt));
+}
+
+/** @internal */
+export type DeploymentGetConfig1DeploymentsNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfig1DeploymentsNe$outboundSchema: z.ZodType<
+  DeploymentGetConfig1DeploymentsNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1DeploymentsNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfig1DeploymentsNeToJSON(
+  deploymentGetConfig1DeploymentsNe: DeploymentGetConfig1DeploymentsNe,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1DeploymentsNe$outboundSchema.parse(
+      deploymentGetConfig1DeploymentsNe,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfig1Ne$Outbound = {
+  ne: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentGetConfig1Ne$outboundSchema: z.ZodType<
+  DeploymentGetConfig1Ne$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1Ne
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+export function deploymentGetConfig1NeToJSON(
+  deploymentGetConfig1Ne: DeploymentGetConfig1Ne,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1Ne$outboundSchema.parse(deploymentGetConfig1Ne),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfig1DeploymentsEq$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentGetConfig1DeploymentsEq$outboundSchema: z.ZodType<
+  DeploymentGetConfig1DeploymentsEq$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1DeploymentsEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function deploymentGetConfig1DeploymentsEqToJSON(
+  deploymentGetConfig1DeploymentsEq: DeploymentGetConfig1DeploymentsEq,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1DeploymentsEq$outboundSchema.parse(
+      deploymentGetConfig1DeploymentsEq,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfig1Eq$Outbound = {
+  eq: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentGetConfig1Eq$outboundSchema: z.ZodType<
+  DeploymentGetConfig1Eq$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1Eq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+export function deploymentGetConfig1EqToJSON(
+  deploymentGetConfig1Eq: DeploymentGetConfig1Eq,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig1Eq$outboundSchema.parse(deploymentGetConfig1Eq),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigKnowledgeFilter1$Outbound =
+  | DeploymentGetConfig1Eq$Outbound
+  | DeploymentGetConfig1Ne$Outbound
+  | OneGt$Outbound
+  | OneGte$Outbound
+  | OneLt$Outbound
+  | OneLte$Outbound
+  | DeploymentGetConfig1In$Outbound
+  | DeploymentGetConfig1Nin$Outbound
+  | OneExists$Outbound;
+
+/** @internal */
+export const DeploymentGetConfigKnowledgeFilter1$outboundSchema: z.ZodType<
+  DeploymentGetConfigKnowledgeFilter1$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigKnowledgeFilter1
 > = z.union([
-  z.lazy(() => And$outboundSchema),
-  z.lazy(() => Or$outboundSchema),
+  z.lazy(() => DeploymentGetConfig1Eq$outboundSchema),
+  z.lazy(() => DeploymentGetConfig1Ne$outboundSchema),
+  z.lazy(() => OneGt$outboundSchema),
+  z.lazy(() => OneGte$outboundSchema),
+  z.lazy(() => OneLt$outboundSchema),
+  z.lazy(() => OneLte$outboundSchema),
+  z.lazy(() => DeploymentGetConfig1In$outboundSchema),
+  z.lazy(() => DeploymentGetConfig1Nin$outboundSchema),
+  z.lazy(() => OneExists$outboundSchema),
+]);
+
+export function deploymentGetConfigKnowledgeFilter1ToJSON(
+  deploymentGetConfigKnowledgeFilter1: DeploymentGetConfigKnowledgeFilter1,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigKnowledgeFilter1$outboundSchema.parse(
+      deploymentGetConfigKnowledgeFilter1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigKnowledgeFilter$Outbound =
+  | DeploymentGetConfigKnowledgeFilterAnd$Outbound
+  | DeploymentGetConfigKnowledgeFilterOr$Outbound
+  | {
+    [k: string]:
+      | DeploymentGetConfig1Eq$Outbound
+      | DeploymentGetConfig1Ne$Outbound
+      | OneGt$Outbound
+      | OneGte$Outbound
+      | OneLt$Outbound
+      | OneLte$Outbound
+      | DeploymentGetConfig1In$Outbound
+      | DeploymentGetConfig1Nin$Outbound
+      | OneExists$Outbound;
+  };
+
+/** @internal */
+export const DeploymentGetConfigKnowledgeFilter$outboundSchema: z.ZodType<
+  DeploymentGetConfigKnowledgeFilter$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigKnowledgeFilter
+> = z.union([
+  z.lazy(() => DeploymentGetConfigKnowledgeFilterAnd$outboundSchema),
+  z.lazy(() => DeploymentGetConfigKnowledgeFilterOr$outboundSchema),
   z.record(z.union([
-    z.lazy(() => Eq$outboundSchema),
-    z.lazy(() => Ne$outboundSchema),
-    z.lazy(() => Gt$outboundSchema),
-    z.lazy(() => Gte$outboundSchema),
-    z.lazy(() => Lt$outboundSchema),
-    z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => In$outboundSchema),
-    z.lazy(() => Nin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
+    z.lazy(() => DeploymentGetConfig1Eq$outboundSchema),
+    z.lazy(() => DeploymentGetConfig1Ne$outboundSchema),
+    z.lazy(() => OneGt$outboundSchema),
+    z.lazy(() => OneGte$outboundSchema),
+    z.lazy(() => OneLt$outboundSchema),
+    z.lazy(() => OneLte$outboundSchema),
+    z.lazy(() => DeploymentGetConfig1In$outboundSchema),
+    z.lazy(() => DeploymentGetConfig1Nin$outboundSchema),
+    z.lazy(() => OneExists$outboundSchema),
   ])),
 ]);
 
-export function knowledgeFilterToJSON(
-  knowledgeFilter: KnowledgeFilter,
+export function deploymentGetConfigKnowledgeFilterToJSON(
+  deploymentGetConfigKnowledgeFilter: DeploymentGetConfigKnowledgeFilter,
 ): string {
-  return JSON.stringify(KnowledgeFilter$outboundSchema.parse(knowledgeFilter));
+  return JSON.stringify(
+    DeploymentGetConfigKnowledgeFilter$outboundSchema.parse(
+      deploymentGetConfigKnowledgeFilter,
+    ),
+  );
 }
 
 /** @internal */
@@ -3852,41 +4294,45 @@ export type DeploymentGetConfigRequestBody$Outbound = {
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
-      | SystemMessage$Outbound
-      | DeveloperMessage$Outbound
-      | UserMessage$Outbound
-      | AssistantMessage$Outbound
-      | ToolMessage$Outbound
+      | PrefixMessagesSystemMessage$Outbound
+      | PrefixMessagesDeveloperMessage$Outbound
+      | PrefixMessagesUserMessage$Outbound
+      | PrefixMessagesAssistantMessage$Outbound
+      | PrefixMessagesToolMessage$Outbound
     >
     | undefined;
   messages?:
     | Array<
-      | MessagesSystemMessage$Outbound
-      | MessagesDeveloperMessage$Outbound
-      | MessagesUserMessage$Outbound
-      | MessagesAssistantMessage$Outbound
-      | MessagesToolMessage$Outbound
+      | DeploymentGetConfigMessagesSystemMessage$Outbound
+      | DeploymentGetConfigMessagesDeveloperMessage$Outbound
+      | DeploymentGetConfigMessagesUserMessage$Outbound
+      | DeploymentGetConfigMessagesAssistantMessage$Outbound
+      | DeploymentGetConfigMessagesToolMessage$Outbound
     >
     | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   file_ids?: Array<string> | undefined;
   metadata?: { [k: string]: any } | undefined;
   extra_params?: { [k: string]: any } | undefined;
-  documents?: Array<Documents$Outbound> | undefined;
-  invoke_options?: InvokeOptions$Outbound | undefined;
-  thread?: Thread$Outbound | undefined;
-  knowledge_filter?: And$Outbound | Or$Outbound | {
-    [k: string]:
-      | Eq$Outbound
-      | Ne$Outbound
-      | Gt$Outbound
-      | Gte$Outbound
-      | Lt$Outbound
-      | Lte$Outbound
-      | In$Outbound
-      | Nin$Outbound
-      | Exists$Outbound;
-  } | undefined;
+  documents?: Array<DeploymentGetConfigDocuments$Outbound> | undefined;
+  invoke_options?: DeploymentGetConfigInvokeOptions$Outbound | undefined;
+  thread?: DeploymentGetConfigThread$Outbound | undefined;
+  knowledge_filter?:
+    | DeploymentGetConfigKnowledgeFilterAnd$Outbound
+    | DeploymentGetConfigKnowledgeFilterOr$Outbound
+    | {
+      [k: string]:
+        | DeploymentGetConfig1Eq$Outbound
+        | DeploymentGetConfig1Ne$Outbound
+        | OneGt$Outbound
+        | OneGte$Outbound
+        | OneLt$Outbound
+        | OneLte$Outbound
+        | DeploymentGetConfig1In$Outbound
+        | DeploymentGetConfig1Nin$Outbound
+        | OneExists$Outbound;
+    }
+    | undefined;
 };
 
 /** @internal */
@@ -3900,43 +4346,47 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
-      z.lazy(() => SystemMessage$outboundSchema),
-      z.lazy(() => DeveloperMessage$outboundSchema),
-      z.lazy(() => UserMessage$outboundSchema),
-      z.lazy(() => AssistantMessage$outboundSchema),
-      z.lazy(() => ToolMessage$outboundSchema),
+      z.lazy(() => PrefixMessagesSystemMessage$outboundSchema),
+      z.lazy(() => PrefixMessagesDeveloperMessage$outboundSchema),
+      z.lazy(() => PrefixMessagesUserMessage$outboundSchema),
+      z.lazy(() => PrefixMessagesAssistantMessage$outboundSchema),
+      z.lazy(() => PrefixMessagesToolMessage$outboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
-      z.lazy(() => MessagesSystemMessage$outboundSchema),
-      z.lazy(() => MessagesDeveloperMessage$outboundSchema),
-      z.lazy(() => MessagesUserMessage$outboundSchema),
-      z.lazy(() => MessagesAssistantMessage$outboundSchema),
-      z.lazy(() => MessagesToolMessage$outboundSchema),
+      z.lazy(() => DeploymentGetConfigMessagesSystemMessage$outboundSchema),
+      z.lazy(() => DeploymentGetConfigMessagesDeveloperMessage$outboundSchema),
+      z.lazy(() => DeploymentGetConfigMessagesUserMessage$outboundSchema),
+      z.lazy(() => DeploymentGetConfigMessagesAssistantMessage$outboundSchema),
+      z.lazy(() => DeploymentGetConfigMessagesToolMessage$outboundSchema),
     ]),
   ).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   fileIds: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   extraParams: z.record(z.any()).optional(),
-  documents: z.array(z.lazy(() => Documents$outboundSchema)).optional(),
-  invokeOptions: z.lazy(() => InvokeOptions$outboundSchema).optional(),
-  thread: z.lazy(() => Thread$outboundSchema).optional(),
+  documents: z.array(z.lazy(() => DeploymentGetConfigDocuments$outboundSchema))
+    .optional(),
+  invokeOptions: z.lazy(() => DeploymentGetConfigInvokeOptions$outboundSchema)
+    .optional(),
+  thread: z.lazy(() => DeploymentGetConfigThread$outboundSchema).optional(),
   knowledgeFilter: z.union([
-    z.lazy(() => And$outboundSchema),
-    z.lazy(() => Or$outboundSchema),
-    z.record(z.union([
-      z.lazy(() => Eq$outboundSchema),
-      z.lazy(() => Ne$outboundSchema),
-      z.lazy(() => Gt$outboundSchema),
-      z.lazy(() => Gte$outboundSchema),
-      z.lazy(() => Lt$outboundSchema),
-      z.lazy(() => Lte$outboundSchema),
-      z.lazy(() => In$outboundSchema),
-      z.lazy(() => Nin$outboundSchema),
-      z.lazy(() => Exists$outboundSchema),
-    ])),
+    z.lazy(() => DeploymentGetConfigKnowledgeFilterAnd$outboundSchema),
+    z.lazy(() => DeploymentGetConfigKnowledgeFilterOr$outboundSchema),
+    z.record(
+      z.union([
+        z.lazy(() => DeploymentGetConfig1Eq$outboundSchema),
+        z.lazy(() => DeploymentGetConfig1Ne$outboundSchema),
+        z.lazy(() => OneGt$outboundSchema),
+        z.lazy(() => OneGte$outboundSchema),
+        z.lazy(() => OneLt$outboundSchema),
+        z.lazy(() => OneLte$outboundSchema),
+        z.lazy(() => DeploymentGetConfig1In$outboundSchema),
+        z.lazy(() => DeploymentGetConfig1Nin$outboundSchema),
+        z.lazy(() => OneExists$outboundSchema),
+      ]),
+    ),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {

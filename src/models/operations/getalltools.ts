@@ -104,13 +104,13 @@ export type DataCodeTool = {
 export type DataCodeExecutionTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -228,13 +228,13 @@ export type DataMcp = {
 export type DataMCPTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -385,13 +385,13 @@ export type GetAllToolsDataHttp = {
 export type DataHTTPTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -484,13 +484,13 @@ export type DataJsonSchema = {
 export type DataJSONSchemaTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -597,13 +597,13 @@ export type GetAllToolsDataFunction = {
 export type DataFunctionTool = {
   id: string;
   /**
-   * Entity storage path in the format: `project/folder/subfolder/...`
+   * Entity storage path.
    *
    * @remarks
    *
-   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
    *
-   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
   path: string;
   /**
@@ -767,7 +767,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MFZC20YG8T1WVA6GPA2"),
+  _id: z.string().default("tool_01KTA6Y5F2P3R624TME7PKXWTQ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -864,7 +864,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KT4C7MFYGNGPN9EA6JPJZN76"),
+  id: z.string().default("01KTA6Y5F162Y980GBXHDTKXWN"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -917,7 +917,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MFX4HF3T9JKTNEYXRJD"),
+  _id: z.string().default("tool_01KTA6Y5EZK6332E2E5T5WNBT8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1102,7 +1102,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MFV91H66ET7S66FXS50"),
+  _id: z.string().default("tool_01KTA6Y5EX9ZRABDBTWHCWK5AK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1195,7 +1195,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MFTC97KYGBDG32GHRRJ"),
+  _id: z.string().default("tool_01KTA6Y5EWY3T9R5E55FQZ71BR"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1297,7 +1297,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KT4C7MFS78TFCTWX1KWGR2T0"),
+  _id: z.string().default("tool_01KTA6Y5ETJC99VZWP9KMT7ZHN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

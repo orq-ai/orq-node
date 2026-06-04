@@ -5,11 +5,11 @@
 ```typescript
 import { OutputType } from "@orq-ai/node/models/operations";
 
-let value: OutputType = "boolean";
+let value: OutputType = "number";
 ```
 
 ## Values
 
 ```typescript
-"boolean"
+"boolean" | "number"
 ```

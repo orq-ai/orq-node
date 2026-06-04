@@ -20,8 +20,6 @@ Invoke a deployment with a given payload
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
-  environment: "<value>",
-  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -80,8 +78,6 @@ import { deploymentsInvoke } from "@orq-ai/node/funcs/deploymentsInvoke.js";
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const orq = new OrqCore({
-  environment: "<value>",
-  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -137,7 +133,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.InvokeDeploymentRequest](../../models/components/invokedeploymentrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeploymentInvokeRequestBody](../../models/operations/deploymentinvokerequestbody.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -372,8 +368,6 @@ Stream deployment generation. Only supported for completions and chat completion
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
-  environment: "<value>",
-  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -434,8 +428,6 @@ import { deploymentsStream } from "@orq-ai/node/funcs/deploymentsStream.js";
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const orq = new OrqCore({
-  environment: "<value>",
-  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 

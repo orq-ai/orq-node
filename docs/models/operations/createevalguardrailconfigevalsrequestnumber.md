@@ -6,10 +6,9 @@
 import { CreateEvalGuardrailConfigEvalsRequestNumber } from "@orq-ai/node/models/operations";
 
 let value: CreateEvalGuardrailConfigEvalsRequestNumber = {
-  enabled: false,
   type: "number",
-  value: 1153.09,
-  operator: "ne",
+  value: 7107.94,
+  operator: "eq",
 };
 ```
 
@@ -17,7 +16,7 @@ let value: CreateEvalGuardrailConfigEvalsRequestNumber = {
 
 | Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `enabled`                                                                                                                            | *boolean*                                                                                                                            | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
+| `enabled`                                                                                                                            | *boolean*                                                                                                                            | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
 | `alertOnFailure`                                                                                                                     | *boolean*                                                                                                                            | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
 | `type`                                                                                                                               | *"number"*                                                                                                                           | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
 | `value`                                                                                                                              | *number*                                                                                                                             | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |

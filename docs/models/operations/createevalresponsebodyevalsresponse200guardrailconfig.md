@@ -3,25 +3,23 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Boolean =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
     {
-      enabled: false,
       type: "boolean",
-      value: true,
+      value: false,
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Categorical`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyCategorical`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Categorical =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyCategorical =
     {
-      enabled: false,
       type: "categorical",
       values: [
         "<value 1>",
@@ -30,16 +28,15 @@ const value:
     };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number`
+### `operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber`
 
 ```typescript
 const value:
-  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number =
+  operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
     {
-      enabled: false,
       type: "number",
-      value: 4424.96,
-      operator: "eq",
+      value: 2504.52,
+      operator: "gte",
     };
 ```
 
