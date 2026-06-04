@@ -1172,6 +1172,7 @@ export const Provider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inceptron: "inceptron",
+  Wafer: "wafer",
   Slack: "slack",
   Orq: "orq",
 } as const;
