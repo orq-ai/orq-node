@@ -7,9 +7,18 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { FilePurpose, FilePurpose$outboundSchema } from "./filepurpose.js";
 
 export type CreateFileRequest = {
-  filename?: string | undefined;
-  content?: string | undefined;
+  /**
+   * Name to store for the uploaded file, including extension when available.
+   */
+  filename: string;
+  /**
+   * Base64-encoded file contents.
+   */
+  content: string;
   purpose?: FilePurpose | undefined;
+  /**
+   * MIME type of the uploaded content, for example `application/pdf`.
+   */
   contentType?: string | undefined;
   /**
    * Project the file is created in. Optional for project-scoped API keys (defaults to the key's bound project); required for workspace-scoped callers.
@@ -19,8 +28,8 @@ export type CreateFileRequest = {
 
 /** @internal */
 export type CreateFileRequest$Outbound = {
-  filename?: string | undefined;
-  content?: string | undefined;
+  filename: string;
+  content: string;
   purpose?: string | undefined;
   content_type?: string | undefined;
   project_id?: string | undefined;
@@ -32,8 +41,8 @@ export const CreateFileRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateFileRequest
 > = z.object({
-  filename: z.string().optional(),
-  content: z.string().optional(),
+  filename: z.string(),
+  content: z.string(),
   purpose: FilePurpose$outboundSchema.optional(),
   contentType: z.string().optional(),
   projectId: z.string().optional(),

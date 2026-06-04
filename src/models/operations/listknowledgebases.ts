@@ -111,7 +111,7 @@ export type Data2 = {
   /**
    * The description of the knowledge base.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The unique key of the knowledge base.
    */
@@ -230,7 +230,7 @@ export type Data1 = {
   /**
    * The description of the knowledge base.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The unique key of the knowledge base.
    */
@@ -424,7 +424,7 @@ export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     created: z.string(),
-    description: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
     key: z.string(),
     domain_id: z.string(),
     path: z.string().optional(),
@@ -559,7 +559,7 @@ export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     created: z.string(),
-    description: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
     key: z.string(),
     domain_id: z.string(),
     path: z.string().optional(),

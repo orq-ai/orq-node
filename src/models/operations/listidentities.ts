@@ -8,11 +8,35 @@ import * as components from "../components/index.js";
 
 export type ListIdentitiesRequest = {
   limit?: number | undefined;
+  /**
+   * Cursor for forward pagination. Set to the `_id` of the last item from
+   *
+   * @remarks
+   *  the previous page.
+   */
   startingAfter?: string | undefined;
+  /**
+   * Cursor for backward pagination. Set to the `_id` of the first item from
+   *
+   * @remarks
+   *  the previous page.
+   */
   endingBefore?: string | undefined;
+  /**
+   * Case-insensitive search text matched against identity profile fields.
+   */
   search?: string | undefined;
+  /**
+   * Return only identities that have at least one of these tags.
+   */
   filterByTags?: Array<string> | undefined;
+  /**
+   * Include aggregate usage metrics on each returned identity.
+   */
   includeMetrics?: boolean | undefined;
+  /**
+   * Field used to order the list.
+   */
   sortBy?: components.IdentitySortField | undefined;
 };
 

@@ -9,7 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetFileContentResponse = {
-  downloadUrl?: string | undefined;
+  /**
+   * Presigned URL that can be used to download the file content.
+   */
+  downloadUrl: string;
 };
 
 /** @internal */
@@ -18,7 +21,7 @@ export const GetFileContentResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  download_url: z.string().optional(),
+  download_url: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "download_url": "downloadUrl",

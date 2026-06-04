@@ -9,7 +9,7 @@ export type CreateSkillRequest = {
   /**
    * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
    */
-  displayName?: string | undefined;
+  displayName: string;
   /**
    * Short human-readable summary of what the skill is for.
    */
@@ -34,7 +34,7 @@ export type CreateSkillRequest = {
 
 /** @internal */
 export type CreateSkillRequest$Outbound = {
-  display_name?: string | undefined;
+  display_name: string;
   description?: string | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
@@ -48,7 +48,7 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateSkillRequest
 > = z.object({
-  displayName: z.string().optional(),
+  displayName: z.string(),
   description: z.string().optional(),
   tags: z.array(z.string()).optional(),
   path: z.string().optional(),

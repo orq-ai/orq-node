@@ -7,6 +7,9 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type FileUpdateRequest = {
+  /**
+   * File ID to update.
+   */
   fileId: string;
   updateFileRequest: components.UpdateFileRequest;
 };

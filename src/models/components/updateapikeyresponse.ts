@@ -13,7 +13,7 @@ export type UpdateApiKeyResponse = {
   /**
    * Updated api-key.
    */
-  apiKey?: ApiKey | undefined;
+  apiKey: ApiKey;
 };
 
 /** @internal */
@@ -22,7 +22,7 @@ export const UpdateApiKeyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  api_key: ApiKey$inboundSchema.optional(),
+  api_key: ApiKey$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "api_key": "apiKey",

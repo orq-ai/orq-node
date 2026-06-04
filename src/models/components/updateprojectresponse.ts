@@ -12,7 +12,7 @@ export type UpdateProjectResponse = {
   /**
    * Updated project.
    */
-  project?: Project | undefined;
+  project: Project;
 };
 
 /** @internal */
@@ -21,7 +21,7 @@ export const UpdateProjectResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  project: Project$inboundSchema.optional(),
+  project: Project$inboundSchema,
 });
 
 export function updateProjectResponseFromJSON(

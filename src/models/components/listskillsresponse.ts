@@ -13,18 +13,18 @@ export type ListSkillsResponse = {
   /**
    * Object discriminator for list responses; always `list`.
    */
-  object?: string | undefined;
+  object: string;
   /**
    * Page of skills, ordered newest first.
    */
-  data?: Array<Skill> | undefined;
+  data: Array<Skill>;
   /**
    * Whether more skills are available in the selected pagination
    *
    * @remarks
    *  direction.
    */
-  hasMore?: boolean | undefined;
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -33,9 +33,9 @@ export const ListSkillsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.string().optional(),
-  data: z.array(Skill$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
+  object: z.string(),
+  data: z.array(Skill$inboundSchema),
+  has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",

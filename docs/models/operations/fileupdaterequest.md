@@ -7,7 +7,9 @@ import { FileUpdateRequest } from "@orq-ai/node/models/operations";
 
 let value: FileUpdateRequest = {
   fileId: "<id>",
-  updateFileRequest: {},
+  updateFileRequest: {
+    fileName: "example.file",
+  },
 };
 ```
 
@@ -15,5 +17,5 @@ let value: FileUpdateRequest = {
 
 | Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `fileId`                                                                     | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `fileId`                                                                     | *string*                                                                     | :heavy_check_mark:                                                           | File ID to update.                                                           |
 | `updateFileRequest`                                                          | [components.UpdateFileRequest](../../models/components/updatefilerequest.md) | :heavy_check_mark:                                                           | N/A                                                                          |

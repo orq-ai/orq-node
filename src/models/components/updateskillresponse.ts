@@ -12,7 +12,7 @@ export type UpdateSkillResponse = {
   /**
    * Updated skill.
    */
-  skill?: Skill | undefined;
+  skill: Skill;
 };
 
 /** @internal */
@@ -21,7 +21,7 @@ export const UpdateSkillResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  skill: Skill$inboundSchema.optional(),
+  skill: Skill$inboundSchema,
 });
 
 export function updateSkillResponseFromJSON(

@@ -10,9 +10,18 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FileT, FileT$inboundSchema } from "./file.js";
 
 export type ListFilesResponse = {
-  object?: string | undefined;
-  data?: Array<FileT> | undefined;
-  hasMore?: boolean | undefined;
+  /**
+   * Object discriminator for list responses; always `list`.
+   */
+  object: string;
+  /**
+   * Page of files.
+   */
+  data: Array<FileT>;
+  /**
+   * Whether more files are available in the selected pagination direction.
+   */
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -21,9 +30,9 @@ export const ListFilesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.string().optional(),
-  data: z.array(FileT$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
+  object: z.string(),
+  data: z.array(FileT$inboundSchema),
+  has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",

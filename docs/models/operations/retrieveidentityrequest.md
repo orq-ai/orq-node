@@ -12,7 +12,7 @@ let value: RetrieveIdentityRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `includeMetrics`   | *boolean*          | :heavy_minus_sign: | N/A                |
+| Field                                                     | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `id`                                                      | *string*                                                  | :heavy_check_mark:                                        | Identity ID to retrieve.                                  |
+| `includeMetrics`                                          | *boolean*                                                 | :heavy_minus_sign:                                        | Include aggregate usage metrics on the returned identity. |

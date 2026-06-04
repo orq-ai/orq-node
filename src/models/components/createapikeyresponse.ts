@@ -13,7 +13,7 @@ export type CreateApiKeyResponse = {
   /**
    * Newly minted api-key record.
    */
-  apiKey?: ApiKey | undefined;
+  apiKey: ApiKey;
   /**
    * Raw bearer token in the form `sk-orq-<api_key_id>-<secret>`.
    *
@@ -21,7 +21,7 @@ export type CreateApiKeyResponse = {
    *  Returned ONCE; the API never exposes this value again. Clients
    *  must persist it immediately on receipt.
    */
-  token?: string | undefined;
+  token: string;
 };
 
 /** @internal */
@@ -30,8 +30,8 @@ export const CreateApiKeyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  api_key: ApiKey$inboundSchema.optional(),
-  token: z.string().optional(),
+  api_key: ApiKey$inboundSchema,
+  token: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "api_key": "apiKey",

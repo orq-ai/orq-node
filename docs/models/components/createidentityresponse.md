@@ -5,11 +5,19 @@
 ```typescript
 import { CreateIdentityResponse } from "@orq-ai/node/models/components";
 
-let value: CreateIdentityResponse = {};
+let value: CreateIdentityResponse = {
+  identity: {
+    id: "<id>",
+    externalId: "<id>",
+    workspaceId: "<id>",
+    created: "<value>",
+    updated: "<value>",
+  },
+};
 ```
 
 ## Fields
 
 | Field                                                      | Type                                                       | Required                                                   | Description                                                |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `identity`                                                 | [components.Identity](../../models/components/identity.md) | :heavy_minus_sign:                                         | N/A                                                        |
+| `identity`                                                 | [components.Identity](../../models/components/identity.md) | :heavy_check_mark:                                         | Newly created identity.                                    |

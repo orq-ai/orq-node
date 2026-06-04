@@ -17,10 +17,6 @@ import {
 
 export type UpdateApiKeyRequest = {
   /**
-   * API key id to update.
-   */
-  apiKeyId?: string | undefined;
-  /**
    * New name. Omit to keep current.
    */
   name?: string | undefined;
@@ -33,7 +29,7 @@ export type UpdateApiKeyRequest = {
    *  `PERMISSION_MODE_RESTRICTED`; ignored otherwise. Provide an empty
    *  map to clear. See `ApiKey.access` for the full catalog of valid
    *  keys (Domain.id) and AccessLevel string values, or fetch the
-   *  live catalog via the `ListCapabilities` RPC.
+   *  live catalog via the capability catalog endpoint.
    */
   access?: { [k: string]: number } | undefined;
   /**
@@ -56,7 +52,6 @@ export type UpdateApiKeyRequest = {
 
 /** @internal */
 export type UpdateApiKeyRequest$Outbound = {
-  api_key_id?: string | undefined;
   name?: string | undefined;
   status?: string | undefined;
   permission_mode?: string | undefined;
@@ -72,7 +67,6 @@ export const UpdateApiKeyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateApiKeyRequest
 > = z.object({
-  apiKeyId: z.string().optional(),
   name: z.string().optional(),
   status: ApiKeyStatus$outboundSchema.optional(),
   permissionMode: PermissionMode$outboundSchema.optional(),
@@ -82,7 +76,6 @@ export const UpdateApiKeyRequest$outboundSchema: z.ZodType<
   clearExpiresAt: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
-    apiKeyId: "api_key_id",
     permissionMode: "permission_mode",
     projectScope: "project_scope",
     expiresAt: "expires_at",

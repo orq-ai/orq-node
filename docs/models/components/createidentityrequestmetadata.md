@@ -1,5 +1,7 @@
 # CreateIdentityRequestMetadata
 
+Custom JSON metadata stored with the identity.
+
 ## Example Usage
 
 ```typescript

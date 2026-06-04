@@ -6,7 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type RetrieveIdentityRequest = {
+  /**
+   * Identity ID to retrieve.
+   */
   id: string;
+  /**
+   * Include aggregate usage metrics on the returned identity.
+   */
   includeMetrics?: boolean | undefined;
 };
 

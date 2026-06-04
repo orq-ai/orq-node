@@ -12,19 +12,64 @@ import {
   IdentityMetrics$inboundSchema,
 } from "./identitymetrics.js";
 
+/**
+ * Custom JSON metadata stored with the identity.
+ */
 export type Metadata = {};
 
 export type Identity = {
-  id?: string | undefined;
-  externalId?: string | undefined;
-  workspaceId?: string | undefined;
+  /**
+   * Unique identity identifier assigned by ORQ. Returned as `_id` for
+   *
+   * @remarks
+   *  compatibility with the v1 identity API.
+   */
+  id: string;
+  /**
+   * Customer-provided stable identifier for this identity. This value is
+   *
+   * @remarks
+   *  required on create and is unique within the workspace.
+   */
+  externalId: string;
+  /**
+   * Workspace that owns the identity.
+   */
+  workspaceId: string;
+  /**
+   * Human-readable display name for the identity.
+   */
   displayName?: string | undefined;
+  /**
+   * Email address associated with the identity.
+   */
   email?: string | undefined;
+  /**
+   * URL of the identity avatar image.
+   */
   avatarUrl?: string | undefined;
+  /**
+   * Free-form labels used to organize and filter identities.
+   */
   tags?: Array<string> | undefined;
+  /**
+   * Custom JSON metadata stored with the identity.
+   */
   metadata?: Metadata | undefined;
-  created?: string | undefined;
-  updated?: string | undefined;
+  /**
+   * ISO timestamp for when the identity was created.
+   */
+  created: string;
+  /**
+   * ISO timestamp for when the identity was last updated.
+   */
+  updated: string;
+  /**
+   * Optional usage and cost metrics. Present only when requested with
+   *
+   * @remarks
+   *  `include_metrics`.
+   */
   metrics?: IdentityMetrics | undefined;
 };
 
@@ -51,16 +96,16 @@ export const Identity$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().optional(),
-  external_id: z.string().optional(),
-  workspace_id: z.string().optional(),
+  _id: z.string(),
+  external_id: z.string(),
+  workspace_id: z.string(),
   display_name: z.string().optional(),
   email: z.string().optional(),
   avatar_url: z.string().optional(),
   tags: z.array(z.string()).optional(),
   metadata: z.lazy(() => Metadata$inboundSchema).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
+  created: z.string(),
+  updated: z.string(),
   metrics: IdentityMetrics$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

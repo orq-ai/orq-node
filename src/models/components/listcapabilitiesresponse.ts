@@ -15,7 +15,7 @@ export type ListCapabilitiesResponse = {
    * @remarks
    *  then platform, then gateway.
    */
-  domains?: Array<Domain> | undefined;
+  domains: Array<Domain>;
 };
 
 /** @internal */
@@ -24,7 +24,7 @@ export const ListCapabilitiesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  domains: z.array(Domain$inboundSchema).optional(),
+  domains: z.array(Domain$inboundSchema),
 });
 
 export function listCapabilitiesResponseFromJSON(

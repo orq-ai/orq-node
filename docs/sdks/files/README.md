@@ -99,7 +99,10 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.files.create({});
+  const result = await orq.files.create({
+    filename: "example.file",
+    content: "<value>",
+  });
 
   console.log(result);
 }
@@ -122,7 +125,10 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await filesCreate(orq, {});
+  const res = await filesCreate(orq, {
+    filename: "example.file",
+    content: "<value>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -301,7 +307,7 @@ run();
 
 ## delete
 
-Delete a file
+Permanently deletes a file and its stored content from the project.
 
 ### Example Usage
 
@@ -389,7 +395,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.files.update({
     fileId: "<id>",
-    updateFileRequest: {},
+    updateFileRequest: {
+      fileName: "example.file",
+    },
   });
 
   console.log(result);
@@ -415,7 +423,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await filesUpdate(orq, {
     fileId: "<id>",
-    updateFileRequest: {},
+    updateFileRequest: {
+      fileName: "example.file",
+    },
   });
   if (res.ok) {
     const { value: result } = res;

@@ -9,10 +9,22 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type IdentityMetrics = {
-  totalTokens?: number | undefined;
-  totalCost?: number | undefined;
-  totalRequests?: number | undefined;
-  errorRate?: number | undefined;
+  /**
+   * Total token count attributed to the identity.
+   */
+  totalTokens: number;
+  /**
+   * Total cost attributed to the identity.
+   */
+  totalCost: number;
+  /**
+   * Total request count attributed to the identity.
+   */
+  totalRequests: number;
+  /**
+   * Fraction of attributed requests that failed.
+   */
+  errorRate: number;
 };
 
 /** @internal */
@@ -21,10 +33,10 @@ export const IdentityMetrics$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total_tokens: z.number().optional(),
-  total_cost: z.number().optional(),
-  total_requests: z.number().optional(),
-  error_rate: z.number().optional(),
+  total_tokens: z.number(),
+  total_cost: z.number(),
+  total_requests: z.number(),
+  error_rate: z.number(),
 }).transform((v) => {
   return remap$(v, {
     "total_tokens": "totalTokens",
