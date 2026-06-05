@@ -21,7 +21,7 @@ export type CreateFileRequest = {
    */
   contentType?: string | undefined;
   /**
-   * Project the file is created in. Optional for project-scoped API keys (defaults to the key's bound project); required for workspace-scoped callers.
+   * Project the file is created in. Optional: project-scoped API keys default to the key's bound project; workspace-scoped callers default to the workspace's default project.
    */
   projectId?: string | undefined;
 };
