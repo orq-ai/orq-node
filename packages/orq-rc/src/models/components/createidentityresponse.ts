@@ -9,7 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Identity, Identity$inboundSchema } from "./identity.js";
 
 export type CreateIdentityResponse = {
-  identity?: Identity | undefined;
+  /**
+   * Newly created identity.
+   */
+  identity: Identity;
 };
 
 /** @internal */
@@ -18,7 +21,7 @@ export const CreateIdentityResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  identity: Identity$inboundSchema.optional(),
+  identity: Identity$inboundSchema,
 });
 
 export function createIdentityResponseFromJSON(

@@ -6,14 +6,15 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateFileRequest = {
-  fileId?: string | undefined;
-  fileName?: string | undefined;
+  /**
+   * New display file name, including extension when available.
+   */
+  fileName: string;
 };
 
 /** @internal */
 export type UpdateFileRequest$Outbound = {
-  file_id?: string | undefined;
-  file_name?: string | undefined;
+  file_name: string;
 };
 
 /** @internal */
@@ -22,11 +23,9 @@ export const UpdateFileRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateFileRequest
 > = z.object({
-  fileId: z.string().optional(),
-  fileName: z.string().optional(),
+  fileName: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    fileId: "file_id",
     fileName: "file_name",
   });
 });

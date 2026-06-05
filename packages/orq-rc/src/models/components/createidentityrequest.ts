@@ -5,14 +5,38 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * Custom JSON metadata stored with the identity.
+ */
 export type CreateIdentityRequestMetadata = {};
 
 export type CreateIdentityRequest = {
-  externalId?: string | undefined;
+  /**
+   * Customer-provided stable identifier for this identity. Must be unique
+   *
+   * @remarks
+   *  within the workspace.
+   */
+  externalId: string;
+  /**
+   * Human-readable display name for the identity.
+   */
   displayName?: string | undefined;
+  /**
+   * Email address associated with the identity.
+   */
   email?: string | undefined;
+  /**
+   * URL of the identity avatar image.
+   */
   avatarUrl?: string | undefined;
+  /**
+   * Free-form labels used to organize and filter identities.
+   */
   tags?: Array<string> | undefined;
+  /**
+   * Custom JSON metadata stored with the identity.
+   */
   metadata?: CreateIdentityRequestMetadata | undefined;
 };
 
@@ -38,7 +62,7 @@ export function createIdentityRequestMetadataToJSON(
 
 /** @internal */
 export type CreateIdentityRequest$Outbound = {
-  external_id?: string | undefined;
+  external_id: string;
   display_name?: string | undefined;
   email?: string | undefined;
   avatar_url?: string | undefined;
@@ -52,7 +76,7 @@ export const CreateIdentityRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateIdentityRequest
 > = z.object({
-  externalId: z.string().optional(),
+  externalId: z.string(),
   displayName: z.string().optional(),
   email: z.string().optional(),
   avatarUrl: z.string().optional(),

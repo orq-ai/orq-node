@@ -44,8 +44,8 @@ export type CreateMemoryDocumentResponseBody = {
   text: string;
   created: string;
   updated: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   workspaceId: string;
   /**
    * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
@@ -126,8 +126,8 @@ export const CreateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
   text: z.string(),
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   workspace_id: z.string(),
   metadata: z.record(z.string()).optional(),
 }).transform((v) => {

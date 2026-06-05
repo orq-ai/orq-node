@@ -5,12 +5,13 @@
 ```typescript
 import { UpdateFileRequest } from "@orq-ai/node/models/components";
 
-let value: UpdateFileRequest = {};
+let value: UpdateFileRequest = {
+  fileName: "example.file",
+};
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `fileId`           | *string*           | :heavy_minus_sign: | N/A                |
-| `fileName`         | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `fileName`                                                 | *string*                                                   | :heavy_check_mark:                                         | New display file name, including extension when available. |

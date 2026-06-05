@@ -94,7 +94,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.projects.create({});
+  const result = await orq.projects.create({
+    name: "<value>",
+  });
 
   console.log(result);
 }
@@ -117,7 +119,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await projectsCreate(orq, {});
+  const res = await projectsCreate(orq, {
+    name: "<value>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

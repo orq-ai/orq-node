@@ -5,13 +5,15 @@
 ```typescript
 import { CreateProjectRequest } from "@orq-ai/node/models/components";
 
-let value: CreateProjectRequest = {};
+let value: CreateProjectRequest = {
+  name: "<value>",
+};
 ```
 
 ## Fields
 
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `name`                                                            | *string*                                                          | :heavy_minus_sign:                                                | Project name. Names must be non-empty and at most 128 characters. |
+| `name`                                                            | *string*                                                          | :heavy_check_mark:                                                | Project name. Names must be non-empty and at most 128 characters. |
 | `teams`                                                           | *string*[]                                                        | :heavy_minus_sign:                                                | Team identifiers to associate with the project.                   |
 | `description`                                                     | *string*                                                          | :heavy_minus_sign:                                                | Optional human-readable description, at most 500 characters.      |

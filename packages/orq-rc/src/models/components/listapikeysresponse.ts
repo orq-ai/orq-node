@@ -13,21 +13,21 @@ export type ListApiKeysResponse = {
   /**
    * Object discriminator for list responses; always `list`.
    */
-  object?: string | undefined;
+  object: string;
   /**
    * Page of api-keys, ordered newest first. `token_hash` and
    *
    * @remarks
    *  `api_key` are always elided in list responses.
    */
-  data?: Array<ApiKey> | undefined;
+  data: Array<ApiKey>;
   /**
    * Whether more api-keys are available in the selected pagination
    *
    * @remarks
    *  direction.
    */
-  hasMore?: boolean | undefined;
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -36,9 +36,9 @@ export const ListApiKeysResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.string().optional(),
-  data: z.array(ApiKey$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
+  object: z.string(),
+  data: z.array(ApiKey$inboundSchema),
+  has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",

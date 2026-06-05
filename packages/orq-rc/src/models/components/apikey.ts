@@ -33,27 +33,27 @@ export type ApiKey = {
    * @remarks
    *  `sk-orq-<id>-<secret>`.
    */
-  apiKeyId?: string | undefined;
+  apiKeyId: string;
   /**
    * Human-readable name shown in the dashboard.
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Owner attribution (drives lifecycle).
    */
-  owner?: ApiKeyOwner | undefined;
+  owner: ApiKeyOwner;
   /**
    * Project authorization scope.
    */
-  projectScope?: ProjectScope | undefined;
-  permissionMode?: PermissionMode | undefined;
+  projectScope: ProjectScope;
+  permissionMode: PermissionMode;
   /**
    * Per-domain access map. Only populated when `permission_mode` is
    *
    * @remarks
    *  `PERMISSION_MODE_RESTRICTED`. The authoritative list of valid
    *  keys and the per-domain read / write semantics are exposed at
-   *  runtime via the `ListCapabilities` RPC.
+   *  runtime via the capability catalog endpoint.
    *
    *  Valid keys are the Domain.id values in the capability catalog —
    *  see libs/catalog/orq/apikeys/v1/catalog.textpb for the canonical
@@ -71,8 +71,8 @@ export type ApiKey = {
    * @remarks
    *  to expose.
    */
-  tokenPrefix?: string | undefined;
-  status?: ApiKeyStatus | undefined;
+  tokenPrefix: string;
+  status: ApiKeyStatus;
   /**
    * Audit: user who created the key. Optional. Distinct from
    *
@@ -88,11 +88,11 @@ export type ApiKey = {
   /**
    * Time the key was created.
    */
-  createdAt?: Date | undefined;
+  createdAt: Date;
   /**
    * Time the key was last updated.
    */
-  updatedAt?: Date | undefined;
+  updatedAt: Date;
   /**
    * Last authenticated use. Updated via NATS debounce + 1% sampler.
    */
@@ -117,22 +117,22 @@ export type ApiKey = {
 /** @internal */
 export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
   .object({
-    api_key_id: z.string().optional(),
-    name: z.string().optional(),
-    owner: ApiKeyOwner$inboundSchema.optional(),
-    project_scope: ProjectScope$inboundSchema.optional(),
-    permission_mode: PermissionMode$inboundSchema.optional(),
+    api_key_id: z.string(),
+    name: z.string(),
+    owner: ApiKeyOwner$inboundSchema,
+    project_scope: ProjectScope$inboundSchema,
+    permission_mode: PermissionMode$inboundSchema,
     access: z.record(z.number().int()).optional(),
-    token_prefix: z.string().optional(),
-    status: ApiKeyStatus$inboundSchema.optional(),
+    token_prefix: z.string(),
+    status: ApiKeyStatus$inboundSchema,
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
+    ),
     updated_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
+    ),
     last_used_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ).optional(),

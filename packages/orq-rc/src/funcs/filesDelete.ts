@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete a file
+ *
+ * @remarks
+ * Permanently deletes a file and its stored content from the project.
  */
 export function filesDelete(
   client: OrqCore,

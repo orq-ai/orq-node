@@ -102,7 +102,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.identities.create({});
+  const result = await orq.identities.create({
+    externalId: "<id>",
+  });
 
   console.log(result);
 }
@@ -125,7 +127,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await identitiesCreate(orq, {});
+  const res = await identitiesCreate(orq, {
+    externalId: "<id>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

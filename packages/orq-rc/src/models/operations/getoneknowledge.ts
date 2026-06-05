@@ -102,7 +102,7 @@ export type GetOneKnowledgeResponseBody2 = {
   /**
    * The description of the knowledge base.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The unique key of the knowledge base.
    */
@@ -228,7 +228,7 @@ export type GetOneKnowledgeResponseBody1 = {
   /**
    * The description of the knowledge base.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The unique key of the knowledge base.
    */
@@ -443,7 +443,7 @@ export const GetOneKnowledgeResponseBody2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   created: z.string(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   key: z.string(),
   domain_id: z.string(),
   path: z.string().optional(),
@@ -599,7 +599,7 @@ export const GetOneKnowledgeResponseBody1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   created: z.string(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   key: z.string(),
   domain_id: z.string(),
   path: z.string().optional(),

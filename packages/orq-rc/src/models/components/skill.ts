@@ -16,47 +16,47 @@ export type Skill = {
    *  `skill_01H...`. Use this value in retrieve, update, and delete
    *  requests.
    */
-  skillId?: string | undefined;
+  skillId: string;
   /**
-   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, underscores, and hyphens.
+   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
    */
-  displayName?: string | undefined;
+  displayName: string;
   /**
    * Short human-readable summary of what the skill is for.
    */
-  description?: string | undefined;
+  description: string;
   /**
    * Free-form labels used for organization and filtering in clients.
    */
-  tags?: Array<string> | undefined;
+  tags: Array<string>;
   /**
    * Project that owns or contains the skill.
    */
-  projectId?: string | undefined;
+  projectId: string;
   /**
    * Project path where the skill is stored in the workspace.
    */
-  path?: string | undefined;
+  path: string;
   /**
    * Time when the skill was created.
    */
-  createdAt?: Date | undefined;
+  createdAt: Date;
   /**
    * Time when the skill was last updated.
    */
-  updatedAt?: Date | undefined;
+  updatedAt: Date;
   /**
    * User ID that created the skill.
    */
-  createdById?: string | undefined;
+  createdById: string;
   /**
    * User ID that last updated the skill.
    */
-  updatedById?: string | undefined;
+  updatedById: string;
   /**
    * Instruction body executed or reused by clients that load this skill.
    */
-  instructions?: string | undefined;
+  instructions: string;
   /**
    * Latest semver assigned by the activity log. Stamped on the document
    *
@@ -64,28 +64,28 @@ export type Skill = {
    *  by CreateSkill / UpdateSkill so reads return it without joining
    *  workspaces.activities.
    */
-  version?: string | undefined;
+  version: string;
 };
 
 /** @internal */
 export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
   .object({
-    skill_id: z.string().optional(),
-    display_name: z.string().optional(),
-    description: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    project_id: z.string().optional(),
-    path: z.string().optional(),
+    skill_id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()),
+    project_id: z.string(),
+    path: z.string(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
+    ),
     updated_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
-    created_by_id: z.string().optional(),
-    updated_by_id: z.string().optional(),
-    instructions: z.string().optional(),
-    version: z.string().optional(),
+    ),
+    created_by_id: z.string(),
+    updated_by_id: z.string(),
+    instructions: z.string(),
+    version: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "skill_id": "skillId",

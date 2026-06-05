@@ -585,11 +585,11 @@ export type ListDatasetDatapointsData = {
   /**
    * The unique identifier of the user who created the dataset
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The unique identifier of the user who last updated the dataset
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The date and time the resource was created
    */
@@ -1270,7 +1270,7 @@ export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-04T13:56:34.055Z",
+    "2026-06-05T06:12:43.212Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1320,7 +1320,7 @@ export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-04T13:56:34.055Z",
+    "2026-06-05T06:12:43.212Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1369,7 +1369,7 @@ export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-04T13:56:34.054Z",
+    "2026-06-05T06:12:43.211Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -1443,12 +1443,12 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   ).optional(),
   dataset_id: z.string(),
   snapshot_version: z.string().optional(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-04T13:56:06.515Z",
+    "2026-06-05T06:12:26.568Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

@@ -9,7 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserOwner = {
-  userId?: string | undefined;
+  /**
+   * User ID that owns the API key.
+   */
+  userId: string;
 };
 
 /** @internal */
@@ -18,7 +21,7 @@ export const UserOwner$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  user_id: z.string().optional(),
+  user_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "user_id": "userId",
@@ -26,7 +29,7 @@ export const UserOwner$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type UserOwner$Outbound = {
-  user_id?: string | undefined;
+  user_id: string;
 };
 
 /** @internal */
@@ -35,7 +38,7 @@ export const UserOwner$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserOwner
 > = z.object({
-  userId: z.string().optional(),
+  userId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     userId: "user_id",

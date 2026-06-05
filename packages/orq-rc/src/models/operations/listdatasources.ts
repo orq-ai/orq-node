@@ -67,7 +67,7 @@ export type ListDatasourcesData = {
   /**
    * The description of the knowledge base
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   status: ListDatasourcesStatus;
   /**
    * The unique identifier of the file used to create the datasource.
@@ -182,9 +182,9 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KT9EQSHQG2M4BAG8E8RCVP90"),
+  _id: z.string().default("01KTB6K60FX3WZR6WQ2QV74ZKN"),
   display_name: z.string(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   status: ListDatasourcesStatus$inboundSchema,
   file_id: z.nullable(z.string()).optional(),
   created: z.string(),

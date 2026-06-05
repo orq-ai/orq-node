@@ -8,7 +8,7 @@ export type CreateProjectRequest = {
   /**
    * Project name. Names must be non-empty and at most 128 characters.
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Team identifiers to associate with the project.
    */
@@ -21,7 +21,7 @@ export type CreateProjectRequest = {
 
 /** @internal */
 export type CreateProjectRequest$Outbound = {
-  name?: string | undefined;
+  name: string;
   teams?: Array<string> | undefined;
   description?: string | undefined;
 };
@@ -32,7 +32,7 @@ export const CreateProjectRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateProjectRequest
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   teams: z.array(z.string()).optional(),
   description: z.string().optional(),
 });

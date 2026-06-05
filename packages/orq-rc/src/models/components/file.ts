@@ -10,28 +10,40 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FilePurpose, FilePurpose$inboundSchema } from "./filepurpose.js";
 
 export type FileT = {
-  fileId?: string | undefined;
-  purpose?: FilePurpose | undefined;
-  fileName?: string | undefined;
-  bytes?: string | undefined;
-  createdAt?: Date | undefined;
+  /**
+   * Unique file identifier assigned by ORQ.
+   */
+  fileId: string;
+  purpose: FilePurpose;
+  /**
+   * Display file name, including extension when available.
+   */
+  fileName: string;
+  /**
+   * Size of the uploaded file in bytes.
+   */
+  bytes: string;
+  /**
+   * Time when the file was created.
+   */
+  createdAt: Date;
   /**
    * Identifier of the project the file belongs to. Files are project-scoped; an API key may only access files in projects it is authorized for.
    */
-  projectId?: string | undefined;
+  projectId: string;
 };
 
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
-    file_id: z.string().optional(),
-    purpose: FilePurpose$inboundSchema.optional(),
-    file_name: z.string().optional(),
-    bytes: z.string().optional(),
+    file_id: z.string(),
+    purpose: FilePurpose$inboundSchema,
+    file_name: z.string(),
+    bytes: z.string(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
-    project_id: z.string().optional(),
+    ),
+    project_id: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "file_id": "fileId",

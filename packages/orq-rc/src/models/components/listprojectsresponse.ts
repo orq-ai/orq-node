@@ -13,18 +13,18 @@ export type ListProjectsResponse = {
   /**
    * Object discriminator for list responses; always `list`.
    */
-  object?: string | undefined;
+  object: string;
   /**
    * Page of projects, ordered newest first.
    */
-  data?: Array<Project> | undefined;
+  data: Array<Project>;
   /**
    * Whether more projects are available in the selected pagination
    *
    * @remarks
    *  direction.
    */
-  hasMore?: boolean | undefined;
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -33,9 +33,9 @@ export const ListProjectsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.string().optional(),
-  data: z.array(Project$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
+  object: z.string(),
+  data: z.array(Project$inboundSchema),
+  has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",

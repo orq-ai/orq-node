@@ -101,7 +101,7 @@ export type CreateDatasourceRequestBody = {
   /**
    * The description of the knowledge base
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The unique identifier of the file used for datasource creation. If provided, the file is immediately queued for chunking.
    */
@@ -144,7 +144,7 @@ export type CreateDatasourceResponseBody = {
   /**
    * The description of the knowledge base
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   status: CreateDatasourceStatus;
   /**
    * The unique identifier of the file used to create the datasource.
@@ -336,7 +336,7 @@ export function chunkingOptionsToJSON(
 /** @internal */
 export type CreateDatasourceRequestBody$Outbound = {
   display_name?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   file_id?: string | undefined;
   chunking_options?: ChunkingOptions$Outbound | undefined;
 };
@@ -348,7 +348,7 @@ export const CreateDatasourceRequestBody$outboundSchema: z.ZodType<
   CreateDatasourceRequestBody
 > = z.object({
   displayName: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   fileId: z.string().optional(),
   chunkingOptions: z.lazy(() => ChunkingOptions$outboundSchema).optional(),
 }).transform((v) => {
@@ -409,9 +409,9 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KT9EQSHWA3KCHWFEMKJE3X88"),
+  _id: z.string().default("01KTB6K60JRA6Z0WS8753R5G4Y"),
   display_name: z.string(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   status: CreateDatasourceStatus$inboundSchema,
   file_id: z.nullable(z.string()).optional(),
   created: z.string(),

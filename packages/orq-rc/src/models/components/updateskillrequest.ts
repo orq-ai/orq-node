@@ -7,10 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateSkillRequest = {
   /**
-   * Skill ID to update.
-   */
-  skillId?: string | undefined;
-  /**
    * New workspace-unique display name. Omit to keep the current name.
    *
    * @remarks
@@ -43,7 +39,6 @@ export type UpdateSkillRequest = {
 
 /** @internal */
 export type UpdateSkillRequest$Outbound = {
-  skill_id?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   tags?: Array<string> | undefined;
@@ -58,7 +53,6 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateSkillRequest
 > = z.object({
-  skillId: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   tags: z.array(z.string()).optional(),
@@ -67,7 +61,6 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    skillId: "skill_id",
     displayName: "display_name",
     projectId: "project_id",
   });

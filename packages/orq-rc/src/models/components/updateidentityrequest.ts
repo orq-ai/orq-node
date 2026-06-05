@@ -5,14 +5,31 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * Replacement custom JSON metadata.
+ */
 export type UpdateIdentityRequestMetadata = {};
 
 export type UpdateIdentityRequest = {
-  id?: string | undefined;
+  /**
+   * New display name. Omit to keep the current display name.
+   */
   displayName?: string | undefined;
+  /**
+   * New email address. Omit to keep the current email.
+   */
   email?: string | undefined;
+  /**
+   * New avatar image URL. Omit to keep the current avatar URL.
+   */
   avatarUrl?: string | undefined;
+  /**
+   * Replacement tag list. Leave empty to clear tags.
+   */
   tags?: Array<string> | undefined;
+  /**
+   * Replacement custom JSON metadata.
+   */
   metadata?: UpdateIdentityRequestMetadata | undefined;
 };
 
@@ -38,7 +55,6 @@ export function updateIdentityRequestMetadataToJSON(
 
 /** @internal */
 export type UpdateIdentityRequest$Outbound = {
-  id?: string | undefined;
   display_name?: string | undefined;
   email?: string | undefined;
   avatar_url?: string | undefined;
@@ -52,7 +68,6 @@ export const UpdateIdentityRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateIdentityRequest
 > = z.object({
-  id: z.string().optional(),
   displayName: z.string().optional(),
   email: z.string().optional(),
   avatarUrl: z.string().optional(),

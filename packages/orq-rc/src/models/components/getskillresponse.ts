@@ -12,7 +12,7 @@ export type GetSkillResponse = {
   /**
    * Requested skill.
    */
-  skill?: Skill | undefined;
+  skill: Skill;
 };
 
 /** @internal */
@@ -21,7 +21,7 @@ export const GetSkillResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  skill: Skill$inboundSchema.optional(),
+  skill: Skill$inboundSchema,
 });
 
 export function getSkillResponseFromJSON(

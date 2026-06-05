@@ -3,13 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateProjectRequest = {
-  /**
-   * Project ID to update.
-   */
-  projectId?: string | undefined;
   /**
    * New project name. Omit to keep the current name.
    */
@@ -29,7 +24,6 @@ export type UpdateProjectRequest = {
 
 /** @internal */
 export type UpdateProjectRequest$Outbound = {
-  project_id?: string | undefined;
   name?: string | undefined;
   teams?: Array<string> | undefined;
   description?: string | undefined;
@@ -41,14 +35,9 @@ export const UpdateProjectRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateProjectRequest
 > = z.object({
-  projectId: z.string().optional(),
   name: z.string().optional(),
   teams: z.array(z.string()).optional(),
   description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
 });
 
 export function updateProjectRequestToJSON(

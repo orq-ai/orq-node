@@ -1,5 +1,7 @@
 # UpdateIdentityRequestMetadata
 
+Replacement custom JSON metadata.
+
 ## Example Usage
 
 ```typescript

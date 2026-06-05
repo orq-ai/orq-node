@@ -13,7 +13,7 @@ export type GetApiKeyResponse = {
   /**
    * Requested api-key. Raw token never included.
    */
-  apiKey?: ApiKey | undefined;
+  apiKey: ApiKey;
 };
 
 /** @internal */
@@ -22,7 +22,7 @@ export const GetApiKeyResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  api_key: ApiKey$inboundSchema.optional(),
+  api_key: ApiKey$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "api_key": "apiKey",

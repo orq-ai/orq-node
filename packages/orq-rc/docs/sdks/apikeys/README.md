@@ -95,7 +95,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.apiKeys.create({});
+  const result = await orq.apiKeys.create({
+    name: "<value>",
+  });
 
   console.log(result);
 }
@@ -118,7 +120,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await apiKeysCreate(orq, {});
+  const res = await apiKeysCreate(orq, {
+    name: "<value>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

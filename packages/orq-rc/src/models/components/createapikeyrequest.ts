@@ -23,7 +23,7 @@ export type CreateApiKeyRequest = {
   /**
    * Human-readable name. Required.
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Owner attribution. Defaults to service_account when omitted.
    */
@@ -39,7 +39,7 @@ export type CreateApiKeyRequest = {
    * @remarks
    *  `PERMISSION_MODE_RESTRICTED`. See `ApiKey.access` for the full
    *  catalog of valid keys (Domain.id) and AccessLevel string values,
-   *  or fetch the live catalog via the `ListCapabilities` RPC.
+   *  or fetch the live catalog via the capability catalog endpoint.
    */
   access?: { [k: string]: number } | undefined;
   /**
@@ -54,7 +54,7 @@ export type CreateApiKeyRequest = {
 
 /** @internal */
 export type CreateApiKeyRequest$Outbound = {
-  name?: string | undefined;
+  name: string;
   owner?: ApiKeyOwner$Outbound | undefined;
   project_scope?: ProjectScope$Outbound | undefined;
   permission_mode?: string | undefined;
@@ -68,7 +68,7 @@ export const CreateApiKeyRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateApiKeyRequest
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   owner: ApiKeyOwner$outboundSchema.optional(),
   projectScope: ProjectScope$outboundSchema.optional(),
   permissionMode: PermissionMode$outboundSchema.optional(),

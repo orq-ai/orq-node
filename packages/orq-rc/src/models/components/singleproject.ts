@@ -9,7 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SingleProject = {
-  projectId?: string | undefined;
+  /**
+   * Project ID this API key is scoped to.
+   */
+  projectId: string;
 };
 
 /** @internal */
@@ -18,7 +21,7 @@ export const SingleProject$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  project_id: z.string().optional(),
+  project_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "project_id": "projectId",
@@ -26,7 +29,7 @@ export const SingleProject$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type SingleProject$Outbound = {
-  project_id?: string | undefined;
+  project_id: string;
 };
 
 /** @internal */
@@ -35,7 +38,7 @@ export const SingleProject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SingleProject
 > = z.object({
-  projectId: z.string().optional(),
+  projectId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",

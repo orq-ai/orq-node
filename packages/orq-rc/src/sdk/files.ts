@@ -84,6 +84,9 @@ export class Files extends ClientSDK {
 
   /**
    * Delete a file
+   *
+   * @remarks
+   * Permanently deletes a file and its stored content from the project.
    */
   async delete(
     request: operations.FileDeleteRequest,

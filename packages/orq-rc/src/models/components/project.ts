@@ -15,44 +15,44 @@ export type Project = {
    * @remarks
    *  retrieve, update, and delete requests.
    */
-  projectId?: string | undefined;
+  projectId: string;
   /**
    * Human-readable project name.
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Stable project key generated from the name and used by internal
    *
    * @remarks
    *  workspace navigation.
    */
-  key?: string | undefined;
+  key: string;
   /**
    * Whether the project is archived and hidden from normal active
    *
    * @remarks
    *  project lists.
    */
-  isArchived?: boolean | undefined;
+  isArchived: boolean;
   /**
    * Whether this is the workspace default project.
    */
-  isDefault?: boolean | undefined;
+  isDefault: boolean;
   /**
    * Team identifiers associated with the project for access and
    *
    * @remarks
    *  organization.
    */
-  teams?: Array<string> | undefined;
+  teams: Array<string>;
   /**
    * Time when the project was created.
    */
-  createdAt?: Date | undefined;
+  createdAt: Date;
   /**
    * Time when the project was last updated.
    */
-  updatedAt?: Date | undefined;
+  updatedAt: Date;
   /**
    * User ID that created the project.
    */
@@ -70,18 +70,18 @@ export type Project = {
 /** @internal */
 export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
   z.object({
-    project_id: z.string().optional(),
-    name: z.string().optional(),
-    key: z.string().optional(),
-    is_archived: z.boolean().optional(),
-    is_default: z.boolean().optional(),
-    teams: z.array(z.string()).optional(),
+    project_id: z.string(),
+    name: z.string(),
+    key: z.string(),
+    is_archived: z.boolean(),
+    is_default: z.boolean(),
+    teams: z.array(z.string()),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
+    ),
     updated_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
-    ).optional(),
+    ),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
     description: z.string().optional(),

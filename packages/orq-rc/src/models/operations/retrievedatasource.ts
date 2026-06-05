@@ -46,7 +46,7 @@ export type RetrieveDatasourceResponseBody = {
   /**
    * The description of the knowledge base
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   status: RetrieveDatasourceStatus;
   /**
    * The unique identifier of the file used to create the datasource.
@@ -118,9 +118,9 @@ export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KT9EQSHT12B69P94MTJ2XHD7"),
+  _id: z.string().default("01KTB6K60HAJESYMW89KC8RYJJ"),
   display_name: z.string(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   status: RetrieveDatasourceStatus$inboundSchema,
   file_id: z.nullable(z.string()).optional(),
   created: z.string(),

@@ -12,7 +12,7 @@ export type CreateSkillResponse = {
   /**
    * Newly created skill.
    */
-  skill?: Skill | undefined;
+  skill: Skill;
 };
 
 /** @internal */
@@ -21,7 +21,7 @@ export const CreateSkillResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  skill: Skill$inboundSchema.optional(),
+  skill: Skill$inboundSchema,
 });
 
 export function createSkillResponseFromJSON(

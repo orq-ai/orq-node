@@ -10,9 +10,21 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Identity, Identity$inboundSchema } from "./identity.js";
 
 export type ListIdentitiesResponse = {
-  object?: string | undefined;
-  data?: Array<Identity> | undefined;
-  hasMore?: boolean | undefined;
+  /**
+   * Object discriminator for list responses; always `list`.
+   */
+  object: string;
+  /**
+   * Page of identities.
+   */
+  data: Array<Identity>;
+  /**
+   * Whether more identities are available in the selected pagination
+   *
+   * @remarks
+   *  direction.
+   */
+  hasMore: boolean;
 };
 
 /** @internal */
@@ -21,9 +33,9 @@ export const ListIdentitiesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.string().optional(),
-  data: z.array(Identity$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
+  object: z.string(),
+  data: z.array(Identity$inboundSchema),
+  has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",

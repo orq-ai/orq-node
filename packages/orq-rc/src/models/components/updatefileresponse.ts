@@ -9,7 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FileT, FileT$inboundSchema } from "./file.js";
 
 export type UpdateFileResponse = {
-  file?: FileT | undefined;
+  /**
+   * Updated file metadata.
+   */
+  file: FileT;
 };
 
 /** @internal */
@@ -18,7 +21,7 @@ export const UpdateFileResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file: FileT$inboundSchema.optional(),
+  file: FileT$inboundSchema,
 });
 
 export function updateFileResponseFromJSON(
