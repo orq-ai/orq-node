@@ -89,7 +89,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
@@ -117,7 +119,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
@@ -131,11 +135,6 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [Orq SDK](docs/sdks/orq/README.md)
-
-* [postV2FeedbackEvaluationRemove](docs/sdks/orq/README.md#postv2feedbackevaluationremove)
-* [postV2FeedbackEvaluation](docs/sdks/orq/README.md#postv2feedbackevaluation)
-
 ### [Agents](docs/sdks/agents/README.md)
 
 * [create](docs/sdks/agents/README.md#create) - Create agent
@@ -147,7 +146,7 @@ run();
 * [~~run~~](docs/sdks/agents/README.md#run) - Run an agent with configuration :warning: **Deprecated**
 * [~~streamRun~~](docs/sdks/agents/README.md#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](docs/sdks/agents/README.md#stream) - Stream agent execution in real-time :warning: **Deprecated**
-* [postV2AgentsKeyCardRefresh](docs/sdks/agents/README.md#postv2agentskeycardrefresh) - Refresh A2A agent card
+* [refreshKeyCard](docs/sdks/agents/README.md#refreshkeycard) - Refresh A2A agent card
 
 #### [Agents.Responses](docs/sdks/orqresponses/README.md)
 
@@ -200,12 +199,14 @@ run();
 * [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 * [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
-* [getV2EvaluatorsIdVersions](docs/sdks/evals/README.md#getv2evaluatorsidversions) - List evaluator versions
+* [listVersions](docs/sdks/evals/README.md#listversions) - List evaluator versions
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
-* [postV2FeedbackRemove](docs/sdks/feedback/README.md#postv2feedbackremove)
-* [postV2Feedback](docs/sdks/feedback/README.md#postv2feedback)
+* [removeEvaluation](docs/sdks/feedback/README.md#removeevaluation)
+* [createEvaluation](docs/sdks/feedback/README.md#createevaluation)
+* [remove](docs/sdks/feedback/README.md#remove)
+* [create](docs/sdks/feedback/README.md#create)
 
 ### [Files](docs/sdks/files/README.md)
 
@@ -226,11 +227,11 @@ run();
 
 ### [HumanReviewSets](docs/sdks/humanreviewsets/README.md)
 
-* [getV2HumanEvalSets](docs/sdks/humanreviewsets/README.md#getv2humanevalsets) - Get all human review sets
-* [postV2HumanEvalSets](docs/sdks/humanreviewsets/README.md#postv2humanevalsets) - Create a human review set
-* [getV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#getv2humanevalsetsid) - Get a human review set by ID
-* [patchV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#patchv2humanevalsetsid) - Update a human review set
-* [deleteV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#deletev2humanevalsetsid) - Delete a human review set
+* [list](docs/sdks/humanreviewsets/README.md#list) - Get all human review sets
+* [create](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
+* [get](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID
+* [update](docs/sdks/humanreviewsets/README.md#update) - Update a human review set
+* [delete](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
 
 ### [Identities](docs/sdks/identities/README.md)
 
@@ -422,8 +423,8 @@ run();
 * [update](docs/sdks/tools/README.md#update) - Update tool
 * [delete](docs/sdks/tools/README.md#delete) - Delete tool
 * [retrieve](docs/sdks/tools/README.md#retrieve) - Retrieve tool
-* [getV2ToolsToolIdVersions](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
-* [getV2ToolsToolIdVersionsVersionId](docs/sdks/tools/README.md#getv2toolstoolidversionsversionid) - Get tool version
+* [listVersions](docs/sdks/tools/README.md#listversions) - List tool versions
+* [getVersion](docs/sdks/tools/README.md#getversion) - Get tool version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -446,7 +447,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsCreate`](docs/sdks/agents/README.md#create) - Create agent
 - [`agentsDelete`](docs/sdks/agents/README.md#delete) - Delete agent
 - [`agentsList`](docs/sdks/agents/README.md#list) - List agents
-- [`agentsPostV2AgentsKeyCardRefresh`](docs/sdks/agents/README.md#postv2agentskeycardrefresh) - Refresh A2A agent card
+- [`agentsRefreshKeyCard`](docs/sdks/agents/README.md#refreshkeycard) - Refresh A2A agent card
 - [`agentsResponsesCreate`](docs/sdks/orqresponses/README.md#create) - Create response
 - [`agentsResponsesGet`](docs/sdks/orqresponses/README.md#get) - Get response
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
@@ -478,11 +479,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsAll`](docs/sdks/evals/README.md#all) - Get all Evaluators
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
 - [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
-- [`evalsGetV2EvaluatorsIdVersions`](docs/sdks/evals/README.md#getv2evaluatorsidversions) - List evaluator versions
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
+- [`evalsListVersions`](docs/sdks/evals/README.md#listversions) - List evaluator versions
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
-- [`feedbackPostV2Feedback`](docs/sdks/feedback/README.md#postv2feedback)
-- [`feedbackPostV2FeedbackRemove`](docs/sdks/feedback/README.md#postv2feedbackremove)
+- [`feedbackCreate`](docs/sdks/feedback/README.md#create)
+- [`feedbackCreateEvaluation`](docs/sdks/feedback/README.md#createevaluation)
+- [`feedbackRemove`](docs/sdks/feedback/README.md#remove)
+- [`feedbackRemoveEvaluation`](docs/sdks/feedback/README.md#removeevaluation)
 - [`filesCreate`](docs/sdks/files/README.md#create) - Upload a file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete a file
 - [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
@@ -494,11 +497,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guardrailRulesList`](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
 - [`guardrailRulesRetrieve`](docs/sdks/guardrailrules/README.md#retrieve) - Get guardrail rule
 - [`guardrailRulesUpdate`](docs/sdks/guardrailrules/README.md#update) - Update guardrail rule
-- [`humanReviewSetsDeleteV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#deletev2humanevalsetsid) - Delete a human review set
-- [`humanReviewSetsGetV2HumanEvalSets`](docs/sdks/humanreviewsets/README.md#getv2humanevalsets) - Get all human review sets
-- [`humanReviewSetsGetV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#getv2humanevalsetsid) - Get a human review set by ID
-- [`humanReviewSetsPatchV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#patchv2humanevalsetsid) - Update a human review set
-- [`humanReviewSetsPostV2HumanEvalSets`](docs/sdks/humanreviewsets/README.md#postv2humanevalsets) - Create a human review set
+- [`humanReviewSetsCreate`](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
+- [`humanReviewSetsDelete`](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
+- [`humanReviewSetsGet`](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID
+- [`humanReviewSetsList`](docs/sdks/humanreviewsets/README.md#list) - Get all human review sets
+- [`humanReviewSetsUpdate`](docs/sdks/humanreviewsets/README.md#update) - Update a human review set
 - [`identitiesCreate`](docs/sdks/identities/README.md#create) - Create an identity
 - [`identitiesDelete`](docs/sdks/identities/README.md#delete) - Delete an identity
 - [`identitiesList`](docs/sdks/identities/README.md#list) - List identities
@@ -564,8 +567,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesList`](docs/sdks/policies/README.md#list) - List policies
 - [`policiesRetrieve`](docs/sdks/policies/README.md#retrieve) - Get policy
 - [`policiesUpdate`](docs/sdks/policies/README.md#update) - Update policy
-- [`postV2FeedbackEvaluation`](docs/sdks/orq/README.md#postv2feedbackevaluation)
-- [`postV2FeedbackEvaluationRemove`](docs/sdks/orq/README.md#postv2feedbackevaluationremove)
 - [`projectsCreate`](docs/sdks/projects/README.md#create) - Create a new project
 - [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete a project
 - [`projectsGet`](docs/sdks/projects/README.md#get) - Retrieve a project
@@ -611,9 +612,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`skillsUpdate`](docs/sdks/skills/README.md#update) - Update a skill
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
-- [`toolsGetV2ToolsToolIdVersions`](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
-- [`toolsGetV2ToolsToolIdVersionsVersionId`](docs/sdks/tools/README.md#getv2toolstoolidversionsversionid) - Get tool version
+- [`toolsGetVersion`](docs/sdks/tools/README.md#getversion) - Get tool version
 - [`toolsList`](docs/sdks/tools/README.md#list) - List tools
+- [`toolsListVersions`](docs/sdks/tools/README.md#listversions) - List tool versions
 - [`toolsRetrieve`](docs/sdks/tools/README.md#retrieve) - Retrieve tool
 - [`toolsUpdate`](docs/sdks/tools/README.md#update) - Update tool
 - ~~[`agentsInvoke`](docs/sdks/agents/README.md#invoke)~~ - Execute an agent task :warning: **Deprecated**
@@ -814,7 +815,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove(undefined, {
+  const result = await orq.evals.all({}, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -826,6 +827,8 @@ async function run() {
       retryConnectionErrors: false,
     },
   });
+
+  console.log(result);
 }
 
 run();
@@ -851,7 +854,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
@@ -982,7 +987,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();

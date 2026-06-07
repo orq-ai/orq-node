@@ -18,6 +18,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -26,15 +27,20 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update a human review set
+ * Refresh A2A agent card
+ *
+ * @remarks
+ * Fetches the latest agent card from the external A2A agent and updates the cached card in the database. Similar to MCP server refresh functionality.
  */
-export function humanReviewSetsPatchV2HumanEvalSetsId(
+export function agentsRefreshKeyCard(
   client: OrqCore,
-  request: operations.PatchV2HumanEvalSetsIdRequest,
+  request: operations.PostV2AgentsKeyCardRefreshRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PatchV2HumanEvalSetsIdResponseBody,
+    operations.PostV2AgentsKeyCardRefreshResponseBody,
+    | errors.PostV2AgentsKeyCardRefreshResponseBody
+    | errors.PostV2AgentsKeyCardRefreshAgentsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -54,12 +60,14 @@ export function humanReviewSetsPatchV2HumanEvalSetsId(
 
 async function $do(
   client: OrqCore,
-  request: operations.PatchV2HumanEvalSetsIdRequest,
+  request: operations.PostV2AgentsKeyCardRefreshRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PatchV2HumanEvalSetsIdResponseBody,
+      operations.PostV2AgentsKeyCardRefreshResponseBody,
+      | errors.PostV2AgentsKeyCardRefreshResponseBody
+      | errors.PostV2AgentsKeyCardRefreshAgentsResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -75,7 +83,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PatchV2HumanEvalSetsIdRequest$outboundSchema.parse(value),
+      operations.PostV2AgentsKeyCardRefreshRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -85,12 +93,12 @@ async function $do(
   const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    key: encodeSimple("key", payload.key, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/human-eval-sets/{id}")(pathParams);
+  const path = pathToFunc("/v2/agents/{key}/card/refresh")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -104,7 +112,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "patch_/v2/human-eval-sets/{id}",
+    operationID: "post_/v2/agents/{key}/card/refresh",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -118,7 +126,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PATCH",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -143,8 +151,14 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    operations.PatchV2HumanEvalSetsIdResponseBody,
+    operations.PostV2AgentsKeyCardRefreshResponseBody,
+    | errors.PostV2AgentsKeyCardRefreshResponseBody
+    | errors.PostV2AgentsKeyCardRefreshAgentsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -154,10 +168,18 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PatchV2HumanEvalSetsIdResponseBody$inboundSchema),
+    M.json(
+      200,
+      operations.PostV2AgentsKeyCardRefreshResponseBody$inboundSchema,
+    ),
+    M.jsonErr(400, errors.PostV2AgentsKeyCardRefreshResponseBody$inboundSchema),
+    M.jsonErr(
+      404,
+      errors.PostV2AgentsKeyCardRefreshAgentsResponseBody$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

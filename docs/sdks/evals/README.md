@@ -9,7 +9,7 @@
 * [update](#update) - Update an Evaluator
 * [delete](#delete) - Delete an Evaluator
 * [invoke](#invoke) - Invoke a Custom Evaluator
-* [getV2EvaluatorsIdVersions](#getv2evaluatorsidversions) - List evaluator versions
+* [listVersions](#listversions) - List evaluator versions
 
 ## all
 
@@ -409,7 +409,7 @@ run();
 | errors.InvokeEvalEvalsResponseResponseBody | 500                                        | application/json                           |
 | errors.APIError                            | 4XX, 5XX                                   | \*/\*                                      |
 
-## getV2EvaluatorsIdVersions
+## listVersions
 
 Returns version history for a specific evaluator
 
@@ -424,7 +424,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.getV2EvaluatorsIdVersions({
+  const result = await orq.evals.listVersions({
     id: "<id>",
   });
 
@@ -440,7 +440,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { evalsGetV2EvaluatorsIdVersions } from "@orq-ai/node/funcs/evalsGetV2EvaluatorsIdVersions.js";
+import { evalsListVersions } from "@orq-ai/node/funcs/evalsListVersions.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -449,14 +449,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await evalsGetV2EvaluatorsIdVersions(orq, {
+  const res = await evalsListVersions(orq, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("evalsGetV2EvaluatorsIdVersions failed:", res.error);
+    console.log("evalsListVersions failed:", res.error);
   }
 }
 

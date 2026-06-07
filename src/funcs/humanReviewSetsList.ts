@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -26,13 +26,16 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export function postV2FeedbackEvaluationRemove(
+/**
+ * Get all human review sets
+ */
+export function humanReviewSetsList(
   client: OrqCore,
-  request?: operations.PostV2FeedbackEvaluationRemoveRequestBody | undefined,
+  request?: operations.GetV2HumanEvalSetsRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    void,
+    Array<operations.GetV2HumanEvalSetsResponseBody>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -52,12 +55,12 @@ export function postV2FeedbackEvaluationRemove(
 
 async function $do(
   client: OrqCore,
-  request?: operations.PostV2FeedbackEvaluationRemoveRequestBody | undefined,
+  request?: operations.GetV2HumanEvalSetsRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      void,
+      Array<operations.GetV2HumanEvalSetsResponseBody>,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -73,23 +76,25 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostV2FeedbackEvaluationRemoveRequestBody$outboundSchema
-        .optional().parse(value),
+      operations.GetV2HumanEvalSetsRequest$outboundSchema.optional().parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = null;
 
-  const path = pathToFunc("/v2/feedback/evaluation/remove")();
+  const path = pathToFunc("/v2/human-eval-sets")();
+
+  const query = encodeFormQuery({
+    "project_id": payload?.project_id,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
-    Accept: "*/*",
+    Accept: "application/json",
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
@@ -99,7 +104,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post_/v2/feedback/evaluation/remove",
+    operationID: "get_/v2/human-eval-sets",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -113,10 +118,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -139,7 +145,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    void,
+    Array<operations.GetV2HumanEvalSetsResponseBody>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -149,7 +155,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.nil(200, z.void()),
+    M.json(
+      200,
+      z.array(operations.GetV2HumanEvalSetsResponseBody$inboundSchema),
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

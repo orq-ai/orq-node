@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -26,15 +26,15 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get a human review set by ID
+ * Update a human review set
  */
-export function humanReviewSetsGetV2HumanEvalSetsId(
+export function humanReviewSetsUpdate(
   client: OrqCore,
-  request: operations.GetV2HumanEvalSetsIdRequest,
+  request: operations.PatchV2HumanEvalSetsIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV2HumanEvalSetsIdResponseBody,
+    operations.PatchV2HumanEvalSetsIdResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -54,12 +54,12 @@ export function humanReviewSetsGetV2HumanEvalSetsId(
 
 async function $do(
   client: OrqCore,
-  request: operations.GetV2HumanEvalSetsIdRequest,
+  request: operations.PatchV2HumanEvalSetsIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV2HumanEvalSetsIdResponseBody,
+      operations.PatchV2HumanEvalSetsIdResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -75,14 +75,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV2HumanEvalSetsIdRequest$outboundSchema.parse(value),
+      operations.PatchV2HumanEvalSetsIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     id: encodeSimple("id", payload.id, {
@@ -93,6 +93,7 @@ async function $do(
   const path = pathToFunc("/v2/human-eval-sets/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -103,7 +104,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get_/v2/human-eval-sets/{id}",
+    operationID: "patch_/v2/human-eval-sets/{id}",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -117,7 +118,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -143,7 +144,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GetV2HumanEvalSetsIdResponseBody,
+    operations.PatchV2HumanEvalSetsIdResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -153,7 +154,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetV2HumanEvalSetsIdResponseBody$inboundSchema),
+    M.json(200, operations.PatchV2HumanEvalSetsIdResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

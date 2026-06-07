@@ -54,12 +54,10 @@ export const OutputType = {
 } as const;
 export type OutputType = ClosedEnum<typeof OutputType>;
 
-export const CreateEvalRequestBodyType = {
+export const RequestBodyType = {
   PythonEval: "python_eval",
 } as const;
-export type CreateEvalRequestBodyType = ClosedEnum<
-  typeof CreateEvalRequestBodyType
->;
+export type RequestBodyType = ClosedEnum<typeof RequestBodyType>;
 
 export type Python = {
   guardrailConfig?:
@@ -70,7 +68,7 @@ export type Python = {
     | undefined;
   outputType?: OutputType | undefined;
   code: string;
-  type: CreateEvalRequestBodyType;
+  type: RequestBodyType;
   /**
    * Entity storage path.
    *
@@ -1299,9 +1297,9 @@ export const OutputType$outboundSchema: z.ZodNativeEnum<typeof OutputType> = z
   .nativeEnum(OutputType);
 
 /** @internal */
-export const CreateEvalRequestBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalRequestBodyType
-> = z.nativeEnum(CreateEvalRequestBodyType);
+export const RequestBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyType
+> = z.nativeEnum(RequestBodyType);
 
 /** @internal */
 export type Python$Outbound = {
@@ -1334,7 +1332,7 @@ export const Python$outboundSchema: z.ZodType<
   ).optional(),
   outputType: OutputType$outboundSchema.optional(),
   code: z.string(),
-  type: CreateEvalRequestBodyType$outboundSchema,
+  type: RequestBodyType$outboundSchema,
   path: z.string(),
   description: z.string().default(""),
   key: z.string(),
@@ -2190,8 +2188,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-05T21:32:40.853Z"),
-  updated: z.string().default("2026-06-05T21:32:40.853Z"),
+  created: z.string().default("2026-06-07T07:50:32.654Z"),
+  updated: z.string().default("2026-06-07T07:50:32.654Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -2381,8 +2379,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-06-05T21:32:40.853Z"),
-    updated: z.string().default("2026-06-05T21:32:40.853Z"),
+    created: z.string().default("2026-06-07T07:50:32.654Z"),
+    updated: z.string().default("2026-06-07T07:50:32.654Z"),
     updated_by_id: z.nullable(z.string()).optional(),
     guardrail_config: z.nullable(
       z.union([
@@ -3207,8 +3205,8 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-05T21:32:40.853Z"),
-  updated: z.string().default("2026-06-05T21:32:40.853Z"),
+  created: z.string().default("2026-06-07T07:50:32.654Z"),
+  updated: z.string().default("2026-06-07T07:50:32.654Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3427,8 +3425,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-05T21:32:40.853Z"),
-  updated: z.string().default("2026-06-05T21:32:40.853Z"),
+  created: z.string().default("2026-06-07T07:50:32.654Z"),
+  updated: z.string().default("2026-06-07T07:50:32.654Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3609,8 +3607,8 @@ export const CreateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-05T21:32:40.853Z"),
-  updated: z.string().default("2026-06-05T21:32:40.853Z"),
+  created: z.string().default("2026-06-07T07:50:32.654Z"),
+  updated: z.string().default("2026-06-07T07:50:32.654Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3769,8 +3767,8 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-06-05T21:32:40.853Z"),
-    updated: z.string().default("2026-06-05T21:32:40.853Z"),
+    created: z.string().default("2026-06-07T07:50:32.654Z"),
+    updated: z.string().default("2026-06-07T07:50:32.654Z"),
     updated_by_id: z.nullable(z.string()).optional(),
     guardrail_config: z.nullable(
       z.union([
@@ -4140,8 +4138,8 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-05T21:32:40.853Z"),
-  updated: z.string().default("2026-06-05T21:32:40.853Z"),
+  created: z.string().default("2026-06-07T07:50:32.654Z"),
+  updated: z.string().default("2026-06-07T07:50:32.654Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -4360,8 +4358,8 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-05T21:32:40.853Z"),
-  updated: z.string().default("2026-06-05T21:32:40.853Z"),
+  created: z.string().default("2026-06-07T07:50:32.654Z"),
+  updated: z.string().default("2026-06-07T07:50:32.654Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([

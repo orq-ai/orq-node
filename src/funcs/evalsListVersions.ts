@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -27,20 +27,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Refresh A2A agent card
+ * List evaluator versions
  *
  * @remarks
- * Fetches the latest agent card from the external A2A agent and updates the cached card in the database. Similar to MCP server refresh functionality.
+ * Returns version history for a specific evaluator
  */
-export function agentsPostV2AgentsKeyCardRefresh(
+export function evalsListVersions(
   client: OrqCore,
-  request: operations.PostV2AgentsKeyCardRefreshRequest,
+  request: operations.GetV2EvaluatorsIdVersionsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV2AgentsKeyCardRefreshResponseBody,
-    | errors.PostV2AgentsKeyCardRefreshResponseBody
-    | errors.PostV2AgentsKeyCardRefreshAgentsResponseBody
+    operations.GetV2EvaluatorsIdVersionsResponseBody,
+    | errors.GetV2EvaluatorsIdVersionsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -60,14 +59,13 @@ export function agentsPostV2AgentsKeyCardRefresh(
 
 async function $do(
   client: OrqCore,
-  request: operations.PostV2AgentsKeyCardRefreshRequest,
+  request: operations.GetV2EvaluatorsIdVersionsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV2AgentsKeyCardRefreshResponseBody,
-      | errors.PostV2AgentsKeyCardRefreshResponseBody
-      | errors.PostV2AgentsKeyCardRefreshAgentsResponseBody
+      operations.GetV2EvaluatorsIdVersionsResponseBody,
+      | errors.GetV2EvaluatorsIdVersionsResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -83,25 +81,30 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostV2AgentsKeyCardRefreshRequest$outboundSchema.parse(value),
+      operations.GetV2EvaluatorsIdVersionsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = null;
 
   const pathParams = {
-    key: encodeSimple("key", payload.key, {
+    id: encodeSimple("id", payload.id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/agents/{key}/card/refresh")(pathParams);
+  const path = pathToFunc("/v2/evaluators/{id}/versions")(pathParams);
+
+  const query = encodeFormQuery({
+    "ending_before": payload.ending_before,
+    "limit": payload.limit,
+    "starting_after": payload.starting_after,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -112,7 +115,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post_/v2/agents/{key}/card/refresh",
+    operationID: "get_/v2/evaluators/{id}/versions",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -126,10 +129,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -156,9 +160,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV2AgentsKeyCardRefreshResponseBody,
-    | errors.PostV2AgentsKeyCardRefreshResponseBody
-    | errors.PostV2AgentsKeyCardRefreshAgentsResponseBody
+    operations.GetV2EvaluatorsIdVersionsResponseBody,
+    | errors.GetV2EvaluatorsIdVersionsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -168,15 +171,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      operations.PostV2AgentsKeyCardRefreshResponseBody$inboundSchema,
-    ),
-    M.jsonErr(400, errors.PostV2AgentsKeyCardRefreshResponseBody$inboundSchema),
-    M.jsonErr(
-      404,
-      errors.PostV2AgentsKeyCardRefreshAgentsResponseBody$inboundSchema,
-    ),
+    M.json(200, operations.GetV2EvaluatorsIdVersionsResponseBody$inboundSchema),
+    M.jsonErr(404, errors.GetV2EvaluatorsIdVersionsResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

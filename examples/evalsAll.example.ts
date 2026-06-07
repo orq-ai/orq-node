@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @orq-ai/node SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx postV2FeedbackEvaluationRemove.example.ts
+ * npm run build && npx tsx evalsAll.example.ts
  */
 
 import { Orq } from "@orq-ai/node";
@@ -18,7 +18,9 @@ const orq = new Orq({
 });
 
 async function main() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 main().catch(console.error);

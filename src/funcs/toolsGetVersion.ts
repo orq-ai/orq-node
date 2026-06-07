@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns a specific version of a tool
  */
-export function toolsGetV2ToolsToolIdVersionsVersionId(
+export function toolsGetVersion(
   client: OrqCore,
   request: operations.GetV2ToolsToolIdVersionsVersionIdRequest,
   options?: RequestOptions,

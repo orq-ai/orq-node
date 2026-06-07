@@ -4,9 +4,9 @@
 
 import { toolsCreate } from "../funcs/toolsCreate.js";
 import { toolsDelete } from "../funcs/toolsDelete.js";
-import { toolsGetV2ToolsToolIdVersions } from "../funcs/toolsGetV2ToolsToolIdVersions.js";
-import { toolsGetV2ToolsToolIdVersionsVersionId } from "../funcs/toolsGetV2ToolsToolIdVersionsVersionId.js";
+import { toolsGetVersion } from "../funcs/toolsGetVersion.js";
 import { toolsList } from "../funcs/toolsList.js";
+import { toolsListVersions } from "../funcs/toolsListVersions.js";
 import { toolsRetrieve } from "../funcs/toolsRetrieve.js";
 import { toolsUpdate } from "../funcs/toolsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -105,11 +105,11 @@ export class Tools extends ClientSDK {
    * @remarks
    * Returns version history for a specific tool
    */
-  async getV2ToolsToolIdVersions(
+  async listVersions(
     request: operations.GetV2ToolsToolIdVersionsRequest,
     options?: RequestOptions,
   ): Promise<operations.GetV2ToolsToolIdVersionsResponseBody> {
-    return unwrapAsync(toolsGetV2ToolsToolIdVersions(
+    return unwrapAsync(toolsListVersions(
       this,
       request,
       options,
@@ -122,11 +122,11 @@ export class Tools extends ClientSDK {
    * @remarks
    * Returns a specific version of a tool
    */
-  async getV2ToolsToolIdVersionsVersionId(
+  async getVersion(
     request: operations.GetV2ToolsToolIdVersionsVersionIdRequest,
     options?: RequestOptions,
   ): Promise<operations.GetV2ToolsToolIdVersionsVersionIdResponseBody> {
-    return unwrapAsync(toolsGetV2ToolsToolIdVersionsVersionId(
+    return unwrapAsync(toolsGetVersion(
       this,
       request,
       options,
