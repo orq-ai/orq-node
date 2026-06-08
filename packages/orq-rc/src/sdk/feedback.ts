@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create image edit
+   * Create a new project
    *
    * @remarks
-   * Edit an Image
+   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

@@ -115,11 +115,11 @@ export type RetrieveToolResponseBodyCodeExecutionTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -241,11 +241,11 @@ export type RetrieveToolResponseBodyMCPTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -402,11 +402,11 @@ export type RetrieveToolResponseBodyHTTPTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -503,11 +503,11 @@ export type RetrieveToolResponseBodyJSONSchemaTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -618,11 +618,11 @@ export type RetrieveToolResponseBodyFunctionTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -753,13 +753,13 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTJVKQP951RKHG017G39HFMK"),
+  _id: z.string().default("tool_01KTKNH3M4F7JMRD2EC8E4CBBB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -859,7 +859,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KTJVKQP88E83VAF201WB954A"),
+  id: z.string().default("01KTKNH3M32NSRAYHE1QJEX9XZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -917,13 +917,13 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTJVKQP7JZYYR6Z1YTRWEZWX"),
+  _id: z.string().default("tool_01KTKNH3M2DD0MJ6T341WTSV2X"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -1108,13 +1108,13 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTJVKQP5AAZJ0X4DSFWY8VM1"),
+  _id: z.string().default("tool_01KTKNH3M0R21XGT9RW2HEG6HN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -1204,13 +1204,13 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTJVKQP3GD00QDQSNG0ZMKPQ"),
+  _id: z.string().default("tool_01KTKNH3KY9YP24H3EF3CD547F"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -1310,13 +1310,13 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTJVKQP287VVYXZH4K6R4F26"),
+  _id: z.string().default("tool_01KTKNH3KXRJA93F7G8EZYEHF7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),

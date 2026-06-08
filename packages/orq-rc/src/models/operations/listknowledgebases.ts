@@ -11,10 +11,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListKnowledgeBasesRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
-  limit?: number | undefined;
-  /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
    */
   startingAfter?: string | undefined;
@@ -22,6 +18,7 @@ export type ListKnowledgeBasesRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  limit?: number | undefined;
 };
 
 export const ListKnowledgeBasesObject = {
@@ -279,9 +276,9 @@ export type ListKnowledgeBasesResponseBody = {
 
 /** @internal */
 export type ListKnowledgeBasesRequest$Outbound = {
-  limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  limit: number;
 };
 
 /** @internal */
@@ -290,9 +287,9 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListKnowledgeBasesRequest
 > = z.object({
-  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  limit: z.number().default(300),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

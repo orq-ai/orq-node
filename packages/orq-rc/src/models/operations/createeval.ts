@@ -200,10 +200,10 @@ export type Llm2 = {
    */
   outputType?: LLMOutputType | undefined;
   type: LLMType;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
-  categoricalLabels?: Array<LLMCategoricalLabels> | undefined;
+  categories?: Array<string> | null | undefined;
+  categoricalLabels?: Array<LLMCategoricalLabels> | null | undefined;
   datasetId?: string | undefined;
   /**
    * Entity storage path.
@@ -298,10 +298,10 @@ export type Llm1 = {
    */
   outputType?: CreateEvalLLMOutputType | undefined;
   type: CreateEvalLLMType;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
-  categoricalLabels?: Array<CreateEvalLLMCategoricalLabels> | undefined;
+  categories?: Array<string> | null | undefined;
+  categoricalLabels?: Array<CreateEvalLLMCategoricalLabels> | null | undefined;
   datasetId?: string | undefined;
   /**
    * Entity storage path.
@@ -1059,10 +1059,13 @@ export type CreateEvalLlm2 = {
     | null
     | undefined;
   type: CreateEvalLLMEvalsResponseType;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
-  categoricalLabels?: Array<CreateEvalLLMEvalsCategoricalLabels> | undefined;
+  categories?: Array<string> | null | undefined;
+  categoricalLabels?:
+    | Array<CreateEvalLLMEvalsCategoricalLabels>
+    | null
+    | undefined;
   datasetId?: string | undefined;
   key: string;
   mode: "jury";
@@ -1137,11 +1140,12 @@ export type CreateEvalLlm1 = {
     | null
     | undefined;
   type: CreateEvalLLMEvalsType;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
+  categories?: Array<string> | null | undefined;
   categoricalLabels?:
     | Array<CreateEvalLLMEvalsResponseCategoricalLabels>
+    | null
     | undefined;
   datasetId?: string | undefined;
   key: string;
@@ -1706,10 +1710,10 @@ export type Llm2$Outbound = {
     | undefined;
   output_type?: string | undefined;
   type: string;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
-  categorical_labels?: Array<LLMCategoricalLabels$Outbound> | undefined;
+  categories?: Array<string> | null | undefined;
+  categorical_labels?: Array<LLMCategoricalLabels$Outbound> | null | undefined;
   dataset_id?: string | undefined;
   path: string;
   description: string;
@@ -1736,11 +1740,11 @@ export const Llm2$outboundSchema: z.ZodType<Llm2$Outbound, z.ZodTypeDef, Llm2> =
     ).optional(),
     outputType: LLMOutputType$outboundSchema.optional(),
     type: LLMType$outboundSchema,
-    repetitions: z.number().int().optional(),
+    repetitions: z.nullable(z.number().int()).optional(),
     prompt: z.string(),
-    categories: z.array(z.string()).optional(),
-    categoricalLabels: z.array(
-      z.lazy(() => LLMCategoricalLabels$outboundSchema),
+    categories: z.nullable(z.array(z.string())).optional(),
+    categoricalLabels: z.nullable(
+      z.array(z.lazy(() => LLMCategoricalLabels$outboundSchema)),
     ).optional(),
     datasetId: z.string().optional(),
     path: z.string(),
@@ -1943,11 +1947,12 @@ export type Llm1$Outbound = {
     | undefined;
   output_type?: string | undefined;
   type: string;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
+  categories?: Array<string> | null | undefined;
   categorical_labels?:
     | Array<CreateEvalLLMCategoricalLabels$Outbound>
+    | null
     | undefined;
   dataset_id?: string | undefined;
   path: string;
@@ -1969,11 +1974,11 @@ export const Llm1$outboundSchema: z.ZodType<Llm1$Outbound, z.ZodTypeDef, Llm1> =
     ).optional(),
     outputType: CreateEvalLLMOutputType$outboundSchema.optional(),
     type: CreateEvalLLMType$outboundSchema,
-    repetitions: z.number().int().optional(),
+    repetitions: z.nullable(z.number().int()).optional(),
     prompt: z.string(),
-    categories: z.array(z.string()).optional(),
-    categoricalLabels: z.array(
-      z.lazy(() => CreateEvalLLMCategoricalLabels$outboundSchema),
+    categories: z.nullable(z.array(z.string())).optional(),
+    categoricalLabels: z.nullable(
+      z.array(z.lazy(() => CreateEvalLLMCategoricalLabels$outboundSchema)),
     ).optional(),
     datasetId: z.string().optional(),
     path: z.string(),
@@ -2188,8 +2193,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T05:34:20.335Z"),
-  updated: z.string().default("2026-06-08T05:34:20.335Z"),
+  created: z.string().default("2026-06-08T13:07:18.574Z"),
+  updated: z.string().default("2026-06-08T13:07:18.574Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -2379,8 +2384,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-06-08T05:34:20.335Z"),
-    updated: z.string().default("2026-06-08T05:34:20.335Z"),
+    created: z.string().default("2026-06-08T13:07:18.574Z"),
+    updated: z.string().default("2026-06-08T13:07:18.574Z"),
     updated_by_id: z.nullable(z.string()).optional(),
     guardrail_config: z.nullable(
       z.union([
@@ -3205,8 +3210,8 @@ export const CreateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T05:34:20.335Z"),
-  updated: z.string().default("2026-06-08T05:34:20.335Z"),
+  created: z.string().default("2026-06-08T13:07:18.574Z"),
+  updated: z.string().default("2026-06-08T13:07:18.574Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3425,8 +3430,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T05:34:20.335Z"),
-  updated: z.string().default("2026-06-08T05:34:20.335Z"),
+  created: z.string().default("2026-06-08T13:07:18.574Z"),
+  updated: z.string().default("2026-06-08T13:07:18.574Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3607,8 +3612,8 @@ export const CreateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T05:34:20.335Z"),
-  updated: z.string().default("2026-06-08T05:34:20.335Z"),
+  created: z.string().default("2026-06-08T13:07:18.574Z"),
+  updated: z.string().default("2026-06-08T13:07:18.574Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3767,8 +3772,8 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2026-06-08T05:34:20.335Z"),
-    updated: z.string().default("2026-06-08T05:34:20.335Z"),
+    created: z.string().default("2026-06-08T13:07:18.574Z"),
+    updated: z.string().default("2026-06-08T13:07:18.574Z"),
     updated_by_id: z.nullable(z.string()).optional(),
     guardrail_config: z.nullable(
       z.union([
@@ -4138,8 +4143,8 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T05:34:20.335Z"),
-  updated: z.string().default("2026-06-08T05:34:20.335Z"),
+  created: z.string().default("2026-06-08T13:07:18.574Z"),
+  updated: z.string().default("2026-06-08T13:07:18.574Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -4155,11 +4160,11 @@ export const CreateEvalLlm2$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   type: CreateEvalLLMEvalsResponseType$inboundSchema,
-  repetitions: z.number().int().optional(),
+  repetitions: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
-  categories: z.array(z.string()).optional(),
-  categorical_labels: z.array(
-    z.lazy(() => CreateEvalLLMEvalsCategoricalLabels$inboundSchema),
+  categories: z.nullable(z.array(z.string())).optional(),
+  categorical_labels: z.nullable(
+    z.array(z.lazy(() => CreateEvalLLMEvalsCategoricalLabels$inboundSchema)),
   ).optional(),
   dataset_id: z.string().optional(),
   key: z.string(),
@@ -4358,8 +4363,8 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T05:34:20.335Z"),
-  updated: z.string().default("2026-06-08T05:34:20.335Z"),
+  created: z.string().default("2026-06-08T13:07:18.574Z"),
+  updated: z.string().default("2026-06-08T13:07:18.574Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -4375,11 +4380,13 @@ export const CreateEvalLlm1$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   type: CreateEvalLLMEvalsType$inboundSchema,
-  repetitions: z.number().int().optional(),
+  repetitions: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
-  categories: z.array(z.string()).optional(),
-  categorical_labels: z.array(
-    z.lazy(() => CreateEvalLLMEvalsResponseCategoricalLabels$inboundSchema),
+  categories: z.nullable(z.array(z.string())).optional(),
+  categorical_labels: z.nullable(
+    z.array(z.lazy(() =>
+      CreateEvalLLMEvalsResponseCategoricalLabels$inboundSchema
+    )),
   ).optional(),
   dataset_id: z.string().optional(),
   key: z.string(),
