@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create completion
+   * Create routing rule
    *
    * @remarks
-   * For sending requests to legacy completion models
+   * Creates a new routing rule with expression, models configuration, and priority settings.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
