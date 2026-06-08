@@ -867,10 +867,13 @@ export type UpdateEvalLlm2 = {
     | null
     | undefined;
   type: UpdateEvalLLMEvalsType;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
-  categoricalLabels?: Array<UpdateEvalLLMEvalsCategoricalLabels> | undefined;
+  categories?: Array<string> | null | undefined;
+  categoricalLabels?:
+    | Array<UpdateEvalLLMEvalsCategoricalLabels>
+    | null
+    | undefined;
   datasetId?: string | undefined;
   key: string;
   mode: "jury";
@@ -945,10 +948,10 @@ export type UpdateEvalLlm1 = {
     | null
     | undefined;
   type: UpdateEvalLLMType;
-  repetitions?: number | undefined;
+  repetitions?: number | null | undefined;
   prompt: string;
-  categories?: Array<string> | undefined;
-  categoricalLabels?: Array<UpdateEvalLLMCategoricalLabels> | undefined;
+  categories?: Array<string> | null | undefined;
+  categoricalLabels?: Array<UpdateEvalLLMCategoricalLabels> | null | undefined;
   datasetId?: string | undefined;
   key: string;
   mode: "single";
@@ -1550,8 +1553,8 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -1746,8 +1749,8 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -2605,8 +2608,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -2824,8 +2827,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -2993,8 +2996,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3147,8 +3150,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3510,8 +3513,8 @@ export const UpdateEvalLlm2$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3527,11 +3530,11 @@ export const UpdateEvalLlm2$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   type: UpdateEvalLLMEvalsType$inboundSchema,
-  repetitions: z.number().int().optional(),
+  repetitions: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
-  categories: z.array(z.string()).optional(),
-  categorical_labels: z.array(
-    z.lazy(() => UpdateEvalLLMEvalsCategoricalLabels$inboundSchema),
+  categories: z.nullable(z.array(z.string())).optional(),
+  categorical_labels: z.nullable(
+    z.array(z.lazy(() => UpdateEvalLLMEvalsCategoricalLabels$inboundSchema)),
   ).optional(),
   dataset_id: z.string().optional(),
   key: z.string(),
@@ -3723,8 +3726,8 @@ export const UpdateEvalLlm1$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-06-08T09:56:38.251Z"),
-  updated: z.string().default("2026-06-08T09:56:38.251Z"),
+  created: z.string().default("2026-06-08T12:17:45.633Z"),
+  updated: z.string().default("2026-06-08T12:17:45.633Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.nullable(
     z.union([
@@ -3740,11 +3743,11 @@ export const UpdateEvalLlm1$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   type: UpdateEvalLLMType$inboundSchema,
-  repetitions: z.number().int().optional(),
+  repetitions: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
-  categories: z.array(z.string()).optional(),
-  categorical_labels: z.array(
-    z.lazy(() => UpdateEvalLLMCategoricalLabels$inboundSchema),
+  categories: z.nullable(z.array(z.string())).optional(),
+  categorical_labels: z.nullable(
+    z.array(z.lazy(() => UpdateEvalLLMCategoricalLabels$inboundSchema)),
   ).optional(),
   dataset_id: z.string().optional(),
   key: z.string(),
