@@ -13,7 +13,7 @@
 * [~~run~~](#run) - Run an agent with configuration :warning: **Deprecated**
 * [~~streamRun~~](#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](#stream) - Stream agent execution in real-time :warning: **Deprecated**
-* [postV2AgentsKeyCardRefresh](#postv2agentskeycardrefresh) - Refresh A2A agent card
+* [refreshKeyCard](#refreshkeycard) - Refresh A2A agent card
 
 ## create
 
@@ -1111,7 +1111,7 @@ run();
 | errors.StreamAgentResponseBody | 404                            | application/json               |
 | errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
-## postV2AgentsKeyCardRefresh
+## refreshKeyCard
 
 Fetches the latest agent card from the external A2A agent and updates the cached card in the database. Similar to MCP server refresh functionality.
 
@@ -1126,7 +1126,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.agents.postV2AgentsKeyCardRefresh({
+  const result = await orq.agents.refreshKeyCard({
     key: "<key>",
   });
 
@@ -1142,7 +1142,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { agentsPostV2AgentsKeyCardRefresh } from "@orq-ai/node/funcs/agentsPostV2AgentsKeyCardRefresh.js";
+import { agentsRefreshKeyCard } from "@orq-ai/node/funcs/agentsRefreshKeyCard.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -1151,14 +1151,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await agentsPostV2AgentsKeyCardRefresh(orq, {
+  const res = await agentsRefreshKeyCard(orq, {
     key: "<key>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("agentsPostV2AgentsKeyCardRefresh failed:", res.error);
+    console.log("agentsRefreshKeyCard failed:", res.error);
   }
 }
 

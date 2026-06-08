@@ -23,6 +23,18 @@ export type RoutingRuleListRequest = {
    * Optional filter by project ID.
    */
   projectId?: string | undefined;
+  /**
+   * Optional search term matched against name and description.
+   */
+  search?: string | undefined;
+  /**
+   * Filter by enabled status.
+   */
+  enabled?: boolean | null | undefined;
+  /**
+   * Filter by referenced model refs (comma-separated).
+   */
+  model?: Array<string> | null | undefined;
 };
 
 /**
@@ -40,6 +52,9 @@ export type RoutingRuleListRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
+  search?: string | undefined;
+  enabled?: boolean | null | undefined;
+  model?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -52,6 +67,9 @@ export const RoutingRuleListRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
+  search: z.string().optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  model: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

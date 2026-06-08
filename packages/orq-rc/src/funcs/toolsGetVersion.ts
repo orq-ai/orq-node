@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -18,6 +18,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -26,18 +27,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List guardrail rules
+ * Get tool version
  *
  * @remarks
- * Returns a paginated list of guardrail rules for the current project.
+ * Returns a specific version of a tool
  */
-export function guardrailRulesList(
+export function toolsGetVersion(
   client: OrqCore,
-  request?: operations.GuardrailRuleListRequest | undefined,
+  request: operations.GetV2ToolsToolIdVersionsVersionIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleListResponseBody,
+    operations.GetV2ToolsToolIdVersionsVersionIdResponseBody,
+    | errors.GetV2ToolsToolIdVersionsVersionIdResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +59,13 @@ export function guardrailRulesList(
 
 async function $do(
   client: OrqCore,
-  request?: operations.GuardrailRuleListRequest | undefined,
+  request: operations.GetV2ToolsToolIdVersionsVersionIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleListResponseBody,
+      operations.GetV2ToolsToolIdVersionsVersionIdResponseBody,
+      | errors.GetV2ToolsToolIdVersionsVersionIdResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -78,7 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GuardrailRuleListRequest$outboundSchema.optional().parse(
+      operations.GetV2ToolsToolIdVersionsVersionIdRequest$outboundSchema.parse(
         value,
       ),
     "Input validation failed",
@@ -89,18 +92,19 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v2/guardrail-rules")();
-
-  const query = encodeFormQuery({
-    "enabled": payload?.enabled,
-    "ending_before": payload?.ending_before,
-    "guardrail_id": payload?.guardrail_id,
-    "limit": payload?.limit,
-    "project_id": payload?.project_id,
-    "search": payload?.search,
-    "sort_by": payload?.sort_by,
-    "starting_after": payload?.starting_after,
-  }, { explode: false });
+  const pathParams = {
+    tool_id: encodeSimple("tool_id", payload.tool_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+    version_id: encodeSimple("version_id", payload.version_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v2/tools/{tool_id}/versions/{version_id}")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -113,7 +117,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "GuardrailRuleList",
+    operationID: "get_/v2/tools/{tool_id}/versions/{version_id}",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -131,7 +135,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -153,8 +156,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    operations.GuardrailRuleListResponseBody,
+    operations.GetV2ToolsToolIdVersionsVersionIdResponseBody,
+    | errors.GetV2ToolsToolIdVersionsVersionIdResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,10 +172,17 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GuardrailRuleListResponseBody$inboundSchema),
+    M.json(
+      200,
+      operations.GetV2ToolsToolIdVersionsVersionIdResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      404,
+      errors.GetV2ToolsToolIdVersionsVersionIdResponseBody$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

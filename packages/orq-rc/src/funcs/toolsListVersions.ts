@@ -27,19 +27,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List evaluator versions
+ * List tool versions
  *
  * @remarks
- * Returns version history for a specific evaluator
+ * Returns version history for a specific tool
  */
-export function evalsGetV2EvaluatorsIdVersions(
+export function toolsListVersions(
   client: OrqCore,
-  request: operations.GetV2EvaluatorsIdVersionsRequest,
+  request: operations.GetV2ToolsToolIdVersionsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV2EvaluatorsIdVersionsResponseBody,
-    | errors.GetV2EvaluatorsIdVersionsResponseBody
+    operations.GetV2ToolsToolIdVersionsResponseBody,
+    | errors.GetV2ToolsToolIdVersionsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,13 +59,13 @@ export function evalsGetV2EvaluatorsIdVersions(
 
 async function $do(
   client: OrqCore,
-  request: operations.GetV2EvaluatorsIdVersionsRequest,
+  request: operations.GetV2ToolsToolIdVersionsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV2EvaluatorsIdVersionsResponseBody,
-      | errors.GetV2EvaluatorsIdVersionsResponseBody
+      operations.GetV2ToolsToolIdVersionsResponseBody,
+      | errors.GetV2ToolsToolIdVersionsResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -81,7 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetV2EvaluatorsIdVersionsRequest$outboundSchema.parse(value),
+      operations.GetV2ToolsToolIdVersionsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -91,12 +91,12 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    tool_id: encodeSimple("tool_id", payload.tool_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/evaluators/{id}/versions")(pathParams);
+  const path = pathToFunc("/v2/tools/{tool_id}/versions")(pathParams);
 
   const query = encodeFormQuery({
     "ending_before": payload.ending_before,
@@ -115,7 +115,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get_/v2/evaluators/{id}/versions",
+    operationID: "get_/v2/tools/{tool_id}/versions",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -160,8 +160,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetV2EvaluatorsIdVersionsResponseBody,
-    | errors.GetV2EvaluatorsIdVersionsResponseBody
+    operations.GetV2ToolsToolIdVersionsResponseBody,
+    | errors.GetV2ToolsToolIdVersionsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -171,8 +171,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetV2EvaluatorsIdVersionsResponseBody$inboundSchema),
-    M.jsonErr(404, errors.GetV2EvaluatorsIdVersionsResponseBody$inboundSchema),
+    M.json(200, operations.GetV2ToolsToolIdVersionsResponseBody$inboundSchema),
+    M.jsonErr(404, errors.GetV2ToolsToolIdVersionsResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -5,6 +5,7 @@
 import { guardrailRulesCreate } from "../funcs/guardrailRulesCreate.js";
 import { guardrailRulesDelete } from "../funcs/guardrailRulesDelete.js";
 import { guardrailRulesList } from "../funcs/guardrailRulesList.js";
+import { guardrailRulesListUsedGuardrails } from "../funcs/guardrailRulesListUsedGuardrails.js";
 import { guardrailRulesRetrieve } from "../funcs/guardrailRulesRetrieve.js";
 import { guardrailRulesUpdate } from "../funcs/guardrailRulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -42,6 +43,21 @@ export class GuardrailRules extends ClientSDK {
     return unwrapAsync(guardrailRulesCreate(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * List used guardrails
+   *
+   * @remarks
+   * Returns the distinct guardrail ids referenced across all guardrail rules in scope.
+   */
+  async listUsedGuardrails(
+    options?: RequestOptions,
+  ): Promise<operations.GuardrailRuleListUsedGuardrailsResponseBody> {
+    return unwrapAsync(guardrailRulesListUsedGuardrails(
+      this,
       options,
     ));
   }

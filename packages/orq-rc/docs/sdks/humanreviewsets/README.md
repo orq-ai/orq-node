@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [getV2HumanEvalSets](#getv2humanevalsets) - Get all human review sets
-* [postV2HumanEvalSets](#postv2humanevalsets) - Create a human review set
-* [getV2HumanEvalSetsId](#getv2humanevalsetsid) - Get a human review set by ID
-* [patchV2HumanEvalSetsId](#patchv2humanevalsetsid) - Update a human review set
-* [deleteV2HumanEvalSetsId](#deletev2humanevalsetsid) - Delete a human review set
+* [list](#list) - Get all human review sets
+* [create](#create) - Create a human review set
+* [get](#get) - Get a human review set by ID
+* [update](#update) - Update a human review set
+* [delete](#delete) - Delete a human review set
 
-## getV2HumanEvalSets
+## list
 
 Get all human review sets
 
@@ -25,7 +25,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.humanReviewSets.getV2HumanEvalSets();
+  const result = await orq.humanReviewSets.list();
 
   console.log(result);
 }
@@ -39,7 +39,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { humanReviewSetsGetV2HumanEvalSets } from "@orq-ai/node/funcs/humanReviewSetsGetV2HumanEvalSets.js";
+import { humanReviewSetsList } from "@orq-ai/node/funcs/humanReviewSetsList.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,12 +48,12 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await humanReviewSetsGetV2HumanEvalSets(orq);
+  const res = await humanReviewSetsList(orq);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("humanReviewSetsGetV2HumanEvalSets failed:", res.error);
+    console.log("humanReviewSetsList failed:", res.error);
   }
 }
 
@@ -79,7 +79,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## postV2HumanEvalSets
+## create
 
 Create a human review set
 
@@ -94,7 +94,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.humanReviewSets.postV2HumanEvalSets();
+  const result = await orq.humanReviewSets.create();
 
   console.log(result);
 }
@@ -108,7 +108,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { humanReviewSetsPostV2HumanEvalSets } from "@orq-ai/node/funcs/humanReviewSetsPostV2HumanEvalSets.js";
+import { humanReviewSetsCreate } from "@orq-ai/node/funcs/humanReviewSetsCreate.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -117,12 +117,12 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await humanReviewSetsPostV2HumanEvalSets(orq);
+  const res = await humanReviewSetsCreate(orq);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("humanReviewSetsPostV2HumanEvalSets failed:", res.error);
+    console.log("humanReviewSetsCreate failed:", res.error);
   }
 }
 
@@ -148,7 +148,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV2HumanEvalSetsId
+## get
 
 Get a human review set by ID
 
@@ -163,7 +163,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.humanReviewSets.getV2HumanEvalSetsId({
+  const result = await orq.humanReviewSets.get({
     id: "<id>",
   });
 
@@ -179,7 +179,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { humanReviewSetsGetV2HumanEvalSetsId } from "@orq-ai/node/funcs/humanReviewSetsGetV2HumanEvalSetsId.js";
+import { humanReviewSetsGet } from "@orq-ai/node/funcs/humanReviewSetsGet.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -188,14 +188,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await humanReviewSetsGetV2HumanEvalSetsId(orq, {
+  const res = await humanReviewSetsGet(orq, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("humanReviewSetsGetV2HumanEvalSetsId failed:", res.error);
+    console.log("humanReviewSetsGet failed:", res.error);
   }
 }
 
@@ -221,7 +221,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## patchV2HumanEvalSetsId
+## update
 
 Update a human review set
 
@@ -236,7 +236,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.humanReviewSets.patchV2HumanEvalSetsId({
+  const result = await orq.humanReviewSets.update({
     id: "<id>",
   });
 
@@ -252,7 +252,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { humanReviewSetsPatchV2HumanEvalSetsId } from "@orq-ai/node/funcs/humanReviewSetsPatchV2HumanEvalSetsId.js";
+import { humanReviewSetsUpdate } from "@orq-ai/node/funcs/humanReviewSetsUpdate.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -261,14 +261,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await humanReviewSetsPatchV2HumanEvalSetsId(orq, {
+  const res = await humanReviewSetsUpdate(orq, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("humanReviewSetsPatchV2HumanEvalSetsId failed:", res.error);
+    console.log("humanReviewSetsUpdate failed:", res.error);
   }
 }
 
@@ -294,7 +294,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteV2HumanEvalSetsId
+## delete
 
 Delete a human review set
 
@@ -309,7 +309,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.humanReviewSets.deleteV2HumanEvalSetsId({
+  await orq.humanReviewSets.delete({
     id: "<id>",
   });
 
@@ -325,7 +325,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { humanReviewSetsDeleteV2HumanEvalSetsId } from "@orq-ai/node/funcs/humanReviewSetsDeleteV2HumanEvalSetsId.js";
+import { humanReviewSetsDelete } from "@orq-ai/node/funcs/humanReviewSetsDelete.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -334,14 +334,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await humanReviewSetsDeleteV2HumanEvalSetsId(orq, {
+  const res = await humanReviewSetsDelete(orq, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("humanReviewSetsDeleteV2HumanEvalSetsId failed:", res.error);
+    console.log("humanReviewSetsDelete failed:", res.error);
   }
 }
 

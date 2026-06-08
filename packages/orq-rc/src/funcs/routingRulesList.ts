@@ -90,9 +90,12 @@ async function $do(
   const path = pathToFunc("/v2/routing-rules")();
 
   const query = encodeFormQuery({
+    "enabled": payload?.enabled,
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
+    "model": payload?.model,
     "project_id": payload?.project_id,
+    "search": payload?.search,
     "starting_after": payload?.starting_after,
   }, { explode: false });
 

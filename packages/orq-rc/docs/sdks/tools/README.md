@@ -9,8 +9,8 @@
 * [update](#update) - Update tool
 * [delete](#delete) - Delete tool
 * [retrieve](#retrieve) - Retrieve tool
-* [getV2ToolsToolIdVersions](#getv2toolstoolidversions) - List tool versions
-* [getV2ToolsToolIdVersionsVersionId](#getv2toolstoolidversionsversionid) - Get tool version
+* [listVersions](#listversions) - List tool versions
+* [getVersion](#getversion) - Get tool version
 
 ## list
 
@@ -419,7 +419,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getV2ToolsToolIdVersions
+## listVersions
 
 Returns version history for a specific tool
 
@@ -434,7 +434,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.tools.getV2ToolsToolIdVersions({
+  const result = await orq.tools.listVersions({
     toolId: "<id>",
   });
 
@@ -450,7 +450,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { toolsGetV2ToolsToolIdVersions } from "@orq-ai/node/funcs/toolsGetV2ToolsToolIdVersions.js";
+import { toolsListVersions } from "@orq-ai/node/funcs/toolsListVersions.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -459,14 +459,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await toolsGetV2ToolsToolIdVersions(orq, {
+  const res = await toolsListVersions(orq, {
     toolId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("toolsGetV2ToolsToolIdVersions failed:", res.error);
+    console.log("toolsListVersions failed:", res.error);
   }
 }
 
@@ -493,7 +493,7 @@ run();
 | errors.GetV2ToolsToolIdVersionsResponseBody | 404                                         | application/json                            |
 | errors.APIError                             | 4XX, 5XX                                    | \*/\*                                       |
 
-## getV2ToolsToolIdVersionsVersionId
+## getVersion
 
 Returns a specific version of a tool
 
@@ -508,7 +508,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.tools.getV2ToolsToolIdVersionsVersionId({
+  const result = await orq.tools.getVersion({
     toolId: "<id>",
     versionId: "<id>",
   });
@@ -525,7 +525,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { toolsGetV2ToolsToolIdVersionsVersionId } from "@orq-ai/node/funcs/toolsGetV2ToolsToolIdVersionsVersionId.js";
+import { toolsGetVersion } from "@orq-ai/node/funcs/toolsGetVersion.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -534,7 +534,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await toolsGetV2ToolsToolIdVersionsVersionId(orq, {
+  const res = await toolsGetVersion(orq, {
     toolId: "<id>",
     versionId: "<id>",
   });
@@ -542,7 +542,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("toolsGetV2ToolsToolIdVersionsVersionId failed:", res.error);
+    console.log("toolsGetVersion failed:", res.error);
   }
 }
 

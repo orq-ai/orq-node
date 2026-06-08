@@ -5,8 +5,8 @@
 import { evalsAll } from "../funcs/evalsAll.js";
 import { evalsCreate } from "../funcs/evalsCreate.js";
 import { evalsDelete } from "../funcs/evalsDelete.js";
-import { evalsGetV2EvaluatorsIdVersions } from "../funcs/evalsGetV2EvaluatorsIdVersions.js";
 import { evalsInvoke } from "../funcs/evalsInvoke.js";
+import { evalsListVersions } from "../funcs/evalsListVersions.js";
 import { evalsUpdate } from "../funcs/evalsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -89,11 +89,11 @@ export class Evals extends ClientSDK {
    * @remarks
    * Returns version history for a specific evaluator
    */
-  async getV2EvaluatorsIdVersions(
+  async listVersions(
     request: operations.GetV2EvaluatorsIdVersionsRequest,
     options?: RequestOptions,
   ): Promise<operations.GetV2EvaluatorsIdVersionsResponseBody> {
-    return unwrapAsync(evalsGetV2EvaluatorsIdVersions(
+    return unwrapAsync(evalsListVersions(
       this,
       request,
       options,

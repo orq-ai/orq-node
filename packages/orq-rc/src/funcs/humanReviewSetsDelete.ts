@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -26,9 +26,12 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export function postV2FeedbackEvaluationRemove(
+/**
+ * Delete a human review set
+ */
+export function humanReviewSetsDelete(
   client: OrqCore,
-  request?: operations.PostV2FeedbackEvaluationRemoveRequestBody | undefined,
+  request: operations.DeleteV2HumanEvalSetsIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -52,7 +55,7 @@ export function postV2FeedbackEvaluationRemove(
 
 async function $do(
   client: OrqCore,
-  request?: operations.PostV2FeedbackEvaluationRemoveRequestBody | undefined,
+  request: operations.DeleteV2HumanEvalSetsIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -73,22 +76,24 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostV2FeedbackEvaluationRemoveRequestBody$outboundSchema
-        .optional().parse(value),
+      operations.DeleteV2HumanEvalSetsIdRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = null;
 
-  const path = pathToFunc("/v2/feedback/evaluation/remove")();
+  const pathParams = {
+    id: encodeSimple("id", payload.id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v2/human-eval-sets/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "*/*",
   }));
 
@@ -99,7 +104,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post_/v2/feedback/evaluation/remove",
+    operationID: "delete_/v2/human-eval-sets/{id}",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -113,7 +118,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "DELETE",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,

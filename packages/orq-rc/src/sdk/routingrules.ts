@@ -5,6 +5,7 @@
 import { routingRulesCreate } from "../funcs/routingRulesCreate.js";
 import { routingRulesDelete } from "../funcs/routingRulesDelete.js";
 import { routingRulesList } from "../funcs/routingRulesList.js";
+import { routingRulesListUsedModels } from "../funcs/routingRulesListUsedModels.js";
 import { routingRulesRetrieve } from "../funcs/routingRulesRetrieve.js";
 import { routingRulesUpdate } from "../funcs/routingRulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -42,6 +43,21 @@ export class RoutingRules extends ClientSDK {
     return unwrapAsync(routingRulesCreate(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * List used models
+   *
+   * @remarks
+   * Returns the distinct model refs referenced across all routing rules in scope.
+   */
+  async listUsedModels(
+    options?: RequestOptions,
+  ): Promise<operations.RoutingRuleListUsedModelsResponseBody> {
+    return unwrapAsync(routingRulesListUsedModels(
+      this,
       options,
     ));
   }

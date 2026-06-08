@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.PostV2FeedbackEvaluationRequestBody1`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.PostV2FeedbackEvaluationRequestBody1 = {
   id: "<id>",
   evaluationType: "human_review",
   humanReviewId: "<id>",
@@ -16,15 +16,15 @@ const value: operations.RequestBody1 = {
 };
 ```
 
-### `operations.RequestBody2`
+### `operations.PostV2FeedbackEvaluationRequestBody2`
 
 ```typescript
-const value: operations.RequestBody2 = {
+const value: operations.PostV2FeedbackEvaluationRequestBody2 = {
   id: "<id>",
   evaluationType: "human_review",
   humanReviewId: "<id>",
   type: "number",
-  value: 507.72,
+  value: 5323.73,
   traceId: "<id>",
 };
 ```

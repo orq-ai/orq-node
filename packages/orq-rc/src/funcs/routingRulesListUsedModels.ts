@@ -3,11 +3,9 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -26,15 +24,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update a human review set
+ * List used models
+ *
+ * @remarks
+ * Returns the distinct model refs referenced across all routing rules in scope.
  */
-export function humanReviewSetsPatchV2HumanEvalSetsId(
+export function routingRulesListUsedModels(
   client: OrqCore,
-  request: operations.PatchV2HumanEvalSetsIdRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PatchV2HumanEvalSetsIdResponseBody,
+    operations.RoutingRuleListUsedModelsResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -47,19 +47,17 @@ export function humanReviewSetsPatchV2HumanEvalSetsId(
 > {
   return new APIPromise($do(
     client,
-    request,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.PatchV2HumanEvalSetsIdRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PatchV2HumanEvalSetsIdResponseBody,
+      operations.RoutingRuleListUsedModelsResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -72,28 +70,9 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed = safeParse(
-    request,
-    (value) =>
-      operations.PatchV2HumanEvalSetsIdRequest$outboundSchema.parse(value),
-    "Input validation failed",
-  );
-  if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
-  }
-  const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
-
-  const pathParams = {
-    id: encodeSimple("id", payload.id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-  const path = pathToFunc("/v2/human-eval-sets/{id}")(pathParams);
+  const path = pathToFunc("/v2/routing-rules/used-models")();
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -104,7 +83,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "patch_/v2/human-eval-sets/{id}",
+    operationID: "RoutingRuleListUsedModels",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -118,11 +97,10 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PATCH",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
@@ -144,7 +122,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.PatchV2HumanEvalSetsIdResponseBody,
+    operations.RoutingRuleListUsedModelsResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -154,7 +132,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PatchV2HumanEvalSetsIdResponseBody$inboundSchema),
+    M.json(200, operations.RoutingRuleListUsedModelsResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

@@ -26,15 +26,14 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
-export function feedbackPostV2Feedback(
+export function feedbackRemove(
   client: OrqCore,
-  request?: operations.PostV2FeedbackRequestBody | undefined,
+  request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostV2FeedbackResponseBody,
-    | errors.PostV2FeedbackResponseBody
-    | errors.PostV2FeedbackFeedbackResponseBody
+    operations.PostV2FeedbackRemoveResponseBody,
+    | errors.PostV2FeedbackRemoveResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -54,14 +53,13 @@ export function feedbackPostV2Feedback(
 
 async function $do(
   client: OrqCore,
-  request?: operations.PostV2FeedbackRequestBody | undefined,
+  request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostV2FeedbackResponseBody,
-      | errors.PostV2FeedbackResponseBody
-      | errors.PostV2FeedbackFeedbackResponseBody
+      operations.PostV2FeedbackRemoveResponseBody,
+      | errors.PostV2FeedbackRemoveResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,9 +75,8 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostV2FeedbackRequestBody$outboundSchema.optional().parse(
-        value,
-      ),
+      operations.PostV2FeedbackRemoveRequestBody$outboundSchema.optional()
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -90,7 +87,7 @@ async function $do(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/feedback")();
+  const path = pathToFunc("/v2/feedback/remove")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -104,7 +101,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post_/v2/feedback",
+    operationID: "post_/v2/feedback/remove",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -148,9 +145,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostV2FeedbackResponseBody,
-    | errors.PostV2FeedbackResponseBody
-    | errors.PostV2FeedbackFeedbackResponseBody
+    operations.PostV2FeedbackRemoveResponseBody,
+    | errors.PostV2FeedbackRemoveResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -160,9 +156,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PostV2FeedbackResponseBody$inboundSchema),
-    M.jsonErr(400, errors.PostV2FeedbackResponseBody$inboundSchema),
-    M.jsonErr(404, errors.PostV2FeedbackFeedbackResponseBody$inboundSchema),
+    M.json(200, operations.PostV2FeedbackRemoveResponseBody$inboundSchema),
+    M.jsonErr(404, errors.PostV2FeedbackRemoveResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -6,7 +6,7 @@ import { agentsCreate } from "../funcs/agentsCreate.js";
 import { agentsDelete } from "../funcs/agentsDelete.js";
 import { agentsInvoke } from "../funcs/agentsInvoke.js";
 import { agentsList } from "../funcs/agentsList.js";
-import { agentsPostV2AgentsKeyCardRefresh } from "../funcs/agentsPostV2AgentsKeyCardRefresh.js";
+import { agentsRefreshKeyCard } from "../funcs/agentsRefreshKeyCard.js";
 import { agentsRetrieve } from "../funcs/agentsRetrieve.js";
 import { agentsRun } from "../funcs/agentsRun.js";
 import { agentsStream } from "../funcs/agentsStream.js";
@@ -203,11 +203,11 @@ export class Agents extends ClientSDK {
    * @remarks
    * Fetches the latest agent card from the external A2A agent and updates the cached card in the database. Similar to MCP server refresh functionality.
    */
-  async postV2AgentsKeyCardRefresh(
+  async refreshKeyCard(
     request: operations.PostV2AgentsKeyCardRefreshRequest,
     options?: RequestOptions,
   ): Promise<operations.PostV2AgentsKeyCardRefreshResponseBody> {
-    return unwrapAsync(agentsPostV2AgentsKeyCardRefresh(
+    return unwrapAsync(agentsRefreshKeyCard(
       this,
       request,
       options,

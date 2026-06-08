@@ -31,7 +31,7 @@ export type ExternalConfig = {
   apiKey: string;
 };
 
-export type CreateKnowledgeRequestBody2 = {
+export type RequestBody2 = {
   type?: CreateKnowledgeRequestBodyKnowledgeType | undefined;
   key: string;
   description?: string | undefined;
@@ -115,7 +115,7 @@ export type RetrievalSettings = {
     | undefined;
 };
 
-export type CreateKnowledgeRequestBody1 = {
+export type RequestBody1 = {
   type?: CreateKnowledgeRequestBodyType | undefined;
   key: string;
   description?: string | undefined;
@@ -139,9 +139,7 @@ export type CreateKnowledgeRequestBody1 = {
   path: string;
 };
 
-export type CreateKnowledgeRequestBody =
-  | CreateKnowledgeRequestBody1
-  | CreateKnowledgeRequestBody2;
+export type CreateKnowledgeRequestBody = RequestBody1 | RequestBody2;
 
 export const CreateKnowledgeResponseBodyKnowledgeType = {
   External: "external",
@@ -421,7 +419,7 @@ export function externalConfigToJSON(externalConfig: ExternalConfig): string {
 }
 
 /** @internal */
-export type CreateKnowledgeRequestBody2$Outbound = {
+export type RequestBody2$Outbound = {
   type: string;
   key: string;
   description?: string | undefined;
@@ -429,10 +427,10 @@ export type CreateKnowledgeRequestBody2$Outbound = {
 };
 
 /** @internal */
-export const CreateKnowledgeRequestBody2$outboundSchema: z.ZodType<
-  CreateKnowledgeRequestBody2$Outbound,
+export const RequestBody2$outboundSchema: z.ZodType<
+  RequestBody2$Outbound,
   z.ZodTypeDef,
-  CreateKnowledgeRequestBody2
+  RequestBody2
 > = z.object({
   type: CreateKnowledgeRequestBodyKnowledgeType$outboundSchema.default(
     "external",
@@ -446,14 +444,8 @@ export const CreateKnowledgeRequestBody2$outboundSchema: z.ZodType<
   });
 });
 
-export function createKnowledgeRequestBody2ToJSON(
-  createKnowledgeRequestBody2: CreateKnowledgeRequestBody2,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRequestBody2$outboundSchema.parse(
-      createKnowledgeRequestBody2,
-    ),
-  );
+export function requestBody2ToJSON(requestBody2: RequestBody2): string {
+  return JSON.stringify(RequestBody2$outboundSchema.parse(requestBody2));
 }
 
 /** @internal */
@@ -575,7 +567,7 @@ export function retrievalSettingsToJSON(
 }
 
 /** @internal */
-export type CreateKnowledgeRequestBody1$Outbound = {
+export type RequestBody1$Outbound = {
   type: string;
   key: string;
   description?: string | undefined;
@@ -585,10 +577,10 @@ export type CreateKnowledgeRequestBody1$Outbound = {
 };
 
 /** @internal */
-export const CreateKnowledgeRequestBody1$outboundSchema: z.ZodType<
-  CreateKnowledgeRequestBody1$Outbound,
+export const RequestBody1$outboundSchema: z.ZodType<
+  RequestBody1$Outbound,
   z.ZodTypeDef,
-  CreateKnowledgeRequestBody1
+  RequestBody1
 > = z.object({
   type: CreateKnowledgeRequestBodyType$outboundSchema.default("internal"),
   key: z.string(),
@@ -603,20 +595,14 @@ export const CreateKnowledgeRequestBody1$outboundSchema: z.ZodType<
   });
 });
 
-export function createKnowledgeRequestBody1ToJSON(
-  createKnowledgeRequestBody1: CreateKnowledgeRequestBody1,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRequestBody1$outboundSchema.parse(
-      createKnowledgeRequestBody1,
-    ),
-  );
+export function requestBody1ToJSON(requestBody1: RequestBody1): string {
+  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
 }
 
 /** @internal */
 export type CreateKnowledgeRequestBody$Outbound =
-  | CreateKnowledgeRequestBody1$Outbound
-  | CreateKnowledgeRequestBody2$Outbound;
+  | RequestBody1$Outbound
+  | RequestBody2$Outbound;
 
 /** @internal */
 export const CreateKnowledgeRequestBody$outboundSchema: z.ZodType<
@@ -624,8 +610,8 @@ export const CreateKnowledgeRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateKnowledgeRequestBody
 > = z.union([
-  z.lazy(() => CreateKnowledgeRequestBody1$outboundSchema),
-  z.lazy(() => CreateKnowledgeRequestBody2$outboundSchema),
+  z.lazy(() => RequestBody1$outboundSchema),
+  z.lazy(() => RequestBody2$outboundSchema),
 ]);
 
 export function createKnowledgeRequestBodyToJSON(

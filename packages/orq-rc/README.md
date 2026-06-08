@@ -89,7 +89,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
@@ -117,7 +119,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
@@ -131,11 +135,6 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [Orq SDK](docs/sdks/orq/README.md)
-
-* [postV2FeedbackEvaluationRemove](docs/sdks/orq/README.md#postv2feedbackevaluationremove)
-* [postV2FeedbackEvaluation](docs/sdks/orq/README.md#postv2feedbackevaluation)
-
 ### [Agents](docs/sdks/agents/README.md)
 
 * [create](docs/sdks/agents/README.md#create) - Create agent
@@ -147,7 +146,7 @@ run();
 * [~~run~~](docs/sdks/agents/README.md#run) - Run an agent with configuration :warning: **Deprecated**
 * [~~streamRun~~](docs/sdks/agents/README.md#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](docs/sdks/agents/README.md#stream) - Stream agent execution in real-time :warning: **Deprecated**
-* [postV2AgentsKeyCardRefresh](docs/sdks/agents/README.md#postv2agentskeycardrefresh) - Refresh A2A agent card
+* [refreshKeyCard](docs/sdks/agents/README.md#refreshkeycard) - Refresh A2A agent card
 
 #### [Agents.Responses](docs/sdks/orqresponses/README.md)
 
@@ -200,12 +199,14 @@ run();
 * [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 * [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
-* [getV2EvaluatorsIdVersions](docs/sdks/evals/README.md#getv2evaluatorsidversions) - List evaluator versions
+* [listVersions](docs/sdks/evals/README.md#listversions) - List evaluator versions
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
-* [postV2FeedbackRemove](docs/sdks/feedback/README.md#postv2feedbackremove)
-* [postV2Feedback](docs/sdks/feedback/README.md#postv2feedback)
+* [removeEvaluation](docs/sdks/feedback/README.md#removeevaluation)
+* [createEvaluation](docs/sdks/feedback/README.md#createevaluation)
+* [remove](docs/sdks/feedback/README.md#remove)
+* [create](docs/sdks/feedback/README.md#create)
 
 ### [Files](docs/sdks/files/README.md)
 
@@ -220,17 +221,18 @@ run();
 
 * [list](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
 * [create](docs/sdks/guardrailrules/README.md#create) - Create guardrail rule
+* [listUsedGuardrails](docs/sdks/guardrailrules/README.md#listusedguardrails) - List used guardrails
 * [delete](docs/sdks/guardrailrules/README.md#delete) - Delete guardrail rule
 * [retrieve](docs/sdks/guardrailrules/README.md#retrieve) - Get guardrail rule
 * [update](docs/sdks/guardrailrules/README.md#update) - Update guardrail rule
 
 ### [HumanReviewSets](docs/sdks/humanreviewsets/README.md)
 
-* [getV2HumanEvalSets](docs/sdks/humanreviewsets/README.md#getv2humanevalsets) - Get all human review sets
-* [postV2HumanEvalSets](docs/sdks/humanreviewsets/README.md#postv2humanevalsets) - Create a human review set
-* [getV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#getv2humanevalsetsid) - Get a human review set by ID
-* [patchV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#patchv2humanevalsetsid) - Update a human review set
-* [deleteV2HumanEvalSetsId](docs/sdks/humanreviewsets/README.md#deletev2humanevalsetsid) - Delete a human review set
+* [list](docs/sdks/humanreviewsets/README.md#list) - Get all human review sets
+* [create](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
+* [get](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID
+* [update](docs/sdks/humanreviewsets/README.md#update) - Update a human review set
+* [delete](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
 
 ### [Identities](docs/sdks/identities/README.md)
 
@@ -394,6 +396,7 @@ run();
 
 * [list](docs/sdks/routingrules/README.md#list) - List routing rules
 * [create](docs/sdks/routingrules/README.md#create) - Create routing rule
+* [listUsedModels](docs/sdks/routingrules/README.md#listusedmodels) - List used models
 * [delete](docs/sdks/routingrules/README.md#delete) - Delete routing rule
 * [retrieve](docs/sdks/routingrules/README.md#retrieve) - Get routing rule
 * [update](docs/sdks/routingrules/README.md#update) - Update routing rule
@@ -422,8 +425,8 @@ run();
 * [update](docs/sdks/tools/README.md#update) - Update tool
 * [delete](docs/sdks/tools/README.md#delete) - Delete tool
 * [retrieve](docs/sdks/tools/README.md#retrieve) - Retrieve tool
-* [getV2ToolsToolIdVersions](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
-* [getV2ToolsToolIdVersionsVersionId](docs/sdks/tools/README.md#getv2toolstoolidversionsversionid) - Get tool version
+* [listVersions](docs/sdks/tools/README.md#listversions) - List tool versions
+* [getVersion](docs/sdks/tools/README.md#getversion) - Get tool version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -446,7 +449,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsCreate`](docs/sdks/agents/README.md#create) - Create agent
 - [`agentsDelete`](docs/sdks/agents/README.md#delete) - Delete agent
 - [`agentsList`](docs/sdks/agents/README.md#list) - List agents
-- [`agentsPostV2AgentsKeyCardRefresh`](docs/sdks/agents/README.md#postv2agentskeycardrefresh) - Refresh A2A agent card
+- [`agentsRefreshKeyCard`](docs/sdks/agents/README.md#refreshkeycard) - Refresh A2A agent card
 - [`agentsResponsesCreate`](docs/sdks/orqresponses/README.md#create) - Create response
 - [`agentsResponsesGet`](docs/sdks/orqresponses/README.md#get) - Get response
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
@@ -478,11 +481,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsAll`](docs/sdks/evals/README.md#all) - Get all Evaluators
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
 - [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
-- [`evalsGetV2EvaluatorsIdVersions`](docs/sdks/evals/README.md#getv2evaluatorsidversions) - List evaluator versions
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
+- [`evalsListVersions`](docs/sdks/evals/README.md#listversions) - List evaluator versions
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
-- [`feedbackPostV2Feedback`](docs/sdks/feedback/README.md#postv2feedback)
-- [`feedbackPostV2FeedbackRemove`](docs/sdks/feedback/README.md#postv2feedbackremove)
+- [`feedbackCreate`](docs/sdks/feedback/README.md#create)
+- [`feedbackCreateEvaluation`](docs/sdks/feedback/README.md#createevaluation)
+- [`feedbackRemove`](docs/sdks/feedback/README.md#remove)
+- [`feedbackRemoveEvaluation`](docs/sdks/feedback/README.md#removeevaluation)
 - [`filesCreate`](docs/sdks/files/README.md#create) - Upload a file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete a file
 - [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
@@ -492,13 +497,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guardrailRulesCreate`](docs/sdks/guardrailrules/README.md#create) - Create guardrail rule
 - [`guardrailRulesDelete`](docs/sdks/guardrailrules/README.md#delete) - Delete guardrail rule
 - [`guardrailRulesList`](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
+- [`guardrailRulesListUsedGuardrails`](docs/sdks/guardrailrules/README.md#listusedguardrails) - List used guardrails
 - [`guardrailRulesRetrieve`](docs/sdks/guardrailrules/README.md#retrieve) - Get guardrail rule
 - [`guardrailRulesUpdate`](docs/sdks/guardrailrules/README.md#update) - Update guardrail rule
-- [`humanReviewSetsDeleteV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#deletev2humanevalsetsid) - Delete a human review set
-- [`humanReviewSetsGetV2HumanEvalSets`](docs/sdks/humanreviewsets/README.md#getv2humanevalsets) - Get all human review sets
-- [`humanReviewSetsGetV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#getv2humanevalsetsid) - Get a human review set by ID
-- [`humanReviewSetsPatchV2HumanEvalSetsId`](docs/sdks/humanreviewsets/README.md#patchv2humanevalsetsid) - Update a human review set
-- [`humanReviewSetsPostV2HumanEvalSets`](docs/sdks/humanreviewsets/README.md#postv2humanevalsets) - Create a human review set
+- [`humanReviewSetsCreate`](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
+- [`humanReviewSetsDelete`](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
+- [`humanReviewSetsGet`](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID
+- [`humanReviewSetsList`](docs/sdks/humanreviewsets/README.md#list) - Get all human review sets
+- [`humanReviewSetsUpdate`](docs/sdks/humanreviewsets/README.md#update) - Update a human review set
 - [`identitiesCreate`](docs/sdks/identities/README.md#create) - Create an identity
 - [`identitiesDelete`](docs/sdks/identities/README.md#delete) - Delete an identity
 - [`identitiesList`](docs/sdks/identities/README.md#list) - List identities
@@ -564,8 +570,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesList`](docs/sdks/policies/README.md#list) - List policies
 - [`policiesRetrieve`](docs/sdks/policies/README.md#retrieve) - Get policy
 - [`policiesUpdate`](docs/sdks/policies/README.md#update) - Update policy
-- [`postV2FeedbackEvaluation`](docs/sdks/orq/README.md#postv2feedbackevaluation)
-- [`postV2FeedbackEvaluationRemove`](docs/sdks/orq/README.md#postv2feedbackevaluationremove)
 - [`projectsCreate`](docs/sdks/projects/README.md#create) - Create a new project
 - [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete a project
 - [`projectsGet`](docs/sdks/projects/README.md#get) - Retrieve a project
@@ -596,6 +600,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`routingRulesCreate`](docs/sdks/routingrules/README.md#create) - Create routing rule
 - [`routingRulesDelete`](docs/sdks/routingrules/README.md#delete) - Delete routing rule
 - [`routingRulesList`](docs/sdks/routingrules/README.md#list) - List routing rules
+- [`routingRulesListUsedModels`](docs/sdks/routingrules/README.md#listusedmodels) - List used models
 - [`routingRulesRetrieve`](docs/sdks/routingrules/README.md#retrieve) - Get routing rule
 - [`routingRulesUpdate`](docs/sdks/routingrules/README.md#update) - Update routing rule
 - [`schedulesCreate`](docs/sdks/schedules/README.md#create) - Create schedule
@@ -611,9 +616,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`skillsUpdate`](docs/sdks/skills/README.md#update) - Update a skill
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
-- [`toolsGetV2ToolsToolIdVersions`](docs/sdks/tools/README.md#getv2toolstoolidversions) - List tool versions
-- [`toolsGetV2ToolsToolIdVersionsVersionId`](docs/sdks/tools/README.md#getv2toolstoolidversionsversionid) - Get tool version
+- [`toolsGetVersion`](docs/sdks/tools/README.md#getversion) - Get tool version
 - [`toolsList`](docs/sdks/tools/README.md#list) - List tools
+- [`toolsListVersions`](docs/sdks/tools/README.md#listversions) - List tool versions
 - [`toolsRetrieve`](docs/sdks/tools/README.md#retrieve) - Retrieve tool
 - [`toolsUpdate`](docs/sdks/tools/README.md#update) - Update tool
 - ~~[`agentsInvoke`](docs/sdks/agents/README.md#invoke)~~ - Execute an agent task :warning: **Deprecated**
@@ -814,7 +819,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove(undefined, {
+  const result = await orq.evals.all({}, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -826,6 +831,8 @@ async function run() {
       retryConnectionErrors: false,
     },
   });
+
+  console.log(result);
 }
 
 run();
@@ -851,7 +858,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
@@ -924,42 +933,42 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 177 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 177 methods.*
-* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 177 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 177 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 177 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 177 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 177 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 177 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 177 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 177 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 177 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 177 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 177 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 177 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 177 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 177 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 177 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 177 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 177 methods.*
-* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 177 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 179 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 179 methods.*
+* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 179 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 179 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 179 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 179 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 179 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 179 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 179 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 179 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 179 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 179 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 179 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 179 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 179 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 179 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 179 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 179 methods.*
+* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 179 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -982,7 +991,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.postV2FeedbackEvaluationRemove();
+  const result = await orq.evals.all({});
+
+  console.log(result);
 }
 
 run();
