@@ -18,6 +18,9 @@ export type ListKnowledgeBasesRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 25
+   */
   limit?: number | undefined;
 };
 
@@ -289,7 +292,7 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
 > = z.object({
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
-  limit: z.number().default(300),
+  limit: z.number().int().default(25),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

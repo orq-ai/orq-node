@@ -40,11 +40,11 @@ export const DeploymentsType = {
  */
 export type DeploymentsType = ClosedEnum<typeof DeploymentsType>;
 
-export const DeploymentsDeploymentsResponseType = {
+export const DeploymentsDeploymentsResponse200Type = {
   Object: "object",
 } as const;
-export type DeploymentsDeploymentsResponseType = ClosedEnum<
-  typeof DeploymentsDeploymentsResponseType
+export type DeploymentsDeploymentsResponse200Type = ClosedEnum<
+  typeof DeploymentsDeploymentsResponse200Type
 >;
 
 /**
@@ -55,7 +55,7 @@ export type DeploymentsDeploymentsResponseType = ClosedEnum<
  *  Omitting `parameters` defines a function with an empty parameter list.
  */
 export type DeploymentsParameters = {
-  type: DeploymentsDeploymentsResponseType;
+  type: DeploymentsDeploymentsResponse200Type;
   properties: { [k: string]: any };
   required?: Array<string> | undefined;
   additionalProperties?: false | undefined;
@@ -218,6 +218,66 @@ export type DeploymentsResponseFormat =
   | DeploymentsResponseFormat6;
 
 /**
+ * Create a cache control breakpoint. Accepts only the value "ephemeral".
+ */
+export const DeploymentsDeploymentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint. Accepts only the value "ephemeral".
+ */
+export type DeploymentsDeploymentsType = ClosedEnum<
+  typeof DeploymentsDeploymentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const DeploymentsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentsTtl = ClosedEnum<typeof DeploymentsTtl>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type DeploymentsCacheControl = {
+  /**
+   * Create a cache control breakpoint. Accepts only the value "ephemeral".
+   */
+  type: DeploymentsDeploymentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: DeploymentsTtl;
+};
+
+/**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
  */
 export const DeploymentsPhotoRealVersion = {
@@ -363,6 +423,10 @@ export type DeploymentsModelParameters = {
     | DeploymentsResponseFormat6
     | null
     | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: DeploymentsCacheControl | null | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -514,11 +578,11 @@ export type DeploymentsContent =
   | string
   | Array<Deployments21 | Deployments22 | Deployments23>;
 
-export const DeploymentsDeploymentsType = {
+export const DeploymentsDeploymentsResponseType = {
   Function: "function",
 } as const;
-export type DeploymentsDeploymentsType = ClosedEnum<
-  typeof DeploymentsDeploymentsType
+export type DeploymentsDeploymentsResponseType = ClosedEnum<
+  typeof DeploymentsDeploymentsResponseType
 >;
 
 export type DeploymentsDeploymentsFunction = {
@@ -532,7 +596,7 @@ export type DeploymentsDeploymentsFunction = {
 export type DeploymentsToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: DeploymentsDeploymentsType;
+  type: DeploymentsDeploymentsResponseType;
   function: DeploymentsDeploymentsFunction;
 };
 
@@ -643,9 +707,10 @@ export const DeploymentsType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentsType);
 
 /** @internal */
-export const DeploymentsDeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsDeploymentsResponseType
-> = z.nativeEnum(DeploymentsDeploymentsResponseType);
+export const DeploymentsDeploymentsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentsDeploymentsResponse200Type> = z.nativeEnum(
+    DeploymentsDeploymentsResponse200Type,
+  );
 
 /** @internal */
 export const DeploymentsParameters$inboundSchema: z.ZodType<
@@ -653,7 +718,7 @@ export const DeploymentsParameters$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: DeploymentsDeploymentsResponseType$inboundSchema,
+  type: DeploymentsDeploymentsResponse200Type$inboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()).optional(),
   additionalProperties: z.literal(false).optional(),
@@ -869,6 +934,36 @@ export function deploymentsResponseFormatFromJSON(
 }
 
 /** @internal */
+export const DeploymentsDeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsDeploymentsType
+> = z.nativeEnum(DeploymentsDeploymentsType);
+
+/** @internal */
+export const DeploymentsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsTtl
+> = z.nativeEnum(DeploymentsTtl);
+
+/** @internal */
+export const DeploymentsCacheControl$inboundSchema: z.ZodType<
+  DeploymentsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentsDeploymentsType$inboundSchema,
+  ttl: DeploymentsTtl$inboundSchema.default("5m"),
+});
+
+export function deploymentsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentsCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentsCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsPhotoRealVersion
 > = z.nativeEnum(DeploymentsPhotoRealVersion);
@@ -921,6 +1016,8 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
       DeploymentsResponseFormat6$inboundSchema,
     ]),
   ).optional(),
+  cacheControl: z.nullable(z.lazy(() => DeploymentsCacheControl$inboundSchema))
+    .optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: DeploymentsEncodingFormat$inboundSchema.optional(),
   reasoningEffort: DeploymentsReasoningEffort$inboundSchema.optional(),
@@ -1110,9 +1207,9 @@ export function deploymentsContentFromJSON(
 }
 
 /** @internal */
-export const DeploymentsDeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsDeploymentsType
-> = z.nativeEnum(DeploymentsDeploymentsType);
+export const DeploymentsDeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsDeploymentsResponseType
+> = z.nativeEnum(DeploymentsDeploymentsResponseType);
 
 /** @internal */
 export const DeploymentsDeploymentsFunction$inboundSchema: z.ZodType<
@@ -1142,7 +1239,7 @@ export const DeploymentsToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: DeploymentsDeploymentsType$inboundSchema,
+  type: DeploymentsDeploymentsResponseType$inboundSchema,
   function: z.lazy(() => DeploymentsDeploymentsFunction$inboundSchema),
 });
 

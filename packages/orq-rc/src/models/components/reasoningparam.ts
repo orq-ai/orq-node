@@ -3,11 +3,55 @@
  */
 
 import * as z from "zod/v3";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const Effort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type Effort = ClosedEnum<typeof Effort>;
+
+/**
+ * The format of the reasoning summary returned by the model.
+ */
+export const Summary = {
+  Concise: "concise",
+  Detailed: "detailed",
+  Auto: "auto",
+} as const;
+/**
+ * The format of the reasoning summary returned by the model.
+ */
+export type Summary = ClosedEnum<typeof Summary>;
 
 export type ReasoningParam = {
-  effort?: string | undefined;
-  summary?: string | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  effort?: Effort | undefined;
+  /**
+   * The format of the reasoning summary returned by the model.
+   */
+  summary?: Summary | undefined;
 };
+
+/** @internal */
+export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> = z
+  .nativeEnum(Effort);
+
+/** @internal */
+export const Summary$outboundSchema: z.ZodNativeEnum<typeof Summary> = z
+  .nativeEnum(Summary);
 
 /** @internal */
 export type ReasoningParam$Outbound = {
@@ -21,8 +65,8 @@ export const ReasoningParam$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReasoningParam
 > = z.object({
-  effort: z.string().optional(),
-  summary: z.string().optional(),
+  effort: Effort$outboundSchema.optional(),
+  summary: Summary$outboundSchema.optional(),
 });
 
 export function reasoningParamToJSON(reasoningParam: ReasoningParam): string {

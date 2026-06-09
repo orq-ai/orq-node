@@ -496,6 +496,66 @@ export type ListAgentsTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const ListAgentsAgentsResponseType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type ListAgentsAgentsResponseType = ClosedEnum<
+  typeof ListAgentsAgentsResponseType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const ListAgentsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type ListAgentsTtl = ClosedEnum<typeof ListAgentsTtl>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type ListAgentsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: ListAgentsAgentsResponseType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: ListAgentsTtl;
+};
+
+/**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type ListAgentsParameters = {
@@ -605,6 +665,14 @@ export type ListAgentsParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: ListAgentsTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: ListAgentsCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -878,6 +946,68 @@ export type ListAgentsFallbackModelConfigurationTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const ListAgentsFallbackModelConfigurationAgentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type ListAgentsFallbackModelConfigurationAgentsType = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationAgentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const ListAgentsFallbackModelConfigurationTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type ListAgentsFallbackModelConfigurationTtl = ClosedEnum<
+  typeof ListAgentsFallbackModelConfigurationTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type ListAgentsFallbackModelConfigurationCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: ListAgentsFallbackModelConfigurationAgentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: ListAgentsFallbackModelConfigurationTtl;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type ListAgentsFallbackModelConfigurationParameters = {
@@ -997,6 +1127,14 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: ListAgentsFallbackModelConfigurationTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: ListAgentsFallbackModelConfigurationCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -1836,6 +1974,36 @@ export function listAgentsTimeoutFromJSON(
 }
 
 /** @internal */
+export const ListAgentsAgentsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsAgentsResponseType
+> = z.nativeEnum(ListAgentsAgentsResponseType);
+
+/** @internal */
+export const ListAgentsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof ListAgentsTtl
+> = z.nativeEnum(ListAgentsTtl);
+
+/** @internal */
+export const ListAgentsCacheControl$inboundSchema: z.ZodType<
+  ListAgentsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListAgentsAgentsResponseType$inboundSchema,
+  ttl: ListAgentsTtl$inboundSchema.default("5m"),
+});
+
+export function listAgentsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsParameters$inboundSchema: z.ZodType<
   ListAgentsParameters,
   z.ZodTypeDef,
@@ -1877,6 +2045,8 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
   cache: z.lazy(() => ListAgentsCache$inboundSchema).optional(),
   load_balancer: z.lazy(() => ListAgentsLoadBalancer1$inboundSchema).optional(),
   timeout: z.lazy(() => ListAgentsTimeout$inboundSchema).optional(),
+  cache_control: z.lazy(() => ListAgentsCacheControl$inboundSchema).optional(),
+  prompt_cache_key: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -1890,6 +2060,8 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "load_balancer": "loadBalancer",
+    "cache_control": "cacheControl",
+    "prompt_cache_key": "promptCacheKey",
   });
 });
 
@@ -2421,6 +2593,43 @@ export function listAgentsFallbackModelConfigurationTimeoutFromJSON(
 }
 
 /** @internal */
+export const ListAgentsFallbackModelConfigurationAgentsType$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationAgentsType> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationAgentsType);
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationTtl$inboundSchema:
+  z.ZodNativeEnum<typeof ListAgentsFallbackModelConfigurationTtl> = z
+    .nativeEnum(ListAgentsFallbackModelConfigurationTtl);
+
+/** @internal */
+export const ListAgentsFallbackModelConfigurationCacheControl$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: ListAgentsFallbackModelConfigurationAgentsType$inboundSchema,
+    ttl: ListAgentsFallbackModelConfigurationTtl$inboundSchema.default("5m"),
+  });
+
+export function listAgentsFallbackModelConfigurationCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentsFallbackModelConfigurationCacheControl$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     ListAgentsFallbackModelConfigurationParameters,
@@ -2476,6 +2685,10 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     timeout: z.lazy(() =>
       ListAgentsFallbackModelConfigurationTimeout$inboundSchema
     ).optional(),
+    cache_control: z.lazy(() =>
+      ListAgentsFallbackModelConfigurationCacheControl$inboundSchema
+    ).optional(),
+    prompt_cache_key: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "frequency_penalty": "frequencyPenalty",
@@ -2489,6 +2702,8 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       "tool_choice": "toolChoice",
       "parallel_tool_calls": "parallelToolCalls",
       "load_balancer": "loadBalancer",
+      "cache_control": "cacheControl",
+      "prompt_cache_key": "promptCacheKey",
     });
   });
 
