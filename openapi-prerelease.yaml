@@ -1047,7 +1047,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01ktpab2m2ecb68y0ehvxx3gkn"
+              default: "reasoning_01ktprqqkjhe2f0dgt0wfxx3xj"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -7197,6 +7197,178 @@ components:
         - "owned_by"
         - "created"
       type: "object"
+    PublicResponseResource:
+      additionalProperties: false
+      properties:
+        background:
+          type: "boolean"
+        completed_at:
+          format: "int64"
+          type:
+            - "integer"
+            - "null"
+        conversation:
+          $ref: "#/components/schemas/ConversationParam"
+        created_at:
+          format: "int64"
+          type: "integer"
+        error:
+          $ref: "#/components/schemas/ResponseError"
+        frequency_penalty:
+          format: "double"
+          type: "number"
+        id:
+          type: "string"
+        incomplete_details:
+          $ref: "#/components/schemas/IncompleteDetails"
+        input:
+          description: "Array of input items (messages, function call outputs, etc.)"
+          items: {}
+          type:
+            - "array"
+            - "null"
+        instructions:
+          type:
+            - "string"
+            - "null"
+        max_output_tokens:
+          format: "int64"
+          type:
+            - "integer"
+            - "null"
+        max_tool_calls:
+          format: "int64"
+          type:
+            - "integer"
+            - "null"
+        memory:
+          $ref: "#/components/schemas/MemoryParam"
+        metadata:
+          additionalProperties:
+            type: "string"
+          description: "Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>)."
+          type: "object"
+        model:
+          type: "string"
+        object:
+          description: "Always \"response\""
+          type: "string"
+        output:
+          description: "Array of output items (messages, function calls, reasoning, etc.)"
+          items: {}
+          type:
+            - "array"
+            - "null"
+        parallel_tool_calls:
+          type: "boolean"
+        presence_penalty:
+          format: "double"
+          type: "number"
+        previous_response_id:
+          type:
+            - "string"
+            - "null"
+        prompt_cache_key:
+          type:
+            - "string"
+            - "null"
+        prompt_cache_retention:
+          type:
+            - "string"
+            - "null"
+        reasoning:
+          $ref: "#/components/schemas/Reasoning"
+        safety_identifier:
+          type:
+            - "string"
+            - "null"
+        service_tier:
+          enum:
+            - "auto"
+            - "default"
+            - "flex"
+            - "priority"
+          type: "string"
+        status:
+          enum:
+            - "queued"
+            - "in_progress"
+            - "completed"
+            - "failed"
+            - "incomplete"
+            - "requires_action"
+          type: "string"
+        store:
+          type: "boolean"
+        temperature:
+          format: "double"
+          type: "number"
+        text:
+          description: "Text output configuration including format and verbosity"
+        tool_choice:
+          description: "Tool choice setting: \"auto\", \"none\", \"required\", or a specific function"
+        tools:
+          description: "Array of tool configurations used in this response"
+          items: {}
+          type:
+            - "array"
+            - "null"
+        top_logprobs:
+          format: "int64"
+          type: "integer"
+        top_p:
+          format: "double"
+          type: "number"
+        truncation:
+          enum:
+            - "disabled"
+            - "auto"
+          type: "string"
+        usage:
+          $ref: "#/components/schemas/PublicUsage"
+        user:
+          type:
+            - "string"
+            - "null"
+        variables:
+          additionalProperties: {}
+          type: "object"
+      required:
+        - "id"
+        - "object"
+        - "created_at"
+        - "completed_at"
+        - "status"
+        - "incomplete_details"
+        - "model"
+        - "previous_response_id"
+        - "instructions"
+        - "input"
+        - "output"
+        - "error"
+        - "tools"
+        - "tool_choice"
+        - "temperature"
+        - "top_p"
+        - "presence_penalty"
+        - "frequency_penalty"
+        - "top_logprobs"
+        - "max_output_tokens"
+        - "max_tool_calls"
+        - "reasoning"
+        - "text"
+        - "user"
+        - "usage"
+        - "truncation"
+        - "parallel_tool_calls"
+        - "store"
+        - "background"
+        - "metadata"
+        - "service_tier"
+        - "safety_identifier"
+        - "prompt_cache_key"
+        - "prompt_cache_retention"
+      type: "object"
     PublicSchedule:
       additionalProperties: false
       properties:
@@ -7390,6 +7562,133 @@ components:
             - "auto"
           type: "string"
       type: "object"
+    ResponseCodeInterpreterCodeDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.code_interpreter_call_code.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "delta"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.code_interpreter_call_code.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Code Interpreter Code Delta"
+      type: "object"
+    ResponseCodeInterpreterCodeDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            code:
+              description: "The completed code interpreter code."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.code_interpreter_call_code.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "code"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.code_interpreter_call_code.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Code Interpreter Code Done"
+      type: "object"
+    ResponseContentPartStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            part:
+              additionalProperties: true
+              description: "The content part."
+              type: "object"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.content_part.added"
+                - "response.content_part.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "part"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.content_part.added"
+            - "response.content_part.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Content Part"
+      type: "object"
     ResponseError:
       additionalProperties: false
       properties:
@@ -7400,6 +7699,37 @@ components:
       required:
         - "code"
         - "message"
+      type: "object"
+    ResponseErrorStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            error:
+              $ref: "#/components/schemas/ResponseError"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "error"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "error"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "error"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Error"
       type: "object"
     ResponseExecutionLimits:
       additionalProperties: false
@@ -7419,6 +7749,153 @@ components:
         tool_timeout:
           format: "int64"
           type: "integer"
+      type: "object"
+    ResponseFunctionCallArgumentsDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            obfuscation:
+              description: "Obfuscation padding accompanying the delta, when present."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.function_call_arguments.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "delta"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.function_call_arguments.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Function Call Arguments Delta"
+      type: "object"
+    ResponseFunctionCallArgumentsDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            arguments:
+              description: "The completed function-call arguments JSON."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.function_call_arguments.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "arguments"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.function_call_arguments.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Function Call Arguments Done"
+      type: "object"
+    ResponseHostedToolCallStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.web_search_call.in_progress"
+                - "response.web_search_call.searching"
+                - "response.web_search_call.completed"
+                - "response.file_search_call.in_progress"
+                - "response.file_search_call.searching"
+                - "response.file_search_call.completed"
+                - "response.code_interpreter_call.in_progress"
+                - "response.code_interpreter_call.interpreting"
+                - "response.code_interpreter_call.completed"
+                - "response.image_generation_call.in_progress"
+                - "response.image_generation_call.generating"
+                - "response.image_generation_call.completed"
+                - "response.mcp_call.in_progress"
+                - "response.mcp_call.completed"
+                - "response.mcp_call.failed"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.web_search_call.in_progress"
+            - "response.web_search_call.searching"
+            - "response.web_search_call.completed"
+            - "response.file_search_call.in_progress"
+            - "response.file_search_call.searching"
+            - "response.file_search_call.completed"
+            - "response.code_interpreter_call.in_progress"
+            - "response.code_interpreter_call.interpreting"
+            - "response.code_interpreter_call.completed"
+            - "response.image_generation_call.in_progress"
+            - "response.image_generation_call.generating"
+            - "response.image_generation_call.completed"
+            - "response.mcp_call.in_progress"
+            - "response.mcp_call.completed"
+            - "response.mcp_call.failed"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Hosted Tool Call"
       type: "object"
     ResponseIdentity:
       additionalProperties: false
@@ -7444,6 +7921,685 @@ components:
             - "null"
       required:
         - "id"
+      type: "object"
+    ResponseImageGenerationPartialImageStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            partial_image_b64:
+              description: "Base64-encoded partial image."
+              type: "string"
+            partial_image_index:
+              description: "Index of the partial image."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.image_generation_call.partial_image"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "partial_image_b64"
+            - "partial_image_index"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.image_generation_call.partial_image"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Image Generation Partial Image"
+      type: "object"
+    ResponseLifecycleStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            response:
+              $ref: "#/components/schemas/PublicResponseResource"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.created"
+                - "response.queued"
+                - "response.in_progress"
+                - "response.completed"
+                - "response.failed"
+                - "response.incomplete"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "response"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.created"
+            - "response.queued"
+            - "response.in_progress"
+            - "response.completed"
+            - "response.failed"
+            - "response.incomplete"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Lifecycle"
+      type: "object"
+    ResponseMcpCallArgumentsDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.mcp_call_arguments.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "delta"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.mcp_call_arguments.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "MCP Call Arguments Delta"
+      type: "object"
+    ResponseMcpCallArgumentsDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            arguments:
+              description: "The completed MCP-call arguments JSON."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.mcp_call_arguments.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "arguments"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.mcp_call_arguments.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "MCP Call Arguments Done"
+      type: "object"
+    ResponseOutputItemStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            item:
+              additionalProperties: true
+              description: "The output item (message, function call, reasoning, etc.)."
+              type: "object"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.output_item.added"
+                - "response.output_item.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "output_index"
+            - "item"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.output_item.added"
+            - "response.output_item.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Output Item"
+      type: "object"
+    ResponseOutputTextAnnotationAddedStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            annotation:
+              additionalProperties: true
+              description: "The annotation added to the output text."
+              type: "object"
+            annotation_index:
+              description: "Index of the annotation within the content part."
+              type: "integer"
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.output_text.annotation.added"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "annotation_index"
+            - "annotation"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.output_text.annotation.added"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Output Text Annotation Added"
+      type: "object"
+    ResponseOutputTextDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            logprobs:
+              description: "Log probability information for the emitted tokens."
+              items:
+                additionalProperties: true
+                type: "object"
+              type: "array"
+            obfuscation:
+              description: "Obfuscation padding accompanying the delta, when present."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.output_text.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "delta"
+            - "logprobs"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.output_text.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Output Text Delta"
+      type: "object"
+    ResponseOutputTextDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            logprobs:
+              description: "Log probability information for the emitted tokens."
+              items:
+                additionalProperties: true
+                type: "object"
+              type: "array"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            text:
+              description: "The completed output text."
+              type: "string"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.output_text.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "text"
+            - "logprobs"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.output_text.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Output Text Done"
+      type: "object"
+    ResponseReasoningDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            obfuscation:
+              description: "Obfuscation padding accompanying the delta, when present."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.reasoning.delta"
+                - "response.reasoning_text.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "delta"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.reasoning.delta"
+            - "response.reasoning_text.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Reasoning Delta"
+      type: "object"
+    ResponseReasoningDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            text:
+              description: "The completed reasoning text."
+              type: "string"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.reasoning.done"
+                - "response.reasoning_text.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "text"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.reasoning.done"
+            - "response.reasoning_text.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Reasoning Done"
+      type: "object"
+    ResponseReasoningSummaryPartStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            part:
+              additionalProperties: true
+              description: "The reasoning summary part."
+              type: "object"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            summary_index:
+              description: "Index of the reasoning summary part."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.reasoning_summary_part.added"
+                - "response.reasoning_summary_part.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "summary_index"
+            - "part"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.reasoning_summary_part.added"
+            - "response.reasoning_summary_part.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Reasoning Summary Part"
+      type: "object"
+    ResponseReasoningSummaryTextDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            obfuscation:
+              description: "Obfuscation padding accompanying the delta, when present."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            summary_index:
+              description: "Index of the reasoning summary part."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.reasoning_summary_text.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "summary_index"
+            - "delta"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.reasoning_summary_text.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Reasoning Summary Text Delta"
+      type: "object"
+    ResponseReasoningSummaryTextDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            summary_index:
+              description: "Index of the reasoning summary part."
+              type: "integer"
+            text:
+              description: "The completed reasoning summary text."
+              type: "string"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.reasoning_summary_text.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "summary_index"
+            - "text"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.reasoning_summary_text.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Reasoning Summary Text Done"
+      type: "object"
+    ResponseRefusalDeltaStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            delta:
+              description: "Incremental text or argument chunk."
+              type: "string"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.refusal.delta"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "delta"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.refusal.delta"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Refusal Delta"
+      type: "object"
+    ResponseRefusalDoneStreamEvent:
+      properties:
+        data:
+          additionalProperties: true
+          description: "The event payload."
+          properties:
+            content_index:
+              description: "Index of the content part within the output item."
+              type: "integer"
+            item_id:
+              description: "ID of the output item this event refers to."
+              type: "string"
+            output_index:
+              description: "Index of the output item in the response output array."
+              type: "integer"
+            refusal:
+              description: "The completed refusal text."
+              type: "string"
+            sequence_number:
+              description: "Monotonically increasing sequence number for ordering events."
+              type: "integer"
+            type:
+              description: "The event type. Matches the SSE `event` field."
+              enum:
+                - "response.refusal.done"
+              type: "string"
+          required:
+            - "type"
+            - "sequence_number"
+            - "item_id"
+            - "output_index"
+            - "content_index"
+            - "refusal"
+          type: "object"
+        event:
+          description: "The SSE event name, equal to the payload's `type`."
+          enum:
+            - "response.refusal.done"
+          type: "string"
+      required:
+        - "event"
+        - "data"
+      title: "Refusal Done"
       type: "object"
     ResponseRetryConfig:
       additionalProperties: false
@@ -7822,10 +8978,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-09T13:49:29.333Z"
+                                  default: "2026-06-09T18:01:05.360Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-09T13:49:29.333Z"
+                                  default: "2026-06-09T18:01:05.360Z"
                                 updated_by_id:
                                   type:
                                     - "string"
@@ -7960,10 +9116,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-09T13:49:29.333Z"
+                                  default: "2026-06-09T18:01:05.360Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-09T13:49:29.333Z"
+                                  default: "2026-06-09T18:01:05.360Z"
                                 updated_by_id:
                                   type:
                                     - "string"
@@ -8193,10 +9349,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8296,10 +9452,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8414,10 +9570,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8517,10 +9673,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -8920,10 +10076,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -9039,10 +10195,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated:
                               type: "string"
-                              default: "2026-06-09T13:49:29.333Z"
+                              default: "2026-06-09T18:01:05.360Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -9655,10 +10811,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -9793,10 +10949,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -10026,10 +11182,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10129,10 +11285,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10247,10 +11403,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10350,10 +11506,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10753,10 +11909,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -10872,10 +12028,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11255,10 +12411,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -11393,10 +12549,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated:
                             type: "string"
-                            default: "2026-06-09T13:49:29.333Z"
+                            default: "2026-06-09T18:01:05.360Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -11626,10 +12782,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11729,10 +12885,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11847,10 +13003,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11950,10 +13106,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -12353,10 +13509,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -12472,10 +13628,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated:
                         type: "string"
-                        default: "2026-06-09T13:49:29.333Z"
+                        default: "2026-06-09T18:01:05.360Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -25935,7 +27091,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KTPAB2RKRYARF1JZRSWA9H24"
+                                          default: "01KTPRQQQM6H4GP79SAYVBJBPF"
                                         name:
                                           type: "string"
                                         description:
@@ -27614,7 +28770,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KTPAB2T342884JG2M9S0ZT3R"
+                                          default: "01KTPRQQS0NV1J593GSJB3AH4M"
                                         name:
                                           type: "string"
                                         description:
@@ -36266,7 +37422,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTPAB2YR00978VSA2HNYX809"
+                              default: "tool_01KTPRQQWXK784WM22QXZK2ZHQ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36367,7 +37523,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTPAB2YT8XTBEPHYSS631PY5"
+                              default: "tool_01KTPRQQWZ8AB1C864P8ZRAPB1"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36470,7 +37626,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTPAB2YWXBMH92SDHC91VGSV"
+                              default: "tool_01KTPRQQX0BH7WCH72YH6Z868T"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36609,7 +37765,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTPAB2YZJB6MJGS239PTVZ5K"
+                              default: "tool_01KTPRQQX3WA3319PQPZK4S9A2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36685,7 +37841,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KTPAB2Z0N5JDG93PEPWBW1A0"
+                                        default: "01KTPRQQX44CZMDGZCH9FB3SMA"
                                       name:
                                         type: "string"
                                       description:
@@ -36744,7 +37900,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KTPAB2Z1E61PZ7XTT2GE1ZXZ"
+                              default: "tool_01KTPRQQX5FQDQENY8F4YT9VNS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37299,7 +38455,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB2ZFS19XEJ9H27D3Q4KX"
+                        default: "tool_01KTPRQQXGC2A55NPEY5P652MK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37400,7 +38556,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB2ZH53V36Q1S0RYEV45T"
+                        default: "tool_01KTPRQQXJ682TQF3AX4PQJ8EX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37503,7 +38659,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB2ZK1QAE31MGV0RGFC88"
+                        default: "tool_01KTPRQQXKSBTNWMCK1B95FDRP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37642,7 +38798,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB2ZPEKZFX6PXPCYSR9XJ"
+                        default: "tool_01KTPRQQXP8829YX0H7BQP2BKH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37718,7 +38874,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KTPAB2ZR78YT2GKWST6XF8ZB"
+                                  default: "01KTPRQQXQXMFMR12H68RW6RN0"
                                 name:
                                   type: "string"
                                 description:
@@ -37777,7 +38933,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB2ZS4H5P6J77TQDD1N3D"
+                        default: "tool_01KTPRQQXR60CEY9CKSYGSBFFQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38238,7 +39394,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KTPAB30NZ3SRP88QTHKAXE1S"
+                                default: "01KTPRQQYCMMKD7AK179M2RM7A"
                               name:
                                 type: "string"
                               description:
@@ -38384,7 +39540,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB301ZAJKFS4H0RRXSF32"
+                        default: "tool_01KTPRQQXZ8HW8FN7CMDGD87E7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38485,7 +39641,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB304QA9H9ESJT3GJ8561"
+                        default: "tool_01KTPRQQY0C3D497AZK73QK4ZW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38588,7 +39744,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB306KD2HFB4AWZP2MQM6"
+                        default: "tool_01KTPRQQY2FTZFQKYEM3ZD890E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38727,7 +39883,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB309V6JYNN0KAGTNVPPN"
+                        default: "tool_01KTPRQQY4A5H5VJHG4D6S38Q5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38803,7 +39959,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KTPAB30BJ6PZX91Q8D61WKZG"
+                                  default: "01KTPRQQY5PHVYVZENEHC835HV"
                                 name:
                                   type: "string"
                                 description:
@@ -38862,7 +40018,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB30C886Y40YNGYB30BF0"
+                        default: "tool_01KTPRQQY6SRJECKZPP37GF8TK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39023,7 +40179,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB3187KEX6WXKSSNJXBJF"
+                        default: "tool_01KTPRQQYR2W6RKYPNDENY32VQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39124,7 +40280,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB31A2XWER7X6S10BZY1B"
+                        default: "tool_01KTPRQQYS5JZR8ANTXJKFKP66"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39227,7 +40383,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB31C0A8MK3QH7T5VWA6K"
+                        default: "tool_01KTPRQQYVGHKK1ESV755YRQHZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39366,7 +40522,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB31F7STE5RZF81RFYK5K"
+                        default: "tool_01KTPRQQYXC8X7D016AA6JA4XQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39442,7 +40598,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KTPAB31HK4T5GGCTTSBXHZK4"
+                                  default: "01KTPRQQYYB3VFMS19FZ71J44E"
                                 name:
                                   type: "string"
                                 description:
@@ -39501,7 +40657,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KTPAB31JMA0TGS60W6R9C9YN"
+                        default: "tool_01KTPRQQYZH76RE5W7TAW4962F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41676,7 +42832,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KTPAB34QN0FP2XPXY1E5JTHD"
+                          default: "01KTPRQR23PRJ023AAT7V3R5CH"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -41851,7 +43007,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KTPAB34T3JK5F07FZKPNGBEF"
+                    default: "01KTPRQR25DJ44DW9N7EF65J15"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -41951,7 +43107,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KTPAB34S63XHNBG1RYFWQHTH"
+                    default: "01KTPRQR249MPW6GXJS0P55HJ4"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42090,7 +43246,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KTPAB34W1QHPRHKDASJ1MZHH"
+                    default: "01KTPRQR28ZTQ8CYV7S2E9QRGC"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -44750,7 +45906,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-09T13:49:27.366Z"
+                          default: "2026-06-09T18:01:04.260Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -44758,7 +45914,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:27.367Z"
+                              default: "2026-06-09T18:01:04.261Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -44902,7 +46058,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-09T13:49:27.366Z"
+                    default: "2026-06-09T18:01:04.260Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44910,7 +46066,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-09T13:49:27.367Z"
+                        default: "2026-06-09T18:01:04.261Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45049,7 +46205,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-09T13:49:27.366Z"
+                    default: "2026-06-09T18:01:04.260Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45057,7 +46213,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-09T13:49:27.367Z"
+                        default: "2026-06-09T18:01:04.261Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45229,7 +46385,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-09T13:49:27.366Z"
+                    default: "2026-06-09T18:01:04.260Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45237,7 +46393,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-09T13:49:27.367Z"
+                        default: "2026-06-09T18:01:04.261Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45638,7 +46794,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-09T13:49:51.184Z"
+                                    default: "2026-06-09T18:01:25.881Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -45678,7 +46834,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-09T13:49:51.185Z"
+                                    default: "2026-06-09T18:01:25.882Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -45718,7 +46874,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-09T13:49:51.186Z"
+                                    default: "2026-06-09T18:01:25.882Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -45758,7 +46914,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-09T13:49:27.366Z"
+                          default: "2026-06-09T18:01:04.260Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45766,7 +46922,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:27.367Z"
+                              default: "2026-06-09T18:01:04.261Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -46350,7 +47506,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-09T13:49:51.199Z"
+                                default: "2026-06-09T18:01:25.897Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -46390,7 +47546,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-09T13:49:51.200Z"
+                                default: "2026-06-09T18:01:25.898Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -46430,7 +47586,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-09T13:49:51.201Z"
+                                default: "2026-06-09T18:01:25.899Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -46470,7 +47626,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-06-09T13:49:27.366Z"
+                      default: "2026-06-09T18:01:04.260Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -46478,7 +47634,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-06-09T13:49:27.367Z"
+                          default: "2026-06-09T18:01:04.261Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -46810,7 +47966,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:51.192Z"
+                              default: "2026-06-09T18:01:25.888Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46850,7 +48006,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:51.193Z"
+                              default: "2026-06-09T18:01:25.889Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46890,7 +48046,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:51.193Z"
+                              default: "2026-06-09T18:01:25.889Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -46930,7 +48086,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-09T13:49:27.366Z"
+                    default: "2026-06-09T18:01:04.260Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46938,7 +48094,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-09T13:49:27.367Z"
+                        default: "2026-06-09T18:01:04.261Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -47521,7 +48677,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:51.224Z"
+                              default: "2026-06-09T18:01:25.931Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -47561,7 +48717,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:51.224Z"
+                              default: "2026-06-09T18:01:25.932Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -47601,7 +48757,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:51.225Z"
+                              default: "2026-06-09T18:01:25.933Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -47641,7 +48797,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-09T13:49:27.366Z"
+                    default: "2026-06-09T18:01:04.260Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47649,7 +48805,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-09T13:49:27.367Z"
+                        default: "2026-06-09T18:01:04.261Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -53806,7 +54962,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-09T13:49:51.337Z"
+                      default: "2026-06-09T18:01:26.073Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -53845,7 +55001,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-09T13:49:51.338Z"
+                      default: "2026-06-09T18:01:26.074Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -53884,7 +55040,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-09T13:49:51.339Z"
+                      default: "2026-06-09T18:01:26.075Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -54219,7 +55375,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-09T13:49:27.366Z"
+                          default: "2026-06-09T18:01:04.260Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54227,7 +55383,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:27.367Z"
+                              default: "2026-06-09T18:01:04.261Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -54301,7 +55457,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-09T13:49:27.366Z"
+                          default: "2026-06-09T18:01:04.260Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54309,7 +55465,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-09T13:49:27.367Z"
+                              default: "2026-06-09T18:01:04.261Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -54497,7 +55653,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-09T13:49:27.366Z"
+                        default: "2026-06-09T18:01:04.260Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -54505,7 +55661,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-09T13:49:27.367Z"
+                            default: "2026-06-09T18:01:04.261Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -54579,7 +55735,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-09T13:49:27.366Z"
+                        default: "2026-06-09T18:01:04.260Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -54587,7 +55743,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-09T13:49:27.367Z"
+                            default: "2026-06-09T18:01:04.261Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -54685,7 +55841,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-09T13:49:27.366Z"
+                        default: "2026-06-09T18:01:04.260Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -54693,7 +55849,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-09T13:49:27.367Z"
+                            default: "2026-06-09T18:01:04.261Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -54767,7 +55923,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-09T13:49:27.366Z"
+                        default: "2026-06-09T18:01:04.260Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -54775,7 +55931,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-09T13:49:27.367Z"
+                            default: "2026-06-09T18:01:04.261Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -54971,7 +56127,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-09T13:49:27.366Z"
+                        default: "2026-06-09T18:01:04.260Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -54979,7 +56135,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-09T13:49:27.367Z"
+                            default: "2026-06-09T18:01:04.261Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55053,7 +56209,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-09T13:49:27.366Z"
+                        default: "2026-06-09T18:01:04.260Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55061,7 +56217,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-09T13:49:27.367Z"
+                            default: "2026-06-09T18:01:04.261Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -60940,45 +62096,79 @@ paths:
                 type: "object"
             text/event-stream:
               schema:
-                description: "A server-sent event in the response stream."
-                properties:
-                  data:
-                    description: A server-sent event in the response stream.
-                    properties:
-                      sequence_number:
-                        description: Monotonically increasing sequence number for ordering events.
-                        type: integer
-                      type:
-                        description: The event type.
-                        enum:
-                          - response.queued
-                          - response.created
-                          - response.in_progress
-                          - response.completed
-                          - response.failed
-                          - response.incomplete
-                          - response.output_item.added
-                          - response.output_item.done
-                          - response.content_part.added
-                          - response.content_part.done
-                          - response.output_text.delta
-                          - response.output_text.done
-                          - response.function_call_arguments.delta
-                          - response.function_call_arguments.done
-                          - response.mcp_call.in_progress
-                          - response.mcp_call.completed
-                          - response.mcp_call.failed
-                          - response.mcp_call_arguments.delta
-                          - response.mcp_call_arguments.done
-                          - response.reasoning.delta
-                          - response.reasoning.done
-                          - error
-                        type: string
-                    required:
-                      - type
-                      - sequence_number
-                    type: object
-                type: "object"
+                description: "A server-sent event in the response stream. The frame's `event` field selects the payload shape carried in `data`."
+                discriminator:
+                  mapping:
+                    error: "#/components/schemas/ResponseErrorStreamEvent"
+                    response.code_interpreter_call.completed: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.code_interpreter_call.in_progress: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.code_interpreter_call.interpreting: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.code_interpreter_call_code.delta: "#/components/schemas/ResponseCodeInterpreterCodeDeltaStreamEvent"
+                    response.code_interpreter_call_code.done: "#/components/schemas/ResponseCodeInterpreterCodeDoneStreamEvent"
+                    response.completed: "#/components/schemas/ResponseLifecycleStreamEvent"
+                    response.content_part.added: "#/components/schemas/ResponseContentPartStreamEvent"
+                    response.content_part.done: "#/components/schemas/ResponseContentPartStreamEvent"
+                    response.created: "#/components/schemas/ResponseLifecycleStreamEvent"
+                    response.failed: "#/components/schemas/ResponseLifecycleStreamEvent"
+                    response.file_search_call.completed: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.file_search_call.in_progress: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.file_search_call.searching: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.function_call_arguments.delta: "#/components/schemas/ResponseFunctionCallArgumentsDeltaStreamEvent"
+                    response.function_call_arguments.done: "#/components/schemas/ResponseFunctionCallArgumentsDoneStreamEvent"
+                    response.image_generation_call.completed: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.image_generation_call.generating: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.image_generation_call.in_progress: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.image_generation_call.partial_image: "#/components/schemas/ResponseImageGenerationPartialImageStreamEvent"
+                    response.in_progress: "#/components/schemas/ResponseLifecycleStreamEvent"
+                    response.incomplete: "#/components/schemas/ResponseLifecycleStreamEvent"
+                    response.mcp_call.completed: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.mcp_call.failed: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.mcp_call.in_progress: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.mcp_call_arguments.delta: "#/components/schemas/ResponseMcpCallArgumentsDeltaStreamEvent"
+                    response.mcp_call_arguments.done: "#/components/schemas/ResponseMcpCallArgumentsDoneStreamEvent"
+                    response.output_item.added: "#/components/schemas/ResponseOutputItemStreamEvent"
+                    response.output_item.done: "#/components/schemas/ResponseOutputItemStreamEvent"
+                    response.output_text.annotation.added: "#/components/schemas/ResponseOutputTextAnnotationAddedStreamEvent"
+                    response.output_text.delta: "#/components/schemas/ResponseOutputTextDeltaStreamEvent"
+                    response.output_text.done: "#/components/schemas/ResponseOutputTextDoneStreamEvent"
+                    response.queued: "#/components/schemas/ResponseLifecycleStreamEvent"
+                    response.reasoning.delta: "#/components/schemas/ResponseReasoningDeltaStreamEvent"
+                    response.reasoning.done: "#/components/schemas/ResponseReasoningDoneStreamEvent"
+                    response.reasoning_summary_part.added: "#/components/schemas/ResponseReasoningSummaryPartStreamEvent"
+                    response.reasoning_summary_part.done: "#/components/schemas/ResponseReasoningSummaryPartStreamEvent"
+                    response.reasoning_summary_text.delta: "#/components/schemas/ResponseReasoningSummaryTextDeltaStreamEvent"
+                    response.reasoning_summary_text.done: "#/components/schemas/ResponseReasoningSummaryTextDoneStreamEvent"
+                    response.reasoning_text.delta: "#/components/schemas/ResponseReasoningDeltaStreamEvent"
+                    response.reasoning_text.done: "#/components/schemas/ResponseReasoningDoneStreamEvent"
+                    response.refusal.delta: "#/components/schemas/ResponseRefusalDeltaStreamEvent"
+                    response.refusal.done: "#/components/schemas/ResponseRefusalDoneStreamEvent"
+                    response.web_search_call.completed: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.web_search_call.in_progress: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                    response.web_search_call.searching: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                  propertyName: "event"
+                oneOf:
+                  - $ref: "#/components/schemas/ResponseLifecycleStreamEvent"
+                  - $ref: "#/components/schemas/ResponseOutputItemStreamEvent"
+                  - $ref: "#/components/schemas/ResponseContentPartStreamEvent"
+                  - $ref: "#/components/schemas/ResponseOutputTextDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseOutputTextDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseOutputTextAnnotationAddedStreamEvent"
+                  - $ref: "#/components/schemas/ResponseRefusalDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseRefusalDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseFunctionCallArgumentsDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseFunctionCallArgumentsDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseReasoningDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseReasoningDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseReasoningSummaryTextDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseReasoningSummaryTextDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseReasoningSummaryPartStreamEvent"
+                  - $ref: "#/components/schemas/ResponseHostedToolCallStreamEvent"
+                  - $ref: "#/components/schemas/ResponseCodeInterpreterCodeDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseCodeInterpreterCodeDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseMcpCallArgumentsDeltaStreamEvent"
+                  - $ref: "#/components/schemas/ResponseMcpCallArgumentsDoneStreamEvent"
+                  - $ref: "#/components/schemas/ResponseImageGenerationPartialImageStreamEvent"
+                  - $ref: "#/components/schemas/ResponseErrorStreamEvent"
               x-speakeasy-sse-sentinel: "[DONE]"
           description: "Returns a response object or a stream of events."
       summary: "Create response"
