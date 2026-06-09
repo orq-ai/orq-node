@@ -785,62 +785,107 @@ export type CreateRouterResponseRequestBody = {
 };
 
 /**
- * The event type.
+ * A server-sent event in the response stream. The frame's `event` field selects the payload shape carried in `data`.
  */
-export const CreateRouterResponseResponsesType = {
-  ResponseQueued: "response.queued",
-  ResponseCreated: "response.created",
-  ResponseInProgress: "response.in_progress",
-  ResponseCompleted: "response.completed",
-  ResponseFailed: "response.failed",
-  ResponseIncomplete: "response.incomplete",
-  ResponseOutputItemAdded: "response.output_item.added",
-  ResponseOutputItemDone: "response.output_item.done",
-  ResponseContentPartAdded: "response.content_part.added",
-  ResponseContentPartDone: "response.content_part.done",
-  ResponseOutputTextDelta: "response.output_text.delta",
-  ResponseOutputTextDone: "response.output_text.done",
-  ResponseFunctionCallArgumentsDelta: "response.function_call_arguments.delta",
-  ResponseFunctionCallArgumentsDone: "response.function_call_arguments.done",
-  ResponseMcpCallInProgress: "response.mcp_call.in_progress",
-  ResponseMcpCallCompleted: "response.mcp_call.completed",
-  ResponseMcpCallFailed: "response.mcp_call.failed",
-  ResponseMcpCallArgumentsDelta: "response.mcp_call_arguments.delta",
-  ResponseMcpCallArgumentsDone: "response.mcp_call_arguments.done",
-  ResponseReasoningDelta: "response.reasoning.delta",
-  ResponseReasoningDone: "response.reasoning.done",
-  Error: "error",
-} as const;
-/**
- * The event type.
- */
-export type CreateRouterResponseResponsesType = ClosedEnum<
-  typeof CreateRouterResponseResponsesType
->;
-
-/**
- * A server-sent event in the response stream.
- */
-export type CreateRouterResponseData = {
-  /**
-   * Monotonically increasing sequence number for ordering events.
-   */
-  sequenceNumber: number;
-  /**
-   * The event type.
-   */
-  type: CreateRouterResponseResponsesType;
-};
-
-/**
- * A server-sent event in the response stream.
- */
-export type CreateRouterResponseResponsesResponseBody = {
-  /**
-   * A server-sent event in the response stream.
-   */
-  data?: CreateRouterResponseData | undefined;
-};
+export type CreateRouterResponseResponsesResponseBody =
+  | components.ResponseErrorStreamEvent
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.code_interpreter_call.completed";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.code_interpreter_call.in_progress";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.code_interpreter_call.interpreting";
+  })
+  | components.ResponseCodeInterpreterCodeDeltaStreamEvent
+  | components.ResponseCodeInterpreterCodeDoneStreamEvent
+  | (components.ResponseLifecycleStreamEvent & { event: "response.completed" })
+  | (components.ResponseContentPartStreamEvent & {
+    event: "response.content_part.added";
+  })
+  | (components.ResponseContentPartStreamEvent & {
+    event: "response.content_part.done";
+  })
+  | (components.ResponseLifecycleStreamEvent & { event: "response.created" })
+  | (components.ResponseLifecycleStreamEvent & { event: "response.failed" })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.file_search_call.completed";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.file_search_call.in_progress";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.file_search_call.searching";
+  })
+  | components.ResponseFunctionCallArgumentsDeltaStreamEvent
+  | components.ResponseFunctionCallArgumentsDoneStreamEvent
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.image_generation_call.completed";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.image_generation_call.generating";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.image_generation_call.in_progress";
+  })
+  | components.ResponseImageGenerationPartialImageStreamEvent
+  | (components.ResponseLifecycleStreamEvent & {
+    event: "response.in_progress";
+  })
+  | (components.ResponseLifecycleStreamEvent & { event: "response.incomplete" })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.mcp_call.completed";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.mcp_call.failed";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.mcp_call.in_progress";
+  })
+  | components.ResponseMcpCallArgumentsDeltaStreamEvent
+  | components.ResponseMcpCallArgumentsDoneStreamEvent
+  | (components.ResponseOutputItemStreamEvent & {
+    event: "response.output_item.added";
+  })
+  | (components.ResponseOutputItemStreamEvent & {
+    event: "response.output_item.done";
+  })
+  | components.ResponseOutputTextAnnotationAddedStreamEvent
+  | components.ResponseOutputTextDeltaStreamEvent
+  | components.ResponseOutputTextDoneStreamEvent
+  | (components.ResponseLifecycleStreamEvent & { event: "response.queued" })
+  | (components.ResponseReasoningDeltaStreamEvent & {
+    event: "response.reasoning.delta";
+  })
+  | (components.ResponseReasoningDoneStreamEvent & {
+    event: "response.reasoning.done";
+  })
+  | (components.ResponseReasoningSummaryPartStreamEvent & {
+    event: "response.reasoning_summary_part.added";
+  })
+  | (components.ResponseReasoningSummaryPartStreamEvent & {
+    event: "response.reasoning_summary_part.done";
+  })
+  | components.ResponseReasoningSummaryTextDeltaStreamEvent
+  | components.ResponseReasoningSummaryTextDoneStreamEvent
+  | (components.ResponseReasoningDeltaStreamEvent & {
+    event: "response.reasoning_text.delta";
+  })
+  | (components.ResponseReasoningDoneStreamEvent & {
+    event: "response.reasoning_text.done";
+  })
+  | components.ResponseRefusalDeltaStreamEvent
+  | components.ResponseRefusalDoneStreamEvent
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.web_search_call.completed";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.web_search_call.in_progress";
+  })
+  | (components.ResponseHostedToolCallStreamEvent & {
+    event: "response.web_search_call.searching";
+  });
 
 export const ServiceTier = {
   Auto: "auto",
@@ -934,7 +979,110 @@ export type CreateRouterResponseResponseBody = {
 
 export type CreateRouterResponseResponse =
   | CreateRouterResponseResponseBody
-  | EventStream<CreateRouterResponseResponsesResponseBody>;
+  | EventStream<
+    | components.ResponseErrorStreamEvent
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.code_interpreter_call.completed";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.code_interpreter_call.in_progress";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.code_interpreter_call.interpreting";
+    })
+    | components.ResponseCodeInterpreterCodeDeltaStreamEvent
+    | components.ResponseCodeInterpreterCodeDoneStreamEvent
+    | (components.ResponseLifecycleStreamEvent & {
+      event: "response.completed";
+    })
+    | (components.ResponseContentPartStreamEvent & {
+      event: "response.content_part.added";
+    })
+    | (components.ResponseContentPartStreamEvent & {
+      event: "response.content_part.done";
+    })
+    | (components.ResponseLifecycleStreamEvent & { event: "response.created" })
+    | (components.ResponseLifecycleStreamEvent & { event: "response.failed" })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.file_search_call.completed";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.file_search_call.in_progress";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.file_search_call.searching";
+    })
+    | components.ResponseFunctionCallArgumentsDeltaStreamEvent
+    | components.ResponseFunctionCallArgumentsDoneStreamEvent
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.image_generation_call.completed";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.image_generation_call.generating";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.image_generation_call.in_progress";
+    })
+    | components.ResponseImageGenerationPartialImageStreamEvent
+    | (components.ResponseLifecycleStreamEvent & {
+      event: "response.in_progress";
+    })
+    | (components.ResponseLifecycleStreamEvent & {
+      event: "response.incomplete";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.mcp_call.completed";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.mcp_call.failed";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.mcp_call.in_progress";
+    })
+    | components.ResponseMcpCallArgumentsDeltaStreamEvent
+    | components.ResponseMcpCallArgumentsDoneStreamEvent
+    | (components.ResponseOutputItemStreamEvent & {
+      event: "response.output_item.added";
+    })
+    | (components.ResponseOutputItemStreamEvent & {
+      event: "response.output_item.done";
+    })
+    | components.ResponseOutputTextAnnotationAddedStreamEvent
+    | components.ResponseOutputTextDeltaStreamEvent
+    | components.ResponseOutputTextDoneStreamEvent
+    | (components.ResponseLifecycleStreamEvent & { event: "response.queued" })
+    | (components.ResponseReasoningDeltaStreamEvent & {
+      event: "response.reasoning.delta";
+    })
+    | (components.ResponseReasoningDoneStreamEvent & {
+      event: "response.reasoning.done";
+    })
+    | (components.ResponseReasoningSummaryPartStreamEvent & {
+      event: "response.reasoning_summary_part.added";
+    })
+    | (components.ResponseReasoningSummaryPartStreamEvent & {
+      event: "response.reasoning_summary_part.done";
+    })
+    | components.ResponseReasoningSummaryTextDeltaStreamEvent
+    | components.ResponseReasoningSummaryTextDoneStreamEvent
+    | (components.ResponseReasoningDeltaStreamEvent & {
+      event: "response.reasoning_text.delta";
+    })
+    | (components.ResponseReasoningDoneStreamEvent & {
+      event: "response.reasoning_text.done";
+    })
+    | components.ResponseRefusalDeltaStreamEvent
+    | components.ResponseRefusalDoneStreamEvent
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.web_search_call.completed";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.web_search_call.in_progress";
+    })
+    | (components.ResponseHostedToolCallStreamEvent & {
+      event: "response.web_search_call.searching";
+    })
+  >;
 
 /** @internal */
 export const CreateRouterResponseTtl$outboundSchema: z.ZodNativeEnum<
@@ -1849,51 +1997,126 @@ export function createRouterResponseRequestBodyToJSON(
 }
 
 /** @internal */
-export const CreateRouterResponseResponsesType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponseResponsesType
-> = z.nativeEnum(CreateRouterResponseResponsesType);
-
-/** @internal */
-export const CreateRouterResponseData$inboundSchema: z.ZodType<
-  CreateRouterResponseData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  sequence_number: z.number().int(),
-  type: CreateRouterResponseResponsesType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
-
-export function createRouterResponseDataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateRouterResponseData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateRouterResponseData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateRouterResponseData' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateRouterResponseResponsesResponseBody$inboundSchema: z.ZodType<
   CreateRouterResponseResponsesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().optional().transform((v, ctx) => {
-    if (v === undefined) return undefined;
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => CreateRouterResponseData$inboundSchema).optional()),
-});
+> = z.union([
+  components.ResponseErrorStreamEvent$inboundSchema,
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.code_interpreter_call.completed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({
+      event: z.literal("response.code_interpreter_call.in_progress"),
+    }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({
+      event: z.literal("response.code_interpreter_call.interpreting"),
+    }),
+  ),
+  components.ResponseCodeInterpreterCodeDeltaStreamEvent$inboundSchema,
+  components.ResponseCodeInterpreterCodeDoneStreamEvent$inboundSchema,
+  components.ResponseLifecycleStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.completed") }),
+  ),
+  components.ResponseContentPartStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.content_part.added") }),
+  ),
+  components.ResponseContentPartStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.content_part.done") }),
+  ),
+  components.ResponseLifecycleStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.created") }),
+  ),
+  components.ResponseLifecycleStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.failed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.file_search_call.completed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.file_search_call.in_progress") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.file_search_call.searching") }),
+  ),
+  components.ResponseFunctionCallArgumentsDeltaStreamEvent$inboundSchema,
+  components.ResponseFunctionCallArgumentsDoneStreamEvent$inboundSchema,
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.image_generation_call.completed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.image_generation_call.generating") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({
+      event: z.literal("response.image_generation_call.in_progress"),
+    }),
+  ),
+  components.ResponseImageGenerationPartialImageStreamEvent$inboundSchema,
+  components.ResponseLifecycleStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.in_progress") }),
+  ),
+  components.ResponseLifecycleStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.incomplete") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.mcp_call.completed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.mcp_call.failed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.mcp_call.in_progress") }),
+  ),
+  components.ResponseMcpCallArgumentsDeltaStreamEvent$inboundSchema,
+  components.ResponseMcpCallArgumentsDoneStreamEvent$inboundSchema,
+  components.ResponseOutputItemStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.output_item.added") }),
+  ),
+  components.ResponseOutputItemStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.output_item.done") }),
+  ),
+  components.ResponseOutputTextAnnotationAddedStreamEvent$inboundSchema,
+  components.ResponseOutputTextDeltaStreamEvent$inboundSchema,
+  components.ResponseOutputTextDoneStreamEvent$inboundSchema,
+  components.ResponseLifecycleStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.queued") }),
+  ),
+  components.ResponseReasoningDeltaStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.reasoning.delta") }),
+  ),
+  components.ResponseReasoningDoneStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.reasoning.done") }),
+  ),
+  components.ResponseReasoningSummaryPartStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.reasoning_summary_part.added") }),
+  ),
+  components.ResponseReasoningSummaryPartStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.reasoning_summary_part.done") }),
+  ),
+  components.ResponseReasoningSummaryTextDeltaStreamEvent$inboundSchema,
+  components.ResponseReasoningSummaryTextDoneStreamEvent$inboundSchema,
+  components.ResponseReasoningDeltaStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.reasoning_text.delta") }),
+  ),
+  components.ResponseReasoningDoneStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.reasoning_text.done") }),
+  ),
+  components.ResponseRefusalDeltaStreamEvent$inboundSchema,
+  components.ResponseRefusalDoneStreamEvent$inboundSchema,
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.web_search_call.completed") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.web_search_call.in_progress") }),
+  ),
+  components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+    z.object({ event: z.literal("response.web_search_call.searching") }),
+  ),
+]);
 
 export function createRouterResponseResponsesResponseBodyFromJSON(
   jsonString: string,
@@ -2011,11 +2234,155 @@ export const CreateRouterResponseResponse$inboundSchema: z.ZodType<
         if (rawEvent.data === "[DONE]") return { done: true, value: undefined };
         return {
           done: false,
-          value: z.lazy(() =>
-            CreateRouterResponseResponsesResponseBody$inboundSchema
-          ).parse(rawEvent),
+          value: z.union([
+            components.ResponseErrorStreamEvent$inboundSchema,
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.code_interpreter_call.completed"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.code_interpreter_call.in_progress"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.code_interpreter_call.interpreting"),
+              }),
+            ),
+            components
+              .ResponseCodeInterpreterCodeDeltaStreamEvent$inboundSchema,
+            components.ResponseCodeInterpreterCodeDoneStreamEvent$inboundSchema,
+            components.ResponseLifecycleStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.completed") }),
+            ),
+            components.ResponseContentPartStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.content_part.added") }),
+            ),
+            components.ResponseContentPartStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.content_part.done") }),
+            ),
+            components.ResponseLifecycleStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.created") }),
+            ),
+            components.ResponseLifecycleStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.failed") }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.file_search_call.completed"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.file_search_call.in_progress"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.file_search_call.searching"),
+              }),
+            ),
+            components
+              .ResponseFunctionCallArgumentsDeltaStreamEvent$inboundSchema,
+            components
+              .ResponseFunctionCallArgumentsDoneStreamEvent$inboundSchema,
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.image_generation_call.completed"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.image_generation_call.generating"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.image_generation_call.in_progress"),
+              }),
+            ),
+            components
+              .ResponseImageGenerationPartialImageStreamEvent$inboundSchema,
+            components.ResponseLifecycleStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.in_progress") }),
+            ),
+            components.ResponseLifecycleStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.incomplete") }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.mcp_call.completed") }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.mcp_call.failed") }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.mcp_call.in_progress") }),
+            ),
+            components.ResponseMcpCallArgumentsDeltaStreamEvent$inboundSchema,
+            components.ResponseMcpCallArgumentsDoneStreamEvent$inboundSchema,
+            components.ResponseOutputItemStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.output_item.added") }),
+            ),
+            components.ResponseOutputItemStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.output_item.done") }),
+            ),
+            components
+              .ResponseOutputTextAnnotationAddedStreamEvent$inboundSchema,
+            components.ResponseOutputTextDeltaStreamEvent$inboundSchema,
+            components.ResponseOutputTextDoneStreamEvent$inboundSchema,
+            components.ResponseLifecycleStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.queued") }),
+            ),
+            components.ResponseReasoningDeltaStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.reasoning.delta") }),
+            ),
+            components.ResponseReasoningDoneStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.reasoning.done") }),
+            ),
+            components.ResponseReasoningSummaryPartStreamEvent$inboundSchema
+              .and(
+                z.object({
+                  event: z.literal("response.reasoning_summary_part.added"),
+                }),
+              ),
+            components.ResponseReasoningSummaryPartStreamEvent$inboundSchema
+              .and(
+                z.object({
+                  event: z.literal("response.reasoning_summary_part.done"),
+                }),
+              ),
+            components
+              .ResponseReasoningSummaryTextDeltaStreamEvent$inboundSchema,
+            components
+              .ResponseReasoningSummaryTextDoneStreamEvent$inboundSchema,
+            components.ResponseReasoningDeltaStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.reasoning_text.delta") }),
+            ),
+            components.ResponseReasoningDoneStreamEvent$inboundSchema.and(
+              z.object({ event: z.literal("response.reasoning_text.done") }),
+            ),
+            components.ResponseRefusalDeltaStreamEvent$inboundSchema,
+            components.ResponseRefusalDoneStreamEvent$inboundSchema,
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.web_search_call.completed"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.web_search_call.in_progress"),
+              }),
+            ),
+            components.ResponseHostedToolCallStreamEvent$inboundSchema.and(
+              z.object({
+                event: z.literal("response.web_search_call.searching"),
+              }),
+            ),
+          ]).parse(rawEvent),
         };
-      }, { dataRequired: false });
+      });
     }),
 ]);
 

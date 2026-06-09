@@ -1,0 +1,31 @@
+# ResponseReasoningSummaryTextDeltaStreamEventData
+
+The event payload.
+
+## Example Usage
+
+```typescript
+import { ResponseReasoningSummaryTextDeltaStreamEventData } from "@orq-ai/node/models/components";
+
+let value: ResponseReasoningSummaryTextDeltaStreamEventData = {
+  delta: "<value>",
+  itemId: "<id>",
+  outputIndex: 590178,
+  sequenceNumber: 310280,
+  summaryIndex: 131872,
+  type: "response.reasoning_summary_text.delta",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `delta`                                                                                                                                    | *string*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | Incremental text or argument chunk.                                                                                                        |
+| `itemId`                                                                                                                                   | *string*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | ID of the output item this event refers to.                                                                                                |
+| `obfuscation`                                                                                                                              | *string*                                                                                                                                   | :heavy_minus_sign:                                                                                                                         | Obfuscation padding accompanying the delta, when present.                                                                                  |
+| `outputIndex`                                                                                                                              | *number*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | Index of the output item in the response output array.                                                                                     |
+| `sequenceNumber`                                                                                                                           | *number*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | Monotonically increasing sequence number for ordering events.                                                                              |
+| `summaryIndex`                                                                                                                             | *number*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | Index of the reasoning summary part.                                                                                                       |
+| `type`                                                                                                                                     | [components.ResponseReasoningSummaryTextDeltaStreamEventType](../../models/components/responsereasoningsummarytextdeltastreameventtype.md) | :heavy_check_mark:                                                                                                                         | The event type. Matches the SSE `event` field.                                                                                             |
+| `additionalProperties`                                                                                                                     | Record<string, *any*>                                                                                                                      | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |
