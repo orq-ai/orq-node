@@ -25,6 +25,8 @@ export type ModelCreateAwsBedrockRequestBody = {
   modelType?: string | undefined;
   outputCost?: number | undefined;
   region: string;
+  supportsAdaptiveReasoning?: boolean | undefined;
+  supportsExtendedThinking?: boolean | undefined;
   supportsJsonMode?: boolean | undefined;
   supportsJsonSchema?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
@@ -83,6 +85,8 @@ export type ModelCreateAwsBedrockRequestBody$Outbound = {
   model_type?: string | undefined;
   output_cost?: number | undefined;
   region: string;
+  supports_adaptive_reasoning?: boolean | undefined;
+  supports_extended_thinking?: boolean | undefined;
   supports_json_mode?: boolean | undefined;
   supports_json_schema?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
@@ -112,6 +116,8 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   modelType: z.string().optional(),
   outputCost: z.number().optional(),
   region: z.string(),
+  supportsAdaptiveReasoning: z.boolean().optional(),
+  supportsExtendedThinking: z.boolean().optional(),
   supportsJsonMode: z.boolean().optional(),
   supportsJsonSchema: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
@@ -133,6 +139,8 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     modelId: "model_id",
     modelType: "model_type",
     outputCost: "output_cost",
+    supportsAdaptiveReasoning: "supports_adaptive_reasoning",
+    supportsExtendedThinking: "supports_extended_thinking",
     supportsJsonMode: "supports_json_mode",
     supportsJsonSchema: "supports_json_schema",
     supportsStrictTool: "supports_strict_tool",

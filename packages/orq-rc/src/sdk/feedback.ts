@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a new project
+   * Create a dataset
    *
    * @remarks
-   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
+   * Creates a new dataset in the specified project.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
