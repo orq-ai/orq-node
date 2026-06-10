@@ -475,61 +475,13 @@ export type CreateRouterResponseRequestBody = {
 };
 
 /**
- * The event type.
- */
-export const CreateRouterResponseType = {
-  ResponseQueued: "response.queued",
-  ResponseCreated: "response.created",
-  ResponseInProgress: "response.in_progress",
-  ResponseCompleted: "response.completed",
-  ResponseFailed: "response.failed",
-  ResponseIncomplete: "response.incomplete",
-  ResponseOutputItemAdded: "response.output_item.added",
-  ResponseOutputItemDone: "response.output_item.done",
-  ResponseContentPartAdded: "response.content_part.added",
-  ResponseContentPartDone: "response.content_part.done",
-  ResponseOutputTextDelta: "response.output_text.delta",
-  ResponseOutputTextDone: "response.output_text.done",
-  ResponseFunctionCallArgumentsDelta: "response.function_call_arguments.delta",
-  ResponseFunctionCallArgumentsDone: "response.function_call_arguments.done",
-  ResponseMcpCallInProgress: "response.mcp_call.in_progress",
-  ResponseMcpCallCompleted: "response.mcp_call.completed",
-  ResponseMcpCallFailed: "response.mcp_call.failed",
-  ResponseMcpCallArgumentsDelta: "response.mcp_call_arguments.delta",
-  ResponseMcpCallArgumentsDone: "response.mcp_call_arguments.done",
-  ResponseReasoningDelta: "response.reasoning.delta",
-  ResponseReasoningDone: "response.reasoning.done",
-  Error: "error",
-} as const;
-/**
- * The event type.
- */
-export type CreateRouterResponseType = ClosedEnum<
-  typeof CreateRouterResponseType
->;
-
-/**
- * A server-sent event in the response stream.
- */
-export type CreateRouterResponseData = {
-  /**
-   * Monotonically increasing sequence number for ordering events.
-   */
-  sequenceNumber: number;
-  /**
-   * The event type.
-   */
-  type: CreateRouterResponseType;
-};
-
-/**
- * A server-sent event in the response stream.
+ * Returns a response object or a stream of events.
  */
 export type CreateRouterResponseResponsesResponseBody = {
   /**
-   * A server-sent event in the response stream.
+   * A single server-sent event emitted on the response stream. The `type` field discriminates the payload.
    */
-  data?: CreateRouterResponseData | undefined;
+  data?: components.ResponseStreamEvent | undefined;
 };
 
 export const ServiceTier = {
@@ -1325,35 +1277,6 @@ export function createRouterResponseRequestBodyToJSON(
 }
 
 /** @internal */
-export const CreateRouterResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponseType
-> = z.nativeEnum(CreateRouterResponseType);
-
-/** @internal */
-export const CreateRouterResponseData$inboundSchema: z.ZodType<
-  CreateRouterResponseData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  sequence_number: z.number().int(),
-  type: CreateRouterResponseType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
-
-export function createRouterResponseDataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateRouterResponseData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateRouterResponseData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateRouterResponseData' from JSON`,
-  );
-}
-
-/** @internal */
 export const CreateRouterResponseResponsesResponseBody$inboundSchema: z.ZodType<
   CreateRouterResponseResponsesResponseBody,
   z.ZodTypeDef,
@@ -1368,7 +1291,7 @@ export const CreateRouterResponseResponsesResponseBody$inboundSchema: z.ZodType<
       ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
       return z.NEVER;
     }
-  }).pipe(z.lazy(() => CreateRouterResponseData$inboundSchema).optional()),
+  }).pipe(components.ResponseStreamEvent$inboundSchema.optional()),
 });
 
 export function createRouterResponseResponsesResponseBodyFromJSON(

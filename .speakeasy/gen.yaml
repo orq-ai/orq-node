@@ -60,6 +60,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: ORQ
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
   fixEnumNameSanitization: false
   flatAdditionalProperties: false
