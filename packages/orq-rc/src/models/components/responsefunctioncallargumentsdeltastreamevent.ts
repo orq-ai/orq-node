@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.function_call_arguments.delta` server-sent event.
  */
-export const ResponseFunctionCallArgumentsDeltaStreamEventType = {
-  ResponseFunctionCallArgumentsDelta: "response.function_call_arguments.delta",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseFunctionCallArgumentsDeltaStreamEventType = ClosedEnum<
-  typeof ResponseFunctionCallArgumentsDeltaStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseFunctionCallArgumentsDeltaStreamEventData = {
+export type ResponseFunctionCallArgumentsDeltaStreamEvent = {
   /**
    * Incremental text or argument chunk.
    */
@@ -50,32 +36,16 @@ export type ResponseFunctionCallArgumentsDeltaStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseFunctionCallArgumentsDeltaStreamEventType;
+  type: "response.function_call_arguments.delta";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseFunctionCallArgumentsDeltaStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseFunctionCallArgumentsDeltaStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.function_call_arguments.delta";
-};
-
 /** @internal */
-export const ResponseFunctionCallArgumentsDeltaStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseFunctionCallArgumentsDeltaStreamEventType> = z
-    .nativeEnum(ResponseFunctionCallArgumentsDeltaStreamEventType);
-
-/** @internal */
-export const ResponseFunctionCallArgumentsDeltaStreamEventData$inboundSchema:
+export const ResponseFunctionCallArgumentsDeltaStreamEvent$inboundSchema:
   z.ZodType<
-    ResponseFunctionCallArgumentsDeltaStreamEventData,
+    ResponseFunctionCallArgumentsDeltaStreamEvent,
     z.ZodTypeDef,
     unknown
   > = collectExtraKeys$(
@@ -85,7 +55,7 @@ export const ResponseFunctionCallArgumentsDeltaStreamEventData$inboundSchema:
       obfuscation: z.string().optional(),
       output_index: z.number().int(),
       sequence_number: z.number().int(),
-      type: ResponseFunctionCallArgumentsDeltaStreamEventType$inboundSchema,
+      type: z.literal("response.function_call_arguments.delta"),
     }).catchall(z.any()),
     "additionalProperties",
     true,
@@ -95,45 +65,6 @@ export const ResponseFunctionCallArgumentsDeltaStreamEventData$inboundSchema:
       "output_index": "outputIndex",
       "sequence_number": "sequenceNumber",
     });
-  });
-
-export function responseFunctionCallArgumentsDeltaStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseFunctionCallArgumentsDeltaStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseFunctionCallArgumentsDeltaStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseFunctionCallArgumentsDeltaStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseFunctionCallArgumentsDeltaStreamEvent$inboundSchema:
-  z.ZodType<
-    ResponseFunctionCallArgumentsDeltaStreamEvent,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    data: z.unknown().transform((v, ctx) => {
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(
-      z.lazy(() =>
-        ResponseFunctionCallArgumentsDeltaStreamEventData$inboundSchema
-      ),
-    ),
-    event: z.literal("response.function_call_arguments.delta"),
   });
 
 export function responseFunctionCallArgumentsDeltaStreamEventFromJSON(

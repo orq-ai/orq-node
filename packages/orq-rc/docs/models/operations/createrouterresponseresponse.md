@@ -54,18 +54,18 @@ const value: operations.CreateRouterResponseResponseBody = {
   topP: 2219.16,
   truncation: "auto",
   usage: {
-    inputTokens: 555125,
+    inputTokens: 349676,
     inputTokensDetails: {
-      cacheCreationTokens: 520588,
-      cachedTokens: 732049,
+      cacheCreationTokens: 786005,
+      cachedTokens: 763695,
     },
-    outputTokens: 15634,
+    outputTokens: 732588,
     outputTokensDetails: {
-      reasoningTokens: 572043,
+      reasoningTokens: 376439,
     },
-    totalTokens: 110886,
+    totalTokens: 349904,
   },
-  user: "Paige.Reynolds",
+  user: "Rose.Rath97",
 };
 ```
 

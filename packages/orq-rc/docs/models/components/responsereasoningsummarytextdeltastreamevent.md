@@ -1,26 +1,31 @@
 # ResponseReasoningSummaryTextDeltaStreamEvent
 
+A `response.reasoning_summary_text.delta` server-sent event.
+
 ## Example Usage
 
 ```typescript
 import { ResponseReasoningSummaryTextDeltaStreamEvent } from "@orq-ai/node/models/components";
 
 let value: ResponseReasoningSummaryTextDeltaStreamEvent = {
-  data: {
-    delta: "<value>",
-    itemId: "<id>",
-    outputIndex: 540085,
-    sequenceNumber: 718040,
-    summaryIndex: 520491,
-    type: "response.reasoning_summary_text.delta",
-  },
-  event: "response.reasoning_summary_text.delta",
+  delta: "<value>",
+  itemId: "<id>",
+  outputIndex: 540085,
+  sequenceNumber: 718040,
+  summaryIndex: 520491,
+  type: "response.reasoning_summary_text.delta",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `data`                                                                                                                                     | [components.ResponseReasoningSummaryTextDeltaStreamEventData](../../models/components/responsereasoningsummarytextdeltastreameventdata.md) | :heavy_check_mark:                                                                                                                         | The event payload.                                                                                                                         |
-| `event`                                                                                                                                    | *"response.reasoning_summary_text.delta"*                                                                                                  | :heavy_check_mark:                                                                                                                         | The SSE event name, equal to the payload's `type`.                                                                                         |
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `delta`                                                       | *string*                                                      | :heavy_check_mark:                                            | Incremental text or argument chunk.                           |
+| `itemId`                                                      | *string*                                                      | :heavy_check_mark:                                            | ID of the output item this event refers to.                   |
+| `obfuscation`                                                 | *string*                                                      | :heavy_minus_sign:                                            | Obfuscation padding accompanying the delta, when present.     |
+| `outputIndex`                                                 | *number*                                                      | :heavy_check_mark:                                            | Index of the output item in the response output array.        |
+| `sequenceNumber`                                              | *number*                                                      | :heavy_check_mark:                                            | Monotonically increasing sequence number for ordering events. |
+| `summaryIndex`                                                | *number*                                                      | :heavy_check_mark:                                            | Index of the reasoning summary part.                          |
+| `type`                                                        | *"response.reasoning_summary_text.delta"*                     | :heavy_check_mark:                                            | The event type. Discriminates the payload.                    |
+| `additionalProperties`                                        | Record<string, *any*>                                         | :heavy_minus_sign:                                            | N/A                                                           |

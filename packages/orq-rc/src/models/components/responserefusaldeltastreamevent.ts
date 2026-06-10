@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.refusal.delta` server-sent event.
  */
-export const ResponseRefusalDeltaStreamEventType = {
-  ResponseRefusalDelta: "response.refusal.delta",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseRefusalDeltaStreamEventType = ClosedEnum<
-  typeof ResponseRefusalDeltaStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseRefusalDeltaStreamEventData = {
+export type ResponseRefusalDeltaStreamEvent = {
   /**
    * Index of the content part within the output item.
    */
@@ -50,31 +36,15 @@ export type ResponseRefusalDeltaStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseRefusalDeltaStreamEventType;
+  type: "response.refusal.delta";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseRefusalDeltaStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseRefusalDeltaStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.refusal.delta";
-};
-
 /** @internal */
-export const ResponseRefusalDeltaStreamEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseRefusalDeltaStreamEventType
-> = z.nativeEnum(ResponseRefusalDeltaStreamEventType);
-
-/** @internal */
-export const ResponseRefusalDeltaStreamEventData$inboundSchema: z.ZodType<
-  ResponseRefusalDeltaStreamEventData,
+export const ResponseRefusalDeltaStreamEvent$inboundSchema: z.ZodType<
+  ResponseRefusalDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -84,7 +54,7 @@ export const ResponseRefusalDeltaStreamEventData$inboundSchema: z.ZodType<
     item_id: z.string(),
     output_index: z.number().int(),
     sequence_number: z.number().int(),
-    type: ResponseRefusalDeltaStreamEventType$inboundSchema,
+    type: z.literal("response.refusal.delta"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -95,35 +65,6 @@ export const ResponseRefusalDeltaStreamEventData$inboundSchema: z.ZodType<
     "output_index": "outputIndex",
     "sequence_number": "sequenceNumber",
   });
-});
-
-export function responseRefusalDeltaStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseRefusalDeltaStreamEventData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseRefusalDeltaStreamEventData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseRefusalDeltaStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseRefusalDeltaStreamEvent$inboundSchema: z.ZodType<
-  ResponseRefusalDeltaStreamEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => ResponseRefusalDeltaStreamEventData$inboundSchema)),
-  event: z.literal("response.refusal.delta"),
 });
 
 export function responseRefusalDeltaStreamEventFromJSON(

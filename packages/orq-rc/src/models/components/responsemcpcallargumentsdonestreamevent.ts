@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.mcp_call_arguments.done` server-sent event.
  */
-export const ResponseMcpCallArgumentsDoneStreamEventType = {
-  ResponseMcpCallArgumentsDone: "response.mcp_call_arguments.done",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseMcpCallArgumentsDoneStreamEventType = ClosedEnum<
-  typeof ResponseMcpCallArgumentsDoneStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseMcpCallArgumentsDoneStreamEventData = {
+export type ResponseMCPCallArgumentsDoneStreamEvent = {
   /**
    * The completed MCP-call arguments JSON.
    */
@@ -46,100 +32,47 @@ export type ResponseMcpCallArgumentsDoneStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseMcpCallArgumentsDoneStreamEventType;
+  type: "response.mcp_call_arguments.done";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseMcpCallArgumentsDoneStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseMcpCallArgumentsDoneStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.mcp_call_arguments.done";
-};
-
 /** @internal */
-export const ResponseMcpCallArgumentsDoneStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseMcpCallArgumentsDoneStreamEventType> = z
-    .nativeEnum(ResponseMcpCallArgumentsDoneStreamEventType);
-
-/** @internal */
-export const ResponseMcpCallArgumentsDoneStreamEventData$inboundSchema:
-  z.ZodType<
-    ResponseMcpCallArgumentsDoneStreamEventData,
-    z.ZodTypeDef,
-    unknown
-  > = collectExtraKeys$(
-    z.object({
-      arguments: z.string(),
-      item_id: z.string(),
-      output_index: z.number().int(),
-      sequence_number: z.number().int(),
-      type: ResponseMcpCallArgumentsDoneStreamEventType$inboundSchema,
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "item_id": "itemId",
-      "output_index": "outputIndex",
-      "sequence_number": "sequenceNumber",
-    });
-  });
-
-export function responseMcpCallArgumentsDoneStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseMcpCallArgumentsDoneStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseMcpCallArgumentsDoneStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseMcpCallArgumentsDoneStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseMcpCallArgumentsDoneStreamEvent$inboundSchema: z.ZodType<
-  ResponseMcpCallArgumentsDoneStreamEvent,
+export const ResponseMCPCallArgumentsDoneStreamEvent$inboundSchema: z.ZodType<
+  ResponseMCPCallArgumentsDoneStreamEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(
-    z.lazy(() => ResponseMcpCallArgumentsDoneStreamEventData$inboundSchema),
-  ),
-  event: z.literal("response.mcp_call_arguments.done"),
+> = collectExtraKeys$(
+  z.object({
+    arguments: z.string(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    sequence_number: z.number().int(),
+    type: z.literal("response.mcp_call_arguments.done"),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "item_id": "itemId",
+    "output_index": "outputIndex",
+    "sequence_number": "sequenceNumber",
+  });
 });
 
-export function responseMcpCallArgumentsDoneStreamEventFromJSON(
+export function responseMCPCallArgumentsDoneStreamEventFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  ResponseMcpCallArgumentsDoneStreamEvent,
+  ResponseMCPCallArgumentsDoneStreamEvent,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      ResponseMcpCallArgumentsDoneStreamEvent$inboundSchema.parse(
+      ResponseMCPCallArgumentsDoneStreamEvent$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'ResponseMcpCallArgumentsDoneStreamEvent' from JSON`,
+    `Failed to parse 'ResponseMCPCallArgumentsDoneStreamEvent' from JSON`,
   );
 }

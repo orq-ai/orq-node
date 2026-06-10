@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.output_text.delta` server-sent event.
  */
-export const ResponseOutputTextDeltaStreamEventType = {
-  ResponseOutputTextDelta: "response.output_text.delta",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseOutputTextDeltaStreamEventType = ClosedEnum<
-  typeof ResponseOutputTextDeltaStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseOutputTextDeltaStreamEventData = {
+export type ResponseOutputTextDeltaStreamEvent = {
   /**
    * Index of the content part within the output item.
    */
@@ -58,32 +44,15 @@ export type ResponseOutputTextDeltaStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseOutputTextDeltaStreamEventType;
+  type: "response.output_text.delta";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseOutputTextDeltaStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseOutputTextDeltaStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.output_text.delta";
-};
-
 /** @internal */
-export const ResponseOutputTextDeltaStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseOutputTextDeltaStreamEventType> = z.nativeEnum(
-    ResponseOutputTextDeltaStreamEventType,
-  );
-
-/** @internal */
-export const ResponseOutputTextDeltaStreamEventData$inboundSchema: z.ZodType<
-  ResponseOutputTextDeltaStreamEventData,
+export const ResponseOutputTextDeltaStreamEvent$inboundSchema: z.ZodType<
+  ResponseOutputTextDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -95,7 +64,7 @@ export const ResponseOutputTextDeltaStreamEventData$inboundSchema: z.ZodType<
     obfuscation: z.string().optional(),
     output_index: z.number().int(),
     sequence_number: z.number().int(),
-    type: ResponseOutputTextDeltaStreamEventType$inboundSchema,
+    type: z.literal("response.output_text.delta"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -106,35 +75,6 @@ export const ResponseOutputTextDeltaStreamEventData$inboundSchema: z.ZodType<
     "output_index": "outputIndex",
     "sequence_number": "sequenceNumber",
   });
-});
-
-export function responseOutputTextDeltaStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseOutputTextDeltaStreamEventData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseOutputTextDeltaStreamEventData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseOutputTextDeltaStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseOutputTextDeltaStreamEvent$inboundSchema: z.ZodType<
-  ResponseOutputTextDeltaStreamEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => ResponseOutputTextDeltaStreamEventData$inboundSchema)),
-  event: z.literal("response.output_text.delta"),
 });
 
 export function responseOutputTextDeltaStreamEventFromJSON(

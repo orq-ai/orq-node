@@ -52,10 +52,10 @@ export type PublicResponseResource = {
   completedAt: number | null;
   conversation?: ConversationParam | undefined;
   createdAt: number;
-  error: ResponseError;
+  error: ResponseError | null;
   frequencyPenalty: number;
   id: string;
-  incompleteDetails: IncompleteDetails;
+  incompleteDetails: IncompleteDetails | null;
   /**
    * Array of input items (messages, function call outputs, etc.)
    */
@@ -82,7 +82,7 @@ export type PublicResponseResource = {
   previousResponseId: string | null;
   promptCacheKey: string | null;
   promptCacheRetention: string | null;
-  reasoning: Reasoning;
+  reasoning: Reasoning | null;
   safetyIdentifier: string | null;
   serviceTier: ServiceTier;
   status: PublicResponseResourceStatus;
@@ -103,7 +103,7 @@ export type PublicResponseResource = {
   topLogprobs: number;
   topP: number;
   truncation: Truncation;
-  usage: PublicUsage;
+  usage: PublicUsage | null;
   user: string | null;
   variables?: { [k: string]: any } | undefined;
 };
@@ -131,10 +131,10 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   completed_at: z.nullable(z.number().int()),
   conversation: ConversationParam$inboundSchema.optional(),
   created_at: z.number().int(),
-  error: ResponseError$inboundSchema,
+  error: z.nullable(ResponseError$inboundSchema),
   frequency_penalty: z.number(),
   id: z.string(),
-  incomplete_details: IncompleteDetails$inboundSchema,
+  incomplete_details: z.nullable(IncompleteDetails$inboundSchema),
   input: z.nullable(z.array(z.any())),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
@@ -149,7 +149,7 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   previous_response_id: z.nullable(z.string()),
   prompt_cache_key: z.nullable(z.string()),
   prompt_cache_retention: z.nullable(z.string()),
-  reasoning: Reasoning$inboundSchema,
+  reasoning: z.nullable(Reasoning$inboundSchema),
   safety_identifier: z.nullable(z.string()),
   service_tier: ServiceTier$inboundSchema,
   status: PublicResponseResourceStatus$inboundSchema,
@@ -161,7 +161,7 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: Truncation$inboundSchema,
-  usage: PublicUsage$inboundSchema,
+  usage: z.nullable(PublicUsage$inboundSchema),
   user: z.nullable(z.string()),
   variables: z.record(z.any()).optional(),
 }).transform((v) => {

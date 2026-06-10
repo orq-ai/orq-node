@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.output_text.annotation.added` server-sent event.
  */
-export const ResponseOutputTextAnnotationAddedStreamEventType = {
-  ResponseOutputTextAnnotationAdded: "response.output_text.annotation.added",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseOutputTextAnnotationAddedStreamEventType = ClosedEnum<
-  typeof ResponseOutputTextAnnotationAddedStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseOutputTextAnnotationAddedStreamEventData = {
+export type ResponseOutputTextAnnotationAddedStreamEvent = {
   /**
    * The annotation added to the output text.
    */
@@ -54,32 +40,16 @@ export type ResponseOutputTextAnnotationAddedStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseOutputTextAnnotationAddedStreamEventType;
+  type: "response.output_text.annotation.added";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseOutputTextAnnotationAddedStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseOutputTextAnnotationAddedStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.output_text.annotation.added";
-};
-
 /** @internal */
-export const ResponseOutputTextAnnotationAddedStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseOutputTextAnnotationAddedStreamEventType> = z
-    .nativeEnum(ResponseOutputTextAnnotationAddedStreamEventType);
-
-/** @internal */
-export const ResponseOutputTextAnnotationAddedStreamEventData$inboundSchema:
+export const ResponseOutputTextAnnotationAddedStreamEvent$inboundSchema:
   z.ZodType<
-    ResponseOutputTextAnnotationAddedStreamEventData,
+    ResponseOutputTextAnnotationAddedStreamEvent,
     z.ZodTypeDef,
     unknown
   > = collectExtraKeys$(
@@ -90,7 +60,7 @@ export const ResponseOutputTextAnnotationAddedStreamEventData$inboundSchema:
       item_id: z.string(),
       output_index: z.number().int(),
       sequence_number: z.number().int(),
-      type: ResponseOutputTextAnnotationAddedStreamEventType$inboundSchema,
+      type: z.literal("response.output_text.annotation.added"),
     }).catchall(z.any()),
     "additionalProperties",
     true,
@@ -102,45 +72,6 @@ export const ResponseOutputTextAnnotationAddedStreamEventData$inboundSchema:
       "output_index": "outputIndex",
       "sequence_number": "sequenceNumber",
     });
-  });
-
-export function responseOutputTextAnnotationAddedStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseOutputTextAnnotationAddedStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseOutputTextAnnotationAddedStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseOutputTextAnnotationAddedStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseOutputTextAnnotationAddedStreamEvent$inboundSchema:
-  z.ZodType<
-    ResponseOutputTextAnnotationAddedStreamEvent,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    data: z.unknown().transform((v, ctx) => {
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(
-      z.lazy(() =>
-        ResponseOutputTextAnnotationAddedStreamEventData$inboundSchema
-      ),
-    ),
-    event: z.literal("response.output_text.annotation.added"),
   });
 
 export function responseOutputTextAnnotationAddedStreamEventFromJSON(

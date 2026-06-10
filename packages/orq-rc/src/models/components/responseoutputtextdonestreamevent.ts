@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.output_text.done` server-sent event.
  */
-export const ResponseOutputTextDoneStreamEventType = {
-  ResponseOutputTextDone: "response.output_text.done",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseOutputTextDoneStreamEventType = ClosedEnum<
-  typeof ResponseOutputTextDoneStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseOutputTextDoneStreamEventData = {
+export type ResponseOutputTextDoneStreamEvent = {
   /**
    * Index of the content part within the output item.
    */
@@ -54,32 +40,15 @@ export type ResponseOutputTextDoneStreamEventData = {
    */
   text: string;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseOutputTextDoneStreamEventType;
+  type: "response.output_text.done";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseOutputTextDoneStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseOutputTextDoneStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.output_text.done";
-};
-
 /** @internal */
-export const ResponseOutputTextDoneStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseOutputTextDoneStreamEventType> = z.nativeEnum(
-    ResponseOutputTextDoneStreamEventType,
-  );
-
-/** @internal */
-export const ResponseOutputTextDoneStreamEventData$inboundSchema: z.ZodType<
-  ResponseOutputTextDoneStreamEventData,
+export const ResponseOutputTextDoneStreamEvent$inboundSchema: z.ZodType<
+  ResponseOutputTextDoneStreamEvent,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -90,7 +59,7 @@ export const ResponseOutputTextDoneStreamEventData$inboundSchema: z.ZodType<
     output_index: z.number().int(),
     sequence_number: z.number().int(),
     text: z.string(),
-    type: ResponseOutputTextDoneStreamEventType$inboundSchema,
+    type: z.literal("response.output_text.done"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -101,35 +70,6 @@ export const ResponseOutputTextDoneStreamEventData$inboundSchema: z.ZodType<
     "output_index": "outputIndex",
     "sequence_number": "sequenceNumber",
   });
-});
-
-export function responseOutputTextDoneStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseOutputTextDoneStreamEventData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseOutputTextDoneStreamEventData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseOutputTextDoneStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseOutputTextDoneStreamEvent$inboundSchema: z.ZodType<
-  ResponseOutputTextDoneStreamEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => ResponseOutputTextDoneStreamEventData$inboundSchema)),
-  event: z.literal("response.output_text.done"),
 });
 
 export function responseOutputTextDoneStreamEventFromJSON(

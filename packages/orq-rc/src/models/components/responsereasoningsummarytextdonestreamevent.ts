@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.reasoning_summary_text.done` server-sent event.
  */
-export const ResponseReasoningSummaryTextDoneStreamEventType = {
-  ResponseReasoningSummaryTextDone: "response.reasoning_summary_text.done",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseReasoningSummaryTextDoneStreamEventType = ClosedEnum<
-  typeof ResponseReasoningSummaryTextDoneStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseReasoningSummaryTextDoneStreamEventData = {
+export type ResponseReasoningSummaryTextDoneStreamEvent = {
   /**
    * ID of the output item this event refers to.
    */
@@ -50,32 +36,16 @@ export type ResponseReasoningSummaryTextDoneStreamEventData = {
    */
   text: string;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseReasoningSummaryTextDoneStreamEventType;
+  type: "response.reasoning_summary_text.done";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseReasoningSummaryTextDoneStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseReasoningSummaryTextDoneStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.reasoning_summary_text.done";
-};
-
 /** @internal */
-export const ResponseReasoningSummaryTextDoneStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseReasoningSummaryTextDoneStreamEventType> = z
-    .nativeEnum(ResponseReasoningSummaryTextDoneStreamEventType);
-
-/** @internal */
-export const ResponseReasoningSummaryTextDoneStreamEventData$inboundSchema:
+export const ResponseReasoningSummaryTextDoneStreamEvent$inboundSchema:
   z.ZodType<
-    ResponseReasoningSummaryTextDoneStreamEventData,
+    ResponseReasoningSummaryTextDoneStreamEvent,
     z.ZodTypeDef,
     unknown
   > = collectExtraKeys$(
@@ -85,7 +55,7 @@ export const ResponseReasoningSummaryTextDoneStreamEventData$inboundSchema:
       sequence_number: z.number().int(),
       summary_index: z.number().int(),
       text: z.string(),
-      type: ResponseReasoningSummaryTextDoneStreamEventType$inboundSchema,
+      type: z.literal("response.reasoning_summary_text.done"),
     }).catchall(z.any()),
     "additionalProperties",
     true,
@@ -96,45 +66,6 @@ export const ResponseReasoningSummaryTextDoneStreamEventData$inboundSchema:
       "sequence_number": "sequenceNumber",
       "summary_index": "summaryIndex",
     });
-  });
-
-export function responseReasoningSummaryTextDoneStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseReasoningSummaryTextDoneStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseReasoningSummaryTextDoneStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseReasoningSummaryTextDoneStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseReasoningSummaryTextDoneStreamEvent$inboundSchema:
-  z.ZodType<
-    ResponseReasoningSummaryTextDoneStreamEvent,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    data: z.unknown().transform((v, ctx) => {
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(
-      z.lazy(() =>
-        ResponseReasoningSummaryTextDoneStreamEventData$inboundSchema
-      ),
-    ),
-    event: z.literal("response.reasoning_summary_text.done"),
   });
 
 export function responseReasoningSummaryTextDoneStreamEventFromJSON(

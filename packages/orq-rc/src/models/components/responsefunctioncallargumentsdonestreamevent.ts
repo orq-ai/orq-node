@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.function_call_arguments.done` server-sent event.
  */
-export const ResponseFunctionCallArgumentsDoneStreamEventType = {
-  ResponseFunctionCallArgumentsDone: "response.function_call_arguments.done",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseFunctionCallArgumentsDoneStreamEventType = ClosedEnum<
-  typeof ResponseFunctionCallArgumentsDoneStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseFunctionCallArgumentsDoneStreamEventData = {
+export type ResponseFunctionCallArgumentsDoneStreamEvent = {
   /**
    * The completed function-call arguments JSON.
    */
@@ -46,32 +32,16 @@ export type ResponseFunctionCallArgumentsDoneStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseFunctionCallArgumentsDoneStreamEventType;
+  type: "response.function_call_arguments.done";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseFunctionCallArgumentsDoneStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseFunctionCallArgumentsDoneStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.function_call_arguments.done";
-};
-
 /** @internal */
-export const ResponseFunctionCallArgumentsDoneStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseFunctionCallArgumentsDoneStreamEventType> = z
-    .nativeEnum(ResponseFunctionCallArgumentsDoneStreamEventType);
-
-/** @internal */
-export const ResponseFunctionCallArgumentsDoneStreamEventData$inboundSchema:
+export const ResponseFunctionCallArgumentsDoneStreamEvent$inboundSchema:
   z.ZodType<
-    ResponseFunctionCallArgumentsDoneStreamEventData,
+    ResponseFunctionCallArgumentsDoneStreamEvent,
     z.ZodTypeDef,
     unknown
   > = collectExtraKeys$(
@@ -80,7 +50,7 @@ export const ResponseFunctionCallArgumentsDoneStreamEventData$inboundSchema:
       item_id: z.string(),
       output_index: z.number().int(),
       sequence_number: z.number().int(),
-      type: ResponseFunctionCallArgumentsDoneStreamEventType$inboundSchema,
+      type: z.literal("response.function_call_arguments.done"),
     }).catchall(z.any()),
     "additionalProperties",
     true,
@@ -90,45 +60,6 @@ export const ResponseFunctionCallArgumentsDoneStreamEventData$inboundSchema:
       "output_index": "outputIndex",
       "sequence_number": "sequenceNumber",
     });
-  });
-
-export function responseFunctionCallArgumentsDoneStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseFunctionCallArgumentsDoneStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseFunctionCallArgumentsDoneStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseFunctionCallArgumentsDoneStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseFunctionCallArgumentsDoneStreamEvent$inboundSchema:
-  z.ZodType<
-    ResponseFunctionCallArgumentsDoneStreamEvent,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    data: z.unknown().transform((v, ctx) => {
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(
-      z.lazy(() =>
-        ResponseFunctionCallArgumentsDoneStreamEventData$inboundSchema
-      ),
-    ),
-    event: z.literal("response.function_call_arguments.done"),
   });
 
 export function responseFunctionCallArgumentsDoneStreamEventFromJSON(

@@ -8,66 +8,36 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ResponseError, ResponseError$inboundSchema } from "./responseerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `error` server-sent event.
  */
-export const ResponseErrorStreamEventType = {
-  Error: "error",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseErrorStreamEventType = ClosedEnum<
-  typeof ResponseErrorStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseErrorStreamEventData = {
+export type ResponseErrorStreamEvent = {
   error: ResponseError;
   /**
    * Monotonically increasing sequence number for ordering events.
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseErrorStreamEventType;
+  type: "error";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseErrorStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseErrorStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "error";
-};
-
 /** @internal */
-export const ResponseErrorStreamEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseErrorStreamEventType
-> = z.nativeEnum(ResponseErrorStreamEventType);
-
-/** @internal */
-export const ResponseErrorStreamEventData$inboundSchema: z.ZodType<
-  ResponseErrorStreamEventData,
+export const ResponseErrorStreamEvent$inboundSchema: z.ZodType<
+  ResponseErrorStreamEvent,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
   z.object({
     error: ResponseError$inboundSchema,
     sequence_number: z.number().int(),
-    type: ResponseErrorStreamEventType$inboundSchema,
+    type: z.literal("error"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -75,34 +45,6 @@ export const ResponseErrorStreamEventData$inboundSchema: z.ZodType<
   return remap$(v, {
     "sequence_number": "sequenceNumber",
   });
-});
-
-export function responseErrorStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseErrorStreamEventData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseErrorStreamEventData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseErrorStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseErrorStreamEvent$inboundSchema: z.ZodType<
-  ResponseErrorStreamEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => ResponseErrorStreamEventData$inboundSchema)),
-  event: z.literal("error"),
 });
 
 export function responseErrorStreamEventFromJSON(

@@ -1,25 +1,29 @@
 # ResponseFunctionCallArgumentsDeltaStreamEvent
 
+A `response.function_call_arguments.delta` server-sent event.
+
 ## Example Usage
 
 ```typescript
 import { ResponseFunctionCallArgumentsDeltaStreamEvent } from "@orq-ai/node/models/components";
 
 let value: ResponseFunctionCallArgumentsDeltaStreamEvent = {
-  data: {
-    delta: "<value>",
-    itemId: "<id>",
-    outputIndex: 112514,
-    sequenceNumber: 271326,
-    type: "response.function_call_arguments.delta",
-  },
-  event: "response.function_call_arguments.delta",
+  delta: "<value>",
+  itemId: "<id>",
+  outputIndex: 112514,
+  sequenceNumber: 271326,
+  type: "response.function_call_arguments.delta",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                        | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data`                                                                                                                                       | [components.ResponseFunctionCallArgumentsDeltaStreamEventData](../../models/components/responsefunctioncallargumentsdeltastreameventdata.md) | :heavy_check_mark:                                                                                                                           | The event payload.                                                                                                                           |
-| `event`                                                                                                                                      | *"response.function_call_arguments.delta"*                                                                                                   | :heavy_check_mark:                                                                                                                           | The SSE event name, equal to the payload's `type`.                                                                                           |
+| Field                                                         | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `delta`                                                       | *string*                                                      | :heavy_check_mark:                                            | Incremental text or argument chunk.                           |
+| `itemId`                                                      | *string*                                                      | :heavy_check_mark:                                            | ID of the output item this event refers to.                   |
+| `obfuscation`                                                 | *string*                                                      | :heavy_minus_sign:                                            | Obfuscation padding accompanying the delta, when present.     |
+| `outputIndex`                                                 | *number*                                                      | :heavy_check_mark:                                            | Index of the output item in the response output array.        |
+| `sequenceNumber`                                              | *number*                                                      | :heavy_check_mark:                                            | Monotonically increasing sequence number for ordering events. |
+| `type`                                                        | *"response.function_call_arguments.delta"*                    | :heavy_check_mark:                                            | The event type. Discriminates the payload.                    |
+| `additionalProperties`                                        | Record<string, *any*>                                         | :heavy_minus_sign:                                            | N/A                                                           |

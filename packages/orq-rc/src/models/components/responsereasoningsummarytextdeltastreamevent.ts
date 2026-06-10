@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.reasoning_summary_text.delta` server-sent event.
  */
-export const ResponseReasoningSummaryTextDeltaStreamEventType = {
-  ResponseReasoningSummaryTextDelta: "response.reasoning_summary_text.delta",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseReasoningSummaryTextDeltaStreamEventType = ClosedEnum<
-  typeof ResponseReasoningSummaryTextDeltaStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseReasoningSummaryTextDeltaStreamEventData = {
+export type ResponseReasoningSummaryTextDeltaStreamEvent = {
   /**
    * Incremental text or argument chunk.
    */
@@ -54,32 +40,16 @@ export type ResponseReasoningSummaryTextDeltaStreamEventData = {
    */
   summaryIndex: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseReasoningSummaryTextDeltaStreamEventType;
+  type: "response.reasoning_summary_text.delta";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseReasoningSummaryTextDeltaStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseReasoningSummaryTextDeltaStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.reasoning_summary_text.delta";
-};
-
 /** @internal */
-export const ResponseReasoningSummaryTextDeltaStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseReasoningSummaryTextDeltaStreamEventType> = z
-    .nativeEnum(ResponseReasoningSummaryTextDeltaStreamEventType);
-
-/** @internal */
-export const ResponseReasoningSummaryTextDeltaStreamEventData$inboundSchema:
+export const ResponseReasoningSummaryTextDeltaStreamEvent$inboundSchema:
   z.ZodType<
-    ResponseReasoningSummaryTextDeltaStreamEventData,
+    ResponseReasoningSummaryTextDeltaStreamEvent,
     z.ZodTypeDef,
     unknown
   > = collectExtraKeys$(
@@ -90,7 +60,7 @@ export const ResponseReasoningSummaryTextDeltaStreamEventData$inboundSchema:
       output_index: z.number().int(),
       sequence_number: z.number().int(),
       summary_index: z.number().int(),
-      type: ResponseReasoningSummaryTextDeltaStreamEventType$inboundSchema,
+      type: z.literal("response.reasoning_summary_text.delta"),
     }).catchall(z.any()),
     "additionalProperties",
     true,
@@ -101,45 +71,6 @@ export const ResponseReasoningSummaryTextDeltaStreamEventData$inboundSchema:
       "sequence_number": "sequenceNumber",
       "summary_index": "summaryIndex",
     });
-  });
-
-export function responseReasoningSummaryTextDeltaStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseReasoningSummaryTextDeltaStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseReasoningSummaryTextDeltaStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseReasoningSummaryTextDeltaStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseReasoningSummaryTextDeltaStreamEvent$inboundSchema:
-  z.ZodType<
-    ResponseReasoningSummaryTextDeltaStreamEvent,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    data: z.unknown().transform((v, ctx) => {
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(
-      z.lazy(() =>
-        ResponseReasoningSummaryTextDeltaStreamEventData$inboundSchema
-      ),
-    ),
-    event: z.literal("response.reasoning_summary_text.delta"),
   });
 
 export function responseReasoningSummaryTextDeltaStreamEventFromJSON(

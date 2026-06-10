@@ -8,28 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.reasoning.delta` server-sent event.
  */
-export const ResponseReasoningDeltaStreamEventType = {
-  ResponseReasoningDelta: "response.reasoning.delta",
-  ResponseReasoningTextDelta: "response.reasoning_text.delta",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseReasoningDeltaStreamEventType = ClosedEnum<
-  typeof ResponseReasoningDeltaStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseReasoningDeltaStreamEventData = {
+export type ResponseReasoningDeltaStreamEvent = {
   /**
    * Index of the content part within the output item.
    */
@@ -55,46 +40,15 @@ export type ResponseReasoningDeltaStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseReasoningDeltaStreamEventType;
+  type: "response.reasoning.delta";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-/**
- * The SSE event name, equal to the payload's `type`.
- */
-export const ResponseReasoningDeltaStreamEventEvent = {
-  ResponseReasoningDelta: "response.reasoning.delta",
-  ResponseReasoningTextDelta: "response.reasoning_text.delta",
-} as const;
-/**
- * The SSE event name, equal to the payload's `type`.
- */
-export type ResponseReasoningDeltaStreamEventEvent = ClosedEnum<
-  typeof ResponseReasoningDeltaStreamEventEvent
->;
-
-export type ResponseReasoningDeltaStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseReasoningDeltaStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: ResponseReasoningDeltaStreamEventEvent;
-};
-
 /** @internal */
-export const ResponseReasoningDeltaStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseReasoningDeltaStreamEventType> = z.nativeEnum(
-    ResponseReasoningDeltaStreamEventType,
-  );
-
-/** @internal */
-export const ResponseReasoningDeltaStreamEventData$inboundSchema: z.ZodType<
-  ResponseReasoningDeltaStreamEventData,
+export const ResponseReasoningDeltaStreamEvent$inboundSchema: z.ZodType<
+  ResponseReasoningDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -105,7 +59,7 @@ export const ResponseReasoningDeltaStreamEventData$inboundSchema: z.ZodType<
     obfuscation: z.string().optional(),
     output_index: z.number().int(),
     sequence_number: z.number().int(),
-    type: ResponseReasoningDeltaStreamEventType$inboundSchema,
+    type: z.literal("response.reasoning.delta"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -116,41 +70,6 @@ export const ResponseReasoningDeltaStreamEventData$inboundSchema: z.ZodType<
     "output_index": "outputIndex",
     "sequence_number": "sequenceNumber",
   });
-});
-
-export function responseReasoningDeltaStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseReasoningDeltaStreamEventData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseReasoningDeltaStreamEventData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseReasoningDeltaStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseReasoningDeltaStreamEventEvent$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseReasoningDeltaStreamEventEvent> = z.nativeEnum(
-    ResponseReasoningDeltaStreamEventEvent,
-  );
-
-/** @internal */
-export const ResponseReasoningDeltaStreamEvent$inboundSchema: z.ZodType<
-  ResponseReasoningDeltaStreamEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => ResponseReasoningDeltaStreamEventData$inboundSchema)),
-  event: ResponseReasoningDeltaStreamEventEvent$inboundSchema,
 });
 
 export function responseReasoningDeltaStreamEventFromJSON(

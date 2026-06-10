@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.refusal.done` server-sent event.
  */
-export const ResponseRefusalDoneStreamEventType = {
-  ResponseRefusalDone: "response.refusal.done",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseRefusalDoneStreamEventType = ClosedEnum<
-  typeof ResponseRefusalDoneStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseRefusalDoneStreamEventData = {
+export type ResponseRefusalDoneStreamEvent = {
   /**
    * Index of the content part within the output item.
    */
@@ -50,31 +36,15 @@ export type ResponseRefusalDoneStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseRefusalDoneStreamEventType;
+  type: "response.refusal.done";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseRefusalDoneStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseRefusalDoneStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.refusal.done";
-};
-
 /** @internal */
-export const ResponseRefusalDoneStreamEventType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseRefusalDoneStreamEventType
-> = z.nativeEnum(ResponseRefusalDoneStreamEventType);
-
-/** @internal */
-export const ResponseRefusalDoneStreamEventData$inboundSchema: z.ZodType<
-  ResponseRefusalDoneStreamEventData,
+export const ResponseRefusalDoneStreamEvent$inboundSchema: z.ZodType<
+  ResponseRefusalDoneStreamEvent,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -84,7 +54,7 @@ export const ResponseRefusalDoneStreamEventData$inboundSchema: z.ZodType<
     output_index: z.number().int(),
     refusal: z.string(),
     sequence_number: z.number().int(),
-    type: ResponseRefusalDoneStreamEventType$inboundSchema,
+    type: z.literal("response.refusal.done"),
   }).catchall(z.any()),
   "additionalProperties",
   true,
@@ -95,35 +65,6 @@ export const ResponseRefusalDoneStreamEventData$inboundSchema: z.ZodType<
     "output_index": "outputIndex",
     "sequence_number": "sequenceNumber",
   });
-});
-
-export function responseRefusalDoneStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseRefusalDoneStreamEventData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseRefusalDoneStreamEventData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseRefusalDoneStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseRefusalDoneStreamEvent$inboundSchema: z.ZodType<
-  ResponseRefusalDoneStreamEvent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(z.lazy(() => ResponseRefusalDoneStreamEventData$inboundSchema)),
-  event: z.literal("response.refusal.done"),
 });
 
 export function responseRefusalDoneStreamEventFromJSON(

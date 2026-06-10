@@ -8,27 +8,13 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The event type. Matches the SSE `event` field.
+ * A `response.mcp_call_arguments.delta` server-sent event.
  */
-export const ResponseMcpCallArgumentsDeltaStreamEventType = {
-  ResponseMcpCallArgumentsDelta: "response.mcp_call_arguments.delta",
-} as const;
-/**
- * The event type. Matches the SSE `event` field.
- */
-export type ResponseMcpCallArgumentsDeltaStreamEventType = ClosedEnum<
-  typeof ResponseMcpCallArgumentsDeltaStreamEventType
->;
-
-/**
- * The event payload.
- */
-export type ResponseMcpCallArgumentsDeltaStreamEventData = {
+export type ResponseMCPCallArgumentsDeltaStreamEvent = {
   /**
    * Incremental text or argument chunk.
    */
@@ -46,100 +32,47 @@ export type ResponseMcpCallArgumentsDeltaStreamEventData = {
    */
   sequenceNumber: number;
   /**
-   * The event type. Matches the SSE `event` field.
+   * The event type. Discriminates the payload.
    */
-  type: ResponseMcpCallArgumentsDeltaStreamEventType;
+  type: "response.mcp_call_arguments.delta";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseMcpCallArgumentsDeltaStreamEvent = {
-  /**
-   * The event payload.
-   */
-  data: ResponseMcpCallArgumentsDeltaStreamEventData;
-  /**
-   * The SSE event name, equal to the payload's `type`.
-   */
-  event: "response.mcp_call_arguments.delta";
-};
-
 /** @internal */
-export const ResponseMcpCallArgumentsDeltaStreamEventType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseMcpCallArgumentsDeltaStreamEventType> = z
-    .nativeEnum(ResponseMcpCallArgumentsDeltaStreamEventType);
-
-/** @internal */
-export const ResponseMcpCallArgumentsDeltaStreamEventData$inboundSchema:
-  z.ZodType<
-    ResponseMcpCallArgumentsDeltaStreamEventData,
-    z.ZodTypeDef,
-    unknown
-  > = collectExtraKeys$(
-    z.object({
-      delta: z.string(),
-      item_id: z.string(),
-      output_index: z.number().int(),
-      sequence_number: z.number().int(),
-      type: ResponseMcpCallArgumentsDeltaStreamEventType$inboundSchema,
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "item_id": "itemId",
-      "output_index": "outputIndex",
-      "sequence_number": "sequenceNumber",
-    });
-  });
-
-export function responseMcpCallArgumentsDeltaStreamEventDataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ResponseMcpCallArgumentsDeltaStreamEventData,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ResponseMcpCallArgumentsDeltaStreamEventData$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'ResponseMcpCallArgumentsDeltaStreamEventData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseMcpCallArgumentsDeltaStreamEvent$inboundSchema: z.ZodType<
-  ResponseMcpCallArgumentsDeltaStreamEvent,
+export const ResponseMCPCallArgumentsDeltaStreamEvent$inboundSchema: z.ZodType<
+  ResponseMCPCallArgumentsDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(
-    z.lazy(() => ResponseMcpCallArgumentsDeltaStreamEventData$inboundSchema),
-  ),
-  event: z.literal("response.mcp_call_arguments.delta"),
+> = collectExtraKeys$(
+  z.object({
+    delta: z.string(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    sequence_number: z.number().int(),
+    type: z.literal("response.mcp_call_arguments.delta"),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "item_id": "itemId",
+    "output_index": "outputIndex",
+    "sequence_number": "sequenceNumber",
+  });
 });
 
-export function responseMcpCallArgumentsDeltaStreamEventFromJSON(
+export function responseMCPCallArgumentsDeltaStreamEventFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  ResponseMcpCallArgumentsDeltaStreamEvent,
+  ResponseMCPCallArgumentsDeltaStreamEvent,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      ResponseMcpCallArgumentsDeltaStreamEvent$inboundSchema.parse(
+      ResponseMCPCallArgumentsDeltaStreamEvent$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'ResponseMcpCallArgumentsDeltaStreamEvent' from JSON`,
+    `Failed to parse 'ResponseMCPCallArgumentsDeltaStreamEvent' from JSON`,
   );
 }
