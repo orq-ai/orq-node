@@ -44,6 +44,12 @@ export class Feedback extends ClientSDK {
     ));
   }
 
+  /**
+   * Create guardrail rule
+   *
+   * @remarks
+   * Creates a new guardrail rule with expression, guardrails configuration, and timeout settings.
+   */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,
