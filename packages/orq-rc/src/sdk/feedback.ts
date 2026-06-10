@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create completion
-   *
-   * @remarks
-   * For sending requests to legacy completion models
+   * Create a knowledge
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
