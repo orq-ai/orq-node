@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create speech
+   * Create a dataset
    *
    * @remarks
-   * Generates audio from the input text.
+   * Creates a new dataset in the specified project.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
