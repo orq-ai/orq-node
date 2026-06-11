@@ -260,6 +260,68 @@ export type RunAgentModelConfigurationTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const RunAgentModelConfigurationAgentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type RunAgentModelConfigurationAgentsType = ClosedEnum<
+  typeof RunAgentModelConfigurationAgentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const RunAgentModelConfigurationTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type RunAgentModelConfigurationTtl = ClosedEnum<
+  typeof RunAgentModelConfigurationTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type RunAgentModelConfigurationCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: RunAgentModelConfigurationAgentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: RunAgentModelConfigurationTtl | undefined;
+};
+
+/**
  * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type RunAgentModelConfigurationParameters = {
@@ -369,6 +431,14 @@ export type RunAgentModelConfigurationParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: RunAgentModelConfigurationTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: RunAgentModelConfigurationCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -665,6 +735,68 @@ export type RunAgentFallbackModelConfigurationTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const RunAgentFallbackModelConfigurationAgentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type RunAgentFallbackModelConfigurationAgentsType = ClosedEnum<
+  typeof RunAgentFallbackModelConfigurationAgentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const RunAgentFallbackModelConfigurationTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type RunAgentFallbackModelConfigurationTtl = ClosedEnum<
+  typeof RunAgentFallbackModelConfigurationTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type RunAgentFallbackModelConfigurationCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: RunAgentFallbackModelConfigurationAgentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: RunAgentFallbackModelConfigurationTtl | undefined;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type RunAgentFallbackModelConfigurationParameters = {
@@ -782,6 +914,14 @@ export type RunAgentFallbackModelConfigurationParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: RunAgentFallbackModelConfigurationTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: RunAgentFallbackModelConfigurationCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -2371,6 +2511,44 @@ export function runAgentModelConfigurationTimeoutToJSON(
 }
 
 /** @internal */
+export const RunAgentModelConfigurationAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentModelConfigurationAgentsType> = z.nativeEnum(
+    RunAgentModelConfigurationAgentsType,
+  );
+
+/** @internal */
+export const RunAgentModelConfigurationTtl$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentModelConfigurationTtl
+> = z.nativeEnum(RunAgentModelConfigurationTtl);
+
+/** @internal */
+export type RunAgentModelConfigurationCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const RunAgentModelConfigurationCacheControl$outboundSchema: z.ZodType<
+  RunAgentModelConfigurationCacheControl$Outbound,
+  z.ZodTypeDef,
+  RunAgentModelConfigurationCacheControl
+> = z.object({
+  type: RunAgentModelConfigurationAgentsType$outboundSchema,
+  ttl: RunAgentModelConfigurationTtl$outboundSchema.default("5m"),
+});
+
+export function runAgentModelConfigurationCacheControlToJSON(
+  runAgentModelConfigurationCacheControl:
+    RunAgentModelConfigurationCacheControl,
+): string {
+  return JSON.stringify(
+    RunAgentModelConfigurationCacheControl$outboundSchema.parse(
+      runAgentModelConfigurationCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type RunAgentModelConfigurationParameters$Outbound = {
   name?: string | undefined;
   frequency_penalty?: number | null | undefined;
@@ -2402,6 +2580,8 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   cache?: RunAgentModelConfigurationCache$Outbound | undefined;
   load_balancer?: RunAgentLoadBalancer1$Outbound | undefined;
   timeout?: RunAgentModelConfigurationTimeout$Outbound | undefined;
+  cache_control?: RunAgentModelConfigurationCacheControl$Outbound | undefined;
+  prompt_cache_key?: string | undefined;
 };
 
 /** @internal */
@@ -2452,6 +2632,10 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   loadBalancer: z.lazy(() => RunAgentLoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => RunAgentModelConfigurationTimeout$outboundSchema)
     .optional(),
+  cacheControl: z.lazy(() =>
+    RunAgentModelConfigurationCacheControl$outboundSchema
+  ).optional(),
+  promptCacheKey: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -2465,6 +2649,8 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
     loadBalancer: "load_balancer",
+    cacheControl: "cache_control",
+    promptCacheKey: "prompt_cache_key",
   });
 });
 
@@ -3087,6 +3273,45 @@ export function runAgentFallbackModelConfigurationTimeoutToJSON(
 }
 
 /** @internal */
+export const RunAgentFallbackModelConfigurationAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationAgentsType> = z
+    .nativeEnum(RunAgentFallbackModelConfigurationAgentsType);
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationTtl$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentFallbackModelConfigurationTtl> = z.nativeEnum(
+    RunAgentFallbackModelConfigurationTtl,
+  );
+
+/** @internal */
+export type RunAgentFallbackModelConfigurationCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const RunAgentFallbackModelConfigurationCacheControl$outboundSchema:
+  z.ZodType<
+    RunAgentFallbackModelConfigurationCacheControl$Outbound,
+    z.ZodTypeDef,
+    RunAgentFallbackModelConfigurationCacheControl
+  > = z.object({
+    type: RunAgentFallbackModelConfigurationAgentsType$outboundSchema,
+    ttl: RunAgentFallbackModelConfigurationTtl$outboundSchema.default("5m"),
+  });
+
+export function runAgentFallbackModelConfigurationCacheControlToJSON(
+  runAgentFallbackModelConfigurationCacheControl:
+    RunAgentFallbackModelConfigurationCacheControl,
+): string {
+  return JSON.stringify(
+    RunAgentFallbackModelConfigurationCacheControl$outboundSchema.parse(
+      runAgentFallbackModelConfigurationCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   name?: string | undefined;
   frequency_penalty?: number | null | undefined;
@@ -3122,6 +3347,10 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
   cache?: RunAgentFallbackModelConfigurationCache$Outbound | undefined;
   load_balancer?: RunAgentLoadBalancerAgents1$Outbound | undefined;
   timeout?: RunAgentFallbackModelConfigurationTimeout$Outbound | undefined;
+  cache_control?:
+    | RunAgentFallbackModelConfigurationCacheControl$Outbound
+    | undefined;
+  prompt_cache_key?: string | undefined;
 };
 
 /** @internal */
@@ -3178,6 +3407,10 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     timeout: z.lazy(() =>
       RunAgentFallbackModelConfigurationTimeout$outboundSchema
     ).optional(),
+    cacheControl: z.lazy(() =>
+      RunAgentFallbackModelConfigurationCacheControl$outboundSchema
+    ).optional(),
+    promptCacheKey: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       frequencyPenalty: "frequency_penalty",
@@ -3191,6 +3424,8 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
       loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
     });
   });
 
@@ -3626,7 +3861,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KTV2HXBQQSYKRHREA7VY7A9E"),
+  id: z.string().default("01KTVC27KQNF3061G313WWDKRX"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

@@ -4,13 +4,59 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const ReasoningEffort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
+
+/**
+ * The format of the reasoning summary returned by the model.
+ */
+export const ReasoningSummary = {
+  Concise: "concise",
+  Detailed: "detailed",
+  Auto: "auto",
+} as const;
+/**
+ * The format of the reasoning summary returned by the model.
+ */
+export type ReasoningSummary = ClosedEnum<typeof ReasoningSummary>;
+
 export type Reasoning = {
-  effort?: string | undefined;
-  summary?: string | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  effort?: ReasoningEffort | undefined;
+  /**
+   * The format of the reasoning summary returned by the model.
+   */
+  summary?: ReasoningSummary | undefined;
 };
+
+/** @internal */
+export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof ReasoningEffort
+> = z.nativeEnum(ReasoningEffort);
+
+/** @internal */
+export const ReasoningSummary$inboundSchema: z.ZodNativeEnum<
+  typeof ReasoningSummary
+> = z.nativeEnum(ReasoningSummary);
 
 /** @internal */
 export const Reasoning$inboundSchema: z.ZodType<
@@ -18,8 +64,8 @@ export const Reasoning$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  effort: z.string().optional(),
-  summary: z.string().optional(),
+  effort: ReasoningEffort$inboundSchema.optional(),
+  summary: ReasoningSummary$inboundSchema.optional(),
 });
 
 export function reasoningFromJSON(

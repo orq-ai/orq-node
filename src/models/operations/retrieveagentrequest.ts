@@ -487,6 +487,68 @@ export type RetrieveAgentRequestTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const RetrieveAgentRequestAgentsResponseType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type RetrieveAgentRequestAgentsResponseType = ClosedEnum<
+  typeof RetrieveAgentRequestAgentsResponseType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const RetrieveAgentRequestTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type RetrieveAgentRequestTtl = ClosedEnum<
+  typeof RetrieveAgentRequestTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type RetrieveAgentRequestCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: RetrieveAgentRequestAgentsResponseType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: RetrieveAgentRequestTtl;
+};
+
+/**
  * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type RetrieveAgentRequestParameters = {
@@ -599,6 +661,14 @@ export type RetrieveAgentRequestParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: RetrieveAgentRequestTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: RetrieveAgentRequestCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -875,6 +945,67 @@ export type RetrieveAgentRequestFallbackModelConfigurationTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const RetrieveAgentRequestFallbackModelConfigurationAgentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type RetrieveAgentRequestFallbackModelConfigurationAgentsType =
+  ClosedEnum<typeof RetrieveAgentRequestFallbackModelConfigurationAgentsType>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const RetrieveAgentRequestFallbackModelConfigurationTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type RetrieveAgentRequestFallbackModelConfigurationTtl = ClosedEnum<
+  typeof RetrieveAgentRequestFallbackModelConfigurationTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type RetrieveAgentRequestFallbackModelConfigurationCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: RetrieveAgentRequestFallbackModelConfigurationAgentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: RetrieveAgentRequestFallbackModelConfigurationTtl;
+};
+
+/**
  * Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used.
  */
 export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
@@ -996,6 +1127,16 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: RetrieveAgentRequestFallbackModelConfigurationTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?:
+    | RetrieveAgentRequestFallbackModelConfigurationCacheControl
+    | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -1846,6 +1987,37 @@ export function retrieveAgentRequestTimeoutFromJSON(
 }
 
 /** @internal */
+export const RetrieveAgentRequestAgentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseType> = z.nativeEnum(
+    RetrieveAgentRequestAgentsResponseType,
+  );
+
+/** @internal */
+export const RetrieveAgentRequestTtl$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveAgentRequestTtl
+> = z.nativeEnum(RetrieveAgentRequestTtl);
+
+/** @internal */
+export const RetrieveAgentRequestCacheControl$inboundSchema: z.ZodType<
+  RetrieveAgentRequestCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RetrieveAgentRequestAgentsResponseType$inboundSchema,
+  ttl: RetrieveAgentRequestTtl$inboundSchema.default("5m"),
+});
+
+export function retrieveAgentRequestCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAgentRequestCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   RetrieveAgentRequestParameters,
   z.ZodTypeDef,
@@ -1892,6 +2064,9 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   load_balancer: z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => RetrieveAgentRequestTimeout$inboundSchema).optional(),
+  cache_control: z.lazy(() => RetrieveAgentRequestCacheControl$inboundSchema)
+    .optional(),
+  prompt_cache_key: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "frequency_penalty": "frequencyPenalty",
@@ -1905,6 +2080,8 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "load_balancer": "loadBalancer",
+    "cache_control": "cacheControl",
+    "prompt_cache_key": "promptCacheKey",
   });
 });
 
@@ -2473,6 +2650,45 @@ export function retrieveAgentRequestFallbackModelConfigurationTimeoutFromJSON(
 }
 
 /** @internal */
+export const RetrieveAgentRequestFallbackModelConfigurationAgentsType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAgentRequestFallbackModelConfigurationAgentsType
+  > = z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationAgentsType);
+
+/** @internal */
+export const RetrieveAgentRequestFallbackModelConfigurationTtl$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationTtl> = z
+    .nativeEnum(RetrieveAgentRequestFallbackModelConfigurationTtl);
+
+/** @internal */
+export const RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestFallbackModelConfigurationCacheControl,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAgentRequestFallbackModelConfigurationAgentsType$inboundSchema,
+    ttl: RetrieveAgentRequestFallbackModelConfigurationTtl$inboundSchema
+      .default("5m"),
+  });
+
+export function retrieveAgentRequestFallbackModelConfigurationCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestFallbackModelConfigurationCacheControl,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestFallbackModelConfigurationParameters,
@@ -2536,6 +2752,10 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     timeout: z.lazy(() =>
       RetrieveAgentRequestFallbackModelConfigurationTimeout$inboundSchema
     ).optional(),
+    cache_control: z.lazy(() =>
+      RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundSchema
+    ).optional(),
+    prompt_cache_key: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "frequency_penalty": "frequencyPenalty",
@@ -2549,6 +2769,8 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
       "tool_choice": "toolChoice",
       "parallel_tool_calls": "parallelToolCalls",
       "load_balancer": "loadBalancer",
+      "cache_control": "cacheControl",
+      "prompt_cache_key": "promptCacheKey",
     });
   });
 

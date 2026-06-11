@@ -19,7 +19,7 @@ export type ListKnowledgeBasesRequest = {
    */
   endingBefore?: string | undefined;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 25
    */
   limit?: number | undefined;
 };

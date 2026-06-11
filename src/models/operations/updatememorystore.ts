@@ -16,7 +16,7 @@ export type UpdateMemoryStoreRequestBody = {
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   path?: string | undefined;
 };
 
@@ -70,14 +70,14 @@ export type UpdateMemoryStoreResponseBody = {
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   embeddingConfig: UpdateMemoryStoreEmbeddingConfig;
 };
 
 /** @internal */
 export type UpdateMemoryStoreRequestBody$Outbound = {
   description?: string | undefined;
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   path?: string | undefined;
 };
 
@@ -88,7 +88,7 @@ export const UpdateMemoryStoreRequestBody$outboundSchema: z.ZodType<
   UpdateMemoryStoreRequestBody
 > = z.object({
   description: z.string().optional(),
-  ttl: z.number().optional(),
+  ttl: z.nullable(z.number()).optional(),
   path: z.string().optional(),
 });
 
@@ -164,7 +164,7 @@ export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
-  ttl: z.number().optional(),
+  ttl: z.nullable(z.number()).optional(),
   embedding_config: z.lazy(() =>
     UpdateMemoryStoreEmbeddingConfig$inboundSchema
   ),

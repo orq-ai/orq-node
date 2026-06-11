@@ -753,6 +753,69 @@ export type CreateChatCompletionTimeout = {
 };
 
 /**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreateChatCompletionRouterChatCompletionsRequestRequestBodyType =
+  ClosedEnum<
+    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
+  >;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const CreateChatCompletionTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type CreateChatCompletionTtl = ClosedEnum<
+  typeof CreateChatCompletionTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type CreateChatCompletionCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreateChatCompletionRouterChatCompletionsRequestRequestBodyType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: CreateChatCompletionTtl | undefined;
+};
+
+/**
  * Retry configuration for the request
  */
 export type CreateChatCompletionRouterChatCompletionsRetry = {
@@ -825,12 +888,13 @@ export type Inputs2 = {
  */
 export type Inputs = { [k: string]: any } | Array<Inputs2>;
 
-export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType = {
-  ExactMatch: "exact_match",
-} as const;
-export type CreateChatCompletionRouterChatCompletionsRequestRequestBodyType =
+export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType =
+  {
+    ExactMatch: "exact_match",
+  } as const;
+export type CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType =
   ClosedEnum<
-    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
+    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType
   >;
 
 /**
@@ -841,7 +905,7 @@ export type CreateChatCompletionRouterChatCompletionsCache = {
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl?: number | undefined;
-  type: CreateChatCompletionRouterChatCompletionsRequestRequestBodyType;
+  type: CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType;
 };
 
 /**
@@ -1559,6 +1623,14 @@ export type CreateChatCompletionRequestBody = {
    * Variables to substitute in message templates. Uses f-string syntax ({{variableName}}) by default. For advanced templating with Jinja or Mustache syntax, use in conjunction with `template_engine`.
    */
   variables?: { [k: string]: any } | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: CreateChatCompletionCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
   /**
    * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
    *
@@ -3542,6 +3614,46 @@ export function createChatCompletionTimeoutToJSON(
 }
 
 /** @internal */
+export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
+  > = z.nativeEnum(
+    CreateChatCompletionRouterChatCompletionsRequestRequestBodyType,
+  );
+
+/** @internal */
+export const CreateChatCompletionTtl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateChatCompletionTtl
+> = z.nativeEnum(CreateChatCompletionTtl);
+
+/** @internal */
+export type CreateChatCompletionCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const CreateChatCompletionCacheControl$outboundSchema: z.ZodType<
+  CreateChatCompletionCacheControl$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionCacheControl
+> = z.object({
+  type:
+    CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema,
+  ttl: CreateChatCompletionTtl$outboundSchema.default("5m"),
+});
+
+export function createChatCompletionCacheControlToJSON(
+  createChatCompletionCacheControl: CreateChatCompletionCacheControl,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionCacheControl$outboundSchema.parse(
+      createChatCompletionCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateChatCompletionRouterChatCompletionsRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
@@ -3688,11 +3800,11 @@ export function inputsToJSON(inputs: Inputs): string {
 }
 
 /** @internal */
-export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema:
+export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema:
   z.ZodNativeEnum<
-    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
+    typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType
   > = z.nativeEnum(
-    CreateChatCompletionRouterChatCompletionsRequestRequestBodyType,
+    CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType,
   );
 
 /** @internal */
@@ -3710,7 +3822,7 @@ export const CreateChatCompletionRouterChatCompletionsCache$outboundSchema:
   > = z.object({
     ttl: z.number().default(1800),
     type:
-      CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema,
+      CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema,
   });
 
 export function createChatCompletionRouterChatCompletionsCacheToJSON(
@@ -5322,6 +5434,8 @@ export type CreateChatCompletionRequestBody$Outbound = {
   load_balancer?: CreateChatCompletionLoadBalancer1$Outbound | undefined;
   timeout?: CreateChatCompletionTimeout$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
+  cache_control?: CreateChatCompletionCacheControl$Outbound | undefined;
+  prompt_cache_key?: string | undefined;
   orq?: Orq$Outbound | undefined;
   stream: boolean;
 };
@@ -5396,6 +5510,9 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     .optional(),
   timeout: z.lazy(() => CreateChatCompletionTimeout$outboundSchema).optional(),
   variables: z.record(z.any()).optional(),
+  cacheControl: z.lazy(() => CreateChatCompletionCacheControl$outboundSchema)
+    .optional(),
+  promptCacheKey: z.string().optional(),
   orq: z.lazy(() => Orq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {
@@ -5413,6 +5530,8 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
     loadBalancer: "load_balancer",
+    cacheControl: "cache_control",
+    promptCacheKey: "prompt_cache_key",
   });
 });
 
