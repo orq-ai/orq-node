@@ -28,7 +28,7 @@ export type CreateMemoryStoreRequestBody = {
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   /**
    * Entity storage path.
    *
@@ -83,7 +83,7 @@ export type CreateMemoryStoreResponseBody = {
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   embeddingConfig: CreateMemoryStoreEmbeddingConfig;
 };
 
@@ -112,7 +112,7 @@ export type CreateMemoryStoreRequestBody$Outbound = {
   key: string;
   embedding_config: EmbeddingConfig$Outbound;
   description: string;
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   path: string;
 };
 
@@ -125,7 +125,7 @@ export const CreateMemoryStoreRequestBody$outboundSchema: z.ZodType<
   key: z.string(),
   embeddingConfig: z.lazy(() => EmbeddingConfig$outboundSchema),
   description: z.string(),
-  ttl: z.number().optional(),
+  ttl: z.nullable(z.number()).optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -175,7 +175,7 @@ export const CreateMemoryStoreResponseBody$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
-  ttl: z.number().optional(),
+  ttl: z.nullable(z.number()).optional(),
   embedding_config: z.lazy(() =>
     CreateMemoryStoreEmbeddingConfig$inboundSchema
   ),
