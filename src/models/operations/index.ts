@@ -81,6 +81,7 @@ export * from "./guardrailrulecreate.js";
 export * from "./guardrailruledelete.js";
 export * from "./guardrailruleget.js";
 export * from "./guardrailrulelist.js";
+export * from "./guardrailrulelistusedguardrails.js";
 export * from "./guardrailruleupdate.js";
 export * from "./invokeagent.js";
 export * from "./invokeeval.js";

@@ -128,11 +128,11 @@ export type DataCodeExecutionTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -252,11 +252,11 @@ export type DataMCPTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -409,11 +409,11 @@ export type DataHTTPTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -508,11 +508,11 @@ export type DataJSONSchemaTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -621,11 +621,11 @@ export type DataFunctionTool = {
   /**
    * The id of the user that created the tool
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the user that last updated the tool
    */
-  updatedById?: string | undefined;
+  updatedById?: string | null | undefined;
   projectId: string;
   workspaceId: string;
   created: string;
@@ -767,13 +767,13 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTRKVD3E8RRP0VHKJDJD9A0T"),
+  _id: z.string().default("tool_01KTTQS0JENAT2W13RQ72TH3VF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -864,7 +864,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KTRKVD3CZH9BGHZBJ3J03MPX"),
+  id: z.string().default("01KTTQS0JDCRN59HQK4VEYH1EW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -917,13 +917,13 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTRKVD3BHZ0JRN1GD75ZPXQB"),
+  _id: z.string().default("tool_01KTTQS0JCHAD9V1GYAJM1R6BW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -1102,13 +1102,13 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTRKVD38VMKA7KZNENTAA834"),
+  _id: z.string().default("tool_01KTTQS0JATNWESEAFMB0GJVE9"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -1195,13 +1195,13 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTRKVD3538F6RZ37BTEXVHWK"),
+  _id: z.string().default("tool_01KTTQS0J87RX3PH93MMAMYMWT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),
@@ -1297,13 +1297,13 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KTRKVD33PVYVWGW21GMCT1PW"),
+  _id: z.string().default("tool_01KTTQS0J6ZBK86XFKKEHHW7VQ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
   description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string(),
   workspace_id: z.string(),
   created: z.string(),

@@ -3,11 +3,9 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -26,18 +24,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List guardrail rules
+ * List used guardrails
  *
  * @remarks
- * Returns a paginated list of guardrail rules for the current project.
+ * Returns the distinct guardrail ids referenced across all guardrail rules in scope.
  */
-export function guardrailRulesList(
+export function guardrailRulesListUsedGuardrails(
   client: OrqCore,
-  request?: operations.GuardrailRuleListRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleListResponseBody,
+    operations.GuardrailRuleListUsedGuardrailsResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -50,19 +47,17 @@ export function guardrailRulesList(
 > {
   return new APIPromise($do(
     client,
-    request,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request?: operations.GuardrailRuleListRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleListResponseBody,
+      operations.GuardrailRuleListUsedGuardrailsResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -75,32 +70,7 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed = safeParse(
-    request,
-    (value) =>
-      operations.GuardrailRuleListRequest$outboundSchema.optional().parse(
-        value,
-      ),
-    "Input validation failed",
-  );
-  if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
-  }
-  const payload = parsed.value;
-  const body = null;
-
-  const path = pathToFunc("/v2/guardrail-rules")();
-
-  const query = encodeFormQuery({
-    "enabled": payload?.enabled,
-    "ending_before": payload?.ending_before,
-    "guardrail_id": payload?.guardrail_id,
-    "limit": payload?.limit,
-    "project_id": payload?.project_id,
-    "search": payload?.search,
-    "sort_by": payload?.sort_by,
-    "starting_after": payload?.starting_after,
-  }, { explode: false });
+  const path = pathToFunc("/v2/guardrail-rules/used-guardrails")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -113,7 +83,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "GuardrailRuleList",
+    operationID: "GuardrailRuleListUsedGuardrails",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -131,8 +101,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
-    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
@@ -154,7 +122,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GuardrailRuleListResponseBody,
+    operations.GuardrailRuleListUsedGuardrailsResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +132,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GuardrailRuleListResponseBody$inboundSchema),
+    M.json(
+      200,
+      operations.GuardrailRuleListUsedGuardrailsResponseBody$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

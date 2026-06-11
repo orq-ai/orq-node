@@ -6,6 +6,7 @@
 
 * [list](#list) - List guardrail rules
 * [create](#create) - Create guardrail rule
+* [listUsedGuardrails](#listusedguardrails) - List used guardrails
 * [delete](#delete) - Delete guardrail rule
 * [retrieve](#retrieve) - Get guardrail rule
 * [update](#update) - Update guardrail rule
@@ -145,6 +146,74 @@ run();
 ### Response
 
 **Promise\<[operations.GuardrailRuleCreateResponseBody](../../models/operations/guardrailrulecreateresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listUsedGuardrails
+
+Returns the distinct guardrail ids referenced across all guardrail rules in scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GuardrailRuleListUsedGuardrails" method="get" path="/v2/guardrail-rules/used-guardrails" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.guardrailRules.listUsedGuardrails();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { guardrailRulesListUsedGuardrails } from "@orq-ai/node/funcs/guardrailRulesListUsedGuardrails.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await guardrailRulesListUsedGuardrails(orq);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guardrailRulesListUsedGuardrails failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GuardrailRuleListUsedGuardrailsResponseBody](../../models/operations/guardrailrulelistusedguardrailsresponsebody.md)\>**
 
 ### Errors
 

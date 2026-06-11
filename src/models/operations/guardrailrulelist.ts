@@ -5,9 +5,23 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Field to sort by. Defaults to created_at (newest first).
+ */
+export const SortBy = {
+  CreatedAt: "created_at",
+  UpdatedAt: "updated_at",
+  DisplayName: "display_name",
+} as const;
+/**
+ * Field to sort by. Defaults to created_at (newest first).
+ */
+export type SortBy = ClosedEnum<typeof SortBy>;
 
 export type GuardrailRuleListRequest = {
   limit?: number | undefined;
@@ -23,6 +37,22 @@ export type GuardrailRuleListRequest = {
    * Optional filter by project ID.
    */
   projectId?: string | undefined;
+  /**
+   * Filter by display name or description (case-insensitive).
+   */
+  search?: string | undefined;
+  /**
+   * Field to sort by. Defaults to created_at (newest first).
+   */
+  sortBy?: SortBy | undefined;
+  /**
+   * Filter by enabled status.
+   */
+  enabled?: boolean | null | undefined;
+  /**
+   * Filter by referenced guardrail ids (comma-separated).
+   */
+  guardrailId?: Array<string> | null | undefined;
 };
 
 /**
@@ -35,11 +65,19 @@ export type GuardrailRuleListResponseBody = {
 };
 
 /** @internal */
+export const SortBy$outboundSchema: z.ZodNativeEnum<typeof SortBy> = z
+  .nativeEnum(SortBy);
+
+/** @internal */
 export type GuardrailRuleListRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
+  search?: string | undefined;
+  sort_by?: string | undefined;
+  enabled?: boolean | null | undefined;
+  guardrail_id?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -52,11 +90,17 @@ export const GuardrailRuleListRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
+  search: z.string().optional(),
+  sortBy: SortBy$outboundSchema.optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  guardrailId: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
     projectId: "project_id",
+    sortBy: "sort_by",
+    guardrailId: "guardrail_id",
   });
 });
 
