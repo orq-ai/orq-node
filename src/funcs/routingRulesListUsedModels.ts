@@ -3,11 +3,9 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -26,18 +24,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List routing rules
+ * List used models
  *
  * @remarks
- * Returns a paginated list of routing rules for the current project, ordered by priority ascending.
+ * Returns the distinct model refs referenced across all routing rules in scope.
  */
-export function routingRulesList(
+export function routingRulesListUsedModels(
   client: OrqCore,
-  request?: operations.RoutingRuleListRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RoutingRuleListResponseBody,
+    operations.RoutingRuleListUsedModelsResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -50,19 +47,17 @@ export function routingRulesList(
 > {
   return new APIPromise($do(
     client,
-    request,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request?: operations.RoutingRuleListRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.RoutingRuleListResponseBody,
+      operations.RoutingRuleListUsedModelsResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -75,29 +70,7 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed = safeParse(
-    request,
-    (value) =>
-      operations.RoutingRuleListRequest$outboundSchema.optional().parse(value),
-    "Input validation failed",
-  );
-  if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
-  }
-  const payload = parsed.value;
-  const body = null;
-
-  const path = pathToFunc("/v2/routing-rules")();
-
-  const query = encodeFormQuery({
-    "enabled": payload?.enabled,
-    "ending_before": payload?.ending_before,
-    "limit": payload?.limit,
-    "model": payload?.model,
-    "project_id": payload?.project_id,
-    "search": payload?.search,
-    "starting_after": payload?.starting_after,
-  }, { explode: false });
+  const path = pathToFunc("/v2/routing-rules/used-models")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -110,7 +83,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "RoutingRuleList",
+    operationID: "RoutingRuleListUsedModels",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -128,8 +101,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
-    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
@@ -151,7 +122,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RoutingRuleListResponseBody,
+    operations.RoutingRuleListUsedModelsResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -161,7 +132,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RoutingRuleListResponseBody$inboundSchema),
+    M.json(200, operations.RoutingRuleListUsedModelsResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

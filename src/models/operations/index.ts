@@ -144,6 +144,7 @@ export * from "./routingrulecreate.js";
 export * from "./routingruledelete.js";
 export * from "./routingruleget.js";
 export * from "./routingrulelist.js";
+export * from "./routingrulelistusedmodels.js";
 export * from "./routingruleupdate.js";
 export * from "./runagent.js";
 export * from "./searchknowledge.js";
