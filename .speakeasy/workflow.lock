@@ -21,7 +21,7 @@ targets:
         sourceRevisionDigest: sha256:2a63892e2433375cfa3eb0137e9247689635ea204363dff398b08a4a1529fe3a
         sourceBlobDigest: sha256:34be2b46510214ea65d1238d5a40f095b059f9daf61d42be0578347f43e78a3c
         codeSamplesNamespace: orq-ai-node-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:910983694f16d9ec9a8cd070ac756c3e8ede67bcb191fb736607ea4925b256db
+        codeSamplesRevisionDigest: sha256:92295216fab61808902363e4e05fc5901c6ef551d22e0f6f6b1cf508f0df1d60
     orq-ai-prerelease-node:
         source: orq-ai-prerelease-node
         sourceNamespace: orq-ai-prerelease-node

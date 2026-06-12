@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create schedule
+   * Create rerank
    *
    * @remarks
-   * Creates a schedule that runs the agent on a recurring or one-off cadence. The minimum firing interval is 1 hour for `cron` and `interval`; `once` schedules are exempt.
+   * Rerank a list of documents based on their relevance to a query.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
