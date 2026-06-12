@@ -167,6 +167,17 @@ run();
 * [delete](docs/sdks/apikeys/README.md#delete) - Delete an API key
 * [update](docs/sdks/apikeys/README.md#update) - Update an API key
 
+### [Budgets](docs/sdks/budgets/README.md)
+
+* [list](docs/sdks/budgets/README.md#list) - List budgets
+* [create](docs/sdks/budgets/README.md#create) - Create a new budget
+* [check](docs/sdks/budgets/README.md#check) - Check budget enforcement
+* [get](docs/sdks/budgets/README.md#get) - Retrieve a budget
+* [delete](docs/sdks/budgets/README.md#delete) - Delete a budget
+* [update](docs/sdks/budgets/README.md#update) - Update a budget
+* [getConsumption](docs/sdks/budgets/README.md#getconsumption) - Get current-period consumption
+* [resetConsumption](docs/sdks/budgets/README.md#resetconsumption) - Reset budget consumption
+
 ### [Chunking](docs/sdks/chunking/README.md)
 
 * [parse](docs/sdks/chunking/README.md#parse) - Parse text
@@ -462,6 +473,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
 - [`apiKeysListCapabilities`](docs/sdks/apikeys/README.md#listcapabilities) - List capability catalog
 - [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Update an API key
+- [`budgetsCheck`](docs/sdks/budgets/README.md#check) - Check budget enforcement
+- [`budgetsCreate`](docs/sdks/budgets/README.md#create) - Create a new budget
+- [`budgetsDelete`](docs/sdks/budgets/README.md#delete) - Delete a budget
+- [`budgetsGet`](docs/sdks/budgets/README.md#get) - Retrieve a budget
+- [`budgetsGetConsumption`](docs/sdks/budgets/README.md#getconsumption) - Get current-period consumption
+- [`budgetsList`](docs/sdks/budgets/README.md#list) - List budgets
+- [`budgetsResetConsumption`](docs/sdks/budgets/README.md#resetconsumption) - Reset budget consumption
+- [`budgetsUpdate`](docs/sdks/budgets/README.md#update) - Update a budget
 - [`chunkingParse`](docs/sdks/chunking/README.md#parse) - Parse text
 - [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 - [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
@@ -933,42 +952,42 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 179 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 179 methods.*
-* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 179 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 179 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 179 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 179 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 179 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 179 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 179 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 179 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 179 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 179 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 179 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 179 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 179 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 179 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 179 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 179 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 179 methods.*
-* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 179 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 10 of 187 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 187 methods.*
+* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 187 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 187 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 187 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 187 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 187 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 187 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 187 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 187 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 187 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 187 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 187 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 187 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 187 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 187 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 187 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 187 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 187 methods.*
+* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 187 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

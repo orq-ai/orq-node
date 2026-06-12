@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
+import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
@@ -124,6 +125,11 @@ export class Orq extends ClientSDK {
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
+  }
+
+  private _budgets?: Budgets;
+  get budgets(): Budgets {
+    return (this._budgets ??= new Budgets(this._options));
   }
 
   private _files?: Files;

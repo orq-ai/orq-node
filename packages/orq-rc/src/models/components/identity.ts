@@ -15,7 +15,7 @@ import {
 /**
  * Custom JSON metadata stored with the identity.
  */
-export type Metadata = {};
+export type IdentityMetadata = {};
 
 export type Identity = {
   /**
@@ -55,7 +55,7 @@ export type Identity = {
   /**
    * Custom JSON metadata stored with the identity.
    */
-  metadata?: Metadata | undefined;
+  metadata?: IdentityMetadata | undefined;
   /**
    * ISO timestamp for when the identity was created.
    */
@@ -74,19 +74,19 @@ export type Identity = {
 };
 
 /** @internal */
-export const Metadata$inboundSchema: z.ZodType<
-  Metadata,
+export const IdentityMetadata$inboundSchema: z.ZodType<
+  IdentityMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({});
 
-export function metadataFromJSON(
+export function identityMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
+): SafeParseResult<IdentityMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
+    (x) => IdentityMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IdentityMetadata' from JSON`,
   );
 }
 
@@ -103,7 +103,7 @@ export const Identity$inboundSchema: z.ZodType<
   email: z.string().optional(),
   avatar_url: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+  metadata: z.lazy(() => IdentityMetadata$inboundSchema).optional(),
   created: z.string(),
   updated: z.string(),
   metrics: IdentityMetrics$inboundSchema.optional(),
