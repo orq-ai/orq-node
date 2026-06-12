@@ -92,9 +92,7 @@ async function $do(
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
-    "search": payload?.search,
     "starting_after": payload?.starting_after,
-    "updated_by": payload?.updated_by,
   });
 
   const headers = new Headers(compactMap({

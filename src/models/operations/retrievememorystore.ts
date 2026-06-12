@@ -57,7 +57,7 @@ export type RetrieveMemoryStoreResponseBody = {
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
-  ttl?: number | null | undefined;
+  ttl?: number | undefined;
   embeddingConfig: RetrieveMemoryStoreEmbeddingConfig;
 };
 
@@ -120,7 +120,7 @@ export const RetrieveMemoryStoreResponseBody$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
-  ttl: z.nullable(z.number()).optional(),
+  ttl: z.number().optional(),
   embedding_config: z.lazy(() =>
     RetrieveMemoryStoreEmbeddingConfig$inboundSchema
   ),

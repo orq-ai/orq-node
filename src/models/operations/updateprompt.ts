@@ -656,66 +656,6 @@ export type UpdatePromptTimeout = {
 };
 
 /**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const UpdatePromptPromptsType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type UpdatePromptPromptsType = ClosedEnum<
-  typeof UpdatePromptPromptsType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const UpdatePromptTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type UpdatePromptTtl = ClosedEnum<typeof UpdatePromptTtl>;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type UpdatePromptCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: UpdatePromptPromptsType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl?: UpdatePromptTtl | undefined;
-};
-
-/**
  * Prompt configuration with model and messages. Use this to update the prompt.
  */
 export type UpdatePromptPromptInput = {
@@ -864,14 +804,6 @@ export type UpdatePromptPromptInput = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: UpdatePromptTimeout | undefined;
-  /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: UpdatePromptCacheControl | undefined;
-  /**
-   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
-   */
-  promptCacheKey?: string | undefined;
 };
 
 export const UpdatePromptUseCases = {
@@ -966,11 +898,11 @@ export type UpdatePromptRequest = {
   requestBody?: UpdatePromptRequestBody | undefined;
 };
 
-export const UpdatePromptPromptsResponseType = {
+export const UpdatePromptPromptsType = {
   Prompt: "prompt",
 } as const;
-export type UpdatePromptPromptsResponseType = ClosedEnum<
-  typeof UpdatePromptPromptsResponseType
+export type UpdatePromptPromptsType = ClosedEnum<
+  typeof UpdatePromptPromptsType
 >;
 
 /**
@@ -1111,69 +1043,6 @@ export type UpdatePromptPromptsResponseResponseFormat =
   | UpdatePromptResponseFormat4
   | UpdatePromptResponseFormat5
   | UpdatePromptResponseFormat6;
-
-/**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export const UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export type UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType
-  >;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const UpdatePromptPromptsResponseTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type UpdatePromptPromptsResponseTtl = ClosedEnum<
-  typeof UpdatePromptPromptsResponseTtl
->;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type UpdatePromptPromptsResponseCacheControl = {
-  /**
-   * Create a cache control breakpoint. Accepts only the value "ephemeral".
-   */
-  type: UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: UpdatePromptPromptsResponseTtl;
-};
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -1321,10 +1190,6 @@ export type UpdatePromptModelParameters = {
     | UpdatePromptResponseFormat6
     | null
     | undefined;
-  /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: UpdatePromptPromptsResponseCacheControl | null | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -1479,14 +1344,12 @@ export type UpdatePromptContent =
   | string
   | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>;
 
-export const UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType =
-  {
-    Function: "function",
-  } as const;
-export type UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType =
-  ClosedEnum<
-    typeof UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
-  >;
+export const UpdatePromptPromptsResponse200Type = {
+  Function: "function",
+} as const;
+export type UpdatePromptPromptsResponse200Type = ClosedEnum<
+  typeof UpdatePromptPromptsResponse200Type
+>;
 
 export type UpdatePromptFunction = {
   name: string;
@@ -1499,8 +1362,7 @@ export type UpdatePromptFunction = {
 export type UpdatePromptToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type:
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType;
+  type: UpdatePromptPromptsResponse200Type;
   function: UpdatePromptFunction;
 };
 
@@ -1819,11 +1681,11 @@ export type UpdatePromptPromptsRetry = {
   onCodes?: Array<number> | undefined;
 };
 
-export const UpdatePromptPromptsResponse200Type = {
+export const UpdatePromptPromptsResponseType = {
   ExactMatch: "exact_match",
 } as const;
-export type UpdatePromptPromptsResponse200Type = ClosedEnum<
-  typeof UpdatePromptPromptsResponse200Type
+export type UpdatePromptPromptsResponseType = ClosedEnum<
+  typeof UpdatePromptPromptsResponseType
 >;
 
 /**
@@ -1834,7 +1696,7 @@ export type UpdatePromptPromptsCache = {
    * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
    */
   ttl: number;
-  type: UpdatePromptPromptsResponse200Type;
+  type: UpdatePromptPromptsResponseType;
 };
 
 export const UpdatePromptLoadBalancerPromptsType = {
@@ -1873,66 +1735,6 @@ export type UpdatePromptPromptsTimeout = {
    * Timeout value in milliseconds
    */
   callTimeout: number;
-};
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const UpdatePromptPromptsResponse200ApplicationJSONType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type UpdatePromptPromptsResponse200ApplicationJSONType = ClosedEnum<
-  typeof UpdatePromptPromptsResponse200ApplicationJSONType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const UpdatePromptPromptsTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type UpdatePromptPromptsTtl = ClosedEnum<typeof UpdatePromptPromptsTtl>;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type UpdatePromptPromptsCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: UpdatePromptPromptsResponse200ApplicationJSONType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: UpdatePromptPromptsTtl;
 };
 
 export type UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2 =
@@ -2406,14 +2208,6 @@ export type UpdatePromptPromptField = {
    */
   timeout?: UpdatePromptPromptsTimeout | undefined;
   /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: UpdatePromptPromptsCacheControl | undefined;
-  /**
-   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
-   */
-  promptCacheKey?: string | undefined;
-  /**
    * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
    */
   messages?:
@@ -2492,7 +2286,7 @@ export type UpdatePromptPromptsMetadata = {
  */
 export type UpdatePromptPrompt = {
   id: string;
-  type: UpdatePromptPromptsResponseType;
+  type: UpdatePromptPromptsType;
   owner: string;
   domainId: string;
   created: string;
@@ -3687,40 +3481,6 @@ export function updatePromptTimeoutToJSON(
 }
 
 /** @internal */
-export const UpdatePromptPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsType
-> = z.nativeEnum(UpdatePromptPromptsType);
-
-/** @internal */
-export const UpdatePromptTtl$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptTtl
-> = z.nativeEnum(UpdatePromptTtl);
-
-/** @internal */
-export type UpdatePromptCacheControl$Outbound = {
-  type: string;
-  ttl: string;
-};
-
-/** @internal */
-export const UpdatePromptCacheControl$outboundSchema: z.ZodType<
-  UpdatePromptCacheControl$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptCacheControl
-> = z.object({
-  type: UpdatePromptPromptsType$outboundSchema,
-  ttl: UpdatePromptTtl$outboundSchema.default("5m"),
-});
-
-export function updatePromptCacheControlToJSON(
-  updatePromptCacheControl: UpdatePromptCacheControl,
-): string {
-  return JSON.stringify(
-    UpdatePromptCacheControl$outboundSchema.parse(updatePromptCacheControl),
-  );
-}
-
-/** @internal */
 export type UpdatePromptPromptInput$Outbound = {
   messages?:
     | Array<
@@ -3767,8 +3527,6 @@ export type UpdatePromptPromptInput$Outbound = {
   cache?: UpdatePromptCache$Outbound | undefined;
   load_balancer?: UpdatePromptLoadBalancer1$Outbound | undefined;
   timeout?: UpdatePromptTimeout$Outbound | undefined;
-  cache_control?: UpdatePromptCacheControl$Outbound | undefined;
-  prompt_cache_key?: string | undefined;
 };
 
 /** @internal */
@@ -3831,9 +3589,6 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
   loadBalancer: z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => UpdatePromptTimeout$outboundSchema).optional(),
-  cacheControl: z.lazy(() => UpdatePromptCacheControl$outboundSchema)
-    .optional(),
-  promptCacheKey: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     frequencyPenalty: "frequency_penalty",
@@ -3849,8 +3604,6 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
     loadBalancer: "load_balancer",
-    cacheControl: "cache_control",
-    promptCacheKey: "prompt_cache_key",
   });
 });
 
@@ -3978,9 +3731,9 @@ export function updatePromptRequestToJSON(
 }
 
 /** @internal */
-export const UpdatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsResponseType
-> = z.nativeEnum(UpdatePromptPromptsResponseType);
+export const UpdatePromptPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsType
+> = z.nativeEnum(UpdatePromptPromptsType);
 
 /** @internal */
 export const UpdatePromptModelType$inboundSchema: z.ZodNativeEnum<
@@ -4159,46 +3912,6 @@ export function updatePromptPromptsResponseResponseFormatFromJSON(
 }
 
 /** @internal */
-export const UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType,
-  );
-
-/** @internal */
-export const UpdatePromptPromptsResponseTtl$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsResponseTtl
-> = z.nativeEnum(UpdatePromptPromptsResponseTtl);
-
-/** @internal */
-export const UpdatePromptPromptsResponseCacheControl$inboundSchema: z.ZodType<
-  UpdatePromptPromptsResponseCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-  ttl: UpdatePromptPromptsResponseTtl$inboundSchema.default("5m"),
-});
-
-export function updatePromptPromptsResponseCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  UpdatePromptPromptsResponseCacheControl,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdatePromptPromptsResponseCacheControl$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'UpdatePromptPromptsResponseCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
 export const UpdatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPhotoRealVersion
 > = z.nativeEnum(UpdatePromptPhotoRealVersion);
@@ -4250,9 +3963,6 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
       UpdatePromptResponseFormat5$inboundSchema,
       UpdatePromptResponseFormat6$inboundSchema,
     ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => UpdatePromptPromptsResponseCacheControl$inboundSchema),
   ).optional(),
   photoRealVersion: UpdatePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: UpdatePromptEncodingFormat$inboundSchema.optional(),
@@ -4445,12 +4155,9 @@ export function updatePromptContentFromJSON(
 }
 
 /** @internal */
-export const UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
-  > = z.nativeEnum(
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
-  );
+export const UpdatePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsResponse200Type
+> = z.nativeEnum(UpdatePromptPromptsResponse200Type);
 
 /** @internal */
 export const UpdatePromptFunction$inboundSchema: z.ZodType<
@@ -4480,8 +4187,7 @@ export const UpdatePromptToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type:
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
+  type: UpdatePromptPromptsResponse200Type$inboundSchema,
   function: z.lazy(() => UpdatePromptFunction$inboundSchema),
 });
 
@@ -4964,9 +4670,9 @@ export function updatePromptPromptsRetryFromJSON(
 }
 
 /** @internal */
-export const UpdatePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsResponse200Type
-> = z.nativeEnum(UpdatePromptPromptsResponse200Type);
+export const UpdatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsResponseType
+> = z.nativeEnum(UpdatePromptPromptsResponseType);
 
 /** @internal */
 export const UpdatePromptPromptsCache$inboundSchema: z.ZodType<
@@ -4975,7 +4681,7 @@ export const UpdatePromptPromptsCache$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   ttl: z.number().default(1800),
-  type: UpdatePromptPromptsResponse200Type$inboundSchema,
+  type: UpdatePromptPromptsResponseType$inboundSchema,
 });
 
 export function updatePromptPromptsCacheFromJSON(
@@ -5073,36 +4779,6 @@ export function updatePromptPromptsTimeoutFromJSON(
     jsonString,
     (x) => UpdatePromptPromptsTimeout$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdatePromptPromptsTimeout' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdatePromptPromptsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200ApplicationJSONType> = z
-    .nativeEnum(UpdatePromptPromptsResponse200ApplicationJSONType);
-
-/** @internal */
-export const UpdatePromptPromptsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsTtl
-> = z.nativeEnum(UpdatePromptPromptsTtl);
-
-/** @internal */
-export const UpdatePromptPromptsCacheControl$inboundSchema: z.ZodType<
-  UpdatePromptPromptsCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: UpdatePromptPromptsResponse200ApplicationJSONType$inboundSchema,
-  ttl: UpdatePromptPromptsTtl$inboundSchema.default("5m"),
-});
-
-export function updatePromptPromptsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptPromptsCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptPromptsCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptPromptsCacheControl' from JSON`,
   );
 }
 
@@ -5701,9 +5377,6 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
   load_balancer: z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => UpdatePromptPromptsTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => UpdatePromptPromptsCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
   messages: z.array(
     z.union([
       z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$inboundSchema),
@@ -5729,8 +5402,6 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
   });
 });
 
@@ -5785,7 +5456,7 @@ export const UpdatePromptPrompt$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  type: UpdatePromptPromptsResponseType$inboundSchema,
+  type: UpdatePromptPromptsType$inboundSchema,
   owner: z.string(),
   domain_id: z.string(),
   created: z.string(),

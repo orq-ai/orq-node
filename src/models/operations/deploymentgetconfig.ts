@@ -1271,11 +1271,11 @@ export type DeploymentGetConfigContent =
   | string
   | Array<Two1 | DeploymentGetConfig22 | Two3>;
 
-export const DeploymentGetConfigDeploymentsResponse200Type = {
+export const DeploymentGetConfigDeploymentsResponseType = {
   Function: "function",
 } as const;
-export type DeploymentGetConfigDeploymentsResponse200Type = ClosedEnum<
-  typeof DeploymentGetConfigDeploymentsResponse200Type
+export type DeploymentGetConfigDeploymentsResponseType = ClosedEnum<
+  typeof DeploymentGetConfigDeploymentsResponseType
 >;
 
 export type DeploymentGetConfigDeploymentsFunction = {
@@ -1289,7 +1289,7 @@ export type DeploymentGetConfigDeploymentsFunction = {
 export type DeploymentGetConfigToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: DeploymentGetConfigDeploymentsResponse200Type;
+  type: DeploymentGetConfigDeploymentsResponseType;
   function: DeploymentGetConfigDeploymentsFunction;
 };
 
@@ -1406,66 +1406,6 @@ export type DeploymentGetConfigResponseFormat =
   | ResponseFormat4
   | ResponseFormat5
   | ResponseFormat6;
-
-/**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export const DeploymentGetConfigDeploymentsResponseType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export type DeploymentGetConfigDeploymentsResponseType = ClosedEnum<
-  typeof DeploymentGetConfigDeploymentsResponseType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const DeploymentGetConfigTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfigTtl = ClosedEnum<typeof DeploymentGetConfigTtl>;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type DeploymentGetConfigCacheControl = {
-  /**
-   * Create a cache control breakpoint. Accepts only the value "ephemeral".
-   */
-  type: DeploymentGetConfigDeploymentsResponseType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: DeploymentGetConfigTtl;
-};
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -1611,10 +1551,6 @@ export type DeploymentGetConfigParameters = {
     | ResponseFormat6
     | null
     | undefined;
-  /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: DeploymentGetConfigCacheControl | null | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -4640,9 +4576,9 @@ export function deploymentGetConfigContentFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigDeploymentsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponse200Type> = z
-    .nativeEnum(DeploymentGetConfigDeploymentsResponse200Type);
+export const DeploymentGetConfigDeploymentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponseType> = z
+    .nativeEnum(DeploymentGetConfigDeploymentsResponseType);
 
 /** @internal */
 export const DeploymentGetConfigDeploymentsFunction$inboundSchema: z.ZodType<
@@ -4673,7 +4609,7 @@ export const DeploymentGetConfigToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: DeploymentGetConfigDeploymentsResponse200Type$inboundSchema,
+  type: DeploymentGetConfigDeploymentsResponseType$inboundSchema,
   function: z.lazy(() => DeploymentGetConfigDeploymentsFunction$inboundSchema),
 });
 
@@ -4882,36 +4818,6 @@ export function deploymentGetConfigResponseFormatFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfigDeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponseType> = z
-    .nativeEnum(DeploymentGetConfigDeploymentsResponseType);
-
-/** @internal */
-export const DeploymentGetConfigTtl$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigTtl
-> = z.nativeEnum(DeploymentGetConfigTtl);
-
-/** @internal */
-export const DeploymentGetConfigCacheControl$inboundSchema: z.ZodType<
-  DeploymentGetConfigCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfigDeploymentsResponseType$inboundSchema,
-  ttl: DeploymentGetConfigTtl$inboundSchema.default("5m"),
-});
-
-export function deploymentGetConfigCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentGetConfigCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentGetConfigCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
 export const PhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof PhotoRealVersion
 > = z.nativeEnum(PhotoRealVersion);
@@ -4963,9 +4869,6 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
       ResponseFormat5$inboundSchema,
       ResponseFormat6$inboundSchema,
     ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => DeploymentGetConfigCacheControl$inboundSchema),
   ).optional(),
   photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
   encoding_format: DeploymentGetConfigEncodingFormat$inboundSchema.optional(),

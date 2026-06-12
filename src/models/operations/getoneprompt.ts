@@ -153,66 +153,6 @@ export type GetOnePromptPromptsResponseFormat =
   | GetOnePromptResponseFormat6;
 
 /**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export const GetOnePromptPromptsResponse200Type = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export type GetOnePromptPromptsResponse200Type = ClosedEnum<
-  typeof GetOnePromptPromptsResponse200Type
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const GetOnePromptPromptsTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type GetOnePromptPromptsTtl = ClosedEnum<typeof GetOnePromptPromptsTtl>;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type GetOnePromptPromptsCacheControl = {
-  /**
-   * Create a cache control breakpoint. Accepts only the value "ephemeral".
-   */
-  type: GetOnePromptPromptsResponse200Type;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: GetOnePromptPromptsTtl;
-};
-
-/**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
  */
 export const GetOnePromptPhotoRealVersion = {
@@ -358,10 +298,6 @@ export type GetOnePromptModelParameters = {
     | GetOnePromptResponseFormat6
     | null
     | undefined;
-  /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: GetOnePromptPromptsCacheControl | null | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -516,11 +452,11 @@ export type GetOnePromptContent =
   | string
   | Array<GetOnePrompt21 | GetOnePrompt22 | GetOnePrompt23>;
 
-export const GetOnePromptPromptsResponse200ApplicationJSONType = {
+export const GetOnePromptPromptsResponseType = {
   Function: "function",
 } as const;
-export type GetOnePromptPromptsResponse200ApplicationJSONType = ClosedEnum<
-  typeof GetOnePromptPromptsResponse200ApplicationJSONType
+export type GetOnePromptPromptsResponseType = ClosedEnum<
+  typeof GetOnePromptPromptsResponseType
 >;
 
 export type GetOnePromptFunction = {
@@ -534,7 +470,7 @@ export type GetOnePromptFunction = {
 export type GetOnePromptToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: GetOnePromptPromptsResponse200ApplicationJSONType;
+  type: GetOnePromptPromptsResponseType;
   function: GetOnePromptFunction;
 };
 
@@ -901,66 +837,6 @@ export type GetOnePromptTimeout = {
    * Timeout value in milliseconds
    */
   callTimeout: number;
-};
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const GetOnePromptPromptsResponseType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type GetOnePromptPromptsResponseType = ClosedEnum<
-  typeof GetOnePromptPromptsResponseType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const GetOnePromptTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type GetOnePromptTtl = ClosedEnum<typeof GetOnePromptTtl>;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type GetOnePromptCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: GetOnePromptPromptsResponseType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: GetOnePromptTtl;
 };
 
 export type GetOnePromptContentPromptsResponse2002 =
@@ -1427,14 +1303,6 @@ export type GetOnePromptPromptField = {
    */
   timeout?: GetOnePromptTimeout | undefined;
   /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: GetOnePromptCacheControl | undefined;
-  /**
-   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
-   */
-  promptCacheKey?: string | undefined;
-  /**
    * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
    */
   messages?:
@@ -1732,36 +1600,6 @@ export function getOnePromptPromptsResponseFormatFromJSON(
 }
 
 /** @internal */
-export const GetOnePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsResponse200Type
-> = z.nativeEnum(GetOnePromptPromptsResponse200Type);
-
-/** @internal */
-export const GetOnePromptPromptsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsTtl
-> = z.nativeEnum(GetOnePromptPromptsTtl);
-
-/** @internal */
-export const GetOnePromptPromptsCacheControl$inboundSchema: z.ZodType<
-  GetOnePromptPromptsCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetOnePromptPromptsResponse200Type$inboundSchema,
-  ttl: GetOnePromptPromptsTtl$inboundSchema.default("5m"),
-});
-
-export function getOnePromptPromptsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOnePromptPromptsCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOnePromptPromptsCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptPromptsCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetOnePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPhotoRealVersion
 > = z.nativeEnum(GetOnePromptPhotoRealVersion);
@@ -1813,9 +1651,6 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
       GetOnePromptResponseFormat5$inboundSchema,
       GetOnePromptResponseFormat6$inboundSchema,
     ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => GetOnePromptPromptsCacheControl$inboundSchema),
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: GetOnePromptEncodingFormat$inboundSchema.optional(),
@@ -2006,9 +1841,9 @@ export function getOnePromptContentFromJSON(
 }
 
 /** @internal */
-export const GetOnePromptPromptsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptPromptsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetOnePromptPromptsResponse200ApplicationJSONType);
+export const GetOnePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptPromptsResponseType
+> = z.nativeEnum(GetOnePromptPromptsResponseType);
 
 /** @internal */
 export const GetOnePromptFunction$inboundSchema: z.ZodType<
@@ -2038,7 +1873,7 @@ export const GetOnePromptToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: GetOnePromptPromptsResponse200ApplicationJSONType$inboundSchema,
+  type: GetOnePromptPromptsResponseType$inboundSchema,
   function: z.lazy(() => GetOnePromptFunction$inboundSchema),
 });
 
@@ -2615,36 +2450,6 @@ export function getOnePromptTimeoutFromJSON(
 }
 
 /** @internal */
-export const GetOnePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptPromptsResponseType
-> = z.nativeEnum(GetOnePromptPromptsResponseType);
-
-/** @internal */
-export const GetOnePromptTtl$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptTtl
-> = z.nativeEnum(GetOnePromptTtl);
-
-/** @internal */
-export const GetOnePromptCacheControl$inboundSchema: z.ZodType<
-  GetOnePromptCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetOnePromptPromptsResponseType$inboundSchema,
-  ttl: GetOnePromptTtl$inboundSchema.default("5m"),
-});
-
-export function getOnePromptCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOnePromptCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOnePromptCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetOnePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
   GetOnePromptContentPromptsResponse2002,
   z.ZodTypeDef,
@@ -3183,9 +2988,6 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
   load_balancer: z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => GetOnePromptTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => GetOnePromptCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
   messages: z.array(
     z.union([
       z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
@@ -3211,8 +3013,6 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
   });
 });
 

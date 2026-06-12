@@ -50,6 +50,7 @@ typescript:
         types: ./langchain/index.d.mts
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Orq
   baseErrorName: OrqError
   clientServerStatusCodesAsErrors: true

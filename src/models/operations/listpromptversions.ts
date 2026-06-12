@@ -169,68 +169,6 @@ export type ListPromptVersionsPromptsResponseFormat =
   | ListPromptVersionsResponseFormat6;
 
 /**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export const ListPromptVersionsPromptsResponseType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint. Accepts only the value "ephemeral".
- */
-export type ListPromptVersionsPromptsResponseType = ClosedEnum<
-  typeof ListPromptVersionsPromptsResponseType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const ListPromptVersionsPromptsTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type ListPromptVersionsPromptsTtl = ClosedEnum<
-  typeof ListPromptVersionsPromptsTtl
->;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type ListPromptVersionsPromptsCacheControl = {
-  /**
-   * Create a cache control breakpoint. Accepts only the value "ephemeral".
-   */
-  type: ListPromptVersionsPromptsResponseType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: ListPromptVersionsPromptsTtl;
-};
-
-/**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
  */
 export const ListPromptVersionsPhotoRealVersion = {
@@ -378,10 +316,6 @@ export type ListPromptVersionsModelParameters = {
     | ListPromptVersionsResponseFormat6
     | null
     | undefined;
-  /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: ListPromptVersionsPromptsCacheControl | null | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -538,11 +472,11 @@ export type ListPromptVersionsContent =
   | string
   | Array<ListPromptVersions21 | ListPromptVersions22 | ListPromptVersions23>;
 
-export const ListPromptVersionsPromptsResponse200Type = {
+export const ListPromptVersionsPromptsType = {
   Function: "function",
 } as const;
-export type ListPromptVersionsPromptsResponse200Type = ClosedEnum<
-  typeof ListPromptVersionsPromptsResponse200Type
+export type ListPromptVersionsPromptsType = ClosedEnum<
+  typeof ListPromptVersionsPromptsType
 >;
 
 export type ListPromptVersionsFunction = {
@@ -556,7 +490,7 @@ export type ListPromptVersionsFunction = {
 export type ListPromptVersionsToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: ListPromptVersionsPromptsResponse200Type;
+  type: ListPromptVersionsPromptsType;
   function: ListPromptVersionsFunction;
 };
 
@@ -927,66 +861,6 @@ export type ListPromptVersionsTimeout = {
    * Timeout value in milliseconds
    */
   callTimeout: number;
-};
-
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export const ListPromptVersionsPromptsType = {
-  Ephemeral: "ephemeral",
-} as const;
-/**
- * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
- */
-export type ListPromptVersionsPromptsType = ClosedEnum<
-  typeof ListPromptVersionsPromptsType
->;
-
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export const ListPromptVersionsTtl = {
-  Fivem: "5m",
-  Oneh: "1h",
-} as const;
-/**
- * The time-to-live for the cache control breakpoint. This may be one of the following values:
- *
- * @remarks
- *
- * - `5m`: 5 minutes
- * - `1h`: 1 hour
- *
- * Defaults to `5m`. Only supported by `Anthropic` Claude models.
- */
-export type ListPromptVersionsTtl = ClosedEnum<typeof ListPromptVersionsTtl>;
-
-/**
- * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
- */
-export type ListPromptVersionsCacheControl = {
-  /**
-   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-   */
-  type: ListPromptVersionsPromptsType;
-  /**
-   * The time-to-live for the cache control breakpoint. This may be one of the following values:
-   *
-   * @remarks
-   *
-   * - `5m`: 5 minutes
-   * - `1h`: 1 hour
-   *
-   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
-   */
-  ttl: ListPromptVersionsTtl;
 };
 
 export type ListPromptVersionsContentPromptsResponse2002 =
@@ -1455,14 +1329,6 @@ export type ListPromptVersionsPromptField = {
    */
   timeout?: ListPromptVersionsTimeout | undefined;
   /**
-   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
-   */
-  cacheControl?: ListPromptVersionsCacheControl | undefined;
-  /**
-   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
-   */
-  promptCacheKey?: string | undefined;
-  /**
    * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
    */
   messages?:
@@ -1780,38 +1646,6 @@ export function listPromptVersionsPromptsResponseFormatFromJSON(
 }
 
 /** @internal */
-export const ListPromptVersionsPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof ListPromptVersionsPromptsResponseType> = z.nativeEnum(
-    ListPromptVersionsPromptsResponseType,
-  );
-
-/** @internal */
-export const ListPromptVersionsPromptsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsPromptsTtl
-> = z.nativeEnum(ListPromptVersionsPromptsTtl);
-
-/** @internal */
-export const ListPromptVersionsPromptsCacheControl$inboundSchema: z.ZodType<
-  ListPromptVersionsPromptsCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ListPromptVersionsPromptsResponseType$inboundSchema,
-  ttl: ListPromptVersionsPromptsTtl$inboundSchema.default("5m"),
-});
-
-export function listPromptVersionsPromptsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<ListPromptVersionsPromptsCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListPromptVersionsPromptsCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListPromptVersionsPromptsCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListPromptVersionsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof ListPromptVersionsPhotoRealVersion
 > = z.nativeEnum(ListPromptVersionsPhotoRealVersion);
@@ -1863,9 +1697,6 @@ export const ListPromptVersionsModelParameters$inboundSchema: z.ZodType<
       ListPromptVersionsResponseFormat5$inboundSchema,
       ListPromptVersionsResponseFormat6$inboundSchema,
     ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => ListPromptVersionsPromptsCacheControl$inboundSchema),
   ).optional(),
   photoRealVersion: ListPromptVersionsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: ListPromptVersionsEncodingFormat$inboundSchema.optional(),
@@ -2057,9 +1888,9 @@ export function listPromptVersionsContentFromJSON(
 }
 
 /** @internal */
-export const ListPromptVersionsPromptsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof ListPromptVersionsPromptsResponse200Type> = z
-    .nativeEnum(ListPromptVersionsPromptsResponse200Type);
+export const ListPromptVersionsPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsPromptsType
+> = z.nativeEnum(ListPromptVersionsPromptsType);
 
 /** @internal */
 export const ListPromptVersionsFunction$inboundSchema: z.ZodType<
@@ -2089,7 +1920,7 @@ export const ListPromptVersionsToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: ListPromptVersionsPromptsResponse200Type$inboundSchema,
+  type: ListPromptVersionsPromptsType$inboundSchema,
   function: z.lazy(() => ListPromptVersionsFunction$inboundSchema),
 });
 
@@ -2680,36 +2511,6 @@ export function listPromptVersionsTimeoutFromJSON(
 }
 
 /** @internal */
-export const ListPromptVersionsPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsPromptsType
-> = z.nativeEnum(ListPromptVersionsPromptsType);
-
-/** @internal */
-export const ListPromptVersionsTtl$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsTtl
-> = z.nativeEnum(ListPromptVersionsTtl);
-
-/** @internal */
-export const ListPromptVersionsCacheControl$inboundSchema: z.ZodType<
-  ListPromptVersionsCacheControl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: ListPromptVersionsPromptsType$inboundSchema,
-  ttl: ListPromptVersionsTtl$inboundSchema.default("5m"),
-});
-
-export function listPromptVersionsCacheControlFromJSON(
-  jsonString: string,
-): SafeParseResult<ListPromptVersionsCacheControl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListPromptVersionsCacheControl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListPromptVersionsCacheControl' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListPromptVersionsContentPromptsResponse2002$inboundSchema:
   z.ZodType<
     ListPromptVersionsContentPromptsResponse2002,
@@ -3289,9 +3090,6 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
   load_balancer: z.lazy(() => ListPromptVersionsLoadBalancer1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => ListPromptVersionsTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => ListPromptVersionsCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
   messages: z.array(
     z.union([
       z.lazy(() => ListPromptVersionsMessagesSystemMessage$inboundSchema),
@@ -3317,8 +3115,6 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
   });
 });
 

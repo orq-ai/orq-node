@@ -1,17 +1,15 @@
 # CreateAgentRequestFallbackModelConfigurationType
 
-Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
-
 ## Example Usage
 
 ```typescript
 import { CreateAgentRequestFallbackModelConfigurationType } from "@orq-ai/node/models/operations";
 
-let value: CreateAgentRequestFallbackModelConfigurationType = "ephemeral";
+let value: CreateAgentRequestFallbackModelConfigurationType = "exact_match";
 ```
 
 ## Values
 
 ```typescript
-"ephemeral"
+"exact_match"
 ```

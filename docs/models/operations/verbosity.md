@@ -1,7 +1,5 @@
 # Verbosity
 
-Controls the verbosity of the model output.
-
 ## Example Usage
 
 ```typescript
