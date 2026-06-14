@@ -1,4 +1,4 @@
-# Inputs
+# UpdateDatapointInputs
 
 
 ## Supported Types

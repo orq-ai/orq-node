@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create rerank
+   * Create image variation
    *
    * @remarks
-   * Rerank a list of documents based on their relevance to a query.
+   * Create an Image Variation
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

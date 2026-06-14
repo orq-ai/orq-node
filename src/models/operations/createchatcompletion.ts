@@ -823,7 +823,7 @@ export type Inputs2 = {
  *
  * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
-export type Inputs = { [k: string]: any } | Array<Inputs2>;
+export type CreateChatCompletionInputs = { [k: string]: any } | Array<Inputs2>;
 
 export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType = {
   ExactMatch: "exact_match",
@@ -3674,17 +3674,23 @@ export function inputs2ToJSON(inputs2: Inputs2): string {
 }
 
 /** @internal */
-export type Inputs$Outbound = { [k: string]: any } | Array<Inputs2$Outbound>;
+export type CreateChatCompletionInputs$Outbound =
+  | { [k: string]: any }
+  | Array<Inputs2$Outbound>;
 
 /** @internal */
-export const Inputs$outboundSchema: z.ZodType<
-  Inputs$Outbound,
+export const CreateChatCompletionInputs$outboundSchema: z.ZodType<
+  CreateChatCompletionInputs$Outbound,
   z.ZodTypeDef,
-  Inputs
+  CreateChatCompletionInputs
 > = z.union([z.record(z.any()), z.array(z.lazy(() => Inputs2$outboundSchema))]);
 
-export function inputsToJSON(inputs: Inputs): string {
-  return JSON.stringify(Inputs$outboundSchema.parse(inputs));
+export function createChatCompletionInputsToJSON(
+  createChatCompletionInputs: CreateChatCompletionInputs,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionInputs$outboundSchema.parse(createChatCompletionInputs),
+  );
 }
 
 /** @internal */

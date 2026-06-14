@@ -10,6 +10,8 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type UpdateDatapointInputs = string | number | boolean;
+
 export type UpdateDatapointContentDatasetsRequest2 =
   components.TextContentPartSchema;
 
@@ -364,9 +366,9 @@ export type UpdateDatapointMessages =
 
 export type UpdateDatapointRequestBody = {
   /**
-   * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported.
+   * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects and arrays are not supported.
    */
-  inputs?: { [k: string]: any } | undefined;
+  inputs?: { [k: string]: string | number | boolean | null } | undefined;
   /**
    * A list of messages comprising the conversation so far
    */
@@ -957,6 +959,24 @@ export type UpdateDatapointResponseBody = {
    */
   updated: Date;
 };
+
+/** @internal */
+export type UpdateDatapointInputs$Outbound = string | number | boolean;
+
+/** @internal */
+export const UpdateDatapointInputs$outboundSchema: z.ZodType<
+  UpdateDatapointInputs$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointInputs
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function updateDatapointInputsToJSON(
+  updateDatapointInputs: UpdateDatapointInputs,
+): string {
+  return JSON.stringify(
+    UpdateDatapointInputs$outboundSchema.parse(updateDatapointInputs),
+  );
+}
 
 /** @internal */
 export type UpdateDatapointContentDatasetsRequest2$Outbound =
@@ -1636,7 +1656,7 @@ export function updateDatapointMessagesToJSON(
 
 /** @internal */
 export type UpdateDatapointRequestBody$Outbound = {
-  inputs?: { [k: string]: any } | undefined;
+  inputs?: { [k: string]: string | number | boolean | null } | undefined;
   messages?:
     | Array<
       | UpdateDatapointMessagesSystemMessage$Outbound
@@ -1655,7 +1675,8 @@ export const UpdateDatapointRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapointRequestBody
 > = z.object({
-  inputs: z.record(z.any()).optional(),
+  inputs: z.record(z.nullable(z.union([z.string(), z.number(), z.boolean()])))
+    .optional(),
   messages: z.array(
     z.union([
       z.lazy(() => UpdateDatapointMessagesSystemMessage$outboundSchema),
@@ -2358,7 +2379,7 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-12T14:13:34.939Z",
+    "2026-06-14T16:07:12.224Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2404,7 +2425,7 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-12T14:13:34.938Z",
+    "2026-06-14T16:07:12.223Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2449,7 +2470,7 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-12T14:13:34.938Z",
+    "2026-06-14T16:07:12.221Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2530,7 +2551,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-12T14:13:06.535Z",
+    "2026-06-14T16:06:43.047Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
