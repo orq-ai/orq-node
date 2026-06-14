@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a human review set
+   * Create agent
+   *
+   * @remarks
+   * Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
