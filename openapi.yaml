@@ -1047,7 +1047,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kv0gg5fm5xqp788cgscnfzqd"
+              default: "reasoning_01kv355y6btnwsn0vpg5aamnpx"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -4683,6 +4683,8 @@ components:
           type: "boolean"
         supports_batch_api:
           type: "boolean"
+        supports_cache_control:
+          type: "boolean"
         supports_code_execution:
           type: "boolean"
         supports_commercial_use:
@@ -5721,6 +5723,325 @@ components:
         project_id:
           type: "string"
           description: "Project ID this API key is scoped to."
+    BudgetScopeKind:
+      type: "string"
+      enum:
+        - "BUDGET_SCOPE_KIND_UNSPECIFIED"
+        - "BUDGET_SCOPE_KIND_WORKSPACE"
+        - "BUDGET_SCOPE_KIND_PROJECT"
+        - "BUDGET_SCOPE_KIND_IDENTITY"
+        - "BUDGET_SCOPE_KIND_API_KEY"
+        - "BUDGET_SCOPE_KIND_PROVIDER"
+        - "BUDGET_SCOPE_KIND_MODEL"
+    BudgetPeriod:
+      type: "string"
+      enum:
+        - "BUDGET_PERIOD_UNSPECIFIED"
+        - "BUDGET_PERIOD_DAILY"
+        - "BUDGET_PERIOD_WEEKLY"
+        - "BUDGET_PERIOD_MONTHLY"
+        - "BUDGET_PERIOD_YEARLY"
+        - "BUDGET_PERIOD_ONE_TIME"
+    ListBudgetsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+          description: "Object discriminator for list responses; always `list`."
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Budget"
+          description: "Page of budgets, ordered newest first."
+        has_more:
+          type: "boolean"
+          description: "Whether more budgets are available in the selected pagination\n direction."
+    CreateBudgetRequest:
+      type: "object"
+      properties:
+        scope:
+          allOf:
+            - $ref: "#/components/schemas/BudgetScope"
+          description: "Structured scope. Mutually exclusive with `match`: provide a scope\n for the six canonical kinds (the server derives the matching CEL),\n or provide `match` for a dynamic budget. Exactly one of the two\n must be set; the handler enforces that invariant."
+        match:
+          allOf:
+            - $ref: "#/components/schemas/BudgetMatch"
+          description: "Raw CEL matching expression for dynamic budgets (e.g.\n `metadata.team == \"ml\" && provider == \"openai\"`). Validated via\n CEL parse at write time. Mutually exclusive with `scope`."
+        limits:
+          allOf:
+            - $ref: "#/components/schemas/BudgetLimits"
+          description: "At least one of amount / token_limit / rate_limit.requests_per_minute\n must be provided on the budget; the handler enforces that invariant."
+        rate_limit:
+          allOf:
+            - $ref: "#/components/schemas/RateLimit"
+          description: "Optional rate limit."
+        is_active:
+          type: "boolean"
+          description: "Whether the budget should be active immediately. Defaults to true\n when omitted (handler enforces)."
+        expires_at:
+          type: "string"
+          description: "Optional expiration. When set in combination with is_active=true,\n the value MUST be in the future; the handler rejects past values."
+          format: "date-time"
+    CreateBudgetResponse:
+      type: "object"
+      properties:
+        budget:
+          allOf:
+            - $ref: "#/components/schemas/Budget"
+          description: "Newly created budget."
+    CheckBudgetsRequest:
+      type: "object"
+      properties:
+        api_key_id:
+          type: "string"
+          description: "API key that issued the request (if any)."
+        project_id:
+          type: "string"
+          description: "Project the request targets (if any)."
+        identity_external_id:
+          type: "string"
+          description: "Identity external id for contact-scoped budgets (if any)."
+        provider:
+          type: "string"
+          description: "Provider enum value for provider-scoped budgets (if any)."
+        model_id:
+          type: "string"
+          description: "Full model reference for model-scoped budgets (if any), exactly as\n the caller sent it: \"provider/model\" or \"workspaceKey@provider/model\"."
+        metadata:
+          type: "object"
+          description: "Request metadata forwarded for dynamic-budget matching\n (`metadata.team == \"ml\"`). Free-form JSON object from the request\n body's `metadata` field."
+        headers:
+          type: "object"
+          additionalProperties:
+            type: "string"
+          description: "Request headers (lowercase keys) forwarded for dynamic-budget\n matching (`headers[\"x-env\"] == \"prod\"`)."
+    CheckBudgetsResponse:
+      type: "object"
+      properties:
+        allowed:
+          type: "boolean"
+          description: "True when no applicable budget exceeds its limit."
+        rejection:
+          allOf:
+            - $ref: "#/components/schemas/BudgetRejection"
+          description: "Populated when allowed is false; identifies which budget and\n dimension triggered the rejection."
+        cost:
+          allOf:
+            - $ref: "#/components/schemas/DimensionInfo"
+          description: "Cost dimension info for rate-limit headers (nil when no cost budget applies)."
+        tokens:
+          allOf:
+            - $ref: "#/components/schemas/DimensionInfo"
+          description: "Token dimension info for rate-limit headers (nil when no token budget applies)."
+        requests:
+          allOf:
+            - $ref: "#/components/schemas/DimensionInfo"
+          description: "Requests dimension info for rate-limit headers (nil when no RPM budget applies)."
+    GetBudgetResponse:
+      type: "object"
+      properties:
+        budget:
+          allOf:
+            - $ref: "#/components/schemas/Budget"
+          description: "Requested budget."
+    DeleteBudgetResponse:
+      type: "object"
+      properties: {}
+    UpdateBudgetRequest:
+      type: "object"
+      properties:
+        limits:
+          allOf:
+            - $ref: "#/components/schemas/BudgetLimits"
+          description: "New limits. Omit to keep current."
+        rate_limit:
+          allOf:
+            - $ref: "#/components/schemas/RateLimit"
+          description: "New rate limit. Omit to keep current."
+        is_active:
+          type: "boolean"
+          description: "New active state. Omit to keep current."
+        expires_at:
+          type: "string"
+          description: "New expiration. Omit to keep current. Set `clear_expires_at = true`\n to remove an existing expiration."
+          format: "date-time"
+        clear_expires_at:
+          type: "boolean"
+          description: "Force-clear the expiration. Mutually exclusive with `expires_at`."
+        match:
+          allOf:
+            - $ref: "#/components/schemas/BudgetMatch"
+          description: "New matching expression. Only valid for dynamic budgets (no\n structured scope) — the scope of a scoped budget is immutable, so\n its derived expression is too. Validated via CEL parse."
+    UpdateBudgetResponse:
+      type: "object"
+      properties:
+        budget:
+          allOf:
+            - $ref: "#/components/schemas/Budget"
+          description: "Updated budget."
+    GetBudgetConsumptionResponse:
+      type: "object"
+      properties:
+        budget_id:
+          type: "string"
+          description: "Budget id whose counters are reported."
+        period:
+          description: "Period the cost / tokens counters bucket against."
+          $ref: "#/components/schemas/BudgetPeriod"
+        period_date:
+          type: "string"
+          description: "Period bucket label (e.g. \"2025-05-27\" for DAILY, \"2025-05\" for\n MONTHLY). Empty when no counters exist for the current period."
+        cost:
+          type: "number"
+          description: "Cost accumulated in the current period, in USD."
+          format: "double"
+        tokens:
+          type: "string"
+          description: "Tokens accumulated in the current period."
+        requests_in_window:
+          type: "integer"
+          description: "Requests counted in the current 60-second rolling window."
+          format: "int32"
+    ResetBudgetConsumptionRequest:
+      type: "object"
+      properties: {}
+    ResetBudgetConsumptionResponse:
+      type: "object"
+      properties:
+        budget:
+          allOf:
+            - $ref: "#/components/schemas/Budget"
+          description: "Budget after reset. The record itself is unchanged; only counters\n were cleared."
+    Budget:
+      type: "object"
+      properties:
+        budget_id:
+          type: "string"
+        scope:
+          allOf:
+            - $ref: "#/components/schemas/BudgetScope"
+          description: "Denormalized metadata for UI rendering, list filters, and the\n resolver's prefilter index. Never consulted for matching — the\n `match` expression is the single source of matching semantics.\n Unset for budgets created from a raw CEL expression (\"custom\")."
+        match:
+          allOf:
+            - $ref: "#/components/schemas/BudgetMatch"
+          description: "The matching semantics of the budget. The enforcement resolver\n evaluates `match.cel` against the request context; a budget\n applies to a request if and only if the expression evaluates to\n true. Scoped creates derive a canonical expression (e.g.\n `provider == \"openai\"`); an empty expression always matches\n (workspace-wide)."
+        limits:
+          $ref: "#/components/schemas/BudgetLimits"
+        rate_limit:
+          $ref: "#/components/schemas/RateLimit"
+        is_active:
+          type: "boolean"
+        expires_at:
+          type: "string"
+          format: "date-time"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+      description: "Budget is the canonical record stored in MongoDB `budgets.entities`.\n It replaces the embedded `constraints.budget` on api-keys and the\n legacy CONTACT-only `budgets.configs` collection (see ADR 0007)."
+    BudgetScope:
+      type: "object"
+      properties:
+        workspace:
+          $ref: "#/components/schemas/WorkspaceBudgetScope"
+        project:
+          $ref: "#/components/schemas/ProjectBudgetScope"
+        identity:
+          $ref: "#/components/schemas/IdentityBudgetScope"
+        api_key:
+          $ref: "#/components/schemas/ApiKeyBudgetScope"
+        provider:
+          $ref: "#/components/schemas/ProviderBudgetScope"
+        model:
+          $ref: "#/components/schemas/ModelBudgetScope"
+      description: "BudgetScope is a closed oneof. Exactly one variant must be set. The\n six variants are ordered by enforcement precedence (most specific to\n most general) and mirror the BudgetScopeKind filter enum."
+    BudgetMatch:
+      type: "object"
+      properties:
+        cel:
+          type: "string"
+      description: "BudgetMatch carries the CEL expression that decides whether a budget\n applies to a request. Available variables: `model`, `provider`,\n `model_id`, `api_key`, `identity`, `project`, `metadata` (map),\n `headers` (map, lowercase keys). An empty expression always matches.\n Expressions are syntax-validated at write time."
+    BudgetLimits:
+      type: "object"
+      properties:
+        period:
+          $ref: "#/components/schemas/BudgetPeriod"
+        amount:
+          type: "number"
+          format: "double"
+        token_limit:
+          type: "string"
+      description: "BudgetLimits is the per-period spend and token ceiling. At least one\n of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be\n set on a Budget; that invariant is enforced by the handler."
+    RateLimit:
+      type: "object"
+      properties:
+        requests_per_minute:
+          type: "integer"
+          format: "int32"
+      description: "RateLimit is the per-minute request ceiling. Enforced via atomic\n increment-first semantics in the enforcement middleware."
+    BudgetRejection:
+      type: "object"
+      properties:
+        scope_kind:
+          type: "string"
+        scope_target_id:
+          type: "string"
+        dimension:
+          type: "string"
+        code:
+          type: "string"
+        message:
+          type: "string"
+      description: "BudgetRejection identifies the budget that caused a 429."
+    DimensionInfo:
+      type: "object"
+      properties:
+        limit:
+          type: "number"
+          format: "double"
+        remaining:
+          type: "number"
+          format: "double"
+        reset_seconds:
+          type: "integer"
+          format: "int32"
+      description: "DimensionInfo carries limit/remaining/reset for a single dimension."
+    WorkspaceBudgetScope:
+      type: "object"
+      properties: {}
+      description: "Workspace-wide ceiling. The implicit target is the caller's workspace."
+    ProjectBudgetScope:
+      type: "object"
+      properties:
+        project_id:
+          type: "string"
+      description: "Per-project cap."
+    IdentityBudgetScope:
+      type: "object"
+      properties:
+        identity_external_id:
+          type: "string"
+      description: "Per-identity cap. Keyed by the contact's external_id (not the\n internal Mongo `_id`) so the scope is stable across imports."
+    ApiKeyBudgetScope:
+      type: "object"
+      properties:
+        api_key_id:
+          type: "string"
+      description: "Per-api-key cap. Replaces the legacy embedded `constraints.budget`\n on auth.apiKeys."
+    ProviderBudgetScope:
+      type: "object"
+      properties:
+        provider:
+          type: "string"
+      description: "Per-provider cap. The value is the provider enum string (e.g.\n \"openai\", \"anthropic\") drawn from ModelIntegrationIdentifier."
+    ModelBudgetScope:
+      type: "object"
+      properties:
+        model_id:
+          type: "string"
+      description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models) — NOT the Mongo `_id` of the model master-data document."
     SearchDocumentationRequest:
       required:
         - "query"
@@ -6571,6 +6892,24 @@ components:
       required:
         - "reasoning_tokens"
       type: "object"
+    PublicCacheControl:
+      additionalProperties: false
+      properties:
+        ttl:
+          default: "5m"
+          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- 5m: 5 minutes\n- 1h: 1 hour\n\nDefaults to 5m. Only supported by Anthropic Claude models."
+          enum:
+            - "5m"
+            - "1h"
+          type: "string"
+        type:
+          description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+          enum:
+            - "ephemeral"
+          type: "string"
+      required:
+        - "type"
+      type: "object"
     PublicCreateEmbeddingBody:
       additionalProperties: false
       properties:
@@ -6641,6 +6980,25 @@ components:
     PublicCreateResponseBody:
       additionalProperties: false
       properties:
+        cache_control:
+          description: "Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request."
+          properties:
+            ttl:
+              default: "5m"
+              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+              enum:
+                - "5m"
+                - "1h"
+              type: "string"
+            type:
+              description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+              enum:
+                - "ephemeral"
+              type: "string"
+          required:
+            - "type"
+          title: "Cache control"
+          type: "object"
         conversation:
           $ref: "#/components/schemas/ConversationParam"
           description: "Conversation context for multi-turn interactions."
@@ -6683,6 +7041,24 @@ components:
                           anyOf:
                             - description: "A text content part."
                               properties:
+                                cache_control:
+                                  properties:
+                                    ttl:
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      type: "string"
+                                    type:
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                      enum:
+                                        - "ephemeral"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                  title: "Cache control"
+                                  type: "object"
                                 text:
                                   description: "The text content."
                                   type: "string"
@@ -6697,6 +7073,24 @@ components:
                               type: "object"
                             - description: "An image content part."
                               properties:
+                                cache_control:
+                                  properties:
+                                    ttl:
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      type: "string"
+                                    type:
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                      enum:
+                                        - "ephemeral"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                  title: "Cache control"
+                                  type: "object"
                                 detail:
                                   description: "The detail level for image understanding."
                                   enum:
@@ -6720,6 +7114,24 @@ components:
                               type: "object"
                             - description: "A file content part. Provide file_id, file_data (base64), or file_url."
                               properties:
+                                cache_control:
+                                  properties:
+                                    ttl:
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      type: "string"
+                                    type:
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                      enum:
+                                        - "ephemeral"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                  title: "Cache control"
+                                  type: "object"
                                 file_data:
                                   description: "Base64-encoded file content."
                                   type: "string"
@@ -6872,6 +7284,7 @@ components:
                   type: "object"
               description: "The output format: plain text or structured JSON schema."
             verbosity:
+              description: "Controls the verbosity of the model output."
               enum:
                 - "low"
                 - "medium"
@@ -6911,6 +7324,24 @@ components:
             anyOf:
               - description: "A function tool the model can call."
                 properties:
+                  cache_control:
+                    properties:
+                      ttl:
+                        default: "5m"
+                        description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                        enum:
+                          - "5m"
+                          - "1h"
+                        type: "string"
+                      type:
+                        description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                        enum:
+                          - "ephemeral"
+                        type: "string"
+                    required:
+                      - "type"
+                    title: "Cache control"
+                    type: "object"
                   description:
                     description: "A description of what the function does."
                     type: "string"
@@ -7420,16 +7851,42 @@ components:
       additionalProperties: false
       properties:
         effort:
+          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+          enum:
+            - "none"
+            - "minimal"
+            - "low"
+            - "medium"
+            - "high"
+            - "xhigh"
           type: "string"
         summary:
+          description: "The format of the reasoning summary returned by the model."
+          enum:
+            - "concise"
+            - "detailed"
+            - "auto"
           type: "string"
       type: "object"
     ReasoningParam:
       additionalProperties: false
       properties:
         effort:
+          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+          enum:
+            - "none"
+            - "minimal"
+            - "low"
+            - "medium"
+            - "high"
+            - "xhigh"
           type: "string"
         summary:
+          description: "The format of the reasoning summary returned by the model."
+          enum:
+            - "concise"
+            - "detailed"
+            - "auto"
           type: "string"
       type: "object"
     ResponseCodeInterpreterCallCodeDeltaStreamEvent:
@@ -8938,13 +9395,23 @@ components:
       additionalProperties: false
       properties:
         budget_tokens:
+          description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. Budget tokens should never exceed the max output tokens parameter. Only supported by Anthropic."
           format: "int64"
           type:
             - "integer"
             - "null"
         thinking_level:
+          description: "The level of thinking to use for the model. Only supported by Google AI."
+          enum:
+            - "low"
+            - "high"
           type: "string"
         type:
+          description: "The thinking mode to use for the model."
+          enum:
+            - "enabled"
+            - "disabled"
+            - "adaptive"
           type:
             - "string"
             - "null"
@@ -9260,10 +9727,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-13T12:49:36.516Z"
+                                  default: "2026-06-14T13:29:30.996Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-13T12:49:36.516Z"
+                                  default: "2026-06-14T13:29:30.996Z"
                                 updated_by_id:
                                   type:
                                     - "string"
@@ -9398,10 +9865,10 @@ paths:
                                   type: "string"
                                 created:
                                   type: "string"
-                                  default: "2026-06-13T12:49:36.516Z"
+                                  default: "2026-06-14T13:29:30.996Z"
                                 updated:
                                   type: "string"
-                                  default: "2026-06-13T12:49:36.516Z"
+                                  default: "2026-06-14T13:29:30.996Z"
                                 updated_by_id:
                                   type:
                                     - "string"
@@ -9631,10 +10098,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -9734,10 +10201,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -9852,10 +10319,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -9955,10 +10422,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -10358,10 +10825,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -10477,10 +10944,10 @@ paths:
                               type: "string"
                             created:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated:
                               type: "string"
-                              default: "2026-06-13T12:49:36.516Z"
+                              default: "2026-06-14T13:29:30.996Z"
                             updated_by_id:
                               type:
                                 - "string"
@@ -11093,10 +11560,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -11231,10 +11698,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -11464,10 +11931,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11567,10 +12034,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11685,10 +12152,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -11788,10 +12255,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -12191,10 +12658,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -12310,10 +12777,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -12693,10 +13160,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -12831,10 +13298,10 @@ paths:
                             type: "string"
                           created:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated:
                             type: "string"
-                            default: "2026-06-13T12:49:36.516Z"
+                            default: "2026-06-14T13:29:30.996Z"
                           updated_by_id:
                             type:
                               - "string"
@@ -13064,10 +13531,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -13167,10 +13634,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -13285,10 +13752,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -13388,10 +13855,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -13791,10 +14258,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -13910,10 +14377,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated:
                         type: "string"
-                        default: "2026-06-13T12:49:36.516Z"
+                        default: "2026-06-14T13:29:30.996Z"
                       updated_by_id:
                         type:
                           - "string"
@@ -14406,6 +14873,8 @@ paths:
                           workflow_run_id:
                             type: "string"
                           trace_id:
+                            type: "string"
+                          span_id:
                             type: "string"
                           value:
                             anyOf:
@@ -16189,6 +16658,26 @@ paths:
                                         - "vtt"
                                     - type: "null"
                                   description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                                cacheControl:
+                                  type:
+                                    - "object"
+                                    - "null"
+                                  properties:
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "ephemeral"
+                                      description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                                    ttl:
+                                      type: "string"
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                  required:
+                                    - "type"
+                                  description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                                 photoRealVersion:
                                   type: "string"
                                   enum:
@@ -17640,6 +18129,26 @@ paths:
                               - "vtt"
                           - type: "null"
                         description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                      cacheControl:
+                        type:
+                          - "object"
+                          - "null"
+                        properties:
+                          type:
+                            type: "string"
+                            enum:
+                              - "ephemeral"
+                            description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                          ttl:
+                            type: "string"
+                            enum:
+                              - "5m"
+                              - "1h"
+                            default: "5m"
+                            description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                        required:
+                          - "type"
+                        description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                       photoRealVersion:
                         type: "string"
                         enum:
@@ -19319,6 +19828,27 @@ paths:
                               required:
                                 - "call_timeout"
                               description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                            cache_control:
+                              type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "ephemeral"
+                                  description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                ttl:
+                                  type: "string"
+                                  enum:
+                                    - "5m"
+                                    - "1h"
+                                  default: "5m"
+                                  description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                              required:
+                                - "type"
+                              description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                            prompt_cache_key:
+                              type: "string"
+                              description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
@@ -19636,6 +20166,27 @@ paths:
                                 required:
                                   - "call_timeout"
                                 description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                              cache_control:
+                                type: "object"
+                                properties:
+                                  type:
+                                    type: "string"
+                                    enum:
+                                      - "ephemeral"
+                                    description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                  ttl:
+                                    type: "string"
+                                    enum:
+                                      - "5m"
+                                      - "1h"
+                                    default: "5m"
+                                    description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                required:
+                                  - "type"
+                                description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                              prompt_cache_key:
+                                type: "string"
+                                description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                           retry:
                             type: "object"
@@ -20647,6 +21198,27 @@ paths:
                             required:
                               - "call_timeout"
                             description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                          cache_control:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                          prompt_cache_key:
+                            type: "string"
+                            description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       retry:
                         type: "object"
@@ -20961,6 +21533,27 @@ paths:
                                       required:
                                         - "call_timeout"
                                       description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                                    cache_control:
+                                      type: "object"
+                                      properties:
+                                        type:
+                                          type: "string"
+                                          enum:
+                                            - "ephemeral"
+                                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                        ttl:
+                                          type: "string"
+                                          enum:
+                                            - "5m"
+                                            - "1h"
+                                          default: "5m"
+                                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                      required:
+                                        - "type"
+                                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                                    prompt_cache_key:
+                                      type: "string"
+                                      description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                                 retry:
                                   type: "object"
@@ -21617,6 +22210,27 @@ paths:
                                   required:
                                     - "call_timeout"
                                   description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                                cache_control:
+                                  type: "object"
+                                  properties:
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "ephemeral"
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                    ttl:
+                                      type: "string"
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                  required:
+                                    - "type"
+                                  description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                                prompt_cache_key:
+                                  type: "string"
+                                  description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                               description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                             retry:
                               type: "object"
@@ -21931,6 +22545,27 @@ paths:
                                             required:
                                               - "call_timeout"
                                             description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                                          cache_control:
+                                            type: "object"
+                                            properties:
+                                              type:
+                                                type: "string"
+                                                enum:
+                                                  - "ephemeral"
+                                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              ttl:
+                                                type: "string"
+                                                enum:
+                                                  - "5m"
+                                                  - "1h"
+                                                default: "5m"
+                                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                            required:
+                                              - "type"
+                                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                                          prompt_cache_key:
+                                            type: "string"
+                                            description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                                         description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                                       retry:
                                         type: "object"
@@ -22892,6 +23527,27 @@ paths:
                             required:
                               - "call_timeout"
                             description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                          cache_control:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                          prompt_cache_key:
+                            type: "string"
+                            description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       retry:
                         type: "object"
@@ -23206,6 +23862,27 @@ paths:
                                       required:
                                         - "call_timeout"
                                       description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                                    cache_control:
+                                      type: "object"
+                                      properties:
+                                        type:
+                                          type: "string"
+                                          enum:
+                                            - "ephemeral"
+                                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                        ttl:
+                                          type: "string"
+                                          enum:
+                                            - "5m"
+                                            - "1h"
+                                          default: "5m"
+                                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                      required:
+                                        - "type"
+                                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                                    prompt_cache_key:
+                                      type: "string"
+                                      description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                                 retry:
                                   type: "object"
@@ -23596,6 +24273,27 @@ paths:
                               required:
                                 - "call_timeout"
                               description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                            cache_control:
+                              type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "ephemeral"
+                                  description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                ttl:
+                                  type: "string"
+                                  enum:
+                                    - "5m"
+                                    - "1h"
+                                  default: "5m"
+                                  description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                              required:
+                                - "type"
+                              description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                            prompt_cache_key:
+                              type: "string"
+                              description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
@@ -23913,6 +24611,27 @@ paths:
                                 required:
                                   - "call_timeout"
                                 description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                              cache_control:
+                                type: "object"
+                                properties:
+                                  type:
+                                    type: "string"
+                                    enum:
+                                      - "ephemeral"
+                                    description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                  ttl:
+                                    type: "string"
+                                    enum:
+                                      - "5m"
+                                      - "1h"
+                                    default: "5m"
+                                    description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                required:
+                                  - "type"
+                                description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                              prompt_cache_key:
+                                type: "string"
+                                description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                           retry:
                             type: "object"
@@ -24910,6 +25629,27 @@ paths:
                             required:
                               - "call_timeout"
                             description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                          cache_control:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                          prompt_cache_key:
+                            type: "string"
+                            description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                         description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       retry:
                         type: "object"
@@ -25224,6 +25964,27 @@ paths:
                                       required:
                                         - "call_timeout"
                                       description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                                    cache_control:
+                                      type: "object"
+                                      properties:
+                                        type:
+                                          type: "string"
+                                          enum:
+                                            - "ephemeral"
+                                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                        ttl:
+                                          type: "string"
+                                          enum:
+                                            - "5m"
+                                            - "1h"
+                                          default: "5m"
+                                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                      required:
+                                        - "type"
+                                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                                    prompt_cache_key:
+                                      type: "string"
+                                      description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                                   description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                                 retry:
                                   type: "object"
@@ -25972,6 +26733,27 @@ paths:
                               required:
                                 - "call_timeout"
                               description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                            cache_control:
+                              type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "ephemeral"
+                                  description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                ttl:
+                                  type: "string"
+                                  enum:
+                                    - "5m"
+                                    - "1h"
+                                  default: "5m"
+                                  description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                              required:
+                                - "type"
+                              description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                            prompt_cache_key:
+                              type: "string"
+                              description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
@@ -26289,6 +27071,27 @@ paths:
                                 required:
                                   - "call_timeout"
                                 description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                              cache_control:
+                                type: "object"
+                                properties:
+                                  type:
+                                    type: "string"
+                                    enum:
+                                      - "ephemeral"
+                                    description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                  ttl:
+                                    type: "string"
+                                    enum:
+                                      - "5m"
+                                      - "1h"
+                                    default: "5m"
+                                    description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                required:
+                                  - "type"
+                                description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                              prompt_cache_key:
+                                type: "string"
+                                description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                           retry:
                             type: "object"
@@ -27039,7 +27842,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KV0GG5KRDANQ1G89NHXEC3DD"
+                                          default: "01KV355YA7G0PVTA4CFQG5C9PY"
                                         name:
                                           type: "string"
                                         description:
@@ -27609,6 +28412,27 @@ paths:
                               required:
                                 - "call_timeout"
                               description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                            cache_control:
+                              type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "ephemeral"
+                                  description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                ttl:
+                                  type: "string"
+                                  enum:
+                                    - "5m"
+                                    - "1h"
+                                  default: "5m"
+                                  description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                              required:
+                                - "type"
+                              description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                            prompt_cache_key:
+                              type: "string"
+                              description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                           description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
@@ -27926,6 +28750,27 @@ paths:
                                 required:
                                   - "call_timeout"
                                 description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                              cache_control:
+                                type: "object"
+                                properties:
+                                  type:
+                                    type: "string"
+                                    enum:
+                                      - "ephemeral"
+                                    description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                  ttl:
+                                    type: "string"
+                                    enum:
+                                      - "5m"
+                                      - "1h"
+                                    default: "5m"
+                                    description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                required:
+                                  - "type"
+                                description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                              prompt_cache_key:
+                                type: "string"
+                                description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                             description: "Optional model parameters specific to this fallback model. Overrides primary model parameters if this fallback is used."
                           retry:
                             type: "object"
@@ -28676,7 +29521,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KV0GG5N5HEAYSH713JF39D9A"
+                                          default: "01KV355YBKRS8M0K6JFX89FNTJ"
                                         name:
                                           type: "string"
                                         description:
@@ -29410,6 +30255,26 @@ paths:
                                         - "vtt"
                                     - type: "null"
                                   description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                                cacheControl:
+                                  type:
+                                    - "object"
+                                    - "null"
+                                  properties:
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "ephemeral"
+                                      description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                                    ttl:
+                                      type: "string"
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                  required:
+                                    - "type"
+                                  description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                                 photoRealVersion:
                                   type: "string"
                                   enum:
@@ -29993,6 +30858,27 @@ paths:
                               required:
                                 - "call_timeout"
                               description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                            cache_control:
+                              type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "ephemeral"
+                                  description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                ttl:
+                                  type: "string"
+                                  enum:
+                                    - "5m"
+                                    - "1h"
+                                  default: "5m"
+                                  description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                              required:
+                                - "type"
+                              description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                            prompt_cache_key:
+                              type: "string"
+                              description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                             messages:
                               type: "array"
                               items:
@@ -30922,6 +31808,27 @@ paths:
                       required:
                         - "call_timeout"
                       description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                    cache_control:
+                      type: "object"
+                      properties:
+                        type:
+                          type: "string"
+                          enum:
+                            - "ephemeral"
+                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                        ttl:
+                          type: "string"
+                          enum:
+                            - "5m"
+                            - "1h"
+                          default: "5m"
+                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                      required:
+                        - "type"
+                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                    prompt_cache_key:
+                      type: "string"
+                      description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                   required:
                     - "messages"
                   title: "PromptInput"
@@ -31128,6 +32035,26 @@ paths:
                                   - "vtt"
                               - type: "null"
                             description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                          cacheControl:
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                           photoRealVersion:
                             type: "string"
                             enum:
@@ -31711,6 +32638,27 @@ paths:
                         required:
                           - "call_timeout"
                         description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                      cache_control:
+                        type: "object"
+                        properties:
+                          type:
+                            type: "string"
+                            enum:
+                              - "ephemeral"
+                            description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                          ttl:
+                            type: "string"
+                            enum:
+                              - "5m"
+                              - "1h"
+                            default: "5m"
+                            description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                        required:
+                          - "type"
+                        description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                      prompt_cache_key:
+                        type: "string"
+                        description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                       messages:
                         type: "array"
                         items:
@@ -32194,6 +33142,26 @@ paths:
                                   - "vtt"
                               - type: "null"
                             description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                          cacheControl:
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                           photoRealVersion:
                             type: "string"
                             enum:
@@ -32777,6 +33745,27 @@ paths:
                         required:
                           - "call_timeout"
                         description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                      cache_control:
+                        type: "object"
+                        properties:
+                          type:
+                            type: "string"
+                            enum:
+                              - "ephemeral"
+                            description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                          ttl:
+                            type: "string"
+                            enum:
+                              - "5m"
+                              - "1h"
+                            default: "5m"
+                            description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                        required:
+                          - "type"
+                        description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                      prompt_cache_key:
+                        type: "string"
+                        description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                       messages:
                         type: "array"
                         items:
@@ -33684,6 +34673,27 @@ paths:
                       required:
                         - "call_timeout"
                       description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                    cache_control:
+                      type: "object"
+                      properties:
+                        type:
+                          type: "string"
+                          enum:
+                            - "ephemeral"
+                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                        ttl:
+                          type: "string"
+                          enum:
+                            - "5m"
+                            - "1h"
+                          default: "5m"
+                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                      required:
+                        - "type"
+                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                    prompt_cache_key:
+                      type: "string"
+                      description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                   title: "PromptInput"
                   description: "Prompt configuration with model and messages. Use this to update the prompt."
                   example:
@@ -33928,6 +34938,26 @@ paths:
                                   - "vtt"
                               - type: "null"
                             description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                          cacheControl:
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                           photoRealVersion:
                             type: "string"
                             enum:
@@ -34511,6 +35541,27 @@ paths:
                         required:
                           - "call_timeout"
                         description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                      cache_control:
+                        type: "object"
+                        properties:
+                          type:
+                            type: "string"
+                            enum:
+                              - "ephemeral"
+                            description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                          ttl:
+                            type: "string"
+                            enum:
+                              - "5m"
+                              - "1h"
+                            default: "5m"
+                            description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                        required:
+                          - "type"
+                        description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                      prompt_cache_key:
+                        type: "string"
+                        description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                       messages:
                         type: "array"
                         items:
@@ -35053,6 +36104,26 @@ paths:
                                             - "vtt"
                                         - type: "null"
                                       description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                                    cacheControl:
+                                      type:
+                                        - "object"
+                                        - "null"
+                                      properties:
+                                        type:
+                                          type: "string"
+                                          enum:
+                                            - "ephemeral"
+                                          description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                                        ttl:
+                                          type: "string"
+                                          enum:
+                                            - "5m"
+                                            - "1h"
+                                          default: "5m"
+                                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                      required:
+                                        - "type"
+                                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                                     photoRealVersion:
                                       type: "string"
                                       enum:
@@ -35636,6 +36707,27 @@ paths:
                                   required:
                                     - "call_timeout"
                                   description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                                cache_control:
+                                  type: "object"
+                                  properties:
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "ephemeral"
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                    ttl:
+                                      type: "string"
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                  required:
+                                    - "type"
+                                  description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                                prompt_cache_key:
+                                  type: "string"
+                                  description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                                 messages:
                                   type: "array"
                                   items:
@@ -36114,6 +37206,26 @@ paths:
                                       - "vtt"
                                   - type: "null"
                                 description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                              cacheControl:
+                                type:
+                                  - "object"
+                                  - "null"
+                                properties:
+                                  type:
+                                    type: "string"
+                                    enum:
+                                      - "ephemeral"
+                                    description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                                  ttl:
+                                    type: "string"
+                                    enum:
+                                      - "5m"
+                                      - "1h"
+                                    default: "5m"
+                                    description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                required:
+                                  - "type"
+                                description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
                               photoRealVersion:
                                 type: "string"
                                 enum:
@@ -36697,6 +37809,27 @@ paths:
                             required:
                               - "call_timeout"
                             description: "Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured."
+                          cache_control:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                            description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                          prompt_cache_key:
+                            type: "string"
+                            description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                           messages:
                             type: "array"
                             items:
@@ -37040,7 +38173,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KV0GG5RYJCD6GMM8TRJ05F2X"
+                              default: "tool_01KV355YFF4HA2S03WMXTFGMY0"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37141,7 +38274,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KV0GG5S0K2X29JNC7CNKVDTJ"
+                              default: "tool_01KV355YFGP4ZDG1Q95S3XQK6X"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37244,7 +38377,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KV0GG5S1D7A4QZV3T1V6HYHS"
+                              default: "tool_01KV355YFJZ2DFWKRJS1MA7S9T"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37383,7 +38516,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KV0GG5S4Q0QREQEBFYB262WK"
+                              default: "tool_01KV355YFM26W2DH2ZK67SHN2M"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37459,7 +38592,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KV0GG5S5D60J1CPGK2XZ5M7M"
+                                        default: "01KV355YFN6Y8BQYZXT27MB14E"
                                       name:
                                         type: "string"
                                       description:
@@ -37518,7 +38651,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KV0GG5S60KN3G2ZPGK2JWPFF"
+                              default: "tool_01KV355YFPZHKAYEPSP5NSBV9J"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38073,7 +39206,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5SJA2FVRQM9ZMM4HCEW"
+                        default: "tool_01KV355YG17EVMZ0M693WDQSQ2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38174,7 +39307,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5SMH2Y4XTN83ATFG2WV"
+                        default: "tool_01KV355YG3WBMTW5F6MJCXSSGT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38277,7 +39410,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5SPFREWNBRP7YK1QCR7"
+                        default: "tool_01KV355YG4DWEH8RFFSDEDX0RA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38416,7 +39549,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5SRK5CPKGCD6DCDX0TQ"
+                        default: "tool_01KV355YG60BDYXJYV2E2SHQB3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38492,7 +39625,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KV0GG5SSZDZ6CCC1JZCV5S4Y"
+                                  default: "01KV355YG7EQEF9KZT384HT0BR"
                                 name:
                                   type: "string"
                                 description:
@@ -38551,7 +39684,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5STV9VJ0T8R0RY2EQT4"
+                        default: "tool_01KV355YG8G8TZ40ZHSTZXR0XC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39012,7 +40145,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KV0GG5TGBF8CZ0VYA6GMSV7T"
+                                default: "01KV355YGWA6AN92NK0CBJ7QXV"
                               name:
                                 type: "string"
                               description:
@@ -39158,7 +40291,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5T2GCVK9JE5JFR6ATCX"
+                        default: "tool_01KV355YGF1J3P6TSNE92H4DCS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39259,7 +40392,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5T3MWZC1RAZT0734AAY"
+                        default: "tool_01KV355YGGXRTSZCJ3MJJPZ79N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39362,7 +40495,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5T5QFYDQCP64NEMZKBS"
+                        default: "tool_01KV355YGJXDDXN2XK0MM2QZFN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39501,7 +40634,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5T7267HGHF6HCFCNMT5"
+                        default: "tool_01KV355YGMFJ528B0DB9B0VMWN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39577,7 +40710,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KV0GG5T82ZRBXDQC58Q60GGY"
+                                  default: "01KV355YGNHDDGGMMWZTZFAPZF"
                                 name:
                                   type: "string"
                                 description:
@@ -39636,7 +40769,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5T9N89S0XF79EQD85BC"
+                        default: "tool_01KV355YGPN4M4NQ33BZDNC057"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39797,7 +40930,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5TXG2843B19B7WT1VR4"
+                        default: "tool_01KV355YH7V41K3D9B1G6Z258T"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39898,7 +41031,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5TZ3T4XY913DVNDW5D7"
+                        default: "tool_01KV355YH91GRJZ3Z2BXA95B35"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40001,7 +41134,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5V0KZWE14NKQVGDPPEA"
+                        default: "tool_01KV355YHAEKSCR2VHT9531SXK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40140,7 +41273,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5V3Z8VXR13TQ2AQNXMH"
+                        default: "tool_01KV355YHCMNN7DCZBCYM4D5W0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40216,7 +41349,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KV0GG5V4XYEQZPNXARVSMRTX"
+                                  default: "01KV355YHDZ4NZ3PXRQGPZS655"
                                 name:
                                   type: "string"
                                 description:
@@ -40275,7 +41408,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KV0GG5V5B9EA8RQ10NE4C35W"
+                        default: "tool_01KV355YHEXM2HX9BGWBVHB42X"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40591,9 +41724,9 @@ paths:
             minimum: 1
             maximum: 300
             default: 25
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 25"
           required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 25"
           name: "limit"
           in: "query"
       responses:
@@ -42450,7 +43583,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KV0GG5YC0KKDGXTMRHPDYPH8"
+                          default: "01KV355YM7S8YEHWDZNTRV1XQX"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -42625,7 +43758,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KV0GG5YFGA6914X1NSEA8VDV"
+                    default: "01KV355YM912YMYKTCMFQVMZ8Z"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42725,7 +43858,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KV0GG5YEHP4SX7WADZKBVNWB"
+                    default: "01KV355YM89RQY0V6T42Q6TM2Q"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42864,7 +43997,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KV0GG5YJH3TCD7XFJB9F1G4Y"
+                    default: "01KV355YMCMNDG09SJWPQ0JEWF"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -44162,7 +45295,9 @@ paths:
                           type: "string"
                           description: "The last update date of the memory store"
                         ttl:
-                          type: "number"
+                          type:
+                            - "number"
+                            - "null"
                           description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                         embedding_config:
                           type: "object"
@@ -44226,7 +45361,9 @@ paths:
                   type: "string"
                   description: "The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store."
                 ttl:
-                  type: "number"
+                  type:
+                    - "number"
+                    - "null"
                   description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                 path:
                   type: "string"
@@ -44274,7 +45411,9 @@ paths:
                     type: "string"
                     description: "The last update date of the memory store"
                   ttl:
-                    type: "number"
+                    type:
+                      - "number"
+                      - "null"
                     description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                   embedding_config:
                     type: "object"
@@ -44349,7 +45488,9 @@ paths:
                     type: "string"
                     description: "The last update date of the memory store"
                   ttl:
-                    type: "number"
+                    type:
+                      - "number"
+                      - "null"
                     description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                   embedding_config:
                     type: "object"
@@ -44414,7 +45555,9 @@ paths:
                   type: "string"
                   description: "The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store."
                 ttl:
-                  type: "number"
+                  type:
+                    - "number"
+                    - "null"
                   description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                 path:
                   type: "string"
@@ -44455,7 +45598,9 @@ paths:
                     type: "string"
                     description: "The last update date of the memory store"
                   ttl:
-                    type: "number"
+                    type:
+                      - "number"
+                      - "null"
                     description: "The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term."
                   embedding_config:
                     type: "object"
@@ -45419,6 +46564,20 @@ paths:
           description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
           name: "ending_before"
           in: "query"
+        - schema:
+            type: "string"
+            description: "Filter datasets by display name (case-insensitive match)."
+          required: false
+          description: "Filter datasets by display name (case-insensitive match)."
+          name: "search"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "Comma-separated list of user IDs; returns datasets last updated by any of them."
+          required: false
+          description: "Comma-separated list of user IDs; returns datasets last updated by any of them."
+          name: "updated_by"
+          in: "query"
       responses:
         "200":
           description: "Datasets Retrieved Successfully"
@@ -45524,7 +46683,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-13T12:49:34.960Z"
+                          default: "2026-06-14T13:29:29.915Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45532,7 +46691,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:34.960Z"
+                              default: "2026-06-14T13:29:29.915Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -45676,7 +46835,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-13T12:49:34.960Z"
+                    default: "2026-06-14T13:29:29.915Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45684,7 +46843,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45823,7 +46982,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-13T12:49:34.960Z"
+                    default: "2026-06-14T13:29:29.915Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45831,7 +46990,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46003,7 +47162,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-13T12:49:34.960Z"
+                    default: "2026-06-14T13:29:29.915Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46011,7 +47170,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46412,7 +47571,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-13T12:49:53.677Z"
+                                    default: "2026-06-14T13:29:47.451Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -46452,7 +47611,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-13T12:49:53.678Z"
+                                    default: "2026-06-14T13:29:47.452Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -46492,7 +47651,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-06-13T12:49:53.678Z"
+                                    default: "2026-06-14T13:29:47.453Z"
                                     description: "The date and time the item was reviewed"
                                   type:
                                     type: "string"
@@ -46532,7 +47691,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-13T12:49:34.960Z"
+                          default: "2026-06-14T13:29:29.915Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -46540,7 +47699,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:34.960Z"
+                              default: "2026-06-14T13:29:29.915Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -47124,7 +48283,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-13T12:49:53.692Z"
+                                default: "2026-06-14T13:29:47.466Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -47164,7 +48323,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-13T12:49:53.692Z"
+                                default: "2026-06-14T13:29:47.466Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -47204,7 +48363,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-06-13T12:49:53.693Z"
+                                default: "2026-06-14T13:29:47.467Z"
                                 description: "The date and time the item was reviewed"
                               type:
                                 type: "string"
@@ -47244,7 +48403,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-06-13T12:49:34.960Z"
+                      default: "2026-06-14T13:29:29.915Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -47252,7 +48411,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-06-13T12:49:34.960Z"
+                          default: "2026-06-14T13:29:29.915Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -47584,7 +48743,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:53.685Z"
+                              default: "2026-06-14T13:29:47.458Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -47624,7 +48783,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:53.685Z"
+                              default: "2026-06-14T13:29:47.459Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -47664,7 +48823,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:53.686Z"
+                              default: "2026-06-14T13:29:47.460Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -47704,7 +48863,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-13T12:49:34.960Z"
+                    default: "2026-06-14T13:29:29.915Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47712,7 +48871,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -48295,7 +49454,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:53.714Z"
+                              default: "2026-06-14T13:29:47.487Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -48335,7 +49494,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:53.714Z"
+                              default: "2026-06-14T13:29:47.488Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -48375,7 +49534,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:53.715Z"
+                              default: "2026-06-14T13:29:47.488Z"
                               description: "The date and time the item was reviewed"
                             type:
                               type: "string"
@@ -48415,7 +49574,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-06-13T12:49:34.960Z"
+                    default: "2026-06-14T13:29:29.915Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -48423,7 +49582,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -49192,6 +50351,27 @@ paths:
                       example:
                         customer_name: "John Smith"
                         product_name: "Premium Plan"
+                    cache_control:
+                      type: "object"
+                      properties:
+                        type:
+                          type: "string"
+                          enum:
+                            - "ephemeral"
+                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                        ttl:
+                          type: "string"
+                          enum:
+                            - "5m"
+                            - "1h"
+                          default: "5m"
+                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                      required:
+                        - "type"
+                      description: "Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models."
+                    prompt_cache_key:
+                      type: "string"
+                      description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
                     orq:
                       type: "object"
                       properties:
@@ -54559,7 +55739,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-13T12:49:53.822Z"
+                      default: "2026-06-14T13:29:47.593Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -54598,7 +55778,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-13T12:49:53.823Z"
+                      default: "2026-06-14T13:29:47.594Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -54637,7 +55817,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-06-13T12:49:53.823Z"
+                      default: "2026-06-14T13:29:47.594Z"
                       description: "The date and time the item was reviewed"
                     type:
                       type: "string"
@@ -54972,7 +56152,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-13T12:49:34.960Z"
+                          default: "2026-06-14T13:29:29.915Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54980,7 +56160,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:34.960Z"
+                              default: "2026-06-14T13:29:29.915Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55054,7 +56234,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-06-13T12:49:34.960Z"
+                          default: "2026-06-14T13:29:29.915Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55062,7 +56242,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-06-13T12:49:34.960Z"
+                              default: "2026-06-14T13:29:29.915Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55250,7 +56430,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55258,7 +56438,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-13T12:49:34.960Z"
+                            default: "2026-06-14T13:29:29.915Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55332,7 +56512,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55340,7 +56520,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-13T12:49:34.960Z"
+                            default: "2026-06-14T13:29:29.915Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55438,7 +56618,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55446,7 +56626,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-13T12:49:34.960Z"
+                            default: "2026-06-14T13:29:29.915Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55520,7 +56700,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55528,7 +56708,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-13T12:49:34.960Z"
+                            default: "2026-06-14T13:29:29.915Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55724,7 +56904,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55732,7 +56912,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-13T12:49:34.960Z"
+                            default: "2026-06-14T13:29:29.915Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55806,7 +56986,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-06-13T12:49:34.960Z"
+                        default: "2026-06-14T13:29:29.915Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55814,7 +56994,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-06-13T12:49:34.960Z"
+                            default: "2026-06-14T13:29:29.915Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -59387,6 +60567,256 @@ paths:
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'API_KEY_STATUS_DISABLED',\n});\n\nconsole.log(result.apiKey.status);\n"
       security:
         - ApiKey: []
+  /v2/budgets:
+    get:
+      tags:
+        - "Budgets"
+      summary: "List budgets"
+      description: "Returns budgets visible to the current workspace, ordered by creation time with the newest first. Supports filtering by scope kind, scope target id, period, and active state, plus an optional free-text query that searches across denormalized target names via Typesense."
+      operationId: "BudgetList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          description: "Page size, 1–200. Unset uses the server default (25)."
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          description: "Cursor for forward pagination. Set to the `budget_id` of the last\n item from the previous page."
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          description: "Cursor for backward pagination. Set to the `budget_id` of the\n first item from the previous page."
+          schema:
+            type: "string"
+        - name: "scope_kind"
+          in: "query"
+          description: "Optional filter: only return budgets whose scope kind matches one\n of the listed values. Empty means no scope-kind filter."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/components/schemas/BudgetScopeKind"
+        - name: "scope_target_id"
+          in: "query"
+          description: "Optional filter: only return budgets whose scope target id matches."
+          schema:
+            type: "string"
+        - name: "is_active"
+          in: "query"
+          description: "Optional filter: only return budgets with this active state."
+          schema:
+            type: "boolean"
+        - name: "period"
+          in: "query"
+          description: "Optional filter: only return budgets whose limits.period matches\n one of the listed values. Empty means no period filter."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/components/schemas/BudgetPeriod"
+        - name: "query"
+          in: "query"
+          description: "Optional free-text query. Server translates this into a Typesense\n search over the denormalized `scope_target_name` and id fields on\n the per-workspace `{workspace_id}_budgets` collection."
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBudgetsResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Budgets"
+      summary: "Create a new budget"
+      description: "Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id)."
+      operationId: "BudgetCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBudgetRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateBudgetResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.budgets.create({ scope: { kind: \"workspace\" }, limits: { period: \"MONTHLY\", amount: 1000 } });\n"
+      security:
+        - ApiKey: []
+  /v2/budgets/check:
+    post:
+      tags:
+        - "Budgets"
+      summary: "Check budget enforcement"
+      description: "Internal endpoint used by the gateway to resolve applicable budgets and check enforcement gates for a request. Returns allowed/rejected status with dimension info for rate-limit headers."
+      operationId: "BudgetCheck"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckBudgetsRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckBudgetsResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "check"
+      security:
+        - ApiKey: []
+  /v2/budgets/{budget_id}:
+    get:
+      tags:
+        - "Budgets"
+      summary: "Retrieve a budget"
+      description: "Retrieves the metadata for an existing budget by its unique identifier. Returns `NotFound` when the budget does not exist in the caller's workspace."
+      operationId: "BudgetGet"
+      parameters:
+        - name: "budget_id"
+          in: "path"
+          description: "Budget id to retrieve."
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetBudgetResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Budgets"
+      summary: "Delete a budget"
+      description: "Permanently deletes a budget. Consumption counters in Redis for this budget are cleared immediately. The response body is empty on success."
+      operationId: "BudgetDelete"
+      parameters:
+        - name: "budget_id"
+          in: "path"
+          description: "Budget id to delete."
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteBudgetResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Budgets"
+      summary: "Update a budget"
+      description: "Updates mutable fields of a budget: limits, rate limit, activation, and expiration. The scope is immutable — to change a budget's target, delete and recreate it. Omitted fields keep their current values."
+      operationId: "BudgetUpdate"
+      parameters:
+        - name: "budget_id"
+          in: "path"
+          description: "Budget id to update."
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateBudgetRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateBudgetResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/budgets/{budget_id}/consumption:
+    get:
+      tags:
+        - "Budgets"
+      summary: "Get current-period consumption"
+      description: "Returns the current-period cost, token, and per-minute request counters for the budget. Values reflect the live Redis state for the active period bucket."
+      operationId: "BudgetGetConsumption"
+      parameters:
+        - name: "budget_id"
+          in: "path"
+          description: "Budget id whose counters should be returned."
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetBudgetConsumptionResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "getConsumption"
+      security:
+        - ApiKey: []
+  /v2/budgets/{budget_id}/reset-consumption:
+    post:
+      tags:
+        - "Budgets"
+      summary: "Reset budget consumption"
+      description: "Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved; only the Redis counters are reset."
+      operationId: "BudgetResetConsumption"
+      parameters:
+        - name: "budget_id"
+          in: "path"
+          description: "Budget id whose current-period counters should be cleared."
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetBudgetConsumptionRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResetBudgetConsumptionResponse"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "resetConsumption"
+      security:
+        - ApiKey: []
   /v2/documentation/search:
     post:
       tags:
@@ -61054,6 +62484,25 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                cache_control:
+                  description: "Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request."
+                  properties:
+                    ttl:
+                      default: "5m"
+                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                      enum:
+                        - "5m"
+                        - "1h"
+                      type: "string"
+                    type:
+                      description: "Create a cache control breakpoint. Accepts only the value \"ephemeral\"."
+                      enum:
+                        - "ephemeral"
+                      type: "string"
+                  required:
+                    - "type"
+                  title: "Cache control"
+                  type: "object"
                 conversation:
                   $ref: "#/components/schemas/ConversationParam"
                   description: "Conversation context for multi-turn interactions."
@@ -61096,6 +62545,24 @@ paths:
                                   anyOf:
                                     - description: "A text content part."
                                       properties:
+                                        cache_control:
+                                          properties:
+                                            ttl:
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              type: "string"
+                                            type:
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              enum:
+                                                - "ephemeral"
+                                              type: "string"
+                                          required:
+                                            - "type"
+                                          title: "Cache control"
+                                          type: "object"
                                         text:
                                           description: "The text content."
                                           type: "string"
@@ -61110,6 +62577,24 @@ paths:
                                       type: "object"
                                     - description: "An image content part."
                                       properties:
+                                        cache_control:
+                                          properties:
+                                            ttl:
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              type: "string"
+                                            type:
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              enum:
+                                                - "ephemeral"
+                                              type: "string"
+                                          required:
+                                            - "type"
+                                          title: "Cache control"
+                                          type: "object"
                                         detail:
                                           description: "The detail level for image understanding."
                                           enum:
@@ -61133,6 +62618,24 @@ paths:
                                       type: "object"
                                     - description: "A file content part. Provide file_id, file_data (base64), or file_url."
                                       properties:
+                                        cache_control:
+                                          properties:
+                                            ttl:
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              type: "string"
+                                            type:
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              enum:
+                                                - "ephemeral"
+                                              type: "string"
+                                          required:
+                                            - "type"
+                                          title: "Cache control"
+                                          type: "object"
                                         file_data:
                                           description: "Base64-encoded file content."
                                           type: "string"
@@ -61285,6 +62788,7 @@ paths:
                           type: "object"
                       description: "The output format: plain text or structured JSON schema."
                     verbosity:
+                      description: "Controls the verbosity of the model output."
                       enum:
                         - "low"
                         - "medium"
@@ -61324,6 +62828,24 @@ paths:
                     anyOf:
                       - description: "A function tool the model can call."
                         properties:
+                          cache_control:
+                            properties:
+                              ttl:
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                type: "string"
+                              type:
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                enum:
+                                  - "ephemeral"
+                                type: "string"
+                            required:
+                              - "type"
+                            title: "Cache control"
+                            type: "object"
                           description:
                             description: "A description of what the function does."
                             type: "string"
@@ -61851,6 +63373,8 @@ tags:
   - name: "Routing Rules"
   - name: "API keys"
     description: "API keys authenticate programmatic access to the workspace. The unified key model exposes opaque tokens, per-domain access grants, and budget / rate-limit constraints (see ADR 0001 and ADR 0002)."
+  - name: "Budgets"
+    description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, api-key, provider, and model. A budget is hierarchical and defense-in-depth — every applicable budget is a hard gate, and the most restrictive one wins per dimension (see ADR 0007)."
   - name: "Documentation"
     description: "Search the orq.ai documentation. Proxies the workspace's query to the hosted docs search index."
   - name: "Files"
