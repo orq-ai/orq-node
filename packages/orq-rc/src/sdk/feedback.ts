@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create agent
+   * Create chat completion
    *
    * @remarks
-   * Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage.
+   * Creates a model response for the given chat conversation with support for retries, fallbacks, prompts, and variables.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

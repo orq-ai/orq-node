@@ -9,6 +9,20 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Filter knowledge bases by type
+ */
+export const ListKnowledgeBasesQueryParamType = {
+  Internal: "internal",
+  External: "external",
+} as const;
+/**
+ * Filter knowledge bases by type
+ */
+export type ListKnowledgeBasesQueryParamType = ClosedEnum<
+  typeof ListKnowledgeBasesQueryParamType
+>;
+
 export type ListKnowledgeBasesRequest = {
   /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
@@ -22,6 +36,18 @@ export type ListKnowledgeBasesRequest = {
    * A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 25
    */
   limit?: number | undefined;
+  /**
+   * Filter knowledge bases by key (case-insensitive match)
+   */
+  search?: string | undefined;
+  /**
+   * Filter by the users who last updated the knowledge base. Accepts a comma-separated list of user IDs
+   */
+  updatedBy?: string | undefined;
+  /**
+   * Filter knowledge bases by type
+   */
+  type?: ListKnowledgeBasesQueryParamType | undefined;
 };
 
 export const ListKnowledgeBasesObject = {
@@ -278,10 +304,18 @@ export type ListKnowledgeBasesResponseBody = {
 };
 
 /** @internal */
+export const ListKnowledgeBasesQueryParamType$outboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesQueryParamType
+> = z.nativeEnum(ListKnowledgeBasesQueryParamType);
+
+/** @internal */
 export type ListKnowledgeBasesRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   limit: number;
+  search?: string | undefined;
+  updated_by?: string | undefined;
+  type?: string | undefined;
 };
 
 /** @internal */
@@ -293,10 +327,14 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   limit: z.number().int().default(25),
+  search: z.string().optional(),
+  updatedBy: z.string().optional(),
+  type: ListKnowledgeBasesQueryParamType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
+    updatedBy: "updated_by",
   });
 });
 

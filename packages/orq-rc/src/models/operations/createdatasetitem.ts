@@ -10,6 +10,8 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type Inputs = string | number | boolean;
+
 export type CreateDatasetItemContentDatasetsRequest2 =
   components.TextContentPartSchema;
 
@@ -364,9 +366,9 @@ export type CreateDatasetItemMessages =
 
 export type CreateDatasetItemRequestBody = {
   /**
-   * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported.
+   * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects and arrays are not supported.
    */
-  inputs?: { [k: string]: any } | undefined;
+  inputs?: { [k: string]: string | number | boolean | null } | undefined;
   /**
    * A list of messages comprising the conversation so far
    */
@@ -940,6 +942,20 @@ export type CreateDatasetItemResponseBody = {
    */
   updated: Date;
 };
+
+/** @internal */
+export type Inputs$Outbound = string | number | boolean;
+
+/** @internal */
+export const Inputs$outboundSchema: z.ZodType<
+  Inputs$Outbound,
+  z.ZodTypeDef,
+  Inputs
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function inputsToJSON(inputs: Inputs): string {
+  return JSON.stringify(Inputs$outboundSchema.parse(inputs));
+}
 
 /** @internal */
 export type CreateDatasetItemContentDatasetsRequest2$Outbound =
@@ -1624,7 +1640,7 @@ export function createDatasetItemMessagesToJSON(
 
 /** @internal */
 export type CreateDatasetItemRequestBody$Outbound = {
-  inputs?: { [k: string]: any } | undefined;
+  inputs?: { [k: string]: string | number | boolean | null } | undefined;
   messages?:
     | Array<
       | CreateDatasetItemMessagesSystemMessage$Outbound
@@ -1643,7 +1659,8 @@ export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasetItemRequestBody
 > = z.object({
-  inputs: z.record(z.any()).optional(),
+  inputs: z.record(z.nullable(z.union([z.string(), z.number(), z.boolean()])))
+    .optional(),
   messages: z.array(
     z.union([
       z.lazy(() => CreateDatasetItemMessagesSystemMessage$outboundSchema),
@@ -2355,7 +2372,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-14T13:29:47.467Z",
+    "2026-06-15T05:10:28.298Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2400,7 +2417,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-14T13:29:47.466Z",
+    "2026-06-15T05:10:28.298Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2446,7 +2463,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   source: EvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-14T13:29:47.466Z",
+    "2026-06-15T05:10:28.297Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2529,7 +2546,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-14T13:29:29.915Z",
+    "2026-06-15T05:10:09.577Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
