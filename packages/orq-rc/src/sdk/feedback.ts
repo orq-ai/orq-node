@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create an Evaluator
+   * Create response
+   *
+   * @remarks
+   * Creates a model response for the given input. Returns a response object or a stream of server-sent events.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
