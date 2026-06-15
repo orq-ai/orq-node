@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create response
+   * Create image edit
    *
    * @remarks
-   * Creates a model response for the given input. Returns a response object or a stream of server-sent events.
+   * Edit an Image
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
