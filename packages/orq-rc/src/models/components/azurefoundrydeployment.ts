@@ -13,9 +13,12 @@ import {
 } from "./azurefoundrydeploymentmasterdata.js";
 
 export type AzureFoundryDeployment = {
+  baseUrl?: string | undefined;
   id: string;
   masterData?: AzureFoundryDeploymentMasterData | undefined;
   model: string;
+  publisher?: string | undefined;
+  wire?: string | undefined;
 };
 
 /** @internal */
@@ -24,11 +27,15 @@ export const AzureFoundryDeployment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  base_url: z.string().optional(),
   id: z.string(),
   master_data: AzureFoundryDeploymentMasterData$inboundSchema.optional(),
   model: z.string(),
+  publisher: z.string().optional(),
+  wire: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "base_url": "baseUrl",
     "master_data": "masterData",
   });
 });

@@ -98,6 +98,7 @@ async function $do(
     "query": payload?.query,
     "scope_kind": payload?.scope_kind,
     "scope_target_id": payload?.scope_target_id,
+    "sort_by": payload?.sort_by,
     "starting_after": payload?.starting_after,
   });
 
