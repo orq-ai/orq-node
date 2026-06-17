@@ -136,7 +136,7 @@ export type GetAllPromptsResponseFormatPromptsResponse200Type = ClosedEnum<
 
 export type GetAllPromptsResponseFormatPromptsResponseJsonSchema = {
   name: string;
-  description?: string | undefined;
+  description?: string | null | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -1699,7 +1699,7 @@ export const GetAllPromptsResponseFormatPromptsResponseJsonSchema$inboundSchema:
     unknown
   > = z.object({
     name: z.string(),
-    description: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
     strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
