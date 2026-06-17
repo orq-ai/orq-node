@@ -23,7 +23,15 @@ import {
 export type BudgetLimits = {
   period?: BudgetPeriod | undefined;
   amount?: number | undefined;
-  tokenLimit?: string | undefined;
+  /**
+   * Token ceiling. Carried as a double so it serializes as a JSON number
+   *
+   * @remarks
+   *  (proto int64 would serialize as a quoted string); token counts are
+   *  whole and well within double's exact-integer range (2^53). Stored as
+   *  an integer server-side.
+   */
+  tokenLimit?: number | undefined;
 };
 
 /** @internal */
@@ -34,7 +42,7 @@ export const BudgetLimits$inboundSchema: z.ZodType<
 > = z.object({
   period: BudgetPeriod$inboundSchema.optional(),
   amount: z.number().optional(),
-  token_limit: z.string().optional(),
+  token_limit: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "token_limit": "tokenLimit",
@@ -44,7 +52,7 @@ export const BudgetLimits$inboundSchema: z.ZodType<
 export type BudgetLimits$Outbound = {
   period?: string | undefined;
   amount?: number | undefined;
-  token_limit?: string | undefined;
+  token_limit?: number | undefined;
 };
 
 /** @internal */
@@ -55,7 +63,7 @@ export const BudgetLimits$outboundSchema: z.ZodType<
 > = z.object({
   period: BudgetPeriod$outboundSchema.optional(),
   amount: z.number().optional(),
-  tokenLimit: z.string().optional(),
+  tokenLimit: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     tokenLimit: "token_limit",

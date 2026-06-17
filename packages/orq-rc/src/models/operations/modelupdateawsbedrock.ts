@@ -12,6 +12,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ModelUpdateAwsBedrockRequestBody = {
   assumeRoleArn?: string | undefined;
   assumeRoleExternalId?: string | undefined;
+  autorouterId?: string | undefined;
+  autorouterVersion?: string | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
   hasReasoning?: boolean | undefined;
@@ -20,7 +22,6 @@ export type ModelUpdateAwsBedrockRequestBody = {
   modelDeveloper?: string | undefined;
   modelFamily?: string | undefined;
   modelId?: string | undefined;
-  modelType?: string | undefined;
   outputCost?: number | undefined;
   region?: string | undefined;
   supportsAdaptiveReasoning?: boolean | undefined;
@@ -78,6 +79,8 @@ export type ModelUpdateAwsBedrockResponseBody = {
 export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   assume_role_arn?: string | undefined;
   assume_role_external_id?: string | undefined;
+  autorouter_id?: string | undefined;
+  autorouter_version?: string | undefined;
   description?: string | undefined;
   display_name?: string | undefined;
   has_reasoning?: boolean | undefined;
@@ -86,7 +89,6 @@ export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   model_developer?: string | undefined;
   model_family?: string | undefined;
   model_id?: string | undefined;
-  model_type?: string | undefined;
   output_cost?: number | undefined;
   region?: string | undefined;
   supports_adaptive_reasoning?: boolean | undefined;
@@ -107,6 +109,8 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   assumeRoleArn: z.string().optional(),
   assumeRoleExternalId: z.string().optional(),
+  autorouterId: z.string().optional(),
+  autorouterVersion: z.string().optional(),
   description: z.string().optional(),
   displayName: z.string().optional(),
   hasReasoning: z.boolean().optional(),
@@ -115,7 +119,6 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   modelDeveloper: z.string().optional(),
   modelFamily: z.string().optional(),
   modelId: z.string().optional(),
-  modelType: z.string().optional(),
   outputCost: z.number().optional(),
   region: z.string().optional(),
   supportsAdaptiveReasoning: z.boolean().optional(),
@@ -130,6 +133,8 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     assumeRoleArn: "assume_role_arn",
     assumeRoleExternalId: "assume_role_external_id",
+    autorouterId: "autorouter_id",
+    autorouterVersion: "autorouter_version",
     displayName: "display_name",
     hasReasoning: "has_reasoning",
     inputCost: "input_cost",
@@ -137,7 +142,6 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     modelDeveloper: "model_developer",
     modelFamily: "model_family",
     modelId: "model_id",
-    modelType: "model_type",
     outputCost: "output_cost",
     supportsAdaptiveReasoning: "supports_adaptive_reasoning",
     supportsExtendedThinking: "supports_extended_thinking",

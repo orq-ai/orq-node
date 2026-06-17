@@ -10,6 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { BudgetLimits, BudgetLimits$inboundSchema } from "./budgetlimits.js";
 import { BudgetMatch, BudgetMatch$inboundSchema } from "./budgetmatch.js";
 import { BudgetScope, BudgetScope$inboundSchema } from "./budgetscope.js";
+import { BudgetUsage, BudgetUsage$inboundSchema } from "./budgetusage.js";
 import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
 
 /**
@@ -60,6 +61,16 @@ export type Budget = {
   expiresAt?: Date | undefined;
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
+  /**
+   * Live consumption for the current period, read from the Redis
+   *
+   * @remarks
+   *  counters the enforcement gate maintains. Populated by read paths
+   *  (Get / List); omitted on write responses (Create / Update / Reset)
+   *  where it carries no signal. Absent or all-zero for a budget that
+   *  has not been spent against in the current period.
+   */
+  usage?: BudgetUsage | undefined;
 };
 
 /** @internal */
@@ -80,6 +91,7 @@ export const Budget$inboundSchema: z.ZodType<Budget, z.ZodTypeDef, unknown> = z
     updated_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ).optional(),
+    usage: BudgetUsage$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "budget_id": "budgetId",

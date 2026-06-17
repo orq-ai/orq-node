@@ -31,6 +31,7 @@ export * from "./budgetrejection.js";
 export * from "./budgetscope.js";
 export * from "./budgetscopekind.js";
 export * from "./budgetsortfield.js";
+export * from "./budgetusage.js";
 export * from "./checkbudgetsrequest.js";
 export * from "./checkbudgetsresponse.js";
 export * from "./conversationparam.js";

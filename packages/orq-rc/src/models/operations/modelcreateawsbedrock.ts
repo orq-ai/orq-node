@@ -13,6 +13,8 @@ export type ModelCreateAwsBedrockRequestBody = {
   assumeRoleArn?: string | undefined;
   assumeRoleExternalId?: string | undefined;
   authMode: string;
+  autorouterId?: string | undefined;
+  autorouterVersion?: string | undefined;
   description?: string | undefined;
   displayName: string;
   hasReasoning?: boolean | undefined;
@@ -73,6 +75,8 @@ export type ModelCreateAwsBedrockRequestBody$Outbound = {
   assume_role_arn?: string | undefined;
   assume_role_external_id?: string | undefined;
   auth_mode: string;
+  autorouter_id?: string | undefined;
+  autorouter_version?: string | undefined;
   description?: string | undefined;
   display_name: string;
   has_reasoning?: boolean | undefined;
@@ -104,6 +108,8 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   assumeRoleArn: z.string().optional(),
   assumeRoleExternalId: z.string().optional(),
   authMode: z.string(),
+  autorouterId: z.string().optional(),
+  autorouterVersion: z.string().optional(),
   description: z.string().optional(),
   displayName: z.string(),
   hasReasoning: z.boolean().optional(),
@@ -129,6 +135,8 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     assumeRoleArn: "assume_role_arn",
     assumeRoleExternalId: "assume_role_external_id",
     authMode: "auth_mode",
+    autorouterId: "autorouter_id",
+    autorouterVersion: "autorouter_version",
     displayName: "display_name",
     hasReasoning: "has_reasoning",
     inputCost: "input_cost",

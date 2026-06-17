@@ -11,6 +11,7 @@ export type ModelValidateAwsBedrockRequestBody = {
   authMode: string;
   inferenceProfileArn: string;
   integrationId?: string | undefined;
+  modelType?: string | undefined;
   region: string;
 };
 
@@ -21,6 +22,7 @@ export type ModelValidateAwsBedrockRequestBody$Outbound = {
   auth_mode: string;
   inference_profile_arn: string;
   integration_id?: string | undefined;
+  model_type?: string | undefined;
   region: string;
 };
 
@@ -35,6 +37,7 @@ export const ModelValidateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   authMode: z.string(),
   inferenceProfileArn: z.string(),
   integrationId: z.string().optional(),
+  modelType: z.string().optional(),
   region: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -43,6 +46,7 @@ export const ModelValidateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     authMode: "auth_mode",
     inferenceProfileArn: "inference_profile_arn",
     integrationId: "integration_id",
+    modelType: "model_type",
   });
 });
 

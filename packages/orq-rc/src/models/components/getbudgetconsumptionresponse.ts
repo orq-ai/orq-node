@@ -27,9 +27,13 @@ export type GetBudgetConsumptionResponse = {
    */
   cost?: number | undefined;
   /**
-   * Tokens accumulated in the current period.
+   * Tokens accumulated in the current period. Carried as a double (not
+   *
+   * @remarks
+   *  int64) so it serializes as a JSON number rather than a quoted
+   *  string, matching BudgetUsage.tokens and limits.token_limit.
    */
-  tokens?: string | undefined;
+  tokens?: number | undefined;
   /**
    * Requests counted in the current 60-second rolling window.
    */
@@ -46,7 +50,7 @@ export const GetBudgetConsumptionResponse$inboundSchema: z.ZodType<
   period: BudgetPeriod$inboundSchema.optional(),
   period_date: z.string().optional(),
   cost: z.number().optional(),
-  tokens: z.string().optional(),
+  tokens: z.number().optional(),
   requests_in_window: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
