@@ -9,8 +9,15 @@ let value: StreamAgentRequest = {
   key: "<key>",
   requestBody: {
     message: {
-      role: "user",
-      parts: [],
+      role: "tool",
+      parts: [
+        {
+          kind: "file",
+          file: {
+            uri: "https://ignorant-hawk.com",
+          },
+        },
+      ],
     },
     identity: {
       id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
@@ -41,7 +48,7 @@ let value: StreamAgentRequest = {
 
 ## Fields
 
-| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `key`                                                                                  | *string*                                                                               | :heavy_check_mark:                                                                     | The key or ID of the agent to invoke                                                   |
-| `requestBody`                                                                          | [operations.StreamAgentRequestBody](../../models/operations/streamagentrequestbody.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `key`                                                                                            | *string*                                                                                         | :heavy_check_mark:                                                                               | The key or ID of the agent to invoke                                                             |
+| `requestBody`                                                                                    | [operations.StreamAgentA2AInvokeRequest](../../models/operations/streamagenta2ainvokerequest.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

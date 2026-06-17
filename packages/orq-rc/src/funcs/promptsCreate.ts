@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  */
 export function promptsCreate(
   client: OrqCore,
-  request?: operations.CreatePromptRequestBody | undefined,
+  request?: operations.CreatePromptCreatePromptRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,7 +54,7 @@ export function promptsCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.CreatePromptRequestBody | undefined,
+  request?: operations.CreatePromptCreatePromptRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -75,7 +75,8 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.CreatePromptRequestBody$outboundSchema.optional().parse(value),
+      operations.CreatePromptCreatePromptRequest$outboundSchema.optional()
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

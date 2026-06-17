@@ -926,7 +926,10 @@ export type UpdatePromptMetadata = {
   language?: UpdatePromptLanguage | null | undefined;
 };
 
-export type UpdatePromptRequestBody = {
+/**
+ * Request body for updating an existing prompt. All fields are optional.
+ */
+export type UpdatePromptUpdatePromptRequest = {
   owner?: string | undefined;
   domainId?: string | undefined;
   created?: string | undefined;
@@ -963,7 +966,7 @@ export type UpdatePromptRequest = {
    * Unique identifier of the prompt
    */
   id: string;
-  requestBody?: UpdatePromptRequestBody | undefined;
+  requestBody?: UpdatePromptUpdatePromptRequest | undefined;
 };
 
 export const UpdatePromptPromptsResponseType = {
@@ -3901,7 +3904,7 @@ export function updatePromptMetadataToJSON(
 }
 
 /** @internal */
-export type UpdatePromptRequestBody$Outbound = {
+export type UpdatePromptUpdatePromptRequest$Outbound = {
   owner?: string | undefined;
   domain_id?: string | undefined;
   created?: string | undefined;
@@ -3916,10 +3919,10 @@ export type UpdatePromptRequestBody$Outbound = {
 };
 
 /** @internal */
-export const UpdatePromptRequestBody$outboundSchema: z.ZodType<
-  UpdatePromptRequestBody$Outbound,
+export const UpdatePromptUpdatePromptRequest$outboundSchema: z.ZodType<
+  UpdatePromptUpdatePromptRequest$Outbound,
   z.ZodTypeDef,
-  UpdatePromptRequestBody
+  UpdatePromptUpdatePromptRequest
 > = z.object({
   owner: z.string().optional(),
   domainId: z.string().optional(),
@@ -3941,18 +3944,20 @@ export const UpdatePromptRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-export function updatePromptRequestBodyToJSON(
-  updatePromptRequestBody: UpdatePromptRequestBody,
+export function updatePromptUpdatePromptRequestToJSON(
+  updatePromptUpdatePromptRequest: UpdatePromptUpdatePromptRequest,
 ): string {
   return JSON.stringify(
-    UpdatePromptRequestBody$outboundSchema.parse(updatePromptRequestBody),
+    UpdatePromptUpdatePromptRequest$outboundSchema.parse(
+      updatePromptUpdatePromptRequest,
+    ),
   );
 }
 
 /** @internal */
 export type UpdatePromptRequest$Outbound = {
   id: string;
-  RequestBody?: UpdatePromptRequestBody$Outbound | undefined;
+  RequestBody?: UpdatePromptUpdatePromptRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -3962,7 +3967,8 @@ export const UpdatePromptRequest$outboundSchema: z.ZodType<
   UpdatePromptRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdatePromptRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => UpdatePromptUpdatePromptRequest$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",

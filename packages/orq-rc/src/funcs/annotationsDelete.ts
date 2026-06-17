@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Remove an annotation from a span
  *
  * @remarks
- * Remove one or more annotations from a specific span by their evaluator keys.
+ * Remove one or more annotations from a specific span by their evaluator keys, or remove corrections by the eval ids of their parent annotations.
  */
 export function annotationsDelete(
   client: OrqCore,

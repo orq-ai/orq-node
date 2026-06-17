@@ -9,7 +9,6 @@
 const value: operations.ListDatasetDatapointsEvaluations1 = {
   id: "<id>",
   evaluationType: "human_review",
-  humanReviewId: "<id>",
   reviewedById: "<id>",
   type: "string",
   value: "<value>",
@@ -22,7 +21,6 @@ const value: operations.ListDatasetDatapointsEvaluations1 = {
 const value: operations.ListDatasetDatapointsEvaluations2 = {
   id: "<id>",
   evaluationType: "human_review",
-  humanReviewId: "<id>",
   reviewedById: "<id>",
   type: "number",
   value: 1462.3,
@@ -35,7 +33,6 @@ const value: operations.ListDatasetDatapointsEvaluations2 = {
 const value: operations.ListDatasetDatapointsEvaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
-  humanReviewId: "<id>",
   reviewedById: "<id>",
   type: "string_array",
   values: [

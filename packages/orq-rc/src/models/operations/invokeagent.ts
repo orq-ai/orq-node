@@ -13,40 +13,34 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Message containing tool execution results
  */
-export const InvokeAgentRoleToolMessage = {
+export const RoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
  * Message containing tool execution results
  */
-export type InvokeAgentRoleToolMessage = ClosedEnum<
-  typeof InvokeAgentRoleToolMessage
->;
+export type RoleToolMessage = ClosedEnum<typeof RoleToolMessage>;
 
 /**
  * Message from the end user
  */
-export const InvokeAgentRoleUserMessage = {
+export const RoleUserMessage = {
   User: "user",
 } as const;
 /**
  * Message from the end user
  */
-export type InvokeAgentRoleUserMessage = ClosedEnum<
-  typeof InvokeAgentRoleUserMessage
->;
+export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
 
 /**
  * Message role (user or tool for continuing executions)
  */
-export type InvokeAgentRole =
-  | InvokeAgentRoleUserMessage
-  | InvokeAgentRoleToolMessage;
+export type InvokeAgentRole = RoleUserMessage | RoleToolMessage;
 
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
-export type InvokeAgentPublicMessagePart =
+export type PublicMessagePart =
   | components.TextPart
   | components.FilePart
   | components.ToolResultPart
@@ -55,7 +49,7 @@ export type InvokeAgentPublicMessagePart =
 /**
  * The A2A message to send to the agent (user input or tool results)
  */
-export type InvokeAgentA2AMessage = {
+export type A2AMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -63,7 +57,7 @@ export type InvokeAgentA2AMessage = {
   /**
    * Message role (user or tool for continuing executions)
    */
-  role: InvokeAgentRoleUserMessage | InvokeAgentRoleToolMessage;
+  role: RoleUserMessage | RoleToolMessage;
   /**
    * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
@@ -78,7 +72,7 @@ export type InvokeAgentA2AMessage = {
 /**
  * Information about the identity making the request. If the identity does not exist, it will be created automatically.
  */
-export type InvokeAgentIdentity = {
+export type Identity = {
   /**
    * Unique identifier for the contact
    */
@@ -110,7 +104,7 @@ export type InvokeAgentIdentity = {
  *
  * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
-export type InvokeAgentContact = {
+export type Contact = {
   /**
    * Unique identifier for the contact
    */
@@ -154,7 +148,7 @@ export type InvokeAgentThread = {
 /**
  * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
  */
-export type InvokeAgentMemory = {
+export type Memory = {
   /**
    * An entity ID used to link memory stores to a specific user, session, or conversation. This ID is used to isolate and retrieve memories specific to the entity across agent executions.
    */
@@ -177,14 +171,17 @@ export type InvokeAgentEngine = ClosedEnum<typeof InvokeAgentEngine>;
 /**
  * Configuration options for the agent invocation
  */
-export type InvokeAgentConfiguration = {
+export type Configuration = {
   /**
    * Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status.
    */
   blocking?: boolean | undefined;
 };
 
-export type InvokeAgentRequestBody = {
+/**
+ * Request body for invoking an existing agent (stream-task endpoint). Used to start a new task or continue an existing conversation.
+ */
+export type InvokeAgentA2AInvokeRequest = {
   /**
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
    */
@@ -192,7 +189,7 @@ export type InvokeAgentRequestBody = {
   /**
    * The A2A message to send to the agent (user input or tool results)
    */
-  message: InvokeAgentA2AMessage;
+  message: A2AMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -200,13 +197,13 @@ export type InvokeAgentRequestBody = {
   /**
    * Information about the identity making the request. If the identity does not exist, it will be created automatically.
    */
-  identity?: InvokeAgentIdentity | undefined;
+  identity?: Identity | undefined;
   /**
    * @deprecated Use identity instead. Information about the contact making the request.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  contact?: InvokeAgentContact | undefined;
+  contact?: Contact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -214,7 +211,7 @@ export type InvokeAgentRequestBody = {
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
-  memory?: InvokeAgentMemory | undefined;
+  memory?: Memory | undefined;
   /**
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
@@ -226,7 +223,7 @@ export type InvokeAgentRequestBody = {
   /**
    * Configuration options for the agent invocation
    */
-  configuration?: InvokeAgentConfiguration | undefined;
+  configuration?: Configuration | undefined;
 };
 
 export type InvokeAgentRequest = {
@@ -234,7 +231,7 @@ export type InvokeAgentRequest = {
    * The key or ID of the agent to invoke
    */
   key: string;
-  requestBody?: InvokeAgentRequestBody | undefined;
+  requestBody?: InvokeAgentA2AInvokeRequest | undefined;
 };
 
 /**
@@ -362,14 +359,14 @@ export type InvokeAgentA2ATaskResponse = {
 };
 
 /** @internal */
-export const InvokeAgentRoleToolMessage$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentRoleToolMessage
-> = z.nativeEnum(InvokeAgentRoleToolMessage);
+export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RoleToolMessage
+> = z.nativeEnum(RoleToolMessage);
 
 /** @internal */
-export const InvokeAgentRoleUserMessage$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeAgentRoleUserMessage
-> = z.nativeEnum(InvokeAgentRoleUserMessage);
+export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RoleUserMessage
+> = z.nativeEnum(RoleUserMessage);
 
 /** @internal */
 export type InvokeAgentRole$Outbound = string | string;
@@ -379,10 +376,7 @@ export const InvokeAgentRole$outboundSchema: z.ZodType<
   InvokeAgentRole$Outbound,
   z.ZodTypeDef,
   InvokeAgentRole
-> = z.union([
-  InvokeAgentRoleUserMessage$outboundSchema,
-  InvokeAgentRoleToolMessage$outboundSchema,
-]);
+> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
 
 export function invokeAgentRoleToJSON(
   invokeAgentRole: InvokeAgentRole,
@@ -391,17 +385,17 @@ export function invokeAgentRoleToJSON(
 }
 
 /** @internal */
-export type InvokeAgentPublicMessagePart$Outbound =
+export type PublicMessagePart$Outbound =
   | components.TextPart$Outbound
   | components.FilePart$Outbound
   | components.ToolResultPart$Outbound
   | components.ErrorPart$Outbound;
 
 /** @internal */
-export const InvokeAgentPublicMessagePart$outboundSchema: z.ZodType<
-  InvokeAgentPublicMessagePart$Outbound,
+export const PublicMessagePart$outboundSchema: z.ZodType<
+  PublicMessagePart$Outbound,
   z.ZodTypeDef,
-  InvokeAgentPublicMessagePart
+  PublicMessagePart
 > = z.union([
   components.TextPart$outboundSchema,
   components.FilePart$outboundSchema,
@@ -409,18 +403,16 @@ export const InvokeAgentPublicMessagePart$outboundSchema: z.ZodType<
   components.ErrorPart$outboundSchema,
 ]);
 
-export function invokeAgentPublicMessagePartToJSON(
-  invokeAgentPublicMessagePart: InvokeAgentPublicMessagePart,
+export function publicMessagePartToJSON(
+  publicMessagePart: PublicMessagePart,
 ): string {
   return JSON.stringify(
-    InvokeAgentPublicMessagePart$outboundSchema.parse(
-      invokeAgentPublicMessagePart,
-    ),
+    PublicMessagePart$outboundSchema.parse(publicMessagePart),
   );
 }
 
 /** @internal */
-export type InvokeAgentA2AMessage$Outbound = {
+export type A2AMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
@@ -432,15 +424,15 @@ export type InvokeAgentA2AMessage$Outbound = {
 };
 
 /** @internal */
-export const InvokeAgentA2AMessage$outboundSchema: z.ZodType<
-  InvokeAgentA2AMessage$Outbound,
+export const A2AMessage$outboundSchema: z.ZodType<
+  A2AMessage$Outbound,
   z.ZodTypeDef,
-  InvokeAgentA2AMessage
+  A2AMessage
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
-    InvokeAgentRoleUserMessage$outboundSchema,
-    InvokeAgentRoleToolMessage$outboundSchema,
+    RoleUserMessage$outboundSchema,
+    RoleToolMessage$outboundSchema,
   ]),
   parts: z.array(
     z.union([
@@ -452,16 +444,12 @@ export const InvokeAgentA2AMessage$outboundSchema: z.ZodType<
   ),
 });
 
-export function invokeAgentA2AMessageToJSON(
-  invokeAgentA2AMessage: InvokeAgentA2AMessage,
-): string {
-  return JSON.stringify(
-    InvokeAgentA2AMessage$outboundSchema.parse(invokeAgentA2AMessage),
-  );
+export function a2AMessageToJSON(a2AMessage: A2AMessage): string {
+  return JSON.stringify(A2AMessage$outboundSchema.parse(a2AMessage));
 }
 
 /** @internal */
-export type InvokeAgentIdentity$Outbound = {
+export type Identity$Outbound = {
   id: string;
   display_name?: string | undefined;
   email?: string | undefined;
@@ -471,10 +459,10 @@ export type InvokeAgentIdentity$Outbound = {
 };
 
 /** @internal */
-export const InvokeAgentIdentity$outboundSchema: z.ZodType<
-  InvokeAgentIdentity$Outbound,
+export const Identity$outboundSchema: z.ZodType<
+  Identity$Outbound,
   z.ZodTypeDef,
-  InvokeAgentIdentity
+  Identity
 > = z.object({
   id: z.string(),
   displayName: z.string().optional(),
@@ -489,16 +477,12 @@ export const InvokeAgentIdentity$outboundSchema: z.ZodType<
   });
 });
 
-export function invokeAgentIdentityToJSON(
-  invokeAgentIdentity: InvokeAgentIdentity,
-): string {
-  return JSON.stringify(
-    InvokeAgentIdentity$outboundSchema.parse(invokeAgentIdentity),
-  );
+export function identityToJSON(identity: Identity): string {
+  return JSON.stringify(Identity$outboundSchema.parse(identity));
 }
 
 /** @internal */
-export type InvokeAgentContact$Outbound = {
+export type Contact$Outbound = {
   id: string;
   display_name?: string | undefined;
   email?: string | undefined;
@@ -508,10 +492,10 @@ export type InvokeAgentContact$Outbound = {
 };
 
 /** @internal */
-export const InvokeAgentContact$outboundSchema: z.ZodType<
-  InvokeAgentContact$Outbound,
+export const Contact$outboundSchema: z.ZodType<
+  Contact$Outbound,
   z.ZodTypeDef,
-  InvokeAgentContact
+  Contact
 > = z.object({
   id: z.string(),
   displayName: z.string().optional(),
@@ -526,12 +510,8 @@ export const InvokeAgentContact$outboundSchema: z.ZodType<
   });
 });
 
-export function invokeAgentContactToJSON(
-  invokeAgentContact: InvokeAgentContact,
-): string {
-  return JSON.stringify(
-    InvokeAgentContact$outboundSchema.parse(invokeAgentContact),
-  );
+export function contactToJSON(contact: Contact): string {
+  return JSON.stringify(Contact$outboundSchema.parse(contact));
 }
 
 /** @internal */
@@ -559,15 +539,15 @@ export function invokeAgentThreadToJSON(
 }
 
 /** @internal */
-export type InvokeAgentMemory$Outbound = {
+export type Memory$Outbound = {
   entity_id: string;
 };
 
 /** @internal */
-export const InvokeAgentMemory$outboundSchema: z.ZodType<
-  InvokeAgentMemory$Outbound,
+export const Memory$outboundSchema: z.ZodType<
+  Memory$Outbound,
   z.ZodTypeDef,
-  InvokeAgentMemory
+  Memory
 > = z.object({
   entityId: z.string(),
 }).transform((v) => {
@@ -576,12 +556,8 @@ export const InvokeAgentMemory$outboundSchema: z.ZodType<
   });
 });
 
-export function invokeAgentMemoryToJSON(
-  invokeAgentMemory: InvokeAgentMemory,
-): string {
-  return JSON.stringify(
-    InvokeAgentMemory$outboundSchema.parse(invokeAgentMemory),
-  );
+export function memoryToJSON(memory: Memory): string {
+  return JSON.stringify(Memory$outboundSchema.parse(memory));
 }
 
 /** @internal */
@@ -590,76 +566,73 @@ export const InvokeAgentEngine$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(InvokeAgentEngine);
 
 /** @internal */
-export type InvokeAgentConfiguration$Outbound = {
+export type Configuration$Outbound = {
   blocking: boolean;
 };
 
 /** @internal */
-export const InvokeAgentConfiguration$outboundSchema: z.ZodType<
-  InvokeAgentConfiguration$Outbound,
+export const Configuration$outboundSchema: z.ZodType<
+  Configuration$Outbound,
   z.ZodTypeDef,
-  InvokeAgentConfiguration
+  Configuration
 > = z.object({
   blocking: z.boolean().default(false),
 });
 
-export function invokeAgentConfigurationToJSON(
-  invokeAgentConfiguration: InvokeAgentConfiguration,
-): string {
-  return JSON.stringify(
-    InvokeAgentConfiguration$outboundSchema.parse(invokeAgentConfiguration),
-  );
+export function configurationToJSON(configuration: Configuration): string {
+  return JSON.stringify(Configuration$outboundSchema.parse(configuration));
 }
 
 /** @internal */
-export type InvokeAgentRequestBody$Outbound = {
+export type InvokeAgentA2AInvokeRequest$Outbound = {
   task_id?: string | undefined;
-  message: InvokeAgentA2AMessage$Outbound;
+  message: A2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
-  identity?: InvokeAgentIdentity$Outbound | undefined;
-  contact?: InvokeAgentContact$Outbound | undefined;
+  identity?: Identity$Outbound | undefined;
+  contact?: Contact$Outbound | undefined;
   thread?: InvokeAgentThread$Outbound | undefined;
-  memory?: InvokeAgentMemory$Outbound | undefined;
+  memory?: Memory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   engine?: string | undefined;
-  configuration?: InvokeAgentConfiguration$Outbound | undefined;
+  configuration?: Configuration$Outbound | undefined;
 };
 
 /** @internal */
-export const InvokeAgentRequestBody$outboundSchema: z.ZodType<
-  InvokeAgentRequestBody$Outbound,
+export const InvokeAgentA2AInvokeRequest$outboundSchema: z.ZodType<
+  InvokeAgentA2AInvokeRequest$Outbound,
   z.ZodTypeDef,
-  InvokeAgentRequestBody
+  InvokeAgentA2AInvokeRequest
 > = z.object({
   taskId: z.string().optional(),
-  message: z.lazy(() => InvokeAgentA2AMessage$outboundSchema),
+  message: z.lazy(() => A2AMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
-  identity: z.lazy(() => InvokeAgentIdentity$outboundSchema).optional(),
-  contact: z.lazy(() => InvokeAgentContact$outboundSchema).optional(),
+  identity: z.lazy(() => Identity$outboundSchema).optional(),
+  contact: z.lazy(() => Contact$outboundSchema).optional(),
   thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
-  memory: z.lazy(() => InvokeAgentMemory$outboundSchema).optional(),
+  memory: z.lazy(() => Memory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   engine: InvokeAgentEngine$outboundSchema.optional(),
-  configuration: z.lazy(() => InvokeAgentConfiguration$outboundSchema)
-    .optional(),
+  configuration: z.lazy(() => Configuration$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     taskId: "task_id",
   });
 });
 
-export function invokeAgentRequestBodyToJSON(
-  invokeAgentRequestBody: InvokeAgentRequestBody,
+export function invokeAgentA2AInvokeRequestToJSON(
+  invokeAgentA2AInvokeRequest: InvokeAgentA2AInvokeRequest,
 ): string {
   return JSON.stringify(
-    InvokeAgentRequestBody$outboundSchema.parse(invokeAgentRequestBody),
+    InvokeAgentA2AInvokeRequest$outboundSchema.parse(
+      invokeAgentA2AInvokeRequest,
+    ),
   );
 }
 
 /** @internal */
 export type InvokeAgentRequest$Outbound = {
   key: string;
-  RequestBody?: InvokeAgentRequestBody$Outbound | undefined;
+  RequestBody?: InvokeAgentA2AInvokeRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -669,7 +642,8 @@ export const InvokeAgentRequest$outboundSchema: z.ZodType<
   InvokeAgentRequest
 > = z.object({
   key: z.string(),
-  requestBody: z.lazy(() => InvokeAgentRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => InvokeAgentA2AInvokeRequest$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",

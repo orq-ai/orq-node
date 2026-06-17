@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -33,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function deploymentsInvoke(
   client: OrqCore,
-  request: operations.DeploymentInvokeRequestBody,
+  request: components.InvokeDeploymentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +58,7 @@ export function deploymentsInvoke(
 
 async function $do(
   client: OrqCore,
-  request: operations.DeploymentInvokeRequestBody,
+  request: components.InvokeDeploymentRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,8 +78,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.DeploymentInvokeRequestBody$outboundSchema.parse(value),
+    (value) => components.InvokeDeploymentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {

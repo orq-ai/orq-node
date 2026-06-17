@@ -924,7 +924,10 @@ export type PromptInput = {
   promptCacheKey?: string | undefined;
 };
 
-export type CreatePromptRequestBody = {
+/**
+ * Request body for creating a new prompt.
+ */
+export type CreatePromptCreatePromptRequest = {
   /**
    * The prompt’s name, meant to be displayable in the UI.
    */
@@ -3866,7 +3869,7 @@ export function promptInputToJSON(promptInput: PromptInput): string {
 }
 
 /** @internal */
-export type CreatePromptRequestBody$Outbound = {
+export type CreatePromptCreatePromptRequest$Outbound = {
   display_name: string;
   description?: string | null | undefined;
   metadata?: CreatePromptMetadata$Outbound | undefined;
@@ -3875,10 +3878,10 @@ export type CreatePromptRequestBody$Outbound = {
 };
 
 /** @internal */
-export const CreatePromptRequestBody$outboundSchema: z.ZodType<
-  CreatePromptRequestBody$Outbound,
+export const CreatePromptCreatePromptRequest$outboundSchema: z.ZodType<
+  CreatePromptCreatePromptRequest$Outbound,
   z.ZodTypeDef,
-  CreatePromptRequestBody
+  CreatePromptCreatePromptRequest
 > = z.object({
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
@@ -3891,11 +3894,13 @@ export const CreatePromptRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-export function createPromptRequestBodyToJSON(
-  createPromptRequestBody: CreatePromptRequestBody,
+export function createPromptCreatePromptRequestToJSON(
+  createPromptCreatePromptRequest: CreatePromptCreatePromptRequest,
 ): string {
   return JSON.stringify(
-    CreatePromptRequestBody$outboundSchema.parse(createPromptRequestBody),
+    CreatePromptCreatePromptRequest$outboundSchema.parse(
+      createPromptCreatePromptRequest,
+    ),
   );
 }
 

@@ -16,6 +16,6 @@ let value: AndNin = {
 
 ## Fields
 
-| Field                                 | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `nin`                                 | *operations.DeploymentInvokeAndNin*[] | :heavy_check_mark:                    | N/A                                   |
+| Field                                    | Type                                     | Required                                 | Description                              |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| `nin`                                    | *operations.DeploymentGetConfigAndNin*[] | :heavy_check_mark:                       | N/A                                      |

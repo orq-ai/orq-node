@@ -38,7 +38,7 @@ import { Result } from "../types/fp.js";
  */
 export function agentsStream(
   client: OrqCore,
-  requestBody: operations.StreamAgentRequestBody,
+  requestBody: operations.StreamAgentA2AInvokeRequest,
   key: string,
   options?: RequestOptions,
 ): APIPromise<
@@ -65,7 +65,7 @@ export function agentsStream(
 
 async function $do(
   client: OrqCore,
-  requestBody: operations.StreamAgentRequestBody,
+  requestBody: operations.StreamAgentA2AInvokeRequest,
   key: string,
   options?: RequestOptions,
 ): Promise<

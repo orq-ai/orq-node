@@ -10,7 +10,7 @@ let value: PartDeltaEventData = {
   delta: {
     kind: "file",
     file: {
-      uri: "https://narrow-rim.info/",
+      uri: "https://ignorant-hawk.com",
     },
   },
 };

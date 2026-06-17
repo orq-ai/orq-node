@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -38,7 +39,7 @@ export enum CreateAcceptEnum {
  */
 export function agentsResponsesCreate(
   client: OrqCore,
-  requestBody: operations.CreateAgentResponseRequestRequestBody,
+  agentResponseRequest: components.AgentResponseRequest,
   agentKey: string,
   options?: RequestOptions & { acceptHeaderOverride?: CreateAcceptEnum },
 ): APIPromise<
@@ -56,7 +57,7 @@ export function agentsResponsesCreate(
 > {
   return new APIPromise($do(
     client,
-    requestBody,
+    agentResponseRequest,
     agentKey,
     options,
   ));
@@ -64,7 +65,7 @@ export function agentsResponsesCreate(
 
 async function $do(
   client: OrqCore,
-  requestBody: operations.CreateAgentResponseRequestRequestBody,
+  agentResponseRequest: components.AgentResponseRequest,
   agentKey: string,
   options?: RequestOptions & { acceptHeaderOverride?: CreateAcceptEnum },
 ): Promise<
@@ -84,7 +85,7 @@ async function $do(
   ]
 > {
   const input: operations.CreateAgentResponseRequestRequest = {
-    requestBody: requestBody,
+    agentResponseRequest: agentResponseRequest,
     agentKey: agentKey,
   };
 
@@ -98,7 +99,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.AgentResponseRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     agent_key: encodeSimple("agent_key", payload.agent_key, {

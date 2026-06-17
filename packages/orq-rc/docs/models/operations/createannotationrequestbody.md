@@ -8,10 +8,8 @@ import { CreateAnnotationRequestBody } from "@orq-ai/node/models/operations";
 let value: CreateAnnotationRequestBody = {
   annotations: [
     {
-      key: "<key>",
-      value: [
-        "<value 1>",
-      ],
+      parentAnnotationId: "<id>",
+      value: "<value>",
     },
   ],
 };
@@ -21,5 +19,5 @@ let value: CreateAnnotationRequestBody = {
 
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `annotations`                                                                              | [operations.Annotations](../../models/operations/annotations.md)[]                         | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `annotations`                                                                              | *operations.Annotations*[]                                                                 | :heavy_check_mark:                                                                         | N/A                                                                                        |
 | `metadata`                                                                                 | [operations.CreateAnnotationMetadata](../../models/operations/createannotationmetadata.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

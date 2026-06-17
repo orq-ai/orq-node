@@ -1,21 +1,23 @@
 # Annotations
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Annotations1`
 
 ```typescript
-import { Annotations } from "@orq-ai/node/models/operations";
-
-let value: Annotations = {
+const value: operations.Annotations1 = {
   key: "<key>",
-  value: [
-    "<value 1>",
-  ],
+  value: true,
 };
 ```
 
-## Fields
+### `operations.Annotations2`
 
-| Field                                                                                                                                                                                                           | Type                                                                                                                                                                                                            | Required                                                                                                                                                                                                        | Description                                                                                                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`                                                                                                                                                                                                           | *string*                                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                              | Unique key of the review.                                                                                                                                                                                       |
-| `value`                                                                                                                                                                                                         | *operations.Value*                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                              | The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For text/correction, provide a string. |
+```typescript
+const value: operations.Annotations2 = {
+  parentAnnotationId: "<id>",
+  value: true,
+};
+```
+

@@ -37,12 +37,18 @@ export type RequestBody3 = {
    */
   evaluationType: PostV2FeedbackEvaluationRequestBodyEvaluationType;
   /**
-   * The unique identifier of the human review
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
-  humanReviewId: string;
+  humanReviewId?: string | undefined;
   source?: PostV2FeedbackEvaluationRequestBodyFeedbackSource | undefined;
   /**
-   * The date and time the item was reviewed
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt?: Date | undefined;
   type: "string_array";
@@ -81,12 +87,18 @@ export type PostV2FeedbackEvaluationRequestBody2 = {
    */
   evaluationType: RequestBodyEvaluationType;
   /**
-   * The unique identifier of the human review
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
-  humanReviewId: string;
+  humanReviewId?: string | undefined;
   source?: PostV2FeedbackEvaluationRequestBodySource | undefined;
   /**
-   * The date and time the item was reviewed
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt?: Date | undefined;
   type: "number";
@@ -121,12 +133,18 @@ export type PostV2FeedbackEvaluationRequestBody1 = {
    */
   evaluationType: EvaluationType;
   /**
-   * The unique identifier of the human review
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
-  humanReviewId: string;
+  humanReviewId?: string | undefined;
   source?: RequestBodySource | undefined;
   /**
-   * The date and time the item was reviewed
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt?: Date | undefined;
   type: "string";
@@ -153,8 +171,9 @@ export const PostV2FeedbackEvaluationRequestBodyFeedbackSource$outboundSchema:
 export type RequestBody3$Outbound = {
   id: string;
   evaluation_type: string;
-  human_review_id: string;
+  human_review_id?: string | undefined;
   source: string;
+  explanation?: string | undefined;
   reviewed_at: string;
   type: "string_array";
   values: Array<string>;
@@ -170,10 +189,11 @@ export const RequestBody3$outboundSchema: z.ZodType<
   id: z.string(),
   evaluationType:
     PostV2FeedbackEvaluationRequestBodyEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
+  humanReviewId: z.string().optional(),
   source: PostV2FeedbackEvaluationRequestBodyFeedbackSource$outboundSchema
     .default("orq"),
-  reviewedAt: z.date().default(() => new Date("2026-06-17T09:58:33.604Z"))
+  explanation: z.string().optional(),
+  reviewedAt: z.date().default(() => new Date("2026-06-17T11:59:37.097Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -205,8 +225,9 @@ export const PostV2FeedbackEvaluationRequestBodySource$outboundSchema:
 export type PostV2FeedbackEvaluationRequestBody2$Outbound = {
   id: string;
   evaluation_type: string;
-  human_review_id: string;
+  human_review_id?: string | undefined;
   source: string;
+  explanation?: string | undefined;
   reviewed_at: string;
   type: "number";
   value: number;
@@ -221,11 +242,12 @@ export const PostV2FeedbackEvaluationRequestBody2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   evaluationType: RequestBodyEvaluationType$outboundSchema,
-  humanReviewId: z.string(),
+  humanReviewId: z.string().optional(),
   source: PostV2FeedbackEvaluationRequestBodySource$outboundSchema.default(
     "orq",
   ),
-  reviewedAt: z.date().default(() => new Date("2026-06-17T09:58:33.603Z"))
+  explanation: z.string().optional(),
+  reviewedAt: z.date().default(() => new Date("2026-06-17T11:59:37.097Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -263,8 +285,9 @@ export const RequestBodySource$outboundSchema: z.ZodNativeEnum<
 export type PostV2FeedbackEvaluationRequestBody1$Outbound = {
   id: string;
   evaluation_type: string;
-  human_review_id: string;
+  human_review_id?: string | undefined;
   source: string;
+  explanation?: string | undefined;
   reviewed_at: string;
   type: "string";
   value: string;
@@ -279,9 +302,10 @@ export const PostV2FeedbackEvaluationRequestBody1$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   evaluationType: EvaluationType$outboundSchema,
-  humanReviewId: z.string(),
+  humanReviewId: z.string().optional(),
   source: RequestBodySource$outboundSchema.default("orq"),
-  reviewedAt: z.date().default(() => new Date("2026-06-17T09:58:33.602Z"))
+  explanation: z.string().optional(),
+  reviewedAt: z.date().default(() => new Date("2026-06-17T11:59:37.096Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
