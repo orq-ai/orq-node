@@ -11,8 +11,8 @@ Successfully updated an eval
 const value: operations.UpdateEvalResponseBodyLLM = {
   id: "<id>",
   description: "once supposing abnegate extremely deploy cosset ravel",
-  created: "2026-06-17T14:01:26.990Z",
-  updated: "2026-06-17T14:01:26.990Z",
+  created: "2026-06-18T04:50:37.829Z",
+  updated: "2026-06-18T04:50:37.829Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
