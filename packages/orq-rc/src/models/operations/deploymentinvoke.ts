@@ -42,7 +42,6 @@ export const Provider = {
   Nvidia: "nvidia",
   Jina: "jina",
   Elevenlabs: "elevenlabs",
-  Litellm: "litellm",
   Cerebras: "cerebras",
   Openailike: "openailike",
   Bytedance: "bytedance",

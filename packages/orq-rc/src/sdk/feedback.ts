@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create custom model
+   * Create image variation
    *
    * @remarks
-   * Creates a new custom model for the workspace. Provider credentials in the configuration are encrypted using the workspace encryption key before being persisted.
+   * Create an Image Variation
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

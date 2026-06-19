@@ -753,7 +753,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KVFA5M8J18HXFWHJQ3C2R93E"),
+  _id: z.string().default("tool_01KVFHHTAH3BC3FEFCN43RQEWV"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -859,7 +859,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KVFA5M8H11V2Z04CKAKP04D9"),
+  id: z.string().default("01KVFHHTAGTXD45DHD34TCG62Y"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -917,7 +917,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KVFA5M8G6CVX7AH01SV12RP9"),
+  _id: z.string().default("tool_01KVFHHTAEQNVTCWTD7E2WETJ0"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1108,7 +1108,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KVFA5M8F21B86N0WZ9MF2AKW"),
+  _id: z.string().default("tool_01KVFHHTABWR2VB7S8C9CPC3JW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1204,7 +1204,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KVFA5M8DWPT2F9QSTEDCD3WA"),
+  _id: z.string().default("tool_01KVFHHTA8NQ0A6RVKJWBZDP2R"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1310,7 +1310,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KVFA5M8CBH46XJY2EPHV34F6"),
+  _id: z.string().default("tool_01KVFHHTA6P9AYWWCPQPYCHBXM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
