@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create speech
+   * Create custom model
    *
    * @remarks
-   * Generates audio from the input text.
+   * Creates a new custom model for the workspace. Provider credentials in the configuration are encrypted using the workspace encryption key before being persisted.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
