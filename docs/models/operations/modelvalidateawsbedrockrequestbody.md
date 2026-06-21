@@ -21,4 +21,5 @@ let value: ModelValidateAwsBedrockRequestBody = {
 | `authMode`             | *string*               | :heavy_check_mark:     | N/A                    |
 | `inferenceProfileArn`  | *string*               | :heavy_check_mark:     | N/A                    |
 | `integrationId`        | *string*               | :heavy_minus_sign:     | N/A                    |
+| `modelType`            | *string*               | :heavy_minus_sign:     | N/A                    |
 | `region`               | *string*               | :heavy_check_mark:     | N/A                    |
