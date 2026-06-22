@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create completion
+   * Create a dataset
    *
    * @remarks
-   * For sending requests to legacy completion models
+   * Creates a new dataset in the specified project.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
