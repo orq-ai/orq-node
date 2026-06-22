@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Annotate a span
+   * Create completion
    *
    * @remarks
-   * Attach one or more annotations to a specific span. A standard annotation references a human review by key and supplies a value. A correction references an existing evaluator output by parent_annotation_id and supplies the corrected value, validated against that evaluator's output schema.
+   * For sending requests to legacy completion models
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
