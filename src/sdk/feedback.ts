@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create response
+   * Create rerank
    *
    * @remarks
-   * Creates a model response for the given input. Returns a response object or a stream of server-sent events.
+   * Rerank a list of documents based on their relevance to a query.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
