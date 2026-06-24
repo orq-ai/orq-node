@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create rerank
+   * Upload a file
    *
    * @remarks
-   * Rerank a list of documents based on their relevance to a query.
+   * Files are used to upload documents that can be used with features like Deployments.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
