@@ -318,7 +318,7 @@ export const PatchV2HumanEvalSetsIdResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-23T17:36:36.357Z",
+    "2026-06-24T03:24:22.071Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("name"),
   filter_value: z.string(),
@@ -364,7 +364,7 @@ export const PatchV2HumanEvalSetsIdResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-23T17:36:36.357Z",
+    "2026-06-24T03:24:22.071Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("span_type"),
   filter_values: z.array(z.string()),
