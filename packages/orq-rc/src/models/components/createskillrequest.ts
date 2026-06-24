@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
-export type CreateSkillRequest = {
+export type Two = {
   /**
    * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
    */
@@ -25,6 +25,33 @@ export type CreateSkillRequest = {
   /**
    * Project that should contain the skill.
    */
+  projectId: string;
+  /**
+   * Instruction body for the skill. Omit to create metadata first and fill instructions later.
+   */
+  instructions?: string | undefined;
+};
+
+export type CreateSkillRequest1 = {
+  /**
+   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
+   */
+  displayName: string;
+  /**
+   * Short human-readable summary of what the skill is for.
+   */
+  description?: string | undefined;
+  /**
+   * Free-form labels for organizing the skill.
+   */
+  tags?: Array<string> | undefined;
+  /**
+   * Project path where the skill should be stored.
+   */
+  path: string;
+  /**
+   * Project that should contain the skill.
+   */
   projectId?: string | undefined;
   /**
    * Instruction body for the skill. Omit to create metadata first and fill instructions later.
@@ -32,26 +59,58 @@ export type CreateSkillRequest = {
   instructions?: string | undefined;
 };
 
+export type CreateSkillRequest = CreateSkillRequest1 | Two;
+
 /** @internal */
-export type CreateSkillRequest$Outbound = {
+export type Two$Outbound = {
   display_name: string;
   description?: string | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
+  project_id: string;
+  instructions?: string | undefined;
+};
+
+/** @internal */
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
+  .object({
+    displayName: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    path: z.string().optional(),
+    projectId: z.string(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  });
+
+export function twoToJSON(two: Two): string {
+  return JSON.stringify(Two$outboundSchema.parse(two));
+}
+
+/** @internal */
+export type CreateSkillRequest1$Outbound = {
+  display_name: string;
+  description?: string | undefined;
+  tags?: Array<string> | undefined;
+  path: string;
   project_id?: string | undefined;
   instructions?: string | undefined;
 };
 
 /** @internal */
-export const CreateSkillRequest$outboundSchema: z.ZodType<
-  CreateSkillRequest$Outbound,
+export const CreateSkillRequest1$outboundSchema: z.ZodType<
+  CreateSkillRequest1$Outbound,
   z.ZodTypeDef,
-  CreateSkillRequest
+  CreateSkillRequest1
 > = z.object({
   displayName: z.string(),
   description: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  path: z.string().optional(),
+  path: z.string(),
   projectId: z.string().optional(),
   instructions: z.string().optional(),
 }).transform((v) => {
@@ -60,6 +119,29 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
     projectId: "project_id",
   });
 });
+
+export function createSkillRequest1ToJSON(
+  createSkillRequest1: CreateSkillRequest1,
+): string {
+  return JSON.stringify(
+    CreateSkillRequest1$outboundSchema.parse(createSkillRequest1),
+  );
+}
+
+/** @internal */
+export type CreateSkillRequest$Outbound =
+  | CreateSkillRequest1$Outbound
+  | Two$Outbound;
+
+/** @internal */
+export const CreateSkillRequest$outboundSchema: z.ZodType<
+  CreateSkillRequest$Outbound,
+  z.ZodTypeDef,
+  CreateSkillRequest
+> = z.union([
+  z.lazy(() => CreateSkillRequest1$outboundSchema),
+  z.lazy(() => Two$outboundSchema),
+]);
 
 export function createSkillRequestToJSON(
   createSkillRequest: CreateSkillRequest,

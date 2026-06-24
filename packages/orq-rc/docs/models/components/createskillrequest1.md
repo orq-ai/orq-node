@@ -1,13 +1,13 @@
-# Two
+# CreateSkillRequest1
 
 ## Example Usage
 
 ```typescript
-import { Two } from "@orq-ai/node/models/components";
+import { CreateSkillRequest1 } from "@orq-ai/node/models/components";
 
-let value: Two = {
-  displayName: "Noel74",
-  projectId: "<id>",
+let value: CreateSkillRequest1 = {
+  displayName: "Lura.Koss-Schroeder",
+  path: "/usr/ports",
 };
 ```
 
@@ -18,6 +18,6 @@ let value: Two = {
 | `displayName`                                                                                                                               | *string*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed. |
 | `description`                                                                                                                               | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | Short human-readable summary of what the skill is for.                                                                                      |
 | `tags`                                                                                                                                      | *string*[]                                                                                                                                  | :heavy_minus_sign:                                                                                                                          | Free-form labels for organizing the skill.                                                                                                  |
-| `path`                                                                                                                                      | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | Project path where the skill should be stored.                                                                                              |
-| `projectId`                                                                                                                                 | *string*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | Project that should contain the skill.                                                                                                      |
+| `path`                                                                                                                                      | *string*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | Project path where the skill should be stored.                                                                                              |
+| `projectId`                                                                                                                                 | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | Project that should contain the skill.                                                                                                      |
 | `instructions`                                                                                                                              | *string*                                                                                                                                    | :heavy_minus_sign:                                                                                                                          | Instruction body for the skill. Omit to create metadata first and fill instructions later.                                                  |

@@ -11,16 +11,13 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `components.Two[]`
+### `components.InvokeDeploymentRequestContentPrefixMessages2[]`
 
 ```typescript
-const value: components.Two[] = [
+const value: components.InvokeDeploymentRequestContentPrefixMessages2[] = [
   {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "mp3",
-    },
+    type: "file",
+    file: {},
   },
 ];
 ```

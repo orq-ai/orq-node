@@ -299,7 +299,7 @@ export type Four = {
   file: FileContentPartSchema;
 };
 
-export type Two =
+export type InvokeDeploymentRequestContentPrefixMessages2 =
   | (TextContentPartSchema & { type: "text" })
   | ImageContentPartSchema
   | AudioContentPartSchema
@@ -1513,15 +1513,19 @@ export function fourToJSON(four: Four): string {
 }
 
 /** @internal */
-export type Two$Outbound =
+export type InvokeDeploymentRequestContentPrefixMessages2$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
   | ImageContentPartSchema$Outbound
   | AudioContentPartSchema$Outbound
   | Four$Outbound;
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .union([
+export const InvokeDeploymentRequestContentPrefixMessages2$outboundSchema:
+  z.ZodType<
+    InvokeDeploymentRequestContentPrefixMessages2$Outbound,
+    z.ZodTypeDef,
+    InvokeDeploymentRequestContentPrefixMessages2
+  > = z.union([
     TextContentPartSchema$outboundSchema.and(
       z.object({ type: z.literal("text") }),
     ),
@@ -1530,8 +1534,15 @@ export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
     z.lazy(() => Four$outboundSchema),
   ]);
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function invokeDeploymentRequestContentPrefixMessages2ToJSON(
+  invokeDeploymentRequestContentPrefixMessages2:
+    InvokeDeploymentRequestContentPrefixMessages2,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequestContentPrefixMessages2$outboundSchema.parse(
+      invokeDeploymentRequestContentPrefixMessages2,
+    ),
+  );
 }
 
 /** @internal */
