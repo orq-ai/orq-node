@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create chat completion
+   * Create a dataset
    *
    * @remarks
-   * Creates a model response for the given chat conversation with support for retries, fallbacks, prompts, and variables.
+   * Creates a new dataset in the specified project.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
