@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create schedule
+   * Create chat completion
    *
    * @remarks
-   * Creates a schedule that runs the agent on a recurring or one-off cadence. The minimum firing interval is 1 hour for `cron` and `interval`; `once` schedules are exempt.
+   * Creates a model response for the given chat conversation with support for retries, fallbacks, prompts, and variables.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
