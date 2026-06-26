@@ -426,7 +426,6 @@ export const GetAllPromptsProvider = {
   Bytedance: "bytedance",
   Mistral: "mistral",
   Deepseek: "deepseek",
-  Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",

@@ -1194,7 +1194,6 @@ export const DeploymentStreamProvider = {
   Bytedance: "bytedance",
   Mistral: "mistral",
   Deepseek: "deepseek",
-  Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",

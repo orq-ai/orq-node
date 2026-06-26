@@ -416,7 +416,6 @@ export const GetPromptVersionProvider = {
   Bytedance: "bytedance",
   Mistral: "mistral",
   Deepseek: "deepseek",
-  Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",
