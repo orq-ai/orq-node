@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Upload a file
+   * Create image variation
    *
    * @remarks
-   * Files are used to upload documents that can be used with features like Deployments.
+   * Create an Image Variation
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

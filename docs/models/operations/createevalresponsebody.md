@@ -11,8 +11,8 @@ Successfully created an evaluator
 const value: operations.ResponseBodyLLM = {
   id: "<id>",
   description: "considerate amid crystallize thorny gracious",
-  created: "2026-06-24T20:10:23.619Z",
-  updated: "2026-06-24T20:10:23.620Z",
+  created: "2026-06-26T11:42:16.479Z",
+  updated: "2026-06-26T11:42:16.479Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",

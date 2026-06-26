@@ -3675,7 +3675,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KVXM3FJ6YTF31RNW8HXQT7HE"),
+  id: z.string().default("01KW1VTDM4GVCCY04P6JM92TZ6"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
