@@ -17,6 +17,7 @@ import { GuardrailRules } from "./guardrailrules.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
+import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Pii } from "./pii.js";
@@ -140,6 +141,11 @@ export class Orq extends ClientSDK {
   private _identities?: Identities;
   get identities(): Identities {
     return (this._identities ??= new Identities(this._options));
+  }
+
+  private _managementKeys?: ManagementKeys;
+  get managementKeys(): ManagementKeys {
+    return (this._managementKeys ??= new ManagementKeys(this._options));
   }
 
   private _projects?: Projects;
