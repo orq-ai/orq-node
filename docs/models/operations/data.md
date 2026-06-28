@@ -9,8 +9,8 @@
 const value: operations.DataLLM = {
   id: "<id>",
   description: "tremendously enrage till pfft wire dish godfather spring",
-  created: "2026-06-26T17:33:05.489Z",
-  updated: "2026-06-26T17:33:05.489Z",
+  created: "2026-06-28T21:48:20.169Z",
+  updated: "2026-06-28T21:48:20.169Z",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
