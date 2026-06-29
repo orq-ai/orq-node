@@ -712,6 +712,10 @@ export type CreateRouterResponseRequestBody = {
    */
   parallelToolCalls?: boolean | undefined;
   /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?: Array<components.PublicPIIRedactionPlugin> | null | undefined;
+  /**
    * Penalize new tokens based on their presence in the text so far. Between -2.0 and 2.0.
    */
   presencePenalty?: number | undefined;
@@ -1670,6 +1674,10 @@ export type CreateRouterResponseRequestBody$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   model?: string | undefined;
   parallel_tool_calls?: boolean | undefined;
+  plugins?:
+    | Array<components.PublicPIIRedactionPlugin$Outbound>
+    | null
+    | undefined;
   presence_penalty?: number | undefined;
   previous_response_id?: string | undefined;
   prompt_cache_key?: string | undefined;
@@ -1727,6 +1735,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.string()).optional(),
   model: z.string().optional(),
   parallelToolCalls: z.boolean().optional(),
+  plugins: z.nullable(
+    z.array(components.PublicPIIRedactionPlugin$outboundSchema),
+  ).optional(),
   presencePenalty: z.number().optional(),
   previousResponseId: z.string().optional(),
   promptCacheKey: z.string().optional(),

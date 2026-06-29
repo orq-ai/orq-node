@@ -580,6 +580,10 @@ export type UpdatePromptGuardrails = {
   executeOn: UpdatePromptExecuteOn;
 };
 
+export type UpdatePromptPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type UpdatePromptFallbacks = {
   /**
    * Fallback model identifier
@@ -844,6 +848,12 @@ export type UpdatePromptPromptInput = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<UpdatePromptGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -1799,6 +1809,10 @@ export type UpdatePromptPromptsGuardrails = {
   executeOn: UpdatePromptPromptsExecuteOn;
 };
 
+export type UpdatePromptPromptsPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type UpdatePromptPromptsFallbacks = {
   /**
    * Fallback model identifier
@@ -2386,6 +2400,12 @@ export type UpdatePromptPromptField = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<UpdatePromptPromptsGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -3509,6 +3529,29 @@ export function updatePromptGuardrailsToJSON(
 }
 
 /** @internal */
+export type UpdatePromptPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound;
+
+/** @internal */
+export const UpdatePromptPlugins$outboundSchema: z.ZodType<
+  UpdatePromptPlugins$Outbound,
+  z.ZodTypeDef,
+  UpdatePromptPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+]);
+
+export function updatePromptPluginsToJSON(
+  updatePromptPlugins: UpdatePromptPlugins,
+): string {
+  return JSON.stringify(
+    UpdatePromptPlugins$outboundSchema.parse(updatePromptPlugins),
+  );
+}
+
+/** @internal */
 export type UpdatePromptFallbacks$Outbound = {
   model: string;
 };
@@ -3763,6 +3806,12 @@ export type UpdatePromptPromptInput$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<UpdatePromptGuardrails$Outbound> | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+    >
+    | undefined;
   fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
   retry?: UpdatePromptRetry$Outbound | undefined;
   cache?: UpdatePromptCache$Outbound | undefined;
@@ -3825,6 +3874,12 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => UpdatePromptGuardrails$outboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => UpdatePromptRetry$outboundSchema).optional(),
@@ -4925,6 +4980,26 @@ export function updatePromptPromptsGuardrailsFromJSON(
 }
 
 /** @internal */
+export const UpdatePromptPromptsPlugins$inboundSchema: z.ZodType<
+  UpdatePromptPromptsPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+]);
+
+export function updatePromptPromptsPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePromptPromptsPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePromptPromptsPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePromptPromptsPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdatePromptPromptsFallbacks$inboundSchema: z.ZodType<
   UpdatePromptPromptsFallbacks,
   z.ZodTypeDef,
@@ -5698,6 +5773,12 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => UpdatePromptPromptsGuardrails$inboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => UpdatePromptPromptsRetry$inboundSchema).optional(),

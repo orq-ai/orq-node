@@ -422,6 +422,10 @@ export type RetrieveAgentRequestAgentsGuardrails = {
   executeOn: RetrieveAgentRequestAgentsResponseExecuteOn;
 };
 
+export type RetrieveAgentRequestPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type RetrieveAgentRequestFallbacks = {
   /**
    * Fallback model identifier
@@ -645,6 +649,12 @@ export type RetrieveAgentRequestParameters = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<RetrieveAgentRequestAgentsGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -880,6 +890,10 @@ export type RetrieveAgentRequestFallbackModelConfigurationGuardrails = {
   executeOn: RetrieveAgentRequestFallbackModelConfigurationExecuteOn;
 };
 
+export type RetrieveAgentRequestFallbackModelConfigurationPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type RetrieveAgentRequestFallbackModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
@@ -1108,6 +1122,12 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    */
   guardrails?:
     | Array<RetrieveAgentRequestFallbackModelConfigurationGuardrails>
+    | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -1854,6 +1874,26 @@ export function retrieveAgentRequestAgentsGuardrailsFromJSON(
 }
 
 /** @internal */
+export const RetrieveAgentRequestPlugins$inboundSchema: z.ZodType<
+  RetrieveAgentRequestPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+]);
+
+export function retrieveAgentRequestPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAgentRequestPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestFallbacks$inboundSchema: z.ZodType<
   RetrieveAgentRequestFallbacks,
   z.ZodTypeDef,
@@ -2057,6 +2097,12 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(
     z.lazy(() => RetrieveAgentRequestAgentsGuardrails$inboundSchema),
+  ).optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+    ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema))
     .optional(),
@@ -2480,6 +2526,33 @@ export function retrieveAgentRequestFallbackModelConfigurationGuardrailsFromJSON
 }
 
 /** @internal */
+export const RetrieveAgentRequestFallbackModelConfigurationPlugins$inboundSchema:
+  z.ZodType<
+    RetrieveAgentRequestFallbackModelConfigurationPlugins,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.PIIRedactionPluginEn$inboundSchema,
+    components.PIIRedactionPluginNl$inboundSchema,
+  ]);
+
+export function retrieveAgentRequestFallbackModelConfigurationPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAgentRequestFallbackModelConfigurationPlugins,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAgentRequestFallbackModelConfigurationPlugins$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAgentRequestFallbackModelConfigurationPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationFallbacks$inboundSchema:
   z.ZodType<
     RetrieveAgentRequestFallbackModelConfigurationFallbacks,
@@ -2737,6 +2810,12 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
       z.lazy(() =>
         RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
       ),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPluginEn$inboundSchema,
+        components.PIIRedactionPluginNl$inboundSchema,
+      ]),
     ).optional(),
     fallbacks: z.array(
       z.lazy(() =>

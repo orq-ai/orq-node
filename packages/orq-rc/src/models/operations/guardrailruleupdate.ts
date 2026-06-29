@@ -38,6 +38,7 @@ export type GuardrailRuleUpdateResponseBody = {
   enabled: boolean;
   expression?: components.Expression | undefined;
   guardrails?: Array<components.GuardrailRef> | null | undefined;
+  plugins?: Array<components.Plugin> | null | undefined;
   projectId: string;
   timeout: number;
   updatedAt: Date;
@@ -126,6 +127,7 @@ export const GuardrailRuleUpdateResponseBody$inboundSchema: z.ZodType<
   expression: components.Expression$inboundSchema.optional(),
   guardrails: z.nullable(z.array(components.GuardrailRef$inboundSchema))
     .optional(),
+  plugins: z.nullable(z.array(components.Plugin$inboundSchema)).optional(),
   project_id: z.string(),
   timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),

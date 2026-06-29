@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a new project
+   * Create a new API key
    *
    * @remarks
-   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
+   * Mints a new opaque API key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

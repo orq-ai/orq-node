@@ -824,6 +824,10 @@ export type GetOnePromptGuardrails = {
   executeOn: GetOnePromptExecuteOn;
 };
 
+export type GetOnePromptPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type GetOnePromptFallbacks = {
   /**
    * Fallback model identifier
@@ -1404,6 +1408,12 @@ export type GetOnePromptPromptField = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<GetOnePromptGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -2460,6 +2470,26 @@ export function getOnePromptGuardrailsFromJSON(
 }
 
 /** @internal */
+export const GetOnePromptPlugins$inboundSchema: z.ZodType<
+  GetOnePromptPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+]);
+
+export function getOnePromptPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetOnePromptFallbacks$inboundSchema: z.ZodType<
   GetOnePromptFallbacks,
   z.ZodTypeDef,
@@ -3174,6 +3204,12 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$inboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => GetOnePromptFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => GetOnePromptRetry$inboundSchema).optional(),

@@ -200,6 +200,10 @@ export type StreamRunAgentModelConfigurationGuardrails = {
   executeOn: StreamRunAgentModelConfigurationExecuteOn;
 };
 
+export type StreamRunAgentModelConfigurationPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type StreamRunAgentModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
@@ -426,6 +430,12 @@ export type StreamRunAgentModelConfigurationParameters = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<StreamRunAgentModelConfigurationGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -688,6 +698,10 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
   executeOn: StreamRunAgentFallbackModelConfigurationExecuteOn;
 };
 
+export type StreamRunAgentFallbackModelConfigurationPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type StreamRunAgentFallbackModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
@@ -917,6 +931,12 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
    */
   guardrails?:
     | Array<StreamRunAgentFallbackModelConfigurationGuardrails>
+    | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -2327,6 +2347,32 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 }
 
 /** @internal */
+export type StreamRunAgentModelConfigurationPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound;
+
+/** @internal */
+export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
+  StreamRunAgentModelConfigurationPlugins$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelConfigurationPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+]);
+
+export function streamRunAgentModelConfigurationPluginsToJSON(
+  streamRunAgentModelConfigurationPlugins:
+    StreamRunAgentModelConfigurationPlugins,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelConfigurationPlugins$outboundSchema.parse(
+      streamRunAgentModelConfigurationPlugins,
+    ),
+  );
+}
+
+/** @internal */
 export type StreamRunAgentModelConfigurationFallbacks$Outbound = {
   model: string;
 };
@@ -2564,6 +2610,12 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
   guardrails?:
     | Array<StreamRunAgentModelConfigurationGuardrails$Outbound>
     | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+    >
+    | undefined;
   fallbacks?:
     | Array<StreamRunAgentModelConfigurationFallbacks$Outbound>
     | undefined;
@@ -2616,6 +2668,12 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     ).optional(),
     guardrails: z.array(
       z.lazy(() => StreamRunAgentModelConfigurationGuardrails$outboundSchema),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPluginEn$outboundSchema,
+        components.PIIRedactionPluginNl$outboundSchema,
+      ]),
     ).optional(),
     fallbacks: z.array(
       z.lazy(() => StreamRunAgentModelConfigurationFallbacks$outboundSchema),
@@ -3114,6 +3172,33 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 }
 
 /** @internal */
+export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound;
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationPlugins$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelConfigurationPlugins
+  > = z.union([
+    components.PIIRedactionPluginEn$outboundSchema,
+    components.PIIRedactionPluginNl$outboundSchema,
+  ]);
+
+export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
+  streamRunAgentFallbackModelConfigurationPlugins:
+    StreamRunAgentFallbackModelConfigurationPlugins,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema.parse(
+      streamRunAgentFallbackModelConfigurationPlugins,
+    ),
+  );
+}
+
+/** @internal */
 export type StreamRunAgentFallbackModelConfigurationFallbacks$Outbound = {
   model: string;
 };
@@ -3356,6 +3441,12 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
   guardrails?:
     | Array<StreamRunAgentFallbackModelConfigurationGuardrails$Outbound>
     | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+    >
+    | undefined;
   fallbacks?:
     | Array<StreamRunAgentFallbackModelConfigurationFallbacks$Outbound>
     | undefined;
@@ -3417,6 +3508,12 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
       z.lazy(() =>
         StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema
       ),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPluginEn$outboundSchema,
+        components.PIIRedactionPluginNl$outboundSchema,
+      ]),
     ).optional(),
     fallbacks: z.array(
       z.lazy(() =>
@@ -3916,7 +4013,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KW2P02XG8N1F0VAXR3TX05RE"),
+  id: z.string().default("01KW90VNX90AX1TV3ENR14H3KV"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

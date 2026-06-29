@@ -434,6 +434,10 @@ export type ListAgentsAgentsGuardrails = {
   executeOn: ListAgentsAgentsResponseExecuteOn;
 };
 
+export type ListAgentsPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type ListAgentsFallbacks = {
   /**
    * Fallback model identifier
@@ -649,6 +653,12 @@ export type ListAgentsParameters = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<ListAgentsAgentsGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -881,6 +891,10 @@ export type ListAgentsFallbackModelConfigurationGuardrails = {
   executeOn: ListAgentsFallbackModelConfigurationExecuteOn;
 };
 
+export type ListAgentsFallbackModelConfigurationPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type ListAgentsFallbackModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
@@ -1110,6 +1124,12 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    */
   guardrails?:
     | Array<ListAgentsFallbackModelConfigurationGuardrails>
+    | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -1845,6 +1865,26 @@ export function listAgentsAgentsGuardrailsFromJSON(
 }
 
 /** @internal */
+export const ListAgentsPlugins$inboundSchema: z.ZodType<
+  ListAgentsPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+]);
+
+export function listAgentsPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsFallbacks$inboundSchema: z.ZodType<
   ListAgentsFallbacks,
   z.ZodTypeDef,
@@ -2040,6 +2080,12 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => ListAgentsAgentsGuardrails$inboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => ListAgentsFallbacks$inboundSchema))
     .optional(),
   cache: z.lazy(() => ListAgentsCache$inboundSchema).optional(),
@@ -2434,6 +2480,33 @@ export function listAgentsFallbackModelConfigurationGuardrailsFromJSON(
 }
 
 /** @internal */
+export const ListAgentsFallbackModelConfigurationPlugins$inboundSchema:
+  z.ZodType<
+    ListAgentsFallbackModelConfigurationPlugins,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    components.PIIRedactionPluginEn$inboundSchema,
+    components.PIIRedactionPluginNl$inboundSchema,
+  ]);
+
+export function listAgentsFallbackModelConfigurationPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListAgentsFallbackModelConfigurationPlugins,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListAgentsFallbackModelConfigurationPlugins$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListAgentsFallbackModelConfigurationPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListAgentsFallbackModelConfigurationFallbacks$inboundSchema:
   z.ZodType<
     ListAgentsFallbackModelConfigurationFallbacks,
@@ -2674,6 +2747,12 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       z.lazy(() =>
         ListAgentsFallbackModelConfigurationGuardrails$inboundSchema
       ),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPluginEn$inboundSchema,
+        components.PIIRedactionPluginNl$inboundSchema,
+      ]),
     ).optional(),
     fallbacks: z.array(
       z.lazy(() => ListAgentsFallbackModelConfigurationFallbacks$inboundSchema),

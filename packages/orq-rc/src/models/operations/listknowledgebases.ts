@@ -48,6 +48,10 @@ export type ListKnowledgeBasesRequest = {
    * Filter knowledge bases by type
    */
   type?: ListKnowledgeBasesQueryParamType | undefined;
+  /**
+   * Filter knowledge bases by project ID
+   */
+  projectId?: string | undefined;
 };
 
 export const ListKnowledgeBasesObject = {
@@ -316,6 +320,7 @@ export type ListKnowledgeBasesRequest$Outbound = {
   search?: string | undefined;
   updated_by?: string | undefined;
   type?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -330,11 +335,13 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
   search: z.string().optional(),
   updatedBy: z.string().optional(),
   type: ListKnowledgeBasesQueryParamType$outboundSchema.optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
     updatedBy: "updated_by",
+    projectId: "project_id",
   });
 });
 

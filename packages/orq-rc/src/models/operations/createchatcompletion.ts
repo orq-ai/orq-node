@@ -674,6 +674,10 @@ export type CreateChatCompletionGuardrails = {
   executeOn: CreateChatCompletionExecuteOn;
 };
 
+export type CreateChatCompletionPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type CreateChatCompletionFallbacks = {
   /**
    * Fallback model identifier
@@ -1599,6 +1603,12 @@ export type CreateChatCompletionRequestBody = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<CreateChatCompletionGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -3418,6 +3428,31 @@ export function createChatCompletionGuardrailsToJSON(
   return JSON.stringify(
     CreateChatCompletionGuardrails$outboundSchema.parse(
       createChatCompletionGuardrails,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound;
+
+/** @internal */
+export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
+  CreateChatCompletionPlugins$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+]);
+
+export function createChatCompletionPluginsToJSON(
+  createChatCompletionPlugins: CreateChatCompletionPlugins,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionPlugins$outboundSchema.parse(
+      createChatCompletionPlugins,
     ),
   );
 }
@@ -5434,6 +5469,12 @@ export type CreateChatCompletionRequestBody$Outbound = {
   parallel_tool_calls?: boolean | undefined;
   modalities?: Array<string> | null | undefined;
   guardrails?: Array<CreateChatCompletionGuardrails$Outbound> | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+    >
+    | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
   retry?: CreateChatCompletionRetry$Outbound | undefined;
   cache?: CreateChatCompletionCache$Outbound | undefined;
@@ -5507,6 +5548,12 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(
     z.lazy(() => CreateChatCompletionGuardrails$outboundSchema),
+  ).optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
+    ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))
     .optional(),

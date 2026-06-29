@@ -842,6 +842,10 @@ export type GetAllPromptsGuardrails = {
   executeOn: GetAllPromptsExecuteOn;
 };
 
+export type GetAllPromptsPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type GetAllPromptsFallbacks = {
   /**
    * Fallback model identifier
@@ -1422,6 +1426,12 @@ export type GetAllPromptsPromptField = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<GetAllPromptsGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -2502,6 +2512,26 @@ export function getAllPromptsGuardrailsFromJSON(
 }
 
 /** @internal */
+export const GetAllPromptsPlugins$inboundSchema: z.ZodType<
+  GetAllPromptsPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+]);
+
+export function getAllPromptsPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsFallbacks$inboundSchema: z.ZodType<
   GetAllPromptsFallbacks,
   z.ZodTypeDef,
@@ -3226,6 +3256,12 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => GetAllPromptsGuardrails$inboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => GetAllPromptsFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => GetAllPromptsRetry$inboundSchema).optional(),

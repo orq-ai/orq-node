@@ -30,6 +30,10 @@ export type GetAllMemoryStoresRequest = {
    * Filter by the users who last updated the memory store. Accepts a comma-separated list of user IDs
    */
   updatedBy?: string | undefined;
+  /**
+   * Filter memory stores by project ID
+   */
+  projectId?: string | undefined;
 };
 
 export const GetAllMemoryStoresObject = {
@@ -98,6 +102,7 @@ export type GetAllMemoryStoresRequest$Outbound = {
   ending_before?: string | undefined;
   search?: string | undefined;
   updated_by?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -111,11 +116,13 @@ export const GetAllMemoryStoresRequest$outboundSchema: z.ZodType<
   endingBefore: z.string().optional(),
   search: z.string().optional(),
   updatedBy: z.string().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
     updatedBy: "updated_by",
+    projectId: "project_id",
   });
 });
 

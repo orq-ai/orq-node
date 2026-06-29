@@ -836,6 +836,10 @@ export type GetPromptVersionGuardrails = {
   executeOn: GetPromptVersionExecuteOn;
 };
 
+export type GetPromptVersionPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl;
+
 export type GetPromptVersionFallbacks = {
   /**
    * Fallback model identifier
@@ -1417,6 +1421,12 @@ export type GetPromptVersionPromptField = {
    * A list of guardrails to apply to the request.
    */
   guardrails?: Array<GetPromptVersionGuardrails> | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -2489,6 +2499,26 @@ export function getPromptVersionGuardrailsFromJSON(
 }
 
 /** @internal */
+export const GetPromptVersionPlugins$inboundSchema: z.ZodType<
+  GetPromptVersionPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+]);
+
+export function getPromptVersionPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetPromptVersionFallbacks$inboundSchema: z.ZodType<
   GetPromptVersionFallbacks,
   z.ZodTypeDef,
@@ -3230,6 +3260,12 @@ export const GetPromptVersionPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => GetPromptVersionGuardrails$inboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => GetPromptVersionFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => GetPromptVersionRetry$inboundSchema).optional(),
