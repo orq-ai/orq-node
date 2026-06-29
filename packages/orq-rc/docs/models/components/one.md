@@ -1,79 +1,19 @@
 # One
 
-
-## Supported Types
-
-### `components.OneEq`
+## Example Usage
 
 ```typescript
-const value: components.OneEq = {
-  eq: "<value>",
+import { One } from "@orq-ai/node/models/components";
+
+let value: One = {
+  type: "contains",
+  value: "<value>",
 };
 ```
 
-### `components.OneNe`
+## Fields
 
-```typescript
-const value: components.OneNe = {
-  ne: 2953.7,
-};
-```
-
-### `components.Gt`
-
-```typescript
-const value: components.Gt = {
-  gt: 2952.97,
-};
-```
-
-### `components.Gte`
-
-```typescript
-const value: components.Gte = {
-  gte: 9700.59,
-};
-```
-
-### `components.Lt`
-
-```typescript
-const value: components.Lt = {
-  lt: 854.37,
-};
-```
-
-### `components.Lte`
-
-```typescript
-const value: components.Lte = {
-  lte: 454.79,
-};
-```
-
-### `components.OneIn`
-
-```typescript
-const value: components.OneIn = {
-  in: [],
-};
-```
-
-### `components.OneNin`
-
-```typescript
-const value: components.OneNin = {
-  nin: [
-    true,
-  ],
-};
-```
-
-### `components.Exists`
-
-```typescript
-const value: components.Exists = {
-  exists: true,
-};
-```
-
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains"*       | :heavy_check_mark: | N/A                |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |

@@ -3,101 +3,92 @@
 
 ## Supported Types
 
-### `operations.DataLLM`
+### `components.EvaluatorResponseLlm`
 
 ```typescript
-const value: operations.DataLLM = {
+const value: components.EvaluatorResponseLlm = {
   id: "<id>",
-  description: "tremendously enrage till pfft wire dish godfather spring",
-  created: "2026-06-29T06:24:58.448Z",
-  updated: "2026-06-29T06:24:58.448Z",
+  description: "wetly whereas failing",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  mode: "single",
-  model: "A4",
+  mode: "jury",
 };
 ```
 
-### `operations.DataJSON`
+### `components.EvaluatorResponseJsonSchema`
 
 ```typescript
-const value: operations.DataJSON = {
+const value: components.EvaluatorResponseJsonSchema = {
   id: "<id>",
-  description: "absent unaccountably anenst hunt floodlight",
+  description: "partially muted and per yahoo until upliftingly like",
   type: "json_schema",
   schema: "<value>",
   key: "<key>",
 };
 ```
 
-### `operations.DataHTTP`
+### `components.EvaluatorResponseHttp`
 
 ```typescript
-const value: operations.DataHTTP = {
+const value: components.EvaluatorResponseHttp = {
   id: "<id>",
-  description: "queasy incidentally neatly tall necessary",
+  description:
+    "and slime corporation um because resort ligate good-natured lonely violin",
   type: "http_eval",
-  url: "https://majestic-alert.biz/",
-  method: "GET",
-  headers: {
-    "key": "<value>",
-  },
-  payload: {
-    "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
-  },
+  url: "https://pertinent-membership.name",
+  method: "POST",
+  headers: {},
+  payload: {},
   key: "<key>",
 };
 ```
 
-### `operations.DataPython`
+### `components.EvaluatorResponsePython`
 
 ```typescript
-const value: operations.DataPython = {
+const value: components.EvaluatorResponsePython = {
   id: "<id>",
-  description:
-    "anenst gastropod partridge tuxedo without bleach except as blissfully",
+  description: "glaring which athwart deficient woot alongside",
   code: "<value>",
   type: "python_eval",
   key: "<key>",
 };
 ```
 
-### `operations.DataFunction`
+### `components.EvaluatorResponseFunction`
 
 ```typescript
-const value: operations.DataFunction = {
+const value: components.EvaluatorResponseFunction = {
   id: "<id>",
-  description: "down at for gee excitable huzzah acidic provided hmph",
+  description: "amount faithfully whoa eek cheerful pfft",
   type: "function_eval",
   functionParams: {
-    type: "levenshtein_distance",
+    type: "sentences_count",
   },
   key: "<key>",
 };
 ```
 
-### `operations.DataRagas`
+### `components.EvaluatorResponseRagas`
 
 ```typescript
-const value: operations.DataRagas = {
+const value: components.EvaluatorResponseRagas = {
   id: "<id>",
-  description: "hurtful deny doodle for",
+  description: "rewarding ack as geez rot outrun an hmph",
   type: "ragas",
-  ragasMetric: "context_entities_recall",
+  ragasMetric: "faithfulness",
   key: "<key>",
-  model: "El Camino",
+  model: "XTS",
 };
 ```
 
-### `operations.DataTypescript`
+### `components.EvaluatorResponseTypescript`
 
 ```typescript
-const value: operations.DataTypescript = {
+const value: components.EvaluatorResponseTypescript = {
   id: "<id>",
-  description: "psst trench forceful",
+  description: "since loftily for along past among qua",
   code: "<value>",
   type: "typescript_eval",
   key: "<key>",

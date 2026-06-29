@@ -202,7 +202,8 @@ export type StreamRunAgentModelConfigurationGuardrails = {
 
 export type StreamRunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type StreamRunAgentModelConfigurationFallbacks = {
   /**
@@ -434,7 +435,11 @@ export type StreamRunAgentModelConfigurationParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -700,7 +705,8 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
 
 export type StreamRunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type StreamRunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -936,7 +942,11 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -2349,7 +2359,8 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 /** @internal */
 export type StreamRunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2359,6 +2370,7 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function streamRunAgentModelConfigurationPluginsToJSON(
@@ -2614,6 +2626,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?:
@@ -2673,6 +2686,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3174,7 +3188,8 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3185,6 +3200,7 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
+    components.PIIRedactionPluginAuto$outboundSchema,
   ]);
 
 export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
@@ -3445,6 +3461,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3513,6 +3530,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -4013,7 +4031,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KW90VNX90AX1TV3ENR14H3KV"),
+  id: z.string().default("01KW9AEEAPMN6857DCTH0DV867"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

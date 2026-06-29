@@ -582,7 +582,8 @@ export type UpdatePromptGuardrails = {
 
 export type UpdatePromptPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type UpdatePromptFallbacks = {
   /**
@@ -852,7 +853,11 @@ export type UpdatePromptPromptInput = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -1811,7 +1816,8 @@ export type UpdatePromptPromptsGuardrails = {
 
 export type UpdatePromptPromptsPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type UpdatePromptPromptsFallbacks = {
   /**
@@ -2404,7 +2410,11 @@ export type UpdatePromptPromptField = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -3531,7 +3541,8 @@ export function updatePromptGuardrailsToJSON(
 /** @internal */
 export type UpdatePromptPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const UpdatePromptPlugins$outboundSchema: z.ZodType<
@@ -3541,6 +3552,7 @@ export const UpdatePromptPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function updatePromptPluginsToJSON(
@@ -3810,6 +3822,7 @@ export type UpdatePromptPromptInput$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
@@ -3878,6 +3891,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
@@ -4987,6 +5001,7 @@ export const UpdatePromptPromptsPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
 ]);
 
 export function updatePromptPromptsPluginsFromJSON(
@@ -5777,6 +5792,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))

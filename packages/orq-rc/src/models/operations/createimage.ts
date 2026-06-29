@@ -167,7 +167,8 @@ export type CreateImageTimeout = {
 
 export type CreateImagePlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 /**
  * Retry configuration for the request
@@ -364,7 +365,11 @@ export type CreateImageRequestBody = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   orq?: CreateImageOrq | undefined;
 };
@@ -619,7 +624,8 @@ export function createImageTimeoutToJSON(
 /** @internal */
 export type CreateImagePlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const CreateImagePlugins$outboundSchema: z.ZodType<
@@ -629,6 +635,7 @@ export const CreateImagePlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function createImagePluginsToJSON(
@@ -921,6 +928,7 @@ export type CreateImageRequestBody$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   orq?: CreateImageOrq$Outbound | undefined;
@@ -957,6 +965,7 @@ export const CreateImageRequestBody$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   orq: z.lazy(() => CreateImageOrq$outboundSchema).optional(),

@@ -200,7 +200,8 @@ export type ModelConfigurationGuardrails = {
 
 export type ModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type UpdateAgentModelConfigurationFallbacks = {
   /**
@@ -425,7 +426,11 @@ export type ModelConfigurationParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -688,7 +693,8 @@ export type UpdateAgentFallbackModelConfigurationGuardrails = {
 
 export type UpdateAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type UpdateAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -924,7 +930,11 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -2050,7 +2060,8 @@ export type UpdateAgentAgentsResponseGuardrails = {
 
 export type UpdateAgentPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type UpdateAgentFallbacks = {
   /**
@@ -2274,7 +2285,11 @@ export type UpdateAgentParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -2516,7 +2531,8 @@ export type UpdateAgentFallbackModelConfigurationAgentsGuardrails = {
 
 export type UpdateAgentFallbackModelConfigurationAgentsPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type UpdateAgentFallbackModelConfigurationAgentsFallbacks = {
   /**
@@ -2750,7 +2766,11 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -3253,7 +3273,8 @@ export function modelConfigurationGuardrailsToJSON(
 /** @internal */
 export type ModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const ModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -3263,6 +3284,7 @@ export const ModelConfigurationPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function modelConfigurationPluginsToJSON(
@@ -3499,6 +3521,7 @@ export type ModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3554,6 +3577,7 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(
@@ -4044,7 +4068,8 @@ export function updateAgentFallbackModelConfigurationGuardrailsToJSON(
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -4055,6 +4080,7 @@ export const UpdateAgentFallbackModelConfigurationPlugins$outboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
+    components.PIIRedactionPluginAuto$outboundSchema,
   ]);
 
 export function updateAgentFallbackModelConfigurationPluginsToJSON(
@@ -4311,6 +4337,7 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?:
@@ -4375,6 +4402,7 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -6145,6 +6173,7 @@ export const UpdateAgentPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
 ]);
 
 export function updateAgentPluginsFromJSON(
@@ -6372,6 +6401,7 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdateAgentFallbacks$inboundSchema))
@@ -6808,6 +6838,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsPlugins$inboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
+    components.PIIRedactionPluginAuto$inboundSchema,
   ]);
 
 export function updateAgentFallbackModelConfigurationAgentsPluginsFromJSON(
@@ -7094,6 +7125,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
       z.union([
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
+        components.PIIRedactionPluginAuto$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

@@ -1,0 +1,29 @@
+# EvaluatorResponseJsonSchema
+
+## Example Usage
+
+```typescript
+import { EvaluatorResponseJsonSchema } from "@orq-ai/node/models/components";
+
+let value: EvaluatorResponseJsonSchema = {
+  id: "<id>",
+  description: "partially muted and per yahoo until upliftingly like",
+  type: "json_schema",
+  schema: "<value>",
+  key: "<key>",
+};
+```
+
+## Fields
+
+| Field                                                   | Type                                                    | Required                                                | Description                                             |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| `id`                                                    | *string*                                                | :heavy_check_mark:                                      | N/A                                                     |
+| `description`                                           | *string*                                                | :heavy_check_mark:                                      | N/A                                                     |
+| `created`                                               | *string*                                                | :heavy_minus_sign:                                      | N/A                                                     |
+| `updated`                                               | *string*                                                | :heavy_minus_sign:                                      | N/A                                                     |
+| `updatedById`                                           | *string*                                                | :heavy_minus_sign:                                      | N/A                                                     |
+| `guardrailConfig`                                       | *components.EvaluatorResponseJsonSchemaGuardrailConfig* | :heavy_minus_sign:                                      | N/A                                                     |
+| `type`                                                  | *"json_schema"*                                         | :heavy_check_mark:                                      | N/A                                                     |
+| `schema`                                                | *string*                                                | :heavy_check_mark:                                      | N/A                                                     |
+| `key`                                                   | *string*                                                | :heavy_check_mark:                                      | N/A                                                     |

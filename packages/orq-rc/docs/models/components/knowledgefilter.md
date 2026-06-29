@@ -5,10 +5,10 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 
 ## Supported Types
 
-### `{ [k: string]: components.One }`
+### `{ [k: string]: components.KnowledgeFilter1 }`
 
 ```typescript
-const value: { [k: string]: components.One } = {};
+const value: { [k: string]: components.KnowledgeFilter1 } = {};
 ```
 
 ### `components.KnowledgeFilterAnd`

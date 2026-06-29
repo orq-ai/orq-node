@@ -1,41 +1,21 @@
-# DataHTTP
+# DataHttp
 
 ## Example Usage
 
 ```typescript
-import { DataHTTP } from "@orq-ai/node/models/operations";
+import { DataHttp } from "@orq-ai/node/models/operations";
 
-let value: DataHTTP = {
-  id: "<id>",
-  description: "queasy incidentally neatly tall necessary",
-  type: "http_eval",
-  url: "https://majestic-alert.biz/",
-  method: "GET",
-  headers: {
-    "key": "<value>",
+let value: DataHttp = {
+  blueprint: {
+    url: "https://dirty-yak.org",
+    method: "PUT",
   },
-  payload: {
-    "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
-  },
-  key: "<key>",
 };
 ```
 
 ## Fields
 
-| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| `id`                                                           | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
-| `description`                                                  | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
-| `created`                                                      | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
-| `updated`                                                      | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
-| `updatedById`                                                  | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
-| `guardrailConfig`                                              | *operations.DataGuardrailConfig*                               | :heavy_minus_sign:                                             | N/A                                                            |
-| `type`                                                         | [operations.DataType](../../models/operations/datatype.md)     | :heavy_check_mark:                                             | N/A                                                            |
-| `url`                                                          | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
-| `method`                                                       | [operations.DataMethod](../../models/operations/datamethod.md) | :heavy_check_mark:                                             | N/A                                                            |
-| `headers`                                                      | Record<string, *string*>                                       | :heavy_check_mark:                                             | N/A                                                            |
-| `payload`                                                      | Record<string, *any*>                                          | :heavy_check_mark:                                             | N/A                                                            |
-| `key`                                                          | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |
+| Field                                                                                                                                                       | Type                                                                                                                                                        | Required                                                                                                                                                    | Description                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `blueprint`                                                                                                                                                 | [operations.DataBlueprint](../../models/operations/datablueprint.md)                                                                                        | :heavy_check_mark:                                                                                                                                          | The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields. |
+| `arguments`                                                                                                                                                 | Record<string, [operations.DataArguments](../../models/operations/dataarguments.md)>                                                                        | :heavy_minus_sign:                                                                                                                                          | The arguments to send with the request. The keys will be used to replace the placeholders in the `blueprint` field.                                         |

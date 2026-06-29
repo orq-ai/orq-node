@@ -198,7 +198,8 @@ export type RunAgentModelConfigurationGuardrails = {
 
 export type RunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type RunAgentModelConfigurationFallbacks = {
   /**
@@ -423,7 +424,11 @@ export type RunAgentModelConfigurationParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -682,7 +687,8 @@ export type RunAgentFallbackModelConfigurationGuardrails = {
 
 export type RunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type RunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -916,7 +922,11 @@ export type RunAgentFallbackModelConfigurationParameters = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -2375,7 +2385,8 @@ export function runAgentModelConfigurationGuardrailsToJSON(
 /** @internal */
 export type RunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2385,6 +2396,7 @@ export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function runAgentModelConfigurationPluginsToJSON(
@@ -2625,6 +2637,7 @@ export type RunAgentModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?: Array<RunAgentModelConfigurationFallbacks$Outbound> | undefined;
@@ -2679,6 +2692,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(
@@ -3161,7 +3175,8 @@ export function runAgentFallbackModelConfigurationGuardrailsToJSON(
 /** @internal */
 export type RunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3172,6 +3187,7 @@ export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
+    components.PIIRedactionPluginAuto$outboundSchema,
   ]);
 
 export function runAgentFallbackModelConfigurationPluginsToJSON(
@@ -3429,6 +3445,7 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3491,6 +3508,7 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3957,7 +3975,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KW90VNVAZ8DQNANQY4RKFM32"),
+  id: z.string().default("01KW9AEE92JM8FVRVZQ02KZ0A0"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

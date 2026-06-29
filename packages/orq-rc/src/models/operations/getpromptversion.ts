@@ -838,7 +838,8 @@ export type GetPromptVersionGuardrails = {
 
 export type GetPromptVersionPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type GetPromptVersionFallbacks = {
   /**
@@ -1425,7 +1426,11 @@ export type GetPromptVersionPromptField = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -2506,6 +2511,7 @@ export const GetPromptVersionPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
 ]);
 
 export function getPromptVersionPluginsFromJSON(
@@ -3264,6 +3270,7 @@ export const GetPromptVersionPromptField$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => GetPromptVersionFallbacks$inboundSchema))

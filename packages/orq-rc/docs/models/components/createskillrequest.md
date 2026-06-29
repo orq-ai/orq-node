@@ -12,11 +12,11 @@ const value: components.CreateSkillRequest1 = {
 };
 ```
 
-### `components.Two`
+### `components.CreateSkillRequest2`
 
 ```typescript
-const value: components.Two = {
-  displayName: "Noel74",
+const value: components.CreateSkillRequest2 = {
+  displayName: "Clifton_Schiller-Kutch",
   projectId: "<id>",
 };
 ```

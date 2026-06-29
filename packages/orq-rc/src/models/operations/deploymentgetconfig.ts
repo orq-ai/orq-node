@@ -1283,20 +1283,20 @@ export type DeploymentGetConfigFormat = ClosedEnum<
   typeof DeploymentGetConfigFormat
 >;
 
-export const ResponseFormat6 = {
+export const Six = {
   Json: "json",
   Text: "text",
   Srt: "srt",
   VerboseJson: "verbose_json",
   Vtt: "vtt",
 } as const;
-export type ResponseFormat6 = ClosedEnum<typeof ResponseFormat6>;
+export type Six = ClosedEnum<typeof Six>;
 
-export const ResponseFormat5 = {
+export const Five = {
   Url: "url",
   Base64Json: "base64_json",
 } as const;
-export type ResponseFormat5 = ClosedEnum<typeof ResponseFormat5>;
+export type Five = ClosedEnum<typeof Five>;
 
 export const ResponseFormat4 = {
   Mp3: "mp3",
@@ -1365,8 +1365,8 @@ export type DeploymentGetConfigResponseFormat =
   | ResponseFormat2
   | ResponseFormat3
   | ResponseFormat4
-  | ResponseFormat5
-  | ResponseFormat6;
+  | Five
+  | Six;
 
 /**
  * Create a cache control breakpoint. Accepts only the value "ephemeral".
@@ -1568,8 +1568,8 @@ export type DeploymentGetConfigParameters = {
     | ResponseFormat2
     | ResponseFormat3
     | ResponseFormat4
-    | ResponseFormat5
-    | ResponseFormat6
+    | Five
+    | Six
     | null
     | undefined;
   /**
@@ -4281,14 +4281,12 @@ export const DeploymentGetConfigFormat$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentGetConfigFormat);
 
 /** @internal */
-export const ResponseFormat6$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormat6
-> = z.nativeEnum(ResponseFormat6);
+export const Six$inboundSchema: z.ZodNativeEnum<typeof Six> = z.nativeEnum(Six);
 
 /** @internal */
-export const ResponseFormat5$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormat5
-> = z.nativeEnum(ResponseFormat5);
+export const Five$inboundSchema: z.ZodNativeEnum<typeof Five> = z.nativeEnum(
+  Five,
+);
 
 /** @internal */
 export const ResponseFormat4$inboundSchema: z.ZodNativeEnum<
@@ -4417,8 +4415,8 @@ export const DeploymentGetConfigResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => ResponseFormat2$inboundSchema),
   z.lazy(() => ResponseFormat3$inboundSchema),
   ResponseFormat4$inboundSchema,
-  ResponseFormat5$inboundSchema,
-  ResponseFormat6$inboundSchema,
+  Five$inboundSchema,
+  Six$inboundSchema,
 ]);
 
 export function deploymentGetConfigResponseFormatFromJSON(
@@ -4510,8 +4508,8 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
       z.lazy(() => ResponseFormat2$inboundSchema),
       z.lazy(() => ResponseFormat3$inboundSchema),
       ResponseFormat4$inboundSchema,
-      ResponseFormat5$inboundSchema,
-      ResponseFormat6$inboundSchema,
+      Five$inboundSchema,
+      Six$inboundSchema,
     ]),
   ).optional(),
   cacheControl: z.nullable(

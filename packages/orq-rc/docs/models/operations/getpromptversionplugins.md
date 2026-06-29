@@ -3,6 +3,14 @@
 
 ## Supported Types
 
+### `components.PIIRedactionPluginAuto`
+
+```typescript
+const value: components.PIIRedactionPluginAuto = {
+  id: "pii_redaction",
+};
+```
+
 ### `components.PIIRedactionPluginEn`
 
 ```typescript

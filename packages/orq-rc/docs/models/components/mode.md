@@ -5,11 +5,11 @@
 ```typescript
 import { Mode } from "@orq-ai/node/models/components";
 
-let value: Mode = "round_robin";
+let value: Mode = "jury";
 ```
 
 ## Values
 
 ```typescript
-"fallback" | "weighted" | "round_robin"
+"single" | "jury"
 ```

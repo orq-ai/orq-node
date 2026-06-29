@@ -3,34 +3,35 @@
 
 ## Supported Types
 
-### `operations.CreateEvalGuardrailConfigEvalsRequestBoolean`
+### `operations.CreateEvalGuardrailConfigEvalsBoolean`
 
 ```typescript
-const value: operations.CreateEvalGuardrailConfigEvalsRequestBoolean = {
+const value: operations.CreateEvalGuardrailConfigEvalsBoolean = {
   type: "boolean",
-  value: false,
+  value: true,
 };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsRequestCategorical`
+### `operations.CreateEvalGuardrailConfigEvalsCategorical`
 
 ```typescript
-const value: operations.CreateEvalGuardrailConfigEvalsRequestCategorical = {
+const value: operations.CreateEvalGuardrailConfigEvalsCategorical = {
   type: "categorical",
   values: [
     "<value 1>",
     "<value 2>",
+    "<value 3>",
   ],
 };
 ```
 
-### `operations.CreateEvalGuardrailConfigEvalsRequestNumber`
+### `operations.CreateEvalGuardrailConfigEvalsNumber`
 
 ```typescript
-const value: operations.CreateEvalGuardrailConfigEvalsRequestNumber = {
+const value: operations.CreateEvalGuardrailConfigEvalsNumber = {
   type: "number",
-  value: 7107.94,
-  operator: "eq",
+  value: 2626.43,
+  operator: "gte",
 };
 ```
 

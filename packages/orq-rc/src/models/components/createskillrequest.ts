@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
-export type Two = {
+export type CreateSkillRequest2 = {
   /**
    * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
    */
@@ -59,10 +59,10 @@ export type CreateSkillRequest1 = {
   instructions?: string | undefined;
 };
 
-export type CreateSkillRequest = CreateSkillRequest1 | Two;
+export type CreateSkillRequest = CreateSkillRequest1 | CreateSkillRequest2;
 
 /** @internal */
-export type Two$Outbound = {
+export type CreateSkillRequest2$Outbound = {
   display_name: string;
   description?: string | undefined;
   tags?: Array<string> | undefined;
@@ -72,23 +72,30 @@ export type Two$Outbound = {
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    displayName: z.string(),
-    description: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    path: z.string().optional(),
-    projectId: z.string(),
-    instructions: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      displayName: "display_name",
-      projectId: "project_id",
-    });
+export const CreateSkillRequest2$outboundSchema: z.ZodType<
+  CreateSkillRequest2$Outbound,
+  z.ZodTypeDef,
+  CreateSkillRequest2
+> = z.object({
+  displayName: z.string(),
+  description: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  path: z.string().optional(),
+  projectId: z.string(),
+  instructions: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    projectId: "project_id",
   });
+});
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function createSkillRequest2ToJSON(
+  createSkillRequest2: CreateSkillRequest2,
+): string {
+  return JSON.stringify(
+    CreateSkillRequest2$outboundSchema.parse(createSkillRequest2),
+  );
 }
 
 /** @internal */
@@ -131,7 +138,7 @@ export function createSkillRequest1ToJSON(
 /** @internal */
 export type CreateSkillRequest$Outbound =
   | CreateSkillRequest1$Outbound
-  | Two$Outbound;
+  | CreateSkillRequest2$Outbound;
 
 /** @internal */
 export const CreateSkillRequest$outboundSchema: z.ZodType<
@@ -140,7 +147,7 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
   CreateSkillRequest
 > = z.union([
   z.lazy(() => CreateSkillRequest1$outboundSchema),
-  z.lazy(() => Two$outboundSchema),
+  z.lazy(() => CreateSkillRequest2$outboundSchema),
 ]);
 
 export function createSkillRequestToJSON(

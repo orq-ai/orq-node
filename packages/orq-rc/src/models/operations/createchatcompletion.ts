@@ -676,7 +676,8 @@ export type CreateChatCompletionGuardrails = {
 
 export type CreateChatCompletionPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type CreateChatCompletionFallbacks = {
   /**
@@ -1607,7 +1608,11 @@ export type CreateChatCompletionRequestBody = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
@@ -3435,7 +3440,8 @@ export function createChatCompletionGuardrailsToJSON(
 /** @internal */
 export type CreateChatCompletionPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
@@ -3445,6 +3451,7 @@ export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function createChatCompletionPluginsToJSON(
@@ -5473,6 +5480,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
@@ -5553,6 +5561,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))

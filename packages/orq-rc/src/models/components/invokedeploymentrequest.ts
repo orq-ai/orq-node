@@ -46,7 +46,8 @@ import {
   TextContentPartSchema$outboundSchema,
 } from "./textcontentpartschema.js";
 
-export type InvokeDeploymentRequestContent2 = TextContentPartSchema;
+export type InvokeDeploymentRequestContentPrefixMessages2 =
+  TextContentPartSchema;
 
 /**
  * The contents of the tool message.
@@ -128,7 +129,7 @@ export type ToolMessage = {
   cacheControl?: PrefixMessagesCacheControl | undefined;
 };
 
-export type Content2 =
+export type InvokeDeploymentRequestContent2 =
   | (TextContentPartSchema & { type: "text" })
   | RefusalPartSchema
   | ReasoningPartSchema
@@ -287,7 +288,7 @@ export type TwoCacheControl = {
   ttl?: TwoTtl | undefined;
 };
 
-export type Four = {
+export type Two4 = {
   /**
    * The type of the content part. Always `file`.
    */
@@ -299,11 +300,11 @@ export type Four = {
   file: FileContentPartSchema;
 };
 
-export type InvokeDeploymentRequestContentPrefixMessages2 =
+export type Content2 =
   | (TextContentPartSchema & { type: "text" })
   | ImageContentPartSchema
   | AudioContentPartSchema
-  | Four;
+  | Two4;
 
 /**
  * The contents of the user message.
@@ -314,7 +315,7 @@ export type InvokeDeploymentRequestPrefixMessagesContent =
     | (TextContentPartSchema & { type: "text" })
     | ImageContentPartSchema
     | AudioContentPartSchema
-    | Four
+    | Two4
   >;
 
 export type UserMessage = {
@@ -335,7 +336,7 @@ export type UserMessage = {
       | (TextContentPartSchema & { type: "text" })
       | ImageContentPartSchema
       | AudioContentPartSchema
-      | Four
+      | Two4
     >;
 };
 
@@ -632,7 +633,7 @@ export type InvokeDeploymentRequest2CacheControl = {
   ttl?: InvokeDeploymentRequest2Ttl | undefined;
 };
 
-export type Two4 = {
+export type InvokeDeploymentRequest24 = {
   /**
    * The type of the content part. Always `file`.
    */
@@ -648,7 +649,7 @@ export type InvokeDeploymentRequestContentMessages2 =
   | (TextContentPartSchema & { type: "text" })
   | ImageContentPartSchema
   | AudioContentPartSchema
-  | Two4;
+  | InvokeDeploymentRequest24;
 
 /**
  * The contents of the user message.
@@ -659,7 +660,7 @@ export type InvokeDeploymentRequestMessages3Content =
     | (TextContentPartSchema & { type: "text" })
     | ImageContentPartSchema
     | AudioContentPartSchema
-    | Two4
+    | InvokeDeploymentRequest24
   >;
 
 export type MessagesUserMessage = {
@@ -680,7 +681,7 @@ export type MessagesUserMessage = {
       | (TextContentPartSchema & { type: "text" })
       | ImageContentPartSchema
       | AudioContentPartSchema
-      | Two4
+      | InvokeDeploymentRequest24
     >;
 };
 
@@ -1066,7 +1067,16 @@ export type OneEq = {
   eq: string | number | boolean;
 };
 
-export type One = OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
+export type KnowledgeFilter1 =
+  | OneEq
+  | OneNe
+  | Gt
+  | Gte
+  | Lt
+  | Lte
+  | OneIn
+  | OneNin
+  | Exists;
 
 /**
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
@@ -1150,22 +1160,24 @@ export type InvokeDeploymentRequest = {
 };
 
 /** @internal */
-export type InvokeDeploymentRequestContent2$Outbound =
+export type InvokeDeploymentRequestContentPrefixMessages2$Outbound =
   TextContentPartSchema$Outbound;
 
 /** @internal */
-export const InvokeDeploymentRequestContent2$outboundSchema: z.ZodType<
-  InvokeDeploymentRequestContent2$Outbound,
-  z.ZodTypeDef,
-  InvokeDeploymentRequestContent2
-> = TextContentPartSchema$outboundSchema;
+export const InvokeDeploymentRequestContentPrefixMessages2$outboundSchema:
+  z.ZodType<
+    InvokeDeploymentRequestContentPrefixMessages2$Outbound,
+    z.ZodTypeDef,
+    InvokeDeploymentRequestContentPrefixMessages2
+  > = TextContentPartSchema$outboundSchema;
 
-export function invokeDeploymentRequestContent2ToJSON(
-  invokeDeploymentRequestContent2: InvokeDeploymentRequestContent2,
+export function invokeDeploymentRequestContentPrefixMessages2ToJSON(
+  invokeDeploymentRequestContentPrefixMessages2:
+    InvokeDeploymentRequestContentPrefixMessages2,
 ): string {
   return JSON.stringify(
-    InvokeDeploymentRequestContent2$outboundSchema.parse(
-      invokeDeploymentRequestContent2,
+    InvokeDeploymentRequestContentPrefixMessages2$outboundSchema.parse(
+      invokeDeploymentRequestContentPrefixMessages2,
     ),
   );
 }
@@ -1259,17 +1271,17 @@ export function toolMessageToJSON(toolMessage: ToolMessage): string {
 }
 
 /** @internal */
-export type Content2$Outbound =
+export type InvokeDeploymentRequestContent2$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
   | RefusalPartSchema$Outbound
   | ReasoningPartSchema$Outbound
   | RedactedReasoningPartSchema$Outbound;
 
 /** @internal */
-export const Content2$outboundSchema: z.ZodType<
-  Content2$Outbound,
+export const InvokeDeploymentRequestContent2$outboundSchema: z.ZodType<
+  InvokeDeploymentRequestContent2$Outbound,
   z.ZodTypeDef,
-  Content2
+  InvokeDeploymentRequestContent2
 > = z.union([
   TextContentPartSchema$outboundSchema.and(
     z.object({ type: z.literal("text") }),
@@ -1279,8 +1291,14 @@ export const Content2$outboundSchema: z.ZodType<
   RedactedReasoningPartSchema$outboundSchema,
 ]);
 
-export function content2ToJSON(content2: Content2): string {
-  return JSON.stringify(Content2$outboundSchema.parse(content2));
+export function invokeDeploymentRequestContent2ToJSON(
+  invokeDeploymentRequestContent2: InvokeDeploymentRequestContent2,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequestContent2$outboundSchema.parse(
+      invokeDeploymentRequestContent2,
+    ),
+  );
 }
 
 /** @internal */
@@ -1490,14 +1508,14 @@ export function twoCacheControlToJSON(
 }
 
 /** @internal */
-export type Four$Outbound = {
+export type Two4$Outbound = {
   type: "file";
   cache_control?: TwoCacheControl$Outbound | undefined;
   file: FileContentPartSchema$Outbound;
 };
 
 /** @internal */
-export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
+export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
   z.object({
     type: z.literal("file"),
     cacheControl: z.lazy(() => TwoCacheControl$outboundSchema).optional(),
@@ -1508,41 +1526,33 @@ export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
     });
   });
 
-export function fourToJSON(four: Four): string {
-  return JSON.stringify(Four$outboundSchema.parse(four));
+export function two4ToJSON(two4: Two4): string {
+  return JSON.stringify(Two4$outboundSchema.parse(two4));
 }
 
 /** @internal */
-export type InvokeDeploymentRequestContentPrefixMessages2$Outbound =
+export type Content2$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
   | ImageContentPartSchema$Outbound
   | AudioContentPartSchema$Outbound
-  | Four$Outbound;
+  | Two4$Outbound;
 
 /** @internal */
-export const InvokeDeploymentRequestContentPrefixMessages2$outboundSchema:
-  z.ZodType<
-    InvokeDeploymentRequestContentPrefixMessages2$Outbound,
-    z.ZodTypeDef,
-    InvokeDeploymentRequestContentPrefixMessages2
-  > = z.union([
-    TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    ImageContentPartSchema$outboundSchema,
-    AudioContentPartSchema$outboundSchema,
-    z.lazy(() => Four$outboundSchema),
-  ]);
+export const Content2$outboundSchema: z.ZodType<
+  Content2$Outbound,
+  z.ZodTypeDef,
+  Content2
+> = z.union([
+  TextContentPartSchema$outboundSchema.and(
+    z.object({ type: z.literal("text") }),
+  ),
+  ImageContentPartSchema$outboundSchema,
+  AudioContentPartSchema$outboundSchema,
+  z.lazy(() => Two4$outboundSchema),
+]);
 
-export function invokeDeploymentRequestContentPrefixMessages2ToJSON(
-  invokeDeploymentRequestContentPrefixMessages2:
-    InvokeDeploymentRequestContentPrefixMessages2,
-): string {
-  return JSON.stringify(
-    InvokeDeploymentRequestContentPrefixMessages2$outboundSchema.parse(
-      invokeDeploymentRequestContentPrefixMessages2,
-    ),
-  );
+export function content2ToJSON(content2: Content2): string {
+  return JSON.stringify(Content2$outboundSchema.parse(content2));
 }
 
 /** @internal */
@@ -1552,7 +1562,7 @@ export type InvokeDeploymentRequestPrefixMessagesContent$Outbound =
     | (TextContentPartSchema$Outbound & { type: "text" })
     | ImageContentPartSchema$Outbound
     | AudioContentPartSchema$Outbound
-    | Four$Outbound
+    | Two4$Outbound
   >;
 
 /** @internal */
@@ -1570,7 +1580,7 @@ export const InvokeDeploymentRequestPrefixMessagesContent$outboundSchema:
         ),
         ImageContentPartSchema$outboundSchema,
         AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Four$outboundSchema),
+        z.lazy(() => Two4$outboundSchema),
       ]),
     ),
   ]);
@@ -1596,7 +1606,7 @@ export type UserMessage$Outbound = {
       | (TextContentPartSchema$Outbound & { type: "text" })
       | ImageContentPartSchema$Outbound
       | AudioContentPartSchema$Outbound
-      | Four$Outbound
+      | Two4$Outbound
     >;
 };
 
@@ -1617,7 +1627,7 @@ export const UserMessage$outboundSchema: z.ZodType<
         ),
         ImageContentPartSchema$outboundSchema,
         AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Four$outboundSchema),
+        z.lazy(() => Two4$outboundSchema),
       ]),
     ),
   ]),
@@ -2093,28 +2103,35 @@ export function invokeDeploymentRequest2CacheControlToJSON(
 }
 
 /** @internal */
-export type Two4$Outbound = {
+export type InvokeDeploymentRequest24$Outbound = {
   type: "file";
   cache_control?: InvokeDeploymentRequest2CacheControl$Outbound | undefined;
   file: FileContentPartSchema$Outbound;
 };
 
 /** @internal */
-export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
-  z.object({
-    type: z.literal("file"),
-    cacheControl: z.lazy(() =>
-      InvokeDeploymentRequest2CacheControl$outboundSchema
-    ).optional(),
-    file: FileContentPartSchema$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
+export const InvokeDeploymentRequest24$outboundSchema: z.ZodType<
+  InvokeDeploymentRequest24$Outbound,
+  z.ZodTypeDef,
+  InvokeDeploymentRequest24
+> = z.object({
+  type: z.literal("file"),
+  cacheControl: z.lazy(() =>
+    InvokeDeploymentRequest2CacheControl$outboundSchema
+  ).optional(),
+  file: FileContentPartSchema$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
   });
+});
 
-export function two4ToJSON(two4: Two4): string {
-  return JSON.stringify(Two4$outboundSchema.parse(two4));
+export function invokeDeploymentRequest24ToJSON(
+  invokeDeploymentRequest24: InvokeDeploymentRequest24,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequest24$outboundSchema.parse(invokeDeploymentRequest24),
+  );
 }
 
 /** @internal */
@@ -2122,7 +2139,7 @@ export type InvokeDeploymentRequestContentMessages2$Outbound =
   | (TextContentPartSchema$Outbound & { type: "text" })
   | ImageContentPartSchema$Outbound
   | AudioContentPartSchema$Outbound
-  | Two4$Outbound;
+  | InvokeDeploymentRequest24$Outbound;
 
 /** @internal */
 export const InvokeDeploymentRequestContentMessages2$outboundSchema: z.ZodType<
@@ -2135,7 +2152,7 @@ export const InvokeDeploymentRequestContentMessages2$outboundSchema: z.ZodType<
   ),
   ImageContentPartSchema$outboundSchema,
   AudioContentPartSchema$outboundSchema,
-  z.lazy(() => Two4$outboundSchema),
+  z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
 ]);
 
 export function invokeDeploymentRequestContentMessages2ToJSON(
@@ -2156,7 +2173,7 @@ export type InvokeDeploymentRequestMessages3Content$Outbound =
     | (TextContentPartSchema$Outbound & { type: "text" })
     | ImageContentPartSchema$Outbound
     | AudioContentPartSchema$Outbound
-    | Two4$Outbound
+    | InvokeDeploymentRequest24$Outbound
   >;
 
 /** @internal */
@@ -2173,7 +2190,7 @@ export const InvokeDeploymentRequestMessages3Content$outboundSchema: z.ZodType<
       ),
       ImageContentPartSchema$outboundSchema,
       AudioContentPartSchema$outboundSchema,
-      z.lazy(() => Two4$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
     ]),
   ),
 ]);
@@ -2199,7 +2216,7 @@ export type MessagesUserMessage$Outbound = {
       | (TextContentPartSchema$Outbound & { type: "text" })
       | ImageContentPartSchema$Outbound
       | AudioContentPartSchema$Outbound
-      | Two4$Outbound
+      | InvokeDeploymentRequest24$Outbound
     >;
 };
 
@@ -2220,7 +2237,7 @@ export const MessagesUserMessage$outboundSchema: z.ZodType<
         ),
         ImageContentPartSchema$outboundSchema,
         AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Two4$outboundSchema),
+        z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
       ]),
     ),
   ]),
@@ -3277,7 +3294,7 @@ export function oneEqToJSON(oneEq: OneEq): string {
 }
 
 /** @internal */
-export type One$Outbound =
+export type KnowledgeFilter1$Outbound =
   | OneEq$Outbound
   | OneNe$Outbound
   | Gt$Outbound
@@ -3289,21 +3306,28 @@ export type One$Outbound =
   | Exists$Outbound;
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .union([
-    z.lazy(() => OneEq$outboundSchema),
-    z.lazy(() => OneNe$outboundSchema),
-    z.lazy(() => Gt$outboundSchema),
-    z.lazy(() => Gte$outboundSchema),
-    z.lazy(() => Lt$outboundSchema),
-    z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => OneIn$outboundSchema),
-    z.lazy(() => OneNin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
-  ]);
+export const KnowledgeFilter1$outboundSchema: z.ZodType<
+  KnowledgeFilter1$Outbound,
+  z.ZodTypeDef,
+  KnowledgeFilter1
+> = z.union([
+  z.lazy(() => OneEq$outboundSchema),
+  z.lazy(() => OneNe$outboundSchema),
+  z.lazy(() => Gt$outboundSchema),
+  z.lazy(() => Gte$outboundSchema),
+  z.lazy(() => Lt$outboundSchema),
+  z.lazy(() => Lte$outboundSchema),
+  z.lazy(() => OneIn$outboundSchema),
+  z.lazy(() => OneNin$outboundSchema),
+  z.lazy(() => Exists$outboundSchema),
+]);
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function knowledgeFilter1ToJSON(
+  knowledgeFilter1: KnowledgeFilter1,
+): string {
+  return JSON.stringify(
+    KnowledgeFilter1$outboundSchema.parse(knowledgeFilter1),
+  );
 }
 
 /** @internal */

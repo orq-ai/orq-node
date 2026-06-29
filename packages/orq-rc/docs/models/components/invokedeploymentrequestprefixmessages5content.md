@@ -11,9 +11,14 @@ The contents of the tool message.
 const value: string = "<value>";
 ```
 
-### `components.InvokeDeploymentRequestContent2[]`
+### `components.InvokeDeploymentRequestContentPrefixMessages2[]`
 
 ```typescript
-const value: components.InvokeDeploymentRequestContent2[] = [];
+const value: components.InvokeDeploymentRequestContentPrefixMessages2[] = [
+  {
+    type: "text",
+    text: "<value>",
+  },
+];
 ```
 

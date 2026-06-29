@@ -34,6 +34,19 @@ export type PIIRedactionPluginNlOnFailure = ClosedEnum<
   typeof PIIRedactionPluginNlOnFailure
 >;
 
+/**
+ * Detector language.
+ */
+export const PIIRedactionPluginNlLanguage = {
+  Nl: "nl",
+} as const;
+/**
+ * Detector language.
+ */
+export type PIIRedactionPluginNlLanguage = ClosedEnum<
+  typeof PIIRedactionPluginNlLanguage
+>;
+
 export const PIIRedactionPluginNlEntities = {
   Age: "AGE",
   ApiKey: "API_KEY",
@@ -103,7 +116,7 @@ export type PIIRedactionPluginNl = {
   /**
    * Detector language.
    */
-  language: "nl";
+  language: PIIRedactionPluginNlLanguage;
   /**
    * Dutch entity types to redact. Omit to redact every type detected for the language.
    */
@@ -129,6 +142,15 @@ export const PIIRedactionPluginNlOnFailure$outboundSchema: z.ZodNativeEnum<
 > = PIIRedactionPluginNlOnFailure$inboundSchema;
 
 /** @internal */
+export const PIIRedactionPluginNlLanguage$inboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginNlLanguage
+> = z.nativeEnum(PIIRedactionPluginNlLanguage);
+/** @internal */
+export const PIIRedactionPluginNlLanguage$outboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginNlLanguage
+> = PIIRedactionPluginNlLanguage$inboundSchema;
+
+/** @internal */
 export const PIIRedactionPluginNlEntities$inboundSchema: z.ZodNativeEnum<
   typeof PIIRedactionPluginNlEntities
 > = z.nativeEnum(PIIRedactionPluginNlEntities);
@@ -146,7 +168,7 @@ export const PIIRedactionPluginNl$inboundSchema: z.ZodType<
   id: PIIRedactionPluginNlId$inboundSchema,
   on_failure: PIIRedactionPluginNlOnFailure$inboundSchema.optional(),
   threshold: z.number().optional(),
-  language: z.literal("nl"),
+  language: PIIRedactionPluginNlLanguage$inboundSchema,
   entities: z.array(PIIRedactionPluginNlEntities$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -158,7 +180,7 @@ export type PIIRedactionPluginNl$Outbound = {
   id: string;
   on_failure?: string | undefined;
   threshold?: number | undefined;
-  language: "nl";
+  language: string;
   entities?: Array<string> | undefined;
 };
 
@@ -171,7 +193,7 @@ export const PIIRedactionPluginNl$outboundSchema: z.ZodType<
   id: PIIRedactionPluginNlId$outboundSchema,
   onFailure: PIIRedactionPluginNlOnFailure$outboundSchema.optional(),
   threshold: z.number().optional(),
-  language: z.literal("nl"),
+  language: PIIRedactionPluginNlLanguage$outboundSchema,
   entities: z.array(PIIRedactionPluginNlEntities$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

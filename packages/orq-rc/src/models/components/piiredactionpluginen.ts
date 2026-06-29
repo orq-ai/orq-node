@@ -12,27 +12,40 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Plugin discriminator. Must be `pii_redaction`.
  */
-export const Id = {
+export const PIIRedactionPluginEnId = {
   PiiRedaction: "pii_redaction",
 } as const;
 /**
  * Plugin discriminator. Must be `pii_redaction`.
  */
-export type Id = ClosedEnum<typeof Id>;
+export type PIIRedactionPluginEnId = ClosedEnum<typeof PIIRedactionPluginEnId>;
 
 /**
  * Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text.
  */
-export const OnFailure = {
+export const PIIRedactionPluginEnOnFailure = {
   Block: "block",
   Passthrough: "passthrough",
 } as const;
 /**
  * Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text.
  */
-export type OnFailure = ClosedEnum<typeof OnFailure>;
+export type PIIRedactionPluginEnOnFailure = ClosedEnum<
+  typeof PIIRedactionPluginEnOnFailure
+>;
 
-export const Entities = {
+/**
+ * Detector language.
+ */
+export const Language = {
+  En: "en",
+} as const;
+/**
+ * Detector language.
+ */
+export type Language = ClosedEnum<typeof Language>;
+
+export const PIIRedactionPluginEnEntities = {
   Age: "AGE",
   ApiKey: "API_KEY",
   BankRouting: "BANK_ROUTING",
@@ -89,17 +102,19 @@ export const Entities = {
   Uuid: "UUID",
   VehicleId: "VEHICLE_ID",
 } as const;
-export type Entities = ClosedEnum<typeof Entities>;
+export type PIIRedactionPluginEnEntities = ClosedEnum<
+  typeof PIIRedactionPluginEnEntities
+>;
 
 export type PIIRedactionPluginEn = {
   /**
    * Plugin discriminator. Must be `pii_redaction`.
    */
-  id: Id;
+  id: PIIRedactionPluginEnId;
   /**
    * Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text.
    */
-  onFailure?: OnFailure | undefined;
+  onFailure?: PIIRedactionPluginEnOnFailure | undefined;
   /**
    * Detector confidence cutoff in [0,1].
    */
@@ -107,31 +122,46 @@ export type PIIRedactionPluginEn = {
   /**
    * Detector language.
    */
-  language: "en";
+  language: Language;
   /**
    * English entity types to redact. Omit to redact every type detected for the language.
    */
-  entities?: Array<Entities> | undefined;
+  entities?: Array<PIIRedactionPluginEnEntities> | undefined;
 };
 
 /** @internal */
-export const Id$inboundSchema: z.ZodNativeEnum<typeof Id> = z.nativeEnum(Id);
+export const PIIRedactionPluginEnId$inboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginEnId
+> = z.nativeEnum(PIIRedactionPluginEnId);
 /** @internal */
-export const Id$outboundSchema: z.ZodNativeEnum<typeof Id> = Id$inboundSchema;
+export const PIIRedactionPluginEnId$outboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginEnId
+> = PIIRedactionPluginEnId$inboundSchema;
 
 /** @internal */
-export const OnFailure$inboundSchema: z.ZodNativeEnum<typeof OnFailure> = z
-  .nativeEnum(OnFailure);
+export const PIIRedactionPluginEnOnFailure$inboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginEnOnFailure
+> = z.nativeEnum(PIIRedactionPluginEnOnFailure);
 /** @internal */
-export const OnFailure$outboundSchema: z.ZodNativeEnum<typeof OnFailure> =
-  OnFailure$inboundSchema;
+export const PIIRedactionPluginEnOnFailure$outboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginEnOnFailure
+> = PIIRedactionPluginEnOnFailure$inboundSchema;
 
 /** @internal */
-export const Entities$inboundSchema: z.ZodNativeEnum<typeof Entities> = z
-  .nativeEnum(Entities);
+export const Language$inboundSchema: z.ZodNativeEnum<typeof Language> = z
+  .nativeEnum(Language);
 /** @internal */
-export const Entities$outboundSchema: z.ZodNativeEnum<typeof Entities> =
-  Entities$inboundSchema;
+export const Language$outboundSchema: z.ZodNativeEnum<typeof Language> =
+  Language$inboundSchema;
+
+/** @internal */
+export const PIIRedactionPluginEnEntities$inboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginEnEntities
+> = z.nativeEnum(PIIRedactionPluginEnEntities);
+/** @internal */
+export const PIIRedactionPluginEnEntities$outboundSchema: z.ZodNativeEnum<
+  typeof PIIRedactionPluginEnEntities
+> = PIIRedactionPluginEnEntities$inboundSchema;
 
 /** @internal */
 export const PIIRedactionPluginEn$inboundSchema: z.ZodType<
@@ -139,11 +169,11 @@ export const PIIRedactionPluginEn$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: Id$inboundSchema,
-  on_failure: OnFailure$inboundSchema.optional(),
+  id: PIIRedactionPluginEnId$inboundSchema,
+  on_failure: PIIRedactionPluginEnOnFailure$inboundSchema.optional(),
   threshold: z.number().optional(),
-  language: z.literal("en"),
-  entities: z.array(Entities$inboundSchema).optional(),
+  language: Language$inboundSchema,
+  entities: z.array(PIIRedactionPluginEnEntities$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "on_failure": "onFailure",
@@ -154,7 +184,7 @@ export type PIIRedactionPluginEn$Outbound = {
   id: string;
   on_failure?: string | undefined;
   threshold?: number | undefined;
-  language: "en";
+  language: string;
   entities?: Array<string> | undefined;
 };
 
@@ -164,11 +194,11 @@ export const PIIRedactionPluginEn$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PIIRedactionPluginEn
 > = z.object({
-  id: Id$outboundSchema,
-  onFailure: OnFailure$outboundSchema.optional(),
+  id: PIIRedactionPluginEnId$outboundSchema,
+  onFailure: PIIRedactionPluginEnOnFailure$outboundSchema.optional(),
   threshold: z.number().optional(),
-  language: z.literal("en"),
-  entities: z.array(Entities$outboundSchema).optional(),
+  language: Language$outboundSchema,
+  entities: z.array(PIIRedactionPluginEnEntities$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     onFailure: "on_failure",

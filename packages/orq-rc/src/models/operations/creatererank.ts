@@ -87,7 +87,8 @@ export type CreateRerankTimeout = {
 
 export type CreateRerankPlugins =
   | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl;
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
 
 export type CreateRerankRouterRerankFallbacks = {
   /**
@@ -256,7 +257,11 @@ export type CreateRerankRequestBody = {
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
-    | Array<components.PIIRedactionPluginEn | components.PIIRedactionPluginNl>
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
     | undefined;
   orq?: CreateRerankOrq | undefined;
 };
@@ -513,7 +518,8 @@ export function createRerankTimeoutToJSON(
 /** @internal */
 export type CreateRerankPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound;
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const CreateRerankPlugins$outboundSchema: z.ZodType<
@@ -523,6 +529,7 @@ export const CreateRerankPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
 ]);
 
 export function createRerankPluginsToJSON(
@@ -788,6 +795,7 @@ export type CreateRerankRequestBody$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
     >
     | undefined;
   orq?: CreateRerankOrq$Outbound | undefined;
@@ -816,6 +824,7 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   orq: z.lazy(() => CreateRerankOrq$outboundSchema).optional(),
