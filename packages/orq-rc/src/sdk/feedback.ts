@@ -44,9 +44,6 @@ export class Feedback extends ClientSDK {
     ));
   }
 
-  /**
-   * Create a human review set
-   */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,
