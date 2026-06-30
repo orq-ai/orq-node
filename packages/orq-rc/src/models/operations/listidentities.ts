@@ -38,6 +38,14 @@ export type ListIdentitiesRequest = {
    * Field used to order the list.
    */
   sortBy?: components.IdentitySortField | undefined;
+  /**
+   * When true, embed each identity's identity-scoped budget (config and
+   *
+   * @remarks
+   *  limits only, no live usage) on the returned records. Adds one budget
+   *  lookup for the page; omit to skip it.
+   */
+  includeBudget?: boolean | undefined;
 };
 
 /** @internal */
@@ -49,6 +57,7 @@ export type ListIdentitiesRequest$Outbound = {
   "filter_by.tags"?: Array<string> | undefined;
   include_metrics?: boolean | undefined;
   sort_by?: string | undefined;
+  include_budget?: boolean | undefined;
 };
 
 /** @internal */
@@ -64,6 +73,7 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
   filterByTags: z.array(z.string()).optional(),
   includeMetrics: z.boolean().optional(),
   sortBy: components.IdentitySortField$outboundSchema.optional(),
+  includeBudget: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -71,6 +81,7 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
     filterByTags: "filter_by.tags",
     includeMetrics: "include_metrics",
     sortBy: "sort_by",
+    includeBudget: "include_budget",
   });
 });
 

@@ -7,15 +7,82 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { BudgetLimits, BudgetLimits$inboundSchema } from "./budgetlimits.js";
+import { BudgetMatch, BudgetMatch$inboundSchema } from "./budgetmatch.js";
+import { BudgetScope, BudgetScope$inboundSchema } from "./budgetscope.js";
+import { BudgetUsage, BudgetUsage$inboundSchema } from "./budgetusage.js";
 import {
   IdentityMetrics,
   IdentityMetrics$inboundSchema,
 } from "./identitymetrics.js";
+import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
 
 /**
  * Custom JSON metadata stored with the identity.
  */
 export type IdentityMetadata = {};
+
+/**
+ * The budget scoped to this identity, if one exists. Read-only here:
+ *
+ * @remarks
+ *  budgets are created and managed through the Budgets API
+ *  (scope.identity). Present only when requested with `include_budget`.
+ *  Live consumption (`usage`) is not attached on this path — call the
+ *  Budgets API for current spend.
+ */
+export type IdentityBudget = {
+  budgetId?: string | undefined;
+  /**
+   * Denormalized metadata for UI rendering, list filters, and the
+   *
+   * @remarks
+   *  resolver's prefilter index. Never consulted for matching — the
+   *  `match` expression is the single source of matching semantics.
+   *  Unset for budgets created from a raw CEL expression ("custom").
+   */
+  scope?: BudgetScope | undefined;
+  /**
+   * The matching semantics of the budget. The enforcement resolver
+   *
+   * @remarks
+   *  evaluates `match.cel` against the request context; a budget
+   *  applies to a request if and only if the expression evaluates to
+   *  true. Scoped creates derive a canonical expression (e.g.
+   *  `provider == "openai"`); an empty expression always matches
+   *  (workspace-wide).
+   */
+  match?: BudgetMatch | undefined;
+  /**
+   * BudgetLimits is the per-period spend and token ceiling. At least one
+   *
+   * @remarks
+   *  of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be
+   *  set on a Budget; that invariant is enforced by the handler.
+   */
+  limits?: BudgetLimits | undefined;
+  /**
+   * RateLimit is the per-minute request ceiling. Enforced via atomic
+   *
+   * @remarks
+   *  increment-first semantics in the enforcement middleware.
+   */
+  rateLimit?: RateLimit | undefined;
+  isActive?: boolean | undefined;
+  expiresAt?: Date | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  /**
+   * Live consumption for the current period, read from the Redis
+   *
+   * @remarks
+   *  counters the enforcement gate maintains. Populated by read paths
+   *  (Get / List); omitted on write responses (Create / Update / Reset)
+   *  where it carries no signal. Absent or all-zero for a budget that
+   *  has not been spent against in the current period.
+   */
+  usage?: BudgetUsage | undefined;
+};
 
 export type Identity = {
   /**
@@ -71,6 +138,16 @@ export type Identity = {
    *  `include_metrics`.
    */
   metrics?: IdentityMetrics | undefined;
+  /**
+   * The budget scoped to this identity, if one exists. Read-only here:
+   *
+   * @remarks
+   *  budgets are created and managed through the Budgets API
+   *  (scope.identity). Present only when requested with `include_budget`.
+   *  Live consumption (`usage`) is not attached on this path — call the
+   *  Budgets API for current spend.
+   */
+  budget?: IdentityBudget | undefined;
 };
 
 /** @internal */
@@ -91,6 +168,46 @@ export function identityMetadataFromJSON(
 }
 
 /** @internal */
+export const IdentityBudget$inboundSchema: z.ZodType<
+  IdentityBudget,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  budget_id: z.string().optional(),
+  scope: BudgetScope$inboundSchema.optional(),
+  match: BudgetMatch$inboundSchema.optional(),
+  limits: BudgetLimits$inboundSchema.optional(),
+  rate_limit: RateLimit$inboundSchema.optional(),
+  is_active: z.boolean().optional(),
+  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  usage: BudgetUsage$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "budget_id": "budgetId",
+    "rate_limit": "rateLimit",
+    "is_active": "isActive",
+    "expires_at": "expiresAt",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+  });
+});
+
+export function identityBudgetFromJSON(
+  jsonString: string,
+): SafeParseResult<IdentityBudget, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => IdentityBudget$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IdentityBudget' from JSON`,
+  );
+}
+
+/** @internal */
 export const Identity$inboundSchema: z.ZodType<
   Identity,
   z.ZodTypeDef,
@@ -107,6 +224,7 @@ export const Identity$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   metrics: IdentityMetrics$inboundSchema.optional(),
+  budget: z.lazy(() => IdentityBudget$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

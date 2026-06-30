@@ -10,11 +10,19 @@ export type ApiKeyGetRequest = {
    * API key id to retrieve (e.g. `01H...`).
    */
   apiKeyId: string;
+  /**
+   * When true, embed the api-key-scoped budget (config and limits only,
+   *
+   * @remarks
+   *  no live usage) on the returned record.
+   */
+  includeBudget?: boolean | undefined;
 };
 
 /** @internal */
 export type ApiKeyGetRequest$Outbound = {
   api_key_id: string;
+  include_budget?: boolean | undefined;
 };
 
 /** @internal */
@@ -24,9 +32,11 @@ export const ApiKeyGetRequest$outboundSchema: z.ZodType<
   ApiKeyGetRequest
 > = z.object({
   apiKeyId: z.string(),
+  includeBudget: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     apiKeyId: "api_key_id",
+    includeBudget: "include_budget",
   });
 });
 

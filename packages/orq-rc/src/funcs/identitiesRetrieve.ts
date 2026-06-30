@@ -96,6 +96,7 @@ async function $do(
   const path = pathToFunc("/v2/identities/{id}")(pathParams);
 
   const query = encodeFormQuery({
+    "include_budget": payload.include_budget,
     "include_metrics": payload.include_metrics,
   });
 
