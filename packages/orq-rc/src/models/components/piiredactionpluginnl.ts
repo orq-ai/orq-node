@@ -60,7 +60,6 @@ export const PIIRedactionPluginNlEntities = {
   DateTime: "DATE_TIME",
   DeviceId: "DEVICE_ID",
   EducationLevel: "EDUCATION_LEVEL",
-  Email: "EMAIL",
   EmailAddress: "EMAIL_ADDRESS",
   EmploymentStatus: "EMPLOYMENT_STATUS",
   Gender: "GENDER",
