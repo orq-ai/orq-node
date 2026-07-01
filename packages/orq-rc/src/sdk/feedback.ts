@@ -44,6 +44,12 @@ export class Feedback extends ClientSDK {
     ));
   }
 
+  /**
+   * Upload a file
+   *
+   * @remarks
+   * Files are used to upload documents that can be used with features like Deployments.
+   */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,
