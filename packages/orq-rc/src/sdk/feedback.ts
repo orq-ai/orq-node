@@ -45,7 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create translation
+   * Create a knowledge
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
