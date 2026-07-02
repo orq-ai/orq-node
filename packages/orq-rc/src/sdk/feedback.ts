@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create image
+   * Create tool
    *
    * @remarks
-   * Create an Image
+   * Creates a new tool in the workspace.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
