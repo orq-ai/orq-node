@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Upload a file
+   * Create chat completion
    *
    * @remarks
-   * Files are used to upload documents that can be used with features like Deployments.
+   * Creates a model response for the given chat conversation with support for retries, fallbacks, prompts, and variables.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

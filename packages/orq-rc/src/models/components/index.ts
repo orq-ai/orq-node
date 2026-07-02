@@ -20,6 +20,8 @@ export * from "./apikeyowner.js";
 export * from "./apikeystatus.js";
 export * from "./audiocontentpartschema.js";
 export * from "./autorouterconfig.js";
+export * from "./autorouterv2config.js";
+export * from "./autorouterv2effortconfig.js";
 export * from "./azurefoundrydeployment.js";
 export * from "./azurefoundrydeploymentmasterdata.js";
 export * from "./budget.js";

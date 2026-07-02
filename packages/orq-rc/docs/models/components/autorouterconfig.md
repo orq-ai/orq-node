@@ -10,10 +10,11 @@ let value: AutoRouterConfig = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `economicalModel`  | *string*           | :heavy_minus_sign: | N/A                |
-| `id`               | *string*           | :heavy_minus_sign: | N/A                |
-| `profile`          | *string*           | :heavy_minus_sign: | N/A                |
-| `strongModel`      | *string*           | :heavy_minus_sign: | N/A                |
-| `version`          | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `economicalModel`                                                              | *string*                                                                       | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `id`                                                                           | *string*                                                                       | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `profile`                                                                      | *string*                                                                       | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `strongModel`                                                                  | *string*                                                                       | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `v2`                                                                           | [components.AutoRouterV2Config](../../models/components/autorouterv2config.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `version`                                                                      | *string*                                                                       | :heavy_minus_sign:                                                             | N/A                                                                            |

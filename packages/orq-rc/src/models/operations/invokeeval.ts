@@ -278,7 +278,7 @@ export type InvokeEvalResponseBodyEvalsResponse200Value =
   | string
   | number;
 
-export type ResponseBodyBoolean = {
+export type Boolean = {
   type: "boolean";
   value: boolean | string | number | null;
 };
@@ -304,7 +304,7 @@ export type FormatOptions1 = {
 
 export type FormatOptions = FormatOptions2 | FormatOptions1;
 
-export type ResponseBodyNumber = {
+export type NumberT = {
   type: "number";
   originalValue?: number | null | undefined;
   value: number | null;
@@ -322,8 +322,8 @@ export type String = {
  */
 export type InvokeEvalResponseBody =
   | String
-  | ResponseBodyNumber
-  | ResponseBodyBoolean
+  | NumberT
+  | Boolean
   | StringArray
   | RougeN
   | BERTScore
@@ -1092,22 +1092,19 @@ export function invokeEvalResponseBodyEvalsResponse200ValueFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyBoolean$inboundSchema: z.ZodType<
-  ResponseBodyBoolean,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("boolean"),
-  value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
-});
+export const Boolean$inboundSchema: z.ZodType<Boolean, z.ZodTypeDef, unknown> =
+  z.object({
+    type: z.literal("boolean"),
+    value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
+  });
 
-export function responseBodyBooleanFromJSON(
+export function booleanFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyBoolean, SDKValidationError> {
+): SafeParseResult<Boolean, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyBoolean$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyBoolean' from JSON`,
+    (x) => Boolean$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Boolean' from JSON`,
   );
 }
 
@@ -1184,32 +1181,29 @@ export function formatOptionsFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyNumber$inboundSchema: z.ZodType<
-  ResponseBodyNumber,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("number"),
-  original_value: z.nullable(z.number()).optional(),
-  value: z.nullable(z.number()),
-  format_options: z.union([
-    z.lazy(() => FormatOptions2$inboundSchema),
-    z.lazy(() => FormatOptions1$inboundSchema),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "original_value": "originalValue",
-    "format_options": "formatOptions",
+export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
+  z.object({
+    type: z.literal("number"),
+    original_value: z.nullable(z.number()).optional(),
+    value: z.nullable(z.number()),
+    format_options: z.union([
+      z.lazy(() => FormatOptions2$inboundSchema),
+      z.lazy(() => FormatOptions1$inboundSchema),
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "original_value": "originalValue",
+      "format_options": "formatOptions",
+    });
   });
-});
 
-export function responseBodyNumberFromJSON(
+export function numberFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyNumber, SDKValidationError> {
+): SafeParseResult<NumberT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyNumber$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyNumber' from JSON`,
+    (x) => NumberT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'NumberT' from JSON`,
   );
 }
 
@@ -1242,8 +1236,8 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() => String$inboundSchema),
-  z.lazy(() => ResponseBodyNumber$inboundSchema),
-  z.lazy(() => ResponseBodyBoolean$inboundSchema),
+  z.lazy(() => NumberT$inboundSchema),
+  z.lazy(() => Boolean$inboundSchema),
   z.lazy(() => StringArray$inboundSchema),
   z.lazy(() => RougeN$inboundSchema),
   z.lazy(() => BERTScore$inboundSchema),

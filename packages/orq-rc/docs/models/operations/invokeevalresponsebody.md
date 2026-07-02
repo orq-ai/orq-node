@@ -13,19 +13,19 @@ const value: operations.String = {
 };
 ```
 
-### `operations.ResponseBodyNumber`
+### `operations.NumberT`
 
 ```typescript
-const value: operations.ResponseBodyNumber = {
+const value: operations.NumberT = {
   type: "number",
-  value: null,
+  value: 3019.07,
 };
 ```
 
-### `operations.ResponseBodyBoolean`
+### `operations.Boolean`
 
 ```typescript
-const value: operations.ResponseBodyBoolean = {
+const value: operations.Boolean = {
   type: "boolean",
   value: "<value>",
 };

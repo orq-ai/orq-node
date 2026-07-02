@@ -7,12 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AutoRouterV2Config,
+  AutoRouterV2Config$inboundSchema,
+  AutoRouterV2Config$Outbound,
+  AutoRouterV2Config$outboundSchema,
+} from "./autorouterv2config.js";
 
 export type AutoRouterConfig = {
   economicalModel?: string | undefined;
   id?: string | undefined;
   profile?: string | undefined;
   strongModel?: string | undefined;
+  v2?: AutoRouterV2Config | undefined;
   version?: string | undefined;
 };
 
@@ -26,6 +33,7 @@ export const AutoRouterConfig$inboundSchema: z.ZodType<
   id: z.string().optional(),
   profile: z.string().optional(),
   strong_model: z.string().optional(),
+  v2: AutoRouterV2Config$inboundSchema.optional(),
   version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -39,6 +47,7 @@ export type AutoRouterConfig$Outbound = {
   id?: string | undefined;
   profile?: string | undefined;
   strong_model?: string | undefined;
+  v2?: AutoRouterV2Config$Outbound | undefined;
   version?: string | undefined;
 };
 
@@ -52,6 +61,7 @@ export const AutoRouterConfig$outboundSchema: z.ZodType<
   id: z.string().optional(),
   profile: z.string().optional(),
   strongModel: z.string().optional(),
+  v2: AutoRouterV2Config$outboundSchema.optional(),
   version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

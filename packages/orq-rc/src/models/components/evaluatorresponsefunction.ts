@@ -5,48 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const EvaluatorResponseFunctionGuardrailConfigOperator = {
-  Eq: "eq",
-  Ne: "ne",
-  Gt: "gt",
-  Gte: "gte",
-  Lt: "lt",
-  Lte: "lte",
-} as const;
-export type EvaluatorResponseFunctionGuardrailConfigOperator = ClosedEnum<
-  typeof EvaluatorResponseFunctionGuardrailConfigOperator
->;
-
-export type EvaluatorResponseFunctionGuardrailConfigNumber = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "number";
-  value: number;
-  operator: EvaluatorResponseFunctionGuardrailConfigOperator;
-};
-
-export type EvaluatorResponseFunctionGuardrailConfigCategorical = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "categorical";
-  values: Array<string>;
-};
-
-export type EvaluatorResponseFunctionGuardrailConfigBoolean = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "boolean";
-  value: boolean;
-};
-
-export type EvaluatorResponseFunctionGuardrailConfig =
-  | EvaluatorResponseFunctionGuardrailConfigBoolean
-  | EvaluatorResponseFunctionGuardrailConfigCategorical
-  | EvaluatorResponseFunctionGuardrailConfigNumber;
 
 export type ThirtyTwo = {
   type: "grammar_diversity";
@@ -228,12 +188,7 @@ export type EvaluatorResponseFunction = {
   created: string;
   updated: string;
   updatedById?: string | null | undefined;
-  guardrailConfig?:
-    | EvaluatorResponseFunctionGuardrailConfigBoolean
-    | EvaluatorResponseFunctionGuardrailConfigCategorical
-    | EvaluatorResponseFunctionGuardrailConfigNumber
-    | null
-    | undefined;
+  guardrailConfig?: any | undefined;
   type: "function_eval";
   functionParams:
     | One
@@ -270,140 +225,6 @@ export type EvaluatorResponseFunction = {
     | ThirtyTwo;
   key: string;
 };
-
-/** @internal */
-export const EvaluatorResponseFunctionGuardrailConfigOperator$inboundSchema:
-  z.ZodNativeEnum<typeof EvaluatorResponseFunctionGuardrailConfigOperator> = z
-    .nativeEnum(EvaluatorResponseFunctionGuardrailConfigOperator);
-
-/** @internal */
-export const EvaluatorResponseFunctionGuardrailConfigNumber$inboundSchema:
-  z.ZodType<
-    EvaluatorResponseFunctionGuardrailConfigNumber,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("number"),
-    value: z.number(),
-    operator: EvaluatorResponseFunctionGuardrailConfigOperator$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function evaluatorResponseFunctionGuardrailConfigNumberFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseFunctionGuardrailConfigNumber,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseFunctionGuardrailConfigNumber$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseFunctionGuardrailConfigNumber' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseFunctionGuardrailConfigCategorical$inboundSchema:
-  z.ZodType<
-    EvaluatorResponseFunctionGuardrailConfigCategorical,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("categorical"),
-    values: z.array(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function evaluatorResponseFunctionGuardrailConfigCategoricalFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseFunctionGuardrailConfigCategorical,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseFunctionGuardrailConfigCategorical$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseFunctionGuardrailConfigCategorical' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseFunctionGuardrailConfigBoolean$inboundSchema:
-  z.ZodType<
-    EvaluatorResponseFunctionGuardrailConfigBoolean,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("boolean"),
-    value: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function evaluatorResponseFunctionGuardrailConfigBooleanFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseFunctionGuardrailConfigBoolean,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseFunctionGuardrailConfigBoolean$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseFunctionGuardrailConfigBoolean' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseFunctionGuardrailConfig$inboundSchema: z.ZodType<
-  EvaluatorResponseFunctionGuardrailConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => EvaluatorResponseFunctionGuardrailConfigBoolean$inboundSchema),
-  z.lazy(() =>
-    EvaluatorResponseFunctionGuardrailConfigCategorical$inboundSchema
-  ),
-  z.lazy(() => EvaluatorResponseFunctionGuardrailConfigNumber$inboundSchema),
-]);
-
-export function evaluatorResponseFunctionGuardrailConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseFunctionGuardrailConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseFunctionGuardrailConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseFunctionGuardrailConfig' from JSON`,
-  );
-}
 
 /** @internal */
 export const ThirtyTwo$inboundSchema: z.ZodType<
@@ -1035,22 +856,10 @@ export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-07-01T12:58:10.623Z"),
-  updated: z.string().default("2026-07-01T12:58:10.623Z"),
+  created: z.string().default("2026-07-02T01:19:40.024Z"),
+  updated: z.string().default("2026-07-02T01:19:40.024Z"),
   updated_by_id: z.nullable(z.string()).optional(),
-  guardrail_config: z.nullable(
-    z.union([
-      z.lazy(() =>
-        EvaluatorResponseFunctionGuardrailConfigBoolean$inboundSchema
-      ),
-      z.lazy(() =>
-        EvaluatorResponseFunctionGuardrailConfigCategorical$inboundSchema
-      ),
-      z.lazy(() =>
-        EvaluatorResponseFunctionGuardrailConfigNumber$inboundSchema
-      ),
-    ]),
-  ).optional(),
+  guardrail_config: z.any().optional(),
   type: z.literal("function_eval"),
   function_params: z.union([
     z.lazy(() => One$inboundSchema),

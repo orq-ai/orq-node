@@ -9,40 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Operator = {
-  Eq: "eq",
-  Ne: "ne",
-  Gt: "gt",
-  Gte: "gte",
-  Lt: "lt",
-  Lte: "lte",
-} as const;
-export type Operator = ClosedEnum<typeof Operator>;
-
-export type NumberT = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "number";
-  value: number;
-  operator: Operator;
-};
-
-export type Categorical = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "categorical";
-  values: Array<string>;
-};
-
-export type Boolean = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "boolean";
-  value: boolean;
-};
-
-export type GuardrailConfig = Boolean | Categorical | NumberT;
-
 export type CategoricalLabels = {
   value: string;
   description?: string | undefined;
@@ -102,7 +68,7 @@ export type EvaluatorResponseLlm = {
   created: string;
   updated: string;
   updatedById?: string | null | undefined;
-  guardrailConfig?: Boolean | Categorical | NumberT | null | undefined;
+  guardrailConfig?: any | undefined;
   type: "llm_eval";
   repetitions?: number | null | undefined;
   prompt: string;
@@ -114,104 +80,6 @@ export type EvaluatorResponseLlm = {
   model?: string | undefined;
   jury?: Jury | undefined;
 };
-
-/** @internal */
-export const Operator$inboundSchema: z.ZodNativeEnum<typeof Operator> = z
-  .nativeEnum(Operator);
-
-/** @internal */
-export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
-  z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("number"),
-    value: z.number(),
-    operator: Operator$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function numberFromJSON(
-  jsonString: string,
-): SafeParseResult<NumberT, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => NumberT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'NumberT' from JSON`,
-  );
-}
-
-/** @internal */
-export const Categorical$inboundSchema: z.ZodType<
-  Categorical,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  alert_on_failure: z.boolean().default(false),
-  type: z.literal("categorical"),
-  values: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "alert_on_failure": "alertOnFailure",
-  });
-});
-
-export function categoricalFromJSON(
-  jsonString: string,
-): SafeParseResult<Categorical, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Categorical$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Categorical' from JSON`,
-  );
-}
-
-/** @internal */
-export const Boolean$inboundSchema: z.ZodType<Boolean, z.ZodTypeDef, unknown> =
-  z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("boolean"),
-    value: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function booleanFromJSON(
-  jsonString: string,
-): SafeParseResult<Boolean, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Boolean$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Boolean' from JSON`,
-  );
-}
-
-/** @internal */
-export const GuardrailConfig$inboundSchema: z.ZodType<
-  GuardrailConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => Boolean$inboundSchema),
-  z.lazy(() => Categorical$inboundSchema),
-  z.lazy(() => NumberT$inboundSchema),
-]);
-
-export function guardrailConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<GuardrailConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GuardrailConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GuardrailConfig' from JSON`,
-  );
-}
 
 /** @internal */
 export const CategoricalLabels$inboundSchema: z.ZodType<
@@ -399,16 +267,10 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-07-01T12:58:10.623Z"),
-  updated: z.string().default("2026-07-01T12:58:10.623Z"),
+  created: z.string().default("2026-07-02T01:19:40.024Z"),
+  updated: z.string().default("2026-07-02T01:19:40.024Z"),
   updated_by_id: z.nullable(z.string()).optional(),
-  guardrail_config: z.nullable(
-    z.union([
-      z.lazy(() => Boolean$inboundSchema),
-      z.lazy(() => Categorical$inboundSchema),
-      z.lazy(() => NumberT$inboundSchema),
-    ]),
-  ).optional(),
+  guardrail_config: z.any().optional(),
   type: z.literal("llm_eval"),
   repetitions: z.nullable(z.number().int()).optional(),
   prompt: z.string(),

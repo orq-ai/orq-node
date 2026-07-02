@@ -7,17 +7,15 @@ import { NumberT } from "@orq-ai/node/models/operations";
 
 let value: NumberT = {
   type: "number",
-  value: 3883.98,
-  operator: "ne",
+  value: 3019.07,
 };
 ```
 
 ## Fields
 
-| Field                                                      | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `enabled`                                                  | *boolean*                                                  | :heavy_minus_sign:                                         | N/A                                                        |
-| `alertOnFailure`                                           | *boolean*                                                  | :heavy_minus_sign:                                         | N/A                                                        |
-| `type`                                                     | *"number"*                                                 | :heavy_check_mark:                                         | N/A                                                        |
-| `value`                                                    | *number*                                                   | :heavy_check_mark:                                         | N/A                                                        |
-| `operator`                                                 | [operations.Operator](../../models/operations/operator.md) | :heavy_check_mark:                                         | N/A                                                        |
+| Field                      | Type                       | Required                   | Description                |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `type`                     | *"number"*                 | :heavy_check_mark:         | N/A                        |
+| `originalValue`            | *number*                   | :heavy_minus_sign:         | N/A                        |
+| `value`                    | *number*                   | :heavy_check_mark:         | N/A                        |
+| `formatOptions`            | *operations.FormatOptions* | :heavy_minus_sign:         | N/A                        |

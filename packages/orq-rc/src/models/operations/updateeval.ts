@@ -63,40 +63,6 @@ export type Jury = {
   tieValue?: TieValue | undefined;
 };
 
-export const Operator = {
-  Eq: "eq",
-  Ne: "ne",
-  Gt: "gt",
-  Gte: "gte",
-  Lt: "lt",
-  Lte: "lte",
-} as const;
-export type Operator = ClosedEnum<typeof Operator>;
-
-export type NumberT = {
-  enabled?: boolean | undefined;
-  alertOnFailure?: boolean | undefined;
-  type: "number";
-  value: number;
-  operator: Operator;
-};
-
-export type Categorical = {
-  enabled?: boolean | undefined;
-  alertOnFailure?: boolean | undefined;
-  type: "categorical";
-  values: Array<string>;
-};
-
-export type Boolean = {
-  enabled?: boolean | undefined;
-  alertOnFailure?: boolean | undefined;
-  type: "boolean";
-  value: boolean;
-};
-
-export type GuardrailConfig = Boolean | Categorical | NumberT;
-
 export const VersionIncrement = {
   Major: "major",
   Minor: "minor",
@@ -129,7 +95,7 @@ export type UpdateEvalRequestBody = {
   headers?: { [k: string]: string } | undefined;
   payload?: { [k: string]: any } | undefined;
   code?: string | undefined;
-  guardrailConfig?: Boolean | Categorical | NumberT | null | undefined;
+  guardrailConfig?: any | undefined;
   versionIncrement?: VersionIncrement | undefined;
   versionDescription?: string | undefined;
 };
@@ -352,119 +318,6 @@ export function juryToJSON(jury: Jury): string {
 }
 
 /** @internal */
-export const Operator$outboundSchema: z.ZodNativeEnum<typeof Operator> = z
-  .nativeEnum(Operator);
-
-/** @internal */
-export type NumberT$Outbound = {
-  enabled: boolean;
-  alert_on_failure: boolean;
-  type: "number";
-  value: number;
-  operator: string;
-};
-
-/** @internal */
-export const NumberT$outboundSchema: z.ZodType<
-  NumberT$Outbound,
-  z.ZodTypeDef,
-  NumberT
-> = z.object({
-  enabled: z.boolean().default(true),
-  alertOnFailure: z.boolean().default(false),
-  type: z.literal("number"),
-  value: z.number(),
-  operator: Operator$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    alertOnFailure: "alert_on_failure",
-  });
-});
-
-export function numberToJSON(numberT: NumberT): string {
-  return JSON.stringify(NumberT$outboundSchema.parse(numberT));
-}
-
-/** @internal */
-export type Categorical$Outbound = {
-  enabled: boolean;
-  alert_on_failure: boolean;
-  type: "categorical";
-  values: Array<string>;
-};
-
-/** @internal */
-export const Categorical$outboundSchema: z.ZodType<
-  Categorical$Outbound,
-  z.ZodTypeDef,
-  Categorical
-> = z.object({
-  enabled: z.boolean().default(true),
-  alertOnFailure: z.boolean().default(false),
-  type: z.literal("categorical"),
-  values: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    alertOnFailure: "alert_on_failure",
-  });
-});
-
-export function categoricalToJSON(categorical: Categorical): string {
-  return JSON.stringify(Categorical$outboundSchema.parse(categorical));
-}
-
-/** @internal */
-export type Boolean$Outbound = {
-  enabled: boolean;
-  alert_on_failure: boolean;
-  type: "boolean";
-  value: boolean;
-};
-
-/** @internal */
-export const Boolean$outboundSchema: z.ZodType<
-  Boolean$Outbound,
-  z.ZodTypeDef,
-  Boolean
-> = z.object({
-  enabled: z.boolean().default(true),
-  alertOnFailure: z.boolean().default(false),
-  type: z.literal("boolean"),
-  value: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    alertOnFailure: "alert_on_failure",
-  });
-});
-
-export function booleanToJSON(value: Boolean): string {
-  return JSON.stringify(Boolean$outboundSchema.parse(value));
-}
-
-/** @internal */
-export type GuardrailConfig$Outbound =
-  | Boolean$Outbound
-  | Categorical$Outbound
-  | NumberT$Outbound;
-
-/** @internal */
-export const GuardrailConfig$outboundSchema: z.ZodType<
-  GuardrailConfig$Outbound,
-  z.ZodTypeDef,
-  GuardrailConfig
-> = z.union([
-  z.lazy(() => Boolean$outboundSchema),
-  z.lazy(() => Categorical$outboundSchema),
-  z.lazy(() => NumberT$outboundSchema),
-]);
-
-export function guardrailConfigToJSON(
-  guardrailConfig: GuardrailConfig,
-): string {
-  return JSON.stringify(GuardrailConfig$outboundSchema.parse(guardrailConfig));
-}
-
-/** @internal */
 export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
   typeof VersionIncrement
 > = z.nativeEnum(VersionIncrement);
@@ -489,12 +342,7 @@ export type UpdateEvalRequestBody$Outbound = {
   headers?: { [k: string]: string } | undefined;
   payload?: { [k: string]: any } | undefined;
   code?: string | undefined;
-  guardrail_config?:
-    | Boolean$Outbound
-    | Categorical$Outbound
-    | NumberT$Outbound
-    | null
-    | undefined;
+  guardrail_config?: any | undefined;
   versionIncrement?: string | undefined;
   versionDescription?: string | undefined;
 };
@@ -525,13 +373,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   headers: z.record(z.string()).optional(),
   payload: z.record(z.any()).optional(),
   code: z.string().optional(),
-  guardrailConfig: z.nullable(
-    z.union([
-      z.lazy(() => Boolean$outboundSchema),
-      z.lazy(() => Categorical$outboundSchema),
-      z.lazy(() => NumberT$outboundSchema),
-    ]),
-  ).optional(),
+  guardrailConfig: z.any().optional(),
   versionIncrement: VersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {

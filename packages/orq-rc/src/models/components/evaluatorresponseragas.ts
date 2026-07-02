@@ -9,45 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const EvaluatorResponseRagasGuardrailConfigOperator = {
-  Eq: "eq",
-  Ne: "ne",
-  Gt: "gt",
-  Gte: "gte",
-  Lt: "lt",
-  Lte: "lte",
-} as const;
-export type EvaluatorResponseRagasGuardrailConfigOperator = ClosedEnum<
-  typeof EvaluatorResponseRagasGuardrailConfigOperator
->;
-
-export type EvaluatorResponseRagasGuardrailConfigNumber = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "number";
-  value: number;
-  operator: EvaluatorResponseRagasGuardrailConfigOperator;
-};
-
-export type EvaluatorResponseRagasGuardrailConfigCategorical = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "categorical";
-  values: Array<string>;
-};
-
-export type EvaluatorResponseRagasGuardrailConfigBoolean = {
-  enabled: boolean;
-  alertOnFailure: boolean;
-  type: "boolean";
-  value: boolean;
-};
-
-export type EvaluatorResponseRagasGuardrailConfig =
-  | EvaluatorResponseRagasGuardrailConfigBoolean
-  | EvaluatorResponseRagasGuardrailConfigCategorical
-  | EvaluatorResponseRagasGuardrailConfigNumber;
-
 export const RagasMetric = {
   ContextPrecision: "context_precision",
   ContextRecall: "context_recall",
@@ -70,144 +31,12 @@ export type EvaluatorResponseRagas = {
   created: string;
   updated: string;
   updatedById?: string | null | undefined;
-  guardrailConfig?:
-    | EvaluatorResponseRagasGuardrailConfigBoolean
-    | EvaluatorResponseRagasGuardrailConfigCategorical
-    | EvaluatorResponseRagasGuardrailConfigNumber
-    | null
-    | undefined;
+  guardrailConfig?: any | undefined;
   type: "ragas";
   ragasMetric: RagasMetric;
   key: string;
   model: string;
 };
-
-/** @internal */
-export const EvaluatorResponseRagasGuardrailConfigOperator$inboundSchema:
-  z.ZodNativeEnum<typeof EvaluatorResponseRagasGuardrailConfigOperator> = z
-    .nativeEnum(EvaluatorResponseRagasGuardrailConfigOperator);
-
-/** @internal */
-export const EvaluatorResponseRagasGuardrailConfigNumber$inboundSchema:
-  z.ZodType<
-    EvaluatorResponseRagasGuardrailConfigNumber,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("number"),
-    value: z.number(),
-    operator: EvaluatorResponseRagasGuardrailConfigOperator$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function evaluatorResponseRagasGuardrailConfigNumberFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseRagasGuardrailConfigNumber,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseRagasGuardrailConfigNumber$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseRagasGuardrailConfigNumber' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseRagasGuardrailConfigCategorical$inboundSchema:
-  z.ZodType<
-    EvaluatorResponseRagasGuardrailConfigCategorical,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("categorical"),
-    values: z.array(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function evaluatorResponseRagasGuardrailConfigCategoricalFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseRagasGuardrailConfigCategorical,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseRagasGuardrailConfigCategorical$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseRagasGuardrailConfigCategorical' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseRagasGuardrailConfigBoolean$inboundSchema:
-  z.ZodType<
-    EvaluatorResponseRagasGuardrailConfigBoolean,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().default(true),
-    alert_on_failure: z.boolean().default(false),
-    type: z.literal("boolean"),
-    value: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_on_failure": "alertOnFailure",
-    });
-  });
-
-export function evaluatorResponseRagasGuardrailConfigBooleanFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  EvaluatorResponseRagasGuardrailConfigBoolean,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseRagasGuardrailConfigBoolean$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'EvaluatorResponseRagasGuardrailConfigBoolean' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseRagasGuardrailConfig$inboundSchema: z.ZodType<
-  EvaluatorResponseRagasGuardrailConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => EvaluatorResponseRagasGuardrailConfigBoolean$inboundSchema),
-  z.lazy(() => EvaluatorResponseRagasGuardrailConfigCategorical$inboundSchema),
-  z.lazy(() => EvaluatorResponseRagasGuardrailConfigNumber$inboundSchema),
-]);
-
-export function evaluatorResponseRagasGuardrailConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<EvaluatorResponseRagasGuardrailConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      EvaluatorResponseRagasGuardrailConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EvaluatorResponseRagasGuardrailConfig' from JSON`,
-  );
-}
 
 /** @internal */
 export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
@@ -221,18 +50,10 @@ export const EvaluatorResponseRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-07-01T12:58:10.623Z"),
-  updated: z.string().default("2026-07-01T12:58:10.623Z"),
+  created: z.string().default("2026-07-02T01:19:40.024Z"),
+  updated: z.string().default("2026-07-02T01:19:40.024Z"),
   updated_by_id: z.nullable(z.string()).optional(),
-  guardrail_config: z.nullable(
-    z.union([
-      z.lazy(() => EvaluatorResponseRagasGuardrailConfigBoolean$inboundSchema),
-      z.lazy(() =>
-        EvaluatorResponseRagasGuardrailConfigCategorical$inboundSchema
-      ),
-      z.lazy(() => EvaluatorResponseRagasGuardrailConfigNumber$inboundSchema),
-    ]),
-  ).optional(),
+  guardrail_config: z.any().optional(),
   type: z.literal("ragas"),
   ragas_metric: RagasMetric$inboundSchema,
   key: z.string(),
