@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create an Evaluator
+   * Create response
+   *
+   * @remarks
+   * Initiates an agent conversation and returns a complete response. This endpoint manages the full lifecycle of an agent interaction, from receiving the initial message through all processing steps until completion. Supports synchronous execution (waits for completion) and asynchronous execution (returns immediately with task ID). The response includes all messages exchanged, tool calls made, and token usage statistics. Ideal for request-response patterns where you need the complete interaction result.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
