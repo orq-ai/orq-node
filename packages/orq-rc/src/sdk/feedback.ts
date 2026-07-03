@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create policy
+   * Create response
    *
    * @remarks
-   * Creates a new router policy with model configuration, evaluators, retry settings, and limits.
+   * Creates a model response for the given input. Returns a response object or a stream of server-sent events.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
