@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create policy
-   *
-   * @remarks
-   * Creates a new router policy with model configuration, evaluators, retry settings, and limits.
+   * Create an Evaluator
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
