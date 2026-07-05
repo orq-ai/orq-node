@@ -990,6 +990,10 @@ export type ProviderBuiltInTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1210,6 +1214,10 @@ export type CurrentDateTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
@@ -1231,6 +1239,10 @@ export type QueryKnowledgeBaseTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
@@ -1252,6 +1264,10 @@ export type RetrieveKnowledgeBasesTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
@@ -1273,6 +1289,10 @@ export type DeleteMemoryDocumentTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
@@ -1294,6 +1314,10 @@ export type RetrieveMemoryStoresTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
@@ -1315,6 +1339,10 @@ export type WriteMemoryStoreTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
@@ -1335,6 +1363,10 @@ export type QueryMemoryStoreTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType = {
@@ -1353,6 +1385,10 @@ export type RetrieveAgentsTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDAgentsType = {
@@ -1371,6 +1407,10 @@ export type CallSubAgentTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const CreateAgentRequestAgentToolInputCRUDType = {
@@ -1389,6 +1429,10 @@ export type WebScraperTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const AgentToolInputCRUDType = {
@@ -1405,6 +1449,10 @@ export type GoogleSearchTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1752,6 +1800,10 @@ export type CreateAgentRequestTools = {
    * Optional tool description
    */
   description?: string | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
   requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
@@ -4352,6 +4404,7 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 export type ProviderBuiltInTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4362,6 +4415,7 @@ export const ProviderBuiltInTool$outboundSchema: z.ZodType<
 > = z.object({
   type: z.string(),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4585,6 +4639,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySetting
 export type CurrentDateTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4596,6 +4651,7 @@ export const CurrentDateTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4620,6 +4676,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySetting
 export type QueryKnowledgeBaseTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4631,6 +4688,7 @@ export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4657,6 +4715,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySetting
 export type RetrieveKnowledgeBasesTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4668,6 +4727,7 @@ export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4694,6 +4754,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySetting
 export type DeleteMemoryDocumentTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4705,6 +4766,7 @@ export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4731,6 +4793,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySetting
 export type RetrieveMemoryStoresTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4742,6 +4805,7 @@ export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4768,6 +4832,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySetting
 export type WriteMemoryStoreTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4779,6 +4844,7 @@ export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4805,6 +4871,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$ou
 export type QueryMemoryStoreTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4816,6 +4883,7 @@ export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
   type:
     CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4840,6 +4908,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchem
 export type RetrieveAgentsTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4850,6 +4919,7 @@ export const RetrieveAgentsTool$outboundSchema: z.ZodType<
 > = z.object({
   type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4873,6 +4943,7 @@ export const CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema:
 export type CallSubAgentTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4883,6 +4954,7 @@ export const CallSubAgentTool$outboundSchema: z.ZodType<
 > = z.object({
   type: CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4906,6 +4978,7 @@ export const CreateAgentRequestAgentToolInputCRUDType$outboundSchema:
 export type WebScraperTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4916,6 +4989,7 @@ export const WebScraperTool$outboundSchema: z.ZodType<
 > = z.object({
   type: CreateAgentRequestAgentToolInputCRUDType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4935,6 +5009,7 @@ export const AgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
 export type GoogleSearchTool$Outbound = {
   type: string;
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4945,6 +5020,7 @@ export const GoogleSearchTool$outboundSchema: z.ZodType<
 > = z.object({
   type: AgentToolInputCRUDType$outboundSchema,
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -5409,6 +5485,7 @@ export const CreateAgentRequestTools$inboundSchema: z.ZodType<
   action_type: z.string(),
   display_name: z.string().optional(),
   description: z.string().optional(),
+  configuration: z.record(z.any()).optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),

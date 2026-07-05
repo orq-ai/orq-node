@@ -97,6 +97,10 @@ export type Tools = {
    * Optional tool description
    */
   description?: string | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
   requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
@@ -328,6 +332,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
     action_type: z.string(),
     display_name: z.string().optional(),
     description: z.string().optional(),
+    configuration: z.record(z.any()).optional(),
     requires_approval: z.boolean().default(false),
     tool_id: z.string().optional(),
     conditions: z.array(

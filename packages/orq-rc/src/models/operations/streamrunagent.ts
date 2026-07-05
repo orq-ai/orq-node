@@ -1596,6 +1596,10 @@ export type StreamRunAgentAgentToolInputRunCurrentDateTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1607,6 +1611,10 @@ export type StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1618,6 +1626,10 @@ export type StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1629,6 +1641,10 @@ export type StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1640,6 +1656,10 @@ export type StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1651,6 +1671,10 @@ export type StreamRunAgentAgentToolInputRunWriteMemoryStoreTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1662,6 +1686,10 @@ export type StreamRunAgentAgentToolInputRunQueryMemoryStoreTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1673,6 +1701,10 @@ export type StreamRunAgentAgentToolInputRunRetrieveAgentsTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1684,6 +1716,10 @@ export type StreamRunAgentAgentToolInputRunCallSubAgentTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1695,6 +1731,10 @@ export type StreamRunAgentAgentToolInputRunWebScraperTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1706,6 +1746,10 @@ export type StreamRunAgentAgentToolInputRunGoogleSearchTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -4031,7 +4075,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KWMEK3MGJTV7CD5NHEEPZ9PB"),
+  id: z.string().default("01KWRS1EZ58R2RFMP36WJ0MBME"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -4713,6 +4757,7 @@ export function agentToolInputRunHTTPToolRunToJSON(
 export type StreamRunAgentAgentToolInputRunCurrentDateTool$Outbound = {
   type: "current_date";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4724,6 +4769,7 @@ export const StreamRunAgentAgentToolInputRunCurrentDateTool$outboundSchema:
   > = z.object({
     type: z.literal("current_date"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4745,6 +4791,7 @@ export function streamRunAgentAgentToolInputRunCurrentDateToolToJSON(
 export type StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$Outbound = {
   type: "query_knowledge_base";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4756,6 +4803,7 @@ export const StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$outboundSchem
   > = z.object({
     type: z.literal("query_knowledge_base"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4778,6 +4826,7 @@ export type StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$Outbound =
   {
     type: "retrieve_knowledge_bases";
     requires_approval?: boolean | undefined;
+    configuration?: { [k: string]: any } | undefined;
   };
 
 /** @internal */
@@ -4789,6 +4838,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$outboundS
   > = z.object({
     type: z.literal("retrieve_knowledge_bases"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4809,6 +4859,7 @@ export function streamRunAgentAgentToolInputRunRetrieveKnowledgeBasesToolToJSON(
 export type StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$Outbound = {
   type: "delete_memory_document";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4820,6 +4871,7 @@ export const StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$outboundSch
   > = z.object({
     type: z.literal("delete_memory_document"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4840,6 +4892,7 @@ export function streamRunAgentAgentToolInputRunDeleteMemoryDocumentToolToJSON(
 export type StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$Outbound = {
   type: "retrieve_memory_stores";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4851,6 +4904,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$outboundSch
   > = z.object({
     type: z.literal("retrieve_memory_stores"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4871,6 +4925,7 @@ export function streamRunAgentAgentToolInputRunRetrieveMemoryStoresToolToJSON(
 export type StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$Outbound = {
   type: "write_memory_store";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4882,6 +4937,7 @@ export const StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$outboundSchema:
   > = z.object({
     type: z.literal("write_memory_store"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4903,6 +4959,7 @@ export function streamRunAgentAgentToolInputRunWriteMemoryStoreToolToJSON(
 export type StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$Outbound = {
   type: "query_memory_store";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4914,6 +4971,7 @@ export const StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$outboundSchema:
   > = z.object({
     type: z.literal("query_memory_store"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4935,6 +4993,7 @@ export function streamRunAgentAgentToolInputRunQueryMemoryStoreToolToJSON(
 export type StreamRunAgentAgentToolInputRunRetrieveAgentsTool$Outbound = {
   type: "retrieve_agents";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4946,6 +5005,7 @@ export const StreamRunAgentAgentToolInputRunRetrieveAgentsTool$outboundSchema:
   > = z.object({
     type: z.literal("retrieve_agents"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4967,6 +5027,7 @@ export function streamRunAgentAgentToolInputRunRetrieveAgentsToolToJSON(
 export type StreamRunAgentAgentToolInputRunCallSubAgentTool$Outbound = {
   type: "call_sub_agent";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4978,6 +5039,7 @@ export const StreamRunAgentAgentToolInputRunCallSubAgentTool$outboundSchema:
   > = z.object({
     type: z.literal("call_sub_agent"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -4999,6 +5061,7 @@ export function streamRunAgentAgentToolInputRunCallSubAgentToolToJSON(
 export type StreamRunAgentAgentToolInputRunWebScraperTool$Outbound = {
   type: "web_scraper";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -5010,6 +5073,7 @@ export const StreamRunAgentAgentToolInputRunWebScraperTool$outboundSchema:
   > = z.object({
     type: z.literal("web_scraper"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",
@@ -5031,6 +5095,7 @@ export function streamRunAgentAgentToolInputRunWebScraperToolToJSON(
 export type StreamRunAgentAgentToolInputRunGoogleSearchTool$Outbound = {
   type: "google_search";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -5042,6 +5107,7 @@ export const StreamRunAgentAgentToolInputRunGoogleSearchTool$outboundSchema:
   > = z.object({
     type: z.literal("google_search"),
     requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
   }).transform((v) => {
     return remap$(v, {
       requiresApproval: "requires_approval",

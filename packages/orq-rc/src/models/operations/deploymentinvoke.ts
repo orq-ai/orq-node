@@ -57,6 +57,8 @@ export const Provider = {
   Hcompany: "hcompany",
   Inceptron: "inceptron",
   Wafer: "wafer",
+  Poolside: "poolside",
+  Tencent: "tencent",
   Slack: "slack",
   Orq: "orq",
 } as const;

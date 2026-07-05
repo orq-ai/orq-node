@@ -20,6 +20,7 @@ import { Knowledge } from "./knowledge.js";
 import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
+import { Notifiers } from "./notifiers.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
@@ -31,6 +32,7 @@ import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
 import { Skills } from "./skills.js";
 import { Tools } from "./tools.js";
+import { Traces } from "./traces.js";
 
 export class Orq extends ClientSDK {
   private _evals?: Evals;
@@ -148,6 +150,11 @@ export class Orq extends ClientSDK {
     return (this._managementKeys ??= new ManagementKeys(this._options));
   }
 
+  private _notifiers?: Notifiers;
+  get notifiers(): Notifiers {
+    return (this._notifiers ??= new Notifiers(this._options));
+  }
+
   private _projects?: Projects;
   get projects(): Projects {
     return (this._projects ??= new Projects(this._options));
@@ -171,5 +178,10 @@ export class Orq extends ClientSDK {
   private _reporting?: Reporting;
   get reporting(): Reporting {
     return (this._reporting ??= new Reporting(this._options));
+  }
+
+  private _traces?: Traces;
+  get traces(): Traces {
+    return (this._traces ??= new Traces(this._options));
   }
 }
