@@ -16,6 +16,6 @@ let value: OrIn = {
 
 ## Fields
 
-| Field                               | Type                                | Required                            | Description                         |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `in`                                | *operations.DeploymentInvokeOrIn*[] | :heavy_check_mark:                  | N/A                                 |
+| Field                                  | Type                                   | Required                               | Description                            |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `in`                                   | *operations.DeploymentGetConfigOrIn*[] | :heavy_check_mark:                     | N/A                                    |

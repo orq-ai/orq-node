@@ -14,6 +14,6 @@ let value: AndNe = {
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `ne`                               | *operations.DeploymentInvokeAndNe* | :heavy_check_mark:                 | N/A                                |
+| Field                                 | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `ne`                                  | *operations.DeploymentGetConfigAndNe* | :heavy_check_mark:                    | N/A                                   |

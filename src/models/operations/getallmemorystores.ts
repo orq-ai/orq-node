@@ -22,6 +22,18 @@ export type GetAllMemoryStoresRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter memory stores by key (case-insensitive match)
+   */
+  search?: string | undefined;
+  /**
+   * Filter by the users who last updated the memory store. Accepts a comma-separated list of user IDs
+   */
+  updatedBy?: string | undefined;
+  /**
+   * Filter memory stores by project ID
+   */
+  projectId?: string | undefined;
 };
 
 export const GetAllMemoryStoresObject = {
@@ -70,7 +82,7 @@ export type GetAllMemoryStoresData = {
   /**
    * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
    */
-  ttl?: number | undefined;
+  ttl?: number | null | undefined;
   embeddingConfig: GetAllMemoryStoresEmbeddingConfig;
 };
 
@@ -88,6 +100,9 @@ export type GetAllMemoryStoresRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  search?: string | undefined;
+  updated_by?: string | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -99,10 +114,15 @@ export const GetAllMemoryStoresRequest$outboundSchema: z.ZodType<
   limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  search: z.string().optional(),
+  updatedBy: z.string().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
+    updatedBy: "updated_by",
+    projectId: "project_id",
   });
 });
 
@@ -151,7 +171,7 @@ export const GetAllMemoryStoresData$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
-  ttl: z.number().optional(),
+  ttl: z.nullable(z.number()).optional(),
   embedding_config: z.lazy(() =>
     GetAllMemoryStoresEmbeddingConfig$inboundSchema
   ),

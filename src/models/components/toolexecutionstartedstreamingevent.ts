@@ -36,7 +36,7 @@ export const Product = {
  */
 export type Product = ClosedEnum<typeof Product>;
 
-export type Memory = {
+export type ToolExecutionStartedStreamingEventMemory = {
   entityId: string;
 };
 
@@ -50,7 +50,7 @@ export type ToolExecutionContext = {
    * Orquesta product
    */
   product: Product;
-  memory?: Memory | undefined;
+  memory?: ToolExecutionStartedStreamingEventMemory | undefined;
   parentId?: string | undefined;
   variables?: { [k: string]: any } | undefined;
   secretKeys?: Array<string> | undefined;
@@ -86,22 +86,31 @@ export const Product$inboundSchema: z.ZodNativeEnum<typeof Product> = z
   .nativeEnum(Product);
 
 /** @internal */
-export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
-  .object({
-    entity_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "entity_id": "entityId",
-    });
+export const ToolExecutionStartedStreamingEventMemory$inboundSchema: z.ZodType<
+  ToolExecutionStartedStreamingEventMemory,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  entity_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
   });
+});
 
-export function memoryFromJSON(
+export function toolExecutionStartedStreamingEventMemoryFromJSON(
   jsonString: string,
-): SafeParseResult<Memory, SDKValidationError> {
+): SafeParseResult<
+  ToolExecutionStartedStreamingEventMemory,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => Memory$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Memory' from JSON`,
+    (x) =>
+      ToolExecutionStartedStreamingEventMemory$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ToolExecutionStartedStreamingEventMemory' from JSON`,
   );
 }
 
@@ -117,7 +126,8 @@ export const ToolExecutionContext$inboundSchema: z.ZodType<
   agent_manifest_id: z.string(),
   agent_execution_id: z.string(),
   product: Product$inboundSchema,
-  memory: z.lazy(() => Memory$inboundSchema).optional(),
+  memory: z.lazy(() => ToolExecutionStartedStreamingEventMemory$inboundSchema)
+    .optional(),
   parent_id: z.string().optional(),
   variables: z.record(z.any()).optional(),
   secret_keys: z.array(z.string()).optional(),

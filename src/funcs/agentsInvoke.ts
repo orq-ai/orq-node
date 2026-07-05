@@ -36,7 +36,7 @@ import { Result } from "../types/fp.js";
 export function agentsInvoke(
   client: OrqCore,
   key: string,
-  requestBody?: operations.InvokeAgentRequestBody | undefined,
+  requestBody?: operations.InvokeAgentA2AInvokeRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -62,7 +62,7 @@ export function agentsInvoke(
 async function $do(
   client: OrqCore,
   key: string,
-  requestBody?: operations.InvokeAgentRequestBody | undefined,
+  requestBody?: operations.InvokeAgentA2AInvokeRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [

@@ -9,18 +9,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Domain describes a permission domain that can be granted to an
+ * Domain describes a permission domain that can be granted to a
  *
  * @remarks
- *  API key. Verbs are derived from id + group + readable/writable.
+ *  management key. Verbs are derived from id + readable/writable.
  */
 export type Domain = {
   /**
-   * Stable domain identifier (e.g. "agent", "chat_completions"). Used
+   * Stable domain identifier (e.g. "api-key", "budget"). Used as the
    *
    * @remarks
-   *  as the key in ApiKey.access and as the verb prefix in resolved
-   *  permissions (e.g. agent.list, agent.view, agent.create).
+   *  key in ManagementKey.access and as the verb prefix in resolved
+   *  permissions (e.g. budget.list, budget.view, budget.create).
    */
   id?: string | undefined;
   /**
@@ -31,13 +31,6 @@ export type Domain = {
    * Logical group used by the UI to render this entry.
    */
   group?: number | undefined;
-  /**
-   * Project scopes this domain may be granted under. A workspace-
-   *
-   * @remarks
-   *  admin domain like `member` is typically SCOPE_MODE_ALL only.
-   */
-  allowedScopes?: Array<number> | undefined;
   /**
    * Whether this domain can be granted read access.
    */
@@ -54,13 +47,11 @@ export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
     id: z.string().optional(),
     display_name: z.string().optional(),
     group: z.number().int().optional(),
-    allowed_scopes: z.array(z.number().int()).optional(),
     readable: z.boolean().optional(),
     writable: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "display_name": "displayName",
-      "allowed_scopes": "allowedScopes",
     });
   });
 

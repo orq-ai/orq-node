@@ -99,6 +99,11 @@ export type CreateCompletionThinking =
   | components.ThinkingConfigEnabledSchema
   | components.ThinkingConfigAdaptiveSchema;
 
+export type CreateCompletionPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 /**
  * Retry configuration for the request
  */
@@ -789,6 +794,16 @@ export type CreateCompletionRequestBody = {
     | null
     | undefined;
   /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
+  /**
    * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -1251,6 +1266,31 @@ export function createCompletionThinkingToJSON(
 ): string {
   return JSON.stringify(
     CreateCompletionThinking$outboundSchema.parse(createCompletionThinking),
+  );
+}
+
+/** @internal */
+export type CreateCompletionPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
+
+/** @internal */
+export const CreateCompletionPlugins$outboundSchema: z.ZodType<
+  CreateCompletionPlugins$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+]);
+
+export function createCompletionPluginsToJSON(
+  createCompletionPlugins: CreateCompletionPlugins,
+): string {
+  return JSON.stringify(
+    CreateCompletionPlugins$outboundSchema.parse(createCompletionPlugins),
   );
 }
 
@@ -2983,6 +3023,13 @@ export type CreateCompletionRequestBody$Outbound = {
     | components.ThinkingConfigAdaptiveSchema$Outbound
     | null
     | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+    >
+    | undefined;
   orq?: CreateCompletionOrq$Outbound | undefined;
   stream: boolean;
 };
@@ -3018,6 +3065,13 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
       components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    ]),
+  ).optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
     ]),
   ).optional(),
   orq: z.lazy(() => CreateCompletionOrq$outboundSchema).optional(),

@@ -1,6 +1,6 @@
 # DeploymentGetConfigMessagesDeploymentsContent
 
-The contents of the developer message.
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,9 +11,9 @@ The contents of the developer message.
 const value: string = "<value>";
 ```
 
-### `components.TextContentPartSchema[]`
+### `operations.DeploymentGetConfigContentDeploymentsRequest2[]`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: operations.DeploymentGetConfigContentDeploymentsRequest2[] = [];
 ```
 

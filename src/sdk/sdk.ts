@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
+import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
@@ -16,6 +17,7 @@ import { GuardrailRules } from "./guardrailrules.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
+import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Pii } from "./pii.js";
@@ -126,6 +128,11 @@ export class Orq extends ClientSDK {
     return (this._apiKeys ??= new ApiKeys(this._options));
   }
 
+  private _budgets?: Budgets;
+  get budgets(): Budgets {
+    return (this._budgets ??= new Budgets(this._options));
+  }
+
   private _files?: Files;
   get files(): Files {
     return (this._files ??= new Files(this._options));
@@ -134,6 +141,11 @@ export class Orq extends ClientSDK {
   private _identities?: Identities;
   get identities(): Identities {
     return (this._identities ??= new Identities(this._options));
+  }
+
+  private _managementKeys?: ManagementKeys;
+  get managementKeys(): ManagementKeys {
+    return (this._managementKeys ??= new ManagementKeys(this._options));
   }
 
   private _projects?: Projects;

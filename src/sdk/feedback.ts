@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a prompt
+   * Create chat completion
+   *
+   * @remarks
+   * Creates a model response for the given chat conversation with support for retries, fallbacks, prompts, and variables.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

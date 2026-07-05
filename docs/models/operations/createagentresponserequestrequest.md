@@ -7,13 +7,13 @@ import { CreateAgentResponseRequestRequest } from "@orq-ai/node/models/operation
 
 let value: CreateAgentResponseRequestRequest = {
   agentKey: "<value>",
-  requestBody: {
+  agentResponseRequest: {
     message: {
       role: "tool",
       parts: [
         {
-          kind: "error",
-          error: "<value>",
+          kind: "tool_result",
+          toolCallId: "<id>",
         },
       ],
     },
@@ -46,7 +46,7 @@ let value: CreateAgentResponseRequestRequest = {
 
 ## Fields
 
-| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `agentKey`                                                                                                           | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | The unique key of identifier of the agent to invoke                                                                  |
-| `requestBody`                                                                                                        | [operations.CreateAgentResponseRequestRequestBody](../../models/operations/createagentresponserequestrequestbody.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `agentKey`                                                                         | *string*                                                                           | :heavy_check_mark:                                                                 | The unique key of identifier of the agent to invoke                                |
+| `agentResponseRequest`                                                             | [components.AgentResponseRequest](../../models/components/agentresponserequest.md) | :heavy_check_mark:                                                                 | N/A                                                                                |

@@ -200,6 +200,11 @@ export type StreamRunAgentModelConfigurationGuardrails = {
   executeOn: StreamRunAgentModelConfigurationExecuteOn;
 };
 
+export type StreamRunAgentModelConfigurationPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 export type StreamRunAgentModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
@@ -262,6 +267,68 @@ export type StreamRunAgentModelConfigurationTimeout = {
    * Timeout value in milliseconds
    */
   callTimeout: number;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const StreamRunAgentModelConfigurationAgentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type StreamRunAgentModelConfigurationAgentsType = ClosedEnum<
+  typeof StreamRunAgentModelConfigurationAgentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const StreamRunAgentModelConfigurationTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type StreamRunAgentModelConfigurationTtl = ClosedEnum<
+  typeof StreamRunAgentModelConfigurationTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type StreamRunAgentModelConfigurationCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: StreamRunAgentModelConfigurationAgentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: StreamRunAgentModelConfigurationTtl | undefined;
 };
 
 /**
@@ -365,6 +432,16 @@ export type StreamRunAgentModelConfigurationParameters = {
    */
   guardrails?: Array<StreamRunAgentModelConfigurationGuardrails> | undefined;
   /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<StreamRunAgentModelConfigurationFallbacks> | undefined;
@@ -380,6 +457,14 @@ export type StreamRunAgentModelConfigurationParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: StreamRunAgentModelConfigurationTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: StreamRunAgentModelConfigurationCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -618,6 +703,11 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
   executeOn: StreamRunAgentFallbackModelConfigurationExecuteOn;
 };
 
+export type StreamRunAgentFallbackModelConfigurationPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 export type StreamRunAgentFallbackModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
@@ -680,6 +770,68 @@ export type StreamRunAgentFallbackModelConfigurationTimeout = {
    * Timeout value in milliseconds
    */
   callTimeout: number;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const StreamRunAgentFallbackModelConfigurationAgentsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type StreamRunAgentFallbackModelConfigurationAgentsType = ClosedEnum<
+  typeof StreamRunAgentFallbackModelConfigurationAgentsType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const StreamRunAgentFallbackModelConfigurationTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type StreamRunAgentFallbackModelConfigurationTtl = ClosedEnum<
+  typeof StreamRunAgentFallbackModelConfigurationTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type StreamRunAgentFallbackModelConfigurationCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: StreamRunAgentFallbackModelConfigurationAgentsType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl?: StreamRunAgentFallbackModelConfigurationTtl | undefined;
 };
 
 /**
@@ -787,6 +939,16 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | Array<StreamRunAgentFallbackModelConfigurationGuardrails>
     | undefined;
   /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?:
@@ -804,6 +966,16 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: StreamRunAgentFallbackModelConfigurationTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?:
+    | StreamRunAgentFallbackModelConfigurationCacheControl
+    | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
 };
 
 /**
@@ -2185,6 +2357,34 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 }
 
 /** @internal */
+export type StreamRunAgentModelConfigurationPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
+
+/** @internal */
+export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
+  StreamRunAgentModelConfigurationPlugins$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentModelConfigurationPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+]);
+
+export function streamRunAgentModelConfigurationPluginsToJSON(
+  streamRunAgentModelConfigurationPlugins:
+    StreamRunAgentModelConfigurationPlugins,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelConfigurationPlugins$outboundSchema.parse(
+      streamRunAgentModelConfigurationPlugins,
+    ),
+  );
+}
+
+/** @internal */
 export type StreamRunAgentModelConfigurationFallbacks$Outbound = {
   model: string;
 };
@@ -2354,6 +2554,45 @@ export function streamRunAgentModelConfigurationTimeoutToJSON(
 }
 
 /** @internal */
+export const StreamRunAgentModelConfigurationAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationAgentsType> = z
+    .nativeEnum(StreamRunAgentModelConfigurationAgentsType);
+
+/** @internal */
+export const StreamRunAgentModelConfigurationTtl$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationTtl> = z.nativeEnum(
+    StreamRunAgentModelConfigurationTtl,
+  );
+
+/** @internal */
+export type StreamRunAgentModelConfigurationCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const StreamRunAgentModelConfigurationCacheControl$outboundSchema:
+  z.ZodType<
+    StreamRunAgentModelConfigurationCacheControl$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentModelConfigurationCacheControl
+  > = z.object({
+    type: StreamRunAgentModelConfigurationAgentsType$outboundSchema,
+    ttl: StreamRunAgentModelConfigurationTtl$outboundSchema.default("5m"),
+  });
+
+export function streamRunAgentModelConfigurationCacheControlToJSON(
+  streamRunAgentModelConfigurationCacheControl:
+    StreamRunAgentModelConfigurationCacheControl,
+): string {
+  return JSON.stringify(
+    StreamRunAgentModelConfigurationCacheControl$outboundSchema.parse(
+      streamRunAgentModelConfigurationCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type StreamRunAgentModelConfigurationParameters$Outbound = {
   name?: string | undefined;
   frequency_penalty?: number | null | undefined;
@@ -2383,12 +2622,23 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
   guardrails?:
     | Array<StreamRunAgentModelConfigurationGuardrails$Outbound>
     | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+    >
+    | undefined;
   fallbacks?:
     | Array<StreamRunAgentModelConfigurationFallbacks$Outbound>
     | undefined;
   cache?: StreamRunAgentModelConfigurationCache$Outbound | undefined;
   load_balancer?: StreamRunAgentLoadBalancer1$Outbound | undefined;
   timeout?: StreamRunAgentModelConfigurationTimeout$Outbound | undefined;
+  cache_control?:
+    | StreamRunAgentModelConfigurationCacheControl$Outbound
+    | undefined;
+  prompt_cache_key?: string | undefined;
 };
 
 /** @internal */
@@ -2432,6 +2682,13 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     guardrails: z.array(
       z.lazy(() => StreamRunAgentModelConfigurationGuardrails$outboundSchema),
     ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPluginEn$outboundSchema,
+        components.PIIRedactionPluginNl$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
+      ]),
+    ).optional(),
     fallbacks: z.array(
       z.lazy(() => StreamRunAgentModelConfigurationFallbacks$outboundSchema),
     ).optional(),
@@ -2442,6 +2699,10 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     timeout: z.lazy(() =>
       StreamRunAgentModelConfigurationTimeout$outboundSchema
     ).optional(),
+    cacheControl: z.lazy(() =>
+      StreamRunAgentModelConfigurationCacheControl$outboundSchema
+    ).optional(),
+    promptCacheKey: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       frequencyPenalty: "frequency_penalty",
@@ -2455,6 +2716,8 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
       loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
     });
   });
 
@@ -2923,6 +3186,35 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 }
 
 /** @internal */
+export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationPlugins$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelConfigurationPlugins
+  > = z.union([
+    components.PIIRedactionPluginEn$outboundSchema,
+    components.PIIRedactionPluginNl$outboundSchema,
+    components.PIIRedactionPluginAuto$outboundSchema,
+  ]);
+
+export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
+  streamRunAgentFallbackModelConfigurationPlugins:
+    StreamRunAgentFallbackModelConfigurationPlugins,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema.parse(
+      streamRunAgentFallbackModelConfigurationPlugins,
+    ),
+  );
+}
+
+/** @internal */
 export type StreamRunAgentFallbackModelConfigurationFallbacks$Outbound = {
   model: string;
 };
@@ -3096,6 +3388,46 @@ export function streamRunAgentFallbackModelConfigurationTimeoutToJSON(
 }
 
 /** @internal */
+export const StreamRunAgentFallbackModelConfigurationAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationAgentsType> = z
+    .nativeEnum(StreamRunAgentFallbackModelConfigurationAgentsType);
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationTtl$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationTtl> = z
+    .nativeEnum(StreamRunAgentFallbackModelConfigurationTtl);
+
+/** @internal */
+export type StreamRunAgentFallbackModelConfigurationCacheControl$Outbound = {
+  type: string;
+  ttl: string;
+};
+
+/** @internal */
+export const StreamRunAgentFallbackModelConfigurationCacheControl$outboundSchema:
+  z.ZodType<
+    StreamRunAgentFallbackModelConfigurationCacheControl$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentFallbackModelConfigurationCacheControl
+  > = z.object({
+    type: StreamRunAgentFallbackModelConfigurationAgentsType$outboundSchema,
+    ttl: StreamRunAgentFallbackModelConfigurationTtl$outboundSchema.default(
+      "5m",
+    ),
+  });
+
+export function streamRunAgentFallbackModelConfigurationCacheControlToJSON(
+  streamRunAgentFallbackModelConfigurationCacheControl:
+    StreamRunAgentFallbackModelConfigurationCacheControl,
+): string {
+  return JSON.stringify(
+    StreamRunAgentFallbackModelConfigurationCacheControl$outboundSchema.parse(
+      streamRunAgentFallbackModelConfigurationCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
   name?: string | undefined;
   frequency_penalty?: number | null | undefined;
@@ -3125,6 +3457,13 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
   guardrails?:
     | Array<StreamRunAgentFallbackModelConfigurationGuardrails$Outbound>
     | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+    >
+    | undefined;
   fallbacks?:
     | Array<StreamRunAgentFallbackModelConfigurationFallbacks$Outbound>
     | undefined;
@@ -3133,6 +3472,10 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
   timeout?:
     | StreamRunAgentFallbackModelConfigurationTimeout$Outbound
     | undefined;
+  cache_control?:
+    | StreamRunAgentFallbackModelConfigurationCacheControl$Outbound
+    | undefined;
+  prompt_cache_key?: string | undefined;
 };
 
 /** @internal */
@@ -3183,6 +3526,13 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
         StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema
       ),
     ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPluginEn$outboundSchema,
+        components.PIIRedactionPluginNl$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
+      ]),
+    ).optional(),
     fallbacks: z.array(
       z.lazy(() =>
         StreamRunAgentFallbackModelConfigurationFallbacks$outboundSchema
@@ -3196,6 +3546,10 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     timeout: z.lazy(() =>
       StreamRunAgentFallbackModelConfigurationTimeout$outboundSchema
     ).optional(),
+    cacheControl: z.lazy(() =>
+      StreamRunAgentFallbackModelConfigurationCacheControl$outboundSchema
+    ).optional(),
+    promptCacheKey: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       frequencyPenalty: "frequency_penalty",
@@ -3209,6 +3563,8 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
       loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
     });
   });
 
@@ -3675,7 +4031,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KW839ETEKRQBB90BHESGP2ZV"),
+  id: z.string().default("01KWRNAJN58A0FWYPMP1ZT88JV"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

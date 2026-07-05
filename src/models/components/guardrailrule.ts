@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Expression, Expression$inboundSchema } from "./expression.js";
 import { GuardrailRef, GuardrailRef$inboundSchema } from "./guardrailref.js";
+import { Plugin, Plugin$inboundSchema } from "./plugin.js";
 
 export type GuardrailRule = {
   id: string;
@@ -19,6 +20,7 @@ export type GuardrailRule = {
   enabled: boolean;
   expression?: Expression | undefined;
   guardrails?: Array<GuardrailRef> | null | undefined;
+  plugins?: Array<Plugin> | null | undefined;
   projectId: string;
   timeout: number;
   updatedAt: Date;
@@ -39,6 +41,7 @@ export const GuardrailRule$inboundSchema: z.ZodType<
   enabled: z.boolean(),
   expression: Expression$inboundSchema.optional(),
   guardrails: z.nullable(z.array(GuardrailRef$inboundSchema)).optional(),
+  plugins: z.nullable(z.array(Plugin$inboundSchema)).optional(),
   project_id: z.string(),
   timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),

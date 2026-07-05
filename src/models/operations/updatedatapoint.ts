@@ -770,6 +770,52 @@ export type UpdateDatapointEvaluationsDatasetsResponseSource = ClosedEnum<
   typeof UpdateDatapointEvaluationsDatasetsResponseSource
 >;
 
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export const UpdateDatapointEvaluationsDatasetsResponseKind = {
+  Llm: "llm",
+  Code: "code",
+  Human: "human",
+  Automation: "automation",
+} as const;
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export type UpdateDatapointEvaluationsDatasetsResponseKind = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsResponseKind
+>;
+
+/**
+ * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+ */
+export type UpdateDatapointEvaluationsDatasetsResponseAnnotator = {
+  /**
+   * The kind of annotator that produced the evaluation
+   */
+  kind: UpdateDatapointEvaluationsDatasetsResponseKind;
+  /**
+   * Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation.
+   */
+  actorId: string;
+};
+
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export const UpdateDatapointEvaluationsDatasetsResponseOutputSchema = {
+  Boolean: "boolean",
+  Number: "number",
+  Categorical: "categorical",
+  String: "string",
+} as const;
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export type UpdateDatapointEvaluationsDatasetsResponseOutputSchema = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsResponseOutputSchema
+>;
+
 export type UpdateDatapointEvaluations3 = {
   /**
    * The unique identifier of the human evaluation
@@ -780,16 +826,38 @@ export type UpdateDatapointEvaluations3 = {
    */
   evaluationType: UpdateDatapointEvaluationsDatasetsResponseEvaluationType;
   /**
-   * The unique identifier of the human review
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
-  humanReviewId: string;
+  humanReviewId?: string | undefined;
   source: UpdateDatapointEvaluationsDatasetsResponseSource;
   /**
-   * The unique identifier of the user who reviewed the item
+   * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+   */
+  annotator?: UpdateDatapointEvaluationsDatasetsResponseAnnotator | undefined;
+  /**
+   * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+   */
+  outputSchema?:
+    | UpdateDatapointEvaluationsDatasetsResponseOutputSchema
+    | undefined;
+  /**
+   * When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction.
+   */
+  parentAnnotationId?: string | undefined;
+  /**
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedById: string;
   /**
-   * The date and time the item was reviewed
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt: Date;
   type: "string_array";
@@ -817,6 +885,52 @@ export type UpdateDatapointEvaluationsDatasetsSource = ClosedEnum<
   typeof UpdateDatapointEvaluationsDatasetsSource
 >;
 
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export const UpdateDatapointEvaluationsDatasetsKind = {
+  Llm: "llm",
+  Code: "code",
+  Human: "human",
+  Automation: "automation",
+} as const;
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export type UpdateDatapointEvaluationsDatasetsKind = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsKind
+>;
+
+/**
+ * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+ */
+export type UpdateDatapointEvaluationsDatasetsAnnotator = {
+  /**
+   * The kind of annotator that produced the evaluation
+   */
+  kind: UpdateDatapointEvaluationsDatasetsKind;
+  /**
+   * Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation.
+   */
+  actorId: string;
+};
+
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export const UpdateDatapointEvaluationsDatasetsOutputSchema = {
+  Boolean: "boolean",
+  Number: "number",
+  Categorical: "categorical",
+  String: "string",
+} as const;
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export type UpdateDatapointEvaluationsDatasetsOutputSchema = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsOutputSchema
+>;
+
 export type UpdateDatapointEvaluations2 = {
   /**
    * The unique identifier of the human evaluation
@@ -827,16 +941,36 @@ export type UpdateDatapointEvaluations2 = {
    */
   evaluationType: UpdateDatapointEvaluationsDatasetsEvaluationType;
   /**
-   * The unique identifier of the human review
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
-  humanReviewId: string;
+  humanReviewId?: string | undefined;
   source: UpdateDatapointEvaluationsDatasetsSource;
   /**
-   * The unique identifier of the user who reviewed the item
+   * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+   */
+  annotator?: UpdateDatapointEvaluationsDatasetsAnnotator | undefined;
+  /**
+   * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+   */
+  outputSchema?: UpdateDatapointEvaluationsDatasetsOutputSchema | undefined;
+  /**
+   * When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction.
+   */
+  parentAnnotationId?: string | undefined;
+  /**
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedById: string;
   /**
-   * The date and time the item was reviewed
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt: Date;
   type: "number";
@@ -864,6 +998,52 @@ export type UpdateDatapointEvaluationsSource = ClosedEnum<
   typeof UpdateDatapointEvaluationsSource
 >;
 
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export const UpdateDatapointEvaluationsKind = {
+  Llm: "llm",
+  Code: "code",
+  Human: "human",
+  Automation: "automation",
+} as const;
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export type UpdateDatapointEvaluationsKind = ClosedEnum<
+  typeof UpdateDatapointEvaluationsKind
+>;
+
+/**
+ * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+ */
+export type UpdateDatapointEvaluationsAnnotator = {
+  /**
+   * The kind of annotator that produced the evaluation
+   */
+  kind: UpdateDatapointEvaluationsKind;
+  /**
+   * Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation.
+   */
+  actorId: string;
+};
+
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export const UpdateDatapointEvaluationsOutputSchema = {
+  Boolean: "boolean",
+  Number: "number",
+  Categorical: "categorical",
+  String: "string",
+} as const;
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export type UpdateDatapointEvaluationsOutputSchema = ClosedEnum<
+  typeof UpdateDatapointEvaluationsOutputSchema
+>;
+
 export type UpdateDatapointEvaluations1 = {
   /**
    * The unique identifier of the human evaluation
@@ -874,16 +1054,36 @@ export type UpdateDatapointEvaluations1 = {
    */
   evaluationType: UpdateDatapointEvaluationsEvaluationType;
   /**
-   * The unique identifier of the human review
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
-  humanReviewId: string;
+  humanReviewId?: string | undefined;
   source: UpdateDatapointEvaluationsSource;
   /**
-   * The unique identifier of the user who reviewed the item
+   * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+   */
+  annotator?: UpdateDatapointEvaluationsAnnotator | undefined;
+  /**
+   * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+   */
+  outputSchema?: UpdateDatapointEvaluationsOutputSchema | undefined;
+  /**
+   * When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction.
+   */
+  parentAnnotationId?: string | undefined;
+  /**
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedById: string;
   /**
-   * The date and time the item was reviewed
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt: Date;
   type: "string";
@@ -2366,6 +2566,48 @@ export const UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema:
     .nativeEnum(UpdateDatapointEvaluationsDatasetsResponseSource);
 
 /** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseKind$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsResponseKind> = z
+    .nativeEnum(UpdateDatapointEvaluationsDatasetsResponseKind);
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseAnnotator$inboundSchema:
+  z.ZodType<
+    UpdateDatapointEvaluationsDatasetsResponseAnnotator,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind: UpdateDatapointEvaluationsDatasetsResponseKind$inboundSchema,
+    actor_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "actor_id": "actorId",
+    });
+  });
+
+export function updateDatapointEvaluationsDatasetsResponseAnnotatorFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointEvaluationsDatasetsResponseAnnotator,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointEvaluationsDatasetsResponseAnnotator$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointEvaluationsDatasetsResponseAnnotator' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseOutputSchema$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointEvaluationsDatasetsResponseOutputSchema
+  > = z.nativeEnum(UpdateDatapointEvaluationsDatasetsResponseOutputSchema);
+
+/** @internal */
 export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
   UpdateDatapointEvaluations3,
   z.ZodTypeDef,
@@ -2374,12 +2616,20 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type:
     UpdateDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema,
-  human_review_id: z.string(),
+  human_review_id: z.string().optional(),
   source: UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema
     .default("orq"),
+  annotator: z.lazy(() =>
+    UpdateDatapointEvaluationsDatasetsResponseAnnotator$inboundSchema
+  ).optional(),
+  output_schema:
+    UpdateDatapointEvaluationsDatasetsResponseOutputSchema$inboundSchema
+      .optional(),
+  parent_annotation_id: z.string().optional(),
+  explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-28T21:48:39.515Z",
+    "2026-07-05T08:11:41.528Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2387,6 +2637,8 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
   return remap$(v, {
     "evaluation_type": "evaluationType",
     "human_review_id": "humanReviewId",
+    "output_schema": "outputSchema",
+    "parent_annotation_id": "parentAnnotationId",
     "reviewed_by_id": "reviewedById",
     "reviewed_at": "reviewedAt",
   });
@@ -2413,6 +2665,48 @@ export const UpdateDatapointEvaluationsDatasetsSource$inboundSchema:
     .nativeEnum(UpdateDatapointEvaluationsDatasetsSource);
 
 /** @internal */
+export const UpdateDatapointEvaluationsDatasetsKind$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsKind> = z.nativeEnum(
+    UpdateDatapointEvaluationsDatasetsKind,
+  );
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsAnnotator$inboundSchema:
+  z.ZodType<
+    UpdateDatapointEvaluationsDatasetsAnnotator,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind: UpdateDatapointEvaluationsDatasetsKind$inboundSchema,
+    actor_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "actor_id": "actorId",
+    });
+  });
+
+export function updateDatapointEvaluationsDatasetsAnnotatorFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointEvaluationsDatasetsAnnotator,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointEvaluationsDatasetsAnnotator$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointEvaluationsDatasetsAnnotator' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsOutputSchema$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsOutputSchema> = z
+    .nativeEnum(UpdateDatapointEvaluationsDatasetsOutputSchema);
+
+/** @internal */
 export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   UpdateDatapointEvaluations2,
   z.ZodTypeDef,
@@ -2421,11 +2715,18 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   id: z.string(),
   evaluation_type:
     UpdateDatapointEvaluationsDatasetsEvaluationType$inboundSchema,
-  human_review_id: z.string(),
+  human_review_id: z.string().optional(),
   source: UpdateDatapointEvaluationsDatasetsSource$inboundSchema.default("orq"),
+  annotator: z.lazy(() =>
+    UpdateDatapointEvaluationsDatasetsAnnotator$inboundSchema
+  ).optional(),
+  output_schema: UpdateDatapointEvaluationsDatasetsOutputSchema$inboundSchema
+    .optional(),
+  parent_annotation_id: z.string().optional(),
+  explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-28T21:48:39.514Z",
+    "2026-07-05T08:11:41.528Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2433,6 +2734,8 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   return remap$(v, {
     "evaluation_type": "evaluationType",
     "human_review_id": "humanReviewId",
+    "output_schema": "outputSchema",
+    "parent_annotation_id": "parentAnnotationId",
     "reviewed_by_id": "reviewedById",
     "reviewed_at": "reviewedAt",
   });
@@ -2459,6 +2762,42 @@ export const UpdateDatapointEvaluationsSource$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateDatapointEvaluationsSource);
 
 /** @internal */
+export const UpdateDatapointEvaluationsKind$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointEvaluationsKind
+> = z.nativeEnum(UpdateDatapointEvaluationsKind);
+
+/** @internal */
+export const UpdateDatapointEvaluationsAnnotator$inboundSchema: z.ZodType<
+  UpdateDatapointEvaluationsAnnotator,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: UpdateDatapointEvaluationsKind$inboundSchema,
+  actor_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "actor_id": "actorId",
+  });
+});
+
+export function updateDatapointEvaluationsAnnotatorFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointEvaluationsAnnotator, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointEvaluationsAnnotator$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointEvaluationsAnnotator' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsOutputSchema$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsOutputSchema> = z.nativeEnum(
+    UpdateDatapointEvaluationsOutputSchema,
+  );
+
+/** @internal */
 export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   UpdateDatapointEvaluations1,
   z.ZodTypeDef,
@@ -2466,11 +2805,17 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   evaluation_type: UpdateDatapointEvaluationsEvaluationType$inboundSchema,
-  human_review_id: z.string(),
+  human_review_id: z.string().optional(),
   source: UpdateDatapointEvaluationsSource$inboundSchema.default("orq"),
+  annotator: z.lazy(() => UpdateDatapointEvaluationsAnnotator$inboundSchema)
+    .optional(),
+  output_schema: UpdateDatapointEvaluationsOutputSchema$inboundSchema
+    .optional(),
+  parent_annotation_id: z.string().optional(),
+  explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-06-28T21:48:39.514Z",
+    "2026-07-05T08:11:41.526Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2478,6 +2823,8 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   return remap$(v, {
     "evaluation_type": "evaluationType",
     "human_review_id": "humanReviewId",
+    "output_schema": "outputSchema",
+    "parent_annotation_id": "parentAnnotationId",
     "reviewed_by_id": "reviewedById",
     "reviewed_at": "reviewedAt",
   });
@@ -2551,7 +2898,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-28T21:48:18.406Z",
+    "2026-07-05T08:11:17.110Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

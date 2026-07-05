@@ -14,6 +14,6 @@ let value: AndIn = {
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `in`                                 | *operations.DeploymentInvokeAndIn*[] | :heavy_check_mark:                   | N/A                                  |
+| Field                                   | Type                                    | Required                                | Description                             |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| `in`                                    | *operations.DeploymentGetConfigAndIn*[] | :heavy_check_mark:                      | N/A                                     |

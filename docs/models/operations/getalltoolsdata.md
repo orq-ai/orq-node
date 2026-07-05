@@ -68,8 +68,8 @@ const value: operations.DataHTTPTool = {
   type: "http",
   http: {
     blueprint: {
-      url: "https://impassioned-charm.net/",
-      method: "DELETE",
+      url: "https://dirty-yak.org",
+      method: "PUT",
     },
   },
 };

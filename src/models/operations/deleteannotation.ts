@@ -5,11 +5,20 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type DeleteAnnotationMetadata = {
+  identityId?: string | undefined;
+};
+
 export type DeleteAnnotationRequestBody = {
   /**
    * Unique keys of the reviews to remove
    */
-  keys: Array<string>;
+  keys?: Array<string> | undefined;
+  /**
+   * Eval ids whose corrections should be removed
+   */
+  parentAnnotationIds?: Array<string> | undefined;
+  metadata?: DeleteAnnotationMetadata | undefined;
 };
 
 export type DeleteAnnotationRequest = {
@@ -25,8 +34,36 @@ export type DeleteAnnotationRequest = {
 };
 
 /** @internal */
+export type DeleteAnnotationMetadata$Outbound = {
+  identity_id?: string | undefined;
+};
+
+/** @internal */
+export const DeleteAnnotationMetadata$outboundSchema: z.ZodType<
+  DeleteAnnotationMetadata$Outbound,
+  z.ZodTypeDef,
+  DeleteAnnotationMetadata
+> = z.object({
+  identityId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    identityId: "identity_id",
+  });
+});
+
+export function deleteAnnotationMetadataToJSON(
+  deleteAnnotationMetadata: DeleteAnnotationMetadata,
+): string {
+  return JSON.stringify(
+    DeleteAnnotationMetadata$outboundSchema.parse(deleteAnnotationMetadata),
+  );
+}
+
+/** @internal */
 export type DeleteAnnotationRequestBody$Outbound = {
-  keys: Array<string>;
+  keys?: Array<string> | undefined;
+  parent_annotation_ids?: Array<string> | undefined;
+  metadata?: DeleteAnnotationMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -35,7 +72,13 @@ export const DeleteAnnotationRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteAnnotationRequestBody
 > = z.object({
-  keys: z.array(z.string()),
+  keys: z.array(z.string()).optional(),
+  parentAnnotationIds: z.array(z.string()).optional(),
+  metadata: z.lazy(() => DeleteAnnotationMetadata$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    parentAnnotationIds: "parent_annotation_ids",
+  });
 });
 
 export function deleteAnnotationRequestBodyToJSON(

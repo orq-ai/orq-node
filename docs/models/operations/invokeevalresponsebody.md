@@ -13,19 +13,19 @@ const value: operations.String = {
 };
 ```
 
-### `operations.ResponseBodyNumber`
+### `operations.NumberT`
 
 ```typescript
-const value: operations.ResponseBodyNumber = {
+const value: operations.NumberT = {
   type: "number",
-  value: null,
+  value: 3019.07,
 };
 ```
 
-### `operations.ResponseBodyBoolean`
+### `operations.Boolean`
 
 ```typescript
-const value: operations.ResponseBodyBoolean = {
+const value: operations.Boolean = {
   type: "boolean",
   value: "<value>",
 };
@@ -78,21 +78,21 @@ const value: operations.BERTScore = {
 };
 ```
 
-### `operations.InvokeEvalResponseBodyLLM`
+### `operations.ResponseBodyLLM`
 
 ```typescript
-const value: operations.InvokeEvalResponseBodyLLM = {
+const value: operations.ResponseBodyLLM = {
   type: "llm_evaluator",
   value: {
-    value: 2734.06,
+    value: 3319.26,
   },
 };
 ```
 
-### `operations.InvokeEvalResponseBodyHTTP`
+### `operations.ResponseBodyHTTP`
 
 ```typescript
-const value: operations.InvokeEvalResponseBodyHTTP = {
+const value: operations.ResponseBodyHTTP = {
   type: "http_eval",
 };
 ```

@@ -1,35 +1,21 @@
 # ResponseBodyLLM
 
-
-## Supported Types
-
-### `operations.CreateEvalLlm1`
+## Example Usage
 
 ```typescript
-const value: operations.CreateEvalLlm1 = {
-  id: "<id>",
-  description: "stump geez anenst gadzooks yuck hype that obnoxiously pasta",
-  type: "llm_eval",
-  prompt: "<value>",
-  key: "<key>",
-  mode: "single",
-  model: "Silverado",
-};
-```
+import { ResponseBodyLLM } from "@orq-ai/node/models/operations";
 
-### `operations.CreateEvalLlm2`
-
-```typescript
-const value: operations.CreateEvalLlm2 = {
-  id: "<id>",
-  description: "event needy since psst shampoo worth whoa",
-  type: "llm_eval",
-  prompt: "<value>",
-  key: "<key>",
-  mode: "jury",
-  jury: {
-    judges: [],
+let value: ResponseBodyLLM = {
+  type: "llm_evaluator",
+  value: {
+    value: 3319.26,
   },
 };
 ```
 
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                     | *"llm_evaluator"*                                                                                          | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `value`                                                                                                    | [operations.InvokeEvalResponseBodyEvalsValue](../../models/operations/invokeevalresponsebodyevalsvalue.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

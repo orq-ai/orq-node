@@ -127,7 +127,7 @@ export class Agents extends ClientSDK {
    */
   async invoke(
     key: string,
-    requestBody?: operations.InvokeAgentRequestBody | undefined,
+    requestBody?: operations.InvokeAgentA2AInvokeRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.InvokeAgentA2ATaskResponse> {
     return unwrapAsync(agentsInvoke(
@@ -185,7 +185,7 @@ export class Agents extends ClientSDK {
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async stream(
-    requestBody: operations.StreamAgentRequestBody,
+    requestBody: operations.StreamAgentA2AInvokeRequest,
     key: string,
     options?: RequestOptions,
   ): Promise<EventStream<operations.StreamAgentResponseBody>> {

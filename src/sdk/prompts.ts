@@ -35,7 +35,7 @@ export class Prompts extends ClientSDK {
    * Create a prompt
    */
   async create(
-    request?: operations.CreatePromptRequestBody | undefined,
+    request?: operations.CreatePromptCreatePromptRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.CreatePromptPrompt> {
     return unwrapAsync(promptsCreate(

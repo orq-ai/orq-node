@@ -14,12 +14,20 @@ export type RetrieveIdentityRequest = {
    * Include aggregate usage metrics on the returned identity.
    */
   includeMetrics?: boolean | undefined;
+  /**
+   * When true, embed the identity-scoped budget (config and limits only,
+   *
+   * @remarks
+   *  no live usage) on the returned record.
+   */
+  includeBudget?: boolean | undefined;
 };
 
 /** @internal */
 export type RetrieveIdentityRequest$Outbound = {
   id: string;
   include_metrics?: boolean | undefined;
+  include_budget?: boolean | undefined;
 };
 
 /** @internal */
@@ -30,9 +38,11 @@ export const RetrieveIdentityRequest$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   includeMetrics: z.boolean().optional(),
+  includeBudget: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     includeMetrics: "include_metrics",
+    includeBudget: "include_budget",
   });
 });
 

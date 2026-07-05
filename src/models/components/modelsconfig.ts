@@ -14,25 +14,26 @@ import {
   ModelRef$outboundSchema,
 } from "./modelref.js";
 
-export const Mode = {
+export const ModelsConfigMode = {
   Fallback: "fallback",
   Weighted: "weighted",
   RoundRobin: "round_robin",
 } as const;
-export type Mode = ClosedEnum<typeof Mode>;
+export type ModelsConfigMode = ClosedEnum<typeof ModelsConfigMode>;
 
 export type ModelsConfig = {
-  mode: Mode;
+  mode: ModelsConfigMode;
   models: Array<ModelRef> | null;
 };
 
 /** @internal */
-export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
+export const ModelsConfigMode$inboundSchema: z.ZodNativeEnum<
+  typeof ModelsConfigMode
+> = z.nativeEnum(ModelsConfigMode);
 /** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
-  Mode$inboundSchema;
+export const ModelsConfigMode$outboundSchema: z.ZodNativeEnum<
+  typeof ModelsConfigMode
+> = ModelsConfigMode$inboundSchema;
 
 /** @internal */
 export const ModelsConfig$inboundSchema: z.ZodType<
@@ -40,7 +41,7 @@ export const ModelsConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  mode: Mode$inboundSchema,
+  mode: ModelsConfigMode$inboundSchema,
   models: z.nullable(z.array(ModelRef$inboundSchema)),
 });
 /** @internal */
@@ -55,7 +56,7 @@ export const ModelsConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelsConfig
 > = z.object({
-  mode: Mode$outboundSchema,
+  mode: ModelsConfigMode$outboundSchema,
   models: z.nullable(z.array(ModelRef$outboundSchema)),
 });
 

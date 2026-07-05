@@ -23,6 +23,7 @@ const value: operations.RequestBody2 = {
     apiUrl: "https://somber-schnitzel.name/",
     apiKey: "<value>",
   },
+  path: "Default",
 };
 ```
 

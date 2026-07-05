@@ -22,6 +22,14 @@ export type ListDatasetsRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Filter datasets by display name (case-insensitive match).
+   */
+  search?: string | undefined;
+  /**
+   * Comma-separated list of user IDs; returns datasets last updated by any of them.
+   */
+  updatedBy?: string | undefined;
 };
 
 export const ListDatasetsObject = {
@@ -84,6 +92,8 @@ export type ListDatasetsRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  search?: string | undefined;
+  updated_by?: string | undefined;
 };
 
 /** @internal */
@@ -95,10 +105,13 @@ export const ListDatasetsRequest$outboundSchema: z.ZodType<
   limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  search: z.string().optional(),
+  updatedBy: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
+    updatedBy: "updated_by",
   });
 });
 
@@ -156,7 +169,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-06-28T21:48:18.406Z",
+    "2026-07-05T08:11:17.110Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

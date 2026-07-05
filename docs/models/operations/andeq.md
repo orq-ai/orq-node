@@ -14,6 +14,6 @@ let value: AndEq = {
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `eq`                               | *operations.DeploymentInvokeAndEq* | :heavy_check_mark:                 | N/A                                |
+| Field                                 | Type                                  | Required                              | Description                           |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `eq`                                  | *operations.DeploymentGetConfigAndEq* | :heavy_check_mark:                    | N/A                                   |

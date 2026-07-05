@@ -165,6 +165,11 @@ export type CreateImageTimeout = {
   callTimeout: number;
 };
 
+export type CreateImagePlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 /**
  * Retry configuration for the request
  */
@@ -356,6 +361,16 @@ export type CreateImageRequestBody = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: CreateImageTimeout | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
   orq?: CreateImageOrq | undefined;
 };
 
@@ -603,6 +618,31 @@ export function createImageTimeoutToJSON(
 ): string {
   return JSON.stringify(
     CreateImageTimeout$outboundSchema.parse(createImageTimeout),
+  );
+}
+
+/** @internal */
+export type CreateImagePlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
+
+/** @internal */
+export const CreateImagePlugins$outboundSchema: z.ZodType<
+  CreateImagePlugins$Outbound,
+  z.ZodTypeDef,
+  CreateImagePlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+]);
+
+export function createImagePluginsToJSON(
+  createImagePlugins: CreateImagePlugins,
+): string {
+  return JSON.stringify(
+    CreateImagePlugins$outboundSchema.parse(createImagePlugins),
   );
 }
 
@@ -884,6 +924,13 @@ export type CreateImageRequestBody$Outbound = {
   cache?: CreateImageCache$Outbound | undefined;
   load_balancer?: CreateImageLoadBalancer1$Outbound | undefined;
   timeout?: CreateImageTimeout$Outbound | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+    >
+    | undefined;
   orq?: CreateImageOrq$Outbound | undefined;
 };
 
@@ -914,6 +961,13 @@ export const CreateImageRequestBody$outboundSchema: z.ZodType<
   loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateImageTimeout$outboundSchema).optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
+    ]),
+  ).optional(),
   orq: z.lazy(() => CreateImageOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

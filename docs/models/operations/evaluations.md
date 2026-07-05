@@ -9,7 +9,6 @@
 const value: operations.Evaluations1 = {
   id: "<id>",
   evaluationType: "human_review",
-  humanReviewId: "<id>",
   reviewedById: "<id>",
   type: "string",
   value: "<value>",
@@ -22,7 +21,6 @@ const value: operations.Evaluations1 = {
 const value: operations.Evaluations2 = {
   id: "<id>",
   evaluationType: "human_review",
-  humanReviewId: "<id>",
   reviewedById: "<id>",
   type: "number",
   value: 9374.68,
@@ -35,7 +33,6 @@ const value: operations.Evaluations2 = {
 const value: operations.Evaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
-  humanReviewId: "<id>",
   reviewedById: "<id>",
   type: "string_array",
   values: [

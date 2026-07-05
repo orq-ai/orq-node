@@ -6,27 +6,49 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
- * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For text/correction, provide a string.
+ * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
  */
-export type Value = string | number | Array<string>;
+export type AnnotationsValue = string | number | boolean | Array<string>;
 
-export type Annotations = {
+export type Annotations2 = {
+  /**
+   * The eval id of the evaluator annotation being corrected.
+   */
+  parentAnnotationId: string;
+  /**
+   * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
+   */
+  value: string | number | boolean | Array<string>;
+  /**
+   * Optional explanation for the correction.
+   */
+  explanation?: string | undefined;
+};
+
+/**
+ * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
+ */
+export type Value = string | number | boolean | Array<string>;
+
+export type Annotations1 = {
   /**
    * Unique key of the review.
    */
   key: string;
   /**
-   * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For text/correction, provide a string.
+   * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
    */
-  value: string | number | Array<string>;
+  value: string | number | boolean | Array<string>;
 };
+
+export type Annotations = Annotations1 | Annotations2;
 
 export type CreateAnnotationMetadata = {
   identityId?: string | undefined;
 };
 
 export type CreateAnnotationRequestBody = {
-  annotations: Array<Annotations>;
+  annotations: Array<Annotations1 | Annotations2>;
   metadata?: CreateAnnotationMetadata | undefined;
 };
 
@@ -43,34 +65,101 @@ export type CreateAnnotationRequest = {
 };
 
 /** @internal */
-export type Value$Outbound = string | number | Array<string>;
+export type AnnotationsValue$Outbound =
+  | string
+  | number
+  | boolean
+  | Array<string>;
+
+/** @internal */
+export const AnnotationsValue$outboundSchema: z.ZodType<
+  AnnotationsValue$Outbound,
+  z.ZodTypeDef,
+  AnnotationsValue
+> = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
+
+export function annotationsValueToJSON(
+  annotationsValue: AnnotationsValue,
+): string {
+  return JSON.stringify(
+    AnnotationsValue$outboundSchema.parse(annotationsValue),
+  );
+}
+
+/** @internal */
+export type Annotations2$Outbound = {
+  parent_annotation_id: string;
+  value: string | number | boolean | Array<string>;
+  explanation?: string | undefined;
+};
+
+/** @internal */
+export const Annotations2$outboundSchema: z.ZodType<
+  Annotations2$Outbound,
+  z.ZodTypeDef,
+  Annotations2
+> = z.object({
+  parentAnnotationId: z.string(),
+  value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]),
+  explanation: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    parentAnnotationId: "parent_annotation_id",
+  });
+});
+
+export function annotations2ToJSON(annotations2: Annotations2): string {
+  return JSON.stringify(Annotations2$outboundSchema.parse(annotations2));
+}
+
+/** @internal */
+export type Value$Outbound = string | number | boolean | Array<string>;
 
 /** @internal */
 export const Value$outboundSchema: z.ZodType<
   Value$Outbound,
   z.ZodTypeDef,
   Value
-> = z.union([z.string(), z.number(), z.array(z.string())]);
+> = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
 
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
 }
 
 /** @internal */
-export type Annotations$Outbound = {
+export type Annotations1$Outbound = {
   key: string;
-  value: string | number | Array<string>;
+  value: string | number | boolean | Array<string>;
 };
+
+/** @internal */
+export const Annotations1$outboundSchema: z.ZodType<
+  Annotations1$Outbound,
+  z.ZodTypeDef,
+  Annotations1
+> = z.object({
+  key: z.string(),
+  value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]),
+});
+
+export function annotations1ToJSON(annotations1: Annotations1): string {
+  return JSON.stringify(Annotations1$outboundSchema.parse(annotations1));
+}
+
+/** @internal */
+export type Annotations$Outbound =
+  | Annotations1$Outbound
+  | Annotations2$Outbound;
 
 /** @internal */
 export const Annotations$outboundSchema: z.ZodType<
   Annotations$Outbound,
   z.ZodTypeDef,
   Annotations
-> = z.object({
-  key: z.string(),
-  value: z.union([z.string(), z.number(), z.array(z.string())]),
-});
+> = z.union([
+  z.lazy(() => Annotations1$outboundSchema),
+  z.lazy(() => Annotations2$outboundSchema),
+]);
 
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
@@ -104,7 +193,7 @@ export function createAnnotationMetadataToJSON(
 
 /** @internal */
 export type CreateAnnotationRequestBody$Outbound = {
-  annotations: Array<Annotations$Outbound>;
+  annotations: Array<Annotations1$Outbound | Annotations2$Outbound>;
   metadata?: CreateAnnotationMetadata$Outbound | undefined;
 };
 
@@ -114,7 +203,12 @@ export const CreateAnnotationRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateAnnotationRequestBody
 > = z.object({
-  annotations: z.array(z.lazy(() => Annotations$outboundSchema)),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => Annotations1$outboundSchema),
+      z.lazy(() => Annotations2$outboundSchema),
+    ]),
+  ),
   metadata: z.lazy(() => CreateAnnotationMetadata$outboundSchema).optional(),
 });
 

@@ -5,97 +5,92 @@ Successfully updated an eval
 
 ## Supported Types
 
-### `operations.UpdateEvalResponseBodyLLM`
+### `components.EvaluatorResponseLlm`
 
 ```typescript
-const value: operations.UpdateEvalResponseBodyLLM = {
+const value: components.EvaluatorResponseLlm = {
   id: "<id>",
-  description: "once supposing abnegate extremely deploy cosset ravel",
-  created: "2026-06-28T21:48:20.169Z",
-  updated: "2026-06-28T21:48:20.169Z",
+  description: "wetly whereas failing",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  mode: "single",
-  model: "Silverado",
+  mode: "jury",
 };
 ```
 
-### `operations.ResponseBodyJSON`
+### `components.EvaluatorResponseJsonSchema`
 
 ```typescript
-const value: operations.ResponseBodyJSON = {
+const value: components.EvaluatorResponseJsonSchema = {
   id: "<id>",
-  description: "qua but till diagram",
+  description: "partially muted and per yahoo until upliftingly like",
   type: "json_schema",
   schema: "<value>",
   key: "<key>",
 };
 ```
 
-### `operations.ResponseBodyHTTP`
+### `components.EvaluatorResponseHttp`
 
 ```typescript
-const value: operations.ResponseBodyHTTP = {
+const value: components.EvaluatorResponseHttp = {
   id: "<id>",
-  description: "how which eek overload respectful clear",
+  description:
+    "and slime corporation um because resort ligate good-natured lonely violin",
   type: "http_eval",
-  url: "https://terrible-backbone.info",
+  url: "https://pertinent-membership.name",
   method: "POST",
   headers: {},
-  payload: {
-    "key": "<value>",
-    "key1": "<value>",
-  },
+  payload: {},
   key: "<key>",
 };
 ```
 
-### `operations.UpdateEvalResponseBodyPython`
+### `components.EvaluatorResponsePython`
 
 ```typescript
-const value: operations.UpdateEvalResponseBodyPython = {
+const value: components.EvaluatorResponsePython = {
   id: "<id>",
-  description: "meh legitimize till haze or wherever buttery quirkily",
+  description: "glaring which athwart deficient woot alongside",
   code: "<value>",
   type: "python_eval",
   key: "<key>",
 };
 ```
 
-### `operations.ResponseBodyFunction`
+### `components.EvaluatorResponseFunction`
 
 ```typescript
-const value: operations.ResponseBodyFunction = {
+const value: components.EvaluatorResponseFunction = {
   id: "<id>",
-  description: "pish mortally likely legitimize awareness easily zowie",
+  description: "amount faithfully whoa eek cheerful pfft",
   type: "function_eval",
   functionParams: {
-    type: "rouge_n",
+    type: "sentences_count",
   },
   key: "<key>",
 };
 ```
 
-### `operations.ResponseBodyRagas`
+### `components.EvaluatorResponseRagas`
 
 ```typescript
-const value: operations.ResponseBodyRagas = {
+const value: components.EvaluatorResponseRagas = {
   id: "<id>",
-  description: "now pliers abandoned um",
+  description: "rewarding ack as geez rot outrun an hmph",
   type: "ragas",
-  ragasMetric: "context_precision",
+  ragasMetric: "faithfulness",
   key: "<key>",
-  model: "A8",
+  model: "XTS",
 };
 ```
 
-### `operations.ResponseBodyTypescript`
+### `components.EvaluatorResponseTypescript`
 
 ```typescript
-const value: operations.ResponseBodyTypescript = {
+const value: components.EvaluatorResponseTypescript = {
   id: "<id>",
-  description: "of ick inasmuch whoa what meh funny failing",
+  description: "since loftily for along past among qua",
   code: "<value>",
   type: "typescript_eval",
   key: "<key>",

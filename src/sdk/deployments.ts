@@ -8,6 +8,7 @@ import { deploymentsList } from "../funcs/deploymentsList.js";
 import { deploymentsStream } from "../funcs/deploymentsStream.js";
 import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -19,7 +20,7 @@ export class Deployments extends ClientSDK {
    * Invoke a deployment with a given payload
    */
   async invoke(
-    request: operations.DeploymentInvokeRequestBody,
+    request: components.InvokeDeploymentRequest,
     options?: RequestOptions,
   ): Promise<operations.DeploymentInvokeResponseBody | undefined> {
     return unwrapAsync(deploymentsInvoke(

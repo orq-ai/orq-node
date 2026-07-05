@@ -36,6 +36,16 @@ export type RequestBody2 = {
   key: string;
   description?: string | undefined;
   externalConfig: ExternalConfig;
+  /**
+   * Entity storage path.
+   *
+   * @remarks
+   *
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   *
+   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
+   */
+  path: string;
 };
 
 export const CreateKnowledgeRequestBodyType = {
@@ -424,6 +434,7 @@ export type RequestBody2$Outbound = {
   key: string;
   description?: string | undefined;
   external_config: ExternalConfig$Outbound;
+  path: string;
 };
 
 /** @internal */
@@ -438,6 +449,7 @@ export const RequestBody2$outboundSchema: z.ZodType<
   key: z.string(),
   description: z.string().optional(),
   externalConfig: z.lazy(() => ExternalConfig$outboundSchema),
+  path: z.string(),
 }).transform((v) => {
   return remap$(v, {
     externalConfig: "external_config",

@@ -60,6 +60,14 @@ export type ApiKeyListRequest = {
    *  of the listed presets. Empty means no permission-mode filter.
    */
   permissionMode?: Array<components.PermissionMode> | undefined;
+  /**
+   * When true, embed each key's api-key-scoped budget (config and limits
+   *
+   * @remarks
+   *  only, no live usage) on the returned records. Adds one budget lookup
+   *  for the page; omit to skip it.
+   */
+  includeBudget?: boolean | undefined;
 };
 
 /** @internal */
@@ -72,6 +80,7 @@ export type ApiKeyListRequest$Outbound = {
   search?: string | undefined;
   owner_type?: Array<string> | undefined;
   permission_mode?: Array<string> | undefined;
+  include_budget?: boolean | undefined;
 };
 
 /** @internal */
@@ -88,6 +97,7 @@ export const ApiKeyListRequest$outboundSchema: z.ZodType<
   search: z.string().optional(),
   ownerType: z.array(components.OwnerType$outboundSchema).optional(),
   permissionMode: z.array(components.PermissionMode$outboundSchema).optional(),
+  includeBudget: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -95,6 +105,7 @@ export const ApiKeyListRequest$outboundSchema: z.ZodType<
     projectId: "project_id",
     ownerType: "owner_type",
     permissionMode: "permission_mode",
+    includeBudget: "include_budget",
   });
 });
 

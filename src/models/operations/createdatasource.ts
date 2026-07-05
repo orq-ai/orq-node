@@ -93,6 +93,9 @@ export type ChunkingOptions = {
   chunkingCleanupOptions?: ChunkingCleanupOptions | undefined;
 };
 
+/**
+ * The request body for creating a new datasource. If `file_id` is provided, the file is immediately queued for chunking.
+ */
 export type CreateDatasourceRequestBody = {
   /**
    * The display name for the datasource visible in the UI. If omitted, the display name is derived from the uploaded file. When both `display_name` and `file_id` are provided, the provided `display_name` is prioritized.
@@ -409,7 +412,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KW839F3Y52WPY3CA8VKAQJ5W"),
+  _id: z.string().default("01KWRNAJZB2PYZVRTZNCQEF46N"),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   status: CreateDatasourceStatus$inboundSchema,

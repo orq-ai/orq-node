@@ -288,7 +288,7 @@ export type GetAllToolsDataToolsStatus = ClosedEnum<
 /**
  * The HTTP method to use.
  */
-export const GetAllToolsDataMethod = {
+export const DataMethod = {
   Get: "GET",
   Post: "POST",
   Put: "PUT",
@@ -297,7 +297,7 @@ export const GetAllToolsDataMethod = {
 /**
  * The HTTP method to use.
  */
-export type GetAllToolsDataMethod = ClosedEnum<typeof GetAllToolsDataMethod>;
+export type DataMethod = ClosedEnum<typeof DataMethod>;
 
 export type GetAllToolsHeaders2 = {
   value: string;
@@ -317,7 +317,7 @@ export type DataBlueprint = {
   /**
    * The HTTP method to use.
    */
-  method: GetAllToolsDataMethod;
+  method: DataMethod;
   /**
    * The headers to send with the request. Can be a string value or an object with value and encrypted properties.
    */
@@ -331,7 +331,7 @@ export type DataBlueprint = {
 /**
  * The type of the argument.
  */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type = {
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
   String: "string",
   Number: "number",
   Boolean: "boolean",
@@ -339,9 +339,9 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type = {
 /**
  * The type of the argument.
  */
-export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type =
+export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
   ClosedEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
   >;
 
 /**
@@ -353,7 +353,7 @@ export type DataArguments = {
   /**
    * The type of the argument.
    */
-  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type;
+  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType;
   /**
    * A description of the argument.
    */
@@ -368,7 +368,7 @@ export type DataArguments = {
   defaultValue?: string | number | boolean | undefined;
 };
 
-export type GetAllToolsDataHttp = {
+export type DataHttp = {
   /**
    * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
    */
@@ -423,7 +423,7 @@ export type DataHTTPTool = {
    */
   status: GetAllToolsDataToolsStatus;
   type: "http";
-  http: GetAllToolsDataHttp;
+  http: DataHttp;
 };
 
 /**
@@ -542,16 +542,15 @@ export type DataStatus = ClosedEnum<typeof DataStatus>;
 /**
  * The type must be "object"
  */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
+export const GetAllToolsDataToolsResponse200ApplicationJSONType = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
-  >;
+export type GetAllToolsDataToolsResponse200ApplicationJSONType = ClosedEnum<
+  typeof GetAllToolsDataToolsResponse200ApplicationJSONType
+>;
 
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -560,7 +559,7 @@ export type DataParameters = {
   /**
    * The type must be "object"
    */
-  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType;
+  type: GetAllToolsDataToolsResponse200ApplicationJSONType;
   /**
    * The properties of the function parameters
    */
@@ -572,7 +571,7 @@ export type DataParameters = {
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type GetAllToolsDataFunction = {
+export type DataFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
    */
@@ -635,7 +634,7 @@ export type DataFunctionTool = {
    */
   status: DataStatus;
   type: "function";
-  function: GetAllToolsDataFunction;
+  function: DataFunction;
 };
 
 export type GetAllToolsData =
@@ -767,7 +766,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KW839EYVEPM3MZPRNKBEX5X0"),
+  _id: z.string().default("tool_01KWRNAJSASS8AGSDXHJEXBWA4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -864,7 +863,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KW839EYTZZZVCJXWN6FPEHK1"),
+  id: z.string().default("01KWRNAJS93TE5SWZ426A2MCYF"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -917,7 +916,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KW839EYRFZ80DQHJ4RN70AMR"),
+  _id: z.string().default("tool_01KWRNAJS8RDVWREB49RZPYMAJ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -958,9 +957,8 @@ export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetAllToolsDataToolsStatus);
 
 /** @internal */
-export const GetAllToolsDataMethod$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataMethod
-> = z.nativeEnum(GetAllToolsDataMethod);
+export const DataMethod$inboundSchema: z.ZodNativeEnum<typeof DataMethod> = z
+  .nativeEnum(DataMethod);
 
 /** @internal */
 export const GetAllToolsHeaders2$inboundSchema: z.ZodType<
@@ -1006,7 +1004,7 @@ export const DataBlueprint$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   url: z.string(),
-  method: GetAllToolsDataMethod$inboundSchema,
+  method: DataMethod$inboundSchema,
   headers: z.record(
     z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]),
   ).optional(),
@@ -1024,11 +1022,11 @@ export function dataBlueprintFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inboundSchema:
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
   > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type,
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
   );
 
 /** @internal */
@@ -1055,7 +1053,7 @@ export const DataArguments$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody3Type$inboundSchema,
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
   description: z.string(),
   send_to_model: z.boolean().default(true),
   default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -1077,8 +1075,8 @@ export function dataArgumentsFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataHttp$inboundSchema: z.ZodType<
-  GetAllToolsDataHttp,
+export const DataHttp$inboundSchema: z.ZodType<
+  DataHttp,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1086,13 +1084,13 @@ export const GetAllToolsDataHttp$inboundSchema: z.ZodType<
   arguments: z.record(z.lazy(() => DataArguments$inboundSchema)).optional(),
 });
 
-export function getAllToolsDataHttpFromJSON(
+export function dataHttpFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsDataHttp, SDKValidationError> {
+): SafeParseResult<DataHttp, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsDataHttp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsDataHttp' from JSON`,
+    (x) => DataHttp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataHttp' from JSON`,
   );
 }
 
@@ -1102,7 +1100,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KW839EYPSJY5DF907JA4PS4R"),
+  _id: z.string().default("tool_01KWRNAJS543ZYR69FDP62Q1RF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1115,7 +1113,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
   type: z.literal("http"),
-  http: z.lazy(() => GetAllToolsDataHttp$inboundSchema),
+  http: z.lazy(() => DataHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -1195,7 +1193,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KW839EYMESVF2Y9EFW9F1SJP"),
+  _id: z.string().default("tool_01KWRNAJS4ES36X79RBNRXWP2A"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1236,12 +1234,9 @@ export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
   .nativeEnum(DataStatus);
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
-  );
+export const GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> = z
+    .nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONType);
 
 /** @internal */
 export const DataParameters$inboundSchema: z.ZodType<
@@ -1250,8 +1245,7 @@ export const DataParameters$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    type:
-      GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    type: GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
   }).catchall(z.any()),
@@ -1270,8 +1264,8 @@ export function dataParametersFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
-  GetAllToolsDataFunction,
+export const DataFunction$inboundSchema: z.ZodType<
+  DataFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1281,13 +1275,13 @@ export const GetAllToolsDataFunction$inboundSchema: z.ZodType<
   parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
 });
 
-export function getAllToolsDataFunctionFromJSON(
+export function dataFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsDataFunction, SDKValidationError> {
+): SafeParseResult<DataFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsDataFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsDataFunction' from JSON`,
+    (x) => DataFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataFunction' from JSON`,
   );
 }
 
@@ -1297,7 +1291,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KW839EYJSZR8EESFQN0W5CXF"),
+  _id: z.string().default("tool_01KWRNAJS2J1S6QYSYCWPWW0D6"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1310,7 +1304,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: DataStatus$inboundSchema.default("live"),
   type: z.literal("function"),
-  function: z.lazy(() => GetAllToolsDataFunction$inboundSchema),
+  function: z.lazy(() => DataFunction$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

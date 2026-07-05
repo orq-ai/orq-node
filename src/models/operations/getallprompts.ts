@@ -136,7 +136,7 @@ export type GetAllPromptsResponseFormatPromptsResponse200Type = ClosedEnum<
 
 export type GetAllPromptsResponseFormatPromptsResponseJsonSchema = {
   name: string;
-  description?: string | undefined;
+  description?: string | null | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -165,6 +165,68 @@ export type GetAllPromptsPromptsResponseFormat =
   | GetAllPromptsResponseFormat4
   | GetAllPromptsResponseFormat5
   | GetAllPromptsResponseFormat6;
+
+/**
+ * Create a cache control breakpoint. Accepts only the value "ephemeral".
+ */
+export const GetAllPromptsPromptsResponse200Type = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint. Accepts only the value "ephemeral".
+ */
+export type GetAllPromptsPromptsResponse200Type = ClosedEnum<
+  typeof GetAllPromptsPromptsResponse200Type
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetAllPromptsPromptsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetAllPromptsPromptsTtl = ClosedEnum<
+  typeof GetAllPromptsPromptsTtl
+>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type GetAllPromptsPromptsCacheControl = {
+  /**
+   * Create a cache control breakpoint. Accepts only the value "ephemeral".
+   */
+  type: GetAllPromptsPromptsResponse200Type;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: GetAllPromptsPromptsTtl;
+};
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -313,6 +375,10 @@ export type GetAllPromptsModelParameters = {
     | null
     | undefined;
   /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: GetAllPromptsPromptsCacheControl | null | undefined;
+  /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
   photoRealVersion?: GetAllPromptsPhotoRealVersion | undefined;
@@ -355,13 +421,11 @@ export const GetAllPromptsProvider = {
   Nvidia: "nvidia",
   Jina: "jina",
   Elevenlabs: "elevenlabs",
-  Litellm: "litellm",
   Cerebras: "cerebras",
   Openailike: "openailike",
   Bytedance: "bytedance",
   Mistral: "mistral",
   Deepseek: "deepseek",
-  Contextualai: "contextualai",
   Moonshotai: "moonshotai",
   Zai: "zai",
   Minimax: "minimax",
@@ -466,11 +530,11 @@ export type GetAllPromptsContent =
   | string
   | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>;
 
-export const GetAllPromptsPromptsResponseType = {
+export const GetAllPromptsPromptsResponse200ApplicationJSONType = {
   Function: "function",
 } as const;
-export type GetAllPromptsPromptsResponseType = ClosedEnum<
-  typeof GetAllPromptsPromptsResponseType
+export type GetAllPromptsPromptsResponse200ApplicationJSONType = ClosedEnum<
+  typeof GetAllPromptsPromptsResponse200ApplicationJSONType
 >;
 
 export type GetAllPromptsFunction = {
@@ -484,7 +548,7 @@ export type GetAllPromptsFunction = {
 export type GetAllPromptsToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: GetAllPromptsPromptsResponseType;
+  type: GetAllPromptsPromptsResponse200ApplicationJSONType;
   function: GetAllPromptsFunction;
 };
 
@@ -778,6 +842,11 @@ export type GetAllPromptsGuardrails = {
   executeOn: GetAllPromptsExecuteOn;
 };
 
+export type GetAllPromptsPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 export type GetAllPromptsFallbacks = {
   /**
    * Fallback model identifier
@@ -853,6 +922,66 @@ export type GetAllPromptsTimeout = {
    * Timeout value in milliseconds
    */
   callTimeout: number;
+};
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const GetAllPromptsPromptsResponseType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type GetAllPromptsPromptsResponseType = ClosedEnum<
+  typeof GetAllPromptsPromptsResponseType
+>;
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export const GetAllPromptsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+ */
+export type GetAllPromptsTtl = ClosedEnum<typeof GetAllPromptsTtl>;
+
+/**
+ * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+ */
+export type GetAllPromptsCacheControl = {
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: GetAllPromptsPromptsResponseType;
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by `Anthropic` Claude models.
+   */
+  ttl: GetAllPromptsTtl;
 };
 
 export type GetAllPromptsContentPromptsResponse2002 =
@@ -1299,6 +1428,16 @@ export type GetAllPromptsPromptField = {
    */
   guardrails?: Array<GetAllPromptsGuardrails> | undefined;
   /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<GetAllPromptsFallbacks> | undefined;
@@ -1318,6 +1457,14 @@ export type GetAllPromptsPromptField = {
    * Timeout configuration to apply to the request. If the request exceeds the timeout, it will be retried or fallback to the next model if configured.
    */
   timeout?: GetAllPromptsTimeout | undefined;
+  /**
+   * Provider-level prompt caching configuration applied to the request. Creates a cache control breakpoint covering the request content. Only supported by `Anthropic` Claude models.
+   */
+  cacheControl?: GetAllPromptsCacheControl | undefined;
+  /**
+   * Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching.
+   */
+  promptCacheKey?: string | undefined;
   /**
    * Array of messages that make up the conversation. Each message has a role (system, user, assistant, or tool) and content.
    */
@@ -1565,7 +1712,7 @@ export const GetAllPromptsResponseFormatPromptsResponseJsonSchema$inboundSchema:
     unknown
   > = z.object({
     name: z.string(),
-    description: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
     strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
@@ -1640,6 +1787,36 @@ export function getAllPromptsPromptsResponseFormatFromJSON(
 }
 
 /** @internal */
+export const GetAllPromptsPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsResponse200Type
+> = z.nativeEnum(GetAllPromptsPromptsResponse200Type);
+
+/** @internal */
+export const GetAllPromptsPromptsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsTtl
+> = z.nativeEnum(GetAllPromptsPromptsTtl);
+
+/** @internal */
+export const GetAllPromptsPromptsCacheControl$inboundSchema: z.ZodType<
+  GetAllPromptsPromptsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptsPromptsResponse200Type$inboundSchema,
+  ttl: GetAllPromptsPromptsTtl$inboundSchema.default("5m"),
+});
+
+export function getAllPromptsPromptsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsPromptsCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsPromptsCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPromptsCacheControl' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof GetAllPromptsPhotoRealVersion
 > = z.nativeEnum(GetAllPromptsPhotoRealVersion);
@@ -1691,6 +1868,9 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
       GetAllPromptsResponseFormat5$inboundSchema,
       GetAllPromptsResponseFormat6$inboundSchema,
     ]),
+  ).optional(),
+  cacheControl: z.nullable(
+    z.lazy(() => GetAllPromptsPromptsCacheControl$inboundSchema),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: GetAllPromptsEncodingFormat$inboundSchema.optional(),
@@ -1881,9 +2061,9 @@ export function getAllPromptsContentFromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsPromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsPromptsResponseType
-> = z.nativeEnum(GetAllPromptsPromptsResponseType);
+export const GetAllPromptsPromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsPromptsResponse200ApplicationJSONType> = z
+    .nativeEnum(GetAllPromptsPromptsResponse200ApplicationJSONType);
 
 /** @internal */
 export const GetAllPromptsFunction$inboundSchema: z.ZodType<
@@ -1913,7 +2093,7 @@ export const GetAllPromptsToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: GetAllPromptsPromptsResponseType$inboundSchema,
+  type: GetAllPromptsPromptsResponse200ApplicationJSONType$inboundSchema,
   function: z.lazy(() => GetAllPromptsFunction$inboundSchema),
 });
 
@@ -2337,6 +2517,27 @@ export function getAllPromptsGuardrailsFromJSON(
 }
 
 /** @internal */
+export const GetAllPromptsPlugins$inboundSchema: z.ZodType<
+  GetAllPromptsPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
+]);
+
+export function getAllPromptsPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsFallbacks$inboundSchema: z.ZodType<
   GetAllPromptsFallbacks,
   z.ZodTypeDef,
@@ -2486,6 +2687,36 @@ export function getAllPromptsTimeoutFromJSON(
     jsonString,
     (x) => GetAllPromptsTimeout$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPromptsTimeout' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsPromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsResponseType
+> = z.nativeEnum(GetAllPromptsPromptsResponseType);
+
+/** @internal */
+export const GetAllPromptsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsTtl
+> = z.nativeEnum(GetAllPromptsTtl);
+
+/** @internal */
+export const GetAllPromptsCacheControl$inboundSchema: z.ZodType<
+  GetAllPromptsCacheControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptsPromptsResponseType$inboundSchema,
+  ttl: GetAllPromptsTtl$inboundSchema.default("5m"),
+});
+
+export function getAllPromptsCacheControlFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsCacheControl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsCacheControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsCacheControl' from JSON`,
   );
 }
 
@@ -3031,6 +3262,13 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     .optional(),
   guardrails: z.array(z.lazy(() => GetAllPromptsGuardrails$inboundSchema))
     .optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
+    ]),
+  ).optional(),
   fallbacks: z.array(z.lazy(() => GetAllPromptsFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => GetAllPromptsRetry$inboundSchema).optional(),
@@ -3038,6 +3276,9 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
   load_balancer: z.lazy(() => GetAllPromptsLoadBalancer1$inboundSchema)
     .optional(),
   timeout: z.lazy(() => GetAllPromptsTimeout$inboundSchema).optional(),
+  cache_control: z.lazy(() => GetAllPromptsCacheControl$inboundSchema)
+    .optional(),
+  prompt_cache_key: z.string().optional(),
   messages: z.array(
     z.union([
       z.lazy(() => GetAllPromptsMessagesSystemMessage$inboundSchema),
@@ -3063,6 +3304,8 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
     "load_balancer": "loadBalancer",
+    "cache_control": "cacheControl",
+    "prompt_cache_key": "promptCacheKey",
   });
 });
 

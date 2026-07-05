@@ -12,9 +12,130 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const CreateRouterResponseTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type CreateRouterResponseTtl = ClosedEnum<
+  typeof CreateRouterResponseTtl
+>;
+
+/**
+ * Create a cache control breakpoint. Accepts only the value "ephemeral".
+ */
+export const CreateRouterResponseType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint. Accepts only the value "ephemeral".
+ */
+export type CreateRouterResponseType = ClosedEnum<
+  typeof CreateRouterResponseType
+>;
+
+/**
+ * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+ */
+export type CreateRouterResponseCacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: CreateRouterResponseTtl | undefined;
+  /**
+   * Create a cache control breakpoint. Accepts only the value "ephemeral".
+   */
+  type: CreateRouterResponseType;
+};
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const CreateRouterResponse2ResponsesRequestTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type CreateRouterResponse2ResponsesRequestTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesRequestTtl
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreateRouterResponse2ResponsesRequestRequestBodyInputType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreateRouterResponse2ResponsesRequestRequestBodyInputType =
+  ClosedEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyInputType>;
+
+export type CreateRouterResponse2ResponsesRequestCacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: CreateRouterResponse2ResponsesRequestTtl | undefined;
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreateRouterResponse2ResponsesRequestRequestBodyInputType;
+};
+
+/**
  * A file content part. Provide file_id, file_data (base64), or file_url.
  */
 export type TwoFile = {
+  cacheControl?: CreateRouterResponse2ResponsesRequestCacheControl | undefined;
   /**
    * Base64-encoded file content.
    */
@@ -39,6 +160,65 @@ export type TwoFile = {
 };
 
 /**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const CreateRouterResponse2ResponsesTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type CreateRouterResponse2ResponsesTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesTtl
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreateRouterResponse2ResponsesRequestType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreateRouterResponse2ResponsesRequestType = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesRequestType
+>;
+
+export type CreateRouterResponse2ResponsesCacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: CreateRouterResponse2ResponsesTtl | undefined;
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreateRouterResponse2ResponsesRequestType;
+};
+
+/**
  * The detail level for image understanding.
  */
 export const Detail = {
@@ -55,6 +235,7 @@ export type Detail = ClosedEnum<typeof Detail>;
  * An image content part.
  */
 export type Image = {
+  cacheControl?: CreateRouterResponse2ResponsesCacheControl | undefined;
   /**
    * The detail level for image understanding.
    */
@@ -71,9 +252,69 @@ export type Image = {
 };
 
 /**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const CreateRouterResponse2Ttl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type CreateRouterResponse2Ttl = ClosedEnum<
+  typeof CreateRouterResponse2Ttl
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreateRouterResponse2Type = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreateRouterResponse2Type = ClosedEnum<
+  typeof CreateRouterResponse2Type
+>;
+
+export type CreateRouterResponse2CacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: CreateRouterResponse2Ttl | undefined;
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreateRouterResponse2Type;
+};
+
+/**
  * A text content part.
  */
 export type TwoText = {
+  cacheControl?: CreateRouterResponse2CacheControl | undefined;
   /**
    * The text content.
    */
@@ -193,11 +434,17 @@ export type PlainText = {
  */
 export type CreateRouterResponseFormat = PlainText | FormatJSONSchema;
 
+/**
+ * Controls the verbosity of the model output.
+ */
 export const Verbosity = {
   Low: "low",
   Medium: "medium",
   High: "high",
 } as const;
+/**
+ * Controls the verbosity of the model output.
+ */
 export type Verbosity = ClosedEnum<typeof Verbosity>;
 
 /**
@@ -208,6 +455,9 @@ export type CreateRouterResponseText = {
    * The output format: plain text or structured JSON schema.
    */
   format?: PlainText | FormatJSONSchema | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
   verbosity?: Verbosity | undefined;
 };
 
@@ -291,7 +541,7 @@ export type ToolsMCPTool = {
 /**
  * The orq.ai tool type.
  */
-export const CreateRouterResponseToolsType = {
+export const CreateRouterResponseToolsResponsesType = {
   OrqCurrentDate: "orq:current_date",
   OrqGoogleSearch: "orq:google_search",
   OrqWebScraper: "orq:web_scraper",
@@ -302,8 +552,8 @@ export const CreateRouterResponseToolsType = {
 /**
  * The orq.ai tool type.
  */
-export type CreateRouterResponseToolsType = ClosedEnum<
-  typeof CreateRouterResponseToolsType
+export type CreateRouterResponseToolsResponsesType = ClosedEnum<
+  typeof CreateRouterResponseToolsResponsesType
 >;
 
 /**
@@ -317,13 +567,69 @@ export type OrqAiTool = {
   /**
    * The orq.ai tool type.
    */
-  type: CreateRouterResponseToolsType;
+  type: CreateRouterResponseToolsResponsesType;
+};
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const ToolsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type ToolsTtl = ClosedEnum<typeof ToolsTtl>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const ToolsType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type ToolsType = ClosedEnum<typeof ToolsType>;
+
+export type ToolsCacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: ToolsTtl | undefined;
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: ToolsType;
 };
 
 /**
  * A function tool the model can call.
  */
 export type ToolsFunction = {
+  cacheControl?: ToolsCacheControl | undefined;
   /**
    * A description of what the function does.
    */
@@ -357,6 +663,10 @@ export type CreateRouterResponseTools =
   | ToolsMCPTool;
 
 export type CreateRouterResponseRequestBody = {
+  /**
+   * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
+   */
+  cacheControl?: CreateRouterResponseCacheControl | undefined;
   conversation?: components.ConversationParam | undefined;
   /**
    * Fallback models to try if the primary model fails. Each entry specifies a model in provider/model format.
@@ -401,6 +711,10 @@ export type CreateRouterResponseRequestBody = {
    * Whether to allow parallel tool calls.
    */
   parallelToolCalls?: boolean | undefined;
+  /**
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   */
+  plugins?: Array<components.PublicPIIRedactionPlugin> | null | undefined;
   /**
    * Penalize new tokens based on their presence in the text so far. Between -2.0 and 2.0.
    */
@@ -579,7 +893,86 @@ export type CreateRouterResponseResponse =
   | EventStream<CreateRouterResponseResponsesResponseBody>;
 
 /** @internal */
+export const CreateRouterResponseTtl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseTtl
+> = z.nativeEnum(CreateRouterResponseTtl);
+
+/** @internal */
+export const CreateRouterResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseType
+> = z.nativeEnum(CreateRouterResponseType);
+
+/** @internal */
+export type CreateRouterResponseCacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const CreateRouterResponseCacheControl$outboundSchema: z.ZodType<
+  CreateRouterResponseCacheControl$Outbound,
+  z.ZodTypeDef,
+  CreateRouterResponseCacheControl
+> = z.object({
+  ttl: CreateRouterResponseTtl$outboundSchema.default("5m"),
+  type: CreateRouterResponseType$outboundSchema,
+});
+
+export function createRouterResponseCacheControlToJSON(
+  createRouterResponseCacheControl: CreateRouterResponseCacheControl,
+): string {
+  return JSON.stringify(
+    CreateRouterResponseCacheControl$outboundSchema.parse(
+      createRouterResponseCacheControl,
+    ),
+  );
+}
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> = z
+    .nativeEnum(CreateRouterResponse2ResponsesRequestTtl);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponse2ResponsesRequestRequestBodyInputType
+  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputType);
+
+/** @internal */
+export type CreateRouterResponse2ResponsesRequestCacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema:
+  z.ZodType<
+    CreateRouterResponse2ResponsesRequestCacheControl$Outbound,
+    z.ZodTypeDef,
+    CreateRouterResponse2ResponsesRequestCacheControl
+  > = z.object({
+    ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
+    type:
+      CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema,
+  });
+
+export function createRouterResponse2ResponsesRequestCacheControlToJSON(
+  createRouterResponse2ResponsesRequestCacheControl:
+    CreateRouterResponse2ResponsesRequestCacheControl,
+): string {
+  return JSON.stringify(
+    CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema.parse(
+      createRouterResponse2ResponsesRequestCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type TwoFile$Outbound = {
+  cache_control?:
+    | CreateRouterResponse2ResponsesRequestCacheControl$Outbound
+    | undefined;
   file_data?: string | undefined;
   file_id?: string | undefined;
   file_url?: string | undefined;
@@ -594,6 +987,9 @@ export const TwoFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TwoFile
 > = z.object({
+  cacheControl: z.lazy(() =>
+    CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema
+  ).optional(),
   fileData: z.string().optional(),
   fileId: z.string().optional(),
   fileUrl: z.string().optional(),
@@ -602,6 +998,7 @@ export const TwoFile$outboundSchema: z.ZodType<
   type: z.literal("input_file"),
 }).transform((v) => {
   return remap$(v, {
+    cacheControl: "cache_control",
     fileData: "file_data",
     fileId: "file_id",
     fileUrl: "file_url",
@@ -614,11 +1011,52 @@ export function twoFileToJSON(twoFile: TwoFile): string {
 }
 
 /** @internal */
+export const CreateRouterResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2ResponsesTtl
+> = z.nativeEnum(CreateRouterResponse2ResponsesTtl);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestType> = z
+    .nativeEnum(CreateRouterResponse2ResponsesRequestType);
+
+/** @internal */
+export type CreateRouterResponse2ResponsesCacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const CreateRouterResponse2ResponsesCacheControl$outboundSchema:
+  z.ZodType<
+    CreateRouterResponse2ResponsesCacheControl$Outbound,
+    z.ZodTypeDef,
+    CreateRouterResponse2ResponsesCacheControl
+  > = z.object({
+    ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.default("5m"),
+    type: CreateRouterResponse2ResponsesRequestType$outboundSchema,
+  });
+
+export function createRouterResponse2ResponsesCacheControlToJSON(
+  createRouterResponse2ResponsesCacheControl:
+    CreateRouterResponse2ResponsesCacheControl,
+): string {
+  return JSON.stringify(
+    CreateRouterResponse2ResponsesCacheControl$outboundSchema.parse(
+      createRouterResponse2ResponsesCacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
   .nativeEnum(Detail);
 
 /** @internal */
 export type Image$Outbound = {
+  cache_control?:
+    | CreateRouterResponse2ResponsesCacheControl$Outbound
+    | undefined;
   detail?: string | undefined;
   file_id?: string | undefined;
   image_url?: string | undefined;
@@ -631,12 +1069,16 @@ export const Image$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Image
 > = z.object({
+  cacheControl: z.lazy(() =>
+    CreateRouterResponse2ResponsesCacheControl$outboundSchema
+  ).optional(),
   detail: Detail$outboundSchema.optional(),
   fileId: z.string().optional(),
   imageUrl: z.string().optional(),
   type: z.literal("input_image"),
 }).transform((v) => {
   return remap$(v, {
+    cacheControl: "cache_control",
     fileId: "file_id",
     imageUrl: "image_url",
   });
@@ -647,7 +1089,44 @@ export function imageToJSON(image: Image): string {
 }
 
 /** @internal */
+export const CreateRouterResponse2Ttl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2Ttl
+> = z.nativeEnum(CreateRouterResponse2Ttl);
+
+/** @internal */
+export const CreateRouterResponse2Type$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2Type
+> = z.nativeEnum(CreateRouterResponse2Type);
+
+/** @internal */
+export type CreateRouterResponse2CacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const CreateRouterResponse2CacheControl$outboundSchema: z.ZodType<
+  CreateRouterResponse2CacheControl$Outbound,
+  z.ZodTypeDef,
+  CreateRouterResponse2CacheControl
+> = z.object({
+  ttl: CreateRouterResponse2Ttl$outboundSchema.default("5m"),
+  type: CreateRouterResponse2Type$outboundSchema,
+});
+
+export function createRouterResponse2CacheControlToJSON(
+  createRouterResponse2CacheControl: CreateRouterResponse2CacheControl,
+): string {
+  return JSON.stringify(
+    CreateRouterResponse2CacheControl$outboundSchema.parse(
+      createRouterResponse2CacheControl,
+    ),
+  );
+}
+
+/** @internal */
 export type TwoText$Outbound = {
+  cache_control?: CreateRouterResponse2CacheControl$Outbound | undefined;
   text: string;
   type: "input_text";
 };
@@ -658,8 +1137,14 @@ export const TwoText$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TwoText
 > = z.object({
+  cacheControl: z.lazy(() => CreateRouterResponse2CacheControl$outboundSchema)
+    .optional(),
   text: z.string(),
   type: z.literal("input_text"),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
 });
 
 export function twoTextToJSON(twoText: TwoText): string {
@@ -1032,9 +1517,10 @@ export function toolsMCPToolToJSON(toolsMCPTool: ToolsMCPTool): string {
 }
 
 /** @internal */
-export const CreateRouterResponseToolsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponseToolsType
-> = z.nativeEnum(CreateRouterResponseToolsType);
+export const CreateRouterResponseToolsResponsesType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesType> = z.nativeEnum(
+    CreateRouterResponseToolsResponsesType,
+  );
 
 /** @internal */
 export type OrqAiTool$Outbound = {
@@ -1049,7 +1535,7 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   OrqAiTool
 > = z.object({
   toolId: z.string().optional(),
-  type: CreateRouterResponseToolsType$outboundSchema,
+  type: CreateRouterResponseToolsResponsesType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     toolId: "tool_id",
@@ -1061,7 +1547,40 @@ export function orqAiToolToJSON(orqAiTool: OrqAiTool): string {
 }
 
 /** @internal */
+export const ToolsTtl$outboundSchema: z.ZodNativeEnum<typeof ToolsTtl> = z
+  .nativeEnum(ToolsTtl);
+
+/** @internal */
+export const ToolsType$outboundSchema: z.ZodNativeEnum<typeof ToolsType> = z
+  .nativeEnum(ToolsType);
+
+/** @internal */
+export type ToolsCacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const ToolsCacheControl$outboundSchema: z.ZodType<
+  ToolsCacheControl$Outbound,
+  z.ZodTypeDef,
+  ToolsCacheControl
+> = z.object({
+  ttl: ToolsTtl$outboundSchema.default("5m"),
+  type: ToolsType$outboundSchema,
+});
+
+export function toolsCacheControlToJSON(
+  toolsCacheControl: ToolsCacheControl,
+): string {
+  return JSON.stringify(
+    ToolsCacheControl$outboundSchema.parse(toolsCacheControl),
+  );
+}
+
+/** @internal */
 export type ToolsFunction$Outbound = {
+  cache_control?: ToolsCacheControl$Outbound | undefined;
   description?: string | undefined;
   name: string;
   parameters?: { [k: string]: any } | undefined;
@@ -1075,11 +1594,16 @@ export const ToolsFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolsFunction
 > = z.object({
+  cacheControl: z.lazy(() => ToolsCacheControl$outboundSchema).optional(),
   description: z.string().optional(),
   name: z.string(),
   parameters: z.record(z.any()).optional(),
   strict: z.boolean().optional(),
   type: z.literal("function"),
+}).transform((v) => {
+  return remap$(v, {
+    cacheControl: "cache_control",
+  });
 });
 
 export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
@@ -1135,6 +1659,7 @@ export function createRouterResponseToolsToJSON(
 
 /** @internal */
 export type CreateRouterResponseRequestBody$Outbound = {
+  cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
@@ -1149,6 +1674,10 @@ export type CreateRouterResponseRequestBody$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   model?: string | undefined;
   parallel_tool_calls?: boolean | undefined;
+  plugins?:
+    | Array<components.PublicPIIRedactionPlugin$Outbound>
+    | null
+    | undefined;
   presence_penalty?: number | undefined;
   previous_response_id?: string | undefined;
   prompt_cache_key?: string | undefined;
@@ -1186,6 +1715,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseRequestBody
 > = z.object({
+  cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
+    .optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
@@ -1204,6 +1735,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.string()).optional(),
   model: z.string().optional(),
   parallelToolCalls: z.boolean().optional(),
+  plugins: z.nullable(
+    z.array(components.PublicPIIRedactionPlugin$outboundSchema),
+  ).optional(),
   presencePenalty: z.number().optional(),
   previousResponseId: z.string().optional(),
   promptCacheKey: z.string().optional(),
@@ -1250,6 +1784,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   variables: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    cacheControl: "cache_control",
     frequencyPenalty: "frequency_penalty",
     maxOutputTokens: "max_output_tokens",
     maxToolCalls: "max_tool_calls",

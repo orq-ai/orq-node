@@ -184,7 +184,10 @@ export type StreamAgentConfiguration = {
   blocking?: boolean | undefined;
 };
 
-export type StreamAgentRequestBody = {
+/**
+ * Request body for invoking an existing agent (stream-task endpoint). Used to start a new task or continue an existing conversation.
+ */
+export type StreamAgentA2AInvokeRequest = {
   /**
    * Optional task ID to continue an existing agent execution. When provided, the agent will continue the conversation from the existing task state. The task must be in an inactive state to continue.
    */
@@ -238,7 +241,7 @@ export type StreamAgentRequest = {
    * The key or ID of the agent to invoke
    */
   key: string;
-  requestBody: StreamAgentRequestBody;
+  requestBody: StreamAgentA2AInvokeRequest;
 };
 
 export type StreamAgentData =
@@ -535,7 +538,7 @@ export function streamAgentConfigurationToJSON(
 }
 
 /** @internal */
-export type StreamAgentRequestBody$Outbound = {
+export type StreamAgentA2AInvokeRequest$Outbound = {
   task_id?: string | undefined;
   message: StreamAgentA2AMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
@@ -550,10 +553,10 @@ export type StreamAgentRequestBody$Outbound = {
 };
 
 /** @internal */
-export const StreamAgentRequestBody$outboundSchema: z.ZodType<
-  StreamAgentRequestBody$Outbound,
+export const StreamAgentA2AInvokeRequest$outboundSchema: z.ZodType<
+  StreamAgentA2AInvokeRequest$Outbound,
   z.ZodTypeDef,
-  StreamAgentRequestBody
+  StreamAgentA2AInvokeRequest
 > = z.object({
   taskId: z.string().optional(),
   message: z.lazy(() => StreamAgentA2AMessage$outboundSchema),
@@ -574,18 +577,20 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-export function streamAgentRequestBodyToJSON(
-  streamAgentRequestBody: StreamAgentRequestBody,
+export function streamAgentA2AInvokeRequestToJSON(
+  streamAgentA2AInvokeRequest: StreamAgentA2AInvokeRequest,
 ): string {
   return JSON.stringify(
-    StreamAgentRequestBody$outboundSchema.parse(streamAgentRequestBody),
+    StreamAgentA2AInvokeRequest$outboundSchema.parse(
+      streamAgentA2AInvokeRequest,
+    ),
   );
 }
 
 /** @internal */
 export type StreamAgentRequest$Outbound = {
   key: string;
-  RequestBody: StreamAgentRequestBody$Outbound;
+  RequestBody: StreamAgentA2AInvokeRequest$Outbound;
 };
 
 /** @internal */
@@ -595,7 +600,7 @@ export const StreamAgentRequest$outboundSchema: z.ZodType<
   StreamAgentRequest
 > = z.object({
   key: z.string(),
-  requestBody: z.lazy(() => StreamAgentRequestBody$outboundSchema),
+  requestBody: z.lazy(() => StreamAgentA2AInvokeRequest$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
