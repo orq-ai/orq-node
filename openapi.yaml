@@ -27,10 +27,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -264,10 +264,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -369,10 +369,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -489,10 +489,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -594,10 +594,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -999,10 +999,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -1120,10 +1120,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated:
           type: "string"
-          default: "2026-07-06T07:43:54.898Z"
+          default: "2026-07-06T11:11:36.140Z"
         updated_by_id:
           type:
             - "string"
@@ -3430,7 +3430,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kwv6526vff6mzc9nhjfqkt3x"
+              default: "reasoning_01kwvj180n3wp3wbem9fw3dfw6"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3928,10 +3928,6 @@ components:
                       description:
                         type: "string"
                         description: "Optional tool description"
-                      configuration:
-                        type: "object"
-                        additionalProperties: {}
-                        description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                       requires_approval:
                         type: "boolean"
                         default: false
@@ -4656,10 +4652,6 @@ components:
                 description:
                   type: "string"
                   description: "Optional tool description"
-                configuration:
-                  type: "object"
-                  additionalProperties: {}
-                  description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                 requires_approval:
                   type: "boolean"
                   default: false
@@ -8308,263 +8300,6 @@ components:
           description: "Optional expiration. The authenticate hot-path rejects keys whose\n `expires_at` is in the past. Unset means the key never expires."
           format: "date-time"
       description: "ManagementKey is the canonical record stored in MongoDB\n `auth.managementKeys`. It is the source of truth for permissions,\n expiration, and revocation. Management keys are always\n workspace-scoped — there is no project_scope field, and they have no\n per-user owner (every management key is workspace-owned;\n `created_by_id` records who created it)."
-    ListNotifiersResponse:
-      required:
-        - "object"
-        - "data"
-        - "has_more"
-      type: "object"
-      properties:
-        object:
-          type: "string"
-          description: "Object discriminator for list responses; always `list`."
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Notifier"
-          description: "Page of notifiers."
-        has_more:
-          type: "boolean"
-          description: "Whether more notifiers are available in the selected pagination direction."
-    CreateNotifierRequest:
-      required:
-        - "display_name"
-        - "type"
-      type: "object"
-      properties:
-        project_id:
-          type: "string"
-          description: "Optional. Workspace-scoped callers may set this to create a project-scoped notifier, or omit it for a workspace-wide notifier. Project-scoped API keys create in the API key's project."
-        display_name:
-          type: "string"
-          description: "Required. Human-readable notifier name."
-        metadata:
-          type: "object"
-          description: "Optional. Custom JSON metadata stored with the notifier."
-        type:
-          description: "Required. Destination type. Use `NOTIFIER_TYPE_EMAIL`, `NOTIFIER_TYPE_SLACK_WEBHOOK`, or `NOTIFIER_TYPE_WEBHOOK`."
-          $ref: "#/components/schemas/NotifierType"
-        emails:
-          type: "array"
-          items:
-            type: "string"
-          description: "Required when `type` is `NOTIFIER_TYPE_EMAIL`. Omit for other notifier types."
-        incoming_webhook_url:
-          type: "string"
-          description: "Required when `type` is `NOTIFIER_TYPE_SLACK_WEBHOOK`. Omit for other notifier types."
-        webhook_url:
-          type: "string"
-          description: "Required when `type` is `NOTIFIER_TYPE_WEBHOOK`. Omit for other notifier types."
-        headers:
-          type: "object"
-          description: "Optional generic webhook headers. Each value may be a string or `{ \"secret\": true, \"value\": \"...\" }`."
-      description: "Create notifier request. `project_id`, `display_name`, and `type` are always required. The destination field required by `type` is captured in `oneOf`."
-      oneOf:
-        - title: "Email notifier create request"
-          type: "object"
-          description: "`emails` is required when `type` is `NOTIFIER_TYPE_EMAIL`."
-          required:
-            - "type"
-            - "emails"
-          properties:
-            type:
-              type: "string"
-              enum:
-                - "NOTIFIER_TYPE_EMAIL"
-            emails:
-              type: "array"
-              items:
-                type: "string"
-              description: "Required when `type` is `NOTIFIER_TYPE_EMAIL`. Omit for other notifier types."
-        - title: "Slack webhook notifier create request"
-          type: "object"
-          description: "`incoming_webhook_url` is required when `type` is `NOTIFIER_TYPE_SLACK_WEBHOOK`."
-          required:
-            - "type"
-            - "incoming_webhook_url"
-          properties:
-            type:
-              type: "string"
-              enum:
-                - "NOTIFIER_TYPE_SLACK_WEBHOOK"
-            incoming_webhook_url:
-              type: "string"
-              description: "Required when `type` is `NOTIFIER_TYPE_SLACK_WEBHOOK`. Omit for other notifier types."
-        - title: "Generic webhook notifier create request"
-          type: "object"
-          description: "`webhook_url` is required when `type` is `NOTIFIER_TYPE_WEBHOOK`; `headers` is optional."
-          required:
-            - "type"
-            - "webhook_url"
-          properties:
-            type:
-              type: "string"
-              enum:
-                - "NOTIFIER_TYPE_WEBHOOK"
-            webhook_url:
-              type: "string"
-              description: "Required when `type` is `NOTIFIER_TYPE_WEBHOOK`. Omit for other notifier types."
-    CreateNotifierResponse:
-      required:
-        - "notifier"
-      type: "object"
-      properties:
-        notifier:
-          $ref: "#/components/schemas/Notifier"
-    GetNotifierResponse:
-      required:
-        - "notifier"
-      type: "object"
-      properties:
-        notifier:
-          $ref: "#/components/schemas/Notifier"
-    DeleteNotifierResponse:
-      type: "object"
-      properties: {}
-    UpdateNotifierRequest:
-      required: []
-      type: "object"
-      properties:
-        project_id:
-          type: "string"
-          description: "Optional. New containing project. Workspace-scoped callers may set an empty value to make the notifier workspace-wide. Project-scoped API keys remain pinned to the API key's project."
-        display_name:
-          type: "string"
-          description: "Optional. New human-readable notifier name."
-        metadata:
-          type: "object"
-          description: "Optional. Replacement custom JSON metadata."
-        type:
-          description: "Optional. New destination type. When provided, also provide the destination field required by the new type."
-          $ref: "#/components/schemas/NotifierType"
-        emails:
-          type: "array"
-          items:
-            type: "string"
-          description: "Optional replacement email recipients. Required when changing `type` to `NOTIFIER_TYPE_EMAIL`."
-        incoming_webhook_url:
-          type: "string"
-          description: "Optional replacement Slack incoming webhook URL. Required when changing `type` to `NOTIFIER_TYPE_SLACK_WEBHOOK`."
-        webhook_url:
-          type: "string"
-          description: "Optional replacement generic webhook URL. Required when changing `type` to `NOTIFIER_TYPE_WEBHOOK`."
-        headers:
-          type: "object"
-          description: "Optional replacement generic webhook headers. Secret header values returned by GET or LIST are masked as an empty string; omit those entries or replace them with the real value when updating."
-      description: "Partial notifier update. All request body fields are optional individually, but at least one field must be provided. When changing `type`, include the destination field required by the new type. Secret header values returned by GET or LIST are masked as an empty string; omit those entries or replace them with the real value when updating."
-      minProperties: 1
-    UpdateNotifierResponse:
-      required:
-        - "notifier"
-      type: "object"
-      properties:
-        notifier:
-          $ref: "#/components/schemas/Notifier"
-    Notifier:
-      required:
-        - "_id"
-        - "display_name"
-        - "created_at"
-        - "updated_at"
-        - "type"
-      type: "object"
-      properties:
-        _id:
-          type: "string"
-          description: "Unique notifier identifier assigned by ORQ."
-        project_id:
-          type: "string"
-          description: "Project that contains the notifier. Empty for workspace-wide notifiers."
-        display_name:
-          type: "string"
-          description: "Human-readable notifier name."
-        created_at:
-          type: "string"
-          description: "Time when the notifier was created."
-          format: "date-time"
-        updated_at:
-          type: "string"
-          description: "Time when the notifier was last updated."
-          format: "date-time"
-        created_by_id:
-          type: "string"
-          description: "User ID that created the notifier."
-        updated_by_id:
-          type: "string"
-          description: "User ID that last updated the notifier."
-        metadata:
-          type: "object"
-          description: "Custom JSON metadata stored with the notifier."
-        type:
-          description: "Notifier destination type. Use `NOTIFIER_TYPE_EMAIL`, `NOTIFIER_TYPE_SLACK_WEBHOOK`, or `NOTIFIER_TYPE_WEBHOOK`."
-          $ref: "#/components/schemas/NotifierType"
-        emails:
-          type: "array"
-          items:
-            type: "string"
-          description: "Email addresses notified when `type` is `NOTIFIER_TYPE_EMAIL`."
-        incoming_webhook_url:
-          type: "string"
-          description: "Slack incoming webhook URL used when `type` is `NOTIFIER_TYPE_SLACK_WEBHOOK`."
-        webhook_url:
-          type: "string"
-          description: "Generic webhook URL used when `type` is `NOTIFIER_TYPE_WEBHOOK`."
-        headers:
-          type: "object"
-          description: "Optional HTTP headers for generic webhooks. Each entry may be a string value or an object with `secret` and `value`."
-      description: "Notifier resource. The destination field present on the resource depends on `type` and is captured in `oneOf`."
-      oneOf:
-        - title: "Email notifier"
-          type: "object"
-          description: "`emails` is present for email notifiers."
-          required:
-            - "type"
-            - "emails"
-          properties:
-            type:
-              type: "string"
-              enum:
-                - "NOTIFIER_TYPE_EMAIL"
-            emails:
-              type: "array"
-              items:
-                type: "string"
-              description: "Email addresses notified when `type` is `NOTIFIER_TYPE_EMAIL`."
-        - title: "Slack webhook notifier"
-          type: "object"
-          description: "`incoming_webhook_url` is present for Slack webhook notifiers."
-          required:
-            - "type"
-            - "incoming_webhook_url"
-          properties:
-            type:
-              type: "string"
-              enum:
-                - "NOTIFIER_TYPE_SLACK_WEBHOOK"
-            incoming_webhook_url:
-              type: "string"
-              description: "Slack incoming webhook URL used when `type` is `NOTIFIER_TYPE_SLACK_WEBHOOK`."
-        - title: "Generic webhook notifier"
-          type: "object"
-          description: "`webhook_url` is present for generic webhook notifiers; `headers` is optional."
-          required:
-            - "type"
-            - "webhook_url"
-          properties:
-            type:
-              type: "string"
-              enum:
-                - "NOTIFIER_TYPE_WEBHOOK"
-            webhook_url:
-              type: "string"
-              description: "Generic webhook URL used when `type` is `NOTIFIER_TYPE_WEBHOOK`."
-    NotifierType:
-      type: "string"
-      enum:
-        - "NOTIFIER_TYPE_UNSPECIFIED"
-        - "NOTIFIER_TYPE_EMAIL"
-        - "NOTIFIER_TYPE_SLACK_WEBHOOK"
-        - "NOTIFIER_TYPE_WEBHOOK"
     ListProjectsResponse:
       required:
         - "object"
@@ -11873,474 +11608,6 @@ components:
           items:
             type: "string"
           description: "Non-fatal warnings about the response. May contain `totals_unavailable` when totals were requested but failed."
-    AggregateTracesRequest:
-      type: "object"
-      properties:
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        filters:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFilter"
-        group_by:
-          type: "array"
-          items:
-            type: "string"
-        compute:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceCompute"
-        limit:
-          type: "integer"
-          format: "int32"
-        filter_operator:
-          type: "string"
-    AggregateTracesResponse:
-      type: "object"
-      properties:
-        object:
-          type: "string"
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceAggregateRow"
-    ListTraceFacetsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFacet"
-    ListTraceFacetValuesResponse:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        values:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFacetValue"
-        has_more:
-          type: "boolean"
-    ListTraceFieldsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceField"
-    QueryTracesRequest:
-      required:
-        - "from"
-        - "to"
-        - "oql"
-      type: "object"
-      properties:
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        oql:
-          type: "string"
-        limit:
-          type: "integer"
-          format: "int32"
-        page_token:
-          type: "string"
-    QueryTracesResponse:
-      type: "object"
-      properties:
-        object:
-          type: "string"
-        search:
-          $ref: "#/components/schemas/SearchTracesResponse"
-    SearchTracesRequest:
-      required:
-        - "from"
-        - "to"
-      type: "object"
-      properties:
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        filters:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFilter"
-        filter_operator:
-          type: "string"
-        query:
-          type: "string"
-        sort:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceSort"
-        limit:
-          type: "integer"
-          format: "int32"
-        page_token:
-          type: "string"
-    SearchTracesResponse:
-      type: "object"
-      properties:
-        object:
-          enum:
-            - "list"
-          type: "string"
-          description: "Object discriminator; always `list`."
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceSummary"
-        has_more:
-          type: "boolean"
-        next_page_token:
-          type: "string"
-        meta:
-          $ref: "#/components/schemas/TraceSearchMeta"
-    GetTraceResponse:
-      type: "object"
-      properties:
-        trace:
-          $ref: "#/components/schemas/TraceSummary"
-    ListTraceSpansResponse:
-      type: "object"
-      properties:
-        object:
-          type: "string"
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/SpanSummary"
-        has_more:
-          type: "boolean"
-        next_page_token:
-          type: "string"
-    GetTraceSpanResponse:
-      type: "object"
-      properties:
-        span:
-          $ref: "#/components/schemas/SpanDetail"
-    TraceFilter:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        op:
-          type: "string"
-        values:
-          type: "array"
-          items:
-            type: "string"
-    TraceCompute:
-      type: "object"
-      properties:
-        metric:
-          type: "string"
-        op:
-          type: "string"
-    TraceAggregateRow:
-      type: "object"
-      properties:
-        group:
-          type: "object"
-          additionalProperties:
-            type: "string"
-        metrics:
-          type: "object"
-          additionalProperties:
-            type: "number"
-            format: "double"
-    TraceFacet:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        label:
-          type: "string"
-        type:
-          type: "string"
-    TraceFacetValue:
-      type: "object"
-      properties:
-        value:
-          type: "string"
-        count:
-          type: "integer"
-          format: "uint32"
-    TraceField:
-      type: "object"
-      properties:
-        name:
-          type: "string"
-        label:
-          type: "string"
-        type:
-          type: "string"
-        scope:
-          type: "string"
-        match:
-          type: "string"
-        operators:
-          type: "array"
-          items:
-            type: "string"
-        facet:
-          type: "boolean"
-        sortable:
-          type: "boolean"
-        groupable:
-          type: "boolean"
-        aliases:
-          type: "array"
-          items:
-            type: "string"
-        enum_values:
-          type: "array"
-          items:
-            type: "string"
-    TraceSort:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        order:
-          type: "string"
-    TraceSummary:
-      type: "object"
-      properties:
-        object:
-          enum:
-            - "trace"
-          type: "string"
-          description: "Object discriminator; always `trace`."
-        trace_id:
-          type: "string"
-        root_span_id:
-          type: "string"
-        leading_span_id:
-          type: "string"
-        name:
-          type: "string"
-        operation:
-          type: "string"
-        status:
-          type: "string"
-        started_at:
-          type: "string"
-          format: "date-time"
-        ended_at:
-          type: "string"
-          format: "date-time"
-        duration_ms:
-          type: "number"
-          format: "double"
-        project_id:
-          type: "string"
-        identity_id:
-          type: "string"
-        session_id:
-          type: "string"
-        thread_id:
-          type: "string"
-        product:
-          type: "string"
-        providers:
-          type: "array"
-          items:
-            type: "string"
-        models:
-          type: "array"
-          items:
-            type: "string"
-        agent:
-          $ref: "#/components/schemas/TraceAgent"
-        usage:
-          $ref: "#/components/schemas/TraceUsage"
-        cost:
-          $ref: "#/components/schemas/TraceCost"
-        id:
-          type: "string"
-        span_id:
-          type: "string"
-        parent_id:
-          type: "string"
-        type:
-          type: "string"
-        context:
-          $ref: "#/components/schemas/TraceContext"
-        attributes:
-          type: "object"
-        start_time:
-          type: "string"
-          format: "date-time"
-        end_time:
-          type: "string"
-          format: "date-time"
-        duration:
-          type: "number"
-          format: "double"
-    TraceSearchMeta:
-      type: "object"
-      properties:
-        request_id:
-          type: "string"
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        row_count:
-          type: "integer"
-          format: "int32"
-    SpanSummary:
-      type: "object"
-      properties:
-        object:
-          type: "string"
-        trace_id:
-          type: "string"
-        span_id:
-          type: "string"
-        parent_span_id:
-          type: "string"
-        name:
-          type: "string"
-        type:
-          type: "string"
-        operation:
-          type: "string"
-        status:
-          type: "string"
-        started_at:
-          type: "string"
-          format: "date-time"
-        ended_at:
-          type: "string"
-          format: "date-time"
-        duration_ms:
-          type: "number"
-          format: "double"
-        provider:
-          type: "string"
-        model:
-          type: "string"
-        usage:
-          $ref: "#/components/schemas/TraceUsage"
-        cost:
-          $ref: "#/components/schemas/TraceCost"
-        has_detail:
-          type: "boolean"
-    SpanDetail:
-      type: "object"
-      properties:
-        summary:
-          $ref: "#/components/schemas/SpanSummary"
-        attributes:
-          type: "object"
-    TraceAgent:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-        name:
-          type: "string"
-    TraceUsage:
-      type: "object"
-      properties:
-        prompt_tokens:
-          type: "integer"
-          format: "uint32"
-        completion_tokens:
-          type: "integer"
-          format: "uint32"
-        total_tokens:
-          type: "integer"
-          format: "uint32"
-        prompt_cached_tokens:
-          type: "integer"
-          format: "uint32"
-        prompt_audio_tokens:
-          type: "integer"
-          format: "uint32"
-        completion_reasoning_tokens:
-          type: "integer"
-          format: "uint32"
-        completion_audio_tokens:
-          type: "integer"
-          format: "uint32"
-        completion_accepted_prediction_tokens:
-          type: "integer"
-          format: "uint32"
-        completion_rejected_prediction_tokens:
-          type: "integer"
-          format: "uint32"
-    TraceCost:
-      type: "object"
-      properties:
-        input:
-          type: "number"
-          format: "double"
-        output:
-          type: "number"
-          format: "double"
-        cache_read:
-          type: "number"
-          format: "double"
-        cache_write:
-          type: "number"
-          format: "double"
-        reasoning:
-          type: "number"
-          format: "double"
-        web_search:
-          type: "number"
-          format: "double"
-        total:
-          type: "number"
-          format: "double"
-        currency:
-          type: "string"
-        cached:
-          type: "number"
-          format: "double"
-        audio_input:
-          type: "number"
-          format: "double"
-        audio_output:
-          type: "number"
-          format: "double"
-        accepted_prediction:
-          type: "number"
-          format: "double"
-        rejected_prediction:
-          type: "number"
-          format: "double"
-        billable:
-          type: "boolean"
-        pricing_tier:
-          type: "string"
-        threshold_exceeded:
-          type: "boolean"
-        integration_id:
-          type: "string"
-    TraceContext:
-      type: "object"
-      properties:
-        trace_id:
-          type: "string"
-        span_id:
-          type: "string"
   parameters: {}
 paths:
   /v2/evaluators:
@@ -14007,8 +13274,6 @@ paths:
                       - "hcompany"
                       - "inceptron"
                       - "wafer"
-                      - "poolside"
-                      - "tencent"
                       - "slack"
                       - "orq"
                     description: "The provider used to generate the response"
@@ -14610,8 +13875,6 @@ paths:
                                 - "hcompany"
                                 - "inceptron"
                                 - "wafer"
-                                - "poolside"
-                                - "tencent"
                                 - "slack"
                                 - "orq"
                             messages:
@@ -17101,8 +16364,6 @@ paths:
                           - hcompany
                           - inceptron
                           - wafer
-                          - poolside
-                          - tencent
                           - slack
                           - orq
                         description: The provider used to generate the response
@@ -18138,10 +17399,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Google search tool"
@@ -18155,10 +17412,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Web scraper tool"
@@ -18172,10 +17425,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Call sub agent tool"
@@ -18189,10 +17438,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve agents tool"
@@ -18206,10 +17451,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query memory store tool"
@@ -18223,10 +17464,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Write memory store tool"
@@ -18240,10 +17477,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve memory stores tool"
@@ -18257,10 +17490,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Delete memory document tool"
@@ -18274,10 +17503,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve knowledge bases tool"
@@ -18291,10 +17516,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query knowledge base tool"
@@ -18308,10 +17529,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Current date tool"
@@ -18435,10 +17652,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Provider Built-in Tool"
@@ -18745,10 +17958,6 @@ paths:
                             description:
                               type: "string"
                               description: "Optional tool description"
-                            configuration:
-                              type: "object"
-                              additionalProperties: {}
-                              description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             requires_approval:
                               type: "boolean"
                               default: false
@@ -19777,10 +18986,6 @@ paths:
                                   description:
                                     type: "string"
                                     description: "Optional tool description"
-                                  configuration:
-                                    type: "object"
-                                    additionalProperties: {}
-                                    description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                                   requires_approval:
                                     type: "boolean"
                                     default: false
@@ -20909,10 +20114,6 @@ paths:
                             description:
                               type: "string"
                               description: "Optional tool description"
-                            configuration:
-                              type: "object"
-                              additionalProperties: {}
-                              description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             requires_approval:
                               type: "boolean"
                               default: false
@@ -22494,10 +21695,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Google search tool"
@@ -22511,10 +21708,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Web scraper tool"
@@ -22528,10 +21721,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Call sub agent tool"
@@ -22545,10 +21734,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve agents tool"
@@ -22562,10 +21747,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query memory store tool"
@@ -22579,10 +21760,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Write memory store tool"
@@ -22596,10 +21773,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve memory stores tool"
@@ -22613,10 +21786,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Delete memory document tool"
@@ -22630,10 +21799,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve knowledge bases tool"
@@ -22647,10 +21812,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query knowledge base tool"
@@ -22664,10 +21825,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Current date tool"
@@ -22791,10 +21948,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Provider Built-in Tool"
@@ -23095,10 +22248,6 @@ paths:
                             description:
                               type: "string"
                               description: "Optional tool description"
-                            configuration:
-                              type: "object"
-                              additionalProperties: {}
-                              description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             requires_approval:
                               type: "boolean"
                               default: false
@@ -25240,10 +24389,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Google search tool"
@@ -25257,10 +24402,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Web scraper tool"
@@ -25274,10 +24415,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Call sub agent tool"
@@ -25291,10 +24428,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve agents tool"
@@ -25308,10 +24441,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query memory store tool"
@@ -25325,10 +24454,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Write memory store tool"
@@ -25342,10 +24467,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve memory stores tool"
@@ -25359,10 +24480,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Delete memory document tool"
@@ -25376,10 +24493,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve knowledge bases tool"
@@ -25393,10 +24506,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query knowledge base tool"
@@ -25410,10 +24519,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Current date tool"
@@ -25767,7 +24872,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KWV652D81DT9073XPDK0P9B3"
+                                          default: "01KWVJ184SKXCS2M1MR6YKRDMN"
                                         name:
                                           type: "string"
                                         description:
@@ -26979,10 +26084,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Google search tool"
@@ -26996,10 +26097,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Web scraper tool"
@@ -27013,10 +26110,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Call sub agent tool"
@@ -27030,10 +26123,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve agents tool"
@@ -27047,10 +26136,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query memory store tool"
@@ -27064,10 +26149,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Write memory store tool"
@@ -27081,10 +26162,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve memory stores tool"
@@ -27098,10 +26175,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Delete memory document tool"
@@ -27115,10 +26188,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Retrieve knowledge bases tool"
@@ -27132,10 +26201,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Query knowledge base tool"
@@ -27149,10 +26214,6 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 description: "Whether this tool requires approval before execution"
-                              configuration:
-                                type: "object"
-                                additionalProperties: {}
-                                description: "Static tool configuration set at design time. Merged over LLM-provided arguments at execution time."
                             required:
                               - "type"
                             title: "Current date tool"
@@ -27506,7 +26567,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KWV652F9PJB3C8W15SBV4BPV"
+                                          default: "01KWVJ1874VY48X7ZKY11DKM4T"
                                         name:
                                           type: "string"
                                         description:
@@ -28340,8 +27401,6 @@ paths:
                                 - "hcompany"
                                 - "inceptron"
                                 - "wafer"
-                                - "poolside"
-                                - "tencent"
                                 - "slack"
                                 - "orq"
                                 - null
@@ -30140,8 +29199,6 @@ paths:
                           - "hcompany"
                           - "inceptron"
                           - "wafer"
-                          - "poolside"
-                          - "tencent"
                           - "slack"
                           - "orq"
                           - null
@@ -31257,8 +30314,6 @@ paths:
                           - "hcompany"
                           - "inceptron"
                           - "wafer"
-                          - "poolside"
-                          - "tencent"
                           - "slack"
                           - "orq"
                           - null
@@ -33073,8 +32128,6 @@ paths:
                           - "hcompany"
                           - "inceptron"
                           - "wafer"
-                          - "poolside"
-                          - "tencent"
                           - "slack"
                           - "orq"
                           - null
@@ -34249,8 +33302,6 @@ paths:
                                     - "hcompany"
                                     - "inceptron"
                                     - "wafer"
-                                    - "poolside"
-                                    - "tencent"
                                     - "slack"
                                     - "orq"
                                     - null
@@ -35361,8 +34412,6 @@ paths:
                               - "hcompany"
                               - "inceptron"
                               - "wafer"
-                              - "poolside"
-                              - "tencent"
                               - "slack"
                               - "orq"
                               - null
@@ -36240,7 +35289,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KWV652MWX82GDPZHS1FMNKYM"
+                              default: "tool_01KWVJ18AVNK8JAEDET4G3WHKD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36341,7 +35390,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KWV652MYHX4VWP3VHPHJ4GH3"
+                              default: "tool_01KWVJ18AXHFQ73BJAD1NH5FT5"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36444,7 +35493,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KWV652N0VANRVZM0QPTRY114"
+                              default: "tool_01KWVJ18AZHF957AMVR3KNXREH"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36583,7 +35632,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KWV652N3DE5Q0WRF6EZ5SR9F"
+                              default: "tool_01KWVJ18B1E527D1Y8KQHW6WKM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36659,7 +35708,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KWV652N5HY03QMXWVHJXJ7VB"
+                                        default: "01KWVJ18B3X9M2FX5GHD4JK14Z"
                                       name:
                                         type: "string"
                                       description:
@@ -36718,7 +35767,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KWV652N62D89XGMGF7S7AVGK"
+                              default: "tool_01KWVJ18B4ZHYQ3500WD0P46BP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37273,7 +36322,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652NQEZKKZQMKPAR3C17F"
+                        default: "tool_01KWVJ18BFR1S748Q3Z66EG2NT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37374,7 +36423,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652NT1135JHGMYJQTGW3Z"
+                        default: "tool_01KWVJ18BHK4DJHH12MZD4F4SE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37477,7 +36526,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652NX0BF8NV1P3MBXDTYA"
+                        default: "tool_01KWVJ18BKM95SGTVFZED1Q8H7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37616,7 +36665,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652P1B4YFH4MMMDP4KN96"
+                        default: "tool_01KWVJ18BNRVB6RD2S7SN1AY1Z"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37692,7 +36741,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KWV652P3DVRBTYE1ZT597X3A"
+                                  default: "01KWVJ18BQM3VQRM8N164B95V4"
                                 name:
                                   type: "string"
                                 description:
@@ -37751,7 +36800,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652P5Z6MZSZMVQVG471XX"
+                        default: "tool_01KWVJ18BRN8B3T0QTNG6SW413"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38212,7 +37261,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KWV652Q7HRYEYEMW5P7YPC8S"
+                                default: "01KWVJ18CXXFQXRMV7VE1W92ZA"
                               name:
                                 type: "string"
                               description:
@@ -38358,7 +37407,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652PHSE0171E096FE6Y7H"
+                        default: "tool_01KWVJ18CC42YPHS1H3BTBQTYE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38459,7 +37508,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652PK41MSWQ441PWE3HV1"
+                        default: "tool_01KWVJ18CE310HVE561NK847PN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38562,7 +37611,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652PN20NMJXXNWAMKYGWP"
+                        default: "tool_01KWVJ18CG6BHAH9WA0CTCBQZZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38701,7 +37750,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652PSEJE11PXQP2AWJPCZ"
+                        default: "tool_01KWVJ18CKVF9CCPJWEGGPQQ50"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38777,7 +37826,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KWV652PWD4V1MNSB0TR18Z18"
+                                  default: "01KWVJ18CMPV940E83M3M99R17"
                                 name:
                                   type: "string"
                                 description:
@@ -38836,7 +37885,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652PYCJZH9XFJVFM2FZFD"
+                        default: "tool_01KWVJ18CN458EQMP4NGRY84FM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38997,7 +38046,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652QQX79ZZEZD2ARD0VB8"
+                        default: "tool_01KWVJ18DBV209VJZ8A3MYW4JT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39098,7 +38147,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652QSDW79X4ER5PRA903Q"
+                        default: "tool_01KWVJ18DEJXS7EK53FVBYRSGE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39201,7 +38250,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652QVHGAQJ7MME5QM2E2A"
+                        default: "tool_01KWVJ18DGBEEMDYK7MKHFYGDP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39340,7 +38389,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652QXN9XS9QFVT9QQ77G6"
+                        default: "tool_01KWVJ18DKZ6AY8JTDM3PJ13YQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39416,7 +38465,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KWV652QZXQ3C5S2DQ6A5DPWG"
+                                  default: "01KWVJ18DMGFGM3Q07ZRZ2F3MF"
                                 name:
                                   type: "string"
                                 description:
@@ -39475,7 +38524,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KWV652R0FME7W6056BFSZCGR"
+                        default: "tool_01KWVJ18DNEYV3HR0ACZ642KAZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41686,7 +40735,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KWV652VTJ3P18FZ8B3EKRSXV"
+                          default: "01KWVJ18GAN51HC8KGRBKVB79P"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -41862,7 +40911,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KWV652VXCDXE6A65CDV0A48R"
+                    default: "01KWVJ18GDHDYNGM24Y4XQYXAV"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -41962,7 +41011,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KWV652VWZZXPN5VWJC9KEB40"
+                    default: "01KWVJ18GB7SVXJ9T0QFGKWSC9"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42101,7 +41150,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KWV652W0JAPVR32R18JG5YT1"
+                    default: "01KWVJ18GGVHH6Z8HSNDB3FKVS"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -44808,7 +43857,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-06T07:43:53.777Z"
+                          default: "2026-07-06T11:11:35.024Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -44816,7 +43865,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:43:53.778Z"
+                              default: "2026-07-06T11:11:35.025Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -44960,7 +44009,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-06T07:43:53.777Z"
+                    default: "2026-07-06T11:11:35.024Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44968,7 +44017,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-06T07:43:53.778Z"
+                        default: "2026-07-06T11:11:35.025Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45107,7 +44156,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-06T07:43:53.777Z"
+                    default: "2026-07-06T11:11:35.024Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45115,7 +44164,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-06T07:43:53.778Z"
+                        default: "2026-07-06T11:11:35.025Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45287,7 +44336,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-06T07:43:53.777Z"
+                    default: "2026-07-06T11:11:35.024Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45295,7 +44344,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-06T07:43:53.778Z"
+                        default: "2026-07-06T11:11:35.025Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45729,7 +44778,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-06T07:44:15.801Z"
+                                    default: "2026-07-06T11:11:53.435Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -45802,7 +44851,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-06T07:44:15.803Z"
+                                    default: "2026-07-06T11:11:53.436Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -45875,7 +44924,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-06T07:44:15.804Z"
+                                    default: "2026-07-06T11:11:53.437Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -45915,7 +44964,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-06T07:43:53.777Z"
+                          default: "2026-07-06T11:11:35.024Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45923,7 +44972,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:43:53.778Z"
+                              default: "2026-07-06T11:11:35.025Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -46551,7 +45600,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-06T07:44:15.820Z"
+                                default: "2026-07-06T11:11:53.458Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -46624,7 +45673,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-06T07:44:15.821Z"
+                                default: "2026-07-06T11:11:53.459Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -46697,7 +45746,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-06T07:44:15.823Z"
+                                default: "2026-07-06T11:11:53.460Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -46737,7 +45786,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-07-06T07:43:53.777Z"
+                      default: "2026-07-06T11:11:35.024Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -46745,7 +45794,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-07-06T07:43:53.778Z"
+                          default: "2026-07-06T11:11:35.025Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -47110,7 +46159,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:44:15.811Z"
+                              default: "2026-07-06T11:11:53.447Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47183,7 +46232,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:44:15.812Z"
+                              default: "2026-07-06T11:11:53.448Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47256,7 +46305,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:44:15.813Z"
+                              default: "2026-07-06T11:11:53.450Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47296,7 +46345,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-06T07:43:53.777Z"
+                    default: "2026-07-06T11:11:35.024Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47304,7 +46353,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-06T07:43:53.778Z"
+                        default: "2026-07-06T11:11:35.025Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -47925,7 +46974,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:44:15.853Z"
+                              default: "2026-07-06T11:11:53.493Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47998,7 +47047,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:44:15.854Z"
+                              default: "2026-07-06T11:11:53.494Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48071,7 +47120,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:44:15.855Z"
+                              default: "2026-07-06T11:11:53.495Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48111,7 +47160,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-06T07:43:53.777Z"
+                    default: "2026-07-06T11:11:35.024Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -48119,7 +47168,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-06T07:43:53.778Z"
+                        default: "2026-07-06T11:11:35.025Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -54347,7 +53396,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-06T07:44:16.021Z"
+                      default: "2026-07-06T11:11:53.622Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54389,7 +53438,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-06T07:44:16.022Z"
+                      default: "2026-07-06T11:11:53.623Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54431,7 +53480,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-06T07:44:16.023Z"
+                      default: "2026-07-06T11:11:53.623Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54766,7 +53815,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-06T07:43:53.777Z"
+                          default: "2026-07-06T11:11:35.024Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54774,7 +53823,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:43:53.778Z"
+                              default: "2026-07-06T11:11:35.025Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -54848,7 +53897,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-06T07:43:53.777Z"
+                          default: "2026-07-06T11:11:35.024Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54856,7 +53905,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-06T07:43:53.778Z"
+                              default: "2026-07-06T11:11:35.025Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55044,7 +54093,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-06T07:43:53.777Z"
+                        default: "2026-07-06T11:11:35.024Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55052,7 +54101,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-06T07:43:53.778Z"
+                            default: "2026-07-06T11:11:35.025Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55126,7 +54175,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-06T07:43:53.777Z"
+                        default: "2026-07-06T11:11:35.024Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55134,7 +54183,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-06T07:43:53.778Z"
+                            default: "2026-07-06T11:11:35.025Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55232,7 +54281,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-06T07:43:53.777Z"
+                        default: "2026-07-06T11:11:35.024Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55240,7 +54289,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-06T07:43:53.778Z"
+                            default: "2026-07-06T11:11:35.025Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55314,7 +54363,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-06T07:43:53.777Z"
+                        default: "2026-07-06T11:11:35.024Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55322,7 +54371,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-06T07:43:53.778Z"
+                            default: "2026-07-06T11:11:35.025Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55518,7 +54567,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-06T07:43:53.777Z"
+                        default: "2026-07-06T11:11:35.024Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55526,7 +54575,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-06T07:43:53.778Z"
+                            default: "2026-07-06T11:11:35.025Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55600,7 +54649,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-06T07:43:53.777Z"
+                        default: "2026-07-06T11:11:35.024Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55608,7 +54657,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-06T07:43:53.778Z"
+                            default: "2026-07-06T11:11:35.025Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -60132,195 +59181,6 @@ paths:
       x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
-  /v2/notifiers:
-    get:
-      tags:
-        - "Notifiers"
-      summary: "List notifiers"
-      description: "Returns notifier destinations visible to the caller, ordered by creation time with the newest notifier first."
-      operationId: "NotifierList"
-      parameters:
-        - name: "limit"
-          in: "query"
-          description: "Optional. Number of notifiers to return. Defaults to 25 and must be between 1 and 200."
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          description: "Cursor for forward pagination. Set to the `_id` of the last item from the previous page."
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          description: "Cursor for backward pagination. Set to the `_id` of the first item from the previous page."
-          schema:
-            type: "string"
-        - name: "project_id"
-          in: "query"
-          description: "Restrict results to one project. Must be a project the caller is authorized for."
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListNotifiersResponse"
-      x-speakeasy-group: "notifiers"
-      x-speakeasy-name-override: "list"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - List notifiers"
-          source: "curl --get 'https://api.orq.ai/v2/notifiers' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'project_id=proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --data-urlencode 'limit=25'\n"
-        - lang: "python"
-          label: "Python - List notifiers"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.notifiers.list(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    limit=25,\n)\n\nfor notifier in page.data:\n    print(notifier._id, notifier.display_name)\n"
-        - lang: "typescript"
-          label: "Node.js - List notifiers"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.notifiers.list({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\n\nfor (const notifier of page.data) {\n  console.log(notifier._id, notifier.displayName);\n}\n"
-      security:
-        - ApiKey: []
-    post:
-      tags:
-        - "Notifiers"
-      summary: "Create a notifier"
-      description: "Creates a notifier destination in a project. Choose `NOTIFIER_TYPE_EMAIL`, `NOTIFIER_TYPE_SLACK_WEBHOOK`, or `NOTIFIER_TYPE_WEBHOOK` and provide the matching destination fields."
-      operationId: "NotifierCreate"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateNotifierRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateNotifierResponse"
-      x-speakeasy-group: "notifiers"
-      x-speakeasy-name-override: "create"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Create email notifier"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/notifiers' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    \"display_name\": \"Production alerts\",\n    \"type\": \"NOTIFIER_TYPE_EMAIL\",\n    \"emails\": [\"ops@example.com\", \"alerts@example.com\"],\n    \"metadata\": {\"environment\": \"production\"}\n  }'\n"
-        - lang: "python"
-          label: "Python - Create email notifier"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.notifiers.create(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    display_name=\"Production alerts\",\n    type=\"NOTIFIER_TYPE_EMAIL\",\n    emails=[\"ops@example.com\", \"alerts@example.com\"],\n    metadata={\"environment\": \"production\"},\n)\n\nprint(result.notifier._id)\n"
-        - lang: "typescript"
-          label: "Node.js - Create email notifier"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.create({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  displayName: 'Production alerts',\n  type: 'NOTIFIER_TYPE_EMAIL',\n  emails: ['ops@example.com', 'alerts@example.com'],\n  metadata: { environment: 'production' },\n});\n\nconsole.log(result.notifier._id);\n"
-      security:
-        - ApiKey: []
-  /v2/notifiers/{notifier_id}:
-    get:
-      tags:
-        - "Notifiers"
-      summary: "Retrieve a notifier"
-      description: "Retrieves an existing notifier by ID."
-      operationId: "NotifierGet"
-      parameters:
-        - name: "notifier_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetNotifierResponse"
-      x-speakeasy-group: "notifiers"
-      x-speakeasy-name-override: "get"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Retrieve notifier"
-          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/notifiers/notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
-        - lang: "python"
-          label: "Python - Retrieve notifier"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.notifiers.get(\n    notifier_id=\"notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.notifier.display_name)\n"
-        - lang: "typescript"
-          label: "Node.js - Retrieve notifier"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.get({\n  notifierId: 'notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.notifier.displayName);\n"
-      security:
-        - ApiKey: []
-    delete:
-      tags:
-        - "Notifiers"
-      summary: "Delete a notifier"
-      description: "Deletes an existing notifier by ID."
-      operationId: "NotifierDelete"
-      parameters:
-        - name: "notifier_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteNotifierResponse"
-      x-speakeasy-group: "notifiers"
-      x-speakeasy-name-override: "delete"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Delete notifier"
-          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/notifiers/notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
-        - lang: "python"
-          label: "Python - Delete notifier"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.notifiers.delete(\n    notifier_id=\"notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
-        - lang: "typescript"
-          label: "Node.js - Delete notifier"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.notifiers.delete({\n  notifierId: 'notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
-      security:
-        - ApiKey: []
-    patch:
-      tags:
-        - "Notifiers"
-      summary: "Update a notifier"
-      description: "Partially updates an existing notifier. When changing `type`, provide the destination fields required by the new notifier type."
-      operationId: "NotifierUpdate"
-      parameters:
-        - name: "notifier_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateNotifierRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateNotifierResponse"
-      x-speakeasy-group: "notifiers"
-      x-speakeasy-name-override: "update"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Update notifier"
-          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/notifiers/notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Production incident alerts\",\n    \"emails\": [\"incidents@example.com\"]\n  }'\n"
-        - lang: "python"
-          label: "Python - Update notifier"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.notifiers.update(\n    notifier_id=\"notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    display_name=\"Production incident alerts\",\n    emails=[\"incidents@example.com\"],\n)\n\nprint(result.notifier.display_name)\n"
-        - lang: "typescript"
-          label: "Node.js - Update notifier"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.update({\n  notifierId: 'notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  displayName: 'Production incident alerts',\n  emails: ['incidents@example.com'],\n});\n\nconsole.log(result.notifier.displayName);\n"
-      security:
-        - ApiKey: []
   /v2/projects:
     get:
       tags:
@@ -62379,243 +61239,6 @@ paths:
       x-speakeasy-name-override: "query"
       security:
         - ApiKey: []
-  /v2/traces/aggregate:
-    post:
-      tags:
-        - "Traces"
-      summary: "Aggregate traces"
-      description: "Aggregate trace metrics using the structured trace filter contract."
-      operationId: "TracesAggregate"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AggregateTracesRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AggregateTracesResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "aggregate"
-      security:
-        - ApiKey: []
-  /v2/traces/facets:
-    get:
-      tags:
-        - "Traces"
-      summary: "List trace facets"
-      description: "List trace fields that support facet value discovery."
-      operationId: "TracesListFacets"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTraceFacetsResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "list_facets"
-      security:
-        - ApiKey: []
-  /v2/traces/facets/{field}:
-    get:
-      tags:
-        - "Traces"
-      summary: "List trace facet values"
-      description: "List values and counts for one trace facet field."
-      operationId: "TracesListFacetValues"
-      parameters:
-        - name: "field"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "from"
-          in: "query"
-          schema:
-            type: "string"
-            format: "date-time"
-        - name: "to"
-          in: "query"
-          schema:
-            type: "string"
-            format: "date-time"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "filter_operator"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTraceFacetValuesResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "list_facet_values"
-      security:
-        - ApiKey: []
-  /v2/traces/fields:
-    get:
-      tags:
-        - "Traces"
-      summary: "List trace fields"
-      description: "List currently supported static trace fields."
-      operationId: "TracesListFields"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTraceFieldsResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "list_fields"
-      security:
-        - ApiKey: []
-  /v2/traces/query:
-    post:
-      tags:
-        - "Traces"
-      summary: "Query traces with OQL"
-      description: "Run an OQL trace query. OQL is validated against the trace field registry and compiled through the trace planner."
-      operationId: "TracesQueryOql"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/QueryTracesRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/QueryTracesResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "query"
-      security:
-        - ApiKey: []
-  /v2/traces/search:
-    post:
-      tags:
-        - "Traces"
-      summary: "Search traces"
-      description: "Search trace summaries using the structured trace filter contract."
-      operationId: "TracesSearch"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SearchTracesRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SearchTracesResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "search"
-      security:
-        - ApiKey: []
-  /v2/traces/{trace_id}:
-    get:
-      tags:
-        - "Traces"
-      summary: "Get trace"
-      description: "Retrieve one trace summary by trace id."
-      operationId: "TracesGet"
-      parameters:
-        - name: "trace_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetTraceResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "get"
-      security:
-        - ApiKey: []
-  /v2/traces/{trace_id}/spans:
-    get:
-      tags:
-        - "Traces"
-      summary: "List trace spans"
-      description: "List canonical span summaries for a trace."
-      operationId: "TracesListSpans"
-      parameters:
-        - name: "trace_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "page_token"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTraceSpansResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "list_spans"
-      security:
-        - ApiKey: []
-  /v2/traces/{trace_id}/spans/{span_id}:
-    get:
-      tags:
-        - "Traces"
-      summary: "Get trace span"
-      description: "Retrieve one hydrated span."
-      operationId: "TracesGetSpan"
-      parameters:
-        - name: "trace_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "span_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetTraceSpanResponse"
-      x-speakeasy-group: "traces"
-      x-speakeasy-name-override: "get_span"
-      security:
-        - ApiKey: []
 webhooks: {}
 tags:
   - description: "List models available through the AI Router."
@@ -62637,8 +61260,6 @@ tags:
     description: "Identities represent end users from your system for usage and engagement tracking."
   - name: "Management keys"
     description: "Management keys are workspace-scoped credentials that authenticate programmatic access to workspace administration surfaces (API keys, budgets). Unlike project-scoped API keys, a management key always operates at the workspace level."
-  - name: "Notifiers"
-    description: "Notifier destinations used to send delivery and workflow notifications."
   - name: "Projects"
     description: "Projects organize resources within a workspace"
   - name: "Skills"
@@ -62649,5 +61270,3 @@ tags:
   - name: "Embeddings"
   - name: "Reporting"
     description: "GenAI reporting API over canonical analytics rollups. Accepts a metric name, time range, grain, group-by, and filters; returns a typed time series and optional totals."
-  - name: "Traces"
-    description: "Query and inspect ingested trace data: search trace summaries, aggregate metrics, and read individual traces and their spans."
