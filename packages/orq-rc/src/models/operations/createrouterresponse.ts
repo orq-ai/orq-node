@@ -538,6 +538,43 @@ export type ToolsMCPTool = {
   type: "mcp";
 };
 
+export type Files = {
+  /**
+   * The workspace file ID.
+   */
+  fileId: string;
+  /**
+   * The file name exposed under /workspace.
+   */
+  name: string;
+};
+
+/**
+ * Network mode. Defaults to disabled.
+ */
+export const ToolsMode = {
+  Disabled: "disabled",
+  Allowlist: "allowlist",
+} as const;
+/**
+ * Network mode. Defaults to disabled.
+ */
+export type ToolsMode = ClosedEnum<typeof ToolsMode>;
+
+/**
+ * Network access intent for orq:code_interpreter. Stored and validated today; runtime enforcement by the sandbox egress layer is rolling out and until then sandbox executions retain default public internet egress.
+ */
+export type Network = {
+  /**
+   * Allowed network hostnames or IPv4 addresses when mode is allowlist. Maximum 50 entries.
+   */
+  allowlist?: Array<string> | undefined;
+  /**
+   * Network mode. Defaults to disabled.
+   */
+  mode?: ToolsMode | undefined;
+};
+
 /**
  * The orq.ai tool type.
  */
@@ -545,6 +582,7 @@ export const CreateRouterResponseToolsResponsesType = {
   OrqCurrentDate: "orq:current_date",
   OrqGoogleSearch: "orq:google_search",
   OrqWebScraper: "orq:web_scraper",
+  OrqCodeInterpreter: "orq:code_interpreter",
   OrqMcp: "orq:mcp",
   OrqHttp: "orq:http",
   OrqFunction: "orq:function",
@@ -560,6 +598,14 @@ export type CreateRouterResponseToolsResponsesType = ClosedEnum<
  * An orq.ai platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'.
  */
 export type OrqAiTool = {
+  /**
+   * Files to stage in /workspace for orq:code_interpreter. Maximum 10 files.
+   */
+  files?: Array<Files> | undefined;
+  /**
+   * Network access intent for orq:code_interpreter. Stored and validated today; runtime enforcement by the sandbox egress layer is rolling out and until then sandbox executions retain default public internet egress.
+   */
+  network?: Network | undefined;
   /**
    * The tool ID (for orq:mcp, orq:http, orq:function).
    */
@@ -657,6 +703,7 @@ export type CreateRouterResponseTools =
   | (OrqAiTool & { type: "orq:current_date" })
   | (OrqAiTool & { type: "orq:google_search" })
   | (OrqAiTool & { type: "orq:web_scraper" })
+  | (OrqAiTool & { type: "orq:code_interpreter" })
   | (OrqAiTool & { type: "orq:mcp" })
   | (OrqAiTool & { type: "orq:http" })
   | (OrqAiTool & { type: "orq:function" })
@@ -768,6 +815,7 @@ export type CreateRouterResponseRequestBody = {
       | (OrqAiTool & { type: "orq:current_date" })
       | (OrqAiTool & { type: "orq:google_search" })
       | (OrqAiTool & { type: "orq:web_scraper" })
+      | (OrqAiTool & { type: "orq:code_interpreter" })
       | (OrqAiTool & { type: "orq:mcp" })
       | (OrqAiTool & { type: "orq:http" })
       | (OrqAiTool & { type: "orq:function" })
@@ -1517,6 +1565,54 @@ export function toolsMCPToolToJSON(toolsMCPTool: ToolsMCPTool): string {
 }
 
 /** @internal */
+export type Files$Outbound = {
+  file_id: string;
+  name: string;
+};
+
+/** @internal */
+export const Files$outboundSchema: z.ZodType<
+  Files$Outbound,
+  z.ZodTypeDef,
+  Files
+> = z.object({
+  fileId: z.string(),
+  name: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+export function filesToJSON(files: Files): string {
+  return JSON.stringify(Files$outboundSchema.parse(files));
+}
+
+/** @internal */
+export const ToolsMode$outboundSchema: z.ZodNativeEnum<typeof ToolsMode> = z
+  .nativeEnum(ToolsMode);
+
+/** @internal */
+export type Network$Outbound = {
+  allowlist?: Array<string> | undefined;
+  mode: string;
+};
+
+/** @internal */
+export const Network$outboundSchema: z.ZodType<
+  Network$Outbound,
+  z.ZodTypeDef,
+  Network
+> = z.object({
+  allowlist: z.array(z.string()).optional(),
+  mode: ToolsMode$outboundSchema.default("disabled"),
+});
+
+export function networkToJSON(network: Network): string {
+  return JSON.stringify(Network$outboundSchema.parse(network));
+}
+
+/** @internal */
 export const CreateRouterResponseToolsResponsesType$outboundSchema:
   z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesType> = z.nativeEnum(
     CreateRouterResponseToolsResponsesType,
@@ -1524,6 +1620,8 @@ export const CreateRouterResponseToolsResponsesType$outboundSchema:
 
 /** @internal */
 export type OrqAiTool$Outbound = {
+  files?: Array<Files$Outbound> | undefined;
+  network?: Network$Outbound | undefined;
   tool_id?: string | undefined;
   type: string;
 };
@@ -1534,6 +1632,8 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OrqAiTool
 > = z.object({
+  files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
+  network: z.lazy(() => Network$outboundSchema).optional(),
   toolId: z.string().optional(),
   type: CreateRouterResponseToolsResponsesType$outboundSchema,
 }).transform((v) => {
@@ -1616,6 +1716,7 @@ export type CreateRouterResponseTools$Outbound =
   | (OrqAiTool$Outbound & { type: "orq:current_date" })
   | (OrqAiTool$Outbound & { type: "orq:google_search" })
   | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
+  | (OrqAiTool$Outbound & { type: "orq:code_interpreter" })
   | (OrqAiTool$Outbound & { type: "orq:mcp" })
   | (OrqAiTool$Outbound & { type: "orq:http" })
   | (OrqAiTool$Outbound & { type: "orq:function" })
@@ -1636,6 +1737,9 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:web_scraper") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:code_interpreter") }),
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:mcp") }),
@@ -1698,6 +1802,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | (OrqAiTool$Outbound & { type: "orq:current_date" })
       | (OrqAiTool$Outbound & { type: "orq:google_search" })
       | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
+      | (OrqAiTool$Outbound & { type: "orq:code_interpreter" })
       | (OrqAiTool$Outbound & { type: "orq:mcp" })
       | (OrqAiTool$Outbound & { type: "orq:http" })
       | (OrqAiTool$Outbound & { type: "orq:function" })
@@ -1767,6 +1872,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       z.lazy(() =>
         OrqAiTool$outboundSchema
       ).and(z.object({ type: z.literal("orq:web_scraper") })),
+      z.lazy(() =>
+        OrqAiTool$outboundSchema
+      ).and(z.object({ type: z.literal("orq:code_interpreter") })),
       z.lazy(() =>
         OrqAiTool$outboundSchema
       ).and(z.object({ type: z.literal("orq:mcp") })),

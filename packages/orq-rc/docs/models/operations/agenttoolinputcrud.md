@@ -93,6 +93,14 @@ const value: operations.CurrentDateTool = {
 };
 ```
 
+### `operations.CodeInterpreterTool`
+
+```typescript
+const value: operations.CodeInterpreterTool = {
+  type: "code_interpreter",
+};
+```
+
 ### `operations.HTTPTool`
 
 ```typescript

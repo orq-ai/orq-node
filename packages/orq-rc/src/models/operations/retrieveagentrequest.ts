@@ -223,6 +223,10 @@ export type RetrieveAgentRequestSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: RetrieveAgentRequestToolApprovalRequired;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?: Array<RetrieveAgentRequestTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -1559,6 +1563,7 @@ export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
   max_cost: z.number().default(0),
   tool_approval_required: RetrieveAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
+  chat_exposed: z.boolean().optional(),
   tools: z.array(z.lazy(() => RetrieveAgentRequestTools$inboundSchema))
     .optional(),
   evaluators: z.array(
@@ -1573,6 +1578,7 @@ export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
     "max_execution_time": "maxExecutionTime",
     "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
+    "chat_exposed": "chatExposed",
   });
 });
 

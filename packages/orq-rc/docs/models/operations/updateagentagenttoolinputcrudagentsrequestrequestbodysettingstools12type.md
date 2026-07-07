@@ -1,7 +1,5 @@
 # UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
 
-HTTP tool type
-
 ## Example Usage
 
 ```typescript
@@ -9,11 +7,11 @@ import { UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Typ
 
 let value:
   UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-    "http";
+    "code_interpreter";
 ```
 
 ## Values
 
 ```typescript
-"http"
+"code_interpreter"
 ```

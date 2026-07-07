@@ -13,5 +13,5 @@ let value: CreateRouterResponseToolsResponsesType = "orq:web_scraper";
 ## Values
 
 ```typescript
-"orq:current_date" | "orq:google_search" | "orq:web_scraper" | "orq:mcp" | "orq:http" | "orq:function"
+"orq:current_date" | "orq:google_search" | "orq:web_scraper" | "orq:code_interpreter" | "orq:mcp" | "orq:http" | "orq:function"
 ```

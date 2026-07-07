@@ -97,6 +97,14 @@ const value: operations.StreamRunAgentAgentToolInputRunCurrentDateTool = {
 };
 ```
 
+### `operations.StreamRunAgentAgentToolInputRunCodeInterpreterTool`
+
+```typescript
+const value: operations.StreamRunAgentAgentToolInputRunCodeInterpreterTool = {
+  type: "code_interpreter",
+};
+```
+
 ### `operations.AgentToolInputRunHTTPToolRun`
 
 ```typescript

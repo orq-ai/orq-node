@@ -1031,16 +1031,16 @@ export type AgentToolInputCRUDProviderBuiltInTool = {
 /**
  * MCP tool type
  */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type =
   {
     Mcp: "mcp",
   } as const;
 /**
  * MCP tool type
  */
-export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
+export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type =
   ClosedEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type
   >;
 
 /**
@@ -1051,7 +1051,7 @@ export type AgentToolInputCRUDMCPTool = {
    * MCP tool type
    */
   type?:
-    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
+    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type
     | undefined;
   /**
    * The key of the parent MCP tool
@@ -1074,16 +1074,16 @@ export type AgentToolInputCRUDMCPTool = {
 /**
  * JSON Schema tool type
  */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
   {
     JsonSchema: "json_schema",
   } as const;
 /**
  * JSON Schema tool type
  */
-export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
+export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
   ClosedEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
   >;
 
 /**
@@ -1094,7 +1094,7 @@ export type AgentToolInputCRUDJSONSchemaTool = {
    * JSON Schema tool type
    */
   type?:
-    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
     | undefined;
   /**
    * The key of the pre-created JSON Schema tool
@@ -1113,16 +1113,16 @@ export type AgentToolInputCRUDJSONSchemaTool = {
 /**
  * Function tool type
  */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
   {
     Function: "function",
   } as const;
 /**
  * Function tool type
  */
-export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
+export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
   ClosedEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
   >;
 
 /**
@@ -1133,7 +1133,7 @@ export type AgentToolInputCRUDFunctionTool = {
    * Function tool type
    */
   type?:
-    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
+    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
     | undefined;
   /**
    * The key of the pre-created function tool
@@ -1152,16 +1152,16 @@ export type AgentToolInputCRUDFunctionTool = {
 /**
  * Code execution tool type
  */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
   {
     Code: "code",
   } as const;
 /**
  * Code execution tool type
  */
-export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
+export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
   ClosedEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
   >;
 
 /**
@@ -1172,7 +1172,7 @@ export type AgentToolInputCRUDCodeExecutionTool = {
    * Code execution tool type
    */
   type?:
-    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
+    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
     | undefined;
   /**
    * The key of the pre-created code tool
@@ -1191,16 +1191,16 @@ export type AgentToolInputCRUDCodeExecutionTool = {
 /**
  * HTTP tool type
  */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
   {
     Http: "http",
   } as const;
 /**
  * HTTP tool type
  */
-export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
+export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
   ClosedEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
   >;
 
 /**
@@ -1211,7 +1211,7 @@ export type AgentToolInputCRUDHTTPTool = {
    * HTTP tool type
    */
   type?:
-    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
+    | UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
     | undefined;
   /**
    * The key of the pre-created HTTP tool
@@ -1225,6 +1225,31 @@ export type AgentToolInputCRUDHTTPTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+};
+
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
+  {
+    CodeInterpreter: "code_interpreter",
+  } as const;
+export type UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
+  ClosedEnum<
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
+  >;
+
+/**
+ * Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
+ */
+export type AgentToolInputCRUDCodeInterpreterTool = {
+  type:
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
@@ -1499,6 +1524,7 @@ export type UpdateAgentAgentToolInputCRUD =
   | AgentToolInputCRUDRetrieveKnowledgeBasesTool
   | AgentToolInputCRUDQueryKnowledgeBaseTool
   | AgentToolInputCRUDCurrentDateTool
+  | AgentToolInputCRUDCodeInterpreterTool
   | AgentToolInputCRUDMCPTool
   | AgentToolInputCRUDProviderBuiltInTool
   | AgentToolInputCRUDHTTPTool
@@ -1567,6 +1593,10 @@ export type UpdateAgentSettings = {
   maxExecutionTime?: number | undefined;
   maxCost?: number | undefined;
   toolApprovalRequired?: UpdateAgentToolApprovalRequired | undefined;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?:
     | Array<
       | AgentToolInputCRUDGoogleSearchTool
@@ -1580,6 +1610,7 @@ export type UpdateAgentSettings = {
       | AgentToolInputCRUDRetrieveKnowledgeBasesTool
       | AgentToolInputCRUDQueryKnowledgeBaseTool
       | AgentToolInputCRUDCurrentDateTool
+      | AgentToolInputCRUDCodeInterpreterTool
       | AgentToolInputCRUDMCPTool
       | AgentToolInputCRUDProviderBuiltInTool
       | AgentToolInputCRUDHTTPTool
@@ -1909,6 +1940,10 @@ export type UpdateAgentAgentsSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?: Array<UpdateAgentTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -4632,11 +4667,11 @@ export function agentToolInputCRUDProviderBuiltInToolToJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type
   > = z.nativeEnum(
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type,
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type,
   );
 
 /** @internal */
@@ -4655,7 +4690,7 @@ export const AgentToolInputCRUDMCPTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDMCPTool
 > = z.object({
   type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools17Type$outboundSchema
       .default("mcp"),
   key: z.string().optional(),
   id: z.string().optional(),
@@ -4677,11 +4712,11 @@ export function agentToolInputCRUDMCPToolToJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
   > = z.nativeEnum(
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type,
   );
 
 /** @internal */
@@ -4699,7 +4734,7 @@ export const AgentToolInputCRUDJSONSchemaTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDJSONSchemaTool
 > = z.object({
   type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema
       .default("json_schema"),
   key: z.string().optional(),
   id: z.string().optional(),
@@ -4721,11 +4756,11 @@ export function agentToolInputCRUDJSONSchemaToolToJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
   > = z.nativeEnum(
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
   );
 
 /** @internal */
@@ -4743,7 +4778,7 @@ export const AgentToolInputCRUDFunctionTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDFunctionTool
 > = z.object({
   type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema
       .default("function"),
   key: z.string().optional(),
   id: z.string().optional(),
@@ -4765,11 +4800,11 @@ export function agentToolInputCRUDFunctionToolToJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
   > = z.nativeEnum(
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
   );
 
 /** @internal */
@@ -4787,7 +4822,7 @@ export const AgentToolInputCRUDCodeExecutionTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDCodeExecutionTool
 > = z.object({
   type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema
       .default("code"),
   key: z.string().optional(),
   id: z.string().optional(),
@@ -4809,11 +4844,11 @@ export function agentToolInputCRUDCodeExecutionToolToJSON(
 }
 
 /** @internal */
-export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
   z.ZodNativeEnum<
-    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
   > = z.nativeEnum(
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
   );
 
 /** @internal */
@@ -4831,7 +4866,7 @@ export const AgentToolInputCRUDHTTPTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDHTTPTool
 > = z.object({
   type:
-    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema
       .default("http"),
   key: z.string().optional(),
   id: z.string().optional(),
@@ -4847,6 +4882,47 @@ export function agentToolInputCRUDHTTPToolToJSON(
 ): string {
   return JSON.stringify(
     AgentToolInputCRUDHTTPTool$outboundSchema.parse(agentToolInputCRUDHTTPTool),
+  );
+}
+
+/** @internal */
+export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
+  > = z.nativeEnum(
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
+  );
+
+/** @internal */
+export type AgentToolInputCRUDCodeInterpreterTool$Outbound = {
+  type: string;
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const AgentToolInputCRUDCodeInterpreterTool$outboundSchema: z.ZodType<
+  AgentToolInputCRUDCodeInterpreterTool$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputCRUDCodeInterpreterTool
+> = z.object({
+  type:
+    UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema,
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function agentToolInputCRUDCodeInterpreterToolToJSON(
+  agentToolInputCRUDCodeInterpreterTool: AgentToolInputCRUDCodeInterpreterTool,
+): string {
+  return JSON.stringify(
+    AgentToolInputCRUDCodeInterpreterTool$outboundSchema.parse(
+      agentToolInputCRUDCodeInterpreterTool,
+    ),
   );
 }
 
@@ -5309,6 +5385,7 @@ export type UpdateAgentAgentToolInputCRUD$Outbound =
   | AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound
   | AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound
   | AgentToolInputCRUDCurrentDateTool$Outbound
+  | AgentToolInputCRUDCodeInterpreterTool$Outbound
   | AgentToolInputCRUDMCPTool$Outbound
   | AgentToolInputCRUDProviderBuiltInTool$Outbound
   | AgentToolInputCRUDHTTPTool$Outbound
@@ -5333,6 +5410,7 @@ export const UpdateAgentAgentToolInputCRUD$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputCRUDRetrieveKnowledgeBasesTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDCurrentDateTool$outboundSchema),
+  z.lazy(() => AgentToolInputCRUDCodeInterpreterTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDProviderBuiltInTool$outboundSchema),
   z.lazy(() => AgentToolInputCRUDHTTPTool$outboundSchema),
@@ -5429,6 +5507,7 @@ export type UpdateAgentSettings$Outbound = {
   max_execution_time?: number | undefined;
   max_cost?: number | undefined;
   tool_approval_required?: string | undefined;
+  chat_exposed?: boolean | undefined;
   tools?:
     | Array<
       | AgentToolInputCRUDGoogleSearchTool$Outbound
@@ -5442,6 +5521,7 @@ export type UpdateAgentSettings$Outbound = {
       | AgentToolInputCRUDRetrieveKnowledgeBasesTool$Outbound
       | AgentToolInputCRUDQueryKnowledgeBaseTool$Outbound
       | AgentToolInputCRUDCurrentDateTool$Outbound
+      | AgentToolInputCRUDCodeInterpreterTool$Outbound
       | AgentToolInputCRUDMCPTool$Outbound
       | AgentToolInputCRUDProviderBuiltInTool$Outbound
       | AgentToolInputCRUDHTTPTool$Outbound
@@ -5465,6 +5545,7 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
   maxCost: z.number().optional(),
   toolApprovalRequired: UpdateAgentToolApprovalRequired$outboundSchema
     .optional(),
+  chatExposed: z.boolean().optional(),
   tools: z.array(
     z.union([
       z.lazy(() => AgentToolInputCRUDGoogleSearchTool$outboundSchema),
@@ -5478,6 +5559,7 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputCRUDRetrieveKnowledgeBasesTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDQueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDCurrentDateTool$outboundSchema),
+      z.lazy(() => AgentToolInputCRUDCodeInterpreterTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDMCPTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDProviderBuiltInTool$outboundSchema),
       z.lazy(() => AgentToolInputCRUDHTTPTool$outboundSchema),
@@ -5496,6 +5578,7 @@ export const UpdateAgentSettings$outboundSchema: z.ZodType<
     maxExecutionTime: "max_execution_time",
     maxCost: "max_cost",
     toolApprovalRequired: "tool_approval_required",
+    chatExposed: "chat_exposed",
   });
 });
 
@@ -5900,6 +5983,7 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
   max_cost: z.number().default(0),
   tool_approval_required: UpdateAgentAgentsToolApprovalRequired$inboundSchema
     .default("respect_tool"),
+  chat_exposed: z.boolean().optional(),
   tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)).optional(),
   evaluators: z.array(z.lazy(() => UpdateAgentAgentsEvaluators$inboundSchema))
     .optional(),
@@ -5911,6 +5995,7 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
     "max_execution_time": "maxExecutionTime",
     "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
+    "chat_exposed": "chatExposed",
   });
 });
 

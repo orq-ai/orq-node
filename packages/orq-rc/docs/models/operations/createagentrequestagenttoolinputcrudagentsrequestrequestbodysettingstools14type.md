@@ -1,6 +1,6 @@
 # CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
 
-Function tool type
+Code execution tool type
 
 ## Example Usage
 
@@ -9,11 +9,11 @@ import { CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToo
 
 let value:
   CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-    "function";
+    "code";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"code"
 ```

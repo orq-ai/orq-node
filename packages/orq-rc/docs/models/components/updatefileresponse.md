@@ -8,7 +8,7 @@ import { UpdateFileResponse } from "@orq-ai/node/models/components";
 let value: UpdateFileResponse = {
   file: {
     fileId: "<id>",
-    purpose: "FILE_PURPOSE_UNSPECIFIED",
+    purpose: "FILE_PURPOSE_RETRIEVAL",
     fileName: "example.file",
     bytes: "<value>",
     createdAt: new Date("2026-08-14T16:29:34.582Z"),

@@ -93,6 +93,14 @@ const value: operations.AgentToolInputRunCurrentDateTool = {
 };
 ```
 
+### `operations.AgentToolInputRunCodeInterpreterTool`
+
+```typescript
+const value: operations.AgentToolInputRunCodeInterpreterTool = {
+  type: "code_interpreter",
+};
+```
+
 ### `operations.HTTPToolRun`
 
 ```typescript

@@ -11,7 +11,9 @@ import { modelsCreateVertex } from "../funcs/modelsCreateVertex.js";
 import { modelsDelete } from "../funcs/modelsDelete.js";
 import { modelsDisable } from "../funcs/modelsDisable.js";
 import { modelsEnable } from "../funcs/modelsEnable.js";
+import { modelsImportLitellm } from "../funcs/modelsImportLitellm.js";
 import { modelsList } from "../funcs/modelsList.js";
+import { modelsListLitellm } from "../funcs/modelsListLitellm.js";
 import { modelsUpdate } from "../funcs/modelsUpdate.js";
 import { modelsUpdateAutorouter } from "../funcs/modelsUpdateAutorouter.js";
 import { modelsUpdateAwsBedrock } from "../funcs/modelsUpdateAwsBedrock.js";
@@ -19,6 +21,7 @@ import { modelsUpdateOpenaiLike } from "../funcs/modelsUpdateOpenaiLike.js";
 import { modelsValidate } from "../funcs/modelsValidate.js";
 import { modelsValidateAwsBedrock } from "../funcs/modelsValidateAwsBedrock.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -138,6 +141,38 @@ export class Models extends ClientSDK {
     return unwrapAsync(modelsAzureFoundryDeployments(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Import models from LiteLLM
+   *
+   * @remarks
+   * Bulk-imports a list of LiteLLM model definitions into the workspace model garden.
+   */
+  async importLitellm(
+    request: Array<components.LiteLLMModel> | null,
+    options?: RequestOptions,
+  ): Promise<Array<components.ModelDocument>> {
+    return unwrapAsync(modelsImportLitellm(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List models from configured LiteLLM instance
+   *
+   * @remarks
+   * Fetches the list of models from the LiteLLM instance configured for the workspace. Requires a stored LiteLLM integration.
+   */
+  async listLitellm(
+    options?: RequestOptions,
+  ): Promise<Array<{ [k: string]: any }>> {
+    return unwrapAsync(modelsListLitellm(
+      this,
       options,
     ));
   }

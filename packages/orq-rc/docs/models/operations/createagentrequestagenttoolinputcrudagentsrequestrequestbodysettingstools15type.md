@@ -1,6 +1,6 @@
 # CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
 
-JSON Schema tool type
+Function tool type
 
 ## Example Usage
 
@@ -9,11 +9,11 @@ import { CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToo
 
 let value:
   CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-    "json_schema";
+    "function";
 ```
 
 ## Values
 
 ```typescript
-"json_schema"
+"function"
 ```

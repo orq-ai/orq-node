@@ -32,7 +32,7 @@ let value: DeploymentsResponseBody = {
         model: "LeBaron",
         modelType: "rerank",
         modelParameters: {},
-        provider: "google",
+        provider: "google-ai",
         messages: [],
       },
       version: "<value>",

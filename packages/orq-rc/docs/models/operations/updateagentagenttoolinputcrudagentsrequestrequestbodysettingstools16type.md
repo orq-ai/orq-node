@@ -1,6 +1,6 @@
 # UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
 
-MCP tool type
+JSON Schema tool type
 
 ## Example Usage
 
@@ -9,11 +9,11 @@ import { UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Typ
 
 let value:
   UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
-    "mcp";
+    "json_schema";
 ```
 
 ## Values
 
 ```typescript
-"mcp"
+"json_schema"
 ```

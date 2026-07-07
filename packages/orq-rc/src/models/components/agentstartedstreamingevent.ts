@@ -188,6 +188,10 @@ export type Settings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: ToolApprovalRequired;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?: Array<Tools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -432,6 +436,7 @@ export const Settings$inboundSchema: z.ZodType<
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
+  chat_exposed: z.boolean().optional(),
   tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
   guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
@@ -441,6 +446,7 @@ export const Settings$inboundSchema: z.ZodType<
     "max_execution_time": "maxExecutionTime",
     "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
+    "chat_exposed": "chatExposed",
   });
 });
 

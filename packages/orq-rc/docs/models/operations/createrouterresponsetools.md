@@ -62,6 +62,14 @@ const value: operations.OrqAiTool = {
 };
 ```
 
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:function",
+};
+```
+
 ### `operations.ToolsMCPTool`
 
 ```typescript
