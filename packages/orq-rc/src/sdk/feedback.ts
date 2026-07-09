@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a new API key
+   * Create schedule
    *
    * @remarks
-   * Mints a new opaque API key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
+   * Creates a schedule that runs the agent on a recurring or one-off cadence. The minimum firing interval is 1 hour for `cron` and `interval`; `once` schedules are exempt.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

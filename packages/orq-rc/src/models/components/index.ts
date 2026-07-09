@@ -38,6 +38,7 @@ export * from "./budgetsortfield.js";
 export * from "./budgetusage.js";
 export * from "./checkbudgetsrequest.js";
 export * from "./checkbudgetsresponse.js";
+export * from "./config.js";
 export * from "./conversationparam.js";
 export * from "./createagentresponse.js";
 export * from "./createapikeyrequest.js";

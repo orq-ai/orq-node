@@ -66,6 +66,7 @@ export type ModelUpdateOpenAILikeResponseBody = {
   pricingUrl: string | null;
   provider: string;
   refId: string;
+  sharing?: components.Config | undefined;
   updated: Date;
 };
 
@@ -203,6 +204,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   pricing_url: z.nullable(z.string()),
   provider: z.string(),
   refId: z.string(),
+  sharing: components.Config$inboundSchema.optional(),
   updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
