@@ -27,6 +27,8 @@ export * from "./autorouterv2effortconfig.js";
 export * from "./azurefoundrydeployment.js";
 export * from "./azurefoundrydeploymentmasterdata.js";
 export * from "./budget.js";
+export * from "./budgetalert.js";
+export * from "./budgetalertdimension.js";
 export * from "./budgetlimit.js";
 export * from "./budgetlimits.js";
 export * from "./budgetmatch.js";

@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  BudgetAlert,
+  BudgetAlert$Outbound,
+  BudgetAlert$outboundSchema,
+} from "./budgetalert.js";
+import {
   BudgetLimits,
   BudgetLimits$Outbound,
   BudgetLimits$outboundSchema,
@@ -68,6 +73,13 @@ export type CreateBudgetRequest = {
    *  the value MUST be in the future; the handler rejects past values.
    */
   expiresAt?: Date | undefined;
+  /**
+   * Optional threshold notifications. Ids are assigned by the server, so
+   *
+   * @remarks
+   *  `alerts[].id` must be omitted here; supplying one is rejected.
+   */
+  alerts?: Array<BudgetAlert> | undefined;
 };
 
 /** @internal */
@@ -78,6 +90,7 @@ export type CreateBudgetRequest$Outbound = {
   rate_limit?: RateLimit$Outbound | undefined;
   is_active?: boolean | undefined;
   expires_at?: string | undefined;
+  alerts?: Array<BudgetAlert$Outbound> | undefined;
 };
 
 /** @internal */
@@ -92,6 +105,7 @@ export const CreateBudgetRequest$outboundSchema: z.ZodType<
   rateLimit: RateLimit$outboundSchema.optional(),
   isActive: z.boolean().optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
+  alerts: z.array(BudgetAlert$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     rateLimit: "rate_limit",

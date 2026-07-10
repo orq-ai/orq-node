@@ -1896,7 +1896,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KX634ZC26DHC2182VM6ERM5R"),
+  _id: z.string().default("tool_01KX67H3J593YN0T53M9PX9JHW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1993,7 +1993,7 @@ export const ResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KX634ZC1T5KT7CP8HPD2TG06"),
+  id: z.string().default("01KX67H3J4GCS7EKZ9D29PJMGA"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2049,7 +2049,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KX634ZC0N8HPPS0SP25A5XB3"),
+  _id: z.string().default("tool_01KX67H3J17HNMNZNBYFSZGYP2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2235,7 +2235,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KX634ZBXYT8T2405RM66Z82R"),
+  _id: z.string().default("tool_01KX67H3HZJCS62NYRTFGFZJAH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2328,7 +2328,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KX634ZBVY1C3K6734QV3DZTD"),
+  _id: z.string().default("tool_01KX67H3HX36GEVQF316T4DQXK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2429,7 +2429,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KX634ZBSPNWWDMH0A9TRTS98"),
+  _id: z.string().default("tool_01KX67H3HV5TY7FN12X6MR07J8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

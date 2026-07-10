@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import * as components from "../components/index.js";
 
 export type NotifierListRequest = {
   /**
@@ -22,6 +23,14 @@ export type NotifierListRequest = {
    * Restrict results to one project. Must be a project the caller is authorized for.
    */
   projectId?: string | undefined;
+  /**
+   * Optional. Case-insensitive substring match on the notifier name.
+   */
+  search?: string | undefined;
+  /**
+   * Optional. Restrict results to these notifier types.
+   */
+  type?: Array<components.NotifierType> | undefined;
 };
 
 /** @internal */
@@ -30,6 +39,8 @@ export type NotifierListRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
+  search?: string | undefined;
+  type?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -42,6 +53,8 @@ export const NotifierListRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
+  search: z.string().optional(),
+  type: z.array(components.NotifierType$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

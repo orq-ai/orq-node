@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { BudgetAlert, BudgetAlert$inboundSchema } from "./budgetalert.js";
 import { BudgetLimits, BudgetLimits$inboundSchema } from "./budgetlimits.js";
 import { BudgetMatch, BudgetMatch$inboundSchema } from "./budgetmatch.js";
 import { BudgetScope, BudgetScope$inboundSchema } from "./budgetscope.js";
@@ -82,6 +83,10 @@ export type IdentityBudget = {
    *  has not been spent against in the current period.
    */
   usage?: BudgetUsage | undefined;
+  /**
+   * Threshold notifications. Absent when the budget has none.
+   */
+  alerts?: Array<BudgetAlert> | undefined;
 };
 
 export type Identity = {
@@ -186,6 +191,7 @@ export const IdentityBudget$inboundSchema: z.ZodType<
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   usage: BudgetUsage$inboundSchema.optional(),
+  alerts: z.array(BudgetAlert$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_id": "budgetId",

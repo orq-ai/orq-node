@@ -94,7 +94,9 @@ async function $do(
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
     "project_id": payload?.project_id,
+    "search": payload?.search,
     "starting_after": payload?.starting_after,
+    "type": payload?.type,
   });
 
   const headers = new Headers(compactMap({

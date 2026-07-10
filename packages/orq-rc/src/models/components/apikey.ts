@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ApiKeyOwner, ApiKeyOwner$inboundSchema } from "./apikeyowner.js";
 import { ApiKeyStatus, ApiKeyStatus$inboundSchema } from "./apikeystatus.js";
+import { BudgetAlert, BudgetAlert$inboundSchema } from "./budgetalert.js";
 import { BudgetLimits, BudgetLimits$inboundSchema } from "./budgetlimits.js";
 import { BudgetMatch, BudgetMatch$inboundSchema } from "./budgetmatch.js";
 import { BudgetScope, BudgetScope$inboundSchema } from "./budgetscope.js";
@@ -84,6 +85,10 @@ export type ApiKeyBudget = {
    *  has not been spent against in the current period.
    */
   usage?: BudgetUsage | undefined;
+  /**
+   * Threshold notifications. Absent when the budget has none.
+   */
+  alerts?: Array<BudgetAlert> | undefined;
 };
 
 /**
@@ -210,6 +215,7 @@ export const ApiKeyBudget$inboundSchema: z.ZodType<
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   usage: BudgetUsage$inboundSchema.optional(),
+  alerts: z.array(BudgetAlert$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_id": "budgetId",
