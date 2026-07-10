@@ -213,7 +213,7 @@ export type ResponseBodyJury = {
 };
 
 export type InvokeEvalResponseBodyEvalsValue = {
-  workflowRunId?: string | undefined;
+  workflowRunId?: string | null | undefined;
   traceId?: string | undefined;
   spanId?: string | undefined;
   value: number | boolean | string | null;
@@ -857,7 +857,7 @@ export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workflow_run_id: z.string().optional(),
+  workflow_run_id: z.nullable(z.string()).optional(),
   trace_id: z.string().optional(),
   span_id: z.string().optional(),
   value: z.nullable(z.union([z.number(), z.boolean(), z.string()])),

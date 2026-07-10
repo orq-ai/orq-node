@@ -1386,6 +1386,7 @@ export const UpdatePromptProvider = {
   Nvidia: "nvidia",
   Jina: "jina",
   Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
   Cerebras: "cerebras",
   Openailike: "openailike",
   Bytedance: "bytedance",
@@ -1401,6 +1402,8 @@ export const UpdatePromptProvider = {
   Hcompany: "hcompany",
   Inceptron: "inceptron",
   Wafer: "wafer",
+  Poolside: "poolside",
+  Tencent: "tencent",
   Slack: "slack",
   Orq: "orq",
 } as const;

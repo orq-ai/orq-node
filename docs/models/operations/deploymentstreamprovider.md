@@ -7,11 +7,11 @@ The provider used to generate the response
 ```typescript
 import { DeploymentStreamProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamProvider = "cerebras";
+let value: DeploymentStreamProvider = "openailike";
 ```
 
 ## Values
 
 ```typescript
-"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "moonshotai" | "zai" | "minimax" | "xai" | "alibaba" | "tensorix" | "scaleway" | "hcompany" | "inceptron" | "wafer" | "slack" | "orq"
+"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "moonshotai" | "zai" | "minimax" | "xai" | "alibaba" | "tensorix" | "scaleway" | "hcompany" | "inceptron" | "wafer" | "poolside" | "tencent" | "slack" | "orq"
 ```
