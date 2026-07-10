@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.CreateKnowledgeRequestBody1`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.CreateKnowledgeRequestBody1 = {
   key: "<key>",
   embeddingModel: "<value>",
   path: "Default",

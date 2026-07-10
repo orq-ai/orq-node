@@ -1,12 +1,12 @@
-# LLMFallbacks
+# OneFallbacks
 
 ## Example Usage
 
 ```typescript
-import { LLMFallbacks } from "@orq-ai/node/models/operations";
+import { OneFallbacks } from "@orq-ai/node/models/operations";
 
-let value: LLMFallbacks = {
-  model: "Model Y",
+let value: OneFallbacks = {
+  model: "LeBaron",
 };
 ```
 

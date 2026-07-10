@@ -44,12 +44,6 @@ export class Feedback extends ClientSDK {
     ));
   }
 
-  /**
-   * Create schedule
-   *
-   * @remarks
-   * Creates a schedule that runs the agent on a recurring or one-off cadence. The minimum firing interval is 1 hour for `cron` and `interval`; `once` schedules are exempt.
-   */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,

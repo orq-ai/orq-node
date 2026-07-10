@@ -43,7 +43,7 @@ export type Python = {
 /**
  * The type of output expected from the evaluator
  */
-export const LLMOutputType = {
+export const OneOutputType = {
   Boolean: "boolean",
   Categorical: "categorical",
   Number: "number",
@@ -52,71 +52,71 @@ export const LLMOutputType = {
 /**
  * The type of output expected from the evaluator
  */
-export type LLMOutputType = ClosedEnum<typeof LLMOutputType>;
+export type OneOutputType = ClosedEnum<typeof OneOutputType>;
 
-export const LLMType = {
+export const OneType = {
   LlmEval: "llm_eval",
 } as const;
-export type LLMType = ClosedEnum<typeof LLMType>;
+export type OneType = ClosedEnum<typeof OneType>;
 
-export type LLMCategoricalLabels = {
+export type OneCategoricalLabels = {
   value: string;
   description?: string | undefined;
 };
 
-export type CreateEvalLLMRetry = {
+export type CreateEval1Retry = {
   count?: number | undefined;
   onCodes?: Array<number> | undefined;
 };
 
-export type CreateEvalLLMFallbacks = {
+export type CreateEval1Fallbacks = {
   model: string;
 };
 
-export type LLMJudges = {
+export type OneJudges = {
   model: string;
-  retry?: CreateEvalLLMRetry | undefined;
-  fallbacks?: Array<CreateEvalLLMFallbacks> | undefined;
+  retry?: CreateEval1Retry | undefined;
+  fallbacks?: Array<CreateEval1Fallbacks> | undefined;
 };
 
-export type LLMRetry = {
+export type OneRetry = {
   count?: number | undefined;
   onCodes?: Array<number> | undefined;
 };
 
-export type LLMFallbacks = {
+export type OneFallbacks = {
   model: string;
 };
 
-export type LLMReplacementJudges = {
+export type OneReplacementJudges = {
   model: string;
-  retry?: LLMRetry | undefined;
-  fallbacks?: Array<LLMFallbacks> | undefined;
+  retry?: OneRetry | undefined;
+  fallbacks?: Array<OneFallbacks> | undefined;
 };
 
-export const LLMTieValue = {
+export const OneTieValue = {
   Tie: "Tie",
 } as const;
-export type LLMTieValue = ClosedEnum<typeof LLMTieValue>;
+export type OneTieValue = ClosedEnum<typeof OneTieValue>;
 
-export type LLMJury = {
-  judges: Array<LLMJudges>;
-  replacementJudges?: Array<LLMReplacementJudges> | undefined;
+export type OneJury = {
+  judges: Array<OneJudges>;
+  replacementJudges?: Array<OneReplacementJudges> | undefined;
   minSuccessfulJudges?: number | undefined;
-  tieValue?: LLMTieValue | undefined;
+  tieValue?: OneTieValue | undefined;
 };
 
-export type Llm2 = {
+export type LLMJury = {
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
    */
-  outputType?: LLMOutputType | undefined;
-  type: LLMType;
+  outputType?: OneOutputType | undefined;
+  type: OneType;
   repetitions?: number | null | undefined;
   prompt: string;
   categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<LLMCategoricalLabels> | null | undefined;
+  categoricalLabels?: Array<OneCategoricalLabels> | null | undefined;
   datasetId?: string | undefined;
   /**
    * Entity storage path.
@@ -131,13 +131,13 @@ export type Llm2 = {
   description?: string | undefined;
   key: string;
   mode: "jury";
-  jury: LLMJury;
+  jury: OneJury;
 };
 
 /**
  * The type of output expected from the evaluator
  */
-export const CreateEvalLLMOutputType = {
+export const CreateEval1OutputType = {
   Boolean: "boolean",
   Categorical: "categorical",
   Number: "number",
@@ -146,31 +146,29 @@ export const CreateEvalLLMOutputType = {
 /**
  * The type of output expected from the evaluator
  */
-export type CreateEvalLLMOutputType = ClosedEnum<
-  typeof CreateEvalLLMOutputType
->;
+export type CreateEval1OutputType = ClosedEnum<typeof CreateEval1OutputType>;
 
-export const CreateEvalLLMType = {
+export const CreateEval1Type = {
   LlmEval: "llm_eval",
 } as const;
-export type CreateEvalLLMType = ClosedEnum<typeof CreateEvalLLMType>;
+export type CreateEval1Type = ClosedEnum<typeof CreateEval1Type>;
 
-export type CreateEvalLLMCategoricalLabels = {
+export type CreateEval1CategoricalLabels = {
   value: string;
   description?: string | undefined;
 };
 
-export type Llm1 = {
+export type Llm = {
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
    */
-  outputType?: CreateEvalLLMOutputType | undefined;
-  type: CreateEvalLLMType;
+  outputType?: CreateEval1OutputType | undefined;
+  type: CreateEval1Type;
   repetitions?: number | null | undefined;
   prompt: string;
   categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<CreateEvalLLMCategoricalLabels> | null | undefined;
+  categoricalLabels?: Array<CreateEval1CategoricalLabels> | null | undefined;
   datasetId?: string | undefined;
   /**
    * Entity storage path.
@@ -188,9 +186,9 @@ export type Llm1 = {
   model: string;
 };
 
-export type Llm = Llm1 | Llm2;
+export type RequestBody1 = Llm | LLMJury;
 
-export type CreateEvalRequestBody = Python | Llm1 | Llm2;
+export type CreateEvalRequestBody = Python | Llm | LLMJury;
 
 /**
  * Successfully created an evaluator
@@ -249,49 +247,49 @@ export function pythonToJSON(python: Python): string {
 }
 
 /** @internal */
-export const LLMOutputType$outboundSchema: z.ZodNativeEnum<
-  typeof LLMOutputType
-> = z.nativeEnum(LLMOutputType);
+export const OneOutputType$outboundSchema: z.ZodNativeEnum<
+  typeof OneOutputType
+> = z.nativeEnum(OneOutputType);
 
 /** @internal */
-export const LLMType$outboundSchema: z.ZodNativeEnum<typeof LLMType> = z
-  .nativeEnum(LLMType);
+export const OneType$outboundSchema: z.ZodNativeEnum<typeof OneType> = z
+  .nativeEnum(OneType);
 
 /** @internal */
-export type LLMCategoricalLabels$Outbound = {
+export type OneCategoricalLabels$Outbound = {
   value: string;
   description?: string | undefined;
 };
 
 /** @internal */
-export const LLMCategoricalLabels$outboundSchema: z.ZodType<
-  LLMCategoricalLabels$Outbound,
+export const OneCategoricalLabels$outboundSchema: z.ZodType<
+  OneCategoricalLabels$Outbound,
   z.ZodTypeDef,
-  LLMCategoricalLabels
+  OneCategoricalLabels
 > = z.object({
   value: z.string(),
   description: z.string().optional(),
 });
 
-export function llmCategoricalLabelsToJSON(
-  llmCategoricalLabels: LLMCategoricalLabels,
+export function oneCategoricalLabelsToJSON(
+  oneCategoricalLabels: OneCategoricalLabels,
 ): string {
   return JSON.stringify(
-    LLMCategoricalLabels$outboundSchema.parse(llmCategoricalLabels),
+    OneCategoricalLabels$outboundSchema.parse(oneCategoricalLabels),
   );
 }
 
 /** @internal */
-export type CreateEvalLLMRetry$Outbound = {
+export type CreateEval1Retry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const CreateEvalLLMRetry$outboundSchema: z.ZodType<
-  CreateEvalLLMRetry$Outbound,
+export const CreateEval1Retry$outboundSchema: z.ZodType<
+  CreateEval1Retry$Outbound,
   z.ZodTypeDef,
-  CreateEvalLLMRetry
+  CreateEval1Retry
 > = z.object({
   count: z.number().int().default(2),
   onCodes: z.array(z.number().int()).optional(),
@@ -301,70 +299,70 @@ export const CreateEvalLLMRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function createEvalLLMRetryToJSON(
-  createEvalLLMRetry: CreateEvalLLMRetry,
+export function createEval1RetryToJSON(
+  createEval1Retry: CreateEval1Retry,
 ): string {
   return JSON.stringify(
-    CreateEvalLLMRetry$outboundSchema.parse(createEvalLLMRetry),
+    CreateEval1Retry$outboundSchema.parse(createEval1Retry),
   );
 }
 
 /** @internal */
-export type CreateEvalLLMFallbacks$Outbound = {
+export type CreateEval1Fallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const CreateEvalLLMFallbacks$outboundSchema: z.ZodType<
-  CreateEvalLLMFallbacks$Outbound,
+export const CreateEval1Fallbacks$outboundSchema: z.ZodType<
+  CreateEval1Fallbacks$Outbound,
   z.ZodTypeDef,
-  CreateEvalLLMFallbacks
+  CreateEval1Fallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function createEvalLLMFallbacksToJSON(
-  createEvalLLMFallbacks: CreateEvalLLMFallbacks,
+export function createEval1FallbacksToJSON(
+  createEval1Fallbacks: CreateEval1Fallbacks,
 ): string {
   return JSON.stringify(
-    CreateEvalLLMFallbacks$outboundSchema.parse(createEvalLLMFallbacks),
+    CreateEval1Fallbacks$outboundSchema.parse(createEval1Fallbacks),
   );
 }
 
 /** @internal */
-export type LLMJudges$Outbound = {
+export type OneJudges$Outbound = {
   model: string;
-  retry?: CreateEvalLLMRetry$Outbound | undefined;
-  fallbacks?: Array<CreateEvalLLMFallbacks$Outbound> | undefined;
+  retry?: CreateEval1Retry$Outbound | undefined;
+  fallbacks?: Array<CreateEval1Fallbacks$Outbound> | undefined;
 };
 
 /** @internal */
-export const LLMJudges$outboundSchema: z.ZodType<
-  LLMJudges$Outbound,
+export const OneJudges$outboundSchema: z.ZodType<
+  OneJudges$Outbound,
   z.ZodTypeDef,
-  LLMJudges
+  OneJudges
 > = z.object({
   model: z.string(),
-  retry: z.lazy(() => CreateEvalLLMRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => CreateEvalLLMFallbacks$outboundSchema))
+  retry: z.lazy(() => CreateEval1Retry$outboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => CreateEval1Fallbacks$outboundSchema))
     .optional(),
 });
 
-export function llmJudgesToJSON(llmJudges: LLMJudges): string {
-  return JSON.stringify(LLMJudges$outboundSchema.parse(llmJudges));
+export function oneJudgesToJSON(oneJudges: OneJudges): string {
+  return JSON.stringify(OneJudges$outboundSchema.parse(oneJudges));
 }
 
 /** @internal */
-export type LLMRetry$Outbound = {
+export type OneRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const LLMRetry$outboundSchema: z.ZodType<
-  LLMRetry$Outbound,
+export const OneRetry$outboundSchema: z.ZodType<
+  OneRetry$Outbound,
   z.ZodTypeDef,
-  LLMRetry
+  OneRetry
 > = z.object({
   count: z.number().int().default(2),
   onCodes: z.array(z.number().int()).optional(),
@@ -374,77 +372,77 @@ export const LLMRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function llmRetryToJSON(llmRetry: LLMRetry): string {
-  return JSON.stringify(LLMRetry$outboundSchema.parse(llmRetry));
+export function oneRetryToJSON(oneRetry: OneRetry): string {
+  return JSON.stringify(OneRetry$outboundSchema.parse(oneRetry));
 }
 
 /** @internal */
-export type LLMFallbacks$Outbound = {
+export type OneFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const LLMFallbacks$outboundSchema: z.ZodType<
-  LLMFallbacks$Outbound,
+export const OneFallbacks$outboundSchema: z.ZodType<
+  OneFallbacks$Outbound,
   z.ZodTypeDef,
-  LLMFallbacks
+  OneFallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function llmFallbacksToJSON(llmFallbacks: LLMFallbacks): string {
-  return JSON.stringify(LLMFallbacks$outboundSchema.parse(llmFallbacks));
+export function oneFallbacksToJSON(oneFallbacks: OneFallbacks): string {
+  return JSON.stringify(OneFallbacks$outboundSchema.parse(oneFallbacks));
 }
 
 /** @internal */
-export type LLMReplacementJudges$Outbound = {
+export type OneReplacementJudges$Outbound = {
   model: string;
-  retry?: LLMRetry$Outbound | undefined;
-  fallbacks?: Array<LLMFallbacks$Outbound> | undefined;
+  retry?: OneRetry$Outbound | undefined;
+  fallbacks?: Array<OneFallbacks$Outbound> | undefined;
 };
 
 /** @internal */
-export const LLMReplacementJudges$outboundSchema: z.ZodType<
-  LLMReplacementJudges$Outbound,
+export const OneReplacementJudges$outboundSchema: z.ZodType<
+  OneReplacementJudges$Outbound,
   z.ZodTypeDef,
-  LLMReplacementJudges
+  OneReplacementJudges
 > = z.object({
   model: z.string(),
-  retry: z.lazy(() => LLMRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => LLMFallbacks$outboundSchema)).optional(),
+  retry: z.lazy(() => OneRetry$outboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => OneFallbacks$outboundSchema)).optional(),
 });
 
-export function llmReplacementJudgesToJSON(
-  llmReplacementJudges: LLMReplacementJudges,
+export function oneReplacementJudgesToJSON(
+  oneReplacementJudges: OneReplacementJudges,
 ): string {
   return JSON.stringify(
-    LLMReplacementJudges$outboundSchema.parse(llmReplacementJudges),
+    OneReplacementJudges$outboundSchema.parse(oneReplacementJudges),
   );
 }
 
 /** @internal */
-export const LLMTieValue$outboundSchema: z.ZodNativeEnum<typeof LLMTieValue> = z
-  .nativeEnum(LLMTieValue);
+export const OneTieValue$outboundSchema: z.ZodNativeEnum<typeof OneTieValue> = z
+  .nativeEnum(OneTieValue);
 
 /** @internal */
-export type LLMJury$Outbound = {
-  judges: Array<LLMJudges$Outbound>;
-  replacement_judges?: Array<LLMReplacementJudges$Outbound> | undefined;
+export type OneJury$Outbound = {
+  judges: Array<OneJudges$Outbound>;
+  replacement_judges?: Array<OneReplacementJudges$Outbound> | undefined;
   min_successful_judges: number;
   tie_value: string;
 };
 
 /** @internal */
-export const LLMJury$outboundSchema: z.ZodType<
-  LLMJury$Outbound,
+export const OneJury$outboundSchema: z.ZodType<
+  OneJury$Outbound,
   z.ZodTypeDef,
-  LLMJury
+  OneJury
 > = z.object({
-  judges: z.array(z.lazy(() => LLMJudges$outboundSchema)),
-  replacementJudges: z.array(z.lazy(() => LLMReplacementJudges$outboundSchema))
+  judges: z.array(z.lazy(() => OneJudges$outboundSchema)),
+  replacementJudges: z.array(z.lazy(() => OneReplacementJudges$outboundSchema))
     .optional(),
   minSuccessfulJudges: z.number().int().default(2),
-  tieValue: LLMTieValue$outboundSchema.default("Tie"),
+  tieValue: OneTieValue$outboundSchema.default("Tie"),
 }).transform((v) => {
   return remap$(v, {
     replacementJudges: "replacement_judges",
@@ -453,96 +451,99 @@ export const LLMJury$outboundSchema: z.ZodType<
   });
 });
 
-export function llmJuryToJSON(llmJury: LLMJury): string {
-  return JSON.stringify(LLMJury$outboundSchema.parse(llmJury));
+export function oneJuryToJSON(oneJury: OneJury): string {
+  return JSON.stringify(OneJury$outboundSchema.parse(oneJury));
 }
 
 /** @internal */
-export type Llm2$Outbound = {
+export type LLMJury$Outbound = {
   guardrail_config?: any | undefined;
   output_type?: string | undefined;
   type: string;
   repetitions?: number | null | undefined;
   prompt: string;
   categories?: Array<string> | null | undefined;
-  categorical_labels?: Array<LLMCategoricalLabels$Outbound> | null | undefined;
+  categorical_labels?: Array<OneCategoricalLabels$Outbound> | null | undefined;
   dataset_id?: string | undefined;
   path: string;
   description: string;
   key: string;
   mode: "jury";
-  jury: LLMJury$Outbound;
+  jury: OneJury$Outbound;
 };
 
 /** @internal */
-export const Llm2$outboundSchema: z.ZodType<Llm2$Outbound, z.ZodTypeDef, Llm2> =
-  z.object({
-    guardrailConfig: z.any().optional(),
-    outputType: LLMOutputType$outboundSchema.optional(),
-    type: LLMType$outboundSchema,
-    repetitions: z.nullable(z.number().int()).optional(),
-    prompt: z.string(),
-    categories: z.nullable(z.array(z.string())).optional(),
-    categoricalLabels: z.nullable(
-      z.array(z.lazy(() => LLMCategoricalLabels$outboundSchema)),
-    ).optional(),
-    datasetId: z.string().optional(),
-    path: z.string(),
-    description: z.string().default(""),
-    key: z.string(),
-    mode: z.literal("jury"),
-    jury: z.lazy(() => LLMJury$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      guardrailConfig: "guardrail_config",
-      outputType: "output_type",
-      categoricalLabels: "categorical_labels",
-      datasetId: "dataset_id",
-    });
+export const LLMJury$outboundSchema: z.ZodType<
+  LLMJury$Outbound,
+  z.ZodTypeDef,
+  LLMJury
+> = z.object({
+  guardrailConfig: z.any().optional(),
+  outputType: OneOutputType$outboundSchema.optional(),
+  type: OneType$outboundSchema,
+  repetitions: z.nullable(z.number().int()).optional(),
+  prompt: z.string(),
+  categories: z.nullable(z.array(z.string())).optional(),
+  categoricalLabels: z.nullable(
+    z.array(z.lazy(() => OneCategoricalLabels$outboundSchema)),
+  ).optional(),
+  datasetId: z.string().optional(),
+  path: z.string(),
+  description: z.string().default(""),
+  key: z.string(),
+  mode: z.literal("jury"),
+  jury: z.lazy(() => OneJury$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    guardrailConfig: "guardrail_config",
+    outputType: "output_type",
+    categoricalLabels: "categorical_labels",
+    datasetId: "dataset_id",
   });
+});
 
-export function llm2ToJSON(llm2: Llm2): string {
-  return JSON.stringify(Llm2$outboundSchema.parse(llm2));
+export function llmJuryToJSON(llmJury: LLMJury): string {
+  return JSON.stringify(LLMJury$outboundSchema.parse(llmJury));
 }
 
 /** @internal */
-export const CreateEvalLLMOutputType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalLLMOutputType
-> = z.nativeEnum(CreateEvalLLMOutputType);
+export const CreateEval1OutputType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEval1OutputType
+> = z.nativeEnum(CreateEval1OutputType);
 
 /** @internal */
-export const CreateEvalLLMType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalLLMType
-> = z.nativeEnum(CreateEvalLLMType);
+export const CreateEval1Type$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEval1Type
+> = z.nativeEnum(CreateEval1Type);
 
 /** @internal */
-export type CreateEvalLLMCategoricalLabels$Outbound = {
+export type CreateEval1CategoricalLabels$Outbound = {
   value: string;
   description?: string | undefined;
 };
 
 /** @internal */
-export const CreateEvalLLMCategoricalLabels$outboundSchema: z.ZodType<
-  CreateEvalLLMCategoricalLabels$Outbound,
+export const CreateEval1CategoricalLabels$outboundSchema: z.ZodType<
+  CreateEval1CategoricalLabels$Outbound,
   z.ZodTypeDef,
-  CreateEvalLLMCategoricalLabels
+  CreateEval1CategoricalLabels
 > = z.object({
   value: z.string(),
   description: z.string().optional(),
 });
 
-export function createEvalLLMCategoricalLabelsToJSON(
-  createEvalLLMCategoricalLabels: CreateEvalLLMCategoricalLabels,
+export function createEval1CategoricalLabelsToJSON(
+  createEval1CategoricalLabels: CreateEval1CategoricalLabels,
 ): string {
   return JSON.stringify(
-    CreateEvalLLMCategoricalLabels$outboundSchema.parse(
-      createEvalLLMCategoricalLabels,
+    CreateEval1CategoricalLabels$outboundSchema.parse(
+      createEval1CategoricalLabels,
     ),
   );
 }
 
 /** @internal */
-export type Llm1$Outbound = {
+export type Llm$Outbound = {
   guardrail_config?: any | undefined;
   output_type?: string | undefined;
   type: string;
@@ -550,7 +551,7 @@ export type Llm1$Outbound = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categorical_labels?:
-    | Array<CreateEvalLLMCategoricalLabels$Outbound>
+    | Array<CreateEval1CategoricalLabels$Outbound>
     | null
     | undefined;
   dataset_id?: string | undefined;
@@ -562,16 +563,16 @@ export type Llm1$Outbound = {
 };
 
 /** @internal */
-export const Llm1$outboundSchema: z.ZodType<Llm1$Outbound, z.ZodTypeDef, Llm1> =
-  z.object({
+export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
+  .object({
     guardrailConfig: z.any().optional(),
-    outputType: CreateEvalLLMOutputType$outboundSchema.optional(),
-    type: CreateEvalLLMType$outboundSchema,
+    outputType: CreateEval1OutputType$outboundSchema.optional(),
+    type: CreateEval1Type$outboundSchema,
     repetitions: z.nullable(z.number().int()).optional(),
     prompt: z.string(),
     categories: z.nullable(z.array(z.string())).optional(),
     categoricalLabels: z.nullable(
-      z.array(z.lazy(() => CreateEvalLLMCategoricalLabels$outboundSchema)),
+      z.array(z.lazy(() => CreateEval1CategoricalLabels$outboundSchema)),
     ).optional(),
     datasetId: z.string().optional(),
     path: z.string(),
@@ -588,29 +589,32 @@ export const Llm1$outboundSchema: z.ZodType<Llm1$Outbound, z.ZodTypeDef, Llm1> =
     });
   });
 
-export function llm1ToJSON(llm1: Llm1): string {
-  return JSON.stringify(Llm1$outboundSchema.parse(llm1));
-}
-
-/** @internal */
-export type Llm$Outbound = Llm1$Outbound | Llm2$Outbound;
-
-/** @internal */
-export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
-  .union([
-    z.lazy(() => Llm1$outboundSchema),
-    z.lazy(() => Llm2$outboundSchema),
-  ]);
-
 export function llmToJSON(llm: Llm): string {
   return JSON.stringify(Llm$outboundSchema.parse(llm));
 }
 
 /** @internal */
+export type RequestBody1$Outbound = Llm$Outbound | LLMJury$Outbound;
+
+/** @internal */
+export const RequestBody1$outboundSchema: z.ZodType<
+  RequestBody1$Outbound,
+  z.ZodTypeDef,
+  RequestBody1
+> = z.union([
+  z.lazy(() => Llm$outboundSchema),
+  z.lazy(() => LLMJury$outboundSchema),
+]);
+
+export function requestBody1ToJSON(requestBody1: RequestBody1): string {
+  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
+}
+
+/** @internal */
 export type CreateEvalRequestBody$Outbound =
   | Python$Outbound
-  | Llm1$Outbound
-  | Llm2$Outbound;
+  | Llm$Outbound
+  | LLMJury$Outbound;
 
 /** @internal */
 export const CreateEvalRequestBody$outboundSchema: z.ZodType<
@@ -620,8 +624,8 @@ export const CreateEvalRequestBody$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Python$outboundSchema),
   z.union([
-    z.lazy(() => Llm1$outboundSchema),
-    z.lazy(() => Llm2$outboundSchema),
+    z.lazy(() => Llm$outboundSchema),
+    z.lazy(() => LLMJury$outboundSchema),
   ]),
 ]);
 

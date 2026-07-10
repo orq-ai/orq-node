@@ -1,11 +1,11 @@
-# LLMCategoricalLabels
+# CreateEval1CategoricalLabels
 
 ## Example Usage
 
 ```typescript
-import { LLMCategoricalLabels } from "@orq-ai/node/models/operations";
+import { CreateEval1CategoricalLabels } from "@orq-ai/node/models/operations";
 
-let value: LLMCategoricalLabels = {
+let value: CreateEval1CategoricalLabels = {
   value: "<value>",
 };
 ```

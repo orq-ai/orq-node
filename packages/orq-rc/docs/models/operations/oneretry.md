@@ -1,11 +1,11 @@
-# CreateEvalLLMRetry
+# OneRetry
 
 ## Example Usage
 
 ```typescript
-import { CreateEvalLLMRetry } from "@orq-ai/node/models/operations";
+import { OneRetry } from "@orq-ai/node/models/operations";
 
-let value: CreateEvalLLMRetry = {};
+let value: OneRetry = {};
 ```
 
 ## Fields

@@ -1,11 +1,11 @@
-# LLMRetry
+# CreateEval1Retry
 
 ## Example Usage
 
 ```typescript
-import { LLMRetry } from "@orq-ai/node/models/operations";
+import { CreateEval1Retry } from "@orq-ai/node/models/operations";
 
-let value: LLMRetry = {};
+let value: CreateEval1Retry = {};
 ```
 
 ## Fields

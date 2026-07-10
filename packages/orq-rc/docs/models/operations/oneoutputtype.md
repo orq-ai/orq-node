@@ -1,13 +1,13 @@
-# LLMOutputType
+# OneOutputType
 
 The type of output expected from the evaluator
 
 ## Example Usage
 
 ```typescript
-import { LLMOutputType } from "@orq-ai/node/models/operations";
+import { OneOutputType } from "@orq-ai/node/models/operations";
 
-let value: LLMOutputType = "number";
+let value: OneOutputType = "boolean";
 ```
 
 ## Values

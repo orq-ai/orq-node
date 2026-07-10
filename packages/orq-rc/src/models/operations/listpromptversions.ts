@@ -13,7 +13,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ListPromptVersionsRequest = {
   promptId: string;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -443,6 +443,7 @@ export const ListPromptVersionsProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;

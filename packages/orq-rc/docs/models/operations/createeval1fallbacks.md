@@ -1,12 +1,12 @@
-# CreateEvalLLMFallbacks
+# CreateEval1Fallbacks
 
 ## Example Usage
 
 ```typescript
-import { CreateEvalLLMFallbacks } from "@orq-ai/node/models/operations";
+import { CreateEval1Fallbacks } from "@orq-ai/node/models/operations";
 
-let value: CreateEvalLLMFallbacks = {
-  model: "El Camino",
+let value: CreateEval1Fallbacks = {
+  model: "Prius",
 };
 ```
 

@@ -1,13 +1,13 @@
-# CreateEvalLLMOutputType
+# CreateEval1OutputType
 
 The type of output expected from the evaluator
 
 ## Example Usage
 
 ```typescript
-import { CreateEvalLLMOutputType } from "@orq-ai/node/models/operations";
+import { CreateEval1OutputType } from "@orq-ai/node/models/operations";
 
-let value: CreateEvalLLMOutputType = "boolean";
+let value: CreateEval1OutputType = "boolean";
 ```
 
 ## Values

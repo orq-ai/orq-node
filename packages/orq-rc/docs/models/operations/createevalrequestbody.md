@@ -3,17 +3,25 @@
 
 ## Supported Types
 
-### `operations.Llm`
+### `operations.RequestBody1`
 
 ```typescript
-const value: operations.Llm = {
+const value: operations.RequestBody1 = {
   type: "llm_eval",
   prompt: "<value>",
   path: "Default",
   description: "",
   key: "<key>",
-  mode: "single",
-  model: "Alpine",
+  mode: "jury",
+  jury: {
+    judges: [
+      {
+        model: "A8",
+      },
+    ],
+    minSuccessfulJudges: 2,
+    tieValue: "Tie",
+  },
 };
 ```
 

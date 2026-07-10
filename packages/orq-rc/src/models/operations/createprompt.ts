@@ -1382,6 +1382,7 @@ export const CreatePromptProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;
