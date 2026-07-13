@@ -7,11 +7,11 @@ The level of thinking to use for the model. Only supported by `Google AI`
 ```typescript
 import { GetPromptVersionThinkingLevel } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionThinkingLevel = "low";
+let value: GetPromptVersionThinkingLevel = "minimal";
 ```
 
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"minimal" | "low" | "medium" | "high"
 ```

@@ -7,11 +7,11 @@ The level of reasoning the model should use. This setting is supported only by `
 ```typescript
 import { ThinkingLevel } from "@orq-ai/node/models/components";
 
-let value: ThinkingLevel = "medium";
+let value: ThinkingLevel = "low";
 ```
 
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"minimal" | "low" | "medium" | "high"
 ```

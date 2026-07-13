@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create image variation
+   * Create speech
    *
    * @remarks
-   * Create an Image Variation
+   * Generates audio from the input text.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

@@ -281,6 +281,7 @@ export type GetPromptVersionVerbosity = ClosedEnum<
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const GetPromptVersionThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -429,6 +430,7 @@ export const GetPromptVersionProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
   Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",

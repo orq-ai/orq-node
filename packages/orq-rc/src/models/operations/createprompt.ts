@@ -1234,6 +1234,7 @@ export type CreatePromptVerbosity = ClosedEnum<typeof CreatePromptVerbosity>;
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const CreatePromptThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -1382,6 +1383,7 @@ export const CreatePromptProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
   Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",

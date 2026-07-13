@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [aggregate](#aggregate) - Aggregate traces
+* [~~aggregate~~](#aggregate) - Aggregate traces :warning: **Deprecated**
 * [listFacets](#listfacets) - List trace facets
 * [listFacetValues](#listfacetvalues) - List trace facet values
 * [listFields](#listfields) - List trace fields
@@ -14,9 +14,11 @@
 * [listSpans](#listspans) - List trace spans
 * [getSpan](#getspan) - Get trace span
 
-## aggregate
+## ~~aggregate~~
 
-Aggregate trace metrics using the structured trace filter contract.
+Deprecated: use TelemetryService.Query (POST /v2/telemetry/query, source=TRACES, grain=none) instead. Aggregate trace metrics using the structured trace filter contract.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

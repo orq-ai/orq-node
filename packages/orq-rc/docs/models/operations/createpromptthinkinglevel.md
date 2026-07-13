@@ -13,5 +13,5 @@ let value: CreatePromptThinkingLevel = "high";
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"minimal" | "low" | "medium" | "high"
 ```

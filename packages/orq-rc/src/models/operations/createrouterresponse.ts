@@ -409,19 +409,26 @@ export const TemplateEngine = {
  */
 export type TemplateEngine = ClosedEnum<typeof TemplateEngine>;
 
-/**
- * The JSON Schema the output must conform to.
- */
-export type FormatSchema = {};
-
 export type FormatJSONSchema = {
-  description?: string | undefined;
-  name?: string | undefined;
   /**
-   * The JSON Schema the output must conform to.
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
-  schema?: FormatSchema | undefined;
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema: { [k: string]: any };
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field.
+   */
   strict?: boolean | undefined;
+  /**
+   * The type of response format being defined. Always `json_schema`.
+   */
   type: "json_schema";
 };
 
@@ -1332,24 +1339,10 @@ export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(TemplateEngine);
 
 /** @internal */
-export type FormatSchema$Outbound = {};
-
-/** @internal */
-export const FormatSchema$outboundSchema: z.ZodType<
-  FormatSchema$Outbound,
-  z.ZodTypeDef,
-  FormatSchema
-> = z.object({});
-
-export function formatSchemaToJSON(formatSchema: FormatSchema): string {
-  return JSON.stringify(FormatSchema$outboundSchema.parse(formatSchema));
-}
-
-/** @internal */
 export type FormatJSONSchema$Outbound = {
   description?: string | undefined;
-  name?: string | undefined;
-  schema?: FormatSchema$Outbound | undefined;
+  name: string;
+  schema: { [k: string]: any };
   strict?: boolean | undefined;
   type: "json_schema";
 };
@@ -1361,8 +1354,8 @@ export const FormatJSONSchema$outboundSchema: z.ZodType<
   FormatJSONSchema
 > = z.object({
   description: z.string().optional(),
-  name: z.string().optional(),
-  schema: z.lazy(() => FormatSchema$outboundSchema).optional(),
+  name: z.string(),
+  schema: z.record(z.any()),
   strict: z.boolean().optional(),
   type: z.literal("json_schema"),
 });
