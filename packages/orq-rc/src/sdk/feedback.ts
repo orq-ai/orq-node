@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create speech
-   *
-   * @remarks
-   * Generates audio from the input text.
+   * Create a prompt
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
