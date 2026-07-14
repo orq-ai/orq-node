@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a dataset
-   *
-   * @remarks
-   * Creates a new dataset in the specified project.
+   * Create a prompt
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
