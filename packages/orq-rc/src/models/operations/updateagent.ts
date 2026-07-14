@@ -166,6 +166,7 @@ export type ModelConfigurationModalities = ClosedEnum<
  */
 export const UpdateAgentId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -657,6 +658,7 @@ export type UpdateAgentFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const UpdateAgentIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -2111,6 +2113,7 @@ export type UpdateAgentModalities = ClosedEnum<typeof UpdateAgentModalities>;
  */
 export const UpdateAgentIdAgentsResponse1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -2580,6 +2583,7 @@ export type UpdateAgentFallbackModelConfigurationAgentsModalities = ClosedEnum<
  */
 export const UpdateAgentIdAgentsResponse2001 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

@@ -164,6 +164,7 @@ export type RunAgentModelConfigurationModalities = ClosedEnum<
  */
 export const RunAgentId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -653,6 +654,7 @@ export type RunAgentFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const RunAgentIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -4040,7 +4042,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KXGR4K8X0V1EW1B62AH6RASC"),
+  id: z.string().default("01KXH5Z3AEC555Q62BMJTAGVZ0"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

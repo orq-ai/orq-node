@@ -550,6 +550,7 @@ export type UpdatePromptModalities = ClosedEnum<typeof UpdatePromptModalities>;
  */
 export const UpdatePromptId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -1788,6 +1789,7 @@ export type UpdatePromptPromptsModalities = ClosedEnum<
  */
 export const UpdatePromptIdPrompts1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

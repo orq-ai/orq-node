@@ -826,6 +826,7 @@ export type ListPromptVersionsModalities = ClosedEnum<
  */
 export const ListPromptVersionsId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

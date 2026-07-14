@@ -168,6 +168,7 @@ export type StreamRunAgentModelConfigurationModalities = ClosedEnum<
  */
 export const StreamRunAgentId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -667,6 +668,7 @@ export type StreamRunAgentFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const StreamRunAgentIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -4096,7 +4098,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KXGR4KANC6GN1ZC9QCJ25VM8"),
+  id: z.string().default("01KXH5Z3C6FHMYDCQDFYDHDCZ9"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

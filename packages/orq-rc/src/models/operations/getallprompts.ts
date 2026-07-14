@@ -818,6 +818,7 @@ export type GetAllPromptsModalities = ClosedEnum<
  */
 export const GetAllPromptsId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
