@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create response
+   * Create a dataset
    *
    * @remarks
-   * Creates a model response for the given input. Returns a response object or a stream of server-sent events.
+   * Creates a new dataset in the specified project.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
