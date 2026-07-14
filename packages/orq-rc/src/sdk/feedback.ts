@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create embeddings
+   * Create response
    *
    * @remarks
-   * Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
+   * Creates a model response for the given input. Returns a response object or a stream of server-sent events.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
