@@ -16,6 +16,7 @@ import {
 
 export const ModelsConfigMode = {
   Fallback: "fallback",
+  LatencyBased: "latency_based",
   Weighted: "weighted",
   RoundRobin: "round_robin",
 } as const;

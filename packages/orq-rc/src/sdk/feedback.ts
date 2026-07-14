@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create moderation
+   * Annotate a span
+   *
+   * @remarks
+   * Attach one or more annotations to a specific span. A standard annotation references a human review by key and supplies a value. A correction references an existing evaluator output by parent_annotation_id and supplies the corrected value, validated against that evaluator's output schema.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
