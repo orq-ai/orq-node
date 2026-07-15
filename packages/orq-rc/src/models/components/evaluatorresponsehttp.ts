@@ -42,8 +42,8 @@ export const EvaluatorResponseHttp$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-07-15T12:23:01.548Z"),
-  updated: z.string().default("2026-07-15T12:23:01.548Z"),
+  created: z.string().default("2026-07-15T13:36:21.685Z"),
+  updated: z.string().default("2026-07-15T13:36:21.686Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("http_eval"),
