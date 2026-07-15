@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create completion
+   * Create an identity
    *
    * @remarks
-   * For sending requests to legacy completion models
+   * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
