@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create an identity
+   * Create a new budget
    *
    * @remarks
-   * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail.
+   * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id).
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
