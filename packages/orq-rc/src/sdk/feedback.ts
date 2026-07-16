@@ -45,7 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a prompt
+   * Create transcription
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
