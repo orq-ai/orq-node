@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a knowledge
+   * Create routing rule
+   *
+   * @remarks
+   * Creates a new routing rule with expression, models configuration, and priority settings.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
