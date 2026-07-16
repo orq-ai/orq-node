@@ -53,10 +53,10 @@ export type RetrieveResponseResponseBody = {
   completedAt: number | null;
   conversation?: components.ConversationParam | undefined;
   createdAt: number;
-  error: components.ResponseError;
+  error: components.ResponseError | null;
   frequencyPenalty: number;
   id: string;
-  incompleteDetails: components.IncompleteDetails;
+  incompleteDetails: components.IncompleteDetails | null;
   /**
    * Array of input items (messages, function call outputs, etc.)
    */
@@ -83,7 +83,7 @@ export type RetrieveResponseResponseBody = {
   previousResponseId: string | null;
   promptCacheKey: string | null;
   promptCacheRetention: string | null;
-  reasoning: components.Reasoning;
+  reasoning: components.Reasoning | null;
   safetyIdentifier: string | null;
   serviceTier: RetrieveResponseServiceTier;
   status: RetrieveResponseStatus;
@@ -104,7 +104,7 @@ export type RetrieveResponseResponseBody = {
   topLogprobs: number;
   topP: number;
   truncation: RetrieveResponseTruncation;
-  usage: components.PublicUsage;
+  usage: components.PublicUsage | null;
   user: string | null;
   variables?: { [k: string]: any } | undefined;
 };
@@ -160,10 +160,10 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   completed_at: z.nullable(z.number().int()),
   conversation: components.ConversationParam$inboundSchema.optional(),
   created_at: z.number().int(),
-  error: components.ResponseError$inboundSchema,
+  error: z.nullable(components.ResponseError$inboundSchema),
   frequency_penalty: z.number(),
   id: z.string(),
-  incomplete_details: components.IncompleteDetails$inboundSchema,
+  incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
   input: z.nullable(z.array(z.any())),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
@@ -178,7 +178,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   previous_response_id: z.nullable(z.string()),
   prompt_cache_key: z.nullable(z.string()),
   prompt_cache_retention: z.nullable(z.string()),
-  reasoning: components.Reasoning$inboundSchema,
+  reasoning: z.nullable(components.Reasoning$inboundSchema),
   safety_identifier: z.nullable(z.string()),
   service_tier: RetrieveResponseServiceTier$inboundSchema,
   status: RetrieveResponseStatus$inboundSchema,
@@ -190,7 +190,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: RetrieveResponseTruncation$inboundSchema,
-  usage: components.PublicUsage$inboundSchema,
+  usage: z.nullable(components.PublicUsage$inboundSchema),
   user: z.nullable(z.string()),
   variables: z.record(z.any()).optional(),
 }).transform((v) => {

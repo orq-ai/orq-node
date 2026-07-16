@@ -883,7 +883,7 @@ export type CreateRouterResponseResponseBody = {
   topLogprobs: number;
   topP: number;
   truncation: Truncation;
-  usage: components.PublicUsage;
+  usage: components.PublicUsage | null;
   user: string | null;
   variables?: { [k: string]: any } | undefined;
 };
@@ -1898,7 +1898,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: Truncation$inboundSchema,
-  usage: components.PublicUsage$inboundSchema,
+  usage: z.nullable(components.PublicUsage$inboundSchema),
   user: z.nullable(z.string()),
   variables: z.record(z.any()).optional(),
 }).transform((v) => {

@@ -1272,7 +1272,7 @@ export type ListAgentsData = {
   /**
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
-  skills: Array<string>;
+  skills?: Array<string> | undefined;
   metrics?: ListAgentsMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -2944,7 +2944,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   memory_stores: z.array(z.string()).optional(),
   team_of_agents: z.array(z.lazy(() => ListAgentsTeamOfAgents$inboundSchema))
     .optional(),
-  skills: z.array(z.string()),
+  skills: z.array(z.string()).optional(),
   metrics: z.lazy(() => ListAgentsMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
