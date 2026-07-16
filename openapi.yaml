@@ -27,10 +27,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -264,10 +264,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -369,10 +369,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -489,10 +489,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -594,10 +594,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -999,10 +999,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -1120,10 +1120,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated:
           type: "string"
-          default: "2026-07-16T09:24:13.490Z"
+          default: "2026-07-16T11:02:25.452Z"
         updated_by_id:
           type:
             - "string"
@@ -3431,7 +3431,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kxn3vrhfm6j5ak37q23dgr70"
+              default: "reasoning_01kxn9ffrh2qhr537yc5agezgm"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -26191,7 +26191,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KXN3VRQFZ73FCKQGSHX03CF6"
+                                          default: "01KXN9FFWZ0K45VAZ70P7AVZPZ"
                                         name:
                                           type: "string"
                                         description:
@@ -27952,7 +27952,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KXN3VRT2KCF44B86ZC8BX8VG"
+                                          default: "01KXN9FFYEBPAE11VQR76E5MMW"
                                         name:
                                           type: "string"
                                         description:
@@ -36721,7 +36721,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXN3VRZHFVVVPBHMNRSGYZZA"
+                              default: "tool_01KXN9FG2VE7QNSTT57ZKHE4ZD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36822,7 +36822,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXN3VRZK580YZ7AXD19QKJA7"
+                              default: "tool_01KXN9FG2WDCJM7PE2RYNTMSB0"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -36925,7 +36925,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXN3VRZNS9XASQGEHKG3E38W"
+                              default: "tool_01KXN9FG2YZF1ZYZFZQTYT47Q8"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37064,7 +37064,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXN3VRZR11G620KWPBPCCATH"
+                              default: "tool_01KXN9FG309CAWABZHT8MG17MC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37140,7 +37140,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KXN3VRZT7ZDE3T5WDCYH6WJG"
+                                        default: "01KXN9FG32BV909A0ZZ23K4W9N"
                                       name:
                                         type: "string"
                                       description:
@@ -37199,7 +37199,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXN3VRZVBE2PEMEPJY6QGY5V"
+                              default: "tool_01KXN9FG33DES1ZQ6Q9VCFWW93"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37754,7 +37754,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS0HHFKR8WM8S6JPXYP1"
+                        default: "tool_01KXN9FG3GQGYRZA9Y93RT26TN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37855,7 +37855,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS0MJM8P2ART1N4V5KRH"
+                        default: "tool_01KXN9FG3HX9WHEEZN5Y1FJBJW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37958,7 +37958,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS0Q0A7EGRWC13JG59K1"
+                        default: "tool_01KXN9FG3KA1ESPQWMN1VMM0RQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38097,7 +38097,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS0TT5B1WSQHEJJ88AVX"
+                        default: "tool_01KXN9FG3NMP16F4HAPW65SRRB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38173,7 +38173,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KXN3VS0XQVJ89147T9X2DADT"
+                                  default: "01KXN9FG3PGT9RTXE0R7P58X6X"
                                 name:
                                   type: "string"
                                 description:
@@ -38232,7 +38232,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS0YXP3YZV8VG65P60D5"
+                        default: "tool_01KXN9FG3Q0ZSA1QNBVRK6R859"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38693,7 +38693,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KXN3VS23S62WKQSVSE853HWJ"
+                                default: "01KXN9FG4FPZR9459SR60ASREV"
                               name:
                                 type: "string"
                               description:
@@ -38839,7 +38839,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS1B1MWNVMBCH4K6N1V2"
+                        default: "tool_01KXN9FG40HXY17GFPMSQMP42Z"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38940,7 +38940,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS1EY4T2VPPT4KXEDJEM"
+                        default: "tool_01KXN9FG41HNGW8NFFEVYTQKC7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39043,7 +39043,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS1HTMQKJDC6PGYNDK8S"
+                        default: "tool_01KXN9FG43WJNTMCRDRGPB7K5A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39182,7 +39182,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS1M123DV90VQ9JBQDXD"
+                        default: "tool_01KXN9FG45DSCGMRBX43VK9BMM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39258,7 +39258,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KXN3VS1P475E5FPDP5QSZA5J"
+                                  default: "01KXN9FG47KKMFNY2QG665JKWC"
                                 name:
                                   type: "string"
                                 description:
@@ -39317,7 +39317,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS1R9DG53QH41886VRP4"
+                        default: "tool_01KXN9FG4899A61A23BAPRDQ17"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39478,7 +39478,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS31JTVMW1CCXG8XJ1YG"
+                        default: "tool_01KXN9FG4XFMVV5R7DSE5R1F1W"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39579,7 +39579,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS34QQY5J3WCH3GQA8CF"
+                        default: "tool_01KXN9FG4ZH49T5FVRV0J8HZG5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39682,7 +39682,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS36HKQQM5CHECZJCDFE"
+                        default: "tool_01KXN9FG51W0YKZ37QDQ566YDP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39821,7 +39821,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS3AG7JXVGFK3TYM2JMY"
+                        default: "tool_01KXN9FG53TJQZKZMJQ8QYT3H7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39897,7 +39897,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KXN3VS3BJWAGHENJCAE062MD"
+                                  default: "01KXN9FG54DJMHNGAERD1S7MH2"
                                 name:
                                   type: "string"
                                 description:
@@ -39956,7 +39956,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXN3VS3DEEGM09G4RRJJ0RAR"
+                        default: "tool_01KXN9FG55SCS6CC1F3W6KGVTZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42167,7 +42167,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KXN3VS7F0017FZ77W4WMWVW4"
+                          default: "01KXN9FG8660100RJ56B9RXFCQ"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -42343,7 +42343,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KXN3VS7KWX7WXBZ9J1R8ZYZG"
+                    default: "01KXN9FG896EN3GC7NKGTFKC8A"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42443,7 +42443,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KXN3VS7HJ0F0SAM0EB7Q6PSC"
+                    default: "01KXN9FG87SMB7CV2FAWQEA0XZ"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42582,7 +42582,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KXN3VS7Q653EBHABZB76FEBF"
+                    default: "01KXN9FG8C8DTNFNH7XBTP487Q"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -45289,7 +45289,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-16T09:24:08.282Z"
+                          default: "2026-07-16T11:02:21.950Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45297,7 +45297,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:08.283Z"
+                              default: "2026-07-16T11:02:21.951Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -45441,7 +45441,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-16T09:24:08.282Z"
+                    default: "2026-07-16T11:02:21.950Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45449,7 +45449,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-16T09:24:08.283Z"
+                        default: "2026-07-16T11:02:21.951Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45588,7 +45588,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-16T09:24:08.282Z"
+                    default: "2026-07-16T11:02:21.950Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45596,7 +45596,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-16T09:24:08.283Z"
+                        default: "2026-07-16T11:02:21.951Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45768,7 +45768,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-16T09:24:08.282Z"
+                    default: "2026-07-16T11:02:21.950Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45776,7 +45776,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-16T09:24:08.283Z"
+                        default: "2026-07-16T11:02:21.951Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46210,7 +46210,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-16T09:24:29.132Z"
+                                    default: "2026-07-16T11:02:38.172Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46283,7 +46283,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-16T09:24:29.134Z"
+                                    default: "2026-07-16T11:02:38.174Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46356,7 +46356,80 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-16T09:24:29.135Z"
+                                    default: "2026-07-16T11:02:38.175Z"
+                                    deprecated: true
+                                    description: "Deprecated. The date and time the item was reviewed"
+                                  type:
+                                    type: "string"
+                                    enum:
+                                      - "boolean"
+                                  value:
+                                    type: "boolean"
+                                required:
+                                  - "id"
+                                  - "evaluation_type"
+                                  - "reviewed_by_id"
+                                  - "type"
+                                  - "value"
+                              - type: "object"
+                                properties:
+                                  id:
+                                    type: "string"
+                                    description: "The unique identifier of the human evaluation"
+                                  evaluation_type:
+                                    type: "string"
+                                    enum:
+                                      - "human_review"
+                                    description: "The type of evaluation"
+                                  human_review_id:
+                                    type: "string"
+                                    description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
+                                  source:
+                                    type: "string"
+                                    enum:
+                                      - "orq"
+                                      - "external"
+                                    default: "orq"
+                                  annotator:
+                                    type: "object"
+                                    properties:
+                                      kind:
+                                        type: "string"
+                                        enum:
+                                          - "llm"
+                                          - "code"
+                                          - "human"
+                                          - "automation"
+                                        description: "The kind of annotator that produced the evaluation"
+                                      actor_id:
+                                        type: "string"
+                                        description: "Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation."
+                                    required:
+                                      - "kind"
+                                      - "actor_id"
+                                    description: "The annotator that produced this evaluation. Optional during the dual-write deprecation window."
+                                  output_schema:
+                                    type: "string"
+                                    enum:
+                                      - "boolean"
+                                      - "number"
+                                      - "categorical"
+                                      - "string"
+                                    description: "The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections."
+                                  parent_annotation_id:
+                                    type: "string"
+                                    description: "When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction."
+                                  explanation:
+                                    type: "string"
+                                    description: "Optional free-text explanation of the value"
+                                  reviewed_by_id:
+                                    type: "string"
+                                    deprecated: true
+                                    description: "Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item."
+                                  reviewed_at:
+                                    type: "string"
+                                    format: "date-time"
+                                    default: "2026-07-16T11:02:38.177Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46396,7 +46469,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-16T09:24:08.282Z"
+                          default: "2026-07-16T11:02:21.950Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -46404,7 +46477,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:08.283Z"
+                              default: "2026-07-16T11:02:21.951Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -47032,7 +47105,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-16T09:24:29.160Z"
+                                default: "2026-07-16T11:02:38.199Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47105,7 +47178,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-16T09:24:29.161Z"
+                                default: "2026-07-16T11:02:38.200Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47178,7 +47251,80 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-16T09:24:29.163Z"
+                                default: "2026-07-16T11:02:38.201Z"
+                                deprecated: true
+                                description: "Deprecated. The date and time the item was reviewed"
+                              type:
+                                type: "string"
+                                enum:
+                                  - "boolean"
+                              value:
+                                type: "boolean"
+                            required:
+                              - "id"
+                              - "evaluation_type"
+                              - "reviewed_by_id"
+                              - "type"
+                              - "value"
+                          - type: "object"
+                            properties:
+                              id:
+                                type: "string"
+                                description: "The unique identifier of the human evaluation"
+                              evaluation_type:
+                                type: "string"
+                                enum:
+                                  - "human_review"
+                                description: "The type of evaluation"
+                              human_review_id:
+                                type: "string"
+                                description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
+                              source:
+                                type: "string"
+                                enum:
+                                  - "orq"
+                                  - "external"
+                                default: "orq"
+                              annotator:
+                                type: "object"
+                                properties:
+                                  kind:
+                                    type: "string"
+                                    enum:
+                                      - "llm"
+                                      - "code"
+                                      - "human"
+                                      - "automation"
+                                    description: "The kind of annotator that produced the evaluation"
+                                  actor_id:
+                                    type: "string"
+                                    description: "Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation."
+                                required:
+                                  - "kind"
+                                  - "actor_id"
+                                description: "The annotator that produced this evaluation. Optional during the dual-write deprecation window."
+                              output_schema:
+                                type: "string"
+                                enum:
+                                  - "boolean"
+                                  - "number"
+                                  - "categorical"
+                                  - "string"
+                                description: "The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections."
+                              parent_annotation_id:
+                                type: "string"
+                                description: "When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction."
+                              explanation:
+                                type: "string"
+                                description: "Optional free-text explanation of the value"
+                              reviewed_by_id:
+                                type: "string"
+                                deprecated: true
+                                description: "Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item."
+                              reviewed_at:
+                                type: "string"
+                                format: "date-time"
+                                default: "2026-07-16T11:02:38.202Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47218,7 +47364,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-07-16T09:24:08.282Z"
+                      default: "2026-07-16T11:02:21.950Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -47226,7 +47372,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-07-16T09:24:08.283Z"
+                          default: "2026-07-16T11:02:21.951Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -47591,7 +47737,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:29.146Z"
+                              default: "2026-07-16T11:02:38.187Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47664,7 +47810,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:29.148Z"
+                              default: "2026-07-16T11:02:38.188Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47737,7 +47883,80 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:29.149Z"
+                              default: "2026-07-16T11:02:38.190Z"
+                              deprecated: true
+                              description: "Deprecated. The date and time the item was reviewed"
+                            type:
+                              type: "string"
+                              enum:
+                                - "boolean"
+                            value:
+                              type: "boolean"
+                          required:
+                            - "id"
+                            - "evaluation_type"
+                            - "reviewed_by_id"
+                            - "type"
+                            - "value"
+                        - type: "object"
+                          properties:
+                            id:
+                              type: "string"
+                              description: "The unique identifier of the human evaluation"
+                            evaluation_type:
+                              type: "string"
+                              enum:
+                                - "human_review"
+                              description: "The type of evaluation"
+                            human_review_id:
+                              type: "string"
+                              description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
+                            source:
+                              type: "string"
+                              enum:
+                                - "orq"
+                                - "external"
+                              default: "orq"
+                            annotator:
+                              type: "object"
+                              properties:
+                                kind:
+                                  type: "string"
+                                  enum:
+                                    - "llm"
+                                    - "code"
+                                    - "human"
+                                    - "automation"
+                                  description: "The kind of annotator that produced the evaluation"
+                                actor_id:
+                                  type: "string"
+                                  description: "Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation."
+                              required:
+                                - "kind"
+                                - "actor_id"
+                              description: "The annotator that produced this evaluation. Optional during the dual-write deprecation window."
+                            output_schema:
+                              type: "string"
+                              enum:
+                                - "boolean"
+                                - "number"
+                                - "categorical"
+                                - "string"
+                              description: "The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections."
+                            parent_annotation_id:
+                              type: "string"
+                              description: "When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction."
+                            explanation:
+                              type: "string"
+                              description: "Optional free-text explanation of the value"
+                            reviewed_by_id:
+                              type: "string"
+                              deprecated: true
+                              description: "Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item."
+                            reviewed_at:
+                              type: "string"
+                              format: "date-time"
+                              default: "2026-07-16T11:02:38.191Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47777,7 +47996,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-16T09:24:08.282Z"
+                    default: "2026-07-16T11:02:21.950Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47785,7 +48004,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-16T09:24:08.283Z"
+                        default: "2026-07-16T11:02:21.951Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -48406,7 +48625,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:29.194Z"
+                              default: "2026-07-16T11:02:38.227Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48479,7 +48698,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:29.195Z"
+                              default: "2026-07-16T11:02:38.228Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48552,7 +48771,80 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:29.196Z"
+                              default: "2026-07-16T11:02:38.229Z"
+                              deprecated: true
+                              description: "Deprecated. The date and time the item was reviewed"
+                            type:
+                              type: "string"
+                              enum:
+                                - "boolean"
+                            value:
+                              type: "boolean"
+                          required:
+                            - "id"
+                            - "evaluation_type"
+                            - "reviewed_by_id"
+                            - "type"
+                            - "value"
+                        - type: "object"
+                          properties:
+                            id:
+                              type: "string"
+                              description: "The unique identifier of the human evaluation"
+                            evaluation_type:
+                              type: "string"
+                              enum:
+                                - "human_review"
+                              description: "The type of evaluation"
+                            human_review_id:
+                              type: "string"
+                              description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
+                            source:
+                              type: "string"
+                              enum:
+                                - "orq"
+                                - "external"
+                              default: "orq"
+                            annotator:
+                              type: "object"
+                              properties:
+                                kind:
+                                  type: "string"
+                                  enum:
+                                    - "llm"
+                                    - "code"
+                                    - "human"
+                                    - "automation"
+                                  description: "The kind of annotator that produced the evaluation"
+                                actor_id:
+                                  type: "string"
+                                  description: "Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation."
+                              required:
+                                - "kind"
+                                - "actor_id"
+                              description: "The annotator that produced this evaluation. Optional during the dual-write deprecation window."
+                            output_schema:
+                              type: "string"
+                              enum:
+                                - "boolean"
+                                - "number"
+                                - "categorical"
+                                - "string"
+                              description: "The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections."
+                            parent_annotation_id:
+                              type: "string"
+                              description: "When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction."
+                            explanation:
+                              type: "string"
+                              description: "Optional free-text explanation of the value"
+                            reviewed_by_id:
+                              type: "string"
+                              deprecated: true
+                              description: "Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item."
+                            reviewed_at:
+                              type: "string"
+                              format: "date-time"
+                              default: "2026-07-16T11:02:38.230Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48592,7 +48884,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-16T09:24:08.282Z"
+                    default: "2026-07-16T11:02:21.950Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -48600,7 +48892,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-16T09:24:08.283Z"
+                        default: "2026-07-16T11:02:21.951Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -54837,7 +55129,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-16T09:24:29.347Z"
+                      default: "2026-07-16T11:02:38.347Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54879,7 +55171,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-16T09:24:29.348Z"
+                      default: "2026-07-16T11:02:38.347Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54921,7 +55213,49 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-16T09:24:29.349Z"
+                      default: "2026-07-16T11:02:38.348Z"
+                      deprecated: true
+                      description: "Deprecated. The date and time the item was reviewed"
+                    type:
+                      type: "string"
+                      enum:
+                        - "boolean"
+                    value:
+                      type: "boolean"
+                    trace_id:
+                      type: "string"
+                  required:
+                    - "id"
+                    - "evaluation_type"
+                    - "type"
+                    - "value"
+                    - "trace_id"
+                - type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                      description: "The unique identifier of the human evaluation"
+                    evaluation_type:
+                      type: "string"
+                      enum:
+                        - "human_review"
+                      description: "The type of evaluation"
+                    human_review_id:
+                      type: "string"
+                      description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
+                    source:
+                      type: "string"
+                      enum:
+                        - "orq"
+                        - "external"
+                      default: "orq"
+                    explanation:
+                      type: "string"
+                      description: "Optional free-text explanation of the value"
+                    reviewed_at:
+                      type: "string"
+                      format: "date-time"
+                      default: "2026-07-16T11:02:38.349Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55256,7 +55590,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-16T09:24:08.282Z"
+                          default: "2026-07-16T11:02:21.950Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55264,7 +55598,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:08.283Z"
+                              default: "2026-07-16T11:02:21.951Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55338,7 +55672,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-16T09:24:08.282Z"
+                          default: "2026-07-16T11:02:21.950Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55346,7 +55680,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-16T09:24:08.283Z"
+                              default: "2026-07-16T11:02:21.951Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55534,7 +55868,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-16T09:24:08.282Z"
+                        default: "2026-07-16T11:02:21.950Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55542,7 +55876,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-16T09:24:08.283Z"
+                            default: "2026-07-16T11:02:21.951Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55616,7 +55950,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-16T09:24:08.282Z"
+                        default: "2026-07-16T11:02:21.950Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55624,7 +55958,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-16T09:24:08.283Z"
+                            default: "2026-07-16T11:02:21.951Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55722,7 +56056,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-16T09:24:08.282Z"
+                        default: "2026-07-16T11:02:21.950Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55730,7 +56064,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-16T09:24:08.283Z"
+                            default: "2026-07-16T11:02:21.951Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55804,7 +56138,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-16T09:24:08.282Z"
+                        default: "2026-07-16T11:02:21.950Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55812,7 +56146,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-16T09:24:08.283Z"
+                            default: "2026-07-16T11:02:21.951Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56008,7 +56342,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-16T09:24:08.282Z"
+                        default: "2026-07-16T11:02:21.950Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56016,7 +56350,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-16T09:24:08.283Z"
+                            default: "2026-07-16T11:02:21.951Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56090,7 +56424,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-16T09:24:08.282Z"
+                        default: "2026-07-16T11:02:21.950Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56098,7 +56432,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-16T09:24:08.283Z"
+                            default: "2026-07-16T11:02:21.951Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
