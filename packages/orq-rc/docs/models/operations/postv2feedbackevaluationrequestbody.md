@@ -33,6 +33,18 @@ const value: operations.PostV2FeedbackEvaluationRequestBody2 = {
 const value: operations.RequestBody3 = {
   id: "<id>",
   evaluationType: "human_review",
+  type: "boolean",
+  value: false,
+  traceId: "<id>",
+};
+```
+
+### `operations.RequestBody4`
+
+```typescript
+const value: operations.RequestBody4 = {
+  id: "<id>",
+  evaluationType: "human_review",
   type: "string_array",
   values: [
     "<value 1>",

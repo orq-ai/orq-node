@@ -376,6 +376,125 @@ export type RetrieveDatapointMessages =
 /**
  * The type of evaluation
  */
+export const RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType =
+  ClosedEnum<
+    typeof RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType
+  >;
+
+export const RetrieveDatapointEvaluationsDatasetsResponse200Source = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type RetrieveDatapointEvaluationsDatasetsResponse200Source = ClosedEnum<
+  typeof RetrieveDatapointEvaluationsDatasetsResponse200Source
+>;
+
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export const RetrieveDatapointEvaluationsDatasetsResponse200Kind = {
+  Llm: "llm",
+  Code: "code",
+  Human: "human",
+  Automation: "automation",
+} as const;
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export type RetrieveDatapointEvaluationsDatasetsResponse200Kind = ClosedEnum<
+  typeof RetrieveDatapointEvaluationsDatasetsResponse200Kind
+>;
+
+/**
+ * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+ */
+export type RetrieveDatapointEvaluationsDatasetsResponse200Annotator = {
+  /**
+   * The kind of annotator that produced the evaluation
+   */
+  kind: RetrieveDatapointEvaluationsDatasetsResponse200Kind;
+  /**
+   * Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation.
+   */
+  actorId: string;
+};
+
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export const RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema = {
+  Boolean: "boolean",
+  Number: "number",
+  Categorical: "categorical",
+  String: "string",
+} as const;
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export type RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema =
+  ClosedEnum<
+    typeof RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema
+  >;
+
+export type RetrieveDatapointEvaluations4 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType;
+  /**
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
+   */
+  humanReviewId?: string | undefined;
+  source: RetrieveDatapointEvaluationsDatasetsResponse200Source;
+  /**
+   * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+   */
+  annotator?:
+    | RetrieveDatapointEvaluationsDatasetsResponse200Annotator
+    | undefined;
+  /**
+   * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+   */
+  outputSchema?:
+    | RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema
+    | undefined;
+  /**
+   * When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction.
+   */
+  parentAnnotationId?: string | undefined;
+  /**
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  reviewedById: string;
+  /**
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  reviewedAt: Date;
+  type: "string_array";
+  values: Array<string>;
+};
+
+/**
+ * The type of evaluation
+ */
 export const RetrieveDatapointEvaluationsDatasetsResponseEvaluationType = {
   HumanReview: "human_review",
 } as const;
@@ -482,8 +601,8 @@ export type RetrieveDatapointEvaluations3 = {
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt: Date;
-  type: "string_array";
-  values: Array<string>;
+  type: "boolean";
+  value: boolean;
 };
 
 /**
@@ -715,7 +834,8 @@ export type RetrieveDatapointEvaluations1 = {
 export type RetrieveDatapointEvaluations =
   | RetrieveDatapointEvaluations1
   | RetrieveDatapointEvaluations2
-  | RetrieveDatapointEvaluations3;
+  | RetrieveDatapointEvaluations3
+  | RetrieveDatapointEvaluations4;
 
 /**
  * Datapoint retrieved.
@@ -754,6 +874,7 @@ export type RetrieveDatapointResponseBody = {
       | RetrieveDatapointEvaluations1
       | RetrieveDatapointEvaluations2
       | RetrieveDatapointEvaluations3
+      | RetrieveDatapointEvaluations4
     >
     | undefined;
   /**
@@ -1382,6 +1503,108 @@ export function retrieveDatapointMessagesFromJSON(
 }
 
 /** @internal */
+export const RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType
+  > = z.nativeEnum(
+    RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType,
+  );
+
+/** @internal */
+export const RetrieveDatapointEvaluationsDatasetsResponse200Source$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapointEvaluationsDatasetsResponse200Source
+  > = z.nativeEnum(RetrieveDatapointEvaluationsDatasetsResponse200Source);
+
+/** @internal */
+export const RetrieveDatapointEvaluationsDatasetsResponse200Kind$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointEvaluationsDatasetsResponse200Kind> =
+    z.nativeEnum(RetrieveDatapointEvaluationsDatasetsResponse200Kind);
+
+/** @internal */
+export const RetrieveDatapointEvaluationsDatasetsResponse200Annotator$inboundSchema:
+  z.ZodType<
+    RetrieveDatapointEvaluationsDatasetsResponse200Annotator,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind: RetrieveDatapointEvaluationsDatasetsResponse200Kind$inboundSchema,
+    actor_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "actor_id": "actorId",
+    });
+  });
+
+export function retrieveDatapointEvaluationsDatasetsResponse200AnnotatorFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveDatapointEvaluationsDatasetsResponse200Annotator,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveDatapointEvaluationsDatasetsResponse200Annotator$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointEvaluationsDatasetsResponse200Annotator' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema
+  > = z.nativeEnum(RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema);
+
+/** @internal */
+export const RetrieveDatapointEvaluations4$inboundSchema: z.ZodType<
+  RetrieveDatapointEvaluations4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type:
+    RetrieveDatapointEvaluationsDatasetsResponse200EvaluationType$inboundSchema,
+  human_review_id: z.string().optional(),
+  source: RetrieveDatapointEvaluationsDatasetsResponse200Source$inboundSchema
+    .default("orq"),
+  annotator: z.lazy(() =>
+    RetrieveDatapointEvaluationsDatasetsResponse200Annotator$inboundSchema
+  ).optional(),
+  output_schema:
+    RetrieveDatapointEvaluationsDatasetsResponse200OutputSchema$inboundSchema
+      .optional(),
+  parent_annotation_id: z.string().optional(),
+  explanation: z.string().optional(),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2026-07-16T11:02:38.191Z",
+  ).transform(v => new Date(v)),
+  type: z.literal("string_array"),
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "output_schema": "outputSchema",
+    "parent_annotation_id": "parentAnnotationId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+export function retrieveDatapointEvaluations4FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapointEvaluations4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapointEvaluations4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointEvaluations4' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema:
   z.ZodNativeEnum<
     typeof RetrieveDatapointEvaluationsDatasetsResponseEvaluationType
@@ -1456,10 +1679,10 @@ export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-07-16T09:24:29.149Z",
+    "2026-07-16T11:02:38.190Z",
   ).transform(v => new Date(v)),
-  type: z.literal("string_array"),
-  values: z.array(z.string()),
+  type: z.literal("boolean"),
+  value: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "evaluation_type": "evaluationType",
@@ -1554,7 +1777,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-07-16T09:24:29.148Z",
+    "2026-07-16T11:02:38.188Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1642,7 +1865,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-07-16T09:24:29.146Z",
+    "2026-07-16T11:02:38.187Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -1676,6 +1899,7 @@ export const RetrieveDatapointEvaluations$inboundSchema: z.ZodType<
   z.lazy(() => RetrieveDatapointEvaluations1$inboundSchema),
   z.lazy(() => RetrieveDatapointEvaluations2$inboundSchema),
   z.lazy(() => RetrieveDatapointEvaluations3$inboundSchema),
+  z.lazy(() => RetrieveDatapointEvaluations4$inboundSchema),
 ]);
 
 export function retrieveDatapointEvaluationsFromJSON(
@@ -1712,6 +1936,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
       z.lazy(() => RetrieveDatapointEvaluations1$inboundSchema),
       z.lazy(() => RetrieveDatapointEvaluations2$inboundSchema),
       z.lazy(() => RetrieveDatapointEvaluations3$inboundSchema),
+      z.lazy(() => RetrieveDatapointEvaluations4$inboundSchema),
     ]),
   ).optional(),
   dataset_id: z.string(),
@@ -1721,7 +1946,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-07-16T09:24:08.283Z",
+    "2026-07-16T11:02:21.951Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

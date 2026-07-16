@@ -34,6 +34,18 @@ const value: operations.RetrieveDatapointEvaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
+  type: "boolean",
+  value: true,
+};
+```
+
+### `operations.RetrieveDatapointEvaluations4`
+
+```typescript
+const value: operations.RetrieveDatapointEvaluations4 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
   type: "string_array",
   values: [
     "<value 1>",
