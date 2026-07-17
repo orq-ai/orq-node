@@ -34,6 +34,7 @@ import { Skills } from "./skills.js";
 import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
+import { Webhooks } from "./webhooks.js";
 
 export class Orq extends ClientSDK {
   private _evals?: Evals;
@@ -164,6 +165,11 @@ export class Orq extends ClientSDK {
   private _skills?: Skills;
   get skills(): Skills {
     return (this._skills ??= new Skills(this._options));
+  }
+
+  private _webhooks?: Webhooks;
+  get webhooks(): Webhooks {
+    return (this._webhooks ??= new Webhooks(this._options));
   }
 
   private _schedules?: Schedules;

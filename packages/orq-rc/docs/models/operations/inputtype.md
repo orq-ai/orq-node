@@ -13,5 +13,5 @@ let value: InputType = "item_reference";
 ## Values
 
 ```typescript
-"message" | "function_call_output" | "item_reference"
+"message" | "function_call" | "function_call_output" | "item_reference"
 ```

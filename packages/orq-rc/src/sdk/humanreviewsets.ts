@@ -27,10 +27,7 @@ export class HumanReviewSets extends ClientSDK {
   }
 
   /**
-   * Create a new management key
-   *
-   * @remarks
-   * Mints a new opaque management key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
+   * Create a human review set
    */
   async create(
     request?: operations.PostV2HumanEvalSetsRequestBody | undefined,

@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create custom model
+   * Create a new management key
    *
    * @remarks
-   * Creates a new custom model for the workspace. Provider credentials in the configuration are encrypted using the workspace encryption key before being persisted.
+   * Mints a new opaque management key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

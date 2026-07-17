@@ -347,10 +347,24 @@ export const InputRole = {
 export type InputRole = ClosedEnum<typeof InputRole>;
 
 /**
+ * The status of a model-generated input item.
+ */
+export const InputStatus = {
+  InProgress: "in_progress",
+  Completed: "completed",
+  Incomplete: "incomplete",
+} as const;
+/**
+ * The status of a model-generated input item.
+ */
+export type InputStatus = ClosedEnum<typeof InputStatus>;
+
+/**
  * The type of item.
  */
 export const InputType = {
   Message: "message",
+  FunctionCall: "function_call",
   FunctionCallOutput: "function_call_output",
   ItemReference: "item_reference",
 } as const;
@@ -360,11 +374,15 @@ export const InputType = {
 export type InputType = ClosedEnum<typeof InputType>;
 
 /**
- * An input item. The "type" field determines the item kind: "message", "function_call_output", "item_reference", etc.
+ * An input item. The "type" field determines the item kind: "message", "function_call", "function_call_output", "item_reference", etc.
  */
 export type CreateRouterResponseInput2 = {
   /**
-   * The ID of the function call being responded to (for function_call_output type).
+   * The function arguments as a JSON string (for function_call items).
+   */
+  arguments?: string | undefined;
+  /**
+   * The function call identifier (for function_call and function_call_output items).
    */
   callId?: string | undefined;
   /**
@@ -372,9 +390,13 @@ export type CreateRouterResponseInput2 = {
    */
   content?: string | Array<TwoText | Image | TwoFile> | undefined;
   /**
-   * The ID of the item (for item_reference type).
+   * The ID of the item. For item_reference items, this identifies the referenced item.
    */
   id?: string | undefined;
+  /**
+   * The name of the function that was called (for function_call items).
+   */
+  name?: string | undefined;
   /**
    * The output of the function call (for function_call_output type).
    */
@@ -383,6 +405,10 @@ export type CreateRouterResponseInput2 = {
    * The role of the message sender (for message items).
    */
   role?: InputRole | undefined;
+  /**
+   * The status of a model-generated input item.
+   */
+  status?: InputStatus | undefined;
   /**
    * The type of item.
    */
@@ -938,7 +964,7 @@ export type CreateRouterResponseResponseBody = {
   topLogprobs: number;
   topP: number;
   truncation: Truncation;
-  usage: components.PublicUsage;
+  usage: components.PublicUsage | null;
   user: string | null;
   variables?: { [k: string]: any } | undefined;
 };
@@ -1261,19 +1287,26 @@ export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
   .nativeEnum(InputRole);
 
 /** @internal */
+export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
+  .nativeEnum(InputStatus);
+
+/** @internal */
 export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
   .nativeEnum(InputType);
 
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
+  arguments?: string | undefined;
   call_id?: string | undefined;
   content?:
     | string
     | Array<TwoText$Outbound | Image$Outbound | TwoFile$Outbound>
     | undefined;
   id?: string | undefined;
+  name?: string | undefined;
   output?: string | undefined;
   role?: string | undefined;
+  status?: string | undefined;
   type?: string | undefined;
 };
 
@@ -1283,6 +1316,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseInput2
 > = z.object({
+  arguments: z.string().optional(),
   callId: z.string().optional(),
   content: z.union([
     z.string(),
@@ -1293,8 +1327,10 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
     ])),
   ]).optional(),
   id: z.string().optional(),
+  name: z.string().optional(),
   output: z.string().optional(),
   role: InputRole$outboundSchema.optional(),
+  status: InputStatus$outboundSchema.optional(),
   type: InputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1999,7 +2035,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: Truncation$inboundSchema,
-  usage: components.PublicUsage$inboundSchema,
+  usage: z.nullable(components.PublicUsage$inboundSchema),
   user: z.nullable(z.string()),
   variables: z.record(z.any()).optional(),
 }).transform((v) => {

@@ -1290,7 +1290,7 @@ export type RetrieveAgentRequestResponseBody = {
   /**
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
-  skills: Array<string>;
+  skills?: Array<string> | undefined;
   metrics?: RetrieveAgentRequestMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -3042,7 +3042,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
   team_of_agents: z.array(
     z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
-  skills: z.array(z.string()),
+  skills: z.array(z.string()).optional(),
   metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(

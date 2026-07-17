@@ -187,3 +187,7 @@ export * from "./updatememorydocument.js";
 export * from "./updatememorystore.js";
 export * from "./updateprompt.js";
 export * from "./updatetool.js";
+export * from "./webhookdelete.js";
+export * from "./webhookget.js";
+export * from "./webhooklist.js";
+export * from "./webhookupdate.js";

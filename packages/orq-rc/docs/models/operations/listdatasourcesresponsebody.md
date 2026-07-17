@@ -17,6 +17,7 @@ let value: ListDatasourcesResponseBody = {
       updated: "<value>",
       knowledgeId: "<id>",
       chunksCount: 1083.16,
+      metadata: {},
     },
   ],
   hasMore: false,

@@ -54,16 +54,16 @@ let value: PublicResponseResource = {
   topP: 1473.73,
   truncation: "disabled",
   usage: {
-    inputTokens: 349676,
+    inputTokens: 786005,
     inputTokensDetails: {
-      cacheCreationTokens: 786005,
-      cachedTokens: 763695,
+      cacheCreationTokens: 763695,
+      cachedTokens: 732588,
     },
-    outputTokens: 732588,
+    outputTokens: 376439,
     outputTokensDetails: {
-      reasoningTokens: 376439,
+      reasoningTokens: 349904,
     },
-    totalTokens: 349904,
+    totalTokens: 437223,
   },
   user: "Kelsi_Ratke81",
 };

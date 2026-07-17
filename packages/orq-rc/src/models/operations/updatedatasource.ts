@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,6 +36,34 @@ export const UpdateDatasourceStatus = {
   Queued: "queued",
 } as const;
 export type UpdateDatasourceStatus = ClosedEnum<typeof UpdateDatasourceStatus>;
+
+export type UpdateDatasourceMetadata = {
+  /**
+   * Number of words in the text
+   */
+  wordsCount?: number | undefined;
+  /**
+   * Number of sentences in the text
+   */
+  sentencesCount?: number | undefined;
+  /**
+   * Number of paragraphs in the text
+   */
+  paragraphsCount?: number | undefined;
+  /**
+   * Number of tokens in the text
+   */
+  tokensCount?: number | undefined;
+  /**
+   * Number of characters in the text
+   */
+  charactersCount?: number | undefined;
+  /**
+   * Number of total chunks
+   */
+  chunksCount?: number | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 /**
  * Datasource successfully updated
@@ -79,6 +110,7 @@ export type UpdateDatasourceResponseBody = {
    * The number of chunks in the datasource
    */
   chunksCount: number;
+  metadata: UpdateDatasourceMetadata;
 };
 
 /** @internal */
@@ -147,12 +179,49 @@ export const UpdateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateDatasourceStatus);
 
 /** @internal */
+export const UpdateDatasourceMetadata$inboundSchema: z.ZodType<
+  UpdateDatasourceMetadata,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    words_count: z.number().optional(),
+    sentences_count: z.number().optional(),
+    paragraphs_count: z.number().optional(),
+    tokens_count: z.number().optional(),
+    characters_count: z.number().optional(),
+    chunks_count: z.number().optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "words_count": "wordsCount",
+    "sentences_count": "sentencesCount",
+    "paragraphs_count": "paragraphsCount",
+    "tokens_count": "tokensCount",
+    "characters_count": "charactersCount",
+    "chunks_count": "chunksCount",
+  });
+});
+
+export function updateDatasourceMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatasourceMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatasourceMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatasourceMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   UpdateDatasourceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KXN9FG8C8DTNFNH7XBTP487Q"),
+  _id: z.string().default("01KXPYT88W7SS1AN33KS0Y6AAC"),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   status: UpdateDatasourceStatus$inboundSchema,
@@ -163,6 +232,7 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   update_by_id: z.nullable(z.string()).optional(),
   knowledge_id: z.string(),
   chunks_count: z.number(),
+  metadata: z.lazy(() => UpdateDatasourceMetadata$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

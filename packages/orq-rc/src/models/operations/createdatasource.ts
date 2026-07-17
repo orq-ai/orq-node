@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -106,6 +109,10 @@ export type CreateDatasourceRequestBody = {
    */
   description?: string | null | undefined;
   /**
+   * Client-defined metadata associated with the datasource.
+   */
+  metadata?: { [k: string]: any } | undefined;
+  /**
    * The unique identifier of the file used for datasource creation. If provided, the file is immediately queued for chunking.
    */
   fileId?: string | undefined;
@@ -131,6 +138,34 @@ export const CreateDatasourceStatus = {
   Queued: "queued",
 } as const;
 export type CreateDatasourceStatus = ClosedEnum<typeof CreateDatasourceStatus>;
+
+export type CreateDatasourceMetadata = {
+  /**
+   * Number of words in the text
+   */
+  wordsCount?: number | undefined;
+  /**
+   * Number of sentences in the text
+   */
+  sentencesCount?: number | undefined;
+  /**
+   * Number of paragraphs in the text
+   */
+  paragraphsCount?: number | undefined;
+  /**
+   * Number of tokens in the text
+   */
+  tokensCount?: number | undefined;
+  /**
+   * Number of characters in the text
+   */
+  charactersCount?: number | undefined;
+  /**
+   * Number of total chunks
+   */
+  chunksCount?: number | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 /**
  * Datasource successfully created
@@ -177,6 +212,7 @@ export type CreateDatasourceResponseBody = {
    * The number of chunks in the datasource
    */
   chunksCount: number;
+  metadata: CreateDatasourceMetadata;
 };
 
 /** @internal */
@@ -340,6 +376,7 @@ export function chunkingOptionsToJSON(
 export type CreateDatasourceRequestBody$Outbound = {
   display_name?: string | undefined;
   description?: string | null | undefined;
+  metadata?: { [k: string]: any } | undefined;
   file_id?: string | undefined;
   chunking_options?: ChunkingOptions$Outbound | undefined;
 };
@@ -352,6 +389,7 @@ export const CreateDatasourceRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string().optional(),
   description: z.nullable(z.string()).optional(),
+  metadata: z.record(z.any()).optional(),
   fileId: z.string().optional(),
   chunkingOptions: z.lazy(() => ChunkingOptions$outboundSchema).optional(),
 }).transform((v) => {
@@ -407,12 +445,49 @@ export const CreateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateDatasourceStatus);
 
 /** @internal */
+export const CreateDatasourceMetadata$inboundSchema: z.ZodType<
+  CreateDatasourceMetadata,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    words_count: z.number().optional(),
+    sentences_count: z.number().optional(),
+    paragraphs_count: z.number().optional(),
+    tokens_count: z.number().optional(),
+    characters_count: z.number().optional(),
+    chunks_count: z.number().optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "words_count": "wordsCount",
+    "sentences_count": "sentencesCount",
+    "paragraphs_count": "paragraphsCount",
+    "tokens_count": "tokensCount",
+    "characters_count": "charactersCount",
+    "chunks_count": "chunksCount",
+  });
+});
+
+export function createDatasourceMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasourceMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasourceMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasourceMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   CreateDatasourceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KXN9FG896EN3GC7NKGTFKC8A"),
+  _id: z.string().default("01KXPYT88RN6X70GR4ZXBJV7SY"),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   status: CreateDatasourceStatus$inboundSchema,
@@ -423,6 +498,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   update_by_id: z.nullable(z.string()).optional(),
   knowledge_id: z.string(),
   chunks_count: z.number(),
+  metadata: z.lazy(() => CreateDatasourceMetadata$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

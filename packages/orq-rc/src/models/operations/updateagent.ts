@@ -3004,7 +3004,7 @@ export type UpdateAgentResponseBody = {
   /**
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
-  skills: Array<string>;
+  skills?: Array<string> | undefined;
   metrics?: UpdateAgentMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -7490,7 +7490,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   team_of_agents: z.array(
     z.lazy(() => UpdateAgentAgentsTeamOfAgents$inboundSchema),
   ).optional(),
-  skills: z.array(z.string()),
+  skills: z.array(z.string()).optional(),
   metrics: z.lazy(() => UpdateAgentMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
