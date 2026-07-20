@@ -319,6 +319,10 @@ export type RetrieveToolResponseBodyBlueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -753,7 +757,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXYTCVK5J8ZCY0PQ2232R578"),
+  _id: z.string().default("tool_01KXZFEEAAGQBTG4RTV4GQ7FJS"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -859,7 +863,7 @@ export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KXYTCVK3B2356141T6DB4NVT"),
+  id: z.string().default("01KXZFEEA8G5SGVERYX14NH4DZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
@@ -917,7 +921,7 @@ export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXYTCVK27NCASAFFQ8F0QBHY"),
+  _id: z.string().default("tool_01KXZFEEA7N2YE5P3X01SSP9G6"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1014,6 +1018,7 @@ export const RetrieveToolResponseBodyBlueprint$inboundSchema: z.ZodType<
     z.union([z.lazy(() => RetrieveToolHeaders2$inboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function retrieveToolResponseBodyBlueprintFromJSON(
@@ -1108,7 +1113,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXYTCVJZQKZT7RSCW8YSQG57"),
+  _id: z.string().default("tool_01KXZFEEA49N6W7FJJF61VW1B5"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1204,7 +1209,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXYTCVJXB6YEPTGB2SEQ84GS"),
+  _id: z.string().default("tool_01KXZFEEA2118HTNTZMAVYP6ZN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1310,7 +1315,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXYTCVJVME267QRGA9NWJG2C"),
+  _id: z.string().default("tool_01KXZFEEA124SYESV5GKBMTN8A"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

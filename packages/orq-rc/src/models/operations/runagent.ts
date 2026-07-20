@@ -1435,6 +1435,10 @@ export type CodeToolRun = {
   description: string;
   codeTool: CodeTool;
   requiresApproval?: boolean | undefined;
+  /**
+   * Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -1478,6 +1482,10 @@ export type Blueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -1550,6 +1558,10 @@ export type HTTPToolRun = {
   description: string;
   http: Http;
   requiresApproval?: boolean | undefined;
+  /**
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -4042,7 +4054,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KXYTCVAAA0126DX1DFMV3FXD"),
+  id: z.string().default("01KXZFEE0HTM17A86EG4R9ZSDV"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4417,6 +4429,7 @@ export type CodeToolRun$Outbound = {
   description: string;
   code_tool: CodeTool$Outbound;
   requires_approval: boolean;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4432,6 +4445,7 @@ export const CodeToolRun$outboundSchema: z.ZodType<
   description: z.string(),
   codeTool: z.lazy(() => CodeTool$outboundSchema),
   requiresApproval: z.boolean().default(false),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -4489,6 +4503,7 @@ export type Blueprint$Outbound = {
   method: string;
   headers?: { [k: string]: Headers2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4503,6 +4518,7 @@ export const Blueprint$outboundSchema: z.ZodType<
     z.union([z.lazy(() => Headers2$outboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function blueprintToJSON(blueprint: Blueprint): string {
@@ -4587,6 +4603,7 @@ export type HTTPToolRun$Outbound = {
   description: string;
   http: Http$Outbound;
   requires_approval: boolean;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4602,6 +4619,7 @@ export const HTTPToolRun$outboundSchema: z.ZodType<
   description: z.string(),
   http: z.lazy(() => Http$outboundSchema),
   requiresApproval: z.boolean().default(false),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

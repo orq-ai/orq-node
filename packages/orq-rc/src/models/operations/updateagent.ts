@@ -1188,6 +1188,10 @@ export type AgentToolInputCRUDCodeExecutionTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -1227,6 +1231,10 @@ export type AgentToolInputCRUDHTTPTool = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
+   */
+  timeout?: number | undefined;
 };
 
 export const UpdateAgentAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
@@ -1862,9 +1870,9 @@ export type UpdateAgentTools = {
   toolId?: string | undefined;
   conditions?: Array<UpdateAgentConditions> | undefined;
   /**
-   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
    */
-  timeout: number;
+  timeout?: number | undefined;
 };
 
 /**
@@ -4817,6 +4825,7 @@ export type AgentToolInputCRUDCodeExecutionTool$Outbound = {
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4831,6 +4840,7 @@ export const AgentToolInputCRUDCodeExecutionTool$outboundSchema: z.ZodType<
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -4861,6 +4871,7 @@ export type AgentToolInputCRUDHTTPTool$Outbound = {
   key?: string | undefined;
   id?: string | undefined;
   requires_approval: boolean;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4875,6 +4886,7 @@ export const AgentToolInputCRUDHTTPTool$outboundSchema: z.ZodType<
   key: z.string().optional(),
   id: z.string().optional(),
   requiresApproval: z.boolean().default(false),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
@@ -5893,7 +5905,7 @@ export const UpdateAgentTools$inboundSchema: z.ZodType<
   tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => UpdateAgentConditions$inboundSchema))
     .optional(),
-  timeout: z.number().default(120),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",

@@ -108,9 +108,9 @@ export type Tools = {
   toolId?: string | undefined;
   conditions?: Array<AgentStartedStreamingEventConditions> | undefined;
   /**
-   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
    */
-  timeout: number;
+  timeout?: number | undefined;
 };
 
 /**
@@ -342,7 +342,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
     conditions: z.array(
       z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
     ).optional(),
-    timeout: z.number().default(120),
+    timeout: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "action_type": "actionType",
