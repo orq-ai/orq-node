@@ -27,10 +27,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -264,10 +264,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -369,10 +369,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -489,10 +489,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -594,10 +594,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -999,10 +999,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -1120,10 +1120,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated:
           type: "string"
-          default: "2026-07-20T03:51:02.805Z"
+          default: "2026-07-20T09:59:03.918Z"
         updated_by_id:
           type:
             - "string"
@@ -3431,7 +3431,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kxytcv5fcapfsp9mb8qqhf5e"
+              default: "reasoning_01kxzfedw93v0xh794ftcv1dr0"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3965,8 +3965,7 @@ components:
                         type: "number"
                         minimum: 1
                         maximum: 600
-                        default: 120
-                        description: "Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)"
+                        description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                     required:
                       - "id"
                       - "action_type"
@@ -4693,8 +4692,7 @@ components:
                   type: "number"
                   minimum: 1
                   maximum: 600
-                  default: 120
-                  description: "Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)"
+                  description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
               required:
                 - "id"
                 - "action_type"
@@ -18981,6 +18979,11 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                             title: "HTTP Tool"
                             description: "Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id."
                           - type: "object"
@@ -19001,6 +19004,11 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 120
+                                description: "Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition."
                             title: "Code Execution Tool"
                             description: "Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id."
                           - type: "object"
@@ -19429,8 +19437,7 @@ paths:
                               type: "number"
                               minimum: 1
                               maximum: 600
-                              default: 120
-                              description: "Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)"
+                              description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                           required:
                             - "id"
                             - "action_type"
@@ -20466,8 +20473,7 @@ paths:
                                     type: "number"
                                     minimum: 1
                                     maximum: 600
-                                    default: 120
-                                    description: "Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)"
+                                    description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                                 required:
                                   - "id"
                                   - "action_type"
@@ -21605,8 +21611,7 @@ paths:
                               type: "number"
                               minimum: 1
                               maximum: 600
-                              default: 120
-                              description: "Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)"
+                              description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                           required:
                             - "id"
                             - "action_type"
@@ -23376,6 +23381,11 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                             title: "HTTP Tool"
                             description: "Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id."
                           - type: "object"
@@ -23396,6 +23406,11 @@ paths:
                                 type: "boolean"
                                 default: false
                                 description: "Whether this tool requires approval before execution"
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 120
+                                description: "Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition."
                             title: "Code Execution Tool"
                             description: "Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id."
                           - type: "object"
@@ -23818,8 +23833,7 @@ paths:
                               type: "number"
                               minimum: 1
                               maximum: 600
-                              default: 120
-                              description: "Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)"
+                              description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                           required:
                             - "id"
                             - "action_type"
@@ -26187,6 +26201,11 @@ paths:
                                         type: "object"
                                         additionalProperties: {}
                                         description: "The body to send with the request."
+                                      timeout:
+                                        type: "number"
+                                        minimum: 1
+                                        maximum: 600
+                                        description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                                     required:
                                       - "url"
                                       - "method"
@@ -26225,6 +26244,11 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 default: false
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                             required:
                               - "type"
                               - "key"
@@ -26291,6 +26315,11 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 default: false
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 120
+                                description: "Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition."
                             required:
                               - "type"
                               - "key"
@@ -26477,7 +26506,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KXYTCVAAA0126DX1DFMV3FXD"
+                                          default: "01KXZFEE0HTM17A86EG4R9ZSDV"
                                         name:
                                           type: "string"
                                         description:
@@ -27948,6 +27977,11 @@ paths:
                                         type: "object"
                                         additionalProperties: {}
                                         description: "The body to send with the request."
+                                      timeout:
+                                        type: "number"
+                                        minimum: 1
+                                        maximum: 600
+                                        description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                                     required:
                                       - "url"
                                       - "method"
@@ -27986,6 +28020,11 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 default: false
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
                             required:
                               - "type"
                               - "key"
@@ -28052,6 +28091,11 @@ paths:
                               requires_approval:
                                 type: "boolean"
                                 default: false
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 120
+                                description: "Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition."
                             required:
                               - "type"
                               - "key"
@@ -28238,7 +28282,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KXYTCVC0QA3TXPXM88A8FFN7"
+                                          default: "01KXZFEE365HGHD2711D42KTBE"
                                         name:
                                           type: "string"
                                         description:
@@ -37007,7 +37051,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXYTCVGE3KYDP1X6QAN2ZFHY"
+                              default: "tool_01KXZFEE7FAGAZS8NT9STNKZTV"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37108,7 +37152,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXYTCVGG3Y20BNNZX0F7Y052"
+                              default: "tool_01KXZFEE7HRCP0PFDEEB94N5PJ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37211,7 +37255,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXYTCVGJEMCKSHBY09M41F6D"
+                              default: "tool_01KXZFEE7K8AJNAVFP8Y9VMB8G"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37299,6 +37343,11 @@ paths:
                                       type: "object"
                                       additionalProperties: {}
                                       description: "The body to send with the request."
+                                    timeout:
+                                      type: "number"
+                                      minimum: 1
+                                      maximum: 600
+                                      description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                                   required:
                                     - "url"
                                     - "method"
@@ -37350,7 +37399,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXYTCVGMH49F7P91MY1A1VZP"
+                              default: "tool_01KXZFEE7N41DB5BR3QWBCJ7X7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37426,7 +37475,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KXYTCVGP6BGTN8PMZAYHMAP9"
+                                        default: "01KXZFEE7Q65HXMD392H5EYMBM"
                                       name:
                                         type: "string"
                                       description:
@@ -37485,7 +37534,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KXYTCVGQ9W537TWW3ABXSMPZ"
+                              default: "tool_01KXZFEE7R4CYAASDHX1FBYHSW"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37837,6 +37886,11 @@ paths:
                               type: "object"
                               additionalProperties: {}
                               description: "The body to send with the request."
+                            timeout:
+                              type: "number"
+                              minimum: 1
+                              maximum: 600
+                              description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                           required:
                             - "url"
                             - "method"
@@ -38040,7 +38094,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVH6G7CED45H837P106B"
+                        default: "tool_01KXZFEE8JK0MJ0A5HQV0V5C01"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38141,7 +38195,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVH8J7T2G62V41EVJWH1"
+                        default: "tool_01KXZFEE8NMF444BEH03BA1PFK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38244,7 +38298,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVHB8EBTXCYNQKAV9HDJ"
+                        default: "tool_01KXZFEE8P247M0WQRD0XF3TGF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38332,6 +38386,11 @@ paths:
                                 type: "object"
                                 additionalProperties: {}
                                 description: "The body to send with the request."
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                             required:
                               - "url"
                               - "method"
@@ -38383,7 +38442,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVHE4N9ZJ773END0SJ1Q"
+                        default: "tool_01KXZFEE8STBK3K74YMW2X0BGA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38459,7 +38518,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KXYTCVHF7Q4W7PSC9J0TWHMK"
+                                  default: "01KXZFEE8TQSTDBNHZST557H76"
                                 name:
                                   type: "string"
                                 description:
@@ -38518,7 +38577,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVHHG9D5WTCMBRTYY6G0"
+                        default: "tool_01KXZFEE8V122TBP7RGQXXB6S8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38873,6 +38932,11 @@ paths:
                               type: "object"
                               additionalProperties: {}
                               description: "The body to send with the request."
+                            timeout:
+                              type: "number"
+                              minimum: 1
+                              maximum: 600
+                              description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                           required:
                             - "url"
                             - "method"
@@ -38979,7 +39043,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KXYTCVJDVB4XN3HV8CTKDY8Q"
+                                default: "01KXZFEE9MXZZQBRH6P0G85W7S"
                               name:
                                 type: "string"
                               description:
@@ -39125,7 +39189,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVHV183HNTMQMG8J7609"
+                        default: "tool_01KXZFEE94VRXJSH6GNHD4P343"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39226,7 +39290,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVHXAGF7T1C3DK6W2DR6"
+                        default: "tool_01KXZFEE96PCEMA58FR93DVQ8A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39329,7 +39393,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVHZY5PAVG7F9RAZH9BE"
+                        default: "tool_01KXZFEE9705WF460JY1APWHRD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39417,6 +39481,11 @@ paths:
                                 type: "object"
                                 additionalProperties: {}
                                 description: "The body to send with the request."
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                             required:
                               - "url"
                               - "method"
@@ -39468,7 +39537,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVJ2WDFTWWVQNJQHQXEG"
+                        default: "tool_01KXZFEE9AE711W7XQ6QFW0ZNB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39544,7 +39613,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KXYTCVJ4MY407D6475PWRSQ8"
+                                  default: "01KXZFEE9BTA15Z68262J371EY"
                                 name:
                                   type: "string"
                                 description:
@@ -39603,7 +39672,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVJ56WFP00ECS7JMQMX0"
+                        default: "tool_01KXZFEE9C12Z6CX5SSD4T6BHV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39764,7 +39833,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVJVME267QRGA9NWJG2C"
+                        default: "tool_01KXZFEEA124SYESV5GKBMTN8A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39865,7 +39934,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVJXB6YEPTGB2SEQ84GS"
+                        default: "tool_01KXZFEEA2118HTNTZMAVYP6ZN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39968,7 +40037,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVJZQKZT7RSCW8YSQG57"
+                        default: "tool_01KXZFEEA49N6W7FJJF61VW1B5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40056,6 +40125,11 @@ paths:
                                 type: "object"
                                 additionalProperties: {}
                                 description: "The body to send with the request."
+                              timeout:
+                                type: "number"
+                                minimum: 1
+                                maximum: 600
+                                description: "The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools."
                             required:
                               - "url"
                               - "method"
@@ -40107,7 +40181,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVK27NCASAFFQ8F0QBHY"
+                        default: "tool_01KXZFEEA7N2YE5P3X01SSP9G6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40183,7 +40257,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KXYTCVK3B2356141T6DB4NVT"
+                                  default: "01KXZFEEA8G5SGVERYX14NH4DZ"
                                 name:
                                   type: "string"
                                 description:
@@ -40242,7 +40316,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KXYTCVK5J8ZCY0PQ2232R578"
+                        default: "tool_01KXZFEEAAGQBTG4RTV4GQ7FJS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42466,7 +42540,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KXYTCVPGFJ3NBYS0NM5M4CCQ"
+                          default: "01KXZFEED80Z4DJY7PV6YPFD93"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -42669,7 +42743,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KXYTCVPQ4VCGNQ3DRF1G5AWH"
+                    default: "01KXZFEEDCD2F6JEMD9A193WQD"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42792,7 +42866,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KXYTCVPMY7124KEA886QE10D"
+                    default: "01KXZFEEDBZN83KN1XGQCNWT01"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -42954,7 +43028,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KXYTCVPVWZPVG705GGKDSZZK"
+                    default: "01KXZFEEDGJCFHTNS9SAW947KB"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -45684,7 +45758,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-20T03:50:54.681Z"
+                          default: "2026-07-20T09:58:58.762Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45692,7 +45766,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:50:54.682Z"
+                              default: "2026-07-20T09:58:58.763Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -45836,7 +45910,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-20T03:50:54.681Z"
+                    default: "2026-07-20T09:58:58.762Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45844,7 +45918,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-20T03:50:54.682Z"
+                        default: "2026-07-20T09:58:58.763Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45983,7 +46057,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-20T03:50:54.681Z"
+                    default: "2026-07-20T09:58:58.762Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45991,7 +46065,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-20T03:50:54.682Z"
+                        default: "2026-07-20T09:58:58.763Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46163,7 +46237,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-20T03:50:54.681Z"
+                    default: "2026-07-20T09:58:58.762Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46171,7 +46245,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-20T03:50:54.682Z"
+                        default: "2026-07-20T09:58:58.763Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46605,7 +46679,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-20T03:51:27.254Z"
+                                    default: "2026-07-20T09:59:19.288Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46678,7 +46752,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-20T03:51:27.255Z"
+                                    default: "2026-07-20T09:59:19.289Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46751,7 +46825,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-20T03:51:27.256Z"
+                                    default: "2026-07-20T09:59:19.290Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46824,7 +46898,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-20T03:51:27.258Z"
+                                    default: "2026-07-20T09:59:19.291Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46864,7 +46938,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-20T03:50:54.681Z"
+                          default: "2026-07-20T09:58:58.762Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -46872,7 +46946,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:50:54.682Z"
+                              default: "2026-07-20T09:58:58.763Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -47500,7 +47574,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-20T03:51:27.278Z"
+                                default: "2026-07-20T09:59:19.307Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47573,7 +47647,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-20T03:51:27.279Z"
+                                default: "2026-07-20T09:59:19.308Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47646,7 +47720,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-20T03:51:27.280Z"
+                                default: "2026-07-20T09:59:19.309Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47719,7 +47793,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-20T03:51:27.281Z"
+                                default: "2026-07-20T09:59:19.310Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47759,7 +47833,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-07-20T03:50:54.681Z"
+                      default: "2026-07-20T09:58:58.762Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -47767,7 +47841,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-07-20T03:50:54.682Z"
+                          default: "2026-07-20T09:58:58.763Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -48132,7 +48206,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.267Z"
+                              default: "2026-07-20T09:59:19.298Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48205,7 +48279,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.268Z"
+                              default: "2026-07-20T09:59:19.299Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48278,7 +48352,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.269Z"
+                              default: "2026-07-20T09:59:19.300Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48351,7 +48425,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.270Z"
+                              default: "2026-07-20T09:59:19.301Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48391,7 +48465,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-20T03:50:54.681Z"
+                    default: "2026-07-20T09:58:58.762Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -48399,7 +48473,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-20T03:50:54.682Z"
+                        default: "2026-07-20T09:58:58.763Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -49020,7 +49094,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.306Z"
+                              default: "2026-07-20T09:59:19.333Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49093,7 +49167,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.306Z"
+                              default: "2026-07-20T09:59:19.334Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49166,7 +49240,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.307Z"
+                              default: "2026-07-20T09:59:19.335Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49239,7 +49313,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:51:27.309Z"
+                              default: "2026-07-20T09:59:19.335Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49279,7 +49353,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-20T03:50:54.681Z"
+                    default: "2026-07-20T09:58:58.762Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -49287,7 +49361,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-20T03:50:54.682Z"
+                        default: "2026-07-20T09:58:58.763Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -55524,7 +55598,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-20T03:51:27.428Z"
+                      default: "2026-07-20T09:59:19.478Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55566,7 +55640,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-20T03:51:27.429Z"
+                      default: "2026-07-20T09:59:19.479Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55608,7 +55682,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-20T03:51:27.430Z"
+                      default: "2026-07-20T09:59:19.480Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55650,7 +55724,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-20T03:51:27.430Z"
+                      default: "2026-07-20T09:59:19.481Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55985,7 +56059,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-20T03:50:54.681Z"
+                          default: "2026-07-20T09:58:58.762Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55993,7 +56067,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:50:54.682Z"
+                              default: "2026-07-20T09:58:58.763Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -56067,7 +56141,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-20T03:50:54.681Z"
+                          default: "2026-07-20T09:58:58.762Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -56075,7 +56149,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-20T03:50:54.682Z"
+                              default: "2026-07-20T09:58:58.763Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -56263,7 +56337,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-20T03:50:54.681Z"
+                        default: "2026-07-20T09:58:58.762Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56271,7 +56345,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-20T03:50:54.682Z"
+                            default: "2026-07-20T09:58:58.763Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56345,7 +56419,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-20T03:50:54.681Z"
+                        default: "2026-07-20T09:58:58.762Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56353,7 +56427,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-20T03:50:54.682Z"
+                            default: "2026-07-20T09:58:58.763Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56451,7 +56525,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-20T03:50:54.681Z"
+                        default: "2026-07-20T09:58:58.762Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56459,7 +56533,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-20T03:50:54.682Z"
+                            default: "2026-07-20T09:58:58.763Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56533,7 +56607,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-20T03:50:54.681Z"
+                        default: "2026-07-20T09:58:58.762Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56541,7 +56615,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-20T03:50:54.682Z"
+                            default: "2026-07-20T09:58:58.763Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56737,7 +56811,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-20T03:50:54.681Z"
+                        default: "2026-07-20T09:58:58.762Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56745,7 +56819,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-20T03:50:54.682Z"
+                            default: "2026-07-20T09:58:58.763Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56819,7 +56893,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-20T03:50:54.681Z"
+                        default: "2026-07-20T09:58:58.762Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56827,7 +56901,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-20T03:50:54.682Z"
+                            default: "2026-07-20T09:58:58.763Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
