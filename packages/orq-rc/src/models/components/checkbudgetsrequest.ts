@@ -16,11 +16,11 @@ export type Metadata = {};
 
 export type CheckBudgetsRequest = {
   /**
-   * API key that issued the request (if any).
+   * API key that issued the request; ignored — the gate uses the caller's own key.
    */
   apiKeyId?: string | undefined;
   /**
-   * Project the request targets (if any).
+   * Project the request targets; must be within the caller's scope.
    */
   projectId?: string | undefined;
   /**

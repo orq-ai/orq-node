@@ -1,12 +1,12 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.12.0-rc.38",
+  "version": "4.12.0-rc.39",
   "author": "Orq",
   "exports": {
     ".": {
+      "import": "./index.js",
       "require": "./index.js",
-      "types": "./index.d.ts",
-      "import": "./index.js"
+      "types": "./index.d.ts"
     },
     "./*": "./*",
     "./langchain": {
