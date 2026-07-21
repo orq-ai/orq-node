@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create translation
+   * Create tool
+   *
+   * @remarks
+   * Creates a new tool in the workspace.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
