@@ -267,8 +267,8 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-07-21T08:06:06.924Z"),
-  updated: z.string().default("2026-07-21T08:06:06.924Z"),
+  created: z.string().default("2026-07-21T08:34:12.428Z"),
+  updated: z.string().default("2026-07-21T08:34:12.428Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("llm_eval"),
