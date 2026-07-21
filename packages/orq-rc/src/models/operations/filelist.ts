@@ -25,6 +25,15 @@ export type FileListRequest = {
    */
   endingBefore?: string | undefined;
   projectId?: string | undefined;
+  /**
+   * Restrict results to files declared with this purpose. Accepts a purpose
+   *
+   * @remarks
+   *  alias (`retrieval`, `knowledge_datasource`, `batch`, `code_interpreter`)
+   *  or canonical `FILE_PURPOSE_*` name case-insensitively. Omit to list files
+   *  of every purpose.
+   */
+  purpose?: string | undefined;
 };
 
 /** @internal */
@@ -33,6 +42,7 @@ export type FileListRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
+  purpose?: string | undefined;
 };
 
 /** @internal */
@@ -45,6 +55,7 @@ export const FileListRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
+  purpose: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
