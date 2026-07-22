@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -26,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update autorouter custom model
+ * Retrieve a Smart Router
  *
  * @remarks
- * Re-configures an autorouter model. Each of key/strong_model/economical_model/profile falls back to the existing value when omitted. Changing the key enforces uniqueness and rewrites PRICING_KV.
+ * Retrieves a Smart Router by ID within the caller's workspace.
  */
-export function modelsUpdateAutorouter(
+export function smartRoutersGet(
   client: OrqCore,
-  request: operations.ModelUpdateAutorouterRequest,
+  request: operations.SmartRouterGetRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ModelUpdateAutorouterResponseBody,
+    components.GetSmartRouterResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +58,12 @@ export function modelsUpdateAutorouter(
 
 async function $do(
   client: OrqCore,
-  request: operations.ModelUpdateAutorouterRequest,
+  request: operations.SmartRouterGetRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ModelUpdateAutorouterResponseBody,
+      components.GetSmartRouterResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,26 +78,24 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.ModelUpdateAutorouterRequest$outboundSchema.parse(value),
+    (value) => operations.SmartRouterGetRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = null;
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    smart_router_id: encodeSimple("smart_router_id", payload.smart_router_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/models/autorouter/{id}")(pathParams);
+  const path = pathToFunc("/v2/smart-routers/{smart_router_id}")(pathParams);
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -107,7 +106,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "ModelUpdateAutorouter",
+    operationID: "SmartRouterGet",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -121,7 +120,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PATCH",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -147,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.ModelUpdateAutorouterResponseBody,
+    components.GetSmartRouterResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -157,8 +156,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ModelUpdateAutorouterResponseBody$inboundSchema),
-    M.fail([400, 404, "4XX"]),
+    M.json(200, components.GetSmartRouterResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

@@ -36,10 +36,8 @@ let value: ModelUpdateAwsBedrockResponseBody = {
     {
       config: {
         "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
       },
-      description: "anenst honestly pink even",
+      description: "phew notwithstanding why",
       id: "<id>",
       isActive: false,
       name: "<value>",

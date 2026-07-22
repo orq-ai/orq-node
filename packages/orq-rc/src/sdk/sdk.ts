@@ -31,6 +31,7 @@ import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
 import { Skills } from "./skills.js";
+import { SmartRouters } from "./smartrouters.js";
 import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
@@ -165,6 +166,11 @@ export class Orq extends ClientSDK {
   private _skills?: Skills;
   get skills(): Skills {
     return (this._skills ??= new Skills(this._options));
+  }
+
+  private _smartRouters?: SmartRouters;
+  get smartRouters(): SmartRouters {
+    return (this._smartRouters ??= new SmartRouters(this._options));
   }
 
   private _webhooks?: Webhooks;

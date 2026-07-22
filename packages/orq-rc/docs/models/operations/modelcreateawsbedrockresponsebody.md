@@ -36,10 +36,8 @@ let value: ModelCreateAwsBedrockResponseBody = {
     {
       config: {
         "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
       },
-      description: "anenst honestly pink even",
+      description: "phew notwithstanding why",
       id: "<id>",
       isActive: false,
       name: "<value>",
@@ -47,10 +45,10 @@ let value: ModelCreateAwsBedrockResponseBody = {
       parameterType: "<value>",
     },
   ],
-  pricingUrl: "https://cluttered-eyeliner.info/",
+  pricingUrl: "https://delicious-hundred.name/",
   provider: "<value>",
   refId: "<id>",
-  updated: new Date("2024-05-29T00:39:25.927Z"),
+  updated: new Date("2024-04-10T14:10:21.332Z"),
 };
 ```
 

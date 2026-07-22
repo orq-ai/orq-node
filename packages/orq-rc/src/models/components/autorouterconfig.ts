@@ -17,6 +17,7 @@ import {
 export type AutoRouterConfig = {
   economicalModel?: string | undefined;
   id?: string | undefined;
+  models?: Array<string> | null | undefined;
   profile?: string | undefined;
   strongModel?: string | undefined;
   v2?: AutoRouterV2Config | undefined;
@@ -31,6 +32,7 @@ export const AutoRouterConfig$inboundSchema: z.ZodType<
 > = z.object({
   economical_model: z.string().optional(),
   id: z.string().optional(),
+  models: z.nullable(z.array(z.string())).optional(),
   profile: z.string().optional(),
   strong_model: z.string().optional(),
   v2: AutoRouterV2Config$inboundSchema.optional(),
@@ -45,6 +47,7 @@ export const AutoRouterConfig$inboundSchema: z.ZodType<
 export type AutoRouterConfig$Outbound = {
   economical_model?: string | undefined;
   id?: string | undefined;
+  models?: Array<string> | null | undefined;
   profile?: string | undefined;
   strong_model?: string | undefined;
   v2?: AutoRouterV2Config$Outbound | undefined;
@@ -59,6 +62,7 @@ export const AutoRouterConfig$outboundSchema: z.ZodType<
 > = z.object({
   economicalModel: z.string().optional(),
   id: z.string().optional(),
+  models: z.nullable(z.array(z.string())).optional(),
   profile: z.string().optional(),
   strongModel: z.string().optional(),
   v2: AutoRouterV2Config$outboundSchema.optional(),

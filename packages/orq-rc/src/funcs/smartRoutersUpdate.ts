@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -26,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create autorouter custom model
+ * Update a Smart Router
  *
  * @remarks
- * Creates an autorouter model that routes between a strong and economical source model based on the requested profile. Both source models must already exist for the workspace and be marked autorouter-eligible in master data.
+ * Partially updates the routing models or profile. The router key is immutable.
  */
-export function modelsCreateAutorouter(
+export function smartRoutersUpdate(
   client: OrqCore,
-  request: operations.ModelCreateAutorouterRequestBody,
+  request: operations.SmartRouterUpdateRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ModelCreateAutorouterResponseBody,
+    components.UpdateSmartRouterResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +58,12 @@ export function modelsCreateAutorouter(
 
 async function $do(
   client: OrqCore,
-  request: operations.ModelCreateAutorouterRequestBody,
+  request: operations.SmartRouterUpdateRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ModelCreateAutorouterResponseBody,
+      components.UpdateSmartRouterResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,17 +78,24 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.ModelCreateAutorouterRequestBody$outboundSchema.parse(value),
+    (value) => operations.SmartRouterUpdateRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload.UpdateSmartRouterRequest, {
+    explode: true,
+  });
 
-  const path = pathToFunc("/v2/models/autorouter")();
+  const pathParams = {
+    smart_router_id: encodeSimple("smart_router_id", payload.smart_router_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v2/smart-routers/{smart_router_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -101,7 +109,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "ModelCreateAutorouter",
+    operationID: "SmartRouterUpdate",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -115,7 +123,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -141,7 +149,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.ModelCreateAutorouterResponseBody,
+    components.UpdateSmartRouterResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -151,8 +159,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ModelCreateAutorouterResponseBody$inboundSchema),
-    M.fail([400, 404, "4XX"]),
+    M.json(200, components.UpdateSmartRouterResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {
