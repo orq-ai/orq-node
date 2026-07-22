@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create speech
+   * Create a new API key
    *
    * @remarks
-   * Generates audio from the input text.
+   * Mints a new opaque API key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
