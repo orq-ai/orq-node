@@ -1,0 +1,23 @@
+# CodeToolInput
+
+Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id.
+
+## Example Usage
+
+```typescript
+import { CodeToolInput } from "@orq-ai/node/models/components";
+
+let value: CodeToolInput = {
+  type: "code",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                             | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                            | *"code"*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | Code execution tool type                                                                                                                          |
+| `key`                                                                                                                                             | *string*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | The key of the pre-created code tool                                                                                                              |
+| `id`                                                                                                                                              | *string*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | The ID of the pre-created code tool                                                                                                               |
+| `requiresApproval`                                                                                                                                | *boolean*                                                                                                                                         | :heavy_minus_sign:                                                                                                                                | Whether this tool requires approval before execution                                                                                              |
+| `timeout`                                                                                                                                         | *number*                                                                                                                                          | :heavy_minus_sign:                                                                                                                                | Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition. |

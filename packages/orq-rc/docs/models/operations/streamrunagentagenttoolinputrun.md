@@ -5,102 +5,98 @@ Tool configuration for agent run operations. Built-in tools only require a type 
 
 ## Supported Types
 
-### `operations.StreamRunAgentAgentToolInputRunGoogleSearchTool`
+### `operations.AgentToolInputRunGoogleSearchTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunGoogleSearchTool = {
+const value: operations.AgentToolInputRunGoogleSearchTool = {
   type: "google_search",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunWebScraperTool`
+### `operations.AgentToolInputRunWebScraperTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunWebScraperTool = {
+const value: operations.AgentToolInputRunWebScraperTool = {
   type: "web_scraper",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunCallSubAgentTool`
+### `operations.AgentToolInputRunCallSubAgentTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunCallSubAgentTool = {
+const value: operations.AgentToolInputRunCallSubAgentTool = {
   type: "call_sub_agent",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunRetrieveAgentsTool`
+### `operations.AgentToolInputRunRetrieveAgentsTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunRetrieveAgentsTool = {
+const value: operations.AgentToolInputRunRetrieveAgentsTool = {
   type: "retrieve_agents",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunQueryMemoryStoreTool`
+### `operations.AgentToolInputRunQueryMemoryStoreTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunQueryMemoryStoreTool = {
+const value: operations.AgentToolInputRunQueryMemoryStoreTool = {
   type: "query_memory_store",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunWriteMemoryStoreTool`
+### `operations.AgentToolInputRunWriteMemoryStoreTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunWriteMemoryStoreTool = {
+const value: operations.AgentToolInputRunWriteMemoryStoreTool = {
   type: "write_memory_store",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool`
+### `operations.AgentToolInputRunRetrieveMemoryStoresTool`
 
 ```typescript
-const value:
-  operations.StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool = {
-    type: "retrieve_memory_stores",
-  };
+const value: operations.AgentToolInputRunRetrieveMemoryStoresTool = {
+  type: "retrieve_memory_stores",
+};
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool`
+### `operations.AgentToolInputRunDeleteMemoryDocumentTool`
 
 ```typescript
-const value:
-  operations.StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool = {
-    type: "delete_memory_document",
-  };
+const value: operations.AgentToolInputRunDeleteMemoryDocumentTool = {
+  type: "delete_memory_document",
+};
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool`
+### `operations.AgentToolInputRunRetrieveKnowledgeBasesTool`
 
 ```typescript
-const value:
-  operations.StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool = {
-    type: "retrieve_knowledge_bases",
-  };
+const value: operations.AgentToolInputRunRetrieveKnowledgeBasesTool = {
+  type: "retrieve_knowledge_bases",
+};
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool`
+### `operations.AgentToolInputRunQueryKnowledgeBaseTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool =
-  {
-    type: "query_knowledge_base",
-  };
+const value: operations.AgentToolInputRunQueryKnowledgeBaseTool = {
+  type: "query_knowledge_base",
+};
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunCurrentDateTool`
+### `operations.AgentToolInputRunCurrentDateTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunCurrentDateTool = {
+const value: operations.AgentToolInputRunCurrentDateTool = {
   type: "current_date",
 };
 ```
 
-### `operations.StreamRunAgentAgentToolInputRunCodeInterpreterTool`
+### `operations.AgentToolInputRunCodeInterpreterTool`
 
 ```typescript
-const value: operations.StreamRunAgentAgentToolInputRunCodeInterpreterTool = {
+const value: operations.AgentToolInputRunCodeInterpreterTool = {
   type: "code_interpreter",
 };
 ```

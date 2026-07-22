@@ -70,10 +70,10 @@ const value: operations.OrqAiTool = {
 };
 ```
 
-### `operations.ToolsMCPTool`
+### `operations.MCPTool`
 
 ```typescript
-const value: operations.ToolsMCPTool = {
+const value: operations.MCPTool = {
   type: "mcp",
 };
 ```

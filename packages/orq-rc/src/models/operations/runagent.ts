@@ -1567,7 +1567,7 @@ export type HTTPToolRun = {
 /**
  * Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
  */
-export type AgentToolInputRunCodeInterpreterTool = {
+export type CodeInterpreterTool = {
   type: "code_interpreter";
   /**
    * Whether this tool requires approval before execution
@@ -1582,7 +1582,7 @@ export type AgentToolInputRunCodeInterpreterTool = {
 /**
  * Returns the current date and time
  */
-export type AgentToolInputRunCurrentDateTool = {
+export type CurrentDateTool = {
   type: "current_date";
   /**
    * Whether this tool requires approval before execution
@@ -1597,7 +1597,7 @@ export type AgentToolInputRunCurrentDateTool = {
 /**
  * Queries knowledge bases for information
  */
-export type AgentToolInputRunQueryKnowledgeBaseTool = {
+export type QueryKnowledgeBaseTool = {
   type: "query_knowledge_base";
   /**
    * Whether this tool requires approval before execution
@@ -1612,7 +1612,7 @@ export type AgentToolInputRunQueryKnowledgeBaseTool = {
 /**
  * Lists available knowledge bases
  */
-export type AgentToolInputRunRetrieveKnowledgeBasesTool = {
+export type RetrieveKnowledgeBasesTool = {
   type: "retrieve_knowledge_bases";
   /**
    * Whether this tool requires approval before execution
@@ -1627,7 +1627,7 @@ export type AgentToolInputRunRetrieveKnowledgeBasesTool = {
 /**
  * Deletes documents from memory stores
  */
-export type AgentToolInputRunDeleteMemoryDocumentTool = {
+export type DeleteMemoryDocumentTool = {
   type: "delete_memory_document";
   /**
    * Whether this tool requires approval before execution
@@ -1642,7 +1642,7 @@ export type AgentToolInputRunDeleteMemoryDocumentTool = {
 /**
  * Lists available memory stores
  */
-export type AgentToolInputRunRetrieveMemoryStoresTool = {
+export type RetrieveMemoryStoresTool = {
   type: "retrieve_memory_stores";
   /**
    * Whether this tool requires approval before execution
@@ -1657,7 +1657,7 @@ export type AgentToolInputRunRetrieveMemoryStoresTool = {
 /**
  * Writes information to agent memory stores
  */
-export type AgentToolInputRunWriteMemoryStoreTool = {
+export type WriteMemoryStoreTool = {
   type: "write_memory_store";
   /**
    * Whether this tool requires approval before execution
@@ -1672,7 +1672,7 @@ export type AgentToolInputRunWriteMemoryStoreTool = {
 /**
  * Queries agent memory stores for context
  */
-export type AgentToolInputRunQueryMemoryStoreTool = {
+export type QueryMemoryStoreTool = {
   type: "query_memory_store";
   /**
    * Whether this tool requires approval before execution
@@ -1687,7 +1687,7 @@ export type AgentToolInputRunQueryMemoryStoreTool = {
 /**
  * Retrieves available agents in the system
  */
-export type AgentToolInputRunRetrieveAgentsTool = {
+export type RetrieveAgentsTool = {
   type: "retrieve_agents";
   /**
    * Whether this tool requires approval before execution
@@ -1702,7 +1702,7 @@ export type AgentToolInputRunRetrieveAgentsTool = {
 /**
  * Delegates tasks to specialized sub-agents
  */
-export type AgentToolInputRunCallSubAgentTool = {
+export type CallSubAgentTool = {
   type: "call_sub_agent";
   /**
    * Whether this tool requires approval before execution
@@ -1717,7 +1717,7 @@ export type AgentToolInputRunCallSubAgentTool = {
 /**
  * Scrapes and extracts content from web pages
  */
-export type AgentToolInputRunWebScraperTool = {
+export type WebScraperTool = {
   type: "web_scraper";
   /**
    * Whether this tool requires approval before execution
@@ -1732,7 +1732,7 @@ export type AgentToolInputRunWebScraperTool = {
 /**
  * Performs Google searches to retrieve web content
  */
-export type AgentToolInputRunGoogleSearchTool = {
+export type GoogleSearchTool = {
   type: "google_search";
   /**
    * Whether this tool requires approval before execution
@@ -1748,18 +1748,18 @@ export type AgentToolInputRunGoogleSearchTool = {
  * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, JSON Schema, MCP) support full inline definitions for on-the-fly creation.
  */
 export type AgentToolInputRun =
-  | AgentToolInputRunGoogleSearchTool
-  | AgentToolInputRunWebScraperTool
-  | AgentToolInputRunCallSubAgentTool
-  | AgentToolInputRunRetrieveAgentsTool
-  | AgentToolInputRunQueryMemoryStoreTool
-  | AgentToolInputRunWriteMemoryStoreTool
-  | AgentToolInputRunRetrieveMemoryStoresTool
-  | AgentToolInputRunDeleteMemoryDocumentTool
-  | AgentToolInputRunRetrieveKnowledgeBasesTool
-  | AgentToolInputRunQueryKnowledgeBaseTool
-  | AgentToolInputRunCurrentDateTool
-  | AgentToolInputRunCodeInterpreterTool
+  | GoogleSearchTool
+  | WebScraperTool
+  | CallSubAgentTool
+  | RetrieveAgentsTool
+  | QueryMemoryStoreTool
+  | WriteMemoryStoreTool
+  | RetrieveMemoryStoresTool
+  | DeleteMemoryDocumentTool
+  | RetrieveKnowledgeBasesTool
+  | QueryKnowledgeBaseTool
+  | CurrentDateTool
+  | CodeInterpreterTool
   | HTTPToolRun
   | CodeToolRun
   | FunctionToolRun
@@ -1843,18 +1843,18 @@ export type RunAgentSettings = {
    */
   tools?:
     | Array<
-      | AgentToolInputRunGoogleSearchTool
-      | AgentToolInputRunWebScraperTool
-      | AgentToolInputRunCallSubAgentTool
-      | AgentToolInputRunRetrieveAgentsTool
-      | AgentToolInputRunQueryMemoryStoreTool
-      | AgentToolInputRunWriteMemoryStoreTool
-      | AgentToolInputRunRetrieveMemoryStoresTool
-      | AgentToolInputRunDeleteMemoryDocumentTool
-      | AgentToolInputRunRetrieveKnowledgeBasesTool
-      | AgentToolInputRunQueryKnowledgeBaseTool
-      | AgentToolInputRunCurrentDateTool
-      | AgentToolInputRunCodeInterpreterTool
+      | GoogleSearchTool
+      | WebScraperTool
+      | CallSubAgentTool
+      | RetrieveAgentsTool
+      | QueryMemoryStoreTool
+      | WriteMemoryStoreTool
+      | RetrieveMemoryStoresTool
+      | DeleteMemoryDocumentTool
+      | RetrieveKnowledgeBasesTool
+      | QueryKnowledgeBaseTool
+      | CurrentDateTool
+      | CodeInterpreterTool
       | HTTPToolRun
       | CodeToolRun
       | FunctionToolRun
@@ -4054,7 +4054,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KY3S9P0XMHSG2GKTJA8P5R4B"),
+  id: z.string().default("01KY4GW3T3VNDZPEBHMRVQNSG6"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4633,17 +4633,17 @@ export function httpToolRunToJSON(httpToolRun: HTTPToolRun): string {
 }
 
 /** @internal */
-export type AgentToolInputRunCodeInterpreterTool$Outbound = {
+export type CodeInterpreterTool$Outbound = {
   type: "code_interpreter";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunCodeInterpreterTool$outboundSchema: z.ZodType<
-  AgentToolInputRunCodeInterpreterTool$Outbound,
+export const CodeInterpreterTool$outboundSchema: z.ZodType<
+  CodeInterpreterTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunCodeInterpreterTool
+  CodeInterpreterTool
 > = z.object({
   type: z.literal("code_interpreter"),
   requiresApproval: z.boolean().optional(),
@@ -4654,28 +4654,26 @@ export const AgentToolInputRunCodeInterpreterTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunCodeInterpreterToolToJSON(
-  agentToolInputRunCodeInterpreterTool: AgentToolInputRunCodeInterpreterTool,
+export function codeInterpreterToolToJSON(
+  codeInterpreterTool: CodeInterpreterTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunCodeInterpreterTool$outboundSchema.parse(
-      agentToolInputRunCodeInterpreterTool,
-    ),
+    CodeInterpreterTool$outboundSchema.parse(codeInterpreterTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunCurrentDateTool$Outbound = {
+export type CurrentDateTool$Outbound = {
   type: "current_date";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunCurrentDateTool$outboundSchema: z.ZodType<
-  AgentToolInputRunCurrentDateTool$Outbound,
+export const CurrentDateTool$outboundSchema: z.ZodType<
+  CurrentDateTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunCurrentDateTool
+  CurrentDateTool
 > = z.object({
   type: z.literal("current_date"),
   requiresApproval: z.boolean().optional(),
@@ -4686,28 +4684,24 @@ export const AgentToolInputRunCurrentDateTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunCurrentDateToolToJSON(
-  agentToolInputRunCurrentDateTool: AgentToolInputRunCurrentDateTool,
+export function currentDateToolToJSON(
+  currentDateTool: CurrentDateTool,
 ): string {
-  return JSON.stringify(
-    AgentToolInputRunCurrentDateTool$outboundSchema.parse(
-      agentToolInputRunCurrentDateTool,
-    ),
-  );
+  return JSON.stringify(CurrentDateTool$outboundSchema.parse(currentDateTool));
 }
 
 /** @internal */
-export type AgentToolInputRunQueryKnowledgeBaseTool$Outbound = {
+export type QueryKnowledgeBaseTool$Outbound = {
   type: "query_knowledge_base";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema: z.ZodType<
-  AgentToolInputRunQueryKnowledgeBaseTool$Outbound,
+export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
+  QueryKnowledgeBaseTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunQueryKnowledgeBaseTool
+  QueryKnowledgeBaseTool
 > = z.object({
   type: z.literal("query_knowledge_base"),
   requiresApproval: z.boolean().optional(),
@@ -4718,131 +4712,116 @@ export const AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunQueryKnowledgeBaseToolToJSON(
-  agentToolInputRunQueryKnowledgeBaseTool:
-    AgentToolInputRunQueryKnowledgeBaseTool,
+export function queryKnowledgeBaseToolToJSON(
+  queryKnowledgeBaseTool: QueryKnowledgeBaseTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema.parse(
-      agentToolInputRunQueryKnowledgeBaseTool,
-    ),
+    QueryKnowledgeBaseTool$outboundSchema.parse(queryKnowledgeBaseTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound = {
+export type RetrieveKnowledgeBasesTool$Outbound = {
   type: "retrieve_knowledge_bases";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema:
-  z.ZodType<
-    AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound,
-    z.ZodTypeDef,
-    AgentToolInputRunRetrieveKnowledgeBasesTool
-  > = z.object({
-    type: z.literal("retrieve_knowledge_bases"),
-    requiresApproval: z.boolean().optional(),
-    configuration: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresApproval: "requires_approval",
-    });
+export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
+  RetrieveKnowledgeBasesTool$Outbound,
+  z.ZodTypeDef,
+  RetrieveKnowledgeBasesTool
+> = z.object({
+  type: z.literal("retrieve_knowledge_bases"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
   });
+});
 
-export function agentToolInputRunRetrieveKnowledgeBasesToolToJSON(
-  agentToolInputRunRetrieveKnowledgeBasesTool:
-    AgentToolInputRunRetrieveKnowledgeBasesTool,
+export function retrieveKnowledgeBasesToolToJSON(
+  retrieveKnowledgeBasesTool: RetrieveKnowledgeBasesTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema.parse(
-      agentToolInputRunRetrieveKnowledgeBasesTool,
-    ),
+    RetrieveKnowledgeBasesTool$outboundSchema.parse(retrieveKnowledgeBasesTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunDeleteMemoryDocumentTool$Outbound = {
+export type DeleteMemoryDocumentTool$Outbound = {
   type: "delete_memory_document";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema:
-  z.ZodType<
-    AgentToolInputRunDeleteMemoryDocumentTool$Outbound,
-    z.ZodTypeDef,
-    AgentToolInputRunDeleteMemoryDocumentTool
-  > = z.object({
-    type: z.literal("delete_memory_document"),
-    requiresApproval: z.boolean().optional(),
-    configuration: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresApproval: "requires_approval",
-    });
+export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
+  DeleteMemoryDocumentTool$Outbound,
+  z.ZodTypeDef,
+  DeleteMemoryDocumentTool
+> = z.object({
+  type: z.literal("delete_memory_document"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
   });
+});
 
-export function agentToolInputRunDeleteMemoryDocumentToolToJSON(
-  agentToolInputRunDeleteMemoryDocumentTool:
-    AgentToolInputRunDeleteMemoryDocumentTool,
+export function deleteMemoryDocumentToolToJSON(
+  deleteMemoryDocumentTool: DeleteMemoryDocumentTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema.parse(
-      agentToolInputRunDeleteMemoryDocumentTool,
-    ),
+    DeleteMemoryDocumentTool$outboundSchema.parse(deleteMemoryDocumentTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunRetrieveMemoryStoresTool$Outbound = {
+export type RetrieveMemoryStoresTool$Outbound = {
   type: "retrieve_memory_stores";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema:
-  z.ZodType<
-    AgentToolInputRunRetrieveMemoryStoresTool$Outbound,
-    z.ZodTypeDef,
-    AgentToolInputRunRetrieveMemoryStoresTool
-  > = z.object({
-    type: z.literal("retrieve_memory_stores"),
-    requiresApproval: z.boolean().optional(),
-    configuration: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresApproval: "requires_approval",
-    });
+export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
+  RetrieveMemoryStoresTool$Outbound,
+  z.ZodTypeDef,
+  RetrieveMemoryStoresTool
+> = z.object({
+  type: z.literal("retrieve_memory_stores"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
   });
+});
 
-export function agentToolInputRunRetrieveMemoryStoresToolToJSON(
-  agentToolInputRunRetrieveMemoryStoresTool:
-    AgentToolInputRunRetrieveMemoryStoresTool,
+export function retrieveMemoryStoresToolToJSON(
+  retrieveMemoryStoresTool: RetrieveMemoryStoresTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema.parse(
-      agentToolInputRunRetrieveMemoryStoresTool,
-    ),
+    RetrieveMemoryStoresTool$outboundSchema.parse(retrieveMemoryStoresTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunWriteMemoryStoreTool$Outbound = {
+export type WriteMemoryStoreTool$Outbound = {
   type: "write_memory_store";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunWriteMemoryStoreTool$outboundSchema: z.ZodType<
-  AgentToolInputRunWriteMemoryStoreTool$Outbound,
+export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
+  WriteMemoryStoreTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunWriteMemoryStoreTool
+  WriteMemoryStoreTool
 > = z.object({
   type: z.literal("write_memory_store"),
   requiresApproval: z.boolean().optional(),
@@ -4853,28 +4832,26 @@ export const AgentToolInputRunWriteMemoryStoreTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunWriteMemoryStoreToolToJSON(
-  agentToolInputRunWriteMemoryStoreTool: AgentToolInputRunWriteMemoryStoreTool,
+export function writeMemoryStoreToolToJSON(
+  writeMemoryStoreTool: WriteMemoryStoreTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunWriteMemoryStoreTool$outboundSchema.parse(
-      agentToolInputRunWriteMemoryStoreTool,
-    ),
+    WriteMemoryStoreTool$outboundSchema.parse(writeMemoryStoreTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunQueryMemoryStoreTool$Outbound = {
+export type QueryMemoryStoreTool$Outbound = {
   type: "query_memory_store";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunQueryMemoryStoreTool$outboundSchema: z.ZodType<
-  AgentToolInputRunQueryMemoryStoreTool$Outbound,
+export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
+  QueryMemoryStoreTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunQueryMemoryStoreTool
+  QueryMemoryStoreTool
 > = z.object({
   type: z.literal("query_memory_store"),
   requiresApproval: z.boolean().optional(),
@@ -4885,28 +4862,26 @@ export const AgentToolInputRunQueryMemoryStoreTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunQueryMemoryStoreToolToJSON(
-  agentToolInputRunQueryMemoryStoreTool: AgentToolInputRunQueryMemoryStoreTool,
+export function queryMemoryStoreToolToJSON(
+  queryMemoryStoreTool: QueryMemoryStoreTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunQueryMemoryStoreTool$outboundSchema.parse(
-      agentToolInputRunQueryMemoryStoreTool,
-    ),
+    QueryMemoryStoreTool$outboundSchema.parse(queryMemoryStoreTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunRetrieveAgentsTool$Outbound = {
+export type RetrieveAgentsTool$Outbound = {
   type: "retrieve_agents";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunRetrieveAgentsTool$outboundSchema: z.ZodType<
-  AgentToolInputRunRetrieveAgentsTool$Outbound,
+export const RetrieveAgentsTool$outboundSchema: z.ZodType<
+  RetrieveAgentsTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunRetrieveAgentsTool
+  RetrieveAgentsTool
 > = z.object({
   type: z.literal("retrieve_agents"),
   requiresApproval: z.boolean().optional(),
@@ -4917,28 +4892,26 @@ export const AgentToolInputRunRetrieveAgentsTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunRetrieveAgentsToolToJSON(
-  agentToolInputRunRetrieveAgentsTool: AgentToolInputRunRetrieveAgentsTool,
+export function retrieveAgentsToolToJSON(
+  retrieveAgentsTool: RetrieveAgentsTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunRetrieveAgentsTool$outboundSchema.parse(
-      agentToolInputRunRetrieveAgentsTool,
-    ),
+    RetrieveAgentsTool$outboundSchema.parse(retrieveAgentsTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunCallSubAgentTool$Outbound = {
+export type CallSubAgentTool$Outbound = {
   type: "call_sub_agent";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunCallSubAgentTool$outboundSchema: z.ZodType<
-  AgentToolInputRunCallSubAgentTool$Outbound,
+export const CallSubAgentTool$outboundSchema: z.ZodType<
+  CallSubAgentTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunCallSubAgentTool
+  CallSubAgentTool
 > = z.object({
   type: z.literal("call_sub_agent"),
   requiresApproval: z.boolean().optional(),
@@ -4949,28 +4922,26 @@ export const AgentToolInputRunCallSubAgentTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunCallSubAgentToolToJSON(
-  agentToolInputRunCallSubAgentTool: AgentToolInputRunCallSubAgentTool,
+export function callSubAgentToolToJSON(
+  callSubAgentTool: CallSubAgentTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunCallSubAgentTool$outboundSchema.parse(
-      agentToolInputRunCallSubAgentTool,
-    ),
+    CallSubAgentTool$outboundSchema.parse(callSubAgentTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunWebScraperTool$Outbound = {
+export type WebScraperTool$Outbound = {
   type: "web_scraper";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunWebScraperTool$outboundSchema: z.ZodType<
-  AgentToolInputRunWebScraperTool$Outbound,
+export const WebScraperTool$outboundSchema: z.ZodType<
+  WebScraperTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunWebScraperTool
+  WebScraperTool
 > = z.object({
   type: z.literal("web_scraper"),
   requiresApproval: z.boolean().optional(),
@@ -4981,28 +4952,22 @@ export const AgentToolInputRunWebScraperTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunWebScraperToolToJSON(
-  agentToolInputRunWebScraperTool: AgentToolInputRunWebScraperTool,
-): string {
-  return JSON.stringify(
-    AgentToolInputRunWebScraperTool$outboundSchema.parse(
-      agentToolInputRunWebScraperTool,
-    ),
-  );
+export function webScraperToolToJSON(webScraperTool: WebScraperTool): string {
+  return JSON.stringify(WebScraperTool$outboundSchema.parse(webScraperTool));
 }
 
 /** @internal */
-export type AgentToolInputRunGoogleSearchTool$Outbound = {
+export type GoogleSearchTool$Outbound = {
   type: "google_search";
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunGoogleSearchTool$outboundSchema: z.ZodType<
-  AgentToolInputRunGoogleSearchTool$Outbound,
+export const GoogleSearchTool$outboundSchema: z.ZodType<
+  GoogleSearchTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunGoogleSearchTool
+  GoogleSearchTool
 > = z.object({
   type: z.literal("google_search"),
   requiresApproval: z.boolean().optional(),
@@ -5013,30 +4978,28 @@ export const AgentToolInputRunGoogleSearchTool$outboundSchema: z.ZodType<
   });
 });
 
-export function agentToolInputRunGoogleSearchToolToJSON(
-  agentToolInputRunGoogleSearchTool: AgentToolInputRunGoogleSearchTool,
+export function googleSearchToolToJSON(
+  googleSearchTool: GoogleSearchTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunGoogleSearchTool$outboundSchema.parse(
-      agentToolInputRunGoogleSearchTool,
-    ),
+    GoogleSearchTool$outboundSchema.parse(googleSearchTool),
   );
 }
 
 /** @internal */
 export type AgentToolInputRun$Outbound =
-  | AgentToolInputRunGoogleSearchTool$Outbound
-  | AgentToolInputRunWebScraperTool$Outbound
-  | AgentToolInputRunCallSubAgentTool$Outbound
-  | AgentToolInputRunRetrieveAgentsTool$Outbound
-  | AgentToolInputRunQueryMemoryStoreTool$Outbound
-  | AgentToolInputRunWriteMemoryStoreTool$Outbound
-  | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
-  | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
-  | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-  | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-  | AgentToolInputRunCurrentDateTool$Outbound
-  | AgentToolInputRunCodeInterpreterTool$Outbound
+  | GoogleSearchTool$Outbound
+  | WebScraperTool$Outbound
+  | CallSubAgentTool$Outbound
+  | RetrieveAgentsTool$Outbound
+  | QueryMemoryStoreTool$Outbound
+  | WriteMemoryStoreTool$Outbound
+  | RetrieveMemoryStoresTool$Outbound
+  | DeleteMemoryDocumentTool$Outbound
+  | RetrieveKnowledgeBasesTool$Outbound
+  | QueryKnowledgeBaseTool$Outbound
+  | CurrentDateTool$Outbound
+  | CodeInterpreterTool$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
   | FunctionToolRun$Outbound
@@ -5049,18 +5012,18 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRun
 > = z.union([
-  z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunCallSubAgentTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunRetrieveAgentsTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunQueryMemoryStoreTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunWriteMemoryStoreTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunCodeInterpreterTool$outboundSchema),
+  z.lazy(() => GoogleSearchTool$outboundSchema),
+  z.lazy(() => WebScraperTool$outboundSchema),
+  z.lazy(() => CallSubAgentTool$outboundSchema),
+  z.lazy(() => RetrieveAgentsTool$outboundSchema),
+  z.lazy(() => QueryMemoryStoreTool$outboundSchema),
+  z.lazy(() => WriteMemoryStoreTool$outboundSchema),
+  z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
+  z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
+  z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
+  z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
+  z.lazy(() => CurrentDateTool$outboundSchema),
+  z.lazy(() => CodeInterpreterTool$outboundSchema),
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
   z.lazy(() => FunctionToolRun$outboundSchema),
@@ -5157,18 +5120,18 @@ export function runAgentGuardrailsToJSON(
 export type RunAgentSettings$Outbound = {
   tools?:
     | Array<
-      | AgentToolInputRunGoogleSearchTool$Outbound
-      | AgentToolInputRunWebScraperTool$Outbound
-      | AgentToolInputRunCallSubAgentTool$Outbound
-      | AgentToolInputRunRetrieveAgentsTool$Outbound
-      | AgentToolInputRunQueryMemoryStoreTool$Outbound
-      | AgentToolInputRunWriteMemoryStoreTool$Outbound
-      | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
-      | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
-      | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-      | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-      | AgentToolInputRunCurrentDateTool$Outbound
-      | AgentToolInputRunCodeInterpreterTool$Outbound
+      | GoogleSearchTool$Outbound
+      | WebScraperTool$Outbound
+      | CallSubAgentTool$Outbound
+      | RetrieveAgentsTool$Outbound
+      | QueryMemoryStoreTool$Outbound
+      | WriteMemoryStoreTool$Outbound
+      | RetrieveMemoryStoresTool$Outbound
+      | DeleteMemoryDocumentTool$Outbound
+      | RetrieveKnowledgeBasesTool$Outbound
+      | QueryKnowledgeBaseTool$Outbound
+      | CurrentDateTool$Outbound
+      | CodeInterpreterTool$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
       | FunctionToolRun$Outbound
@@ -5193,18 +5156,18 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunCallSubAgentTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunRetrieveAgentsTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunQueryMemoryStoreTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunWriteMemoryStoreTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunCodeInterpreterTool$outboundSchema),
+      z.lazy(() => GoogleSearchTool$outboundSchema),
+      z.lazy(() => WebScraperTool$outboundSchema),
+      z.lazy(() => CallSubAgentTool$outboundSchema),
+      z.lazy(() => RetrieveAgentsTool$outboundSchema),
+      z.lazy(() => QueryMemoryStoreTool$outboundSchema),
+      z.lazy(() => WriteMemoryStoreTool$outboundSchema),
+      z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
+      z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
+      z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
+      z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
+      z.lazy(() => CurrentDateTool$outboundSchema),
+      z.lazy(() => CodeInterpreterTool$outboundSchema),
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),
       z.lazy(() => FunctionToolRun$outboundSchema),

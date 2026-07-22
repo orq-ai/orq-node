@@ -547,7 +547,7 @@ export type AllowedTools = {
 /**
  * An MCP (Model Context Protocol) server tool. Provide server_url for inline mode, or key to reference a pre-configured MCP server.
  */
-export type ToolsMCPTool = {
+export type MCPTool = {
   /**
    * Filter which tools from the MCP server are exposed.
    */
@@ -740,7 +740,7 @@ export type CreateRouterResponseTools =
   | (OrqAiTool & { type: "orq:mcp" })
   | (OrqAiTool & { type: "orq:http" })
   | (OrqAiTool & { type: "orq:function" })
-  | ToolsMCPTool;
+  | MCPTool;
 
 export type CreateRouterResponseRequestBody = {
   /**
@@ -852,7 +852,7 @@ export type CreateRouterResponseRequestBody = {
       | (OrqAiTool & { type: "orq:mcp" })
       | (OrqAiTool & { type: "orq:http" })
       | (OrqAiTool & { type: "orq:function" })
-      | ToolsMCPTool
+      | MCPTool
     >
     | undefined;
   /**
@@ -1560,7 +1560,7 @@ export function allowedToolsToJSON(allowedTools: AllowedTools): string {
 }
 
 /** @internal */
-export type ToolsMCPTool$Outbound = {
+export type MCPTool$Outbound = {
   allowed_tools?: AllowedTools$Outbound | undefined;
   headers?: { [k: string]: string } | undefined;
   key?: string | undefined;
@@ -1570,10 +1570,10 @@ export type ToolsMCPTool$Outbound = {
 };
 
 /** @internal */
-export const ToolsMCPTool$outboundSchema: z.ZodType<
-  ToolsMCPTool$Outbound,
+export const MCPTool$outboundSchema: z.ZodType<
+  MCPTool$Outbound,
   z.ZodTypeDef,
-  ToolsMCPTool
+  MCPTool
 > = z.object({
   allowedTools: z.lazy(() => AllowedTools$outboundSchema).optional(),
   headers: z.record(z.string()).optional(),
@@ -1589,8 +1589,8 @@ export const ToolsMCPTool$outboundSchema: z.ZodType<
   });
 });
 
-export function toolsMCPToolToJSON(toolsMCPTool: ToolsMCPTool): string {
-  return JSON.stringify(ToolsMCPTool$outboundSchema.parse(toolsMCPTool));
+export function mcpToolToJSON(mcpTool: MCPTool): string {
+  return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));
 }
 
 /** @internal */
@@ -1749,7 +1749,7 @@ export type CreateRouterResponseTools$Outbound =
   | (OrqAiTool$Outbound & { type: "orq:mcp" })
   | (OrqAiTool$Outbound & { type: "orq:http" })
   | (OrqAiTool$Outbound & { type: "orq:function" })
-  | ToolsMCPTool$Outbound;
+  | MCPTool$Outbound;
 
 /** @internal */
 export const CreateRouterResponseTools$outboundSchema: z.ZodType<
@@ -1779,7 +1779,7 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:function") }),
   ),
-  z.lazy(() => ToolsMCPTool$outboundSchema),
+  z.lazy(() => MCPTool$outboundSchema),
 ]);
 
 export function createRouterResponseToolsToJSON(
@@ -1835,7 +1835,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | (OrqAiTool$Outbound & { type: "orq:mcp" })
       | (OrqAiTool$Outbound & { type: "orq:http" })
       | (OrqAiTool$Outbound & { type: "orq:function" })
-      | ToolsMCPTool$Outbound
+      | MCPTool$Outbound
     >
     | undefined;
   top_logprobs?: number | undefined;
@@ -1913,7 +1913,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       z.lazy(() =>
         OrqAiTool$outboundSchema
       ).and(z.object({ type: z.literal("orq:function") })),
-      z.lazy(() => ToolsMCPTool$outboundSchema),
+      z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
   topLogprobs: z.number().int().optional(),
