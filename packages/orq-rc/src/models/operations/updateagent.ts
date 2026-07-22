@@ -1021,6 +1021,14 @@ export type AgentToolInputCRUDProviderBuiltInTool = {
    */
   type: string;
   /**
+   * The key of a pre-created tool
+   */
+  key?: string | undefined;
+  /**
+   * The ID of a pre-created tool
+   */
+  id?: string | undefined;
+  /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
@@ -4649,6 +4657,8 @@ export const UpdateAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type AgentToolInputCRUDProviderBuiltInTool$Outbound = {
   type: string;
+  key?: string | undefined;
+  id?: string | undefined;
   requires_approval?: boolean | undefined;
   configuration?: { [k: string]: any } | undefined;
 };
@@ -4660,6 +4670,8 @@ export const AgentToolInputCRUDProviderBuiltInTool$outboundSchema: z.ZodType<
   AgentToolInputCRUDProviderBuiltInTool
 > = z.object({
   type: z.string(),
+  key: z.string().optional(),
+  id: z.string().optional(),
   requiresApproval: z.boolean().optional(),
   configuration: z.record(z.any()).optional(),
 }).transform((v) => {
