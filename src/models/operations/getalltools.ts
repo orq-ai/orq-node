@@ -326,6 +326,10 @@ export type DataBlueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -766,7 +770,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7WNA50Q20445DWYTTTX"),
+  _id: z.string().default("tool_01KY7CX60BG7KZN9T35QVY49PZ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -863,7 +867,7 @@ export const DataTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KXPCS7WKKHSR8Z501KQ02K49"),
+  id: z.string().default("01KY7CX609RYRWB754BJXM7AKP"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
@@ -916,7 +920,7 @@ export const DataMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7WGS6X6ZGPZQ1GAG98E"),
+  _id: z.string().default("tool_01KY7CX607C9A3MQY4HC4J94M1"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1009,6 +1013,7 @@ export const DataBlueprint$inboundSchema: z.ZodType<
     z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function dataBlueprintFromJSON(
@@ -1100,7 +1105,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7WC63AY98H4K8SES0P7"),
+  _id: z.string().default("tool_01KY7CX6043VPYC6YBR7QKTHN9"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1193,7 +1198,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7W909YW4HH97XK9GBPS"),
+  _id: z.string().default("tool_01KY7CX603MCVR5XC89FFFCFVT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1291,7 +1296,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7W6CEHQECB7WYXSR0XF"),
+  _id: z.string().default("tool_01KY7CX601Y4NT6T02R9T6VGKH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

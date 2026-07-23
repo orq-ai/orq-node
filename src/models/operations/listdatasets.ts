@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListDatasetsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -169,7 +169,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-07-16T21:19:18.917Z",
+    "2026-07-23T11:48:21.396Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

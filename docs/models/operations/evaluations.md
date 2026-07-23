@@ -34,10 +34,20 @@ const value: operations.Evaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
+  type: "boolean",
+  value: true,
+};
+```
+
+### `operations.Evaluations4`
+
+```typescript
+const value: operations.Evaluations4 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
   type: "string_array",
-  values: [
-    "<value 1>",
-  ],
+  values: [],
 };
 ```
 

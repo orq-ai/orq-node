@@ -749,6 +749,119 @@ export type CreateDatasetItemDatasetsMessages =
 /**
  * The type of evaluation
  */
+export const CreateDatasetItemEvaluationsDatasetsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type CreateDatasetItemEvaluationsDatasetsEvaluationType = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsEvaluationType
+>;
+
+export const CreateDatasetItemEvaluationsDatasetsResponseSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type CreateDatasetItemEvaluationsDatasetsResponseSource = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsResponseSource
+>;
+
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export const CreateDatasetItemEvaluationsDatasetsResponseKind = {
+  Llm: "llm",
+  Code: "code",
+  Human: "human",
+  Automation: "automation",
+} as const;
+/**
+ * The kind of annotator that produced the evaluation
+ */
+export type CreateDatasetItemEvaluationsDatasetsResponseKind = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsResponseKind
+>;
+
+/**
+ * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+ */
+export type CreateDatasetItemEvaluationsDatasetsAnnotator = {
+  /**
+   * The kind of annotator that produced the evaluation
+   */
+  kind: CreateDatasetItemEvaluationsDatasetsResponseKind;
+  /**
+   * Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation.
+   */
+  actorId: string;
+};
+
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export const CreateDatasetItemEvaluationsDatasetsOutputSchema = {
+  Boolean: "boolean",
+  Number: "number",
+  Categorical: "categorical",
+  String: "string",
+} as const;
+/**
+ * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+ */
+export type CreateDatasetItemEvaluationsDatasetsOutputSchema = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsOutputSchema
+>;
+
+export type Evaluations4 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: CreateDatasetItemEvaluationsDatasetsEvaluationType;
+  /**
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
+   */
+  humanReviewId?: string | undefined;
+  source: CreateDatasetItemEvaluationsDatasetsResponseSource;
+  /**
+   * The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+   */
+  annotator?: CreateDatasetItemEvaluationsDatasetsAnnotator | undefined;
+  /**
+   * The expected shape of the value. Derived from the human review type, or inherited from the parent annotation for corrections.
+   */
+  outputSchema?: CreateDatasetItemEvaluationsDatasetsOutputSchema | undefined;
+  /**
+   * When present, references the id of the annotation this entry corrects. Presence of this field marks the entry as a correction.
+   */
+  parentAnnotationId?: string | undefined;
+  /**
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated: use annotator.actor_id. The unique identifier of the user who reviewed the item.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  reviewedById: string;
+  /**
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  reviewedAt: Date;
+  type: "string_array";
+  values: Array<string>;
+};
+
+/**
+ * The type of evaluation
+ */
 export const CreateDatasetItemEvaluationsEvaluationType = {
   HumanReview: "human_review",
 } as const;
@@ -855,8 +968,8 @@ export type Evaluations3 = {
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt: Date;
-  type: "string_array";
-  values: Array<string>;
+  type: "boolean";
+  value: boolean;
 };
 
 /**
@@ -975,15 +1088,14 @@ export type Evaluations2 = {
 /**
  * The type of evaluation
  */
-export const CreateDatasetItemEvaluationsDatasetsEvaluationType = {
+export const CreateDatasetItemEvaluationsDatasetsResponseEvaluationType = {
   HumanReview: "human_review",
 } as const;
 /**
  * The type of evaluation
  */
-export type CreateDatasetItemEvaluationsDatasetsEvaluationType = ClosedEnum<
-  typeof CreateDatasetItemEvaluationsDatasetsEvaluationType
->;
+export type CreateDatasetItemEvaluationsDatasetsResponseEvaluationType =
+  ClosedEnum<typeof CreateDatasetItemEvaluationsDatasetsResponseEvaluationType>;
 
 export const EvaluationsSource = {
   Orq: "orq",
@@ -1041,7 +1153,7 @@ export type Evaluations1 = {
   /**
    * The type of evaluation
    */
-  evaluationType: CreateDatasetItemEvaluationsDatasetsEvaluationType;
+  evaluationType: CreateDatasetItemEvaluationsDatasetsResponseEvaluationType;
   /**
    * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
    */
@@ -1079,7 +1191,11 @@ export type Evaluations1 = {
   value: string;
 };
 
-export type Evaluations = Evaluations1 | Evaluations2 | Evaluations3;
+export type Evaluations =
+  | Evaluations1
+  | Evaluations2
+  | Evaluations3
+  | Evaluations4;
 
 export type CreateDatasetItemResponseBody = {
   /**
@@ -1110,7 +1226,9 @@ export type CreateDatasetItemResponseBody = {
   /**
    * Evaluations associated with the datapoint
    */
-  evaluations?: Array<Evaluations1 | Evaluations2 | Evaluations3> | undefined;
+  evaluations?:
+    | Array<Evaluations1 | Evaluations2 | Evaluations3 | Evaluations4>
+    | undefined;
   /**
    * The unique identifier of the dataset
    */
@@ -2543,6 +2661,103 @@ export function createDatasetItemDatasetsMessagesFromJSON(
 }
 
 /** @internal */
+export const CreateDatasetItemEvaluationsDatasetsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsEvaluationType> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsEvaluationType);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsDatasetsResponseSource$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsResponseSource> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsResponseSource);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsDatasetsResponseKind$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsResponseKind> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsResponseKind);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsDatasetsAnnotator$inboundSchema:
+  z.ZodType<
+    CreateDatasetItemEvaluationsDatasetsAnnotator,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind: CreateDatasetItemEvaluationsDatasetsResponseKind$inboundSchema,
+    actor_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "actor_id": "actorId",
+    });
+  });
+
+export function createDatasetItemEvaluationsDatasetsAnnotatorFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateDatasetItemEvaluationsDatasetsAnnotator,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemEvaluationsDatasetsAnnotator$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateDatasetItemEvaluationsDatasetsAnnotator' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemEvaluationsDatasetsOutputSchema$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsOutputSchema> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsOutputSchema);
+
+/** @internal */
+export const Evaluations4$inboundSchema: z.ZodType<
+  Evaluations4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type:
+    CreateDatasetItemEvaluationsDatasetsEvaluationType$inboundSchema,
+  human_review_id: z.string().optional(),
+  source: CreateDatasetItemEvaluationsDatasetsResponseSource$inboundSchema
+    .default("orq"),
+  annotator: z.lazy(() =>
+    CreateDatasetItemEvaluationsDatasetsAnnotator$inboundSchema
+  ).optional(),
+  output_schema: CreateDatasetItemEvaluationsDatasetsOutputSchema$inboundSchema
+    .optional(),
+  parent_annotation_id: z.string().optional(),
+  explanation: z.string().optional(),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2026-07-23T11:48:52.154Z",
+  ).transform(v => new Date(v)),
+  type: z.literal("string_array"),
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "output_schema": "outputSchema",
+    "parent_annotation_id": "parentAnnotationId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+export function evaluations4FromJSON(
+  jsonString: string,
+): SafeParseResult<Evaluations4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Evaluations4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluations4' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateDatasetItemEvaluationsEvaluationType$inboundSchema:
   z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> = z
     .nativeEnum(CreateDatasetItemEvaluationsEvaluationType);
@@ -2607,10 +2822,10 @@ export const Evaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-07-16T21:19:37.688Z",
+    "2026-07-23T11:48:52.152Z",
   ).transform(v => new Date(v)),
-  type: z.literal("string_array"),
-  values: z.array(z.string()),
+  type: z.literal("boolean"),
+  value: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "evaluation_type": "evaluationType",
@@ -2692,7 +2907,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-07-16T21:19:37.687Z",
+    "2026-07-23T11:48:52.150Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2718,9 +2933,10 @@ export function evaluations2FromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemEvaluationsDatasetsEvaluationType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsEvaluationType> = z
-    .nativeEnum(CreateDatasetItemEvaluationsDatasetsEvaluationType);
+export const CreateDatasetItemEvaluationsDatasetsResponseEvaluationType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemEvaluationsDatasetsResponseEvaluationType
+  > = z.nativeEnum(CreateDatasetItemEvaluationsDatasetsResponseEvaluationType);
 
 /** @internal */
 export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
@@ -2768,7 +2984,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   evaluation_type:
-    CreateDatasetItemEvaluationsDatasetsEvaluationType$inboundSchema,
+    CreateDatasetItemEvaluationsDatasetsResponseEvaluationType$inboundSchema,
   human_review_id: z.string().optional(),
   source: EvaluationsSource$inboundSchema.default("orq"),
   annotator: z.lazy(() => Annotator$inboundSchema).optional(),
@@ -2777,7 +2993,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-07-16T21:19:37.685Z",
+    "2026-07-23T11:48:52.149Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2811,6 +3027,7 @@ export const Evaluations$inboundSchema: z.ZodType<
   z.lazy(() => Evaluations1$inboundSchema),
   z.lazy(() => Evaluations2$inboundSchema),
   z.lazy(() => Evaluations3$inboundSchema),
+  z.lazy(() => Evaluations4$inboundSchema),
 ]);
 
 export function evaluationsFromJSON(
@@ -2853,6 +3070,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
       z.lazy(() => Evaluations1$inboundSchema),
       z.lazy(() => Evaluations2$inboundSchema),
       z.lazy(() => Evaluations3$inboundSchema),
+      z.lazy(() => Evaluations4$inboundSchema),
     ]),
   ).optional(),
   dataset_id: z.string(),
@@ -2862,7 +3080,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-07-16T21:19:18.917Z",
+    "2026-07-23T11:48:21.396Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

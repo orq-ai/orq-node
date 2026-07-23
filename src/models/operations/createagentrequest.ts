@@ -155,6 +155,7 @@ export type Modalities = ClosedEnum<typeof Modalities>;
  */
 export const Id1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -632,6 +633,7 @@ export type FallbackModelConfigurationModalities = ClosedEnum<
  */
 export const CreateAgentRequestId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -979,457 +981,6 @@ export const ToolApprovalRequired = {
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 /**
- * Provider-specific built-in tools that are passed through to the provider. Must be prefixed with the provider name (e.g., openai:web_search, anthropic:web_search_20250305, google:google_search).
- */
-export type ProviderBuiltInTool = {
-  /**
-   * Provider-prefixed tool type
-   */
-  type: string;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-/**
- * MCP tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
-  {
-    Mcp: "mcp",
-  } as const;
-/**
- * MCP tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
-  >;
-
-/**
- * Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
- */
-export type MCPTool = {
-  /**
-   * MCP tool type
-   */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
-    | undefined;
-  /**
-   * The key of the parent MCP tool
-   */
-  key?: string | undefined;
-  /**
-   * The ID of the parent MCP tool
-   */
-  id?: string | undefined;
-  /**
-   * The ID of the specific nested tool within the MCP server
-   */
-  toolId: string;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-/**
- * JSON Schema tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-  {
-    JsonSchema: "json_schema",
-  } as const;
-/**
- * JSON Schema tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  >;
-
-/**
- * Enforces structured output format using JSON Schema. Must reference a pre-created JSON Schema tool by key or id.
- */
-export type JSONSchemaTool = {
-  /**
-   * JSON Schema tool type
-   */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-    | undefined;
-  /**
-   * The key of the pre-created JSON Schema tool
-   */
-  key?: string | undefined;
-  /**
-   * The ID of the pre-created JSON Schema tool
-   */
-  id?: string | undefined;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-/**
- * Function tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-  {
-    Function: "function",
-  } as const;
-/**
- * Function tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  >;
-
-/**
- * Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id.
- */
-export type FunctionTool = {
-  /**
-   * Function tool type
-   */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-    | undefined;
-  /**
-   * The key of the pre-created function tool
-   */
-  key?: string | undefined;
-  /**
-   * The ID of the pre-created function tool
-   */
-  id?: string | undefined;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-/**
- * Code execution tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
-  {
-    Code: "code",
-  } as const;
-/**
- * Code execution tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  >;
-
-/**
- * Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id.
- */
-export type CodeExecutionTool = {
-  /**
-   * Code execution tool type
-   */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-    | undefined;
-  /**
-   * The key of the pre-created code tool
-   */
-  key?: string | undefined;
-  /**
-   * The ID of the pre-created code tool
-   */
-  id?: string | undefined;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-/**
- * HTTP tool type
- */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-  {
-    Http: "http",
-  } as const;
-/**
- * HTTP tool type
- */
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  >;
-
-/**
- * Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id.
- */
-export type HTTPTool = {
-  /**
-   * HTTP tool type
-   */
-  type?:
-    | CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-    | undefined;
-  /**
-   * The key of the pre-created HTTP tool
-   */
-  key?: string | undefined;
-  /**
-   * The ID of the pre-created HTTP tool
-   */
-  id?: string | undefined;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
-  {
-    CurrentDate: "current_date",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  >;
-
-/**
- * Returns the current date and time
- */
-export type CurrentDateTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
-  {
-    QueryKnowledgeBase: "query_knowledge_base",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  >;
-
-/**
- * Queries knowledge bases for information
- */
-export type QueryKnowledgeBaseTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
-  {
-    RetrieveKnowledgeBases: "retrieve_knowledge_bases",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  >;
-
-/**
- * Lists available knowledge bases
- */
-export type RetrieveKnowledgeBasesTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
-  {
-    DeleteMemoryDocument: "delete_memory_document",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  >;
-
-/**
- * Deletes documents from memory stores
- */
-export type DeleteMemoryDocumentTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
-  {
-    RetrieveMemoryStores: "retrieve_memory_stores",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  >;
-
-/**
- * Lists available memory stores
- */
-export type RetrieveMemoryStoresTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
-  {
-    WriteMemoryStore: "write_memory_store",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  >;
-
-/**
- * Writes information to agent memory stores
- */
-export type WriteMemoryStoreTool = {
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
-  {
-    QueryMemoryStore: "query_memory_store",
-  } as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType =
-  ClosedEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  >;
-
-/**
- * Queries agent memory stores for context
- */
-export type QueryMemoryStoreTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType = {
-  RetrieveAgents: "retrieve_agents",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsRequestType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
->;
-
-/**
- * Retrieves available agents in the system
- */
-export type RetrieveAgentsTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDAgentsType = {
-  CallSubAgent: "call_sub_agent",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDAgentsType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDAgentsType
->;
-
-/**
- * Delegates tasks to specialized sub-agents
- */
-export type CallSubAgentTool = {
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const CreateAgentRequestAgentToolInputCRUDType = {
-  WebScraper: "web_scraper",
-} as const;
-export type CreateAgentRequestAgentToolInputCRUDType = ClosedEnum<
-  typeof CreateAgentRequestAgentToolInputCRUDType
->;
-
-/**
- * Scrapes and extracts content from web pages
- */
-export type WebScraperTool = {
-  type: CreateAgentRequestAgentToolInputCRUDType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-export const AgentToolInputCRUDType = {
-  GoogleSearch: "google_search",
-} as const;
-export type AgentToolInputCRUDType = ClosedEnum<typeof AgentToolInputCRUDType>;
-
-/**
- * Performs Google searches to retrieve web content
- */
-export type GoogleSearchTool = {
-  type: AgentToolInputCRUDType;
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-};
-
-/**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function, JSON Schema, MCP) must reference pre-created tools by key or id. Provider-prefixed tools (e.g., openai:web_search) are passed through to the provider.
- */
-export type AgentToolInputCRUD =
-  | GoogleSearchTool
-  | WebScraperTool
-  | CallSubAgentTool
-  | RetrieveAgentsTool
-  | QueryMemoryStoreTool
-  | WriteMemoryStoreTool
-  | RetrieveMemoryStoresTool
-  | DeleteMemoryDocumentTool
-  | RetrieveKnowledgeBasesTool
-  | QueryKnowledgeBaseTool
-  | CurrentDateTool
-  | MCPTool
-  | ProviderBuiltInTool
-  | HTTPTool
-  | CodeExecutionTool
-  | FunctionTool
-  | JSONSchemaTool;
-
-/**
  * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
  */
 export const CreateAgentRequestExecuteOn = {
@@ -1508,29 +1059,13 @@ export type Settings = {
    */
   toolApprovalRequired?: ToolApprovalRequired | undefined;
   /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
+  /**
    * Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id.
    */
-  tools?:
-    | Array<
-      | GoogleSearchTool
-      | WebScraperTool
-      | CallSubAgentTool
-      | RetrieveAgentsTool
-      | QueryMemoryStoreTool
-      | WriteMemoryStoreTool
-      | RetrieveMemoryStoresTool
-      | DeleteMemoryDocumentTool
-      | RetrieveKnowledgeBasesTool
-      | QueryKnowledgeBaseTool
-      | CurrentDateTool
-      | MCPTool
-      | ProviderBuiltInTool
-      | HTTPTool
-      | CodeExecutionTool
-      | FunctionTool
-      | JSONSchemaTool
-    >
-    | undefined;
+  tools?: Array<components.AgentToolInputCRUD> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
    */
@@ -1752,6 +1287,10 @@ export type CreateAgentRequestTools = {
    * Optional tool description
    */
   description?: string | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
   requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
@@ -1759,9 +1298,9 @@ export type CreateAgentRequestTools = {
   toolId?: string | undefined;
   conditions?: Array<Conditions> | undefined;
   /**
-   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
    */
-  timeout: number;
+  timeout?: number | undefined;
 };
 
 /**
@@ -1839,6 +1378,10 @@ export type CreateAgentRequestSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: CreateAgentRequestToolApprovalRequired;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?: Array<CreateAgentRequestTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -2008,6 +1551,7 @@ export type CreateAgentRequestModalities = ClosedEnum<
  */
 export const CreateAgentRequestIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -2483,6 +2027,7 @@ export type CreateAgentRequestFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const CreateAgentRequestIdAgentsResponse1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -4349,670 +3894,6 @@ export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ToolApprovalRequired);
 
 /** @internal */
-export type ProviderBuiltInTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const ProviderBuiltInTool$outboundSchema: z.ZodType<
-  ProviderBuiltInTool$Outbound,
-  z.ZodTypeDef,
-  ProviderBuiltInTool
-> = z.object({
-  type: z.string(),
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function providerBuiltInToolToJSON(
-  providerBuiltInTool: ProviderBuiltInTool,
-): string {
-  return JSON.stringify(
-    ProviderBuiltInTool$outboundSchema.parse(providerBuiltInTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type,
-  );
-
-/** @internal */
-export type MCPTool$Outbound = {
-  type: string;
-  key?: string | undefined;
-  id?: string | undefined;
-  tool_id: string;
-  requires_approval: boolean;
-};
-
-/** @internal */
-export const MCPTool$outboundSchema: z.ZodType<
-  MCPTool$Outbound,
-  z.ZodTypeDef,
-  MCPTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools16Type$outboundSchema
-      .default("mcp"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  toolId: z.string(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function mcpToolToJSON(mcpTool: MCPTool): string {
-  return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type,
-  );
-
-/** @internal */
-export type JSONSchemaTool$Outbound = {
-  type: string;
-  key?: string | undefined;
-  id?: string | undefined;
-  requires_approval: boolean;
-};
-
-/** @internal */
-export const JSONSchemaTool$outboundSchema: z.ZodType<
-  JSONSchemaTool$Outbound,
-  z.ZodTypeDef,
-  JSONSchemaTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools15Type$outboundSchema
-      .default("json_schema"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
-  return JSON.stringify(JSONSchemaTool$outboundSchema.parse(jsonSchemaTool));
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type,
-  );
-
-/** @internal */
-export type FunctionTool$Outbound = {
-  type: string;
-  key?: string | undefined;
-  id?: string | undefined;
-  requires_approval: boolean;
-};
-
-/** @internal */
-export const FunctionTool$outboundSchema: z.ZodType<
-  FunctionTool$Outbound,
-  z.ZodTypeDef,
-  FunctionTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools14Type$outboundSchema
-      .default("function"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function functionToolToJSON(functionTool: FunctionTool): string {
-  return JSON.stringify(FunctionTool$outboundSchema.parse(functionTool));
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type,
-  );
-
-/** @internal */
-export type CodeExecutionTool$Outbound = {
-  type: string;
-  key?: string | undefined;
-  id?: string | undefined;
-  requires_approval: boolean;
-};
-
-/** @internal */
-export const CodeExecutionTool$outboundSchema: z.ZodType<
-  CodeExecutionTool$Outbound,
-  z.ZodTypeDef,
-  CodeExecutionTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools13Type$outboundSchema
-      .default("code"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function codeExecutionToolToJSON(
-  codeExecutionTool: CodeExecutionTool,
-): string {
-  return JSON.stringify(
-    CodeExecutionTool$outboundSchema.parse(codeExecutionTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type,
-  );
-
-/** @internal */
-export type HTTPTool$Outbound = {
-  type: string;
-  key?: string | undefined;
-  id?: string | undefined;
-  requires_approval: boolean;
-};
-
-/** @internal */
-export const HTTPTool$outboundSchema: z.ZodType<
-  HTTPTool$Outbound,
-  z.ZodTypeDef,
-  HTTPTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools12Type$outboundSchema
-      .default("http"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function httpToolToJSON(httpTool: HTTPTool): string {
-  return JSON.stringify(HTTPTool$outboundSchema.parse(httpTool));
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type,
-  );
-
-/** @internal */
-export type CurrentDateTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const CurrentDateTool$outboundSchema: z.ZodType<
-  CurrentDateTool$Outbound,
-  z.ZodTypeDef,
-  CurrentDateTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools11Type$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function currentDateToolToJSON(
-  currentDateTool: CurrentDateTool,
-): string {
-  return JSON.stringify(CurrentDateTool$outboundSchema.parse(currentDateTool));
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type,
-  );
-
-/** @internal */
-export type QueryKnowledgeBaseTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
-  QueryKnowledgeBaseTool$Outbound,
-  z.ZodTypeDef,
-  QueryKnowledgeBaseTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools10Type$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function queryKnowledgeBaseToolToJSON(
-  queryKnowledgeBaseTool: QueryKnowledgeBaseTool,
-): string {
-  return JSON.stringify(
-    QueryKnowledgeBaseTool$outboundSchema.parse(queryKnowledgeBaseTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type,
-  );
-
-/** @internal */
-export type RetrieveKnowledgeBasesTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
-  RetrieveKnowledgeBasesTool$Outbound,
-  z.ZodTypeDef,
-  RetrieveKnowledgeBasesTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools9Type$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function retrieveKnowledgeBasesToolToJSON(
-  retrieveKnowledgeBasesTool: RetrieveKnowledgeBasesTool,
-): string {
-  return JSON.stringify(
-    RetrieveKnowledgeBasesTool$outboundSchema.parse(retrieveKnowledgeBasesTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type,
-  );
-
-/** @internal */
-export type DeleteMemoryDocumentTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
-  DeleteMemoryDocumentTool$Outbound,
-  z.ZodTypeDef,
-  DeleteMemoryDocumentTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsTools8Type$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function deleteMemoryDocumentToolToJSON(
-  deleteMemoryDocumentTool: DeleteMemoryDocumentTool,
-): string {
-  return JSON.stringify(
-    DeleteMemoryDocumentTool$outboundSchema.parse(deleteMemoryDocumentTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType,
-  );
-
-/** @internal */
-export type RetrieveMemoryStoresTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
-  RetrieveMemoryStoresTool$Outbound,
-  z.ZodTypeDef,
-  RetrieveMemoryStoresTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsToolsType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function retrieveMemoryStoresToolToJSON(
-  retrieveMemoryStoresTool: RetrieveMemoryStoresTool,
-): string {
-  return JSON.stringify(
-    RetrieveMemoryStoresTool$outboundSchema.parse(retrieveMemoryStoresTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType,
-  );
-
-/** @internal */
-export type WriteMemoryStoreTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
-  WriteMemoryStoreTool$Outbound,
-  z.ZodTypeDef,
-  WriteMemoryStoreTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodySettingsType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function writeMemoryStoreToolToJSON(
-  writeMemoryStoreTool: WriteMemoryStoreTool,
-): string {
-  return JSON.stringify(
-    WriteMemoryStoreTool$outboundSchema.parse(writeMemoryStoreTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType
-  > = z.nativeEnum(
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType,
-  );
-
-/** @internal */
-export type QueryMemoryStoreTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
-  QueryMemoryStoreTool$Outbound,
-  z.ZodTypeDef,
-  QueryMemoryStoreTool
-> = z.object({
-  type:
-    CreateAgentRequestAgentToolInputCRUDAgentsRequestRequestBodyType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function queryMemoryStoreToolToJSON(
-  queryMemoryStoreTool: QueryMemoryStoreTool,
-): string {
-  return JSON.stringify(
-    QueryMemoryStoreTool$outboundSchema.parse(queryMemoryStoreTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateAgentRequestAgentToolInputCRUDAgentsRequestType
-  > = z.nativeEnum(CreateAgentRequestAgentToolInputCRUDAgentsRequestType);
-
-/** @internal */
-export type RetrieveAgentsTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const RetrieveAgentsTool$outboundSchema: z.ZodType<
-  RetrieveAgentsTool$Outbound,
-  z.ZodTypeDef,
-  RetrieveAgentsTool
-> = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsRequestType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function retrieveAgentsToolToJSON(
-  retrieveAgentsTool: RetrieveAgentsTool,
-): string {
-  return JSON.stringify(
-    RetrieveAgentsTool$outboundSchema.parse(retrieveAgentsTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDAgentsType> = z
-    .nativeEnum(CreateAgentRequestAgentToolInputCRUDAgentsType);
-
-/** @internal */
-export type CallSubAgentTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const CallSubAgentTool$outboundSchema: z.ZodType<
-  CallSubAgentTool$Outbound,
-  z.ZodTypeDef,
-  CallSubAgentTool
-> = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDAgentsType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function callSubAgentToolToJSON(
-  callSubAgentTool: CallSubAgentTool,
-): string {
-  return JSON.stringify(
-    CallSubAgentTool$outboundSchema.parse(callSubAgentTool),
-  );
-}
-
-/** @internal */
-export const CreateAgentRequestAgentToolInputCRUDType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentToolInputCRUDType> = z
-    .nativeEnum(CreateAgentRequestAgentToolInputCRUDType);
-
-/** @internal */
-export type WebScraperTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const WebScraperTool$outboundSchema: z.ZodType<
-  WebScraperTool$Outbound,
-  z.ZodTypeDef,
-  WebScraperTool
-> = z.object({
-  type: CreateAgentRequestAgentToolInputCRUDType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function webScraperToolToJSON(webScraperTool: WebScraperTool): string {
-  return JSON.stringify(WebScraperTool$outboundSchema.parse(webScraperTool));
-}
-
-/** @internal */
-export const AgentToolInputCRUDType$outboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputCRUDType
-> = z.nativeEnum(AgentToolInputCRUDType);
-
-/** @internal */
-export type GoogleSearchTool$Outbound = {
-  type: string;
-  requires_approval?: boolean | undefined;
-};
-
-/** @internal */
-export const GoogleSearchTool$outboundSchema: z.ZodType<
-  GoogleSearchTool$Outbound,
-  z.ZodTypeDef,
-  GoogleSearchTool
-> = z.object({
-  type: AgentToolInputCRUDType$outboundSchema,
-  requiresApproval: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function googleSearchToolToJSON(
-  googleSearchTool: GoogleSearchTool,
-): string {
-  return JSON.stringify(
-    GoogleSearchTool$outboundSchema.parse(googleSearchTool),
-  );
-}
-
-/** @internal */
-export type AgentToolInputCRUD$Outbound =
-  | GoogleSearchTool$Outbound
-  | WebScraperTool$Outbound
-  | CallSubAgentTool$Outbound
-  | RetrieveAgentsTool$Outbound
-  | QueryMemoryStoreTool$Outbound
-  | WriteMemoryStoreTool$Outbound
-  | RetrieveMemoryStoresTool$Outbound
-  | DeleteMemoryDocumentTool$Outbound
-  | RetrieveKnowledgeBasesTool$Outbound
-  | QueryKnowledgeBaseTool$Outbound
-  | CurrentDateTool$Outbound
-  | MCPTool$Outbound
-  | ProviderBuiltInTool$Outbound
-  | HTTPTool$Outbound
-  | CodeExecutionTool$Outbound
-  | FunctionTool$Outbound
-  | JSONSchemaTool$Outbound;
-
-/** @internal */
-export const AgentToolInputCRUD$outboundSchema: z.ZodType<
-  AgentToolInputCRUD$Outbound,
-  z.ZodTypeDef,
-  AgentToolInputCRUD
-> = z.union([
-  z.lazy(() => GoogleSearchTool$outboundSchema),
-  z.lazy(() => WebScraperTool$outboundSchema),
-  z.lazy(() => CallSubAgentTool$outboundSchema),
-  z.lazy(() => RetrieveAgentsTool$outboundSchema),
-  z.lazy(() => QueryMemoryStoreTool$outboundSchema),
-  z.lazy(() => WriteMemoryStoreTool$outboundSchema),
-  z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
-  z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
-  z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
-  z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
-  z.lazy(() => CurrentDateTool$outboundSchema),
-  z.lazy(() => MCPTool$outboundSchema),
-  z.lazy(() => ProviderBuiltInTool$outboundSchema),
-  z.lazy(() => HTTPTool$outboundSchema),
-  z.lazy(() => CodeExecutionTool$outboundSchema),
-  z.lazy(() => FunctionTool$outboundSchema),
-  z.lazy(() => JSONSchemaTool$outboundSchema),
-]);
-
-export function agentToolInputCRUDToJSON(
-  agentToolInputCRUD: AgentToolInputCRUD,
-): string {
-  return JSON.stringify(
-    AgentToolInputCRUD$outboundSchema.parse(agentToolInputCRUD),
-  );
-}
-
-/** @internal */
 export const CreateAgentRequestExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestExecuteOn
 > = z.nativeEnum(CreateAgentRequestExecuteOn);
@@ -5088,27 +3969,8 @@ export type Settings$Outbound = {
   max_execution_time: number;
   max_cost: number;
   tool_approval_required: string;
-  tools?:
-    | Array<
-      | GoogleSearchTool$Outbound
-      | WebScraperTool$Outbound
-      | CallSubAgentTool$Outbound
-      | RetrieveAgentsTool$Outbound
-      | QueryMemoryStoreTool$Outbound
-      | WriteMemoryStoreTool$Outbound
-      | RetrieveMemoryStoresTool$Outbound
-      | DeleteMemoryDocumentTool$Outbound
-      | RetrieveKnowledgeBasesTool$Outbound
-      | QueryKnowledgeBaseTool$Outbound
-      | CurrentDateTool$Outbound
-      | MCPTool$Outbound
-      | ProviderBuiltInTool$Outbound
-      | HTTPTool$Outbound
-      | CodeExecutionTool$Outbound
-      | FunctionTool$Outbound
-      | JSONSchemaTool$Outbound
-    >
-    | undefined;
+  chat_exposed?: boolean | undefined;
+  tools?: Array<components.AgentToolInputCRUD$Outbound> | undefined;
   evaluators?: Array<Evaluators$Outbound> | undefined;
   guardrails?: Array<CreateAgentRequestGuardrails$Outbound> | undefined;
 };
@@ -5125,27 +3987,8 @@ export const Settings$outboundSchema: z.ZodType<
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(
-    z.union([
-      z.lazy(() => GoogleSearchTool$outboundSchema),
-      z.lazy(() => WebScraperTool$outboundSchema),
-      z.lazy(() => CallSubAgentTool$outboundSchema),
-      z.lazy(() => RetrieveAgentsTool$outboundSchema),
-      z.lazy(() => QueryMemoryStoreTool$outboundSchema),
-      z.lazy(() => WriteMemoryStoreTool$outboundSchema),
-      z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
-      z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
-      z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
-      z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
-      z.lazy(() => CurrentDateTool$outboundSchema),
-      z.lazy(() => MCPTool$outboundSchema),
-      z.lazy(() => ProviderBuiltInTool$outboundSchema),
-      z.lazy(() => HTTPTool$outboundSchema),
-      z.lazy(() => CodeExecutionTool$outboundSchema),
-      z.lazy(() => FunctionTool$outboundSchema),
-      z.lazy(() => JSONSchemaTool$outboundSchema),
-    ]),
-  ).optional(),
+  chatExposed: z.boolean().optional(),
+  tools: z.array(components.AgentToolInputCRUD$outboundSchema).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
   guardrails: z.array(z.lazy(() => CreateAgentRequestGuardrails$outboundSchema))
     .optional(),
@@ -5155,6 +3998,7 @@ export const Settings$outboundSchema: z.ZodType<
     maxExecutionTime: "max_execution_time",
     maxCost: "max_cost",
     toolApprovalRequired: "tool_approval_required",
+    chatExposed: "chat_exposed",
   });
 });
 
@@ -5409,10 +4253,11 @@ export const CreateAgentRequestTools$inboundSchema: z.ZodType<
   action_type: z.string(),
   display_name: z.string().optional(),
   description: z.string().optional(),
+  configuration: z.record(z.any()).optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
-  timeout: z.number().default(120),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",
@@ -5506,6 +4351,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
   max_cost: z.number().default(0),
   tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
     .default("respect_tool"),
+  chat_exposed: z.boolean().optional(),
   tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
     .optional(),
   evaluators: z.array(z.lazy(() => CreateAgentRequestEvaluators$inboundSchema))
@@ -5519,6 +4365,7 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
     "max_execution_time": "maxExecutionTime",
     "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
+    "chat_exposed": "chatExposed",
   });
 });
 

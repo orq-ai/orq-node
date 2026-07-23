@@ -5,11 +5,11 @@
 ```typescript
 import { ModelsConfigMode } from "@orq-ai/node/models/components";
 
-let value: ModelsConfigMode = "weighted";
+let value: ModelsConfigMode = "latency_based";
 ```
 
 ## Values
 
 ```typescript
-"fallback" | "weighted" | "round_robin"
+"fallback" | "latency_based" | "weighted" | "round_robin"
 ```

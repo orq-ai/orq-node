@@ -247,6 +247,30 @@ const value: components.ResponseCreatedStreamEvent = {
 };
 ```
 
+### `components.ResponseCustomToolCallInputDeltaStreamEvent`
+
+```typescript
+const value: components.ResponseCustomToolCallInputDeltaStreamEvent = {
+  delta: "<value>",
+  itemId: "<id>",
+  outputIndex: 489568,
+  sequenceNumber: 887496,
+  type: "response.custom_tool_call_input.delta",
+};
+```
+
+### `components.ResponseCustomToolCallInputDoneStreamEvent`
+
+```typescript
+const value: components.ResponseCustomToolCallInputDoneStreamEvent = {
+  input: "<value>",
+  itemId: "<id>",
+  outputIndex: 586961,
+  sequenceNumber: 603044,
+  type: "response.custom_tool_call_input.done",
+};
+```
+
 ### `components.ResponseFailedStreamEvent`
 
 ```typescript
@@ -620,6 +644,39 @@ const value: components.ResponseMCPCallArgumentsDoneStreamEvent = {
   outputIndex: 306364,
   sequenceNumber: 813167,
   type: "response.mcp_call_arguments.done",
+};
+```
+
+### `components.ResponseMCPListToolsCompletedStreamEvent`
+
+```typescript
+const value: components.ResponseMCPListToolsCompletedStreamEvent = {
+  itemId: "<id>",
+  outputIndex: 73366,
+  sequenceNumber: 745152,
+  type: "response.mcp_list_tools.completed",
+};
+```
+
+### `components.ResponseMCPListToolsFailedStreamEvent`
+
+```typescript
+const value: components.ResponseMCPListToolsFailedStreamEvent = {
+  itemId: "<id>",
+  outputIndex: 69290,
+  sequenceNumber: 747779,
+  type: "response.mcp_list_tools.failed",
+};
+```
+
+### `components.ResponseMCPListToolsInProgressStreamEvent`
+
+```typescript
+const value: components.ResponseMCPListToolsInProgressStreamEvent = {
+  itemId: "<id>",
+  outputIndex: 188856,
+  sequenceNumber: 632370,
+  type: "response.mcp_list_tools.in_progress",
 };
 ```
 

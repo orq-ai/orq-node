@@ -6,7 +6,7 @@
 ### `operations.StreamRunAgentId1`
 
 ```typescript
-const value: operations.StreamRunAgentId1 = "orq_sexual_moderation";
+const value: operations.StreamRunAgentId1 = "orq_secret_detection";
 ```
 
 ### `string`

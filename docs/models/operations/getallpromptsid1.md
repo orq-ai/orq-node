@@ -7,11 +7,11 @@ The key of the guardrail.
 ```typescript
 import { GetAllPromptsId1 } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsId1 = "orq_pii_detection";
+let value: GetAllPromptsId1 = "orq_secret_detection";
 ```
 
 ## Values
 
 ```typescript
-"orq_pii_detection" | "orq_sexual_moderation" | "orq_harmful_moderation"
+"orq_pii_detection" | "orq_secret_detection" | "orq_sexual_moderation" | "orq_harmful_moderation"
 ```

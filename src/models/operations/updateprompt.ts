@@ -550,6 +550,7 @@ export type UpdatePromptModalities = ClosedEnum<typeof UpdatePromptModalities>;
  */
 export const UpdatePromptId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -1256,6 +1257,7 @@ export type UpdatePromptVerbosity = ClosedEnum<typeof UpdatePromptVerbosity>;
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const UpdatePromptThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -1404,6 +1406,8 @@ export const UpdatePromptProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -1785,6 +1789,7 @@ export type UpdatePromptPromptsModalities = ClosedEnum<
  */
 export const UpdatePromptIdPrompts1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

@@ -1491,6 +1491,7 @@ export type DeploymentGetConfigVerbosity = ClosedEnum<
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const ThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

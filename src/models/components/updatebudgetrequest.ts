@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  BudgetAlert,
+  BudgetAlert$Outbound,
+  BudgetAlert$outboundSchema,
+} from "./budgetalert.js";
+import {
   BudgetLimits,
   BudgetLimits$Outbound,
   BudgetLimits$outboundSchema,
@@ -52,6 +57,17 @@ export type UpdateBudgetRequest = {
    *  its derived expression is too. Validated via CEL parse.
    */
   match?: BudgetMatch | undefined;
+  /**
+   * Replaces the alert list wholesale. Omit to keep the current alerts.
+   *
+   * @remarks
+   *  An entry with a known `id` is edited in place; one with no id is minted.
+   */
+  alerts?: Array<BudgetAlert> | undefined;
+  /**
+   * Force-clear every alert. Mutually exclusive with a non-empty `alerts`.
+   */
+  clearAlerts?: boolean | undefined;
 };
 
 /** @internal */
@@ -62,6 +78,8 @@ export type UpdateBudgetRequest$Outbound = {
   expires_at?: string | undefined;
   clear_expires_at?: boolean | undefined;
   match?: BudgetMatch$Outbound | undefined;
+  alerts?: Array<BudgetAlert$Outbound> | undefined;
+  clear_alerts?: boolean | undefined;
 };
 
 /** @internal */
@@ -76,12 +94,15 @@ export const UpdateBudgetRequest$outboundSchema: z.ZodType<
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   clearExpiresAt: z.boolean().optional(),
   match: BudgetMatch$outboundSchema.optional(),
+  alerts: z.array(BudgetAlert$outboundSchema).optional(),
+  clearAlerts: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     rateLimit: "rate_limit",
     isActive: "is_active",
     expiresAt: "expires_at",
     clearExpiresAt: "clear_expires_at",
+    clearAlerts: "clear_alerts",
   });
 });
 

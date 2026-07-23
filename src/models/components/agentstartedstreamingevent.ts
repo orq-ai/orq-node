@@ -97,6 +97,10 @@ export type Tools = {
    * Optional tool description
    */
   description?: string | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
   requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
@@ -104,9 +108,9 @@ export type Tools = {
   toolId?: string | undefined;
   conditions?: Array<AgentStartedStreamingEventConditions> | undefined;
   /**
-   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
    */
-  timeout: number;
+  timeout?: number | undefined;
 };
 
 /**
@@ -184,6 +188,10 @@ export type Settings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: ToolApprovalRequired;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?: Array<Tools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -328,12 +336,13 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
     action_type: z.string(),
     display_name: z.string().optional(),
     description: z.string().optional(),
+    configuration: z.record(z.any()).optional(),
     requires_approval: z.boolean().default(false),
     tool_id: z.string().optional(),
     conditions: z.array(
       z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
     ).optional(),
-    timeout: z.number().default(120),
+    timeout: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "action_type": "actionType",
@@ -427,6 +436,7 @@ export const Settings$inboundSchema: z.ZodType<
   tool_approval_required: ToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
+  chat_exposed: z.boolean().optional(),
   tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
   guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
@@ -436,6 +446,7 @@ export const Settings$inboundSchema: z.ZodType<
     "max_execution_time": "maxExecutionTime",
     "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
+    "chat_exposed": "chatExposed",
   });
 });
 

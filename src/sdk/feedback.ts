@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create transcription
+   * Create completion
+   *
+   * @remarks
+   * For sending requests to legacy completion models
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

@@ -275,6 +275,7 @@ export type GetOnePromptVerbosity = ClosedEnum<typeof GetOnePromptVerbosity>;
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const GetOnePromptThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -423,6 +424,8 @@ export const GetOnePromptProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -797,6 +800,7 @@ export type GetOnePromptModalities = ClosedEnum<typeof GetOnePromptModalities>;
  */
 export const GetOnePromptId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

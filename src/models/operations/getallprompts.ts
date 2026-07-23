@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAllPromptsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -291,6 +291,7 @@ export type GetAllPromptsVerbosity = ClosedEnum<typeof GetAllPromptsVerbosity>;
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const GetAllPromptsThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -439,6 +440,8 @@ export const GetAllPromptsProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -815,6 +818,7 @@ export type GetAllPromptsModalities = ClosedEnum<
  */
 export const GetAllPromptsId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

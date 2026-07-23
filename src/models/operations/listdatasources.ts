@@ -4,7 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  collectExtraKeys as collectExtraKeys$,
+  safeParse,
+} from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -13,6 +16,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Filter datasources by status.
  */
 export type ListDatasourcesQueryParamStatus = Array<string> | string;
+
+export type QueryParamMetadata = string | number | boolean;
 
 export type ListDatasourcesRequest = {
   /**
@@ -39,6 +44,10 @@ export type ListDatasourcesRequest = {
    * Filter datasources by status.
    */
   status?: Array<string> | string | undefined;
+  /**
+   * Filter datasources by exact metadata key/value pairs. Provide a JSON-encoded object when calling this endpoint over HTTP.
+   */
+  metadata?: { [k: string]: string | number | boolean | null } | undefined;
 };
 
 export const ListDatasourcesObject = {
@@ -54,6 +63,34 @@ export const ListDatasourcesStatus = {
   Queued: "queued",
 } as const;
 export type ListDatasourcesStatus = ClosedEnum<typeof ListDatasourcesStatus>;
+
+export type ListDatasourcesMetadata = {
+  /**
+   * Number of words in the text
+   */
+  wordsCount?: number | undefined;
+  /**
+   * Number of sentences in the text
+   */
+  sentencesCount?: number | undefined;
+  /**
+   * Number of paragraphs in the text
+   */
+  paragraphsCount?: number | undefined;
+  /**
+   * Number of tokens in the text
+   */
+  tokensCount?: number | undefined;
+  /**
+   * Number of characters in the text
+   */
+  charactersCount?: number | undefined;
+  /**
+   * Number of total chunks
+   */
+  chunksCount?: number | undefined;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
 
 export type ListDatasourcesData = {
   /**
@@ -97,6 +134,7 @@ export type ListDatasourcesData = {
    * The number of chunks in the datasource
    */
   chunksCount: number;
+  metadata: ListDatasourcesMetadata;
 };
 
 /**
@@ -129,6 +167,24 @@ export function listDatasourcesQueryParamStatusToJSON(
 }
 
 /** @internal */
+export type QueryParamMetadata$Outbound = string | number | boolean;
+
+/** @internal */
+export const QueryParamMetadata$outboundSchema: z.ZodType<
+  QueryParamMetadata$Outbound,
+  z.ZodTypeDef,
+  QueryParamMetadata
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+export function queryParamMetadataToJSON(
+  queryParamMetadata: QueryParamMetadata,
+): string {
+  return JSON.stringify(
+    QueryParamMetadata$outboundSchema.parse(queryParamMetadata),
+  );
+}
+
+/** @internal */
 export type ListDatasourcesRequest$Outbound = {
   knowledge_id: string;
   starting_after?: string | undefined;
@@ -136,6 +192,7 @@ export type ListDatasourcesRequest$Outbound = {
   q?: string | undefined;
   limit: number;
   status?: Array<string> | string | undefined;
+  metadata?: { [k: string]: string | number | boolean | null } | undefined;
 };
 
 /** @internal */
@@ -150,6 +207,8 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   q: z.string().optional(),
   limit: z.number().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
+  metadata: z.record(z.nullable(z.union([z.string(), z.number(), z.boolean()])))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -177,12 +236,49 @@ export const ListDatasourcesStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListDatasourcesStatus);
 
 /** @internal */
+export const ListDatasourcesMetadata$inboundSchema: z.ZodType<
+  ListDatasourcesMetadata,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    words_count: z.number().optional(),
+    sentences_count: z.number().optional(),
+    paragraphs_count: z.number().optional(),
+    tokens_count: z.number().optional(),
+    characters_count: z.number().optional(),
+    chunks_count: z.number().optional(),
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+).transform((v) => {
+  return remap$(v, {
+    "words_count": "wordsCount",
+    "sentences_count": "sentencesCount",
+    "paragraphs_count": "paragraphsCount",
+    "tokens_count": "tokensCount",
+    "characters_count": "charactersCount",
+    "chunks_count": "chunksCount",
+  });
+});
+
+export function listDatasourcesMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasourcesMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasourcesMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasourcesMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListDatasourcesData$inboundSchema: z.ZodType<
   ListDatasourcesData,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KXPCS83GMP1SSXEBNV3YWYB5"),
+  _id: z.string().default("01KY7CX66B6ADVH12MQ2DPDTCX"),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -193,6 +289,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   update_by_id: z.nullable(z.string()).optional(),
   knowledge_id: z.string(),
   chunks_count: z.number(),
+  metadata: z.lazy(() => ListDatasourcesMetadata$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

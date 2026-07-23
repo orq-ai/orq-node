@@ -1,0 +1,25 @@
+# McpToolInput
+
+Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
+
+## Example Usage
+
+```typescript
+import { McpToolInput } from "@orq-ai/node/models/components";
+
+let value: McpToolInput = {
+  type: "mcp",
+  id: "01KA84ND5J0SWQMA2Q8HY5WZZZ",
+  toolId: "01KXYZ123456789",
+};
+```
+
+## Fields
+
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `type`                                                   | *"mcp"*                                                  | :heavy_check_mark:                                       | MCP tool type                                            |
+| `key`                                                    | *string*                                                 | :heavy_minus_sign:                                       | The key of the parent MCP tool                           |
+| `id`                                                     | *string*                                                 | :heavy_minus_sign:                                       | The ID of the parent MCP tool                            |
+| `toolId`                                                 | *string*                                                 | :heavy_check_mark:                                       | The ID of the specific nested tool within the MCP server |
+| `requiresApproval`                                       | *boolean*                                                | :heavy_minus_sign:                                       | Whether this tool requires approval before execution     |

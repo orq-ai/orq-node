@@ -281,6 +281,7 @@ export type GetPromptVersionVerbosity = ClosedEnum<
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const GetPromptVersionThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -429,6 +430,8 @@ export const GetPromptVersionProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -807,6 +810,7 @@ export type GetPromptVersionModalities = ClosedEnum<
  */
 export const GetPromptVersionId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;

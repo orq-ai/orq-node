@@ -34,11 +34,22 @@ const value: operations.UpdateDatapointEvaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
+  type: "boolean",
+  value: false,
+};
+```
+
+### `operations.UpdateDatapointEvaluations4`
+
+```typescript
+const value: operations.UpdateDatapointEvaluations4 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
   type: "string_array",
   values: [
     "<value 1>",
     "<value 2>",
-    "<value 3>",
   ],
 };
 ```

@@ -19,7 +19,7 @@ export type GetAllMemoryDocumentsRequest = {
    */
   memoryEntityId: string;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
    */
   limit?: number | undefined;
   /**

@@ -5,13 +5,13 @@ The tool to create
 
 ## Supported Types
 
-### `operations.RequestBodyFunctionTool`
+### `operations.FunctionTool`
 
 ```typescript
-const value: operations.RequestBodyFunctionTool = {
+const value: operations.FunctionTool = {
   path: "Default",
   key: "<key>",
-  description: "surprisingly management aw character wretched",
+  description: "beyond playfully atop apropos aw how",
   type: "function",
   function: {
     name: "<value>",
@@ -19,17 +19,17 @@ const value: operations.RequestBodyFunctionTool = {
 };
 ```
 
-### `operations.RequestBodyJSONSchemaTool`
+### `operations.JSONSchemaTool`
 
 ```typescript
-const value: operations.RequestBodyJSONSchemaTool = {
+const value: operations.JSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "outside freezing despite mmm",
+  description: "uh-huh scholarship what madly",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "swanling even whoever via yuck in",
+    description: "barring climb usefully however ouch yuck bicycle",
     schema: {
       type: "<value>",
       properties: {
@@ -41,13 +41,13 @@ const value: operations.RequestBodyJSONSchemaTool = {
 };
 ```
 
-### `operations.RequestBodyHTTPTool`
+### `operations.HTTPTool`
 
 ```typescript
-const value: operations.RequestBodyHTTPTool = {
+const value: operations.HTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "that finally rebuild carefully pace yowza whenever",
+  description: "midst too hello difficult proofread",
   type: "http",
   http: {
     blueprint: {
@@ -73,13 +73,13 @@ const value: operations.RequestBodyMCPTool = {
 };
 ```
 
-### `operations.RequestBodyCodeExecutionTool`
+### `operations.CodeExecutionTool`
 
 ```typescript
-const value: operations.RequestBodyCodeExecutionTool = {
+const value: operations.CodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description: "yahoo er scared pretend endow obvious accentuate plain readily",
+  description: "convince without brr",
   type: "code",
   codeTool: {
     language: "python",

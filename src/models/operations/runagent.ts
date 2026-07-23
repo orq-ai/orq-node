@@ -164,6 +164,7 @@ export type RunAgentModelConfigurationModalities = ClosedEnum<
  */
 export const RunAgentId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -653,6 +654,7 @@ export type RunAgentFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const RunAgentIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -1165,17 +1167,17 @@ export type AgentToolInputRunHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
   {
     Object: "object",
   } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
   >;
 
 export type AgentToolInputRunSchema = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType;
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1297,16 +1299,16 @@ export type JSONSchemaToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
   >;
 
 /**
@@ -1317,7 +1319,7 @@ export type RunAgentAgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType;
   /**
    * The properties of the function parameters
    */
@@ -1367,16 +1369,16 @@ export type FunctionToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
   >;
 
 /**
@@ -1387,7 +1389,7 @@ export type AgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType;
   /**
    * The properties of the function parameters
    */
@@ -1433,6 +1435,10 @@ export type CodeToolRun = {
   description: string;
   codeTool: CodeTool;
   requiresApproval?: boolean | undefined;
+  /**
+   * Tool execution timeout in seconds for this agent (max: 2 minutes, the code sandbox cap). Overrides the timeout configured on the tool definition.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -1476,12 +1482,16 @@ export type Blueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
  * The type of the argument.
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
   {
     String: "string",
     Number: "number",
@@ -1490,9 +1500,9 @@ export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12Htt
 /**
  * The type of the argument.
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
   >;
 
 /**
@@ -1505,7 +1515,7 @@ export type Arguments = {
    * The type of the argument.
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType;
   /**
    * A description of the argument.
    */
@@ -1548,144 +1558,208 @@ export type HTTPToolRun = {
   description: string;
   http: Http;
   requiresApproval?: boolean | undefined;
+  /**
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
+   */
+  timeout?: number | undefined;
+};
+
+/**
+ * Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
+ */
+export type CodeInterpreterTool = {
+  type: "code_interpreter";
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Returns the current date and time
  */
-export type AgentToolInputRunCurrentDateTool = {
+export type CurrentDateTool = {
   type: "current_date";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Queries knowledge bases for information
  */
-export type AgentToolInputRunQueryKnowledgeBaseTool = {
+export type QueryKnowledgeBaseTool = {
   type: "query_knowledge_base";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Lists available knowledge bases
  */
-export type AgentToolInputRunRetrieveKnowledgeBasesTool = {
+export type RetrieveKnowledgeBasesTool = {
   type: "retrieve_knowledge_bases";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Deletes documents from memory stores
  */
-export type AgentToolInputRunDeleteMemoryDocumentTool = {
+export type DeleteMemoryDocumentTool = {
   type: "delete_memory_document";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Lists available memory stores
  */
-export type AgentToolInputRunRetrieveMemoryStoresTool = {
+export type RetrieveMemoryStoresTool = {
   type: "retrieve_memory_stores";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Writes information to agent memory stores
  */
-export type AgentToolInputRunWriteMemoryStoreTool = {
+export type WriteMemoryStoreTool = {
   type: "write_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Queries agent memory stores for context
  */
-export type AgentToolInputRunQueryMemoryStoreTool = {
+export type QueryMemoryStoreTool = {
   type: "query_memory_store";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Retrieves available agents in the system
  */
-export type AgentToolInputRunRetrieveAgentsTool = {
+export type RetrieveAgentsTool = {
   type: "retrieve_agents";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Delegates tasks to specialized sub-agents
  */
-export type AgentToolInputRunCallSubAgentTool = {
+export type CallSubAgentTool = {
   type: "call_sub_agent";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Scrapes and extracts content from web pages
  */
-export type AgentToolInputRunWebScraperTool = {
+export type WebScraperTool = {
   type: "web_scraper";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Performs Google searches to retrieve web content
  */
-export type AgentToolInputRunGoogleSearchTool = {
+export type GoogleSearchTool = {
   type: "google_search";
   /**
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /**
  * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, JSON Schema, MCP) support full inline definitions for on-the-fly creation.
  */
 export type AgentToolInputRun =
-  | AgentToolInputRunGoogleSearchTool
-  | AgentToolInputRunWebScraperTool
-  | AgentToolInputRunCallSubAgentTool
-  | AgentToolInputRunRetrieveAgentsTool
-  | AgentToolInputRunQueryMemoryStoreTool
-  | AgentToolInputRunWriteMemoryStoreTool
-  | AgentToolInputRunRetrieveMemoryStoresTool
-  | AgentToolInputRunDeleteMemoryDocumentTool
-  | AgentToolInputRunRetrieveKnowledgeBasesTool
-  | AgentToolInputRunQueryKnowledgeBaseTool
-  | AgentToolInputRunCurrentDateTool
+  | GoogleSearchTool
+  | WebScraperTool
+  | CallSubAgentTool
+  | RetrieveAgentsTool
+  | QueryMemoryStoreTool
+  | WriteMemoryStoreTool
+  | RetrieveMemoryStoresTool
+  | DeleteMemoryDocumentTool
+  | RetrieveKnowledgeBasesTool
+  | QueryKnowledgeBaseTool
+  | CurrentDateTool
+  | CodeInterpreterTool
   | HTTPToolRun
   | CodeToolRun
   | FunctionToolRun
@@ -1769,17 +1843,18 @@ export type RunAgentSettings = {
    */
   tools?:
     | Array<
-      | AgentToolInputRunGoogleSearchTool
-      | AgentToolInputRunWebScraperTool
-      | AgentToolInputRunCallSubAgentTool
-      | AgentToolInputRunRetrieveAgentsTool
-      | AgentToolInputRunQueryMemoryStoreTool
-      | AgentToolInputRunWriteMemoryStoreTool
-      | AgentToolInputRunRetrieveMemoryStoresTool
-      | AgentToolInputRunDeleteMemoryDocumentTool
-      | AgentToolInputRunRetrieveKnowledgeBasesTool
-      | AgentToolInputRunQueryKnowledgeBaseTool
-      | AgentToolInputRunCurrentDateTool
+      | GoogleSearchTool
+      | WebScraperTool
+      | CallSubAgentTool
+      | RetrieveAgentsTool
+      | QueryMemoryStoreTool
+      | WriteMemoryStoreTool
+      | RetrieveMemoryStoresTool
+      | DeleteMemoryDocumentTool
+      | RetrieveKnowledgeBasesTool
+      | QueryKnowledgeBaseTool
+      | CurrentDateTool
+      | CodeInterpreterTool
       | HTTPToolRun
       | CodeToolRun
       | FunctionToolRun
@@ -1803,6 +1878,10 @@ export type RunAgentSettings = {
    * Maximum cost in USD for the agent execution. When the accumulated cost exceeds this limit, the agent will stop executing. Set to 0 for unlimited. Only supported in v3 responses
    */
   maxCost?: number | undefined;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   /**
    * Configuration for an evaluator applied to the agent
    */
@@ -3927,11 +4006,11 @@ export function agentToolInputRunHeadersToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType,
   );
 
 /** @internal */
@@ -3948,7 +4027,7 @@ export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
   AgentToolInputRunSchema
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16McpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
@@ -3975,7 +4054,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KXPCS7N2H4CGP0GCZGG9VS6Q"),
+  id: z.string().default("01KY7CX5RFZS7YYM1KHF6Q95FS"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4156,11 +4235,11 @@ export function jsonSchemaToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType,
   );
 
 /** @internal */
@@ -4178,7 +4257,7 @@ export const RunAgentAgentToolInputRunParameters$outboundSchema: z.ZodType<
   RunAgentAgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14FunctionType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4269,11 +4348,11 @@ export function functionToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType,
   );
 
 /** @internal */
@@ -4291,7 +4370,7 @@ export const AgentToolInputRunParameters$outboundSchema: z.ZodType<
   AgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13CodeToolType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4350,6 +4429,7 @@ export type CodeToolRun$Outbound = {
   description: string;
   code_tool: CodeTool$Outbound;
   requires_approval: boolean;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4365,6 +4445,7 @@ export const CodeToolRun$outboundSchema: z.ZodType<
   description: z.string(),
   codeTool: z.lazy(() => CodeTool$outboundSchema),
   requiresApproval: z.boolean().default(false),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -4422,6 +4503,7 @@ export type Blueprint$Outbound = {
   method: string;
   headers?: { [k: string]: Headers2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4436,6 +4518,7 @@ export const Blueprint$outboundSchema: z.ZodType<
     z.union([z.lazy(() => Headers2$outboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function blueprintToJSON(blueprint: Blueprint): string {
@@ -4443,11 +4526,11 @@ export function blueprintToJSON(blueprint: Blueprint): string {
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType,
   );
 
 /** @internal */
@@ -4479,7 +4562,7 @@ export const Arguments$outboundSchema: z.ZodType<
   Arguments
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools12HttpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema,
   description: z.string(),
   sendToModel: z.boolean().default(true),
   defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -4520,6 +4603,7 @@ export type HTTPToolRun$Outbound = {
   description: string;
   http: Http$Outbound;
   requires_approval: boolean;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -4535,6 +4619,7 @@ export const HTTPToolRun$outboundSchema: z.ZodType<
   description: z.string(),
   http: z.lazy(() => Http$outboundSchema),
   requiresApproval: z.boolean().default(false),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
@@ -4548,355 +4633,373 @@ export function httpToolRunToJSON(httpToolRun: HTTPToolRun): string {
 }
 
 /** @internal */
-export type AgentToolInputRunCurrentDateTool$Outbound = {
-  type: "current_date";
+export type CodeInterpreterTool$Outbound = {
+  type: "code_interpreter";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunCurrentDateTool$outboundSchema: z.ZodType<
-  AgentToolInputRunCurrentDateTool$Outbound,
+export const CodeInterpreterTool$outboundSchema: z.ZodType<
+  CodeInterpreterTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunCurrentDateTool
+  CodeInterpreterTool
+> = z.object({
+  type: z.literal("code_interpreter"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function codeInterpreterToolToJSON(
+  codeInterpreterTool: CodeInterpreterTool,
+): string {
+  return JSON.stringify(
+    CodeInterpreterTool$outboundSchema.parse(codeInterpreterTool),
+  );
+}
+
+/** @internal */
+export type CurrentDateTool$Outbound = {
+  type: "current_date";
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const CurrentDateTool$outboundSchema: z.ZodType<
+  CurrentDateTool$Outbound,
+  z.ZodTypeDef,
+  CurrentDateTool
 > = z.object({
   type: z.literal("current_date"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunCurrentDateToolToJSON(
-  agentToolInputRunCurrentDateTool: AgentToolInputRunCurrentDateTool,
+export function currentDateToolToJSON(
+  currentDateTool: CurrentDateTool,
 ): string {
-  return JSON.stringify(
-    AgentToolInputRunCurrentDateTool$outboundSchema.parse(
-      agentToolInputRunCurrentDateTool,
-    ),
-  );
+  return JSON.stringify(CurrentDateTool$outboundSchema.parse(currentDateTool));
 }
 
 /** @internal */
-export type AgentToolInputRunQueryKnowledgeBaseTool$Outbound = {
+export type QueryKnowledgeBaseTool$Outbound = {
   type: "query_knowledge_base";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema: z.ZodType<
-  AgentToolInputRunQueryKnowledgeBaseTool$Outbound,
+export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
+  QueryKnowledgeBaseTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunQueryKnowledgeBaseTool
+  QueryKnowledgeBaseTool
 > = z.object({
   type: z.literal("query_knowledge_base"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunQueryKnowledgeBaseToolToJSON(
-  agentToolInputRunQueryKnowledgeBaseTool:
-    AgentToolInputRunQueryKnowledgeBaseTool,
+export function queryKnowledgeBaseToolToJSON(
+  queryKnowledgeBaseTool: QueryKnowledgeBaseTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema.parse(
-      agentToolInputRunQueryKnowledgeBaseTool,
-    ),
+    QueryKnowledgeBaseTool$outboundSchema.parse(queryKnowledgeBaseTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound = {
+export type RetrieveKnowledgeBasesTool$Outbound = {
   type: "retrieve_knowledge_bases";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema:
-  z.ZodType<
-    AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound,
-    z.ZodTypeDef,
-    AgentToolInputRunRetrieveKnowledgeBasesTool
-  > = z.object({
-    type: z.literal("retrieve_knowledge_bases"),
-    requiresApproval: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresApproval: "requires_approval",
-    });
+export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
+  RetrieveKnowledgeBasesTool$Outbound,
+  z.ZodTypeDef,
+  RetrieveKnowledgeBasesTool
+> = z.object({
+  type: z.literal("retrieve_knowledge_bases"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
   });
+});
 
-export function agentToolInputRunRetrieveKnowledgeBasesToolToJSON(
-  agentToolInputRunRetrieveKnowledgeBasesTool:
-    AgentToolInputRunRetrieveKnowledgeBasesTool,
+export function retrieveKnowledgeBasesToolToJSON(
+  retrieveKnowledgeBasesTool: RetrieveKnowledgeBasesTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema.parse(
-      agentToolInputRunRetrieveKnowledgeBasesTool,
-    ),
+    RetrieveKnowledgeBasesTool$outboundSchema.parse(retrieveKnowledgeBasesTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunDeleteMemoryDocumentTool$Outbound = {
+export type DeleteMemoryDocumentTool$Outbound = {
   type: "delete_memory_document";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema:
-  z.ZodType<
-    AgentToolInputRunDeleteMemoryDocumentTool$Outbound,
-    z.ZodTypeDef,
-    AgentToolInputRunDeleteMemoryDocumentTool
-  > = z.object({
-    type: z.literal("delete_memory_document"),
-    requiresApproval: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresApproval: "requires_approval",
-    });
+export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
+  DeleteMemoryDocumentTool$Outbound,
+  z.ZodTypeDef,
+  DeleteMemoryDocumentTool
+> = z.object({
+  type: z.literal("delete_memory_document"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
   });
+});
 
-export function agentToolInputRunDeleteMemoryDocumentToolToJSON(
-  agentToolInputRunDeleteMemoryDocumentTool:
-    AgentToolInputRunDeleteMemoryDocumentTool,
+export function deleteMemoryDocumentToolToJSON(
+  deleteMemoryDocumentTool: DeleteMemoryDocumentTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema.parse(
-      agentToolInputRunDeleteMemoryDocumentTool,
-    ),
+    DeleteMemoryDocumentTool$outboundSchema.parse(deleteMemoryDocumentTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunRetrieveMemoryStoresTool$Outbound = {
+export type RetrieveMemoryStoresTool$Outbound = {
   type: "retrieve_memory_stores";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema:
-  z.ZodType<
-    AgentToolInputRunRetrieveMemoryStoresTool$Outbound,
-    z.ZodTypeDef,
-    AgentToolInputRunRetrieveMemoryStoresTool
-  > = z.object({
-    type: z.literal("retrieve_memory_stores"),
-    requiresApproval: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requiresApproval: "requires_approval",
-    });
+export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
+  RetrieveMemoryStoresTool$Outbound,
+  z.ZodTypeDef,
+  RetrieveMemoryStoresTool
+> = z.object({
+  type: z.literal("retrieve_memory_stores"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
   });
+});
 
-export function agentToolInputRunRetrieveMemoryStoresToolToJSON(
-  agentToolInputRunRetrieveMemoryStoresTool:
-    AgentToolInputRunRetrieveMemoryStoresTool,
+export function retrieveMemoryStoresToolToJSON(
+  retrieveMemoryStoresTool: RetrieveMemoryStoresTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema.parse(
-      agentToolInputRunRetrieveMemoryStoresTool,
-    ),
+    RetrieveMemoryStoresTool$outboundSchema.parse(retrieveMemoryStoresTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunWriteMemoryStoreTool$Outbound = {
+export type WriteMemoryStoreTool$Outbound = {
   type: "write_memory_store";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunWriteMemoryStoreTool$outboundSchema: z.ZodType<
-  AgentToolInputRunWriteMemoryStoreTool$Outbound,
+export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
+  WriteMemoryStoreTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunWriteMemoryStoreTool
+  WriteMemoryStoreTool
 > = z.object({
   type: z.literal("write_memory_store"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunWriteMemoryStoreToolToJSON(
-  agentToolInputRunWriteMemoryStoreTool: AgentToolInputRunWriteMemoryStoreTool,
+export function writeMemoryStoreToolToJSON(
+  writeMemoryStoreTool: WriteMemoryStoreTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunWriteMemoryStoreTool$outboundSchema.parse(
-      agentToolInputRunWriteMemoryStoreTool,
-    ),
+    WriteMemoryStoreTool$outboundSchema.parse(writeMemoryStoreTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunQueryMemoryStoreTool$Outbound = {
+export type QueryMemoryStoreTool$Outbound = {
   type: "query_memory_store";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunQueryMemoryStoreTool$outboundSchema: z.ZodType<
-  AgentToolInputRunQueryMemoryStoreTool$Outbound,
+export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
+  QueryMemoryStoreTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunQueryMemoryStoreTool
+  QueryMemoryStoreTool
 > = z.object({
   type: z.literal("query_memory_store"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunQueryMemoryStoreToolToJSON(
-  agentToolInputRunQueryMemoryStoreTool: AgentToolInputRunQueryMemoryStoreTool,
+export function queryMemoryStoreToolToJSON(
+  queryMemoryStoreTool: QueryMemoryStoreTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunQueryMemoryStoreTool$outboundSchema.parse(
-      agentToolInputRunQueryMemoryStoreTool,
-    ),
+    QueryMemoryStoreTool$outboundSchema.parse(queryMemoryStoreTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunRetrieveAgentsTool$Outbound = {
+export type RetrieveAgentsTool$Outbound = {
   type: "retrieve_agents";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunRetrieveAgentsTool$outboundSchema: z.ZodType<
-  AgentToolInputRunRetrieveAgentsTool$Outbound,
+export const RetrieveAgentsTool$outboundSchema: z.ZodType<
+  RetrieveAgentsTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunRetrieveAgentsTool
+  RetrieveAgentsTool
 > = z.object({
   type: z.literal("retrieve_agents"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunRetrieveAgentsToolToJSON(
-  agentToolInputRunRetrieveAgentsTool: AgentToolInputRunRetrieveAgentsTool,
+export function retrieveAgentsToolToJSON(
+  retrieveAgentsTool: RetrieveAgentsTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunRetrieveAgentsTool$outboundSchema.parse(
-      agentToolInputRunRetrieveAgentsTool,
-    ),
+    RetrieveAgentsTool$outboundSchema.parse(retrieveAgentsTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunCallSubAgentTool$Outbound = {
+export type CallSubAgentTool$Outbound = {
   type: "call_sub_agent";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunCallSubAgentTool$outboundSchema: z.ZodType<
-  AgentToolInputRunCallSubAgentTool$Outbound,
+export const CallSubAgentTool$outboundSchema: z.ZodType<
+  CallSubAgentTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunCallSubAgentTool
+  CallSubAgentTool
 > = z.object({
   type: z.literal("call_sub_agent"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunCallSubAgentToolToJSON(
-  agentToolInputRunCallSubAgentTool: AgentToolInputRunCallSubAgentTool,
+export function callSubAgentToolToJSON(
+  callSubAgentTool: CallSubAgentTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunCallSubAgentTool$outboundSchema.parse(
-      agentToolInputRunCallSubAgentTool,
-    ),
+    CallSubAgentTool$outboundSchema.parse(callSubAgentTool),
   );
 }
 
 /** @internal */
-export type AgentToolInputRunWebScraperTool$Outbound = {
+export type WebScraperTool$Outbound = {
   type: "web_scraper";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunWebScraperTool$outboundSchema: z.ZodType<
-  AgentToolInputRunWebScraperTool$Outbound,
+export const WebScraperTool$outboundSchema: z.ZodType<
+  WebScraperTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunWebScraperTool
+  WebScraperTool
 > = z.object({
   type: z.literal("web_scraper"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunWebScraperToolToJSON(
-  agentToolInputRunWebScraperTool: AgentToolInputRunWebScraperTool,
-): string {
-  return JSON.stringify(
-    AgentToolInputRunWebScraperTool$outboundSchema.parse(
-      agentToolInputRunWebScraperTool,
-    ),
-  );
+export function webScraperToolToJSON(webScraperTool: WebScraperTool): string {
+  return JSON.stringify(WebScraperTool$outboundSchema.parse(webScraperTool));
 }
 
 /** @internal */
-export type AgentToolInputRunGoogleSearchTool$Outbound = {
+export type GoogleSearchTool$Outbound = {
   type: "google_search";
   requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const AgentToolInputRunGoogleSearchTool$outboundSchema: z.ZodType<
-  AgentToolInputRunGoogleSearchTool$Outbound,
+export const GoogleSearchTool$outboundSchema: z.ZodType<
+  GoogleSearchTool$Outbound,
   z.ZodTypeDef,
-  AgentToolInputRunGoogleSearchTool
+  GoogleSearchTool
 > = z.object({
   type: z.literal("google_search"),
   requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
 
-export function agentToolInputRunGoogleSearchToolToJSON(
-  agentToolInputRunGoogleSearchTool: AgentToolInputRunGoogleSearchTool,
+export function googleSearchToolToJSON(
+  googleSearchTool: GoogleSearchTool,
 ): string {
   return JSON.stringify(
-    AgentToolInputRunGoogleSearchTool$outboundSchema.parse(
-      agentToolInputRunGoogleSearchTool,
-    ),
+    GoogleSearchTool$outboundSchema.parse(googleSearchTool),
   );
 }
 
 /** @internal */
 export type AgentToolInputRun$Outbound =
-  | AgentToolInputRunGoogleSearchTool$Outbound
-  | AgentToolInputRunWebScraperTool$Outbound
-  | AgentToolInputRunCallSubAgentTool$Outbound
-  | AgentToolInputRunRetrieveAgentsTool$Outbound
-  | AgentToolInputRunQueryMemoryStoreTool$Outbound
-  | AgentToolInputRunWriteMemoryStoreTool$Outbound
-  | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
-  | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
-  | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-  | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-  | AgentToolInputRunCurrentDateTool$Outbound
+  | GoogleSearchTool$Outbound
+  | WebScraperTool$Outbound
+  | CallSubAgentTool$Outbound
+  | RetrieveAgentsTool$Outbound
+  | QueryMemoryStoreTool$Outbound
+  | WriteMemoryStoreTool$Outbound
+  | RetrieveMemoryStoresTool$Outbound
+  | DeleteMemoryDocumentTool$Outbound
+  | RetrieveKnowledgeBasesTool$Outbound
+  | QueryKnowledgeBaseTool$Outbound
+  | CurrentDateTool$Outbound
+  | CodeInterpreterTool$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
   | FunctionToolRun$Outbound
@@ -4909,17 +5012,18 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRun
 > = z.union([
-  z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunCallSubAgentTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunRetrieveAgentsTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunQueryMemoryStoreTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunWriteMemoryStoreTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
-  z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
+  z.lazy(() => GoogleSearchTool$outboundSchema),
+  z.lazy(() => WebScraperTool$outboundSchema),
+  z.lazy(() => CallSubAgentTool$outboundSchema),
+  z.lazy(() => RetrieveAgentsTool$outboundSchema),
+  z.lazy(() => QueryMemoryStoreTool$outboundSchema),
+  z.lazy(() => WriteMemoryStoreTool$outboundSchema),
+  z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
+  z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
+  z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
+  z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
+  z.lazy(() => CurrentDateTool$outboundSchema),
+  z.lazy(() => CodeInterpreterTool$outboundSchema),
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
   z.lazy(() => FunctionToolRun$outboundSchema),
@@ -5016,17 +5120,18 @@ export function runAgentGuardrailsToJSON(
 export type RunAgentSettings$Outbound = {
   tools?:
     | Array<
-      | AgentToolInputRunGoogleSearchTool$Outbound
-      | AgentToolInputRunWebScraperTool$Outbound
-      | AgentToolInputRunCallSubAgentTool$Outbound
-      | AgentToolInputRunRetrieveAgentsTool$Outbound
-      | AgentToolInputRunQueryMemoryStoreTool$Outbound
-      | AgentToolInputRunWriteMemoryStoreTool$Outbound
-      | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
-      | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
-      | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-      | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-      | AgentToolInputRunCurrentDateTool$Outbound
+      | GoogleSearchTool$Outbound
+      | WebScraperTool$Outbound
+      | CallSubAgentTool$Outbound
+      | RetrieveAgentsTool$Outbound
+      | QueryMemoryStoreTool$Outbound
+      | WriteMemoryStoreTool$Outbound
+      | RetrieveMemoryStoresTool$Outbound
+      | DeleteMemoryDocumentTool$Outbound
+      | RetrieveKnowledgeBasesTool$Outbound
+      | QueryKnowledgeBaseTool$Outbound
+      | CurrentDateTool$Outbound
+      | CodeInterpreterTool$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
       | FunctionToolRun$Outbound
@@ -5038,6 +5143,7 @@ export type RunAgentSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   max_cost: number;
+  chat_exposed?: boolean | undefined;
   evaluators?: Array<RunAgentEvaluators$Outbound> | undefined;
   guardrails?: Array<RunAgentGuardrails$Outbound> | undefined;
 };
@@ -5050,17 +5156,18 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => AgentToolInputRunGoogleSearchTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunWebScraperTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunCallSubAgentTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunRetrieveAgentsTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunQueryMemoryStoreTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunWriteMemoryStoreTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunRetrieveMemoryStoresTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunDeleteMemoryDocumentTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
-      z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
+      z.lazy(() => GoogleSearchTool$outboundSchema),
+      z.lazy(() => WebScraperTool$outboundSchema),
+      z.lazy(() => CallSubAgentTool$outboundSchema),
+      z.lazy(() => RetrieveAgentsTool$outboundSchema),
+      z.lazy(() => QueryMemoryStoreTool$outboundSchema),
+      z.lazy(() => WriteMemoryStoreTool$outboundSchema),
+      z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
+      z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
+      z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
+      z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
+      z.lazy(() => CurrentDateTool$outboundSchema),
+      z.lazy(() => CodeInterpreterTool$outboundSchema),
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),
       z.lazy(() => FunctionToolRun$outboundSchema),
@@ -5074,6 +5181,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
   maxIterations: z.number().int().default(100),
   maxExecutionTime: z.number().int().default(600),
   maxCost: z.number().default(0),
+  chatExposed: z.boolean().optional(),
   evaluators: z.array(z.lazy(() => RunAgentEvaluators$outboundSchema))
     .optional(),
   guardrails: z.array(z.lazy(() => RunAgentGuardrails$outboundSchema))
@@ -5084,6 +5192,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
     maxIterations: "max_iterations",
     maxExecutionTime: "max_execution_time",
     maxCost: "max_cost",
+    chatExposed: "chat_exposed",
   });
 });
 

@@ -60,6 +60,8 @@ export const Provider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;

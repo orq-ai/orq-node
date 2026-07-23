@@ -9,6 +9,54 @@ import { ClosedEnum } from "../../types/enums.js";
 /**
  * The type of evaluation
  */
+export const PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType =
+  ClosedEnum<typeof PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType>;
+
+export const PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource =
+  ClosedEnum<typeof PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource>;
+
+export type RequestBody4 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType;
+  /**
+   * The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.
+   */
+  humanReviewId?: string | undefined;
+  source?: PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource | undefined;
+  /**
+   * Optional free-text explanation of the value
+   */
+  explanation?: string | undefined;
+  /**
+   * Deprecated. The date and time the item was reviewed
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  reviewedAt?: Date | undefined;
+  type: "string_array";
+  values: Array<string>;
+  traceId: string;
+};
+
+/**
+ * The type of evaluation
+ */
 export const PostV2FeedbackEvaluationRequestBodyEvaluationType = {
   HumanReview: "human_review",
 } as const;
@@ -51,8 +99,8 @@ export type RequestBody3 = {
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   reviewedAt?: Date | undefined;
-  type: "string_array";
-  values: Array<string>;
+  type: "boolean";
+  value: boolean;
   traceId: string;
 };
 
@@ -155,7 +203,65 @@ export type PostV2FeedbackEvaluationRequestBody1 = {
 export type PostV2FeedbackEvaluationRequestBody =
   | PostV2FeedbackEvaluationRequestBody1
   | PostV2FeedbackEvaluationRequestBody2
-  | RequestBody3;
+  | RequestBody3
+  | RequestBody4;
+
+/** @internal */
+export const PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType
+  > = z.nativeEnum(PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType);
+
+/** @internal */
+export const PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource$outboundSchema:
+  z.ZodNativeEnum<
+    typeof PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource
+  > = z.nativeEnum(PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource);
+
+/** @internal */
+export type RequestBody4$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id?: string | undefined;
+  source: string;
+  explanation?: string | undefined;
+  reviewed_at: string;
+  type: "string_array";
+  values: Array<string>;
+  trace_id: string;
+};
+
+/** @internal */
+export const RequestBody4$outboundSchema: z.ZodType<
+  RequestBody4$Outbound,
+  z.ZodTypeDef,
+  RequestBody4
+> = z.object({
+  id: z.string(),
+  evaluationType:
+    PostV2FeedbackEvaluationRequestBodyFeedbackEvaluationType$outboundSchema,
+  humanReviewId: z.string().optional(),
+  source:
+    PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource$outboundSchema
+      .default("orq"),
+  explanation: z.string().optional(),
+  reviewedAt: z.date().default(() => new Date("2026-07-23T11:48:52.324Z"))
+    .transform(v => v.toISOString()),
+  type: z.literal("string_array"),
+  values: z.array(z.string()),
+  traceId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedAt: "reviewed_at",
+    traceId: "trace_id",
+  });
+});
+
+export function requestBody4ToJSON(requestBody4: RequestBody4): string {
+  return JSON.stringify(RequestBody4$outboundSchema.parse(requestBody4));
+}
 
 /** @internal */
 export const PostV2FeedbackEvaluationRequestBodyEvaluationType$outboundSchema:
@@ -175,8 +281,8 @@ export type RequestBody3$Outbound = {
   source: string;
   explanation?: string | undefined;
   reviewed_at: string;
-  type: "string_array";
-  values: Array<string>;
+  type: "boolean";
+  value: boolean;
   trace_id: string;
 };
 
@@ -193,10 +299,10 @@ export const RequestBody3$outboundSchema: z.ZodType<
   source: PostV2FeedbackEvaluationRequestBodyFeedbackSource$outboundSchema
     .default("orq"),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-07-16T21:19:37.867Z"))
+  reviewedAt: z.date().default(() => new Date("2026-07-23T11:48:52.323Z"))
     .transform(v => v.toISOString()),
-  type: z.literal("string_array"),
-  values: z.array(z.string()),
+  type: z.literal("boolean"),
+  value: z.boolean(),
   traceId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -247,7 +353,7 @@ export const PostV2FeedbackEvaluationRequestBody2$outboundSchema: z.ZodType<
     "orq",
   ),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-07-16T21:19:37.866Z"))
+  reviewedAt: z.date().default(() => new Date("2026-07-23T11:48:52.323Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -305,7 +411,7 @@ export const PostV2FeedbackEvaluationRequestBody1$outboundSchema: z.ZodType<
   humanReviewId: z.string().optional(),
   source: RequestBodySource$outboundSchema.default("orq"),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-07-16T21:19:37.865Z"))
+  reviewedAt: z.date().default(() => new Date("2026-07-23T11:48:52.322Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -333,7 +439,8 @@ export function postV2FeedbackEvaluationRequestBody1ToJSON(
 export type PostV2FeedbackEvaluationRequestBody$Outbound =
   | PostV2FeedbackEvaluationRequestBody1$Outbound
   | PostV2FeedbackEvaluationRequestBody2$Outbound
-  | RequestBody3$Outbound;
+  | RequestBody3$Outbound
+  | RequestBody4$Outbound;
 
 /** @internal */
 export const PostV2FeedbackEvaluationRequestBody$outboundSchema: z.ZodType<
@@ -344,6 +451,7 @@ export const PostV2FeedbackEvaluationRequestBody$outboundSchema: z.ZodType<
   z.lazy(() => PostV2FeedbackEvaluationRequestBody1$outboundSchema),
   z.lazy(() => PostV2FeedbackEvaluationRequestBody2$outboundSchema),
   z.lazy(() => RequestBody3$outboundSchema),
+  z.lazy(() => RequestBody4$outboundSchema),
 ]);
 
 export function postV2FeedbackEvaluationRequestBodyToJSON(

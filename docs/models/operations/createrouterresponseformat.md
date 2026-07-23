@@ -17,6 +17,10 @@ const value: operations.PlainText = {
 
 ```typescript
 const value: operations.FormatJSONSchema = {
+  name: "<value>",
+  schema: {
+    "key": "<value>",
+  },
   type: "json_schema",
 };
 ```

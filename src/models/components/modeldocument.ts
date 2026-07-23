@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { Config, Config$inboundSchema } from "./config.js";
 import {
   ModelConfigurationResponse,
   ModelConfigurationResponse$inboundSchema,
@@ -44,6 +45,7 @@ export type ModelDocument = {
   pricingUrl: string | null;
   provider: string;
   refId: string;
+  sharing?: Config | undefined;
   updated: Date;
 };
 
@@ -79,6 +81,7 @@ export const ModelDocument$inboundSchema: z.ZodType<
   pricing_url: z.nullable(z.string()),
   provider: z.string(),
   refId: z.string(),
+  sharing: Config$inboundSchema.optional(),
   updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

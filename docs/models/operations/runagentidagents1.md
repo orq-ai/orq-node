@@ -13,5 +13,5 @@ let value: RunAgentIdAgents1 = "orq_harmful_moderation";
 ## Values
 
 ```typescript
-"orq_pii_detection" | "orq_sexual_moderation" | "orq_harmful_moderation"
+"orq_pii_detection" | "orq_secret_detection" | "orq_sexual_moderation" | "orq_harmful_moderation"
 ```

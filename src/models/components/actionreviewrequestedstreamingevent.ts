@@ -38,6 +38,10 @@ export type Tool = {
    * Optional tool description
    */
   description?: string | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
   requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
@@ -45,9 +49,9 @@ export type Tool = {
   toolId?: string | undefined;
   conditions?: Array<Conditions> | undefined;
   /**
-   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
    */
-  timeout: number;
+  timeout?: number | undefined;
 };
 
 export type ActionReviewRequestedStreamingEventData = {
@@ -101,10 +105,11 @@ export const Tool$inboundSchema: z.ZodType<Tool, z.ZodTypeDef, unknown> = z
     action_type: z.string(),
     display_name: z.string().optional(),
     description: z.string().optional(),
+    configuration: z.record(z.any()).optional(),
     requires_approval: z.boolean().default(false),
     tool_id: z.string().optional(),
     conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
-    timeout: z.number().default(120),
+    timeout: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "action_type": "actionType",

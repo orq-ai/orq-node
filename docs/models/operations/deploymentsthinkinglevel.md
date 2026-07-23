@@ -13,5 +13,5 @@ let value: DeploymentsThinkingLevel = "medium";
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"minimal" | "low" | "medium" | "high"
 ```

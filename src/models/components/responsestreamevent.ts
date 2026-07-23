@@ -43,6 +43,14 @@ import {
   ResponseCreatedStreamEvent$inboundSchema,
 } from "./responsecreatedstreamevent.js";
 import {
+  ResponseCustomToolCallInputDeltaStreamEvent,
+  ResponseCustomToolCallInputDeltaStreamEvent$inboundSchema,
+} from "./responsecustomtoolcallinputdeltastreamevent.js";
+import {
+  ResponseCustomToolCallInputDoneStreamEvent,
+  ResponseCustomToolCallInputDoneStreamEvent$inboundSchema,
+} from "./responsecustomtoolcallinputdonestreamevent.js";
+import {
   ResponseErrorStreamEvent,
   ResponseErrorStreamEvent$inboundSchema,
 } from "./responseerrorstreamevent.js";
@@ -114,6 +122,18 @@ import {
   ResponseMCPCallInProgressStreamEvent,
   ResponseMCPCallInProgressStreamEvent$inboundSchema,
 } from "./responsemcpcallinprogressstreamevent.js";
+import {
+  ResponseMCPListToolsCompletedStreamEvent,
+  ResponseMCPListToolsCompletedStreamEvent$inboundSchema,
+} from "./responsemcplisttoolscompletedstreamevent.js";
+import {
+  ResponseMCPListToolsFailedStreamEvent,
+  ResponseMCPListToolsFailedStreamEvent$inboundSchema,
+} from "./responsemcplisttoolsfailedstreamevent.js";
+import {
+  ResponseMCPListToolsInProgressStreamEvent,
+  ResponseMCPListToolsInProgressStreamEvent$inboundSchema,
+} from "./responsemcplisttoolsinprogressstreamevent.js";
 import {
   ResponseOutputItemAddedStreamEvent,
   ResponseOutputItemAddedStreamEvent$inboundSchema,
@@ -205,6 +225,8 @@ export type ResponseStreamEvent =
   | ResponseContentPartAddedStreamEvent
   | ResponseContentPartDoneStreamEvent
   | ResponseCreatedStreamEvent
+  | ResponseCustomToolCallInputDeltaStreamEvent
+  | ResponseCustomToolCallInputDoneStreamEvent
   | ResponseFailedStreamEvent
   | ResponseFileSearchCallCompletedStreamEvent
   | ResponseFileSearchCallInProgressStreamEvent
@@ -222,6 +244,9 @@ export type ResponseStreamEvent =
   | ResponseMCPCallInProgressStreamEvent
   | ResponseMCPCallArgumentsDeltaStreamEvent
   | ResponseMCPCallArgumentsDoneStreamEvent
+  | ResponseMCPListToolsCompletedStreamEvent
+  | ResponseMCPListToolsFailedStreamEvent
+  | ResponseMCPListToolsInProgressStreamEvent
   | ResponseOutputItemAddedStreamEvent
   | ResponseOutputItemDoneStreamEvent
   | ResponseOutputTextAnnotationAddedStreamEvent
@@ -258,6 +283,8 @@ export const ResponseStreamEvent$inboundSchema: z.ZodType<
   ResponseContentPartAddedStreamEvent$inboundSchema,
   ResponseContentPartDoneStreamEvent$inboundSchema,
   ResponseCreatedStreamEvent$inboundSchema,
+  ResponseCustomToolCallInputDeltaStreamEvent$inboundSchema,
+  ResponseCustomToolCallInputDoneStreamEvent$inboundSchema,
   ResponseFailedStreamEvent$inboundSchema,
   ResponseFileSearchCallCompletedStreamEvent$inboundSchema,
   ResponseFileSearchCallInProgressStreamEvent$inboundSchema,
@@ -275,6 +302,9 @@ export const ResponseStreamEvent$inboundSchema: z.ZodType<
   ResponseMCPCallInProgressStreamEvent$inboundSchema,
   ResponseMCPCallArgumentsDeltaStreamEvent$inboundSchema,
   ResponseMCPCallArgumentsDoneStreamEvent$inboundSchema,
+  ResponseMCPListToolsCompletedStreamEvent$inboundSchema,
+  ResponseMCPListToolsFailedStreamEvent$inboundSchema,
+  ResponseMCPListToolsInProgressStreamEvent$inboundSchema,
   ResponseOutputItemAddedStreamEvent$inboundSchema,
   ResponseOutputItemDoneStreamEvent$inboundSchema,
   ResponseOutputTextAnnotationAddedStreamEvent$inboundSchema,

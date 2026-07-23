@@ -125,7 +125,7 @@ export type RetrievalSettings = {
     | undefined;
 };
 
-export type RequestBody1 = {
+export type CreateKnowledgeRequestBody1 = {
   type?: CreateKnowledgeRequestBodyType | undefined;
   key: string;
   description?: string | undefined;
@@ -149,7 +149,9 @@ export type RequestBody1 = {
   path: string;
 };
 
-export type CreateKnowledgeRequestBody = RequestBody1 | RequestBody2;
+export type CreateKnowledgeRequestBody =
+  | CreateKnowledgeRequestBody1
+  | RequestBody2;
 
 export const CreateKnowledgeResponseBodyKnowledgeType = {
   External: "external",
@@ -579,7 +581,7 @@ export function retrievalSettingsToJSON(
 }
 
 /** @internal */
-export type RequestBody1$Outbound = {
+export type CreateKnowledgeRequestBody1$Outbound = {
   type: string;
   key: string;
   description?: string | undefined;
@@ -589,10 +591,10 @@ export type RequestBody1$Outbound = {
 };
 
 /** @internal */
-export const RequestBody1$outboundSchema: z.ZodType<
-  RequestBody1$Outbound,
+export const CreateKnowledgeRequestBody1$outboundSchema: z.ZodType<
+  CreateKnowledgeRequestBody1$Outbound,
   z.ZodTypeDef,
-  RequestBody1
+  CreateKnowledgeRequestBody1
 > = z.object({
   type: CreateKnowledgeRequestBodyType$outboundSchema.default("internal"),
   key: z.string(),
@@ -607,13 +609,19 @@ export const RequestBody1$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBody1ToJSON(requestBody1: RequestBody1): string {
-  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
+export function createKnowledgeRequestBody1ToJSON(
+  createKnowledgeRequestBody1: CreateKnowledgeRequestBody1,
+): string {
+  return JSON.stringify(
+    CreateKnowledgeRequestBody1$outboundSchema.parse(
+      createKnowledgeRequestBody1,
+    ),
+  );
 }
 
 /** @internal */
 export type CreateKnowledgeRequestBody$Outbound =
-  | RequestBody1$Outbound
+  | CreateKnowledgeRequestBody1$Outbound
   | RequestBody2$Outbound;
 
 /** @internal */
@@ -622,7 +630,7 @@ export const CreateKnowledgeRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateKnowledgeRequestBody
 > = z.union([
-  z.lazy(() => RequestBody1$outboundSchema),
+  z.lazy(() => CreateKnowledgeRequestBody1$outboundSchema),
   z.lazy(() => RequestBody2$outboundSchema),
 ]);
 

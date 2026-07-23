@@ -347,12 +347,47 @@ export const InputRole = {
 export type InputRole = ClosedEnum<typeof InputRole>;
 
 /**
+ * The status of a model-generated input item.
+ */
+export const InputStatus = {
+  InProgress: "in_progress",
+  Completed: "completed",
+  Incomplete: "incomplete",
+} as const;
+/**
+ * The status of a model-generated input item.
+ */
+export type InputStatus = ClosedEnum<typeof InputStatus>;
+
+/**
  * The type of item.
  */
 export const InputType = {
   Message: "message",
+  FunctionCall: "function_call",
   FunctionCallOutput: "function_call_output",
   ItemReference: "item_reference",
+  Reasoning: "reasoning",
+  CustomToolCall: "custom_tool_call",
+  CustomToolCallOutput: "custom_tool_call_output",
+  ComputerCall: "computer_call",
+  ComputerCallOutput: "computer_call_output",
+  LocalShellCall: "local_shell_call",
+  LocalShellCallOutput: "local_shell_call_output",
+  ShellCall: "shell_call",
+  ShellCallOutput: "shell_call_output",
+  ApplyPatchCall: "apply_patch_call",
+  ApplyPatchCallOutput: "apply_patch_call_output",
+  ToolSearchCall: "tool_search_call",
+  ToolSearchOutput: "tool_search_output",
+  AdditionalTools: "additional_tools",
+  Compaction: "compaction",
+  Program: "program",
+  ProgramOutput: "program_output",
+  McpCall: "mcp_call",
+  McpListTools: "mcp_list_tools",
+  McpApprovalRequest: "mcp_approval_request",
+  McpApprovalResponse: "mcp_approval_response",
 } as const;
 /**
  * The type of item.
@@ -360,11 +395,15 @@ export const InputType = {
 export type InputType = ClosedEnum<typeof InputType>;
 
 /**
- * An input item. The "type" field determines the item kind: "message", "function_call_output", "item_reference", etc.
+ * An input item. The "type" field determines the item kind: "message", "function_call", "function_call_output", "item_reference", etc.
  */
 export type CreateRouterResponseInput2 = {
   /**
-   * The ID of the function call being responded to (for function_call_output type).
+   * The function arguments as a JSON string (for function_call items).
+   */
+  arguments?: string | undefined;
+  /**
+   * The function call identifier (for function_call and function_call_output items).
    */
   callId?: string | undefined;
   /**
@@ -372,9 +411,13 @@ export type CreateRouterResponseInput2 = {
    */
   content?: string | Array<TwoText | Image | TwoFile> | undefined;
   /**
-   * The ID of the item (for item_reference type).
+   * The ID of the item. For item_reference items, this identifies the referenced item.
    */
   id?: string | undefined;
+  /**
+   * The name of the function that was called (for function_call items).
+   */
+  name?: string | undefined;
   /**
    * The output of the function call (for function_call_output type).
    */
@@ -383,6 +426,10 @@ export type CreateRouterResponseInput2 = {
    * The role of the message sender (for message items).
    */
   role?: InputRole | undefined;
+  /**
+   * The status of a model-generated input item.
+   */
+  status?: InputStatus | undefined;
   /**
    * The type of item.
    */
@@ -409,19 +456,26 @@ export const TemplateEngine = {
  */
 export type TemplateEngine = ClosedEnum<typeof TemplateEngine>;
 
-/**
- * The JSON Schema the output must conform to.
- */
-export type FormatSchema = {};
-
 export type FormatJSONSchema = {
-  description?: string | undefined;
-  name?: string | undefined;
   /**
-   * The JSON Schema the output must conform to.
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
-  schema?: FormatSchema | undefined;
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema: { [k: string]: any };
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field.
+   */
   strict?: boolean | undefined;
+  /**
+   * The type of response format being defined. Always `json_schema`.
+   */
   type: "json_schema";
 };
 
@@ -514,7 +568,7 @@ export type AllowedTools = {
 /**
  * An MCP (Model Context Protocol) server tool. Provide server_url for inline mode, or key to reference a pre-configured MCP server.
  */
-export type ToolsMCPTool = {
+export type MCPTool = {
   /**
    * Filter which tools from the MCP server are exposed.
    */
@@ -538,6 +592,43 @@ export type ToolsMCPTool = {
   type: "mcp";
 };
 
+export type Files = {
+  /**
+   * The workspace file ID.
+   */
+  fileId: string;
+  /**
+   * The file name exposed under /workspace.
+   */
+  name: string;
+};
+
+/**
+ * Network mode. Defaults to disabled.
+ */
+export const ToolsMode = {
+  Disabled: "disabled",
+  Allowlist: "allowlist",
+} as const;
+/**
+ * Network mode. Defaults to disabled.
+ */
+export type ToolsMode = ClosedEnum<typeof ToolsMode>;
+
+/**
+ * Network access intent for orq:code_interpreter. Stored and validated today; runtime enforcement by the sandbox egress layer is rolling out and until then sandbox executions retain default public internet egress.
+ */
+export type Network = {
+  /**
+   * Allowed network hostnames or IPv4 addresses when mode is allowlist. Maximum 50 entries.
+   */
+  allowlist?: Array<string> | undefined;
+  /**
+   * Network mode. Defaults to disabled.
+   */
+  mode?: ToolsMode | undefined;
+};
+
 /**
  * The orq.ai tool type.
  */
@@ -545,6 +636,7 @@ export const CreateRouterResponseToolsResponsesType = {
   OrqCurrentDate: "orq:current_date",
   OrqGoogleSearch: "orq:google_search",
   OrqWebScraper: "orq:web_scraper",
+  OrqCodeInterpreter: "orq:code_interpreter",
   OrqMcp: "orq:mcp",
   OrqHttp: "orq:http",
   OrqFunction: "orq:function",
@@ -560,6 +652,14 @@ export type CreateRouterResponseToolsResponsesType = ClosedEnum<
  * An orq.ai platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'.
  */
 export type OrqAiTool = {
+  /**
+   * Files to stage in /workspace for orq:code_interpreter. Maximum 10 files.
+   */
+  files?: Array<Files> | undefined;
+  /**
+   * Network access intent for orq:code_interpreter. Stored and validated today; runtime enforcement by the sandbox egress layer is rolling out and until then sandbox executions retain default public internet egress.
+   */
+  network?: Network | undefined;
   /**
    * The tool ID (for orq:mcp, orq:http, orq:function).
    */
@@ -657,10 +757,11 @@ export type CreateRouterResponseTools =
   | (OrqAiTool & { type: "orq:current_date" })
   | (OrqAiTool & { type: "orq:google_search" })
   | (OrqAiTool & { type: "orq:web_scraper" })
+  | (OrqAiTool & { type: "orq:code_interpreter" })
   | (OrqAiTool & { type: "orq:mcp" })
   | (OrqAiTool & { type: "orq:http" })
   | (OrqAiTool & { type: "orq:function" })
-  | ToolsMCPTool;
+  | MCPTool;
 
 export type CreateRouterResponseRequestBody = {
   /**
@@ -768,10 +869,11 @@ export type CreateRouterResponseRequestBody = {
       | (OrqAiTool & { type: "orq:current_date" })
       | (OrqAiTool & { type: "orq:google_search" })
       | (OrqAiTool & { type: "orq:web_scraper" })
+      | (OrqAiTool & { type: "orq:code_interpreter" })
       | (OrqAiTool & { type: "orq:mcp" })
       | (OrqAiTool & { type: "orq:http" })
       | (OrqAiTool & { type: "orq:function" })
-      | ToolsMCPTool
+      | MCPTool
     >
     | undefined;
   /**
@@ -1206,19 +1308,26 @@ export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
   .nativeEnum(InputRole);
 
 /** @internal */
+export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
+  .nativeEnum(InputStatus);
+
+/** @internal */
 export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
   .nativeEnum(InputType);
 
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
+  arguments?: string | undefined;
   call_id?: string | undefined;
   content?:
     | string
     | Array<TwoText$Outbound | Image$Outbound | TwoFile$Outbound>
     | undefined;
   id?: string | undefined;
+  name?: string | undefined;
   output?: string | undefined;
   role?: string | undefined;
+  status?: string | undefined;
   type?: string | undefined;
 };
 
@@ -1228,6 +1337,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseInput2
 > = z.object({
+  arguments: z.string().optional(),
   callId: z.string().optional(),
   content: z.union([
     z.string(),
@@ -1238,8 +1348,10 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
     ])),
   ]).optional(),
   id: z.string().optional(),
+  name: z.string().optional(),
   output: z.string().optional(),
   role: InputRole$outboundSchema.optional(),
+  status: InputStatus$outboundSchema.optional(),
   type: InputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1284,24 +1396,10 @@ export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(TemplateEngine);
 
 /** @internal */
-export type FormatSchema$Outbound = {};
-
-/** @internal */
-export const FormatSchema$outboundSchema: z.ZodType<
-  FormatSchema$Outbound,
-  z.ZodTypeDef,
-  FormatSchema
-> = z.object({});
-
-export function formatSchemaToJSON(formatSchema: FormatSchema): string {
-  return JSON.stringify(FormatSchema$outboundSchema.parse(formatSchema));
-}
-
-/** @internal */
 export type FormatJSONSchema$Outbound = {
   description?: string | undefined;
-  name?: string | undefined;
-  schema?: FormatSchema$Outbound | undefined;
+  name: string;
+  schema: { [k: string]: any };
   strict?: boolean | undefined;
   type: "json_schema";
 };
@@ -1313,8 +1411,8 @@ export const FormatJSONSchema$outboundSchema: z.ZodType<
   FormatJSONSchema
 > = z.object({
   description: z.string().optional(),
-  name: z.string().optional(),
-  schema: z.lazy(() => FormatSchema$outboundSchema).optional(),
+  name: z.string(),
+  schema: z.record(z.any()),
   strict: z.boolean().optional(),
   type: z.literal("json_schema"),
 });
@@ -1483,7 +1581,7 @@ export function allowedToolsToJSON(allowedTools: AllowedTools): string {
 }
 
 /** @internal */
-export type ToolsMCPTool$Outbound = {
+export type MCPTool$Outbound = {
   allowed_tools?: AllowedTools$Outbound | undefined;
   headers?: { [k: string]: string } | undefined;
   key?: string | undefined;
@@ -1493,10 +1591,10 @@ export type ToolsMCPTool$Outbound = {
 };
 
 /** @internal */
-export const ToolsMCPTool$outboundSchema: z.ZodType<
-  ToolsMCPTool$Outbound,
+export const MCPTool$outboundSchema: z.ZodType<
+  MCPTool$Outbound,
   z.ZodTypeDef,
-  ToolsMCPTool
+  MCPTool
 > = z.object({
   allowedTools: z.lazy(() => AllowedTools$outboundSchema).optional(),
   headers: z.record(z.string()).optional(),
@@ -1512,8 +1610,56 @@ export const ToolsMCPTool$outboundSchema: z.ZodType<
   });
 });
 
-export function toolsMCPToolToJSON(toolsMCPTool: ToolsMCPTool): string {
-  return JSON.stringify(ToolsMCPTool$outboundSchema.parse(toolsMCPTool));
+export function mcpToolToJSON(mcpTool: MCPTool): string {
+  return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));
+}
+
+/** @internal */
+export type Files$Outbound = {
+  file_id: string;
+  name: string;
+};
+
+/** @internal */
+export const Files$outboundSchema: z.ZodType<
+  Files$Outbound,
+  z.ZodTypeDef,
+  Files
+> = z.object({
+  fileId: z.string(),
+  name: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+export function filesToJSON(files: Files): string {
+  return JSON.stringify(Files$outboundSchema.parse(files));
+}
+
+/** @internal */
+export const ToolsMode$outboundSchema: z.ZodNativeEnum<typeof ToolsMode> = z
+  .nativeEnum(ToolsMode);
+
+/** @internal */
+export type Network$Outbound = {
+  allowlist?: Array<string> | undefined;
+  mode: string;
+};
+
+/** @internal */
+export const Network$outboundSchema: z.ZodType<
+  Network$Outbound,
+  z.ZodTypeDef,
+  Network
+> = z.object({
+  allowlist: z.array(z.string()).optional(),
+  mode: ToolsMode$outboundSchema.default("disabled"),
+});
+
+export function networkToJSON(network: Network): string {
+  return JSON.stringify(Network$outboundSchema.parse(network));
 }
 
 /** @internal */
@@ -1524,6 +1670,8 @@ export const CreateRouterResponseToolsResponsesType$outboundSchema:
 
 /** @internal */
 export type OrqAiTool$Outbound = {
+  files?: Array<Files$Outbound> | undefined;
+  network?: Network$Outbound | undefined;
   tool_id?: string | undefined;
   type: string;
 };
@@ -1534,6 +1682,8 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OrqAiTool
 > = z.object({
+  files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
+  network: z.lazy(() => Network$outboundSchema).optional(),
   toolId: z.string().optional(),
   type: CreateRouterResponseToolsResponsesType$outboundSchema,
 }).transform((v) => {
@@ -1616,10 +1766,11 @@ export type CreateRouterResponseTools$Outbound =
   | (OrqAiTool$Outbound & { type: "orq:current_date" })
   | (OrqAiTool$Outbound & { type: "orq:google_search" })
   | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
+  | (OrqAiTool$Outbound & { type: "orq:code_interpreter" })
   | (OrqAiTool$Outbound & { type: "orq:mcp" })
   | (OrqAiTool$Outbound & { type: "orq:http" })
   | (OrqAiTool$Outbound & { type: "orq:function" })
-  | ToolsMCPTool$Outbound;
+  | MCPTool$Outbound;
 
 /** @internal */
 export const CreateRouterResponseTools$outboundSchema: z.ZodType<
@@ -1638,6 +1789,9 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
     z.object({ type: z.literal("orq:web_scraper") }),
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:code_interpreter") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:mcp") }),
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
@@ -1646,7 +1800,7 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:function") }),
   ),
-  z.lazy(() => ToolsMCPTool$outboundSchema),
+  z.lazy(() => MCPTool$outboundSchema),
 ]);
 
 export function createRouterResponseToolsToJSON(
@@ -1698,10 +1852,11 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | (OrqAiTool$Outbound & { type: "orq:current_date" })
       | (OrqAiTool$Outbound & { type: "orq:google_search" })
       | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
+      | (OrqAiTool$Outbound & { type: "orq:code_interpreter" })
       | (OrqAiTool$Outbound & { type: "orq:mcp" })
       | (OrqAiTool$Outbound & { type: "orq:http" })
       | (OrqAiTool$Outbound & { type: "orq:function" })
-      | ToolsMCPTool$Outbound
+      | MCPTool$Outbound
     >
     | undefined;
   top_logprobs?: number | undefined;
@@ -1769,6 +1924,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       ).and(z.object({ type: z.literal("orq:web_scraper") })),
       z.lazy(() =>
         OrqAiTool$outboundSchema
+      ).and(z.object({ type: z.literal("orq:code_interpreter") })),
+      z.lazy(() =>
+        OrqAiTool$outboundSchema
       ).and(z.object({ type: z.literal("orq:mcp") })),
       z.lazy(() =>
         OrqAiTool$outboundSchema
@@ -1776,7 +1934,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       z.lazy(() =>
         OrqAiTool$outboundSchema
       ).and(z.object({ type: z.literal("orq:function") })),
-      z.lazy(() => ToolsMCPTool$outboundSchema),
+      z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
   topLogprobs: z.number().int().optional(),

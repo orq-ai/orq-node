@@ -340,6 +340,7 @@ export type DeploymentsVerbosity = ClosedEnum<typeof DeploymentsVerbosity>;
  * The level of thinking to use for the model. Only supported by `Google AI`
  */
 export const DeploymentsThinkingLevel = {
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -488,6 +489,8 @@ export const DeploymentsProvider = {
   Wafer: "wafer",
   Poolside: "poolside",
   Tencent: "tencent",
+  Nebius: "nebius",
+  Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
 } as const;

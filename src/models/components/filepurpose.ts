@@ -10,6 +10,7 @@ export const FilePurpose = {
   FilePurposeRetrieval: "FILE_PURPOSE_RETRIEVAL",
   FilePurposeKnowledgeDatasource: "FILE_PURPOSE_KNOWLEDGE_DATASOURCE",
   FilePurposeBatch: "FILE_PURPOSE_BATCH",
+  FilePurposeCodeInterpreter: "FILE_PURPOSE_CODE_INTERPRETER",
 } as const;
 export type FilePurpose = ClosedEnum<typeof FilePurpose>;
 

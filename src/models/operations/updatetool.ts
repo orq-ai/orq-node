@@ -307,6 +307,10 @@ export type UpdateToolRequestBodyBlueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -938,6 +942,10 @@ export type UpdateToolResponseBodyBlueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -1472,7 +1480,7 @@ export const RequestBodyTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RequestBodyTools
 > = z.object({
-  id: z.string().default("01KXPCS7YCBR5G69D1N4VCR8VV"),
+  id: z.string().default("01KY7CX61XGQQKHK7ZCS855C80"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolRequestBodyToolsSchema$outboundSchema),
@@ -1637,6 +1645,7 @@ export type UpdateToolRequestBodyBlueprint$Outbound = {
   method: string;
   headers?: { [k: string]: UpdateToolHeaders2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -1651,6 +1660,7 @@ export const UpdateToolRequestBodyBlueprint$outboundSchema: z.ZodType<
     z.union([z.lazy(() => UpdateToolHeaders2$outboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function updateToolRequestBodyBlueprintToJSON(
@@ -2193,7 +2203,7 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7Y5RX273834JCJG6MTJ"),
+  _id: z.string().default("tool_01KY7CX61N2DZ9Z2AMCBGWZCWT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2296,7 +2306,7 @@ export const UpdateToolResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KXPCS7Y4DP0N5DGMMWTRSEK7"),
+  id: z.string().default("01KY7CX61MSFNR909T891EN4AY"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => UpdateToolResponseBodyToolsSchema$inboundSchema),
@@ -2354,7 +2364,7 @@ export const UpdateToolResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7Y31C8XRZF7WC3VA6TS"),
+  _id: z.string().default("tool_01KY7CX61KM8PBB9GSJ66WX6KN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2451,6 +2461,7 @@ export const UpdateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
     z.union([z.lazy(() => UpdateToolHeadersTools2$inboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function updateToolResponseBodyBlueprintFromJSON(
@@ -2543,7 +2554,7 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7Y0HTCY9Y350DQNBV36"),
+  _id: z.string().default("tool_01KY7CX61GYBSRNZTXMWH16FFQ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2638,7 +2649,7 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7XYSP3T5EWWARQKYBYR"),
+  _id: z.string().default("tool_01KY7CX61E8SEHWVKS2CYFXA1G"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2741,7 +2752,7 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7XWHAV88GPE6V7SXNXD"),
+  _id: z.string().default("tool_01KY7CX61CH3588EBHFH951X6H"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

@@ -34,12 +34,20 @@ const value: operations.ListDatasetDatapointsEvaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
+  type: "boolean",
+  value: false,
+};
+```
+
+### `operations.ListDatasetDatapointsEvaluations4`
+
+```typescript
+const value: operations.ListDatasetDatapointsEvaluations4 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
   type: "string_array",
-  values: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
-  ],
+  values: [],
 };
 ```
 

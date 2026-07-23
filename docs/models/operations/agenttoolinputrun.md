@@ -5,91 +5,99 @@ Tool configuration for agent run operations. Built-in tools only require a type 
 
 ## Supported Types
 
-### `operations.AgentToolInputRunGoogleSearchTool`
+### `operations.GoogleSearchTool`
 
 ```typescript
-const value: operations.AgentToolInputRunGoogleSearchTool = {
+const value: operations.GoogleSearchTool = {
   type: "google_search",
 };
 ```
 
-### `operations.AgentToolInputRunWebScraperTool`
+### `operations.WebScraperTool`
 
 ```typescript
-const value: operations.AgentToolInputRunWebScraperTool = {
+const value: operations.WebScraperTool = {
   type: "web_scraper",
 };
 ```
 
-### `operations.AgentToolInputRunCallSubAgentTool`
+### `operations.CallSubAgentTool`
 
 ```typescript
-const value: operations.AgentToolInputRunCallSubAgentTool = {
+const value: operations.CallSubAgentTool = {
   type: "call_sub_agent",
 };
 ```
 
-### `operations.AgentToolInputRunRetrieveAgentsTool`
+### `operations.RetrieveAgentsTool`
 
 ```typescript
-const value: operations.AgentToolInputRunRetrieveAgentsTool = {
+const value: operations.RetrieveAgentsTool = {
   type: "retrieve_agents",
 };
 ```
 
-### `operations.AgentToolInputRunQueryMemoryStoreTool`
+### `operations.QueryMemoryStoreTool`
 
 ```typescript
-const value: operations.AgentToolInputRunQueryMemoryStoreTool = {
+const value: operations.QueryMemoryStoreTool = {
   type: "query_memory_store",
 };
 ```
 
-### `operations.AgentToolInputRunWriteMemoryStoreTool`
+### `operations.WriteMemoryStoreTool`
 
 ```typescript
-const value: operations.AgentToolInputRunWriteMemoryStoreTool = {
+const value: operations.WriteMemoryStoreTool = {
   type: "write_memory_store",
 };
 ```
 
-### `operations.AgentToolInputRunRetrieveMemoryStoresTool`
+### `operations.RetrieveMemoryStoresTool`
 
 ```typescript
-const value: operations.AgentToolInputRunRetrieveMemoryStoresTool = {
+const value: operations.RetrieveMemoryStoresTool = {
   type: "retrieve_memory_stores",
 };
 ```
 
-### `operations.AgentToolInputRunDeleteMemoryDocumentTool`
+### `operations.DeleteMemoryDocumentTool`
 
 ```typescript
-const value: operations.AgentToolInputRunDeleteMemoryDocumentTool = {
+const value: operations.DeleteMemoryDocumentTool = {
   type: "delete_memory_document",
 };
 ```
 
-### `operations.AgentToolInputRunRetrieveKnowledgeBasesTool`
+### `operations.RetrieveKnowledgeBasesTool`
 
 ```typescript
-const value: operations.AgentToolInputRunRetrieveKnowledgeBasesTool = {
+const value: operations.RetrieveKnowledgeBasesTool = {
   type: "retrieve_knowledge_bases",
 };
 ```
 
-### `operations.AgentToolInputRunQueryKnowledgeBaseTool`
+### `operations.QueryKnowledgeBaseTool`
 
 ```typescript
-const value: operations.AgentToolInputRunQueryKnowledgeBaseTool = {
+const value: operations.QueryKnowledgeBaseTool = {
   type: "query_knowledge_base",
 };
 ```
 
-### `operations.AgentToolInputRunCurrentDateTool`
+### `operations.CurrentDateTool`
 
 ```typescript
-const value: operations.AgentToolInputRunCurrentDateTool = {
+const value: operations.CurrentDateTool = {
   type: "current_date",
+};
+```
+
+### `operations.CodeInterpreterTool`
+
+```typescript
+const value: operations.CodeInterpreterTool = {
+  type: "code_interpreter",
 };
 ```
 

@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.UpdateAgentIdAgentsResponse2001 =
-  "orq_harmful_moderation";
+  "orq_sexual_moderation";
 ```
 
 ### `string`

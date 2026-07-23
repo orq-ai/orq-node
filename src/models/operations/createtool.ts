@@ -80,7 +80,7 @@ export type RequestBodyCodeTool = {
 /**
  * Executes code snippets in a sandboxed environment, currently supporting Python.
  */
-export type RequestBodyCodeExecutionTool = {
+export type CodeExecutionTool = {
   /**
    * Entity storage path.
    *
@@ -253,6 +253,10 @@ export type RequestBodyBlueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -308,7 +312,7 @@ export type RequestBodyHttp = {
 /**
  * Executes HTTP requests to interact with external APIs and web services using customizable blueprints.
  */
-export type RequestBodyHTTPTool = {
+export type HTTPTool = {
   /**
    * Entity storage path.
    *
@@ -394,7 +398,7 @@ export type RequestBodyJsonSchema = {
 /**
  * A tool that enforces structured output format using JSON Schema for consistent response formatting.
  */
-export type RequestBodyJSONSchemaTool = {
+export type JSONSchemaTool = {
   /**
    * Entity storage path.
    *
@@ -495,7 +499,7 @@ export type RequestBodyFunction = {
 /**
  * A custom function tool that allows the model to call predefined functions with structured parameters.
  */
-export type RequestBodyFunctionTool = {
+export type FunctionTool = {
   /**
    * Entity storage path.
    *
@@ -530,11 +534,11 @@ export type RequestBodyFunctionTool = {
  * The tool to create
  */
 export type CreateToolRequestBody =
-  | RequestBodyFunctionTool
-  | RequestBodyJSONSchemaTool
-  | RequestBodyHTTPTool
+  | FunctionTool
+  | JSONSchemaTool
+  | HTTPTool
   | RequestBodyMCPTool
-  | RequestBodyCodeExecutionTool;
+  | CodeExecutionTool;
 
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
@@ -828,6 +832,10 @@ export type ResponseBodyBlueprint = {
    * The body to send with the request.
    */
   body?: { [k: string]: any } | undefined;
+  /**
+   * The request timeout in seconds. Defaults to 60 seconds when not set. When used in an agent, tool executions are also bound by the agent run `limits.tool_timeout` (default 5 minutes), so raise that limit for longer-running tools.
+   */
+  timeout?: number | undefined;
 };
 
 /**
@@ -1228,7 +1236,7 @@ export function requestBodyCodeToolToJSON(
 }
 
 /** @internal */
-export type RequestBodyCodeExecutionTool$Outbound = {
+export type CodeExecutionTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1239,10 +1247,10 @@ export type RequestBodyCodeExecutionTool$Outbound = {
 };
 
 /** @internal */
-export const RequestBodyCodeExecutionTool$outboundSchema: z.ZodType<
-  RequestBodyCodeExecutionTool$Outbound,
+export const CodeExecutionTool$outboundSchema: z.ZodType<
+  CodeExecutionTool$Outbound,
   z.ZodTypeDef,
-  RequestBodyCodeExecutionTool
+  CodeExecutionTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -1260,13 +1268,11 @@ export const RequestBodyCodeExecutionTool$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBodyCodeExecutionToolToJSON(
-  requestBodyCodeExecutionTool: RequestBodyCodeExecutionTool,
+export function codeExecutionToolToJSON(
+  codeExecutionTool: CodeExecutionTool,
 ): string {
   return JSON.stringify(
-    RequestBodyCodeExecutionTool$outboundSchema.parse(
-      requestBodyCodeExecutionTool,
-    ),
+    CodeExecutionTool$outboundSchema.parse(codeExecutionTool),
   );
 }
 
@@ -1434,6 +1440,7 @@ export type RequestBodyBlueprint$Outbound = {
   method: string;
   headers?: { [k: string]: CreateToolHeaders2$Outbound | string } | undefined;
   body?: { [k: string]: any } | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -1448,6 +1455,7 @@ export const RequestBodyBlueprint$outboundSchema: z.ZodType<
     z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function requestBodyBlueprintToJSON(
@@ -1539,7 +1547,7 @@ export function requestBodyHttpToJSON(
 }
 
 /** @internal */
-export type RequestBodyHTTPTool$Outbound = {
+export type HTTPTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1550,10 +1558,10 @@ export type RequestBodyHTTPTool$Outbound = {
 };
 
 /** @internal */
-export const RequestBodyHTTPTool$outboundSchema: z.ZodType<
-  RequestBodyHTTPTool$Outbound,
+export const HTTPTool$outboundSchema: z.ZodType<
+  HTTPTool$Outbound,
   z.ZodTypeDef,
-  RequestBodyHTTPTool
+  HTTPTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -1568,12 +1576,8 @@ export const RequestBodyHTTPTool$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBodyHTTPToolToJSON(
-  requestBodyHTTPTool: RequestBodyHTTPTool,
-): string {
-  return JSON.stringify(
-    RequestBodyHTTPTool$outboundSchema.parse(requestBodyHTTPTool),
-  );
+export function httpToolToJSON(httpTool: HTTPTool): string {
+  return JSON.stringify(HTTPTool$outboundSchema.parse(httpTool));
 }
 
 /** @internal */
@@ -1645,7 +1649,7 @@ export function requestBodyJsonSchemaToJSON(
 }
 
 /** @internal */
-export type RequestBodyJSONSchemaTool$Outbound = {
+export type JSONSchemaTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1656,10 +1660,10 @@ export type RequestBodyJSONSchemaTool$Outbound = {
 };
 
 /** @internal */
-export const RequestBodyJSONSchemaTool$outboundSchema: z.ZodType<
-  RequestBodyJSONSchemaTool$Outbound,
+export const JSONSchemaTool$outboundSchema: z.ZodType<
+  JSONSchemaTool$Outbound,
   z.ZodTypeDef,
-  RequestBodyJSONSchemaTool
+  JSONSchemaTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -1675,12 +1679,8 @@ export const RequestBodyJSONSchemaTool$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBodyJSONSchemaToolToJSON(
-  requestBodyJSONSchemaTool: RequestBodyJSONSchemaTool,
-): string {
-  return JSON.stringify(
-    RequestBodyJSONSchemaTool$outboundSchema.parse(requestBodyJSONSchemaTool),
-  );
+export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
+  return JSON.stringify(JSONSchemaTool$outboundSchema.parse(jsonSchemaTool));
 }
 
 /** @internal */
@@ -1758,7 +1758,7 @@ export function requestBodyFunctionToJSON(
 }
 
 /** @internal */
-export type RequestBodyFunctionTool$Outbound = {
+export type FunctionTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1769,10 +1769,10 @@ export type RequestBodyFunctionTool$Outbound = {
 };
 
 /** @internal */
-export const RequestBodyFunctionTool$outboundSchema: z.ZodType<
-  RequestBodyFunctionTool$Outbound,
+export const FunctionTool$outboundSchema: z.ZodType<
+  FunctionTool$Outbound,
   z.ZodTypeDef,
-  RequestBodyFunctionTool
+  FunctionTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -1789,21 +1789,17 @@ export const RequestBodyFunctionTool$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBodyFunctionToolToJSON(
-  requestBodyFunctionTool: RequestBodyFunctionTool,
-): string {
-  return JSON.stringify(
-    RequestBodyFunctionTool$outboundSchema.parse(requestBodyFunctionTool),
-  );
+export function functionToolToJSON(functionTool: FunctionTool): string {
+  return JSON.stringify(FunctionTool$outboundSchema.parse(functionTool));
 }
 
 /** @internal */
 export type CreateToolRequestBody$Outbound =
-  | RequestBodyFunctionTool$Outbound
-  | RequestBodyJSONSchemaTool$Outbound
-  | RequestBodyHTTPTool$Outbound
+  | FunctionTool$Outbound
+  | JSONSchemaTool$Outbound
+  | HTTPTool$Outbound
   | RequestBodyMCPTool$Outbound
-  | RequestBodyCodeExecutionTool$Outbound;
+  | CodeExecutionTool$Outbound;
 
 /** @internal */
 export const CreateToolRequestBody$outboundSchema: z.ZodType<
@@ -1811,11 +1807,11 @@ export const CreateToolRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateToolRequestBody
 > = z.union([
-  z.lazy(() => RequestBodyFunctionTool$outboundSchema),
-  z.lazy(() => RequestBodyJSONSchemaTool$outboundSchema),
-  z.lazy(() => RequestBodyHTTPTool$outboundSchema),
+  z.lazy(() => FunctionTool$outboundSchema),
+  z.lazy(() => JSONSchemaTool$outboundSchema),
+  z.lazy(() => HTTPTool$outboundSchema),
   z.lazy(() => RequestBodyMCPTool$outboundSchema),
-  z.lazy(() => RequestBodyCodeExecutionTool$outboundSchema),
+  z.lazy(() => CodeExecutionTool$outboundSchema),
 ]);
 
 export function createToolRequestBodyToJSON(
@@ -1896,7 +1892,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7XJZYW9NMBZCH6B0VS8"),
+  _id: z.string().default("tool_01KY7CX613W82E1A0QEKAV8Y7Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1993,7 +1989,7 @@ export const ResponseBodyTools$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01KXPCS7XHGE7VM8MGZSWTPC60"),
+  id: z.string().default("01KY7CX612NX7DA0FN86BE5FR5"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
@@ -2049,7 +2045,7 @@ export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7XF4G043RNA24MGAQNP"),
+  _id: z.string().default("tool_01KY7CX610TK741Z95R4AXD85Y"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2145,6 +2141,7 @@ export const ResponseBodyBlueprint$inboundSchema: z.ZodType<
     z.union([z.lazy(() => CreateToolHeadersTools2$inboundSchema), z.string()]),
   ).optional(),
   body: z.record(z.any()).optional(),
+  timeout: z.number().optional(),
 });
 
 export function responseBodyBlueprintFromJSON(
@@ -2235,7 +2232,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7XD4GMB3QD958B88DW0"),
+  _id: z.string().default("tool_01KY7CX60YTFTQS6WW1DB0XEWB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2328,7 +2325,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7XAWTHWRZPD9DZQT2MV"),
+  _id: z.string().default("tool_01KY7CX60WPR4BKY5BKZ28Y428"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2429,7 +2426,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01KXPCS7X86ER86R0APWWSKC5A"),
+  _id: z.string().default("tool_01KY7CX60TKYAFGQ8W22P4T98Y"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),

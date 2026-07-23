@@ -152,6 +152,10 @@ export type ListAgentsTools = {
    * Optional tool description
    */
   description?: string | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
   requiresApproval: boolean;
   /**
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
@@ -159,9 +163,9 @@ export type ListAgentsTools = {
   toolId?: string | undefined;
   conditions?: Array<ListAgentsConditions> | undefined;
   /**
-   * Tool execution timeout in seconds (default: 2 minutes, max: 10 minutes)
+   * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
    */
-  timeout: number;
+  timeout?: number | undefined;
 };
 
 /**
@@ -237,6 +241,10 @@ export type ListAgentsSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired: ListAgentsToolApprovalRequired;
+  /**
+   * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
+   */
+  chatExposed?: boolean | undefined;
   tools?: Array<ListAgentsTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
@@ -402,6 +410,7 @@ export type ListAgentsModalities = ClosedEnum<typeof ListAgentsModalities>;
  */
 export const ListAgentsId1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -862,6 +871,7 @@ export type ListAgentsFallbackModelConfigurationModalities = ClosedEnum<
  */
 export const ListAgentsIdAgents1 = {
   OrqPiiDetection: "orq_pii_detection",
+  OrqSecretDetection: "orq_secret_detection",
   OrqSexualModeration: "orq_sexual_moderation",
   OrqHarmfulModeration: "orq_harmful_moderation",
 } as const;
@@ -1471,11 +1481,12 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   action_type: z.string(),
   display_name: z.string().optional(),
   description: z.string().optional(),
+  configuration: z.record(z.any()).optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
   conditions: z.array(z.lazy(() => ListAgentsConditions$inboundSchema))
     .optional(),
-  timeout: z.number().default(120),
+  timeout: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "action_type": "actionType",
@@ -1569,6 +1580,7 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
   tool_approval_required: ListAgentsToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
+  chat_exposed: z.boolean().optional(),
   tools: z.array(z.lazy(() => ListAgentsTools$inboundSchema)).optional(),
   evaluators: z.array(z.lazy(() => ListAgentsEvaluators$inboundSchema))
     .optional(),
@@ -1580,6 +1592,7 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
     "max_execution_time": "maxExecutionTime",
     "max_cost": "maxCost",
     "tool_approval_required": "toolApprovalRequired",
+    "chat_exposed": "chatExposed",
   });
 });
 
