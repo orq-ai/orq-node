@@ -271,7 +271,7 @@ export const PostV2HumanEvalSetsResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-07-23T11:34:18.983Z",
+    "2026-07-24T06:25:00.263Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("name"),
   filter_value: z.string(),
@@ -316,7 +316,7 @@ export const PostV2HumanEvalSetsResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-07-23T11:34:18.983Z",
+    "2026-07-24T06:25:00.263Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("span_type"),
   filter_values: z.array(z.string()),
