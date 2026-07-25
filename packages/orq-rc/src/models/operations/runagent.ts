@@ -1167,17 +1167,17 @@ export type AgentToolInputRunHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
   {
     Object: "object",
   } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
   >;
 
 export type AgentToolInputRunSchema = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType;
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1299,16 +1299,16 @@ export type JSONSchemaToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
   >;
 
 /**
@@ -1319,7 +1319,7 @@ export type RunAgentAgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType;
   /**
    * The properties of the function parameters
    */
@@ -1369,16 +1369,16 @@ export type FunctionToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
   >;
 
 /**
@@ -1389,7 +1389,7 @@ export type AgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType;
   /**
    * The properties of the function parameters
    */
@@ -1491,7 +1491,7 @@ export type Blueprint = {
 /**
  * The type of the argument.
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
   {
     String: "string",
     Number: "number",
@@ -1500,9 +1500,9 @@ export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13Htt
 /**
  * The type of the argument.
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
   >;
 
 /**
@@ -1515,7 +1515,7 @@ export type Arguments = {
    * The type of the argument.
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType;
   /**
    * A description of the argument.
    */
@@ -1569,6 +1569,36 @@ export type HTTPToolRun = {
  */
 export type CodeInterpreterTool = {
   type: "code_interpreter";
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/**
+ * Delegate a subtask to a secondary model for execution
+ */
+export type SidekickTool = {
+  type: "sidekick";
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/**
+ * Consult a secondary model for advice on the current task
+ */
+export type AdvisorTool = {
+  type: "advisor";
   /**
    * Whether this tool requires approval before execution
    */
@@ -1759,6 +1789,8 @@ export type AgentToolInputRun =
   | RetrieveKnowledgeBasesTool
   | QueryKnowledgeBaseTool
   | CurrentDateTool
+  | AdvisorTool
+  | SidekickTool
   | CodeInterpreterTool
   | HTTPToolRun
   | CodeToolRun
@@ -1854,6 +1886,8 @@ export type RunAgentSettings = {
       | RetrieveKnowledgeBasesTool
       | QueryKnowledgeBaseTool
       | CurrentDateTool
+      | AdvisorTool
+      | SidekickTool
       | CodeInterpreterTool
       | HTTPToolRun
       | CodeToolRun
@@ -4006,11 +4040,11 @@ export function agentToolInputRunHeadersToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType,
   );
 
 /** @internal */
@@ -4027,7 +4061,7 @@ export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
   AgentToolInputRunSchema
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
@@ -4054,7 +4088,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KYD71G78SSKWDMH48SPPC4YD"),
+  id: z.string().default("01KYDMWCQJKCPX2G9FRS7JR8FW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4235,11 +4269,11 @@ export function jsonSchemaToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType,
   );
 
 /** @internal */
@@ -4257,7 +4291,7 @@ export const RunAgentAgentToolInputRunParameters$outboundSchema: z.ZodType<
   RunAgentAgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4348,11 +4382,11 @@ export function functionToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType,
   );
 
 /** @internal */
@@ -4370,7 +4404,7 @@ export const AgentToolInputRunParameters$outboundSchema: z.ZodType<
   AgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4526,11 +4560,11 @@ export function blueprintToJSON(blueprint: Blueprint): string {
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType,
   );
 
 /** @internal */
@@ -4562,7 +4596,7 @@ export const Arguments$outboundSchema: z.ZodType<
   Arguments
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema,
   description: z.string(),
   sendToModel: z.boolean().default(true),
   defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -4660,6 +4694,58 @@ export function codeInterpreterToolToJSON(
   return JSON.stringify(
     CodeInterpreterTool$outboundSchema.parse(codeInterpreterTool),
   );
+}
+
+/** @internal */
+export type SidekickTool$Outbound = {
+  type: "sidekick";
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const SidekickTool$outboundSchema: z.ZodType<
+  SidekickTool$Outbound,
+  z.ZodTypeDef,
+  SidekickTool
+> = z.object({
+  type: z.literal("sidekick"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function sidekickToolToJSON(sidekickTool: SidekickTool): string {
+  return JSON.stringify(SidekickTool$outboundSchema.parse(sidekickTool));
+}
+
+/** @internal */
+export type AdvisorTool$Outbound = {
+  type: "advisor";
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const AdvisorTool$outboundSchema: z.ZodType<
+  AdvisorTool$Outbound,
+  z.ZodTypeDef,
+  AdvisorTool
+> = z.object({
+  type: z.literal("advisor"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function advisorToolToJSON(advisorTool: AdvisorTool): string {
+  return JSON.stringify(AdvisorTool$outboundSchema.parse(advisorTool));
 }
 
 /** @internal */
@@ -4999,6 +5085,8 @@ export type AgentToolInputRun$Outbound =
   | RetrieveKnowledgeBasesTool$Outbound
   | QueryKnowledgeBaseTool$Outbound
   | CurrentDateTool$Outbound
+  | AdvisorTool$Outbound
+  | SidekickTool$Outbound
   | CodeInterpreterTool$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
@@ -5023,6 +5111,8 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
   z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => CurrentDateTool$outboundSchema),
+  z.lazy(() => AdvisorTool$outboundSchema),
+  z.lazy(() => SidekickTool$outboundSchema),
   z.lazy(() => CodeInterpreterTool$outboundSchema),
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
@@ -5131,6 +5221,8 @@ export type RunAgentSettings$Outbound = {
       | RetrieveKnowledgeBasesTool$Outbound
       | QueryKnowledgeBaseTool$Outbound
       | CurrentDateTool$Outbound
+      | AdvisorTool$Outbound
+      | SidekickTool$Outbound
       | CodeInterpreterTool$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
@@ -5167,6 +5259,8 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
       z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => CurrentDateTool$outboundSchema),
+      z.lazy(() => AdvisorTool$outboundSchema),
+      z.lazy(() => SidekickTool$outboundSchema),
       z.lazy(() => CodeInterpreterTool$outboundSchema),
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),

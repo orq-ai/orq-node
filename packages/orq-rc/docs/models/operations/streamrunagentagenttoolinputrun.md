@@ -93,6 +93,22 @@ const value: operations.AgentToolInputRunCurrentDateTool = {
 };
 ```
 
+### `operations.AgentToolInputRunAdvisorTool`
+
+```typescript
+const value: operations.AgentToolInputRunAdvisorTool = {
+  type: "advisor",
+};
+```
+
+### `operations.AgentToolInputRunSidekickTool`
+
+```typescript
+const value: operations.AgentToolInputRunSidekickTool = {
+  type: "sidekick",
+};
+```
+
 ### `operations.AgentToolInputRunCodeInterpreterTool`
 
 ```typescript

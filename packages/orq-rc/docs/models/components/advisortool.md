@@ -1,14 +1,14 @@
-# CodeInterpreterTool
+# AdvisorTool
 
-Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
+Consult a secondary model for advice on the current task
 
 ## Example Usage
 
 ```typescript
-import { CodeInterpreterTool } from "@orq-ai/node/models/components";
+import { AdvisorTool } from "@orq-ai/node/models/components";
 
-let value: CodeInterpreterTool = {
-  type: "code_interpreter",
+let value: AdvisorTool = {
+  type: "advisor",
 };
 ```
 
@@ -16,6 +16,6 @@ let value: CodeInterpreterTool = {
 
 | Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `type`                                                                                              | [components.AgentToolInputCrud14Type](../../models/components/agenttoolinputcrud14type.md)          | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `type`                                                                                              | [components.AgentToolInputCrud12Type](../../models/components/agenttoolinputcrud12type.md)          | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `requiresApproval`                                                                                  | *boolean*                                                                                           | :heavy_minus_sign:                                                                                  | Whether this tool requires approval before execution                                                |
 | `configuration`                                                                                     | Record<string, *any*>                                                                               | :heavy_minus_sign:                                                                                  | Static tool configuration set at design time. Merged over LLM-provided arguments at execution time. |
