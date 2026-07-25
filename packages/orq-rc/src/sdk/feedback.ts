@@ -44,9 +44,6 @@ export class Feedback extends ClientSDK {
     ));
   }
 
-  /**
-   * Create translation
-   */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,

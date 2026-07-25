@@ -1,0 +1,18 @@
+# MonitorListRequest
+
+## Example Usage
+
+```typescript
+import { MonitorListRequest } from "@orq-ai/node/models/operations";
+
+let value: MonitorListRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `limit`                                                                                                                              | *number*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | Page size, 1-200. Unset uses the server default (25).                                                                                |
+| `startingAfter`                                                                                                                      | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | Cursor for forward pagination. Set to the `monitor_id` of the last<br/> item from the previous page.                                 |
+| `endingBefore`                                                                                                                       | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | Cursor for backward pagination. Set to the `monitor_id` of the<br/> first item from the previous page.                               |
+| `projectId`                                                                                                                          | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | Restrict results to one project. Workspace-wide monitors are still<br/> included unless the caller's key is pinned to specific projects. |

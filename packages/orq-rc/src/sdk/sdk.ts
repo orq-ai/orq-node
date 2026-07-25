@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
+import { Alerts } from "./alerts.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
 import { Budgets } from "./budgets.js";
@@ -20,7 +21,9 @@ import { Knowledge } from "./knowledge.js";
 import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
+import { Monitors } from "./monitors.js";
 import { Notifiers } from "./notifiers.js";
+import { People } from "./people.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
@@ -128,6 +131,11 @@ export class Orq extends ClientSDK {
     return (this._routingRules ??= new RoutingRules(this._options));
   }
 
+  private _alerts?: Alerts;
+  get alerts(): Alerts {
+    return (this._alerts ??= new Alerts(this._options));
+  }
+
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
@@ -153,9 +161,19 @@ export class Orq extends ClientSDK {
     return (this._managementKeys ??= new ManagementKeys(this._options));
   }
 
+  private _monitors?: Monitors;
+  get monitors(): Monitors {
+    return (this._monitors ??= new Monitors(this._options));
+  }
+
   private _notifiers?: Notifiers;
   get notifiers(): Notifiers {
     return (this._notifiers ??= new Notifiers(this._options));
+  }
+
+  private _people?: People;
+  get people(): People {
+    return (this._people ??= new People(this._options));
   }
 
   private _projects?: Projects;

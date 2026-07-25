@@ -6,6 +6,32 @@ import * as z from "zod/v3";
 import { OrqError } from "./orqerror.js";
 
 /**
+ * The evaluator is still referenced as an evaluator or guardrail by one or more deployments
+ */
+export type DeleteEvalEvalsResponseBodyData = {
+  message: string;
+};
+
+/**
+ * The evaluator is still referenced as an evaluator or guardrail by one or more deployments
+ */
+export class DeleteEvalEvalsResponseBody extends OrqError {
+  /** The original data that was passed to this error instance. */
+  data$: DeleteEvalEvalsResponseBodyData;
+
+  constructor(
+    err: DeleteEvalEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+
+    this.name = "DeleteEvalEvalsResponseBody";
+  }
+}
+
+/**
  * Workspace ID is not found on the request
  */
 export type DeleteEvalResponseBodyData = {
@@ -30,6 +56,25 @@ export class DeleteEvalResponseBody extends OrqError {
     this.name = "DeleteEvalResponseBody";
   }
 }
+
+/** @internal */
+export const DeleteEvalEvalsResponseBody$inboundSchema: z.ZodType<
+  DeleteEvalEvalsResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
+})
+  .transform((v) => {
+    return new DeleteEvalEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
+  });
 
 /** @internal */
 export const DeleteEvalResponseBody$inboundSchema: z.ZodType<
