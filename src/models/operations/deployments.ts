@@ -490,6 +490,8 @@ export const DeploymentsProvider = {
   Poolside: "poolside",
   Tencent: "tencent",
   Nebius: "nebius",
+  Fireworks: "fireworks",
+  Baseten: "baseten",
   Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
