@@ -11,17 +11,17 @@ let value: ModelUpdateAwsBedrockResponseBody = {
   configuration: {
     provider: "<value>",
   },
-  created: new Date("2026-08-26T04:49:41.949Z"),
-  description: "seldom rubric disarm violent",
-  displayName: "Willis.McLaughlin",
-  docsUrl: "https://thin-hose.name/",
-  enabled: false,
-  enabledForEndpoints: true,
+  created: "<value>",
+  description: "between beyond unexpectedly weary majestically around gee",
+  displayName: "Molly43",
+  docsUrl: "https://secondary-cellar.biz",
+  enabled: true,
+  enabledForEndpoints: false,
   enabledForPlayground: true,
-  hasCpuPricing: false,
-  hasFunctions: true,
+  hasCpuPricing: true,
+  hasFunctions: false,
   id: "<id>",
-  inputCost: 1179.33,
+  inputCost: 3966.37,
   inputCurrency: "<value>",
   isActive: true,
   metadata: {
@@ -29,26 +29,25 @@ let value: ModelUpdateAwsBedrockResponseBody = {
   },
   modelId: "<id>",
   modelType: "<value>",
-  outputCost: 7265.7,
+  outputCost: 9940.57,
   outputCurrency: "<value>",
   owner: "<value>",
   parameters: [
     {
-      config: {
-        "key": "<value>",
-      },
-      description: "phew notwithstanding why",
+      config: {},
+      description:
+        "whereas laughter fork unimpressively ugh er even an inasmuch",
       id: "<id>",
-      isActive: false,
+      isActive: true,
       name: "<value>",
       parameter: "<value>",
       parameterType: "<value>",
     },
   ],
-  pricingUrl: "https://self-assured-warming.org/",
+  pricingUrl: null,
   provider: "<value>",
   refId: "<id>",
-  updated: new Date("2026-02-25T09:58:52.135Z"),
+  updated: "<value>",
 };
 ```
 
@@ -57,7 +56,7 @@ let value: ModelUpdateAwsBedrockResponseBody = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `configuration`                                                                                | [components.ModelConfigurationResponse](../../models/components/modelconfigurationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `created`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `created`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `displayName`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `docsUrl`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
@@ -83,4 +82,4 @@ let value: ModelUpdateAwsBedrockResponseBody = {
 | `provider`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `refId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `sharing`                                                                                      | [components.Config](../../models/components/config.md)                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `updated`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `updated`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
