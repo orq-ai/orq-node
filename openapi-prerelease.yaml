@@ -27,10 +27,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -264,10 +264,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -369,10 +369,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -489,10 +489,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -594,10 +594,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -999,10 +999,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -1120,10 +1120,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated:
           type: "string"
-          default: "2026-07-25T22:03:09.281Z"
+          default: "2026-07-27T08:22:55.302Z"
         updated_by_id:
           type:
             - "string"
@@ -3843,7 +3843,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01kydmwchahk59zgzt1xzmyksp"
+              default: "reasoning_01kyhaqpdk307cxqmn5mzktx15"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -8318,6 +8318,10 @@ components:
           type: "string"
           description: "Optional expiration. When set, the authenticate hot-path rejects\n the key once `expires_at` is in the past. Unset means the key\n never expires."
           format: "date-time"
+        mcp_access:
+          allOf:
+            - $ref: "#/components/schemas/McpAccess"
+          description: "Optional MCP-gateway access restriction. Unset means no\n restriction. See McpAccess for the deny_all / allow-list semantics."
     CreateApiKeyResponse:
       required:
         - "api_key"
@@ -8383,6 +8387,10 @@ components:
         clear_expires_at:
           type: "boolean"
           description: "Force-clear the expiration. Mutually exclusive with `expires_at`."
+        mcp_access:
+          allOf:
+            - $ref: "#/components/schemas/McpAccess"
+          description: "Replacement MCP-gateway access restriction. Absent leaves the\n current value intact; an explicitly-set McpAccess replaces it —\n including an empty one (deny_all=false + empty list), which clears\n any existing restriction. See McpAccess."
     UpdateApiKeyResponse:
       required:
         - "api_key"
@@ -8467,6 +8475,10 @@ components:
           allOf:
             - $ref: "#/components/schemas/Budget"
           description: "The budget scoped to this api-key, if one exists. Read-only here:\n budgets are created and managed through the Budgets API\n (scope.api_key). Populated only when the read request sets\n `include_budget`. Live consumption (`usage`) is not attached on this\n path — call the Budgets API for current spend."
+        mcp_access:
+          allOf:
+            - $ref: "#/components/schemas/McpAccess"
+          description: "Optional MCP-gateway access restriction. Unset means the key can\n reach every MCP gateway allowed by its project scope. See\n McpAccess for the deny_all / allow-list semantics."
       description: "ApiKey is the canonical record stored in MongoDB `auth.apiKeys`.\n It is the source of truth for scope, permissions, owner, budget,\n expiration, and revocation (see ADR 0001)."
     ApiKeyOwner:
       type: "object"
@@ -8484,6 +8496,23 @@ components:
         single:
           $ref: "#/components/schemas/SingleProject"
       description: "Project authorization scope. Single-project or all-projects.\n Multi-project use cases are served by minting per-project keys or by\n using an all-projects key with `restricted` mode."
+    McpAccess:
+      type: "object"
+      properties:
+        deny_all:
+          type: "boolean"
+          description: "When true, the key is denied every MCP gateway regardless of\n allowed_mcp_gateway_ids."
+        allowed_mcp_gateway_ids:
+          type: "array"
+          items:
+            type: "string"
+          description: "Allow-list of MCP gateway ids (`mcp_gateway_<ULID>`) the key may\n reach. Ignored when deny_all is true. Empty (with deny_all=false)\n means no restriction."
+        toolset_ids:
+          type: "array"
+          items:
+            type: "string"
+          description: "Allow-list of MCP toolset ids (`mcp_toolset_<ULID>`) the key is\n bound to. When non-empty, the key sees and may call only the tools\n that are both exposed by the target gateway and members of the\n union of these toolsets. Empty means no toolset restriction."
+      description: "McpAccess optionally restricts which MCP gateways an API key may\n reach at the data plane. It is orthogonal to permission_mode /\n access: the key must still hold the `mcp_gateway.execute` verb and\n project membership; McpAccess only narrows the reachable gateway set\n within that grant. Human sessions and keys without an McpAccess are\n unaffected.\n\n Semantics:\n   - absent, or deny_all=false with an empty allowed_mcp_gateway_ids:\n     no restriction — every gateway in the key's project scope is\n     reachable.\n   - deny_all=true: zero gateways are reachable. Wins over\n     allowed_mcp_gateway_ids.\n   - non-empty allowed_mcp_gateway_ids: only the listed gateway ids\n     are reachable. Each id must look like `mcp_gateway_<ULID>`."
     Domain:
       type: "object"
       properties:
@@ -9496,6 +9525,685 @@ components:
           description: "Optional expiration. The authenticate hot-path rejects keys whose\n `expires_at` is in the past. Unset means the key never expires."
           format: "date-time"
       description: "ManagementKey is the canonical record stored in MongoDB\n `auth.managementKeys`. It is the source of truth for permissions,\n expiration, and revocation. Management keys are always\n workspace-scoped — there is no project_scope field, and they have no\n per-user owner (every management key is workspace-owned;\n `created_by_id` records who created it)."
+    McpGatewayCallStatus:
+      type: "string"
+      enum:
+        - "MCP_GATEWAY_CALL_STATUS_UNSPECIFIED"
+        - "MCP_GATEWAY_CALL_STATUS_SUCCEEDED"
+        - "MCP_GATEWAY_CALL_STATUS_FAILED"
+        - "MCP_GATEWAY_CALL_STATUS_DENIED"
+        - "MCP_GATEWAY_CALL_STATUS_TIMED_OUT"
+    ListMcpGatewayCallsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpGatewayCall"
+        has_more:
+          type: "boolean"
+    McpGatewayCall:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        mcp_gateway_id:
+          type: "string"
+        mcp_server_id:
+          type: "string"
+        exposed_tool_name:
+          type: "string"
+        upstream_tool_name:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/McpGatewayCallStatus"
+        latency_ms:
+          type: "integer"
+          format: "int32"
+        error_code:
+          type: "string"
+        error_message:
+          type: "string"
+        account_id:
+          type: "string"
+        token_id:
+          type: "string"
+        timestamp:
+          type: "string"
+    McpGatewayStatus:
+      type: "string"
+      enum:
+        - "MCP_GATEWAY_STATUS_UNSPECIFIED"
+        - "MCP_GATEWAY_STATUS_ACTIVE"
+        - "MCP_GATEWAY_STATUS_DISABLED"
+    ListMcpGatewaysResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpGateway"
+        has_more:
+          type: "boolean"
+    CreateMcpGatewayRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        server_links:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpGatewayServerLink"
+        tool_naming:
+          $ref: "#/components/schemas/McpToolNaming"
+        runtime_limits:
+          $ref: "#/components/schemas/McpRuntimeLimits"
+        egress_policy:
+          $ref: "#/components/schemas/McpEgressPolicy"
+    CreateMcpGatewayResponse:
+      type: "object"
+      properties:
+        mcp_gateway:
+          $ref: "#/components/schemas/McpGateway"
+    ListMcpGatewayToolsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpGatewayTool"
+        has_more:
+          type: "boolean"
+    TestMcpGatewayToolRequest:
+      type: "object"
+      properties:
+        tool_name:
+          type: "string"
+        arguments:
+          type: "object"
+    TestMcpGatewayToolResponse:
+      type: "object"
+      properties:
+        result:
+          $ref: "#/components/schemas/McpGatewayToolTestResult"
+    GetMcpGatewayResponse:
+      type: "object"
+      properties:
+        mcp_gateway:
+          $ref: "#/components/schemas/McpGateway"
+    DeleteMcpGatewayResponse:
+      type: "object"
+      properties: {}
+    UpdateMcpGatewayRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        server_links:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpGatewayServerLink"
+        tool_naming:
+          $ref: "#/components/schemas/McpToolNaming"
+        runtime_limits:
+          $ref: "#/components/schemas/McpRuntimeLimits"
+        egress_policy:
+          $ref: "#/components/schemas/McpEgressPolicy"
+        status:
+          $ref: "#/components/schemas/McpGatewayStatus"
+    UpdateMcpGatewayResponse:
+      type: "object"
+      properties:
+        mcp_gateway:
+          $ref: "#/components/schemas/McpGateway"
+    McpGateway:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        server_links:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpGatewayServerLink"
+        tool_naming:
+          $ref: "#/components/schemas/McpToolNaming"
+        runtime_limits:
+          $ref: "#/components/schemas/McpRuntimeLimits"
+        egress_policy:
+          $ref: "#/components/schemas/McpEgressPolicy"
+        status:
+          $ref: "#/components/schemas/McpGatewayStatus"
+        public_url:
+          type: "string"
+        created:
+          type: "string"
+        updated:
+          type: "string"
+        exposed_tools_count:
+          type: "integer"
+          format: "int32"
+    McpGatewayServerLink:
+      type: "object"
+      properties:
+        mcp_server_id:
+          type: "string"
+        alias:
+          type: "string"
+        enabled:
+          type: "boolean"
+        tool_exposure:
+          $ref: "#/components/schemas/McpToolExposure"
+    McpToolNaming:
+      type: "string"
+      enum:
+        - "MCP_TOOL_NAMING_UNSPECIFIED"
+        - "MCP_TOOL_NAMING_PREFIX_WITH_SERVER_KEY"
+        - "MCP_TOOL_NAMING_PREFIX_ON_COLLISION"
+    McpRuntimeLimits:
+      type: "object"
+      properties:
+        request_timeout_ms:
+          type: "integer"
+          format: "int32"
+        tool_timeout_ms:
+          type: "integer"
+          format: "int32"
+        max_request_bytes:
+          type: "integer"
+          format: "int32"
+        max_response_bytes:
+          type: "integer"
+          format: "int32"
+        max_tools_per_gateway:
+          type: "integer"
+          format: "int32"
+        per_token_requests_per_minute:
+          type: "integer"
+          format: "int32"
+        per_gateway_requests_per_minute:
+          type: "integer"
+          format: "int32"
+    McpEgressPolicy:
+      type: "object"
+      properties:
+        allow_private_network:
+          type: "boolean"
+        allowed_domains:
+          type: "array"
+          items:
+            type: "string"
+        blocked_domains:
+          type: "array"
+          items:
+            type: "string"
+        allow_public_internet:
+          type: "boolean"
+    McpGatewayTool:
+      type: "object"
+      properties:
+        server_key:
+          type: "string"
+        alias:
+          type: "string"
+        exposed_name:
+          type: "string"
+        description:
+          type: "string"
+        input_schema:
+          type: "object"
+        read_only:
+          type: "boolean"
+    McpGatewayToolTestResult:
+      type: "object"
+      properties:
+        ok:
+          type: "boolean"
+        result:
+          type: "object"
+        latency_ms:
+          type: "integer"
+          format: "int32"
+        error_message:
+          type: "string"
+        errors:
+          type: "array"
+          items:
+            type: "string"
+    McpToolExposure:
+      type: "object"
+      properties:
+        mode:
+          $ref: "#/components/schemas/McpToolExposureMode"
+        read_only:
+          type: "boolean"
+        tool_names:
+          type: "array"
+          items:
+            type: "string"
+    McpToolExposureMode:
+      type: "string"
+      enum:
+        - "MCP_TOOL_EXPOSURE_MODE_UNSPECIFIED"
+        - "MCP_TOOL_EXPOSURE_MODE_ALL"
+        - "MCP_TOOL_EXPOSURE_MODE_SELECTED"
+        - "MCP_TOOL_EXPOSURE_MODE_NONE"
+    McpServerStatus:
+      type: "string"
+      enum:
+        - "MCP_SERVER_STATUS_UNSPECIFIED"
+        - "MCP_SERVER_STATUS_ACTIVE"
+        - "MCP_SERVER_STATUS_DISABLED"
+        - "MCP_SERVER_STATUS_ERROR"
+    ListMcpServersResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpServer"
+        has_more:
+          type: "boolean"
+    CreateMcpServerRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        connection:
+          $ref: "#/components/schemas/McpConnection"
+        auth:
+          $ref: "#/components/schemas/McpAuthConfig"
+        default_tool_exposure:
+          $ref: "#/components/schemas/McpToolExposure"
+        sharing:
+          $ref: "#/components/schemas/McpServerSharing"
+    CreateMcpServerResponse:
+      type: "object"
+      properties:
+        mcp_server:
+          $ref: "#/components/schemas/McpServer"
+    GetMcpServerResponse:
+      type: "object"
+      properties:
+        mcp_server:
+          $ref: "#/components/schemas/McpServer"
+    DeleteMcpServerResponse:
+      type: "object"
+      properties: {}
+    UpdateMcpServerRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        connection:
+          $ref: "#/components/schemas/McpConnection"
+        auth:
+          $ref: "#/components/schemas/McpAuthConfig"
+        default_tool_exposure:
+          $ref: "#/components/schemas/McpToolExposure"
+        status:
+          $ref: "#/components/schemas/McpServerStatus"
+        sharing:
+          $ref: "#/components/schemas/McpServerSharing"
+    UpdateMcpServerResponse:
+      type: "object"
+      properties:
+        mcp_server:
+          $ref: "#/components/schemas/McpServer"
+    TestMcpServerToolRequest:
+      type: "object"
+      properties:
+        tool_name:
+          type: "string"
+        arguments:
+          type: "object"
+    TestMcpServerToolResponse:
+      type: "object"
+      properties:
+        result:
+          $ref: "#/components/schemas/McpGatewayToolTestResult"
+    SyncMcpServerRequest:
+      type: "object"
+      properties: {}
+    SyncMcpServerResponse:
+      type: "object"
+      properties:
+        mcp_server:
+          $ref: "#/components/schemas/McpServer"
+    TestMcpServerRequest:
+      type: "object"
+      properties:
+        connection:
+          $ref: "#/components/schemas/McpConnection"
+        auth:
+          $ref: "#/components/schemas/McpAuthConfig"
+        id:
+          type: "string"
+    TestMcpServerResponse:
+      type: "object"
+      properties:
+        result:
+          $ref: "#/components/schemas/McpTestResult"
+    McpServer:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        connection:
+          $ref: "#/components/schemas/McpConnection"
+        auth:
+          $ref: "#/components/schemas/McpAuthConfig"
+        default_tool_exposure:
+          $ref: "#/components/schemas/McpToolExposure"
+        status:
+          $ref: "#/components/schemas/McpServerStatus"
+        sync_state:
+          $ref: "#/components/schemas/McpSyncState"
+        tools:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpTool"
+        created:
+          type: "string"
+        updated:
+          type: "string"
+        sharing:
+          $ref: "#/components/schemas/McpServerSharing"
+    McpConnection:
+      type: "object"
+      properties:
+        type:
+          $ref: "#/components/schemas/McpConnectionType"
+        url:
+          type: "string"
+    McpAuthConfig:
+      type: "object"
+      properties:
+        type:
+          $ref: "#/components/schemas/McpAuthType"
+        static_headers:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpHeaderSecret"
+        oauth:
+          $ref: "#/components/schemas/McpOAuthConfig"
+    McpServerSharing:
+      type: "object"
+      properties:
+        scope:
+          $ref: "#/components/schemas/McpServerSharingScope"
+        project_ids:
+          type: "array"
+          items:
+            type: "string"
+    McpTestResult:
+      type: "object"
+      properties:
+        ok:
+          type: "boolean"
+        tools:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpTool"
+        latency_ms:
+          type: "integer"
+          format: "int32"
+        error_message:
+          type: "string"
+        errors:
+          type: "array"
+          items:
+            type: "string"
+    McpSyncState:
+      type: "object"
+      properties:
+        status:
+          $ref: "#/components/schemas/SyncStatus"
+        tools_total:
+          type: "integer"
+          format: "int32"
+        tools_added:
+          type: "integer"
+          format: "int32"
+        tools_removed:
+          type: "integer"
+          format: "int32"
+        last_synced_at:
+          type: "string"
+        errors:
+          type: "array"
+          items:
+            type: "string"
+    McpTool:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+        input_schema:
+          type: "object"
+        read_only:
+          type: "boolean"
+        status:
+          type: "string"
+    McpConnectionType:
+      type: "string"
+      enum:
+        - "MCP_CONNECTION_TYPE_UNSPECIFIED"
+        - "MCP_CONNECTION_TYPE_HTTP"
+        - "MCP_CONNECTION_TYPE_SSE"
+        - "MCP_CONNECTION_TYPE_STDIO"
+    McpAuthType:
+      type: "string"
+      enum:
+        - "MCP_AUTH_TYPE_UNSPECIFIED"
+        - "MCP_AUTH_TYPE_NONE"
+        - "MCP_AUTH_TYPE_STATIC_HEADERS"
+        - "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS"
+        - "MCP_AUTH_TYPE_PER_USER_OAUTH"
+    McpHeaderSecret:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        masked_value:
+          type: "string"
+    McpOAuthConfig:
+      type: "object"
+      properties:
+        client_id:
+          type: "string"
+        token_url:
+          type: "string"
+        scopes:
+          type: "array"
+          items:
+            type: "string"
+        masked_value:
+          type: "string"
+    McpServerSharingScope:
+      type: "string"
+      enum:
+        - "MCP_SERVER_SHARING_SCOPE_UNSPECIFIED"
+        - "MCP_SERVER_SHARING_SCOPE_PROJECT"
+        - "MCP_SERVER_SHARING_SCOPE_WORKSPACE"
+        - "MCP_SERVER_SHARING_SCOPE_SELECTED_PROJECTS"
+    SyncStatus:
+      type: "string"
+      enum:
+        - "SYNC_STATUS_UNSPECIFIED"
+        - "SYNC_STATUS_SYNCED"
+        - "SYNC_STATUS_FAILED"
+        - "SYNC_STATUS_PENDING"
+    McpSessionStatus:
+      type: "string"
+      enum:
+        - "MCP_SESSION_STATUS_UNSPECIFIED"
+        - "MCP_SESSION_STATUS_ACTIVE"
+        - "MCP_SESSION_STATUS_REVOKED"
+    ListMcpSessionsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpSession"
+        has_more:
+          type: "boolean"
+    RevokeMcpSessionResponse:
+      type: "object"
+      properties:
+        mcp_session:
+          $ref: "#/components/schemas/McpSession"
+    McpSession:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        mcp_gateway_id:
+          type: "string"
+        mcp_server_id:
+          type: "string"
+        account_id:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/McpSessionStatus"
+        created:
+          type: "string"
+        updated:
+          type: "string"
+    ListMcpToolsetsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpToolset"
+        has_more:
+          type: "boolean"
+    CreateMcpToolsetRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        tools:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpToolsetToolRef"
+    CreateMcpToolsetResponse:
+      type: "object"
+      properties:
+        mcp_toolset:
+          $ref: "#/components/schemas/McpToolset"
+    GetMcpToolsetResponse:
+      type: "object"
+      properties:
+        mcp_toolset:
+          $ref: "#/components/schemas/McpToolset"
+    DeleteMcpToolsetResponse:
+      type: "object"
+      properties: {}
+    UpdateMcpToolsetRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        tools:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpToolsetToolRef"
+    UpdateMcpToolsetResponse:
+      type: "object"
+      properties:
+        mcp_toolset:
+          $ref: "#/components/schemas/McpToolset"
+    McpToolset:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        tools:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/McpToolsetToolRef"
+        created:
+          type: "string"
+        updated:
+          type: "string"
+    McpToolsetToolRef:
+      type: "object"
+      properties:
+        mcp_server_id:
+          type: "string"
+        tool_name:
+          type: "string"
+      description: "McpToolsetToolRef points at a single tool by its origin server and the\n tool's bare (upstream) name."
     Sharing:
       type: "object"
       properties:
@@ -13950,6 +14658,471 @@ components:
         - "type"
         - "budget_tokens"
       type: "object"
+    ListTraceLogsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Log"
+        has_more:
+          type: "boolean"
+        next_page_token:
+          type: "string"
+    AggregateLogsRequest:
+      type: "object"
+      properties:
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        grain:
+          type: "string"
+          description: "Time bucket grain: \"auto\" | \"minute\" | \"hour\" | \"day\", matching the shared\n libs/go/reporting Grain vocabulary used by the traces reporting API. Empty\n defaults to \"auto\" (grain picked from the time range)."
+        filters:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TraceFilter"
+    AggregateLogsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        buckets:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AggregateBucket"
+    ListLogFacetsResponse:
+      type: "object"
+      properties:
+        groups:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FacetGroup"
+    ListLogFacetValuesResponse:
+      type: "object"
+      properties:
+        values:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FacetValue"
+    ListLogFieldsResponse:
+      type: "object"
+      properties:
+        fields:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FieldInfo"
+    FindLogPatternsRequest:
+      required:
+        - "from"
+        - "to"
+      type: "object"
+      properties:
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        query:
+          type: "string"
+        filter_operator:
+          type: "string"
+        filters:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TraceFilter"
+        limit:
+          type: "integer"
+          description: "Maximum patterns to return. Defaults to 50."
+          format: "int32"
+    FindLogPatternsResponse:
+      required:
+        - "object"
+        - "data"
+        - "meta"
+      type: "object"
+      properties:
+        object:
+          type: "string"
+          description: "Object discriminator; always \"list\"."
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LogPattern"
+        meta:
+          $ref: "#/components/schemas/FindLogPatternsMeta"
+    QueryLogsRequest:
+      required:
+        - "from"
+        - "to"
+        - "oql"
+      type: "object"
+      properties:
+        oql:
+          type: "string"
+          description: "OQL query string, e.g.\n `fetch logs | filter severity_number > 10 | filter body contains \"error\"`."
+        limit:
+          type: "integer"
+          description: "Maximum rows to return; a `| limit N` pipeline command takes precedence."
+          format: "int32"
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        page_token:
+          type: "string"
+          description: "Opaque cursor for pagination."
+    QueryLogsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+          description: "Object discriminator; always \"query\". Mirrors QueryTracesResponse."
+        search:
+          $ref: "#/components/schemas/SearchLogsResponse"
+    SearchLogsRequest:
+      type: "object"
+      properties:
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        query:
+          type: "string"
+          description: "Free-text query matched against the body field (case-insensitive)."
+        filter_operator:
+          type: "string"
+          description: "How to combine multiple filters: \"and\" (default) or \"or\", mirroring\n the traces filter_operator."
+        filters:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TraceFilter"
+        sort:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TraceSort"
+        limit:
+          type: "integer"
+          description: "Maximum rows to return. Defaults to 100 and is capped at 1000."
+          format: "int32"
+        page_token:
+          type: "string"
+          description: "Opaque cursor for pagination; empty or absent means the first page."
+    SearchLogsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+          description: "Object discriminator; always \"list\". Mirrors SearchTracesResponse."
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Log"
+        has_more:
+          type: "boolean"
+        next_page_token:
+          type: "string"
+          description: "Keyset cursor for the next page; empty when has_more is false."
+        meta:
+          $ref: "#/components/schemas/TraceSearchMeta"
+        total_count:
+          type: "string"
+          description: "Exact match count for the full time range (cursor-independent, constant\n across pages). int64 serializes as a JSON string per protojson."
+    GetLogResponse:
+      type: "object"
+      properties:
+        log:
+          $ref: "#/components/schemas/Log"
+    GetLogContextRequest:
+      required:
+        - "from"
+        - "to"
+      type: "object"
+      properties:
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        query:
+          type: "string"
+        filter_operator:
+          type: "string"
+        filters:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TraceFilter"
+        before:
+          type: "integer"
+          description: "Number of matching records earlier than the anchor. Defaults to 10."
+          format: "int32"
+        after:
+          type: "integer"
+          description: "Number of matching records later than the anchor. Defaults to 10."
+          format: "int32"
+        oql:
+          type: "string"
+          description: "Optional OQL pipeline. It cannot be combined with query or filters."
+    GetLogContextResponse:
+      required:
+        - "anchor"
+        - "before"
+        - "after"
+        - "has_more_before"
+        - "has_more_after"
+      type: "object"
+      properties:
+        anchor:
+          $ref: "#/components/schemas/Log"
+        before:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Log"
+          description: "Matching records earlier than the anchor, ordered oldest to newest."
+        after:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Log"
+          description: "Matching records later than the anchor, ordered oldest to newest."
+        has_more_before:
+          type: "boolean"
+        has_more_after:
+          type: "boolean"
+    Log:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        trace_id:
+          type: "string"
+        span_id:
+          type: "string"
+        timestamp:
+          type: "string"
+          format: "date-time"
+        observed_timestamp:
+          type: "string"
+          format: "date-time"
+        severity_number:
+          type: "integer"
+          format: "int32"
+        severity_text:
+          type: "string"
+        body:
+          type: "string"
+        body_is_json:
+          type: "boolean"
+        event_name:
+          type: "string"
+        dropped_attributes_count:
+          type: "integer"
+          format: "int32"
+        trace_flags:
+          type: "integer"
+          format: "uint32"
+        scope_name:
+          type: "string"
+        scope_version:
+          type: "string"
+        scope_attributes:
+          type: "object"
+          additionalProperties:
+            type: "string"
+        log_attributes:
+          type: "object"
+          additionalProperties:
+            type: "string"
+        resource_attributes:
+          type: "object"
+          additionalProperties:
+            type: "string"
+        service_name:
+          type: "string"
+        service_version:
+          type: "string"
+        deployment_environment:
+          type: "string"
+        host_name:
+          type: "string"
+        project_id:
+          type: "string"
+      description: "Log is the canonical wire representation of an otel_logs row."
+    TraceFilter:
+      type: "object"
+      properties:
+        field:
+          type: "string"
+        op:
+          type: "string"
+        values:
+          type: "array"
+          items:
+            type: "string"
+    AggregateBucket:
+      type: "object"
+      properties:
+        timestamp:
+          type: "string"
+          format: "date-time"
+        severity_counts:
+          type: "object"
+          additionalProperties:
+            type: "string"
+          description: "severity_number → count"
+        total_count:
+          type: "string"
+    FacetGroup:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        keys:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FacetKey"
+      description: "FacetGroup is one attribute family in the facet hierarchy. name is one of\n \"native\" (promoted columns), \"attribute\" (log_attributes), \"resource\"\n (resource_attributes), or \"scope\" (scope_attributes)."
+    FacetValue:
+      type: "object"
+      properties:
+        value:
+          type: "string"
+        count:
+          type: "string"
+    FieldInfo:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        type:
+          type: "string"
+    LogPattern:
+      required:
+        - "id"
+        - "template"
+        - "count"
+        - "percentage"
+        - "first_seen"
+        - "last_seen"
+        - "sample_log_ids"
+        - "severity_summary"
+        - "service_summary"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Stable hash of the normalized template."
+        template:
+          type: "string"
+        count:
+          type: "string"
+          description: "Number of sampled records assigned to this pattern. This is exact when\n meta.truncated is false."
+        percentage:
+          type: "number"
+          description: "Percentage of sampled records assigned to this pattern, from 0 to 100."
+          format: "double"
+        first_seen:
+          type: "string"
+          format: "date-time"
+        last_seen:
+          type: "string"
+          format: "date-time"
+        sample_log_ids:
+          type: "array"
+          items:
+            type: "string"
+          description: "A bounded set of example record identifiers; raw bodies are not repeated."
+        severity_summary:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FacetValue"
+          description: "Top severity and service values observed inside this pattern."
+        service_summary:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FacetValue"
+        suggested_query:
+          type: "string"
+          description: "Bounded literal fragment that can be sent through SearchLogs to find\n representative raw records for this normalized pattern."
+    FindLogPatternsMeta:
+      required:
+        - "request_id"
+        - "from"
+        - "to"
+        - "total_count"
+        - "sampled_count"
+        - "truncated"
+        - "warnings"
+      type: "object"
+      properties:
+        request_id:
+          type: "string"
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        total_count:
+          type: "string"
+          description: "Exact number of records matching the request before bounded sampling."
+        sampled_count:
+          type: "string"
+        truncated:
+          type: "boolean"
+        warnings:
+          type: "array"
+          items:
+            type: "string"
+    TraceSort:
+      type: "object"
+      properties:
+        field:
+          type: "string"
+        order:
+          type: "string"
+    TraceSearchMeta:
+      type: "object"
+      properties:
+        request_id:
+          type: "string"
+        from:
+          type: "string"
+          format: "date-time"
+        to:
+          type: "string"
+          format: "date-time"
+        row_count:
+          type: "integer"
+          format: "int32"
+    FacetKey:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        field:
+          type: "string"
+        log_count:
+          type: "string"
+        distinct_value_count:
+          type: "string"
+        top_values:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FacetValue"
+        filterable:
+          type: "boolean"
+      description: "FacetKey is one facetable key inside a group, with its observed volume and\n top values for the requested range. field is the name usable in filters /\n sort (e.g. \"attribute.http.method\" or \"service_name\"); it is empty when the\n key is not filterable (the scope group)."
     QueryReportRequest:
       required:
         - "metric"
@@ -14255,17 +15428,6 @@ components:
           type: "string"
         op:
           type: "string"
-    TraceFilter:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        op:
-          type: "string"
-        values:
-          type: "array"
-          items:
-            type: "string"
     TelemetryRow:
       type: "object"
       properties:
@@ -14508,13 +15670,6 @@ components:
           type: "array"
           items:
             type: "string"
-    TraceSort:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        order:
-          type: "string"
     TraceSummary:
       type: "object"
       properties:
@@ -14589,20 +15744,6 @@ components:
         duration:
           type: "number"
           format: "double"
-    TraceSearchMeta:
-      type: "object"
-      properties:
-        request_id:
-          type: "string"
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        row_count:
-          type: "integer"
-          format: "int32"
     SpanSummary:
       type: "object"
       properties:
@@ -27652,7 +28793,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KYDMWCQJKCPX2G9FRS7JR8FW"
+                                          default: "01KYHAQPJ98XEAMRA8PE24KKX3"
                                         name:
                                           type: "string"
                                         description:
@@ -29462,7 +30603,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01KYDMWCSG5D6M80BRHKT56TJJ"
+                                          default: "01KYHAQPKYW1ANQW3THW6C4K2P"
                                         name:
                                           type: "string"
                                         description:
@@ -38231,7 +39372,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KYDMWCZKPWENDFYJ5KSQX45T"
+                              default: "tool_01KYHAQPT3DGERVSRVNCZ8XFH7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38332,7 +39473,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KYDMWCZN8GHVBNGXZSHMQSFD"
+                              default: "tool_01KYHAQPT5KTETX8EA0125RJ9G"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38435,7 +39576,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KYDMWCZQDZHJPKVPC4MA13TH"
+                              default: "tool_01KYHAQPT898HPTP3X3WTWEFT2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38579,7 +39720,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KYDMWCZVY79YAF2J9V23NEC6"
+                              default: "tool_01KYHAQPTBEETJG2393D3ASYZJ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38655,7 +39796,7 @@ paths:
                                     properties:
                                       id:
                                         type: "string"
-                                        default: "01KYDMWCZX6JZ7HYE1GSNDK0RV"
+                                        default: "01KYHAQPTENVRPFC8DGXJYYVRM"
                                       name:
                                         type: "string"
                                       description:
@@ -38714,7 +39855,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01KYDMWCZY2WMPM441GHNV1YA7"
+                              default: "tool_01KYHAQPTFHVM14VHRMRK9Z1C4"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39274,7 +40415,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD0H6KV41MWQ1WTQK5XA"
+                        default: "tool_01KYHAQPVB0RVN7S766RMNRF3N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39375,7 +40516,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD0MTS8S606S4A6RP762"
+                        default: "tool_01KYHAQPVF3XCXNRQ4HDCX7XVP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39478,7 +40619,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD0PAZW0E3DWB142BJWT"
+                        default: "tool_01KYHAQPVJG8ZQPMG55Z0JFDVC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39622,7 +40763,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD0TY6KGAG87QQ3513QS"
+                        default: "tool_01KYHAQPVQFGQQ4B1QB7DMSYSX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39698,7 +40839,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KYDMWD0V6P0QJQRAKBE522T5"
+                                  default: "01KYHAQPVTNW6JCHJY0GJY9281"
                                 name:
                                   type: "string"
                                 description:
@@ -39757,7 +40898,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD0XAWJZ2VK8QWP3D4FT"
+                        default: "tool_01KYHAQPVWRTH3HFESAQFCB776"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40223,7 +41364,7 @@ paths:
                             properties:
                               id:
                                 type: "string"
-                                default: "01KYDMWD1T2QXXH1J8JWB85GR5"
+                                default: "01KYHAQPXCAXES2FEK3RPTG77H"
                               name:
                                 type: "string"
                               description:
@@ -40369,7 +41510,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD18V14VAWN66JCMKDYP"
+                        default: "tool_01KYHAQPWEPXZNXJW4F3QEPPJ1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40470,7 +41611,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD1AEEBZ9G138AZ9XY7D"
+                        default: "tool_01KYHAQPWJ63TNYEQ6ZQH2YMZ0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40573,7 +41714,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD1CY7YVNRPS18ADS7B4"
+                        default: "tool_01KYHAQPWNAXTF00FZWDEE0081"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40717,7 +41858,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD1E0DJFTPRX8XAD4TDA"
+                        default: "tool_01KYHAQPWSTQQX9GWB6V5T3BT5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40793,7 +41934,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KYDMWD1GJ0PX5H1E7EM7YDQN"
+                                  default: "01KYHAQPWWEXEY5P3H6ECH52R9"
                                 name:
                                   type: "string"
                                 description:
@@ -40852,7 +41993,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD1HCQ2XFFDKCD3GYBFF"
+                        default: "tool_01KYHAQPWYPS2APYR8P07SKR44"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41013,7 +42154,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD2SJHMX394FXY6PZ1XX"
+                        default: "tool_01KYHAQPYT5KFN52M6FDGRSGGR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41114,7 +42255,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD2W08TA5GF8R8BY3RA4"
+                        default: "tool_01KYHAQPYY7A8H6FK4FCR45MR9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41217,7 +42358,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD2YTE03AVF5TAKMMZYZ"
+                        default: "tool_01KYHAQPZ2RK2BE4P39A5S9F4X"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41361,7 +42502,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD32BNMHC7EBMDCF18MR"
+                        default: "tool_01KYHAQPZ73RVS00FR2QXBP8S8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41437,7 +42578,7 @@ paths:
                               properties:
                                 id:
                                   type: "string"
-                                  default: "01KYDMWD33P0HWWXS57R7HQ8FA"
+                                  default: "01KYHAQPZAG63SSM1QVTYKWW16"
                                 name:
                                   type: "string"
                                 description:
@@ -41496,7 +42637,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01KYDMWD34FAQGFMT141B3H5MN"
+                        default: "tool_01KYHAQPZCRS1N1G82947FK9WJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43720,7 +44861,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01KYDMWD6TC07CBJHHRP29S6JP"
+                          default: "01KYHAQQ3YB77E8FKQPD1P7GXX"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         display_name:
@@ -43923,7 +45064,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KYDMWD70517XDDMCJ9X5RPYP"
+                    default: "01KYHAQQ42ZHAPKM9X92EKSXR9"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -44046,7 +45187,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KYDMWD6YMK4BGBF948G8NNZH"
+                    default: "01KYHAQQ41SACYSH7RY7SSF516"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -44208,7 +45349,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01KYDMWD74RWYDYFKJA5J3033F"
+                    default: "01KYHAQQ46AR1BX4641ZD5JW1Q"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   display_name:
@@ -46938,7 +48079,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-25T22:03:03.347Z"
+                          default: "2026-07-27T08:22:51.156Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -46946,7 +48087,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:03.348Z"
+                              default: "2026-07-27T08:22:51.157Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -47090,7 +48231,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-25T22:03:03.347Z"
+                    default: "2026-07-27T08:22:51.156Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47098,7 +48239,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-25T22:03:03.348Z"
+                        default: "2026-07-27T08:22:51.157Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -47237,7 +48378,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-25T22:03:03.347Z"
+                    default: "2026-07-27T08:22:51.156Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47245,7 +48386,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-25T22:03:03.348Z"
+                        default: "2026-07-27T08:22:51.157Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -47417,7 +48558,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-25T22:03:03.347Z"
+                    default: "2026-07-27T08:22:51.156Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47425,7 +48566,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-25T22:03:03.348Z"
+                        default: "2026-07-27T08:22:51.157Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -47859,7 +49000,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-25T22:03:41.746Z"
+                                    default: "2026-07-27T08:23:20.006Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -47932,7 +49073,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-25T22:03:41.748Z"
+                                    default: "2026-07-27T08:23:20.008Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -48005,7 +49146,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-25T22:03:41.750Z"
+                                    default: "2026-07-27T08:23:20.009Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -48078,7 +49219,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-07-25T22:03:41.751Z"
+                                    default: "2026-07-27T08:23:20.011Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -48118,7 +49259,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-25T22:03:03.347Z"
+                          default: "2026-07-27T08:22:51.156Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -48126,7 +49267,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:03.348Z"
+                              default: "2026-07-27T08:22:51.157Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -48754,7 +49895,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-25T22:03:41.793Z"
+                                default: "2026-07-27T08:23:20.040Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -48827,7 +49968,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-25T22:03:41.794Z"
+                                default: "2026-07-27T08:23:20.042Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -48900,7 +50041,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-25T22:03:41.796Z"
+                                default: "2026-07-27T08:23:20.043Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -48973,7 +50114,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-07-25T22:03:41.798Z"
+                                default: "2026-07-27T08:23:20.045Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -49013,7 +50154,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-07-25T22:03:03.347Z"
+                      default: "2026-07-27T08:22:51.156Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -49021,7 +50162,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-07-25T22:03:03.348Z"
+                          default: "2026-07-27T08:22:51.157Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -49386,7 +50527,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.777Z"
+                              default: "2026-07-27T08:23:20.023Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49459,7 +50600,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.778Z"
+                              default: "2026-07-27T08:23:20.025Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49532,7 +50673,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.780Z"
+                              default: "2026-07-27T08:23:20.026Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49605,7 +50746,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.781Z"
+                              default: "2026-07-27T08:23:20.028Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49645,7 +50786,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-25T22:03:03.347Z"
+                    default: "2026-07-27T08:22:51.156Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -49653,7 +50794,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-25T22:03:03.348Z"
+                        default: "2026-07-27T08:22:51.157Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -50274,7 +51415,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.838Z"
+                              default: "2026-07-27T08:23:20.087Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -50347,7 +51488,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.839Z"
+                              default: "2026-07-27T08:23:20.088Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -50420,7 +51561,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.840Z"
+                              default: "2026-07-27T08:23:20.090Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -50493,7 +51634,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:41.841Z"
+                              default: "2026-07-27T08:23:20.091Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -50533,7 +51674,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-07-25T22:03:03.347Z"
+                    default: "2026-07-27T08:22:51.156Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -50541,7 +51682,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-07-25T22:03:03.348Z"
+                        default: "2026-07-27T08:22:51.157Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -56784,7 +57925,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-25T22:03:41.981Z"
+                      default: "2026-07-27T08:23:20.268Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -56826,7 +57967,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-25T22:03:41.982Z"
+                      default: "2026-07-27T08:23:20.269Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -56868,7 +58009,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-25T22:03:41.983Z"
+                      default: "2026-07-27T08:23:20.270Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -56910,7 +58051,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-07-25T22:03:41.984Z"
+                      default: "2026-07-27T08:23:20.272Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -57245,7 +58386,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-25T22:03:03.347Z"
+                          default: "2026-07-27T08:22:51.156Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -57253,7 +58394,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:03.348Z"
+                              default: "2026-07-27T08:22:51.157Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -57327,7 +58468,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-07-25T22:03:03.347Z"
+                          default: "2026-07-27T08:22:51.156Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -57335,7 +58476,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-07-25T22:03:03.348Z"
+                              default: "2026-07-27T08:22:51.157Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -57523,7 +58664,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-25T22:03:03.347Z"
+                        default: "2026-07-27T08:22:51.156Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -57531,7 +58672,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-25T22:03:03.348Z"
+                            default: "2026-07-27T08:22:51.157Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -57605,7 +58746,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-25T22:03:03.347Z"
+                        default: "2026-07-27T08:22:51.156Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -57613,7 +58754,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-25T22:03:03.348Z"
+                            default: "2026-07-27T08:22:51.157Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -57711,7 +58852,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-25T22:03:03.347Z"
+                        default: "2026-07-27T08:22:51.156Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -57719,7 +58860,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-25T22:03:03.348Z"
+                            default: "2026-07-27T08:22:51.157Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -57793,7 +58934,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-25T22:03:03.347Z"
+                        default: "2026-07-27T08:22:51.156Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -57801,7 +58942,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-25T22:03:03.348Z"
+                            default: "2026-07-27T08:22:51.157Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -57997,7 +59138,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-25T22:03:03.347Z"
+                        default: "2026-07-27T08:22:51.156Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -58005,7 +59146,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-25T22:03:03.348Z"
+                            default: "2026-07-27T08:22:51.157Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -58079,7 +59220,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-07-25T22:03:03.347Z"
+                        default: "2026-07-27T08:22:51.156Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -58087,7 +59228,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-07-25T22:03:03.348Z"
+                            default: "2026-07-27T08:22:51.157Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -62794,6 +63935,698 @@ paths:
       x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
+  /v2/mcp-gateway-calls:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "List MCP gateway calls"
+      description: "Returns a paginated audit log of tool calls made through MCP gateways."
+      operationId: "McpGatewayCallList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "mcp_gateway_id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "mcp_server_id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "status"
+          in: "query"
+          schema:
+            $ref: "#/components/schemas/McpGatewayCallStatus"
+        - name: "start_time"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "end_time"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMcpGatewayCallsResponse"
+      x-speakeasy-group: "mcpGatewayCalls"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+  /v2/mcp-gateways:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "List MCP gateways"
+      description: "Returns a paginated list of MCP gateways in the workspace."
+      operationId: "McpGatewayList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "status"
+          in: "query"
+          schema:
+            $ref: "#/components/schemas/McpGatewayStatus"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMcpGatewaysResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Create an MCP gateway"
+      description: "Creates a client-facing MCP gateway that links one or more synced upstream servers and exposes a unified MCP endpoint."
+      operationId: "McpGatewayCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMcpGatewayRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateMcpGatewayResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/mcp-gateways/{gateway_id}/tools:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "List exposed tools for a gateway"
+      description: "Returns the namespaced, policy-filtered tool view for a gateway."
+      operationId: "McpGatewayListTools"
+      parameters:
+        - name: "gateway_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "mcp_server_id"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMcpGatewayToolsResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "listTools"
+      security:
+        - ApiKey: []
+  /v2/mcp-gateways/{gateway_id}/tools:test:
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Test an MCP gateway tool"
+      description: "Executes a single exposed tool through a gateway for testing."
+      operationId: "McpGatewayTestTool"
+      parameters:
+        - name: "gateway_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestMcpGatewayToolRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestMcpGatewayToolResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "testTool"
+      security:
+        - ApiKey: []
+  /v2/mcp-gateways/{id}:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "Retrieve an MCP gateway"
+      description: "Retrieves the details of an existing MCP gateway by its unique ID."
+      operationId: "McpGatewayGet"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetMcpGatewayResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "MCP Gateway"
+      summary: "Delete an MCP gateway"
+      description: "Deletes an MCP gateway from the workspace. The response body is empty when the delete succeeds."
+      operationId: "McpGatewayDelete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteMcpGatewayResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "MCP Gateway"
+      summary: "Update an MCP gateway"
+      description: "Updates mutable fields of an existing MCP gateway. Omitted optional fields keep their current values."
+      operationId: "McpGatewayUpdate"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMcpGatewayRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateMcpGatewayResponse"
+      x-speakeasy-group: "mcpGateways"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/mcp-servers:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "List MCP servers"
+      description: "Returns a paginated list of MCP servers in the workspace."
+      operationId: "McpServerList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "status"
+          in: "query"
+          schema:
+            $ref: "#/components/schemas/McpServerStatus"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMcpServersResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Create an MCP server"
+      description: "Creates a new upstream MCP server connection in the workspace."
+      operationId: "McpServerCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMcpServerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateMcpServerResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/mcp-servers/{id}:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "Retrieve an MCP server"
+      description: "Retrieves the details of an existing MCP server by its unique ID."
+      operationId: "McpServerGet"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetMcpServerResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "MCP Gateway"
+      summary: "Delete an MCP server"
+      description: "Deletes an MCP server from the workspace. The response body is empty when the delete succeeds."
+      operationId: "McpServerDelete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteMcpServerResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "MCP Gateway"
+      summary: "Update an MCP server"
+      description: "Updates mutable fields of an existing MCP server. Omitted optional fields keep their current values."
+      operationId: "McpServerUpdate"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMcpServerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateMcpServerResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+  /v2/mcp-servers/{id}/tools:test:
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Test an MCP server tool"
+      description: "Executes a single tool on an upstream MCP server for testing. Connects to the server, invokes the tool with the provided arguments, and returns the result."
+      operationId: "McpServerTestTool"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestMcpServerToolRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestMcpServerToolResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "testTool"
+      security:
+        - ApiKey: []
+  /v2/mcp-servers/{id}:sync:
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Sync an MCP server"
+      description: "Connects to an upstream MCP server, discovers tools, and persists the tool list and sync state on the server record."
+      operationId: "McpServerSync"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SyncMcpServerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncMcpServerResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "sync"
+      security:
+        - ApiKey: []
+  /v2/mcp-servers:test:
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Test an MCP server connection"
+      description: "Probes an upstream MCP server connection without persisting it. Returns discovered tools and connectivity status."
+      operationId: "McpServerTest"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestMcpServerRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestMcpServerResponse"
+      x-speakeasy-group: "mcpServers"
+      x-speakeasy-name-override: "test"
+      security:
+        - ApiKey: []
+  /v2/mcp-sessions:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "List MCP sessions"
+      description: "Returns a paginated list of per-user OAuth sessions for MCP gateways."
+      operationId: "McpSessionList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "mcp_gateway_id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "mcp_server_id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "account_id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "status"
+          in: "query"
+          schema:
+            $ref: "#/components/schemas/McpSessionStatus"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMcpSessionsResponse"
+      x-speakeasy-group: "mcpSessions"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+  /v2/mcp-sessions/{id}:
+    delete:
+      tags:
+        - "MCP Gateway"
+      summary: "Revoke an MCP session"
+      description: "Revokes a per-user OAuth session, invalidating the stored upstream token."
+      operationId: "McpSessionRevoke"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RevokeMcpSessionResponse"
+      x-speakeasy-group: "mcpSessions"
+      x-speakeasy-name-override: "revoke"
+      security:
+        - ApiKey: []
+  /v2/mcp-toolsets:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "List MCP toolsets"
+      description: "Returns a paginated list of MCP toolsets in the workspace."
+      operationId: "McpToolsetList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMcpToolsetsResponse"
+      x-speakeasy-group: "mcpToolsets"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "MCP Gateway"
+      summary: "Create an MCP toolset"
+      description: "Creates a named, project-scoped collection of individual tools drawn from MCP servers. Toolsets can be assigned to API keys to narrow the tools a key may see and call."
+      operationId: "McpToolsetCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMcpToolsetRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateMcpToolsetResponse"
+      x-speakeasy-group: "mcpToolsets"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v2/mcp-toolsets/{id}:
+    get:
+      tags:
+        - "MCP Gateway"
+      summary: "Retrieve an MCP toolset"
+      description: "Retrieves the details of an existing MCP toolset by its unique ID."
+      operationId: "McpToolsetGet"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetMcpToolsetResponse"
+      x-speakeasy-group: "mcpToolsets"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "MCP Gateway"
+      summary: "Delete an MCP toolset"
+      description: "Deletes an MCP toolset from the workspace. The response body is empty when the delete succeeds."
+      operationId: "McpToolsetDelete"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteMcpToolsetResponse"
+      x-speakeasy-group: "mcpToolsets"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "MCP Gateway"
+      summary: "Update an MCP toolset"
+      description: "Updates mutable fields of an existing MCP toolset. Omitted optional fields keep their current values."
+      operationId: "McpToolsetUpdate"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMcpToolsetRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateMcpToolsetResponse"
+      x-speakeasy-group: "mcpToolsets"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
   /v2/models/{model_id}/sharing:
     put:
       tags:
@@ -65920,6 +67753,290 @@ paths:
       x-speakeasy-name-override: "get"
       security:
         - ApiKey: []
+  /v2/traces/{trace_id}/logs:
+    get:
+      tags:
+        - "Logs"
+      summary: "List logs for a trace"
+      description: "Return all log records correlated with a given trace_id. Results are scoped to the authenticated workspace."
+      operationId: "ListTraceLogs"
+      parameters:
+        - name: "trace_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "page_token"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTraceLogsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "listTraceLogs"
+      security:
+        - ApiKey: []
+  /v3/logs/aggregate:
+    post:
+      tags:
+        - "Logs"
+      summary: "Aggregate logs"
+      description: "Return severity counts grouped by time buckets at a configurable grain (auto, minute, hour, day)."
+      operationId: "AggregateLogs"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AggregateLogsRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AggregateLogsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "aggregate"
+      security:
+        - ApiKey: []
+  /v3/logs/facets:
+    get:
+      tags:
+        - "Logs"
+      summary: "List log facets"
+      description: "Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values for the requested time range."
+      operationId: "ListLogFacets"
+      parameters:
+        - name: "from"
+          in: "query"
+          schema:
+            type: "string"
+            format: "date-time"
+        - name: "to"
+          in: "query"
+          schema:
+            type: "string"
+            format: "date-time"
+        - name: "key_limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "value_limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLogFacetsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "listFacets"
+      security:
+        - ApiKey: []
+  /v3/logs/facets/{field}:
+    get:
+      tags:
+        - "Logs"
+      summary: "List facet values"
+      description: "Return distinct values with occurrence counts for a given facet field."
+      operationId: "ListLogFacetValues"
+      parameters:
+        - name: "field"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "from"
+          in: "query"
+          schema:
+            type: "string"
+            format: "date-time"
+        - name: "to"
+          in: "query"
+          schema:
+            type: "string"
+            format: "date-time"
+        - name: "search"
+          in: "query"
+          description: "Optional case-insensitive substring search over facet values."
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLogFacetValuesResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "listFacetValues"
+      security:
+        - ApiKey: []
+  /v3/logs/fields:
+    get:
+      tags:
+        - "Logs"
+      summary: "List log fields"
+      description: "Return all queryable fields: static columns and dynamic attribute families (attribute.*, resource.*)."
+      operationId: "ListLogFields"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLogFieldsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "listFields"
+      security:
+        - ApiKey: []
+  /v3/logs/patterns:
+    post:
+      tags:
+        - "Logs"
+      summary: "Find log patterns"
+      description: "Find stable templates in a bounded sample of matching log bodies. The response reports sampling and truncation metadata and never returns an unbounded list of raw bodies."
+      operationId: "FindLogPatterns"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FindLogPatternsRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FindLogPatternsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "findPatterns"
+      security:
+        - ApiKey: []
+  /v3/logs/query:
+    post:
+      tags:
+        - "Logs"
+      summary: "Query logs with OQL"
+      description: "Run an OQL log query using the pipeline grammar `fetch logs | filter <expr> | sort timestamp desc | limit N`. The query is compiled onto the same engine as SearchLogs; timestamp desc is the only supported sort."
+      operationId: "QueryLogs"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryLogsRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryLogsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "query"
+      security:
+        - ApiKey: []
+  /v3/logs/search:
+    post:
+      tags:
+        - "Logs"
+      summary: "Search logs"
+      description: "Query log records with filters, free-text search, and keyset pagination. Results are ordered timestamp desc (the only supported sort, mirroring traces)."
+      operationId: "SearchLogs"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchLogsRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchLogsResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "search"
+      security:
+        - ApiKey: []
+  /v3/logs/{id}:
+    get:
+      tags:
+        - "Logs"
+      summary: "Get a single log"
+      description: "Retrieve a log record by its ULID. Returns 404 if the record does not exist or belongs to another workspace."
+      operationId: "GetLog"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetLogResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+  /v3/logs/{id}/context:
+    post:
+      tags:
+        - "Logs"
+      summary: "Get surrounding log context"
+      description: "Retrieve the matching log records immediately before and after an anchor log. Neighbors use the same free-text and structured filter dialect as SearchLogs and are returned in chronological order."
+      operationId: "GetLogContext"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetLogContextRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetLogContextResponse"
+      x-speakeasy-group: "logs"
+      x-speakeasy-name-override: "context"
+      security:
+        - ApiKey: []
   /v2/reporting:
     post:
       tags:
@@ -66234,6 +68351,8 @@ tags:
     description: "Identities represent end users from your system for usage and engagement tracking."
   - name: "Management keys"
     description: "Management keys are workspace-scoped credentials that authenticate programmatic access to workspace administration surfaces (API keys, budgets). Unlike project-scoped API keys, a management key always operates at the workspace level."
+  - name: "MCP Gateway"
+    description: "Manage upstream MCP servers and client-facing MCP gateways. Create server connections, discover tools, assemble gateways, and review call logs."
   - name: "Model Sharing"
     description: "Model sharing controls which projects a workspace model is available to. Workspace admins configure a model's Sharing (all projects / selected projects); the config ships inline on the models list response, so there is no separate read endpoint."
   - name: "Monitors"
@@ -66254,6 +68373,8 @@ tags:
   - description: "Run agents on a cadence — cron, interval, or one-off. Minimum firing interval is 1 hour."
     name: "Agent Schedules"
   - name: "Embeddings"
+  - name: "Logs"
+    description: "OpenTelemetry log query API. Search, filter, aggregate, and facet log records ingested via OTLP."
   - name: "Reporting"
     description: "GenAI reporting API over canonical analytics rollups. Accepts a metric name, time range, grain, group-by, and filters; returns a typed time series and optional totals."
   - name: "Telemetry"
