@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a webhook
+   * Create completion
    *
    * @remarks
-   * Creates a webhook that delivers the selected workspace events to an HTTPS endpoint. Generate a signing secret first with `GET /v2/webhooks/secret`.
+   * For sending requests to legacy completion models
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
