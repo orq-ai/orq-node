@@ -204,7 +204,8 @@ export type StreamRunAgentModelConfigurationGuardrails = {
 export type StreamRunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type StreamRunAgentModelConfigurationFallbacks = {
   /**
@@ -433,13 +434,14 @@ export type StreamRunAgentModelConfigurationParameters = {
    */
   guardrails?: Array<StreamRunAgentModelConfigurationGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -708,7 +710,8 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
 export type StreamRunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type StreamRunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -941,13 +944,14 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | Array<StreamRunAgentFallbackModelConfigurationGuardrails>
     | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2473,7 +2477,8 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2484,6 +2489,7 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function streamRunAgentModelConfigurationPluginsToJSON(
@@ -2740,6 +2746,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -2800,6 +2807,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
+        components.ResponseHealingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3302,7 +3310,8 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3314,6 +3323,7 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
     components.PIIRedactionPluginAuto$outboundSchema,
+    components.ResponseHealingPlugin$outboundSchema,
   ]);
 
 export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
@@ -3575,6 +3585,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3644,6 +3655,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
+        components.ResponseHealingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -4144,7 +4156,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KYHFSEBJXEPEC9T3XKD5X8A8"),
+  id: z.string().default("01KYKESHCJAFHYHA7KJXMTWA0D"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

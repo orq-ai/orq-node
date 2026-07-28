@@ -446,7 +446,8 @@ export type ListAgentsAgentsGuardrails = {
 export type ListAgentsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type ListAgentsFallbacks = {
   /**
@@ -664,13 +665,14 @@ export type ListAgentsParameters = {
    */
   guardrails?: Array<ListAgentsAgentsGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -909,7 +911,8 @@ export type ListAgentsFallbackModelConfigurationGuardrails = {
 export type ListAgentsFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type ListAgentsFallbackModelConfigurationFallbacks = {
   /**
@@ -1142,13 +1145,14 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | Array<ListAgentsFallbackModelConfigurationGuardrails>
     | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1896,6 +1900,7 @@ export const ListAgentsPlugins$inboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function listAgentsPluginsFromJSON(
@@ -2109,6 +2114,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => ListAgentsFallbacks$inboundSchema))
@@ -2514,6 +2520,7 @@ export const ListAgentsFallbackModelConfigurationPlugins$inboundSchema:
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
     components.PIIRedactionPluginAuto$inboundSchema,
+    components.ResponseHealingPlugin$inboundSchema,
   ]);
 
 export function listAgentsFallbackModelConfigurationPluginsFromJSON(
@@ -2779,6 +2786,7 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
         components.PIIRedactionPluginAuto$inboundSchema,
+        components.ResponseHealingPlugin$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

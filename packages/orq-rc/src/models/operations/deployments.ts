@@ -315,6 +315,8 @@ export const DeploymentsReasoningEffort = {
   Low: "low",
   Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -490,6 +492,8 @@ export const DeploymentsProvider = {
   Poolside: "poolside",
   Tencent: "tencent",
   Nebius: "nebius",
+  Fireworks: "fireworks",
+  Baseten: "baseten",
   Reson8: "reson8",
   Slack: "slack",
   Orq: "orq",
