@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create transcription
+   * Create image edit
+   *
+   * @remarks
+   * Edit an Image
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
