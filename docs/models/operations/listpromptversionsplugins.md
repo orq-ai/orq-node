@@ -29,3 +29,11 @@ const value: components.PIIRedactionPluginNl = {
 };
 ```
 
+### `components.ResponseHealingPlugin`
+
+```typescript
+const value: components.ResponseHealingPlugin = {
+  id: "response_healing",
+};
+```
+

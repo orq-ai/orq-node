@@ -204,7 +204,8 @@ export type StreamRunAgentModelConfigurationGuardrails = {
 export type StreamRunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type StreamRunAgentModelConfigurationFallbacks = {
   /**
@@ -433,13 +434,14 @@ export type StreamRunAgentModelConfigurationParameters = {
    */
   guardrails?: Array<StreamRunAgentModelConfigurationGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -708,7 +710,8 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
 export type StreamRunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type StreamRunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -941,13 +944,14 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | Array<StreamRunAgentFallbackModelConfigurationGuardrails>
     | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1193,18 +1197,18 @@ export type StreamRunAgentAgentToolInputRunAgentsHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
   {
     Object: "object",
   } as const;
-export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
   ClosedEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
   >;
 
 export type StreamRunAgentAgentToolInputRunAgentsSchema = {
   type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType;
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1330,16 +1334,16 @@ export type AgentToolInputRunJSONSchemaToolRun = {
 /**
  * The type must be "object"
  */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
   ClosedEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
   >;
 
 /**
@@ -1350,7 +1354,7 @@ export type StreamRunAgentAgentToolInputRunAgentsParameters = {
    * The type must be "object"
    */
   type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType;
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType;
   /**
    * The properties of the function parameters
    */
@@ -1400,16 +1404,16 @@ export type AgentToolInputRunFunctionToolRun = {
 /**
  * The type must be "object"
  */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
   ClosedEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
   >;
 
 /**
@@ -1420,7 +1424,7 @@ export type StreamRunAgentAgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType;
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType;
   /**
    * The properties of the function parameters
    */
@@ -1528,7 +1532,7 @@ export type AgentToolInputRunBlueprint = {
 /**
  * The type of the argument.
  */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
   {
     String: "string",
     Number: "number",
@@ -1537,9 +1541,9 @@ export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTool
 /**
  * The type of the argument.
  */
-export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
+export type StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
   ClosedEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
   >;
 
 /**
@@ -1552,7 +1556,7 @@ export type AgentToolInputRunArguments = {
    * The type of the argument.
    */
   type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType;
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType;
   /**
    * A description of the argument.
    */
@@ -1606,6 +1610,36 @@ export type AgentToolInputRunHTTPToolRun = {
  */
 export type AgentToolInputRunCodeInterpreterTool = {
   type: "code_interpreter";
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/**
+ * Delegate a subtask to a secondary model for execution
+ */
+export type AgentToolInputRunSidekickTool = {
+  type: "sidekick";
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/**
+ * Consult a secondary model for advice on the current task
+ */
+export type AgentToolInputRunAdvisorTool = {
+  type: "advisor";
   /**
    * Whether this tool requires approval before execution
    */
@@ -1796,6 +1830,8 @@ export type StreamRunAgentAgentToolInputRun =
   | AgentToolInputRunRetrieveKnowledgeBasesTool
   | AgentToolInputRunQueryKnowledgeBaseTool
   | AgentToolInputRunCurrentDateTool
+  | AgentToolInputRunAdvisorTool
+  | AgentToolInputRunSidekickTool
   | AgentToolInputRunCodeInterpreterTool
   | AgentToolInputRunHTTPToolRun
   | AgentToolInputRunCodeToolRun
@@ -1893,6 +1929,8 @@ export type StreamRunAgentSettings = {
       | AgentToolInputRunRetrieveKnowledgeBasesTool
       | AgentToolInputRunQueryKnowledgeBaseTool
       | AgentToolInputRunCurrentDateTool
+      | AgentToolInputRunAdvisorTool
+      | AgentToolInputRunSidekickTool
       | AgentToolInputRunCodeInterpreterTool
       | AgentToolInputRunHTTPToolRun
       | AgentToolInputRunCodeToolRun
@@ -2439,7 +2477,8 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2450,6 +2489,7 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function streamRunAgentModelConfigurationPluginsToJSON(
@@ -2706,6 +2746,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -2766,6 +2807,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
+        components.ResponseHealingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3268,7 +3310,8 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3280,6 +3323,7 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
     components.PIIRedactionPluginAuto$outboundSchema,
+    components.ResponseHealingPlugin$outboundSchema,
   ]);
 
 export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
@@ -3541,6 +3585,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3610,6 +3655,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
+        components.ResponseHealingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -4058,11 +4104,11 @@ export function streamRunAgentAgentToolInputRunAgentsHeadersToJSON(
 }
 
 /** @internal */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema:
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
   > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType,
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType,
   );
 
 /** @internal */
@@ -4080,7 +4126,7 @@ export const StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema:
     StreamRunAgentAgentToolInputRunAgentsSchema
   > = z.object({
     type:
-      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema,
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema,
     properties: z.record(z.any()).optional(),
     required: z.array(z.string()).optional(),
   });
@@ -4110,7 +4156,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KYJT1HJC2HJVMCX0BN42P3HS"),
+  id: z.string().default("01KYPT8FM37BE6C1VR97GF89KW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -4325,11 +4371,11 @@ export function agentToolInputRunJSONSchemaToolRunToJSON(
 }
 
 /** @internal */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema:
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema:
   z.ZodNativeEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
   > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType,
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType,
   );
 
 /** @internal */
@@ -4348,7 +4394,7 @@ export const StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema:
     StreamRunAgentAgentToolInputRunAgentsParameters
   > = z.object({
     type:
-      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema,
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
     additionalProperties: z.record(z.any()).optional(),
@@ -4452,11 +4498,11 @@ export function agentToolInputRunFunctionToolRunToJSON(
 }
 
 /** @internal */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema:
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema:
   z.ZodNativeEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
   > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType,
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType,
   );
 
 /** @internal */
@@ -4475,7 +4521,7 @@ export const StreamRunAgentAgentToolInputRunParameters$outboundSchema:
     StreamRunAgentAgentToolInputRunParameters
   > = z.object({
     type:
-      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema,
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
     additionalProperties: z.record(z.any()).optional(),
@@ -4664,11 +4710,11 @@ export function agentToolInputRunBlueprintToJSON(
 }
 
 /** @internal */
-export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema:
+export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
+    typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
   > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType,
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType,
   );
 
 /** @internal */
@@ -4706,7 +4752,7 @@ export const AgentToolInputRunArguments$outboundSchema: z.ZodType<
   AgentToolInputRunArguments
 > = z.object({
   type:
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema,
+    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema,
   description: z.string(),
   sendToModel: z.boolean().default(true),
   defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -4822,6 +4868,70 @@ export function agentToolInputRunCodeInterpreterToolToJSON(
   return JSON.stringify(
     AgentToolInputRunCodeInterpreterTool$outboundSchema.parse(
       agentToolInputRunCodeInterpreterTool,
+    ),
+  );
+}
+
+/** @internal */
+export type AgentToolInputRunSidekickTool$Outbound = {
+  type: "sidekick";
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const AgentToolInputRunSidekickTool$outboundSchema: z.ZodType<
+  AgentToolInputRunSidekickTool$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunSidekickTool
+> = z.object({
+  type: z.literal("sidekick"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function agentToolInputRunSidekickToolToJSON(
+  agentToolInputRunSidekickTool: AgentToolInputRunSidekickTool,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunSidekickTool$outboundSchema.parse(
+      agentToolInputRunSidekickTool,
+    ),
+  );
+}
+
+/** @internal */
+export type AgentToolInputRunAdvisorTool$Outbound = {
+  type: "advisor";
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const AgentToolInputRunAdvisorTool$outboundSchema: z.ZodType<
+  AgentToolInputRunAdvisorTool$Outbound,
+  z.ZodTypeDef,
+  AgentToolInputRunAdvisorTool
+> = z.object({
+  type: z.literal("advisor"),
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function agentToolInputRunAdvisorToolToJSON(
+  agentToolInputRunAdvisorTool: AgentToolInputRunAdvisorTool,
+): string {
+  return JSON.stringify(
+    AgentToolInputRunAdvisorTool$outboundSchema.parse(
+      agentToolInputRunAdvisorTool,
     ),
   );
 }
@@ -5198,6 +5308,8 @@ export type StreamRunAgentAgentToolInputRun$Outbound =
   | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
   | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
   | AgentToolInputRunCurrentDateTool$Outbound
+  | AgentToolInputRunAdvisorTool$Outbound
+  | AgentToolInputRunSidekickTool$Outbound
   | AgentToolInputRunCodeInterpreterTool$Outbound
   | AgentToolInputRunHTTPToolRun$Outbound
   | AgentToolInputRunCodeToolRun$Outbound
@@ -5222,6 +5334,8 @@ export const StreamRunAgentAgentToolInputRun$outboundSchema: z.ZodType<
   z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
   z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
+  z.lazy(() => AgentToolInputRunAdvisorTool$outboundSchema),
+  z.lazy(() => AgentToolInputRunSidekickTool$outboundSchema),
   z.lazy(() => AgentToolInputRunCodeInterpreterTool$outboundSchema),
   z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
   z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
@@ -5332,6 +5446,8 @@ export type StreamRunAgentSettings$Outbound = {
       | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
       | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
       | AgentToolInputRunCurrentDateTool$Outbound
+      | AgentToolInputRunAdvisorTool$Outbound
+      | AgentToolInputRunSidekickTool$Outbound
       | AgentToolInputRunCodeInterpreterTool$Outbound
       | AgentToolInputRunHTTPToolRun$Outbound
       | AgentToolInputRunCodeToolRun$Outbound
@@ -5368,6 +5484,8 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunRetrieveKnowledgeBasesTool$outboundSchema),
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
+      z.lazy(() => AgentToolInputRunAdvisorTool$outboundSchema),
+      z.lazy(() => AgentToolInputRunSidekickTool$outboundSchema),
       z.lazy(() => AgentToolInputRunCodeInterpreterTool$outboundSchema),
       z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
       z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),

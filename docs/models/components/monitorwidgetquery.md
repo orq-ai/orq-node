@@ -1,0 +1,21 @@
+# MonitorWidgetQuery
+
+## Example Usage
+
+```typescript
+import { MonitorWidgetQuery } from "@orq-ai/node/models/components";
+
+let value: MonitorWidgetQuery = {
+  metric: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                  | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `metric`                                                                                                                               | *string*                                                                                                                               | :heavy_check_mark:                                                                                                                     | Reporting API catalogue metric, e.g. `genai.cost` or<br/> `genai.latency.p95`. Validated against the catalogue when the<br/> monitor is saved. |
+| `groupBy`                                                                                                                              | *string*[]                                                                                                                             | :heavy_minus_sign:                                                                                                                     | Reporting dimensions to break down by. Valid dimensions depend on<br/> the metric; validated when the monitor is saved.                |
+| `filters`                                                                                                                              | [components.MonitorFilter](../../models/components/monitorfilter.md)[]                                                                 | :heavy_minus_sign:                                                                                                                     | Reporting filters combined with AND.                                                                                                   |
+| `grain`                                                                                                                                | [components.Grain](../../models/components/grain.md)                                                                                   | :heavy_minus_sign:                                                                                                                     | Requested bucket grain for timeseries widgets.                                                                                         |
+| `limit`                                                                                                                                | *number*                                                                                                                               | :heavy_minus_sign:                                                                                                                     | Row cap. For toplist widgets this is the top-N group count.                                                                            |

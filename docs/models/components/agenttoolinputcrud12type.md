@@ -5,11 +5,11 @@
 ```typescript
 import { AgentToolInputCrud12Type } from "@orq-ai/node/models/components";
 
-let value: AgentToolInputCrud12Type = "code_interpreter";
+let value: AgentToolInputCrud12Type = "advisor";
 ```
 
 ## Values
 
 ```typescript
-"code_interpreter"
+"advisor"
 ```

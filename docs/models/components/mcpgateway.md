@@ -1,0 +1,28 @@
+# McpGateway
+
+## Example Usage
+
+```typescript
+import { McpGateway } from "@orq-ai/node/models/components";
+
+let value: McpGateway = {};
+```
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `id`                                                                                 | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `key`                                                                                | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `displayName`                                                                        | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `description`                                                                        | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `projectId`                                                                          | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `serverLinks`                                                                        | [components.McpGatewayServerLink](../../models/components/mcpgatewayserverlink.md)[] | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `toolNaming`                                                                         | [components.McpToolNaming](../../models/components/mcptoolnaming.md)                 | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `runtimeLimits`                                                                      | [components.McpRuntimeLimits](../../models/components/mcpruntimelimits.md)           | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `egressPolicy`                                                                       | [components.McpEgressPolicy](../../models/components/mcpegresspolicy.md)             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `status`                                                                             | [components.McpGatewayStatus](../../models/components/mcpgatewaystatus.md)           | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `publicUrl`                                                                          | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `created`                                                                            | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `updated`                                                                            | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `exposedToolsCount`                                                                  | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |

@@ -312,10 +312,11 @@ run();
 
 ### Errors
 
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.DeleteEvalResponseBody | 404                           | application/json              |
-| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.DeleteEvalResponseBody      | 404                                | application/json                   |
+| errors.DeleteEvalEvalsResponseBody | 409                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## invoke
 

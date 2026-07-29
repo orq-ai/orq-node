@@ -153,6 +153,17 @@ run();
 * [~~create~~](docs/sdks/orqresponses/README.md#create) - Create response :warning: **Deprecated**
 * [~~get~~](docs/sdks/orqresponses/README.md#get) - Get response :warning: **Deprecated**
 
+### [Alerts](docs/sdks/alerts/README.md)
+
+* [list](docs/sdks/alerts/README.md#list) - List alerts
+* [create](docs/sdks/alerts/README.md#create) - Create an alert
+* [get](docs/sdks/alerts/README.md#get) - Retrieve an alert
+* [delete](docs/sdks/alerts/README.md#delete) - Delete an alert
+* [update](docs/sdks/alerts/README.md#update) - Update an alert
+* [checkNow](docs/sdks/alerts/README.md#checknow) - Run an alert check now
+* [listTriggers](docs/sdks/alerts/README.md#listtriggers) - List alert triggers
+* [listTriggerEvents](docs/sdks/alerts/README.md#listtriggerevents) - List alert trigger events
+
 ### [Annotations](docs/sdks/annotations/README.md)
 
 * [create](docs/sdks/annotations/README.md#create) - Annotate a span
@@ -274,6 +285,19 @@ run();
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 * [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 
+### [Logs](docs/sdks/logs/README.md)
+
+* [listTraceLogs](docs/sdks/logs/README.md#listtracelogs) - List logs for a trace
+* [aggregate](docs/sdks/logs/README.md#aggregate) - Aggregate logs
+* [listFacets](docs/sdks/logs/README.md#listfacets) - List log facets
+* [listFacetValues](docs/sdks/logs/README.md#listfacetvalues) - List facet values
+* [listFields](docs/sdks/logs/README.md#listfields) - List log fields
+* [findPatterns](docs/sdks/logs/README.md#findpatterns) - Find log patterns
+* [query](docs/sdks/logs/README.md#query) - Query logs with OQL
+* [search](docs/sdks/logs/README.md#search) - Search logs
+* [get](docs/sdks/logs/README.md#get) - Get a single log
+* [context](docs/sdks/logs/README.md#context) - Get surrounding log context
+
 ### [ManagementKeys](docs/sdks/managementkeys/README.md)
 
 * [list](docs/sdks/managementkeys/README.md#list) - List management keys
@@ -282,6 +306,44 @@ run();
 * [get](docs/sdks/managementkeys/README.md#get) - Retrieve a management key
 * [delete](docs/sdks/managementkeys/README.md#delete) - Delete a management key
 * [update](docs/sdks/managementkeys/README.md#update) - Update a management key
+
+### [McpGatewayCalls](docs/sdks/mcpgatewaycalls/README.md)
+
+* [list](docs/sdks/mcpgatewaycalls/README.md#list) - List MCP gateway calls
+
+### [McpGateways](docs/sdks/mcpgateways/README.md)
+
+* [list](docs/sdks/mcpgateways/README.md#list) - List MCP gateways
+* [create](docs/sdks/mcpgateways/README.md#create) - Create an MCP gateway
+* [listTools](docs/sdks/mcpgateways/README.md#listtools) - List exposed tools for a gateway
+* [testTool](docs/sdks/mcpgateways/README.md#testtool) - Test an MCP gateway tool
+* [get](docs/sdks/mcpgateways/README.md#get) - Retrieve an MCP gateway
+* [delete](docs/sdks/mcpgateways/README.md#delete) - Delete an MCP gateway
+* [update](docs/sdks/mcpgateways/README.md#update) - Update an MCP gateway
+
+### [McpServers](docs/sdks/mcpservers/README.md)
+
+* [list](docs/sdks/mcpservers/README.md#list) - List MCP servers
+* [create](docs/sdks/mcpservers/README.md#create) - Create an MCP server
+* [get](docs/sdks/mcpservers/README.md#get) - Retrieve an MCP server
+* [delete](docs/sdks/mcpservers/README.md#delete) - Delete an MCP server
+* [update](docs/sdks/mcpservers/README.md#update) - Update an MCP server
+* [testTool](docs/sdks/mcpservers/README.md#testtool) - Test an MCP server tool
+* [sync](docs/sdks/mcpservers/README.md#sync) - Sync an MCP server
+* [test](docs/sdks/mcpservers/README.md#test) - Test an MCP server connection
+
+### [McpSessions](docs/sdks/mcpsessions/README.md)
+
+* [list](docs/sdks/mcpsessions/README.md#list) - List MCP sessions
+* [revoke](docs/sdks/mcpsessions/README.md#revoke) - Revoke an MCP session
+
+### [McpToolsets](docs/sdks/mcptoolsets/README.md)
+
+* [list](docs/sdks/mcptoolsets/README.md#list) - List MCP toolsets
+* [create](docs/sdks/mcptoolsets/README.md#create) - Create an MCP toolset
+* [get](docs/sdks/mcptoolsets/README.md#get) - Retrieve an MCP toolset
+* [delete](docs/sdks/mcptoolsets/README.md#delete) - Delete an MCP toolset
+* [update](docs/sdks/mcptoolsets/README.md#update) - Update an MCP toolset
 
 ### [MemoryStores](docs/sdks/memorystores/README.md)
 
@@ -304,8 +366,6 @@ run();
 ### [Models](docs/sdks/models/README.md)
 
 * [create](docs/sdks/models/README.md#create) - Create custom model
-* [createAutorouter](docs/sdks/models/README.md#createautorouter) - Create autorouter custom model
-* [updateAutorouter](docs/sdks/models/README.md#updateautorouter) - Update autorouter custom model
 * [createAwsBedrock](docs/sdks/models/README.md#createawsbedrock) - Create AWS Bedrock custom model
 * [validateAwsBedrock](docs/sdks/models/README.md#validateawsbedrock) - Validate AWS Bedrock inference profile
 * [updateAwsBedrock](docs/sdks/models/README.md#updateawsbedrock) - Update AWS Bedrock custom model
@@ -322,6 +382,15 @@ run();
 * [disable](docs/sdks/models/README.md#disable) - Disable model for workspace
 * [list](docs/sdks/models/README.md#list) - List models
 
+### [Monitors](docs/sdks/monitors/README.md)
+
+* [list](docs/sdks/monitors/README.md#list) - List monitors
+* [create](docs/sdks/monitors/README.md#create) - Create a monitor
+* [listPresets](docs/sdks/monitors/README.md#listpresets) - List monitor presets
+* [get](docs/sdks/monitors/README.md#get) - Retrieve a monitor
+* [delete](docs/sdks/monitors/README.md#delete) - Delete a monitor
+* [update](docs/sdks/monitors/README.md#update) - Update a monitor
+
 ### [Notifiers](docs/sdks/notifiers/README.md)
 
 * [list](docs/sdks/notifiers/README.md#list) - List notifiers
@@ -329,6 +398,15 @@ run();
 * [get](docs/sdks/notifiers/README.md#get) - Retrieve a notifier
 * [delete](docs/sdks/notifiers/README.md#delete) - Delete a notifier
 * [update](docs/sdks/notifiers/README.md#update) - Update a notifier
+
+### [People](docs/sdks/people/README.md)
+
+* [list](docs/sdks/people/README.md#list) - List all people
+* [create](docs/sdks/people/README.md#create) - Invite people to a workspace
+* [get](docs/sdks/people/README.md#get) - Retrieve a person
+* [delete](docs/sdks/people/README.md#delete) - Delete a person
+* [update](docs/sdks/people/README.md#update) - Update a person
+* [resendInvitation](docs/sdks/people/README.md#resendinvitation) - Resend invitation
 
 ### [Pii](docs/sdks/pii/README.md)
 
@@ -445,6 +523,15 @@ run();
 * [delete](docs/sdks/skills/README.md#delete) - Delete a skill
 * [update](docs/sdks/skills/README.md#update) - Update a skill
 
+### [SmartRouters](docs/sdks/smartrouters/README.md)
+
+* [list](docs/sdks/smartrouters/README.md#list) - List Smart Routers
+* [create](docs/sdks/smartrouters/README.md#create) - Create a Smart Router
+* [get](docs/sdks/smartrouters/README.md#get) - Retrieve a Smart Router
+* [delete](docs/sdks/smartrouters/README.md#delete) - Delete a Smart Router
+* [update](docs/sdks/smartrouters/README.md#update) - Update a Smart Router
+* [setEnabled](docs/sdks/smartrouters/README.md#setenabled) - Enable or disable a Smart Router
+
 ### [Telemetry](docs/sdks/telemetry/README.md)
 
 * [query](docs/sdks/telemetry/README.md#query) - Query telemetry
@@ -506,6 +593,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`agentsRefreshKeyCard`](docs/sdks/agents/README.md#refreshkeycard) - Refresh A2A agent card
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
 - [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update agent
+- [`alertsCheckNow`](docs/sdks/alerts/README.md#checknow) - Run an alert check now
+- [`alertsCreate`](docs/sdks/alerts/README.md#create) - Create an alert
+- [`alertsDelete`](docs/sdks/alerts/README.md#delete) - Delete an alert
+- [`alertsGet`](docs/sdks/alerts/README.md#get) - Retrieve an alert
+- [`alertsList`](docs/sdks/alerts/README.md#list) - List alerts
+- [`alertsListTriggerEvents`](docs/sdks/alerts/README.md#listtriggerevents) - List alert trigger events
+- [`alertsListTriggers`](docs/sdks/alerts/README.md#listtriggers) - List alert triggers
+- [`alertsUpdate`](docs/sdks/alerts/README.md#update) - Update an alert
 - [`annotationsCreate`](docs/sdks/annotations/README.md#create) - Annotate a span
 - [`annotationsDelete`](docs/sdks/annotations/README.md#delete) - Remove an annotation from a span
 - [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create a new API key
@@ -588,12 +683,45 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 - [`knowledgeUpdateChunk`](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 - [`knowledgeUpdateDatasource`](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
+- [`logsAggregate`](docs/sdks/logs/README.md#aggregate) - Aggregate logs
+- [`logsContext`](docs/sdks/logs/README.md#context) - Get surrounding log context
+- [`logsFindPatterns`](docs/sdks/logs/README.md#findpatterns) - Find log patterns
+- [`logsGet`](docs/sdks/logs/README.md#get) - Get a single log
+- [`logsListFacets`](docs/sdks/logs/README.md#listfacets) - List log facets
+- [`logsListFacetValues`](docs/sdks/logs/README.md#listfacetvalues) - List facet values
+- [`logsListFields`](docs/sdks/logs/README.md#listfields) - List log fields
+- [`logsListTraceLogs`](docs/sdks/logs/README.md#listtracelogs) - List logs for a trace
+- [`logsQuery`](docs/sdks/logs/README.md#query) - Query logs with OQL
+- [`logsSearch`](docs/sdks/logs/README.md#search) - Search logs
 - [`managementKeysCreate`](docs/sdks/managementkeys/README.md#create) - Create a new management key
 - [`managementKeysDelete`](docs/sdks/managementkeys/README.md#delete) - Delete a management key
 - [`managementKeysGet`](docs/sdks/managementkeys/README.md#get) - Retrieve a management key
 - [`managementKeysList`](docs/sdks/managementkeys/README.md#list) - List management keys
 - [`managementKeysListCapabilities`](docs/sdks/managementkeys/README.md#listcapabilities) - List management capability catalog
 - [`managementKeysUpdate`](docs/sdks/managementkeys/README.md#update) - Update a management key
+- [`mcpGatewayCallsList`](docs/sdks/mcpgatewaycalls/README.md#list) - List MCP gateway calls
+- [`mcpGatewaysCreate`](docs/sdks/mcpgateways/README.md#create) - Create an MCP gateway
+- [`mcpGatewaysDelete`](docs/sdks/mcpgateways/README.md#delete) - Delete an MCP gateway
+- [`mcpGatewaysGet`](docs/sdks/mcpgateways/README.md#get) - Retrieve an MCP gateway
+- [`mcpGatewaysList`](docs/sdks/mcpgateways/README.md#list) - List MCP gateways
+- [`mcpGatewaysListTools`](docs/sdks/mcpgateways/README.md#listtools) - List exposed tools for a gateway
+- [`mcpGatewaysTestTool`](docs/sdks/mcpgateways/README.md#testtool) - Test an MCP gateway tool
+- [`mcpGatewaysUpdate`](docs/sdks/mcpgateways/README.md#update) - Update an MCP gateway
+- [`mcpServersCreate`](docs/sdks/mcpservers/README.md#create) - Create an MCP server
+- [`mcpServersDelete`](docs/sdks/mcpservers/README.md#delete) - Delete an MCP server
+- [`mcpServersGet`](docs/sdks/mcpservers/README.md#get) - Retrieve an MCP server
+- [`mcpServersList`](docs/sdks/mcpservers/README.md#list) - List MCP servers
+- [`mcpServersSync`](docs/sdks/mcpservers/README.md#sync) - Sync an MCP server
+- [`mcpServersTest`](docs/sdks/mcpservers/README.md#test) - Test an MCP server connection
+- [`mcpServersTestTool`](docs/sdks/mcpservers/README.md#testtool) - Test an MCP server tool
+- [`mcpServersUpdate`](docs/sdks/mcpservers/README.md#update) - Update an MCP server
+- [`mcpSessionsList`](docs/sdks/mcpsessions/README.md#list) - List MCP sessions
+- [`mcpSessionsRevoke`](docs/sdks/mcpsessions/README.md#revoke) - Revoke an MCP session
+- [`mcpToolsetsCreate`](docs/sdks/mcptoolsets/README.md#create) - Create an MCP toolset
+- [`mcpToolsetsDelete`](docs/sdks/mcptoolsets/README.md#delete) - Delete an MCP toolset
+- [`mcpToolsetsGet`](docs/sdks/mcptoolsets/README.md#get) - Retrieve an MCP toolset
+- [`mcpToolsetsList`](docs/sdks/mcptoolsets/README.md#list) - List MCP toolsets
+- [`mcpToolsetsUpdate`](docs/sdks/mcptoolsets/README.md#update) - Update an MCP toolset
 - [`memoryStoresCreate`](docs/sdks/memorystores/README.md#create) - Create memory store
 - [`memoryStoresCreateDocument`](docs/sdks/memorystores/README.md#createdocument) - Create a new memory document
 - [`memoryStoresCreateMemory`](docs/sdks/memorystores/README.md#creatememory) - Create a new memory
@@ -611,7 +739,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`memoryStoresUpdateMemory`](docs/sdks/memorystores/README.md#updatememory) - Update a specific memory
 - [`modelsAzureFoundryDeployments`](docs/sdks/models/README.md#azurefoundrydeployments) - List Azure Foundry deployments under a resource
 - [`modelsCreate`](docs/sdks/models/README.md#create) - Create custom model
-- [`modelsCreateAutorouter`](docs/sdks/models/README.md#createautorouter) - Create autorouter custom model
 - [`modelsCreateAwsBedrock`](docs/sdks/models/README.md#createawsbedrock) - Create AWS Bedrock custom model
 - [`modelsCreateOpenaiLike`](docs/sdks/models/README.md#createopenailike) - Create OpenAI-compatible custom model
 - [`modelsCreateVertex`](docs/sdks/models/README.md#createvertex) - Create Vertex AI custom model
@@ -622,16 +749,27 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsList`](docs/sdks/models/README.md#list) - List models
 - [`modelsListLitellm`](docs/sdks/models/README.md#listlitellm) - List models from configured LiteLLM instance
 - [`modelsUpdate`](docs/sdks/models/README.md#update) - Update custom model
-- [`modelsUpdateAutorouter`](docs/sdks/models/README.md#updateautorouter) - Update autorouter custom model
 - [`modelsUpdateAwsBedrock`](docs/sdks/models/README.md#updateawsbedrock) - Update AWS Bedrock custom model
 - [`modelsUpdateOpenaiLike`](docs/sdks/models/README.md#updateopenailike) - Update OpenAI-compatible custom model
 - [`modelsValidate`](docs/sdks/models/README.md#validate) - Validate model endpoint
 - [`modelsValidateAwsBedrock`](docs/sdks/models/README.md#validateawsbedrock) - Validate AWS Bedrock inference profile
+- [`monitorsCreate`](docs/sdks/monitors/README.md#create) - Create a monitor
+- [`monitorsDelete`](docs/sdks/monitors/README.md#delete) - Delete a monitor
+- [`monitorsGet`](docs/sdks/monitors/README.md#get) - Retrieve a monitor
+- [`monitorsList`](docs/sdks/monitors/README.md#list) - List monitors
+- [`monitorsListPresets`](docs/sdks/monitors/README.md#listpresets) - List monitor presets
+- [`monitorsUpdate`](docs/sdks/monitors/README.md#update) - Update a monitor
 - [`notifiersCreate`](docs/sdks/notifiers/README.md#create) - Create a notifier
 - [`notifiersDelete`](docs/sdks/notifiers/README.md#delete) - Delete a notifier
 - [`notifiersGet`](docs/sdks/notifiers/README.md#get) - Retrieve a notifier
 - [`notifiersList`](docs/sdks/notifiers/README.md#list) - List notifiers
 - [`notifiersUpdate`](docs/sdks/notifiers/README.md#update) - Update a notifier
+- [`peopleCreate`](docs/sdks/people/README.md#create) - Invite people to a workspace
+- [`peopleDelete`](docs/sdks/people/README.md#delete) - Delete a person
+- [`peopleGet`](docs/sdks/people/README.md#get) - Retrieve a person
+- [`peopleList`](docs/sdks/people/README.md#list) - List all people
+- [`peopleResendInvitation`](docs/sdks/people/README.md#resendinvitation) - Resend invitation
+- [`peopleUpdate`](docs/sdks/people/README.md#update) - Update a person
 - [`piiDetect`](docs/sdks/pii/README.md#detect) - Detect PII
 - [`piiRedact`](docs/sdks/pii/README.md#redact) - Redact PII
 - [`piiRestore`](docs/sdks/pii/README.md#restore) - Restore redacted text
@@ -683,6 +821,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`skillsGet`](docs/sdks/skills/README.md#get) - Retrieve a skill
 - [`skillsList`](docs/sdks/skills/README.md#list) - List all skills
 - [`skillsUpdate`](docs/sdks/skills/README.md#update) - Update a skill
+- [`smartRoutersCreate`](docs/sdks/smartrouters/README.md#create) - Create a Smart Router
+- [`smartRoutersDelete`](docs/sdks/smartrouters/README.md#delete) - Delete a Smart Router
+- [`smartRoutersGet`](docs/sdks/smartrouters/README.md#get) - Retrieve a Smart Router
+- [`smartRoutersList`](docs/sdks/smartrouters/README.md#list) - List Smart Routers
+- [`smartRoutersSetEnabled`](docs/sdks/smartrouters/README.md#setenabled) - Enable or disable a Smart Router
+- [`smartRoutersUpdate`](docs/sdks/smartrouters/README.md#update) - Update a Smart Router
 - [`telemetryQuery`](docs/sdks/telemetry/README.md#query) - Query telemetry
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
@@ -1010,7 +1154,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (42)</summary>
+<details><summary>Less common errors (43)</summary>
 
 <br />
 
@@ -1023,42 +1167,43 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 215 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 215 methods.*
-* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 215 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 215 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 215 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 215 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 215 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 215 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 215 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 215 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 215 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 215 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 215 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 215 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 215 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 215 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 215 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 215 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 215 methods.*
-* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 215 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 272 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Bad request. Status code `400`. Applicable to 1 of 272 methods.*
+* [`PostV2AgentsKeyCardRefreshResponseBody`](./src/models/errors/postv2agentskeycardrefreshresponsebody.ts): Invalid request - Agent is not an A2A agent or card fetch failed. Status code `400`. Applicable to 1 of 272 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 272 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 272 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 272 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 272 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 272 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 272 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`PostV2AgentsKeyCardRefreshAgentsResponseBody`](./src/models/errors/postv2agentskeycardrefreshagentsresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 272 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 272 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 272 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 272 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 272 methods.*
+* [`InvokeEvalEvalsResponseResponseBody`](./src/models/errors/invokeevalevalsresponseresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 272 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

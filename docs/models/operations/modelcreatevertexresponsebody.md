@@ -11,18 +11,17 @@ let value: ModelCreateVertexResponseBody = {
   configuration: {
     provider: "<value>",
   },
-  created: new Date("2026-08-10T16:51:58.376Z"),
-  description:
-    "remarkable above within alongside scaffold apropos brilliant duh shy till",
-  displayName: "Dimitri10",
-  docsUrl: "https://sugary-ceramic.net",
-  enabled: false,
-  enabledForEndpoints: true,
+  created: "<value>",
+  description: "until rim ribbon procurement meh transom rebound department",
+  displayName: "Mason53",
+  docsUrl: "https://whopping-surface.org",
+  enabled: true,
+  enabledForEndpoints: false,
   enabledForPlayground: true,
-  hasCpuPricing: true,
-  hasFunctions: false,
+  hasCpuPricing: false,
+  hasFunctions: true,
   id: "<id>",
-  inputCost: 546.9,
+  inputCost: 8993.23,
   inputCurrency: "<value>",
   isActive: true,
   metadata: {
@@ -30,28 +29,25 @@ let value: ModelCreateVertexResponseBody = {
   },
   modelId: "<id>",
   modelType: "<value>",
-  outputCost: 6172.49,
+  outputCost: 8849.81,
   outputCurrency: "<value>",
   owner: "<value>",
   parameters: [
     {
-      config: {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
-      },
-      description: "anenst honestly pink even",
+      config: {},
+      description:
+        "whereas laughter fork unimpressively ugh er even an inasmuch",
       id: "<id>",
-      isActive: false,
+      isActive: true,
       name: "<value>",
       parameter: "<value>",
       parameterType: "<value>",
     },
   ],
-  pricingUrl: "https://elliptical-anticodon.info",
+  pricingUrl: "https://swift-settler.info/",
   provider: "<value>",
   refId: "<id>",
-  updated: new Date("2026-04-26T07:45:41.832Z"),
+  updated: "<value>",
 };
 ```
 
@@ -60,7 +56,7 @@ let value: ModelCreateVertexResponseBody = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `configuration`                                                                                | [components.ModelConfigurationResponse](../../models/components/modelconfigurationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `created`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `created`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `displayName`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `docsUrl`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
@@ -86,4 +82,4 @@ let value: ModelCreateVertexResponseBody = {
 | `provider`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `refId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `sharing`                                                                                      | [components.Config](../../models/components/config.md)                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `updated`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `updated`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |

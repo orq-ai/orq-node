@@ -6,13 +6,13 @@
 import { ListDatasetsData } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetsData = {
-  id: "d1a77024-8eb6-44e3-a29b-5f87c131ff8b",
-  displayName: "Meggie_Hauck",
-  projectId: "cda97e05-673f-416f-8256-1b4c1e421564",
-  workspaceId: "8b4b45c2-97c8-43d3-9cba-baa89eeadc77",
+  id: "<id>",
+  displayName: "Reagan.Orn48",
+  projectId: "<id>",
+  workspaceId: "<id>",
   metadata: {
-    totalVersions: 8366.49,
-    datapointsCount: 7565.49,
+    totalVersions: 1632.71,
+    datapointsCount: 2574.75,
   },
 };
 ```

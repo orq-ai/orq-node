@@ -11,18 +11,25 @@ import {
   PIIRedactionPlugin,
   PIIRedactionPlugin$inboundSchema,
 } from "./piiredactionplugin.js";
+import {
+  ResponseHealingPlugin,
+  ResponseHealingPlugin$inboundSchema,
+} from "./responsehealingplugin.js";
 
 export type Plugin = {
   ofPIIRedaction: PIIRedactionPlugin;
+  ofResponseHealing: ResponseHealingPlugin;
 };
 
 /** @internal */
 export const Plugin$inboundSchema: z.ZodType<Plugin, z.ZodTypeDef, unknown> = z
   .object({
     OfPIIRedaction: PIIRedactionPlugin$inboundSchema,
+    OfResponseHealing: ResponseHealingPlugin$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "OfPIIRedaction": "ofPIIRedaction",
+      "OfResponseHealing": "ofResponseHealing",
     });
   });
 

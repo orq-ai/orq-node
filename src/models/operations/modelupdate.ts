@@ -32,7 +32,7 @@ export type ModelUpdateRequest = {
  */
 export type ModelUpdateResponseBody = {
   configuration: components.ModelConfigurationResponse;
-  created: Date;
+  created: string;
   description: string | null;
   displayName: string;
   docsUrl: string | null;
@@ -58,7 +58,7 @@ export type ModelUpdateResponseBody = {
   provider: string;
   refId: string;
   sharing?: components.Config | undefined;
-  updated: Date;
+  updated: string;
 };
 
 /** @internal */
@@ -139,7 +139,7 @@ export const ModelUpdateResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created: z.string(),
   description: z.nullable(z.string()),
   display_name: z.string(),
   docs_url: z.nullable(z.string()),
@@ -167,7 +167,7 @@ export const ModelUpdateResponseBody$inboundSchema: z.ZodType<
   provider: z.string(),
   refId: z.string(),
   sharing: components.Config$inboundSchema.optional(),
-  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updated: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
