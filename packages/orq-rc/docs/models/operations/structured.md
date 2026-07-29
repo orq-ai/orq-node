@@ -19,3 +19,5 @@ let value: Structured = {
 | --------------------- | --------------------- | --------------------- | --------------------- |
 | `type`                | *"structured"*        | :heavy_check_mark:    | N/A                   |
 | `value`               | Record<string, *any*> | :heavy_check_mark:    | N/A                   |
+| `traceId`             | *string*              | :heavy_minus_sign:    | N/A                   |
+| `spanId`              | *string*              | :heavy_minus_sign:    | N/A                   |

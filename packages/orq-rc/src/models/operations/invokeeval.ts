@@ -160,6 +160,8 @@ export type InvokeEvalRequest = {
 export type Structured = {
   type: "structured";
   value: { [k: string]: any };
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value =
@@ -174,6 +176,8 @@ export type InvokeEvalResponseBodyEvalsResponseValue = {
 export type ResponseBodyHTTP = {
   type: "http_eval";
   value?: InvokeEvalResponseBodyEvalsResponseValue | null | undefined;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
@@ -237,6 +241,8 @@ export type InvokeEvalResponseBodyValue = {
 export type BERTScore = {
   type: "bert_score";
   value: InvokeEvalResponseBodyValue;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export type Rouge1 = {
@@ -266,11 +272,15 @@ export type ResponseBodyValue = {
 export type RougeN = {
   type: "rouge_n";
   value: ResponseBodyValue;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export type StringArray = {
   type: "string_array";
   values: Array<string | null>;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200Value =
@@ -281,6 +291,8 @@ export type InvokeEvalResponseBodyEvalsResponse200Value =
 export type Boolean = {
   type: "boolean";
   value: boolean | string | number | null;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export const FormatOptionsStyle = {
@@ -309,12 +321,16 @@ export type NumberT = {
   originalValue?: number | null | undefined;
   value: number | null;
   formatOptions?: FormatOptions2 | FormatOptions1 | undefined;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 export type String = {
   type: "string";
   originalValue?: string | null | undefined;
   value?: string | null | undefined;
+  traceId?: string | undefined;
+  spanId?: string | undefined;
 };
 
 /**
@@ -635,6 +651,13 @@ export const Structured$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("structured"),
   value: z.record(z.any()),
+  trace_id: z.string().optional(),
+  span_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "trace_id": "traceId",
+    "span_id": "spanId",
+  });
 });
 
 export function structuredFromJSON(
@@ -706,6 +729,13 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
   value: z.nullable(
     z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
   ).optional(),
+  trace_id: z.string().optional(),
+  span_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "trace_id": "traceId",
+    "span_id": "spanId",
+  });
 });
 
 export function responseBodyHTTPFromJSON(
@@ -937,6 +967,13 @@ export const BERTScore$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("bert_score"),
   value: z.lazy(() => InvokeEvalResponseBodyValue$inboundSchema),
+  trace_id: z.string().optional(),
+  span_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "trace_id": "traceId",
+    "span_id": "spanId",
+  });
 });
 
 export function bertScoreFromJSON(
@@ -1035,6 +1072,13 @@ export const RougeN$inboundSchema: z.ZodType<RougeN, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("rouge_n"),
     value: z.lazy(() => ResponseBodyValue$inboundSchema),
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+    });
   });
 
 export function rougeNFromJSON(
@@ -1055,6 +1099,13 @@ export const StringArray$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("string_array"),
   values: z.array(z.nullable(z.string())),
+  trace_id: z.string().optional(),
+  span_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "trace_id": "traceId",
+    "span_id": "spanId",
+  });
 });
 
 export function stringArrayFromJSON(
@@ -1096,6 +1147,13 @@ export const Boolean$inboundSchema: z.ZodType<Boolean, z.ZodTypeDef, unknown> =
   z.object({
     type: z.literal("boolean"),
     value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+    });
   });
 
 export function booleanFromJSON(
@@ -1190,10 +1248,14 @@ export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
       z.lazy(() => FormatOptions2$inboundSchema),
       z.lazy(() => FormatOptions1$inboundSchema),
     ]).optional(),
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "original_value": "originalValue",
       "format_options": "formatOptions",
+      "trace_id": "traceId",
+      "span_id": "spanId",
     });
   });
 
@@ -1213,9 +1275,13 @@ export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
     type: z.literal("string"),
     original_value: z.nullable(z.string()).optional(),
     value: z.nullable(z.string()).optional(),
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "original_value": "originalValue",
+      "trace_id": "traceId",
+      "span_id": "spanId",
     });
   });
 

@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create image edit
+   * Create guardrail rule
    *
    * @remarks
-   * Edit an Image
+   * Creates a new guardrail rule with expression, guardrails configuration, and timeout settings.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
