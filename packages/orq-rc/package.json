@@ -1,17 +1,17 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.13.0-rc.10",
+  "version": "4.13.0-rc.12",
   "author": "Orq",
   "exports": {
     "./langchain": {
-      "types": "./langchain/index.d.mts",
       "import": "./langchain/index.mjs",
-      "require": "./langchain/index.js"
+      "require": "./langchain/index.js",
+      "types": "./langchain/index.d.mts"
     },
     ".": {
+      "types": "./index.d.ts",
       "import": "./index.js",
-      "require": "./index.js",
-      "types": "./index.d.ts"
+      "require": "./index.js"
     },
     "./*": "./*"
   },
