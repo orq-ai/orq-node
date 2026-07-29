@@ -434,8 +434,7 @@ export type RetrieveAgentRequestAgentsGuardrails = {
 export type RetrieveAgentRequestPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type RetrieveAgentRequestFallbacks = {
   /**
@@ -661,14 +660,13 @@ export type RetrieveAgentRequestParameters = {
    */
   guardrails?: Array<RetrieveAgentRequestAgentsGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -910,8 +908,7 @@ export type RetrieveAgentRequestFallbackModelConfigurationGuardrails = {
 export type RetrieveAgentRequestFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type RetrieveAgentRequestFallbackModelConfigurationFallbacks = {
   /**
@@ -1143,14 +1140,13 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
     | Array<RetrieveAgentRequestFallbackModelConfigurationGuardrails>
     | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1909,7 +1905,6 @@ export const RetrieveAgentRequestPlugins$inboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
-  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function retrieveAgentRequestPluginsFromJSON(
@@ -2132,7 +2127,6 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
-      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema))
@@ -2566,7 +2560,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationPlugins$inboundSchema
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
     components.PIIRedactionPluginAuto$inboundSchema,
-    components.ResponseHealingPlugin$inboundSchema,
   ]);
 
 export function retrieveAgentRequestFallbackModelConfigurationPluginsFromJSON(
@@ -2849,7 +2842,6 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
         components.PIIRedactionPluginAuto$inboundSchema,
-        components.ResponseHealingPlugin$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

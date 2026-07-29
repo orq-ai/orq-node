@@ -6,7 +6,7 @@
 import { DeleteDatasetRequest } from "@orq-ai/node/models/operations";
 
 let value: DeleteDatasetRequest = {
-  datasetId: "<id>",
+  datasetId: "126c1bce-8db8-4a3f-85c4-c59d4bda6232",
 };
 ```
 

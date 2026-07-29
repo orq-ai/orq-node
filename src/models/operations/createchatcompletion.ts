@@ -678,8 +678,7 @@ export type CreateChatCompletionGuardrails = {
 export type CreateChatCompletionPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type CreateChatCompletionFallbacks = {
   /**
@@ -1607,14 +1606,13 @@ export type CreateChatCompletionRequestBody = {
    */
   guardrails?: Array<CreateChatCompletionGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -3444,8 +3442,7 @@ export function createChatCompletionGuardrailsToJSON(
 export type CreateChatCompletionPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
@@ -3456,7 +3453,6 @@ export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
-  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function createChatCompletionPluginsToJSON(
@@ -5486,7 +5482,6 @@ export type CreateChatCompletionRequestBody$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
-      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
@@ -5568,7 +5563,6 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
-      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))

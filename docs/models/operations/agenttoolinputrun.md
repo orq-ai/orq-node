@@ -93,22 +93,6 @@ const value: operations.CurrentDateTool = {
 };
 ```
 
-### `operations.AdvisorTool`
-
-```typescript
-const value: operations.AdvisorTool = {
-  type: "advisor",
-};
-```
-
-### `operations.SidekickTool`
-
-```typescript
-const value: operations.SidekickTool = {
-  type: "sidekick",
-};
-```
-
 ### `operations.CodeInterpreterTool`
 
 ```typescript

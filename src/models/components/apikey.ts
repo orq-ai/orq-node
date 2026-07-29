@@ -18,7 +18,6 @@ import {
   LegacyTokenFamily,
   LegacyTokenFamily$inboundSchema,
 } from "./legacytokenfamily.js";
-import { McpAccess, McpAccess$inboundSchema } from "./mcpaccess.js";
 import {
   PermissionMode,
   PermissionMode$inboundSchema,
@@ -195,14 +194,6 @@ export type ApiKey = {
    *  path — call the Budgets API for current spend.
    */
   budget?: ApiKeyBudget | undefined;
-  /**
-   * Optional MCP-gateway access restriction. Unset means the key can
-   *
-   * @remarks
-   *  reach every MCP gateway allowed by its project scope. See
-   *  McpAccess for the deny_all / allow-list semantics.
-   */
-  mcpAccess?: McpAccess | undefined;
 };
 
 /** @internal */
@@ -274,7 +265,6 @@ export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
     legacy_token_family: LegacyTokenFamily$inboundSchema.optional(),
     legacy_key_id: z.string().optional(),
     budget: z.lazy(() => ApiKeyBudget$inboundSchema).optional(),
-    mcp_access: McpAccess$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "api_key_id": "apiKeyId",
@@ -289,7 +279,6 @@ export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
       "expires_at": "expiresAt",
       "legacy_token_family": "legacyTokenFamily",
       "legacy_key_id": "legacyKeyId",
-      "mcp_access": "mcpAccess",
     });
   });
 

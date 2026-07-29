@@ -4,7 +4,6 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
-import { Alerts } from "./alerts.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
 import { Budgets } from "./budgets.js";
@@ -18,18 +17,10 @@ import { GuardrailRules } from "./guardrailrules.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
-import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
-import { McpGatewayCalls } from "./mcpgatewaycalls.js";
-import { McpGateways } from "./mcpgateways.js";
-import { McpServers } from "./mcpservers.js";
-import { McpSessions } from "./mcpsessions.js";
-import { McpToolsets } from "./mcptoolsets.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
-import { Monitors } from "./monitors.js";
 import { Notifiers } from "./notifiers.js";
-import { People } from "./people.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
@@ -40,7 +31,6 @@ import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
 import { Skills } from "./skills.js";
-import { SmartRouters } from "./smartrouters.js";
 import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
@@ -137,11 +127,6 @@ export class Orq extends ClientSDK {
     return (this._routingRules ??= new RoutingRules(this._options));
   }
 
-  private _alerts?: Alerts;
-  get alerts(): Alerts {
-    return (this._alerts ??= new Alerts(this._options));
-  }
-
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
@@ -167,44 +152,9 @@ export class Orq extends ClientSDK {
     return (this._managementKeys ??= new ManagementKeys(this._options));
   }
 
-  private _mcpGatewayCalls?: McpGatewayCalls;
-  get mcpGatewayCalls(): McpGatewayCalls {
-    return (this._mcpGatewayCalls ??= new McpGatewayCalls(this._options));
-  }
-
-  private _mcpGateways?: McpGateways;
-  get mcpGateways(): McpGateways {
-    return (this._mcpGateways ??= new McpGateways(this._options));
-  }
-
-  private _mcpServers?: McpServers;
-  get mcpServers(): McpServers {
-    return (this._mcpServers ??= new McpServers(this._options));
-  }
-
-  private _mcpSessions?: McpSessions;
-  get mcpSessions(): McpSessions {
-    return (this._mcpSessions ??= new McpSessions(this._options));
-  }
-
-  private _mcpToolsets?: McpToolsets;
-  get mcpToolsets(): McpToolsets {
-    return (this._mcpToolsets ??= new McpToolsets(this._options));
-  }
-
-  private _monitors?: Monitors;
-  get monitors(): Monitors {
-    return (this._monitors ??= new Monitors(this._options));
-  }
-
   private _notifiers?: Notifiers;
   get notifiers(): Notifiers {
     return (this._notifiers ??= new Notifiers(this._options));
-  }
-
-  private _people?: People;
-  get people(): People {
-    return (this._people ??= new People(this._options));
   }
 
   private _projects?: Projects;
@@ -215,11 +165,6 @@ export class Orq extends ClientSDK {
   private _skills?: Skills;
   get skills(): Skills {
     return (this._skills ??= new Skills(this._options));
-  }
-
-  private _smartRouters?: SmartRouters;
-  get smartRouters(): SmartRouters {
-    return (this._smartRouters ??= new SmartRouters(this._options));
   }
 
   private _webhooks?: Webhooks;
@@ -235,11 +180,6 @@ export class Orq extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
-  }
-
-  private _logs?: Logs;
-  get logs(): Logs {
-    return (this._logs ??= new Logs(this._options));
   }
 
   private _reporting?: Reporting;

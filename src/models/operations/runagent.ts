@@ -200,8 +200,7 @@ export type RunAgentModelConfigurationGuardrails = {
 export type RunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type RunAgentModelConfigurationFallbacks = {
   /**
@@ -423,14 +422,13 @@ export type RunAgentModelConfigurationParameters = {
    */
   guardrails?: Array<RunAgentModelConfigurationGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -692,8 +690,7 @@ export type RunAgentFallbackModelConfigurationGuardrails = {
 export type RunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type RunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -924,14 +921,13 @@ export type RunAgentFallbackModelConfigurationParameters = {
    */
   guardrails?: Array<RunAgentFallbackModelConfigurationGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1171,17 +1167,17 @@ export type AgentToolInputRunHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
   {
     Object: "object",
   } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
   >;
 
 export type AgentToolInputRunSchema = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType;
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1303,16 +1299,16 @@ export type JSONSchemaToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
   >;
 
 /**
@@ -1323,7 +1319,7 @@ export type RunAgentAgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType;
   /**
    * The properties of the function parameters
    */
@@ -1373,16 +1369,16 @@ export type FunctionToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
   {
     Object: "object",
   } as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
   >;
 
 /**
@@ -1393,7 +1389,7 @@ export type AgentToolInputRunParameters = {
    * The type must be "object"
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType;
   /**
    * The properties of the function parameters
    */
@@ -1495,7 +1491,7 @@ export type Blueprint = {
 /**
  * The type of the argument.
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
   {
     String: "string",
     Number: "number",
@@ -1504,9 +1500,9 @@ export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15Htt
 /**
  * The type of the argument.
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
   >;
 
 /**
@@ -1519,7 +1515,7 @@ export type Arguments = {
    * The type of the argument.
    */
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType;
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType;
   /**
    * A description of the argument.
    */
@@ -1573,36 +1569,6 @@ export type HTTPToolRun = {
  */
 export type CodeInterpreterTool = {
   type: "code_interpreter";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Delegate a subtask to a secondary model for execution
- */
-export type SidekickTool = {
-  type: "sidekick";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Consult a secondary model for advice on the current task
- */
-export type AdvisorTool = {
-  type: "advisor";
   /**
    * Whether this tool requires approval before execution
    */
@@ -1793,8 +1759,6 @@ export type AgentToolInputRun =
   | RetrieveKnowledgeBasesTool
   | QueryKnowledgeBaseTool
   | CurrentDateTool
-  | AdvisorTool
-  | SidekickTool
   | CodeInterpreterTool
   | HTTPToolRun
   | CodeToolRun
@@ -1890,8 +1854,6 @@ export type RunAgentSettings = {
       | RetrieveKnowledgeBasesTool
       | QueryKnowledgeBaseTool
       | CurrentDateTool
-      | AdvisorTool
-      | SidekickTool
       | CodeInterpreterTool
       | HTTPToolRun
       | CodeToolRun
@@ -2503,8 +2465,7 @@ export function runAgentModelConfigurationGuardrailsToJSON(
 export type RunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2515,7 +2476,6 @@ export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
-  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function runAgentModelConfigurationPluginsToJSON(
@@ -2757,7 +2717,6 @@ export type RunAgentModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
-      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<RunAgentModelConfigurationFallbacks$Outbound> | undefined;
@@ -2813,7 +2772,6 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
-      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(
@@ -3297,8 +3255,7 @@ export function runAgentFallbackModelConfigurationGuardrailsToJSON(
 export type RunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3310,7 +3267,6 @@ export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
     components.PIIRedactionPluginAuto$outboundSchema,
-    components.ResponseHealingPlugin$outboundSchema,
   ]);
 
 export function runAgentFallbackModelConfigurationPluginsToJSON(
@@ -3569,7 +3525,6 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
-      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3633,7 +3588,6 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
-        components.ResponseHealingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -4052,11 +4006,11 @@ export function agentToolInputRunHeadersToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType,
   );
 
 /** @internal */
@@ -4073,7 +4027,7 @@ export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
   AgentToolInputRunSchema
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17McpType$outboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
@@ -4100,7 +4054,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KYPT8FHKCMKWZW3AGVYTX9EY"),
+  id: z.string().default("01KYPZXVC3APGNXB9WJAG73694"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4281,11 +4235,11 @@ export function jsonSchemaToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType,
   );
 
 /** @internal */
@@ -4303,7 +4257,7 @@ export const RunAgentAgentToolInputRunParameters$outboundSchema: z.ZodType<
   RunAgentAgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15FunctionType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4394,11 +4348,11 @@ export function functionToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType,
   );
 
 /** @internal */
@@ -4416,7 +4370,7 @@ export const AgentToolInputRunParameters$outboundSchema: z.ZodType<
   AgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools14CodeToolType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4572,11 +4526,11 @@ export function blueprintToJSON(blueprint: Blueprint): string {
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType,
   );
 
 /** @internal */
@@ -4608,7 +4562,7 @@ export const Arguments$outboundSchema: z.ZodType<
   Arguments
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools13HttpType$outboundSchema,
   description: z.string(),
   sendToModel: z.boolean().default(true),
   defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -4706,58 +4660,6 @@ export function codeInterpreterToolToJSON(
   return JSON.stringify(
     CodeInterpreterTool$outboundSchema.parse(codeInterpreterTool),
   );
-}
-
-/** @internal */
-export type SidekickTool$Outbound = {
-  type: "sidekick";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const SidekickTool$outboundSchema: z.ZodType<
-  SidekickTool$Outbound,
-  z.ZodTypeDef,
-  SidekickTool
-> = z.object({
-  type: z.literal("sidekick"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function sidekickToolToJSON(sidekickTool: SidekickTool): string {
-  return JSON.stringify(SidekickTool$outboundSchema.parse(sidekickTool));
-}
-
-/** @internal */
-export type AdvisorTool$Outbound = {
-  type: "advisor";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const AdvisorTool$outboundSchema: z.ZodType<
-  AdvisorTool$Outbound,
-  z.ZodTypeDef,
-  AdvisorTool
-> = z.object({
-  type: z.literal("advisor"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function advisorToolToJSON(advisorTool: AdvisorTool): string {
-  return JSON.stringify(AdvisorTool$outboundSchema.parse(advisorTool));
 }
 
 /** @internal */
@@ -5097,8 +4999,6 @@ export type AgentToolInputRun$Outbound =
   | RetrieveKnowledgeBasesTool$Outbound
   | QueryKnowledgeBaseTool$Outbound
   | CurrentDateTool$Outbound
-  | AdvisorTool$Outbound
-  | SidekickTool$Outbound
   | CodeInterpreterTool$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
@@ -5123,8 +5023,6 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
   z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
   z.lazy(() => CurrentDateTool$outboundSchema),
-  z.lazy(() => AdvisorTool$outboundSchema),
-  z.lazy(() => SidekickTool$outboundSchema),
   z.lazy(() => CodeInterpreterTool$outboundSchema),
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
@@ -5233,8 +5131,6 @@ export type RunAgentSettings$Outbound = {
       | RetrieveKnowledgeBasesTool$Outbound
       | QueryKnowledgeBaseTool$Outbound
       | CurrentDateTool$Outbound
-      | AdvisorTool$Outbound
-      | SidekickTool$Outbound
       | CodeInterpreterTool$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
@@ -5271,8 +5167,6 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
       z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => CurrentDateTool$outboundSchema),
-      z.lazy(() => AdvisorTool$outboundSchema),
-      z.lazy(() => SidekickTool$outboundSchema),
       z.lazy(() => CodeInterpreterTool$outboundSchema),
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),

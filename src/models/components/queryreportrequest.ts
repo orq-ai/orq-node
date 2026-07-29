@@ -23,13 +23,9 @@ export const Metric = {
   GenaiTokens: "genai.tokens",
   GenaiCost: "genai.cost",
   GenaiErrors: "genai.errors",
-  GenaiErrorRate: "genai.error_rate",
   GenaiLatencyP50: "genai.latency.p50",
   GenaiLatencyP95: "genai.latency.p95",
   GenaiLatencyP99: "genai.latency.p99",
-  GenaiTtftAvg: "genai.ttft.avg",
-  GenaiTtftP50: "genai.ttft.p50",
-  GenaiTtftP95: "genai.ttft.p95",
   GenaiEvaluatorRuns: "genai.evaluator.runs",
   GenaiEvaluatorPassRate: "genai.evaluator.pass_rate",
   GenaiEvaluatorScoreAvg: "genai.evaluator.score.avg",
@@ -46,7 +42,7 @@ export type Metric = ClosedEnum<typeof Metric>;
 /**
  * Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
  */
-export const QueryReportRequestGrain = {
+export const Grain = {
   Auto: "auto",
   Minute: "minute",
   Hour: "hour",
@@ -55,9 +51,7 @@ export const QueryReportRequestGrain = {
 /**
  * Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
  */
-export type QueryReportRequestGrain = ClosedEnum<
-  typeof QueryReportRequestGrain
->;
+export type Grain = ClosedEnum<typeof Grain>;
 
 export const GroupBy = {
   Project: "project",
@@ -97,30 +91,6 @@ export const GroupBy = {
 } as const;
 export type GroupBy = ClosedEnum<typeof GroupBy>;
 
-/**
- * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
- */
-export const QueryReportRequestMode = {
-  Timeseries: "timeseries",
-  Scalar: "scalar",
-} as const;
-/**
- * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
- */
-export type QueryReportRequestMode = ClosedEnum<typeof QueryReportRequestMode>;
-
-/**
- * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
- */
-export const QueryReportRequestSort = {
-  Desc: "desc",
-  Asc: "asc",
-} as const;
-/**
- * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
- */
-export type QueryReportRequestSort = ClosedEnum<typeof QueryReportRequestSort>;
-
 export type QueryReportRequest = {
   /**
    * Catalogue metric to query.
@@ -137,7 +107,7 @@ export type QueryReportRequest = {
   /**
    * Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
    */
-  grain?: QueryReportRequestGrain | undefined;
+  grain?: Grain | undefined;
   /**
    * Reporting dimensions to break down by. Valid dimensions depend on the selected metric.
    */
@@ -167,14 +137,6 @@ export type QueryReportRequest = {
    *  report window.
    */
   includeTotals?: boolean | undefined;
-  /**
-   * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
-   */
-  mode?: QueryReportRequestMode | undefined;
-  /**
-   * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
-   */
-  sort?: QueryReportRequestSort | undefined;
 };
 
 /** @internal */
@@ -185,13 +147,12 @@ export const Metric$outboundSchema: z.ZodNativeEnum<typeof Metric> =
   Metric$inboundSchema;
 
 /** @internal */
-export const QueryReportRequestGrain$inboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestGrain
-> = z.nativeEnum(QueryReportRequestGrain);
+export const Grain$inboundSchema: z.ZodNativeEnum<typeof Grain> = z.nativeEnum(
+  Grain,
+);
 /** @internal */
-export const QueryReportRequestGrain$outboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestGrain
-> = QueryReportRequestGrain$inboundSchema;
+export const Grain$outboundSchema: z.ZodNativeEnum<typeof Grain> =
+  Grain$inboundSchema;
 
 /** @internal */
 export const GroupBy$inboundSchema: z.ZodNativeEnum<typeof GroupBy> = z
@@ -199,24 +160,6 @@ export const GroupBy$inboundSchema: z.ZodNativeEnum<typeof GroupBy> = z
 /** @internal */
 export const GroupBy$outboundSchema: z.ZodNativeEnum<typeof GroupBy> =
   GroupBy$inboundSchema;
-
-/** @internal */
-export const QueryReportRequestMode$inboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestMode
-> = z.nativeEnum(QueryReportRequestMode);
-/** @internal */
-export const QueryReportRequestMode$outboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestMode
-> = QueryReportRequestMode$inboundSchema;
-
-/** @internal */
-export const QueryReportRequestSort$inboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestSort
-> = z.nativeEnum(QueryReportRequestSort);
-/** @internal */
-export const QueryReportRequestSort$outboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestSort
-> = QueryReportRequestSort$inboundSchema;
 
 /** @internal */
 export const QueryReportRequest$inboundSchema: z.ZodType<
@@ -227,14 +170,12 @@ export const QueryReportRequest$inboundSchema: z.ZodType<
   metric: Metric$inboundSchema,
   from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  grain: QueryReportRequestGrain$inboundSchema.optional(),
+  grain: Grain$inboundSchema.optional(),
   group_by: z.array(GroupBy$inboundSchema).optional(),
   filters: z.array(Filter$inboundSchema).optional(),
   limit: z.number().int().optional(),
   time_zone: z.string().optional(),
   include_totals: z.boolean().optional(),
-  mode: QueryReportRequestMode$inboundSchema.optional(),
-  sort: QueryReportRequestSort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "group_by": "groupBy",
@@ -253,8 +194,6 @@ export type QueryReportRequest$Outbound = {
   limit?: number | undefined;
   time_zone?: string | undefined;
   include_totals?: boolean | undefined;
-  mode?: string | undefined;
-  sort?: string | undefined;
 };
 
 /** @internal */
@@ -266,14 +205,12 @@ export const QueryReportRequest$outboundSchema: z.ZodType<
   metric: Metric$outboundSchema,
   from: z.date().transform(v => v.toISOString()),
   to: z.date().transform(v => v.toISOString()),
-  grain: QueryReportRequestGrain$outboundSchema.optional(),
+  grain: Grain$outboundSchema.optional(),
   groupBy: z.array(GroupBy$outboundSchema).optional(),
   filters: z.array(Filter$outboundSchema).optional(),
   limit: z.number().int().optional(),
   timeZone: z.string().optional(),
   includeTotals: z.boolean().optional(),
-  mode: QueryReportRequestMode$outboundSchema.optional(),
-  sort: QueryReportRequestSort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     groupBy: "group_by",

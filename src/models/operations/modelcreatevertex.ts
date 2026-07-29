@@ -19,7 +19,7 @@ export type ModelCreateVertexRequestBody = {
  */
 export type ModelCreateVertexResponseBody = {
   configuration: components.ModelConfigurationResponse;
-  created: string;
+  created: Date;
   description: string | null;
   displayName: string;
   docsUrl: string | null;
@@ -45,7 +45,7 @@ export type ModelCreateVertexResponseBody = {
   provider: string;
   refId: string;
   sharing?: components.Config | undefined;
-  updated: string;
+  updated: Date;
 };
 
 /** @internal */
@@ -85,7 +85,7 @@ export const ModelCreateVertexResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
+  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   description: z.nullable(z.string()),
   display_name: z.string(),
   docs_url: z.nullable(z.string()),
@@ -113,7 +113,7 @@ export const ModelCreateVertexResponseBody$inboundSchema: z.ZodType<
   provider: z.string(),
   refId: z.string(),
   sharing: components.Config$inboundSchema.optional(),
-  updated: z.string(),
+  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

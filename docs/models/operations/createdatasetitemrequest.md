@@ -6,7 +6,7 @@
 import { CreateDatasetItemRequest } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItemRequest = {
-  datasetId: "<id>",
+  datasetId: "9217a60b-2d3a-4cbb-8424-793662bd4be1",
 };
 ```
 

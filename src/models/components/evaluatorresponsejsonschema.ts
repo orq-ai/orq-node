@@ -28,8 +28,8 @@ export const EvaluatorResponseJsonSchema$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-07-29T11:30:32.267Z"),
-  updated: z.string().default("2026-07-29T11:30:32.267Z"),
+  created: z.string().default("2026-07-29T13:09:29.179Z"),
+  updated: z.string().default("2026-07-29T13:09:29.179Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("json_schema"),

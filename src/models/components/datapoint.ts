@@ -14,8 +14,7 @@ export type DataPoint = {
    * @remarks
    *  `Date.parse(timestamp)` or `new Date(timestamp).getTime()` —
    *  returning the int64 in JSON would force a string (protojson rule)
-   *  and force callers to coerce anyway, so we ship ISO only. Unset for
-   *  `mode=scalar` rows, which aggregate the whole window.
+   *  and force callers to coerce anyway, so we ship ISO only.
    */
   timestamp?: Date | undefined;
   /**

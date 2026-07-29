@@ -20,7 +20,7 @@ import {
 
 export type ModelDocument = {
   configuration: ModelConfigurationResponse;
-  created: string;
+  created: Date;
   description: string | null;
   displayName: string;
   docsUrl: string | null;
@@ -46,7 +46,7 @@ export type ModelDocument = {
   provider: string;
   refId: string;
   sharing?: Config | undefined;
-  updated: string;
+  updated: Date;
 };
 
 /** @internal */
@@ -56,7 +56,7 @@ export const ModelDocument$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
+  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   description: z.nullable(z.string()),
   display_name: z.string(),
   docs_url: z.nullable(z.string()),
@@ -82,7 +82,7 @@ export const ModelDocument$inboundSchema: z.ZodType<
   provider: z.string(),
   refId: z.string(),
   sharing: Config$inboundSchema.optional(),
-  updated: z.string(),
+  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

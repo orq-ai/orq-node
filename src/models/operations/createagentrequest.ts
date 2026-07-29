@@ -189,8 +189,7 @@ export type Guardrails = {
 export type Plugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type ModelConfigurationFallbacks = {
   /**
@@ -402,14 +401,13 @@ export type ParametersT = {
    */
   guardrails?: Array<Guardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -671,8 +669,7 @@ export type FallbackModelConfigurationGuardrails = {
 export type FallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type FallbackModelConfigurationFallbacks = {
   /**
@@ -898,14 +895,13 @@ export type FallbackModelConfigurationParameters = {
    */
   guardrails?: Array<FallbackModelConfigurationGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1594,8 +1590,7 @@ export type CreateAgentRequestAgentsResponseGuardrails = {
 export type CreateAgentRequestPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type CreateAgentRequestFallbacks = {
   /**
@@ -1819,14 +1814,13 @@ export type CreateAgentRequestParameters = {
    */
   guardrails?: Array<CreateAgentRequestAgentsResponseGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2073,8 +2067,7 @@ export type CreateAgentRequestFallbackModelConfigurationGuardrails = {
 export type CreateAgentRequestFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type CreateAgentRequestFallbackModelConfigurationFallbacks = {
   /**
@@ -2308,14 +2301,13 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
     | Array<CreateAgentRequestFallbackModelConfigurationGuardrails>
     | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2746,8 +2738,7 @@ export function guardrailsToJSON(guardrails: Guardrails): string {
 export type Plugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const Plugins$outboundSchema: z.ZodType<
@@ -2758,7 +2749,6 @@ export const Plugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
-  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function pluginsToJSON(plugins: Plugins): string {
@@ -2964,7 +2954,6 @@ export type ParametersT$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
-      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
@@ -3015,7 +3004,6 @@ export const ParametersT$outboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
-      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
@@ -3466,8 +3454,7 @@ export function fallbackModelConfigurationGuardrailsToJSON(
 export type FallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound;
 
 /** @internal */
 export const FallbackModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -3478,7 +3465,6 @@ export const FallbackModelConfigurationPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
-  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function fallbackModelConfigurationPluginsToJSON(
@@ -3721,7 +3707,6 @@ export type FallbackModelConfigurationParameters$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
-      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<FallbackModelConfigurationFallbacks$Outbound> | undefined;
@@ -3777,7 +3762,6 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
-      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(
@@ -4712,7 +4696,6 @@ export const CreateAgentRequestPlugins$inboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
-  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function createAgentRequestPluginsFromJSON(
@@ -4934,7 +4917,6 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
-      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateAgentRequestFallbacks$inboundSchema))
@@ -5374,7 +5356,6 @@ export const CreateAgentRequestFallbackModelConfigurationPlugins$inboundSchema:
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
     components.PIIRedactionPluginAuto$inboundSchema,
-    components.ResponseHealingPlugin$inboundSchema,
   ]);
 
 export function createAgentRequestFallbackModelConfigurationPluginsFromJSON(
@@ -5660,7 +5641,6 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
         components.PIIRedactionPluginAuto$inboundSchema,
-        components.ResponseHealingPlugin$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

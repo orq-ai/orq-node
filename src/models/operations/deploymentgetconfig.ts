@@ -1464,8 +1464,6 @@ export const DeploymentGetConfigReasoningEffort = {
   Low: "low",
   Medium: "medium",
   High: "high",
-  Xhigh: "xhigh",
-  Max: "max",
 } as const;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.

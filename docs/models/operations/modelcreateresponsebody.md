@@ -11,17 +11,18 @@ let value: ModelCreateResponseBody = {
   configuration: {
     provider: "<value>",
   },
-  created: "<value>",
-  description: "supposing oof verbally",
-  displayName: "Muhammad.Fay36",
-  docsUrl: "https://lumpy-polarisation.biz",
-  enabled: false,
+  created: new Date("2025-11-10T02:22:31.532Z"),
+  description:
+    "although pressure revitalise makeover astride fooey aha supposing meanwhile during",
+  displayName: "Jazmyn40",
+  docsUrl: "https://immense-joy.info",
+  enabled: true,
   enabledForEndpoints: false,
   enabledForPlayground: true,
   hasCpuPricing: true,
   hasFunctions: true,
   id: "<id>",
-  inputCost: null,
+  inputCost: 5434.67,
   inputCurrency: "<value>",
   isActive: false,
   metadata: {
@@ -29,14 +30,14 @@ let value: ModelCreateResponseBody = {
   },
   modelId: "<id>",
   modelType: "<value>",
-  outputCost: 749.24,
+  outputCost: 3110.25,
   outputCurrency: "<value>",
   owner: "<value>",
   parameters: [],
-  pricingUrl: "https://lazy-academics.name/",
+  pricingUrl: null,
   provider: "<value>",
   refId: "<id>",
-  updated: "<value>",
+  updated: new Date("2026-10-31T18:03:14.363Z"),
 };
 ```
 
@@ -45,7 +46,7 @@ let value: ModelCreateResponseBody = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `configuration`                                                                                | [components.ModelConfigurationResponse](../../models/components/modelconfigurationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `created`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `created`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `displayName`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `docsUrl`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
@@ -71,4 +72,4 @@ let value: ModelCreateResponseBody = {
 | `provider`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `refId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `sharing`                                                                                      | [components.Config](../../models/components/config.md)                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `updated`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `updated`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
