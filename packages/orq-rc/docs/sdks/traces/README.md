@@ -22,7 +22,7 @@ Deprecated: use TelemetryService.Query (POST /v2/telemetry/query, source=TRACES,
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesAggregate" method="post" path="/v2/traces/aggregate" -->
+<!-- UsageSnippet language="typescript" operationID="TracesAggregate" method="post" path="/v3/traces/aggregate" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -91,7 +91,7 @@ List trace fields that support facet value discovery.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListFacets" method="get" path="/v2/traces/facets" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListFacets" method="get" path="/v3/traces/facets" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -159,7 +159,7 @@ List values and counts for one trace facet field.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListFacetValues" method="get" path="/v2/traces/facets/{field}" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListFacetValues" method="get" path="/v3/traces/facets/{field}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -232,7 +232,7 @@ List currently supported static trace fields.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListFields" method="get" path="/v2/traces/fields" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListFields" method="get" path="/v3/traces/fields" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -300,7 +300,7 @@ Run an OQL trace query. OQL is validated against the trace field registry and co
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesQueryOql" method="post" path="/v2/traces/query" -->
+<!-- UsageSnippet language="typescript" operationID="TracesQueryOql" method="post" path="/v3/traces/query" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -377,7 +377,7 @@ Search trace summaries using the structured trace filter contract.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesSearch" method="post" path="/v2/traces/search" -->
+<!-- UsageSnippet language="typescript" operationID="TracesSearch" method="post" path="/v3/traces/search" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -452,7 +452,7 @@ Retrieve one trace summary by trace id.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesGet" method="get" path="/v2/traces/{trace_id}" -->
+<!-- UsageSnippet language="typescript" operationID="TracesGet" method="get" path="/v3/traces/{trace_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -525,7 +525,7 @@ List canonical span summaries for a trace.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListSpans" method="get" path="/v2/traces/{trace_id}/spans" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListSpans" method="get" path="/v3/traces/{trace_id}/spans" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -598,7 +598,7 @@ Retrieve one hydrated span.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesGetSpan" method="get" path="/v2/traces/{trace_id}/spans/{span_id}" -->
+<!-- UsageSnippet language="typescript" operationID="TracesGetSpan" method="get" path="/v3/traces/{trace_id}/spans/{span_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

@@ -93,7 +93,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/traces/{trace_id}")(pathParams);
+  const path = pathToFunc("/v3/traces/{trace_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

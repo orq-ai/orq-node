@@ -93,7 +93,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/traces/{trace_id}/spans")(pathParams);
+  const path = pathToFunc("/v3/traces/{trace_id}/spans")(pathParams);
 
   const query = encodeFormQuery({
     "limit": payload.limit,

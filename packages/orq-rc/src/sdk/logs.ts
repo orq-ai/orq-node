@@ -19,23 +19,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Logs extends ClientSDK {
   /**
-   * List logs for a trace
-   *
-   * @remarks
-   * Return all log records correlated with a given trace_id. Results are scoped to the authenticated workspace.
-   */
-  async listTraceLogs(
-    request: operations.ListTraceLogsRequest,
-    options?: RequestOptions,
-  ): Promise<components.ListTraceLogsResponse> {
-    return unwrapAsync(logsListTraceLogs(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Aggregate logs
    *
    * @remarks
@@ -180,6 +163,23 @@ export class Logs extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetLogContextResponse> {
     return unwrapAsync(logsContext(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List logs for a trace
+   *
+   * @remarks
+   * Return all log records correlated with a given trace_id. Results are scoped to the authenticated workspace.
+   */
+  async listTraceLogs(
+    request: operations.ListTraceLogsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListTraceLogsResponse> {
+    return unwrapAsync(logsListTraceLogs(
       this,
       request,
       options,

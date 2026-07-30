@@ -287,7 +287,6 @@ run();
 
 ### [Logs](docs/sdks/logs/README.md)
 
-* [listTraceLogs](docs/sdks/logs/README.md#listtracelogs) - List logs for a trace
 * [aggregate](docs/sdks/logs/README.md#aggregate) - Aggregate logs
 * [listFacets](docs/sdks/logs/README.md#listfacets) - List log facets
 * [listFacetValues](docs/sdks/logs/README.md#listfacetvalues) - List facet values
@@ -297,6 +296,7 @@ run();
 * [search](docs/sdks/logs/README.md#search) - Search logs
 * [get](docs/sdks/logs/README.md#get) - Get a single log
 * [context](docs/sdks/logs/README.md#context) - Get surrounding log context
+* [listTraceLogs](docs/sdks/logs/README.md#listtracelogs) - List logs for a trace
 
 ### [ManagementKeys](docs/sdks/managementkeys/README.md)
 
