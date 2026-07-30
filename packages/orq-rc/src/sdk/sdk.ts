@@ -20,11 +20,6 @@ import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
-import { McpGatewayCalls } from "./mcpgatewaycalls.js";
-import { McpGateways } from "./mcpgateways.js";
-import { McpServers } from "./mcpservers.js";
-import { McpSessions } from "./mcpsessions.js";
-import { McpToolsets } from "./mcptoolsets.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Monitors } from "./monitors.js";
@@ -165,31 +160,6 @@ export class Orq extends ClientSDK {
   private _managementKeys?: ManagementKeys;
   get managementKeys(): ManagementKeys {
     return (this._managementKeys ??= new ManagementKeys(this._options));
-  }
-
-  private _mcpGatewayCalls?: McpGatewayCalls;
-  get mcpGatewayCalls(): McpGatewayCalls {
-    return (this._mcpGatewayCalls ??= new McpGatewayCalls(this._options));
-  }
-
-  private _mcpGateways?: McpGateways;
-  get mcpGateways(): McpGateways {
-    return (this._mcpGateways ??= new McpGateways(this._options));
-  }
-
-  private _mcpServers?: McpServers;
-  get mcpServers(): McpServers {
-    return (this._mcpServers ??= new McpServers(this._options));
-  }
-
-  private _mcpSessions?: McpSessions;
-  get mcpSessions(): McpSessions {
-    return (this._mcpSessions ??= new McpSessions(this._options));
-  }
-
-  private _mcpToolsets?: McpToolsets;
-  get mcpToolsets(): McpToolsets {
-    return (this._mcpToolsets ??= new McpToolsets(this._options));
   }
 
   private _monitors?: Monitors;
