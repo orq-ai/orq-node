@@ -444,6 +444,22 @@ export type CreateRouterResponseInput =
   | Array<CreateRouterResponseInput2>;
 
 /**
+ * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+ */
+export const ServiceTier = {
+  Auto: "auto",
+  Default: "default",
+  Flex: "flex",
+  Fast: "fast",
+  Scale: "scale",
+  Priority: "priority",
+} as const;
+/**
+ * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+ */
+export type ServiceTier = ClosedEnum<typeof ServiceTier>;
+
+/**
  * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
  */
 export const TemplateEngine = {
@@ -835,6 +851,10 @@ export type CreateRouterResponseRequestBody = {
    */
   safetyIdentifier?: string | undefined;
   /**
+   * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+   */
+  serviceTier?: ServiceTier | undefined;
+  /**
    * Whether to persist the response (default: true). When false, the response cannot be retrieved later and previous_response_id will not work for follow-up requests.
    */
   store?: boolean | undefined;
@@ -900,13 +920,16 @@ export type CreateRouterResponseResponsesResponseBody = {
   data?: components.ResponseStreamEvent | undefined;
 };
 
-export const ServiceTier = {
+export const CreateRouterResponseServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
+  Fast: "fast",
   Priority: "priority",
 } as const;
-export type ServiceTier = ClosedEnum<typeof ServiceTier>;
+export type CreateRouterResponseServiceTier = ClosedEnum<
+  typeof CreateRouterResponseServiceTier
+>;
 
 export const CreateRouterResponseStatus = {
   Queued: "queued",
@@ -966,7 +989,7 @@ export type CreateRouterResponseResponseBody = {
   promptCacheRetention: string | null;
   reasoning: components.Reasoning | null;
   safetyIdentifier: string | null;
-  serviceTier: ServiceTier;
+  serviceTier: CreateRouterResponseServiceTier;
   status: CreateRouterResponseStatus;
   store: boolean;
   temperature: number;
@@ -1389,6 +1412,10 @@ export function createRouterResponseInputToJSON(
     CreateRouterResponseInput$outboundSchema.parse(createRouterResponseInput),
   );
 }
+
+/** @internal */
+export const ServiceTier$outboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
+  .nativeEnum(ServiceTier);
 
 /** @internal */
 export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
@@ -1838,6 +1865,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   reasoning?: components.ReasoningParam$Outbound | undefined;
   retry?: components.ResponseRetryConfig$Outbound | undefined;
   safety_identifier?: string | undefined;
+  service_tier?: string | undefined;
   store?: boolean | undefined;
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
@@ -1899,6 +1927,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   reasoning: components.ReasoningParam$outboundSchema.optional(),
   retry: components.ResponseRetryConfig$outboundSchema.optional(),
   safetyIdentifier: z.string().optional(),
+  serviceTier: ServiceTier$outboundSchema.optional(),
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
@@ -1951,6 +1980,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     previousResponseId: "previous_response_id",
     promptCacheKey: "prompt_cache_key",
     safetyIdentifier: "safety_identifier",
+    serviceTier: "service_tier",
     streamOptions: "stream_options",
     templateEngine: "template_engine",
     toolChoice: "tool_choice",
@@ -2004,8 +2034,9 @@ export function createRouterResponseResponsesResponseBodyFromJSON(
 }
 
 /** @internal */
-export const ServiceTier$inboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
-  .nativeEnum(ServiceTier);
+export const CreateRouterResponseServiceTier$inboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseServiceTier
+> = z.nativeEnum(CreateRouterResponseServiceTier);
 
 /** @internal */
 export const CreateRouterResponseStatus$inboundSchema: z.ZodNativeEnum<
@@ -2046,7 +2077,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   prompt_cache_retention: z.nullable(z.string()),
   reasoning: z.nullable(components.Reasoning$inboundSchema),
   safety_identifier: z.nullable(z.string()),
-  service_tier: ServiceTier$inboundSchema,
+  service_tier: CreateRouterResponseServiceTier$inboundSchema,
   status: CreateRouterResponseStatus$inboundSchema,
   store: z.boolean(),
   temperature: z.number(),

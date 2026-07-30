@@ -25,6 +25,7 @@ export const ServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
+  Fast: "fast",
   Priority: "priority",
 } as const;
 export type ServiceTier = ClosedEnum<typeof ServiceTier>;
