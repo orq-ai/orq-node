@@ -12,6 +12,10 @@ import {
   McpEgressPolicy$inboundSchema,
 } from "./mcpegresspolicy.js";
 import {
+  McpGatewayMode,
+  McpGatewayMode$inboundSchema,
+} from "./mcpgatewaymode.js";
+import {
   McpGatewayServerLink,
   McpGatewayServerLink$inboundSchema,
 } from "./mcpgatewayserverlink.js";
@@ -40,6 +44,7 @@ export type McpGateway = {
   created?: string | undefined;
   updated?: string | undefined;
   exposedToolsCount?: number | undefined;
+  mode?: McpGatewayMode | undefined;
 };
 
 /** @internal */
@@ -62,6 +67,7 @@ export const McpGateway$inboundSchema: z.ZodType<
   created: z.string().optional(),
   updated: z.string().optional(),
   exposed_tools_count: z.number().int().optional(),
+  mode: McpGatewayMode$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

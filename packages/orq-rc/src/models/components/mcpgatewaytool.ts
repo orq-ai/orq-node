@@ -17,6 +17,8 @@ export type McpGatewayTool = {
   description?: string | undefined;
   inputSchema?: InputSchema | undefined;
   readOnly?: boolean | undefined;
+  mcpServerId?: string | undefined;
+  upstreamToolName?: string | undefined;
 };
 
 /** @internal */
@@ -48,12 +50,16 @@ export const McpGatewayTool$inboundSchema: z.ZodType<
   description: z.string().optional(),
   input_schema: z.lazy(() => InputSchema$inboundSchema).optional(),
   read_only: z.boolean().optional(),
+  mcp_server_id: z.string().optional(),
+  upstream_tool_name: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_key": "serverKey",
     "exposed_name": "exposedName",
     "input_schema": "inputSchema",
     "read_only": "readOnly",
+    "mcp_server_id": "mcpServerId",
+    "upstream_tool_name": "upstreamToolName",
   });
 });
 

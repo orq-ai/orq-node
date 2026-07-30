@@ -123,7 +123,6 @@ export * from "./mcpgatewaydelete.js";
 export * from "./mcpgatewayget.js";
 export * from "./mcpgatewaylist.js";
 export * from "./mcpgatewaylisttools.js";
-export * from "./mcpgatewaytesttool.js";
 export * from "./mcpgatewayupdate.js";
 export * from "./mcpserverdelete.js";
 export * from "./mcpserverget.js";

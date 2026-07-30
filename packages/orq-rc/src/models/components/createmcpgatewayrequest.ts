@@ -10,6 +10,10 @@ import {
   McpEgressPolicy$outboundSchema,
 } from "./mcpegresspolicy.js";
 import {
+  McpGatewayMode,
+  McpGatewayMode$outboundSchema,
+} from "./mcpgatewaymode.js";
+import {
   McpGatewayServerLink,
   McpGatewayServerLink$Outbound,
   McpGatewayServerLink$outboundSchema,
@@ -33,6 +37,7 @@ export type CreateMcpGatewayRequest = {
   toolNaming?: McpToolNaming | undefined;
   runtimeLimits?: McpRuntimeLimits | undefined;
   egressPolicy?: McpEgressPolicy | undefined;
+  mode?: McpGatewayMode | undefined;
 };
 
 /** @internal */
@@ -45,6 +50,7 @@ export type CreateMcpGatewayRequest$Outbound = {
   tool_naming?: string | undefined;
   runtime_limits?: McpRuntimeLimits$Outbound | undefined;
   egress_policy?: McpEgressPolicy$Outbound | undefined;
+  mode?: string | undefined;
 };
 
 /** @internal */
@@ -61,6 +67,7 @@ export const CreateMcpGatewayRequest$outboundSchema: z.ZodType<
   toolNaming: McpToolNaming$outboundSchema.optional(),
   runtimeLimits: McpRuntimeLimits$outboundSchema.optional(),
   egressPolicy: McpEgressPolicy$outboundSchema.optional(),
+  mode: McpGatewayMode$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

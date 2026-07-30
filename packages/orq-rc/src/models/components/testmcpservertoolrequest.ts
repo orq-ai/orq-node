@@ -5,37 +5,31 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
-export type TestMcpServerToolRequestArguments = {};
+export type Arguments = {};
 
 export type TestMcpServerToolRequest = {
   toolName?: string | undefined;
-  arguments?: TestMcpServerToolRequestArguments | undefined;
+  arguments?: Arguments | undefined;
 };
 
 /** @internal */
-export type TestMcpServerToolRequestArguments$Outbound = {};
+export type Arguments$Outbound = {};
 
 /** @internal */
-export const TestMcpServerToolRequestArguments$outboundSchema: z.ZodType<
-  TestMcpServerToolRequestArguments$Outbound,
+export const Arguments$outboundSchema: z.ZodType<
+  Arguments$Outbound,
   z.ZodTypeDef,
-  TestMcpServerToolRequestArguments
+  Arguments
 > = z.object({});
 
-export function testMcpServerToolRequestArgumentsToJSON(
-  testMcpServerToolRequestArguments: TestMcpServerToolRequestArguments,
-): string {
-  return JSON.stringify(
-    TestMcpServerToolRequestArguments$outboundSchema.parse(
-      testMcpServerToolRequestArguments,
-    ),
-  );
+export function argumentsToJSON(value: Arguments): string {
+  return JSON.stringify(Arguments$outboundSchema.parse(value));
 }
 
 /** @internal */
 export type TestMcpServerToolRequest$Outbound = {
   tool_name?: string | undefined;
-  arguments?: TestMcpServerToolRequestArguments$Outbound | undefined;
+  arguments?: Arguments$Outbound | undefined;
 };
 
 /** @internal */
@@ -45,8 +39,7 @@ export const TestMcpServerToolRequest$outboundSchema: z.ZodType<
   TestMcpServerToolRequest
 > = z.object({
   toolName: z.string().optional(),
-  arguments: z.lazy(() => TestMcpServerToolRequestArguments$outboundSchema)
-    .optional(),
+  arguments: z.lazy(() => Arguments$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     toolName: "tool_name",

@@ -7,7 +7,6 @@
 * [list](#list) - List MCP gateways
 * [create](#create) - Create an MCP gateway
 * [listTools](#listtools) - List exposed tools for a gateway
-* [testTool](#testtool) - Test an MCP gateway tool
 * [get](#get) - Retrieve an MCP gateway
 * [delete](#delete) - Delete an MCP gateway
 * [update](#update) - Update an MCP gateway
@@ -152,7 +151,7 @@ run();
 
 ## listTools
 
-Returns the namespaced, policy-filtered tool view for a gateway.
+Returns the namespaced tool view for a gateway.
 
 ### Example Usage
 
@@ -216,81 +215,6 @@ run();
 ### Response
 
 **Promise\<[components.ListMcpGatewayToolsResponse](../../models/components/listmcpgatewaytoolsresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## testTool
-
-Executes a single exposed tool through a gateway for testing.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="McpGatewayTestTool" method="post" path="/v2/mcp-gateways/{gateway_id}/tools:test" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.mcpGateways.testTool({
-    gatewayId: "<id>",
-    testMcpGatewayToolRequest: {},
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { mcpGatewaysTestTool } from "@orq-ai/node/funcs/mcpGatewaysTestTool.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await mcpGatewaysTestTool(orq, {
-    gatewayId: "<id>",
-    testMcpGatewayToolRequest: {},
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("mcpGatewaysTestTool failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.McpGatewayTestToolRequest](../../models/operations/mcpgatewaytesttoolrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.TestMcpGatewayToolResponse](../../models/components/testmcpgatewaytoolresponse.md)\>**
 
 ### Errors
 

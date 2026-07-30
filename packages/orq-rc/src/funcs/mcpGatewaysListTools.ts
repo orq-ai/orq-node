@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List exposed tools for a gateway
  *
  * @remarks
- * Returns the namespaced, policy-filtered tool view for a gateway.
+ * Returns the namespaced tool view for a gateway.
  */
 export function mcpGatewaysListTools(
   client: OrqCore,

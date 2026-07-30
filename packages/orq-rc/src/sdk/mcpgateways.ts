@@ -7,7 +7,6 @@ import { mcpGatewaysDelete } from "../funcs/mcpGatewaysDelete.js";
 import { mcpGatewaysGet } from "../funcs/mcpGatewaysGet.js";
 import { mcpGatewaysList } from "../funcs/mcpGatewaysList.js";
 import { mcpGatewaysListTools } from "../funcs/mcpGatewaysListTools.js";
-import { mcpGatewaysTestTool } from "../funcs/mcpGatewaysTestTool.js";
 import { mcpGatewaysUpdate } from "../funcs/mcpGatewaysUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -53,30 +52,13 @@ export class McpGateways extends ClientSDK {
    * List exposed tools for a gateway
    *
    * @remarks
-   * Returns the namespaced, policy-filtered tool view for a gateway.
+   * Returns the namespaced tool view for a gateway.
    */
   async listTools(
     request: operations.McpGatewayListToolsRequest,
     options?: RequestOptions,
   ): Promise<components.ListMcpGatewayToolsResponse> {
     return unwrapAsync(mcpGatewaysListTools(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Test an MCP gateway tool
-   *
-   * @remarks
-   * Executes a single exposed tool through a gateway for testing.
-   */
-  async testTool(
-    request: operations.McpGatewayTestToolRequest,
-    options?: RequestOptions,
-  ): Promise<components.TestMcpGatewayToolResponse> {
-    return unwrapAsync(mcpGatewaysTestTool(
       this,
       request,
       options,
