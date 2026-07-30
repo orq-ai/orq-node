@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a notifier
-   *
-   * @remarks
-   * Creates a notifier destination in a project. Choose `NOTIFIER_TYPE_EMAIL`, `NOTIFIER_TYPE_SLACK_WEBHOOK`, or `NOTIFIER_TYPE_WEBHOOK` and provide the matching destination fields.
+   * Create moderation
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
