@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a new skill
+   * Create tool
    *
    * @remarks
-   * Creates a reusable skill in the workspace. Skills store instructions, metadata, and an optional project location so teams can standardize repeatable AI workflows.
+   * Creates a new tool in the workspace.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

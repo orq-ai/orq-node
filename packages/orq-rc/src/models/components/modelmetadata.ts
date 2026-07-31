@@ -116,6 +116,7 @@ export type ModelMetadata = {
   supportsReasoningEffortXhigh?: boolean | undefined;
   supportsResponsesApi?: boolean | undefined;
   supportsSamplingParams?: boolean | undefined;
+  supportsServiceTier?: boolean | undefined;
   supportsStreaming?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
   supportsStructuredOutputs?: boolean | undefined;
@@ -237,6 +238,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_reasoning_effort_xhigh: z.boolean().optional(),
   supports_responses_api: z.boolean().optional(),
   supports_sampling_params: z.boolean().optional(),
+  supports_service_tier: z.boolean().optional(),
   supports_streaming: z.boolean().optional(),
   supports_strict_tool: z.boolean().optional(),
   supports_structured_outputs: z.boolean().optional(),
@@ -351,6 +353,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_reasoning_effort_xhigh": "supportsReasoningEffortXhigh",
     "supports_responses_api": "supportsResponsesApi",
     "supports_sampling_params": "supportsSamplingParams",
+    "supports_service_tier": "supportsServiceTier",
     "supports_streaming": "supportsStreaming",
     "supports_strict_tool": "supportsStrictTool",
     "supports_structured_outputs": "supportsStructuredOutputs",
@@ -468,6 +471,7 @@ export type ModelMetadata$Outbound = {
   supports_reasoning_effort_xhigh?: boolean | undefined;
   supports_responses_api?: boolean | undefined;
   supports_sampling_params?: boolean | undefined;
+  supports_service_tier?: boolean | undefined;
   supports_streaming?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
   supports_structured_outputs?: boolean | undefined;
@@ -589,6 +593,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsReasoningEffortXhigh: z.boolean().optional(),
   supportsResponsesApi: z.boolean().optional(),
   supportsSamplingParams: z.boolean().optional(),
+  supportsServiceTier: z.boolean().optional(),
   supportsStreaming: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
   supportsStructuredOutputs: z.boolean().optional(),
@@ -703,6 +708,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsReasoningEffortXhigh: "supports_reasoning_effort_xhigh",
     supportsResponsesApi: "supports_responses_api",
     supportsSamplingParams: "supports_sampling_params",
+    supportsServiceTier: "supports_service_tier",
     supportsStreaming: "supports_streaming",
     supportsStrictTool: "supports_strict_tool",
     supportsStructuredOutputs: "supports_structured_outputs",
