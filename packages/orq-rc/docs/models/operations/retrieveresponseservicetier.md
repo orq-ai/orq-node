@@ -11,5 +11,5 @@ let value: RetrieveResponseServiceTier = "priority";
 ## Values
 
 ```typescript
-"auto" | "default" | "flex" | "priority"
+"auto" | "default" | "flex" | "fast" | "priority"
 ```

@@ -21,6 +21,7 @@ export const RetrieveResponseServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
+  Fast: "fast",
   Priority: "priority",
 } as const;
 export type RetrieveResponseServiceTier = ClosedEnum<

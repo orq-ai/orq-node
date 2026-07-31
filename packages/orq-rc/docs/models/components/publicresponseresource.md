@@ -43,7 +43,7 @@ let value: PublicResponseResource = {
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
-  serviceTier: "priority",
+  serviceTier: "fast",
   status: "incomplete",
   store: true,
   temperature: 164.13,
