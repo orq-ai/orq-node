@@ -20,6 +20,7 @@ import { MemoryParam, MemoryParam$inboundSchema } from "./memoryparam.js";
 import { PublicUsage, PublicUsage$inboundSchema } from "./publicusage.js";
 import { Reasoning, Reasoning$inboundSchema } from "./reasoning.js";
 import { ResponseError, ResponseError$inboundSchema } from "./responseerror.js";
+import { Telemetry, Telemetry$inboundSchema } from "./telemetry.js";
 
 export const ServiceTier = {
   Auto: "auto",
@@ -88,6 +89,10 @@ export type PublicResponseResource = {
   serviceTier: ServiceTier;
   status: PublicResponseResourceStatus;
   store: boolean;
+  /**
+   * Telemetry information for correlating the response with traces
+   */
+  telemetry?: Telemetry | undefined;
   temperature: number;
   /**
    * Text output configuration including format and verbosity
@@ -155,6 +160,7 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   service_tier: ServiceTier$inboundSchema,
   status: PublicResponseResourceStatus$inboundSchema,
   store: z.boolean(),
+  telemetry: Telemetry$inboundSchema.optional(),
   temperature: z.number(),
   text: z.any().optional(),
   tool_choice: z.any().optional(),

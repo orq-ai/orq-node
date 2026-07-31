@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a notifier
+   * Create guardrail rule
    *
    * @remarks
-   * Creates a notifier destination in a project. Choose `NOTIFIER_TYPE_EMAIL`, `NOTIFIER_TYPE_SLACK_WEBHOOK`, or `NOTIFIER_TYPE_WEBHOOK` and provide the matching destination fields.
+   * Creates a new guardrail rule with expression, guardrails configuration, and timeout settings.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

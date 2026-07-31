@@ -46,7 +46,7 @@ export type Reasoning = {
   /**
    * The format of the reasoning summary returned by the model.
    */
-  summary?: ReasoningSummary | undefined;
+  summary?: ReasoningSummary | null | undefined;
 };
 
 /** @internal */
@@ -66,7 +66,7 @@ export const Reasoning$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   effort: ReasoningEffort$inboundSchema.optional(),
-  summary: ReasoningSummary$inboundSchema.optional(),
+  summary: z.nullable(ReasoningSummary$inboundSchema).optional(),
 });
 
 export function reasoningFromJSON(

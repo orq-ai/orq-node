@@ -89,6 +89,10 @@ export type RetrieveResponseResponseBody = {
   serviceTier: RetrieveResponseServiceTier;
   status: RetrieveResponseStatus;
   store: boolean;
+  /**
+   * Telemetry information for correlating the response with traces
+   */
+  telemetry?: components.Telemetry | undefined;
   temperature: number;
   /**
    * Text output configuration including format and verbosity
@@ -184,6 +188,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   service_tier: RetrieveResponseServiceTier$inboundSchema,
   status: RetrieveResponseStatus$inboundSchema,
   store: z.boolean(),
+  telemetry: components.Telemetry$inboundSchema.optional(),
   temperature: z.number(),
   text: z.any().optional(),
   tool_choice: z.any().optional(),
