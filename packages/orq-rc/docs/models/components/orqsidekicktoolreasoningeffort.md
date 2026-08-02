@@ -1,13 +1,13 @@
-# ReasoningEffort
+# OrqSidekickToolReasoningEffort
 
 Reasoning effort for supported models. Omit to use the provider default.
 
 ## Example Usage
 
 ```typescript
-import { ReasoningEffort } from "@orq-ai/node/models/components";
+import { OrqSidekickToolReasoningEffort } from "@orq-ai/node/models/components";
 
-let value: ReasoningEffort = "none";
+let value: OrqSidekickToolReasoningEffort = "low";
 ```
 
 ## Values

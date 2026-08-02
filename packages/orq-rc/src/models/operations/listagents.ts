@@ -1232,7 +1232,7 @@ export type ListAgentsModel = {
   /**
    * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
-  parameters?: ListAgentsParameters | undefined;
+  parameters?: ListAgentsParameters | null | undefined;
   /**
    * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
    */
@@ -2921,7 +2921,8 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   integration_id: z.nullable(z.string()).optional(),
-  parameters: z.lazy(() => ListAgentsParameters$inboundSchema).optional(),
+  parameters: z.nullable(z.lazy(() => ListAgentsParameters$inboundSchema))
+    .optional(),
   retry: z.lazy(() => ListAgentsRetry$inboundSchema).optional(),
   fallback_models: z.nullable(
     z.array(z.union([

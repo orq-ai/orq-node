@@ -36,7 +36,6 @@ import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
 import { Skills } from "./skills.js";
 import { SmartRouters } from "./smartrouters.js";
-import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
@@ -215,11 +214,6 @@ export class Orq extends ClientSDK {
   private _reporting?: Reporting;
   get reporting(): Reporting {
     return (this._reporting ??= new Reporting(this._options));
-  }
-
-  private _telemetry?: Telemetry;
-  get telemetry(): Telemetry {
-    return (this._telemetry ??= new Telemetry(this._options));
   }
 
   private _traces?: Traces;

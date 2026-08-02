@@ -770,6 +770,8 @@ export type ToolsFunction = {
  */
 export type CreateRouterResponseTools =
   | ToolsFunction
+  | components.OrqAdvisorTool
+  | components.OrqSidekickTool
   | (OrqAiTool & { type: "orq:current_date" })
   | (OrqAiTool & { type: "orq:google_search" })
   | (OrqAiTool & { type: "orq:web_scraper" })
@@ -886,6 +888,8 @@ export type CreateRouterResponseRequestBody = {
   tools?:
     | Array<
       | ToolsFunction
+      | components.OrqAdvisorTool
+      | components.OrqSidekickTool
       | (OrqAiTool & { type: "orq:current_date" })
       | (OrqAiTool & { type: "orq:google_search" })
       | (OrqAiTool & { type: "orq:web_scraper" })
@@ -1794,6 +1798,8 @@ export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
 /** @internal */
 export type CreateRouterResponseTools$Outbound =
   | ToolsFunction$Outbound
+  | components.OrqAdvisorTool$Outbound
+  | components.OrqSidekickTool$Outbound
   | (OrqAiTool$Outbound & { type: "orq:current_date" })
   | (OrqAiTool$Outbound & { type: "orq:google_search" })
   | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
@@ -1810,6 +1816,8 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   CreateRouterResponseTools
 > = z.union([
   z.lazy(() => ToolsFunction$outboundSchema),
+  components.OrqAdvisorTool$outboundSchema,
+  components.OrqSidekickTool$outboundSchema,
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:current_date") }),
   ),
@@ -1878,6 +1886,8 @@ export type CreateRouterResponseRequestBody$Outbound = {
   tools?:
     | Array<
       | ToolsFunction$Outbound
+      | components.OrqAdvisorTool$Outbound
+      | components.OrqSidekickTool$Outbound
       | (OrqAiTool$Outbound & { type: "orq:current_date" })
       | (OrqAiTool$Outbound & { type: "orq:google_search" })
       | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
@@ -1942,27 +1952,29 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   tools: z.array(
     z.union([
       z.lazy(() => ToolsFunction$outboundSchema),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:current_date") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:google_search") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:web_scraper") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:code_interpreter") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:mcp") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:http") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:function") })),
+      components.OrqAdvisorTool$outboundSchema,
+      components.OrqSidekickTool$outboundSchema,
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:current_date") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:google_search") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:web_scraper") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:code_interpreter") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:mcp") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:http") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:function") }),
+      ),
       z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
