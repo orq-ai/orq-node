@@ -31,17 +31,61 @@ import {
   McpToolInput$outboundSchema,
 } from "./mcptoolinput.js";
 
-export const AgentToolInputCrud12Type = {
+export const AgentToolInputCrud14Type = {
   CodeInterpreter: "code_interpreter",
 } as const;
-export type AgentToolInputCrud12Type = ClosedEnum<
-  typeof AgentToolInputCrud12Type
+export type AgentToolInputCrud14Type = ClosedEnum<
+  typeof AgentToolInputCrud14Type
 >;
 
 /**
  * Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
  */
 export type CodeInterpreterTool = {
+  type: AgentToolInputCrud14Type;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
+};
+
+export const AgentToolInputCrud13Type = {
+  Sidekick: "sidekick",
+} as const;
+export type AgentToolInputCrud13Type = ClosedEnum<
+  typeof AgentToolInputCrud13Type
+>;
+
+/**
+ * Delegate a subtask to a secondary model for execution
+ */
+export type SidekickTool = {
+  type: AgentToolInputCrud13Type;
+  /**
+   * Whether this tool requires approval before execution
+   */
+  requiresApproval?: boolean | undefined;
+  /**
+   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
+   */
+  configuration?: { [k: string]: any } | undefined;
+};
+
+export const AgentToolInputCrud12Type = {
+  Advisor: "advisor",
+} as const;
+export type AgentToolInputCrud12Type = ClosedEnum<
+  typeof AgentToolInputCrud12Type
+>;
+
+/**
+ * Consult a secondary model for advice on the current task
+ */
+export type AdvisorTool = {
   type: AgentToolInputCrud12Type;
   /**
    * Whether this tool requires approval before execution
@@ -304,9 +348,9 @@ export type AgentToolInputCRUD =
   | McpToolInput;
 
 /** @internal */
-export const AgentToolInputCrud12Type$outboundSchema: z.ZodNativeEnum<
-  typeof AgentToolInputCrud12Type
-> = z.nativeEnum(AgentToolInputCrud12Type);
+export const AgentToolInputCrud14Type$outboundSchema: z.ZodNativeEnum<
+  typeof AgentToolInputCrud14Type
+> = z.nativeEnum(AgentToolInputCrud14Type);
 
 /** @internal */
 export type CodeInterpreterTool$Outbound = {
@@ -321,7 +365,7 @@ export const CodeInterpreterTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CodeInterpreterTool
 > = z.object({
-  type: AgentToolInputCrud12Type$outboundSchema,
+  type: AgentToolInputCrud14Type$outboundSchema,
   requiresApproval: z.boolean().optional(),
   configuration: z.record(z.any()).optional(),
 }).transform((v) => {
@@ -336,6 +380,68 @@ export function codeInterpreterToolToJSON(
   return JSON.stringify(
     CodeInterpreterTool$outboundSchema.parse(codeInterpreterTool),
   );
+}
+
+/** @internal */
+export const AgentToolInputCrud13Type$outboundSchema: z.ZodNativeEnum<
+  typeof AgentToolInputCrud13Type
+> = z.nativeEnum(AgentToolInputCrud13Type);
+
+/** @internal */
+export type SidekickTool$Outbound = {
+  type: string;
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const SidekickTool$outboundSchema: z.ZodType<
+  SidekickTool$Outbound,
+  z.ZodTypeDef,
+  SidekickTool
+> = z.object({
+  type: AgentToolInputCrud13Type$outboundSchema,
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function sidekickToolToJSON(sidekickTool: SidekickTool): string {
+  return JSON.stringify(SidekickTool$outboundSchema.parse(sidekickTool));
+}
+
+/** @internal */
+export const AgentToolInputCrud12Type$outboundSchema: z.ZodNativeEnum<
+  typeof AgentToolInputCrud12Type
+> = z.nativeEnum(AgentToolInputCrud12Type);
+
+/** @internal */
+export type AdvisorTool$Outbound = {
+  type: string;
+  requires_approval?: boolean | undefined;
+  configuration?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const AdvisorTool$outboundSchema: z.ZodType<
+  AdvisorTool$Outbound,
+  z.ZodTypeDef,
+  AdvisorTool
+> = z.object({
+  type: AgentToolInputCrud12Type$outboundSchema,
+  requiresApproval: z.boolean().optional(),
+  configuration: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requiresApproval: "requires_approval",
+  });
+});
+
+export function advisorToolToJSON(advisorTool: AdvisorTool): string {
+  return JSON.stringify(AdvisorTool$outboundSchema.parse(advisorTool));
 }
 
 /** @internal */

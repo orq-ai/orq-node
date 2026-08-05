@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { Config, Config$inboundSchema } from "./config.js";
 import {
   ModelConfigurationResponse,
   ModelConfigurationResponse$inboundSchema,
@@ -17,10 +16,14 @@ import {
   ModelParameterDocument,
   ModelParameterDocument$inboundSchema,
 } from "./modelparameterdocument.js";
+import {
+  ModelSharingConfig,
+  ModelSharingConfig$inboundSchema,
+} from "./modelsharingconfig.js";
 
 export type ModelDocument = {
   configuration: ModelConfigurationResponse;
-  created: Date;
+  created: string;
   description: string | null;
   displayName: string;
   docsUrl: string | null;
@@ -45,8 +48,8 @@ export type ModelDocument = {
   pricingUrl: string | null;
   provider: string;
   refId: string;
-  sharing?: Config | undefined;
-  updated: Date;
+  sharing?: ModelSharingConfig | undefined;
+  updated: string;
 };
 
 /** @internal */
@@ -56,7 +59,7 @@ export const ModelDocument$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: ModelConfigurationResponse$inboundSchema,
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created: z.string(),
   description: z.nullable(z.string()),
   display_name: z.string(),
   docs_url: z.nullable(z.string()),
@@ -81,8 +84,8 @@ export const ModelDocument$inboundSchema: z.ZodType<
   pricing_url: z.nullable(z.string()),
   provider: z.string(),
   refId: z.string(),
-  sharing: Config$inboundSchema.optional(),
-  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  sharing: ModelSharingConfig$inboundSchema.optional(),
+  updated: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

@@ -1,0 +1,21 @@
+# RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody17Role
+
+The message role. Always `user`.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody17Role,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody17Role =
+    "user";
+```
+
+## Values
+
+```typescript
+"user"
+```

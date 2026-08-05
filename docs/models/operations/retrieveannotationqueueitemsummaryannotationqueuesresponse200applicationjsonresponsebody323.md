@@ -1,0 +1,24 @@
+# RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody323
+
+A text content.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody323,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody323 =
+    {
+      text: "<value>",
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                                                                               | [operations.RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody32AttributesOpenresponsesType](../../models/operations/retrieveannotationqueueitemsummaryannotationqueuesresponse200applicationjsonresponsebody32attributesopenresponsestype.md) | :heavy_minus_sign:                                                                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                                                                  |
+| `text`                                                                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                                                                  |

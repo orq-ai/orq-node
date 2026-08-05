@@ -584,7 +584,8 @@ export type UpdatePromptGuardrails = {
 export type UpdatePromptPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type UpdatePromptFallbacks = {
   /**
@@ -851,13 +852,14 @@ export type UpdatePromptPromptInput = {
    */
   guardrails?: Array<UpdatePromptGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1232,6 +1234,8 @@ export const UpdatePromptPromptsResponseReasoningEffort = {
   Low: "low",
   Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1553,9 +1557,6 @@ export type UpdatePromptPromptsMessages = {
 export type UpdatePromptPromptConfig = {
   stream?: boolean | undefined;
   model?: string | null | undefined;
-  /**
-   * The id of the resource
-   */
   modelDbId?: string | null | undefined;
   /**
    * The modality of the model
@@ -1827,7 +1828,8 @@ export type UpdatePromptPromptsGuardrails = {
 export type UpdatePromptPromptsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type UpdatePromptPromptsFallbacks = {
   /**
@@ -2417,13 +2419,14 @@ export type UpdatePromptPromptField = {
    */
   guardrails?: Array<UpdatePromptPromptsGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -3552,7 +3555,8 @@ export function updatePromptGuardrailsToJSON(
 export type UpdatePromptPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const UpdatePromptPlugins$outboundSchema: z.ZodType<
@@ -3563,6 +3567,7 @@ export const UpdatePromptPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function updatePromptPluginsToJSON(
@@ -3833,6 +3838,7 @@ export type UpdatePromptPromptInput$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
@@ -3902,6 +3908,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
+      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
@@ -5012,6 +5019,7 @@ export const UpdatePromptPromptsPlugins$inboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function updatePromptPromptsPluginsFromJSON(
@@ -5803,6 +5811,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))

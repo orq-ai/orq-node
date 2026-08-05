@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AutoRouterV2CreatorConfig,
+  AutoRouterV2CreatorConfig$inboundSchema,
+  AutoRouterV2CreatorConfig$Outbound,
+  AutoRouterV2CreatorConfig$outboundSchema,
+} from "./autorouterv2creatorconfig.js";
+import {
   AutoRouterV2EffortConfig,
   AutoRouterV2EffortConfig$inboundSchema,
   AutoRouterV2EffortConfig$Outbound,
@@ -15,6 +21,15 @@ import {
 } from "./autorouterv2effortconfig.js";
 
 export type AutoRouterV2Config = {
+  aaCreator?: AutoRouterV2CreatorConfig | undefined;
+  aaEvaluations?: { [k: string]: number | null } | undefined;
+  aaMedianOutputTokensPerSecond?: number | undefined;
+  aaMedianTimeToFirstAnswerToken?: number | undefined;
+  aaMedianTimeToFirstTokenSeconds?: number | undefined;
+  aaModelId?: string | undefined;
+  aaName?: string | undefined;
+  aaPricing?: { [k: string]: number | null } | undefined;
+  aaReleaseDate?: string | undefined;
   aaSlug?: string | undefined;
   defaultEffort?: string | undefined;
   intelligenceIndex: number;
@@ -28,6 +43,15 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  aa_creator: AutoRouterV2CreatorConfig$inboundSchema.optional(),
+  aa_evaluations: z.record(z.nullable(z.number())).optional(),
+  aa_median_output_tokens_per_second: z.number().optional(),
+  aa_median_time_to_first_answer_token: z.number().optional(),
+  aa_median_time_to_first_token_seconds: z.number().optional(),
+  aa_model_id: z.string().optional(),
+  aa_name: z.string().optional(),
+  aa_pricing: z.record(z.nullable(z.number())).optional(),
+  aa_release_date: z.string().optional(),
   aa_slug: z.string().optional(),
   default_effort: z.string().optional(),
   intelligence_index: z.number(),
@@ -36,6 +60,15 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    "aa_creator": "aaCreator",
+    "aa_evaluations": "aaEvaluations",
+    "aa_median_output_tokens_per_second": "aaMedianOutputTokensPerSecond",
+    "aa_median_time_to_first_answer_token": "aaMedianTimeToFirstAnswerToken",
+    "aa_median_time_to_first_token_seconds": "aaMedianTimeToFirstTokenSeconds",
+    "aa_model_id": "aaModelId",
+    "aa_name": "aaName",
+    "aa_pricing": "aaPricing",
+    "aa_release_date": "aaReleaseDate",
     "aa_slug": "aaSlug",
     "default_effort": "defaultEffort",
     "intelligence_index": "intelligenceIndex",
@@ -44,6 +77,15 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type AutoRouterV2Config$Outbound = {
+  aa_creator?: AutoRouterV2CreatorConfig$Outbound | undefined;
+  aa_evaluations?: { [k: string]: number | null } | undefined;
+  aa_median_output_tokens_per_second?: number | undefined;
+  aa_median_time_to_first_answer_token?: number | undefined;
+  aa_median_time_to_first_token_seconds?: number | undefined;
+  aa_model_id?: string | undefined;
+  aa_name?: string | undefined;
+  aa_pricing?: { [k: string]: number | null } | undefined;
+  aa_release_date?: string | undefined;
   aa_slug?: string | undefined;
   default_effort?: string | undefined;
   intelligence_index: number;
@@ -59,6 +101,15 @@ export const AutoRouterV2Config$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutoRouterV2Config
 > = z.object({
+  aaCreator: AutoRouterV2CreatorConfig$outboundSchema.optional(),
+  aaEvaluations: z.record(z.nullable(z.number())).optional(),
+  aaMedianOutputTokensPerSecond: z.number().optional(),
+  aaMedianTimeToFirstAnswerToken: z.number().optional(),
+  aaMedianTimeToFirstTokenSeconds: z.number().optional(),
+  aaModelId: z.string().optional(),
+  aaName: z.string().optional(),
+  aaPricing: z.record(z.nullable(z.number())).optional(),
+  aaReleaseDate: z.string().optional(),
   aaSlug: z.string().optional(),
   defaultEffort: z.string().optional(),
   intelligenceIndex: z.number(),
@@ -67,6 +118,15 @@ export const AutoRouterV2Config$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    aaCreator: "aa_creator",
+    aaEvaluations: "aa_evaluations",
+    aaMedianOutputTokensPerSecond: "aa_median_output_tokens_per_second",
+    aaMedianTimeToFirstAnswerToken: "aa_median_time_to_first_answer_token",
+    aaMedianTimeToFirstTokenSeconds: "aa_median_time_to_first_token_seconds",
+    aaModelId: "aa_model_id",
+    aaName: "aa_name",
+    aaPricing: "aa_pricing",
+    aaReleaseDate: "aa_release_date",
     aaSlug: "aa_slug",
     defaultEffort: "default_effort",
     intelligenceIndex: "intelligence_index",

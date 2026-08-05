@@ -1,12 +1,12 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.12.15",
+  "version": "4.12.18",
   "author": "Orq",
   "exports": {
     ".": {
-      "import": "./index.js",
       "require": "./index.js",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "import": "./index.js"
     },
     "./*": "./*",
     "./langchain": {
@@ -23,7 +23,7 @@
   },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
-    "build": "tsc",
+    "build": "node --max-old-space-size=8192 ./node_modules/typescript/bin/tsc",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {

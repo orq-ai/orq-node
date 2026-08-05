@@ -38,6 +38,7 @@ export function evalsDelete(
   Result<
     void,
     | errors.DeleteEvalResponseBody
+    | errors.DeleteEvalEvalsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -64,6 +65,7 @@ async function $do(
     Result<
       void,
       | errors.DeleteEvalResponseBody
+      | errors.DeleteEvalEvalsResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -152,6 +154,7 @@ async function $do(
   const [result] = await M.match<
     void,
     | errors.DeleteEvalResponseBody
+    | errors.DeleteEvalEvalsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -163,6 +166,7 @@ async function $do(
   >(
     M.nil(204, z.void()),
     M.jsonErr(404, errors.DeleteEvalResponseBody$inboundSchema),
+    M.jsonErr(409, errors.DeleteEvalEvalsResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

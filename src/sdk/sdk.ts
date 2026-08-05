@@ -4,6 +4,8 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
+import { Alerts } from "./alerts.js";
+import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
 import { Budgets } from "./budgets.js";
@@ -17,10 +19,13 @@ import { GuardrailRules } from "./guardrailrules.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
+import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
+import { Monitors } from "./monitors.js";
 import { Notifiers } from "./notifiers.js";
+import { People } from "./people.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
@@ -31,10 +36,11 @@ import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
 import { Skills } from "./skills.js";
-import { Telemetry } from "./telemetry.js";
+import { SmartRouters } from "./smartrouters.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
+import { WorkspaceSettings } from "./workspacesettings.js";
 
 export class Orq extends ClientSDK {
   private _evals?: Evals;
@@ -102,6 +108,11 @@ export class Orq extends ClientSDK {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
   }
 
+  private _annotationQueues?: AnnotationQueues;
+  get annotationQueues(): AnnotationQueues {
+    return (this._annotationQueues ??= new AnnotationQueues(this._options));
+  }
+
   private _pii?: Pii;
   get pii(): Pii {
     return (this._pii ??= new Pii(this._options));
@@ -125,6 +136,11 @@ export class Orq extends ClientSDK {
   private _routingRules?: RoutingRules;
   get routingRules(): RoutingRules {
     return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
+  private _alerts?: Alerts;
+  get alerts(): Alerts {
+    return (this._alerts ??= new Alerts(this._options));
   }
 
   private _apiKeys?: ApiKeys;
@@ -152,9 +168,19 @@ export class Orq extends ClientSDK {
     return (this._managementKeys ??= new ManagementKeys(this._options));
   }
 
+  private _monitors?: Monitors;
+  get monitors(): Monitors {
+    return (this._monitors ??= new Monitors(this._options));
+  }
+
   private _notifiers?: Notifiers;
   get notifiers(): Notifiers {
     return (this._notifiers ??= new Notifiers(this._options));
+  }
+
+  private _people?: People;
+  get people(): People {
+    return (this._people ??= new People(this._options));
   }
 
   private _projects?: Projects;
@@ -167,9 +193,19 @@ export class Orq extends ClientSDK {
     return (this._skills ??= new Skills(this._options));
   }
 
+  private _smartRouters?: SmartRouters;
+  get smartRouters(): SmartRouters {
+    return (this._smartRouters ??= new SmartRouters(this._options));
+  }
+
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _workspaceSettings?: WorkspaceSettings;
+  get workspaceSettings(): WorkspaceSettings {
+    return (this._workspaceSettings ??= new WorkspaceSettings(this._options));
   }
 
   private _schedules?: Schedules;
@@ -182,14 +218,14 @@ export class Orq extends ClientSDK {
     return (this._responses ??= new Responses(this._options));
   }
 
+  private _logs?: Logs;
+  get logs(): Logs {
+    return (this._logs ??= new Logs(this._options));
+  }
+
   private _reporting?: Reporting;
   get reporting(): Reporting {
     return (this._reporting ??= new Reporting(this._options));
-  }
-
-  private _telemetry?: Telemetry;
-  get telemetry(): Telemetry {
-    return (this._telemetry ??= new Telemetry(this._options));
   }
 
   private _traces?: Traces;

@@ -1,0 +1,19 @@
+# RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody8Status
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody8Status,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody8Status =
+    "incomplete";
+```
+
+## Values
+
+```typescript
+"in_progress" | "completed" | "incomplete"
+```

@@ -45,6 +45,7 @@ export type ModelMetadata = {
   maxImagesPerRequest?: number | undefined;
   maxInputTokens?: number | undefined;
   maxOutputTokens?: number | undefined;
+  maxTemperature?: number | undefined;
   millionSearchesCost?: number | undefined;
   millionTokensAbove128kCacheReadCost?: number | undefined;
   millionTokensAbove128kCacheWriteCost?: number | undefined;
@@ -116,6 +117,7 @@ export type ModelMetadata = {
   supportsReasoningEffortXhigh?: boolean | undefined;
   supportsResponsesApi?: boolean | undefined;
   supportsSamplingParams?: boolean | undefined;
+  supportsServiceTier?: boolean | undefined;
   supportsStreaming?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
   supportsStructuredOutputs?: boolean | undefined;
@@ -166,6 +168,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   max_images_per_request: z.number().int().optional(),
   max_input_tokens: z.number().int().optional(),
   max_output_tokens: z.number().int().optional(),
+  max_temperature: z.number().optional(),
   million_searches_cost: z.number().optional(),
   million_tokens_above_128k_cache_read_cost: z.number().optional(),
   million_tokens_above_128k_cache_write_cost: z.number().optional(),
@@ -237,6 +240,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_reasoning_effort_xhigh: z.boolean().optional(),
   supports_responses_api: z.boolean().optional(),
   supports_sampling_params: z.boolean().optional(),
+  supports_service_tier: z.boolean().optional(),
   supports_streaming: z.boolean().optional(),
   supports_strict_tool: z.boolean().optional(),
   supports_structured_outputs: z.boolean().optional(),
@@ -280,6 +284,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "max_images_per_request": "maxImagesPerRequest",
     "max_input_tokens": "maxInputTokens",
     "max_output_tokens": "maxOutputTokens",
+    "max_temperature": "maxTemperature",
     "million_searches_cost": "millionSearchesCost",
     "million_tokens_above_128k_cache_read_cost":
       "millionTokensAbove128kCacheReadCost",
@@ -351,6 +356,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_reasoning_effort_xhigh": "supportsReasoningEffortXhigh",
     "supports_responses_api": "supportsResponsesApi",
     "supports_sampling_params": "supportsSamplingParams",
+    "supports_service_tier": "supportsServiceTier",
     "supports_streaming": "supportsStreaming",
     "supports_strict_tool": "supportsStrictTool",
     "supports_structured_outputs": "supportsStructuredOutputs",
@@ -397,6 +403,7 @@ export type ModelMetadata$Outbound = {
   max_images_per_request?: number | undefined;
   max_input_tokens?: number | undefined;
   max_output_tokens?: number | undefined;
+  max_temperature?: number | undefined;
   million_searches_cost?: number | undefined;
   million_tokens_above_128k_cache_read_cost?: number | undefined;
   million_tokens_above_128k_cache_write_cost?: number | undefined;
@@ -468,6 +475,7 @@ export type ModelMetadata$Outbound = {
   supports_reasoning_effort_xhigh?: boolean | undefined;
   supports_responses_api?: boolean | undefined;
   supports_sampling_params?: boolean | undefined;
+  supports_service_tier?: boolean | undefined;
   supports_streaming?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
   supports_structured_outputs?: boolean | undefined;
@@ -518,6 +526,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   maxImagesPerRequest: z.number().int().optional(),
   maxInputTokens: z.number().int().optional(),
   maxOutputTokens: z.number().int().optional(),
+  maxTemperature: z.number().optional(),
   millionSearchesCost: z.number().optional(),
   millionTokensAbove128kCacheReadCost: z.number().optional(),
   millionTokensAbove128kCacheWriteCost: z.number().optional(),
@@ -589,6 +598,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsReasoningEffortXhigh: z.boolean().optional(),
   supportsResponsesApi: z.boolean().optional(),
   supportsSamplingParams: z.boolean().optional(),
+  supportsServiceTier: z.boolean().optional(),
   supportsStreaming: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
   supportsStructuredOutputs: z.boolean().optional(),
@@ -632,6 +642,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     maxImagesPerRequest: "max_images_per_request",
     maxInputTokens: "max_input_tokens",
     maxOutputTokens: "max_output_tokens",
+    maxTemperature: "max_temperature",
     millionSearchesCost: "million_searches_cost",
     millionTokensAbove128kCacheReadCost:
       "million_tokens_above_128k_cache_read_cost",
@@ -703,6 +714,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsReasoningEffortXhigh: "supports_reasoning_effort_xhigh",
     supportsResponsesApi: "supports_responses_api",
     supportsSamplingParams: "supports_sampling_params",
+    supportsServiceTier: "supports_service_tier",
     supportsStreaming: "supports_streaming",
     supportsStrictTool: "supports_strict_tool",
     supportsStructuredOutputs: "supports_structured_outputs",

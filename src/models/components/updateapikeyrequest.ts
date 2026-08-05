@@ -6,6 +6,11 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ApiKeyStatus, ApiKeyStatus$outboundSchema } from "./apikeystatus.js";
 import {
+  McpAccess,
+  McpAccess$Outbound,
+  McpAccess$outboundSchema,
+} from "./mcpaccess.js";
+import {
   PermissionMode,
   PermissionMode$outboundSchema,
 } from "./permissionmode.js";
@@ -48,6 +53,15 @@ export type UpdateApiKeyRequest = {
    * Force-clear the expiration. Mutually exclusive with `expires_at`.
    */
   clearExpiresAt?: boolean | undefined;
+  /**
+   * Replacement MCP-gateway access restriction. Absent leaves the
+   *
+   * @remarks
+   *  current value intact; an explicitly-set McpAccess replaces it —
+   *  including an empty one (deny_all=false + empty list), which clears
+   *  any existing restriction. See McpAccess.
+   */
+  mcpAccess?: McpAccess | undefined;
 };
 
 /** @internal */
@@ -59,6 +73,7 @@ export type UpdateApiKeyRequest$Outbound = {
   project_scope?: ProjectScope$Outbound | undefined;
   expires_at?: string | undefined;
   clear_expires_at?: boolean | undefined;
+  mcp_access?: McpAccess$Outbound | undefined;
 };
 
 /** @internal */
@@ -74,12 +89,14 @@ export const UpdateApiKeyRequest$outboundSchema: z.ZodType<
   projectScope: ProjectScope$outboundSchema.optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   clearExpiresAt: z.boolean().optional(),
+  mcpAccess: McpAccess$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     permissionMode: "permission_mode",
     projectScope: "project_scope",
     expiresAt: "expires_at",
     clearExpiresAt: "clear_expires_at",
+    mcpAccess: "mcp_access",
   });
 });
 

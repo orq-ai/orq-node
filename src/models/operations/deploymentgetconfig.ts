@@ -1283,20 +1283,20 @@ export type DeploymentGetConfigFormat = ClosedEnum<
   typeof DeploymentGetConfigFormat
 >;
 
-export const Six = {
+export const ResponseFormat6 = {
   Json: "json",
   Text: "text",
   Srt: "srt",
   VerboseJson: "verbose_json",
   Vtt: "vtt",
 } as const;
-export type Six = ClosedEnum<typeof Six>;
+export type ResponseFormat6 = ClosedEnum<typeof ResponseFormat6>;
 
-export const Five = {
+export const ResponseFormat5 = {
   Url: "url",
   Base64Json: "base64_json",
 } as const;
-export type Five = ClosedEnum<typeof Five>;
+export type ResponseFormat5 = ClosedEnum<typeof ResponseFormat5>;
 
 export const ResponseFormat4 = {
   Mp3: "mp3",
@@ -1365,8 +1365,8 @@ export type DeploymentGetConfigResponseFormat =
   | ResponseFormat2
   | ResponseFormat3
   | ResponseFormat4
-  | Five
-  | Six;
+  | ResponseFormat5
+  | ResponseFormat6;
 
 /**
  * Create a cache control breakpoint. Accepts only the value "ephemeral".
@@ -1464,6 +1464,8 @@ export const DeploymentGetConfigReasoningEffort = {
   Low: "low",
   Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1569,8 +1571,8 @@ export type DeploymentGetConfigParameters = {
     | ResponseFormat2
     | ResponseFormat3
     | ResponseFormat4
-    | Five
-    | Six
+    | ResponseFormat5
+    | ResponseFormat6
     | null
     | undefined;
   /**
@@ -4282,12 +4284,14 @@ export const DeploymentGetConfigFormat$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentGetConfigFormat);
 
 /** @internal */
-export const Six$inboundSchema: z.ZodNativeEnum<typeof Six> = z.nativeEnum(Six);
+export const ResponseFormat6$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat6
+> = z.nativeEnum(ResponseFormat6);
 
 /** @internal */
-export const Five$inboundSchema: z.ZodNativeEnum<typeof Five> = z.nativeEnum(
-  Five,
-);
+export const ResponseFormat5$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat5
+> = z.nativeEnum(ResponseFormat5);
 
 /** @internal */
 export const ResponseFormat4$inboundSchema: z.ZodNativeEnum<
@@ -4416,8 +4420,8 @@ export const DeploymentGetConfigResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => ResponseFormat2$inboundSchema),
   z.lazy(() => ResponseFormat3$inboundSchema),
   ResponseFormat4$inboundSchema,
-  Five$inboundSchema,
-  Six$inboundSchema,
+  ResponseFormat5$inboundSchema,
+  ResponseFormat6$inboundSchema,
 ]);
 
 export function deploymentGetConfigResponseFormatFromJSON(
@@ -4509,8 +4513,8 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
       z.lazy(() => ResponseFormat2$inboundSchema),
       z.lazy(() => ResponseFormat3$inboundSchema),
       ResponseFormat4$inboundSchema,
-      Five$inboundSchema,
-      Six$inboundSchema,
+      ResponseFormat5$inboundSchema,
+      ResponseFormat6$inboundSchema,
     ]),
   ).optional(),
   cacheControl: z.nullable(

@@ -1,0 +1,20 @@
+# RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson34Otel
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson34Otel,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson34Otel =
+    {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `statusCode`                                                                                                                                                                                                                         | [operations.RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson34StatusCode](../../models/operations/retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson34statuscode.md) | :heavy_minus_sign:                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                  |
+| `statusDescription`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                                  |

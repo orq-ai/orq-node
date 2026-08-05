@@ -636,7 +636,8 @@ export type CreatePromptGuardrails = {
 export type CreatePromptPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type CreatePromptFallbacks = {
   /**
@@ -901,13 +902,14 @@ export type PromptInput = {
    */
   guardrails?: Array<CreatePromptGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1010,20 +1012,24 @@ export const CreatePromptFormat = {
  */
 export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
 
-export const ResponseFormat6 = {
+export const CreatePromptResponseFormat6 = {
   Json: "json",
   Text: "text",
   Srt: "srt",
   VerboseJson: "verbose_json",
   Vtt: "vtt",
 } as const;
-export type ResponseFormat6 = ClosedEnum<typeof ResponseFormat6>;
+export type CreatePromptResponseFormat6 = ClosedEnum<
+  typeof CreatePromptResponseFormat6
+>;
 
-export const ResponseFormat5 = {
+export const CreatePromptResponseFormat5 = {
   Url: "url",
   Base64Json: "base64_json",
 } as const;
-export type ResponseFormat5 = ClosedEnum<typeof ResponseFormat5>;
+export type CreatePromptResponseFormat5 = ClosedEnum<
+  typeof CreatePromptResponseFormat5
+>;
 
 export const CreatePromptResponseFormat4 = {
   Mp3: "mp3",
@@ -1106,8 +1112,8 @@ export type CreatePromptPromptsResponseResponseFormat =
   | CreatePromptResponseFormat2
   | CreatePromptResponseFormat3
   | CreatePromptResponseFormat4
-  | ResponseFormat5
-  | ResponseFormat6;
+  | CreatePromptResponseFormat5
+  | CreatePromptResponseFormat6;
 
 /**
  * Create a cache control breakpoint. Accepts only the value "ephemeral".
@@ -1210,6 +1216,8 @@ export const CreatePromptPromptsResponseReasoningEffort = {
   Low: "low",
   Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -1315,8 +1323,8 @@ export type ModelParameters = {
     | CreatePromptResponseFormat2
     | CreatePromptResponseFormat3
     | CreatePromptResponseFormat4
-    | ResponseFormat5
-    | ResponseFormat6
+    | CreatePromptResponseFormat5
+    | CreatePromptResponseFormat6
     | null
     | undefined;
   /**
@@ -1531,9 +1539,6 @@ export type CreatePromptPromptsMessages = {
 export type PromptConfig = {
   stream?: boolean | undefined;
   model?: string | null | undefined;
-  /**
-   * The id of the resource
-   */
   modelDbId?: string | null | undefined;
   /**
    * The modality of the model
@@ -1803,7 +1808,8 @@ export type CreatePromptPromptsGuardrails = {
 export type CreatePromptPromptsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto;
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type CreatePromptPromptsFallbacks = {
   /**
@@ -2393,13 +2399,14 @@ export type PromptField = {
    */
   guardrails?: Array<CreatePromptPromptsGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -3558,7 +3565,8 @@ export function createPromptGuardrailsToJSON(
 export type CreatePromptPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.PIIRedactionPluginAuto$Outbound;
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const CreatePromptPlugins$outboundSchema: z.ZodType<
@@ -3569,6 +3577,7 @@ export const CreatePromptPlugins$outboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function createPromptPluginsToJSON(
@@ -3837,6 +3846,7 @@ export type PromptInput$Outbound = {
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
       | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<CreatePromptFallbacks$Outbound> | undefined;
@@ -3905,6 +3915,7 @@ export const PromptInput$outboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
+      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreatePromptFallbacks$outboundSchema))
@@ -3992,14 +4003,14 @@ export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreatePromptFormat);
 
 /** @internal */
-export const ResponseFormat6$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormat6
-> = z.nativeEnum(ResponseFormat6);
+export const CreatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptResponseFormat6
+> = z.nativeEnum(CreatePromptResponseFormat6);
 
 /** @internal */
-export const ResponseFormat5$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseFormat5
-> = z.nativeEnum(ResponseFormat5);
+export const CreatePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptResponseFormat5
+> = z.nativeEnum(CreatePromptResponseFormat5);
 
 /** @internal */
 export const CreatePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
@@ -4137,8 +4148,8 @@ export const CreatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
   z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
   CreatePromptResponseFormat4$inboundSchema,
-  ResponseFormat5$inboundSchema,
-  ResponseFormat6$inboundSchema,
+  CreatePromptResponseFormat5$inboundSchema,
+  CreatePromptResponseFormat6$inboundSchema,
 ]);
 
 export function createPromptPromptsResponseResponseFormatFromJSON(
@@ -4246,8 +4257,8 @@ export const ModelParameters$inboundSchema: z.ZodType<
       z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
       z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
       CreatePromptResponseFormat4$inboundSchema,
-      ResponseFormat5$inboundSchema,
-      ResponseFormat6$inboundSchema,
+      CreatePromptResponseFormat5$inboundSchema,
+      CreatePromptResponseFormat6$inboundSchema,
     ]),
   ).optional(),
   cacheControl: z.nullable(
@@ -4926,6 +4937,7 @@ export const CreatePromptPromptsPlugins$inboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function createPromptPromptsPluginsFromJSON(
@@ -5717,6 +5729,7 @@ export const PromptField$inboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreatePromptPromptsFallbacks$inboundSchema))
