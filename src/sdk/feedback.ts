@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create an identity
+   * Create speech
    *
    * @remarks
-   * Creates a new identity with a unique external_id. If an identity with the same external_id already exists, the operation will fail.
+   * Generates audio from the input text.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
