@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create rerank
-   *
-   * @remarks
-   * Rerank a list of documents based on their relevance to a query.
+   * Create a knowledge
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
