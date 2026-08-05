@@ -54,6 +54,7 @@ export type ModelUpdateOpenAILikeResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
   modelFamily?: string | undefined;
@@ -190,6 +191,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   input_cost: z.nullable(z.number()),
   input_currency: z.string(),
   is_active: z.boolean(),
+  legacy_uuid: z.string().optional(),
   metadata: components.ModelMetadata$inboundSchema,
   model_developer: z.string().optional(),
   model_family: z.string().optional(),
@@ -217,6 +219,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
     "input_cost": "inputCost",
     "input_currency": "inputCurrency",
     "is_active": "isActive",
+    "legacy_uuid": "legacyUuid",
     "model_developer": "modelDeveloper",
     "model_family": "modelFamily",
     "model_id": "modelId",

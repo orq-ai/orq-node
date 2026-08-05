@@ -1,6 +1,6 @@
 # Grain
 
-Requested bucket grain for timeseries widgets.
+Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
 
 ## Example Usage
 

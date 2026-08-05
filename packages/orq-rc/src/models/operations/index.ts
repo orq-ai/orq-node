@@ -3,7 +3,6 @@
  */
 
 export * from "./addannotationqueueitems.js";
-export * from "./alertchecknow.js";
 export * from "./alertdelete.js";
 export * from "./alertget.js";
 export * from "./alertlist.js";
@@ -17,7 +16,6 @@ export * from "./apikeyupdate.js";
 export * from "./billing.js";
 export * from "./budgetdelete.js";
 export * from "./budgetget.js";
-export * from "./budgetgetconsumption.js";
 export * from "./budgetlist.js";
 export * from "./budgetresetconsumption.js";
 export * from "./budgetupdate.js";
@@ -140,10 +138,6 @@ export * from "./modelupdateawsbedrock.js";
 export * from "./modelupdateopenailike.js";
 export * from "./modelvalidate.js";
 export * from "./modelvalidateawsbedrock.js";
-export * from "./monitordelete.js";
-export * from "./monitorget.js";
-export * from "./monitorlist.js";
-export * from "./monitorupdate.js";
 export * from "./notifierdelete.js";
 export * from "./notifierget.js";
 export * from "./notifierlist.js";

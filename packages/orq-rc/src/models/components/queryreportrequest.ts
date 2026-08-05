@@ -46,7 +46,7 @@ export type Metric = ClosedEnum<typeof Metric>;
 /**
  * Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
  */
-export const QueryReportRequestGrain = {
+export const Grain = {
   Auto: "auto",
   Minute: "minute",
   Hour: "hour",
@@ -55,9 +55,7 @@ export const QueryReportRequestGrain = {
 /**
  * Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
  */
-export type QueryReportRequestGrain = ClosedEnum<
-  typeof QueryReportRequestGrain
->;
+export type Grain = ClosedEnum<typeof Grain>;
 
 export const GroupBy = {
   Project: "project",
@@ -112,14 +110,14 @@ export type QueryReportRequestMode = ClosedEnum<typeof QueryReportRequestMode>;
 /**
  * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
  */
-export const QueryReportRequestSort = {
+export const Sort = {
   Desc: "desc",
   Asc: "asc",
 } as const;
 /**
  * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
  */
-export type QueryReportRequestSort = ClosedEnum<typeof QueryReportRequestSort>;
+export type Sort = ClosedEnum<typeof Sort>;
 
 export type QueryReportRequest = {
   /**
@@ -137,7 +135,7 @@ export type QueryReportRequest = {
   /**
    * Requested bucket grain. Use `auto` or omit the field to let the server choose based on the requested range.
    */
-  grain?: QueryReportRequestGrain | undefined;
+  grain?: Grain | undefined;
   /**
    * Reporting dimensions to break down by. Valid dimensions depend on the selected metric.
    */
@@ -174,7 +172,7 @@ export type QueryReportRequest = {
   /**
    * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
    */
-  sort?: QueryReportRequestSort | undefined;
+  sort?: Sort | undefined;
 };
 
 /** @internal */
@@ -185,13 +183,12 @@ export const Metric$outboundSchema: z.ZodNativeEnum<typeof Metric> =
   Metric$inboundSchema;
 
 /** @internal */
-export const QueryReportRequestGrain$inboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestGrain
-> = z.nativeEnum(QueryReportRequestGrain);
+export const Grain$inboundSchema: z.ZodNativeEnum<typeof Grain> = z.nativeEnum(
+  Grain,
+);
 /** @internal */
-export const QueryReportRequestGrain$outboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestGrain
-> = QueryReportRequestGrain$inboundSchema;
+export const Grain$outboundSchema: z.ZodNativeEnum<typeof Grain> =
+  Grain$inboundSchema;
 
 /** @internal */
 export const GroupBy$inboundSchema: z.ZodNativeEnum<typeof GroupBy> = z
@@ -210,13 +207,12 @@ export const QueryReportRequestMode$outboundSchema: z.ZodNativeEnum<
 > = QueryReportRequestMode$inboundSchema;
 
 /** @internal */
-export const QueryReportRequestSort$inboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestSort
-> = z.nativeEnum(QueryReportRequestSort);
+export const Sort$inboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
+  Sort,
+);
 /** @internal */
-export const QueryReportRequestSort$outboundSchema: z.ZodNativeEnum<
-  typeof QueryReportRequestSort
-> = QueryReportRequestSort$inboundSchema;
+export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> =
+  Sort$inboundSchema;
 
 /** @internal */
 export const QueryReportRequest$inboundSchema: z.ZodType<
@@ -227,14 +223,14 @@ export const QueryReportRequest$inboundSchema: z.ZodType<
   metric: Metric$inboundSchema,
   from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  grain: QueryReportRequestGrain$inboundSchema.optional(),
+  grain: Grain$inboundSchema.optional(),
   group_by: z.array(GroupBy$inboundSchema).optional(),
   filters: z.array(Filter$inboundSchema).optional(),
   limit: z.number().int().optional(),
   time_zone: z.string().optional(),
   include_totals: z.boolean().optional(),
   mode: QueryReportRequestMode$inboundSchema.optional(),
-  sort: QueryReportRequestSort$inboundSchema.optional(),
+  sort: Sort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "group_by": "groupBy",
@@ -266,14 +262,14 @@ export const QueryReportRequest$outboundSchema: z.ZodType<
   metric: Metric$outboundSchema,
   from: z.date().transform(v => v.toISOString()),
   to: z.date().transform(v => v.toISOString()),
-  grain: QueryReportRequestGrain$outboundSchema.optional(),
+  grain: Grain$outboundSchema.optional(),
   groupBy: z.array(GroupBy$outboundSchema).optional(),
   filters: z.array(Filter$outboundSchema).optional(),
   limit: z.number().int().optional(),
   timeZone: z.string().optional(),
   includeTotals: z.boolean().optional(),
   mode: QueryReportRequestMode$outboundSchema.optional(),
-  sort: QueryReportRequestSort$outboundSchema.optional(),
+  sort: Sort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     groupBy: "group_by",

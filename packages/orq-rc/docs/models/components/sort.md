@@ -1,6 +1,6 @@
 # Sort
 
-Value ordering for toplist widgets.
+Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
 
 ## Example Usage
 

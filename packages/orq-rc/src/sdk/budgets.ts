@@ -5,7 +5,6 @@
 import { budgetsCreate } from "../funcs/budgetsCreate.js";
 import { budgetsDelete } from "../funcs/budgetsDelete.js";
 import { budgetsGet } from "../funcs/budgetsGet.js";
-import { budgetsGetConsumption } from "../funcs/budgetsGetConsumption.js";
 import { budgetsList } from "../funcs/budgetsList.js";
 import { budgetsResetConsumption } from "../funcs/budgetsResetConsumption.js";
 import { budgetsUpdate } from "../funcs/budgetsUpdate.js";
@@ -94,23 +93,6 @@ export class Budgets extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.UpdateBudgetResponse> {
     return unwrapAsync(budgetsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get current-period consumption
-   *
-   * @remarks
-   * Returns the current-period cost, token, and per-minute request counters for the budget. Values reflect the live Redis state for the active period bucket.
-   */
-  async getConsumption(
-    request: operations.BudgetGetConsumptionRequest,
-    options?: RequestOptions,
-  ): Promise<components.GetBudgetConsumptionResponse> {
-    return unwrapAsync(budgetsGetConsumption(
       this,
       request,
       options,

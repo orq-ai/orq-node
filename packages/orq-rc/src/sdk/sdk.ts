@@ -23,7 +23,6 @@ import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
-import { Monitors } from "./monitors.js";
 import { Notifiers } from "./notifiers.js";
 import { People } from "./people.js";
 import { Pii } from "./pii.js";
@@ -166,11 +165,6 @@ export class Orq extends ClientSDK {
   private _managementKeys?: ManagementKeys;
   get managementKeys(): ManagementKeys {
     return (this._managementKeys ??= new ManagementKeys(this._options));
-  }
-
-  private _monitors?: Monitors;
-  get monitors(): Monitors {
-    return (this._monitors ??= new Monitors(this._options));
   }
 
   private _notifiers?: Notifiers;

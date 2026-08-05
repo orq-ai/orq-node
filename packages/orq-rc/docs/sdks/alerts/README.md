@@ -9,7 +9,6 @@
 * [get](#get) - Retrieve an alert
 * [delete](#delete) - Delete an alert
 * [update](#update) - Update an alert
-* [checkNow](#checknow) - Run an alert check now
 * [listTriggers](#listtriggers) - List alert triggers
 * [listTriggerEvents](#listtriggerevents) - List alert trigger events
 
@@ -389,81 +388,6 @@ run();
 ### Response
 
 **Promise\<[components.UpdateAlertResponse](../../models/components/updatealertresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## checkNow
-
-Schedules one immediate evaluation of the alert (delivered within ~10 seconds), independent of its regular interval. The check runs through the normal evaluation pipeline: it records a run, can open or resolve triggers, and fires notifications. The alert must be enabled.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="AlertCheckNow" method="post" path="/v2/alerts/{alert_id}/check" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.alerts.checkNow({
-    alertId: "<id>",
-    checkAlertNowRequest: {},
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { alertsCheckNow } from "@orq-ai/node/funcs/alertsCheckNow.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await alertsCheckNow(orq, {
-    alertId: "<id>",
-    checkAlertNowRequest: {},
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("alertsCheckNow failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.AlertCheckNowRequest](../../models/operations/alertchecknowrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.CheckAlertNowResponse](../../models/components/checkalertnowresponse.md)\>**
 
 ### Errors
 
