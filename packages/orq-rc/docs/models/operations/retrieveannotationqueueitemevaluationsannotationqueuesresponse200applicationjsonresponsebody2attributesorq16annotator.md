@@ -1,0 +1,25 @@
+# RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOrq16Annotator
+
+The annotator that produced this evaluation. Optional during the dual-write deprecation window.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOrq16Annotator,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOrq16Annotator =
+    {
+      kind: "llm",
+      actorId: "<id>",
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `kind`                                                                                                                                                                                                                                                                     | [operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOrq16Kind](../../models/operations/retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody2attributesorq16kind.md) | :heavy_check_mark:                                                                                                                                                                                                                                                         | The kind of annotator that produced the evaluation                                                                                                                                                                                                                         |
+| `actorId`                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                         | Who/what produced this annotation. User/contact id for human, evaluator eval span id for llm/code, automation rule id for automation.                                                                                                                                      |

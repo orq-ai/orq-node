@@ -1,0 +1,25 @@
+# RetrieveAnnotationQueueItemInputOutput
+
+Text, image, or file output of the function tool call.
+
+
+## Supported Types
+
+### `operations.RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOpenresponses1[]`
+
+```typescript
+const value:
+  operations.RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOpenresponses1[] =
+    [
+      {
+        type: "input_image",
+      },
+    ];
+```
+
+### `string`
+
+```typescript
+const value: string = "<value>";
+```
+

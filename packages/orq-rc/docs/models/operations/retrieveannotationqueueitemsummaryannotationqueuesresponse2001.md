@@ -1,0 +1,20 @@
+# RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse2001
+
+A text input to the model.
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse2001 } from "@orq-ai/node/models/operations";
+
+let value: RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse2001 = {
+  text: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                               | [operations.RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody5Type](../../models/operations/retrieveannotationqueueitemsummaryannotationqueuesresponse200applicationjsonresponsebody5type.md) | :heavy_minus_sign:                                                                                                                                                                                                                   | The type of the input item. Always `input_text`.                                                                                                                                                                                     |
+| `text`                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                   | The text input to the model.                                                                                                                                                                                                         |

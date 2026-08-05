@@ -78,13 +78,13 @@ const value: operations.BERTScore = {
 };
 ```
 
-### `operations.ResponseBodyLLM`
+### `operations.InvokeEvalResponseBodyLLM`
 
 ```typescript
-const value: operations.ResponseBodyLLM = {
+const value: operations.InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator",
   value: {
-    value: 3319.26,
+    value: 2734.06,
   },
 };
 ```

@@ -1,0 +1,32 @@
+# RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyLogprobs
+
+The log probability of a token.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyLogprobs,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyLogprobs =
+    {
+      token: "<value>",
+      logprob: 7106.86,
+      bytes: [
+        554314,
+        148535,
+      ],
+      topLogprobs: [],
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `token`                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                                |
+| `logprob`                                                                                                                                                                                                                                          | *number*                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                                |
+| `bytes`                                                                                                                                                                                                                                            | *number*[]                                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                                |
+| `topLogprobs`                                                                                                                                                                                                                                      | [operations.RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyTopLogprobs](../../models/operations/retrieveannotationqueueitemsummaryannotationqueuesresponse200applicationjsonresponsebodytoplogprobs.md)[] | :heavy_check_mark:                                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                                |

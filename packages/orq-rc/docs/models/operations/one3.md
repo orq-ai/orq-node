@@ -1,0 +1,20 @@
+# One3
+
+A file input to the model.
+
+## Example Usage
+
+```typescript
+import { One3 } from "@orq-ai/node/models/operations";
+
+let value: One3 = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                     | [operations.RetrieveAnnotationQueueItem1AnnotationQueuesResponseType](../../models/operations/retrieveannotationqueueitem1annotationqueuesresponsetype.md) | :heavy_minus_sign:                                                                                                                                         | The type of the input item. Always `input_file`.                                                                                                           |
+| `filename`                                                                                                                                                 | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
+| `fileData`                                                                                                                                                 | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
+| `fileUrl`                                                                                                                                                  | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |

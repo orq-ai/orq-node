@@ -5,6 +5,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { Agents } from "./agents.js";
 import { Alerts } from "./alerts.js";
+import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
 import { Budgets } from "./budgets.js";
@@ -39,6 +40,7 @@ import { SmartRouters } from "./smartrouters.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
+import { WorkspaceSettings } from "./workspacesettings.js";
 
 export class Orq extends ClientSDK {
   private _evals?: Evals;
@@ -104,6 +106,11 @@ export class Orq extends ClientSDK {
   private _humanReviewSets?: HumanReviewSets;
   get humanReviewSets(): HumanReviewSets {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
+  }
+
+  private _annotationQueues?: AnnotationQueues;
+  get annotationQueues(): AnnotationQueues {
+    return (this._annotationQueues ??= new AnnotationQueues(this._options));
   }
 
   private _pii?: Pii;
@@ -194,6 +201,11 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _workspaceSettings?: WorkspaceSettings;
+  get workspaceSettings(): WorkspaceSettings {
+    return (this._workspaceSettings ??= new WorkspaceSettings(this._options));
   }
 
   private _schedules?: Schedules;

@@ -1,0 +1,17 @@
+# RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Otel
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Otel } from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Otel = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `statusCode`                                                                                                                                                                                       | [operations.RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200StatusCode](../../models/operations/retrieveannotationqueueitemresponsebodyannotationqueuesresponse200statuscode.md) | :heavy_minus_sign:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+| `statusDescription`                                                                                                                                                                                | *string*                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |

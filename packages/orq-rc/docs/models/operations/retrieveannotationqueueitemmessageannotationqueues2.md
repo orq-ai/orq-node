@@ -1,0 +1,19 @@
+# RetrieveAnnotationQueueItemMessageAnnotationQueues2
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemMessageAnnotationQueues2 } from "@orq-ai/node/models/operations";
+
+let value: RetrieveAnnotationQueueItemMessageAnnotationQueues2 = {
+  role: "correction",
+  content: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                      | Type                                                                                                                                                                                                       | Required                                                                                                                                                                                                   | Description                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                                                                                                     | [operations.RetrieveAnnotationQueueItemMessageAnnotationQueuesResponse200ApplicationJSONRole](../../models/operations/retrieveannotationqueueitemmessageannotationqueuesresponse200applicationjsonrole.md) | :heavy_check_mark:                                                                                                                                                                                         | The role of the prompt message                                                                                                                                                                             |
+| `content`                                                                                                                                                                                                  | *string*                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                         | N/A                                                                                                                                                                                                        |

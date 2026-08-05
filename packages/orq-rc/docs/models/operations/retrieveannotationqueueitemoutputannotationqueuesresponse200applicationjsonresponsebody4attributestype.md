@@ -1,0 +1,21 @@
+# RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody4AttributesType
+
+The type of the item. Always `function_call`.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody4AttributesType,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody4AttributesType =
+    "function_call";
+```
+
+## Values
+
+```typescript
+"function_call"
+```

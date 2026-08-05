@@ -1,0 +1,29 @@
+# RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONLogprobs
+
+The log probability of a token.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONLogprobs,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONLogprobs =
+    {
+      token: "<value>",
+      logprob: 6403.39,
+      bytes: [],
+      topLogprobs: [],
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `token`                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                        |
+| `logprob`                                                                                                                                                                                                                  | *number*                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                        |
+| `bytes`                                                                                                                                                                                                                    | *number*[]                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                        |
+| `topLogprobs`                                                                                                                                                                                                              | [operations.RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONTopLogprobs](../../models/operations/retrieveannotationqueueitemcontentannotationqueuesresponse200applicationjsontoplogprobs.md)[] | :heavy_check_mark:                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                        |

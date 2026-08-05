@@ -55,7 +55,7 @@ export type ModelCreateResponseBody = {
   pricingUrl: string | null;
   provider: string;
   refId: string;
-  sharing?: components.Config | undefined;
+  sharing?: components.ModelSharingConfig | undefined;
   updated: string;
 };
 
@@ -152,7 +152,7 @@ export const ModelCreateResponseBody$inboundSchema: z.ZodType<
   pricing_url: z.nullable(z.string()),
   provider: z.string(),
   refId: z.string(),
-  sharing: components.Config$inboundSchema.optional(),
+  sharing: components.ModelSharingConfig$inboundSchema.optional(),
   updated: z.string(),
 }).transform((v) => {
   return remap$(v, {

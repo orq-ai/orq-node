@@ -1,0 +1,22 @@
+# RetrieveAnnotationQueueItemOutput2
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemOutput2 } from "@orq-ai/node/models/operations";
+
+let value: RetrieveAnnotationQueueItemOutput2 = {
+  text: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `task`                                                                                                                         | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `language`                                                                                                                     | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `duration`                                                                                                                     | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `text`                                                                                                                         | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `words`                                                                                                                        | [operations.RetrieveAnnotationQueueItemOutputWords](../../models/operations/retrieveannotationqueueitemoutputwords.md)[]       | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `segments`                                                                                                                     | [operations.RetrieveAnnotationQueueItemOutputSegments](../../models/operations/retrieveannotationqueueitemoutputsegments.md)[] | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |

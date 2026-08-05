@@ -1,0 +1,26 @@
+# RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody115
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody115,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody115 =
+    {
+      id: "<id>",
+      type: "<value>",
+      status: "<value>",
+    };
+```
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *string*           | :heavy_check_mark: | N/A                |
+| `type`             | *string*           | :heavy_check_mark: | N/A                |
+| `status`           | *string*           | :heavy_check_mark: | N/A                |
+| `result`           | *any*              | :heavy_minus_sign: | N/A                |
