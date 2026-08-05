@@ -13,6 +13,7 @@ export type SmartRouterListRequest = {
   search?: string | undefined;
   profile?: Array<components.SmartRouterProfile> | undefined;
   enabled?: boolean | undefined;
+  includeMetrics?: boolean | undefined;
 };
 
 /** @internal */
@@ -23,6 +24,7 @@ export type SmartRouterListRequest$Outbound = {
   search?: string | undefined;
   profile?: Array<string> | undefined;
   enabled?: boolean | undefined;
+  include_metrics?: boolean | undefined;
 };
 
 /** @internal */
@@ -37,10 +39,12 @@ export const SmartRouterListRequest$outboundSchema: z.ZodType<
   search: z.string().optional(),
   profile: z.array(components.SmartRouterProfile$outboundSchema).optional(),
   enabled: z.boolean().optional(),
+  includeMetrics: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
+    includeMetrics: "include_metrics",
   });
 });
 

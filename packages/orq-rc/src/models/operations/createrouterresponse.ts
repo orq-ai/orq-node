@@ -783,6 +783,10 @@ export type CreateRouterResponseTools =
 
 export type CreateRouterResponseRequestBody = {
   /**
+   * If true, the response runs asynchronously in the background.
+   */
+  background?: boolean | undefined;
+  /**
    * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
    */
   cacheControl?: CreateRouterResponseCacheControl | undefined;
@@ -857,6 +861,10 @@ export type CreateRouterResponseRequestBody = {
    */
   serviceTier?: ServiceTier | undefined;
   /**
+   * Custom text sequences that cause the model to stop generating. Forwarded to providers that support it (e.g. Anthropic); ignored otherwise.
+   */
+  stopSequences?: Array<string> | undefined;
+  /**
    * Whether to persist the response (default: true). When false, the response cannot be retrieved later and previous_response_id will not work for follow-up requests.
    */
   store?: boolean | undefined;
@@ -901,6 +909,10 @@ export type CreateRouterResponseRequestBody = {
     >
     | undefined;
   /**
+   * Only sample from the top K options for each subsequent token. Forwarded to providers that support it (e.g. Anthropic); ignored otherwise.
+   */
+  topK?: number | undefined;
+  /**
    * Number of most likely tokens to return at each position.
    */
   topLogprobs?: number | undefined;
@@ -929,6 +941,7 @@ export const CreateRouterResponseServiceTier = {
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Scale: "scale",
   Priority: "priority",
 } as const;
 export type CreateRouterResponseServiceTier = ClosedEnum<
@@ -941,7 +954,6 @@ export const CreateRouterResponseStatus = {
   Completed: "completed",
   Failed: "failed",
   Incomplete: "incomplete",
-  RequiresAction: "requires_action",
 } as const;
 export type CreateRouterResponseStatus = ClosedEnum<
   typeof CreateRouterResponseStatus
@@ -1013,6 +1025,10 @@ export type CreateRouterResponseResponseBody = {
    * Array of tool configurations used in this response
    */
   tools: Array<any> | null;
+  /**
+   * Only sample from the top K options for each subsequent token. Present only when set on the request.
+   */
+  topK?: number | undefined;
   topLogprobs: number;
   topP: number;
   truncation: Truncation;
@@ -1852,6 +1868,7 @@ export function createRouterResponseToolsToJSON(
 
 /** @internal */
 export type CreateRouterResponseRequestBody$Outbound = {
+  background?: boolean | undefined;
   cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
@@ -1875,6 +1892,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   retry?: components.ResponseRetryConfig$Outbound | undefined;
   safety_identifier?: string | undefined;
   service_tier?: string | undefined;
+  stop_sequences?: Array<string> | undefined;
   store?: boolean | undefined;
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
@@ -1898,6 +1916,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | MCPTool$Outbound
     >
     | undefined;
+  top_k?: number | undefined;
   top_logprobs?: number | undefined;
   top_p?: number | undefined;
   variables?: { [k: string]: any } | undefined;
@@ -1909,6 +1928,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseRequestBody
 > = z.object({
+  background: z.boolean().optional(),
   cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
     .optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
@@ -1938,6 +1958,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   retry: components.ResponseRetryConfig$outboundSchema.optional(),
   safetyIdentifier: z.string().optional(),
   serviceTier: ServiceTier$outboundSchema.optional(),
+  stopSequences: z.array(z.string()).optional(),
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
@@ -1978,6 +1999,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
+  topK: z.number().int().optional(),
   topLogprobs: z.number().int().optional(),
   topP: z.number().optional(),
   variables: z.record(z.any()).optional(),
@@ -1993,9 +2015,11 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     promptCacheKey: "prompt_cache_key",
     safetyIdentifier: "safety_identifier",
     serviceTier: "service_tier",
+    stopSequences: "stop_sequences",
     streamOptions: "stream_options",
     templateEngine: "template_engine",
     toolChoice: "tool_choice",
+    topK: "top_k",
     topLogprobs: "top_logprobs",
     topP: "top_p",
   });
@@ -2097,6 +2121,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   text: z.any().optional(),
   tool_choice: z.any().optional(),
   tools: z.nullable(z.array(z.any())),
+  top_k: z.number().int().optional(),
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: Truncation$inboundSchema,
@@ -2119,6 +2144,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",
     "tool_choice": "toolChoice",
+    "top_k": "topK",
     "top_logprobs": "topLogprobs",
     "top_p": "topP",
   });

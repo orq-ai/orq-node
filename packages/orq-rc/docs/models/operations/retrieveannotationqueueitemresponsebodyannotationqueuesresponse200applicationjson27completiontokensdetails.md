@@ -1,0 +1,22 @@
+# RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson27CompletionTokensDetails
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson27CompletionTokensDetails,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson27CompletionTokensDetails =
+    {};
+```
+
+## Fields
+
+| Field                      | Type                       | Required                   | Description                |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `reasoningTokens`          | *number*                   | :heavy_minus_sign:         | N/A                        |
+| `audioTokens`              | *number*                   | :heavy_minus_sign:         | N/A                        |
+| `acceptedPredictionTokens` | *number*                   | :heavy_minus_sign:         | N/A                        |
+| `rejectedPredictionTokens` | *number*                   | :heavy_minus_sign:         | N/A                        |

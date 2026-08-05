@@ -1,0 +1,36 @@
+# RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody211
+
+A message to or from the model.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody211,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody211 =
+    {
+      id: "<id>",
+      status: "in_progress",
+      role: "assistant",
+      content: [
+        {
+          type: "input_image",
+          imageUrl: "https://wretched-dusk.net/",
+          detail: "auto",
+        },
+      ],
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                   | [operations.RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody21Type](../../models/operations/retrieveannotationqueueitemoutputannotationqueuesresponse200applicationjsonresponsebody21type.md)     | :heavy_minus_sign:                                                                                                                                                                                                                       | The type of the message. Always set to `message`.                                                                                                                                                                                        |
+| `id`                                                                                                                                                                                                                                     | *string*                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                       | The unique ID of the message.                                                                                                                                                                                                            |
+| `status`                                                                                                                                                                                                                                 | [operations.RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody21Status](../../models/operations/retrieveannotationqueueitemoutputannotationqueuesresponse200applicationjsonresponsebody21status.md) | :heavy_check_mark:                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                      |
+| `role`                                                                                                                                                                                                                                   | [operations.RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody21Role](../../models/operations/retrieveannotationqueueitemoutputannotationqueuesresponse200applicationjsonresponsebody21role.md)     | :heavy_check_mark:                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                      |
+| `content`                                                                                                                                                                                                                                | *operations.RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody21Content*[]                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                       | The content of the message                                                                                                                                                                                                               |

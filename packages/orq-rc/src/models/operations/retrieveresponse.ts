@@ -22,6 +22,7 @@ export const RetrieveResponseServiceTier = {
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Scale: "scale",
   Priority: "priority",
 } as const;
 export type RetrieveResponseServiceTier = ClosedEnum<
@@ -34,7 +35,6 @@ export const RetrieveResponseStatus = {
   Completed: "completed",
   Failed: "failed",
   Incomplete: "incomplete",
-  RequiresAction: "requires_action",
 } as const;
 export type RetrieveResponseStatus = ClosedEnum<typeof RetrieveResponseStatus>;
 
@@ -106,6 +106,10 @@ export type RetrieveResponseResponseBody = {
    * Array of tool configurations used in this response
    */
   tools: Array<any> | null;
+  /**
+   * Only sample from the top K options for each subsequent token. Present only when set on the request.
+   */
+  topK?: number | undefined;
   topLogprobs: number;
   topP: number;
   truncation: RetrieveResponseTruncation;
@@ -193,6 +197,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   text: z.any().optional(),
   tool_choice: z.any().optional(),
   tools: z.nullable(z.array(z.any())),
+  top_k: z.number().int().optional(),
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: RetrieveResponseTruncation$inboundSchema,
@@ -215,6 +220,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",
     "tool_choice": "toolChoice",
+    "top_k": "topK",
     "top_logprobs": "topLogprobs",
     "top_p": "topP",
   });

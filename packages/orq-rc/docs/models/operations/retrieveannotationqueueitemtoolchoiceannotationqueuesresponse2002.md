@@ -1,0 +1,20 @@
+# RetrieveAnnotationQueueItemToolChoiceAnnotationQueuesResponse2002
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemToolChoiceAnnotationQueuesResponse2002 } from "@orq-ai/node/models/operations";
+
+let value: RetrieveAnnotationQueueItemToolChoiceAnnotationQueuesResponse2002 = {
+  function: {
+    name: "<value>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                   | [operations.RetrieveAnnotationQueueItemToolChoiceAnnotationQueuesResponse200ApplicationJSONResponseBodyType](../../models/operations/retrieveannotationqueueitemtoolchoiceannotationqueuesresponse200applicationjsonresponsebodytype.md) | :heavy_minus_sign:                                                                                                                                                                                                                       | The type of the tool. Currently, only function is supported.                                                                                                                                                                             |
+| `function`                                                                                                                                                                                                                               | [operations.RetrieveAnnotationQueueItemToolChoiceAnnotationQueuesFunction](../../models/operations/retrieveannotationqueueitemtoolchoiceannotationqueuesfunction.md)                                                                     | :heavy_check_mark:                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                      |

@@ -7,12 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateSkillRequest = {
   /**
-   * New workspace-unique display name. Omit to keep the current name.
-   *
-   * @remarks
-   *  Must start with a letter and may contain letters, numbers, and
-   *  underscores. Dashes and dots are not allowed because skill names
-   *  are referenced as template variables.
+   * New workspace-unique display name. Must start with a letter and may contain letters, numbers, dashes, and underscores. Dots are not allowed.
    */
   displayName?: string | undefined;
   /**

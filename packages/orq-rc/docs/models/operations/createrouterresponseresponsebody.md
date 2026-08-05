@@ -45,7 +45,7 @@ let value: CreateRouterResponseResponseBody = {
   reasoning: {},
   safetyIdentifier: "<value>",
   serviceTier: "auto",
-  status: "failed",
+  status: "completed",
   store: true,
   temperature: 3997.15,
   text: "<value>",
@@ -106,6 +106,7 @@ let value: CreateRouterResponseResponseBody = {
 | `text`                                                                                                   | *any*                                                                                                    | :heavy_check_mark:                                                                                       | Text output configuration including format and verbosity                                                 |
 | `toolChoice`                                                                                             | *any*                                                                                                    | :heavy_check_mark:                                                                                       | Tool choice setting: "auto", "none", "required", or a specific function                                  |
 | `tools`                                                                                                  | *any*[]                                                                                                  | :heavy_check_mark:                                                                                       | Array of tool configurations used in this response                                                       |
+| `topK`                                                                                                   | *number*                                                                                                 | :heavy_minus_sign:                                                                                       | Only sample from the top K options for each subsequent token. Present only when set on the request.      |
 | `topLogprobs`                                                                                            | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `topP`                                                                                                   | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `truncation`                                                                                             | [operations.Truncation](../../models/operations/truncation.md)                                           | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

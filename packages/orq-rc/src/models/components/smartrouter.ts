@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  SmartRouterMetrics,
+  SmartRouterMetrics$inboundSchema,
+} from "./smartroutermetrics.js";
+import {
   SmartRouterProfile,
   SmartRouterProfile$inboundSchema,
 } from "./smartrouterprofile.js";
@@ -36,6 +40,7 @@ export type SmartRouter = {
   enabled: boolean;
   createdAt: Date;
   updatedAt: Date;
+  metrics?: SmartRouterMetrics | undefined;
 };
 
 /** @internal */
@@ -52,6 +57,7 @@ export const SmartRouter$inboundSchema: z.ZodType<
   enabled: z.boolean(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  metrics: SmartRouterMetrics$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "smart_router_id": "smartRouterId",

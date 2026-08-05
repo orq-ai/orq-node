@@ -44,7 +44,7 @@ const value: operations.CreateRouterResponseResponseBody = {
   reasoning: {},
   safetyIdentifier: "<value>",
   serviceTier: "auto",
-  status: "failed",
+  status: "completed",
   store: true,
   temperature: 3997.15,
   text: "<value>",

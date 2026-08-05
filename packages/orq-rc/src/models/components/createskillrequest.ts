@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type CreateSkillRequest2 = {
   /**
-   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
+   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, dashes, and underscores. Dots are not allowed.
    */
   displayName: string;
   /**
@@ -34,7 +34,7 @@ export type CreateSkillRequest2 = {
 
 export type CreateSkillRequest1 = {
   /**
-   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, and underscores. Dashes and dots are not allowed.
+   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, dashes, and underscores. Dots are not allowed.
    */
   displayName: string;
   /**

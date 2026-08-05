@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -147,6 +148,12 @@ export type InvokeEvalRequestBody = {
    * Model to use for LLM-based evaluators (e.g. "openai/gpt-4o")
    */
   model?: string | undefined;
+  /**
+   * Template variables for evaluator prompt substitution. Request values override evaluator defaults, including for nested arrays and objects.
+   */
+  variables?:
+    | { [k: string]: components.EvaluatorVariableValue | null }
+    | undefined;
 };
 
 export type InvokeEvalRequest = {
@@ -206,7 +213,7 @@ export type Stats = {
   std: number;
 };
 
-export type ResponseBodyJury = {
+export type InvokeEvalResponseBodyJury = {
   judgesConfigured: number;
   judgesSucceeded: number;
   judgesFailed: number;
@@ -224,10 +231,10 @@ export type InvokeEvalResponseBodyEvalsValue = {
   explanation?: string | null | undefined;
   originalValue?: number | boolean | string | null | undefined;
   originalExplanation?: string | null | undefined;
-  jury?: ResponseBodyJury | undefined;
+  jury?: InvokeEvalResponseBodyJury | undefined;
 };
 
-export type ResponseBodyLLM = {
+export type InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator";
   value: InvokeEvalResponseBodyEvalsValue | null;
 };
@@ -343,7 +350,7 @@ export type InvokeEvalResponseBody =
   | StringArray
   | RougeN
   | BERTScore
-  | ResponseBodyLLM
+  | InvokeEvalResponseBodyLLM
   | ResponseBodyHTTP
   | Structured;
 
@@ -591,6 +598,9 @@ export type InvokeEvalRequestBody$Outbound = {
   retrievals?: Array<string> | undefined;
   messages?: Array<Messages$Outbound> | undefined;
   model?: string | undefined;
+  variables?:
+    | { [k: string]: components.EvaluatorVariableValue$Outbound | null }
+    | undefined;
 };
 
 /** @internal */
@@ -605,6 +615,9 @@ export const InvokeEvalRequestBody$outboundSchema: z.ZodType<
   retrievals: z.array(z.string()).optional(),
   messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
   model: z.string().optional(),
+  variables: z.record(
+    z.nullable(components.EvaluatorVariableValue$outboundSchema),
+  ).optional(),
 });
 
 export function invokeEvalRequestBodyToJSON(
@@ -850,8 +863,8 @@ export function statsFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyJury$inboundSchema: z.ZodType<
-  ResponseBodyJury,
+export const InvokeEvalResponseBodyJury$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyJury,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -871,13 +884,13 @@ export const ResponseBodyJury$inboundSchema: z.ZodType<
   });
 });
 
-export function responseBodyJuryFromJSON(
+export function invokeEvalResponseBodyJuryFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyJury, SDKValidationError> {
+): SafeParseResult<InvokeEvalResponseBodyJury, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyJury$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyJury' from JSON`,
+    (x) => InvokeEvalResponseBodyJury$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyJury' from JSON`,
   );
 }
 
@@ -895,7 +908,7 @@ export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
   original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
     .optional(),
   original_explanation: z.nullable(z.string()).optional(),
-  jury: z.lazy(() => ResponseBodyJury$inboundSchema).optional(),
+  jury: z.lazy(() => InvokeEvalResponseBodyJury$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "workflow_run_id": "workflowRunId",
@@ -917,8 +930,8 @@ export function invokeEvalResponseBodyEvalsValueFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyLLM$inboundSchema: z.ZodType<
-  ResponseBodyLLM,
+export const InvokeEvalResponseBodyLLM$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyLLM,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -928,13 +941,13 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   ),
 });
 
-export function responseBodyLLMFromJSON(
+export function invokeEvalResponseBodyLLMFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyLLM, SDKValidationError> {
+): SafeParseResult<InvokeEvalResponseBodyLLM, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyLLM$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyLLM' from JSON`,
+    (x) => InvokeEvalResponseBodyLLM$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyLLM' from JSON`,
   );
 }
 
@@ -1307,7 +1320,7 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => StringArray$inboundSchema),
   z.lazy(() => RougeN$inboundSchema),
   z.lazy(() => BERTScore$inboundSchema),
-  z.lazy(() => ResponseBodyLLM$inboundSchema),
+  z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
   z.lazy(() => ResponseBodyHTTP$inboundSchema),
   z.lazy(() => Structured$inboundSchema),
 ]);

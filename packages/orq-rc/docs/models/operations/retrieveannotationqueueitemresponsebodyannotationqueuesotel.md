@@ -1,0 +1,16 @@
+# RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesOtel
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesOtel } from "@orq-ai/node/models/operations";
+
+let value: RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesOtel = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                        | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `statusCode`                                                                                                                                                                 | [operations.RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesStatusCode](../../models/operations/retrieveannotationqueueitemresponsebodyannotationqueuesstatuscode.md) | :heavy_minus_sign:                                                                                                                                                           | N/A                                                                                                                                                                          |
+| `statusDescription`                                                                                                                                                          | *string*                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                           | N/A                                                                                                                                                                          |

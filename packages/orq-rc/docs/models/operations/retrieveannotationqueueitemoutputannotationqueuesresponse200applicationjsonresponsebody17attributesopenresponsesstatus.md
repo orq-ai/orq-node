@@ -1,0 +1,21 @@
+# RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody17AttributesOpenresponsesStatus
+
+Similar to `FunctionCallStatus`. All three options are allowed here for compatibility, but because in practice these items will be provided by developers, only `completed` should be used.
+
+## Example Usage
+
+```typescript
+import {
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody17AttributesOpenresponsesStatus,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody17AttributesOpenresponsesStatus =
+    "completed";
+```
+
+## Values
+
+```typescript
+"in_progress" | "completed" | "incomplete"
+```

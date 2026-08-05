@@ -1,0 +1,23 @@
+# RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesOutput
+
+## Example Usage
+
+```typescript
+import { RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesOutput } from "@orq-ai/node/models/operations";
+
+let value: RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesOutput = {
+  created: 875.83,
+  data: [
+    {},
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                              | Type                                                                                                                                                                               | Required                                                                                                                                                                           | Description                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `created`                                                                                                                                                                          | *number*                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                 | The Unix timestamp (in seconds) of when the image was created.                                                                                                                     |
+| `data`                                                                                                                                                                             | [operations.RetrieveAnnotationQueueItemResponseBodyData](../../models/operations/retrieveannotationqueueitemresponsebodydata.md)[]                                                 | :heavy_check_mark:                                                                                                                                                                 | Represents the url or the content of an image generated.                                                                                                                           |
+| `usage`                                                                                                                                                                            | [operations.RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponseUsage](../../models/operations/retrieveannotationqueueitemresponsebodyannotationqueuesresponseusage.md) | :heavy_minus_sign:                                                                                                                                                                 | N/A                                                                                                                                                                                |
+| `outputMasking`                                                                                                                                                                    | *boolean*                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                 | N/A                                                                                                                                                                                |
