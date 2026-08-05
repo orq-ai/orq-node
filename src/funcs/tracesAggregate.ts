@@ -29,7 +29,9 @@ import { Result } from "../types/fp.js";
  * Aggregate traces
  *
  * @remarks
- * Aggregate trace metrics using the structured trace filter contract.
+ * Deprecated: use TelemetryService.Query (POST /v2/telemetry/query, source=TRACES, grain=none) instead. Aggregate trace metrics using the structured trace filter contract.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function tracesAggregate(
   client: OrqCore,
@@ -86,7 +88,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v3/traces/aggregate")();
+  const path = pathToFunc("/v2/traces/aggregate")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

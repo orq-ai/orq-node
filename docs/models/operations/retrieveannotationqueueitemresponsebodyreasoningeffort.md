@@ -13,5 +13,5 @@ let value: RetrieveAnnotationQueueItemResponseBodyReasoningEffort = "none";
 ## Values
 
 ```typescript
-"none" | "disable" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
+"none" | "disable" | "minimal" | "low" | "medium" | "high"
 ```

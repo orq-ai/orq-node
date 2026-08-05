@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [aggregate](#aggregate) - Aggregate traces
+* [~~aggregate~~](#aggregate) - Aggregate traces :warning: **Deprecated**
 * [listFacets](#listfacets) - List trace facets
 * [listFacetValues](#listfacetvalues) - List trace facet values
 * [listFields](#listfields) - List trace fields
@@ -14,13 +14,15 @@
 * [listSpans](#listspans) - List trace spans
 * [getSpan](#getspan) - Get trace span
 
-## aggregate
+## ~~aggregate~~
 
-Aggregate trace metrics using the structured trace filter contract.
+Deprecated: use TelemetryService.Query (POST /v2/telemetry/query, source=TRACES, grain=none) instead. Aggregate trace metrics using the structured trace filter contract.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesAggregate" method="post" path="/v3/traces/aggregate" -->
+<!-- UsageSnippet language="typescript" operationID="TracesAggregate" method="post" path="/v2/traces/aggregate" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -89,7 +91,7 @@ List trace fields that support facet value discovery.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListFacets" method="get" path="/v3/traces/facets" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListFacets" method="get" path="/v2/traces/facets" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -157,7 +159,7 @@ List values and counts for one trace facet field.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListFacetValues" method="get" path="/v3/traces/facets/{field}" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListFacetValues" method="get" path="/v2/traces/facets/{field}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -230,7 +232,7 @@ List currently supported static trace fields.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListFields" method="get" path="/v3/traces/fields" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListFields" method="get" path="/v2/traces/fields" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -298,7 +300,7 @@ Run an OQL trace query. OQL is validated against the trace field registry and co
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesQueryOql" method="post" path="/v3/traces/query" -->
+<!-- UsageSnippet language="typescript" operationID="TracesQueryOql" method="post" path="/v2/traces/query" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -375,7 +377,7 @@ Search trace summaries using the structured trace filter contract.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesSearch" method="post" path="/v3/traces/search" -->
+<!-- UsageSnippet language="typescript" operationID="TracesSearch" method="post" path="/v2/traces/search" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -450,7 +452,7 @@ Retrieve one trace summary by trace id.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesGet" method="get" path="/v3/traces/{trace_id}" -->
+<!-- UsageSnippet language="typescript" operationID="TracesGet" method="get" path="/v2/traces/{trace_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -523,7 +525,7 @@ List canonical span summaries for a trace.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesListSpans" method="get" path="/v3/traces/{trace_id}/spans" -->
+<!-- UsageSnippet language="typescript" operationID="TracesListSpans" method="get" path="/v2/traces/{trace_id}/spans" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -596,7 +598,7 @@ Retrieve one hydrated span.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="TracesGetSpan" method="get" path="/v3/traces/{trace_id}/spans/{span_id}" -->
+<!-- UsageSnippet language="typescript" operationID="TracesGetSpan" method="get" path="/v2/traces/{trace_id}/spans/{span_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

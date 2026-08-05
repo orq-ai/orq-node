@@ -14,24 +14,6 @@ const value: operations.ToolsFunction = {
 };
 ```
 
-### `components.OrqAdvisorTool`
-
-```typescript
-const value: components.OrqAdvisorTool = {
-  model: "XC90",
-  type: "orq:advisor",
-};
-```
-
-### `components.OrqSidekickTool`
-
-```typescript
-const value: components.OrqSidekickTool = {
-  model: "Challenger",
-  type: "orq:sidekick",
-};
-```
-
 ### `operations.OrqAiTool`
 
 ```typescript

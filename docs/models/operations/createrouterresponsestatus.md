@@ -11,5 +11,5 @@ let value: CreateRouterResponseStatus = "in_progress";
 ## Values
 
 ```typescript
-"queued" | "in_progress" | "completed" | "failed" | "incomplete"
+"queued" | "in_progress" | "completed" | "failed" | "incomplete" | "requires_action"
 ```

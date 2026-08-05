@@ -11,5 +11,5 @@ let value: CreateRouterResponseServiceTier = "auto";
 ## Values
 
 ```typescript
-"auto" | "default" | "flex" | "fast" | "scale" | "priority"
+"auto" | "default" | "flex" | "fast" | "priority"
 ```

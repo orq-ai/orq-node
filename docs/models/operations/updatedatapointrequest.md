@@ -6,7 +6,7 @@
 import { UpdateDatapointRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapointRequest = {
-  datasetId: "<id>",
+  datasetId: "f354f6ca-af65-42f0-8de0-be5eb76ce3b4",
   datapointId: "<id>",
 };
 ```

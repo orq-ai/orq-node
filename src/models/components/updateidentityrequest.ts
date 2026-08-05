@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * Replacement custom JSON metadata.
+ */
+export type UpdateIdentityRequestMetadata = {};
+
 export type UpdateIdentityRequest = {
   /**
    * New display name. Omit to keep the current display name.
@@ -25,8 +30,28 @@ export type UpdateIdentityRequest = {
   /**
    * Replacement custom JSON metadata.
    */
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: UpdateIdentityRequestMetadata | undefined;
 };
+
+/** @internal */
+export type UpdateIdentityRequestMetadata$Outbound = {};
+
+/** @internal */
+export const UpdateIdentityRequestMetadata$outboundSchema: z.ZodType<
+  UpdateIdentityRequestMetadata$Outbound,
+  z.ZodTypeDef,
+  UpdateIdentityRequestMetadata
+> = z.object({});
+
+export function updateIdentityRequestMetadataToJSON(
+  updateIdentityRequestMetadata: UpdateIdentityRequestMetadata,
+): string {
+  return JSON.stringify(
+    UpdateIdentityRequestMetadata$outboundSchema.parse(
+      updateIdentityRequestMetadata,
+    ),
+  );
+}
 
 /** @internal */
 export type UpdateIdentityRequest$Outbound = {
@@ -34,7 +59,7 @@ export type UpdateIdentityRequest$Outbound = {
   email?: string | undefined;
   avatar_url?: string | undefined;
   tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: UpdateIdentityRequestMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -47,7 +72,8 @@ export const UpdateIdentityRequest$outboundSchema: z.ZodType<
   email: z.string().optional(),
   avatarUrl: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.lazy(() => UpdateIdentityRequestMetadata$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

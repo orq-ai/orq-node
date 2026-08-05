@@ -99,27 +99,27 @@ const value:
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody7`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson7`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody7 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson7 =
     {
       id: "<id>",
       evaluationType: "evaluator",
       evaluatorId: "<id>",
-      evaluatorConfigType: "output_evaluator",
+      evaluatorConfigType: "input_guardrail",
       type: "http_evaluator",
       status: "completed",
-      value: true,
+      value: 4810.11,
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody8`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson8`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody8 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson8 =
     {
       id: "<id>",
       evaluationType: "evaluator",
@@ -130,42 +130,42 @@ const value:
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson9`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson9 =
     {
       id: "<id>",
       evaluationType: "evaluator",
       evaluatorId: "<id>",
-      evaluatorConfigType: "output_evaluator",
+      evaluatorConfigType: "input_evaluator",
       type: "http_evaluator",
       status: "failed",
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody10`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson10`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody10 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson10 =
     {
       id: "<id>",
       evaluationType: "evaluator",
       evaluatorId: "<id>",
-      evaluatorConfigType: "output_guardrail",
+      evaluatorConfigType: "input_evaluator",
       type: "llm_evaluator",
       status: "completed",
-      value: "<value>",
+      value: false,
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody11`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson11`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody11 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson11 =
     {
       id: "<id>",
       evaluationType: "evaluator",
@@ -176,31 +176,31 @@ const value:
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody12`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson12`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody12 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "output_guardrail",
-      type: "llm_evaluator",
-      status: "failed",
-    };
-```
-
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody13`
-
-```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody13 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson12 =
     {
       id: "<id>",
       evaluationType: "evaluator",
       evaluatorId: "<id>",
       evaluatorConfigType: "input_evaluator",
+      type: "llm_evaluator",
+      status: "failed",
+    };
+```
+
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson13`
+
+```typescript
+const value:
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson13 =
+    {
+      id: "<id>",
+      evaluationType: "evaluator",
+      evaluatorId: "<id>",
+      evaluatorConfigType: "output_evaluator",
       type: "rouge_n",
       status: "completed",
       value: {
@@ -223,41 +223,41 @@ const value:
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody14`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson14`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody14 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson14 =
     {
       id: "<id>",
       evaluationType: "evaluator",
       evaluatorId: "<id>",
-      evaluatorConfigType: "input_evaluator",
+      evaluatorConfigType: "output_guardrail",
       type: "rouge_n",
       status: "pending",
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody15`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson15`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody15 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson15 =
     {
       id: "<id>",
       evaluationType: "evaluator",
       evaluatorId: "<id>",
-      evaluatorConfigType: "input_evaluator",
+      evaluatorConfigType: "input_guardrail",
       type: "rouge_n",
       status: "failed",
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody16`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson16`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody16 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson16 =
     {
       id: "<id>",
       evaluationType: "human_review",
@@ -267,25 +267,25 @@ const value:
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody17`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson17`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody17 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson17 =
     {
       id: "<id>",
       evaluationType: "human_review",
       reviewedById: "<id>",
       type: "number",
-      value: 8091.92,
+      value: 449.24,
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody18`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson18`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody18 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson18 =
     {
       id: "<id>",
       evaluationType: "human_review",
@@ -295,11 +295,11 @@ const value:
     };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody19`
+### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson19`
 
 ```typescript
 const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody19 =
+  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJson19 =
     {
       id: "<id>",
       evaluationType: "human_review",
@@ -308,7 +308,6 @@ const value:
       values: [
         "<value 1>",
         "<value 2>",
-        "<value 3>",
       ],
     };
 ```

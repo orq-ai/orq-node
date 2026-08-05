@@ -268,8 +268,6 @@ export const ListPromptVersionsPromptsReasoningEffort = {
   Low: "low",
   Medium: "medium",
   High: "high",
-  Xhigh: "xhigh",
-  Max: "max",
 } as const;
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
@@ -592,6 +590,9 @@ export type ListPromptVersionsMessages = {
 export type ListPromptVersionsPromptConfig = {
   stream?: boolean | undefined;
   model?: string | null | undefined;
+  /**
+   * The id of the resource
+   */
   modelDbId?: string | null | undefined;
   /**
    * The modality of the model
@@ -863,8 +864,7 @@ export type ListPromptVersionsGuardrails = {
 export type ListPromptVersionsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | components.PIIRedactionPluginAuto;
 
 export type ListPromptVersionsFallbacks = {
   /**
@@ -1447,14 +1447,13 @@ export type ListPromptVersionsPromptField = {
    */
   guardrails?: Array<ListPromptVersionsGuardrails> | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output.
+   * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
   plugins?:
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
       | components.PIIRedactionPluginAuto
-      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2555,7 +2554,6 @@ export const ListPromptVersionsPlugins$inboundSchema: z.ZodType<
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
-  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function listPromptVersionsPluginsFromJSON(
@@ -3332,7 +3330,6 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
-      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => ListPromptVersionsFallbacks$inboundSchema))

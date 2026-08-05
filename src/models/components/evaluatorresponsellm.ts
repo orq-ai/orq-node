@@ -74,7 +74,7 @@ export type EvaluatorResponseLlm = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<CategoricalLabels> | null | undefined;
-  datasetId?: string | null | undefined;
+  datasetId?: string | undefined;
   key: string;
   mode: Mode;
   model?: string | undefined;
@@ -267,8 +267,8 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-08-05T12:35:47.738Z"),
-  updated: z.string().default("2026-08-05T12:35:47.738Z"),
+  created: z.string().default("2026-08-05T17:21:12.269Z"),
+  updated: z.string().default("2026-08-05T17:21:12.269Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("llm_eval"),
@@ -278,7 +278,7 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
   categorical_labels: z.nullable(
     z.array(z.lazy(() => CategoricalLabels$inboundSchema)),
   ).optional(),
-  dataset_id: z.nullable(z.string()).optional(),
+  dataset_id: z.string().optional(),
   key: z.string(),
   mode: Mode$inboundSchema,
   model: z.string().optional(),

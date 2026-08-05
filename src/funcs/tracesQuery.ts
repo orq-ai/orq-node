@@ -86,7 +86,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v3/traces/query")();
+  const path = pathToFunc("/v2/traces/query")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

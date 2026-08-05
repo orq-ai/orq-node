@@ -11,10 +11,10 @@ let value: CacheConfig2 = {
   type: "semantic",
   modelConfig: {
     model: "Camaro",
-    modelDbId: "<id>",
+    modelDbId: "9a8bcc68-cff5-46dc-b7dc-41b0ef56fa46",
     modelType: "stt",
     modelParameters: {},
-    provider: "alibaba",
+    provider: "mistral",
   },
   ttl: 3600,
 };

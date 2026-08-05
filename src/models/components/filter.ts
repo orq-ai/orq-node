@@ -56,7 +56,7 @@ export type Field = ClosedEnum<typeof Field>;
 /**
  * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.
  */
-export const FilterOp = {
+export const Op = {
   Eq: "eq",
   Neq: "neq",
   In: "in",
@@ -65,7 +65,7 @@ export const FilterOp = {
 /**
  * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.
  */
-export type FilterOp = ClosedEnum<typeof FilterOp>;
+export type Op = ClosedEnum<typeof Op>;
 
 export type Filter = {
   /**
@@ -75,7 +75,7 @@ export type Filter = {
   /**
    * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.
    */
-  op?: FilterOp | undefined;
+  op?: Op | undefined;
   /**
    * Values compared against the selected field. Values are interpreted
    *
@@ -94,17 +94,15 @@ export const Field$outboundSchema: z.ZodNativeEnum<typeof Field> =
   Field$inboundSchema;
 
 /** @internal */
-export const FilterOp$inboundSchema: z.ZodNativeEnum<typeof FilterOp> = z
-  .nativeEnum(FilterOp);
+export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> = z.nativeEnum(Op);
 /** @internal */
-export const FilterOp$outboundSchema: z.ZodNativeEnum<typeof FilterOp> =
-  FilterOp$inboundSchema;
+export const Op$outboundSchema: z.ZodNativeEnum<typeof Op> = Op$inboundSchema;
 
 /** @internal */
 export const Filter$inboundSchema: z.ZodType<Filter, z.ZodTypeDef, unknown> = z
   .object({
     field: Field$inboundSchema.optional(),
-    op: FilterOp$inboundSchema.optional(),
+    op: Op$inboundSchema.optional(),
     values: z.array(z.string()).optional(),
   });
 /** @internal */
@@ -121,7 +119,7 @@ export const Filter$outboundSchema: z.ZodType<
   Filter
 > = z.object({
   field: Field$outboundSchema.optional(),
-  op: FilterOp$outboundSchema.optional(),
+  op: Op$outboundSchema.optional(),
   values: z.array(z.string()).optional(),
 });
 

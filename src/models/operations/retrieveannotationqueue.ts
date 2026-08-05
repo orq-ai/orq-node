@@ -51,11 +51,11 @@ export type RetrieveAnnotationQueueResponseBody = {
   /**
    * The id of the user who created the resource
    */
-  createdById?: string | null | undefined;
+  createdById: string;
   /**
    * The id of the user who last updated the resource
    */
-  updatedById?: string | null | undefined;
+  updatedById: string;
   /**
    * The date and time the resource was created
    */
@@ -130,12 +130,12 @@ export const RetrieveAnnotationQueueResponseBody$inboundSchema: z.ZodType<
   project_id: z.string().optional(),
   human_review_ids: z.array(z.string()),
   metadata: z.lazy(() => RetrieveAnnotationQueueMetadata$inboundSchema),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
+  created_by_id: z.string(),
+  updated_by_id: z.string(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-08-05T12:35:40.429Z",
+    "2026-08-05T17:21:05.768Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

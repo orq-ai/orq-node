@@ -19,6 +19,11 @@ import {
 import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
 
 /**
+ * Custom JSON metadata stored with the identity.
+ */
+export type Metadata = {};
+
+/**
  * The budget scoped to this identity, if one exists. Read-only here:
  *
  * @remarks
@@ -122,7 +127,7 @@ export type Identity = {
   /**
    * Custom JSON metadata stored with the identity.
    */
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: Metadata | undefined;
   /**
    * ISO timestamp for when the identity was created.
    */
@@ -149,6 +154,23 @@ export type Identity = {
    */
   budget?: IdentityBudget | undefined;
 };
+
+/** @internal */
+export const Metadata$inboundSchema: z.ZodType<
+  Metadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function metadataFromJSON(
+  jsonString: string,
+): SafeParseResult<Metadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metadata' from JSON`,
+  );
+}
 
 /** @internal */
 export const IdentityBudget$inboundSchema: z.ZodType<
@@ -204,7 +226,7 @@ export const Identity$inboundSchema: z.ZodType<
   email: z.string().optional(),
   avatar_url: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
   created: z.string(),
   updated: z.string(),
   metrics: IdentityMetrics$inboundSchema.optional(),

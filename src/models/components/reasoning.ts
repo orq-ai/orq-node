@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export const ReasoningEffort1 = {
+export const ReasoningEffort = {
   None: "none",
   Minimal: "minimal",
   Low: "low",
@@ -23,7 +23,7 @@ export const ReasoningEffort1 = {
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
-export type ReasoningEffort1 = ClosedEnum<typeof ReasoningEffort1>;
+export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
 
 /**
  * The format of the reasoning summary returned by the model.
@@ -42,17 +42,17 @@ export type Reasoning = {
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  effort?: ReasoningEffort1 | undefined;
+  effort?: ReasoningEffort | undefined;
   /**
    * The format of the reasoning summary returned by the model.
    */
-  summary?: ReasoningSummary | null | undefined;
+  summary?: ReasoningSummary | undefined;
 };
 
 /** @internal */
-export const ReasoningEffort1$inboundSchema: z.ZodNativeEnum<
-  typeof ReasoningEffort1
-> = z.nativeEnum(ReasoningEffort1);
+export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof ReasoningEffort
+> = z.nativeEnum(ReasoningEffort);
 
 /** @internal */
 export const ReasoningSummary$inboundSchema: z.ZodNativeEnum<
@@ -65,8 +65,8 @@ export const Reasoning$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  effort: ReasoningEffort1$inboundSchema.optional(),
-  summary: z.nullable(ReasoningSummary$inboundSchema).optional(),
+  effort: ReasoningEffort$inboundSchema.optional(),
+  summary: ReasoningSummary$inboundSchema.optional(),
 });
 
 export function reasoningFromJSON(

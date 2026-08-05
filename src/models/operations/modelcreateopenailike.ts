@@ -34,7 +34,7 @@ export type ModelCreateOpenAILikeRequestBody = {
  */
 export type ModelCreateOpenAILikeResponseBody = {
   configuration: components.ModelConfigurationResponse;
-  created: string;
+  created: Date;
   description: string | null;
   displayName: string;
   docsUrl: string | null;
@@ -59,8 +59,8 @@ export type ModelCreateOpenAILikeResponseBody = {
   pricingUrl: string | null;
   provider: string;
   refId: string;
-  sharing?: components.ModelSharingConfig | undefined;
-  updated: string;
+  sharing?: components.Config | undefined;
+  updated: Date;
 };
 
 /** @internal */
@@ -143,7 +143,7 @@ export const ModelCreateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
+  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   description: z.nullable(z.string()),
   display_name: z.string(),
   docs_url: z.nullable(z.string()),
@@ -170,8 +170,8 @@ export const ModelCreateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   pricing_url: z.nullable(z.string()),
   provider: z.string(),
   refId: z.string(),
-  sharing: components.ModelSharingConfig$inboundSchema.optional(),
-  updated: z.string(),
+  sharing: components.Config$inboundSchema.optional(),
+  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

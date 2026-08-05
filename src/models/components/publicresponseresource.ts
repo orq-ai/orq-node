@@ -20,14 +20,12 @@ import { MemoryParam, MemoryParam$inboundSchema } from "./memoryparam.js";
 import { PublicUsage, PublicUsage$inboundSchema } from "./publicusage.js";
 import { Reasoning, Reasoning$inboundSchema } from "./reasoning.js";
 import { ResponseError, ResponseError$inboundSchema } from "./responseerror.js";
-import { Telemetry, Telemetry$inboundSchema } from "./telemetry.js";
 
 export const ServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
   Fast: "fast",
-  Scale: "scale",
   Priority: "priority",
 } as const;
 export type ServiceTier = ClosedEnum<typeof ServiceTier>;
@@ -38,6 +36,7 @@ export const PublicResponseResourceStatus = {
   Completed: "completed",
   Failed: "failed",
   Incomplete: "incomplete",
+  RequiresAction: "requires_action",
 } as const;
 export type PublicResponseResourceStatus = ClosedEnum<
   typeof PublicResponseResourceStatus
@@ -89,10 +88,6 @@ export type PublicResponseResource = {
   serviceTier: ServiceTier;
   status: PublicResponseResourceStatus;
   store: boolean;
-  /**
-   * Telemetry information for correlating the response with traces
-   */
-  telemetry?: Telemetry | undefined;
   temperature: number;
   /**
    * Text output configuration including format and verbosity
@@ -106,10 +101,6 @@ export type PublicResponseResource = {
    * Array of tool configurations used in this response
    */
   tools: Array<any> | null;
-  /**
-   * Only sample from the top K options for each subsequent token. Present only when set on the request.
-   */
-  topK?: number | undefined;
   topLogprobs: number;
   topP: number;
   truncation: Truncation;
@@ -164,12 +155,10 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   service_tier: ServiceTier$inboundSchema,
   status: PublicResponseResourceStatus$inboundSchema,
   store: z.boolean(),
-  telemetry: Telemetry$inboundSchema.optional(),
   temperature: z.number(),
   text: z.any().optional(),
   tool_choice: z.any().optional(),
   tools: z.nullable(z.array(z.any())),
-  top_k: z.number().int().optional(),
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: Truncation$inboundSchema,
@@ -192,7 +181,6 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",
     "tool_choice": "toolChoice",
-    "top_k": "topK",
     "top_logprobs": "topLogprobs",
     "top_p": "topP",
   });

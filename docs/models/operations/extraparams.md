@@ -13,16 +13,11 @@ let value: ExtraParams = {
     {
       stream: true,
       model: "Land Cruiser",
-      modelDbId: "<id>",
-      modelType: "completion",
+      modelDbId: "35bb17ae-dba0-4eee-a99f-2ea79f449752",
+      modelType: "ocr",
       modelParameters: {},
-      provider: "nvidia",
-      messages: [
-        {
-          role: "expected_output",
-          content: [],
-        },
-      ],
+      provider: "orq",
+      messages: [],
     },
   ],
 };

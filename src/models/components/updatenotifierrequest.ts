@@ -9,7 +9,7 @@ import { NotifierType, NotifierType$outboundSchema } from "./notifiertype.js";
 /**
  * Optional. Replacement custom JSON metadata.
  */
-export type Metadata = {};
+export type UpdateNotifierRequestMetadata = {};
 
 /**
  * Optional replacement generic webhook headers. Secret header values returned by GET or LIST are masked as an empty string; omit those entries or replace them with the real value when updating.
@@ -31,7 +31,7 @@ export type UpdateNotifierRequest = {
   /**
    * Optional. Replacement custom JSON metadata.
    */
-  metadata?: Metadata | undefined;
+  metadata?: UpdateNotifierRequestMetadata | undefined;
   type?: NotifierType | undefined;
   /**
    * Optional replacement email recipients. Required when changing `type` to `NOTIFIER_TYPE_EMAIL`.
@@ -52,17 +52,23 @@ export type UpdateNotifierRequest = {
 };
 
 /** @internal */
-export type Metadata$Outbound = {};
+export type UpdateNotifierRequestMetadata$Outbound = {};
 
 /** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
+export const UpdateNotifierRequestMetadata$outboundSchema: z.ZodType<
+  UpdateNotifierRequestMetadata$Outbound,
   z.ZodTypeDef,
-  Metadata
+  UpdateNotifierRequestMetadata
 > = z.object({});
 
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
+export function updateNotifierRequestMetadataToJSON(
+  updateNotifierRequestMetadata: UpdateNotifierRequestMetadata,
+): string {
+  return JSON.stringify(
+    UpdateNotifierRequestMetadata$outboundSchema.parse(
+      updateNotifierRequestMetadata,
+    ),
+  );
 }
 
 /** @internal */
@@ -83,7 +89,7 @@ export function headersToJSON(headers: Headers): string {
 export type UpdateNotifierRequest$Outbound = {
   project_id?: string | undefined;
   display_name?: string | undefined;
-  metadata?: Metadata$Outbound | undefined;
+  metadata?: UpdateNotifierRequestMetadata$Outbound | undefined;
   type?: string | undefined;
   emails?: Array<string> | undefined;
   incoming_webhook_url?: string | undefined;
@@ -99,7 +105,8 @@ export const UpdateNotifierRequest$outboundSchema: z.ZodType<
 > = z.object({
   projectId: z.string().optional(),
   displayName: z.string().optional(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
+  metadata: z.lazy(() => UpdateNotifierRequestMetadata$outboundSchema)
+    .optional(),
   type: NotifierType$outboundSchema.optional(),
   emails: z.array(z.string()).optional(),
   incomingWebhookUrl: z.string().optional(),

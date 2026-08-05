@@ -12,6 +12,4 @@ let value: Agent = {};
 
 | Field                                                          | Type                                                           | Required                                                       | Description                                                    |
 | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| `version`                                                      | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
-| `environment`                                                  | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
 | `iterations`                                                   | [operations.Iterations](../../models/operations/iterations.md) | :heavy_minus_sign:                                             | N/A                                                            |

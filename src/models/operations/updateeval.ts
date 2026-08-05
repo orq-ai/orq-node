@@ -85,7 +85,6 @@ export type UpdateEvalRequestBody = {
   outputType?: string | undefined;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<CategoricalLabels> | null | undefined;
-  datasetId?: string | null | undefined;
   repetitions?: number | undefined;
   mode?: Mode | undefined;
   model?: string | undefined;
@@ -333,7 +332,6 @@ export type UpdateEvalRequestBody$Outbound = {
   output_type?: string | undefined;
   categories?: Array<string> | null | undefined;
   categorical_labels?: Array<CategoricalLabels$Outbound> | null | undefined;
-  dataset_id?: string | null | undefined;
   repetitions?: number | undefined;
   mode?: string | undefined;
   model?: string | undefined;
@@ -365,7 +363,6 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   categoricalLabels: z.nullable(
     z.array(z.lazy(() => CategoricalLabels$outboundSchema)),
   ).optional(),
-  datasetId: z.nullable(z.string()).optional(),
   repetitions: z.number().optional(),
   mode: Mode$outboundSchema.optional(),
   model: z.string().optional(),
@@ -383,7 +380,6 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     outputType: "output_type",
     categoricalLabels: "categorical_labels",
-    datasetId: "dataset_id",
     guardrailConfig: "guardrail_config",
   });
 });

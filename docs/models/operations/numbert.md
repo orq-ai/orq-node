@@ -19,5 +19,3 @@ let value: NumberT = {
 | `originalValue`            | *number*                   | :heavy_minus_sign:         | N/A                        |
 | `value`                    | *number*                   | :heavy_check_mark:         | N/A                        |
 | `formatOptions`            | *operations.FormatOptions* | :heavy_minus_sign:         | N/A                        |
-| `traceId`                  | *string*                   | :heavy_minus_sign:         | N/A                        |
-| `spanId`                   | *string*                   | :heavy_minus_sign:         | N/A                        |

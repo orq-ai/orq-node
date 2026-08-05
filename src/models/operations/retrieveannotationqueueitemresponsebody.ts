@@ -12,6 +12,43 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  Eighteen,
+  Eighteen$inboundSchema,
+} from "./cacheconfigphotorealversion.js";
+import { Eight, Eight$inboundSchema } from "./eight.js";
+import {
+  Input8,
+  Input8$inboundSchema,
+  Otel,
+  Otel$inboundSchema,
+  Otlp,
+  Otlp$inboundSchema,
+  ResponseBodyOrq,
+  ResponseBodyOrq$inboundSchema,
+  RetrieveAnnotationQueueItemResponseBodyHttp,
+  RetrieveAnnotationQueueItemResponseBodyHttp$inboundSchema,
+} from "./input8.js";
+import {
+  Eleven,
+  Eleven$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody10attributesorq13evaluatorconfigtype.js";
+import {
+  Thirteen,
+  Thirteen$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody12attributesorq13value.js";
+import {
+  Fifteen,
+  Fifteen$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody14attributesorq12status.js";
+import {
+  Seventeen,
+  Seventeen$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody16attributesorq15outputschema.js";
+import {
+  Nineteen,
+  Nineteen$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody18attributesorq10kind.js";
+import {
   Agent,
   Agent$inboundSchema,
   Context,
@@ -22,168 +59,1787 @@ import {
   RetrieveAnnotationQueueItemResponseBody2$inboundSchema,
   RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Type,
   RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Type$inboundSchema,
-} from "./billing.js";
-import {
-  Content8,
-  Content8$inboundSchema,
-  Content9,
-  Content9$inboundSchema,
-  Otel,
-  Otel$inboundSchema,
-  Otlp,
-  Otlp$inboundSchema,
-  ResponseBodyOrq,
-  ResponseBodyOrq$inboundSchema,
-  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType,
-  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status$inboundSchema,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type,
-  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type$inboundSchema,
-  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input,
-  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input$inboundSchema,
-  RetrieveAnnotationQueueItemResponseBodyHttp,
-  RetrieveAnnotationQueueItemResponseBodyHttp$inboundSchema,
-} from "./retrieveannotationqueueitemcontentannotationqueuesresponse200applicationjsonresponsebody1attributestype.js";
-import {
-  Eleven,
-  Eleven$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody1017.js";
-import {
-  Twelve,
-  Twelve$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody11attributesorq7evaluatorconfigtype.js";
-import {
-  Thirteen,
-  Thirteen$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody12attributesorq15annotator.js";
-import {
-  Fourteen,
-  Fourteen$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody136.js";
-import {
-  Fifteen,
-  Fifteen$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody14attributesorq14type.js";
-import {
-  Sixteen,
-  Sixteen$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody15attributesorq7outputschema.js";
-import {
-  Seventeen,
-  Seventeen$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody1618.js";
-import {
-  Nineteen,
-  Nineteen$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody18attributesorq12evaluatorconfigtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody1attributesorq15type.js";
 import {
   TwentyOne,
   TwentyOne$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody20attributesorq14annotator.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody20attributesorq13value.js";
 import {
   TwentyTwo,
   TwentyTwo$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody21attributesorq7evaluatorconfigtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody21attributesorq6status.js";
 import {
   TwentyFour,
   TwentyFour$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody23attributesorq13evaluationtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody23attributesorq12evaluationtype.js";
 import {
   TwentyFive,
   TwentyFive$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody24attributesorq7status.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody24attributesorq5evaluationtype.js";
 import {
   TwentySix,
   TwentySix$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody25attributesorq18type.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody25source.js";
 import {
   TwentySeven,
   TwentySeven$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody2611.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody2610.js";
 import {
   TwentyNine,
   TwentyNine$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody28attributesorq14annotator.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody28attributesorq13kind.js";
 import {
   Thirty,
   Thirty$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody29attributesorq7evaluatorconfigtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody29attributesvalue.js";
 import {
   ResponseBody3,
   ResponseBody3$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody2attributesorq14type.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody2attributesorq10kind.js";
 import {
   ThirtyOne,
   ThirtyOne$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody30attributesorq18evaluationtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody30attributesorq18type.js";
 import {
   ThirtyTwo,
   ThirtyTwo$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody31attributesorq16kind.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody3116.js";
 import {
   ThirtyThree,
   ThirtyThree$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody32attributesorq9evaluatorconfigtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody32attributesorq9outputschema.js";
 import {
   ThirtyFive,
   ThirtyFive$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody34attributesorq12evaluationtype.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody34attributesorq12evaluatorconfigtype.js";
 import {
   ResponseBody4,
   ResponseBody4$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody3attributesorq14evaluationtype.js";
-import {
-  Six,
-  Six$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody5attributesorq11evaluatorconfigtype.js";
-import {
-  Seven,
-  Seven$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody6attributesorq19annotator.js";
-import {
-  Eight,
-  Eight$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody7attributesorq8evaluatorconfigtype.js";
-import {
-  Nine,
-  Nine$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody8attributesorq18annotator.js";
-import {
-  Ten,
-  Ten$inboundSchema,
-} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody9attributesorq9kind.js";
-import {
-  Eighteen,
-  Eighteen$inboundSchema,
-} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson17context.js";
-import {
-  TwentyThree,
-  TwentyThree$inboundSchema,
-} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson22call.js";
-import {
-  TwentyEight,
-  TwentyEight$inboundSchema,
-} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson27conversation.js";
-import {
-  ThirtyFour,
-  ThirtyFour$inboundSchema,
-} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson33token.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody3attributesorq11outputschema.js";
 import {
   Five,
   Five$inboundSchema,
-} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjsonresponse.js";
-import { Twenty, Twenty$inboundSchema } from "./twenty.js";
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody4attributesorq19type.js";
+import {
+  Six,
+  Six$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody5attributesorq8status.js";
+import {
+  Seven,
+  Seven$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody6attributesorq15outputschema.js";
+import {
+  Nine,
+  Nine$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody8attributesorq14evaluatorconfigtype.js";
+import {
+  Ten,
+  Ten$inboundSchema,
+} from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody9attributesorq6annotator.js";
+import {
+  Twelve,
+  Twelve$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson11choice.js";
+import {
+  Fourteen,
+  Fourteen$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson13attributesgenaiinput.js";
+import {
+  Sixteen,
+  Sixteen$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson15operation.js";
+import {
+  Twenty,
+  Twenty$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson19datasource.js";
+import {
+  TwentyThree,
+  TwentyThree$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson22score.js";
+import {
+  TwentyEight,
+  TwentyEight$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson27name.js";
+import {
+  ThirtyFour,
+  ThirtyFour$inboundSchema,
+} from "./retrieveannotationqueueitemresponsebodyannotationqueuesresponse200applicationjson33embeddings.js";
+
+/**
+ * The item type. Always `function_call`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type =
+  {
+    FunctionCall: "function_call",
+  } as const;
+/**
+ * The item type. Always `function_call`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type
+  >;
+
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status =
+  {
+    InProgress: "in_progress",
+    Completed: "completed",
+    Incomplete: "incomplete",
+  } as const;
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status
+  >;
+
+export type Input7 = {
+  id?: string | null | undefined;
+  /**
+   * The unique ID of the function tool call generated by the model.
+   */
+  callId: string;
+  /**
+   * The item type. Always `function_call`.
+   */
+  type:
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type;
+  /**
+   * The name of the function to call.
+   */
+  name: string;
+  /**
+   * The function arguments as a JSON string.
+   */
+  arguments: string;
+  status?:
+    | RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status
+    | null
+    | undefined;
+};
+
+/**
+ * The item type. Always `message`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type =
+  {
+    Message: "message",
+  } as const;
+/**
+ * The item type. Always `message`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type
+  >;
+
+/**
+ * The role of the message author. Always `assistant`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the message author. Always `assistant`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole
+  >;
+
+/**
+ * The content type. Always `refusal`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The content type. Always `refusal`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType
+  >;
+
+export type RetrieveAnnotationQueueItem12 = {
+  /**
+   * The content type. Always `refusal`.
+   */
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType;
+  /**
+   * The refusal text.
+   */
+  refusal: string;
+};
+
+/**
+ * The content type. Always `output_text`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type = {
+  OutputText: "output_text",
+} as const;
+/**
+ * The content type. Always `output_text`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type
+  >;
+
+/**
+ * The citation type. Always `url_citation`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType =
+  {
+    UrlCitation: "url_citation",
+  } as const;
+/**
+ * The citation type. Always `url_citation`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType
+  >;
+
+export type OneAnnotations = {
+  /**
+   * The citation type. Always `url_citation`.
+   */
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType;
+  /**
+   * The index of the first character of the citation in the message.
+   */
+  startIndex: number;
+  /**
+   * The index of the last character of the citation in the message.
+   */
+  endIndex: number;
+  /**
+   * The URL of the cited resource.
+   */
+  url: string;
+  /**
+   * The title of the cited resource.
+   */
+  title: string;
+};
+
+export type RetrieveAnnotationQueueItem11 = {
+  /**
+   * The content type. Always `output_text`.
+   */
+  type: RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type;
+  /**
+   * The text content.
+   */
+  text: string;
+  /**
+   * Citations associated with the text content.
+   */
+  annotations?: Array<OneAnnotations> | undefined;
+};
+
+/**
+ * A piece of assistant message content, such as text or a refusal.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse1 =
+  | RetrieveAnnotationQueueItem11
+  | RetrieveAnnotationQueueItem12;
+
+/**
+ * The message content, as an array of content parts.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponseContent =
+  | Array<RetrieveAnnotationQueueItem11 | RetrieveAnnotationQueueItem12>
+  | string;
+
+export type Input6 = {
+  id?: string | null | undefined;
+  /**
+   * The item type. Always `message`.
+   */
+  type:
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type;
+  /**
+   * The role of the message author. Always `assistant`.
+   */
+  role: RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole;
+  /**
+   * The message content, as an array of content parts.
+   */
+  content:
+    | Array<RetrieveAnnotationQueueItem11 | RetrieveAnnotationQueueItem12>
+    | string;
+  status?: string | null | undefined;
+};
+
+/**
+ * The item type. Always `message`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type =
+  {
+    Message: "message",
+  } as const;
+/**
+ * The item type. Always `message`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type
+  >;
+
+/**
+ * The message role. Always `developer`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The message role. Always `developer`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesRole = ClosedEnum<
+  typeof RetrieveAnnotationQueueItemInputAnnotationQueuesRole
+>;
+
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type =
+  {
+    InputText: "input_text",
+  } as const;
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type
+  >;
+
+/**
+ * A text input to the model.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueues1 = {
+  /**
+   * The type of the input item. Always `input_text`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type;
+  /**
+   * The text input to the model.
+   */
+  text: string;
+};
+
+/**
+ * The message content, as an array of content parts.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesContent =
+  | Array<RetrieveAnnotationQueueItemContentAnnotationQueues1>
+  | string;
+
+export type Input5 = {
+  id?: string | null | undefined;
+  /**
+   * The item type. Always `message`.
+   */
+  type:
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type;
+  /**
+   * The message role. Always `developer`.
+   */
+  role: RetrieveAnnotationQueueItemInputAnnotationQueuesRole;
+  /**
+   * The message content, as an array of content parts.
+   */
+  content: Array<RetrieveAnnotationQueueItemContentAnnotationQueues1> | string;
+  status?: string | null | undefined;
+};
+
+/**
+ * The item type. Always `message`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type =
+  {
+    Message: "message",
+  } as const;
+/**
+ * The item type. Always `message`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type
+  >;
+
+/**
+ * The message role. Always `system`.
+ */
+export const RetrieveAnnotationQueueItemInputRole = {
+  System: "system",
+} as const;
+/**
+ * The message role. Always `system`.
+ */
+export type RetrieveAnnotationQueueItemInputRole = ClosedEnum<
+  typeof RetrieveAnnotationQueueItemInputRole
+>;
+
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType =
+  {
+    InputText: "input_text",
+  } as const;
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType
+  >;
+
+/**
+ * A text input to the model.
+ */
+export type RetrieveAnnotationQueueItemContent1 = {
+  /**
+   * The type of the input item. Always `input_text`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType;
+  /**
+   * The text input to the model.
+   */
+  text: string;
+};
+
+/**
+ * The message content, as an array of content parts.
+ */
+export type RetrieveAnnotationQueueItemInputContent =
+  | Array<RetrieveAnnotationQueueItemContent1>
+  | string;
+
+export type Input4 = {
+  id?: string | null | undefined;
+  /**
+   * The item type. Always `message`.
+   */
+  type:
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type;
+  /**
+   * The message role. Always `system`.
+   */
+  role: RetrieveAnnotationQueueItemInputRole;
+  /**
+   * The message content, as an array of content parts.
+   */
+  content: Array<RetrieveAnnotationQueueItemContent1> | string;
+  status?: string | null | undefined;
+};
+
+/**
+ * The item type. Always `message`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type =
+  {
+    Message: "message",
+  } as const;
+/**
+ * The item type. Always `message`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type
+  >;
+
+/**
+ * The message role. Always `user`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role =
+  {
+    User: "user",
+  } as const;
+/**
+ * The message role. Always `user`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role
+  >;
+
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponseType = {
+  InputFile: "input_file",
+} as const;
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponseType =
+  ClosedEnum<typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponseType>;
+
+/**
+ * A file input to the model.
+ */
+export type One3 = {
+  /**
+   * The type of the input item. Always `input_file`.
+   */
+  type: RetrieveAnnotationQueueItem1AnnotationQueuesResponseType;
+  filename?: string | null | undefined;
+  fileData?: string | null | undefined;
+  fileUrl?: string | null | undefined;
+};
+
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesType = {
+  InputImage: "input_image",
+} as const;
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesType = ClosedEnum<
+  typeof RetrieveAnnotationQueueItem1AnnotationQueuesType
+>;
+
+export const RetrieveAnnotationQueueItem1Detail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+export type RetrieveAnnotationQueueItem1Detail = ClosedEnum<
+  typeof RetrieveAnnotationQueueItem1Detail
+>;
+
+/**
+ * An image input to the model. Learn about [image inputs](/docs/guides/vision)
+ */
+export type One2 = {
+  /**
+   * The type of the input item. Always `input_image`.
+   */
+  type: RetrieveAnnotationQueueItem1AnnotationQueuesType;
+  imageUrl?: string | null | undefined;
+  detail?: RetrieveAnnotationQueueItem1Detail | null | undefined;
+};
+
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export const RetrieveAnnotationQueueItem1Type = {
+  InputText: "input_text",
+} as const;
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export type RetrieveAnnotationQueueItem1Type = ClosedEnum<
+  typeof RetrieveAnnotationQueueItem1Type
+>;
+
+/**
+ * A text input to the model.
+ */
+export type One1 = {
+  /**
+   * The type of the input item. Always `input_text`.
+   */
+  type: RetrieveAnnotationQueueItem1Type;
+  /**
+   * The text input to the model.
+   */
+  text: string;
+};
+
+/**
+ * A piece of message content, such as text, an image, or a file.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11 =
+  | One1
+  | One2
+  | One3;
+
+/**
+ * The message content, as an array of content parts.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Content =
+  | Array<One1 | One2 | One3>
+  | string;
+
+export type Input3 = {
+  id?: string | null | undefined;
+  /**
+   * The item type. Always `message`.
+   */
+  type:
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type;
+  /**
+   * The message role. Always `user`.
+   */
+  role:
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role;
+  /**
+   * The message content, as an array of content parts.
+   */
+  content: Array<One1 | One2 | One3> | string;
+  status?: string | null | undefined;
+};
+
+/**
+ * The item type. Always `reasoning`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType =
+  {
+    Reasoning: "reasoning",
+  } as const;
+/**
+ * The item type. Always `reasoning`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType
+  >;
+
+/**
+ * The content type. Always `summary_text`.
+ */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type =
+  {
+    SummaryText: "summary_text",
+  } as const;
+/**
+ * The content type. Always `summary_text`.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type
+  >;
+
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary =
+  {
+    /**
+     * The content type. Always `summary_text`.
+     */
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type;
+    /**
+     * The reasoning summary text.
+     */
+    text: string;
+  };
+
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12 =
+  {
+    id?: string | null | undefined;
+    /**
+     * The item type. Always `reasoning`.
+     */
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType;
+    /**
+     * Reasoning summary content associated with this item.
+     */
+    summary: Array<
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary
+    >;
+    encryptedContent?: string | null | undefined;
+  };
+
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  {
+    ItemReference: "item_reference",
+  } as const;
+export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  >;
+
+/**
+ * An internal identifier for an item to reference.
+ */
+export type RetrieveAnnotationQueueItemInputAnnotationQueues1 = {
+  type?:
+    | RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+    | null
+    | undefined;
+  /**
+   * The ID of the item to reference.
+   */
+  id: string;
+};
+
+export type RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input =
+  | Input7
+  | Input8
+  | RetrieveAnnotationQueueItemInputAnnotationQueues1
+  | RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12
+  | Input3
+  | Input4
+  | Input5
+  | Input6;
+
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15 =
+  {
+    id: string;
+    type: string;
+    status: string;
+    result?: any | undefined;
+  };
+
+/**
+ * The type of the item. Always `reasoning`.
+ */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type =
+  {
+    Reasoning: "reasoning",
+  } as const;
+/**
+ * The type of the item. Always `reasoning`.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type
+  >;
+
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type =
+  {
+    InputFile: "input_file",
+  } as const;
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type
+  >;
+
+/**
+ * A file input to the model.
+ */
+export type RetrieveAnnotationQueueItemContent8 = {
+  /**
+   * The type of the input item. Always `input_file`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type;
+  /**
+   * The name of the file to be sent to the model.
+   */
+  filename?: string | undefined;
+  /**
+   * The URL of the file to be sent to the model.
+   */
+  fileUrl?: string | undefined;
+};
+
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type =
+  {
+    InputImage: "input_image",
+  } as const;
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type
+  >;
+
+export const ContentDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+export type ContentDetail = ClosedEnum<typeof ContentDetail>;
+
+/**
+ * An image input to the model. Learn about [image inputs](/docs/guides/vision).
+ */
+export type RetrieveAnnotationQueueItemContent7 = {
+  /**
+   * The type of the input item. Always `input_image`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type;
+  imageUrl: string | null;
+  detail: ContentDetail;
+};
+
+/**
+ * The type of the refusal. Always `refusal`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the refusal. Always `refusal`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type
+  >;
+
+/**
+ * A refusal from the model.
+ */
+export type RetrieveAnnotationQueueItemContent6 = {
+  /**
+   * The type of the refusal. Always `refusal`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type;
+  /**
+   * The refusal explanation from the model.
+   */
+  refusal: string;
+};
+
+/**
+ * The type of the reasoning text. Always `reasoning_text`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type =
+  {
+    ReasoningText: "reasoning_text",
+  } as const;
+/**
+ * The type of the reasoning text. Always `reasoning_text`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type
+  >;
+
+/**
+ * Reasoning text from the model.
+ */
+export type RetrieveAnnotationQueueItemContent5 = {
+  /**
+   * The type of the reasoning text. Always `reasoning_text`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type;
+  /**
+   * The reasoning text from the model.
+   */
+  text: string;
+};
+
+/**
+ * The type of the object. Always `summary_text`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type =
+  {
+    SummaryText: "summary_text",
+  } as const;
+/**
+ * The type of the object. Always `summary_text`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type
+  >;
+
+/**
+ * A summary text from the model.
+ */
+export type RetrieveAnnotationQueueItemContent4 = {
+  /**
+   * The type of the object. Always `summary_text`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type;
+  /**
+   * A summary of the reasoning output from the model so far.
+   */
+  text: string;
+};
+
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type =
+  {
+    Text: "text",
+  } as const;
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type
+  >;
+
+/**
+ * A text content.
+ */
+export type RetrieveAnnotationQueueItemContent3 = {
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type;
+  text: string;
+};
+
+/**
+ * The type of the output text. Always `output_text`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type =
+  {
+    OutputText: "output_text",
+  } as const;
+/**
+ * The type of the output text. Always `output_text`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type
+  >;
+
+/**
+ * The type of the URL citation. Always `url_citation`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType =
+  {
+    UrlCitation: "url_citation",
+  } as const;
+/**
+ * The type of the URL citation. Always `url_citation`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType
+  >;
+
+/**
+ * An annotation that applies to a span of output text.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotations = {
+  /**
+   * The type of the URL citation. Always `url_citation`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType;
+  /**
+   * The URL of the web resource.
+   */
+  url: string;
+  /**
+   * The index of the first character of the URL citation in the message.
+   */
+  startIndex: number;
+  /**
+   * The index of the last character of the URL citation in the message.
+   */
+  endIndex: number;
+  /**
+   * The title of the web resource.
+   */
+  title: string;
+};
+
+/**
+ * The top log probability of a token.
+ */
+export type RetrieveAnnotationQueueItemContentTopLogprobs = {
+  token: string;
+  logprob: number;
+  bytes: Array<number>;
+};
+
+/**
+ * The log probability of a token.
+ */
+export type RetrieveAnnotationQueueItemContentLogprobs = {
+  token: string;
+  logprob: number;
+  bytes: Array<number>;
+  topLogprobs: Array<RetrieveAnnotationQueueItemContentTopLogprobs>;
+};
+
+/**
+ * A text output from the model.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2 =
+  {
+    /**
+     * The type of the output text. Always `output_text`.
+     */
+    type:
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type;
+    /**
+     * The text output from the model.
+     */
+    text: string;
+    /**
+     * The annotations of the text output.
+     */
+    annotations: Array<RetrieveAnnotationQueueItemContentAnnotations>;
+    logprobs: Array<RetrieveAnnotationQueueItemContentLogprobs>;
+  };
+
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type =
+  {
+    InputText: "input_text",
+  } as const;
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type
+  >;
+
+/**
+ * A text input to the model.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1 =
+  {
+    /**
+     * The type of the input item. Always `input_text`.
+     */
+    type:
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type;
+    /**
+     * The text input to the model.
+     */
+    text: string;
+  };
+
+/**
+ * A content part that makes up an input or output item.
+ */
+export type RetrieveAnnotationQueueItemOutputContent =
+  | RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2
+  | RetrieveAnnotationQueueItemContent7
+  | RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1
+  | RetrieveAnnotationQueueItemContent3
+  | RetrieveAnnotationQueueItemContent4
+  | RetrieveAnnotationQueueItemContent5
+  | RetrieveAnnotationQueueItemContent6
+  | RetrieveAnnotationQueueItemContent8;
+
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type =
+  {
+    InputFile: "input_file",
+  } as const;
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type
+  >;
+
+/**
+ * A file input to the model.
+ */
+export type Summary8 = {
+  /**
+   * The type of the input item. Always `input_file`.
+   */
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type;
+  /**
+   * The name of the file to be sent to the model.
+   */
+  filename?: string | undefined;
+  /**
+   * The URL of the file to be sent to the model.
+   */
+  fileUrl?: string | undefined;
+};
+
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType =
+  {
+    InputImage: "input_image",
+  } as const;
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType
+  >;
+
+export const SummaryDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+export type SummaryDetail = ClosedEnum<typeof SummaryDetail>;
+
+/**
+ * An image input to the model. Learn about [image inputs](/docs/guides/vision).
+ */
+export type Summary7 = {
+  /**
+   * The type of the input item. Always `input_image`.
+   */
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType;
+  imageUrl: string | null;
+  detail: SummaryDetail;
+};
+
+/**
+ * The type of the refusal. Always `refusal`.
+ */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the refusal. Always `refusal`.
+ */
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType
+  >;
+
+/**
+ * A refusal from the model.
+ */
+export type Summary6 = {
+  /**
+   * The type of the refusal. Always `refusal`.
+   */
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType;
+  /**
+   * The refusal explanation from the model.
+   */
+  refusal: string;
+};
+
+/**
+ * The type of the reasoning text. Always `reasoning_text`.
+ */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type =
+  {
+    ReasoningText: "reasoning_text",
+  } as const;
+/**
+ * The type of the reasoning text. Always `reasoning_text`.
+ */
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type
+  >;
+
+/**
+ * Reasoning text from the model.
+ */
+export type Summary5 = {
+  /**
+   * The type of the reasoning text. Always `reasoning_text`.
+   */
+  type: RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type;
+  /**
+   * The reasoning text from the model.
+   */
+  text: string;
+};
+
+/**
+ * The type of the object. Always `summary_text`.
+ */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType = {
+  SummaryText: "summary_text",
+} as const;
+/**
+ * The type of the object. Always `summary_text`.
+ */
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType
+  >;
+
+/**
+ * A summary text from the model.
+ */
+export type Summary4 = {
+  /**
+   * The type of the object. Always `summary_text`.
+   */
+  type: RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType;
+  /**
+   * A summary of the reasoning output from the model so far.
+   */
+  text: string;
+};
+
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesType = {
+  Text: "text",
+} as const;
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesType = ClosedEnum<
+  typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesType
+>;
+
+/**
+ * A text content.
+ */
+export type Summary3 = {
+  type: RetrieveAnnotationQueueItemSummaryAnnotationQueuesType;
+  text: string;
+};
+
+/**
+ * The type of the output text. Always `output_text`.
+ */
+export const RetrieveAnnotationQueueItemSummaryType = {
+  OutputText: "output_text",
+} as const;
+/**
+ * The type of the output text. Always `output_text`.
+ */
+export type RetrieveAnnotationQueueItemSummaryType = ClosedEnum<
+  typeof RetrieveAnnotationQueueItemSummaryType
+>;
+
+/**
+ * The type of the URL citation. Always `url_citation`.
+ */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  {
+    UrlCitation: "url_citation",
+  } as const;
+/**
+ * The type of the URL citation. Always `url_citation`.
+ */
+export type RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  >;
+
+/**
+ * An annotation that applies to a span of output text.
+ */
+export type SummaryAnnotations = {
+  /**
+   * The type of the URL citation. Always `url_citation`.
+   */
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType;
+  /**
+   * The URL of the web resource.
+   */
+  url: string;
+  /**
+   * The index of the first character of the URL citation in the message.
+   */
+  startIndex: number;
+  /**
+   * The index of the last character of the URL citation in the message.
+   */
+  endIndex: number;
+  /**
+   * The title of the web resource.
+   */
+  title: string;
+};
+
+/**
+ * The top log probability of a token.
+ */
+export type SummaryTopLogprobs = {
+  token: string;
+  logprob: number;
+  bytes: Array<number>;
+};
+
+/**
+ * The log probability of a token.
+ */
+export type SummaryLogprobs = {
+  token: string;
+  logprob: number;
+  bytes: Array<number>;
+  topLogprobs: Array<SummaryTopLogprobs>;
+};
+
+/**
+ * A text output from the model.
+ */
+export type Summary2 = {
+  /**
+   * The type of the output text. Always `output_text`.
+   */
+  type: RetrieveAnnotationQueueItemSummaryType;
+  /**
+   * The text output from the model.
+   */
+  text: string;
+  /**
+   * The annotations of the text output.
+   */
+  annotations: Array<SummaryAnnotations>;
+  logprobs: Array<SummaryLogprobs>;
+};
+
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export const SummaryType = {
+  InputText: "input_text",
+} as const;
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export type SummaryType = ClosedEnum<typeof SummaryType>;
+
+/**
+ * A text input to the model.
+ */
+export type Summary1 = {
+  /**
+   * The type of the input item. Always `input_text`.
+   */
+  type: SummaryType;
+  /**
+   * The text input to the model.
+   */
+  text: string;
+};
+
+/**
+ * A content part that makes up an input or output item.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary =
+  | Summary2
+  | Summary7
+  | Summary1
+  | Summary3
+  | Summary4
+  | Summary5
+  | Summary6
+  | Summary8;
+
+/**
+ * A reasoning item that was generated by the model.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14 =
+  {
+    /**
+     * The type of the item. Always `reasoning`.
+     */
+    type:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type;
+    /**
+     * The unique ID of the reasoning item.
+     */
+    id: string;
+    /**
+     * The reasoning content that was generated.
+     */
+    content?:
+      | Array<
+        | RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2
+        | RetrieveAnnotationQueueItemContent7
+        | RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1
+        | RetrieveAnnotationQueueItemContent3
+        | RetrieveAnnotationQueueItemContent4
+        | RetrieveAnnotationQueueItemContent5
+        | RetrieveAnnotationQueueItemContent6
+        | RetrieveAnnotationQueueItemContent8
+      >
+      | undefined;
+    /**
+     * The reasoning summary content that was generated.
+     */
+    summary: Array<
+      | Summary2
+      | Summary7
+      | Summary1
+      | Summary3
+      | Summary4
+      | Summary5
+      | Summary6
+      | Summary8
+    >;
+    /**
+     * The encrypted reasoning content that was generated.
+     */
+    encryptedContent?: string | undefined;
+    /**
+     * The signature of the reasoning content that was generated.
+     */
+    signature?: string | undefined;
+    /**
+     * The identifier of the actor that created the item.
+     */
+    createdBy?: string | undefined;
+  };
+
+/**
+ * The type of the function tool call output. Always `function_call_output`.
+ */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType =
+  {
+    FunctionCallOutput: "function_call_output",
+  } as const;
+/**
+ * The type of the function tool call output. Always `function_call_output`.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType
+  >;
+
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType =
+  {
+    InputFile: "input_file",
+  } as const;
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType
+  >;
+
+/**
+ * A file input to the model.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueues3 = {
+  /**
+   * The type of the input item. Always `input_file`.
+   */
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType;
+  /**
+   * The name of the file to be sent to the model.
+   */
+  filename?: string | undefined;
+  /**
+   * The URL of the file to be sent to the model.
+   */
+  fileUrl?: string | undefined;
+};
+
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type =
+  {
+    InputImage: "input_image",
+  } as const;
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type
+  >;
+
+export const RetrieveAnnotationQueueItem1AnnotationQueuesDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+export type RetrieveAnnotationQueueItem1AnnotationQueuesDetail = ClosedEnum<
+  typeof RetrieveAnnotationQueueItem1AnnotationQueuesDetail
+>;
+
+/**
+ * An image input to the model. Learn about [image inputs](/docs/guides/vision).
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse2 = {
+  /**
+   * The type of the input item. Always `input_image`.
+   */
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type;
+  imageUrl: string | null;
+  detail: RetrieveAnnotationQueueItem1AnnotationQueuesDetail;
+};
+
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType =
+  {
+    InputText: "input_text",
+  } as const;
+/**
+ * The type of the input item. Always `input_text`.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType
+  >;
+
+/**
+ * A text input to the model.
+ */
+export type RetrieveAnnotationQueueItem1AnnotationQueuesResponse1 = {
+  /**
+   * The type of the input item. Always `input_text`.
+   */
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType;
+  /**
+   * The text input to the model.
+   */
+  text: string;
+};
+
+/**
+ * A content part that makes up an input or output item.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1 =
+  | RetrieveAnnotationQueueItem1AnnotationQueuesResponse2
+  | RetrieveAnnotationQueueItem1AnnotationQueuesResponse1
+  | RetrieveAnnotationQueueItem1AnnotationQueues3;
+
+export type OutputOutput =
+  | Array<
+    | RetrieveAnnotationQueueItem1AnnotationQueuesResponse2
+    | RetrieveAnnotationQueueItem1AnnotationQueuesResponse1
+    | RetrieveAnnotationQueueItem1AnnotationQueues3
+  >
+  | string;
+
+/**
+ * Similar to `FunctionCallStatus`. All three options are allowed here for compatibility, but because in practice these items will be provided by developers, only `completed` should be used.
+ */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus =
+  {
+    InProgress: "in_progress",
+    Completed: "completed",
+    Incomplete: "incomplete",
+  } as const;
+/**
+ * Similar to `FunctionCallStatus`. All three options are allowed here for compatibility, but because in practice these items will be provided by developers, only `completed` should be used.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus
+  >;
+
+/**
+ * A function tool call output that was returned by the tool.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13 =
+  {
+    /**
+     * The type of the function tool call output. Always `function_call_output`.
+     */
+    type:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType;
+    /**
+     * The unique ID of the function tool call output. Populated when this item is returned via API.
+     */
+    id: string;
+    /**
+     * The unique ID of the function tool call generated by the model.
+     */
+    callId: string;
+    output:
+      | Array<
+        | RetrieveAnnotationQueueItem1AnnotationQueuesResponse2
+        | RetrieveAnnotationQueueItem1AnnotationQueuesResponse1
+        | RetrieveAnnotationQueueItem1AnnotationQueues3
+      >
+      | string;
+    status:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus;
+    /**
+     * The identifier of the actor that created the item.
+     */
+    createdBy?: string | undefined;
+  };
+
+/**
+ * The type of the item. Always `function_call`.
+ */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  {
+    FunctionCall: "function_call",
+  } as const;
+/**
+ * The type of the item. Always `function_call`.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  >;
+
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus =
+  {
+    InProgress: "in_progress",
+    Completed: "completed",
+    Incomplete: "incomplete",
+  } as const;
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus
+  >;
+
+/**
+ * A function tool call that was generated by the model.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12 =
+  {
+    /**
+     * The type of the item. Always `function_call`.
+     */
+    type:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType;
+    /**
+     * The unique ID of the function call item.
+     */
+    id: string;
+    /**
+     * The unique ID of the function tool call that was generated.
+     */
+    callId: string;
+    /**
+     * The name of the function that was called.
+     */
+    name: string;
+    /**
+     * The arguments JSON string that was generated.
+     */
+    arguments: string;
+    status:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus;
+    /**
+     * The identifier of the actor that created the item.
+     */
+    createdBy?: string | undefined;
+  };
+
+/**
+ * The type of the message. Always set to `message`.
+ */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type =
+  {
+    Message: "message",
+  } as const;
+/**
+ * The type of the message. Always set to `message`.
+ */
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type
+  >;
+
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status =
+  {
+    InProgress: "in_progress",
+    Completed: "completed",
+    Incomplete: "incomplete",
+  } as const;
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status
+  >;
+
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role =
+  {
+    User: "user",
+    Assistant: "assistant",
+    System: "system",
+    Developer: "developer",
+  } as const;
+export type RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role
+  >;
+
+/**
+ * The type of the input content. Always `input_video`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType =
+  {
+    InputVideo: "input_video",
+  } as const;
+/**
+ * The type of the input content. Always `input_video`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType
+  >;
+
+/**
+ * A content block representing a video input to the model.
+ */
+export type Content9 = {
+  /**
+   * The type of the input content. Always `input_video`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType;
+  /**
+   * A base64 or remote url that resolves to a video file.
+   */
+  videoUrl: string;
+};
+
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType =
+  {
+    InputFile: "input_file",
+  } as const;
+/**
+ * The type of the input item. Always `input_file`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType
+  >;
+
+/**
+ * A file input to the model.
+ */
+export type Content8 = {
+  /**
+   * The type of the input item. Always `input_file`.
+   */
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType;
+  /**
+   * The name of the file to be sent to the model.
+   */
+  filename?: string | undefined;
+  /**
+   * The URL of the file to be sent to the model.
+   */
+  fileUrl?: string | undefined;
+};
+
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  {
+    InputImage: "input_image",
+  } as const;
+/**
+ * The type of the input item. Always `input_image`.
+ */
+export type RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType =
+  ClosedEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  >;
 
 export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Detail =
   {
@@ -559,7 +2215,14 @@ export type RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Ap
 export type Openresponses = {
   input?:
     | Array<
-      RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input
+      | Input7
+      | Input8
+      | RetrieveAnnotationQueueItemInputAnnotationQueues1
+      | RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12
+      | Input3
+      | Input4
+      | Input5
+      | Input6
     >
     | undefined;
   output?:
@@ -726,6 +2389,2097 @@ export type RetrieveAnnotationQueueItemResponseBody =
   | ThirtyThree
   | ThirtyFour
   | ThirtyFive;
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status,
+  );
+
+/** @internal */
+export const Input7$inboundSchema: z.ZodType<Input7, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.nullable(z.string()).optional(),
+    call_id: z.string(),
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses7Type$inboundSchema
+        .default("function_call"),
+    name: z.string(),
+    arguments: z.string(),
+    status: z.nullable(
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+    });
+  });
+
+export function input7FromJSON(
+  jsonString: string,
+): SafeParseResult<Input7, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Input7$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Input7' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem12$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItem12,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONType$inboundSchema
+      .default("refusal"),
+  refusal: z.string(),
+});
+
+export function retrieveAnnotationQueueItem12FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItem12, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAnnotationQueueItem12$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItem12' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type
+  > = z.nativeEnum(RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type);
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType,
+  );
+
+/** @internal */
+export const OneAnnotations$inboundSchema: z.ZodType<
+  OneAnnotations,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType$inboundSchema
+      .default("url_citation"),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+  url: z.string(),
+  title: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+export function oneAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<OneAnnotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OneAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OneAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItem11$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItem11,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200Type$inboundSchema
+      .default("output_text"),
+  text: z.string(),
+  annotations: z.array(z.lazy(() => OneAnnotations$inboundSchema)).optional(),
+});
+
+export function retrieveAnnotationQueueItem11FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItem11, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAnnotationQueueItem11$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItem11' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse1$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse1,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => RetrieveAnnotationQueueItem11$inboundSchema),
+    z.lazy(() => RetrieveAnnotationQueueItem12$inboundSchema),
+  ]);
+
+export function retrieveAnnotationQueueItemContentAnnotationQueuesResponse1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse1$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentAnnotationQueuesResponse1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponseContent$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponseContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.array(z.union([
+      z.lazy(() => RetrieveAnnotationQueueItem11$inboundSchema),
+      z.lazy(() =>
+        RetrieveAnnotationQueueItem12$inboundSchema
+      ),
+    ])),
+    z.string(),
+  ]);
+
+export function retrieveAnnotationQueueItemInputAnnotationQueuesResponseContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputAnnotationQueuesResponseContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponseContent$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputAnnotationQueuesResponseContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const Input6$inboundSchema: z.ZodType<Input6, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.nullable(z.string()).optional(),
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses6Type$inboundSchema
+        .default("message"),
+    role:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponseRole$inboundSchema
+        .default("assistant"),
+    content: z.union([
+      z.array(z.union([
+        z.lazy(() => RetrieveAnnotationQueueItem11$inboundSchema),
+        z.lazy(() =>
+          RetrieveAnnotationQueueItem12$inboundSchema
+        ),
+      ])),
+      z.string(),
+    ]),
+    status: z.nullable(z.string()).optional(),
+  });
+
+export function input6FromJSON(
+  jsonString: string,
+): SafeParseResult<Input6, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Input6$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Input6' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesRole$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAnnotationQueueItemInputAnnotationQueuesRole> =
+    z.nativeEnum(RetrieveAnnotationQueueItemInputAnnotationQueuesRole);
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueues1$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentAnnotationQueues1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInput5Type$inboundSchema
+        .default("input_text"),
+    text: z.string(),
+  });
+
+export function retrieveAnnotationQueueItemContentAnnotationQueues1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentAnnotationQueues1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentAnnotationQueues1$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentAnnotationQueues1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesContent$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemInputAnnotationQueuesContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.array(z.lazy(() =>
+      RetrieveAnnotationQueueItemContentAnnotationQueues1$inboundSchema
+    )),
+    z.string(),
+  ]);
+
+export function retrieveAnnotationQueueItemInputAnnotationQueuesContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputAnnotationQueuesContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputAnnotationQueuesContent$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputAnnotationQueuesContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const Input5$inboundSchema: z.ZodType<Input5, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.nullable(z.string()).optional(),
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses5Type$inboundSchema
+        .default("message"),
+    role: RetrieveAnnotationQueueItemInputAnnotationQueuesRole$inboundSchema
+      .default("developer"),
+    content: z.union([
+      z.array(z.lazy(() =>
+        RetrieveAnnotationQueueItemContentAnnotationQueues1$inboundSchema
+      )),
+      z.string(),
+    ]),
+    status: z.nullable(z.string()).optional(),
+  });
+
+export function input5FromJSON(
+  jsonString: string,
+): SafeParseResult<Input5, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Input5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Input5' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputRole$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAnnotationQueueItemInputRole> = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputRole,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent1$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesInputType$inboundSchema
+      .default("input_text"),
+  text: z.string(),
+});
+
+export function retrieveAnnotationQueueItemContent1FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputContent$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemInputContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.array(z.lazy(() => RetrieveAnnotationQueueItemContent1$inboundSchema)),
+  z.string(),
+]);
+
+export function retrieveAnnotationQueueItemInputContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const Input4$inboundSchema: z.ZodType<Input4, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.nullable(z.string()).optional(),
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type$inboundSchema
+        .default("message"),
+    role: RetrieveAnnotationQueueItemInputRole$inboundSchema.default("system"),
+    content: z.union([
+      z.array(z.lazy(() => RetrieveAnnotationQueueItemContent1$inboundSchema)),
+      z.string(),
+    ]),
+    status: z.nullable(z.string()).optional(),
+  });
+
+export function input4FromJSON(
+  jsonString: string,
+): SafeParseResult<Input4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Input4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Input4' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponseType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponseType
+  > = z.nativeEnum(RetrieveAnnotationQueueItem1AnnotationQueuesResponseType);
+
+/** @internal */
+export const One3$inboundSchema: z.ZodType<One3, z.ZodTypeDef, unknown> = z
+  .object({
+    type: RetrieveAnnotationQueueItem1AnnotationQueuesResponseType$inboundSchema
+      .default("input_file"),
+    filename: z.nullable(z.string()).optional(),
+    file_data: z.nullable(z.string()).optional(),
+    file_url: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+      "file_url": "fileUrl",
+    });
+  });
+
+export function one3FromJSON(
+  jsonString: string,
+): SafeParseResult<One3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => One3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One3' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAnnotationQueueItem1AnnotationQueuesType> = z
+    .nativeEnum(RetrieveAnnotationQueueItem1AnnotationQueuesType);
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1Detail$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveAnnotationQueueItem1Detail
+> = z.nativeEnum(RetrieveAnnotationQueueItem1Detail);
+
+/** @internal */
+export const One2$inboundSchema: z.ZodType<One2, z.ZodTypeDef, unknown> = z
+  .object({
+    type: RetrieveAnnotationQueueItem1AnnotationQueuesType$inboundSchema
+      .default("input_image"),
+    image_url: z.nullable(z.string()).optional(),
+    detail: z.nullable(RetrieveAnnotationQueueItem1Detail$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
+  });
+
+export function one2FromJSON(
+  jsonString: string,
+): SafeParseResult<One2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => One2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1Type$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveAnnotationQueueItem1Type
+> = z.nativeEnum(RetrieveAnnotationQueueItem1Type);
+
+/** @internal */
+export const One1$inboundSchema: z.ZodType<One1, z.ZodTypeDef, unknown> = z
+  .object({
+    type: RetrieveAnnotationQueueItem1Type$inboundSchema.default("input_text"),
+    text: z.string(),
+  });
+
+export function one1FromJSON(
+  jsonString: string,
+): SafeParseResult<One1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => One1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => One1$inboundSchema),
+    z.lazy(() => One2$inboundSchema),
+    z.lazy(() => One3$inboundSchema),
+  ]);
+
+export function retrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody11' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Content$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Content,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.array(z.union([
+      z.lazy(() => One1$inboundSchema),
+      z.lazy(() =>
+        One2$inboundSchema
+      ),
+      z.lazy(() => One3$inboundSchema),
+    ])),
+    z.string(),
+  ]);
+
+export function retrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1ContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Content,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Content$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Content' from JSON`,
+  );
+}
+
+/** @internal */
+export const Input3$inboundSchema: z.ZodType<Input3, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.nullable(z.string()).optional(),
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses3Type$inboundSchema
+        .default("message"),
+    role:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role$inboundSchema
+        .default("user"),
+    content: z.union([
+      z.array(z.union([
+        z.lazy(() => One1$inboundSchema),
+        z.lazy(() =>
+          One2$inboundSchema
+        ),
+        z.lazy(() => One3$inboundSchema),
+      ])),
+      z.string(),
+    ]),
+    status: z.nullable(z.string()).optional(),
+  });
+
+export function input3FromJSON(
+  jsonString: string,
+): SafeParseResult<Input3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Input3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Input3' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses2Type$inboundSchema
+        .default("summary_text"),
+    text: z.string(),
+  });
+
+export function retrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1SummaryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.nullable(z.string()).optional(),
+    type:
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType$inboundSchema
+        .default("reasoning"),
+    summary: z.array(
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary$inboundSchema
+      ),
+    ),
+    encrypted_content: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+    });
+  });
+
+export function retrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemInputAnnotationQueues1$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemInputAnnotationQueues1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type: z.nullable(
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema,
+    ).optional(),
+    id: z.string(),
+  });
+
+export function retrieveAnnotationQueueItemInputAnnotationQueues1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemInputAnnotationQueues1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemInputAnnotationQueues1$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemInputAnnotationQueues1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => Input7$inboundSchema),
+    Input8$inboundSchema,
+    z.lazy(() =>
+      RetrieveAnnotationQueueItemInputAnnotationQueues1$inboundSchema
+    ),
+    z.lazy(() =>
+      RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
+    ),
+    z.lazy(() => Input3$inboundSchema),
+    z.lazy(() => Input4$inboundSchema),
+    z.lazy(() => Input5$inboundSchema),
+    z.lazy(() => Input6$inboundSchema),
+  ]);
+
+export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJSON1InputFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.string(),
+    type: z.string(),
+    status: z.string(),
+    result: z.any().optional(),
+  });
+
+export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent8$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent8,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput48Type$inboundSchema
+      .default("input_file"),
+  filename: z.string().optional(),
+  file_url: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_url": "fileUrl",
+  });
+});
+
+export function retrieveAnnotationQueueItemContent8FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent8, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent8$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent8' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type,
+  );
+
+/** @internal */
+export const ContentDetail$inboundSchema: z.ZodNativeEnum<
+  typeof ContentDetail
+> = z.nativeEnum(ContentDetail);
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent7$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent7,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput47Type$inboundSchema
+      .default("input_image"),
+  image_url: z.nullable(z.string()),
+  detail: ContentDetail$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "image_url": "imageUrl",
+  });
+});
+
+export function retrieveAnnotationQueueItemContent7FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent7, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent7$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent7' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent6$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent6,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput46Type$inboundSchema
+      .default("refusal"),
+  refusal: z.string(),
+});
+
+export function retrieveAnnotationQueueItemContent6FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent6, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent6$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent6' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent5$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent5,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput45Type$inboundSchema
+      .default("reasoning_text"),
+  text: z.string(),
+});
+
+export function retrieveAnnotationQueueItemContent5FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent5, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent5' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent4$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput44Type$inboundSchema
+      .default("summary_text"),
+  text: z.string(),
+});
+
+export function retrieveAnnotationQueueItemContent4FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent4' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContent3$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemContent3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput43Type$inboundSchema
+      .default("text"),
+  text: z.string(),
+});
+
+export function retrieveAnnotationQueueItemContent3FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAnnotationQueueItemContent3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContent3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContent3' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotations$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentAnnotations,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42AnnotationsType$inboundSchema
+        .default("url_citation"),
+    url: z.string(),
+    start_index: z.number().int(),
+    end_index: z.number().int(),
+    title: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_index": "startIndex",
+      "end_index": "endIndex",
+    });
+  });
+
+export function retrieveAnnotationQueueItemContentAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentAnnotations,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentAnnotations$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentTopLogprobs$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentTopLogprobs,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.array(z.number().int()),
+  });
+
+export function retrieveAnnotationQueueItemContentTopLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentTopLogprobs,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentTopLogprobs$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentTopLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentLogprobs$inboundSchema:
+  z.ZodType<RetrieveAnnotationQueueItemContentLogprobs, z.ZodTypeDef, unknown> =
+    z.object({
+      token: z.string(),
+      logprob: z.number(),
+      bytes: z.array(z.number().int()),
+      top_logprobs: z.array(
+        z.lazy(() =>
+          RetrieveAnnotationQueueItemContentTopLogprobs$inboundSchema
+        ),
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "top_logprobs": "topLogprobs",
+      });
+    });
+
+export function retrieveAnnotationQueueItemContentLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentLogprobs,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentLogprobs$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput42Type$inboundSchema
+        .default("output_text"),
+    text: z.string(),
+    annotations: z.array(
+      z.lazy(() => RetrieveAnnotationQueueItemContentAnnotations$inboundSchema),
+    ),
+    logprobs: z.array(
+      z.lazy(() => RetrieveAnnotationQueueItemContentLogprobs$inboundSchema),
+    ),
+  });
+
+export function retrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput4Type$inboundSchema
+        .default("input_text"),
+    text: z.string(),
+  });
+
+export function retrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSON1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputContent$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemOutputContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() =>
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2$inboundSchema
+  ),
+  z.lazy(() => RetrieveAnnotationQueueItemContent7$inboundSchema),
+  z.lazy(() =>
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1$inboundSchema
+  ),
+  z.lazy(() => RetrieveAnnotationQueueItemContent3$inboundSchema),
+  z.lazy(() => RetrieveAnnotationQueueItemContent4$inboundSchema),
+  z.lazy(() => RetrieveAnnotationQueueItemContent5$inboundSchema),
+  z.lazy(() => RetrieveAnnotationQueueItemContent6$inboundSchema),
+  z.lazy(() => RetrieveAnnotationQueueItemContent8$inboundSchema),
+]);
+
+export function retrieveAnnotationQueueItemOutputContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputContent' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type,
+  );
+
+/** @internal */
+export const Summary8$inboundSchema: z.ZodType<
+  Summary8,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1Type$inboundSchema
+      .default("input_file"),
+  filename: z.string().optional(),
+  file_url: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_url": "fileUrl",
+  });
+});
+
+export function summary8FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary8, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary8$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary8' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType,
+  );
+
+/** @internal */
+export const SummaryDetail$inboundSchema: z.ZodNativeEnum<
+  typeof SummaryDetail
+> = z.nativeEnum(SummaryDetail);
+
+/** @internal */
+export const Summary7$inboundSchema: z.ZodType<
+  Summary7,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBodyType$inboundSchema
+      .default("input_image"),
+  image_url: z.nullable(z.string()),
+  detail: SummaryDetail$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "image_url": "imageUrl",
+  });
+});
+
+export function summary7FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary7, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary7$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary7' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const Summary6$inboundSchema: z.ZodType<
+  Summary6,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONType$inboundSchema
+      .default("refusal"),
+  refusal: z.string(),
+});
+
+export function summary6FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary6, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary6$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary6' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type,
+  );
+
+/** @internal */
+export const Summary5$inboundSchema: z.ZodType<
+  Summary5,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200Type$inboundSchema
+      .default("reasoning_text"),
+  text: z.string(),
+});
+
+export function summary5FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary5, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary5' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType,
+  );
+
+/** @internal */
+export const Summary4$inboundSchema: z.ZodType<
+  Summary4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponseType$inboundSchema
+      .default("summary_text"),
+  text: z.string(),
+});
+
+export function summary4FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary4' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesType
+  > = z.nativeEnum(RetrieveAnnotationQueueItemSummaryAnnotationQueuesType);
+
+/** @internal */
+export const Summary3$inboundSchema: z.ZodType<
+  Summary3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RetrieveAnnotationQueueItemSummaryAnnotationQueuesType$inboundSchema
+    .default("text"),
+  text: z.string(),
+});
+
+export function summary3FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary3' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAnnotationQueueItemSummaryType> = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType,
+  );
+
+/** @internal */
+export const SummaryAnnotations$inboundSchema: z.ZodType<
+  SummaryAnnotations,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemSummaryAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema
+      .default("url_citation"),
+  url: z.string(),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+  title: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+export function summaryAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<SummaryAnnotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SummaryAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SummaryAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
+export const SummaryTopLogprobs$inboundSchema: z.ZodType<
+  SummaryTopLogprobs,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.array(z.number().int()),
+});
+
+export function summaryTopLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<SummaryTopLogprobs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SummaryTopLogprobs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SummaryTopLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const SummaryLogprobs$inboundSchema: z.ZodType<
+  SummaryLogprobs,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.array(z.number().int()),
+  top_logprobs: z.array(z.lazy(() => SummaryTopLogprobs$inboundSchema)),
+}).transform((v) => {
+  return remap$(v, {
+    "top_logprobs": "topLogprobs",
+  });
+});
+
+export function summaryLogprobsFromJSON(
+  jsonString: string,
+): SafeParseResult<SummaryLogprobs, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SummaryLogprobs$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SummaryLogprobs' from JSON`,
+  );
+}
+
+/** @internal */
+export const Summary2$inboundSchema: z.ZodType<
+  Summary2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RetrieveAnnotationQueueItemSummaryType$inboundSchema.default(
+    "output_text",
+  ),
+  text: z.string(),
+  annotations: z.array(z.lazy(() => SummaryAnnotations$inboundSchema)),
+  logprobs: z.array(z.lazy(() => SummaryLogprobs$inboundSchema)),
+});
+
+export function summary2FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary2' from JSON`,
+  );
+}
+
+/** @internal */
+export const SummaryType$inboundSchema: z.ZodNativeEnum<typeof SummaryType> = z
+  .nativeEnum(SummaryType);
+
+/** @internal */
+export const Summary1$inboundSchema: z.ZodType<
+  Summary1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: SummaryType$inboundSchema.default("input_text"),
+  text: z.string(),
+});
+
+export function summary1FromJSON(
+  jsonString: string,
+): SafeParseResult<Summary1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Summary1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Summary1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => Summary2$inboundSchema),
+    z.lazy(() => Summary7$inboundSchema),
+    z.lazy(() => Summary1$inboundSchema),
+    z.lazy(() => Summary3$inboundSchema),
+    z.lazy(() => Summary4$inboundSchema),
+    z.lazy(() => Summary5$inboundSchema),
+    z.lazy(() => Summary6$inboundSchema),
+    z.lazy(() => Summary8$inboundSchema),
+  ]);
+
+export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1SummaryFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Summary' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses4Type$inboundSchema
+        .default("reasoning"),
+    id: z.string(),
+    content: z.array(
+      z.union([
+        z.lazy(() =>
+          RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes2$inboundSchema
+        ),
+        z.lazy(() => RetrieveAnnotationQueueItemContent7$inboundSchema),
+        z.lazy(() =>
+          RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJson1$inboundSchema
+        ),
+        z.lazy(() => RetrieveAnnotationQueueItemContent3$inboundSchema),
+        z.lazy(() => RetrieveAnnotationQueueItemContent4$inboundSchema),
+        z.lazy(() => RetrieveAnnotationQueueItemContent5$inboundSchema),
+        z.lazy(() => RetrieveAnnotationQueueItemContent6$inboundSchema),
+        z.lazy(() => RetrieveAnnotationQueueItemContent8$inboundSchema),
+      ]),
+    ).optional(),
+    summary: z.array(
+      z.union([
+        z.lazy(() => Summary2$inboundSchema),
+        z.lazy(() => Summary7$inboundSchema),
+        z.lazy(() => Summary1$inboundSchema),
+        z.lazy(() => Summary3$inboundSchema),
+        z.lazy(() => Summary4$inboundSchema),
+        z.lazy(() => Summary5$inboundSchema),
+        z.lazy(() => Summary6$inboundSchema),
+        z.lazy(() => Summary8$inboundSchema),
+      ]),
+    ),
+    encrypted_content: z.string().optional(),
+    signature: z.string().optional(),
+    created_by: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+      "created_by": "createdBy",
+    });
+  });
+
+export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueues3$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItem1AnnotationQueues3,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3OutputType$inboundSchema
+        .default("input_file"),
+    filename: z.string().optional(),
+    file_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_url": "fileUrl",
+    });
+  });
+
+export function retrieveAnnotationQueueItem1AnnotationQueues3FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItem1AnnotationQueues3,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItem1AnnotationQueues3$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItem1AnnotationQueues3' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesDetail$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveAnnotationQueueItem1AnnotationQueuesDetail> = z
+    .nativeEnum(RetrieveAnnotationQueueItem1AnnotationQueuesDetail);
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse2$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse2,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutput3Type$inboundSchema
+        .default("input_image"),
+    image_url: z.nullable(z.string()),
+    detail: RetrieveAnnotationQueueItem1AnnotationQueuesDetail$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
+  });
+
+export function retrieveAnnotationQueueItem1AnnotationQueuesResponse2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItem1AnnotationQueuesResponse2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItem1AnnotationQueuesResponse2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItem1AnnotationQueuesResponse1$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItem1AnnotationQueuesResponse1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType$inboundSchema
+        .default("input_text"),
+    text: z.string(),
+  });
+
+export function retrieveAnnotationQueueItem1AnnotationQueuesResponse1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItem1AnnotationQueuesResponse1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse1$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItem1AnnotationQueuesResponse1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() =>
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse2$inboundSchema
+    ),
+    z.lazy(() =>
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse1$inboundSchema
+    ),
+    z.lazy(() => RetrieveAnnotationQueueItem1AnnotationQueues3$inboundSchema),
+  ]);
+
+export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponses1' from JSON`,
+  );
+}
+
+/** @internal */
+export const OutputOutput$inboundSchema: z.ZodType<
+  OutputOutput,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.array(z.union([
+    z.lazy(() =>
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse2$inboundSchema
+    ),
+    z.lazy(() =>
+      RetrieveAnnotationQueueItem1AnnotationQueuesResponse1$inboundSchema
+    ),
+    z.lazy(() => RetrieveAnnotationQueueItem1AnnotationQueues3$inboundSchema),
+  ])),
+  z.string(),
+]);
+
+export function outputOutputFromJSON(
+  jsonString: string,
+): SafeParseResult<OutputOutput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OutputOutput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OutputOutput' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType$inboundSchema
+        .default("function_call_output"),
+    id: z.string(),
+    call_id: z.string(),
+    output: z.union([
+      z.array(z.union([
+        z.lazy(() =>
+          RetrieveAnnotationQueueItem1AnnotationQueuesResponse2$inboundSchema
+        ),
+        z.lazy(() =>
+          RetrieveAnnotationQueueItem1AnnotationQueuesResponse1$inboundSchema
+        ),
+        z.lazy(() =>
+          RetrieveAnnotationQueueItem1AnnotationQueues3$inboundSchema
+        ),
+      ])),
+      z.string(),
+    ]),
+    status:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesStatus$inboundSchema,
+    created_by: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "created_by": "createdBy",
+    });
+  });
+
+export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema:
+  z.ZodType<
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema
+        .default("function_call"),
+    id: z.string(),
+    call_id: z.string(),
+    name: z.string(),
+    arguments: z.string(),
+    status:
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesStatus$inboundSchema,
+    created_by: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "created_by": "createdBy",
+    });
+  });
+
+export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Type,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Status,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1Role,
+  );
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType,
+  );
+
+/** @internal */
+export const Content9$inboundSchema: z.ZodType<
+  Content9,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesOutputType$inboundSchema,
+  video_url: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "video_url": "videoUrl",
+  });
+});
+
+export function content9FromJSON(
+  jsonString: string,
+): SafeParseResult<Content9, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Content9$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content9' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType,
+  );
+
+/** @internal */
+export const Content8$inboundSchema: z.ZodType<
+  Content8,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesOpenresponsesType$inboundSchema
+      .default("input_file"),
+  filename: z.string().optional(),
+  file_url: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_url": "fileUrl",
+  });
+});
+
+export function content8FromJSON(
+  jsonString: string,
+): SafeParseResult<Content8, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Content8$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content8' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType
+  > = z.nativeEnum(
+    RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1AttributesType,
+  );
 
 /** @internal */
 export const RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody1Detail$inboundSchema:
@@ -1060,7 +4814,7 @@ export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200Applica
       RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
     ),
     z.lazy(() => Content7$inboundSchema),
-    Content9$inboundSchema,
+    z.lazy(() => Content9$inboundSchema),
     z.lazy(() =>
       RetrieveAnnotationQueueItemContentAnnotationQueuesResponse2001$inboundSchema
     ),
@@ -1068,7 +4822,7 @@ export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200Applica
     z.lazy(() => Content4$inboundSchema),
     z.lazy(() => Content5$inboundSchema),
     z.lazy(() => Content6$inboundSchema),
-    Content8$inboundSchema,
+    z.lazy(() => Content8$inboundSchema),
   ]);
 
 export function retrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody1ContentFromJSON(
@@ -1107,7 +4861,7 @@ export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200Applica
           RetrieveAnnotationQueueItemContentAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
         ),
         z.lazy(() => Content7$inboundSchema),
-        Content9$inboundSchema,
+        z.lazy(() => Content9$inboundSchema),
         z.lazy(() =>
           RetrieveAnnotationQueueItemContentAnnotationQueuesResponse2001$inboundSchema
         ),
@@ -1115,7 +4869,7 @@ export const RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200Applica
         z.lazy(() => Content4$inboundSchema),
         z.lazy(() => Content5$inboundSchema),
         z.lazy(() => Content6$inboundSchema),
-        Content8$inboundSchema,
+        z.lazy(() => Content8$inboundSchema),
       ]),
     ),
   });
@@ -1142,13 +4896,21 @@ export const RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200A
     z.ZodTypeDef,
     unknown
   > = z.union([
-    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema,
+    z.lazy(() =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
+    ),
     z.lazy(() =>
       RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody11$inboundSchema
     ),
-    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema,
-    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema,
-    RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema,
+    z.lazy(() =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema
+    ),
+    z.lazy(() =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema
+    ),
+    z.lazy(() =>
+      RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema
+    ),
   ]);
 
 export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJSON1OutputFromJSON(
@@ -1228,20 +4990,37 @@ export const Openresponses$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    input: z.array(
-      RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200ApplicationJson1Input$inboundSchema,
-    ).optional(),
-    output: z.array(
-      z.union([
-        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema,
-        z.lazy(() =>
-          RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody11$inboundSchema
-        ),
-        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema,
-        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema,
-        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema,
-      ]),
-    ).optional(),
+    input: z.array(z.union([
+      z.lazy(() => Input7$inboundSchema),
+      Input8$inboundSchema,
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemInputAnnotationQueues1$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemInputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
+      ),
+      z.lazy(() => Input3$inboundSchema),
+      z.lazy(() => Input4$inboundSchema),
+      z.lazy(() => Input5$inboundSchema),
+      z.lazy(() => Input6$inboundSchema),
+    ])).optional(),
+    output: z.array(z.union([
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody12$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody11$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody13$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody15$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAnnotationQueueItemOutputAnnotationQueuesResponse200ApplicationJSONResponseBody14$inboundSchema
+      ),
+    ])).optional(),
     object: z.string().optional(),
     created_at: z.number().optional(),
     status: z.string().optional(),
@@ -1356,7 +5135,7 @@ export const RetrieveAnnotationQueueItemResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KZ8YSBZ9VP2EC83ZE20WKEQM"),
+  _id: z.string().default("01KZ9F3SP253M034ZA3CC4WQY2"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),

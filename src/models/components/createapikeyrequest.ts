@@ -10,11 +10,6 @@ import {
   ApiKeyOwner$outboundSchema,
 } from "./apikeyowner.js";
 import {
-  McpAccess,
-  McpAccess$Outbound,
-  McpAccess$outboundSchema,
-} from "./mcpaccess.js";
-import {
   PermissionMode,
   PermissionMode$outboundSchema,
 } from "./permissionmode.js";
@@ -55,13 +50,6 @@ export type CreateApiKeyRequest = {
    *  never expires.
    */
   expiresAt?: Date | undefined;
-  /**
-   * Optional MCP-gateway access restriction. Unset means no
-   *
-   * @remarks
-   *  restriction. See McpAccess for the deny_all / allow-list semantics.
-   */
-  mcpAccess?: McpAccess | undefined;
 };
 
 /** @internal */
@@ -72,7 +60,6 @@ export type CreateApiKeyRequest$Outbound = {
   permission_mode?: string | undefined;
   access?: { [k: string]: number } | undefined;
   expires_at?: string | undefined;
-  mcp_access?: McpAccess$Outbound | undefined;
 };
 
 /** @internal */
@@ -87,13 +74,11 @@ export const CreateApiKeyRequest$outboundSchema: z.ZodType<
   permissionMode: PermissionMode$outboundSchema.optional(),
   access: z.record(z.number().int()).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
-  mcpAccess: McpAccess$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     projectScope: "project_scope",
     permissionMode: "permission_mode",
     expiresAt: "expires_at",
-    mcpAccess: "mcp_access",
   });
 });
 

@@ -70,7 +70,7 @@ async function $do(
     APICall,
   ]
 > {
-  const path = pathToFunc("/v3/traces/facets")();
+  const path = pathToFunc("/v2/traces/facets")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

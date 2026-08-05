@@ -13,18 +13,18 @@ export type ListBudgetsResponse = {
   /**
    * Object discriminator for list responses; always `list`.
    */
-  object: string;
+  object?: string | undefined;
   /**
    * Page of budgets, ordered newest first.
    */
-  data: Array<Budget>;
+  data?: Array<Budget> | undefined;
   /**
    * Whether more budgets are available in the selected pagination
    *
    * @remarks
    *  direction.
    */
-  hasMore: boolean;
+  hasMore?: boolean | undefined;
 };
 
 /** @internal */
@@ -33,9 +33,9 @@ export const ListBudgetsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: z.string(),
-  data: z.array(Budget$inboundSchema),
-  has_more: z.boolean(),
+  object: z.string().optional(),
+  data: z.array(Budget$inboundSchema).optional(),
+  has_more: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",

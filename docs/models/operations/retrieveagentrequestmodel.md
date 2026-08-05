@@ -43,7 +43,9 @@ let value: RetrieveAgentRequestModel = {
       504,
     ],
   },
-  fallbackModels: null,
+  fallbackModels: [
+    "<value>",
+  ],
 };
 ```
 

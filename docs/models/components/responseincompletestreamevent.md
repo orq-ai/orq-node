@@ -46,7 +46,7 @@ let value: ResponseIncompleteStreamEvent = {
     reasoning: {},
     safetyIdentifier: "<value>",
     serviceTier: "default",
-    status: "incomplete",
+    status: "requires_action",
     store: false,
     temperature: 5687.5,
     text: "<value>",

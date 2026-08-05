@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * Custom JSON metadata stored with the identity.
+ */
+export type CreateIdentityRequestMetadata = {};
+
 export type CreateIdentityRequest = {
   /**
    * Customer-provided stable identifier for this identity. Must be unique
@@ -32,8 +37,28 @@ export type CreateIdentityRequest = {
   /**
    * Custom JSON metadata stored with the identity.
    */
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: CreateIdentityRequestMetadata | undefined;
 };
+
+/** @internal */
+export type CreateIdentityRequestMetadata$Outbound = {};
+
+/** @internal */
+export const CreateIdentityRequestMetadata$outboundSchema: z.ZodType<
+  CreateIdentityRequestMetadata$Outbound,
+  z.ZodTypeDef,
+  CreateIdentityRequestMetadata
+> = z.object({});
+
+export function createIdentityRequestMetadataToJSON(
+  createIdentityRequestMetadata: CreateIdentityRequestMetadata,
+): string {
+  return JSON.stringify(
+    CreateIdentityRequestMetadata$outboundSchema.parse(
+      createIdentityRequestMetadata,
+    ),
+  );
+}
 
 /** @internal */
 export type CreateIdentityRequest$Outbound = {
@@ -42,7 +67,7 @@ export type CreateIdentityRequest$Outbound = {
   email?: string | undefined;
   avatar_url?: string | undefined;
   tags?: Array<string> | undefined;
-  metadata?: { [k: string]: any } | undefined;
+  metadata?: CreateIdentityRequestMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -56,7 +81,8 @@ export const CreateIdentityRequest$outboundSchema: z.ZodType<
   email: z.string().optional(),
   avatarUrl: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.lazy(() => CreateIdentityRequestMetadata$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     externalId: "external_id",

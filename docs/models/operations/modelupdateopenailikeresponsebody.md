@@ -11,17 +11,17 @@ let value: ModelUpdateOpenAILikeResponseBody = {
   configuration: {
     provider: "<value>",
   },
-  created: "<value>",
-  description: "yippee although solidly silently",
-  displayName: "Narciso_Cruickshank",
-  docsUrl: "https://worthless-tune-up.name/",
-  enabled: false,
+  created: new Date("2026-03-09T01:59:28.514Z"),
+  description: "depart consequently superior qua exhaust",
+  displayName: "Wilson_Mayer",
+  docsUrl: "https://immaculate-cross-contamination.name/",
+  enabled: true,
   enabledForEndpoints: false,
   enabledForPlayground: false,
   hasCpuPricing: false,
   hasFunctions: true,
   id: "<id>",
-  inputCost: 2081.18,
+  inputCost: 1470.28,
   inputCurrency: "<value>",
   isActive: false,
   metadata: {
@@ -29,25 +29,14 @@ let value: ModelUpdateOpenAILikeResponseBody = {
   },
   modelId: "<id>",
   modelType: "<value>",
-  outputCost: 8462.84,
+  outputCost: 668.63,
   outputCurrency: "<value>",
   owner: "<value>",
-  parameters: [
-    {
-      config: {},
-      description:
-        "whereas laughter fork unimpressively ugh er even an inasmuch",
-      id: "<id>",
-      isActive: true,
-      name: "<value>",
-      parameter: "<value>",
-      parameterType: "<value>",
-    },
-  ],
-  pricingUrl: null,
+  parameters: [],
+  pricingUrl: "https://outstanding-thigh.info/",
   provider: "<value>",
   refId: "<id>",
-  updated: "<value>",
+  updated: new Date("2025-04-25T22:04:54.419Z"),
 };
 ```
 
@@ -56,7 +45,7 @@ let value: ModelUpdateOpenAILikeResponseBody = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `configuration`                                                                                | [components.ModelConfigurationResponse](../../models/components/modelconfigurationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `created`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `created`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `displayName`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `docsUrl`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
@@ -81,5 +70,5 @@ let value: ModelUpdateOpenAILikeResponseBody = {
 | `pricingUrl`                                                                                   | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `provider`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `refId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `sharing`                                                                                      | [components.ModelSharingConfig](../../models/components/modelsharingconfig.md)                 | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `updated`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `sharing`                                                                                      | [components.Config](../../models/components/config.md)                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `updated`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |

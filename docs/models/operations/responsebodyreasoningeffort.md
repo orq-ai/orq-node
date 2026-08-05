@@ -7,11 +7,11 @@ Constrains effort on reasoning for reasoning models. Reducing reasoning effort c
 ```typescript
 import { ResponseBodyReasoningEffort } from "@orq-ai/node/models/operations";
 
-let value: ResponseBodyReasoningEffort = "minimal";
+let value: ResponseBodyReasoningEffort = "disable";
 ```
 
 ## Values
 
 ```typescript
-"none" | "disable" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
+"none" | "disable" | "minimal" | "low" | "medium" | "high"
 ```

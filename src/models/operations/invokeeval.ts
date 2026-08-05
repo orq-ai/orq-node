@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -148,12 +147,6 @@ export type InvokeEvalRequestBody = {
    * Model to use for LLM-based evaluators (e.g. "openai/gpt-4o")
    */
   model?: string | undefined;
-  /**
-   * Template variables for evaluator prompt substitution. Request values override evaluator defaults, including for nested arrays and objects.
-   */
-  variables?:
-    | { [k: string]: components.EvaluatorVariableValue | null }
-    | undefined;
 };
 
 export type InvokeEvalRequest = {
@@ -167,8 +160,6 @@ export type InvokeEvalRequest = {
 export type Structured = {
   type: "structured";
   value: { [k: string]: any };
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Value =
@@ -183,8 +174,6 @@ export type InvokeEvalResponseBodyEvalsResponseValue = {
 export type ResponseBodyHTTP = {
   type: "http_eval";
   value?: InvokeEvalResponseBodyEvalsResponseValue | null | undefined;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
@@ -213,7 +202,7 @@ export type Stats = {
   std: number;
 };
 
-export type InvokeEvalResponseBodyJury = {
+export type ResponseBodyJury = {
   judgesConfigured: number;
   judgesSucceeded: number;
   judgesFailed: number;
@@ -231,10 +220,10 @@ export type InvokeEvalResponseBodyEvalsValue = {
   explanation?: string | null | undefined;
   originalValue?: number | boolean | string | null | undefined;
   originalExplanation?: string | null | undefined;
-  jury?: InvokeEvalResponseBodyJury | undefined;
+  jury?: ResponseBodyJury | undefined;
 };
 
-export type InvokeEvalResponseBodyLLM = {
+export type ResponseBodyLLM = {
   type: "llm_evaluator";
   value: InvokeEvalResponseBodyEvalsValue | null;
 };
@@ -248,8 +237,6 @@ export type InvokeEvalResponseBodyValue = {
 export type BERTScore = {
   type: "bert_score";
   value: InvokeEvalResponseBodyValue;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export type Rouge1 = {
@@ -279,15 +266,11 @@ export type ResponseBodyValue = {
 export type RougeN = {
   type: "rouge_n";
   value: ResponseBodyValue;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export type StringArray = {
   type: "string_array";
   values: Array<string | null>;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export type InvokeEvalResponseBodyEvalsResponse200Value =
@@ -298,8 +281,6 @@ export type InvokeEvalResponseBodyEvalsResponse200Value =
 export type Boolean = {
   type: "boolean";
   value: boolean | string | number | null;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export const FormatOptionsStyle = {
@@ -328,16 +309,12 @@ export type NumberT = {
   originalValue?: number | null | undefined;
   value: number | null;
   formatOptions?: FormatOptions2 | FormatOptions1 | undefined;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 export type String = {
   type: "string";
   originalValue?: string | null | undefined;
   value?: string | null | undefined;
-  traceId?: string | undefined;
-  spanId?: string | undefined;
 };
 
 /**
@@ -350,7 +327,7 @@ export type InvokeEvalResponseBody =
   | StringArray
   | RougeN
   | BERTScore
-  | InvokeEvalResponseBodyLLM
+  | ResponseBodyLLM
   | ResponseBodyHTTP
   | Structured;
 
@@ -598,9 +575,6 @@ export type InvokeEvalRequestBody$Outbound = {
   retrievals?: Array<string> | undefined;
   messages?: Array<Messages$Outbound> | undefined;
   model?: string | undefined;
-  variables?:
-    | { [k: string]: components.EvaluatorVariableValue$Outbound | null }
-    | undefined;
 };
 
 /** @internal */
@@ -615,9 +589,6 @@ export const InvokeEvalRequestBody$outboundSchema: z.ZodType<
   retrievals: z.array(z.string()).optional(),
   messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
   model: z.string().optional(),
-  variables: z.record(
-    z.nullable(components.EvaluatorVariableValue$outboundSchema),
-  ).optional(),
 });
 
 export function invokeEvalRequestBodyToJSON(
@@ -664,13 +635,6 @@ export const Structured$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("structured"),
   value: z.record(z.any()),
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-  });
 });
 
 export function structuredFromJSON(
@@ -742,13 +706,6 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
   value: z.nullable(
     z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
   ).optional(),
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-  });
 });
 
 export function responseBodyHTTPFromJSON(
@@ -863,8 +820,8 @@ export function statsFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyJury$inboundSchema: z.ZodType<
-  InvokeEvalResponseBodyJury,
+export const ResponseBodyJury$inboundSchema: z.ZodType<
+  ResponseBodyJury,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -884,13 +841,13 @@ export const InvokeEvalResponseBodyJury$inboundSchema: z.ZodType<
   });
 });
 
-export function invokeEvalResponseBodyJuryFromJSON(
+export function responseBodyJuryFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalResponseBodyJury, SDKValidationError> {
+): SafeParseResult<ResponseBodyJury, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalResponseBodyJury$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalResponseBodyJury' from JSON`,
+    (x) => ResponseBodyJury$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyJury' from JSON`,
   );
 }
 
@@ -908,7 +865,7 @@ export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
   original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
     .optional(),
   original_explanation: z.nullable(z.string()).optional(),
-  jury: z.lazy(() => InvokeEvalResponseBodyJury$inboundSchema).optional(),
+  jury: z.lazy(() => ResponseBodyJury$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "workflow_run_id": "workflowRunId",
@@ -930,8 +887,8 @@ export function invokeEvalResponseBodyEvalsValueFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyLLM$inboundSchema: z.ZodType<
-  InvokeEvalResponseBodyLLM,
+export const ResponseBodyLLM$inboundSchema: z.ZodType<
+  ResponseBodyLLM,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -941,13 +898,13 @@ export const InvokeEvalResponseBodyLLM$inboundSchema: z.ZodType<
   ),
 });
 
-export function invokeEvalResponseBodyLLMFromJSON(
+export function responseBodyLLMFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalResponseBodyLLM, SDKValidationError> {
+): SafeParseResult<ResponseBodyLLM, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalResponseBodyLLM$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalResponseBodyLLM' from JSON`,
+    (x) => ResponseBodyLLM$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyLLM' from JSON`,
   );
 }
 
@@ -980,13 +937,6 @@ export const BERTScore$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("bert_score"),
   value: z.lazy(() => InvokeEvalResponseBodyValue$inboundSchema),
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-  });
 });
 
 export function bertScoreFromJSON(
@@ -1085,13 +1035,6 @@ export const RougeN$inboundSchema: z.ZodType<RougeN, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("rouge_n"),
     value: z.lazy(() => ResponseBodyValue$inboundSchema),
-    trace_id: z.string().optional(),
-    span_id: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "trace_id": "traceId",
-      "span_id": "spanId",
-    });
   });
 
 export function rougeNFromJSON(
@@ -1112,13 +1055,6 @@ export const StringArray$inboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("string_array"),
   values: z.array(z.nullable(z.string())),
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-  });
 });
 
 export function stringArrayFromJSON(
@@ -1160,13 +1096,6 @@ export const Boolean$inboundSchema: z.ZodType<Boolean, z.ZodTypeDef, unknown> =
   z.object({
     type: z.literal("boolean"),
     value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
-    trace_id: z.string().optional(),
-    span_id: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "trace_id": "traceId",
-      "span_id": "spanId",
-    });
   });
 
 export function booleanFromJSON(
@@ -1261,14 +1190,10 @@ export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
       z.lazy(() => FormatOptions2$inboundSchema),
       z.lazy(() => FormatOptions1$inboundSchema),
     ]).optional(),
-    trace_id: z.string().optional(),
-    span_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "original_value": "originalValue",
       "format_options": "formatOptions",
-      "trace_id": "traceId",
-      "span_id": "spanId",
     });
   });
 
@@ -1288,13 +1213,9 @@ export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
     type: z.literal("string"),
     original_value: z.nullable(z.string()).optional(),
     value: z.nullable(z.string()).optional(),
-    trace_id: z.string().optional(),
-    span_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "original_value": "originalValue",
-      "trace_id": "traceId",
-      "span_id": "spanId",
     });
   });
 
@@ -1320,7 +1241,7 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => StringArray$inboundSchema),
   z.lazy(() => RougeN$inboundSchema),
   z.lazy(() => BERTScore$inboundSchema),
-  z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
+  z.lazy(() => ResponseBodyLLM$inboundSchema),
   z.lazy(() => ResponseBodyHTTP$inboundSchema),
   z.lazy(() => Structured$inboundSchema),
 ]);

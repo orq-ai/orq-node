@@ -117,7 +117,7 @@ export type LLMJury = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<OneCategoricalLabels> | null | undefined;
-  datasetId?: string | null | undefined;
+  datasetId?: string | undefined;
   /**
    * Entity storage path.
    *
@@ -169,7 +169,7 @@ export type Llm = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<CreateEval1CategoricalLabels> | null | undefined;
-  datasetId?: string | null | undefined;
+  datasetId?: string | undefined;
   /**
    * Entity storage path.
    *
@@ -464,7 +464,7 @@ export type LLMJury$Outbound = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categorical_labels?: Array<OneCategoricalLabels$Outbound> | null | undefined;
-  dataset_id?: string | null | undefined;
+  dataset_id?: string | undefined;
   path: string;
   description: string;
   key: string;
@@ -487,7 +487,7 @@ export const LLMJury$outboundSchema: z.ZodType<
   categoricalLabels: z.nullable(
     z.array(z.lazy(() => OneCategoricalLabels$outboundSchema)),
   ).optional(),
-  datasetId: z.nullable(z.string()).optional(),
+  datasetId: z.string().optional(),
   path: z.string(),
   description: z.string().default(""),
   key: z.string(),
@@ -554,7 +554,7 @@ export type Llm$Outbound = {
     | Array<CreateEval1CategoricalLabels$Outbound>
     | null
     | undefined;
-  dataset_id?: string | null | undefined;
+  dataset_id?: string | undefined;
   path: string;
   description: string;
   key: string;
@@ -574,7 +574,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
     categoricalLabels: z.nullable(
       z.array(z.lazy(() => CreateEval1CategoricalLabels$outboundSchema)),
     ).optional(),
-    datasetId: z.nullable(z.string()).optional(),
+    datasetId: z.string().optional(),
     path: z.string(),
     description: z.string().default(""),
     key: z.string(),

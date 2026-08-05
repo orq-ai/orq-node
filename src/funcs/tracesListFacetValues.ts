@@ -94,7 +94,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v3/traces/facets/{field}")(pathParams);
+  const path = pathToFunc("/v2/traces/facets/{field}")(pathParams);
 
   const query = encodeFormQuery({
     "filter_operator": payload.filter_operator,

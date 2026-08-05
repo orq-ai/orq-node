@@ -17,5 +17,3 @@ let value: String = {
 | `type`             | *"string"*         | :heavy_check_mark: | N/A                |
 | `originalValue`    | *string*           | :heavy_minus_sign: | N/A                |
 | `value`            | *string*           | :heavy_minus_sign: | N/A                |
-| `traceId`          | *string*           | :heavy_minus_sign: | N/A                |
-| `spanId`           | *string*           | :heavy_minus_sign: | N/A                |
