@@ -33,8 +33,6 @@ jobs:
       mode: direct
       target: ${{ inputs.target }}
       force: ${{ inputs.force }}
-      environment: |
-        NODE_OPTIONS=--max-old-space-size=8192
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}

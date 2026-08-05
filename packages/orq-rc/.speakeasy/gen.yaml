@@ -48,7 +48,8 @@ typescript:
         import: ./langchain/index.mjs
         require: ./langchain/index.js
         types: ./langchain/index.d.mts
-  additionalScripts: {}
+  additionalScripts:
+    build: node --max-old-space-size=8192 ./node_modules/typescript/bin/tsc
   alwaysIncludeInboundAndOutbound: false
   apiPromiseHelpers: false
   author: Orq
