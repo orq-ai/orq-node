@@ -45,7 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create an annotation queue
+   * Create embeddings
+   *
+   * @remarks
+   * Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
