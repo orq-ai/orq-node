@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create completion
+   * Create speech
    *
    * @remarks
-   * For sending requests to legacy completion models
+   * Generates audio from the input text.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
