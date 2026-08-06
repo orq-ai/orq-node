@@ -68,6 +68,10 @@ export type EvaluatorResponseLlm = {
   created: string;
   updated: string;
   updatedById?: string | null | undefined;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   type: "llm_eval";
   repetitions?: number | null | undefined;
@@ -267,9 +271,10 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   updated_by_id: z.nullable(z.string()).optional(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("llm_eval"),
   repetitions: z.nullable(z.number().int()).optional(),
@@ -287,6 +292,7 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "updated_by_id": "updatedById",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "categorical_labels": "categoricalLabels",
     "dataset_id": "datasetId",

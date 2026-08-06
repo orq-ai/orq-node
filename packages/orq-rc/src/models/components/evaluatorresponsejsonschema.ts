@@ -14,6 +14,10 @@ export type EvaluatorResponseJsonSchema = {
   created: string;
   updated: string;
   updatedById?: string | null | undefined;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   type: "json_schema";
   schema: string;
@@ -28,9 +32,10 @@ export const EvaluatorResponseJsonSchema$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   updated_by_id: z.nullable(z.string()).optional(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("json_schema"),
   schema: z.string(),
@@ -39,6 +44,7 @@ export const EvaluatorResponseJsonSchema$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "updated_by_id": "updatedById",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
   });
 });

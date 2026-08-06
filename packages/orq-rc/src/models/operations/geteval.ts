@@ -45,6 +45,10 @@ export type BedrockGuardrail = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   outputType?:
     | GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType
@@ -94,6 +98,10 @@ export type Typescript = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -135,6 +143,10 @@ export type ResponseBodyPython = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   outputType?:
     | GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType
@@ -186,6 +198,10 @@ export type GetEvalResponseBodyHTTP = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -226,6 +242,10 @@ export type Json = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   outputType?: GetEvalResponseBodyEvalsResponseOutputType | undefined;
   type: "json_schema";
@@ -281,6 +301,10 @@ export type Ragas = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   outputType?: GetEvalResponseBodyEvalsOutputType | undefined;
   type: "ragas";
@@ -493,6 +517,10 @@ export type ResponseBodyFunction = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   outputType: GetEvalResponseBodyOutputType;
   type: "function_eval";
@@ -706,6 +734,10 @@ export type ResponseBodyLLM = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   domainId: string;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -814,11 +846,12 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type:
     GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType$inboundSchema
@@ -835,6 +868,7 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "domain_id": "domainId",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "output_type": "outputType",
     "guardrail_identifier": "guardrailIdentifier",
@@ -915,11 +949,12 @@ export const Typescript$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type:
     GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema
@@ -933,6 +968,7 @@ export const Typescript$inboundSchema: z.ZodType<
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "domain_id": "domainId",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "output_type": "outputType",
   });
@@ -1010,11 +1046,12 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type:
     GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema
@@ -1028,6 +1065,7 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "domain_id": "domainId",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "output_type": "outputType",
   });
@@ -1106,11 +1144,12 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type: GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema
     .optional(),
@@ -1126,6 +1165,7 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "domain_id": "domainId",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "output_type": "outputType",
   });
@@ -1188,11 +1228,12 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-06T08:50:29.080Z"),
-    updated: z.string().default("2026-08-06T08:50:29.080Z"),
+    created: z.string().default("2026-08-06T09:55:43.642Z"),
+    updated: z.string().default("2026-08-06T09:55:43.642Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
+    project_id: z.string().optional(),
     guardrail_config: z.any().optional(),
     output_type: GetEvalResponseBodyEvalsResponseOutputType$inboundSchema
       .optional(),
@@ -1205,6 +1246,7 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
       "created_by_id": "createdById",
       "updated_by_id": "updatedById",
       "domain_id": "domainId",
+      "project_id": "projectId",
       "guardrail_config": "guardrailConfig",
       "output_type": "outputType",
     });
@@ -1295,11 +1337,12 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-06T08:50:29.080Z"),
-    updated: z.string().default("2026-08-06T08:50:29.080Z"),
+    created: z.string().default("2026-08-06T09:55:43.642Z"),
+    updated: z.string().default("2026-08-06T09:55:43.642Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
+    project_id: z.string().optional(),
     guardrail_config: z.any().optional(),
     output_type: GetEvalResponseBodyEvalsOutputType$inboundSchema.optional(),
     type: z.literal("ragas"),
@@ -1312,6 +1355,7 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
       "created_by_id": "createdById",
       "updated_by_id": "updatedById",
       "domain_id": "domainId",
+      "project_id": "projectId",
       "guardrail_config": "guardrailConfig",
       "output_type": "outputType",
       "ragas_metric": "ragasMetric",
@@ -2048,11 +2092,12 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type: GetEvalResponseBodyOutputType$inboundSchema,
   type: z.literal("function_eval"),
@@ -2097,6 +2142,7 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "domain_id": "domainId",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "output_type": "outputType",
     "function_params": "functionParams",
@@ -2717,11 +2763,12 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-06T08:50:29.080Z"),
-  updated: z.string().default("2026-08-06T08:50:29.080Z"),
+  created: z.string().default("2026-08-06T09:55:43.642Z"),
+  updated: z.string().default("2026-08-06T09:55:43.642Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type: ResponseBodyOutputType$inboundSchema.optional(),
   type: z.literal("llm_eval"),
@@ -2742,6 +2789,7 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
     "domain_id": "domainId",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
     "output_type": "outputType",
     "categorical_labels": "categoricalLabels",

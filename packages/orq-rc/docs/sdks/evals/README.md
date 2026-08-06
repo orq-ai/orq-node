@@ -261,6 +261,7 @@ async function run() {
     id: "<id>",
     requestBody: {
       path: "Default",
+      projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
     },
   });
 
@@ -289,6 +290,7 @@ async function run() {
     id: "<id>",
     requestBody: {
       path: "Default",
+      projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
     },
   });
   if (res.ok) {
