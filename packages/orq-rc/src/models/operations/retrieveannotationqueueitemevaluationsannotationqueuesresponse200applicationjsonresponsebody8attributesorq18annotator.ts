@@ -5000,7 +5000,7 @@ export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse2
 /** @internal */
 export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01KZBBCTDF7AAW0W18381QYRDR"),
+    _id: z.string().default("01KZBD19CHJYMHXWTJX8WBZPCX"),
     name: z.string().optional(),
     trace_id: z.string(),
     duration: z.number().optional(),
@@ -6014,7 +6014,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-06T10:55:06.639Z",
+      "2026-08-06T11:23:45.911Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody8AttributesOrq19Type$inboundSchema,
