@@ -31,6 +31,10 @@ export type CreateAgentScheduleRequestBody = {
    */
   agentTag?: string | undefined;
   /**
+   * Human-readable name of the schedule.
+   */
+  displayName: string;
+  /**
    * Schedule expression. Examples: cron '0 0 9 * * mon-fri' (9am UTC weekdays), interval '@every 1h', once '@at 2026-05-01T09:00:00Z'. Minimum firing cadence is 1 hour for cron and interval.
    */
   expression: string;
@@ -118,6 +122,7 @@ export const CreateAgentScheduleType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type CreateAgentScheduleRequestBody$Outbound = {
   agent_tag?: string | undefined;
+  display_name: string;
   expression: string;
   payload: components.PublicSchedulePayload$Outbound;
   type: string;
@@ -130,12 +135,14 @@ export const CreateAgentScheduleRequestBody$outboundSchema: z.ZodType<
   CreateAgentScheduleRequestBody
 > = z.object({
   agentTag: z.string().optional(),
+  displayName: z.string(),
   expression: z.string(),
   payload: components.PublicSchedulePayload$outboundSchema,
   type: CreateAgentScheduleType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     agentTag: "agent_tag",
+    displayName: "display_name",
   });
 });
 

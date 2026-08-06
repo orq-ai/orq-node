@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create speech
+   * Create rerank
    *
    * @remarks
-   * Generates audio from the input text.
+   * Rerank a list of documents based on their relevance to a query.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

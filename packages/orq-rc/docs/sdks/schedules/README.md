@@ -103,6 +103,7 @@ async function run() {
     agentKey: "<value>",
     requestBody: {
       agentTag: "v2",
+      displayName: "Daily morning briefing",
       expression: "0 0 9 * * mon-fri",
       payload: {
         input: "Generate the morning briefing for {{region}}",
@@ -143,6 +144,7 @@ async function run() {
     agentKey: "<value>",
     requestBody: {
       agentTag: "v2",
+      displayName: "Daily morning briefing",
       expression: "0 0 9 * * mon-fri",
       payload: {
         input: "Generate the morning briefing for {{region}}",
@@ -181,6 +183,7 @@ async function run() {
   const result = await orq.schedules.create({
     agentKey: "<value>",
     requestBody: {
+      displayName: "Hourly ticket summary",
       expression: "@every 1h",
       payload: {
         input: "Summarize new tickets from the last hour",
@@ -213,6 +216,7 @@ async function run() {
   const res = await schedulesCreate(orq, {
     agentKey: "<value>",
     requestBody: {
+      displayName: "Hourly ticket summary",
       expression: "@every 1h",
       payload: {
         input: "Summarize new tickets from the last hour",
@@ -244,6 +248,7 @@ async function run() {
   const result = await orq.schedules.create({
     agentKey: "<value>",
     requestBody: {
+      displayName: "Ticket status update",
       expression: "@at 2026-05-01T09:00:00Z",
       payload: {
         input: "Check in on ticket TICKET-123 and post a status update.",
@@ -276,6 +281,7 @@ async function run() {
   const res = await schedulesCreate(orq, {
     agentKey: "<value>",
     requestBody: {
+      displayName: "Ticket status update",
       expression: "@at 2026-05-01T09:00:00Z",
       payload: {
         input: "Check in on ticket TICKET-123 and post a status update.",

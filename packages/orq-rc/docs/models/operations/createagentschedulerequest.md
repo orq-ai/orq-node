@@ -8,6 +8,7 @@ import { CreateAgentScheduleRequest } from "@orq-ai/node/models/operations";
 let value: CreateAgentScheduleRequest = {
   agentKey: "<value>",
   requestBody: {
+    displayName: "Penelope.Lebsack3",
     expression: "<value>",
     payload: {},
     type: "interval",
