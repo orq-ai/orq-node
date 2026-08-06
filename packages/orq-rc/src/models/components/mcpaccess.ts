@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * McpAccess optionally restricts which MCP gateways an API key may
@@ -55,22 +52,6 @@ export type McpAccess = {
 };
 
 /** @internal */
-export const McpAccess$inboundSchema: z.ZodType<
-  McpAccess,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  deny_all: z.boolean().optional(),
-  allowed_mcp_gateway_ids: z.array(z.string()).optional(),
-  toolset_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "deny_all": "denyAll",
-    "allowed_mcp_gateway_ids": "allowedMcpGatewayIds",
-    "toolset_ids": "toolsetIds",
-  });
-});
-/** @internal */
 export type McpAccess$Outbound = {
   deny_all?: boolean | undefined;
   allowed_mcp_gateway_ids?: Array<string> | undefined;
@@ -96,13 +77,4 @@ export const McpAccess$outboundSchema: z.ZodType<
 
 export function mcpAccessToJSON(mcpAccess: McpAccess): string {
   return JSON.stringify(McpAccess$outboundSchema.parse(mcpAccess));
-}
-export function mcpAccessFromJSON(
-  jsonString: string,
-): SafeParseResult<McpAccess, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => McpAccess$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'McpAccess' from JSON`,
-  );
 }

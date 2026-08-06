@@ -14,10 +14,6 @@ export const PermissionMode = {
 export type PermissionMode = ClosedEnum<typeof PermissionMode>;
 
 /** @internal */
-export const PermissionMode$inboundSchema: z.ZodNativeEnum<
-  typeof PermissionMode
-> = z.nativeEnum(PermissionMode);
-/** @internal */
 export const PermissionMode$outboundSchema: z.ZodNativeEnum<
   typeof PermissionMode
-> = PermissionMode$inboundSchema;
+> = z.nativeEnum(PermissionMode);

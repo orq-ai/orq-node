@@ -786,6 +786,7 @@ export type CreateRouterResponseRequestBody = {
    * If true, the response runs asynchronously in the background.
    */
   background?: boolean | undefined;
+  cache?: components.CacheConfig | undefined;
   /**
    * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
    */
@@ -812,7 +813,12 @@ export type CreateRouterResponseRequestBody = {
    * System prompt / instructions for the model.
    */
   instructions?: string | undefined;
+  /**
+   * Integration ID used to resolve provider credentials for this request.
+   */
+  integrationId?: string | undefined;
   limits?: components.ResponseExecutionLimits | undefined;
+  loadBalancer?: components.LoadBalancerConfig | undefined;
   /**
    * Maximum number of tokens in the response output.
    */
@@ -856,6 +862,7 @@ export type CreateRouterResponseRequestBody = {
    * Safety identifier for content filtering.
    */
   safetyIdentifier?: string | undefined;
+  security?: components.SecurityConfig | undefined;
   /**
    * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
    */
@@ -874,6 +881,10 @@ export type CreateRouterResponseRequestBody = {
   stream?: boolean | undefined;
   streamOptions?: components.StreamOptions | undefined;
   /**
+   * Tags attached to the request trace.
+   */
+  tags?: Array<string> | null | undefined;
+  /**
    * Sampling temperature between 0 and 2.
    */
   temperature?: number | undefined;
@@ -886,6 +897,7 @@ export type CreateRouterResponseRequestBody = {
    */
   text?: CreateRouterResponseText | undefined;
   thread?: components.ResponseThread | undefined;
+  timeout?: components.TimeoutConfig | undefined;
   /**
    * How the model should use the provided tools. Can be a string shorthand or a specific function selector.
    */
@@ -1869,6 +1881,7 @@ export function createRouterResponseToolsToJSON(
 /** @internal */
 export type CreateRouterResponseRequestBody$Outbound = {
   background?: boolean | undefined;
+  cache?: components.CacheConfig$Outbound | undefined;
   cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
@@ -1877,7 +1890,9 @@ export type CreateRouterResponseRequestBody$Outbound = {
   identity?: components.ResponseIdentity$Outbound | undefined;
   input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
   instructions?: string | undefined;
+  integration_id?: string | undefined;
   limits?: components.ResponseExecutionLimits$Outbound | undefined;
+  load_balancer?: components.LoadBalancerConfig$Outbound | undefined;
   max_output_tokens?: number | undefined;
   max_tool_calls?: number | undefined;
   memory?: components.MemoryParam$Outbound | undefined;
@@ -1891,15 +1906,18 @@ export type CreateRouterResponseRequestBody$Outbound = {
   reasoning?: components.ReasoningParam$Outbound | undefined;
   retry?: components.ResponseRetryConfig$Outbound | undefined;
   safety_identifier?: string | undefined;
+  security?: components.SecurityConfig$Outbound | undefined;
   service_tier?: string | undefined;
   stop_sequences?: Array<string> | undefined;
   store?: boolean | undefined;
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
+  tags?: Array<string> | null | undefined;
   temperature?: number | undefined;
   template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
   thread?: components.ResponseThread$Outbound | undefined;
+  timeout?: components.TimeoutConfig$Outbound | undefined;
   tool_choice?: SpecificFunction$Outbound | string | undefined;
   tools?:
     | Array<
@@ -1929,6 +1947,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   CreateRouterResponseRequestBody
 > = z.object({
   background: z.boolean().optional(),
+  cache: components.CacheConfig$outboundSchema.optional(),
   cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
     .optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
@@ -1942,7 +1961,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
   ]).optional(),
   instructions: z.string().optional(),
+  integrationId: z.string().optional(),
   limits: components.ResponseExecutionLimits$outboundSchema.optional(),
+  loadBalancer: components.LoadBalancerConfig$outboundSchema.optional(),
   maxOutputTokens: z.number().int().optional(),
   maxToolCalls: z.number().int().optional(),
   memory: components.MemoryParam$outboundSchema.optional(),
@@ -1957,15 +1978,18 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   reasoning: components.ReasoningParam$outboundSchema.optional(),
   retry: components.ResponseRetryConfig$outboundSchema.optional(),
   safetyIdentifier: z.string().optional(),
+  security: components.SecurityConfig$outboundSchema.optional(),
   serviceTier: ServiceTier$outboundSchema.optional(),
   stopSequences: z.array(z.string()).optional(),
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
   temperature: z.number().optional(),
   templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
   thread: components.ResponseThread$outboundSchema.optional(),
+  timeout: components.TimeoutConfig$outboundSchema.optional(),
   toolChoice: z.union([
     z.lazy(() => SpecificFunction$outboundSchema),
     Shorthand$outboundSchema,
@@ -2007,6 +2031,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     cacheControl: "cache_control",
     frequencyPenalty: "frequency_penalty",
+    integrationId: "integration_id",
+    loadBalancer: "load_balancer",
     maxOutputTokens: "max_output_tokens",
     maxToolCalls: "max_tool_calls",
     parallelToolCalls: "parallel_tool_calls",

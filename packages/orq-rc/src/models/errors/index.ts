@@ -27,6 +27,7 @@ export * from "./postv2feedbackremove.js";
 export * from "./responsevalidationerror.js";
 export * from "./retrieveagentrequest.js";
 export * from "./retrieveagentschedule.js";
+export * from "./retrieveresponse.js";
 export * from "./sdkvalidationerror.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";

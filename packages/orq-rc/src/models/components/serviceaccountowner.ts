@@ -3,18 +3,9 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ServiceAccountOwner = {};
 
-/** @internal */
-export const ServiceAccountOwner$inboundSchema: z.ZodType<
-  ServiceAccountOwner,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 /** @internal */
 export type ServiceAccountOwner$Outbound = {};
 
@@ -30,14 +21,5 @@ export function serviceAccountOwnerToJSON(
 ): string {
   return JSON.stringify(
     ServiceAccountOwner$outboundSchema.parse(serviceAccountOwner),
-  );
-}
-export function serviceAccountOwnerFromJSON(
-  jsonString: string,
-): SafeParseResult<ServiceAccountOwner, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ServiceAccountOwner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ServiceAccountOwner' from JSON`,
   );
 }

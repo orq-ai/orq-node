@@ -3,18 +3,9 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AllProjects = {};
 
-/** @internal */
-export const AllProjects$inboundSchema: z.ZodType<
-  AllProjects,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
 /** @internal */
 export type AllProjects$Outbound = {};
 
@@ -27,13 +18,4 @@ export const AllProjects$outboundSchema: z.ZodType<
 
 export function allProjectsToJSON(allProjects: AllProjects): string {
   return JSON.stringify(AllProjects$outboundSchema.parse(allProjects));
-}
-export function allProjectsFromJSON(
-  jsonString: string,
-): SafeParseResult<AllProjects, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AllProjects$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AllProjects' from JSON`,
-  );
 }

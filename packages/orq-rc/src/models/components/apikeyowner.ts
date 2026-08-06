@@ -4,18 +4,13 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ServiceAccountOwner,
-  ServiceAccountOwner$inboundSchema,
   ServiceAccountOwner$Outbound,
   ServiceAccountOwner$outboundSchema,
 } from "./serviceaccountowner.js";
 import {
   UserOwner,
-  UserOwner$inboundSchema,
   UserOwner$Outbound,
   UserOwner$outboundSchema,
 } from "./userowner.js";
@@ -35,19 +30,6 @@ export type ApiKeyOwner = {
   serviceAccount?: ServiceAccountOwner | undefined;
 };
 
-/** @internal */
-export const ApiKeyOwner$inboundSchema: z.ZodType<
-  ApiKeyOwner,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  user: UserOwner$inboundSchema.optional(),
-  service_account: ServiceAccountOwner$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "service_account": "serviceAccount",
-  });
-});
 /** @internal */
 export type ApiKeyOwner$Outbound = {
   user?: UserOwner$Outbound | undefined;
@@ -70,13 +52,4 @@ export const ApiKeyOwner$outboundSchema: z.ZodType<
 
 export function apiKeyOwnerToJSON(apiKeyOwner: ApiKeyOwner): string {
   return JSON.stringify(ApiKeyOwner$outboundSchema.parse(apiKeyOwner));
-}
-export function apiKeyOwnerFromJSON(
-  jsonString: string,
-): SafeParseResult<ApiKeyOwner, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ApiKeyOwner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ApiKeyOwner' from JSON`,
-  );
 }

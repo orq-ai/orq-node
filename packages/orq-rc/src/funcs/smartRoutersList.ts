@@ -93,7 +93,6 @@ async function $do(
   const query = encodeFormQuery({
     "enabled": payload?.enabled,
     "ending_before": payload?.ending_before,
-    "include_metrics": payload?.include_metrics,
     "limit": payload?.limit,
     "profile": payload?.profile,
     "search": payload?.search,
