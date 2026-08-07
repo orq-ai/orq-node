@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create routing rule
+   * Create a webhook
    *
    * @remarks
-   * Creates a new routing rule with expression, models configuration, and priority settings.
+   * Creates a webhook that delivers the selected workspace events to an HTTPS endpoint. Generate a signing secret first with `GET /v2/webhooks/secret`.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
