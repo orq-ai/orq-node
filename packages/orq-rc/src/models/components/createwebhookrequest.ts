@@ -45,7 +45,7 @@ export type CreateWebhookRequest = {
    */
   events: Array<string>;
   /**
-   * Signing secret returned by `GET /v2/webhooks/secret`.
+   * Signing secret returned by `GET /v2/webhooks/secret`. Deliveries set `X-Orq-Signature` to the lowercase hexadecimal HMAC-SHA256 of the exact request body bytes.
    */
   secret: string;
   /**

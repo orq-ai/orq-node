@@ -1,17 +1,17 @@
 # CreateAgentScheduleType
 
-Schedule type. cron uses 6-field cron expressions; interval uses @every <duration>; once uses @at <RFC3339-UTC>.
+Schedule type. Only cron is accepted; the expression must be a 6-field cron expression firing at most once per hour.
 
 ## Example Usage
 
 ```typescript
 import { CreateAgentScheduleType } from "@orq-ai/node/models/operations";
 
-let value: CreateAgentScheduleType = "once";
+let value: CreateAgentScheduleType = "cron";
 ```
 
 ## Values
 
 ```typescript
-"cron" | "once" | "interval"
+"cron"
 ```

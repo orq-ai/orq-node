@@ -6,7 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { Budget, Budget$inboundSchema } from "./budget.js";
+import {
+  BudgetRestResponse,
+  BudgetRestResponse$inboundSchema,
+} from "./budgetrestresponse.js";
 
 export type ResetBudgetConsumptionResponse = {
   /**
@@ -15,7 +18,7 @@ export type ResetBudgetConsumptionResponse = {
    * @remarks
    *  were cleared.
    */
-  budget?: Budget | undefined;
+  budget?: BudgetRestResponse | undefined;
 };
 
 /** @internal */
@@ -24,7 +27,7 @@ export const ResetBudgetConsumptionResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  budget: Budget$inboundSchema.optional(),
+  budget: BudgetRestResponse$inboundSchema.optional(),
 });
 
 export function resetBudgetConsumptionResponseFromJSON(

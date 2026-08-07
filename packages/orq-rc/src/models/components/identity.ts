@@ -27,8 +27,8 @@ import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
  *  Live consumption (`usage`) is not attached on this path — call the
  *  Budgets API for current spend.
  */
-export type IdentityBudget = {
-  budgetId?: string | undefined;
+export type Budget = {
+  budgetId: string;
   /**
    * Denormalized metadata for UI rendering, list filters, and the
    *
@@ -56,7 +56,7 @@ export type IdentityBudget = {
    *  of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be
    *  set on a Budget; that invariant is enforced by the handler.
    */
-  limits?: BudgetLimits | undefined;
+  limits: BudgetLimits;
   /**
    * RateLimit is the per-minute request ceiling. Enforced via atomic
    *
@@ -66,8 +66,8 @@ export type IdentityBudget = {
   rateLimit?: RateLimit | undefined;
   isActive?: boolean | undefined;
   expiresAt?: Date | undefined;
-  createdAt?: Date | undefined;
-  updatedAt?: Date | undefined;
+  createdAt: Date;
+  updatedAt: Date;
   /**
    * Live consumption for the current period, read from the Redis
    *
@@ -147,47 +147,47 @@ export type Identity = {
    *  Live consumption (`usage`) is not attached on this path — call the
    *  Budgets API for current spend.
    */
-  budget?: IdentityBudget | undefined;
+  budget?: Budget | undefined;
 };
 
 /** @internal */
-export const IdentityBudget$inboundSchema: z.ZodType<
-  IdentityBudget,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  budget_id: z.string().optional(),
-  scope: BudgetScope$inboundSchema.optional(),
-  match: BudgetMatch$inboundSchema.optional(),
-  limits: BudgetLimits$inboundSchema.optional(),
-  rate_limit: RateLimit$inboundSchema.optional(),
-  is_active: z.boolean().optional(),
-  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  usage: BudgetUsage$inboundSchema.optional(),
-  alerts: z.array(BudgetAlert$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_id": "budgetId",
-    "rate_limit": "rateLimit",
-    "is_active": "isActive",
-    "expires_at": "expiresAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
+export const Budget$inboundSchema: z.ZodType<Budget, z.ZodTypeDef, unknown> = z
+  .object({
+    budget_id: z.string(),
+    scope: BudgetScope$inboundSchema.optional(),
+    match: BudgetMatch$inboundSchema.optional(),
+    limits: BudgetLimits$inboundSchema,
+    rate_limit: RateLimit$inboundSchema.optional(),
+    is_active: z.boolean().optional(),
+    expires_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    usage: BudgetUsage$inboundSchema.optional(),
+    alerts: z.array(BudgetAlert$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_id": "budgetId",
+      "rate_limit": "rateLimit",
+      "is_active": "isActive",
+      "expires_at": "expiresAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
   });
-});
 
-export function identityBudgetFromJSON(
+export function budgetFromJSON(
   jsonString: string,
-): SafeParseResult<IdentityBudget, SDKValidationError> {
+): SafeParseResult<Budget, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => IdentityBudget$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IdentityBudget' from JSON`,
+    (x) => Budget$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Budget' from JSON`,
   );
 }
 
@@ -208,7 +208,7 @@ export const Identity$inboundSchema: z.ZodType<
   created: z.string(),
   updated: z.string(),
   metrics: IdentityMetrics$inboundSchema.optional(),
-  budget: z.lazy(() => IdentityBudget$inboundSchema).optional(),
+  budget: z.lazy(() => Budget$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

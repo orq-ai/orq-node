@@ -3,11 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { Budget, Budget$inboundSchema } from "./budget.js";
+import {
+  BudgetRestResponse,
+  BudgetRestResponse$inboundSchema,
+} from "./budgetrestresponse.js";
 
 export type ListBudgetsResponse = {
   /**
@@ -17,7 +19,7 @@ export type ListBudgetsResponse = {
   /**
    * Page of budgets, ordered newest first.
    */
-  data: Array<Budget>;
+  data: Array<BudgetRestResponse>;
   /**
    * Whether more budgets are available in the selected pagination
    *
@@ -34,12 +36,8 @@ export const ListBudgetsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   object: z.string(),
-  data: z.array(Budget$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
+  data: z.array(BudgetRestResponse$inboundSchema),
+  hasMore: z.boolean().default(false),
 });
 
 export function listBudgetsResponseFromJSON(

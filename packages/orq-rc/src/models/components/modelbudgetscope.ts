@@ -16,7 +16,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  *  models) — NOT the Mongo `_id` of the model master-data document.
  */
 export type ModelBudgetScope = {
-  modelId?: string | undefined;
+  modelId: string;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const ModelBudgetScope$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model_id: z.string().optional(),
+  model_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "model_id": "modelId",
@@ -33,7 +33,7 @@ export const ModelBudgetScope$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ModelBudgetScope$Outbound = {
-  model_id?: string | undefined;
+  model_id: string;
 };
 
 /** @internal */
@@ -42,7 +42,7 @@ export const ModelBudgetScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelBudgetScope
 > = z.object({
-  modelId: z.string().optional(),
+  modelId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     modelId: "model_id",

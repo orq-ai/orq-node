@@ -11,15 +11,13 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Schedule type. cron uses 6-field cron expressions; interval uses @every <duration>; once uses @at <RFC3339-UTC>.
+ * Schedule type. Only cron is accepted; the expression must be a 6-field cron expression firing at most once per hour.
  */
 export const CreateAgentScheduleType = {
   Cron: "cron",
-  Once: "once",
-  Interval: "interval",
 } as const;
 /**
- * Schedule type. cron uses 6-field cron expressions; interval uses @every <duration>; once uses @at <RFC3339-UTC>.
+ * Schedule type. Only cron is accepted; the expression must be a 6-field cron expression firing at most once per hour.
  */
 export type CreateAgentScheduleType = ClosedEnum<
   typeof CreateAgentScheduleType
@@ -35,12 +33,12 @@ export type CreateAgentScheduleRequestBody = {
    */
   displayName: string;
   /**
-   * Schedule expression. Examples: cron '0 0 9 * * mon-fri' (9am UTC weekdays), interval '@every 1h', once '@at 2026-05-01T09:00:00Z'. Minimum firing cadence is 1 hour for cron and interval.
+   * 6-field cron expression (sec min hour dom month dow). Seconds and minutes must be 0, day-of-month and month must be '*'. Hour and weekday must each be a single integer or '*'; ranges, lists, steps, and named days are rejected. Accepted shapes: hourly '0 0 * * * *', daily '0 0 9 * * *' (hour 0-23), weekly '0 0 9 * * 1' (weekday 0-6). Minimum firing cadence is 1 hour.
    */
   expression: string;
   payload: components.PublicSchedulePayload;
   /**
-   * Schedule type. cron uses 6-field cron expressions; interval uses @every <duration>; once uses @at <RFC3339-UTC>.
+   * Schedule type. Only cron is accepted; the expression must be a 6-field cron expression firing at most once per hour.
    */
   type: CreateAgentScheduleType;
 };
@@ -54,7 +52,7 @@ export type CreateAgentScheduleRequest = {
 };
 
 /**
- * Schedule type.
+ * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
  */
 export const CreateAgentScheduleSchedulesType = {
   Cron: "cron",
@@ -62,7 +60,7 @@ export const CreateAgentScheduleSchedulesType = {
   Interval: "interval",
 } as const;
 /**
- * Schedule type.
+ * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
  */
 export type CreateAgentScheduleSchedulesType = ClosedEnum<
   typeof CreateAgentScheduleSchedulesType
@@ -87,7 +85,11 @@ export type CreateAgentScheduleResponseBody = {
    */
   createdById: string;
   /**
-   * Cron expression (6-field, seconds required), @every duration, @at RFC3339 timestamp, or a predefined descriptor like @hourly/@daily.
+   * Human-readable name of the schedule. Omitted for schedules created before display names were required.
+   */
+  displayName?: string | undefined;
+  /**
+   * 6-field cron expression. Schedules stored before the cron-only restriction may also return an @every duration or an @at RFC3339 timestamp.
    */
   expression: string;
   /**
@@ -95,7 +97,7 @@ export type CreateAgentScheduleResponseBody = {
    */
   generation: number;
   /**
-   * Whether the schedule is currently firing. once schedules flip to false automatically after firing.
+   * Whether the schedule is currently firing. Legacy once schedules flip to false automatically after firing.
    */
   isActive: boolean;
   /**
@@ -108,10 +110,14 @@ export type CreateAgentScheduleResponseBody = {
    */
   triggerCount: number;
   /**
-   * Schedule type.
+   * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
    */
   type: CreateAgentScheduleSchedulesType;
   updated: Date;
+  /**
+   * ID of the API key that last updated the schedule. Omitted until the schedule is updated.
+   */
+  updatedById?: string | undefined;
 };
 
 /** @internal */
@@ -201,6 +207,7 @@ export const CreateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   agent_tag: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   created_by_id: z.string(),
+  display_name: z.string().optional(),
   expression: z.string(),
   generation: z.number().int(),
   is_active: z.boolean(),
@@ -211,15 +218,18 @@ export const CreateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   trigger_count: z.number().int(),
   type: CreateAgentScheduleSchedulesType$inboundSchema,
   updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updated_by_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "agent_key": "agentKey",
     "agent_tag": "agentTag",
     "created_by_id": "createdById",
+    "display_name": "displayName",
     "is_active": "isActive",
     "last_triggered_at": "lastTriggeredAt",
     "trigger_count": "triggerCount",
+    "updated_by_id": "updatedById",
   });
 });
 

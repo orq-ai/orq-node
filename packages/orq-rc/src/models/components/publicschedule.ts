@@ -14,7 +14,7 @@ import {
 } from "./publicschedulepayload.js";
 
 /**
- * Schedule type.
+ * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
  */
 export const PublicScheduleType = {
   Cron: "cron",
@@ -22,7 +22,7 @@ export const PublicScheduleType = {
   Interval: "interval",
 } as const;
 /**
- * Schedule type.
+ * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
  */
 export type PublicScheduleType = ClosedEnum<typeof PublicScheduleType>;
 
@@ -42,7 +42,11 @@ export type PublicSchedule = {
    */
   createdById: string;
   /**
-   * Cron expression (6-field, seconds required), @every duration, @at RFC3339 timestamp, or a predefined descriptor like @hourly/@daily.
+   * Human-readable name of the schedule. Omitted for schedules created before display names were required.
+   */
+  displayName?: string | undefined;
+  /**
+   * 6-field cron expression. Schedules stored before the cron-only restriction may also return an @every duration or an @at RFC3339 timestamp.
    */
   expression: string;
   /**
@@ -50,7 +54,7 @@ export type PublicSchedule = {
    */
   generation: number;
   /**
-   * Whether the schedule is currently firing. once schedules flip to false automatically after firing.
+   * Whether the schedule is currently firing. Legacy once schedules flip to false automatically after firing.
    */
   isActive: boolean;
   /**
@@ -63,10 +67,14 @@ export type PublicSchedule = {
    */
   triggerCount: number;
   /**
-   * Schedule type.
+   * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
    */
   type: PublicScheduleType;
   updated: Date;
+  /**
+   * ID of the API key that last updated the schedule. Omitted until the schedule is updated.
+   */
+  updatedById?: string | undefined;
 };
 
 /** @internal */
@@ -85,6 +93,7 @@ export const PublicSchedule$inboundSchema: z.ZodType<
   agent_tag: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   created_by_id: z.string(),
+  display_name: z.string().optional(),
   expression: z.string(),
   generation: z.number().int(),
   is_active: z.boolean(),
@@ -95,15 +104,18 @@ export const PublicSchedule$inboundSchema: z.ZodType<
   trigger_count: z.number().int(),
   type: PublicScheduleType$inboundSchema,
   updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updated_by_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "agent_key": "agentKey",
     "agent_tag": "agentTag",
     "created_by_id": "createdById",
+    "display_name": "displayName",
     "is_active": "isActive",
     "last_triggered_at": "lastTriggeredAt",
     "trigger_count": "triggerCount",
+    "updated_by_id": "updatedById",
   });
 });
 

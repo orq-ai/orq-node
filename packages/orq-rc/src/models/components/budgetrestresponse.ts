@@ -3,16 +3,27 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { BudgetAlert, BudgetAlert$inboundSchema } from "./budgetalert.js";
-import { BudgetLimits, BudgetLimits$inboundSchema } from "./budgetlimits.js";
+import {
+  BudgetAlertRestResponse,
+  BudgetAlertRestResponse$inboundSchema,
+} from "./budgetalertrestresponse.js";
+import {
+  BudgetLimitsRestResponse,
+  BudgetLimitsRestResponse$inboundSchema,
+} from "./budgetlimitsrestresponse.js";
 import { BudgetMatch, BudgetMatch$inboundSchema } from "./budgetmatch.js";
-import { BudgetScope, BudgetScope$inboundSchema } from "./budgetscope.js";
+import {
+  BudgetScopeRestResponse,
+  BudgetScopeRestResponse$inboundSchema,
+} from "./budgetscoperestresponse.js";
 import { BudgetUsage, BudgetUsage$inboundSchema } from "./budgetusage.js";
-import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
+import {
+  RateLimitRestResponse,
+  RateLimitRestResponse$inboundSchema,
+} from "./ratelimitrestresponse.js";
 
 /**
  * Budget is the canonical record stored in MongoDB `budgets.entities`.
@@ -21,8 +32,8 @@ import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
  *  It replaces the embedded `constraints.budget` on api-keys and the
  *  legacy CONTACT-only `budgets.configs` collection (see ADR 0007).
  */
-export type Budget = {
-  budgetId?: string | undefined;
+export type BudgetRestResponse = {
+  budgetId: string;
   /**
    * Denormalized metadata for UI rendering, list filters, and the
    *
@@ -31,7 +42,7 @@ export type Budget = {
    *  `match` expression is the single source of matching semantics.
    *  Unset for budgets created from a raw CEL expression ("custom").
    */
-  scope?: BudgetScope | undefined;
+  scope?: BudgetScopeRestResponse | undefined;
   /**
    * The matching semantics of the budget. The enforcement resolver
    *
@@ -50,18 +61,18 @@ export type Budget = {
    *  of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be
    *  set on a Budget; that invariant is enforced by the handler.
    */
-  limits?: BudgetLimits | undefined;
+  limits: BudgetLimitsRestResponse;
   /**
    * RateLimit is the per-minute request ceiling. Enforced via atomic
    *
    * @remarks
    *  increment-first semantics in the enforcement middleware.
    */
-  rateLimit?: RateLimit | undefined;
-  isActive?: boolean | undefined;
+  rateLimit?: RateLimitRestResponse | undefined;
+  isActive: boolean;
   expiresAt?: Date | undefined;
-  createdAt?: Date | undefined;
-  updatedAt?: Date | undefined;
+  createdAt: Date;
+  updatedAt: Date;
   /**
    * Live consumption for the current period, read from the Redis
    *
@@ -75,46 +86,35 @@ export type Budget = {
   /**
    * Threshold notifications. Absent when the budget has none.
    */
-  alerts?: Array<BudgetAlert> | undefined;
+  alerts?: Array<BudgetAlertRestResponse> | undefined;
 };
 
 /** @internal */
-export const Budget$inboundSchema: z.ZodType<Budget, z.ZodTypeDef, unknown> = z
-  .object({
-    budget_id: z.string().optional(),
-    scope: BudgetScope$inboundSchema.optional(),
-    match: BudgetMatch$inboundSchema.optional(),
-    limits: BudgetLimits$inboundSchema.optional(),
-    rate_limit: RateLimit$inboundSchema.optional(),
-    is_active: z.boolean().optional(),
-    expires_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    usage: BudgetUsage$inboundSchema.optional(),
-    alerts: z.array(BudgetAlert$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "budget_id": "budgetId",
-      "rate_limit": "rateLimit",
-      "is_active": "isActive",
-      "expires_at": "expiresAt",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-    });
-  });
+export const BudgetRestResponse$inboundSchema: z.ZodType<
+  BudgetRestResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  budgetId: z.string(),
+  scope: BudgetScopeRestResponse$inboundSchema.optional(),
+  match: BudgetMatch$inboundSchema.optional(),
+  limits: BudgetLimitsRestResponse$inboundSchema,
+  rateLimit: RateLimitRestResponse$inboundSchema.optional(),
+  isActive: z.boolean().default(false),
+  expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  usage: BudgetUsage$inboundSchema.optional(),
+  alerts: z.array(BudgetAlertRestResponse$inboundSchema).optional(),
+});
 
-export function budgetFromJSON(
+export function budgetRestResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Budget, SDKValidationError> {
+): SafeParseResult<BudgetRestResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Budget$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Budget' from JSON`,
+    (x) => BudgetRestResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BudgetRestResponse' from JSON`,
   );
 }

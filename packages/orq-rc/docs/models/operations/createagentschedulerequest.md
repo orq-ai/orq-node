@@ -11,7 +11,7 @@ let value: CreateAgentScheduleRequest = {
     displayName: "Penelope.Lebsack3",
     expression: "<value>",
     payload: {},
-    type: "interval",
+    type: "cron",
   },
 };
 ```
