@@ -1356,7 +1356,7 @@ export const RetrieveAnnotationQueueItemResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KZE0KN20ZXQAW7SS2V5T36BR"),
+  _id: z.string().default("01KZE4E8R2FKXZNAA2VQ6ET3K3"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),
