@@ -21,7 +21,7 @@ export class Traces extends ClientSDK {
    * Aggregate traces
    *
    * @remarks
-   * Aggregate trace metrics using the structured trace filter contract.
+   * Aggregate trace metrics using the structured trace filter contract. This API remains supported; POST /v3/telemetry/query offers the same aggregate shape in a neutral multi-signal envelope.
    */
   async aggregate(
     request: components.AggregateTracesRequest,

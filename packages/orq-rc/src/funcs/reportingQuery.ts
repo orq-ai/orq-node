@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Query reporting metrics
  *
  * @remarks
- * Returns time-series analytics for AI usage, cost, latency, evaluator results, and guardrail outcomes. Select a metric and time range, break results down by supported dimensions, apply filters, and optionally include totals for the full range.
+ * Returns time-series, scalar, and top-list analytics for AI usage, cost, latency, evaluator results, and guardrail outcomes. This API remains supported while the neutral telemetry envelope is proven against every reporting request shape.
  */
 export function reportingQuery(
   client: OrqCore,
