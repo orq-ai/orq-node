@@ -10,11 +10,11 @@ import {
 
 export type CreateSmartRouterRequest = {
   /**
-   * Required. Stable lowercase key containing letters, numbers, and hyphens.
+   * Unique key for the Smart Router within the workspace. Use lowercase letters, numbers, and hyphens.
    */
   key: string;
   /**
-   * Required. Ordered pool of distinct models in provider/model format.
+   * Pool of 2 to 50 distinct eligible models. Each value uses `provider/model` format.
    */
   models: Array<string>;
   profile: SmartRouterProfile;

@@ -14,27 +14,33 @@ import {
 
 export type SmartRouter = {
   /**
-   * Unique Smart Router identifier assigned by ORQ.
+   * Unique identifier assigned to the Smart Router.
    */
   smartRouterId: string;
   /**
-   * Stable lowercase key used in the gateway model reference.
+   * Immutable lowercase key that identifies the Smart Router within the workspace.
    */
   key: string;
   /**
-   * Workspace-qualified gateway model reference.
+   * Immutable workspace-qualified model reference to use in AI Gateway requests, in `<workspace-key>@orq/<key>` format.
    */
   modelRef: string;
   /**
-   * Ordered model pool in provider/model format, from highest to lowest capability.
+   * Pool of 2 to 50 distinct eligible models. Each value uses `provider/model` format.
    */
   models: Array<string>;
   profile: SmartRouterProfile;
   /**
-   * Whether the router is available to gateway requests.
+   * Whether the Smart Router can be used in AI Gateway requests.
    */
   enabled: boolean;
+  /**
+   * Date and time when the Smart Router was created.
+   */
   createdAt: Date;
+  /**
+   * Date and time when the Smart Router was last updated.
+   */
   updatedAt: Date;
 };
 

@@ -30,11 +30,12 @@ import { Result } from "../types/fp.js";
  * Update a Smart Router
  *
  * @remarks
- * Partially updates the routing models or profile. The router key is immutable.
+ * Updates the model pool, routing profile, or both. Omitted fields retain their current values. The router key and model reference cannot be changed.
  */
 export function smartRoutersUpdate(
   client: OrqCore,
-  request: operations.SmartRouterUpdateRequest,
+  updateSmartRouterRequest: components.UpdateSmartRouterRequest,
+  smartRouterId: string,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -51,14 +52,16 @@ export function smartRoutersUpdate(
 > {
   return new APIPromise($do(
     client,
-    request,
+    updateSmartRouterRequest,
+    smartRouterId,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  request: operations.SmartRouterUpdateRequest,
+  updateSmartRouterRequest: components.UpdateSmartRouterRequest,
+  smartRouterId: string,
   options?: RequestOptions,
 ): Promise<
   [
@@ -76,8 +79,13 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.SmartRouterUpdateRequest = {
+    updateSmartRouterRequest: updateSmartRouterRequest,
+    smartRouterId: smartRouterId,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.SmartRouterUpdateRequest$outboundSchema.parse(value),
     "Input validation failed",
   );

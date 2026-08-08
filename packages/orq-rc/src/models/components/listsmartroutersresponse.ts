@@ -10,8 +10,17 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SmartRouter, SmartRouter$inboundSchema } from "./smartrouter.js";
 
 export type ListSmartRoutersResponse = {
+  /**
+   * Object type for this collection. Always `list`.
+   */
   object: string;
+  /**
+   * Smart Routers in the current page.
+   */
   data: Array<SmartRouter>;
+  /**
+   * Whether more Smart Routers are available in the requested pagination direction.
+   */
   hasMore: boolean;
 };
 

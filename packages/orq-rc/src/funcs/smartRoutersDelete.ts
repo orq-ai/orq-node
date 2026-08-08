@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete a Smart Router
  *
  * @remarks
- * Permanently deletes a Smart Router and removes its gateway model configuration.
+ * Permanently deletes a Smart Router and removes its AI Gateway model configuration. A Smart Router referenced by an experiment cannot be deleted.
  */
 export function smartRoutersDelete(
   client: OrqCore,

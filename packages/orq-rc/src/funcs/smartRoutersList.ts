@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List Smart Routers
  *
  * @remarks
- * Returns Smart Routers in the caller's workspace, ordered newest first. Supports cursor pagination, name search, profile filtering, and enabled-state filtering.
+ * Lists Smart Routers in the current workspace, ordered newest first. Use cursor pagination and optional key, profile, or enabled-state filters to narrow the results.
  */
 export function smartRoutersList(
   client: OrqCore,

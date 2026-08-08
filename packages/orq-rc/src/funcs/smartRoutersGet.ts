@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a Smart Router
  *
  * @remarks
- * Retrieves a Smart Router by ID within the caller's workspace.
+ * Retrieves a Smart Router by ID from the current workspace, including its model reference, model pool, routing profile, and enabled state.
  */
 export function smartRoutersGet(
   client: OrqCore,

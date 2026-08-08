@@ -9,6 +9,9 @@ import {
 } from "./smartrouterprofile.js";
 
 export type UpdateSmartRouterRequest = {
+  /**
+   * Replacement pool of 2 to 50 distinct eligible models. Each value uses `provider/model` format. Omit to keep the current pool.
+   */
   models?: Array<string> | undefined;
   profile?: SmartRouterProfile | undefined;
 };

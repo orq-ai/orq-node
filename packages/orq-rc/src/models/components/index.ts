@@ -355,8 +355,6 @@ export * from "./searchtracesresponse.js";
 export * from "./security.js";
 export * from "./securityconfig.js";
 export * from "./serviceaccountowner.js";
-export * from "./setsmartrouterenabledrequest.js";
-export * from "./setsmartrouterenabledresponse.js";
 export * from "./singleproject.js";
 export * from "./skill.js";
 export * from "./smartrouter.js";

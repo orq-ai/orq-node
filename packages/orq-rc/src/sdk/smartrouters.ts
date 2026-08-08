@@ -6,7 +6,6 @@ import { smartRoutersCreate } from "../funcs/smartRoutersCreate.js";
 import { smartRoutersDelete } from "../funcs/smartRoutersDelete.js";
 import { smartRoutersGet } from "../funcs/smartRoutersGet.js";
 import { smartRoutersList } from "../funcs/smartRoutersList.js";
-import { smartRoutersSetEnabled } from "../funcs/smartRoutersSetEnabled.js";
 import { smartRoutersUpdate } from "../funcs/smartRoutersUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -18,7 +17,7 @@ export class SmartRouters extends ClientSDK {
    * List Smart Routers
    *
    * @remarks
-   * Returns Smart Routers in the caller's workspace, ordered newest first. Supports cursor pagination, name search, profile filtering, and enabled-state filtering.
+   * Lists Smart Routers in the current workspace, ordered newest first. Use cursor pagination and optional key, profile, or enabled-state filters to narrow the results.
    */
   async list(
     request?: operations.SmartRouterListRequest | undefined,
@@ -35,7 +34,7 @@ export class SmartRouters extends ClientSDK {
    * Create a Smart Router
    *
    * @remarks
-   * Creates a workspace Smart Router from an ordered pool of autorouter-eligible models. The router key becomes the stable model identifier used by gateway requests.
+   * Creates a Smart Router in the current workspace from 2 to 50 distinct eligible models. The key must be unique in the workspace and becomes part of the model reference used in AI Gateway requests.
    */
   async create(
     request: components.CreateSmartRouterRequest,
@@ -52,7 +51,7 @@ export class SmartRouters extends ClientSDK {
    * Retrieve a Smart Router
    *
    * @remarks
-   * Retrieves a Smart Router by ID within the caller's workspace.
+   * Retrieves a Smart Router by ID from the current workspace, including its model reference, model pool, routing profile, and enabled state.
    */
   async get(
     request: operations.SmartRouterGetRequest,
@@ -69,7 +68,7 @@ export class SmartRouters extends ClientSDK {
    * Delete a Smart Router
    *
    * @remarks
-   * Permanently deletes a Smart Router and removes its gateway model configuration.
+   * Permanently deletes a Smart Router and removes its AI Gateway model configuration. A Smart Router referenced by an experiment cannot be deleted.
    */
   async delete(
     request: operations.SmartRouterDeleteRequest,
@@ -86,32 +85,17 @@ export class SmartRouters extends ClientSDK {
    * Update a Smart Router
    *
    * @remarks
-   * Partially updates the routing models or profile. The router key is immutable.
+   * Updates the model pool, routing profile, or both. Omitted fields retain their current values. The router key and model reference cannot be changed.
    */
   async update(
-    request: operations.SmartRouterUpdateRequest,
+    updateSmartRouterRequest: components.UpdateSmartRouterRequest,
+    smartRouterId: string,
     options?: RequestOptions,
   ): Promise<components.UpdateSmartRouterResponse> {
     return unwrapAsync(smartRoutersUpdate(
       this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Enable or disable a Smart Router
-   *
-   * @remarks
-   * Controls whether the Smart Router is available to gateway requests in the workspace.
-   */
-  async setEnabled(
-    request: operations.SmartRouterSetEnabledRequest,
-    options?: RequestOptions,
-  ): Promise<components.SetSmartRouterEnabledResponse> {
-    return unwrapAsync(smartRoutersSetEnabled(
-      this,
-      request,
+      updateSmartRouterRequest,
+      smartRouterId,
       options,
     ));
   }

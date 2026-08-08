@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Create a Smart Router
  *
  * @remarks
- * Creates a workspace Smart Router from an ordered pool of autorouter-eligible models. The router key becomes the stable model identifier used by gateway requests.
+ * Creates a Smart Router in the current workspace from 2 to 50 distinct eligible models. The key must be unique in the workspace and becomes part of the model reference used in AI Gateway requests.
  */
 export function smartRoutersCreate(
   client: OrqCore,

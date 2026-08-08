@@ -5815,7 +5815,7 @@ export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesOutputFro
 /** @internal */
 export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01KZEAE7B2DDT8X07PQ29F3GTA"),
+    _id: z.string().default("01KZGZNNA6DGHKQYKQ2K7M59JC"),
     name: z.string().optional(),
     trace_id: z.string(),
     duration: z.number().optional(),

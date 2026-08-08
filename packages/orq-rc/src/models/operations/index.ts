@@ -280,7 +280,6 @@ export * from "./skillupdate.js";
 export * from "./smartrouterdelete.js";
 export * from "./smartrouterget.js";
 export * from "./smartrouterlist.js";
-export * from "./smartroutersetenabled.js";
 export * from "./smartrouterupdate.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
