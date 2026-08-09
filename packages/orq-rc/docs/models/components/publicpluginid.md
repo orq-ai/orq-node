@@ -1,17 +1,17 @@
 # PublicPluginId
 
-Plugin discriminator. pii_redaction replaces PII with placeholders before the provider sees it and restores the original values in the response. response_healing repairs malformed JSON in non-streaming model output.
+Plugin discriminator. pii_redaction redacts PII, response_healing repairs malformed JSON, and trace_scrubbing removes selected sensitive fields from exported traces.
 
 ## Example Usage
 
 ```typescript
 import { PublicPluginId } from "@orq-ai/node/models/components";
 
-let value: PublicPluginId = "pii_redaction";
+let value: PublicPluginId = "response_healing";
 ```
 
 ## Values
 
 ```typescript
-"pii_redaction" | "response_healing"
+"pii_redaction" | "response_healing" | "trace_scrubbing"
 ```

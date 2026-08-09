@@ -434,6 +434,7 @@ export type RetrieveAgentRequestAgentsGuardrails = {
 export type RetrieveAgentRequestPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -667,6 +668,7 @@ export type RetrieveAgentRequestParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -910,6 +912,7 @@ export type RetrieveAgentRequestFallbackModelConfigurationGuardrails = {
 export type RetrieveAgentRequestFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -1149,6 +1152,7 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -1908,6 +1912,7 @@ export const RetrieveAgentRequestPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
   components.ResponseHealingPlugin$inboundSchema,
 ]);
@@ -2131,6 +2136,7 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
       components.ResponseHealingPlugin$inboundSchema,
     ]),
@@ -2565,6 +2571,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationPlugins$inboundSchema
   > = z.union([
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
     components.PIIRedactionPluginAuto$inboundSchema,
     components.ResponseHealingPlugin$inboundSchema,
   ]);
@@ -2848,6 +2855,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
       z.union([
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
         components.PIIRedactionPluginAuto$inboundSchema,
         components.ResponseHealingPlugin$inboundSchema,
       ]),

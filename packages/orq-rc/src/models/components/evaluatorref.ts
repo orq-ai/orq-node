@@ -22,6 +22,7 @@ export type EvaluatorRef = {
   isGuardrail?: boolean | undefined;
   options?: { [k: string]: any } | undefined;
   sampleRate?: number | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -44,6 +45,7 @@ export const EvaluatorRef$inboundSchema: z.ZodType<
   is_guardrail: z.boolean().optional(),
   options: z.record(z.any()).optional(),
   sample_rate: z.number().optional(),
+  timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "execute_on": "executeOn",
@@ -58,6 +60,7 @@ export type EvaluatorRef$Outbound = {
   is_guardrail?: boolean | undefined;
   options?: { [k: string]: any } | undefined;
   sample_rate?: number | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -71,6 +74,7 @@ export const EvaluatorRef$outboundSchema: z.ZodType<
   isGuardrail: z.boolean().optional(),
   options: z.record(z.any()).optional(),
   sampleRate: z.number().optional(),
+  timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     executeOn: "execute_on",

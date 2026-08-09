@@ -14,8 +14,7 @@ let value: GuardrailRuleGetResponseBody = {
   displayName: "Zachary64",
   enabled: false,
   projectId: "<id>",
-  timeout: 270312,
-  updatedAt: new Date("2024-10-16T02:53:35.885Z"),
+  updatedAt: new Date("2024-10-23T06:17:03.984Z"),
   updatedById: "<id>",
 };
 ```
@@ -34,6 +33,6 @@ let value: GuardrailRuleGetResponseBody = {
 | `guardrails`                                                                                  | [components.GuardrailRef](../../models/components/guardrailref.md)[]                          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `plugins`                                                                                     | [components.Plugin](../../models/components/plugin.md)[]                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `projectId`                                                                                   | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `timeout`                                                                                     | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `timeout`                                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `updatedById`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

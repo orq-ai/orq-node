@@ -464,11 +464,11 @@ run();
 ### [RoutingRules](docs/sdks/routingrules/README.md)
 
 * [list](docs/sdks/routingrules/README.md#list) - List routing rules
-* [create](docs/sdks/routingrules/README.md#create) - Create routing rule
-* [listUsedModels](docs/sdks/routingrules/README.md#listusedmodels) - List used models
-* [delete](docs/sdks/routingrules/README.md#delete) - Delete routing rule
-* [retrieve](docs/sdks/routingrules/README.md#retrieve) - Get routing rule
-* [update](docs/sdks/routingrules/README.md#update) - Update routing rule
+* [create](docs/sdks/routingrules/README.md#create) - Create a routing rule
+* [listUsedModels](docs/sdks/routingrules/README.md#listusedmodels) - List models used by routing rules
+* [retrieve](docs/sdks/routingrules/README.md#retrieve) - Retrieve a routing rule
+* [delete](docs/sdks/routingrules/README.md#delete) - Delete a routing rule
+* [update](docs/sdks/routingrules/README.md#update) - Update a routing rule
 
 ### [Schedules](docs/sdks/schedules/README.md)
 
@@ -748,12 +748,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`routerModerationsCreate`](docs/sdks/moderations/README.md#create) - Create moderation
 - [`routerOcr`](docs/sdks/router/README.md#ocr) - Extracts text content while maintaining document structure and hierarchy
 - [`routerRerankCreate`](docs/sdks/rerank/README.md#create) - Create rerank
-- [`routingRulesCreate`](docs/sdks/routingrules/README.md#create) - Create routing rule
-- [`routingRulesDelete`](docs/sdks/routingrules/README.md#delete) - Delete routing rule
+- [`routingRulesCreate`](docs/sdks/routingrules/README.md#create) - Create a routing rule
+- [`routingRulesDelete`](docs/sdks/routingrules/README.md#delete) - Delete a routing rule
 - [`routingRulesList`](docs/sdks/routingrules/README.md#list) - List routing rules
-- [`routingRulesListUsedModels`](docs/sdks/routingrules/README.md#listusedmodels) - List used models
-- [`routingRulesRetrieve`](docs/sdks/routingrules/README.md#retrieve) - Get routing rule
-- [`routingRulesUpdate`](docs/sdks/routingrules/README.md#update) - Update routing rule
+- [`routingRulesListUsedModels`](docs/sdks/routingrules/README.md#listusedmodels) - List models used by routing rules
+- [`routingRulesRetrieve`](docs/sdks/routingrules/README.md#retrieve) - Retrieve a routing rule
+- [`routingRulesUpdate`](docs/sdks/routingrules/README.md#update) - Update a routing rule
 - [`schedulesCreate`](docs/sdks/schedules/README.md#create) - Create schedule
 - [`schedulesDelete`](docs/sdks/schedules/README.md#delete) - Delete schedule
 - [`schedulesList`](docs/sdks/schedules/README.md#list) - List schedules

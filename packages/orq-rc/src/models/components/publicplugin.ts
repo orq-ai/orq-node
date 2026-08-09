@@ -7,14 +7,15 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * Plugin discriminator. pii_redaction replaces PII with placeholders before the provider sees it and restores the original values in the response. response_healing repairs malformed JSON in non-streaming model output.
+ * Plugin discriminator. pii_redaction redacts PII, response_healing repairs malformed JSON, and trace_scrubbing removes selected sensitive fields from exported traces.
  */
 export const PublicPluginId = {
   PiiRedaction: "pii_redaction",
   ResponseHealing: "response_healing",
+  TraceScrubbing: "trace_scrubbing",
 } as const;
 /**
- * Plugin discriminator. pii_redaction replaces PII with placeholders before the provider sees it and restores the original values in the response. response_healing repairs malformed JSON in non-streaming model output.
+ * Plugin discriminator. pii_redaction redacts PII, response_healing repairs malformed JSON, and trace_scrubbing removes selected sensitive fields from exported traces.
  */
 export type PublicPluginId = ClosedEnum<typeof PublicPluginId>;
 
@@ -29,6 +30,16 @@ export const PublicPluginLanguage = {
  * pii_redaction only. Detector language. Defaults to en.
  */
 export type PublicPluginLanguage = ClosedEnum<typeof PublicPluginLanguage>;
+
+export const PublicPluginMask = {
+  All: "all",
+  System: "system",
+  Input: "input",
+  Output: "output",
+  Metadata: "metadata",
+  Variables: "variables",
+} as const;
+export type PublicPluginMask = ClosedEnum<typeof PublicPluginMask>;
 
 /**
  * pii_redaction only. Behavior when redaction is unavailable. block (default) fails the request; passthrough sends the original text.
@@ -48,13 +59,17 @@ export type PublicPlugin = {
    */
   entities?: Array<string> | null | undefined;
   /**
-   * Plugin discriminator. pii_redaction replaces PII with placeholders before the provider sees it and restores the original values in the response. response_healing repairs malformed JSON in non-streaming model output.
+   * Plugin discriminator. pii_redaction redacts PII, response_healing repairs malformed JSON, and trace_scrubbing removes selected sensitive fields from exported traces.
    */
   id: PublicPluginId;
   /**
    * pii_redaction only. Detector language. Defaults to en.
    */
   language?: PublicPluginLanguage | undefined;
+  /**
+   * trace_scrubbing only. Trace surfaces to scrub. At least one value required.
+   */
+  mask?: Array<PublicPluginMask> | null | undefined;
   /**
    * pii_redaction only. Behavior when redaction is unavailable. block (default) fails the request; passthrough sends the original text.
    */
@@ -76,6 +91,11 @@ export const PublicPluginLanguage$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(PublicPluginLanguage);
 
 /** @internal */
+export const PublicPluginMask$outboundSchema: z.ZodNativeEnum<
+  typeof PublicPluginMask
+> = z.nativeEnum(PublicPluginMask);
+
+/** @internal */
 export const PublicPluginOnFailure$outboundSchema: z.ZodNativeEnum<
   typeof PublicPluginOnFailure
 > = z.nativeEnum(PublicPluginOnFailure);
@@ -85,6 +105,7 @@ export type PublicPlugin$Outbound = {
   entities?: Array<string> | null | undefined;
   id: string;
   language?: string | undefined;
+  mask?: Array<string> | null | undefined;
   on_failure?: string | undefined;
   threshold?: number | undefined;
 };
@@ -98,6 +119,7 @@ export const PublicPlugin$outboundSchema: z.ZodType<
   entities: z.nullable(z.array(z.string())).optional(),
   id: PublicPluginId$outboundSchema,
   language: PublicPluginLanguage$outboundSchema.optional(),
+  mask: z.nullable(z.array(PublicPluginMask$outboundSchema)).optional(),
   onFailure: PublicPluginOnFailure$outboundSchema.optional(),
   threshold: z.number().optional(),
 }).transform((v) => {

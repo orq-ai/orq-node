@@ -446,6 +446,7 @@ export type ListAgentsAgentsGuardrails = {
 export type ListAgentsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -671,6 +672,7 @@ export type ListAgentsParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -911,6 +913,7 @@ export type ListAgentsFallbackModelConfigurationGuardrails = {
 export type ListAgentsFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -1151,6 +1154,7 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -1899,6 +1903,7 @@ export const ListAgentsPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
   components.ResponseHealingPlugin$inboundSchema,
 ]);
@@ -2113,6 +2118,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
       components.ResponseHealingPlugin$inboundSchema,
     ]),
@@ -2519,6 +2525,7 @@ export const ListAgentsFallbackModelConfigurationPlugins$inboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
     components.PIIRedactionPluginAuto$inboundSchema,
     components.ResponseHealingPlugin$inboundSchema,
   ]);
@@ -2785,6 +2792,7 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       z.union([
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
         components.PIIRedactionPluginAuto$inboundSchema,
         components.ResponseHealingPlugin$inboundSchema,
       ]),
