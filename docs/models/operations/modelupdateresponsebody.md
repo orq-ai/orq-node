@@ -11,32 +11,32 @@ let value: ModelUpdateResponseBody = {
   configuration: {
     provider: "<value>",
   },
-  created: new Date("2026-04-11T11:39:42.249Z"),
-  description: "vaguely emboss furthermore woot fooey ew misreport",
-  displayName: "Kiarra.Pacocha",
-  docsUrl: "https://dependent-council.org/",
+  created: "<value>",
+  description: "long-term meanwhile drat which spring whether save midst",
+  displayName: "Bianka.Denesik",
+  docsUrl: "https://skeletal-trick.biz/",
   enabled: true,
   enabledForEndpoints: true,
   enabledForPlayground: true,
   hasCpuPricing: false,
-  hasFunctions: false,
+  hasFunctions: true,
   id: "<id>",
-  inputCost: 4426.38,
+  inputCost: null,
   inputCurrency: "<value>",
-  isActive: true,
+  isActive: false,
   metadata: {
     isPrivate: true,
   },
   modelId: "<id>",
   modelType: "<value>",
-  outputCost: 9847.25,
+  outputCost: 3477.17,
   outputCurrency: "<value>",
   owner: "<value>",
   parameters: [],
-  pricingUrl: "https://grumpy-popularity.info",
+  pricingUrl: "https://whimsical-jellyfish.info/",
   provider: "<value>",
   refId: "<id>",
-  updated: new Date("2026-02-12T18:53:00.136Z"),
+  updated: "<value>",
 };
 ```
 
@@ -45,7 +45,7 @@ let value: ModelUpdateResponseBody = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `configuration`                                                                                | [components.ModelConfigurationResponse](../../models/components/modelconfigurationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `created`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `created`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `displayName`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `docsUrl`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
@@ -58,6 +58,7 @@ let value: ModelUpdateResponseBody = {
 | `inputCost`                                                                                    | *number*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `inputCurrency`                                                                                | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `isActive`                                                                                     | *boolean*                                                                                      | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `legacyUuid`                                                                                   | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `metadata`                                                                                     | [components.ModelMetadata](../../models/components/modelmetadata.md)                           | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `modelDeveloper`                                                                               | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `modelFamily`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
@@ -70,5 +71,5 @@ let value: ModelUpdateResponseBody = {
 | `pricingUrl`                                                                                   | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `provider`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `refId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `sharing`                                                                                      | [components.Config](../../models/components/config.md)                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `updated`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `sharing`                                                                                      | [components.ModelSharingConfig](../../models/components/modelsharingconfig.md)                 | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `updated`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |

@@ -76,15 +76,20 @@ export type UpdateEvalRequestBody = {
    */
   type?: string | undefined;
   /**
-   * Project path. Optional on update — uses existing project if omitted.
+   * Legacy alternative to `project_id`. Project path. Optional on update — the evaluator keeps its current project when both are omitted. Mutually exclusive with `project_id`.
    */
   path?: string | undefined;
+  /**
+   * Unique identifier of the project that owns the evaluator, as returned by `GET /v2/projects`. Optional on update — the evaluator keeps its current project when omitted; supplying a different id moves it. Mutually exclusive with `path`.
+   */
+  projectId?: string | undefined;
   key?: string | undefined;
   description?: string | undefined;
   prompt?: string | undefined;
   outputType?: string | undefined;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<CategoricalLabels> | null | undefined;
+  datasetId?: string | null | undefined;
   repetitions?: number | undefined;
   mode?: Mode | undefined;
   model?: string | undefined;
@@ -326,12 +331,14 @@ export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
 export type UpdateEvalRequestBody$Outbound = {
   type?: string | undefined;
   path?: string | undefined;
+  project_id?: string | undefined;
   key?: string | undefined;
   description?: string | undefined;
   prompt?: string | undefined;
   output_type?: string | undefined;
   categories?: Array<string> | null | undefined;
   categorical_labels?: Array<CategoricalLabels$Outbound> | null | undefined;
+  dataset_id?: string | null | undefined;
   repetitions?: number | undefined;
   mode?: string | undefined;
   model?: string | undefined;
@@ -355,6 +362,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   type: z.string().optional(),
   path: z.string().optional(),
+  projectId: z.string().optional(),
   key: z.string().optional(),
   description: z.string().optional(),
   prompt: z.string().optional(),
@@ -363,6 +371,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   categoricalLabels: z.nullable(
     z.array(z.lazy(() => CategoricalLabels$outboundSchema)),
   ).optional(),
+  datasetId: z.nullable(z.string()).optional(),
   repetitions: z.number().optional(),
   mode: Mode$outboundSchema.optional(),
   model: z.string().optional(),
@@ -378,8 +387,10 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    projectId: "project_id",
     outputType: "output_type",
     categoricalLabels: "categorical_labels",
+    datasetId: "dataset_id",
     guardrailConfig: "guardrail_config",
   });
 });

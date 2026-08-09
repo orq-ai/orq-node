@@ -1,6 +1,6 @@
 # Metadata
 
-Custom JSON metadata stored with the identity.
+Optional. Replacement custom JSON metadata.
 
 ## Example Usage
 

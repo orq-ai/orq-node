@@ -19,10 +19,10 @@ const value: operations.CacheConfig2 = {
   type: "semantic",
   modelConfig: {
     model: "Camaro",
-    modelDbId: "9a8bcc68-cff5-46dc-b7dc-41b0ef56fa46",
+    modelDbId: "<id>",
     modelType: "stt",
     modelParameters: {},
-    provider: "mistral",
+    provider: "alibaba",
   },
   ttl: 3600,
 };

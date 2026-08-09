@@ -14,6 +14,10 @@ export type EvaluatorResponsePython = {
   created: string;
   updated: string;
   updatedById?: string | null | undefined;
+  /**
+   * Unique identifier of the project owning this evaluator.
+   */
+  projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   code: string;
   type: "python_eval";
@@ -28,9 +32,10 @@ export const EvaluatorResponsePython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-08-06T08:17:03.296Z"),
-  updated: z.string().default("2026-08-06T08:17:03.296Z"),
+  created: z.string().default("2026-08-09T21:43:31.698Z"),
+  updated: z.string().default("2026-08-09T21:43:31.698Z"),
   updated_by_id: z.nullable(z.string()).optional(),
+  project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   code: z.string(),
   type: z.literal("python_eval"),
@@ -39,6 +44,7 @@ export const EvaluatorResponsePython$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "updated_by_id": "updatedById",
+    "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
   });
 });

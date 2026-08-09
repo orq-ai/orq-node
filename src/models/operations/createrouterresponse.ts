@@ -770,6 +770,8 @@ export type ToolsFunction = {
  */
 export type CreateRouterResponseTools =
   | ToolsFunction
+  | components.OrqAdvisorTool
+  | components.OrqSidekickTool
   | (OrqAiTool & { type: "orq:current_date" })
   | (OrqAiTool & { type: "orq:google_search" })
   | (OrqAiTool & { type: "orq:web_scraper" })
@@ -780,6 +782,11 @@ export type CreateRouterResponseTools =
   | MCPTool;
 
 export type CreateRouterResponseRequestBody = {
+  /**
+   * If true, the response runs asynchronously in the background.
+   */
+  background?: boolean | undefined;
+  cache?: components.CacheConfig | undefined;
   /**
    * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
    */
@@ -806,7 +813,12 @@ export type CreateRouterResponseRequestBody = {
    * System prompt / instructions for the model.
    */
   instructions?: string | undefined;
+  /**
+   * Integration ID used to resolve provider credentials for this request.
+   */
+  integrationId?: string | undefined;
   limits?: components.ResponseExecutionLimits | undefined;
+  loadBalancer?: components.LoadBalancerConfig | undefined;
   /**
    * Maximum number of tokens in the response output.
    */
@@ -829,9 +841,9 @@ export type CreateRouterResponseRequestBody = {
    */
   parallelToolCalls?: boolean | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Currently supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response; response_healing, which repairs malformed JSON in non-streaming model output; and trace_scrubbing, which removes selected sensitive fields from exported traces.
    */
-  plugins?: Array<components.PublicPIIRedactionPlugin> | null | undefined;
+  plugins?: Array<components.PublicPlugin> | null | undefined;
   /**
    * Penalize new tokens based on their presence in the text so far. Between -2.0 and 2.0.
    */
@@ -850,10 +862,15 @@ export type CreateRouterResponseRequestBody = {
    * Safety identifier for content filtering.
    */
   safetyIdentifier?: string | undefined;
+  security?: components.SecurityConfig | undefined;
   /**
    * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
    */
   serviceTier?: ServiceTier | undefined;
+  /**
+   * Custom text sequences that cause the model to stop generating. Forwarded to providers that support it (e.g. Anthropic); ignored otherwise.
+   */
+  stopSequences?: Array<string> | undefined;
   /**
    * Whether to persist the response (default: true). When false, the response cannot be retrieved later and previous_response_id will not work for follow-up requests.
    */
@@ -863,6 +880,10 @@ export type CreateRouterResponseRequestBody = {
    */
   stream?: boolean | undefined;
   streamOptions?: components.StreamOptions | undefined;
+  /**
+   * Tags attached to the request trace.
+   */
+  tags?: Array<string> | null | undefined;
   /**
    * Sampling temperature between 0 and 2.
    */
@@ -876,6 +897,7 @@ export type CreateRouterResponseRequestBody = {
    */
   text?: CreateRouterResponseText | undefined;
   thread?: components.ResponseThread | undefined;
+  timeout?: components.TimeoutConfig | undefined;
   /**
    * How the model should use the provided tools. Can be a string shorthand or a specific function selector.
    */
@@ -886,6 +908,8 @@ export type CreateRouterResponseRequestBody = {
   tools?:
     | Array<
       | ToolsFunction
+      | components.OrqAdvisorTool
+      | components.OrqSidekickTool
       | (OrqAiTool & { type: "orq:current_date" })
       | (OrqAiTool & { type: "orq:google_search" })
       | (OrqAiTool & { type: "orq:web_scraper" })
@@ -896,6 +920,10 @@ export type CreateRouterResponseRequestBody = {
       | MCPTool
     >
     | undefined;
+  /**
+   * Only sample from the top K options for each subsequent token. Forwarded to providers that support it (e.g. Anthropic); ignored otherwise.
+   */
+  topK?: number | undefined;
   /**
    * Number of most likely tokens to return at each position.
    */
@@ -925,6 +953,7 @@ export const CreateRouterResponseServiceTier = {
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Scale: "scale",
   Priority: "priority",
 } as const;
 export type CreateRouterResponseServiceTier = ClosedEnum<
@@ -937,7 +966,6 @@ export const CreateRouterResponseStatus = {
   Completed: "completed",
   Failed: "failed",
   Incomplete: "incomplete",
-  RequiresAction: "requires_action",
 } as const;
 export type CreateRouterResponseStatus = ClosedEnum<
   typeof CreateRouterResponseStatus
@@ -992,6 +1020,10 @@ export type CreateRouterResponseResponseBody = {
   serviceTier: CreateRouterResponseServiceTier;
   status: CreateRouterResponseStatus;
   store: boolean;
+  /**
+   * Telemetry information for correlating the response with traces
+   */
+  telemetry?: components.Telemetry | undefined;
   temperature: number;
   /**
    * Text output configuration including format and verbosity
@@ -1005,6 +1037,10 @@ export type CreateRouterResponseResponseBody = {
    * Array of tool configurations used in this response
    */
   tools: Array<any> | null;
+  /**
+   * Only sample from the top K options for each subsequent token. Present only when set on the request.
+   */
+  topK?: number | undefined;
   topLogprobs: number;
   topP: number;
   truncation: Truncation;
@@ -1790,6 +1826,8 @@ export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
 /** @internal */
 export type CreateRouterResponseTools$Outbound =
   | ToolsFunction$Outbound
+  | components.OrqAdvisorTool$Outbound
+  | components.OrqSidekickTool$Outbound
   | (OrqAiTool$Outbound & { type: "orq:current_date" })
   | (OrqAiTool$Outbound & { type: "orq:google_search" })
   | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
@@ -1806,6 +1844,8 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   CreateRouterResponseTools
 > = z.union([
   z.lazy(() => ToolsFunction$outboundSchema),
+  components.OrqAdvisorTool$outboundSchema,
+  components.OrqSidekickTool$outboundSchema,
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:current_date") }),
   ),
@@ -1840,6 +1880,8 @@ export function createRouterResponseToolsToJSON(
 
 /** @internal */
 export type CreateRouterResponseRequestBody$Outbound = {
+  background?: boolean | undefined;
+  cache?: components.CacheConfig$Outbound | undefined;
   cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
@@ -1848,35 +1890,40 @@ export type CreateRouterResponseRequestBody$Outbound = {
   identity?: components.ResponseIdentity$Outbound | undefined;
   input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
   instructions?: string | undefined;
+  integration_id?: string | undefined;
   limits?: components.ResponseExecutionLimits$Outbound | undefined;
+  load_balancer?: components.LoadBalancerConfig$Outbound | undefined;
   max_output_tokens?: number | undefined;
   max_tool_calls?: number | undefined;
   memory?: components.MemoryParam$Outbound | undefined;
   metadata?: { [k: string]: string } | undefined;
   model?: string | undefined;
   parallel_tool_calls?: boolean | undefined;
-  plugins?:
-    | Array<components.PublicPIIRedactionPlugin$Outbound>
-    | null
-    | undefined;
+  plugins?: Array<components.PublicPlugin$Outbound> | null | undefined;
   presence_penalty?: number | undefined;
   previous_response_id?: string | undefined;
   prompt_cache_key?: string | undefined;
   reasoning?: components.ReasoningParam$Outbound | undefined;
   retry?: components.ResponseRetryConfig$Outbound | undefined;
   safety_identifier?: string | undefined;
+  security?: components.SecurityConfig$Outbound | undefined;
   service_tier?: string | undefined;
+  stop_sequences?: Array<string> | undefined;
   store?: boolean | undefined;
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
+  tags?: Array<string> | null | undefined;
   temperature?: number | undefined;
   template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
   thread?: components.ResponseThread$Outbound | undefined;
+  timeout?: components.TimeoutConfig$Outbound | undefined;
   tool_choice?: SpecificFunction$Outbound | string | undefined;
   tools?:
     | Array<
       | ToolsFunction$Outbound
+      | components.OrqAdvisorTool$Outbound
+      | components.OrqSidekickTool$Outbound
       | (OrqAiTool$Outbound & { type: "orq:current_date" })
       | (OrqAiTool$Outbound & { type: "orq:google_search" })
       | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
@@ -1887,6 +1934,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | MCPTool$Outbound
     >
     | undefined;
+  top_k?: number | undefined;
   top_logprobs?: number | undefined;
   top_p?: number | undefined;
   variables?: { [k: string]: any } | undefined;
@@ -1898,6 +1946,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseRequestBody
 > = z.object({
+  background: z.boolean().optional(),
+  cache: components.CacheConfig$outboundSchema.optional(),
   cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
     .optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
@@ -1911,30 +1961,35 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
   ]).optional(),
   instructions: z.string().optional(),
+  integrationId: z.string().optional(),
   limits: components.ResponseExecutionLimits$outboundSchema.optional(),
+  loadBalancer: components.LoadBalancerConfig$outboundSchema.optional(),
   maxOutputTokens: z.number().int().optional(),
   maxToolCalls: z.number().int().optional(),
   memory: components.MemoryParam$outboundSchema.optional(),
   metadata: z.record(z.string()).optional(),
   model: z.string().optional(),
   parallelToolCalls: z.boolean().optional(),
-  plugins: z.nullable(
-    z.array(components.PublicPIIRedactionPlugin$outboundSchema),
-  ).optional(),
+  plugins: z.nullable(z.array(components.PublicPlugin$outboundSchema))
+    .optional(),
   presencePenalty: z.number().optional(),
   previousResponseId: z.string().optional(),
   promptCacheKey: z.string().optional(),
   reasoning: components.ReasoningParam$outboundSchema.optional(),
   retry: components.ResponseRetryConfig$outboundSchema.optional(),
   safetyIdentifier: z.string().optional(),
+  security: components.SecurityConfig$outboundSchema.optional(),
   serviceTier: ServiceTier$outboundSchema.optional(),
+  stopSequences: z.array(z.string()).optional(),
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
   temperature: z.number().optional(),
   templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
   thread: components.ResponseThread$outboundSchema.optional(),
+  timeout: components.TimeoutConfig$outboundSchema.optional(),
   toolChoice: z.union([
     z.lazy(() => SpecificFunction$outboundSchema),
     Shorthand$outboundSchema,
@@ -1942,30 +1997,33 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   tools: z.array(
     z.union([
       z.lazy(() => ToolsFunction$outboundSchema),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:current_date") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:google_search") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:web_scraper") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:code_interpreter") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:mcp") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:http") })),
-      z.lazy(() =>
-        OrqAiTool$outboundSchema
-      ).and(z.object({ type: z.literal("orq:function") })),
+      components.OrqAdvisorTool$outboundSchema,
+      components.OrqSidekickTool$outboundSchema,
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:current_date") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:google_search") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:web_scraper") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:code_interpreter") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:mcp") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:http") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:function") }),
+      ),
       z.lazy(() => MCPTool$outboundSchema),
     ]),
   ).optional(),
+  topK: z.number().int().optional(),
   topLogprobs: z.number().int().optional(),
   topP: z.number().optional(),
   variables: z.record(z.any()).optional(),
@@ -1973,6 +2031,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     cacheControl: "cache_control",
     frequencyPenalty: "frequency_penalty",
+    integrationId: "integration_id",
+    loadBalancer: "load_balancer",
     maxOutputTokens: "max_output_tokens",
     maxToolCalls: "max_tool_calls",
     parallelToolCalls: "parallel_tool_calls",
@@ -1981,9 +2041,11 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     promptCacheKey: "prompt_cache_key",
     safetyIdentifier: "safety_identifier",
     serviceTier: "service_tier",
+    stopSequences: "stop_sequences",
     streamOptions: "stream_options",
     templateEngine: "template_engine",
     toolChoice: "tool_choice",
+    topK: "top_k",
     topLogprobs: "top_logprobs",
     topP: "top_p",
   });
@@ -2080,10 +2142,12 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   service_tier: CreateRouterResponseServiceTier$inboundSchema,
   status: CreateRouterResponseStatus$inboundSchema,
   store: z.boolean(),
+  telemetry: components.Telemetry$inboundSchema.optional(),
   temperature: z.number(),
   text: z.any().optional(),
   tool_choice: z.any().optional(),
   tools: z.nullable(z.array(z.any())),
+  top_k: z.number().int().optional(),
   top_logprobs: z.number().int(),
   top_p: z.number(),
   truncation: Truncation$inboundSchema,
@@ -2106,6 +2170,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",
     "tool_choice": "toolChoice",
+    "top_k": "topK",
     "top_logprobs": "topLogprobs",
     "top_p": "topP",
   });

@@ -41,7 +41,7 @@ export type ModelUpdateOpenAILikeRequest = {
  */
 export type ModelUpdateOpenAILikeResponseBody = {
   configuration: components.ModelConfigurationResponse;
-  created: Date;
+  created: string;
   description: string | null;
   displayName: string;
   docsUrl: string | null;
@@ -54,6 +54,7 @@ export type ModelUpdateOpenAILikeResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
   modelFamily?: string | undefined;
@@ -66,8 +67,8 @@ export type ModelUpdateOpenAILikeResponseBody = {
   pricingUrl: string | null;
   provider: string;
   refId: string;
-  sharing?: components.Config | undefined;
-  updated: Date;
+  sharing?: components.ModelSharingConfig | undefined;
+  updated: string;
 };
 
 /** @internal */
@@ -177,7 +178,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created: z.string(),
   description: z.nullable(z.string()),
   display_name: z.string(),
   docs_url: z.nullable(z.string()),
@@ -190,6 +191,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   input_cost: z.nullable(z.number()),
   input_currency: z.string(),
   is_active: z.boolean(),
+  legacy_uuid: z.string().optional(),
   metadata: components.ModelMetadata$inboundSchema,
   model_developer: z.string().optional(),
   model_family: z.string().optional(),
@@ -204,8 +206,8 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   pricing_url: z.nullable(z.string()),
   provider: z.string(),
   refId: z.string(),
-  sharing: components.Config$inboundSchema.optional(),
-  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  sharing: components.ModelSharingConfig$inboundSchema.optional(),
+  updated: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -217,6 +219,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
     "input_cost": "inputCost",
     "input_currency": "inputCurrency",
     "is_active": "isActive",
+    "legacy_uuid": "legacyUuid",
     "model_developer": "modelDeveloper",
     "model_family": "modelFamily",
     "model_id": "modelId",

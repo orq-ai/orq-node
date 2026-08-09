@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create schedule
  *
  * @remarks
- * Creates a schedule that runs the agent on a recurring or one-off cadence. The minimum firing interval is 1 hour for `cron` and `interval`; `once` schedules are exempt.
+ * Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
  */
 export function schedulesCreate(
   client: OrqCore,

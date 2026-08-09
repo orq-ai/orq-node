@@ -21,9 +21,7 @@ export class Traces extends ClientSDK {
    * Aggregate traces
    *
    * @remarks
-   * Deprecated: use TelemetryService.Query (POST /v2/telemetry/query, source=TRACES, grain=none) instead. Aggregate trace metrics using the structured trace filter contract.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+   * Aggregate trace metrics using the structured trace filter contract. This API remains supported; POST /v3/telemetry/query offers the same aggregate shape in a neutral multi-signal envelope.
    */
   async aggregate(
     request: components.AggregateTracesRequest,

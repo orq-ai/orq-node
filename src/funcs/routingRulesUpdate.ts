@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -26,10 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update routing rule
+ * Update a routing rule
  *
  * @remarks
- * Partially updates an existing routing rule. Only provided fields are updated.
+ * Partially updates routing-rule metadata or configuration. Project scope is immutable.
  */
 export function routingRulesUpdate(
   client: OrqCore,
@@ -37,7 +38,7 @@ export function routingRulesUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RoutingRuleUpdateResponseBody,
+    components.RoutingRule,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RoutingRuleUpdateResponseBody,
+      components.RoutingRule,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -84,7 +85,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.UpdateRoutingRuleRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     routing_rule_id: encodeSimple("routing_rule_id", payload.routing_rule_id, {
@@ -146,7 +149,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RoutingRuleUpdateResponseBody,
+    components.RoutingRule,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -156,8 +159,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RoutingRuleUpdateResponseBody$inboundSchema),
-    M.fail([400, 404, 409, "4XX"]),
+    M.json(200, components.RoutingRule$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

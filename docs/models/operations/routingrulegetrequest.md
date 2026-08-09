@@ -12,6 +12,6 @@ let value: RoutingRuleGetRequest = {
 
 ## Fields
 
-| Field                      | Type                       | Required                   | Description                |
-| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `routingRuleId`            | *string*                   | :heavy_check_mark:         | The ID of the routing rule |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `routingRuleId`    | *string*           | :heavy_check_mark: | N/A                |

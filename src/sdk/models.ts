@@ -4,7 +4,6 @@
 
 import { modelsAzureFoundryDeployments } from "../funcs/modelsAzureFoundryDeployments.js";
 import { modelsCreate } from "../funcs/modelsCreate.js";
-import { modelsCreateAutorouter } from "../funcs/modelsCreateAutorouter.js";
 import { modelsCreateAwsBedrock } from "../funcs/modelsCreateAwsBedrock.js";
 import { modelsCreateOpenaiLike } from "../funcs/modelsCreateOpenaiLike.js";
 import { modelsCreateVertex } from "../funcs/modelsCreateVertex.js";
@@ -15,7 +14,6 @@ import { modelsImportLitellm } from "../funcs/modelsImportLitellm.js";
 import { modelsList } from "../funcs/modelsList.js";
 import { modelsListLitellm } from "../funcs/modelsListLitellm.js";
 import { modelsUpdate } from "../funcs/modelsUpdate.js";
-import { modelsUpdateAutorouter } from "../funcs/modelsUpdateAutorouter.js";
 import { modelsUpdateAwsBedrock } from "../funcs/modelsUpdateAwsBedrock.js";
 import { modelsUpdateOpenaiLike } from "../funcs/modelsUpdateOpenaiLike.js";
 import { modelsValidate } from "../funcs/modelsValidate.js";
@@ -37,40 +35,6 @@ export class Models extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.ModelCreateResponseBody> {
     return unwrapAsync(modelsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create autorouter custom model
-   *
-   * @remarks
-   * Creates an autorouter model that routes between a strong and economical source model based on the requested profile. Both source models must already exist for the workspace and be marked autorouter-eligible in master data.
-   */
-  async createAutorouter(
-    request: operations.ModelCreateAutorouterRequestBody,
-    options?: RequestOptions,
-  ): Promise<operations.ModelCreateAutorouterResponseBody> {
-    return unwrapAsync(modelsCreateAutorouter(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update autorouter custom model
-   *
-   * @remarks
-   * Re-configures an autorouter model. Each of key/strong_model/economical_model/profile falls back to the existing value when omitted. Changing the key enforces uniqueness and rewrites PRICING_KV.
-   */
-  async updateAutorouter(
-    request: operations.ModelUpdateAutorouterRequest,
-    options?: RequestOptions,
-  ): Promise<operations.ModelUpdateAutorouterResponseBody> {
-    return unwrapAsync(modelsUpdateAutorouter(
       this,
       request,
       options,

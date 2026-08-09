@@ -87,213 +87,187 @@ const value: operations.Evaluations6 = {
 };
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody7`
+### `operations.Evaluations7`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody7 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "output_evaluator",
-      type: "http_evaluator",
-      status: "completed",
-      value: true,
-    };
+const value: operations.Evaluations7 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "output_guardrail",
+  type: "http_evaluator",
+  status: "completed",
+  value: 2522.05,
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes8`
+### `operations.Evaluations8`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes8 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "output_evaluator",
-      type: "http_evaluator",
-      status: "pending",
-    };
+const value: operations.Evaluations8 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "input_evaluator",
+  type: "http_evaluator",
+  status: "pending",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes9`
+### `operations.Evaluations9`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes9 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "input_evaluator",
-      type: "http_evaluator",
-      status: "failed",
-    };
+const value: operations.Evaluations9 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "input_evaluator",
+  type: "http_evaluator",
+  status: "failed",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody110`
+### `operations.Evaluations10`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody110 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "output_guardrail",
-      type: "llm_evaluator",
-      status: "completed",
-      value: 1013.77,
-    };
+const value: operations.Evaluations10 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "output_evaluator",
+  type: "llm_evaluator",
+  status: "completed",
+  value: "<value>",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes11`
+### `operations.Evaluations11`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes11 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "output_evaluator",
-      type: "llm_evaluator",
-      status: "pending",
-    };
+const value: operations.Evaluations11 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "output_guardrail",
+  type: "llm_evaluator",
+  status: "pending",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes12`
+### `operations.Evaluations12`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes12 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "output_guardrail",
-      type: "llm_evaluator",
-      status: "failed",
-    };
+const value: operations.Evaluations12 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "output_guardrail",
+  type: "llm_evaluator",
+  status: "failed",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes13`
+### `operations.Evaluations13`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes13 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "input_evaluator",
-      type: "rouge_n",
-      status: "completed",
-      value: {
-        rouge1: {
-          f1: 2570.25,
-          precision: 7777.26,
-          recall: 4465.36,
-        },
-        rouge2: {
-          f1: 4436.73,
-          precision: 7513.2,
-          recall: 2466.04,
-        },
-        rougeL: {
-          f1: 58.92,
-          precision: 2196.23,
-          recall: 7451.01,
-        },
-      },
-    };
+const value: operations.Evaluations13 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "output_evaluator",
+  type: "rouge_n",
+  status: "completed",
+  value: {
+    rouge1: {
+      f1: 2570.25,
+      precision: 7777.26,
+      recall: 4465.36,
+    },
+    rouge2: {
+      f1: 4436.73,
+      precision: 7513.2,
+      recall: 2466.04,
+    },
+    rougeL: {
+      f1: 58.92,
+      precision: 2196.23,
+      recall: 7451.01,
+    },
+  },
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes14`
+### `operations.Evaluations14`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes14 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "input_guardrail",
-      type: "rouge_n",
-      status: "pending",
-    };
+const value: operations.Evaluations14 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "input_evaluator",
+  type: "rouge_n",
+  status: "pending",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes15`
+### `operations.Evaluations15`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes15 =
-    {
-      id: "<id>",
-      evaluationType: "evaluator",
-      evaluatorId: "<id>",
-      evaluatorConfigType: "input_guardrail",
-      type: "rouge_n",
-      status: "failed",
-    };
+const value: operations.Evaluations15 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "input_guardrail",
+  type: "rouge_n",
+  status: "failed",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes16`
+### `operations.Evaluations16`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes16 =
-    {
-      id: "<id>",
-      evaluationType: "human_review",
-      reviewedById: "<id>",
-      type: "string",
-      value: "<value>",
-    };
+const value: operations.Evaluations16 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
+  type: "string",
+  value: "<value>",
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes17`
+### `operations.Evaluations17`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes17 =
-    {
-      id: "<id>",
-      evaluationType: "human_review",
-      reviewedById: "<id>",
-      type: "number",
-      value: 5406.72,
-    };
+const value: operations.Evaluations17 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
+  type: "number",
+  value: 6008.58,
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes18`
+### `operations.Evaluations18`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes18 =
-    {
-      id: "<id>",
-      evaluationType: "human_review",
-      reviewedById: "<id>",
-      type: "boolean",
-      value: true,
-    };
+const value: operations.Evaluations18 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
+  type: "boolean",
+  value: true,
+};
 ```
 
-### `operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes19`
+### `operations.Evaluations19`
 
 ```typescript
-const value:
-  operations.RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody1Attributes19 =
-    {
-      id: "<id>",
-      evaluationType: "human_review",
-      reviewedById: "<id>",
-      type: "string_array",
-      values: [],
-    };
+const value: operations.Evaluations19 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  reviewedById: "<id>",
+  type: "string_array",
+  values: [],
+};
 ```
 

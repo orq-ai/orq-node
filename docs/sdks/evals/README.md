@@ -6,6 +6,7 @@
 
 * [all](#all) - Get all Evaluators
 * [create](#create) - Create an Evaluator
+* [get](#get) - Retrieve an Evaluator
 * [update](#update) - Update an Evaluator
 * [delete](#delete) - Delete an Evaluator
 * [invoke](#invoke) - Invoke a Custom Evaluator
@@ -163,6 +164,84 @@ run();
 | errors.CreateEvalResponseBody | 404                           | application/json              |
 | errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
+## get
+
+Retrieve a single evaluator by its unique identifier. Returns the evaluator exactly as stored, including its type-specific configuration — prompt and model for LLM evaluators, source code for Python and TypeScript evaluators, the JSON Schema for schema evaluators, and so on.
+
+Use this when you already know the evaluator id (for example to refresh the state of a resource you manage declaratively). To discover evaluator ids, list them with `GET /v2/evaluators`.
+
+This endpoint returns the stored record, which carries more detail than the representation `GET /v2/evaluators` returns: `display_name` rather than `key`, `model` as an object rather than a provider-qualified string, plus the `owner`, `domain_id`, `metadata`, `enabled` and `output_type` fields.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetEval" method="get" path="/v2/evaluators/{id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.evals.get({
+    id: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsGet } from "@orq-ai/node/funcs/evalsGet.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsGet(orq, {
+    id: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsGet failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetEvalRequest](../../models/operations/getevalrequest.md)                                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetEvalResponseBody](../../models/operations/getevalresponsebody.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.GetEvalResponseBody | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
+
 ## update
 
 Update an Evaluator
@@ -182,6 +261,7 @@ async function run() {
     id: "<id>",
     requestBody: {
       path: "Default",
+      projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
     },
   });
 
@@ -210,6 +290,7 @@ async function run() {
     id: "<id>",
     requestBody: {
       path: "Default",
+      projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
     },
   });
   if (res.ok) {
@@ -312,10 +393,11 @@ run();
 
 ### Errors
 
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.DeleteEvalResponseBody | 404                           | application/json              |
-| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.DeleteEvalResponseBody      | 404                                | application/json                   |
+| errors.DeleteEvalEvalsResponseBody | 409                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## invoke
 
@@ -341,6 +423,17 @@ async function run() {
           content: [],
         },
       ],
+      variables: {
+        "locale": "en",
+        "tags": [
+          "alpha",
+          "omega",
+        ],
+        "profile": {
+          "tier": "gold",
+          "active": true,
+        },
+      },
     },
   });
 
@@ -374,6 +467,17 @@ async function run() {
           content: [],
         },
       ],
+      variables: {
+        "locale": "en",
+        "tags": [
+          "alpha",
+          "omega",
+        ],
+        "profile": {
+          "tier": "gold",
+          "active": true,
+        },
+      },
     },
   });
   if (res.ok) {

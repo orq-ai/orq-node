@@ -7,22 +7,47 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { Expression, Expression$inboundSchema } from "./expression.js";
-import { ModelsConfig, ModelsConfig$inboundSchema } from "./modelsconfig.js";
+import {
+  RoutingRuleCacheConfig,
+  RoutingRuleCacheConfig$inboundSchema,
+} from "./routingrulecacheconfig.js";
+import {
+  RoutingRuleExpression,
+  RoutingRuleExpression$inboundSchema,
+} from "./routingruleexpression.js";
+import {
+  RoutingRuleModelsConfig,
+  RoutingRuleModelsConfig$inboundSchema,
+} from "./routingrulemodelsconfig.js";
+import {
+  RoutingRulePlugin,
+  RoutingRulePlugin$inboundSchema,
+} from "./routingruleplugin.js";
 
 export type RoutingRule = {
   id: string;
   createdAt: Date;
-  createdById: string;
-  description?: string | undefined;
-  displayName: string;
-  enabled: boolean;
-  expression?: Expression | undefined;
-  modelsConfig?: ModelsConfig | undefined;
-  priority: number;
-  projectId: string;
   updatedAt: Date;
+  createdById: string;
   updatedById: string;
+  /**
+   * Project that contains the rule. Empty for workspace-wide rules.
+   */
+  projectId: string;
+  /**
+   * Human-readable routing-rule name.
+   */
+  displayName: string;
+  description: string;
+  enabled: boolean;
+  expression?: RoutingRuleExpression | undefined;
+  modelsConfig?: RoutingRuleModelsConfig | undefined;
+  plugins: Array<RoutingRulePlugin>;
+  /**
+   * Evaluation order. Lower values are evaluated first.
+   */
+  priority: number;
+  cacheConfig?: RoutingRuleCacheConfig | undefined;
 };
 
 /** @internal */
@@ -33,26 +58,29 @@ export const RoutingRule$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  description: z.string().optional(),
-  display_name: z.string(),
-  enabled: z.boolean(),
-  expression: Expression$inboundSchema.optional(),
-  models_config: ModelsConfig$inboundSchema.optional(),
-  priority: z.number().int(),
-  project_id: z.string(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_by_id: z.string(),
   updated_by_id: z.string(),
+  project_id: z.string(),
+  display_name: z.string(),
+  description: z.string(),
+  enabled: z.boolean(),
+  expression: RoutingRuleExpression$inboundSchema.optional(),
+  models_config: RoutingRuleModelsConfig$inboundSchema.optional(),
+  plugins: z.array(RoutingRulePlugin$inboundSchema),
+  priority: z.number().int(),
+  cache_config: RoutingRuleCacheConfig$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "created_at": "createdAt",
+    "updated_at": "updatedAt",
     "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "project_id": "projectId",
     "display_name": "displayName",
     "models_config": "modelsConfig",
-    "project_id": "projectId",
-    "updated_at": "updatedAt",
-    "updated_by_id": "updatedById",
+    "cache_config": "cacheConfig",
   });
 });
 

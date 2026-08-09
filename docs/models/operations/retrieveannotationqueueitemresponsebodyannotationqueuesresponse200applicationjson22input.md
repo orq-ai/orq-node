@@ -14,29 +14,44 @@ let value:
       promptConfig: {
         stream: true,
         model: "Colorado",
-        modelDbId: "798fb58b-d01e-45e0-b035-41086079f946",
-        modelType: "chat",
+        modelDbId: "<id>",
+        modelType: "tts",
         modelParameters: {},
-        provider: "moonshotai",
-        messages: [],
+        provider: "minimax",
+        messages: [
+          {
+            role: "expected_output",
+            content: "<value>",
+          },
+        ],
       },
       extraParams: {
-        product: "remoteconfigs",
-        relatedEntities: [],
+        product: "workflows",
+        relatedEntities: [
+          {
+            type: "spreadsheet_sheet_row_cell",
+            cellId: "<id>",
+          },
+        ],
         projectId: "<id>",
         fallbacks: [
           {
             stream: true,
             model: "Land Cruiser",
-            modelDbId: "35bb17ae-dba0-4eee-a99f-2ea79f449752",
-            modelType: "ocr",
+            modelDbId: "<id>",
+            modelType: "completion",
             modelParameters: {},
-            provider: "orq",
-            messages: [],
+            provider: "nvidia",
+            messages: [
+              {
+                role: "expected_output",
+                content: [],
+              },
+            ],
           },
         ],
       },
-      workspaceId: "030cf172-0f2a-4b48-ae70-3b28fb84729b",
+      workspaceId: "<id>",
     };
 ```
 
@@ -49,5 +64,5 @@ let value:
 | `tools`                                                                                                                                                                              | [operations.RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponseTools](../../models/operations/retrieveannotationqueueitemresponsebodyannotationqueuesresponsetools.md)[] | :heavy_minus_sign:                                                                                                                                                                   | N/A                                                                                                                                                                                  |
 | `knowledgeBases`                                                                                                                                                                     | [operations.ResponseBodyKnowledgeBases](../../models/operations/responsebodyknowledgebases.md)[]                                                                                     | :heavy_minus_sign:                                                                                                                                                                   | N/A                                                                                                                                                                                  |
 | `extraParams`                                                                                                                                                                        | [operations.ExtraParams](../../models/operations/extraparams.md)                                                                                                                     | :heavy_check_mark:                                                                                                                                                                   | N/A                                                                                                                                                                                  |
-| `workspaceId`                                                                                                                                                                        | *string*                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                   | The id of the resource                                                                                                                                                               |
+| `workspaceId`                                                                                                                                                                        | *string*                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                   | N/A                                                                                                                                                                                  |
 | `engine`                                                                                                                                                                             | [operations.ResponseBodyEngine](../../models/operations/responsebodyengine.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                                                   | N/A                                                                                                                                                                                  |

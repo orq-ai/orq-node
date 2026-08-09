@@ -4,9 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserOwner = {
   /**
@@ -15,18 +12,6 @@ export type UserOwner = {
   userId: string;
 };
 
-/** @internal */
-export const UserOwner$inboundSchema: z.ZodType<
-  UserOwner,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  user_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_id": "userId",
-  });
-});
 /** @internal */
 export type UserOwner$Outbound = {
   user_id: string;
@@ -47,13 +32,4 @@ export const UserOwner$outboundSchema: z.ZodType<
 
 export function userOwnerToJSON(userOwner: UserOwner): string {
   return JSON.stringify(UserOwner$outboundSchema.parse(userOwner));
-}
-export function userOwnerFromJSON(
-  jsonString: string,
-): SafeParseResult<UserOwner, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UserOwner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UserOwner' from JSON`,
-  );
 }

@@ -11,46 +11,32 @@ let value: ModelCreateAwsBedrockResponseBody = {
   configuration: {
     provider: "<value>",
   },
-  created: new Date("2026-04-25T08:14:51.431Z"),
-  description: "whose indeed weary innovate",
-  displayName: "Alejandrin.OConner29",
-  docsUrl: "https://outlying-creature.com",
-  enabled: true,
-  enabledForEndpoints: true,
+  created: "<value>",
+  description: "along skean pupil once far",
+  displayName: "Cornell.McGlynn",
+  docsUrl: "https://parallel-coil.net/",
+  enabled: false,
+  enabledForEndpoints: false,
   enabledForPlayground: true,
   hasCpuPricing: false,
   hasFunctions: true,
   id: "<id>",
-  inputCost: 7288.26,
+  inputCost: 4149.55,
   inputCurrency: "<value>",
-  isActive: false,
+  isActive: true,
   metadata: {
     isPrivate: true,
   },
   modelId: "<id>",
   modelType: "<value>",
-  outputCost: 9665.63,
+  outputCost: 3164.1,
   outputCurrency: "<value>",
   owner: "<value>",
-  parameters: [
-    {
-      config: {
-        "key": "<value>",
-        "key1": "<value>",
-        "key2": "<value>",
-      },
-      description: "anenst honestly pink even",
-      id: "<id>",
-      isActive: false,
-      name: "<value>",
-      parameter: "<value>",
-      parameterType: "<value>",
-    },
-  ],
-  pricingUrl: "https://cluttered-eyeliner.info/",
+  parameters: [],
+  pricingUrl: "https://pale-riser.info",
   provider: "<value>",
   refId: "<id>",
-  updated: new Date("2024-05-29T00:39:25.927Z"),
+  updated: "<value>",
 };
 ```
 
@@ -59,7 +45,7 @@ let value: ModelCreateAwsBedrockResponseBody = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `configuration`                                                                                | [components.ModelConfigurationResponse](../../models/components/modelconfigurationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `created`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `created`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `description`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `displayName`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `docsUrl`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
@@ -72,6 +58,7 @@ let value: ModelCreateAwsBedrockResponseBody = {
 | `inputCost`                                                                                    | *number*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `inputCurrency`                                                                                | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `isActive`                                                                                     | *boolean*                                                                                      | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `legacyUuid`                                                                                   | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `metadata`                                                                                     | [components.ModelMetadata](../../models/components/modelmetadata.md)                           | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `modelDeveloper`                                                                               | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
 | `modelFamily`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
@@ -84,5 +71,5 @@ let value: ModelCreateAwsBedrockResponseBody = {
 | `pricingUrl`                                                                                   | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `provider`                                                                                     | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
 | `refId`                                                                                        | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `sharing`                                                                                      | [components.Config](../../models/components/config.md)                                         | :heavy_minus_sign:                                                                             | N/A                                                                                            |
-| `updated`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `sharing`                                                                                      | [components.ModelSharingConfig](../../models/components/modelsharingconfig.md)                 | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `updated`                                                                                      | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |

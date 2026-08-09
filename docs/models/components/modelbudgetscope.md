@@ -9,11 +9,13 @@ Per-model cap. The value is the FULL model reference as callers send
 ```typescript
 import { ModelBudgetScope } from "@orq-ai/node/models/components";
 
-let value: ModelBudgetScope = {};
+let value: ModelBudgetScope = {
+  modelId: "<id>",
+};
 ```
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `modelId`          | *string*           | :heavy_minus_sign: | N/A                |
+| `modelId`          | *string*           | :heavy_check_mark: | N/A                |

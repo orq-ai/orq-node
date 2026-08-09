@@ -13,5 +13,5 @@ let value: CacheConfigReasoningEffort = "disable";
 ## Values
 
 ```typescript
-"none" | "disable" | "minimal" | "low" | "medium" | "high"
+"none" | "disable" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
 ```

@@ -13,7 +13,7 @@
 
 ## list
 
-Returns API keys visible to the current workspace, ordered by creation time with the newest key first. The `api_key` and `token_hash` fields are never returned by this endpoint; only `token_prefix` is included.
+Returns API keys visible to the current workspace as a JSON array. Raw tokens are never included; the `token` field contains a masked display value.
 
 ### Example Usage
 
@@ -72,7 +72,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListApiKeysResponse](../../models/components/listapikeysresponse.md)\>**
+**Promise\<[components.ApiKeyRestResponse[]](../../models/.md)\>**
 
 ### Errors
 
@@ -145,7 +145,7 @@ run();
 
 ### Response
 
-**Promise\<[components.CreateApiKeyResponse](../../models/components/createapikeyresponse.md)\>**
+**Promise\<[components.ApiKeyRestResponse](../../models/components/apikeyrestresponse.md)\>**
 
 ### Errors
 
@@ -286,7 +286,7 @@ run();
 
 ### Response
 
-**Promise\<[components.GetApiKeyResponse](../../models/components/getapikeyresponse.md)\>**
+**Promise\<[components.ApiKeyRestResponse](../../models/components/apikeyrestresponse.md)\>**
 
 ### Errors
 
@@ -309,11 +309,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.apiKeys.delete({
+  await orq.apiKeys.delete({
     apiKeyId: "<id>",
   });
 
-  console.log(result);
+
 }
 
 run();
@@ -339,7 +339,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("apiKeysDelete failed:", res.error);
   }
@@ -359,7 +359,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DeleteApiKeyResponse](../../models/components/deleteapikeyresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
@@ -434,7 +434,7 @@ run();
 
 ### Response
 
-**Promise\<[components.UpdateApiKeyResponse](../../models/components/updateapikeyresponse.md)\>**
+**Promise\<[components.ApiKeyRestResponse](../../models/components/apikeyrestresponse.md)\>**
 
 ### Errors
 

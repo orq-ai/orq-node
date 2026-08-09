@@ -16,33 +16,48 @@ let value: TwentyTwo = {
     promptConfig: {
       stream: true,
       model: "Colorado",
-      modelDbId: "798fb58b-d01e-45e0-b035-41086079f946",
-      modelType: "chat",
+      modelDbId: "<id>",
+      modelType: "tts",
       modelParameters: {},
-      provider: "moonshotai",
-      messages: [],
+      provider: "minimax",
+      messages: [
+        {
+          role: "expected_output",
+          content: "<value>",
+        },
+      ],
     },
     extraParams: {
-      product: "remoteconfigs",
-      relatedEntities: [],
+      product: "workflows",
+      relatedEntities: [
+        {
+          type: "spreadsheet_sheet_row_cell",
+          cellId: "<id>",
+        },
+      ],
       projectId: "<id>",
       fallbacks: [
         {
           stream: true,
           model: "Land Cruiser",
-          modelDbId: "35bb17ae-dba0-4eee-a99f-2ea79f449752",
-          modelType: "ocr",
+          modelDbId: "<id>",
+          modelType: "completion",
           modelParameters: {},
-          provider: "orq",
-          messages: [],
+          provider: "nvidia",
+          messages: [
+            {
+              role: "expected_output",
+              content: [],
+            },
+          ],
         },
       ],
     },
-    workspaceId: "99dd309c-e34b-4e07-815c-f6226cd52124",
+    workspaceId: "<id>",
   },
   output: [
     {
-      index: 9383.83,
+      index: 6224.3,
     },
   ],
 };

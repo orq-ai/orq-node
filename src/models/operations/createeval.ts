@@ -27,15 +27,13 @@ export type Python = {
   code: string;
   type: RequestBodyType;
   /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
+   * Legacy alternative to `project_id`. Storage path whose first segment names the project that owns the evaluator. Mutually exclusive with `project_id`.
    */
-  path: string;
+  path?: string | undefined;
+  /**
+   * Unique identifier of the project that owns the evaluator, as returned by `GET /v2/projects`. Mutually exclusive with `path`.
+   */
+  projectId?: string | undefined;
   description?: string | undefined;
   key: string;
 };
@@ -117,17 +115,15 @@ export type LLMJury = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<OneCategoricalLabels> | null | undefined;
-  datasetId?: string | undefined;
+  datasetId?: string | null | undefined;
   /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
+   * Legacy alternative to `project_id`. Storage path whose first segment names the project that owns the evaluator. Mutually exclusive with `project_id`.
    */
-  path: string;
+  path?: string | undefined;
+  /**
+   * Unique identifier of the project that owns the evaluator, as returned by `GET /v2/projects`. Mutually exclusive with `path`.
+   */
+  projectId?: string | undefined;
   description?: string | undefined;
   key: string;
   mode: "jury";
@@ -169,17 +165,15 @@ export type Llm = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categoricalLabels?: Array<CreateEval1CategoricalLabels> | null | undefined;
-  datasetId?: string | undefined;
+  datasetId?: string | null | undefined;
   /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
+   * Legacy alternative to `project_id`. Storage path whose first segment names the project that owns the evaluator. Mutually exclusive with `project_id`.
    */
-  path: string;
+  path?: string | undefined;
+  /**
+   * Unique identifier of the project that owns the evaluator, as returned by `GET /v2/projects`. Mutually exclusive with `path`.
+   */
+  projectId?: string | undefined;
   description?: string | undefined;
   key: string;
   mode: "single";
@@ -217,7 +211,8 @@ export type Python$Outbound = {
   output_type?: string | undefined;
   code: string;
   type: string;
-  path: string;
+  path?: string | undefined;
+  project_id?: string | undefined;
   description: string;
   key: string;
 };
@@ -232,13 +227,15 @@ export const Python$outboundSchema: z.ZodType<
   outputType: OutputType$outboundSchema.optional(),
   code: z.string(),
   type: RequestBodyType$outboundSchema,
-  path: z.string(),
+  path: z.string().optional(),
+  projectId: z.string().optional(),
   description: z.string().default(""),
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
     outputType: "output_type",
+    projectId: "project_id",
   });
 });
 
@@ -464,8 +461,9 @@ export type LLMJury$Outbound = {
   prompt: string;
   categories?: Array<string> | null | undefined;
   categorical_labels?: Array<OneCategoricalLabels$Outbound> | null | undefined;
-  dataset_id?: string | undefined;
-  path: string;
+  dataset_id?: string | null | undefined;
+  path?: string | undefined;
+  project_id?: string | undefined;
   description: string;
   key: string;
   mode: "jury";
@@ -487,8 +485,9 @@ export const LLMJury$outboundSchema: z.ZodType<
   categoricalLabels: z.nullable(
     z.array(z.lazy(() => OneCategoricalLabels$outboundSchema)),
   ).optional(),
-  datasetId: z.string().optional(),
-  path: z.string(),
+  datasetId: z.nullable(z.string()).optional(),
+  path: z.string().optional(),
+  projectId: z.string().optional(),
   description: z.string().default(""),
   key: z.string(),
   mode: z.literal("jury"),
@@ -499,6 +498,7 @@ export const LLMJury$outboundSchema: z.ZodType<
     outputType: "output_type",
     categoricalLabels: "categorical_labels",
     datasetId: "dataset_id",
+    projectId: "project_id",
   });
 });
 
@@ -554,8 +554,9 @@ export type Llm$Outbound = {
     | Array<CreateEval1CategoricalLabels$Outbound>
     | null
     | undefined;
-  dataset_id?: string | undefined;
-  path: string;
+  dataset_id?: string | null | undefined;
+  path?: string | undefined;
+  project_id?: string | undefined;
   description: string;
   key: string;
   mode: "single";
@@ -574,8 +575,9 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
     categoricalLabels: z.nullable(
       z.array(z.lazy(() => CreateEval1CategoricalLabels$outboundSchema)),
     ).optional(),
-    datasetId: z.string().optional(),
-    path: z.string(),
+    datasetId: z.nullable(z.string()).optional(),
+    path: z.string().optional(),
+    projectId: z.string().optional(),
     description: z.string().default(""),
     key: z.string(),
     mode: z.literal("single"),
@@ -586,6 +588,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
       outputType: "output_type",
       categoricalLabels: "categorical_labels",
       datasetId: "dataset_id",
+      projectId: "project_id",
     });
   });
 

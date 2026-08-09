@@ -14,8 +14,5 @@ export const ApiKeyStatus = {
 export type ApiKeyStatus = ClosedEnum<typeof ApiKeyStatus>;
 
 /** @internal */
-export const ApiKeyStatus$inboundSchema: z.ZodNativeEnum<typeof ApiKeyStatus> =
-  z.nativeEnum(ApiKeyStatus);
-/** @internal */
 export const ApiKeyStatus$outboundSchema: z.ZodNativeEnum<typeof ApiKeyStatus> =
-  ApiKeyStatus$inboundSchema;
+  z.nativeEnum(ApiKeyStatus);

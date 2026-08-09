@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AllProjects,
-  AllProjects$inboundSchema,
   AllProjects$Outbound,
   AllProjects$outboundSchema,
 } from "./allprojects.js";
 import {
   SingleProject,
-  SingleProject$inboundSchema,
   SingleProject$Outbound,
   SingleProject$outboundSchema,
 } from "./singleproject.js";
@@ -31,15 +26,6 @@ export type ProjectScope = {
   single?: SingleProject | undefined;
 };
 
-/** @internal */
-export const ProjectScope$inboundSchema: z.ZodType<
-  ProjectScope,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  all: AllProjects$inboundSchema.optional(),
-  single: SingleProject$inboundSchema.optional(),
-});
 /** @internal */
 export type ProjectScope$Outbound = {
   all?: AllProjects$Outbound | undefined;
@@ -58,13 +44,4 @@ export const ProjectScope$outboundSchema: z.ZodType<
 
 export function projectScopeToJSON(projectScope: ProjectScope): string {
   return JSON.stringify(ProjectScope$outboundSchema.parse(projectScope));
-}
-export function projectScopeFromJSON(
-  jsonString: string,
-): SafeParseResult<ProjectScope, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ProjectScope$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ProjectScope' from JSON`,
-  );
 }

@@ -46,7 +46,7 @@ export type Webhook = {
    */
   events: Array<string>;
   /**
-   * Signing secret used to verify webhook delivery signatures. Treat this value as sensitive.
+   * Signing secret used to compute `X-Orq-Signature` as the lowercase hexadecimal HMAC-SHA256 of the exact request body bytes. Treat this value as sensitive.
    */
   secret: string;
   /**

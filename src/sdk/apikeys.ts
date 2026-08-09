@@ -18,12 +18,12 @@ export class ApiKeys extends ClientSDK {
    * List API keys
    *
    * @remarks
-   * Returns API keys visible to the current workspace, ordered by creation time with the newest key first. The `api_key` and `token_hash` fields are never returned by this endpoint; only `token_prefix` is included.
+   * Returns API keys visible to the current workspace as a JSON array. Raw tokens are never included; the `token` field contains a masked display value.
    */
   async list(
     request?: operations.ApiKeyListRequest | undefined,
     options?: RequestOptions,
-  ): Promise<components.ListApiKeysResponse> {
+  ): Promise<Array<components.ApiKeyRestResponse>> {
     return unwrapAsync(apiKeysList(
       this,
       request,
@@ -40,7 +40,7 @@ export class ApiKeys extends ClientSDK {
   async create(
     request: components.CreateApiKeyRequest,
     options?: RequestOptions,
-  ): Promise<components.CreateApiKeyResponse> {
+  ): Promise<components.ApiKeyRestResponse> {
     return unwrapAsync(apiKeysCreate(
       this,
       request,
@@ -72,7 +72,7 @@ export class ApiKeys extends ClientSDK {
   async get(
     request: operations.ApiKeyGetRequest,
     options?: RequestOptions,
-  ): Promise<components.GetApiKeyResponse> {
+  ): Promise<components.ApiKeyRestResponse> {
     return unwrapAsync(apiKeysGet(
       this,
       request,
@@ -89,7 +89,7 @@ export class ApiKeys extends ClientSDK {
   async delete(
     request: operations.ApiKeyDeleteRequest,
     options?: RequestOptions,
-  ): Promise<components.DeleteApiKeyResponse> {
+  ): Promise<void> {
     return unwrapAsync(apiKeysDelete(
       this,
       request,
@@ -106,7 +106,7 @@ export class ApiKeys extends ClientSDK {
   async update(
     request: operations.ApiKeyUpdateRequest,
     options?: RequestOptions,
-  ): Promise<components.UpdateApiKeyResponse> {
+  ): Promise<components.ApiKeyRestResponse> {
     return unwrapAsync(apiKeysUpdate(
       this,
       request,

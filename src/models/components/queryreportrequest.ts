@@ -23,9 +23,13 @@ export const Metric = {
   GenaiTokens: "genai.tokens",
   GenaiCost: "genai.cost",
   GenaiErrors: "genai.errors",
+  GenaiErrorRate: "genai.error_rate",
   GenaiLatencyP50: "genai.latency.p50",
   GenaiLatencyP95: "genai.latency.p95",
   GenaiLatencyP99: "genai.latency.p99",
+  GenaiTtftAvg: "genai.ttft.avg",
+  GenaiTtftP50: "genai.ttft.p50",
+  GenaiTtftP95: "genai.ttft.p95",
   GenaiEvaluatorRuns: "genai.evaluator.runs",
   GenaiEvaluatorPassRate: "genai.evaluator.pass_rate",
   GenaiEvaluatorScoreAvg: "genai.evaluator.score.avg",
@@ -91,6 +95,30 @@ export const GroupBy = {
 } as const;
 export type GroupBy = ClosedEnum<typeof GroupBy>;
 
+/**
+ * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
+ */
+export const QueryReportRequestMode = {
+  Timeseries: "timeseries",
+  Scalar: "scalar",
+} as const;
+/**
+ * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
+ */
+export type QueryReportRequestMode = ClosedEnum<typeof QueryReportRequestMode>;
+
+/**
+ * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
+ */
+export const Sort = {
+  Desc: "desc",
+  Asc: "asc",
+} as const;
+/**
+ * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
+ */
+export type Sort = ClosedEnum<typeof Sort>;
+
 export type QueryReportRequest = {
   /**
    * Catalogue metric to query.
@@ -137,6 +165,14 @@ export type QueryReportRequest = {
    *  report window.
    */
   includeTotals?: boolean | undefined;
+  /**
+   * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
+   */
+  mode?: QueryReportRequestMode | undefined;
+  /**
+   * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
+   */
+  sort?: Sort | undefined;
 };
 
 /** @internal */
@@ -162,6 +198,23 @@ export const GroupBy$outboundSchema: z.ZodNativeEnum<typeof GroupBy> =
   GroupBy$inboundSchema;
 
 /** @internal */
+export const QueryReportRequestMode$inboundSchema: z.ZodNativeEnum<
+  typeof QueryReportRequestMode
+> = z.nativeEnum(QueryReportRequestMode);
+/** @internal */
+export const QueryReportRequestMode$outboundSchema: z.ZodNativeEnum<
+  typeof QueryReportRequestMode
+> = QueryReportRequestMode$inboundSchema;
+
+/** @internal */
+export const Sort$inboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
+  Sort,
+);
+/** @internal */
+export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> =
+  Sort$inboundSchema;
+
+/** @internal */
 export const QueryReportRequest$inboundSchema: z.ZodType<
   QueryReportRequest,
   z.ZodTypeDef,
@@ -176,6 +229,8 @@ export const QueryReportRequest$inboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   time_zone: z.string().optional(),
   include_totals: z.boolean().optional(),
+  mode: QueryReportRequestMode$inboundSchema.optional(),
+  sort: Sort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "group_by": "groupBy",
@@ -194,6 +249,8 @@ export type QueryReportRequest$Outbound = {
   limit?: number | undefined;
   time_zone?: string | undefined;
   include_totals?: boolean | undefined;
+  mode?: string | undefined;
+  sort?: string | undefined;
 };
 
 /** @internal */
@@ -211,6 +268,8 @@ export const QueryReportRequest$outboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   timeZone: z.string().optional(),
   includeTotals: z.boolean().optional(),
+  mode: QueryReportRequestMode$outboundSchema.optional(),
+  sort: Sort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     groupBy: "group_by",

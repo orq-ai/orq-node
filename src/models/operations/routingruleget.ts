@@ -4,34 +4,9 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RoutingRuleGetRequest = {
-  /**
-   * The ID of the routing rule
-   */
   routingRuleId: string;
-};
-
-/**
- * Routing rule retrieved successfully
- */
-export type RoutingRuleGetResponseBody = {
-  id: string;
-  createdAt: Date;
-  createdById: string;
-  description?: string | undefined;
-  displayName: string;
-  enabled: boolean;
-  expression?: components.Expression | undefined;
-  modelsConfig?: components.ModelsConfig | undefined;
-  priority: number;
-  projectId: string;
-  updatedAt: Date;
-  updatedById: string;
 };
 
 /** @internal */
@@ -57,46 +32,5 @@ export function routingRuleGetRequestToJSON(
 ): string {
   return JSON.stringify(
     RoutingRuleGetRequest$outboundSchema.parse(routingRuleGetRequest),
-  );
-}
-
-/** @internal */
-export const RoutingRuleGetResponseBody$inboundSchema: z.ZodType<
-  RoutingRuleGetResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  description: z.string().optional(),
-  display_name: z.string(),
-  enabled: z.boolean(),
-  expression: components.Expression$inboundSchema.optional(),
-  models_config: components.ModelsConfig$inboundSchema.optional(),
-  priority: z.number().int(),
-  project_id: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_at": "createdAt",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "models_config": "modelsConfig",
-    "project_id": "projectId",
-    "updated_at": "updatedAt",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function routingRuleGetResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RoutingRuleGetResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RoutingRuleGetResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RoutingRuleGetResponseBody' from JSON`,
   );
 }

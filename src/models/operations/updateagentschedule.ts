@@ -11,15 +11,13 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Change the schedule type. Changing type or expression resets the NATS schedule and bumps generation.
+ * Change the schedule type. Only cron is accepted. Changing type or expression resets the NATS schedule and bumps generation.
  */
 export const UpdateAgentScheduleType = {
   Cron: "cron",
-  Once: "once",
-  Interval: "interval",
 } as const;
 /**
- * Change the schedule type. Changing type or expression resets the NATS schedule and bumps generation.
+ * Change the schedule type. Only cron is accepted. Changing type or expression resets the NATS schedule and bumps generation.
  */
 export type UpdateAgentScheduleType = ClosedEnum<
   typeof UpdateAgentScheduleType
@@ -31,7 +29,11 @@ export type UpdateAgentScheduleRequestBody = {
    */
   agentTag?: string | undefined;
   /**
-   * Update the schedule expression. Minimum firing cadence is 1 hour for cron and interval.
+   * Rename the schedule.
+   */
+  displayName?: string | undefined;
+  /**
+   * Update the schedule expression. Same 6-field cron shapes as create; minimum firing cadence is 1 hour.
    */
   expression?: string | undefined;
   /**
@@ -40,7 +42,7 @@ export type UpdateAgentScheduleRequestBody = {
   isActive?: boolean | undefined;
   payload?: components.PublicSchedulePayload | undefined;
   /**
-   * Change the schedule type. Changing type or expression resets the NATS schedule and bumps generation.
+   * Change the schedule type. Only cron is accepted. Changing type or expression resets the NATS schedule and bumps generation.
    */
   type?: UpdateAgentScheduleType | undefined;
 };
@@ -58,7 +60,7 @@ export type UpdateAgentScheduleRequest = {
 };
 
 /**
- * Schedule type.
+ * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
  */
 export const UpdateAgentScheduleSchedulesType = {
   Cron: "cron",
@@ -66,7 +68,7 @@ export const UpdateAgentScheduleSchedulesType = {
   Interval: "interval",
 } as const;
 /**
- * Schedule type.
+ * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
  */
 export type UpdateAgentScheduleSchedulesType = ClosedEnum<
   typeof UpdateAgentScheduleSchedulesType
@@ -91,7 +93,11 @@ export type UpdateAgentScheduleResponseBody = {
    */
   createdById: string;
   /**
-   * Cron expression (6-field, seconds required), @every duration, @at RFC3339 timestamp, or a predefined descriptor like @hourly/@daily.
+   * Human-readable name of the schedule. Omitted for schedules created before display names were required.
+   */
+  displayName?: string | undefined;
+  /**
+   * 6-field cron expression. Schedules stored before the cron-only restriction may also return an @every duration or an @at RFC3339 timestamp.
    */
   expression: string;
   /**
@@ -99,7 +105,7 @@ export type UpdateAgentScheduleResponseBody = {
    */
   generation: number;
   /**
-   * Whether the schedule is currently firing. once schedules flip to false automatically after firing.
+   * Whether the schedule is currently firing. Legacy once schedules flip to false automatically after firing.
    */
   isActive: boolean;
   /**
@@ -112,10 +118,14 @@ export type UpdateAgentScheduleResponseBody = {
    */
   triggerCount: number;
   /**
-   * Schedule type.
+   * Schedule type. Only cron can be created or updated; once and interval only appear on schedules stored before that restriction.
    */
   type: UpdateAgentScheduleSchedulesType;
   updated: Date;
+  /**
+   * ID of the API key that last updated the schedule. Omitted until the schedule is updated.
+   */
+  updatedById?: string | undefined;
 };
 
 /** @internal */
@@ -126,6 +136,7 @@ export const UpdateAgentScheduleType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type UpdateAgentScheduleRequestBody$Outbound = {
   agent_tag?: string | undefined;
+  display_name?: string | undefined;
   expression?: string | undefined;
   is_active?: boolean | undefined;
   payload?: components.PublicSchedulePayload$Outbound | undefined;
@@ -139,6 +150,7 @@ export const UpdateAgentScheduleRequestBody$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequestBody
 > = z.object({
   agentTag: z.string().optional(),
+  displayName: z.string().optional(),
   expression: z.string().optional(),
   isActive: z.boolean().optional(),
   payload: components.PublicSchedulePayload$outboundSchema.optional(),
@@ -146,6 +158,7 @@ export const UpdateAgentScheduleRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     agentTag: "agent_tag",
+    displayName: "display_name",
     isActive: "is_active",
   });
 });
@@ -208,6 +221,7 @@ export const UpdateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   agent_tag: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   created_by_id: z.string(),
+  display_name: z.string().optional(),
   expression: z.string(),
   generation: z.number().int(),
   is_active: z.boolean(),
@@ -218,15 +232,18 @@ export const UpdateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   trigger_count: z.number().int(),
   type: UpdateAgentScheduleSchedulesType$inboundSchema,
   updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updated_by_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "agent_key": "agentKey",
     "agent_tag": "agentTag",
     "created_by_id": "createdById",
+    "display_name": "displayName",
     "is_active": "isActive",
     "last_triggered_at": "lastTriggeredAt",
     "trigger_count": "triggerCount",
+    "updated_by_id": "updatedById",
   });
 });
 

@@ -91,37 +91,37 @@ const value: operations.RetrieveAnnotationQueueItemEvaluations6 = {
 };
 ```
 
-### `operations.Evaluations7`
+### `operations.RetrieveAnnotationQueueItemEvaluations7`
 
 ```typescript
-const value: operations.Evaluations7 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations7 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
   evaluatorConfigType: "output_guardrail",
   type: "http_evaluator",
   status: "completed",
-  value: 2522.05,
+  value: false,
 };
 ```
 
-### `operations.Evaluations8`
+### `operations.RetrieveAnnotationQueueItemEvaluations8`
 
 ```typescript
-const value: operations.Evaluations8 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations8 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
-  evaluatorConfigType: "input_evaluator",
+  evaluatorConfigType: "input_guardrail",
   type: "http_evaluator",
   status: "pending",
 };
 ```
 
-### `operations.Evaluations9`
+### `operations.RetrieveAnnotationQueueItemEvaluations9`
 
 ```typescript
-const value: operations.Evaluations9 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations9 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
@@ -131,50 +131,50 @@ const value: operations.Evaluations9 = {
 };
 ```
 
-### `operations.Evaluations10`
+### `operations.RetrieveAnnotationQueueItemEvaluations10`
 
 ```typescript
-const value: operations.Evaluations10 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations10 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "input_guardrail",
+  type: "llm_evaluator",
+  status: "completed",
+  value: 420.56,
+};
+```
+
+### `operations.RetrieveAnnotationQueueItemEvaluations11`
+
+```typescript
+const value: operations.RetrieveAnnotationQueueItemEvaluations11 = {
+  id: "<id>",
+  evaluationType: "evaluator",
+  evaluatorId: "<id>",
+  evaluatorConfigType: "input_guardrail",
+  type: "llm_evaluator",
+  status: "pending",
+};
+```
+
+### `operations.RetrieveAnnotationQueueItemEvaluations12`
+
+```typescript
+const value: operations.RetrieveAnnotationQueueItemEvaluations12 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
   evaluatorConfigType: "output_evaluator",
   type: "llm_evaluator",
-  status: "completed",
-  value: "<value>",
-};
-```
-
-### `operations.Evaluations11`
-
-```typescript
-const value: operations.Evaluations11 = {
-  id: "<id>",
-  evaluationType: "evaluator",
-  evaluatorId: "<id>",
-  evaluatorConfigType: "output_guardrail",
-  type: "llm_evaluator",
-  status: "pending",
-};
-```
-
-### `operations.Evaluations12`
-
-```typescript
-const value: operations.Evaluations12 = {
-  id: "<id>",
-  evaluationType: "evaluator",
-  evaluatorId: "<id>",
-  evaluatorConfigType: "output_guardrail",
-  type: "llm_evaluator",
   status: "failed",
 };
 ```
 
-### `operations.Evaluations13`
+### `operations.RetrieveAnnotationQueueItemEvaluations13`
 
 ```typescript
-const value: operations.Evaluations13 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations13 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
@@ -201,36 +201,36 @@ const value: operations.Evaluations13 = {
 };
 ```
 
-### `operations.Evaluations14`
+### `operations.RetrieveAnnotationQueueItemEvaluations14`
 
 ```typescript
-const value: operations.Evaluations14 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations14 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
-  evaluatorConfigType: "input_evaluator",
+  evaluatorConfigType: "output_evaluator",
   type: "rouge_n",
   status: "pending",
 };
 ```
 
-### `operations.Evaluations15`
+### `operations.RetrieveAnnotationQueueItemEvaluations15`
 
 ```typescript
-const value: operations.Evaluations15 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations15 = {
   id: "<id>",
   evaluationType: "evaluator",
   evaluatorId: "<id>",
-  evaluatorConfigType: "input_guardrail",
+  evaluatorConfigType: "input_evaluator",
   type: "rouge_n",
   status: "failed",
 };
 ```
 
-### `operations.Evaluations16`
+### `operations.RetrieveAnnotationQueueItemEvaluations16`
 
 ```typescript
-const value: operations.Evaluations16 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations16 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
@@ -239,39 +239,43 @@ const value: operations.Evaluations16 = {
 };
 ```
 
-### `operations.Evaluations17`
+### `operations.RetrieveAnnotationQueueItemEvaluations17`
 
 ```typescript
-const value: operations.Evaluations17 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations17 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
   type: "number",
-  value: 6008.58,
+  value: 6411.72,
 };
 ```
 
-### `operations.Evaluations18`
+### `operations.RetrieveAnnotationQueueItemEvaluations18`
 
 ```typescript
-const value: operations.Evaluations18 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations18 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
   type: "boolean",
-  value: true,
+  value: false,
 };
 ```
 
-### `operations.Evaluations19`
+### `operations.RetrieveAnnotationQueueItemEvaluations19`
 
 ```typescript
-const value: operations.Evaluations19 = {
+const value: operations.RetrieveAnnotationQueueItemEvaluations19 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
   type: "string_array",
-  values: [],
+  values: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
 };
 ```
 

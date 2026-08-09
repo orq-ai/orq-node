@@ -86,7 +86,7 @@ run();
 
 ## create
 
-Creates a schedule that runs the agent on a recurring or one-off cadence. The minimum firing interval is 1 hour for `cron` and `interval`; `once` schedules are exempt.
+Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
 
 ### Example Usage: daily_cron
 
@@ -103,7 +103,8 @@ async function run() {
     agentKey: "<value>",
     requestBody: {
       agentTag: "v2",
-      expression: "0 0 9 * * mon-fri",
+      displayName: "Daily morning briefing",
+      expression: "0 0 9 * * *",
       payload: {
         input: "Generate the morning briefing for {{region}}",
         memoryEntityId: "mem_entity_123",
@@ -143,7 +144,8 @@ async function run() {
     agentKey: "<value>",
     requestBody: {
       agentTag: "v2",
-      expression: "0 0 9 * * mon-fri",
+      displayName: "Daily morning briefing",
+      expression: "0 0 9 * * *",
       payload: {
         input: "Generate the morning briefing for {{region}}",
         memoryEntityId: "mem_entity_123",
@@ -153,6 +155,71 @@ async function run() {
         variables: {
           "region": "EMEA",
         },
+      },
+      type: "cron",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("schedulesCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: hourly_cron
+
+<!-- UsageSnippet language="typescript" operationID="create-agent-schedule" method="post" path="/v3/agents/{agent_key}/schedules" example="hourly_cron" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.schedules.create({
+    agentKey: "<value>",
+    requestBody: {
+      displayName: "Hourly ticket summary",
+      expression: "0 0 * * * *",
+      payload: {
+        input: "Summarize new tickets from the last hour",
+      },
+      type: "cron",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { schedulesCreate } from "@orq-ai/node/funcs/schedulesCreate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await schedulesCreate(orq, {
+    agentKey: "<value>",
+    requestBody: {
+      displayName: "Hourly ticket summary",
+      expression: "0 0 * * * *",
+      payload: {
+        input: "Summarize new tickets from the last hour",
       },
       type: "cron",
     },
@@ -181,11 +248,11 @@ async function run() {
   const result = await orq.schedules.create({
     agentKey: "<value>",
     requestBody: {
+      displayName: "Bernie56",
       expression: "@every 1h",
       payload: {
         input: "Summarize new tickets from the last hour",
       },
-      type: "interval",
     },
   });
 
@@ -213,11 +280,11 @@ async function run() {
   const res = await schedulesCreate(orq, {
     agentKey: "<value>",
     requestBody: {
+      displayName: "Nicholas.Heaney25",
       expression: "@every 1h",
       payload: {
         input: "Summarize new tickets from the last hour",
       },
-      type: "interval",
     },
   });
   if (res.ok) {
@@ -244,11 +311,11 @@ async function run() {
   const result = await orq.schedules.create({
     agentKey: "<value>",
     requestBody: {
+      displayName: "Wava_Ferry",
       expression: "@at 2026-05-01T09:00:00Z",
       payload: {
         input: "Check in on ticket TICKET-123 and post a status update.",
       },
-      type: "once",
     },
   });
 
@@ -276,11 +343,76 @@ async function run() {
   const res = await schedulesCreate(orq, {
     agentKey: "<value>",
     requestBody: {
+      displayName: "Keagan.Wolf-Hermiston57",
       expression: "@at 2026-05-01T09:00:00Z",
       payload: {
         input: "Check in on ticket TICKET-123 and post a status update.",
       },
-      type: "once",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("schedulesCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: weekly_cron
+
+<!-- UsageSnippet language="typescript" operationID="create-agent-schedule" method="post" path="/v3/agents/{agent_key}/schedules" example="weekly_cron" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.schedules.create({
+    agentKey: "<value>",
+    requestBody: {
+      displayName: "Weekly ticket status update",
+      expression: "0 0 9 * * 1",
+      payload: {
+        input: "Post the weekly status update for TICKET-123.",
+      },
+      type: "cron",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { schedulesCreate } from "@orq-ai/node/funcs/schedulesCreate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await schedulesCreate(orq, {
+    agentKey: "<value>",
+    requestBody: {
+      displayName: "Weekly ticket status update",
+      expression: "0 0 9 * * 1",
+      payload: {
+        input: "Post the weekly status update for TICKET-123.",
+      },
+      type: "cron",
     },
   });
   if (res.ok) {
@@ -486,7 +618,7 @@ async function run() {
     agentKey: "<value>",
     scheduleId: "<id>",
     requestBody: {
-      expression: "@every 6h",
+      expression: "0 0 9 * * *",
     },
   });
 
@@ -515,7 +647,7 @@ async function run() {
     agentKey: "<value>",
     scheduleId: "<id>",
     requestBody: {
-      expression: "@every 6h",
+      expression: "0 0 9 * * *",
     },
   });
   if (res.ok) {
@@ -573,6 +705,63 @@ async function run() {
     scheduleId: "<id>",
     requestBody: {
       isActive: false,
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("schedulesUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: rename
+
+<!-- UsageSnippet language="typescript" operationID="update-agent-schedule" method="patch" path="/v3/agents/{agent_key}/schedules/{schedule_id}" example="rename" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.schedules.update({
+    agentKey: "<value>",
+    scheduleId: "<id>",
+    requestBody: {
+      displayName: "Nightly report",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { schedulesUpdate } from "@orq-ai/node/funcs/schedulesUpdate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await schedulesUpdate(orq, {
+    agentKey: "<value>",
+    scheduleId: "<id>",
+    requestBody: {
+      displayName: "Nightly report",
     },
   });
   if (res.ok) {

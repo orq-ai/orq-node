@@ -1,0 +1,33 @@
+# McpAccess
+
+McpAccess optionally restricts which MCP gateways an API key may
+ reach at the data plane. It is orthogonal to permission_mode /
+ access: the key must still hold the `mcp_gateway.execute` verb and
+ project membership; McpAccess only narrows the reachable gateway set
+ within that grant. Human sessions and keys without an McpAccess are
+ unaffected.
+
+ Semantics:
+   - absent, or deny_all=false with an empty allowed_mcp_gateway_ids:
+     no restriction — every gateway in the key's project scope is
+     reachable.
+   - deny_all=true: zero gateways are reachable. Wins over
+     allowed_mcp_gateway_ids.
+   - non-empty allowed_mcp_gateway_ids: only the listed gateway ids
+     are reachable. Each id must look like `mcp_gateway_<ULID>`.
+
+## Example Usage
+
+```typescript
+import { McpAccess } from "@orq-ai/node/models/components";
+
+let value: McpAccess = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                             | Type                                                                                                                                                                                                                                                              | Required                                                                                                                                                                                                                                                          | Description                                                                                                                                                                                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `denyAll`                                                                                                                                                                                                                                                         | *boolean*                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                | When true, the key is denied every MCP gateway regardless of<br/> allowed_mcp_gateway_ids.                                                                                                                                                                        |
+| `allowedMcpGatewayIds`                                                                                                                                                                                                                                            | *string*[]                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                | Allow-list of MCP gateway ids (`mcp_gateway_<ULID>`) the key may<br/> reach. Ignored when deny_all is true. Empty (with deny_all=false)<br/> means no restriction.                                                                                                |
+| `toolsetIds`                                                                                                                                                                                                                                                      | *string*[]                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                | Allow-list of MCP toolset ids (`mcp_toolset_<ULID>`) the key is<br/> bound to. When non-empty, the key sees and may call only the tools<br/> that are both exposed by the target gateway and members of the<br/> union of these toolsets. Empty means no toolset restriction. |
