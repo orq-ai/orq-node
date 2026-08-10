@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -22,22 +21,23 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a routing rule
+ * Create routing rule
  *
  * @remarks
- * Creates a routing rule with metadata and optional model, plugin, priority, and matching configuration. Rules default to disabled when `enabled` is omitted.
+ * Creates a new routing rule with expression, models configuration, and priority settings.
  */
 export function routingRulesCreate(
   client: OrqCore,
-  request: components.CreateRoutingRuleRequest,
+  request: operations.RoutingRuleCreateRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.RoutingRule,
+    operations.RoutingRuleCreateResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function routingRulesCreate(
 
 async function $do(
   client: OrqCore,
-  request: components.CreateRoutingRuleRequest,
+  request: operations.RoutingRuleCreateRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.RoutingRule,
+      operations.RoutingRuleCreateResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,7 +77,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.CreateRoutingRuleRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.RoutingRuleCreateRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -140,7 +141,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.RoutingRule,
+    operations.RoutingRuleCreateResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -150,8 +151,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.RoutingRule$inboundSchema),
-    M.fail("4XX"),
+    M.json(201, operations.RoutingRuleCreateResponseBody$inboundSchema),
+    M.fail([400, 409, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

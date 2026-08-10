@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -30,7 +29,7 @@ import { Result } from "../types/fp.js";
  * List routing rules
  *
  * @remarks
- * Returns routing rules ordered by ascending priority. Supports cursor pagination, search, status, project, and referenced-model filters.
+ * Returns a paginated list of routing rules for the current project, ordered by priority ascending.
  */
 export function routingRulesList(
   client: OrqCore,
@@ -38,7 +37,7 @@ export function routingRulesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ListRoutingRulesResponse,
+    operations.RoutingRuleListResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ListRoutingRulesResponse,
+      operations.RoutingRuleListResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -98,7 +97,7 @@ async function $do(
     "project_id": payload?.project_id,
     "search": payload?.search,
     "starting_after": payload?.starting_after,
-  });
+  }, { explode: false });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -152,7 +151,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ListRoutingRulesResponse,
+    operations.RoutingRuleListResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -162,7 +161,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ListRoutingRulesResponse$inboundSchema),
+    M.json(200, operations.RoutingRuleListResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

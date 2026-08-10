@@ -40,7 +40,7 @@ export type GuardrailRuleUpdateResponseBody = {
   guardrails?: Array<components.GuardrailRef> | null | undefined;
   plugins?: Array<components.Plugin> | null | undefined;
   projectId: string;
-  timeout?: number | undefined;
+  timeout: number;
   updatedAt: Date;
   updatedById: string;
 };
@@ -129,7 +129,7 @@ export const GuardrailRuleUpdateResponseBody$inboundSchema: z.ZodType<
     .optional(),
   plugins: z.nullable(z.array(components.Plugin$inboundSchema)).optional(),
   project_id: z.string(),
-  timeout: z.number().int().optional(),
+  timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_by_id: z.string(),
 }).transform((v) => {

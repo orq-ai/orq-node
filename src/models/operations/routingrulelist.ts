@@ -4,26 +4,57 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RoutingRuleListRequest = {
   limit?: number | undefined;
+  /**
+   * A cursor for use in pagination.
+   */
   startingAfter?: string | undefined;
+  /**
+   * A cursor for use in pagination.
+   */
   endingBefore?: string | undefined;
+  /**
+   * Optional filter by project ID.
+   */
   projectId?: string | undefined;
+  /**
+   * Optional search term matched against name and description.
+   */
   search?: string | undefined;
-  enabled?: boolean | undefined;
-  model?: Array<string> | undefined;
+  /**
+   * Filter by enabled status.
+   */
+  enabled?: boolean | null | undefined;
+  /**
+   * Filter by referenced model refs (comma-separated).
+   */
+  model?: Array<string> | null | undefined;
+};
+
+/**
+ * Routing rules retrieved successfully
+ */
+export type RoutingRuleListResponseBody = {
+  data: Array<components.RoutingRule> | null;
+  hasMore: boolean;
+  object: string;
 };
 
 /** @internal */
 export type RoutingRuleListRequest$Outbound = {
-  limit?: number | undefined;
+  limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
   search?: string | undefined;
-  enabled?: boolean | undefined;
-  model?: Array<string> | undefined;
+  enabled?: boolean | null | undefined;
+  model?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -32,13 +63,13 @@ export const RoutingRuleListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RoutingRuleListRequest
 > = z.object({
-  limit: z.number().int().optional(),
+  limit: z.number().int().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
   search: z.string().optional(),
-  enabled: z.boolean().optional(),
-  model: z.array(z.string()).optional(),
+  enabled: z.nullable(z.boolean()).optional(),
+  model: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -52,5 +83,30 @@ export function routingRuleListRequestToJSON(
 ): string {
   return JSON.stringify(
     RoutingRuleListRequest$outboundSchema.parse(routingRuleListRequest),
+  );
+}
+
+/** @internal */
+export const RoutingRuleListResponseBody$inboundSchema: z.ZodType<
+  RoutingRuleListResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  data: z.nullable(z.array(components.RoutingRule$inboundSchema)),
+  has_more: z.boolean(),
+  object: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "has_more": "hasMore",
+  });
+});
+
+export function routingRuleListResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<RoutingRuleListResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RoutingRuleListResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoutingRuleListResponseBody' from JSON`,
   );
 }

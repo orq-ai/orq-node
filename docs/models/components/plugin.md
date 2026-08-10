@@ -12,10 +12,6 @@ let value: Plugin = {
   ofResponseHealing: {
     id: "response_healing",
   },
-  ofTraceScrubbing: {
-    id: "trace_scrubbing",
-    mask: [],
-  },
 };
 ```
 
@@ -25,4 +21,3 @@ let value: Plugin = {
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ofPIIRedaction`                                                                     | [components.PIIRedactionPlugin](../../models/components/piiredactionplugin.md)       | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `ofResponseHealing`                                                                  | [components.ResponseHealingPlugin](../../models/components/responsehealingplugin.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `ofTraceScrubbing`                                                                   | [components.TraceScrubbingPlugin](../../models/components/tracescrubbingplugin.md)   | :heavy_check_mark:                                                                   | N/A                                                                                  |

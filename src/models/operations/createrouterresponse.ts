@@ -841,7 +841,7 @@ export type CreateRouterResponseRequestBody = {
    */
   parallelToolCalls?: boolean | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response; response_healing, which repairs malformed JSON in non-streaming model output; and trace_scrubbing, which removes selected sensitive fields from exported traces.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and response_healing, which repairs malformed JSON in non-streaming model output.
    */
   plugins?: Array<components.PublicPlugin> | null | undefined;
   /**

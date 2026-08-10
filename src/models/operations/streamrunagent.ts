@@ -204,7 +204,6 @@ export type StreamRunAgentModelConfigurationGuardrails = {
 export type StreamRunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -441,7 +440,6 @@ export type StreamRunAgentModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -712,7 +710,6 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
 export type StreamRunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -953,7 +950,6 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -2481,7 +2477,6 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -2493,7 +2488,6 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
   components.ResponseHealingPlugin$outboundSchema,
 ]);
@@ -2751,7 +2745,6 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -2813,7 +2806,6 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
         components.ResponseHealingPlugin$outboundSchema,
       ]),
@@ -3318,7 +3310,6 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -3331,7 +3322,6 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
-    components.TraceScrubbingPlugin$outboundSchema,
     components.PIIRedactionPluginAuto$outboundSchema,
     components.ResponseHealingPlugin$outboundSchema,
   ]);
@@ -3594,7 +3584,6 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -3665,7 +3654,6 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
         components.ResponseHealingPlugin$outboundSchema,
       ]),
@@ -4168,7 +4156,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01KZM7PMSKJFM1X1NX88Z6T3YJ"),
+  id: z.string().default("01KZNKY412B5VWTDQ7Y8WAQ9WT"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

@@ -5,15 +5,15 @@
 ### Available Operations
 
 * [list](#list) - List routing rules
-* [create](#create) - Create a routing rule
-* [listUsedModels](#listusedmodels) - List models used by routing rules
-* [retrieve](#retrieve) - Retrieve a routing rule
-* [delete](#delete) - Delete a routing rule
-* [update](#update) - Update a routing rule
+* [create](#create) - Create routing rule
+* [listUsedModels](#listusedmodels) - List used models
+* [delete](#delete) - Delete routing rule
+* [retrieve](#retrieve) - Get routing rule
+* [update](#update) - Update routing rule
 
 ## list
 
-Returns routing rules ordered by ascending priority. Supports cursor pagination, search, status, project, and referenced-model filters.
+Returns a paginated list of routing rules for the current project, ordered by priority ascending.
 
 ### Example Usage
 
@@ -26,9 +26,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.routingRules.list({
-    limit: 10,
-  });
+  const result = await orq.routingRules.list({});
 
   console.log(result);
 }
@@ -51,9 +49,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await routingRulesList(orq, {
-    limit: 10,
-  });
+  const res = await routingRulesList(orq, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -76,7 +72,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListRoutingRulesResponse](../../models/components/listroutingrulesresponse.md)\>**
+**Promise\<[operations.RoutingRuleListResponseBody](../../models/operations/routingrulelistresponsebody.md)\>**
 
 ### Errors
 
@@ -86,7 +82,7 @@ run();
 
 ## create
 
-Creates a routing rule with metadata and optional model, plugin, priority, and matching configuration. Rules default to disabled when `enabled` is omitted.
+Creates a new routing rule with expression, models configuration, and priority settings.
 
 ### Example Usage
 
@@ -142,14 +138,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.CreateRoutingRuleRequest](../../models/components/createroutingrulerequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.RoutingRuleCreateRequestBody](../../models/operations/routingrulecreaterequestbody.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.RoutingRule](../../models/components/routingrule.md)\>**
+**Promise\<[operations.RoutingRuleCreateResponseBody](../../models/operations/routingrulecreateresponsebody.md)\>**
 
 ### Errors
 
@@ -159,7 +155,7 @@ run();
 
 ## listUsedModels
 
-Returns the distinct model references used by routing rules in the requested scope.
+Returns the distinct model refs referenced across all routing rules in scope.
 
 ### Example Usage
 
@@ -211,87 +207,13 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.RoutingRuleListUsedModelsRequest](../../models/operations/routingrulelistusedmodelsrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.ListRoutingRuleUsedModelsResponse](../../models/components/listroutingruleusedmodelsresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## retrieve
-
-Retrieves a routing rule by its unique identifier.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="RoutingRuleGet" method="get" path="/v2/routing-rules/{routing_rule_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.routingRules.retrieve({
-    routingRuleId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { routingRulesRetrieve } from "@orq-ai/node/funcs/routingRulesRetrieve.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await routingRulesRetrieve(orq, {
-    routingRuleId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("routingRulesRetrieve failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.RoutingRuleGetRequest](../../models/operations/routingrulegetrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.RoutingRule](../../models/components/routingrule.md)\>**
+**Promise\<[operations.RoutingRuleListUsedModelsResponseBody](../../models/operations/routingrulelistusedmodelsresponsebody.md)\>**
 
 ### Errors
 
@@ -301,7 +223,7 @@ run();
 
 ## delete
 
-Permanently deletes a routing rule.
+Deletes an existing routing rule by ID.
 
 ### Example Usage
 
@@ -372,9 +294,82 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
+## retrieve
+
+Retrieves the details of an existing routing rule by ID.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="RoutingRuleGet" method="get" path="/v2/routing-rules/{routing_rule_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.routingRules.retrieve({
+    routingRuleId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { routingRulesRetrieve } from "@orq-ai/node/funcs/routingRulesRetrieve.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await routingRulesRetrieve(orq, {
+    routingRuleId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("routingRulesRetrieve failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.RoutingRuleGetRequest](../../models/operations/routingrulegetrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.RoutingRuleGetResponseBody](../../models/operations/routingrulegetresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
 ## update
 
-Partially updates routing-rule metadata or configuration. Project scope is immutable.
+Partially updates an existing routing rule. Only provided fields are updated.
 
 ### Example Usage
 
@@ -389,7 +384,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.routingRules.update({
     routingRuleId: "<id>",
-    updateRoutingRuleRequest: {},
+    requestBody: {},
   });
 
   console.log(result);
@@ -415,7 +410,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await routingRulesUpdate(orq, {
     routingRuleId: "<id>",
-    updateRoutingRuleRequest: {},
+    requestBody: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -439,7 +434,7 @@ run();
 
 ### Response
 
-**Promise\<[components.RoutingRule](../../models/components/routingrule.md)\>**
+**Promise\<[operations.RoutingRuleUpdateResponseBody](../../models/operations/routingruleupdateresponsebody.md)\>**
 
 ### Errors
 

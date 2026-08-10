@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a routing rule
+ * Get routing rule
  *
  * @remarks
- * Retrieves a routing rule by its unique identifier.
+ * Retrieves the details of an existing routing rule by ID.
  */
 export function routingRulesRetrieve(
   client: OrqCore,
@@ -38,7 +37,7 @@ export function routingRulesRetrieve(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.RoutingRule,
+    operations.RoutingRuleGetResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.RoutingRule,
+      operations.RoutingRuleGetResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -146,7 +145,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.RoutingRule,
+    operations.RoutingRuleGetResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -156,8 +155,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.RoutingRule$inboundSchema),
-    M.fail("4XX"),
+    M.json(200, operations.RoutingRuleGetResponseBody$inboundSchema),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

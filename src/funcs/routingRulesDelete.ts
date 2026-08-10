@@ -27,10 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete a routing rule
+ * Delete routing rule
  *
  * @remarks
- * Permanently deletes a routing rule.
+ * Deletes an existing routing rule by ID.
  */
 export function routingRulesDelete(
   client: OrqCore,
@@ -157,7 +157,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, z.void()),
-    M.fail("4XX"),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

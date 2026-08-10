@@ -132,6 +132,11 @@ export class Orq extends ClientSDK {
     return (this._policies ??= new Policies(this._options));
   }
 
+  private _routingRules?: RoutingRules;
+  get routingRules(): RoutingRules {
+    return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
   private _alerts?: Alerts;
   get alerts(): Alerts {
     return (this._alerts ??= new Alerts(this._options));
@@ -175,11 +180,6 @@ export class Orq extends ClientSDK {
   private _projects?: Projects;
   get projects(): Projects {
     return (this._projects ??= new Projects(this._options));
-  }
-
-  private _routingRules?: RoutingRules;
-  get routingRules(): RoutingRules {
-    return (this._routingRules ??= new RoutingRules(this._options));
   }
 
   private _skills?: Skills;

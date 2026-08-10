@@ -12,6 +12,6 @@ let value: RoutingRuleDeleteRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `routingRuleId`    | *string*           | :heavy_check_mark: | N/A                |
+| Field                      | Type                       | Required                   | Description                |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `routingRuleId`            | *string*                   | :heavy_check_mark:         | The ID of the routing rule |

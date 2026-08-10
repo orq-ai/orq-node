@@ -37,12 +37,3 @@ const value: components.ResponseHealingPlugin = {
 };
 ```
 
-### `components.TraceScrubbingPlugin`
-
-```typescript
-const value: components.TraceScrubbingPlugin = {
-  id: "trace_scrubbing",
-  mask: [],
-};
-```
-

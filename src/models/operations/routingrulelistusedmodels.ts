@@ -3,36 +3,35 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RoutingRuleListUsedModelsRequest = {
-  projectId?: string | undefined;
+/**
+ * Used models retrieved successfully
+ */
+export type RoutingRuleListUsedModelsResponseBody = {
+  models: Array<string> | null;
+  object: string;
 };
 
 /** @internal */
-export type RoutingRuleListUsedModelsRequest$Outbound = {
-  project_id?: string | undefined;
-};
-
-/** @internal */
-export const RoutingRuleListUsedModelsRequest$outboundSchema: z.ZodType<
-  RoutingRuleListUsedModelsRequest$Outbound,
+export const RoutingRuleListUsedModelsResponseBody$inboundSchema: z.ZodType<
+  RoutingRuleListUsedModelsResponseBody,
   z.ZodTypeDef,
-  RoutingRuleListUsedModelsRequest
+  unknown
 > = z.object({
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
+  models: z.nullable(z.array(z.string())),
+  object: z.string(),
 });
 
-export function routingRuleListUsedModelsRequestToJSON(
-  routingRuleListUsedModelsRequest: RoutingRuleListUsedModelsRequest,
-): string {
-  return JSON.stringify(
-    RoutingRuleListUsedModelsRequest$outboundSchema.parse(
-      routingRuleListUsedModelsRequest,
-    ),
+export function routingRuleListUsedModelsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<RoutingRuleListUsedModelsResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RoutingRuleListUsedModelsResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoutingRuleListUsedModelsResponseBody' from JSON`,
   );
 }
