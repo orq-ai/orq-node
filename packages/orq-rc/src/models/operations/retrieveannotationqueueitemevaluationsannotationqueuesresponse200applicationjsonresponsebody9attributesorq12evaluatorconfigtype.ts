@@ -886,6 +886,10 @@ export type RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Ap
      */
     topN?: number | undefined;
     /**
+     * Whether to return the documents in the response
+     */
+    returnDocuments?: boolean | undefined;
+    /**
      * The filename of the document to rerank
      */
     filename?: string | null | undefined;
@@ -3997,7 +4001,8 @@ export const RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200A
     query: z.string(),
     documents: z.array(z.string()),
     model: z.string(),
-    top_n: z.number().optional(),
+    top_n: z.number().int().optional(),
+    return_documents: z.boolean().optional(),
     filename: z.nullable(z.string()).optional(),
     name: z.string().optional(),
     fallbacks: z.array(
@@ -4030,6 +4035,7 @@ export const RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200A
   }).transform((v) => {
     return remap$(v, {
       "top_n": "topN",
+      "return_documents": "returnDocuments",
       "load_balancer": "loadBalancer",
     });
   });
@@ -4212,7 +4218,7 @@ export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse2
 /** @internal */
 export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01KZM7PPB9RBE12QN9084QCR8M"),
+    _id: z.string().default("01KZNZEXYVVAPB9MCYEMA8HRTJ"),
     name: z.string().optional(),
     trace_id: z.string(),
     duration: z.number().optional(),
@@ -5226,7 +5232,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.712Z",
+      "2026-08-10T13:58:11.643Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq19Type$inboundSchema,
@@ -5352,7 +5358,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.712Z",
+      "2026-08-10T13:58:11.643Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq18Type$inboundSchema,
@@ -5478,7 +5484,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.711Z",
+      "2026-08-10T13:58:11.642Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq17Type$inboundSchema,
@@ -5604,7 +5610,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.710Z",
+      "2026-08-10T13:58:11.641Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq16Type$inboundSchema,
@@ -5737,10 +5743,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.708Z",
+      "2026-08-10T13:58:11.641Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.709Z",
+      "2026-08-10T13:58:11.641Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq15Type$inboundSchema,
@@ -5879,10 +5885,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.707Z",
+      "2026-08-10T13:58:11.640Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.707Z",
+      "2026-08-10T13:58:11.640Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq14Type$inboundSchema,
@@ -6137,10 +6143,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.705Z",
+      "2026-08-10T13:58:11.639Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-09T21:43:45.705Z",
+      "2026-08-10T13:58:11.639Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody9AttributesOrq13Type$inboundSchema,

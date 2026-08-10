@@ -4,45 +4,36 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Used guardrails retrieved successfully
- */
-export type GuardrailRuleListUsedGuardrailsResponseBody = {
-  guardrailIds: Array<string> | null;
-  object: string;
+export type GuardrailRuleListUsedGuardrailsRequest = {
+  projectId?: string | undefined;
 };
 
 /** @internal */
-export const GuardrailRuleListUsedGuardrailsResponseBody$inboundSchema:
-  z.ZodType<
-    GuardrailRuleListUsedGuardrailsResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    guardrail_ids: z.nullable(z.array(z.string())),
-    object: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "guardrail_ids": "guardrailIds",
-    });
-  });
+export type GuardrailRuleListUsedGuardrailsRequest$Outbound = {
+  project_id?: string | undefined;
+};
 
-export function guardrailRuleListUsedGuardrailsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GuardrailRuleListUsedGuardrailsResponseBody,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GuardrailRuleListUsedGuardrailsResponseBody$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GuardrailRuleListUsedGuardrailsResponseBody' from JSON`,
+/** @internal */
+export const GuardrailRuleListUsedGuardrailsRequest$outboundSchema: z.ZodType<
+  GuardrailRuleListUsedGuardrailsRequest$Outbound,
+  z.ZodTypeDef,
+  GuardrailRuleListUsedGuardrailsRequest
+> = z.object({
+  projectId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    projectId: "project_id",
+  });
+});
+
+export function guardrailRuleListUsedGuardrailsRequestToJSON(
+  guardrailRuleListUsedGuardrailsRequest:
+    GuardrailRuleListUsedGuardrailsRequest,
+): string {
+  return JSON.stringify(
+    GuardrailRuleListUsedGuardrailsRequest$outboundSchema.parse(
+      guardrailRuleListUsedGuardrailsRequest,
+    ),
   );
 }

@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -26,10 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update guardrail rule
+ * Update a guardrail rule
  *
  * @remarks
- * Partially updates an existing guardrail rule. Only provided fields are updated.
+ * Partially updates guardrail-rule metadata or configuration. Project scope is immutable.
  */
 export function guardrailRulesUpdate(
   client: OrqCore,
@@ -37,7 +38,7 @@ export function guardrailRulesUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleUpdateResponseBody,
+    components.UpdateGuardrailRuleResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleUpdateResponseBody,
+      components.UpdateGuardrailRuleResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -85,7 +86,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.UpdateGuardrailRuleRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     guardrail_rule_id: encodeSimple(
@@ -150,7 +153,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GuardrailRuleUpdateResponseBody,
+    components.UpdateGuardrailRuleResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -160,8 +163,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GuardrailRuleUpdateResponseBody$inboundSchema),
-    M.fail([400, 404, 409, "4XX"]),
+    M.json(200, components.UpdateGuardrailRuleResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a routing rule
-   *
-   * @remarks
-   * Creates a routing rule with metadata and optional model, plugin, priority, and matching configuration. Rules default to disabled when `enabled` is omitted.
+   * Create a human review set
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

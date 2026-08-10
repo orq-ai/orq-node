@@ -7,10 +7,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Config = {};
+export type RoutingRuleExpressionConfig = {};
 
 export type RoutingRuleExpression = {
-  config?: Config | undefined;
+  config?: RoutingRuleExpressionConfig | undefined;
   /**
    * CEL expression used to match requests. Empty means the rule always matches.
    */
@@ -18,28 +18,37 @@ export type RoutingRuleExpression = {
 };
 
 /** @internal */
-export const Config$inboundSchema: z.ZodType<Config, z.ZodTypeDef, unknown> = z
-  .object({});
+export const RoutingRuleExpressionConfig$inboundSchema: z.ZodType<
+  RoutingRuleExpressionConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
 /** @internal */
-export type Config$Outbound = {};
+export type RoutingRuleExpressionConfig$Outbound = {};
 
 /** @internal */
-export const Config$outboundSchema: z.ZodType<
-  Config$Outbound,
+export const RoutingRuleExpressionConfig$outboundSchema: z.ZodType<
+  RoutingRuleExpressionConfig$Outbound,
   z.ZodTypeDef,
-  Config
+  RoutingRuleExpressionConfig
 > = z.object({});
 
-export function configToJSON(config: Config): string {
-  return JSON.stringify(Config$outboundSchema.parse(config));
+export function routingRuleExpressionConfigToJSON(
+  routingRuleExpressionConfig: RoutingRuleExpressionConfig,
+): string {
+  return JSON.stringify(
+    RoutingRuleExpressionConfig$outboundSchema.parse(
+      routingRuleExpressionConfig,
+    ),
+  );
 }
-export function configFromJSON(
+export function routingRuleExpressionConfigFromJSON(
   jsonString: string,
-): SafeParseResult<Config, SDKValidationError> {
+): SafeParseResult<RoutingRuleExpressionConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Config$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Config' from JSON`,
+    (x) => RoutingRuleExpressionConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoutingRuleExpressionConfig' from JSON`,
   );
 }
 
@@ -49,12 +58,12 @@ export const RoutingRuleExpression$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  config: z.lazy(() => Config$inboundSchema).optional(),
+  config: z.lazy(() => RoutingRuleExpressionConfig$inboundSchema).optional(),
   cel: z.string().optional(),
 });
 /** @internal */
 export type RoutingRuleExpression$Outbound = {
-  config?: Config$Outbound | undefined;
+  config?: RoutingRuleExpressionConfig$Outbound | undefined;
   cel?: string | undefined;
 };
 
@@ -64,7 +73,7 @@ export const RoutingRuleExpression$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RoutingRuleExpression
 > = z.object({
-  config: z.lazy(() => Config$outboundSchema).optional(),
+  config: z.lazy(() => RoutingRuleExpressionConfig$outboundSchema).optional(),
   cel: z.string().optional(),
 });
 

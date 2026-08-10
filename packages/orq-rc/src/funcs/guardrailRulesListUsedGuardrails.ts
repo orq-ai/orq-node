@@ -3,12 +3,15 @@
  */
 
 import { OrqCore } from "../core.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -24,17 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List used guardrails
+ * List guardrails used by guardrail rules
  *
  * @remarks
- * Returns the distinct guardrail ids referenced across all guardrail rules in scope.
+ * Returns the distinct guardrail identifiers used by guardrail rules in the requested scope.
  */
 export function guardrailRulesListUsedGuardrails(
   client: OrqCore,
+  request?: operations.GuardrailRuleListUsedGuardrailsRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleListUsedGuardrailsResponseBody,
+    components.ListGuardrailRuleUsedGuardrailsResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -47,17 +51,19 @@ export function guardrailRulesListUsedGuardrails(
 > {
   return new APIPromise($do(
     client,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
+  request?: operations.GuardrailRuleListUsedGuardrailsRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleListUsedGuardrailsResponseBody,
+      components.ListGuardrailRuleUsedGuardrailsResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -70,7 +76,24 @@ async function $do(
     APICall,
   ]
 > {
+  const parsed = safeParse(
+    request,
+    (value) =>
+      operations.GuardrailRuleListUsedGuardrailsRequest$outboundSchema
+        .optional().parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return [parsed, { status: "invalid" }];
+  }
+  const payload = parsed.value;
+  const body = null;
+
   const path = pathToFunc("/v2/guardrail-rules/used-guardrails")();
+
+  const query = encodeFormQuery({
+    "project_id": payload?.project_id,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -101,6 +124,8 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
+    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
@@ -122,7 +147,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GuardrailRuleListUsedGuardrailsResponseBody,
+    components.ListGuardrailRuleUsedGuardrailsResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -134,7 +159,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.GuardrailRuleListUsedGuardrailsResponseBody$inboundSchema,
+      components.ListGuardrailRuleUsedGuardrailsResponse$inboundSchema,
     ),
     M.fail("4XX"),
     M.fail("5XX"),

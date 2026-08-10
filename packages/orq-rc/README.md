@@ -252,11 +252,11 @@ run();
 ### [GuardrailRules](docs/sdks/guardrailrules/README.md)
 
 * [list](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
-* [create](docs/sdks/guardrailrules/README.md#create) - Create guardrail rule
-* [listUsedGuardrails](docs/sdks/guardrailrules/README.md#listusedguardrails) - List used guardrails
-* [delete](docs/sdks/guardrailrules/README.md#delete) - Delete guardrail rule
-* [retrieve](docs/sdks/guardrailrules/README.md#retrieve) - Get guardrail rule
-* [update](docs/sdks/guardrailrules/README.md#update) - Update guardrail rule
+* [create](docs/sdks/guardrailrules/README.md#create) - Create a guardrail rule
+* [listUsedGuardrails](docs/sdks/guardrailrules/README.md#listusedguardrails) - List guardrails used by guardrail rules
+* [retrieve](docs/sdks/guardrailrules/README.md#retrieve) - Retrieve a guardrail rule
+* [delete](docs/sdks/guardrailrules/README.md#delete) - Delete a guardrail rule
+* [update](docs/sdks/guardrailrules/README.md#update) - Update a guardrail rule
 
 ### [HumanReviewSets](docs/sdks/humanreviewsets/README.md)
 
@@ -620,12 +620,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesGetContent`](docs/sdks/files/README.md#getcontent) - Download file content
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
 - [`filesUpdate`](docs/sdks/files/README.md#update) - Update a file
-- [`guardrailRulesCreate`](docs/sdks/guardrailrules/README.md#create) - Create guardrail rule
-- [`guardrailRulesDelete`](docs/sdks/guardrailrules/README.md#delete) - Delete guardrail rule
+- [`guardrailRulesCreate`](docs/sdks/guardrailrules/README.md#create) - Create a guardrail rule
+- [`guardrailRulesDelete`](docs/sdks/guardrailrules/README.md#delete) - Delete a guardrail rule
 - [`guardrailRulesList`](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
-- [`guardrailRulesListUsedGuardrails`](docs/sdks/guardrailrules/README.md#listusedguardrails) - List used guardrails
-- [`guardrailRulesRetrieve`](docs/sdks/guardrailrules/README.md#retrieve) - Get guardrail rule
-- [`guardrailRulesUpdate`](docs/sdks/guardrailrules/README.md#update) - Update guardrail rule
+- [`guardrailRulesListUsedGuardrails`](docs/sdks/guardrailrules/README.md#listusedguardrails) - List guardrails used by guardrail rules
+- [`guardrailRulesRetrieve`](docs/sdks/guardrailrules/README.md#retrieve) - Retrieve a guardrail rule
+- [`guardrailRulesUpdate`](docs/sdks/guardrailrules/README.md#update) - Update a guardrail rule
 - [`humanReviewSetsCreate`](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
 - [`humanReviewSetsDelete`](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
 - [`humanReviewSetsGet`](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID

@@ -1307,16 +1307,15 @@ export type JSONSchemaToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
-  {
-    Object: "object",
-  } as const;
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType = {
+  Object: "object",
+} as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType
   >;
 
 /**
@@ -1326,8 +1325,7 @@ export type RunAgentAgentToolInputRunParameters = {
   /**
    * The type must be "object"
    */
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType;
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType;
   /**
    * The properties of the function parameters
    */
@@ -1377,17 +1375,15 @@ export type FunctionToolRun = {
 /**
  * The type must be "object"
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
-  {
-    Object: "object",
-  } as const;
+export const RunAgentAgentToolInputRunAgentsRequestType = {
+  Object: "object",
+} as const;
 /**
  * The type must be "object"
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
-  >;
+export type RunAgentAgentToolInputRunAgentsRequestType = ClosedEnum<
+  typeof RunAgentAgentToolInputRunAgentsRequestType
+>;
 
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -1396,8 +1392,7 @@ export type AgentToolInputRunParameters = {
   /**
    * The type must be "object"
    */
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType;
+  type: RunAgentAgentToolInputRunAgentsRequestType;
   /**
    * The properties of the function parameters
    */
@@ -1499,19 +1494,17 @@ export type Blueprint = {
 /**
  * The type of the argument.
  */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
-  {
-    String: "string",
-    Number: "number",
-    Boolean: "boolean",
-  } as const;
+export const RunAgentAgentToolInputRunType = {
+  String: "string",
+  Number: "number",
+  Boolean: "boolean",
+} as const;
 /**
  * The type of the argument.
  */
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType =
-  ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
-  >;
+export type RunAgentAgentToolInputRunType = ClosedEnum<
+  typeof RunAgentAgentToolInputRunType
+>;
 
 /**
  * The default value of the argument.
@@ -1522,8 +1515,7 @@ export type Arguments = {
   /**
    * The type of the argument.
    */
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType;
+  type: RunAgentAgentToolInputRunType;
   /**
    * A description of the argument.
    */
@@ -1573,233 +1565,23 @@ export type HTTPToolRun = {
 };
 
 /**
- * Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
- */
-export type CodeInterpreterTool = {
-  type: "code_interpreter";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Delegate a subtask to a secondary model for execution
- */
-export type SidekickTool = {
-  type: "sidekick";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Consult a secondary model for advice on the current task
- */
-export type AdvisorTool = {
-  type: "advisor";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Returns the current date and time
- */
-export type CurrentDateTool = {
-  type: "current_date";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Queries knowledge bases for information
- */
-export type QueryKnowledgeBaseTool = {
-  type: "query_knowledge_base";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Lists available knowledge bases
- */
-export type RetrieveKnowledgeBasesTool = {
-  type: "retrieve_knowledge_bases";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Deletes documents from memory stores
- */
-export type DeleteMemoryDocumentTool = {
-  type: "delete_memory_document";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Lists available memory stores
- */
-export type RetrieveMemoryStoresTool = {
-  type: "retrieve_memory_stores";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Writes information to agent memory stores
- */
-export type WriteMemoryStoreTool = {
-  type: "write_memory_store";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Queries agent memory stores for context
- */
-export type QueryMemoryStoreTool = {
-  type: "query_memory_store";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Retrieves available agents in the system
- */
-export type RetrieveAgentsTool = {
-  type: "retrieve_agents";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Delegates tasks to specialized sub-agents
- */
-export type CallSubAgentTool = {
-  type: "call_sub_agent";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Scrapes and extracts content from web pages
- */
-export type WebScraperTool = {
-  type: "web_scraper";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
- * Performs Google searches to retrieve web content
- */
-export type GoogleSearchTool = {
-  type: "google_search";
-  /**
-   * Whether this tool requires approval before execution
-   */
-  requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/**
  * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function, JSON Schema, MCP) support full inline definitions for on-the-fly creation.
  */
 export type AgentToolInputRun =
-  | GoogleSearchTool
-  | WebScraperTool
-  | CallSubAgentTool
-  | RetrieveAgentsTool
-  | QueryMemoryStoreTool
-  | WriteMemoryStoreTool
-  | RetrieveMemoryStoresTool
-  | DeleteMemoryDocumentTool
-  | RetrieveKnowledgeBasesTool
-  | QueryKnowledgeBaseTool
-  | CurrentDateTool
-  | AdvisorTool
-  | SidekickTool
-  | CodeInterpreterTool
+  | components.GoogleSearchToolInput
+  | components.WebScraperToolInput
+  | components.CallSubAgentToolInput
+  | components.RetrieveAgentsToolInput
+  | components.QueryMemoryStoreToolInput
+  | components.WriteMemoryStoreToolInput
+  | components.RetrieveMemoryStoresToolInput
+  | components.DeleteMemoryDocumentToolInput
+  | components.RetrieveKnowledgeBasesToolInput
+  | components.QueryKnowledgeBaseToolInput
+  | components.CurrentDateToolInput
+  | components.AdvisorToolInput
+  | components.SidekickToolInput
+  | components.CodeInterpreterToolInput
   | HTTPToolRun
   | CodeToolRun
   | FunctionToolRun
@@ -1883,20 +1665,20 @@ export type RunAgentSettings = {
    */
   tools?:
     | Array<
-      | GoogleSearchTool
-      | WebScraperTool
-      | CallSubAgentTool
-      | RetrieveAgentsTool
-      | QueryMemoryStoreTool
-      | WriteMemoryStoreTool
-      | RetrieveMemoryStoresTool
-      | DeleteMemoryDocumentTool
-      | RetrieveKnowledgeBasesTool
-      | QueryKnowledgeBaseTool
-      | CurrentDateTool
-      | AdvisorTool
-      | SidekickTool
-      | CodeInterpreterTool
+      | components.GoogleSearchToolInput
+      | components.WebScraperToolInput
+      | components.CallSubAgentToolInput
+      | components.RetrieveAgentsToolInput
+      | components.QueryMemoryStoreToolInput
+      | components.WriteMemoryStoreToolInput
+      | components.RetrieveMemoryStoresToolInput
+      | components.DeleteMemoryDocumentToolInput
+      | components.RetrieveKnowledgeBasesToolInput
+      | components.QueryKnowledgeBaseToolInput
+      | components.CurrentDateToolInput
+      | components.AdvisorToolInput
+      | components.SidekickToolInput
+      | components.CodeInterpreterToolInput
       | HTTPToolRun
       | CodeToolRun
       | FunctionToolRun
@@ -4112,7 +3894,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01KZM7PMQT3D1461DN4RQSXE78"),
+  id: z.string().default("01KZNZEWRR2EKW3HZ45NXFYNGZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4293,11 +4075,11 @@ export function jsonSchemaToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType,
   );
 
 /** @internal */
@@ -4315,7 +4097,7 @@ export const RunAgentAgentToolInputRunParameters$outboundSchema: z.ZodType<
   RunAgentAgentToolInputRunParameters
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools17FunctionType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4406,12 +4188,9 @@ export function functionToolRunToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType,
-  );
+export const RunAgentAgentToolInputRunAgentsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentAgentToolInputRunAgentsRequestType> = z
+    .nativeEnum(RunAgentAgentToolInputRunAgentsRequestType);
 
 /** @internal */
 export type AgentToolInputRunParameters$Outbound = {
@@ -4427,8 +4206,7 @@ export const AgentToolInputRunParameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunParameters
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools16CodeToolType$outboundSchema,
+  type: RunAgentAgentToolInputRunAgentsRequestType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -4584,12 +4362,9 @@ export function blueprintToJSON(blueprint: Blueprint): string {
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType
-  > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType,
-  );
+export const RunAgentAgentToolInputRunType$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentAgentToolInputRunType
+> = z.nativeEnum(RunAgentAgentToolInputRunType);
 
 /** @internal */
 export type DefaultValue$Outbound = string | number | boolean;
@@ -4619,8 +4394,7 @@ export const Arguments$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Arguments
 > = z.object({
-  type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools15HttpType$outboundSchema,
+  type: RunAgentAgentToolInputRunType$outboundSchema,
   description: z.string(),
   sendToModel: z.boolean().default(true),
   defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -4691,427 +4465,21 @@ export function httpToolRunToJSON(httpToolRun: HTTPToolRun): string {
 }
 
 /** @internal */
-export type CodeInterpreterTool$Outbound = {
-  type: "code_interpreter";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const CodeInterpreterTool$outboundSchema: z.ZodType<
-  CodeInterpreterTool$Outbound,
-  z.ZodTypeDef,
-  CodeInterpreterTool
-> = z.object({
-  type: z.literal("code_interpreter"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function codeInterpreterToolToJSON(
-  codeInterpreterTool: CodeInterpreterTool,
-): string {
-  return JSON.stringify(
-    CodeInterpreterTool$outboundSchema.parse(codeInterpreterTool),
-  );
-}
-
-/** @internal */
-export type SidekickTool$Outbound = {
-  type: "sidekick";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const SidekickTool$outboundSchema: z.ZodType<
-  SidekickTool$Outbound,
-  z.ZodTypeDef,
-  SidekickTool
-> = z.object({
-  type: z.literal("sidekick"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function sidekickToolToJSON(sidekickTool: SidekickTool): string {
-  return JSON.stringify(SidekickTool$outboundSchema.parse(sidekickTool));
-}
-
-/** @internal */
-export type AdvisorTool$Outbound = {
-  type: "advisor";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const AdvisorTool$outboundSchema: z.ZodType<
-  AdvisorTool$Outbound,
-  z.ZodTypeDef,
-  AdvisorTool
-> = z.object({
-  type: z.literal("advisor"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function advisorToolToJSON(advisorTool: AdvisorTool): string {
-  return JSON.stringify(AdvisorTool$outboundSchema.parse(advisorTool));
-}
-
-/** @internal */
-export type CurrentDateTool$Outbound = {
-  type: "current_date";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const CurrentDateTool$outboundSchema: z.ZodType<
-  CurrentDateTool$Outbound,
-  z.ZodTypeDef,
-  CurrentDateTool
-> = z.object({
-  type: z.literal("current_date"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function currentDateToolToJSON(
-  currentDateTool: CurrentDateTool,
-): string {
-  return JSON.stringify(CurrentDateTool$outboundSchema.parse(currentDateTool));
-}
-
-/** @internal */
-export type QueryKnowledgeBaseTool$Outbound = {
-  type: "query_knowledge_base";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const QueryKnowledgeBaseTool$outboundSchema: z.ZodType<
-  QueryKnowledgeBaseTool$Outbound,
-  z.ZodTypeDef,
-  QueryKnowledgeBaseTool
-> = z.object({
-  type: z.literal("query_knowledge_base"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function queryKnowledgeBaseToolToJSON(
-  queryKnowledgeBaseTool: QueryKnowledgeBaseTool,
-): string {
-  return JSON.stringify(
-    QueryKnowledgeBaseTool$outboundSchema.parse(queryKnowledgeBaseTool),
-  );
-}
-
-/** @internal */
-export type RetrieveKnowledgeBasesTool$Outbound = {
-  type: "retrieve_knowledge_bases";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const RetrieveKnowledgeBasesTool$outboundSchema: z.ZodType<
-  RetrieveKnowledgeBasesTool$Outbound,
-  z.ZodTypeDef,
-  RetrieveKnowledgeBasesTool
-> = z.object({
-  type: z.literal("retrieve_knowledge_bases"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function retrieveKnowledgeBasesToolToJSON(
-  retrieveKnowledgeBasesTool: RetrieveKnowledgeBasesTool,
-): string {
-  return JSON.stringify(
-    RetrieveKnowledgeBasesTool$outboundSchema.parse(retrieveKnowledgeBasesTool),
-  );
-}
-
-/** @internal */
-export type DeleteMemoryDocumentTool$Outbound = {
-  type: "delete_memory_document";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const DeleteMemoryDocumentTool$outboundSchema: z.ZodType<
-  DeleteMemoryDocumentTool$Outbound,
-  z.ZodTypeDef,
-  DeleteMemoryDocumentTool
-> = z.object({
-  type: z.literal("delete_memory_document"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function deleteMemoryDocumentToolToJSON(
-  deleteMemoryDocumentTool: DeleteMemoryDocumentTool,
-): string {
-  return JSON.stringify(
-    DeleteMemoryDocumentTool$outboundSchema.parse(deleteMemoryDocumentTool),
-  );
-}
-
-/** @internal */
-export type RetrieveMemoryStoresTool$Outbound = {
-  type: "retrieve_memory_stores";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const RetrieveMemoryStoresTool$outboundSchema: z.ZodType<
-  RetrieveMemoryStoresTool$Outbound,
-  z.ZodTypeDef,
-  RetrieveMemoryStoresTool
-> = z.object({
-  type: z.literal("retrieve_memory_stores"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function retrieveMemoryStoresToolToJSON(
-  retrieveMemoryStoresTool: RetrieveMemoryStoresTool,
-): string {
-  return JSON.stringify(
-    RetrieveMemoryStoresTool$outboundSchema.parse(retrieveMemoryStoresTool),
-  );
-}
-
-/** @internal */
-export type WriteMemoryStoreTool$Outbound = {
-  type: "write_memory_store";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const WriteMemoryStoreTool$outboundSchema: z.ZodType<
-  WriteMemoryStoreTool$Outbound,
-  z.ZodTypeDef,
-  WriteMemoryStoreTool
-> = z.object({
-  type: z.literal("write_memory_store"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function writeMemoryStoreToolToJSON(
-  writeMemoryStoreTool: WriteMemoryStoreTool,
-): string {
-  return JSON.stringify(
-    WriteMemoryStoreTool$outboundSchema.parse(writeMemoryStoreTool),
-  );
-}
-
-/** @internal */
-export type QueryMemoryStoreTool$Outbound = {
-  type: "query_memory_store";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const QueryMemoryStoreTool$outboundSchema: z.ZodType<
-  QueryMemoryStoreTool$Outbound,
-  z.ZodTypeDef,
-  QueryMemoryStoreTool
-> = z.object({
-  type: z.literal("query_memory_store"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function queryMemoryStoreToolToJSON(
-  queryMemoryStoreTool: QueryMemoryStoreTool,
-): string {
-  return JSON.stringify(
-    QueryMemoryStoreTool$outboundSchema.parse(queryMemoryStoreTool),
-  );
-}
-
-/** @internal */
-export type RetrieveAgentsTool$Outbound = {
-  type: "retrieve_agents";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const RetrieveAgentsTool$outboundSchema: z.ZodType<
-  RetrieveAgentsTool$Outbound,
-  z.ZodTypeDef,
-  RetrieveAgentsTool
-> = z.object({
-  type: z.literal("retrieve_agents"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function retrieveAgentsToolToJSON(
-  retrieveAgentsTool: RetrieveAgentsTool,
-): string {
-  return JSON.stringify(
-    RetrieveAgentsTool$outboundSchema.parse(retrieveAgentsTool),
-  );
-}
-
-/** @internal */
-export type CallSubAgentTool$Outbound = {
-  type: "call_sub_agent";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const CallSubAgentTool$outboundSchema: z.ZodType<
-  CallSubAgentTool$Outbound,
-  z.ZodTypeDef,
-  CallSubAgentTool
-> = z.object({
-  type: z.literal("call_sub_agent"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function callSubAgentToolToJSON(
-  callSubAgentTool: CallSubAgentTool,
-): string {
-  return JSON.stringify(
-    CallSubAgentTool$outboundSchema.parse(callSubAgentTool),
-  );
-}
-
-/** @internal */
-export type WebScraperTool$Outbound = {
-  type: "web_scraper";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const WebScraperTool$outboundSchema: z.ZodType<
-  WebScraperTool$Outbound,
-  z.ZodTypeDef,
-  WebScraperTool
-> = z.object({
-  type: z.literal("web_scraper"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function webScraperToolToJSON(webScraperTool: WebScraperTool): string {
-  return JSON.stringify(WebScraperTool$outboundSchema.parse(webScraperTool));
-}
-
-/** @internal */
-export type GoogleSearchTool$Outbound = {
-  type: "google_search";
-  requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const GoogleSearchTool$outboundSchema: z.ZodType<
-  GoogleSearchTool$Outbound,
-  z.ZodTypeDef,
-  GoogleSearchTool
-> = z.object({
-  type: z.literal("google_search"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
-
-export function googleSearchToolToJSON(
-  googleSearchTool: GoogleSearchTool,
-): string {
-  return JSON.stringify(
-    GoogleSearchTool$outboundSchema.parse(googleSearchTool),
-  );
-}
-
-/** @internal */
 export type AgentToolInputRun$Outbound =
-  | GoogleSearchTool$Outbound
-  | WebScraperTool$Outbound
-  | CallSubAgentTool$Outbound
-  | RetrieveAgentsTool$Outbound
-  | QueryMemoryStoreTool$Outbound
-  | WriteMemoryStoreTool$Outbound
-  | RetrieveMemoryStoresTool$Outbound
-  | DeleteMemoryDocumentTool$Outbound
-  | RetrieveKnowledgeBasesTool$Outbound
-  | QueryKnowledgeBaseTool$Outbound
-  | CurrentDateTool$Outbound
-  | AdvisorTool$Outbound
-  | SidekickTool$Outbound
-  | CodeInterpreterTool$Outbound
+  | components.GoogleSearchToolInput$Outbound
+  | components.WebScraperToolInput$Outbound
+  | components.CallSubAgentToolInput$Outbound
+  | components.RetrieveAgentsToolInput$Outbound
+  | components.QueryMemoryStoreToolInput$Outbound
+  | components.WriteMemoryStoreToolInput$Outbound
+  | components.RetrieveMemoryStoresToolInput$Outbound
+  | components.DeleteMemoryDocumentToolInput$Outbound
+  | components.RetrieveKnowledgeBasesToolInput$Outbound
+  | components.QueryKnowledgeBaseToolInput$Outbound
+  | components.CurrentDateToolInput$Outbound
+  | components.AdvisorToolInput$Outbound
+  | components.SidekickToolInput$Outbound
+  | components.CodeInterpreterToolInput$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
   | FunctionToolRun$Outbound
@@ -5124,20 +4492,20 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRun
 > = z.union([
-  z.lazy(() => GoogleSearchTool$outboundSchema),
-  z.lazy(() => WebScraperTool$outboundSchema),
-  z.lazy(() => CallSubAgentTool$outboundSchema),
-  z.lazy(() => RetrieveAgentsTool$outboundSchema),
-  z.lazy(() => QueryMemoryStoreTool$outboundSchema),
-  z.lazy(() => WriteMemoryStoreTool$outboundSchema),
-  z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
-  z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
-  z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
-  z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
-  z.lazy(() => CurrentDateTool$outboundSchema),
-  z.lazy(() => AdvisorTool$outboundSchema),
-  z.lazy(() => SidekickTool$outboundSchema),
-  z.lazy(() => CodeInterpreterTool$outboundSchema),
+  components.GoogleSearchToolInput$outboundSchema,
+  components.WebScraperToolInput$outboundSchema,
+  components.CallSubAgentToolInput$outboundSchema,
+  components.RetrieveAgentsToolInput$outboundSchema,
+  components.QueryMemoryStoreToolInput$outboundSchema,
+  components.WriteMemoryStoreToolInput$outboundSchema,
+  components.RetrieveMemoryStoresToolInput$outboundSchema,
+  components.DeleteMemoryDocumentToolInput$outboundSchema,
+  components.RetrieveKnowledgeBasesToolInput$outboundSchema,
+  components.QueryKnowledgeBaseToolInput$outboundSchema,
+  components.CurrentDateToolInput$outboundSchema,
+  components.AdvisorToolInput$outboundSchema,
+  components.SidekickToolInput$outboundSchema,
+  components.CodeInterpreterToolInput$outboundSchema,
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
   z.lazy(() => FunctionToolRun$outboundSchema),
@@ -5234,20 +4602,20 @@ export function runAgentGuardrailsToJSON(
 export type RunAgentSettings$Outbound = {
   tools?:
     | Array<
-      | GoogleSearchTool$Outbound
-      | WebScraperTool$Outbound
-      | CallSubAgentTool$Outbound
-      | RetrieveAgentsTool$Outbound
-      | QueryMemoryStoreTool$Outbound
-      | WriteMemoryStoreTool$Outbound
-      | RetrieveMemoryStoresTool$Outbound
-      | DeleteMemoryDocumentTool$Outbound
-      | RetrieveKnowledgeBasesTool$Outbound
-      | QueryKnowledgeBaseTool$Outbound
-      | CurrentDateTool$Outbound
-      | AdvisorTool$Outbound
-      | SidekickTool$Outbound
-      | CodeInterpreterTool$Outbound
+      | components.GoogleSearchToolInput$Outbound
+      | components.WebScraperToolInput$Outbound
+      | components.CallSubAgentToolInput$Outbound
+      | components.RetrieveAgentsToolInput$Outbound
+      | components.QueryMemoryStoreToolInput$Outbound
+      | components.WriteMemoryStoreToolInput$Outbound
+      | components.RetrieveMemoryStoresToolInput$Outbound
+      | components.DeleteMemoryDocumentToolInput$Outbound
+      | components.RetrieveKnowledgeBasesToolInput$Outbound
+      | components.QueryKnowledgeBaseToolInput$Outbound
+      | components.CurrentDateToolInput$Outbound
+      | components.AdvisorToolInput$Outbound
+      | components.SidekickToolInput$Outbound
+      | components.CodeInterpreterToolInput$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
       | FunctionToolRun$Outbound
@@ -5272,20 +4640,20 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => GoogleSearchTool$outboundSchema),
-      z.lazy(() => WebScraperTool$outboundSchema),
-      z.lazy(() => CallSubAgentTool$outboundSchema),
-      z.lazy(() => RetrieveAgentsTool$outboundSchema),
-      z.lazy(() => QueryMemoryStoreTool$outboundSchema),
-      z.lazy(() => WriteMemoryStoreTool$outboundSchema),
-      z.lazy(() => RetrieveMemoryStoresTool$outboundSchema),
-      z.lazy(() => DeleteMemoryDocumentTool$outboundSchema),
-      z.lazy(() => RetrieveKnowledgeBasesTool$outboundSchema),
-      z.lazy(() => QueryKnowledgeBaseTool$outboundSchema),
-      z.lazy(() => CurrentDateTool$outboundSchema),
-      z.lazy(() => AdvisorTool$outboundSchema),
-      z.lazy(() => SidekickTool$outboundSchema),
-      z.lazy(() => CodeInterpreterTool$outboundSchema),
+      components.GoogleSearchToolInput$outboundSchema,
+      components.WebScraperToolInput$outboundSchema,
+      components.CallSubAgentToolInput$outboundSchema,
+      components.RetrieveAgentsToolInput$outboundSchema,
+      components.QueryMemoryStoreToolInput$outboundSchema,
+      components.WriteMemoryStoreToolInput$outboundSchema,
+      components.RetrieveMemoryStoresToolInput$outboundSchema,
+      components.DeleteMemoryDocumentToolInput$outboundSchema,
+      components.RetrieveKnowledgeBasesToolInput$outboundSchema,
+      components.QueryKnowledgeBaseToolInput$outboundSchema,
+      components.CurrentDateToolInput$outboundSchema,
+      components.AdvisorToolInput$outboundSchema,
+      components.SidekickToolInput$outboundSchema,
+      components.CodeInterpreterToolInput$outboundSchema,
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),
       z.lazy(() => FunctionToolRun$outboundSchema),

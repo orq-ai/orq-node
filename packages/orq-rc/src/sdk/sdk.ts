@@ -117,11 +117,6 @@ export class Orq extends ClientSDK {
     return (this._pii ??= new Pii(this._options));
   }
 
-  private _guardrailRules?: GuardrailRules;
-  get guardrailRules(): GuardrailRules {
-    return (this._guardrailRules ??= new GuardrailRules(this._options));
-  }
-
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
@@ -150,6 +145,11 @@ export class Orq extends ClientSDK {
   private _files?: Files;
   get files(): Files {
     return (this._files ??= new Files(this._options));
+  }
+
+  private _guardrailRules?: GuardrailRules;
+  get guardrailRules(): GuardrailRules {
+    return (this._guardrailRules ??= new GuardrailRules(this._options));
   }
 
   private _identities?: Identities;

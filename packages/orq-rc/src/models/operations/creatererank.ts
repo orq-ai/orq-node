@@ -226,6 +226,10 @@ export type CreateRerankRequestBody = {
    */
   topN?: number | undefined;
   /**
+   * Whether to return the documents in the response
+   */
+  returnDocuments?: boolean | undefined;
+  /**
    * The filename of the document to rerank
    */
   filename?: string | null | undefined;
@@ -784,6 +788,7 @@ export type CreateRerankRequestBody$Outbound = {
   documents: Array<string>;
   model: string;
   top_n?: number | undefined;
+  return_documents?: boolean | undefined;
   filename?: string | null | undefined;
   name?: string | undefined;
   fallbacks?: Array<CreateRerankFallbacks$Outbound> | undefined;
@@ -810,7 +815,8 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
   query: z.string(),
   documents: z.array(z.string()),
   model: z.string(),
-  topN: z.number().optional(),
+  topN: z.number().int().optional(),
+  returnDocuments: z.boolean().optional(),
   filename: z.nullable(z.string()).optional(),
   name: z.string().optional(),
   fallbacks: z.array(z.lazy(() => CreateRerankFallbacks$outboundSchema))
@@ -831,6 +837,7 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     topN: "top_n",
+    returnDocuments: "return_documents",
     loadBalancer: "load_balancer",
   });
 });

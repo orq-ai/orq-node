@@ -95,7 +95,6 @@ export * from "./getv2humanevalsets.js";
 export * from "./getv2humanevalsetsid.js";
 export * from "./getv2toolstoolidversions.js";
 export * from "./getv2toolstoolidversionsversionid.js";
-export * from "./guardrailrulecreate.js";
 export * from "./guardrailruledelete.js";
 export * from "./guardrailruleget.js";
 export * from "./guardrailrulelist.js";

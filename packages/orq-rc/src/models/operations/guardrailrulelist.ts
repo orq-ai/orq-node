@@ -4,80 +4,28 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * Field to sort by. Defaults to created_at (newest first).
- */
-export const SortBy = {
-  CreatedAt: "created_at",
-  UpdatedAt: "updated_at",
-  DisplayName: "display_name",
-} as const;
-/**
- * Field to sort by. Defaults to created_at (newest first).
- */
-export type SortBy = ClosedEnum<typeof SortBy>;
 
 export type GuardrailRuleListRequest = {
   limit?: number | undefined;
-  /**
-   * A cursor for use in pagination.
-   */
   startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination.
-   */
   endingBefore?: string | undefined;
-  /**
-   * Optional filter by project ID.
-   */
   projectId?: string | undefined;
-  /**
-   * Filter by display name or description (case-insensitive).
-   */
   search?: string | undefined;
-  /**
-   * Field to sort by. Defaults to created_at (newest first).
-   */
-  sortBy?: SortBy | undefined;
-  /**
-   * Filter by enabled status.
-   */
-  enabled?: boolean | null | undefined;
-  /**
-   * Filter by referenced guardrail ids (comma-separated).
-   */
-  guardrailId?: Array<string> | null | undefined;
+  sortBy?: string | undefined;
+  enabled?: boolean | undefined;
+  guardrailId?: Array<string> | undefined;
 };
-
-/**
- * Guardrail rules retrieved successfully
- */
-export type GuardrailRuleListResponseBody = {
-  data: Array<components.GuardrailRule> | null;
-  hasMore: boolean;
-  object: string;
-};
-
-/** @internal */
-export const SortBy$outboundSchema: z.ZodNativeEnum<typeof SortBy> = z
-  .nativeEnum(SortBy);
 
 /** @internal */
 export type GuardrailRuleListRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
   search?: string | undefined;
   sort_by?: string | undefined;
-  enabled?: boolean | null | undefined;
-  guardrail_id?: Array<string> | null | undefined;
+  enabled?: boolean | undefined;
+  guardrail_id?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -86,14 +34,14 @@ export const GuardrailRuleListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GuardrailRuleListRequest
 > = z.object({
-  limit: z.number().int().default(10),
+  limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
   search: z.string().optional(),
-  sortBy: SortBy$outboundSchema.optional(),
-  enabled: z.nullable(z.boolean()).optional(),
-  guardrailId: z.nullable(z.array(z.string())).optional(),
+  sortBy: z.string().optional(),
+  enabled: z.boolean().optional(),
+  guardrailId: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -109,30 +57,5 @@ export function guardrailRuleListRequestToJSON(
 ): string {
   return JSON.stringify(
     GuardrailRuleListRequest$outboundSchema.parse(guardrailRuleListRequest),
-  );
-}
-
-/** @internal */
-export const GuardrailRuleListResponseBody$inboundSchema: z.ZodType<
-  GuardrailRuleListResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.nullable(z.array(components.GuardrailRule$inboundSchema)),
-  has_more: z.boolean(),
-  object: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function guardrailRuleListResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GuardrailRuleListResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GuardrailRuleListResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GuardrailRuleListResponseBody' from JSON`,
   );
 }
