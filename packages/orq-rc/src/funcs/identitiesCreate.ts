@@ -22,6 +22,7 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -37,7 +38,7 @@ export function identitiesCreate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.CreateIdentityResponse,
+    operations.CreateIdentityResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.CreateIdentityResponse,
+      operations.CreateIdentityResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -139,8 +140,12 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    components.CreateIdentityResponse,
+    operations.CreateIdentityResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -150,10 +155,13 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.CreateIdentityResponse$inboundSchema),
+    M.json(201, operations.CreateIdentityResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

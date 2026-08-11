@@ -5,10 +5,16 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export type Image = {
+  fileName: string;
+  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
+};
 
 /**
  * The quality of the image that will be generated. Auto will automatically select the best quality for the given model.
@@ -266,7 +272,7 @@ export type CreateImageEditRequestBody = {
   /**
    * The image(s) to edit. Must be a supported image file or an array of images.  Each image should be a png, webp, or jpg file less than 50MB. You can provide up to 16 images.
    */
-  image?: any | undefined;
+  image?: Image | Blob | undefined;
   /**
    * A text description of the desired image(s).
    */
@@ -394,6 +400,31 @@ export type CreateImageEditResponseBody = {
    */
   usage?: CreateImageEditUsage | undefined;
 };
+
+/** @internal */
+export type Image$Outbound = {
+  fileName: string;
+  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
+};
+
+/** @internal */
+export const Image$outboundSchema: z.ZodType<
+  Image$Outbound,
+  z.ZodTypeDef,
+  Image
+> = z.object({
+  fileName: z.string(),
+  content: z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(Blob),
+    z.instanceof(ArrayBuffer),
+    z.instanceof(Uint8Array),
+  ]),
+});
+
+export function imageToJSON(image: Image): string {
+  return JSON.stringify(Image$outboundSchema.parse(image));
+}
 
 /** @internal */
 export const CreateImageEditQuality$outboundSchema: z.ZodNativeEnum<
@@ -882,7 +913,7 @@ export function createImageEditOrqToJSON(
 /** @internal */
 export type CreateImageEditRequestBody$Outbound = {
   model: string;
-  image?: any | undefined;
+  image?: Image$Outbound | Blob | undefined;
   prompt: string;
   n: number | null;
   size?: string | null | undefined;
@@ -905,7 +936,7 @@ export const CreateImageEditRequestBody$outboundSchema: z.ZodType<
   CreateImageEditRequestBody
 > = z.object({
   model: z.string(),
-  image: z.any().optional(),
+  image: z.lazy(() => Image$outboundSchema).or(blobLikeSchema).optional(),
   prompt: z.string(),
   n: z.nullable(z.number().default(1)),
   size: z.nullable(z.string()).optional(),

@@ -2575,10 +2575,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:46.828Z",
+      "2026-08-11T11:07:58.205Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:46.828Z",
+      "2026-08-11T11:07:58.205Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody33AttributesType$inboundSchema,
@@ -2740,10 +2740,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:46.827Z",
+      "2026-08-11T11:07:58.204Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:46.827Z",
+      "2026-08-11T11:07:58.204Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody33Type$inboundSchema,

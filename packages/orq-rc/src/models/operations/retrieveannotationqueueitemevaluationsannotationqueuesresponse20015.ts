@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import * as b64$ from "../../lib/base64.js";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
@@ -1302,7 +1303,7 @@ export type RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200In
     /**
      * The image(s) to edit. Must be a supported image file or an array of images.  Each image should be a png, webp, or jpg file less than 50MB. You can provide up to 16 images.
      */
-    image?: any | undefined;
+    image?: Uint8Array | string | undefined;
     /**
      * A text description of the desired image(s).
      */
@@ -4555,7 +4556,7 @@ export const RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200I
     knowledge_bases: z.array(z.record(z.any())).optional(),
     retrievals: z.array(z.record(z.any())).optional(),
     model: z.string(),
-    image: z.any().optional(),
+    image: b64$.zodInbound.optional(),
     prompt: z.string(),
     n: z.nullable(z.number().default(1)),
     size: z.nullable(z.string()).optional(),
@@ -4753,7 +4754,7 @@ export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponseO
 /** @internal */
 export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01KZQRRV5XE9FRE9MQ4CHETKQJ"),
+    _id: z.string().default("01KZR83X0PYFQ3X6NMW6HS6WDY"),
     name: z.string().optional(),
     trace_id: z.string(),
     duration: z.number().optional(),
@@ -5767,7 +5768,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse20019
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:45.301Z",
+      "2026-08-11T11:07:56.277Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody5AttributesOrq19Type$inboundSchema,
@@ -5893,7 +5894,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse20018
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:45.301Z",
+      "2026-08-11T11:07:56.270Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody5AttributesOrq18Type$inboundSchema,
@@ -6019,7 +6020,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse20017
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:45.300Z",
+      "2026-08-11T11:07:56.269Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody5AttributesOrq17Type$inboundSchema,
@@ -6145,7 +6146,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse20016
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:45.299Z",
+      "2026-08-11T11:07:56.269Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody5AttributesOrq16Type$inboundSchema,
@@ -6278,10 +6279,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse20015
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:45.299Z",
+      "2026-08-11T11:07:56.268Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-11T06:39:45.299Z",
+      "2026-08-11T11:07:56.268Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody5AttributesOrq15Type$inboundSchema,

@@ -234,7 +234,7 @@ export type Detail = ClosedEnum<typeof Detail>;
 /**
  * An image content part.
  */
-export type Image = {
+export type TwoImage = {
   cacheControl?: CreateRouterResponse2ResponsesCacheControl | undefined;
   /**
    * The detail level for image understanding.
@@ -325,12 +325,12 @@ export type TwoText = {
 /**
  * A content part within a message.
  */
-export type CreateRouterResponseContent2 = TwoText | Image | TwoFile;
+export type CreateRouterResponseContent2 = TwoText | TwoImage | TwoFile;
 
 /**
  * The content of the item: a string or an array of content parts.
  */
-export type InputContent = string | Array<TwoText | Image | TwoFile>;
+export type InputContent = string | Array<TwoText | TwoImage | TwoFile>;
 
 /**
  * The role of the message sender (for message items).
@@ -409,7 +409,7 @@ export type CreateRouterResponseInput2 = {
   /**
    * The content of the item: a string or an array of content parts.
    */
-  content?: string | Array<TwoText | Image | TwoFile> | undefined;
+  content?: string | Array<TwoText | TwoImage | TwoFile> | undefined;
   /**
    * The ID of the item. For item_reference items, this identifies the referenced item.
    */
@@ -1214,7 +1214,7 @@ export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
   .nativeEnum(Detail);
 
 /** @internal */
-export type Image$Outbound = {
+export type TwoImage$Outbound = {
   cache_control?:
     | CreateRouterResponse2ResponsesCacheControl$Outbound
     | undefined;
@@ -1225,10 +1225,10 @@ export type Image$Outbound = {
 };
 
 /** @internal */
-export const Image$outboundSchema: z.ZodType<
-  Image$Outbound,
+export const TwoImage$outboundSchema: z.ZodType<
+  TwoImage$Outbound,
   z.ZodTypeDef,
-  Image
+  TwoImage
 > = z.object({
   cacheControl: z.lazy(() =>
     CreateRouterResponse2ResponsesCacheControl$outboundSchema
@@ -1245,8 +1245,8 @@ export const Image$outboundSchema: z.ZodType<
   });
 });
 
-export function imageToJSON(image: Image): string {
-  return JSON.stringify(Image$outboundSchema.parse(image));
+export function twoImageToJSON(twoImage: TwoImage): string {
+  return JSON.stringify(TwoImage$outboundSchema.parse(twoImage));
 }
 
 /** @internal */
@@ -1315,7 +1315,7 @@ export function twoTextToJSON(twoText: TwoText): string {
 /** @internal */
 export type CreateRouterResponseContent2$Outbound =
   | TwoText$Outbound
-  | Image$Outbound
+  | TwoImage$Outbound
   | TwoFile$Outbound;
 
 /** @internal */
@@ -1325,7 +1325,7 @@ export const CreateRouterResponseContent2$outboundSchema: z.ZodType<
   CreateRouterResponseContent2
 > = z.union([
   z.lazy(() => TwoText$outboundSchema),
-  z.lazy(() => Image$outboundSchema),
+  z.lazy(() => TwoImage$outboundSchema),
   z.lazy(() => TwoFile$outboundSchema),
 ]);
 
@@ -1342,7 +1342,7 @@ export function createRouterResponseContent2ToJSON(
 /** @internal */
 export type InputContent$Outbound =
   | string
-  | Array<TwoText$Outbound | Image$Outbound | TwoFile$Outbound>;
+  | Array<TwoText$Outbound | TwoImage$Outbound | TwoFile$Outbound>;
 
 /** @internal */
 export const InputContent$outboundSchema: z.ZodType<
@@ -1353,7 +1353,7 @@ export const InputContent$outboundSchema: z.ZodType<
   z.string(),
   z.array(z.union([
     z.lazy(() => TwoText$outboundSchema),
-    z.lazy(() => Image$outboundSchema),
+    z.lazy(() => TwoImage$outboundSchema),
     z.lazy(() => TwoFile$outboundSchema),
   ])),
 ]);
@@ -1380,7 +1380,7 @@ export type CreateRouterResponseInput2$Outbound = {
   call_id?: string | undefined;
   content?:
     | string
-    | Array<TwoText$Outbound | Image$Outbound | TwoFile$Outbound>
+    | Array<TwoText$Outbound | TwoImage$Outbound | TwoFile$Outbound>
     | undefined;
   id?: string | undefined;
   name?: string | undefined;
@@ -1402,7 +1402,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
     z.string(),
     z.array(z.union([
       z.lazy(() => TwoText$outboundSchema),
-      z.lazy(() => Image$outboundSchema),
+      z.lazy(() => TwoImage$outboundSchema),
       z.lazy(() => TwoFile$outboundSchema),
     ])),
   ]).optional(),

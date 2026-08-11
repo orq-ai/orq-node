@@ -1,9 +1,9 @@
-# Image
+# CreateImageVariationImage
 
 ## Example Usage
 
 ```typescript
-import { Image } from "@orq-ai/node/models/operations";
+import { CreateImageVariationImage } from "@orq-ai/node/models/operations";
 
 // No examples available for this model
 ```

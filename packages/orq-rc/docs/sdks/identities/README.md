@@ -152,7 +152,7 @@ run();
 
 ### Response
 
-**Promise\<[components.CreateIdentityResponse](../../models/components/createidentityresponse.md)\>**
+**Promise\<[operations.CreateIdentityResponse](../../models/operations/createidentityresponse.md)\>**
 
 ### Errors
 

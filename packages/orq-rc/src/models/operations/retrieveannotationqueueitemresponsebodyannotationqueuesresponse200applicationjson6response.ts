@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import * as b64$ from "../../lib/base64.js";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
@@ -2215,7 +2216,7 @@ export type RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Ap
     /**
      * The image to edit. Must be a supported image file. It should be a png, webp, or jpg file less than 50MB.
      */
-    image?: any | undefined;
+    image?: Uint8Array | string | undefined;
     /**
      * The model to use for image generation.
      */
@@ -5703,7 +5704,7 @@ export const RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200A
     z.ZodTypeDef,
     unknown
   > = z.object({
-    image: z.any().optional(),
+    image: b64$.zodInbound.optional(),
     model: z.string(),
     n: z.nullable(z.number().default(1)),
     response_format:
@@ -5897,7 +5898,7 @@ export function retrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse2
 /** @internal */
 export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01KZQRRV846VYB8YAXJJK9SP07"),
+    _id: z.string().default("01KZR83X339TR8J8CCMQ533PXQ"),
     name: z.string().optional(),
     trace_id: z.string(),
     duration: z.number().optional(),

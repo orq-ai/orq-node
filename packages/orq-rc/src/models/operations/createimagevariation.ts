@@ -5,10 +5,16 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export type CreateImageVariationImage = {
+  fileName: string;
+  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
+};
 
 /**
  * The format in which the generated images are returned. Must be one of `url` or `b64_json`. URLs are only valid for 60 minutes after the image has been generated.
@@ -271,7 +277,7 @@ export type CreateImageVariationRequestBody = {
   /**
    * The image to edit. Must be a supported image file. It should be a png, webp, or jpg file less than 50MB.
    */
-  image?: any | undefined;
+  image?: CreateImageVariationImage | Blob | undefined;
   /**
    * The model to use for image generation.
    */
@@ -395,6 +401,35 @@ export type CreateImageVariationResponseBody = {
    */
   usage?: CreateImageVariationUsage | undefined;
 };
+
+/** @internal */
+export type CreateImageVariationImage$Outbound = {
+  fileName: string;
+  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
+};
+
+/** @internal */
+export const CreateImageVariationImage$outboundSchema: z.ZodType<
+  CreateImageVariationImage$Outbound,
+  z.ZodTypeDef,
+  CreateImageVariationImage
+> = z.object({
+  fileName: z.string(),
+  content: z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(Blob),
+    z.instanceof(ArrayBuffer),
+    z.instanceof(Uint8Array),
+  ]),
+});
+
+export function createImageVariationImageToJSON(
+  createImageVariationImage: CreateImageVariationImage,
+): string {
+  return JSON.stringify(
+    CreateImageVariationImage$outboundSchema.parse(createImageVariationImage),
+  );
+}
 
 /** @internal */
 export const CreateImageVariationResponseFormat$outboundSchema: z.ZodNativeEnum<
@@ -902,7 +937,7 @@ export function createImageVariationOrqToJSON(
 
 /** @internal */
 export type CreateImageVariationRequestBody$Outbound = {
-  image?: any | undefined;
+  image?: CreateImageVariationImage$Outbound | Blob | undefined;
   model: string;
   n: number | null;
   response_format: string;
@@ -923,7 +958,9 @@ export const CreateImageVariationRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateImageVariationRequestBody
 > = z.object({
-  image: z.any().optional(),
+  image: z.lazy(() => CreateImageVariationImage$outboundSchema).or(
+    blobLikeSchema,
+  ).optional(),
   model: z.string(),
   n: z.nullable(z.number().default(1)),
   responseFormat: CreateImageVariationResponseFormat$outboundSchema.default(
