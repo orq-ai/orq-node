@@ -5,114 +5,114 @@ Tool configuration for agent run operations. Built-in tools only require a type 
 
 ## Supported Types
 
-### `operations.GoogleSearchTool`
+### `components.GoogleSearchToolInput`
 
 ```typescript
-const value: operations.GoogleSearchTool = {
+const value: components.GoogleSearchToolInput = {
   type: "google_search",
 };
 ```
 
-### `operations.WebScraperTool`
+### `components.WebScraperToolInput`
 
 ```typescript
-const value: operations.WebScraperTool = {
+const value: components.WebScraperToolInput = {
   type: "web_scraper",
 };
 ```
 
-### `operations.CallSubAgentTool`
+### `components.CallSubAgentToolInput`
 
 ```typescript
-const value: operations.CallSubAgentTool = {
+const value: components.CallSubAgentToolInput = {
   type: "call_sub_agent",
 };
 ```
 
-### `operations.RetrieveAgentsTool`
+### `components.RetrieveAgentsToolInput`
 
 ```typescript
-const value: operations.RetrieveAgentsTool = {
+const value: components.RetrieveAgentsToolInput = {
   type: "retrieve_agents",
 };
 ```
 
-### `operations.QueryMemoryStoreTool`
+### `components.QueryMemoryStoreToolInput`
 
 ```typescript
-const value: operations.QueryMemoryStoreTool = {
+const value: components.QueryMemoryStoreToolInput = {
   type: "query_memory_store",
 };
 ```
 
-### `operations.WriteMemoryStoreTool`
+### `components.WriteMemoryStoreToolInput`
 
 ```typescript
-const value: operations.WriteMemoryStoreTool = {
+const value: components.WriteMemoryStoreToolInput = {
   type: "write_memory_store",
 };
 ```
 
-### `operations.RetrieveMemoryStoresTool`
+### `components.RetrieveMemoryStoresToolInput`
 
 ```typescript
-const value: operations.RetrieveMemoryStoresTool = {
+const value: components.RetrieveMemoryStoresToolInput = {
   type: "retrieve_memory_stores",
 };
 ```
 
-### `operations.DeleteMemoryDocumentTool`
+### `components.DeleteMemoryDocumentToolInput`
 
 ```typescript
-const value: operations.DeleteMemoryDocumentTool = {
+const value: components.DeleteMemoryDocumentToolInput = {
   type: "delete_memory_document",
 };
 ```
 
-### `operations.RetrieveKnowledgeBasesTool`
+### `components.RetrieveKnowledgeBasesToolInput`
 
 ```typescript
-const value: operations.RetrieveKnowledgeBasesTool = {
+const value: components.RetrieveKnowledgeBasesToolInput = {
   type: "retrieve_knowledge_bases",
 };
 ```
 
-### `operations.QueryKnowledgeBaseTool`
+### `components.QueryKnowledgeBaseToolInput`
 
 ```typescript
-const value: operations.QueryKnowledgeBaseTool = {
+const value: components.QueryKnowledgeBaseToolInput = {
   type: "query_knowledge_base",
 };
 ```
 
-### `operations.CurrentDateTool`
+### `components.CurrentDateToolInput`
 
 ```typescript
-const value: operations.CurrentDateTool = {
+const value: components.CurrentDateToolInput = {
   type: "current_date",
 };
 ```
 
-### `operations.AdvisorTool`
+### `components.AdvisorToolInput`
 
 ```typescript
-const value: operations.AdvisorTool = {
+const value: components.AdvisorToolInput = {
   type: "advisor",
 };
 ```
 
-### `operations.SidekickTool`
+### `components.SidekickToolInput`
 
 ```typescript
-const value: operations.SidekickTool = {
+const value: components.SidekickToolInput = {
   type: "sidekick",
 };
 ```
 
-### `operations.CodeInterpreterTool`
+### `components.CodeInterpreterToolInput`
 
 ```typescript
-const value: operations.CodeInterpreterTool = {
+const value: components.CodeInterpreterToolInput = {
   type: "code_interpreter",
 };
 ```

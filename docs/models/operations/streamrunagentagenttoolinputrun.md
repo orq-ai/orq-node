@@ -5,114 +5,114 @@ Tool configuration for agent run operations. Built-in tools only require a type 
 
 ## Supported Types
 
-### `operations.AgentToolInputRunGoogleSearchTool`
+### `components.GoogleSearchToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunGoogleSearchTool = {
+const value: components.GoogleSearchToolInput = {
   type: "google_search",
 };
 ```
 
-### `operations.AgentToolInputRunWebScraperTool`
+### `components.WebScraperToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunWebScraperTool = {
+const value: components.WebScraperToolInput = {
   type: "web_scraper",
 };
 ```
 
-### `operations.AgentToolInputRunCallSubAgentTool`
+### `components.CallSubAgentToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunCallSubAgentTool = {
+const value: components.CallSubAgentToolInput = {
   type: "call_sub_agent",
 };
 ```
 
-### `operations.AgentToolInputRunRetrieveAgentsTool`
+### `components.RetrieveAgentsToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunRetrieveAgentsTool = {
+const value: components.RetrieveAgentsToolInput = {
   type: "retrieve_agents",
 };
 ```
 
-### `operations.AgentToolInputRunQueryMemoryStoreTool`
+### `components.QueryMemoryStoreToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunQueryMemoryStoreTool = {
+const value: components.QueryMemoryStoreToolInput = {
   type: "query_memory_store",
 };
 ```
 
-### `operations.AgentToolInputRunWriteMemoryStoreTool`
+### `components.WriteMemoryStoreToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunWriteMemoryStoreTool = {
+const value: components.WriteMemoryStoreToolInput = {
   type: "write_memory_store",
 };
 ```
 
-### `operations.AgentToolInputRunRetrieveMemoryStoresTool`
+### `components.RetrieveMemoryStoresToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunRetrieveMemoryStoresTool = {
+const value: components.RetrieveMemoryStoresToolInput = {
   type: "retrieve_memory_stores",
 };
 ```
 
-### `operations.AgentToolInputRunDeleteMemoryDocumentTool`
+### `components.DeleteMemoryDocumentToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunDeleteMemoryDocumentTool = {
+const value: components.DeleteMemoryDocumentToolInput = {
   type: "delete_memory_document",
 };
 ```
 
-### `operations.AgentToolInputRunRetrieveKnowledgeBasesTool`
+### `components.RetrieveKnowledgeBasesToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunRetrieveKnowledgeBasesTool = {
+const value: components.RetrieveKnowledgeBasesToolInput = {
   type: "retrieve_knowledge_bases",
 };
 ```
 
-### `operations.AgentToolInputRunQueryKnowledgeBaseTool`
+### `components.QueryKnowledgeBaseToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunQueryKnowledgeBaseTool = {
+const value: components.QueryKnowledgeBaseToolInput = {
   type: "query_knowledge_base",
 };
 ```
 
-### `operations.AgentToolInputRunCurrentDateTool`
+### `components.CurrentDateToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunCurrentDateTool = {
+const value: components.CurrentDateToolInput = {
   type: "current_date",
 };
 ```
 
-### `operations.AgentToolInputRunAdvisorTool`
+### `components.AdvisorToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunAdvisorTool = {
+const value: components.AdvisorToolInput = {
   type: "advisor",
 };
 ```
 
-### `operations.AgentToolInputRunSidekickTool`
+### `components.SidekickToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunSidekickTool = {
+const value: components.SidekickToolInput = {
   type: "sidekick",
 };
 ```
 
-### `operations.AgentToolInputRunCodeInterpreterTool`
+### `components.CodeInterpreterToolInput`
 
 ```typescript
-const value: operations.AgentToolInputRunCodeInterpreterTool = {
+const value: components.CodeInterpreterToolInput = {
   type: "code_interpreter",
 };
 ```

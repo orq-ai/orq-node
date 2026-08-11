@@ -5,6 +5,118 @@ Tool configuration for agent create/update operations. Built-in tools only requi
 
 ## Supported Types
 
+### `components.GoogleSearchToolInput`
+
+```typescript
+const value: components.GoogleSearchToolInput = {
+  type: "google_search",
+};
+```
+
+### `components.WebScraperToolInput`
+
+```typescript
+const value: components.WebScraperToolInput = {
+  type: "web_scraper",
+};
+```
+
+### `components.CallSubAgentToolInput`
+
+```typescript
+const value: components.CallSubAgentToolInput = {
+  type: "call_sub_agent",
+};
+```
+
+### `components.RetrieveAgentsToolInput`
+
+```typescript
+const value: components.RetrieveAgentsToolInput = {
+  type: "retrieve_agents",
+};
+```
+
+### `components.QueryMemoryStoreToolInput`
+
+```typescript
+const value: components.QueryMemoryStoreToolInput = {
+  type: "query_memory_store",
+};
+```
+
+### `components.WriteMemoryStoreToolInput`
+
+```typescript
+const value: components.WriteMemoryStoreToolInput = {
+  type: "write_memory_store",
+};
+```
+
+### `components.RetrieveMemoryStoresToolInput`
+
+```typescript
+const value: components.RetrieveMemoryStoresToolInput = {
+  type: "retrieve_memory_stores",
+};
+```
+
+### `components.DeleteMemoryDocumentToolInput`
+
+```typescript
+const value: components.DeleteMemoryDocumentToolInput = {
+  type: "delete_memory_document",
+};
+```
+
+### `components.RetrieveKnowledgeBasesToolInput`
+
+```typescript
+const value: components.RetrieveKnowledgeBasesToolInput = {
+  type: "retrieve_knowledge_bases",
+};
+```
+
+### `components.QueryKnowledgeBaseToolInput`
+
+```typescript
+const value: components.QueryKnowledgeBaseToolInput = {
+  type: "query_knowledge_base",
+};
+```
+
+### `components.CurrentDateToolInput`
+
+```typescript
+const value: components.CurrentDateToolInput = {
+  type: "current_date",
+};
+```
+
+### `components.AdvisorToolInput`
+
+```typescript
+const value: components.AdvisorToolInput = {
+  type: "advisor",
+};
+```
+
+### `components.SidekickToolInput`
+
+```typescript
+const value: components.SidekickToolInput = {
+  type: "sidekick",
+};
+```
+
+### `components.CodeInterpreterToolInput`
+
+```typescript
+const value: components.CodeInterpreterToolInput = {
+  type: "code_interpreter",
+};
+```
+
 ### `components.HttpToolInput`
 
 ```typescript

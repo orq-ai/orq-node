@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create a dataset
+   * Create a new skill
    *
    * @remarks
-   * Creates a new dataset in the specified project.
+   * Creates a reusable skill in the workspace. Skills store instructions, metadata, and an optional project location so teams can standardize repeatable AI workflows.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
