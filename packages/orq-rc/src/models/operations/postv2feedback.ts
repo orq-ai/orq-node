@@ -84,7 +84,7 @@ export type PostV2FeedbackFeedbackProduct = ClosedEnum<
 >;
 
 /**
- * Event has been dispatched to delete the feedback
+ * Feedback submitted successfully
  */
 export type PostV2FeedbackResponseBody = {
   /**

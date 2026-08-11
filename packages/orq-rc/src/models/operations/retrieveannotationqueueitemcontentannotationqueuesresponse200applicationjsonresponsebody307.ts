@@ -2525,10 +2525,10 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
         .optional(),
     explanation: z.string().optional(),
     started_at: z.string().datetime({ offset: true }).default(
-      "2026-08-10T13:58:13.134Z",
+      "2026-08-11T06:39:46.660Z",
     ).transform(v => new Date(v)),
     finished_at: z.string().datetime({ offset: true }).default(
-      "2026-08-10T13:58:13.134Z",
+      "2026-08-11T06:39:46.660Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody30Type$inboundSchema,

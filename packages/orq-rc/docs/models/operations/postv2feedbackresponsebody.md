@@ -1,6 +1,6 @@
 # PostV2FeedbackResponseBody
 
-Event has been dispatched to delete the feedback
+Feedback submitted successfully
 
 ## Example Usage
 

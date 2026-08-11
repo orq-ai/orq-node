@@ -1135,7 +1135,7 @@ run();
 * [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 251 methods.*
 * [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 251 methods.*
 * [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 251 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 251 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 251 methods.*
 * [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 251 methods.*
 * [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 251 methods.*
 * [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 251 methods.*

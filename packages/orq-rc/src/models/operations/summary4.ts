@@ -2425,10 +2425,10 @@ export const Evaluations5$inboundSchema: z.ZodType<
       .optional(),
   explanation: z.string().optional(),
   started_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.069Z",
+    "2026-08-11T06:39:44.399Z",
   ).transform(v => new Date(v)),
   finished_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.070Z",
+    "2026-08-11T06:39:44.399Z",
   ).transform(v => new Date(v)),
   type:
     RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONType$inboundSchema,
@@ -2557,10 +2557,10 @@ export const RetrieveAnnotationQueueItemEvaluations4$inboundSchema: z.ZodType<
       .optional(),
   explanation: z.string().optional(),
   started_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.069Z",
+    "2026-08-11T06:39:44.398Z",
   ).transform(v => new Date(v)),
   finished_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.069Z",
+    "2026-08-11T06:39:44.398Z",
   ).transform(v => new Date(v)),
   type:
     RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Type$inboundSchema,
@@ -2694,10 +2694,10 @@ export const RetrieveAnnotationQueueItemEvaluations3$inboundSchema: z.ZodType<
       .optional(),
   explanation: z.string().optional(),
   started_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.068Z",
+    "2026-08-11T06:39:44.397Z",
   ).transform(v => new Date(v)),
   finished_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.068Z",
+    "2026-08-11T06:39:44.397Z",
   ).transform(v => new Date(v)),
   type:
     RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponseType$inboundSchema,
@@ -2825,10 +2825,10 @@ export const RetrieveAnnotationQueueItemEvaluations2$inboundSchema: z.ZodType<
       .optional(),
   explanation: z.string().optional(),
   started_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.067Z",
+    "2026-08-11T06:39:44.396Z",
   ).transform(v => new Date(v)),
   finished_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.067Z",
+    "2026-08-11T06:39:44.396Z",
   ).transform(v => new Date(v)),
   type:
     RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesType$inboundSchema,
@@ -2963,10 +2963,10 @@ export const RetrieveAnnotationQueueItemEvaluations1$inboundSchema: z.ZodType<
     RetrieveAnnotationQueueItemEvaluationsOutputSchema$inboundSchema.optional(),
   explanation: z.string().optional(),
   started_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.059Z",
+    "2026-08-11T06:39:44.395Z",
   ).transform(v => new Date(v)),
   finished_at: z.string().datetime({ offset: true }).default(
-    "2026-08-10T13:58:11.059Z",
+    "2026-08-11T06:39:44.395Z",
   ).transform(v => new Date(v)),
   type: RetrieveAnnotationQueueItemEvaluationsType$inboundSchema,
   status: EvaluationsStatus$inboundSchema,
