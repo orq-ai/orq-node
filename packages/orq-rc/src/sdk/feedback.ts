@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create policy
+   * Invite people to a workspace
    *
    * @remarks
-   * Creates a new router policy with model configuration, evaluators, retry settings, and limits.
+   * Invites one or more people to the current workspace. If an email is not already registered, a new account is created and an invitation email is sent. Existing accounts are linked directly to the workspace.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

@@ -4809,7 +4809,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KZTE0J2V42J0T96T6C5F7KBR"),
+  _id: z.string().default("01KZTY08XXYQ210R7E6EVEYYK6"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),
@@ -5684,7 +5684,7 @@ export const RetrieveAnnotationQueueItemEvaluations19$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-12T07:29:27.058Z",
+    "2026-08-12T12:08:54.900Z",
   ).transform(v => new Date(v)),
   type:
     RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOrq19Type$inboundSchema,
