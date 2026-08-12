@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Delete schedule
  *
  * @remarks
- * Permanently removes a schedule from NATS, Mongo, and the Redis cache.
+ * Permanently removes the schedule. It will not run again.
  */
 export function schedulesDelete(
   client: OrqCore,

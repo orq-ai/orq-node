@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update schedule
  *
  * @remarks
- * Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) re-publishes the NATS schedule and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+ * Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
  */
 export function schedulesUpdate(
   client: OrqCore,

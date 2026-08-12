@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Reset budget consumption
  *
  * @remarks
- * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved; only the Redis counters are reset.
+ * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved.
  */
 export function budgetsResetConsumption(
   client: OrqCore,

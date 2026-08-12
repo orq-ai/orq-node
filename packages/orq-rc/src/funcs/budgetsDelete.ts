@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete a budget
  *
  * @remarks
- * Permanently deletes a budget. Consumption counters in Redis for this budget are cleared immediately. The response body is empty on success.
+ * Permanently deletes a budget. Its consumption counters are cleared immediately. The response body is empty on success.
  */
 export function budgetsDelete(
   client: OrqCore,
