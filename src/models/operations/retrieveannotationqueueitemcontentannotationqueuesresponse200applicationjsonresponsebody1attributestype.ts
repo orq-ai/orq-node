@@ -2318,10 +2318,10 @@ export const RetrieveAnnotationQueueItemEvaluations1$inboundSchema: z.ZodType<
     RetrieveAnnotationQueueItemEvaluationsOutputSchema$inboundSchema.optional(),
   explanation: z.string().optional(),
   started_at: z.string().datetime({ offset: true }).default(
-    "2026-08-12T21:42:04.573Z",
+    "2026-08-13T11:30:40.481Z",
   ).transform(v => new Date(v)),
   finished_at: z.string().datetime({ offset: true }).default(
-    "2026-08-12T21:42:04.573Z",
+    "2026-08-13T11:30:40.481Z",
   ).transform(v => new Date(v)),
   type: RetrieveAnnotationQueueItemEvaluationsType$inboundSchema,
   status: EvaluationsStatus$inboundSchema,

@@ -45,10 +45,10 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Create custom model
+   * Create an alert
    *
    * @remarks
-   * Creates a new custom model for the workspace. Provider credentials in the configuration are encrypted using the workspace encryption key before being persisted.
+   * Creates a threshold alert in a project. The alert's query is validated against the Reporting API metric catalogue and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

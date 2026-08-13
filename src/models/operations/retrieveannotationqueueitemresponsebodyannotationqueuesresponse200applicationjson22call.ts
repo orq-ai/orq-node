@@ -5657,7 +5657,7 @@ export const TwentyThree$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KZVYSSTNG9KXQQKA5XXM5SJ9"),
+  _id: z.string().default("01KZXE710576P1X2C453WMA6J9"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),
