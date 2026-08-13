@@ -7,30 +7,36 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { DomainGroup, DomainGroup$inboundSchema } from "./domaingroup.js";
+import { ScopeMode, ScopeMode$inboundSchema } from "./scopemode.js";
 
 /**
- * Domain describes a permission domain that can be granted to a
+ * Domain describes a permission domain that can be granted to an
  *
  * @remarks
- *  management key. Verbs are derived from id + readable/writable.
+ *  API key. Verbs are derived from id + group + readable/writable.
  */
 export type Domain = {
   /**
-   * Stable domain identifier (e.g. "api-key", "budget"). Used as the
+   * Stable domain identifier (e.g. "agent", "chat_completions"). Used
    *
    * @remarks
-   *  key in ManagementKey.access and as the verb prefix in resolved
-   *  permissions (e.g. budget.list, budget.view, budget.create).
+   *  as the key in ApiKey.access and as the verb prefix in resolved
+   *  permissions (e.g. agent.list, agent.view, agent.create).
    */
   id?: string | undefined;
   /**
    * Human-readable label for the dashboard.
    */
   displayName?: string | undefined;
+  group?: DomainGroup | undefined;
   /**
-   * Logical group used by the UI to render this entry.
+   * Project scopes this domain may be granted under. A workspace-
+   *
+   * @remarks
+   *  admin domain like `member` is typically SCOPE_MODE_ALL only.
    */
-  group?: number | undefined;
+  allowedScopes?: Array<ScopeMode> | undefined;
   /**
    * Whether this domain can be granted read access.
    */
@@ -46,12 +52,14 @@ export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string().optional(),
     display_name: z.string().optional(),
-    group: z.number().int().optional(),
+    group: DomainGroup$inboundSchema.optional(),
+    allowed_scopes: z.array(ScopeMode$inboundSchema).optional(),
     readable: z.boolean().optional(),
     writable: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "display_name": "displayName",
+      "allowed_scopes": "allowedScopes",
     });
   });
 

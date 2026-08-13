@@ -11,7 +11,7 @@ let value: GetAllToolsResponseBody = {
   object: "list",
   data: [
     {
-      id: "tool_01KZX7X3HH25GKXBDCXCG8MPWM",
+      id: "tool_01KZXN3T5Q743WN3J749B1GT2G",
       path: "Default",
       key: "<key>",
       description: "fast as violently next bouncy smoothly oof silent",

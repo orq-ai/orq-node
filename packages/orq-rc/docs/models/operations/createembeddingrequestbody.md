@@ -10,24 +10,6 @@ let value: CreateEmbeddingRequestBody = {
     [],
   ],
   model: "Expedition",
-  orq: {
-    identity: {
-      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-      displayName: "Jane Doe",
-      email: "jane.doe@example.com",
-      metadata: [
-        {
-          "department": "Engineering",
-          "role": "Senior Developer",
-        },
-      ],
-      logoUrl: "https://example.com/avatars/jane-doe.jpg",
-      tags: [
-        "hr",
-        "engineering",
-      ],
-    },
-  },
 };
 ```
 

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { AccessLevel, AccessLevel$inboundSchema } from "./accesslevel.js";
 import {
   ManagementKeyStatus,
   ManagementKeyStatus$inboundSchema,
@@ -48,7 +49,7 @@ export type ManagementKey = {
    *  libs/catalog/orq/managementkeys/v1/catalog.textpb for the canonical
    *  list.
    */
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: AccessLevel } | undefined;
   /**
    * Displayable prefix for UI listings (e.g. "sk-orq-01HXY..."). Safe
    *
@@ -95,7 +96,7 @@ export const ManagementKey$inboundSchema: z.ZodType<
   management_key_id: z.string(),
   name: z.string(),
   permission_mode: ManagementPermissionMode$inboundSchema,
-  access: z.record(z.number().int()).optional(),
+  access: z.record(AccessLevel$inboundSchema).optional(),
   token_prefix: z.string(),
   status: ManagementKeyStatus$inboundSchema,
   created_by_id: z.string().optional(),

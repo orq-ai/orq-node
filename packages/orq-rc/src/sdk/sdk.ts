@@ -24,7 +24,6 @@ import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Notifiers } from "./notifiers.js";
-import { People } from "./people.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
@@ -166,11 +165,6 @@ export class Orq extends ClientSDK {
   private _notifiers?: Notifiers;
   get notifiers(): Notifiers {
     return (this._notifiers ??= new Notifiers(this._options));
-  }
-
-  private _people?: People;
-  get people(): People {
-    return (this._people ??= new People(this._options));
   }
 
   private _projects?: Projects;

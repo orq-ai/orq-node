@@ -1020,10 +1020,7 @@ export type CreateRouterResponseResponseBody = {
   serviceTier: CreateRouterResponseServiceTier;
   status: CreateRouterResponseStatus;
   store: boolean;
-  /**
-   * Telemetry information for correlating the response with traces
-   */
-  telemetry?: components.Telemetry | undefined;
+  telemetry?: components.ResponseTelemetry | undefined;
   temperature: number;
   /**
    * Text output configuration including format and verbosity
@@ -2142,7 +2139,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   service_tier: CreateRouterResponseServiceTier$inboundSchema,
   status: CreateRouterResponseStatus$inboundSchema,
   store: z.boolean(),
-  telemetry: components.Telemetry$inboundSchema.optional(),
+  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
   temperature: z.number(),
   text: z.any().optional(),
   tool_choice: z.any().optional(),
