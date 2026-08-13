@@ -45,10 +45,7 @@ export class Feedback extends ClientSDK {
   }
 
   /**
-   * Invite people to a workspace
-   *
-   * @remarks
-   * Invites one or more people to the current workspace. If an email is not already registered, a new account is created and an invitation email is sent. Existing accounts are linked directly to the workspace.
+   * Create an annotation queue
    */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,

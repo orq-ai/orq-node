@@ -39,6 +39,7 @@ import { SmartRouters } from "./smartrouters.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
+import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
 
 export class Orq extends ClientSDK {
@@ -195,6 +196,11 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _workspaceSecurity?: WorkspaceSecurity;
+  get workspaceSecurity(): WorkspaceSecurity {
+    return (this._workspaceSecurity ??= new WorkspaceSecurity(this._options));
   }
 
   private _workspaceSettings?: WorkspaceSettings;
