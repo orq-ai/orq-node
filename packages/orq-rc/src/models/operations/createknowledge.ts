@@ -31,11 +31,65 @@ export type ExternalConfig = {
   apiKey: string;
 };
 
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
+export type RequestBodyRerankConfig = {
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
+   */
+  rerankThreshold?: number | undefined;
+  /**
+   * The rerank model to use for the knowledge base.
+   */
+  rerankModel: string;
+};
+
+/**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type RequestBodyAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
+ * The retrieval settings for the knowledge base.
+ */
+export type RequestBodyRetrievalSettings = {
+  /**
+   * The number of results to return from the search.
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?: RequestBodyRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?: RequestBodyAgenticRagConfig | null | undefined;
+};
+
 export type RequestBody2 = {
   type?: CreateKnowledgeRequestBodyKnowledgeType | undefined;
   key: string;
   description?: string | undefined;
   externalConfig: ExternalConfig;
+  /**
+   * The retrieval settings for the knowledge base.
+   */
+  retrievalSettings?: RequestBodyRetrievalSettings | undefined;
   /**
    * Entity storage path.
    *
@@ -97,7 +151,7 @@ export type CreateKnowledgeRequestBodyAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
 export type RetrievalSettings = {
   /**
@@ -134,7 +188,7 @@ export type CreateKnowledgeRequestBody1 = {
    */
   embeddingModel: string;
   /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
   retrievalSettings?: RetrievalSettings | undefined;
   /**
@@ -320,7 +374,7 @@ export type ResponseBodyAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
 export type ResponseBodyRetrievalSettings = {
   /**
@@ -384,7 +438,7 @@ export type ResponseBody1 = {
   updated: string;
   type: CreateKnowledgeResponseBodyType;
   /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
   retrievalSettings?: ResponseBodyRetrievalSettings | undefined;
   /**
@@ -431,11 +485,107 @@ export function externalConfigToJSON(externalConfig: ExternalConfig): string {
 }
 
 /** @internal */
+export type RequestBodyRerankConfig$Outbound = {
+  top_k: number;
+  rerank_threshold: number;
+  rerank_model: string;
+};
+
+/** @internal */
+export const RequestBodyRerankConfig$outboundSchema: z.ZodType<
+  RequestBodyRerankConfig$Outbound,
+  z.ZodTypeDef,
+  RequestBodyRerankConfig
+> = z.object({
+  topK: z.number().int().default(5),
+  rerankThreshold: z.number().default(0.5),
+  rerankModel: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    topK: "top_k",
+    rerankThreshold: "rerank_threshold",
+    rerankModel: "rerank_model",
+  });
+});
+
+export function requestBodyRerankConfigToJSON(
+  requestBodyRerankConfig: RequestBodyRerankConfig,
+): string {
+  return JSON.stringify(
+    RequestBodyRerankConfig$outboundSchema.parse(requestBodyRerankConfig),
+  );
+}
+
+/** @internal */
+export type RequestBodyAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const RequestBodyAgenticRagConfig$outboundSchema: z.ZodType<
+  RequestBodyAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  RequestBodyAgenticRagConfig
+> = z.object({
+  model: z.string(),
+});
+
+export function requestBodyAgenticRagConfigToJSON(
+  requestBodyAgenticRagConfig: RequestBodyAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    RequestBodyAgenticRagConfig$outboundSchema.parse(
+      requestBodyAgenticRagConfig,
+    ),
+  );
+}
+
+/** @internal */
+export type RequestBodyRetrievalSettings$Outbound = {
+  top_k: number;
+  threshold: number;
+  rerank_config?: RequestBodyRerankConfig$Outbound | null | undefined;
+  agentic_rag_config?: RequestBodyAgenticRagConfig$Outbound | null | undefined;
+};
+
+/** @internal */
+export const RequestBodyRetrievalSettings$outboundSchema: z.ZodType<
+  RequestBodyRetrievalSettings$Outbound,
+  z.ZodTypeDef,
+  RequestBodyRetrievalSettings
+> = z.object({
+  topK: z.number().int().default(5),
+  threshold: z.number().default(0),
+  rerankConfig: z.nullable(z.lazy(() => RequestBodyRerankConfig$outboundSchema))
+    .optional(),
+  agenticRagConfig: z.nullable(
+    z.lazy(() => RequestBodyAgenticRagConfig$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    topK: "top_k",
+    rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
+  });
+});
+
+export function requestBodyRetrievalSettingsToJSON(
+  requestBodyRetrievalSettings: RequestBodyRetrievalSettings,
+): string {
+  return JSON.stringify(
+    RequestBodyRetrievalSettings$outboundSchema.parse(
+      requestBodyRetrievalSettings,
+    ),
+  );
+}
+
+/** @internal */
 export type RequestBody2$Outbound = {
   type: string;
   key: string;
   description?: string | undefined;
   external_config: ExternalConfig$Outbound;
+  retrieval_settings?: RequestBodyRetrievalSettings$Outbound | undefined;
   path: string;
 };
 
@@ -451,10 +601,13 @@ export const RequestBody2$outboundSchema: z.ZodType<
   key: z.string(),
   description: z.string().optional(),
   externalConfig: z.lazy(() => ExternalConfig$outboundSchema),
+  retrievalSettings: z.lazy(() => RequestBodyRetrievalSettings$outboundSchema)
+    .optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
     externalConfig: "external_config",
+    retrievalSettings: "retrieval_settings",
   });
 });
 

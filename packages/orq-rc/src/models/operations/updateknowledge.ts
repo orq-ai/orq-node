@@ -25,9 +25,9 @@ export type RequestBodyRetrievalType = ClosedEnum<
 >;
 
 /**
- * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ * The rerank configuration for the knowledge base. Only the fields provided are updated, any field omitted keeps its currently configured value. Send `null` to disable reranking.
  */
-export type UpdateKnowledgeRequestBodyRerankConfig = {
+export type UpdateKnowledgeRequestBodyKnowledgeRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
@@ -45,7 +45,7 @@ export type UpdateKnowledgeRequestBodyRerankConfig = {
 /**
  * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
  */
-export type UpdateKnowledgeRequestBodyAgenticRagConfig = {
+export type UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig = {
   /**
    * The model to use for the Agentic RAG
    */
@@ -53,9 +53,9 @@ export type UpdateKnowledgeRequestBodyAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base.
  */
-export type UpdateKnowledgeRequestBodyRetrievalSettings = {
+export type UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings = {
   /**
    * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
@@ -69,14 +69,17 @@ export type UpdateKnowledgeRequestBodyRetrievalSettings = {
    */
   threshold?: number | undefined;
   /**
-   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   * The rerank configuration for the knowledge base. Only the fields provided are updated, any field omitted keeps its currently configured value. Send `null` to disable reranking.
    */
-  rerankConfig?: UpdateKnowledgeRequestBodyRerankConfig | null | undefined;
+  rerankConfig?:
+    | UpdateKnowledgeRequestBodyKnowledgeRerankConfig
+    | null
+    | undefined;
   /**
    * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
    */
   agenticRagConfig?:
-    | UpdateKnowledgeRequestBodyAgenticRagConfig
+    | UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig
     | null
     | undefined;
 };
@@ -108,16 +111,18 @@ export type UpdateKnowledgeRequestBody2 = {
    */
   path?: string | undefined;
   /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   * The retrieval settings for the knowledge base.
    */
-  retrievalSettings?: UpdateKnowledgeRequestBodyRetrievalSettings | undefined;
+  retrievalSettings?:
+    | UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings
+    | undefined;
   type?: UpdateKnowledgeRequestBodyKnowledgeType | undefined;
 };
 
 /**
- * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ * The rerank configuration for the knowledge base. Only the fields provided are updated, any field omitted keeps its currently configured value. Send `null` to disable reranking.
  */
-export type RequestBodyRerankConfig = {
+export type UpdateKnowledgeRequestBodyRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
@@ -135,7 +140,7 @@ export type RequestBodyRerankConfig = {
 /**
  * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
  */
-export type RequestBodyAgenticRagConfig = {
+export type UpdateKnowledgeRequestBodyAgenticRagConfig = {
   /**
    * The model to use for the Agentic RAG
    */
@@ -145,7 +150,7 @@ export type RequestBodyAgenticRagConfig = {
 /**
  * The retrieval settings for the knowledge base.
  */
-export type RequestBodyRetrievalSettings = {
+export type UpdateKnowledgeRequestBodyRetrievalSettings = {
   /**
    * The number of results to return from the search.
    */
@@ -155,13 +160,16 @@ export type RequestBodyRetrievalSettings = {
    */
   threshold?: number | undefined;
   /**
-   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   * The rerank configuration for the knowledge base. Only the fields provided are updated, any field omitted keeps its currently configured value. Send `null` to disable reranking.
    */
-  rerankConfig?: RequestBodyRerankConfig | null | undefined;
+  rerankConfig?: UpdateKnowledgeRequestBodyRerankConfig | null | undefined;
   /**
    * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
    */
-  agenticRagConfig?: RequestBodyAgenticRagConfig | null | undefined;
+  agenticRagConfig?:
+    | UpdateKnowledgeRequestBodyAgenticRagConfig
+    | null
+    | undefined;
 };
 
 /**
@@ -207,7 +215,7 @@ export type UpdateKnowledgeRequestBody1 = {
   /**
    * The retrieval settings for the knowledge base.
    */
-  retrievalSettings?: RequestBodyRetrievalSettings | undefined;
+  retrievalSettings?: UpdateKnowledgeRequestBodyRetrievalSettings | undefined;
   /**
    * Configuration for the external knowledge base.
    */
@@ -399,7 +407,7 @@ export type UpdateKnowledgeResponseBodyAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
 export type UpdateKnowledgeResponseBodyRetrievalSettings = {
   /**
@@ -466,7 +474,7 @@ export type UpdateKnowledgeResponseBody1 = {
   updated: string;
   type: UpdateKnowledgeResponseBodyType;
   /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
   retrievalSettings?: UpdateKnowledgeResponseBodyRetrievalSettings | undefined;
   /**
@@ -488,9 +496,174 @@ export const RequestBodyRetrievalType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RequestBodyRetrievalType);
 
 /** @internal */
+export type UpdateKnowledgeRequestBodyKnowledgeRerankConfig$Outbound = {
+  top_k?: number | undefined;
+  rerank_threshold?: number | undefined;
+  rerank_model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyKnowledgeRerankConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeRequestBodyKnowledgeRerankConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeRequestBodyKnowledgeRerankConfig
+  > = z.object({
+    topK: z.number().int().optional(),
+    rerankThreshold: z.number().optional(),
+    rerankModel: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      rerankThreshold: "rerank_threshold",
+      rerankModel: "rerank_model",
+    });
+  });
+
+export function updateKnowledgeRequestBodyKnowledgeRerankConfigToJSON(
+  updateKnowledgeRequestBodyKnowledgeRerankConfig:
+    UpdateKnowledgeRequestBodyKnowledgeRerankConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBodyKnowledgeRerankConfig$outboundSchema.parse(
+      updateKnowledgeRequestBodyKnowledgeRerankConfig,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig
+  > = z.object({
+    model: z.string(),
+  });
+
+export function updateKnowledgeRequestBodyKnowledgeAgenticRagConfigToJSON(
+  updateKnowledgeRequestBodyKnowledgeAgenticRagConfig:
+    UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig$outboundSchema.parse(
+      updateKnowledgeRequestBodyKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings$Outbound = {
+  retrieval_type?: string | undefined;
+  top_k?: number | undefined;
+  threshold?: number | undefined;
+  rerank_config?:
+    | UpdateKnowledgeRequestBodyKnowledgeRerankConfig$Outbound
+    | null
+    | undefined;
+  agentic_rag_config?:
+    | UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig$Outbound
+    | null
+    | undefined;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings
+  > = z.object({
+    retrievalType: RequestBodyRetrievalType$outboundSchema.optional(),
+    topK: z.number().int().optional(),
+    threshold: z.number().optional(),
+    rerankConfig: z.nullable(
+      z.lazy(() =>
+        UpdateKnowledgeRequestBodyKnowledgeRerankConfig$outboundSchema
+      ),
+    ).optional(),
+    agenticRagConfig: z.nullable(
+      z.lazy(() =>
+        UpdateKnowledgeRequestBodyKnowledgeAgenticRagConfig$outboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      retrievalType: "retrieval_type",
+      topK: "top_k",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+    });
+  });
+
+export function updateKnowledgeRequestBodyKnowledgeRetrievalSettingsToJSON(
+  updateKnowledgeRequestBodyKnowledgeRetrievalSettings:
+    UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings$outboundSchema.parse(
+      updateKnowledgeRequestBodyKnowledgeRetrievalSettings,
+    ),
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeRequestBodyKnowledgeType> = z
+    .nativeEnum(UpdateKnowledgeRequestBodyKnowledgeType);
+
+/** @internal */
+export type UpdateKnowledgeRequestBody2$Outbound = {
+  description?: string | null | undefined;
+  embedding_model?: string | undefined;
+  path?: string | undefined;
+  retrieval_settings?:
+    | UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings$Outbound
+    | undefined;
+  type: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBody2$outboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBody2$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeRequestBody2
+> = z.object({
+  description: z.nullable(z.string()).optional(),
+  embeddingModel: z.string().optional(),
+  path: z.string().optional(),
+  retrievalSettings: z.lazy(() =>
+    UpdateKnowledgeRequestBodyKnowledgeRetrievalSettings$outboundSchema
+  ).optional(),
+  type: UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema.default(
+    "internal",
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    embeddingModel: "embedding_model",
+    retrievalSettings: "retrieval_settings",
+  });
+});
+
+export function updateKnowledgeRequestBody2ToJSON(
+  updateKnowledgeRequestBody2: UpdateKnowledgeRequestBody2,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBody2$outboundSchema.parse(
+      updateKnowledgeRequestBody2,
+    ),
+  );
+}
+
+/** @internal */
 export type UpdateKnowledgeRequestBodyRerankConfig$Outbound = {
-  top_k: number;
-  rerank_threshold: number;
+  top_k?: number | undefined;
+  rerank_threshold?: number | undefined;
   rerank_model: string;
 };
 
@@ -500,8 +673,8 @@ export const UpdateKnowledgeRequestBodyRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateKnowledgeRequestBodyRerankConfig
 > = z.object({
-  topK: z.number().int().default(5),
-  rerankThreshold: z.number().default(0.5),
+  topK: z.number().int().optional(),
+  rerankThreshold: z.number().optional(),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -550,9 +723,8 @@ export function updateKnowledgeRequestBodyAgenticRagConfigToJSON(
 
 /** @internal */
 export type UpdateKnowledgeRequestBodyRetrievalSettings$Outbound = {
-  retrieval_type: string;
-  top_k: number;
-  threshold: number;
+  top_k?: number | undefined;
+  threshold?: number | undefined;
   rerank_config?:
     | UpdateKnowledgeRequestBodyRerankConfig$Outbound
     | null
@@ -570,11 +742,8 @@ export const UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema:
     z.ZodTypeDef,
     UpdateKnowledgeRequestBodyRetrievalSettings
   > = z.object({
-    retrievalType: RequestBodyRetrievalType$outboundSchema.default(
-      "hybrid_search",
-    ),
-    topK: z.number().int().default(5),
-    threshold: z.number().default(0),
+    topK: z.number().int().optional(),
+    threshold: z.number().optional(),
     rerankConfig: z.nullable(
       z.lazy(() => UpdateKnowledgeRequestBodyRerankConfig$outboundSchema),
     ).optional(),
@@ -583,7 +752,6 @@ export const UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema:
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
-      retrievalType: "retrieval_type",
       topK: "top_k",
       rerankConfig: "rerank_config",
       agenticRagConfig: "agentic_rag_config",
@@ -597,149 +765,6 @@ export function updateKnowledgeRequestBodyRetrievalSettingsToJSON(
   return JSON.stringify(
     UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema.parse(
       updateKnowledgeRequestBodyRetrievalSettings,
-    ),
-  );
-}
-
-/** @internal */
-export const UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateKnowledgeRequestBodyKnowledgeType> = z
-    .nativeEnum(UpdateKnowledgeRequestBodyKnowledgeType);
-
-/** @internal */
-export type UpdateKnowledgeRequestBody2$Outbound = {
-  description?: string | null | undefined;
-  embedding_model?: string | undefined;
-  path?: string | undefined;
-  retrieval_settings?:
-    | UpdateKnowledgeRequestBodyRetrievalSettings$Outbound
-    | undefined;
-  type: string;
-};
-
-/** @internal */
-export const UpdateKnowledgeRequestBody2$outboundSchema: z.ZodType<
-  UpdateKnowledgeRequestBody2$Outbound,
-  z.ZodTypeDef,
-  UpdateKnowledgeRequestBody2
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  embeddingModel: z.string().optional(),
-  path: z.string().optional(),
-  retrievalSettings: z.lazy(() =>
-    UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema
-  ).optional(),
-  type: UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema.default(
-    "internal",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingModel: "embedding_model",
-    retrievalSettings: "retrieval_settings",
-  });
-});
-
-export function updateKnowledgeRequestBody2ToJSON(
-  updateKnowledgeRequestBody2: UpdateKnowledgeRequestBody2,
-): string {
-  return JSON.stringify(
-    UpdateKnowledgeRequestBody2$outboundSchema.parse(
-      updateKnowledgeRequestBody2,
-    ),
-  );
-}
-
-/** @internal */
-export type RequestBodyRerankConfig$Outbound = {
-  top_k: number;
-  rerank_threshold: number;
-  rerank_model: string;
-};
-
-/** @internal */
-export const RequestBodyRerankConfig$outboundSchema: z.ZodType<
-  RequestBodyRerankConfig$Outbound,
-  z.ZodTypeDef,
-  RequestBodyRerankConfig
-> = z.object({
-  topK: z.number().int().default(5),
-  rerankThreshold: z.number().default(0.5),
-  rerankModel: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankThreshold: "rerank_threshold",
-    rerankModel: "rerank_model",
-  });
-});
-
-export function requestBodyRerankConfigToJSON(
-  requestBodyRerankConfig: RequestBodyRerankConfig,
-): string {
-  return JSON.stringify(
-    RequestBodyRerankConfig$outboundSchema.parse(requestBodyRerankConfig),
-  );
-}
-
-/** @internal */
-export type RequestBodyAgenticRagConfig$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const RequestBodyAgenticRagConfig$outboundSchema: z.ZodType<
-  RequestBodyAgenticRagConfig$Outbound,
-  z.ZodTypeDef,
-  RequestBodyAgenticRagConfig
-> = z.object({
-  model: z.string(),
-});
-
-export function requestBodyAgenticRagConfigToJSON(
-  requestBodyAgenticRagConfig: RequestBodyAgenticRagConfig,
-): string {
-  return JSON.stringify(
-    RequestBodyAgenticRagConfig$outboundSchema.parse(
-      requestBodyAgenticRagConfig,
-    ),
-  );
-}
-
-/** @internal */
-export type RequestBodyRetrievalSettings$Outbound = {
-  top_k: number;
-  threshold: number;
-  rerank_config?: RequestBodyRerankConfig$Outbound | null | undefined;
-  agentic_rag_config?: RequestBodyAgenticRagConfig$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RequestBodyRetrievalSettings$outboundSchema: z.ZodType<
-  RequestBodyRetrievalSettings$Outbound,
-  z.ZodTypeDef,
-  RequestBodyRetrievalSettings
-> = z.object({
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(z.lazy(() => RequestBodyRerankConfig$outboundSchema))
-    .optional(),
-  agenticRagConfig: z.nullable(
-    z.lazy(() => RequestBodyAgenticRagConfig$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-    agenticRagConfig: "agentic_rag_config",
-  });
-});
-
-export function requestBodyRetrievalSettingsToJSON(
-  requestBodyRetrievalSettings: RequestBodyRetrievalSettings,
-): string {
-  return JSON.stringify(
-    RequestBodyRetrievalSettings$outboundSchema.parse(
-      requestBodyRetrievalSettings,
     ),
   );
 }
@@ -784,7 +809,9 @@ export const UpdateKnowledgeRequestBodyType$outboundSchema: z.ZodNativeEnum<
 export type UpdateKnowledgeRequestBody1$Outbound = {
   description?: string | null | undefined;
   path?: string | undefined;
-  retrieval_settings?: RequestBodyRetrievalSettings$Outbound | undefined;
+  retrieval_settings?:
+    | UpdateKnowledgeRequestBodyRetrievalSettings$Outbound
+    | undefined;
   external_config?: RequestBodyExternalConfig$Outbound | undefined;
   type: string;
 };
@@ -797,8 +824,9 @@ export const UpdateKnowledgeRequestBody1$outboundSchema: z.ZodType<
 > = z.object({
   description: z.nullable(z.string()).optional(),
   path: z.string().optional(),
-  retrievalSettings: z.lazy(() => RequestBodyRetrievalSettings$outboundSchema)
-    .optional(),
+  retrievalSettings: z.lazy(() =>
+    UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema
+  ).optional(),
   externalConfig: z.lazy(() => RequestBodyExternalConfig$outboundSchema)
     .optional(),
   type: UpdateKnowledgeRequestBodyType$outboundSchema.default("external"),

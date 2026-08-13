@@ -1,6 +1,6 @@
 # UpdateKnowledgeResponseBodyRetrievalSettings
 
-The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
 
 ## Example Usage
 

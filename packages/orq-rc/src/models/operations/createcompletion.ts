@@ -200,7 +200,7 @@ export type CreateCompletionRouterCompletionsCache = {
 };
 
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export const CreateCompletionSearchType = {
   VectorSearch: "vector_search",
@@ -208,7 +208,7 @@ export const CreateCompletionSearchType = {
   HybridSearch: "hybrid_search",
 } as const;
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export type CreateCompletionSearchType = ClosedEnum<
   typeof CreateCompletionSearchType
@@ -550,7 +550,7 @@ export type CreateCompletionRerankConfig = {
    */
   threshold?: number | undefined;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking. Defaults to `10`.
    */
   topK?: number | undefined;
 };
@@ -567,17 +567,17 @@ export type CreateCompletionAgenticRagConfig = {
 
 export type CreateCompletionKnowledgeBases = {
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of results to return. Send `null` or omit to use the knowledge base configured `top_k`.
    */
-  topK?: number | undefined;
+  topK?: number | null | undefined;
   /**
-   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   * The threshold to apply to the search. Send `null` or omit to use the knowledge base configured `threshold`
    */
-  threshold?: number | undefined;
+  threshold?: number | null | undefined;
   /**
-   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType?: CreateCompletionSearchType | undefined;
+  searchType?: CreateCompletionSearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
@@ -2727,9 +2727,9 @@ export function createCompletionAgenticRagConfigToJSON(
 
 /** @internal */
 export type CreateCompletionKnowledgeBases$Outbound = {
-  top_k?: number | undefined;
-  threshold?: number | undefined;
-  search_type: string;
+  top_k?: number | null | undefined;
+  threshold?: number | null | undefined;
+  search_type?: string | null | undefined;
   filter_by?:
     | CreateCompletionFilterByAnd$Outbound
     | CreateCompletionFilterByOr$Outbound
@@ -2759,11 +2759,9 @@ export const CreateCompletionKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateCompletionKnowledgeBases
 > = z.object({
-  topK: z.number().int().optional(),
-  threshold: z.number().optional(),
-  searchType: CreateCompletionSearchType$outboundSchema.default(
-    "hybrid_search",
-  ),
+  topK: z.nullable(z.number().int()).optional(),
+  threshold: z.nullable(z.number()).optional(),
+  searchType: z.nullable(CreateCompletionSearchType$outboundSchema).optional(),
   filterBy: z.union([
     z.lazy(() => CreateCompletionFilterByAnd$outboundSchema),
     z.lazy(() => CreateCompletionFilterByOr$outboundSchema),

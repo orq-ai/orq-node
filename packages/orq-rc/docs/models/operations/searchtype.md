@@ -1,6 +1,6 @@
 # SearchType
 
-The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
 
 ## Example Usage
 

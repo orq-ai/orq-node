@@ -1363,7 +1363,7 @@ export type RetrieveAnnotationQueueItemInputAnnotationQueuesResponseCache = {
 };
 
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export const RetrieveAnnotationQueueItemInputSearchType = {
   VectorSearch: "vector_search",
@@ -1371,7 +1371,7 @@ export const RetrieveAnnotationQueueItemInputSearchType = {
   HybridSearch: "hybrid_search",
 } as const;
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export type RetrieveAnnotationQueueItemInputSearchType = ClosedEnum<
   typeof RetrieveAnnotationQueueItemInputSearchType
@@ -1763,7 +1763,7 @@ export type RetrieveAnnotationQueueItemInputRerankConfig = {
    */
   threshold: number;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking. Defaults to `10`.
    */
   topK: number;
 };
@@ -1780,17 +1780,17 @@ export type RetrieveAnnotationQueueItemInputAgenticRagConfig = {
 
 export type RetrieveAnnotationQueueItemInputKnowledgeBases = {
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of results to return. Send `null` or omit to use the knowledge base configured `top_k`.
    */
-  topK?: number | undefined;
+  topK?: number | null | undefined;
   /**
-   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   * The threshold to apply to the search. Send `null` or omit to use the knowledge base configured `threshold`
    */
-  threshold?: number | undefined;
+  threshold?: number | null | undefined;
   /**
-   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType: RetrieveAnnotationQueueItemInputSearchType;
+  searchType?: RetrieveAnnotationQueueItemInputSearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
@@ -5567,10 +5567,11 @@ export const RetrieveAnnotationQueueItemInputKnowledgeBases$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    top_k: z.number().int().optional(),
-    threshold: z.number().optional(),
-    search_type: RetrieveAnnotationQueueItemInputSearchType$inboundSchema
-      .default("hybrid_search"),
+    top_k: z.nullable(z.number().int()).optional(),
+    threshold: z.nullable(z.number()).optional(),
+    search_type: z.nullable(
+      RetrieveAnnotationQueueItemInputSearchType$inboundSchema,
+    ).optional(),
     filter_by: z.union([
       z.lazy(() =>
         RetrieveAnnotationQueueItemFilterByAnnotationQueuesResponse200ApplicationJSONResponseBodyAnd$inboundSchema

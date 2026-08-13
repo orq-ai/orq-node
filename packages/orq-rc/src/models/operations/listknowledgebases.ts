@@ -223,7 +223,7 @@ export type ListKnowledgeBasesDataAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
 export type ListKnowledgeBasesDataRetrievalSettings = {
   /**
@@ -287,7 +287,7 @@ export type Data1 = {
   updated: string;
   type: ListKnowledgeBasesDataType;
   /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   * The retrieval settings for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
   retrievalSettings?: ListKnowledgeBasesDataRetrievalSettings | undefined;
   /**

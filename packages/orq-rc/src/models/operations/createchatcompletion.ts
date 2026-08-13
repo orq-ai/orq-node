@@ -917,7 +917,7 @@ export type CreateChatCompletionRouterChatCompletionsCache = {
 };
 
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export const CreateChatCompletionSearchType = {
   VectorSearch: "vector_search",
@@ -925,7 +925,7 @@ export const CreateChatCompletionSearchType = {
   HybridSearch: "hybrid_search",
 } as const;
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export type CreateChatCompletionSearchType = ClosedEnum<
   typeof CreateChatCompletionSearchType
@@ -1303,7 +1303,7 @@ export type CreateChatCompletionRerankConfig = {
    */
   threshold?: number | undefined;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking. Defaults to `10`.
    */
   topK?: number | undefined;
 };
@@ -1320,17 +1320,17 @@ export type CreateChatCompletionAgenticRagConfig = {
 
 export type CreateChatCompletionKnowledgeBases = {
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of results to return. Send `null` or omit to use the knowledge base configured `top_k`.
    */
-  topK?: number | undefined;
+  topK?: number | null | undefined;
   /**
-   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   * The threshold to apply to the search. Send `null` or omit to use the knowledge base configured `threshold`
    */
-  threshold?: number | undefined;
+  threshold?: number | null | undefined;
   /**
-   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType?: CreateChatCompletionSearchType | undefined;
+  searchType?: CreateChatCompletionSearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
@@ -5161,9 +5161,9 @@ export function createChatCompletionAgenticRagConfigToJSON(
 
 /** @internal */
 export type CreateChatCompletionKnowledgeBases$Outbound = {
-  top_k?: number | undefined;
-  threshold?: number | undefined;
-  search_type: string;
+  top_k?: number | null | undefined;
+  threshold?: number | null | undefined;
+  search_type?: string | null | undefined;
   filter_by?:
     | CreateChatCompletionFilterByAnd$Outbound
     | CreateChatCompletionFilterByOr$Outbound
@@ -5195,11 +5195,10 @@ export const CreateChatCompletionKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionKnowledgeBases
 > = z.object({
-  topK: z.number().int().optional(),
-  threshold: z.number().optional(),
-  searchType: CreateChatCompletionSearchType$outboundSchema.default(
-    "hybrid_search",
-  ),
+  topK: z.nullable(z.number().int()).optional(),
+  threshold: z.nullable(z.number()).optional(),
+  searchType: z.nullable(CreateChatCompletionSearchType$outboundSchema)
+    .optional(),
   filterBy: z.union([
     z.lazy(() => CreateChatCompletionFilterByAnd$outboundSchema),
     z.lazy(() => CreateChatCompletionFilterByOr$outboundSchema),

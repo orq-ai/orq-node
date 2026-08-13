@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export const SearchType = {
   VectorSearch: "vector_search",
@@ -18,7 +18,7 @@ export const SearchType = {
   HybridSearch: "hybrid_search",
 } as const;
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export type SearchType = ClosedEnum<typeof SearchType>;
 
@@ -355,7 +355,7 @@ export type RerankConfig = {
    */
   threshold?: number | undefined;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking. Defaults to `10`.
    */
   topK?: number | undefined;
 };
@@ -379,17 +379,17 @@ export type SearchKnowledgeRequestBody = {
    */
   query: string;
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of results to return. Send `null` or omit to use the knowledge base configured `top_k`.
    */
-  topK?: number | undefined;
+  topK?: number | null | undefined;
   /**
-   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   * The threshold to apply to the search. Send `null` or omit to use the knowledge base configured `threshold`
    */
-  threshold?: number | undefined;
+  threshold?: number | null | undefined;
   /**
-   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType?: SearchType | undefined;
+  searchType?: SearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
@@ -1603,9 +1603,9 @@ export function agenticRagConfigToJSON(
 /** @internal */
 export type SearchKnowledgeRequestBody$Outbound = {
   query: string;
-  top_k?: number | undefined;
-  threshold?: number | undefined;
-  search_type: string;
+  top_k?: number | null | undefined;
+  threshold?: number | null | undefined;
+  search_type?: string | null | undefined;
   filter_by?: FilterByAnd$Outbound | FilterByOr$Outbound | {
     [k: string]:
       | SearchKnowledge1Eq$Outbound
@@ -1630,9 +1630,9 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
   SearchKnowledgeRequestBody
 > = z.object({
   query: z.string(),
-  topK: z.number().int().optional(),
-  threshold: z.number().optional(),
-  searchType: SearchType$outboundSchema.default("hybrid_search"),
+  topK: z.nullable(z.number().int()).optional(),
+  threshold: z.nullable(z.number()).optional(),
+  searchType: z.nullable(SearchType$outboundSchema).optional(),
   filterBy: z.union([
     z.lazy(() => FilterByAnd$outboundSchema),
     z.lazy(() => FilterByOr$outboundSchema),

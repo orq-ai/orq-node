@@ -665,7 +665,7 @@ export type RetrieveAnnotationQueueItemResponseBodyAnnotationQueuesResponse200Ap
   };
 
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export const ResponseBodySearchType = {
   VectorSearch: "vector_search",
@@ -673,7 +673,7 @@ export const ResponseBodySearchType = {
   HybridSearch: "hybrid_search",
 } as const;
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export type ResponseBodySearchType = ClosedEnum<typeof ResponseBodySearchType>;
 
@@ -1014,7 +1014,7 @@ export type RetrieveAnnotationQueueItemResponseBodyRerankConfig = {
    */
   threshold: number;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking. Defaults to `10`.
    */
   topK: number;
 };
@@ -1031,17 +1031,17 @@ export type RetrieveAnnotationQueueItemResponseBodyAgenticRagConfig = {
 
 export type RetrieveAnnotationQueueItemResponseBodyKnowledgeBases = {
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of results to return. Send `null` or omit to use the knowledge base configured `top_k`.
    */
-  topK?: number | undefined;
+  topK?: number | null | undefined;
   /**
-   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   * The threshold to apply to the search. Send `null` or omit to use the knowledge base configured `threshold`
    */
-  threshold?: number | undefined;
+  threshold?: number | null | undefined;
   /**
-   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType: ResponseBodySearchType;
+  searchType?: ResponseBodySearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
@@ -4274,9 +4274,9 @@ export const RetrieveAnnotationQueueItemResponseBodyKnowledgeBases$inboundSchema
     z.ZodTypeDef,
     unknown
   > = z.object({
-    top_k: z.number().int().optional(),
-    threshold: z.number().optional(),
-    search_type: ResponseBodySearchType$inboundSchema.default("hybrid_search"),
+    top_k: z.nullable(z.number().int()).optional(),
+    threshold: z.nullable(z.number()).optional(),
+    search_type: z.nullable(ResponseBodySearchType$inboundSchema).optional(),
     filter_by: z.union([
       z.lazy(() =>
         RetrieveAnnotationQueueItemFilterByAnnotationQueuesResponse200And$inboundSchema
@@ -4809,7 +4809,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KZX55XHE7E6JZZKCX9H41ZVR"),
+  _id: z.string().default("01KZX7X43AMFDW5GNEFA2ZNM6Q"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),
@@ -5684,7 +5684,7 @@ export const RetrieveAnnotationQueueItemEvaluations19$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-13T08:52:48.749Z",
+    "2026-08-13T09:40:26.276Z",
   ).transform(v => new Date(v)),
   type:
     RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody2AttributesOrq19Type$inboundSchema,

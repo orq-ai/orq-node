@@ -1,13 +1,13 @@
-# UpdateKnowledgeRequestBodyRerankConfig
+# UpdateKnowledgeRequestBodyKnowledgeRerankConfig
 
 The rerank configuration for the knowledge base. Only the fields provided are updated, any field omitted keeps its currently configured value. Send `null` to disable reranking.
 
 ## Example Usage
 
 ```typescript
-import { UpdateKnowledgeRequestBodyRerankConfig } from "@orq-ai/node/models/operations";
+import { UpdateKnowledgeRequestBodyKnowledgeRerankConfig } from "@orq-ai/node/models/operations";
 
-let value: UpdateKnowledgeRequestBodyRerankConfig = {
+let value: UpdateKnowledgeRequestBodyKnowledgeRerankConfig = {
   rerankModel: "<value>",
 };
 ```
