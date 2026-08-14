@@ -6,12 +6,14 @@
 import { ResponseBodyFallbacks } from "@orq-ai/node/models/operations";
 
 let value: ResponseBodyFallbacks = {
-  model: "Fortwo",
+  model: {
+    id: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                     | Type                      | Required                  | Description               |
-| ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| `model`                   | *string*                  | :heavy_check_mark:        | Fallback model identifier |
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `model`                                                                                                                    | [operations.GetEvalResponseBodyEvalsResponse200Model](../../models/operations/getevalresponsebodyevalsresponse200model.md) | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |

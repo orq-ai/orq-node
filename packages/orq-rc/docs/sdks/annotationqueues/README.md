@@ -731,7 +731,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveAnnotationQueueItemResponseBody](../../models/operations/retrieveannotationqueueitemresponsebody.md)\>**
+**Promise\<[components.PublicSpan](../../models/components/publicspan.md)\>**
 
 ### Errors
 

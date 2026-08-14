@@ -46,234 +46,236 @@ const value: operations.FunctionParams4 = {
 };
 ```
 
-### `operations.FunctionParams5`
+### `operations.Five`
 
 ```typescript
-const value: operations.FunctionParams5 = {
+const value: operations.Five = {
   type: "contains_email",
 };
 ```
 
-### `operations.FunctionParams6`
+### `operations.Six`
 
 ```typescript
-const value: operations.FunctionParams6 = {
+const value: operations.Six = {
   type: "contains_url",
 };
 ```
 
-### `operations.FunctionParams7`
+### `operations.Seven`
 
 ```typescript
-const value: operations.FunctionParams7 = {
+const value: operations.Seven = {
   type: "contains_valid_link",
 };
 ```
 
-### `operations.FunctionParams8`
+### `operations.Eight`
 
 ```typescript
-const value: operations.FunctionParams8 = {
+const value: operations.Eight = {
   type: "start_with",
   value: "<value>",
 };
 ```
 
-### `operations.FunctionParams9`
+### `operations.Nine`
 
 ```typescript
-const value: operations.FunctionParams9 = {
+const value: operations.Nine = {
   type: "ends_with",
   value: "<value>",
 };
 ```
 
-### `operations.FunctionParams10`
+### `operations.Ten`
 
 ```typescript
-const value: operations.FunctionParams10 = {
+const value: operations.Ten = {
   type: "exact_match",
 };
 ```
 
-### `operations.FunctionParams11`
+### `operations.Eleven`
 
 ```typescript
-const value: operations.FunctionParams11 = {
+const value: operations.Eleven = {
   type: "length_less_than",
-  value: 6346.02,
+  value: 1493.93,
 };
 ```
 
-### `operations.FunctionParams12`
+### `operations.Twelve`
 
 ```typescript
-const value: operations.FunctionParams12 = {
+const value: operations.Twelve = {
   type: "length_between",
-  min: 5418.21,
-  max: 5310.29,
+  min: 4530.84,
+  max: 1705.51,
 };
 ```
 
-### `operations.FunctionParams13`
+### `operations.Thirteen`
 
 ```typescript
-const value: operations.FunctionParams13 = {
+const value: operations.Thirteen = {
   type: "length_greater_than",
-  value: 9362.11,
+  value: 1177.11,
 };
 ```
 
-### `operations.FunctionParams14`
+### `operations.Fourteen`
 
 ```typescript
-const value: operations.FunctionParams14 = {
+const value: operations.Fourteen = {
   type: "one_line",
 };
 ```
 
-### `operations.FunctionParams15`
+### `operations.Fifteen`
 
 ```typescript
-const value: operations.FunctionParams15 = {
+const value: operations.Fifteen = {
   type: "regex",
   pattern: "<value>",
 };
 ```
 
-### `operations.FunctionParams16`
+### `operations.Sixteen`
 
 ```typescript
-const value: operations.FunctionParams16 = {
+const value: operations.Sixteen = {
   type: "is_valid_json",
 };
 ```
 
-### `operations.FunctionParams17`
+### `operations.Seventeen`
 
 ```typescript
-const value: operations.FunctionParams17 = {
+const value: operations.Seventeen = {
   type: "moderations_openai",
 };
 ```
 
-### `operations.FunctionParams18`
+### `operations.Eighteen`
 
 ```typescript
-const value: operations.FunctionParams18 = {
+const value: operations.Eighteen = {
   type: "moderations_google",
 };
 ```
 
-### `operations.FunctionParams19`
+### `operations.Nineteen`
 
 ```typescript
-const value: operations.FunctionParams19 = {
+const value: operations.Nineteen = {
   type: "bert_score",
 };
 ```
 
-### `operations.FunctionParams20`
+### `operations.Twenty`
 
 ```typescript
-const value: operations.FunctionParams20 = {
+const value: operations.Twenty = {
   type: "bleu_score",
 };
 ```
 
-### `operations.FunctionParams21`
+### `operations.TwentyOne`
 
 ```typescript
-const value: operations.FunctionParams21 = {
+const value: operations.TwentyOne = {
   type: "rouge_n",
 };
 ```
 
-### `operations.FunctionParams22`
+### `operations.TwentyTwo`
 
 ```typescript
-const value: operations.FunctionParams22 = {
+const value: operations.TwentyTwo = {
   type: "meteor_score",
 };
 ```
 
-### `operations.FunctionParams23`
+### `operations.TwentyThree`
 
 ```typescript
-const value: operations.FunctionParams23 = {
+const value: operations.TwentyThree = {
   type: "cosine_similarity",
 };
 ```
 
-### `operations.FunctionParams24`
+### `operations.TwentyFour`
 
 ```typescript
-const value: operations.FunctionParams24 = {
+const value: operations.TwentyFour = {
   type: "levenshtein_distance",
 };
 ```
 
-### `operations.FunctionParams25`
+### `operations.TwentyFive`
 
 ```typescript
-const value: operations.FunctionParams25 = {
+const value: operations.TwentyFive = {
   type: "keywords_match",
-  keywords: [],
+  keywords: [
+    "<value 1>",
+  ],
 };
 ```
 
-### `operations.FunctionParams26`
+### `operations.TwentySix`
 
 ```typescript
-const value: operations.FunctionParams26 = {
+const value: operations.TwentySix = {
   type: "most_repeated_words",
 };
 ```
 
-### `operations.FunctionParams27`
+### `operations.TwentySeven`
 
 ```typescript
-const value: operations.FunctionParams27 = {
+const value: operations.TwentySeven = {
   type: "flesch_reading_ease",
 };
 ```
 
-### `operations.FunctionParams28`
+### `operations.TwentyEight`
 
 ```typescript
-const value: operations.FunctionParams28 = {
+const value: operations.TwentyEight = {
   type: "gse_english_level",
 };
 ```
 
-### `operations.FunctionParams29`
+### `operations.TwentyNine`
 
 ```typescript
-const value: operations.FunctionParams29 = {
+const value: operations.TwentyNine = {
   type: "words_count",
 };
 ```
 
-### `operations.FunctionParams30`
+### `operations.Thirty`
 
 ```typescript
-const value: operations.FunctionParams30 = {
+const value: operations.Thirty = {
   type: "sentences_count",
 };
 ```
 
-### `operations.FunctionParams31`
+### `operations.ThirtyOne`
 
 ```typescript
-const value: operations.FunctionParams31 = {
+const value: operations.ThirtyOne = {
   type: "lexical_repetition",
 };
 ```
 
-### `operations.FunctionParams32`
+### `operations.ThirtyTwo`
 
 ```typescript
-const value: operations.FunctionParams32 = {
+const value: operations.ThirtyTwo = {
   type: "grammar_diversity",
 };
 ```

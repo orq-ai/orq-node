@@ -13,6 +13,7 @@ import { annotationQueuesRetrieve } from "../funcs/annotationQueuesRetrieve.js";
 import { annotationQueuesRetrieveItem } from "../funcs/annotationQueuesRetrieveItem.js";
 import { annotationQueuesUpdate } from "../funcs/annotationQueuesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -170,7 +171,7 @@ export class AnnotationQueues extends ClientSDK {
   async retrieveItem(
     request: operations.RetrieveAnnotationQueueItemRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveAnnotationQueueItemResponseBody> {
+  ): Promise<components.PublicSpan> {
     return unwrapAsync(annotationQueuesRetrieveItem(
       this,
       request,

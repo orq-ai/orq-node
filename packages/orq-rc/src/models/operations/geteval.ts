@@ -331,123 +331,123 @@ export type GetEvalResponseBodyOutputType = ClosedEnum<
   typeof GetEvalResponseBodyOutputType
 >;
 
-export type FunctionParams32 = {
+export type ThirtyTwo = {
   type: "grammar_diversity";
 };
 
-export type FunctionParams31 = {
+export type ThirtyOne = {
   type: "lexical_repetition";
 };
 
-export type FunctionParams30 = {
+export type Thirty = {
   type: "sentences_count";
 };
 
-export type FunctionParams29 = {
+export type TwentyNine = {
   type: "words_count";
 };
 
-export type FunctionParams28 = {
+export type TwentyEight = {
   type: "gse_english_level";
 };
 
-export type FunctionParams27 = {
+export type TwentySeven = {
   type: "flesch_reading_ease";
 };
 
-export type FunctionParams26 = {
+export type TwentySix = {
   type: "most_repeated_words";
 };
 
-export type FunctionParams25 = {
+export type TwentyFive = {
   type: "keywords_match";
   keywords: Array<string>;
 };
 
-export type FunctionParams24 = {
+export type TwentyFour = {
   type: "levenshtein_distance";
 };
 
-export type FunctionParams23 = {
+export type TwentyThree = {
   type: "cosine_similarity";
 };
 
-export type FunctionParams22 = {
+export type TwentyTwo = {
   type: "meteor_score";
 };
 
-export type FunctionParams21 = {
+export type TwentyOne = {
   type: "rouge_n";
 };
 
-export type FunctionParams20 = {
+export type Twenty = {
   type: "bleu_score";
 };
 
-export type FunctionParams19 = {
+export type Nineteen = {
   type: "bert_score";
 };
 
-export type FunctionParams18 = {
+export type Eighteen = {
   type: "moderations_google";
 };
 
-export type FunctionParams17 = {
+export type Seventeen = {
   type: "moderations_openai";
 };
 
-export type FunctionParams16 = {
+export type Sixteen = {
   type: "is_valid_json";
 };
 
-export type FunctionParams15 = {
+export type Fifteen = {
   type: "regex";
   pattern: string;
 };
 
-export type FunctionParams14 = {
+export type Fourteen = {
   type: "one_line";
 };
 
-export type FunctionParams13 = {
+export type Thirteen = {
   type: "length_greater_than";
   value: number;
 };
 
-export type FunctionParams12 = {
+export type Twelve = {
   type: "length_between";
   min: number;
   max: number;
 };
 
-export type FunctionParams11 = {
+export type Eleven = {
   type: "length_less_than";
   value: number;
 };
 
-export type FunctionParams10 = {
+export type Ten = {
   type: "exact_match";
 };
 
-export type FunctionParams9 = {
+export type Nine = {
   type: "ends_with";
   value: string;
 };
 
-export type FunctionParams8 = {
+export type Eight = {
   type: "start_with";
   value: string;
 };
 
-export type FunctionParams7 = {
+export type Seven = {
   type: "contains_valid_link";
 };
 
-export type FunctionParams6 = {
+export type Six = {
   type: "contains_url";
 };
 
-export type FunctionParams5 = {
+export type Five = {
   type: "contains_email";
 };
 
@@ -476,34 +476,34 @@ export type FunctionParams =
   | FunctionParams2
   | FunctionParams3
   | FunctionParams4
-  | FunctionParams5
-  | FunctionParams6
-  | FunctionParams7
-  | FunctionParams8
-  | FunctionParams9
-  | FunctionParams10
-  | FunctionParams11
-  | FunctionParams12
-  | FunctionParams13
-  | FunctionParams14
-  | FunctionParams15
-  | FunctionParams16
-  | FunctionParams17
-  | FunctionParams18
-  | FunctionParams19
-  | FunctionParams20
-  | FunctionParams21
-  | FunctionParams22
-  | FunctionParams23
-  | FunctionParams24
-  | FunctionParams25
-  | FunctionParams26
-  | FunctionParams27
-  | FunctionParams28
-  | FunctionParams29
-  | FunctionParams30
-  | FunctionParams31
-  | FunctionParams32;
+  | Five
+  | Six
+  | Seven
+  | Eight
+  | Nine
+  | Ten
+  | Eleven
+  | Twelve
+  | Thirteen
+  | Fourteen
+  | Fifteen
+  | Sixteen
+  | Seventeen
+  | Eighteen
+  | Nineteen
+  | Twenty
+  | TwentyOne
+  | TwentyTwo
+  | TwentyThree
+  | TwentyFour
+  | TwentyFive
+  | TwentySix
+  | TwentySeven
+  | TwentyEight
+  | TwentyNine
+  | Thirty
+  | ThirtyOne
+  | ThirtyTwo;
 
 export type ResponseBodyFunction = {
   enabled: boolean;
@@ -529,34 +529,34 @@ export type ResponseBodyFunction = {
     | FunctionParams2
     | FunctionParams3
     | FunctionParams4
-    | FunctionParams5
-    | FunctionParams6
-    | FunctionParams7
-    | FunctionParams8
-    | FunctionParams9
-    | FunctionParams10
-    | FunctionParams11
-    | FunctionParams12
-    | FunctionParams13
-    | FunctionParams14
-    | FunctionParams15
-    | FunctionParams16
-    | FunctionParams17
-    | FunctionParams18
-    | FunctionParams19
-    | FunctionParams20
-    | FunctionParams21
-    | FunctionParams22
-    | FunctionParams23
-    | FunctionParams24
-    | FunctionParams25
-    | FunctionParams26
-    | FunctionParams27
-    | FunctionParams28
-    | FunctionParams29
-    | FunctionParams30
-    | FunctionParams31
-    | FunctionParams32;
+    | Five
+    | Six
+    | Seven
+    | Eight
+    | Nine
+    | Ten
+    | Eleven
+    | Twelve
+    | Thirteen
+    | Fourteen
+    | Fifteen
+    | Sixteen
+    | Seventeen
+    | Eighteen
+    | Nineteen
+    | Twenty
+    | TwentyOne
+    | TwentyTwo
+    | TwentyThree
+    | TwentyFour
+    | TwentyFive
+    | TwentySix
+    | TwentySeven
+    | TwentyEight
+    | TwentyNine
+    | Thirty
+    | ThirtyOne
+    | ThirtyTwo;
 };
 
 export type GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata = {
@@ -622,7 +622,7 @@ export type GetEvalResponseBodyEvalsModel = {
   modelParameters?: GetEvalResponseBodyEvalsModelParameters | undefined;
 };
 
-export type GetEvalResponseBodyEvalsRetry = {
+export type ResponseBodyRetry = {
   count: number;
   onCodes?: Array<number> | undefined;
 };
@@ -646,14 +646,14 @@ export type GetEvalResponseBodyEvalsResponse200Model = {
     | undefined;
 };
 
-export type GetEvalResponseBodyEvalsFallbacks = {
+export type ResponseBodyFallbacks = {
   model: GetEvalResponseBodyEvalsResponse200Model;
 };
 
 export type ResponseBodyJudges = {
   model: GetEvalResponseBodyEvalsModel;
-  retry?: GetEvalResponseBodyEvalsRetry | undefined;
-  fallbacks?: Array<GetEvalResponseBodyEvalsFallbacks> | undefined;
+  retry?: ResponseBodyRetry | undefined;
+  fallbacks?: Array<ResponseBodyFallbacks> | undefined;
 };
 
 export type GetEvalResponseBodyModelParameters = {
@@ -846,8 +846,8 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-14T03:59:18.686Z"),
-  updated: z.string().default("2026-08-14T03:59:18.686Z"),
+  created: z.string().default("2026-08-14T13:41:27.001Z"),
+  updated: z.string().default("2026-08-14T13:41:27.001Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -949,8 +949,8 @@ export const Typescript$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-14T03:59:18.686Z"),
-  updated: z.string().default("2026-08-14T03:59:18.686Z"),
+  created: z.string().default("2026-08-14T13:41:27.001Z"),
+  updated: z.string().default("2026-08-14T13:41:27.001Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -1046,8 +1046,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-14T03:59:18.686Z"),
-  updated: z.string().default("2026-08-14T03:59:18.686Z"),
+  created: z.string().default("2026-08-14T13:41:27.001Z"),
+  updated: z.string().default("2026-08-14T13:41:27.001Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -1144,8 +1144,8 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-14T03:59:18.686Z"),
-  updated: z.string().default("2026-08-14T03:59:18.686Z"),
+  created: z.string().default("2026-08-14T13:41:27.001Z"),
+  updated: z.string().default("2026-08-14T13:41:27.001Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -1228,8 +1228,8 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-14T03:59:18.686Z"),
-    updated: z.string().default("2026-08-14T03:59:18.686Z"),
+    created: z.string().default("2026-08-14T13:41:27.001Z"),
+    updated: z.string().default("2026-08-14T13:41:27.001Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
@@ -1337,8 +1337,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-14T03:59:18.686Z"),
-    updated: z.string().default("2026-08-14T03:59:18.686Z"),
+    created: z.string().default("2026-08-14T13:41:27.001Z"),
+    updated: z.string().default("2026-08-14T13:41:27.001Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
@@ -1411,141 +1411,138 @@ export const GetEvalResponseBodyOutputType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetEvalResponseBodyOutputType);
 
 /** @internal */
-export const FunctionParams32$inboundSchema: z.ZodType<
-  FunctionParams32,
+export const ThirtyTwo$inboundSchema: z.ZodType<
+  ThirtyTwo,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("grammar_diversity"),
 });
 
-export function functionParams32FromJSON(
+export function thirtyTwoFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams32, SDKValidationError> {
+): SafeParseResult<ThirtyTwo, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams32$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams32' from JSON`,
+    (x) => ThirtyTwo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ThirtyTwo' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams31$inboundSchema: z.ZodType<
-  FunctionParams31,
+export const ThirtyOne$inboundSchema: z.ZodType<
+  ThirtyOne,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("lexical_repetition"),
 });
 
-export function functionParams31FromJSON(
+export function thirtyOneFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams31, SDKValidationError> {
+): SafeParseResult<ThirtyOne, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams31$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams31' from JSON`,
+    (x) => ThirtyOne$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ThirtyOne' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams30$inboundSchema: z.ZodType<
-  FunctionParams30,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("sentences_count"),
-});
+export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("sentences_count"),
+  });
 
-export function functionParams30FromJSON(
+export function thirtyFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams30, SDKValidationError> {
+): SafeParseResult<Thirty, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams30$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams30' from JSON`,
+    (x) => Thirty$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Thirty' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams29$inboundSchema: z.ZodType<
-  FunctionParams29,
+export const TwentyNine$inboundSchema: z.ZodType<
+  TwentyNine,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("words_count"),
 });
 
-export function functionParams29FromJSON(
+export function twentyNineFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams29, SDKValidationError> {
+): SafeParseResult<TwentyNine, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams29$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams29' from JSON`,
+    (x) => TwentyNine$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyNine' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams28$inboundSchema: z.ZodType<
-  FunctionParams28,
+export const TwentyEight$inboundSchema: z.ZodType<
+  TwentyEight,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("gse_english_level"),
 });
 
-export function functionParams28FromJSON(
+export function twentyEightFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams28, SDKValidationError> {
+): SafeParseResult<TwentyEight, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams28$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams28' from JSON`,
+    (x) => TwentyEight$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyEight' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams27$inboundSchema: z.ZodType<
-  FunctionParams27,
+export const TwentySeven$inboundSchema: z.ZodType<
+  TwentySeven,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("flesch_reading_ease"),
 });
 
-export function functionParams27FromJSON(
+export function twentySevenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams27, SDKValidationError> {
+): SafeParseResult<TwentySeven, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams27$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams27' from JSON`,
+    (x) => TwentySeven$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentySeven' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams26$inboundSchema: z.ZodType<
-  FunctionParams26,
+export const TwentySix$inboundSchema: z.ZodType<
+  TwentySix,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("most_repeated_words"),
 });
 
-export function functionParams26FromJSON(
+export function twentySixFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams26, SDKValidationError> {
+): SafeParseResult<TwentySix, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams26$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams26' from JSON`,
+    (x) => TwentySix$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentySix' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams25$inboundSchema: z.ZodType<
-  FunctionParams25,
+export const TwentyFive$inboundSchema: z.ZodType<
+  TwentyFive,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1553,229 +1550,220 @@ export const FunctionParams25$inboundSchema: z.ZodType<
   keywords: z.array(z.string()),
 });
 
-export function functionParams25FromJSON(
+export function twentyFiveFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams25, SDKValidationError> {
+): SafeParseResult<TwentyFive, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams25$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams25' from JSON`,
+    (x) => TwentyFive$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyFive' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams24$inboundSchema: z.ZodType<
-  FunctionParams24,
+export const TwentyFour$inboundSchema: z.ZodType<
+  TwentyFour,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("levenshtein_distance"),
 });
 
-export function functionParams24FromJSON(
+export function twentyFourFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams24, SDKValidationError> {
+): SafeParseResult<TwentyFour, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams24$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams24' from JSON`,
+    (x) => TwentyFour$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyFour' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams23$inboundSchema: z.ZodType<
-  FunctionParams23,
+export const TwentyThree$inboundSchema: z.ZodType<
+  TwentyThree,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("cosine_similarity"),
 });
 
-export function functionParams23FromJSON(
+export function twentyThreeFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams23, SDKValidationError> {
+): SafeParseResult<TwentyThree, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams23$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams23' from JSON`,
+    (x) => TwentyThree$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyThree' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams22$inboundSchema: z.ZodType<
-  FunctionParams22,
+export const TwentyTwo$inboundSchema: z.ZodType<
+  TwentyTwo,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("meteor_score"),
 });
 
-export function functionParams22FromJSON(
+export function twentyTwoFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams22, SDKValidationError> {
+): SafeParseResult<TwentyTwo, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams22$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams22' from JSON`,
+    (x) => TwentyTwo$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyTwo' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams21$inboundSchema: z.ZodType<
-  FunctionParams21,
+export const TwentyOne$inboundSchema: z.ZodType<
+  TwentyOne,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("rouge_n"),
 });
 
-export function functionParams21FromJSON(
+export function twentyOneFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams21, SDKValidationError> {
+): SafeParseResult<TwentyOne, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams21' from JSON`,
+    (x) => TwentyOne$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwentyOne' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams20$inboundSchema: z.ZodType<
-  FunctionParams20,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("bleu_score"),
-});
+export const Twenty$inboundSchema: z.ZodType<Twenty, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("bleu_score"),
+  });
 
-export function functionParams20FromJSON(
+export function twentyFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams20, SDKValidationError> {
+): SafeParseResult<Twenty, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams20$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams20' from JSON`,
+    (x) => Twenty$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Twenty' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams19$inboundSchema: z.ZodType<
-  FunctionParams19,
+export const Nineteen$inboundSchema: z.ZodType<
+  Nineteen,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("bert_score"),
 });
 
-export function functionParams19FromJSON(
+export function nineteenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams19, SDKValidationError> {
+): SafeParseResult<Nineteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams19$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams19' from JSON`,
+    (x) => Nineteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Nineteen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams18$inboundSchema: z.ZodType<
-  FunctionParams18,
+export const Eighteen$inboundSchema: z.ZodType<
+  Eighteen,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("moderations_google"),
 });
 
-export function functionParams18FromJSON(
+export function eighteenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams18, SDKValidationError> {
+): SafeParseResult<Eighteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams18$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams18' from JSON`,
+    (x) => Eighteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Eighteen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams17$inboundSchema: z.ZodType<
-  FunctionParams17,
+export const Seventeen$inboundSchema: z.ZodType<
+  Seventeen,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("moderations_openai"),
 });
 
-export function functionParams17FromJSON(
+export function seventeenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams17, SDKValidationError> {
+): SafeParseResult<Seventeen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams17$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams17' from JSON`,
+    (x) => Seventeen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Seventeen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams16$inboundSchema: z.ZodType<
-  FunctionParams16,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("is_valid_json"),
-});
+export const Sixteen$inboundSchema: z.ZodType<Sixteen, z.ZodTypeDef, unknown> =
+  z.object({
+    type: z.literal("is_valid_json"),
+  });
 
-export function functionParams16FromJSON(
+export function sixteenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams16, SDKValidationError> {
+): SafeParseResult<Sixteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams16$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams16' from JSON`,
+    (x) => Sixteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Sixteen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams15$inboundSchema: z.ZodType<
-  FunctionParams15,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("regex"),
-  pattern: z.string(),
-});
+export const Fifteen$inboundSchema: z.ZodType<Fifteen, z.ZodTypeDef, unknown> =
+  z.object({
+    type: z.literal("regex"),
+    pattern: z.string(),
+  });
 
-export function functionParams15FromJSON(
+export function fifteenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams15, SDKValidationError> {
+): SafeParseResult<Fifteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams15$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams15' from JSON`,
+    (x) => Fifteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Fifteen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams14$inboundSchema: z.ZodType<
-  FunctionParams14,
+export const Fourteen$inboundSchema: z.ZodType<
+  Fourteen,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: z.literal("one_line"),
 });
 
-export function functionParams14FromJSON(
+export function fourteenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams14, SDKValidationError> {
+): SafeParseResult<Fourteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams14$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams14' from JSON`,
+    (x) => Fourteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Fourteen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams13$inboundSchema: z.ZodType<
-  FunctionParams13,
+export const Thirteen$inboundSchema: z.ZodType<
+  Thirteen,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1783,170 +1771,146 @@ export const FunctionParams13$inboundSchema: z.ZodType<
   value: z.number(),
 });
 
-export function functionParams13FromJSON(
+export function thirteenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams13, SDKValidationError> {
+): SafeParseResult<Thirteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams13$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams13' from JSON`,
+    (x) => Thirteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Thirteen' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams12$inboundSchema: z.ZodType<
-  FunctionParams12,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("length_between"),
-  min: z.number(),
-  max: z.number(),
-});
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("length_between"),
+    min: z.number(),
+    max: z.number(),
+  });
 
-export function functionParams12FromJSON(
+export function twelveFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams12, SDKValidationError> {
+): SafeParseResult<Twelve, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams12$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams12' from JSON`,
+    (x) => Twelve$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Twelve' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams11$inboundSchema: z.ZodType<
-  FunctionParams11,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("length_less_than"),
-  value: z.number(),
-});
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("length_less_than"),
+    value: z.number(),
+  });
 
-export function functionParams11FromJSON(
+export function elevenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams11, SDKValidationError> {
+): SafeParseResult<Eleven, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams11$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams11' from JSON`,
+    (x) => Eleven$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Eleven' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams10$inboundSchema: z.ZodType<
-  FunctionParams10,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("exact_match"),
-});
+export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("exact_match"),
+  });
 
-export function functionParams10FromJSON(
+export function tenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams10, SDKValidationError> {
+): SafeParseResult<Ten, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams10$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams10' from JSON`,
+    (x) => Ten$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Ten' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams9$inboundSchema: z.ZodType<
-  FunctionParams9,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("ends_with"),
-  value: z.string(),
-});
+export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("ends_with"),
+    value: z.string(),
+  });
 
-export function functionParams9FromJSON(
+export function nineFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams9, SDKValidationError> {
+): SafeParseResult<Nine, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams9$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams9' from JSON`,
+    (x) => Nine$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Nine' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams8$inboundSchema: z.ZodType<
-  FunctionParams8,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("start_with"),
-  value: z.string(),
-});
+export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("start_with"),
+    value: z.string(),
+  });
 
-export function functionParams8FromJSON(
+export function eightFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams8, SDKValidationError> {
+): SafeParseResult<Eight, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams8$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams8' from JSON`,
+    (x) => Eight$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Eight' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams7$inboundSchema: z.ZodType<
-  FunctionParams7,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("contains_valid_link"),
-});
+export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("contains_valid_link"),
+  });
 
-export function functionParams7FromJSON(
+export function sevenFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams7, SDKValidationError> {
+): SafeParseResult<Seven, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams7$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams7' from JSON`,
+    (x) => Seven$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Seven' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams6$inboundSchema: z.ZodType<
-  FunctionParams6,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("contains_url"),
-});
+export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("contains_url"),
+  });
 
-export function functionParams6FromJSON(
+export function sixFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams6, SDKValidationError> {
+): SafeParseResult<Six, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams6$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams6' from JSON`,
+    (x) => Six$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Six' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams5$inboundSchema: z.ZodType<
-  FunctionParams5,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("contains_email"),
-});
+export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("contains_email"),
+  });
 
-export function functionParams5FromJSON(
+export function fiveFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams5, SDKValidationError> {
+): SafeParseResult<Five, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams5' from JSON`,
+    (x) => Five$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Five' from JSON`,
   );
 }
 
@@ -2040,34 +2004,34 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => FunctionParams2$inboundSchema),
   z.lazy(() => FunctionParams3$inboundSchema),
   z.lazy(() => FunctionParams4$inboundSchema),
-  z.lazy(() => FunctionParams5$inboundSchema),
-  z.lazy(() => FunctionParams6$inboundSchema),
-  z.lazy(() => FunctionParams7$inboundSchema),
-  z.lazy(() => FunctionParams8$inboundSchema),
-  z.lazy(() => FunctionParams9$inboundSchema),
-  z.lazy(() => FunctionParams10$inboundSchema),
-  z.lazy(() => FunctionParams11$inboundSchema),
-  z.lazy(() => FunctionParams12$inboundSchema),
-  z.lazy(() => FunctionParams13$inboundSchema),
-  z.lazy(() => FunctionParams14$inboundSchema),
-  z.lazy(() => FunctionParams15$inboundSchema),
-  z.lazy(() => FunctionParams16$inboundSchema),
-  z.lazy(() => FunctionParams17$inboundSchema),
-  z.lazy(() => FunctionParams18$inboundSchema),
-  z.lazy(() => FunctionParams19$inboundSchema),
-  z.lazy(() => FunctionParams20$inboundSchema),
-  z.lazy(() => FunctionParams21$inboundSchema),
-  z.lazy(() => FunctionParams22$inboundSchema),
-  z.lazy(() => FunctionParams23$inboundSchema),
-  z.lazy(() => FunctionParams24$inboundSchema),
-  z.lazy(() => FunctionParams25$inboundSchema),
-  z.lazy(() => FunctionParams26$inboundSchema),
-  z.lazy(() => FunctionParams27$inboundSchema),
-  z.lazy(() => FunctionParams28$inboundSchema),
-  z.lazy(() => FunctionParams29$inboundSchema),
-  z.lazy(() => FunctionParams30$inboundSchema),
-  z.lazy(() => FunctionParams31$inboundSchema),
-  z.lazy(() => FunctionParams32$inboundSchema),
+  z.lazy(() => Five$inboundSchema),
+  z.lazy(() => Six$inboundSchema),
+  z.lazy(() => Seven$inboundSchema),
+  z.lazy(() => Eight$inboundSchema),
+  z.lazy(() => Nine$inboundSchema),
+  z.lazy(() => Ten$inboundSchema),
+  z.lazy(() => Eleven$inboundSchema),
+  z.lazy(() => Twelve$inboundSchema),
+  z.lazy(() => Thirteen$inboundSchema),
+  z.lazy(() => Fourteen$inboundSchema),
+  z.lazy(() => Fifteen$inboundSchema),
+  z.lazy(() => Sixteen$inboundSchema),
+  z.lazy(() => Seventeen$inboundSchema),
+  z.lazy(() => Eighteen$inboundSchema),
+  z.lazy(() => Nineteen$inboundSchema),
+  z.lazy(() => Twenty$inboundSchema),
+  z.lazy(() => TwentyOne$inboundSchema),
+  z.lazy(() => TwentyTwo$inboundSchema),
+  z.lazy(() => TwentyThree$inboundSchema),
+  z.lazy(() => TwentyFour$inboundSchema),
+  z.lazy(() => TwentyFive$inboundSchema),
+  z.lazy(() => TwentySix$inboundSchema),
+  z.lazy(() => TwentySeven$inboundSchema),
+  z.lazy(() => TwentyEight$inboundSchema),
+  z.lazy(() => TwentyNine$inboundSchema),
+  z.lazy(() => Thirty$inboundSchema),
+  z.lazy(() => ThirtyOne$inboundSchema),
+  z.lazy(() => ThirtyTwo$inboundSchema),
 ]);
 
 export function functionParamsFromJSON(
@@ -2092,8 +2056,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-14T03:59:18.686Z"),
-  updated: z.string().default("2026-08-14T03:59:18.686Z"),
+  created: z.string().default("2026-08-14T13:41:27.001Z"),
+  updated: z.string().default("2026-08-14T13:41:27.001Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -2106,34 +2070,34 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
     z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => FunctionParams3$inboundSchema),
     z.lazy(() => FunctionParams4$inboundSchema),
-    z.lazy(() => FunctionParams5$inboundSchema),
-    z.lazy(() => FunctionParams6$inboundSchema),
-    z.lazy(() => FunctionParams7$inboundSchema),
-    z.lazy(() => FunctionParams8$inboundSchema),
-    z.lazy(() => FunctionParams9$inboundSchema),
-    z.lazy(() => FunctionParams10$inboundSchema),
-    z.lazy(() => FunctionParams11$inboundSchema),
-    z.lazy(() => FunctionParams12$inboundSchema),
-    z.lazy(() => FunctionParams13$inboundSchema),
-    z.lazy(() => FunctionParams14$inboundSchema),
-    z.lazy(() => FunctionParams15$inboundSchema),
-    z.lazy(() => FunctionParams16$inboundSchema),
-    z.lazy(() => FunctionParams17$inboundSchema),
-    z.lazy(() => FunctionParams18$inboundSchema),
-    z.lazy(() => FunctionParams19$inboundSchema),
-    z.lazy(() => FunctionParams20$inboundSchema),
-    z.lazy(() => FunctionParams21$inboundSchema),
-    z.lazy(() => FunctionParams22$inboundSchema),
-    z.lazy(() => FunctionParams23$inboundSchema),
-    z.lazy(() => FunctionParams24$inboundSchema),
-    z.lazy(() => FunctionParams25$inboundSchema),
-    z.lazy(() => FunctionParams26$inboundSchema),
-    z.lazy(() => FunctionParams27$inboundSchema),
-    z.lazy(() => FunctionParams28$inboundSchema),
-    z.lazy(() => FunctionParams29$inboundSchema),
-    z.lazy(() => FunctionParams30$inboundSchema),
-    z.lazy(() => FunctionParams31$inboundSchema),
-    z.lazy(() => FunctionParams32$inboundSchema),
+    z.lazy(() => Five$inboundSchema),
+    z.lazy(() => Six$inboundSchema),
+    z.lazy(() => Seven$inboundSchema),
+    z.lazy(() => Eight$inboundSchema),
+    z.lazy(() => Nine$inboundSchema),
+    z.lazy(() => Ten$inboundSchema),
+    z.lazy(() => Eleven$inboundSchema),
+    z.lazy(() => Twelve$inboundSchema),
+    z.lazy(() => Thirteen$inboundSchema),
+    z.lazy(() => Fourteen$inboundSchema),
+    z.lazy(() => Fifteen$inboundSchema),
+    z.lazy(() => Sixteen$inboundSchema),
+    z.lazy(() => Seventeen$inboundSchema),
+    z.lazy(() => Eighteen$inboundSchema),
+    z.lazy(() => Nineteen$inboundSchema),
+    z.lazy(() => Twenty$inboundSchema),
+    z.lazy(() => TwentyOne$inboundSchema),
+    z.lazy(() => TwentyTwo$inboundSchema),
+    z.lazy(() => TwentyThree$inboundSchema),
+    z.lazy(() => TwentyFour$inboundSchema),
+    z.lazy(() => TwentyFive$inboundSchema),
+    z.lazy(() => TwentySix$inboundSchema),
+    z.lazy(() => TwentySeven$inboundSchema),
+    z.lazy(() => TwentyEight$inboundSchema),
+    z.lazy(() => TwentyNine$inboundSchema),
+    z.lazy(() => Thirty$inboundSchema),
+    z.lazy(() => ThirtyOne$inboundSchema),
+    z.lazy(() => ThirtyTwo$inboundSchema),
   ]),
 }).transform((v) => {
   return remap$(v, {
@@ -2342,8 +2306,8 @@ export function getEvalResponseBodyEvalsModelFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyEvalsRetry$inboundSchema: z.ZodType<
-  GetEvalResponseBodyEvalsRetry,
+export const ResponseBodyRetry$inboundSchema: z.ZodType<
+  ResponseBodyRetry,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2355,13 +2319,13 @@ export const GetEvalResponseBodyEvalsRetry$inboundSchema: z.ZodType<
   });
 });
 
-export function getEvalResponseBodyEvalsRetryFromJSON(
+export function responseBodyRetryFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalResponseBodyEvalsRetry, SDKValidationError> {
+): SafeParseResult<ResponseBodyRetry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalResponseBodyEvalsRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyEvalsRetry' from JSON`,
+    (x) => ResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyRetry' from JSON`,
   );
 }
 
@@ -2443,21 +2407,21 @@ export function getEvalResponseBodyEvalsResponse200ModelFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyEvalsFallbacks$inboundSchema: z.ZodType<
-  GetEvalResponseBodyEvalsFallbacks,
+export const ResponseBodyFallbacks$inboundSchema: z.ZodType<
+  ResponseBodyFallbacks,
   z.ZodTypeDef,
   unknown
 > = z.object({
   model: z.lazy(() => GetEvalResponseBodyEvalsResponse200Model$inboundSchema),
 });
 
-export function getEvalResponseBodyEvalsFallbacksFromJSON(
+export function responseBodyFallbacksFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalResponseBodyEvalsFallbacks, SDKValidationError> {
+): SafeParseResult<ResponseBodyFallbacks, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalResponseBodyEvalsFallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyEvalsFallbacks' from JSON`,
+    (x) => ResponseBodyFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyFallbacks' from JSON`,
   );
 }
 
@@ -2468,10 +2432,9 @@ export const ResponseBodyJudges$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   model: z.lazy(() => GetEvalResponseBodyEvalsModel$inboundSchema),
-  retry: z.lazy(() => GetEvalResponseBodyEvalsRetry$inboundSchema).optional(),
-  fallbacks: z.array(
-    z.lazy(() => GetEvalResponseBodyEvalsFallbacks$inboundSchema),
-  ).optional(),
+  retry: z.lazy(() => ResponseBodyRetry$inboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => ResponseBodyFallbacks$inboundSchema))
+    .optional(),
 });
 
 export function responseBodyJudgesFromJSON(
@@ -2763,8 +2726,8 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-14T03:59:18.686Z"),
-  updated: z.string().default("2026-08-14T03:59:18.686Z"),
+  created: z.string().default("2026-08-14T13:41:27.001Z"),
+  updated: z.string().default("2026-08-14T13:41:27.001Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),

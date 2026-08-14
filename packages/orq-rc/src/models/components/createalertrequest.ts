@@ -10,6 +10,11 @@ import {
   AlertCondition$outboundSchema,
 } from "./alertcondition.js";
 import {
+  AlertDisplay,
+  AlertDisplay$Outbound,
+  AlertDisplay$outboundSchema,
+} from "./alertdisplay.js";
+import {
   AlertQuery,
   AlertQuery$Outbound,
   AlertQuery$outboundSchema,
@@ -51,6 +56,10 @@ export type CreateAlertRequest = {
    * Whether the alert starts evaluating immediately. Defaults to true.
    */
   enabled?: boolean | undefined;
+  /**
+   * Display options for the alert activity chart.
+   */
+  display?: AlertDisplay | undefined;
 };
 
 /** @internal */
@@ -63,6 +72,7 @@ export type CreateAlertRequest$Outbound = {
   condition: AlertCondition$Outbound;
   notifier_ids?: Array<string> | undefined;
   enabled?: boolean | undefined;
+  display?: AlertDisplay$Outbound | undefined;
 };
 
 /** @internal */
@@ -79,6 +89,7 @@ export const CreateAlertRequest$outboundSchema: z.ZodType<
   condition: AlertCondition$outboundSchema,
   notifierIds: z.array(z.string()).optional(),
   enabled: z.boolean().optional(),
+  display: AlertDisplay$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

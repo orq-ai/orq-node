@@ -56,7 +56,7 @@ export const Interval = {
 export type Interval = ClosedEnum<typeof Interval>;
 
 /**
- * Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+ * Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
  */
 export const Delay = {
   Thirtys: "30s",
@@ -66,7 +66,7 @@ export const Delay = {
   SixHundreds: "600s",
 } as const;
 /**
- * Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+ * Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
  */
 export type Delay = ClosedEnum<typeof Delay>;
 
@@ -109,7 +109,7 @@ export type AlertCondition = {
    */
   interval: Interval;
   /**
-   * Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+   * Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
    */
   delay?: Delay | undefined;
 };
