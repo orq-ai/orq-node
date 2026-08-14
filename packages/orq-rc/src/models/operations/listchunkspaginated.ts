@@ -9,20 +9,28 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Filter chunks by processing status
- */
-export const Status = {
+export const Status2 = {
   Pending: "pending",
   Processing: "processing",
   Completed: "completed",
   Failed: "failed",
   Queued: "queued",
 } as const;
+export type Status2 = ClosedEnum<typeof Status2>;
+
+export const Status1 = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type Status1 = ClosedEnum<typeof Status1>;
+
 /**
  * Filter chunks by processing status
  */
-export type Status = ClosedEnum<typeof Status>;
+export type Status = Array<Status1> | Status2;
 
 export type ListChunksPaginatedRequestBody = {
   /**
@@ -36,7 +44,7 @@ export type ListChunksPaginatedRequestBody = {
   /**
    * Filter chunks by processing status
    */
-  status?: Status | undefined;
+  status?: Array<Status1> | Status2 | undefined;
   limit?: number | undefined;
   page?: number | undefined;
 };
@@ -128,14 +136,32 @@ export type ListChunksPaginatedResponseBody = {
 };
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status2$outboundSchema: z.ZodNativeEnum<typeof Status2> = z
+  .nativeEnum(Status2);
+
+/** @internal */
+export const Status1$outboundSchema: z.ZodNativeEnum<typeof Status1> = z
+  .nativeEnum(Status1);
+
+/** @internal */
+export type Status$Outbound = Array<string> | string;
+
+/** @internal */
+export const Status$outboundSchema: z.ZodType<
+  Status$Outbound,
+  z.ZodTypeDef,
+  Status
+> = z.union([z.array(Status1$outboundSchema), Status2$outboundSchema]);
+
+export function statusToJSON(status: Status): string {
+  return JSON.stringify(Status$outboundSchema.parse(status));
+}
 
 /** @internal */
 export type ListChunksPaginatedRequestBody$Outbound = {
   q: string;
   enabled?: boolean | undefined;
-  status?: string | undefined;
+  status?: Array<string> | string | undefined;
   limit: number;
   page: number;
 };
@@ -148,7 +174,8 @@ export const ListChunksPaginatedRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   q: z.string().default(""),
   enabled: z.boolean().optional(),
-  status: Status$outboundSchema.optional(),
+  status: z.union([z.array(Status1$outboundSchema), Status2$outboundSchema])
+    .optional(),
   limit: z.number().int().default(100),
   page: z.number().int().default(1),
 });

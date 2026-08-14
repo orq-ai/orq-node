@@ -2,16 +2,20 @@
 
 Filter chunks by processing status
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Status1[]`
 
 ```typescript
-import { Status } from "@orq-ai/node/models/operations";
-
-let value: Status = "failed";
+const value: operations.Status1[] = [
+  "queued",
+];
 ```
 
-## Values
+### `operations.Status2`
 
 ```typescript
-"pending" | "processing" | "completed" | "failed" | "queued"
+const value: operations.Status2 = "processing";
 ```
+

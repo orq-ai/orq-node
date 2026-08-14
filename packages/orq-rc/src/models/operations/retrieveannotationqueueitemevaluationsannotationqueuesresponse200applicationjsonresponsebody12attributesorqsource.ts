@@ -5169,7 +5169,7 @@ export const Thirteen$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01KZXTXZ22Z1HVT7MTYEDPASXW"),
+  _id: z.string().default("01KZZ6SKQP9TAJHN6JRPMHGASE"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),
@@ -6185,7 +6185,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-13T15:12:56.872Z",
+      "2026-08-14T03:59:31.552Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody12AttributesOrq19Type$inboundSchema,

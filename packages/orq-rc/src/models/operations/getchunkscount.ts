@@ -9,20 +9,30 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Filter chunks by processing status
- */
-export const GetChunksCountStatus = {
+export const GetChunksCountStatus2 = {
   Pending: "pending",
   Processing: "processing",
   Completed: "completed",
   Failed: "failed",
   Queued: "queued",
 } as const;
+export type GetChunksCountStatus2 = ClosedEnum<typeof GetChunksCountStatus2>;
+
+export const GetChunksCountStatus1 = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type GetChunksCountStatus1 = ClosedEnum<typeof GetChunksCountStatus1>;
+
 /**
  * Filter chunks by processing status
  */
-export type GetChunksCountStatus = ClosedEnum<typeof GetChunksCountStatus>;
+export type GetChunksCountStatus =
+  | Array<GetChunksCountStatus1>
+  | GetChunksCountStatus2;
 
 export type GetChunksCountRequestBody = {
   /**
@@ -36,7 +46,7 @@ export type GetChunksCountRequestBody = {
   /**
    * Filter chunks by processing status
    */
-  status?: GetChunksCountStatus | undefined;
+  status?: Array<GetChunksCountStatus1> | GetChunksCountStatus2 | undefined;
 };
 
 export type GetChunksCountRequest = {
@@ -59,15 +69,41 @@ export type GetChunksCountResponseBody = {
 };
 
 /** @internal */
-export const GetChunksCountStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GetChunksCountStatus
-> = z.nativeEnum(GetChunksCountStatus);
+export const GetChunksCountStatus2$outboundSchema: z.ZodNativeEnum<
+  typeof GetChunksCountStatus2
+> = z.nativeEnum(GetChunksCountStatus2);
+
+/** @internal */
+export const GetChunksCountStatus1$outboundSchema: z.ZodNativeEnum<
+  typeof GetChunksCountStatus1
+> = z.nativeEnum(GetChunksCountStatus1);
+
+/** @internal */
+export type GetChunksCountStatus$Outbound = Array<string> | string;
+
+/** @internal */
+export const GetChunksCountStatus$outboundSchema: z.ZodType<
+  GetChunksCountStatus$Outbound,
+  z.ZodTypeDef,
+  GetChunksCountStatus
+> = z.union([
+  z.array(GetChunksCountStatus1$outboundSchema),
+  GetChunksCountStatus2$outboundSchema,
+]);
+
+export function getChunksCountStatusToJSON(
+  getChunksCountStatus: GetChunksCountStatus,
+): string {
+  return JSON.stringify(
+    GetChunksCountStatus$outboundSchema.parse(getChunksCountStatus),
+  );
+}
 
 /** @internal */
 export type GetChunksCountRequestBody$Outbound = {
   q: string;
   enabled?: boolean | undefined;
-  status?: string | undefined;
+  status?: Array<string> | string | undefined;
 };
 
 /** @internal */
@@ -78,7 +114,10 @@ export const GetChunksCountRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   q: z.string().default(""),
   enabled: z.boolean().optional(),
-  status: GetChunksCountStatus$outboundSchema.optional(),
+  status: z.union([
+    z.array(GetChunksCountStatus1$outboundSchema),
+    GetChunksCountStatus2$outboundSchema,
+  ]).optional(),
 });
 
 export function getChunksCountRequestBodyToJSON(

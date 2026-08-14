@@ -2,16 +2,20 @@
 
 Filter chunks by processing status
 
-## Example Usage
+
+## Supported Types
+
+### `operations.GetChunksCountStatus1[]`
 
 ```typescript
-import { GetChunksCountStatus } from "@orq-ai/node/models/operations";
-
-let value: GetChunksCountStatus = "queued";
+const value: operations.GetChunksCountStatus1[] = [
+  "completed",
+];
 ```
 
-## Values
+### `operations.GetChunksCountStatus2`
 
 ```typescript
-"pending" | "processing" | "completed" | "failed" | "queued"
+const value: operations.GetChunksCountStatus2 = "processing";
 ```
+
