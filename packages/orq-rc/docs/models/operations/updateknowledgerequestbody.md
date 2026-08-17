@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.UpdateKnowledgeRequestBody1 = {
-  path: "Default",
+  path: "Default Project",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: operations.UpdateKnowledgeRequestBody1 = {
 
 ```typescript
 const value: operations.UpdateKnowledgeRequestBody2 = {
-  path: "Default",
+  path: "Default Project",
 };
 ```
 

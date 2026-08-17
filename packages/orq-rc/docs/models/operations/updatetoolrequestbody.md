@@ -9,7 +9,7 @@ The tool to update
 
 ```typescript
 const value: operations.UpdateFunctionTool = {
-  path: "Default",
+  path: "Default Project",
   type: "function",
 };
 ```
@@ -18,7 +18,7 @@ const value: operations.UpdateFunctionTool = {
 
 ```typescript
 const value: operations.UpdateJSONSchemaTool = {
-  path: "Default",
+  path: "Default Project",
   type: "json_schema",
 };
 ```
@@ -27,17 +27,8 @@ const value: operations.UpdateJSONSchemaTool = {
 
 ```typescript
 const value: operations.UpdateHTTPTool = {
-  path: "Default",
+  path: "Default Project",
   type: "http",
-};
-```
-
-### `operations.UpdateMCPTool`
-
-```typescript
-const value: operations.UpdateMCPTool = {
-  path: "Default",
-  type: "mcp",
 };
 ```
 
@@ -45,7 +36,7 @@ const value: operations.UpdateMCPTool = {
 
 ```typescript
 const value: operations.UpdateCodeExecutionTool = {
-  path: "Default",
+  path: "Default Project",
   type: "code",
 };
 ```

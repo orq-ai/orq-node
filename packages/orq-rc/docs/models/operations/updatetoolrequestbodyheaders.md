@@ -1,18 +1,19 @@
 # UpdateToolRequestBodyHeaders
 
-## Example Usage
+
+## Supported Types
+
+### `string`
 
 ```typescript
-import { UpdateToolRequestBodyHeaders } from "@orq-ai/node/models/operations";
+const value: string = "<value>";
+```
 
-let value: UpdateToolRequestBodyHeaders = {
+### `operations.UpdateToolHeaders2`
+
+```typescript
+const value: operations.UpdateToolHeaders2 = {
   value: "<value>",
 };
 ```
 
-## Fields
-
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `value`            | *string*           | :heavy_check_mark: | N/A                |
-| `encrypted`        | *boolean*          | :heavy_minus_sign: | N/A                |

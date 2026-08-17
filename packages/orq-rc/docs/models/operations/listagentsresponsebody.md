@@ -14,7 +14,7 @@ let value: ListAgentsResponseBody = {
       id: "<id>",
       key: "<key>",
       status: "draft",
-      path: "Default",
+      path: "Default Project",
       knowledgeBases: [
         {
           knowledgeId: "customer-knowledge-base",

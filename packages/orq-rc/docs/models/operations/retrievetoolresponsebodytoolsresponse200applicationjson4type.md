@@ -1,5 +1,7 @@
 # RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type
 
+The type must be "object"
+
 ## Example Usage
 
 ```typescript

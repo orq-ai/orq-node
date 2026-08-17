@@ -11,7 +11,7 @@ const value: operations.Data1 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   model: "Taurus",
 };
@@ -25,7 +25,7 @@ const value: operations.Data2 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   externalConfig: {
     name: "<value>",

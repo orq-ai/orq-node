@@ -13,7 +13,7 @@ const value: operations.ResponseBody1 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   model: "Altima",
 };
@@ -27,7 +27,7 @@ const value: operations.ResponseBody2 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   externalConfig: {
     name: "<value>",

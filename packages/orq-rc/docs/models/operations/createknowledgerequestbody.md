@@ -9,7 +9,7 @@
 const value: operations.CreateKnowledgeRequestBody1 = {
   key: "<key>",
   embeddingModel: "<value>",
-  path: "Default",
+  path: "Default Project",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.RequestBody2 = {
     apiUrl: "https://somber-schnitzel.name/",
     apiKey: "<value>",
   },
-  path: "Default",
+  path: "Default Project",
 };
 ```
 

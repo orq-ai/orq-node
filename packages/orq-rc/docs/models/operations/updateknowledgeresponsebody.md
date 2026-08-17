@@ -13,7 +13,7 @@ const value: operations.UpdateKnowledgeResponseBody1 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   model: "Taurus",
 };
@@ -27,7 +27,7 @@ const value: operations.UpdateKnowledgeResponseBody2 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   externalConfig: {
     name: "<value>",

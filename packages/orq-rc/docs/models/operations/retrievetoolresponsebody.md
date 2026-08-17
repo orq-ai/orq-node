@@ -9,7 +9,7 @@ Successfully retrieved the tool.
 
 ```typescript
 const value: operations.RetrieveToolResponseBodyFunctionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "if necklace yippee but before cheerfully",
   projectId: "<id>",
@@ -27,7 +27,7 @@ const value: operations.RetrieveToolResponseBodyFunctionTool = {
 
 ```typescript
 const value: operations.RetrieveToolResponseBodyJSONSchemaTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "lazy commemorate enlist",
   projectId: "<id>",
@@ -59,7 +59,7 @@ const value: operations.RetrieveToolResponseBodyJSONSchemaTool = {
 
 ```typescript
 const value: operations.RetrieveToolResponseBodyHTTPTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "weird mummify scrape massage athwart",
   projectId: "<id>",
@@ -76,39 +76,11 @@ const value: operations.RetrieveToolResponseBodyHTTPTool = {
 };
 ```
 
-### `operations.RetrieveToolResponseBodyMCPTool`
-
-```typescript
-const value: operations.RetrieveToolResponseBodyMCPTool = {
-  path: "Default",
-  key: "<key>",
-  description:
-    "regarding immaculate amongst in pleasure label beside er before somber",
-  projectId: "<id>",
-  workspaceId: "<id>",
-  created: "<value>",
-  updated: "<value>",
-  type: "mcp",
-  mcp: {
-    serverUrl: "https://warmhearted-tuba.net",
-    tools: [
-      {
-        name: "<value>",
-        schema: {
-          type: "object",
-        },
-      },
-    ],
-    connectionType: "sse",
-  },
-};
-```
-
 ### `operations.RetrieveToolResponseBodyCodeExecutionTool`
 
 ```typescript
 const value: operations.RetrieveToolResponseBodyCodeExecutionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "acidly highly monocle",
   projectId: "<id>",

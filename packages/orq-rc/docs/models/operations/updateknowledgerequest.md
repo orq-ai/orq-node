@@ -8,7 +8,7 @@ import { UpdateKnowledgeRequest } from "@orq-ai/node/models/operations";
 let value: UpdateKnowledgeRequest = {
   knowledgeId: "<id>",
   requestBody: {
-    path: "Default",
+    path: "Default Project",
     type: "internal",
   },
 };

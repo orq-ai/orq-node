@@ -35,7 +35,7 @@ export type GetAllToolsObject = ClosedEnum<typeof GetAllToolsObject>;
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const GetAllToolsDataToolsResponse200Status = {
+export const GetAllToolsDataToolsResponseStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -44,22 +44,22 @@ export const GetAllToolsDataToolsResponse200Status = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type GetAllToolsDataToolsResponse200Status = ClosedEnum<
-  typeof GetAllToolsDataToolsResponse200Status
+export type GetAllToolsDataToolsResponseStatus = ClosedEnum<
+  typeof GetAllToolsDataToolsResponseStatus
 >;
 
 /**
  * The type must be "object"
  */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type = {
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type =
+export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
   ClosedEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
   >;
 
 /**
@@ -69,7 +69,7 @@ export type GetAllToolsDataParameters = {
   /**
    * The type must be "object"
    */
-  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type;
+  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType;
   /**
    * The properties of the function parameters
    */
@@ -108,131 +108,7 @@ export type DataCodeExecutionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
-   */
-  path: string;
-  /**
-   * Unique key of the tool as it will be displayed in the UI
-   */
-  key: string;
-  /**
-   * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
-   */
-  displayName?: string | undefined;
-  /**
-   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
-   */
-  description: string;
-  /**
-   * The id of the user that created the tool
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The id of the user that last updated the tool
-   */
-  updatedById?: string | null | undefined;
-  projectId: string;
-  workspaceId: string;
-  created: string;
-  updated: string;
-  /**
-   * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
-   */
-  status: GetAllToolsDataToolsResponse200Status;
-  type: "code";
-  codeTool: DataCodeTool;
-};
-
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export const GetAllToolsDataToolsResponseStatus = {
-  Live: "live",
-  Draft: "draft",
-  Pending: "pending",
-  Published: "published",
-} as const;
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export type GetAllToolsDataToolsResponseStatus = ClosedEnum<
-  typeof GetAllToolsDataToolsResponseStatus
->;
-
-export type DataHeaders = {
-  value: string;
-  encrypted: boolean;
-};
-
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type = {
-  Object: "object",
-} as const;
-export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type =
-  ClosedEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type
-  >;
-
-export type GetAllToolsDataSchema = {
-  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type;
-  properties?: { [k: string]: any } | undefined;
-  required?: Array<string> | undefined;
-};
-
-export type DataTools = {
-  id: string;
-  name: string;
-  description?: string | undefined;
-  schema: GetAllToolsDataSchema;
-};
-
-/**
- * The connection type used by the MCP server
- */
-export const DataConnectionType = {
-  Http: "http",
-  Sse: "sse",
-} as const;
-/**
- * The connection type used by the MCP server
- */
-export type DataConnectionType = ClosedEnum<typeof DataConnectionType>;
-
-export type DataMcp = {
-  /**
-   * The MCP server URL (cached for execution)
-   */
-  serverUrl: string;
-  /**
-   * HTTP headers for MCP server requests with encryption support
-   */
-  headers?: { [k: string]: DataHeaders } | undefined;
-  /**
-   * Array of tools available from the MCP server
-   */
-  tools: Array<DataTools>;
-  /**
-   * The connection type used by the MCP server
-   */
-  connectionType: DataConnectionType;
-  /**
-   * Names of template variables detected in server_url and headers. Used by the FE to prompt for one-time values on sync/refresh.
-   */
-  templateVariables?: Array<string> | null | undefined;
-};
-
-/**
- * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
- */
-export type DataMCPTool = {
-  id: string;
-  /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -265,8 +141,8 @@ export type DataMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: GetAllToolsDataToolsResponseStatus;
-  type: "mcp";
-  mcp: DataMcp;
+  type: "code";
+  codeTool: DataCodeTool;
 };
 
 /**
@@ -304,7 +180,7 @@ export type GetAllToolsHeaders2 = {
   encrypted: boolean;
 };
 
-export type GetAllToolsDataHeaders = GetAllToolsHeaders2 | string;
+export type DataHeaders = GetAllToolsHeaders2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -335,7 +211,7 @@ export type DataBlueprint = {
 /**
  * The type of the argument.
  */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
+export const GetAllToolsDataToolsResponse200Type = {
   String: "string",
   Number: "number",
   Boolean: "boolean",
@@ -343,10 +219,9 @@ export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType = {
 /**
  * The type of the argument.
  */
-export type GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
-  >;
+export type GetAllToolsDataToolsResponse200Type = ClosedEnum<
+  typeof GetAllToolsDataToolsResponse200Type
+>;
 
 /**
  * The default value of the argument.
@@ -357,7 +232,7 @@ export type DataArguments = {
   /**
    * The type of the argument.
    */
-  type: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType;
+  type: GetAllToolsDataToolsResponse200Type;
   /**
    * A description of the argument.
    */
@@ -393,7 +268,7 @@ export type DataHTTPTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -492,7 +367,7 @@ export type DataJSONSchemaTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -604,7 +479,7 @@ export type DataFunctionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -645,7 +520,6 @@ export type GetAllToolsData =
   | DataFunctionTool
   | DataJSONSchemaTool
   | DataHTTPTool
-  | DataMCPTool
   | DataCodeExecutionTool;
 
 /**
@@ -654,11 +528,7 @@ export type GetAllToolsData =
 export type GetAllToolsResponseBody = {
   object: GetAllToolsObject;
   data: Array<
-    | DataFunctionTool
-    | DataJSONSchemaTool
-    | DataHTTPTool
-    | DataMCPTool
-    | DataCodeExecutionTool
+    DataFunctionTool | DataJSONSchemaTool | DataHTTPTool | DataCodeExecutionTool
   >;
   hasMore: boolean;
 };
@@ -700,17 +570,16 @@ export const GetAllToolsObject$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(GetAllToolsObject);
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200Status$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200Status> = z.nativeEnum(
-    GetAllToolsDataToolsResponse200Status,
-  );
+export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllToolsDataToolsResponseStatus
+> = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema:
+export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type
+    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
   > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type,
+    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
   );
 
 /** @internal */
@@ -721,7 +590,7 @@ export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
 > = collectExtraKeys$(
   z.object({
     type:
-      GetAllToolsDataToolsResponse200ApplicationJSONResponseBody5Type$inboundSchema,
+      GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
   }).catchall(z.any()),
@@ -770,7 +639,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0083HZ7F364WP68HG2KT8MX"),
+  _id: z.string().default("tool_01M06YQWMHGA3VFT9W9TQDXTTH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -781,7 +650,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: GetAllToolsDataToolsResponse200Status$inboundSchema.default("live"),
+  status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
   type: z.literal("code"),
   code_tool: z.lazy(() => DataCodeTool$inboundSchema),
 }).transform((v) => {
@@ -803,155 +672,6 @@ export function dataCodeExecutionToolFromJSON(
     jsonString,
     (x) => DataCodeExecutionTool$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DataCodeExecutionTool' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllToolsDataToolsResponseStatus
-> = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
-
-/** @internal */
-export const DataHeaders$inboundSchema: z.ZodType<
-  DataHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function dataHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<DataHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DataHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataHeaders' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type
-  > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type,
-  );
-
-/** @internal */
-export const GetAllToolsDataSchema$inboundSchema: z.ZodType<
-  GetAllToolsDataSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBody4Type$inboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
-
-export function getAllToolsDataSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllToolsDataSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllToolsDataSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsDataSchema' from JSON`,
-  );
-}
-
-/** @internal */
-export const DataTools$inboundSchema: z.ZodType<
-  DataTools,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().default("01M0083HZ5MEVCP2RYRP1B41XR"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() => GetAllToolsDataSchema$inboundSchema),
-});
-
-export function dataToolsFromJSON(
-  jsonString: string,
-): SafeParseResult<DataTools, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DataTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataTools' from JSON`,
-  );
-}
-
-/** @internal */
-export const DataConnectionType$inboundSchema: z.ZodNativeEnum<
-  typeof DataConnectionType
-> = z.nativeEnum(DataConnectionType);
-
-/** @internal */
-export const DataMcp$inboundSchema: z.ZodType<DataMcp, z.ZodTypeDef, unknown> =
-  z.object({
-    server_url: z.string(),
-    headers: z.record(z.lazy(() => DataHeaders$inboundSchema)).optional(),
-    tools: z.array(z.lazy(() => DataTools$inboundSchema)),
-    connection_type: DataConnectionType$inboundSchema,
-    template_variables: z.nullable(z.array(z.string())).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "server_url": "serverUrl",
-      "connection_type": "connectionType",
-      "template_variables": "templateVariables",
-    });
-  });
-
-export function dataMcpFromJSON(
-  jsonString: string,
-): SafeParseResult<DataMcp, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DataMcp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataMcp' from JSON`,
-  );
-}
-
-/** @internal */
-export const DataMCPTool$inboundSchema: z.ZodType<
-  DataMCPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("tool_01M0083HZ3DNXQRDVVBNT68254"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => DataMcp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function dataMCPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<DataMCPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DataMCPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DataMCPTool' from JSON`,
   );
 }
 
@@ -985,19 +705,19 @@ export function getAllToolsHeaders2FromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataHeaders$inboundSchema: z.ZodType<
-  GetAllToolsDataHeaders,
+export const DataHeaders$inboundSchema: z.ZodType<
+  DataHeaders,
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]);
 
-export function getAllToolsDataHeadersFromJSON(
+export function dataHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsDataHeaders, SDKValidationError> {
+): SafeParseResult<DataHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsDataHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsDataHeaders' from JSON`,
+    (x) => DataHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataHeaders' from JSON`,
   );
 }
 
@@ -1027,12 +747,9 @@ export function dataBlueprintFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
-  );
+export const GetAllToolsDataToolsResponse200Type$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllToolsDataToolsResponse200Type
+> = z.nativeEnum(GetAllToolsDataToolsResponse200Type);
 
 /** @internal */
 export const DataDefaultValue$inboundSchema: z.ZodType<
@@ -1057,8 +774,7 @@ export const DataArguments$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  type: GetAllToolsDataToolsResponse200Type$inboundSchema,
   description: z.string(),
   send_to_model: z.boolean().default(true),
   default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -1105,7 +821,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0083HZ0WHVBVG2MK7DC6SRG"),
+  _id: z.string().default("tool_01M06YQWMDASYK2JCFZTBV7CB7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1198,7 +914,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0083HYYRSYV16ESHKBB9X0S"),
+  _id: z.string().default("tool_01M06YQWMB6CN1PC6HB71B7S0T"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1296,7 +1012,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0083HYWCD8DABYJVC6B82RE"),
+  _id: z.string().default("tool_01M06YQWM9YMHXJ8DTBB84MGDD"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1340,7 +1056,6 @@ export const GetAllToolsData$inboundSchema: z.ZodType<
   z.lazy(() => DataFunctionTool$inboundSchema),
   z.lazy(() => DataJSONSchemaTool$inboundSchema),
   z.lazy(() => DataHTTPTool$inboundSchema),
-  z.lazy(() => DataMCPTool$inboundSchema),
   z.lazy(() => DataCodeExecutionTool$inboundSchema),
 ]);
 
@@ -1366,7 +1081,6 @@ export const GetAllToolsResponseBody$inboundSchema: z.ZodType<
       z.lazy(() => DataFunctionTool$inboundSchema),
       z.lazy(() => DataJSONSchemaTool$inboundSchema),
       z.lazy(() => DataHTTPTool$inboundSchema),
-      z.lazy(() => DataMCPTool$inboundSchema),
       z.lazy(() => DataCodeExecutionTool$inboundSchema),
     ]),
   ),

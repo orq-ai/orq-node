@@ -9,7 +9,7 @@ Successfully created the tool.
 
 ```typescript
 const value: operations.ResponseBodyFunctionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "deer brightly clamor wherever boo since solidly blah extremely",
   projectId: "<id>",
@@ -27,7 +27,7 @@ const value: operations.ResponseBodyFunctionTool = {
 
 ```typescript
 const value: operations.ResponseBodyJSONSchemaTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "blah neighboring fooey gently",
   projectId: "<id>",
@@ -55,7 +55,7 @@ const value: operations.ResponseBodyJSONSchemaTool = {
 
 ```typescript
 const value: operations.ResponseBodyHTTPTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description:
     "chops though rebound impish zowie ha soft potentially vestment youthful",
@@ -73,32 +73,11 @@ const value: operations.ResponseBodyHTTPTool = {
 };
 ```
 
-### `operations.ResponseBodyMCPTool`
-
-```typescript
-const value: operations.ResponseBodyMCPTool = {
-  path: "Default",
-  key: "<key>",
-  description:
-    "retool gaseous officially urgently vivaciously bah positively chilly",
-  projectId: "<id>",
-  workspaceId: "<id>",
-  created: "<value>",
-  updated: "<value>",
-  type: "mcp",
-  mcp: {
-    serverUrl: "https://unwilling-coliseum.biz/",
-    tools: [],
-    connectionType: "http",
-  },
-};
-```
-
 ### `operations.ResponseBodyCodeExecutionTool`
 
 ```typescript
 const value: operations.ResponseBodyCodeExecutionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description:
     "finally radiant to disappointment including chiffonier sheepishly",

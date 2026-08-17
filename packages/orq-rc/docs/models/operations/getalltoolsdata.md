@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DataFunctionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "mid via yum reluctantly",
   projectId: "<id>",
@@ -25,7 +25,7 @@ const value: operations.DataFunctionTool = {
 
 ```typescript
 const value: operations.DataJSONSchemaTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "after intrigue distinct fluffy even off um",
   projectId: "<id>",
@@ -58,7 +58,7 @@ const value: operations.DataJSONSchemaTool = {
 
 ```typescript
 const value: operations.DataHTTPTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "ceramic pfft where mortally gosh or co-producer for",
   projectId: "<id>",
@@ -75,38 +75,11 @@ const value: operations.DataHTTPTool = {
 };
 ```
 
-### `operations.DataMCPTool`
-
-```typescript
-const value: operations.DataMCPTool = {
-  path: "Default",
-  key: "<key>",
-  description: "reboot aw without webbed lasting",
-  projectId: "<id>",
-  workspaceId: "<id>",
-  created: "<value>",
-  updated: "<value>",
-  type: "mcp",
-  mcp: {
-    serverUrl: "https://stable-bran.net",
-    tools: [
-      {
-        name: "<value>",
-        schema: {
-          type: "object",
-        },
-      },
-    ],
-    connectionType: "http",
-  },
-};
-```
-
 ### `operations.DataCodeExecutionTool`
 
 ```typescript
 const value: operations.DataCodeExecutionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "fervently pace but blah upon charm quarterly on neglect",
   projectId: "<id>",

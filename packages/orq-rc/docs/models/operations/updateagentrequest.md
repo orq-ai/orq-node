@@ -100,7 +100,7 @@ let value: UpdateAgentRequest = {
         },
       ],
     },
-    path: "Default",
+    path: "Default Project",
     knowledgeBases: [
       {
         knowledgeId: "customer-knowledge-base",

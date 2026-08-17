@@ -15,7 +15,7 @@ let value: ListKnowledgeBasesResponseBody = {
       created: "<value>",
       key: "<key>",
       domainId: "<id>",
-      path: "Default",
+      path: "Default Project",
       updated: "<value>",
       type: "internal",
       model: "Civic",

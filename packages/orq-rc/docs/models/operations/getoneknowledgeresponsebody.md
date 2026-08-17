@@ -13,7 +13,7 @@ const value: operations.GetOneKnowledgeResponseBody1 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   model: "Wrangler",
 };
@@ -27,7 +27,7 @@ const value: operations.GetOneKnowledgeResponseBody2 = {
   created: "<value>",
   key: "<key>",
   domainId: "<id>",
-  path: "Default",
+  path: "Default Project",
   updated: "<value>",
   externalConfig: {
     name: "<value>",
