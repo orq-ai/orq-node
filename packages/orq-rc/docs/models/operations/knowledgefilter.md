@@ -5,10 +5,14 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 
 ## Supported Types
 
-### `{ [k: string]: operations.KnowledgeFilter1 }`
+### `{ [k: string]: operations.One }`
 
 ```typescript
-const value: { [k: string]: operations.KnowledgeFilter1 } = {};
+const value: { [k: string]: operations.One } = {
+  "key": {
+    gte: 4428.74,
+  },
+};
 ```
 
 ### `operations.And`

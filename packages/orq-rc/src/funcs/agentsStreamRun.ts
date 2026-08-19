@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Run agent with streaming response
  *
  * @remarks
- * Dynamically configures and executes an agent while streaming the interaction in real-time via Server-Sent Events (SSE). Intelligently manages agent versioning by reusing existing agents with matching configurations or creating new versions when configurations differ. Combines the flexibility of inline configuration with real-time streaming, making it ideal for dynamic agent interactions with live feedback. The stream provides continuous updates including message chunks, tool executions, and status changes until completion or timeout.
+ * Run an agent with streaming via SSE, combining inline configuration with real-time updates including messages, tool executions, and status.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */

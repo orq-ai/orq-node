@@ -4,135 +4,19 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const GetChunksCountStatus2 = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type GetChunksCountStatus2 = ClosedEnum<typeof GetChunksCountStatus2>;
-
-export const GetChunksCountStatus1 = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type GetChunksCountStatus1 = ClosedEnum<typeof GetChunksCountStatus1>;
-
-/**
- * Filter chunks by processing status
- */
-export type GetChunksCountStatus =
-  | Array<GetChunksCountStatus1>
-  | GetChunksCountStatus2;
-
-export type GetChunksCountRequestBody = {
-  /**
-   * Search query to find chunks by text content
-   */
-  q?: string | undefined;
-  /**
-   * Filter chunks by enabled status
-   */
-  enabled?: boolean | undefined;
-  /**
-   * Filter chunks by processing status
-   */
-  status?: Array<GetChunksCountStatus1> | GetChunksCountStatus2 | undefined;
-};
+import * as components from "../components/index.js";
 
 export type GetChunksCountRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
-  /**
-   * The unique identifier of the datasource.
-   */
   datasourceId: string;
-  requestBody?: GetChunksCountRequestBody | undefined;
+  chunksServiceCountRequest: components.ChunksServiceCountRequest;
 };
-
-/**
- * Chunks count
- */
-export type GetChunksCountResponseBody = {
-  count: number;
-};
-
-/** @internal */
-export const GetChunksCountStatus2$outboundSchema: z.ZodNativeEnum<
-  typeof GetChunksCountStatus2
-> = z.nativeEnum(GetChunksCountStatus2);
-
-/** @internal */
-export const GetChunksCountStatus1$outboundSchema: z.ZodNativeEnum<
-  typeof GetChunksCountStatus1
-> = z.nativeEnum(GetChunksCountStatus1);
-
-/** @internal */
-export type GetChunksCountStatus$Outbound = Array<string> | string;
-
-/** @internal */
-export const GetChunksCountStatus$outboundSchema: z.ZodType<
-  GetChunksCountStatus$Outbound,
-  z.ZodTypeDef,
-  GetChunksCountStatus
-> = z.union([
-  z.array(GetChunksCountStatus1$outboundSchema),
-  GetChunksCountStatus2$outboundSchema,
-]);
-
-export function getChunksCountStatusToJSON(
-  getChunksCountStatus: GetChunksCountStatus,
-): string {
-  return JSON.stringify(
-    GetChunksCountStatus$outboundSchema.parse(getChunksCountStatus),
-  );
-}
-
-/** @internal */
-export type GetChunksCountRequestBody$Outbound = {
-  q: string;
-  enabled?: boolean | undefined;
-  status?: Array<string> | string | undefined;
-};
-
-/** @internal */
-export const GetChunksCountRequestBody$outboundSchema: z.ZodType<
-  GetChunksCountRequestBody$Outbound,
-  z.ZodTypeDef,
-  GetChunksCountRequestBody
-> = z.object({
-  q: z.string().default(""),
-  enabled: z.boolean().optional(),
-  status: z.union([
-    z.array(GetChunksCountStatus1$outboundSchema),
-    GetChunksCountStatus2$outboundSchema,
-  ]).optional(),
-});
-
-export function getChunksCountRequestBodyToJSON(
-  getChunksCountRequestBody: GetChunksCountRequestBody,
-): string {
-  return JSON.stringify(
-    GetChunksCountRequestBody$outboundSchema.parse(getChunksCountRequestBody),
-  );
-}
 
 /** @internal */
 export type GetChunksCountRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody?: GetChunksCountRequestBody$Outbound | undefined;
+  ChunksServiceCountRequest: components.ChunksServiceCountRequest$Outbound;
 };
 
 /** @internal */
@@ -143,13 +27,13 @@ export const GetChunksCountRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.lazy(() => GetChunksCountRequestBody$outboundSchema)
-    .optional(),
+  chunksServiceCountRequest:
+    components.ChunksServiceCountRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
     datasourceId: "datasource_id",
-    requestBody: "RequestBody",
+    chunksServiceCountRequest: "ChunksServiceCountRequest",
   });
 });
 
@@ -158,24 +42,5 @@ export function getChunksCountRequestToJSON(
 ): string {
   return JSON.stringify(
     GetChunksCountRequest$outboundSchema.parse(getChunksCountRequest),
-  );
-}
-
-/** @internal */
-export const GetChunksCountResponseBody$inboundSchema: z.ZodType<
-  GetChunksCountResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number(),
-});
-
-export function getChunksCountResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetChunksCountResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetChunksCountResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetChunksCountResponseBody' from JSON`,
   );
 }

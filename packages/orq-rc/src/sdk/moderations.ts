@@ -10,6 +10,9 @@ import { unwrapAsync } from "../types/fp.js";
 export class Moderations extends ClientSDK {
   /**
    * Create moderation
+   *
+   * @remarks
+   * Analyze text for content policy violations using the moderation model and return classification results.
    */
   async create(
     request: operations.CreateModerationRequestBody,

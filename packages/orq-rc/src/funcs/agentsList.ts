@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * List agents
  *
  * @remarks
- * Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
+ * List all agents in the workspace with full configuration details. Supports pagination and sorts agents newest first.
  */
 export function agentsList(
   client: OrqCore,

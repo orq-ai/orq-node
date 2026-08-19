@@ -15,22 +15,22 @@ const value: operations.PostV2FeedbackEvaluationRequestBody1 = {
 };
 ```
 
-### `operations.PostV2FeedbackEvaluationRequestBody2`
+### `operations.RequestBody2`
 
 ```typescript
-const value: operations.PostV2FeedbackEvaluationRequestBody2 = {
+const value: operations.RequestBody2 = {
   id: "<id>",
   evaluationType: "human_review",
   type: "number",
-  value: 5323.73,
+  value: 507.72,
   traceId: "<id>",
 };
 ```
 
-### `operations.RequestBody3`
+### `operations.Three`
 
 ```typescript
-const value: operations.RequestBody3 = {
+const value: operations.Three = {
   id: "<id>",
   evaluationType: "human_review",
   type: "boolean",

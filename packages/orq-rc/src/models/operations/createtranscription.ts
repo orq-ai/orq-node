@@ -204,7 +204,7 @@ export type CreateTranscriptionOrq = {
   timeout?: CreateTranscriptionRouterAudioTranscriptionsTimeout | undefined;
 };
 
-export type CreateTranscriptionFile = {
+export type FileT = {
   fileName: string;
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
 };
@@ -281,7 +281,7 @@ export type CreateTranscriptionRequestBody = {
   /**
    * The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
    */
-  file?: CreateTranscriptionFile | Blob | undefined;
+  file?: FileT | Blob | undefined;
 };
 
 export type Words = {
@@ -303,7 +303,7 @@ export type Segments = {
   noSpeechProb: number;
 };
 
-export type CreateTranscriptionResponseBody2 = {
+export type ResponseBody2 = {
   task?: string | undefined;
   language?: string | undefined;
   duration?: number | undefined;
@@ -312,7 +312,7 @@ export type CreateTranscriptionResponseBody2 = {
   segments?: Array<Segments> | undefined;
 };
 
-export type CreateTranscriptionResponseBody1 = {
+export type ResponseBody1 = {
   text: string;
 };
 
@@ -320,8 +320,8 @@ export type CreateTranscriptionResponseBody1 = {
  * Returns the transcription or verbose transcription
  */
 export type CreateTranscriptionResponseBody =
-  | CreateTranscriptionResponseBody1
-  | CreateTranscriptionResponseBody2
+  | ResponseBody1
+  | ResponseBody2
   | string;
 
 /** @internal */
@@ -738,16 +738,16 @@ export function createTranscriptionOrqToJSON(
 }
 
 /** @internal */
-export type CreateTranscriptionFile$Outbound = {
+export type FileT$Outbound = {
   fileName: string;
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
 };
 
 /** @internal */
-export const CreateTranscriptionFile$outboundSchema: z.ZodType<
-  CreateTranscriptionFile$Outbound,
+export const FileT$outboundSchema: z.ZodType<
+  FileT$Outbound,
   z.ZodTypeDef,
-  CreateTranscriptionFile
+  FileT
 > = z.object({
   fileName: z.string(),
   content: z.union([
@@ -758,12 +758,8 @@ export const CreateTranscriptionFile$outboundSchema: z.ZodType<
   ]),
 });
 
-export function createTranscriptionFileToJSON(
-  createTranscriptionFile: CreateTranscriptionFile,
-): string {
-  return JSON.stringify(
-    CreateTranscriptionFile$outboundSchema.parse(createTranscriptionFile),
-  );
+export function fileToJSON(fileT: FileT): string {
+  return JSON.stringify(FileT$outboundSchema.parse(fileT));
 }
 
 /** @internal */
@@ -785,7 +781,7 @@ export type CreateTranscriptionRequestBody$Outbound = {
   load_balancer?: CreateTranscriptionLoadBalancer1$Outbound | undefined;
   timeout?: CreateTranscriptionTimeout$Outbound | undefined;
   orq?: CreateTranscriptionOrq$Outbound | undefined;
-  file?: CreateTranscriptionFile$Outbound | Blob | undefined;
+  file?: FileT$Outbound | Blob | undefined;
 };
 
 /** @internal */
@@ -814,8 +810,7 @@ export const CreateTranscriptionRequestBody$outboundSchema: z.ZodType<
     .optional(),
   timeout: z.lazy(() => CreateTranscriptionTimeout$outboundSchema).optional(),
   orq: z.lazy(() => CreateTranscriptionOrq$outboundSchema).optional(),
-  file: z.lazy(() => CreateTranscriptionFile$outboundSchema).or(blobLikeSchema)
-    .optional(),
+  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     enableLogging: "enable_logging",
@@ -891,8 +886,8 @@ export function segmentsFromJSON(
 }
 
 /** @internal */
-export const CreateTranscriptionResponseBody2$inboundSchema: z.ZodType<
-  CreateTranscriptionResponseBody2,
+export const ResponseBody2$inboundSchema: z.ZodType<
+  ResponseBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -904,32 +899,32 @@ export const CreateTranscriptionResponseBody2$inboundSchema: z.ZodType<
   segments: z.array(z.lazy(() => Segments$inboundSchema)).optional(),
 });
 
-export function createTranscriptionResponseBody2FromJSON(
+export function responseBody2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateTranscriptionResponseBody2, SDKValidationError> {
+): SafeParseResult<ResponseBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateTranscriptionResponseBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateTranscriptionResponseBody2' from JSON`,
+    (x) => ResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody2' from JSON`,
   );
 }
 
 /** @internal */
-export const CreateTranscriptionResponseBody1$inboundSchema: z.ZodType<
-  CreateTranscriptionResponseBody1,
+export const ResponseBody1$inboundSchema: z.ZodType<
+  ResponseBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   text: z.string(),
 });
 
-export function createTranscriptionResponseBody1FromJSON(
+export function responseBody1FromJSON(
   jsonString: string,
-): SafeParseResult<CreateTranscriptionResponseBody1, SDKValidationError> {
+): SafeParseResult<ResponseBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateTranscriptionResponseBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateTranscriptionResponseBody1' from JSON`,
+    (x) => ResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody1' from JSON`,
   );
 }
 
@@ -939,8 +934,8 @@ export const CreateTranscriptionResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateTranscriptionResponseBody1$inboundSchema),
-  z.lazy(() => CreateTranscriptionResponseBody2$inboundSchema),
+  z.lazy(() => ResponseBody1$inboundSchema),
+  z.lazy(() => ResponseBody2$inboundSchema),
   z.string(),
 ]);
 

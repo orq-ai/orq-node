@@ -57,13 +57,14 @@ let value: RetrieveResponseResponseBody = {
     inputTokens: 786005,
     inputTokensDetails: {
       cacheCreationTokens: 763695,
-      cachedTokens: 732588,
+      cacheWriteTokens: 732588,
+      cachedTokens: 376439,
     },
-    outputTokens: 376439,
+    outputTokens: 349904,
     outputTokensDetails: {
-      reasoningTokens: 349904,
+      reasoningTokens: 437223,
     },
-    totalTokens: 437223,
+    totalTokens: 846277,
   },
   user: "Jaquelin_Stiedemann47",
 };

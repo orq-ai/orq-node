@@ -4,20 +4,11 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Filter datasources by status.
  */
 export type ListDatasourcesQueryParamStatus = Array<string> | string;
-
-export type QueryParamMetadata = string | number | boolean;
 
 export type ListDatasourcesRequest = {
   /**
@@ -44,106 +35,6 @@ export type ListDatasourcesRequest = {
    * Filter datasources by status.
    */
   status?: Array<string> | string | undefined;
-  /**
-   * Filter datasources by exact metadata key/value pairs. Provide a JSON-encoded object when calling this endpoint over HTTP.
-   */
-  metadata?: { [k: string]: string | number | boolean | null } | undefined;
-};
-
-export const ListDatasourcesObject = {
-  List: "list",
-} as const;
-export type ListDatasourcesObject = ClosedEnum<typeof ListDatasourcesObject>;
-
-export const ListDatasourcesStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type ListDatasourcesStatus = ClosedEnum<typeof ListDatasourcesStatus>;
-
-export type ListDatasourcesMetadata = {
-  /**
-   * Number of words in the text
-   */
-  wordsCount?: number | undefined;
-  /**
-   * Number of sentences in the text
-   */
-  sentencesCount?: number | undefined;
-  /**
-   * Number of paragraphs in the text
-   */
-  paragraphsCount?: number | undefined;
-  /**
-   * Number of tokens in the text
-   */
-  tokensCount?: number | undefined;
-  /**
-   * Number of characters in the text
-   */
-  charactersCount?: number | undefined;
-  /**
-   * Number of total chunks
-   */
-  chunksCount?: number | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
-};
-
-export type ListDatasourcesData = {
-  /**
-   * The unique identifier of the data source
-   */
-  id: string;
-  /**
-   * The display name of the datasource. Normally the name of the uploaded file
-   */
-  displayName: string;
-  /**
-   * The description of the knowledge base
-   */
-  description?: string | null | undefined;
-  status: ListDatasourcesStatus;
-  /**
-   * The unique identifier of the file used to create the datasource.
-   */
-  fileId?: string | null | undefined;
-  /**
-   * The date and time the datasource was created
-   */
-  created: string;
-  /**
-   * The date and time the datasource was updated
-   */
-  updated: string;
-  /**
-   * The user ID of the creator of the knowledge base
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The user ID of the last user who updated the knowledge base
-   */
-  updateById?: string | null | undefined;
-  /**
-   * The unique identifier of the knowledge base
-   */
-  knowledgeId: string;
-  /**
-   * The number of chunks in the datasource
-   */
-  chunksCount: number;
-  metadata: ListDatasourcesMetadata;
-};
-
-/**
- * Datasources successfully retrieved
- */
-export type ListDatasourcesResponseBody = {
-  object: ListDatasourcesObject;
-  data: Array<ListDatasourcesData>;
-  hasMore: boolean;
 };
 
 /** @internal */
@@ -167,24 +58,6 @@ export function listDatasourcesQueryParamStatusToJSON(
 }
 
 /** @internal */
-export type QueryParamMetadata$Outbound = string | number | boolean;
-
-/** @internal */
-export const QueryParamMetadata$outboundSchema: z.ZodType<
-  QueryParamMetadata$Outbound,
-  z.ZodTypeDef,
-  QueryParamMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function queryParamMetadataToJSON(
-  queryParamMetadata: QueryParamMetadata,
-): string {
-  return JSON.stringify(
-    QueryParamMetadata$outboundSchema.parse(queryParamMetadata),
-  );
-}
-
-/** @internal */
 export type ListDatasourcesRequest$Outbound = {
   knowledge_id: string;
   starting_after?: string | undefined;
@@ -192,7 +65,6 @@ export type ListDatasourcesRequest$Outbound = {
   q?: string | undefined;
   limit: number;
   status?: Array<string> | string | undefined;
-  metadata?: { [k: string]: string | number | boolean | null } | undefined;
 };
 
 /** @internal */
@@ -207,8 +79,6 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   q: z.string().optional(),
   limit: z.number().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
-  metadata: z.record(z.nullable(z.union([z.string(), z.number(), z.boolean()])))
-    .optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -222,117 +92,5 @@ export function listDatasourcesRequestToJSON(
 ): string {
   return JSON.stringify(
     ListDatasourcesRequest$outboundSchema.parse(listDatasourcesRequest),
-  );
-}
-
-/** @internal */
-export const ListDatasourcesObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesObject
-> = z.nativeEnum(ListDatasourcesObject);
-
-/** @internal */
-export const ListDatasourcesStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesStatus
-> = z.nativeEnum(ListDatasourcesStatus);
-
-/** @internal */
-export const ListDatasourcesMetadata$inboundSchema: z.ZodType<
-  ListDatasourcesMetadata,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    words_count: z.number().optional(),
-    sentences_count: z.number().optional(),
-    paragraphs_count: z.number().optional(),
-    tokens_count: z.number().optional(),
-    characters_count: z.number().optional(),
-    chunks_count: z.number().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "words_count": "wordsCount",
-    "sentences_count": "sentencesCount",
-    "paragraphs_count": "paragraphsCount",
-    "tokens_count": "tokensCount",
-    "characters_count": "charactersCount",
-    "chunks_count": "chunksCount",
-  });
-});
-
-export function listDatasourcesMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasourcesMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasourcesMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasourcesMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListDatasourcesData$inboundSchema: z.ZodType<
-  ListDatasourcesData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("01M06YQWRB1QR8J3BY1H47BQ1W"),
-  display_name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  status: ListDatasourcesStatus$inboundSchema,
-  file_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-  knowledge_id: z.string(),
-  chunks_count: z.number(),
-  metadata: z.lazy(() => ListDatasourcesMetadata$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "file_id": "fileId",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-    "knowledge_id": "knowledgeId",
-    "chunks_count": "chunksCount",
-  });
-});
-
-export function listDatasourcesDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasourcesData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasourcesData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasourcesData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListDatasourcesResponseBody$inboundSchema: z.ZodType<
-  ListDatasourcesResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: ListDatasourcesObject$inboundSchema,
-  data: z.array(z.lazy(() => ListDatasourcesData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function listDatasourcesResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasourcesResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasourcesResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasourcesResponseBody' from JSON`,
   );
 }

@@ -4,14 +4,10 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAllMemoryStoresRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -34,65 +30,6 @@ export type GetAllMemoryStoresRequest = {
    * Filter memory stores by project ID
    */
   projectId?: string | undefined;
-};
-
-export const GetAllMemoryStoresObject = {
-  List: "list",
-} as const;
-export type GetAllMemoryStoresObject = ClosedEnum<
-  typeof GetAllMemoryStoresObject
->;
-
-export type GetAllMemoryStoresEmbeddingConfig = {
-  /**
-   * The embeddings model to use for the knowledge base in the format "provider/model" for public models or "workspaceKey@provider/model" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models.
-   */
-  model: string;
-};
-
-export type GetAllMemoryStoresData = {
-  /**
-   * The unique identifier of the memory store
-   */
-  id: string;
-  /**
-   * The unique key of the memory store. The key is unique and inmmutable and cannot be repeated within the same workspace.
-   */
-  key: string;
-  /**
-   * The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store.
-   */
-  description: string;
-  /**
-   * The user ID of the creator
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The user ID of the last updater
-   */
-  updatedById?: string | null | undefined;
-  /**
-   * The creation date of the memory store
-   */
-  created: string;
-  /**
-   * The last update date of the memory store
-   */
-  updated: string;
-  /**
-   * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
-   */
-  ttl?: number | null | undefined;
-  embeddingConfig: GetAllMemoryStoresEmbeddingConfig;
-};
-
-/**
- * Successfully retrieved the list of memory stores.
- */
-export type GetAllMemoryStoresResponseBody = {
-  object: GetAllMemoryStoresObject;
-  data: Array<GetAllMemoryStoresData>;
-  hasMore: boolean;
 };
 
 /** @internal */
@@ -131,90 +68,5 @@ export function getAllMemoryStoresRequestToJSON(
 ): string {
   return JSON.stringify(
     GetAllMemoryStoresRequest$outboundSchema.parse(getAllMemoryStoresRequest),
-  );
-}
-
-/** @internal */
-export const GetAllMemoryStoresObject$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllMemoryStoresObject
-> = z.nativeEnum(GetAllMemoryStoresObject);
-
-/** @internal */
-export const GetAllMemoryStoresEmbeddingConfig$inboundSchema: z.ZodType<
-  GetAllMemoryStoresEmbeddingConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
-
-export function getAllMemoryStoresEmbeddingConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryStoresEmbeddingConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryStoresEmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryStoresEmbeddingConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAllMemoryStoresData$inboundSchema: z.ZodType<
-  GetAllMemoryStoresData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  key: z.string(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.nullable(z.number()).optional(),
-  embedding_config: z.lazy(() =>
-    GetAllMemoryStoresEmbeddingConfig$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "embedding_config": "embeddingConfig",
-  });
-});
-
-export function getAllMemoryStoresDataFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryStoresData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryStoresData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryStoresData' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAllMemoryStoresResponseBody$inboundSchema: z.ZodType<
-  GetAllMemoryStoresResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: GetAllMemoryStoresObject$inboundSchema,
-  data: z.array(z.lazy(() => GetAllMemoryStoresData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function getAllMemoryStoresResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryStoresResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryStoresResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryStoresResponseBody' from JSON`,
   );
 }

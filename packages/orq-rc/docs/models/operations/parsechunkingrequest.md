@@ -61,3 +61,13 @@ const value: operations.FastChunkerStrategy = {
 };
 ```
 
+### `operations.LateChunkerStrategy`
+
+```typescript
+const value: operations.LateChunkerStrategy = {
+  text: "<value>",
+  strategy: "late",
+  embeddingModel: "<value>",
+};
+```
+

@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Updates a knowledge
+ *
+ * @remarks
+ * Updates a knowledge base. Omitted optional fields retain their current values.
  */
 export function knowledgeUpdate(
   client: OrqCore,
@@ -34,7 +38,7 @@ export function knowledgeUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdateKnowledgeResponseBody,
+    components.Knowledge,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.UpdateKnowledgeResponseBody,
+      components.Knowledge,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -81,7 +85,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.KnowledgeBasesServiceUpdateRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     knowledge_id: encodeSimple("knowledge_id", payload.knowledge_id, {
@@ -143,7 +149,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.UpdateKnowledgeResponseBody,
+    components.Knowledge,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -153,7 +159,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdateKnowledgeResponseBody$inboundSchema),
+    M.json(200, components.Knowledge$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

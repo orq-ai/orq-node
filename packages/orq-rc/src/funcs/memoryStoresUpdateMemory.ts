@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -37,7 +38,7 @@ export function memoryStoresUpdateMemory(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdateMemoryResponseBody,
+    components.Memory,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.UpdateMemoryResponseBody,
+      components.Memory,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -84,7 +85,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.UpdateMemoryRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     memory_entity_id: encodeSimple(
@@ -154,7 +157,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.UpdateMemoryResponseBody,
+    components.Memory,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +167,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdateMemoryResponseBody$inboundSchema),
+    M.json(200, components.Memory$inboundSchema),
     M.fail([400, 401, 403, 404, "4XX"]),
     M.fail("5XX"),
   )(response, req);

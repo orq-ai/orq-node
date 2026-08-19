@@ -26,7 +26,6 @@ let value: CreateGuardrailRuleResponse = {
     plugins: [
       {},
     ],
-    timeout: 894636,
   },
 };
 ```

@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete an annotation queue
+ *
+ * @remarks
+ * Delete an annotation queue and its items by ID.
  */
 export function annotationQueuesDelete(
   client: OrqCore,

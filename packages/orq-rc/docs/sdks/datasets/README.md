@@ -526,7 +526,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateDatasetItemResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
 
 ### Errors
 
@@ -612,7 +612,7 @@ run();
 
 ## updateDatapoint
 
-Update a datapoint
+Update a datapoint in the specified dataset.
 
 ### Example Usage
 

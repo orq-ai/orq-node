@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Update a prompt
+ *
+ * @remarks
+ * Update a prompt by ID with the provided fields.
  */
 export function promptsUpdate(
   client: OrqCore,

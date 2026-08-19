@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Delete agent
  *
  * @remarks
- * Permanently removes an agent from the workspace. This operation is irreversible and will delete all associated configuration including model assignments, tools, knowledge bases, memory stores, and cached data. Active agent sessions will be terminated, and the agent key will become available for reuse.
+ * Permanently remove an agent and all associated configuration from the workspace. Terminate active sessions and the key becomes reusable.
  */
 export function agentsDelete(
   client: OrqCore,

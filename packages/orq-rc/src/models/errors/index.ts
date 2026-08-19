@@ -20,7 +20,7 @@ export * from "./getv2toolstoolidversions.js";
 export * from "./getv2toolstoolidversionsversionid.js";
 export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
-export * from "./invokeeval.js";
+export * from "./knowledgeapierror.js";
 export * from "./orqerror.js";
 export * from "./postv2feedback.js";
 export * from "./postv2feedbackremove.js";

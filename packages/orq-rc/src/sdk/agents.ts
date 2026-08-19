@@ -27,7 +27,7 @@ export class Agents extends ClientSDK {
    * Create agent
    *
    * @remarks
-   * Creates a new agent with the specified configuration, including model selection, instructions, tools, and knowledge bases. Agents are intelligent assistants that can execute tasks, interact with tools, and maintain context through memory stores. The agent can be configured with a primary model and optional fallback models for automatic failover, custom instructions for behavior control, and various settings to control execution limits and tool usage.
+   * Create a new agent with the specified model, instructions, tools, and knowledge bases. Supports fallback models and configurable execution settings.
    */
   async create(
     request: operations.CreateAgentRequestRequestBody,
@@ -44,7 +44,7 @@ export class Agents extends ClientSDK {
    * List agents
    *
    * @remarks
-   * Retrieves a comprehensive list of agents configured in your workspace. Supports pagination for large datasets and returns agents sorted by creation date (newest first). Each agent in the response includes its complete configuration: model settings with fallback options, instructions, tools, knowledge bases, memory stores, and execution parameters. Use pagination parameters to efficiently navigate through large collections of agents.
+   * List all agents in the workspace with full configuration details. Supports pagination and sorts agents newest first.
    */
   async list(
     limit?: number | undefined,
@@ -67,7 +67,7 @@ export class Agents extends ClientSDK {
    * Delete agent
    *
    * @remarks
-   * Permanently removes an agent from the workspace. This operation is irreversible and will delete all associated configuration including model assignments, tools, knowledge bases, memory stores, and cached data. Active agent sessions will be terminated, and the agent key will become available for reuse.
+   * Permanently remove an agent and all associated configuration from the workspace. Terminate active sessions and the key becomes reusable.
    */
   async delete(
     agentKey: string,
@@ -84,7 +84,7 @@ export class Agents extends ClientSDK {
    * Retrieve agent
    *
    * @remarks
-   * Retrieves detailed information about a specific agent identified by its unique key or identifier. Returns the complete agent manifest including configuration settings, model assignments (primary and fallback), tools, knowledge bases, memory stores, instructions, and execution parameters. Use this endpoint to fetch the current state and configuration of an individual agent.
+   * Retrieve the complete agent manifest by key, including model assignments, tools, knowledge bases, memory stores, and execution parameters.
    */
   async retrieve(
     agentKey: string,
@@ -101,7 +101,7 @@ export class Agents extends ClientSDK {
    * Update agent
    *
    * @remarks
-   * Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations.
+   * Partially update an existing agent configuration including models, instructions, tools, knowledge bases, and execution parameters.
    */
   async update(
     requestBody: operations.UpdateAgentRequestBody,
@@ -120,7 +120,7 @@ export class Agents extends ClientSDK {
    * Execute an agent task
    *
    * @remarks
-   * Invokes an agent to perform a task with the provided input message. The agent will process the request using its configured model and tools, maintaining context through memory stores if configured. Supports automatic model fallback on primary model failure, tool execution, knowledge base retrieval, and continuation of previous conversations. Returns a task response that can be used to track execution status and retrieve results.
+   * Invoke an agent to perform a task with input messages. Supports tool execution, knowledge retrieval, memory context, and model fallback.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -141,7 +141,7 @@ export class Agents extends ClientSDK {
    * Run an agent with configuration
    *
    * @remarks
-   * Executes an agent using inline configuration or references an existing agent. Supports dynamic agent creation where the system automatically manages agent versioning - reusing existing agents with matching configurations or creating new versions when configurations differ. Ideal for programmatic agent execution with flexible configuration management. The agent processes messages in A2A format with support for memory context, tool execution, and automatic model fallback on failure.
+   * Run an agent with inline configuration or existing agent reference. Supports A2A messages, memory context, tool execution, and model fallback.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -160,7 +160,7 @@ export class Agents extends ClientSDK {
    * Run agent with streaming response
    *
    * @remarks
-   * Dynamically configures and executes an agent while streaming the interaction in real-time via Server-Sent Events (SSE). Intelligently manages agent versioning by reusing existing agents with matching configurations or creating new versions when configurations differ. Combines the flexibility of inline configuration with real-time streaming, making it ideal for dynamic agent interactions with live feedback. The stream provides continuous updates including message chunks, tool executions, and status changes until completion or timeout.
+   * Run an agent with streaming via SSE, combining inline configuration with real-time updates including messages, tool executions, and status.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -179,7 +179,7 @@ export class Agents extends ClientSDK {
    * Stream agent execution in real-time
    *
    * @remarks
-   * Executes an agent and streams the interaction in real-time using Server-Sent Events (SSE). Provides live updates as the agent processes the request, including message chunks, tool calls, and execution status. Perfect for building responsive chat interfaces and monitoring agent progress. The stream continues until the agent completes its task, encounters an error, or reaches the configured timeout (default 30 minutes, configurable 1-3600 seconds).
+   * Stream an existing agent execution in real-time via SSE, providing live message chunks, tool calls, and status updates until completion.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */

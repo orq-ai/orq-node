@@ -6,25 +6,16 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteChunkRequest = {
-  /**
-   * The unique identifier of the chunk
-   */
-  chunkId: string;
-  /**
-   * The unique identifier of the data source
-   */
-  datasourceId: string;
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
+  datasourceId: string;
+  chunkId: string;
 };
 
 /** @internal */
 export type DeleteChunkRequest$Outbound = {
-  chunk_id: string;
-  datasource_id: string;
   knowledge_id: string;
+  datasource_id: string;
+  chunk_id: string;
 };
 
 /** @internal */
@@ -33,14 +24,14 @@ export const DeleteChunkRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteChunkRequest
 > = z.object({
-  chunkId: z.string(),
-  datasourceId: z.string(),
   knowledgeId: z.string(),
+  datasourceId: z.string(),
+  chunkId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    chunkId: "chunk_id",
-    datasourceId: "datasource_id",
     knowledgeId: "knowledge_id",
+    datasourceId: "datasource_id",
+    chunkId: "chunk_id",
   });
 });
 

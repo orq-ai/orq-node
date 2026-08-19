@@ -39,10 +39,6 @@ export type GuardrailRule = {
   expression?: GuardrailRuleExpression | undefined;
   guardrails: Array<GuardrailRuleGuardrail>;
   plugins: Array<GuardrailRulePlugin>;
-  /**
-   * Evaluation timeout in milliseconds.
-   */
-  timeout: number;
 };
 
 /** @internal */
@@ -63,7 +59,6 @@ export const GuardrailRule$inboundSchema: z.ZodType<
   expression: GuardrailRuleExpression$inboundSchema.optional(),
   guardrails: z.array(GuardrailRuleGuardrail$inboundSchema),
   plugins: z.array(GuardrailRulePlugin$inboundSchema),
-  timeout: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",

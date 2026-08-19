@@ -1,0 +1,19 @@
+# ChunksServiceListPaginatedRequest
+
+## Example Usage
+
+```typescript
+import { ChunksServiceListPaginatedRequest } from "@orq-ai/node/models/components";
+
+let value: ChunksServiceListPaginatedRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `q`                                                                                                                      | *string*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `enabled`                                                                                                                | *boolean*                                                                                                                | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `status`                                                                                                                 | [components.ChunksServiceListPaginatedRequestStatus](../../models/components/chunksservicelistpaginatedrequeststatus.md) | :heavy_minus_sign:                                                                                                       | Filter chunks by processing status                                                                                       |
+| `limit`                                                                                                                  | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `page`                                                                                                                   | *number*                                                                                                                 | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |

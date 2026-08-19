@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Update a datasource
+ *
+ * @remarks
+ * Updates the display name of a datasource.
  */
 export function knowledgeUpdateDatasource(
   client: OrqCore,
@@ -34,7 +38,7 @@ export function knowledgeUpdateDatasource(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdateDatasourceResponseBody,
+    components.Datasource,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.UpdateDatasourceResponseBody,
+      components.Datasource,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -81,7 +85,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.DatasourcesServiceUpdateRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     datasource_id: encodeSimple("datasource_id", payload.datasource_id, {
@@ -149,7 +155,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.UpdateDatasourceResponseBody,
+    components.Datasource,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -159,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdateDatasourceResponseBody$inboundSchema),
+    M.json(200, components.Datasource$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

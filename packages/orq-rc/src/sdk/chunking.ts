@@ -4,6 +4,7 @@
 
 import { chunkingParse } from "../funcs/chunkingParse.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -17,7 +18,7 @@ export class Chunking extends ClientSDK {
   async parse(
     request: operations.ParseChunkingRequest,
     options?: RequestOptions,
-  ): Promise<operations.ParseResponseBody> {
+  ): Promise<components.ParseResponse> {
     return unwrapAsync(chunkingParse(
       this,
       request,

@@ -86,7 +86,7 @@ run();
 
 ## create
 
-Creates a guardrail rule with metadata and optional evaluator, plugin, timeout, and matching configuration. Rules default to disabled when `enabled` is omitted.
+Creates a guardrail rule with metadata and optional evaluator, plugin, and matching configuration. Rules default to disabled when `enabled` is omitted.
 
 ### Example Usage
 

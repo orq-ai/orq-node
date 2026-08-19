@@ -4,91 +4,21 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateMemoryDocumentRequestBody = {
-  /**
-   * The content of the memory document (whitespace trimmed).
-   */
-  text?: string | undefined;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
-   */
-  metadata?: { [k: string]: string } | undefined;
-};
+import * as components from "../components/index.js";
 
 export type UpdateMemoryDocumentRequest = {
-  /**
-   * The unique key identifier of the memory store
-   */
   memoryStoreKey: string;
-  /**
-   * The unique identifier of the memory
-   */
   memoryEntityId: string;
-  /**
-   * The unique identifier of the document
-   */
   documentId: string;
-  requestBody?: UpdateMemoryDocumentRequestBody | undefined;
+  updateMemoryDocumentRequest: components.UpdateMemoryDocumentRequest;
 };
-
-/**
- * Memory document successfully updated.
- */
-export type UpdateMemoryDocumentResponseBody = {
-  id: string;
-  memoryId: string;
-  storeId: string;
-  /**
-   * The content of the memory document (whitespace trimmed).
-   */
-  text: string;
-  created: string;
-  updated: string;
-  createdById?: string | null | undefined;
-  updatedById?: string | null | undefined;
-  workspaceId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
-   */
-  metadata?: { [k: string]: string } | undefined;
-};
-
-/** @internal */
-export type UpdateMemoryDocumentRequestBody$Outbound = {
-  text?: string | undefined;
-  metadata?: { [k: string]: string } | undefined;
-};
-
-/** @internal */
-export const UpdateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
-  UpdateMemoryDocumentRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryDocumentRequestBody
-> = z.object({
-  text: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-});
-
-export function updateMemoryDocumentRequestBodyToJSON(
-  updateMemoryDocumentRequestBody: UpdateMemoryDocumentRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateMemoryDocumentRequestBody$outboundSchema.parse(
-      updateMemoryDocumentRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type UpdateMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
   memory_entity_id: string;
   document_id: string;
-  RequestBody?: UpdateMemoryDocumentRequestBody$Outbound | undefined;
+  UpdateMemoryDocumentRequest: components.UpdateMemoryDocumentRequest$Outbound;
 };
 
 /** @internal */
@@ -100,14 +30,14 @@ export const UpdateMemoryDocumentRequest$outboundSchema: z.ZodType<
   memoryStoreKey: z.string(),
   memoryEntityId: z.string(),
   documentId: z.string(),
-  requestBody: z.lazy(() => UpdateMemoryDocumentRequestBody$outboundSchema)
-    .optional(),
+  updateMemoryDocumentRequest:
+    components.UpdateMemoryDocumentRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
     memoryEntityId: "memory_entity_id",
     documentId: "document_id",
-    requestBody: "RequestBody",
+    updateMemoryDocumentRequest: "UpdateMemoryDocumentRequest",
   });
 });
 
@@ -118,42 +48,5 @@ export function updateMemoryDocumentRequestToJSON(
     UpdateMemoryDocumentRequest$outboundSchema.parse(
       updateMemoryDocumentRequest,
     ),
-  );
-}
-
-/** @internal */
-export const UpdateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
-  UpdateMemoryDocumentResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  memory_id: z.string(),
-  store_id: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  workspace_id: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "memory_id": "memoryId",
-    "store_id": "storeId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function updateMemoryDocumentResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryDocumentResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryDocumentResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryDocumentResponseBody' from JSON`,
   );
 }

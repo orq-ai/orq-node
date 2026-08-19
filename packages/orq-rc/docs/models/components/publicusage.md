@@ -9,11 +9,12 @@ let value: PublicUsage = {
   inputTokens: 37454,
   inputTokensDetails: {
     cacheCreationTokens: 763695,
-    cachedTokens: 732588,
+    cacheWriteTokens: 732588,
+    cachedTokens: 376439,
   },
   outputTokens: 218537,
   outputTokensDetails: {
-    reasoningTokens: 349904,
+    reasoningTokens: 437223,
   },
   totalTokens: 444522,
 };

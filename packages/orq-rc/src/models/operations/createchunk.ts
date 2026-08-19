@@ -4,141 +4,19 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type CreateChunkMetadata = string | number | boolean;
-
-export type RequestBody = {
-  /**
-   * The text content of the chunk
-   */
-  text: string;
-  /**
-   * The embedding vector of the chunk. If not provided the chunk will be embedded with the knowledge base embeddings model.
-   */
-  embedding?: Array<number> | undefined;
-  /**
-   * Metadata of the chunk
-   */
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-};
+import * as components from "../components/index.js";
 
 export type CreateChunkRequest = {
-  /**
-   * Unique identifier of the knowledge
-   */
   knowledgeId: string;
-  /**
-   * Unique identifier of the datasource
-   */
   datasourceId: string;
-  requestBody?: Array<RequestBody> | undefined;
+  requestBody: Array<components.UpsertChunk>;
 };
-
-export type CreateChunkKnowledgeMetadata = string | number | boolean;
-
-/**
- * The status of the chunk
- */
-export const CreateChunkStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type CreateChunkStatus = ClosedEnum<typeof CreateChunkStatus>;
-
-export type ResponseBody = {
-  /**
-   * The unique identifier of the chunk
-   */
-  id: string;
-  /**
-   * The text content of the chunk
-   */
-  text: string;
-  /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
-   */
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  /**
-   * Whether the chunk is enabled
-   */
-  enabled: boolean;
-  /**
-   * The status of the chunk
-   */
-  status: CreateChunkStatus;
-  /**
-   * The date and time the chunk was created
-   */
-  created: string;
-  /**
-   * The date and time the chunk was updated
-   */
-  updated: string;
-  /**
-   * The unique identifier of the user who created the chunk
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who updated the chunk
-   */
-  updateById?: string | null | undefined;
-};
-
-/** @internal */
-export type CreateChunkMetadata$Outbound = string | number | boolean;
-
-/** @internal */
-export const CreateChunkMetadata$outboundSchema: z.ZodType<
-  CreateChunkMetadata$Outbound,
-  z.ZodTypeDef,
-  CreateChunkMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function createChunkMetadataToJSON(
-  createChunkMetadata: CreateChunkMetadata,
-): string {
-  return JSON.stringify(
-    CreateChunkMetadata$outboundSchema.parse(createChunkMetadata),
-  );
-}
-
-/** @internal */
-export type RequestBody$Outbound = {
-  text: string;
-  embedding?: Array<number> | undefined;
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-};
-
-/** @internal */
-export const RequestBody$outboundSchema: z.ZodType<
-  RequestBody$Outbound,
-  z.ZodTypeDef,
-  RequestBody
-> = z.object({
-  text: z.string(),
-  embedding: z.array(z.number()).optional(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
-
-export function requestBodyToJSON(requestBody: RequestBody): string {
-  return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
-}
 
 /** @internal */
 export type CreateChunkRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody?: Array<RequestBody$Outbound> | undefined;
+  RequestBody: Array<components.UpsertChunk$Outbound>;
 };
 
 /** @internal */
@@ -149,7 +27,7 @@ export const CreateChunkRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)).optional(),
+  requestBody: z.array(components.UpsertChunk$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -163,60 +41,5 @@ export function createChunkRequestToJSON(
 ): string {
   return JSON.stringify(
     CreateChunkRequest$outboundSchema.parse(createChunkRequest),
-  );
-}
-
-/** @internal */
-export const CreateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
-  CreateChunkKnowledgeMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function createChunkKnowledgeMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChunkKnowledgeMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChunkKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkKnowledgeMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChunkStatus
-> = z.nativeEnum(CreateChunkStatus);
-
-/** @internal */
-export const ResponseBody$inboundSchema: z.ZodType<
-  ResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: CreateChunkStatus$inboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-  });
-});
-
-export function responseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

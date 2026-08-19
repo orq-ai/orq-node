@@ -19,7 +19,6 @@ let value: GuardrailRule = {
   plugins: [
     {},
   ],
-  timeout: 36521,
 };
 ```
 
@@ -39,4 +38,3 @@ let value: GuardrailRule = {
 | `expression`                                                                                  | [components.GuardrailRuleExpression](../../models/components/guardrailruleexpression.md)      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `guardrails`                                                                                  | [components.GuardrailRuleGuardrail](../../models/components/guardrailruleguardrail.md)[]      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `plugins`                                                                                     | [components.GuardrailRulePlugin](../../models/components/guardrailruleplugin.md)[]            | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `timeout`                                                                                     | *number*                                                                                      | :heavy_check_mark:                                                                            | Evaluation timeout in milliseconds.                                                           |

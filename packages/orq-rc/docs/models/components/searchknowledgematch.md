@@ -1,0 +1,22 @@
+# SearchKnowledgeMatch
+
+## Example Usage
+
+```typescript
+import { SearchKnowledgeMatch } from "@orq-ai/node/models/components";
+
+let value: SearchKnowledgeMatch = {
+  id: "<id>",
+  text: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                             | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *string*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               |
+| `text`                                                                                                                                            | *string*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               |
+| `vector`                                                                                                                                          | *number*[]                                                                                                                                        | :heavy_minus_sign:                                                                                                                                | The service maps the internal embedding field to this public name. Empty<br/> repeated fields are omitted by proto JSON, preserving optional vectors. |
+| `metadata`                                                                                                                                        | [components.SearchKnowledgeMatchMetadata](../../models/components/searchknowledgematchmetadata.md)                                                | :heavy_minus_sign:                                                                                                                                | Arbitrary chunk metadata, omitted unless requested.                                                                                               |
+| `scores`                                                                                                                                          | [components.SearchKnowledgeScores](../../models/components/searchknowledgescores.md)                                                              | :heavy_minus_sign:                                                                                                                                | Search and rerank scores, omitted unless requested.                                                                                               |

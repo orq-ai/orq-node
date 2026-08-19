@@ -35,7 +35,7 @@ export class GuardrailRules extends ClientSDK {
    * Create a guardrail rule
    *
    * @remarks
-   * Creates a guardrail rule with metadata and optional evaluator, plugin, timeout, and matching configuration. Rules default to disabled when `enabled` is omitted.
+   * Creates a guardrail rule with metadata and optional evaluator, plugin, and matching configuration. Rules default to disabled when `enabled` is omitted.
    */
   async create(
     request: components.CreateGuardrailRuleRequest,

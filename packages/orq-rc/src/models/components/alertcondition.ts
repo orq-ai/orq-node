@@ -41,17 +41,16 @@ export const Window = {
 export type Window = ClosedEnum<typeof Window>;
 
 /**
- * How often the alert is evaluated. `30s` is a testing cadence.
+ * How often the alert is evaluated. Plan limits may enforce a minimum.
  */
 export const Interval = {
-  Thirtys: "30s",
   Fivem: "5m",
   Fifteenm: "15m",
   Oneh: "1h",
   Oned: "1d",
 } as const;
 /**
- * How often the alert is evaluated. `30s` is a testing cadence.
+ * How often the alert is evaluated. Plan limits may enforce a minimum.
  */
 export type Interval = ClosedEnum<typeof Interval>;
 
@@ -105,7 +104,7 @@ export type AlertCondition = {
    */
   window: Window;
   /**
-   * How often the alert is evaluated. `30s` is a testing cadence.
+   * How often the alert is evaluated. Plan limits may enforce a minimum.
    */
   interval: Interval;
   /**

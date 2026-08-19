@@ -4,10 +4,6 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAllMemoryDocumentsRequest = {
   /**
@@ -19,7 +15,7 @@ export type GetAllMemoryDocumentsRequest = {
    */
   memoryEntityId: string;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -38,41 +34,6 @@ export type GetAllMemoryDocumentsRequest = {
    * Filter documents updated before this ISO datetime
    */
   updatedBefore?: Date | undefined;
-};
-
-export const GetAllMemoryDocumentsObject = {
-  List: "list",
-} as const;
-export type GetAllMemoryDocumentsObject = ClosedEnum<
-  typeof GetAllMemoryDocumentsObject
->;
-
-export type GetAllMemoryDocumentsData = {
-  id: string;
-  memoryId: string;
-  storeId: string;
-  /**
-   * The content of the memory document (whitespace trimmed).
-   */
-  text: string;
-  created: string;
-  updated: string;
-  createdById?: string | null | undefined;
-  updatedById?: string | null | undefined;
-  workspaceId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
-   */
-  metadata?: { [k: string]: string } | undefined;
-};
-
-/**
- * Successfully retrieved the list of memory documents.
- */
-export type GetAllMemoryDocumentsResponseBody = {
-  object: GetAllMemoryDocumentsObject;
-  data: Array<GetAllMemoryDocumentsData>;
-  hasMore: boolean;
 };
 
 /** @internal */
@@ -117,72 +78,5 @@ export function getAllMemoryDocumentsRequestToJSON(
     GetAllMemoryDocumentsRequest$outboundSchema.parse(
       getAllMemoryDocumentsRequest,
     ),
-  );
-}
-
-/** @internal */
-export const GetAllMemoryDocumentsObject$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllMemoryDocumentsObject
-> = z.nativeEnum(GetAllMemoryDocumentsObject);
-
-/** @internal */
-export const GetAllMemoryDocumentsData$inboundSchema: z.ZodType<
-  GetAllMemoryDocumentsData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  memory_id: z.string(),
-  store_id: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  workspace_id: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "memory_id": "memoryId",
-    "store_id": "storeId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function getAllMemoryDocumentsDataFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryDocumentsData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryDocumentsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryDocumentsData' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAllMemoryDocumentsResponseBody$inboundSchema: z.ZodType<
-  GetAllMemoryDocumentsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: GetAllMemoryDocumentsObject$inboundSchema,
-  data: z.array(z.lazy(() => GetAllMemoryDocumentsData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function getAllMemoryDocumentsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllMemoryDocumentsResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllMemoryDocumentsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllMemoryDocumentsResponseBody' from JSON`,
   );
 }

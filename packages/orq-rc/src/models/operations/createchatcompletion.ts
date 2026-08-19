@@ -919,7 +919,7 @@ export type CreateChatCompletionRouterChatCompletionsCache = {
 /**
  * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
-export const CreateChatCompletionSearchType = {
+export const SearchType = {
   VectorSearch: "vector_search",
   KeywordSearch: "keyword_search",
   HybridSearch: "hybrid_search",
@@ -927,9 +927,7 @@ export const CreateChatCompletionSearchType = {
 /**
  * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
-export type CreateChatCompletionSearchType = ClosedEnum<
-  typeof CreateChatCompletionSearchType
->;
+export type SearchType = ClosedEnum<typeof SearchType>;
 
 /**
  * Exists
@@ -1014,7 +1012,7 @@ export type CreateChatCompletionOrEq = {
   eq: string | number | boolean;
 };
 
-export type CreateChatCompletionFilterByRouterChatCompletionsOr =
+export type CreateChatCompletionFilterByOr =
   | CreateChatCompletionOrEq
   | CreateChatCompletionOrNe
   | CreateChatCompletionOrGt
@@ -1028,7 +1026,7 @@ export type CreateChatCompletionFilterByRouterChatCompletionsOr =
 /**
  * Or
  */
-export type CreateChatCompletionFilterByOr = {
+export type FilterByOr = {
   or: Array<
     {
       [k: string]:
@@ -1128,7 +1126,7 @@ export type CreateChatCompletionAndEq = {
   eq: string | number | boolean;
 };
 
-export type CreateChatCompletionFilterByRouterChatCompletionsAnd =
+export type CreateChatCompletionFilterByAnd =
   | CreateChatCompletionAndEq
   | CreateChatCompletionAndNe
   | CreateChatCompletionAndGt
@@ -1142,7 +1140,7 @@ export type CreateChatCompletionFilterByRouterChatCompletionsAnd =
 /**
  * And
  */
-export type CreateChatCompletionFilterByAnd = {
+export type FilterByAnd = {
   and: Array<
     {
       [k: string]:
@@ -1242,7 +1240,7 @@ export type CreateChatCompletion1Eq = {
   eq: string | number | boolean;
 };
 
-export type CreateChatCompletionFilterBy1 =
+export type FilterBy1 =
   | CreateChatCompletion1Eq
   | CreateChatCompletion1Ne
   | CreateChatCompletion1Gt
@@ -1256,26 +1254,23 @@ export type CreateChatCompletionFilterBy1 =
 /**
  * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
  */
-export type CreateChatCompletionFilterBy =
-  | CreateChatCompletionFilterByAnd
-  | CreateChatCompletionFilterByOr
-  | {
-    [k: string]:
-      | CreateChatCompletion1Eq
-      | CreateChatCompletion1Ne
-      | CreateChatCompletion1Gt
-      | CreateChatCompletion1Gte
-      | CreateChatCompletion1Lt
-      | CreateChatCompletion1Lte
-      | CreateChatCompletion1In
-      | CreateChatCompletion1Nin
-      | CreateChatCompletion1Exists;
-  };
+export type FilterBy = FilterByAnd | FilterByOr | {
+  [k: string]:
+    | CreateChatCompletion1Eq
+    | CreateChatCompletion1Ne
+    | CreateChatCompletion1Gt
+    | CreateChatCompletion1Gte
+    | CreateChatCompletion1Lt
+    | CreateChatCompletion1Lte
+    | CreateChatCompletion1In
+    | CreateChatCompletion1Nin
+    | CreateChatCompletion1Exists;
+};
 
 /**
  * Additional search options
  */
-export type CreateChatCompletionSearchOptions = {
+export type SearchOptions = {
   /**
    * Whether to include the vector in the chunk
    */
@@ -1293,7 +1288,7 @@ export type CreateChatCompletionSearchOptions = {
 /**
  * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
  */
-export type CreateChatCompletionRerankConfig = {
+export type RerankConfig = {
   /**
    * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/rerank-models).
    */
@@ -1311,7 +1306,7 @@ export type CreateChatCompletionRerankConfig = {
 /**
  * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
  */
-export type CreateChatCompletionAgenticRagConfig = {
+export type AgenticRagConfig = {
   /**
    * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
    */
@@ -1330,38 +1325,34 @@ export type CreateChatCompletionKnowledgeBases = {
   /**
    * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType?: CreateChatCompletionSearchType | null | undefined;
+  searchType?: SearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
-  filterBy?:
-    | CreateChatCompletionFilterByAnd
-    | CreateChatCompletionFilterByOr
-    | {
-      [k: string]:
-        | CreateChatCompletion1Eq
-        | CreateChatCompletion1Ne
-        | CreateChatCompletion1Gt
-        | CreateChatCompletion1Gte
-        | CreateChatCompletion1Lt
-        | CreateChatCompletion1Lte
-        | CreateChatCompletion1In
-        | CreateChatCompletion1Nin
-        | CreateChatCompletion1Exists;
-    }
-    | undefined;
+  filterBy?: FilterByAnd | FilterByOr | {
+    [k: string]:
+      | CreateChatCompletion1Eq
+      | CreateChatCompletion1Ne
+      | CreateChatCompletion1Gt
+      | CreateChatCompletion1Gte
+      | CreateChatCompletion1Lt
+      | CreateChatCompletion1Lte
+      | CreateChatCompletion1In
+      | CreateChatCompletion1Nin
+      | CreateChatCompletion1Exists;
+  } | undefined;
   /**
    * Additional search options
    */
-  searchOptions?: CreateChatCompletionSearchOptions | undefined;
+  searchOptions?: SearchOptions | undefined;
   /**
    * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
    */
-  rerankConfig?: CreateChatCompletionRerankConfig | undefined;
+  rerankConfig?: RerankConfig | undefined;
   /**
    * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
    */
-  agenticRagConfig?: CreateChatCompletionAgenticRagConfig | undefined;
+  agenticRagConfig?: AgenticRagConfig | undefined;
   /**
    * Unique identifier of the knowledge base to search
    */
@@ -3894,9 +3885,8 @@ export function createChatCompletionRouterChatCompletionsCacheToJSON(
 }
 
 /** @internal */
-export const CreateChatCompletionSearchType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChatCompletionSearchType
-> = z.nativeEnum(CreateChatCompletionSearchType);
+export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> = z
+  .nativeEnum(SearchType);
 
 /** @internal */
 export type CreateChatCompletionOrExists$Outbound = {
@@ -4199,7 +4189,7 @@ export function createChatCompletionOrEqToJSON(
 }
 
 /** @internal */
-export type CreateChatCompletionFilterByRouterChatCompletionsOr$Outbound =
+export type CreateChatCompletionFilterByOr$Outbound =
   | CreateChatCompletionOrEq$Outbound
   | CreateChatCompletionOrNe$Outbound
   | CreateChatCompletionOrGt$Outbound
@@ -4211,36 +4201,34 @@ export type CreateChatCompletionFilterByRouterChatCompletionsOr$Outbound =
   | CreateChatCompletionOrExists$Outbound;
 
 /** @internal */
-export const CreateChatCompletionFilterByRouterChatCompletionsOr$outboundSchema:
-  z.ZodType<
-    CreateChatCompletionFilterByRouterChatCompletionsOr$Outbound,
-    z.ZodTypeDef,
-    CreateChatCompletionFilterByRouterChatCompletionsOr
-  > = z.union([
-    z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrNe$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrGt$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrGte$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrLt$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
-    z.lazy(() => CreateChatCompletionOrExists$outboundSchema),
-  ]);
+export const CreateChatCompletionFilterByOr$outboundSchema: z.ZodType<
+  CreateChatCompletionFilterByOr$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionFilterByOr
+> = z.union([
+  z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrNe$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrGt$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrGte$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrLt$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
+  z.lazy(() => CreateChatCompletionOrExists$outboundSchema),
+]);
 
-export function createChatCompletionFilterByRouterChatCompletionsOrToJSON(
-  createChatCompletionFilterByRouterChatCompletionsOr:
-    CreateChatCompletionFilterByRouterChatCompletionsOr,
+export function createChatCompletionFilterByOrToJSON(
+  createChatCompletionFilterByOr: CreateChatCompletionFilterByOr,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionFilterByRouterChatCompletionsOr$outboundSchema.parse(
-      createChatCompletionFilterByRouterChatCompletionsOr,
+    CreateChatCompletionFilterByOr$outboundSchema.parse(
+      createChatCompletionFilterByOr,
     ),
   );
 }
 
 /** @internal */
-export type CreateChatCompletionFilterByOr$Outbound = {
+export type FilterByOr$Outbound = {
   or: Array<
     {
       [k: string]:
@@ -4258,10 +4246,10 @@ export type CreateChatCompletionFilterByOr$Outbound = {
 };
 
 /** @internal */
-export const CreateChatCompletionFilterByOr$outboundSchema: z.ZodType<
-  CreateChatCompletionFilterByOr$Outbound,
+export const FilterByOr$outboundSchema: z.ZodType<
+  FilterByOr$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionFilterByOr
+  FilterByOr
 > = z.object({
   or: z.array(
     z.record(z.union([
@@ -4280,14 +4268,8 @@ export const CreateChatCompletionFilterByOr$outboundSchema: z.ZodType<
   ),
 });
 
-export function createChatCompletionFilterByOrToJSON(
-  createChatCompletionFilterByOr: CreateChatCompletionFilterByOr,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionFilterByOr$outboundSchema.parse(
-      createChatCompletionFilterByOr,
-    ),
-  );
+export function filterByOrToJSON(filterByOr: FilterByOr): string {
+  return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
 }
 
 /** @internal */
@@ -4591,7 +4573,7 @@ export function createChatCompletionAndEqToJSON(
 }
 
 /** @internal */
-export type CreateChatCompletionFilterByRouterChatCompletionsAnd$Outbound =
+export type CreateChatCompletionFilterByAnd$Outbound =
   | CreateChatCompletionAndEq$Outbound
   | CreateChatCompletionAndNe$Outbound
   | CreateChatCompletionAndGt$Outbound
@@ -4603,36 +4585,34 @@ export type CreateChatCompletionFilterByRouterChatCompletionsAnd$Outbound =
   | CreateChatCompletionAndExists$Outbound;
 
 /** @internal */
-export const CreateChatCompletionFilterByRouterChatCompletionsAnd$outboundSchema:
-  z.ZodType<
-    CreateChatCompletionFilterByRouterChatCompletionsAnd$Outbound,
-    z.ZodTypeDef,
-    CreateChatCompletionFilterByRouterChatCompletionsAnd
-  > = z.union([
-    z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndNe$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndGt$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndGte$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndLt$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
-    z.lazy(() => CreateChatCompletionAndExists$outboundSchema),
-  ]);
+export const CreateChatCompletionFilterByAnd$outboundSchema: z.ZodType<
+  CreateChatCompletionFilterByAnd$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionFilterByAnd
+> = z.union([
+  z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndNe$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndGt$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndGte$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndLt$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
+  z.lazy(() => CreateChatCompletionAndExists$outboundSchema),
+]);
 
-export function createChatCompletionFilterByRouterChatCompletionsAndToJSON(
-  createChatCompletionFilterByRouterChatCompletionsAnd:
-    CreateChatCompletionFilterByRouterChatCompletionsAnd,
+export function createChatCompletionFilterByAndToJSON(
+  createChatCompletionFilterByAnd: CreateChatCompletionFilterByAnd,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionFilterByRouterChatCompletionsAnd$outboundSchema.parse(
-      createChatCompletionFilterByRouterChatCompletionsAnd,
+    CreateChatCompletionFilterByAnd$outboundSchema.parse(
+      createChatCompletionFilterByAnd,
     ),
   );
 }
 
 /** @internal */
-export type CreateChatCompletionFilterByAnd$Outbound = {
+export type FilterByAnd$Outbound = {
   and: Array<
     {
       [k: string]:
@@ -4650,10 +4630,10 @@ export type CreateChatCompletionFilterByAnd$Outbound = {
 };
 
 /** @internal */
-export const CreateChatCompletionFilterByAnd$outboundSchema: z.ZodType<
-  CreateChatCompletionFilterByAnd$Outbound,
+export const FilterByAnd$outboundSchema: z.ZodType<
+  FilterByAnd$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionFilterByAnd
+  FilterByAnd
 > = z.object({
   and: z.array(
     z.record(z.union([
@@ -4672,14 +4652,8 @@ export const CreateChatCompletionFilterByAnd$outboundSchema: z.ZodType<
   ),
 });
 
-export function createChatCompletionFilterByAndToJSON(
-  createChatCompletionFilterByAnd: CreateChatCompletionFilterByAnd,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionFilterByAnd$outboundSchema.parse(
-      createChatCompletionFilterByAnd,
-    ),
-  );
+export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
+  return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
 }
 
 /** @internal */
@@ -4983,7 +4957,7 @@ export function createChatCompletion1EqToJSON(
 }
 
 /** @internal */
-export type CreateChatCompletionFilterBy1$Outbound =
+export type FilterBy1$Outbound =
   | CreateChatCompletion1Eq$Outbound
   | CreateChatCompletion1Ne$Outbound
   | CreateChatCompletion1Gt$Outbound
@@ -4995,10 +4969,10 @@ export type CreateChatCompletionFilterBy1$Outbound =
   | CreateChatCompletion1Exists$Outbound;
 
 /** @internal */
-export const CreateChatCompletionFilterBy1$outboundSchema: z.ZodType<
-  CreateChatCompletionFilterBy1$Outbound,
+export const FilterBy1$outboundSchema: z.ZodType<
+  FilterBy1$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionFilterBy1
+  FilterBy1
 > = z.union([
   z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
   z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
@@ -5011,41 +4985,32 @@ export const CreateChatCompletionFilterBy1$outboundSchema: z.ZodType<
   z.lazy(() => CreateChatCompletion1Exists$outboundSchema),
 ]);
 
-export function createChatCompletionFilterBy1ToJSON(
-  createChatCompletionFilterBy1: CreateChatCompletionFilterBy1,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionFilterBy1$outboundSchema.parse(
-      createChatCompletionFilterBy1,
-    ),
-  );
+export function filterBy1ToJSON(filterBy1: FilterBy1): string {
+  return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
 }
 
 /** @internal */
-export type CreateChatCompletionFilterBy$Outbound =
-  | CreateChatCompletionFilterByAnd$Outbound
-  | CreateChatCompletionFilterByOr$Outbound
-  | {
-    [k: string]:
-      | CreateChatCompletion1Eq$Outbound
-      | CreateChatCompletion1Ne$Outbound
-      | CreateChatCompletion1Gt$Outbound
-      | CreateChatCompletion1Gte$Outbound
-      | CreateChatCompletion1Lt$Outbound
-      | CreateChatCompletion1Lte$Outbound
-      | CreateChatCompletion1In$Outbound
-      | CreateChatCompletion1Nin$Outbound
-      | CreateChatCompletion1Exists$Outbound;
-  };
+export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
+  [k: string]:
+    | CreateChatCompletion1Eq$Outbound
+    | CreateChatCompletion1Ne$Outbound
+    | CreateChatCompletion1Gt$Outbound
+    | CreateChatCompletion1Gte$Outbound
+    | CreateChatCompletion1Lt$Outbound
+    | CreateChatCompletion1Lte$Outbound
+    | CreateChatCompletion1In$Outbound
+    | CreateChatCompletion1Nin$Outbound
+    | CreateChatCompletion1Exists$Outbound;
+};
 
 /** @internal */
-export const CreateChatCompletionFilterBy$outboundSchema: z.ZodType<
-  CreateChatCompletionFilterBy$Outbound,
+export const FilterBy$outboundSchema: z.ZodType<
+  FilterBy$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionFilterBy
+  FilterBy
 > = z.union([
-  z.lazy(() => CreateChatCompletionFilterByAnd$outboundSchema),
-  z.lazy(() => CreateChatCompletionFilterByOr$outboundSchema),
+  z.lazy(() => FilterByAnd$outboundSchema),
+  z.lazy(() => FilterByOr$outboundSchema),
   z.record(z.union([
     z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
     z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
@@ -5059,28 +5024,22 @@ export const CreateChatCompletionFilterBy$outboundSchema: z.ZodType<
   ])),
 ]);
 
-export function createChatCompletionFilterByToJSON(
-  createChatCompletionFilterBy: CreateChatCompletionFilterBy,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionFilterBy$outboundSchema.parse(
-      createChatCompletionFilterBy,
-    ),
-  );
+export function filterByToJSON(filterBy: FilterBy): string {
+  return JSON.stringify(FilterBy$outboundSchema.parse(filterBy));
 }
 
 /** @internal */
-export type CreateChatCompletionSearchOptions$Outbound = {
+export type SearchOptions$Outbound = {
   include_vectors?: boolean | undefined;
   include_metadata?: boolean | undefined;
   include_scores?: boolean | undefined;
 };
 
 /** @internal */
-export const CreateChatCompletionSearchOptions$outboundSchema: z.ZodType<
-  CreateChatCompletionSearchOptions$Outbound,
+export const SearchOptions$outboundSchema: z.ZodType<
+  SearchOptions$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionSearchOptions
+  SearchOptions
 > = z.object({
   includeVectors: z.boolean().optional(),
   includeMetadata: z.boolean().optional(),
@@ -5093,28 +5052,22 @@ export const CreateChatCompletionSearchOptions$outboundSchema: z.ZodType<
   });
 });
 
-export function createChatCompletionSearchOptionsToJSON(
-  createChatCompletionSearchOptions: CreateChatCompletionSearchOptions,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionSearchOptions$outboundSchema.parse(
-      createChatCompletionSearchOptions,
-    ),
-  );
+export function searchOptionsToJSON(searchOptions: SearchOptions): string {
+  return JSON.stringify(SearchOptions$outboundSchema.parse(searchOptions));
 }
 
 /** @internal */
-export type CreateChatCompletionRerankConfig$Outbound = {
+export type RerankConfig$Outbound = {
   model: string;
   threshold: number;
   top_k: number;
 };
 
 /** @internal */
-export const CreateChatCompletionRerankConfig$outboundSchema: z.ZodType<
-  CreateChatCompletionRerankConfig$Outbound,
+export const RerankConfig$outboundSchema: z.ZodType<
+  RerankConfig$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionRerankConfig
+  RerankConfig
 > = z.object({
   model: z.string(),
   threshold: z.number().default(0),
@@ -5125,37 +5078,29 @@ export const CreateChatCompletionRerankConfig$outboundSchema: z.ZodType<
   });
 });
 
-export function createChatCompletionRerankConfigToJSON(
-  createChatCompletionRerankConfig: CreateChatCompletionRerankConfig,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionRerankConfig$outboundSchema.parse(
-      createChatCompletionRerankConfig,
-    ),
-  );
+export function rerankConfigToJSON(rerankConfig: RerankConfig): string {
+  return JSON.stringify(RerankConfig$outboundSchema.parse(rerankConfig));
 }
 
 /** @internal */
-export type CreateChatCompletionAgenticRagConfig$Outbound = {
+export type AgenticRagConfig$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const CreateChatCompletionAgenticRagConfig$outboundSchema: z.ZodType<
-  CreateChatCompletionAgenticRagConfig$Outbound,
+export const AgenticRagConfig$outboundSchema: z.ZodType<
+  AgenticRagConfig$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionAgenticRagConfig
+  AgenticRagConfig
 > = z.object({
   model: z.string(),
 });
 
-export function createChatCompletionAgenticRagConfigToJSON(
-  createChatCompletionAgenticRagConfig: CreateChatCompletionAgenticRagConfig,
+export function agenticRagConfigToJSON(
+  agenticRagConfig: AgenticRagConfig,
 ): string {
   return JSON.stringify(
-    CreateChatCompletionAgenticRagConfig$outboundSchema.parse(
-      createChatCompletionAgenticRagConfig,
-    ),
+    AgenticRagConfig$outboundSchema.parse(agenticRagConfig),
   );
 }
 
@@ -5164,27 +5109,21 @@ export type CreateChatCompletionKnowledgeBases$Outbound = {
   top_k?: number | null | undefined;
   threshold?: number | null | undefined;
   search_type?: string | null | undefined;
-  filter_by?:
-    | CreateChatCompletionFilterByAnd$Outbound
-    | CreateChatCompletionFilterByOr$Outbound
-    | {
-      [k: string]:
-        | CreateChatCompletion1Eq$Outbound
-        | CreateChatCompletion1Ne$Outbound
-        | CreateChatCompletion1Gt$Outbound
-        | CreateChatCompletion1Gte$Outbound
-        | CreateChatCompletion1Lt$Outbound
-        | CreateChatCompletion1Lte$Outbound
-        | CreateChatCompletion1In$Outbound
-        | CreateChatCompletion1Nin$Outbound
-        | CreateChatCompletion1Exists$Outbound;
-    }
-    | undefined;
-  search_options?: CreateChatCompletionSearchOptions$Outbound | undefined;
-  rerank_config?: CreateChatCompletionRerankConfig$Outbound | undefined;
-  agentic_rag_config?:
-    | CreateChatCompletionAgenticRagConfig$Outbound
-    | undefined;
+  filter_by?: FilterByAnd$Outbound | FilterByOr$Outbound | {
+    [k: string]:
+      | CreateChatCompletion1Eq$Outbound
+      | CreateChatCompletion1Ne$Outbound
+      | CreateChatCompletion1Gt$Outbound
+      | CreateChatCompletion1Gte$Outbound
+      | CreateChatCompletion1Lt$Outbound
+      | CreateChatCompletion1Lte$Outbound
+      | CreateChatCompletion1In$Outbound
+      | CreateChatCompletion1Nin$Outbound
+      | CreateChatCompletion1Exists$Outbound;
+  } | undefined;
+  search_options?: SearchOptions$Outbound | undefined;
+  rerank_config?: RerankConfig$Outbound | undefined;
+  agentic_rag_config?: AgenticRagConfig$Outbound | undefined;
   knowledge_id: string;
   query?: string | undefined;
 };
@@ -5197,32 +5136,25 @@ export const CreateChatCompletionKnowledgeBases$outboundSchema: z.ZodType<
 > = z.object({
   topK: z.nullable(z.number().int()).optional(),
   threshold: z.nullable(z.number()).optional(),
-  searchType: z.nullable(CreateChatCompletionSearchType$outboundSchema)
-    .optional(),
+  searchType: z.nullable(SearchType$outboundSchema).optional(),
   filterBy: z.union([
-    z.lazy(() => CreateChatCompletionFilterByAnd$outboundSchema),
-    z.lazy(() => CreateChatCompletionFilterByOr$outboundSchema),
-    z.record(
-      z.union([
-        z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
-        z.lazy(() => CreateChatCompletion1In$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-        z.lazy(() => CreateChatCompletion1Exists$outboundSchema),
-      ]),
-    ),
+    z.lazy(() => FilterByAnd$outboundSchema),
+    z.lazy(() => FilterByOr$outboundSchema),
+    z.record(z.union([
+      z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
+      z.lazy(() => CreateChatCompletion1In$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Exists$outboundSchema),
+    ])),
   ]).optional(),
-  searchOptions: z.lazy(() => CreateChatCompletionSearchOptions$outboundSchema)
-    .optional(),
-  rerankConfig: z.lazy(() => CreateChatCompletionRerankConfig$outboundSchema)
-    .optional(),
-  agenticRagConfig: z.lazy(() =>
-    CreateChatCompletionAgenticRagConfig$outboundSchema
-  ).optional(),
+  searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),
+  rerankConfig: z.lazy(() => RerankConfig$outboundSchema).optional(),
+  agenticRagConfig: z.lazy(() => AgenticRagConfig$outboundSchema).optional(),
   knowledgeId: z.string(),
   query: z.string().optional(),
 }).transform((v) => {

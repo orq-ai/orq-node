@@ -1008,7 +1008,7 @@ export type Nin = string | number | boolean;
 /**
  * Not in
  */
-export type OneNin = {
+export type InvokeDeploymentRequest1Nin = {
   nin: Array<string | number | boolean>;
 };
 
@@ -1017,7 +1017,7 @@ export type In = string | number | boolean;
 /**
  * In
  */
-export type OneIn = {
+export type InvokeDeploymentRequest1In = {
   in: Array<string | number | boolean>;
 };
 
@@ -1054,7 +1054,7 @@ export type Ne = string | number | boolean;
 /**
  * Not equal to
  */
-export type OneNe = {
+export type InvokeDeploymentRequest1Ne = {
   ne: string | number | boolean;
 };
 
@@ -1063,26 +1063,35 @@ export type Eq = string | number | boolean;
 /**
  * Equal to
  */
-export type OneEq = {
+export type InvokeDeploymentRequest1Eq = {
   eq: string | number | boolean;
 };
 
 export type KnowledgeFilter1 =
-  | OneEq
-  | OneNe
+  | InvokeDeploymentRequest1Eq
+  | InvokeDeploymentRequest1Ne
   | Gt
   | Gte
   | Lt
   | Lte
-  | OneIn
-  | OneNin
+  | InvokeDeploymentRequest1In
+  | InvokeDeploymentRequest1Nin
   | Exists;
 
 /**
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
  */
 export type KnowledgeFilter = KnowledgeFilterAnd | KnowledgeFilterOr | {
-  [k: string]: OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
+  [k: string]:
+    | InvokeDeploymentRequest1Eq
+    | InvokeDeploymentRequest1Ne
+    | Gt
+    | Gte
+    | Lt
+    | Lte
+    | InvokeDeploymentRequest1In
+    | InvokeDeploymentRequest1Nin
+    | Exists;
 };
 
 /**
@@ -1155,7 +1164,16 @@ export type InvokeDeploymentRequest = {
    * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
    */
   knowledgeFilter?: KnowledgeFilterAnd | KnowledgeFilterOr | {
-    [k: string]: OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
+    [k: string]:
+      | InvokeDeploymentRequest1Eq
+      | InvokeDeploymentRequest1Ne
+      | Gt
+      | Gte
+      | Lt
+      | Lte
+      | InvokeDeploymentRequest1In
+      | InvokeDeploymentRequest1Nin
+      | Exists;
   } | undefined;
 };
 
@@ -3129,21 +3147,27 @@ export function ninToJSON(nin: Nin): string {
 }
 
 /** @internal */
-export type OneNin$Outbound = {
+export type InvokeDeploymentRequest1Nin$Outbound = {
   nin: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const OneNin$outboundSchema: z.ZodType<
-  OneNin$Outbound,
+export const InvokeDeploymentRequest1Nin$outboundSchema: z.ZodType<
+  InvokeDeploymentRequest1Nin$Outbound,
   z.ZodTypeDef,
-  OneNin
+  InvokeDeploymentRequest1Nin
 > = z.object({
   nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-export function oneNinToJSON(oneNin: OneNin): string {
-  return JSON.stringify(OneNin$outboundSchema.parse(oneNin));
+export function invokeDeploymentRequest1NinToJSON(
+  invokeDeploymentRequest1Nin: InvokeDeploymentRequest1Nin,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequest1Nin$outboundSchema.parse(
+      invokeDeploymentRequest1Nin,
+    ),
+  );
 }
 
 /** @internal */
@@ -3158,21 +3182,25 @@ export function inToJSON(value: In): string {
 }
 
 /** @internal */
-export type OneIn$Outbound = {
+export type InvokeDeploymentRequest1In$Outbound = {
   in: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const OneIn$outboundSchema: z.ZodType<
-  OneIn$Outbound,
+export const InvokeDeploymentRequest1In$outboundSchema: z.ZodType<
+  InvokeDeploymentRequest1In$Outbound,
   z.ZodTypeDef,
-  OneIn
+  InvokeDeploymentRequest1In
 > = z.object({
   in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
-export function oneInToJSON(oneIn: OneIn): string {
-  return JSON.stringify(OneIn$outboundSchema.parse(oneIn));
+export function invokeDeploymentRequest1InToJSON(
+  invokeDeploymentRequest1In: InvokeDeploymentRequest1In,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequest1In$outboundSchema.parse(invokeDeploymentRequest1In),
+  );
 }
 
 /** @internal */
@@ -3247,21 +3275,25 @@ export function neToJSON(ne: Ne): string {
 }
 
 /** @internal */
-export type OneNe$Outbound = {
+export type InvokeDeploymentRequest1Ne$Outbound = {
   ne: string | number | boolean;
 };
 
 /** @internal */
-export const OneNe$outboundSchema: z.ZodType<
-  OneNe$Outbound,
+export const InvokeDeploymentRequest1Ne$outboundSchema: z.ZodType<
+  InvokeDeploymentRequest1Ne$Outbound,
   z.ZodTypeDef,
-  OneNe
+  InvokeDeploymentRequest1Ne
 > = z.object({
   ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-export function oneNeToJSON(oneNe: OneNe): string {
-  return JSON.stringify(OneNe$outboundSchema.parse(oneNe));
+export function invokeDeploymentRequest1NeToJSON(
+  invokeDeploymentRequest1Ne: InvokeDeploymentRequest1Ne,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequest1Ne$outboundSchema.parse(invokeDeploymentRequest1Ne),
+  );
 }
 
 /** @internal */
@@ -3276,33 +3308,37 @@ export function eqToJSON(eq: Eq): string {
 }
 
 /** @internal */
-export type OneEq$Outbound = {
+export type InvokeDeploymentRequest1Eq$Outbound = {
   eq: string | number | boolean;
 };
 
 /** @internal */
-export const OneEq$outboundSchema: z.ZodType<
-  OneEq$Outbound,
+export const InvokeDeploymentRequest1Eq$outboundSchema: z.ZodType<
+  InvokeDeploymentRequest1Eq$Outbound,
   z.ZodTypeDef,
-  OneEq
+  InvokeDeploymentRequest1Eq
 > = z.object({
   eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
-export function oneEqToJSON(oneEq: OneEq): string {
-  return JSON.stringify(OneEq$outboundSchema.parse(oneEq));
+export function invokeDeploymentRequest1EqToJSON(
+  invokeDeploymentRequest1Eq: InvokeDeploymentRequest1Eq,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequest1Eq$outboundSchema.parse(invokeDeploymentRequest1Eq),
+  );
 }
 
 /** @internal */
 export type KnowledgeFilter1$Outbound =
-  | OneEq$Outbound
-  | OneNe$Outbound
+  | InvokeDeploymentRequest1Eq$Outbound
+  | InvokeDeploymentRequest1Ne$Outbound
   | Gt$Outbound
   | Gte$Outbound
   | Lt$Outbound
   | Lte$Outbound
-  | OneIn$Outbound
-  | OneNin$Outbound
+  | InvokeDeploymentRequest1In$Outbound
+  | InvokeDeploymentRequest1Nin$Outbound
   | Exists$Outbound;
 
 /** @internal */
@@ -3311,14 +3347,14 @@ export const KnowledgeFilter1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   KnowledgeFilter1
 > = z.union([
-  z.lazy(() => OneEq$outboundSchema),
-  z.lazy(() => OneNe$outboundSchema),
+  z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
+  z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
   z.lazy(() => Gt$outboundSchema),
   z.lazy(() => Gte$outboundSchema),
   z.lazy(() => Lt$outboundSchema),
   z.lazy(() => Lte$outboundSchema),
-  z.lazy(() => OneIn$outboundSchema),
-  z.lazy(() => OneNin$outboundSchema),
+  z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
+  z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
   z.lazy(() => Exists$outboundSchema),
 ]);
 
@@ -3336,14 +3372,14 @@ export type KnowledgeFilter$Outbound =
   | KnowledgeFilterOr$Outbound
   | {
     [k: string]:
-      | OneEq$Outbound
-      | OneNe$Outbound
+      | InvokeDeploymentRequest1Eq$Outbound
+      | InvokeDeploymentRequest1Ne$Outbound
       | Gt$Outbound
       | Gte$Outbound
       | Lt$Outbound
       | Lte$Outbound
-      | OneIn$Outbound
-      | OneNin$Outbound
+      | InvokeDeploymentRequest1In$Outbound
+      | InvokeDeploymentRequest1Nin$Outbound
       | Exists$Outbound;
   };
 
@@ -3356,14 +3392,14 @@ export const KnowledgeFilter$outboundSchema: z.ZodType<
   z.lazy(() => KnowledgeFilterAnd$outboundSchema),
   z.lazy(() => KnowledgeFilterOr$outboundSchema),
   z.record(z.union([
-    z.lazy(() => OneEq$outboundSchema),
-    z.lazy(() => OneNe$outboundSchema),
+    z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
+    z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
     z.lazy(() => Gt$outboundSchema),
     z.lazy(() => Gte$outboundSchema),
     z.lazy(() => Lt$outboundSchema),
     z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => OneIn$outboundSchema),
-    z.lazy(() => OneNin$outboundSchema),
+    z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
+    z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
     z.lazy(() => Exists$outboundSchema),
   ])),
 ]);
@@ -3410,14 +3446,14 @@ export type InvokeDeploymentRequest$Outbound = {
     | KnowledgeFilterOr$Outbound
     | {
       [k: string]:
-        | OneEq$Outbound
-        | OneNe$Outbound
+        | InvokeDeploymentRequest1Eq$Outbound
+        | InvokeDeploymentRequest1Ne$Outbound
         | Gt$Outbound
         | Gte$Outbound
         | Lt$Outbound
         | Lte$Outbound
-        | OneIn$Outbound
-        | OneNin$Outbound
+        | InvokeDeploymentRequest1In$Outbound
+        | InvokeDeploymentRequest1Nin$Outbound
         | Exists$Outbound;
     }
     | undefined;
@@ -3462,14 +3498,14 @@ export const InvokeDeploymentRequest$outboundSchema: z.ZodType<
     z.lazy(() => KnowledgeFilterAnd$outboundSchema),
     z.lazy(() => KnowledgeFilterOr$outboundSchema),
     z.record(z.union([
-      z.lazy(() => OneEq$outboundSchema),
-      z.lazy(() => OneNe$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
       z.lazy(() => Gt$outboundSchema),
       z.lazy(() => Gte$outboundSchema),
       z.lazy(() => Lt$outboundSchema),
       z.lazy(() => Lte$outboundSchema),
-      z.lazy(() => OneIn$outboundSchema),
-      z.lazy(() => OneNin$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
       z.lazy(() => Exists$outboundSchema),
     ])),
   ]).optional(),

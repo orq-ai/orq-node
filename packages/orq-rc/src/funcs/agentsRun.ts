@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Run an agent with configuration
  *
  * @remarks
- * Executes an agent using inline configuration or references an existing agent. Supports dynamic agent creation where the system automatically manages agent versioning - reusing existing agents with matching configurations or creating new versions when configurations differ. Ideal for programmatic agent execution with flexible configuration management. The agent processes messages in A2A format with support for memory context, tool execution, and automatic model fallback on failure.
+ * Run an agent with inline configuration or existing agent reference. Supports A2A messages, memory context, tool execution, and model fallback.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */

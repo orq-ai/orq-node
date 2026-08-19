@@ -14,8 +14,8 @@ let value: DeleteMemoryDocumentRequest = {
 
 ## Fields
 
-| Field                                         | Type                                          | Required                                      | Description                                   |
-| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| `memoryStoreKey`                              | *string*                                      | :heavy_check_mark:                            | The unique key identifier of the memory store |
-| `memoryEntityId`                              | *string*                                      | :heavy_check_mark:                            | The unique identifier of the memory           |
-| `documentId`                                  | *string*                                      | :heavy_check_mark:                            | The unique identifier of the document         |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `memoryStoreKey`   | *string*           | :heavy_check_mark: | N/A                |
+| `memoryEntityId`   | *string*           | :heavy_check_mark: | N/A                |
+| `documentId`       | *string*           | :heavy_check_mark: | N/A                |

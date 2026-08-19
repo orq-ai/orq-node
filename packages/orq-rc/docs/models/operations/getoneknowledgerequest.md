@@ -12,6 +12,6 @@ let value: GetOneKnowledgeRequest = {
 
 ## Fields
 
-| Field                                   | Type                                    | Required                                | Description                             |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `knowledgeId`                           | *string*                                | :heavy_check_mark:                      | Unique identifier of the knowledge base |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `knowledgeId`      | *string*           | :heavy_check_mark: | N/A                |

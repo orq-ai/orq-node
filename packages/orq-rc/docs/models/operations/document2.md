@@ -13,7 +13,7 @@ let value: Document2 = {
 
 ## Fields
 
-| Field                         | Type                          | Required                      | Description                   |
-| ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
-| `type`                        | *"image_url"*                 | :heavy_check_mark:            | N/A                           |
-| `imageUrl`                    | *operations.DocumentImageUrl* | :heavy_check_mark:            | N/A                           |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `type`                | *"image_url"*         | :heavy_check_mark:    | N/A                   |
+| `imageUrl`            | *operations.ImageUrl* | :heavy_check_mark:    | N/A                   |

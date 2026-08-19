@@ -364,7 +364,7 @@ export type CreateDatasetItemMessages =
   | CreateDatasetItemMessagesAssistantMessage
   | CreateDatasetItemMessagesToolMessage;
 
-export type CreateDatasetItemRequestBody = {
+export type RequestBody = {
   /**
    * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects and arrays are not supported.
    */
@@ -389,7 +389,7 @@ export type CreateDatasetItemRequest = {
    * The unique identifier of the dataset
    */
   datasetId: string;
-  requestBody?: Array<CreateDatasetItemRequestBody> | undefined;
+  requestBody?: Array<RequestBody> | undefined;
 };
 
 export type CreateDatasetItemContentDatasetsResponse200ApplicationJson2 =
@@ -926,7 +926,7 @@ export type CreateDatasetItemEvaluationsOutputSchema = ClosedEnum<
   typeof CreateDatasetItemEvaluationsOutputSchema
 >;
 
-export type Evaluations3 = {
+export type CreateDatasetItemEvaluations3 = {
   /**
    * The unique identifier of the human evaluation
    */
@@ -1194,10 +1194,10 @@ export type Evaluations1 = {
 export type Evaluations =
   | Evaluations1
   | Evaluations2
-  | Evaluations3
+  | CreateDatasetItemEvaluations3
   | Evaluations4;
 
-export type CreateDatasetItemResponseBody = {
+export type ResponseBody = {
   /**
    * The unique identifier of the dataset item
    */
@@ -1227,7 +1227,9 @@ export type CreateDatasetItemResponseBody = {
    * Evaluations associated with the datapoint
    */
   evaluations?:
-    | Array<Evaluations1 | Evaluations2 | Evaluations3 | Evaluations4>
+    | Array<
+      Evaluations1 | Evaluations2 | CreateDatasetItemEvaluations3 | Evaluations4
+    >
     | undefined;
   /**
    * The unique identifier of the dataset
@@ -1951,7 +1953,7 @@ export function createDatasetItemMessagesToJSON(
 }
 
 /** @internal */
-export type CreateDatasetItemRequestBody$Outbound = {
+export type RequestBody$Outbound = {
   inputs?: { [k: string]: string | number | boolean | null } | undefined;
   messages?:
     | Array<
@@ -1966,10 +1968,10 @@ export type CreateDatasetItemRequestBody$Outbound = {
 };
 
 /** @internal */
-export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
-  CreateDatasetItemRequestBody$Outbound,
+export const RequestBody$outboundSchema: z.ZodType<
+  RequestBody$Outbound,
   z.ZodTypeDef,
-  CreateDatasetItemRequestBody
+  RequestBody
 > = z.object({
   inputs: z.record(z.nullable(z.union([z.string(), z.number(), z.boolean()])))
     .optional(),
@@ -1989,20 +1991,14 @@ export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-export function createDatasetItemRequestBodyToJSON(
-  createDatasetItemRequestBody: CreateDatasetItemRequestBody,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemRequestBody$outboundSchema.parse(
-      createDatasetItemRequestBody,
-    ),
-  );
+export function requestBodyToJSON(requestBody: RequestBody): string {
+  return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
 }
 
 /** @internal */
 export type CreateDatasetItemRequest$Outbound = {
   dataset_id: string;
-  RequestBody?: Array<CreateDatasetItemRequestBody$Outbound> | undefined;
+  RequestBody?: Array<RequestBody$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2012,9 +2008,7 @@ export const CreateDatasetItemRequest$outboundSchema: z.ZodType<
   CreateDatasetItemRequest
 > = z.object({
   datasetId: z.string(),
-  requestBody: z.array(
-    z.lazy(() => CreateDatasetItemRequestBody$outboundSchema),
-  ).optional(),
+  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     datasetId: "dataset_id",
@@ -2732,7 +2726,7 @@ export const Evaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-17T04:12:42.205Z",
+    "2026-08-19T10:58:37.124Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2803,8 +2797,8 @@ export const CreateDatasetItemEvaluationsOutputSchema$inboundSchema:
     .nativeEnum(CreateDatasetItemEvaluationsOutputSchema);
 
 /** @internal */
-export const Evaluations3$inboundSchema: z.ZodType<
-  Evaluations3,
+export const CreateDatasetItemEvaluations3$inboundSchema: z.ZodType<
+  CreateDatasetItemEvaluations3,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2822,7 +2816,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-17T04:12:42.204Z",
+    "2026-08-19T10:58:37.123Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2837,13 +2831,13 @@ export const Evaluations3$inboundSchema: z.ZodType<
   });
 });
 
-export function evaluations3FromJSON(
+export function createDatasetItemEvaluations3FromJSON(
   jsonString: string,
-): SafeParseResult<Evaluations3, SDKValidationError> {
+): SafeParseResult<CreateDatasetItemEvaluations3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Evaluations3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Evaluations3' from JSON`,
+    (x) => CreateDatasetItemEvaluations3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemEvaluations3' from JSON`,
   );
 }
 
@@ -2907,7 +2901,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-17T04:12:42.204Z",
+    "2026-08-19T10:58:37.123Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2993,7 +2987,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-17T04:12:42.203Z",
+    "2026-08-19T10:58:37.122Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3026,7 +3020,7 @@ export const Evaluations$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Evaluations1$inboundSchema),
   z.lazy(() => Evaluations2$inboundSchema),
-  z.lazy(() => Evaluations3$inboundSchema),
+  z.lazy(() => CreateDatasetItemEvaluations3$inboundSchema),
   z.lazy(() => Evaluations4$inboundSchema),
 ]);
 
@@ -3041,8 +3035,8 @@ export function evaluationsFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
-  CreateDatasetItemResponseBody,
+export const ResponseBody$inboundSchema: z.ZodType<
+  ResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3069,7 +3063,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => Evaluations1$inboundSchema),
       z.lazy(() => Evaluations2$inboundSchema),
-      z.lazy(() => Evaluations3$inboundSchema),
+      z.lazy(() => CreateDatasetItemEvaluations3$inboundSchema),
       z.lazy(() => Evaluations4$inboundSchema),
     ]),
   ).optional(),
@@ -3080,7 +3074,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-08-17T04:12:25.936Z",
+    "2026-08-19T10:58:01.279Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -3094,12 +3088,12 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   });
 });
 
-export function createDatasetItemResponseBodyFromJSON(
+export function responseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateDatasetItemResponseBody, SDKValidationError> {
+): SafeParseResult<ResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateDatasetItemResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemResponseBody' from JSON`,
+    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

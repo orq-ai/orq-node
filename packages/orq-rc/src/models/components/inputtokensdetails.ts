@@ -12,6 +12,7 @@ export type InputTokensDetails = {
   cacheCreation1hTokens?: number | undefined;
   cacheCreation5mTokens?: number | undefined;
   cacheCreationTokens: number;
+  cacheWriteTokens: number;
   cachedTokens: number;
 };
 
@@ -24,12 +25,14 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
   cache_creation_1h_tokens: z.number().int().optional(),
   cache_creation_5m_tokens: z.number().int().optional(),
   cache_creation_tokens: z.number().int(),
+  cache_write_tokens: z.number().int(),
   cached_tokens: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "cache_creation_1h_tokens": "cacheCreation1hTokens",
     "cache_creation_5m_tokens": "cacheCreation5mTokens",
     "cache_creation_tokens": "cacheCreationTokens",
+    "cache_write_tokens": "cacheWriteTokens",
     "cached_tokens": "cachedTokens",
   });
 });

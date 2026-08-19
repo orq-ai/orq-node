@@ -4,90 +4,18 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetOneChunkRequest = {
-  /**
-   * The unique identifier of the chunk
-   */
-  chunkId: string;
-  /**
-   * The unique identifier of the data source
-   */
-  datasourceId: string;
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
-};
-
-export type GetOneChunkMetadata = string | number | boolean;
-
-/**
- * The status of the chunk
- */
-export const GetOneChunkStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type GetOneChunkStatus = ClosedEnum<typeof GetOneChunkStatus>;
-
-/**
- * Chunk successfully retrieved
- */
-export type GetOneChunkResponseBody = {
-  /**
-   * The unique identifier of the chunk
-   */
-  id: string;
-  /**
-   * The text content of the chunk
-   */
-  text: string;
-  /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
-   */
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  /**
-   * Whether the chunk is enabled
-   */
-  enabled: boolean;
-  /**
-   * The status of the chunk
-   */
-  status: GetOneChunkStatus;
-  /**
-   * The date and time the chunk was created
-   */
-  created: string;
-  /**
-   * The date and time the chunk was updated
-   */
-  updated: string;
-  /**
-   * The unique identifier of the user who created the chunk
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who updated the chunk
-   */
-  updateById?: string | null | undefined;
+  datasourceId: string;
+  chunkId: string;
 };
 
 /** @internal */
 export type GetOneChunkRequest$Outbound = {
-  chunk_id: string;
-  datasource_id: string;
   knowledge_id: string;
+  datasource_id: string;
+  chunk_id: string;
 };
 
 /** @internal */
@@ -96,14 +24,14 @@ export const GetOneChunkRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOneChunkRequest
 > = z.object({
-  chunkId: z.string(),
-  datasourceId: z.string(),
   knowledgeId: z.string(),
+  datasourceId: z.string(),
+  chunkId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    chunkId: "chunk_id",
-    datasourceId: "datasource_id",
     knowledgeId: "knowledge_id",
+    datasourceId: "datasource_id",
+    chunkId: "chunk_id",
   });
 });
 
@@ -112,60 +40,5 @@ export function getOneChunkRequestToJSON(
 ): string {
   return JSON.stringify(
     GetOneChunkRequest$outboundSchema.parse(getOneChunkRequest),
-  );
-}
-
-/** @internal */
-export const GetOneChunkMetadata$inboundSchema: z.ZodType<
-  GetOneChunkMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function getOneChunkMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneChunkMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneChunkMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneChunkMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneChunkStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GetOneChunkStatus
-> = z.nativeEnum(GetOneChunkStatus);
-
-/** @internal */
-export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
-  GetOneChunkResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: GetOneChunkStatus$inboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-  });
-});
-
-export function getOneChunkResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneChunkResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneChunkResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneChunkResponseBody' from JSON`,
   );
 }

@@ -14,7 +14,7 @@
 
 ## list
 
-Lists all workspace tools. By default, returns all tools in a single response. Set `limit` to enable cursor-based pagination with `starting_after` and `ending_before`.
+List all workspace tools. By default returns all tools in one response. Set `limit` for cursor-based pagination.
 
 ### Example Usage
 

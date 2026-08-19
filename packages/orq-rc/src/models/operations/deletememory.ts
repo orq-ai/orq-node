@@ -6,13 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteMemoryRequest = {
-  /**
-   * The unique key identifier of the memory store
-   */
   memoryStoreKey: string;
-  /**
-   * The unique identifier of the memory
-   */
   memoryEntityId: string;
 };
 

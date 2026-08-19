@@ -32,10 +32,10 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Permanently deletes a specific memory.
  *
- *         Use this endpoint to:
- *         - Remove a memory from the store
- *         - Clean up unused memories
- *         - Manage memory storage space
+ * Use this endpoint to:
+ * - Remove a memory from the store
+ * - Clean up unused memories
+ * - Manage memory storage space
  */
 export function memoryStoresDeleteMemory(
   client: OrqCore,

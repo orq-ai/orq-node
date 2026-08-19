@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve agent
  *
  * @remarks
- * Retrieves detailed information about a specific agent identified by its unique key or identifier. Returns the complete agent manifest including configuration settings, model assignments (primary and fallback), tools, knowledge bases, memory stores, instructions, and execution parameters. Use this endpoint to fetch the current state and configuration of an individual agent.
+ * Retrieve the complete agent manifest by key, including model assignments, tools, knowledge bases, memory stores, and execution parameters.
  */
 export function agentsRetrieve(
   client: OrqCore,

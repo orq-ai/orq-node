@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Get all Evaluators
+ *
+ * @remarks
+ * List all evaluators in the workspace.
  */
 export function evalsAll(
   client: OrqCore,

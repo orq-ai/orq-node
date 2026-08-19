@@ -67,21 +67,6 @@ export class Orq extends ClientSDK {
     return (this._tools ??= new Tools(this._options));
   }
 
-  private _knowledge?: Knowledge;
-  get knowledge(): Knowledge {
-    return (this._knowledge ??= new Knowledge(this._options));
-  }
-
-  private _chunking?: Chunking;
-  get chunking(): Chunking {
-    return (this._chunking ??= new Chunking(this._options));
-  }
-
-  private _memoryStores?: MemoryStores;
-  get memoryStores(): MemoryStores {
-    return (this._memoryStores ??= new MemoryStores(this._options));
-  }
-
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
@@ -110,6 +95,21 @@ export class Orq extends ClientSDK {
   private _annotationQueues?: AnnotationQueues;
   get annotationQueues(): AnnotationQueues {
     return (this._annotationQueues ??= new AnnotationQueues(this._options));
+  }
+
+  private _chunking?: Chunking;
+  get chunking(): Chunking {
+    return (this._chunking ??= new Chunking(this._options));
+  }
+
+  private _knowledge?: Knowledge;
+  get knowledge(): Knowledge {
+    return (this._knowledge ??= new Knowledge(this._options));
+  }
+
+  private _memoryStores?: MemoryStores;
+  get memoryStores(): MemoryStores {
+    return (this._memoryStores ??= new MemoryStores(this._options));
   }
 
   private _pii?: Pii;

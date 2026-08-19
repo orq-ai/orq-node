@@ -16,7 +16,7 @@ export type ImageUrl2 = {
   detail?: string | undefined;
 };
 
-export type DocumentImageUrl = ImageUrl2 | string;
+export type ImageUrl = ImageUrl2 | string;
 
 export type Document2 = {
   type: "image_url";
@@ -182,21 +182,17 @@ export function imageUrl2ToJSON(imageUrl2: ImageUrl2): string {
 }
 
 /** @internal */
-export type DocumentImageUrl$Outbound = ImageUrl2$Outbound | string;
+export type ImageUrl$Outbound = ImageUrl2$Outbound | string;
 
 /** @internal */
-export const DocumentImageUrl$outboundSchema: z.ZodType<
-  DocumentImageUrl$Outbound,
+export const ImageUrl$outboundSchema: z.ZodType<
+  ImageUrl$Outbound,
   z.ZodTypeDef,
-  DocumentImageUrl
+  ImageUrl
 > = z.union([z.lazy(() => ImageUrl2$outboundSchema), z.string()]);
 
-export function documentImageUrlToJSON(
-  documentImageUrl: DocumentImageUrl,
-): string {
-  return JSON.stringify(
-    DocumentImageUrl$outboundSchema.parse(documentImageUrl),
-  );
+export function imageUrlToJSON(imageUrl: ImageUrl): string {
+  return JSON.stringify(ImageUrl$outboundSchema.parse(imageUrl));
 }
 
 /** @internal */

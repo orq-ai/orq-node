@@ -19,7 +19,7 @@ export class OrqResponses extends ClientSDK {
    * Create response
    *
    * @remarks
-   * Initiates an agent conversation and returns a complete response. This endpoint manages the full lifecycle of an agent interaction, from receiving the initial message through all processing steps until completion. Supports synchronous execution (waits for completion) and asynchronous execution (returns immediately with task ID). The response includes all messages exchanged, tool calls made, and token usage statistics. Ideal for request-response patterns where you need the complete interaction result.
+   * Create an agent response for a given message. Return the complete conversation including messages, tool interactions, and token usage.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -40,7 +40,7 @@ export class OrqResponses extends ClientSDK {
    * Get response
    *
    * @remarks
-   * Retrieves the current state of an agent response by task ID. Returns the response output, model information, token usage, and execution status. When the agent is still processing, the output array will be empty and status will be `in_progress`. Once completed, the response includes the full output, usage statistics, and finish reason.
+   * Retrieve an agent response by task ID, including output, model info, token usage, and execution status.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */

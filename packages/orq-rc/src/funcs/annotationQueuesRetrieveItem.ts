@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve an annotation queue item
  *
  * @remarks
- * Retrieves an item from the specified annotation queue in its expanded form. An annotation queue item is a pointer to a span; this endpoint returns the fully resolved span the item references.
+ * Retrieve an annotation queue item. Each item is a pointer to a span with fully resolved span data.
  */
 export function annotationQueuesRetrieveItem(
   client: OrqCore,

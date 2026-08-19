@@ -159,7 +159,7 @@ export type AgentResponseRequestThread = {
 /**
  * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
  */
-export type Memory = {
+export type AgentResponseRequestMemory = {
   /**
    * An entity ID used to link memory stores to a specific user, session, or conversation. This ID is used to isolate and retrieve memories specific to the entity across agent executions.
    */
@@ -232,7 +232,7 @@ export type AgentResponseRequest = {
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
-  memory?: Memory | undefined;
+  memory?: AgentResponseRequestMemory | undefined;
   /**
    * Optional metadata for the agent invocation as key-value pairs that will be included in traces
    */
@@ -448,15 +448,15 @@ export function agentResponseRequestThreadToJSON(
 }
 
 /** @internal */
-export type Memory$Outbound = {
+export type AgentResponseRequestMemory$Outbound = {
   entity_id: string;
 };
 
 /** @internal */
-export const Memory$outboundSchema: z.ZodType<
-  Memory$Outbound,
+export const AgentResponseRequestMemory$outboundSchema: z.ZodType<
+  AgentResponseRequestMemory$Outbound,
   z.ZodTypeDef,
-  Memory
+  AgentResponseRequestMemory
 > = z.object({
   entityId: z.string(),
 }).transform((v) => {
@@ -465,8 +465,12 @@ export const Memory$outboundSchema: z.ZodType<
   });
 });
 
-export function memoryToJSON(memory: Memory): string {
-  return JSON.stringify(Memory$outboundSchema.parse(memory));
+export function agentResponseRequestMemoryToJSON(
+  agentResponseRequestMemory: AgentResponseRequestMemory,
+): string {
+  return JSON.stringify(
+    AgentResponseRequestMemory$outboundSchema.parse(agentResponseRequestMemory),
+  );
 }
 
 /** @internal */
@@ -521,7 +525,7 @@ export type AgentResponseRequest$Outbound = {
   identity?: AgentResponseRequestIdentity$Outbound | undefined;
   contact?: Contact$Outbound | undefined;
   thread?: AgentResponseRequestThread$Outbound | undefined;
-  memory?: Memory$Outbound | undefined;
+  memory?: AgentResponseRequestMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   engine?: string | undefined;
   configuration?: Configuration$Outbound | undefined;
@@ -543,7 +547,7 @@ export const AgentResponseRequest$outboundSchema: z.ZodType<
     .optional(),
   contact: z.lazy(() => Contact$outboundSchema).optional(),
   thread: z.lazy(() => AgentResponseRequestThread$outboundSchema).optional(),
-  memory: z.lazy(() => Memory$outboundSchema).optional(),
+  memory: z.lazy(() => AgentResponseRequestMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   engine: Engine$outboundSchema.optional(),
   configuration: z.lazy(() => Configuration$outboundSchema).optional(),

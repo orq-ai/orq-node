@@ -5,14 +5,10 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 
 ## Supported Types
 
-### `{ [k: string]: operations.DeploymentStreamKnowledgeFilter1 }`
+### `{ [k: string]: operations.KnowledgeFilter1 }`
 
 ```typescript
-const value: { [k: string]: operations.DeploymentStreamKnowledgeFilter1 } = {
-  "key": {
-    lt: 3892.14,
-  },
-};
+const value: { [k: string]: operations.KnowledgeFilter1 } = {};
 ```
 
 ### `operations.DeploymentStreamKnowledgeFilterAnd`

@@ -32,10 +32,10 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Permanently deletes a specific memory document.
  *
- *         Use this endpoint to:
- *         - Remove a document from a memory
- *         - Clean up unused documents
- *         - Manage document storage space
+ * Use this endpoint to:
+ * - Remove a document from a memory
+ * - Clean up unused documents
+ * - Manage document storage space
  */
 export function memoryStoresDeleteDocument(
   client: OrqCore,

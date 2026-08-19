@@ -17,7 +17,7 @@ let value: Two2 = {
 
 ## Fields
 
-| Field                                                      | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `type`                                                     | *"image_url"*                                              | :heavy_check_mark:                                         | N/A                                                        |
-| `imageUrl`                                                 | [operations.ImageUrl](../../models/operations/imageurl.md) | :heavy_check_mark:                                         | N/A                                                        |
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `type`                                                           | *"image_url"*                                                    | :heavy_check_mark:                                               | N/A                                                              |
+| `imageUrl`                                                       | [operations.TwoImageUrl](../../models/operations/twoimageurl.md) | :heavy_check_mark:                                               | N/A                                                              |

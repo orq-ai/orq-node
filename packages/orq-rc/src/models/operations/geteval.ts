@@ -186,7 +186,7 @@ export const ResponseBodyMethod = {
 } as const;
 export type ResponseBodyMethod = ClosedEnum<typeof ResponseBodyMethod>;
 
-export type GetEvalResponseBodyHTTP = {
+export type ResponseBodyHTTP = {
   enabled: boolean;
   metadata: GetEvalResponseBodyEvalsResponseMetadata;
   id: string;
@@ -762,7 +762,7 @@ export type GetEvalResponseBody =
   | ResponseBodyFunction
   | Ragas
   | Json
-  | GetEvalResponseBodyHTTP
+  | ResponseBodyHTTP
   | ResponseBodyPython
   | Typescript
   | BedrockGuardrail;
@@ -846,8 +846,8 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-17T04:12:28.242Z"),
-  updated: z.string().default("2026-08-17T04:12:28.242Z"),
+  created: z.string().default("2026-08-19T10:58:05.439Z"),
+  updated: z.string().default("2026-08-19T10:58:05.439Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -949,8 +949,8 @@ export const Typescript$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-17T04:12:28.242Z"),
-  updated: z.string().default("2026-08-17T04:12:28.242Z"),
+  created: z.string().default("2026-08-19T10:58:05.439Z"),
+  updated: z.string().default("2026-08-19T10:58:05.439Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -1046,8 +1046,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-17T04:12:28.242Z"),
-  updated: z.string().default("2026-08-17T04:12:28.242Z"),
+  created: z.string().default("2026-08-19T10:58:05.439Z"),
+  updated: z.string().default("2026-08-19T10:58:05.439Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -1131,8 +1131,8 @@ export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ResponseBodyMethod);
 
 /** @internal */
-export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
-  GetEvalResponseBodyHTTP,
+export const ResponseBodyHTTP$inboundSchema: z.ZodType<
+  ResponseBodyHTTP,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1144,8 +1144,8 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-17T04:12:28.242Z"),
-  updated: z.string().default("2026-08-17T04:12:28.242Z"),
+  created: z.string().default("2026-08-19T10:58:05.439Z"),
+  updated: z.string().default("2026-08-19T10:58:05.439Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -1171,13 +1171,13 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   });
 });
 
-export function getEvalResponseBodyHTTPFromJSON(
+export function responseBodyHTTPFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalResponseBodyHTTP, SDKValidationError> {
+): SafeParseResult<ResponseBodyHTTP, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyHTTP' from JSON`,
+    (x) => ResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyHTTP' from JSON`,
   );
 }
 
@@ -1228,8 +1228,8 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-17T04:12:28.242Z"),
-    updated: z.string().default("2026-08-17T04:12:28.242Z"),
+    created: z.string().default("2026-08-19T10:58:05.439Z"),
+    updated: z.string().default("2026-08-19T10:58:05.439Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
@@ -1337,8 +1337,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-17T04:12:28.242Z"),
-    updated: z.string().default("2026-08-17T04:12:28.242Z"),
+    created: z.string().default("2026-08-19T10:58:05.439Z"),
+    updated: z.string().default("2026-08-19T10:58:05.439Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
@@ -2056,8 +2056,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-17T04:12:28.242Z"),
-  updated: z.string().default("2026-08-17T04:12:28.242Z"),
+  created: z.string().default("2026-08-19T10:58:05.439Z"),
+  updated: z.string().default("2026-08-19T10:58:05.439Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -2726,8 +2726,8 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-17T04:12:28.242Z"),
-  updated: z.string().default("2026-08-17T04:12:28.242Z"),
+  created: z.string().default("2026-08-19T10:58:05.439Z"),
+  updated: z.string().default("2026-08-19T10:58:05.439Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -2780,7 +2780,7 @@ export const GetEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => ResponseBodyFunction$inboundSchema),
   z.lazy(() => Ragas$inboundSchema),
   z.lazy(() => Json$inboundSchema),
-  z.lazy(() => GetEvalResponseBodyHTTP$inboundSchema),
+  z.lazy(() => ResponseBodyHTTP$inboundSchema),
   z.lazy(() => ResponseBodyPython$inboundSchema),
   z.lazy(() => Typescript$inboundSchema),
   z.lazy(() => BedrockGuardrail$inboundSchema),

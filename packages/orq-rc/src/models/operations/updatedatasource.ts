@@ -4,148 +4,20 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  collectExtraKeys as collectExtraKeys$,
-  safeParse,
-} from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateDatasourceRequestBody = {
-  displayName: string;
-};
+import * as components from "../components/index.js";
 
 export type UpdateDatasourceRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
-  /**
-   * The unique identifier of the datasource.
-   */
   datasourceId: string;
-  requestBody: UpdateDatasourceRequestBody;
+  datasourcesServiceUpdateRequest: components.DatasourcesServiceUpdateRequest;
 };
-
-export const UpdateDatasourceStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type UpdateDatasourceStatus = ClosedEnum<typeof UpdateDatasourceStatus>;
-
-export type UpdateDatasourceMetadata = {
-  /**
-   * Number of words in the text
-   */
-  wordsCount?: number | undefined;
-  /**
-   * Number of sentences in the text
-   */
-  sentencesCount?: number | undefined;
-  /**
-   * Number of paragraphs in the text
-   */
-  paragraphsCount?: number | undefined;
-  /**
-   * Number of tokens in the text
-   */
-  tokensCount?: number | undefined;
-  /**
-   * Number of characters in the text
-   */
-  charactersCount?: number | undefined;
-  /**
-   * Number of total chunks
-   */
-  chunksCount?: number | undefined;
-  additionalProperties?: { [k: string]: any } | undefined;
-};
-
-/**
- * Datasource successfully updated
- */
-export type UpdateDatasourceResponseBody = {
-  /**
-   * The unique identifier of the data source
-   */
-  id: string;
-  /**
-   * The display name of the datasource. Normally the name of the uploaded file
-   */
-  displayName: string;
-  /**
-   * The description of the knowledge base
-   */
-  description?: string | null | undefined;
-  status: UpdateDatasourceStatus;
-  /**
-   * The unique identifier of the file used to create the datasource.
-   */
-  fileId?: string | null | undefined;
-  /**
-   * The date and time the datasource was created
-   */
-  created: string;
-  /**
-   * The date and time the datasource was updated
-   */
-  updated: string;
-  /**
-   * The user ID of the creator of the knowledge base
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The user ID of the last user who updated the knowledge base
-   */
-  updateById?: string | null | undefined;
-  /**
-   * The unique identifier of the knowledge base
-   */
-  knowledgeId: string;
-  /**
-   * The number of chunks in the datasource
-   */
-  chunksCount: number;
-  metadata: UpdateDatasourceMetadata;
-};
-
-/** @internal */
-export type UpdateDatasourceRequestBody$Outbound = {
-  display_name: string;
-};
-
-/** @internal */
-export const UpdateDatasourceRequestBody$outboundSchema: z.ZodType<
-  UpdateDatasourceRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateDatasourceRequestBody
-> = z.object({
-  displayName: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
-
-export function updateDatasourceRequestBodyToJSON(
-  updateDatasourceRequestBody: UpdateDatasourceRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateDatasourceRequestBody$outboundSchema.parse(
-      updateDatasourceRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type UpdateDatasourceRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody: UpdateDatasourceRequestBody$Outbound;
+  DatasourcesServiceUpdateRequest:
+    components.DatasourcesServiceUpdateRequest$Outbound;
 };
 
 /** @internal */
@@ -156,12 +28,13 @@ export const UpdateDatasourceRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.lazy(() => UpdateDatasourceRequestBody$outboundSchema),
+  datasourcesServiceUpdateRequest:
+    components.DatasourcesServiceUpdateRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
     datasourceId: "datasource_id",
-    requestBody: "RequestBody",
+    datasourcesServiceUpdateRequest: "DatasourcesServiceUpdateRequest",
   });
 });
 
@@ -170,87 +43,5 @@ export function updateDatasourceRequestToJSON(
 ): string {
   return JSON.stringify(
     UpdateDatasourceRequest$outboundSchema.parse(updateDatasourceRequest),
-  );
-}
-
-/** @internal */
-export const UpdateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateDatasourceStatus
-> = z.nativeEnum(UpdateDatasourceStatus);
-
-/** @internal */
-export const UpdateDatasourceMetadata$inboundSchema: z.ZodType<
-  UpdateDatasourceMetadata,
-  z.ZodTypeDef,
-  unknown
-> = collectExtraKeys$(
-  z.object({
-    words_count: z.number().optional(),
-    sentences_count: z.number().optional(),
-    paragraphs_count: z.number().optional(),
-    tokens_count: z.number().optional(),
-    characters_count: z.number().optional(),
-    chunks_count: z.number().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "words_count": "wordsCount",
-    "sentences_count": "sentencesCount",
-    "paragraphs_count": "paragraphsCount",
-    "tokens_count": "tokensCount",
-    "characters_count": "charactersCount",
-    "chunks_count": "chunksCount",
-  });
-});
-
-export function updateDatasourceMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasourceMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasourceMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasourceMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
-  UpdateDatasourceResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("01M06YQWRHDWMBYBEZXCFPQP69"),
-  display_name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  status: UpdateDatasourceStatus$inboundSchema,
-  file_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-  knowledge_id: z.string(),
-  chunks_count: z.number(),
-  metadata: z.lazy(() => UpdateDatasourceMetadata$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "file_id": "fileId",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-    "knowledge_id": "knowledgeId",
-    "chunks_count": "chunksCount",
-  });
-});
-
-export function updateDatasourceResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasourceResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasourceResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasourceResponseBody' from JSON`,
   );
 }

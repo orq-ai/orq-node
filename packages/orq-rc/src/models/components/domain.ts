@@ -14,7 +14,8 @@ import { ScopeMode, ScopeMode$inboundSchema } from "./scopemode.js";
  * Domain describes a permission domain that can be granted to an
  *
  * @remarks
- *  API key. Verbs are derived from id + group + readable/writable.
+ *  API key. Standard verbs are derived from id + group +
+ *  readable/writable; exceptional write verbs are explicit data.
  */
 export type Domain = {
   /**
@@ -45,6 +46,14 @@ export type Domain = {
    * Whether this domain can be granted write access.
    */
   writable?: boolean | undefined;
+  /**
+   * Additional full verb names granted only with write access. This is
+   *
+   * @remarks
+   *  additive to the standard group-derived verbs and intentionally does
+   *  not affect read access (e.g. "insights.run").
+   */
+  extraWriteVerbs?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -56,10 +65,12 @@ export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
     allowed_scopes: z.array(ScopeMode$inboundSchema).optional(),
     readable: z.boolean().optional(),
     writable: z.boolean().optional(),
+    extra_write_verbs: z.array(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       "display_name": "displayName",
       "allowed_scopes": "allowedScopes",
+      "extra_write_verbs": "extraWriteVerbs",
     });
   });
 

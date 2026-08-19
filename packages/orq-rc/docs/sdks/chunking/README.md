@@ -87,7 +87,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.ParseResponseBody](../../models/operations/parseresponsebody.md)\>**
+**Promise\<[components.ParseResponse](../../models/components/parseresponse.md)\>**
 
 ### Errors
 

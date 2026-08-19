@@ -8,7 +8,7 @@
 
 ## create
 
-Create translation
+Translate audio input into English text using the configured translation model and return the result.
 
 ### Example Usage
 

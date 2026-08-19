@@ -1,0 +1,20 @@
+# KnowledgeBasesServiceUpdateRequestRetrievalSettings
+
+The retrieval settings for the knowledge base.
+
+## Example Usage
+
+```typescript
+import { KnowledgeBasesServiceUpdateRequestRetrievalSettings } from "@orq-ai/node/models/components";
+
+let value: KnowledgeBasesServiceUpdateRequestRetrievalSettings = {};
+```
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `topK`                                                                                                                                         | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | The number of results to return from the search.                                                                                               |
+| `threshold`                                                                                                                                    | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned       |
+| `rerankConfig`                                                                                                                                 | [components.KnowledgeBasesServiceUpdateRequestRerankConfig](../../models/components/knowledgebasesserviceupdaterequestrerankconfig.md)         | :heavy_minus_sign:                                                                                                                             | The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.                |
+| `agenticRagConfig`                                                                                                                             | [components.KnowledgeBasesServiceUpdateRequestAgenticRagConfig](../../models/components/knowledgebasesserviceupdaterequestagenticragconfig.md) | :heavy_minus_sign:                                                                                                                             | The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.                                     |

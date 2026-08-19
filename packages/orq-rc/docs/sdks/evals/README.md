@@ -2,6 +2,8 @@
 
 ## Overview
 
+Run an evaluator against a conversation and its result
+
 ### Available Operations
 
 * [all](#all) - Get all Evaluators
@@ -14,7 +16,7 @@
 
 ## all
 
-Get all Evaluators
+List all evaluators in the workspace.
 
 ### Example Usage
 
@@ -84,7 +86,7 @@ run();
 
 ## create
 
-Create an Evaluator
+Create a new evaluator in the workspace.
 
 ### Example Usage
 
@@ -166,11 +168,7 @@ run();
 
 ## get
 
-Retrieve a single evaluator by its unique identifier. Returns the evaluator exactly as stored, including its type-specific configuration — prompt and model for LLM evaluators, source code for Python and TypeScript evaluators, the JSON Schema for schema evaluators, and so on.
-
-Use this when you already know the evaluator id (for example to refresh the state of a resource you manage declaratively). To discover evaluator ids, list them with `GET /v2/evaluators`.
-
-This endpoint returns the stored record, which carries more detail than the representation `GET /v2/evaluators` returns: `display_name` rather than `key`, `model` as an object rather than a provider-qualified string, plus the `owner`, `domain_id`, `metadata`, `enabled` and `output_type` fields.
+Retrieve a single evaluator by ID with more detail than the list endpoint: full type-specific config, owner, domain_id, metadata, enabled, and output_type.
 
 ### Example Usage
 
@@ -244,7 +242,7 @@ run();
 
 ## update
 
-Update an Evaluator
+Update an evaluator by ID with the provided fields.
 
 ### Example Usage
 
@@ -326,7 +324,7 @@ run();
 
 ## delete
 
-Delete an Evaluator
+Delete an evaluator by its unique identifier.
 
 ### Example Usage
 
@@ -401,11 +399,11 @@ run();
 
 ## invoke
 
-Invoke a Custom Evaluator
+Runs an evaluator that already exists in the workspace. Accepts either a conversation or the structured input and output fields; when both are present the conversation wins.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="InvokeEval" method="post" path="/v2/evaluators/{id}/invoke" -->
+<!-- UsageSnippet language="typescript" operationID="InvokeEval" method="post" path="/v3/evaluators/{id}/invoke" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -416,30 +414,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.invoke({
     id: "<id>",
-    requestBody: {
-      messages: [
-        {
-          role: "tool",
-          content: [
-            {
-              type: "text",
-              text: "<value>",
-            },
-          ],
-        },
-      ],
-      variables: {
-        "locale": "en",
-        "tags": [
-          "alpha",
-          "omega",
-        ],
-        "profile": {
-          "tier": "gold",
-          "active": true,
-        },
-      },
-    },
+    invokeEvaluatorRequest: {},
   });
 
   console.log(result);
@@ -465,30 +440,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await evalsInvoke(orq, {
     id: "<id>",
-    requestBody: {
-      messages: [
-        {
-          role: "tool",
-          content: [
-            {
-              type: "text",
-              text: "<value>",
-            },
-          ],
-        },
-      ],
-      variables: {
-        "locale": "en",
-        "tags": [
-          "alpha",
-          "omega",
-        ],
-        "profile": {
-          "tier": "gold",
-          "active": true,
-        },
-      },
-    },
+    invokeEvaluatorRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -512,16 +464,13 @@ run();
 
 ### Response
 
-**Promise\<[operations.InvokeEvalResponseBody](../../models/operations/invokeevalresponsebody.md)\>**
+**Promise\<[components.InvokeEvaluatorResponse](../../models/components/invokeevaluatorresponse.md)\>**
 
 ### Errors
 
-| Error Type                                 | Status Code                                | Content Type                               |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| errors.InvokeEvalResponseBody              | 400                                        | application/json                           |
-| errors.InvokeEvalEvalsResponseBody         | 404                                        | application/json                           |
-| errors.InvokeEvalEvalsResponseResponseBody | 500                                        | application/json                           |
-| errors.APIError                            | 4XX, 5XX                                   | \*/\*                                      |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## listVersions
 

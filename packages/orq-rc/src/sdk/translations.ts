@@ -10,6 +10,9 @@ import { unwrapAsync } from "../types/fp.js";
 export class Translations extends ClientSDK {
   /**
    * Create translation
+   *
+   * @remarks
+   * Translate audio input into English text using the configured translation model and return the result.
    */
   async create(
     request: operations.CreateTranslationRequestBody,

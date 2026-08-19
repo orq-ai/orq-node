@@ -1,21 +1,17 @@
 # Status
 
-Filter chunks by processing status
+The status of a model-generated input item.
 
-
-## Supported Types
-
-### `operations.Status1[]`
+## Example Usage
 
 ```typescript
-const value: operations.Status1[] = [
-  "queued",
-];
+import { Status } from "@orq-ai/node/models/operations";
+
+let value: Status = "completed";
 ```
 
-### `operations.Status2`
+## Values
 
 ```typescript
-const value: operations.Status2 = "processing";
+"in_progress" | "completed" | "incomplete"
 ```
-

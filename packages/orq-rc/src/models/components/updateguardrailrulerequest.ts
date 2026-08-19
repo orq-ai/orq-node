@@ -27,7 +27,6 @@ export type UpdateGuardrailRuleRequest = {
   expression?: GuardrailRuleExpression | undefined;
   guardrails?: Array<GuardrailRuleGuardrail> | undefined;
   plugins?: Array<GuardrailRulePlugin> | undefined;
-  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -38,7 +37,6 @@ export type UpdateGuardrailRuleRequest$Outbound = {
   expression?: GuardrailRuleExpression$Outbound | undefined;
   guardrails?: Array<GuardrailRuleGuardrail$Outbound> | undefined;
   plugins?: Array<GuardrailRulePlugin$Outbound> | undefined;
-  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -53,7 +51,6 @@ export const UpdateGuardrailRuleRequest$outboundSchema: z.ZodType<
   expression: GuardrailRuleExpression$outboundSchema.optional(),
   guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
   plugins: z.array(GuardrailRulePlugin$outboundSchema).optional(),
-  timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

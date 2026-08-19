@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create an Evaluator
+ *
+ * @remarks
+ * Create a new evaluator in the workspace.
  */
 export function evalsCreate(
   client: OrqCore,

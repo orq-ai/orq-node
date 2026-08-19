@@ -4,74 +4,20 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type DeleteChunksRequestBody = {
-  /**
-   * Array of chunk IDs to delete
-   */
-  chunkIds: Array<string>;
-};
+import * as components from "../components/index.js";
 
 export type DeleteChunksRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
-  /**
-   * The unique identifier of the datasource.
-   */
   datasourceId: string;
-  requestBody?: DeleteChunksRequestBody | undefined;
+  chunksServiceDeleteManyRequest: components.ChunksServiceDeleteManyRequest;
 };
-
-/**
- * Chunks deletion result
- */
-export type DeleteChunksResponseBody = {
-  /**
-   * Number of chunks successfully deleted
-   */
-  deletedCount: number;
-  /**
-   * Array of chunk IDs that failed to delete
-   */
-  failedIds?: Array<string> | undefined;
-};
-
-/** @internal */
-export type DeleteChunksRequestBody$Outbound = {
-  chunk_ids: Array<string>;
-};
-
-/** @internal */
-export const DeleteChunksRequestBody$outboundSchema: z.ZodType<
-  DeleteChunksRequestBody$Outbound,
-  z.ZodTypeDef,
-  DeleteChunksRequestBody
-> = z.object({
-  chunkIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    chunkIds: "chunk_ids",
-  });
-});
-
-export function deleteChunksRequestBodyToJSON(
-  deleteChunksRequestBody: DeleteChunksRequestBody,
-): string {
-  return JSON.stringify(
-    DeleteChunksRequestBody$outboundSchema.parse(deleteChunksRequestBody),
-  );
-}
 
 /** @internal */
 export type DeleteChunksRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody?: DeleteChunksRequestBody$Outbound | undefined;
+  ChunksServiceDeleteManyRequest:
+    components.ChunksServiceDeleteManyRequest$Outbound;
 };
 
 /** @internal */
@@ -82,12 +28,13 @@ export const DeleteChunksRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.lazy(() => DeleteChunksRequestBody$outboundSchema).optional(),
+  chunksServiceDeleteManyRequest:
+    components.ChunksServiceDeleteManyRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
     datasourceId: "datasource_id",
-    requestBody: "RequestBody",
+    chunksServiceDeleteManyRequest: "ChunksServiceDeleteManyRequest",
   });
 });
 
@@ -96,30 +43,5 @@ export function deleteChunksRequestToJSON(
 ): string {
   return JSON.stringify(
     DeleteChunksRequest$outboundSchema.parse(deleteChunksRequest),
-  );
-}
-
-/** @internal */
-export const DeleteChunksResponseBody$inboundSchema: z.ZodType<
-  DeleteChunksResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  deleted_count: z.number(),
-  failed_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "deleted_count": "deletedCount",
-    "failed_ids": "failedIds",
-  });
-});
-
-export function deleteChunksResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<DeleteChunksResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeleteChunksResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteChunksResponseBody' from JSON`,
   );
 }
