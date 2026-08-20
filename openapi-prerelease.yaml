@@ -27,10 +27,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -269,10 +269,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -377,10 +377,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -500,10 +500,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -608,10 +608,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -1016,10 +1016,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -1140,10 +1140,10 @@ components:
           type: "string"
         created:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.748Z"
         updated:
           type: "string"
-          default: "2026-08-20T15:20:52.764Z"
+          default: "2026-08-20T18:41:42.749Z"
         updated_by_id:
           type:
             - "string"
@@ -3922,7 +3922,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m0fw5wqeepgaytb789p2hn86"
+              default: "reasoning_01m0g7nmejgyde3jce6f31mabh"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -11841,6 +11841,227 @@ components:
       type: "string"
       enum:
         - "DOMAIN_GROUP_WORKSPACE_ADMIN"
+    ListModelCatalogResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
+      type: "object"
+      properties:
+        object:
+          type: "string"
+          description: "Object discriminator for list responses; always `list`."
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Model"
+          description: "Page of catalog entries."
+        has_more:
+          type: "boolean"
+          description: "Whether more entries are available in the selected pagination\n direction."
+    GetModelCatalogModelResponse:
+      required:
+        - "model"
+      type: "object"
+      properties:
+        model:
+          allOf:
+            - $ref: "#/components/schemas/Model"
+          description: "Requested catalog entry."
+    ListModelCatalogOfferingsResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
+      type: "object"
+      properties:
+        object:
+          type: "string"
+          description: "Object discriminator for list responses; always `list`."
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Model"
+          description: "Page of catalog offerings, ordered by `offering_of` then `id`."
+        has_more:
+          type: "boolean"
+          description: "Whether more offerings are available in the selected pagination\n direction."
+    Model:
+      required:
+        - "id"
+        - "created"
+        - "name"
+        - "description"
+        - "provider"
+        - "endpoints"
+        - "modalities"
+        - "offering_of"
+        - "supported_parameters"
+        - "supported_tiers"
+        - "location"
+        - "status"
+        - "type"
+        - "knowledge_cutoff"
+        - "release_date"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Catalog identifier, `<provider>/<model>` (for example `openai/gpt-4o`)."
+        created:
+          type: "string"
+          description: "When orq listed this offering, Unix seconds (string-encoded int64 in\n JSON)."
+        deprecation:
+          type: "string"
+          description: "When this offering stops being served, Unix seconds (string-encoded\n int64 in JSON): orq's own sunset date if one is set, otherwise the\n developer's announced deprecation date. Absent when neither is set."
+        name:
+          type: "string"
+          description: "Display name shown in the orq model garden."
+        description:
+          type: "string"
+          description: "Short model description."
+        provider:
+          allOf:
+            - $ref: "#/components/schemas/ModelProvider"
+          description: "Provider that serves this offering."
+        endpoints:
+          type: "array"
+          items:
+            type: "string"
+          description: "API endpoints this offering exposes (chat, batch, ...)."
+        modalities:
+          allOf:
+            - $ref: "#/components/schemas/ModelModalities"
+          description: "Content modalities this offering consumes and produces."
+        offering_of:
+          type: "string"
+          description: "Provider-independent model reference this offering serves, `<developer>/<stem>`."
+        pricing:
+          type: "object"
+          description: "Resolved commercial pricing, including service-tier variants. Each\n variant carries a `when` CEL condition string evaluated against\n `input_tokens`, `output_tokens`, `total_tokens` and `tier`; all\n variants whose condition is true are merged onto the base pricing in\n order, later variants winning per field. Absent when this offering has\n no representable token-based pricing."
+        supported_parameters:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ModelParameter"
+          description: "Playground and API parameters this offering exposes."
+        supported_tiers:
+          type: "array"
+          items:
+            type: "string"
+          description: "Paid service tier names available to this offering."
+        context_window:
+          type: "string"
+          description: "Maximum input context size in tokens (string-encoded int64 in JSON).\n Absent when not applicable."
+        max_output_tokens:
+          type: "string"
+          description: "Maximum output size in tokens (string-encoded int64 in JSON). Absent\n when not applicable."
+        location:
+          type: "array"
+          items:
+            type: "string"
+          description: "Regions this offering routes to, lowercased."
+        artificial_intelligence:
+          allOf:
+            - $ref: "#/components/schemas/ModelArtificialAnalysis"
+          description: "Artificial Analysis benchmark data. Absent when unavailable for this\n offering."
+        status:
+          type: "string"
+          description: "Catalog lifecycle: active, preview or deprecated."
+        type:
+          type: "string"
+          description: "Task type: chat, completion, embedding, image, ..."
+        knowledge_cutoff:
+          type: "string"
+          description: "Training-data cutoff (YYYY-MM). Empty when unset."
+        release_date:
+          type: "string"
+          description: "Public release date (YYYY-MM-DD). Empty when unset."
+    ModelProvider:
+      required:
+        - "id"
+        - "name"
+        - "logo"
+        - "docs_url"
+        - "pricing_url"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Catalog provider key (openai, anthropic, aws, ...)."
+        name:
+          type: "string"
+          description: "Provider display name."
+        logo:
+          type: "string"
+          description: "Absolute URL of the provider logo. Empty when no logo is known."
+        docs_url:
+          type: "string"
+          description: "Provider documentation URL."
+        pricing_url:
+          type: "string"
+          description: "Provider pricing page URL."
+    ModelModalities:
+      required:
+        - "input"
+        - "output"
+      type: "object"
+      properties:
+        input:
+          type: "array"
+          items:
+            type: "string"
+          description: "Modalities this offering accepts as input."
+        output:
+          type: "array"
+          items:
+            type: "string"
+          description: "Modalities this offering produces as output."
+    ModelParameter:
+      required:
+        - "name"
+        - "parameter"
+        - "type"
+        - "description"
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "Display name shown in the playground."
+        parameter:
+          type: "string"
+          description: "API parameter key (e.g. `temperature`, `maxTokens`)."
+        type:
+          type: "string"
+          description: "Widget type: slider, select, toggle or text."
+        description:
+          type: "string"
+          description: "Help text shown to playground users."
+    ModelArtificialAnalysis:
+      required:
+        - "slug"
+      type: "object"
+      properties:
+        slug:
+          type: "string"
+          description: "Artificial Analysis model slug."
+        intelligence_index:
+          type: "number"
+          description: "Artificial Analysis intelligence index. Absent when unmeasured."
+          format: "double"
+        evaluations:
+          type: "object"
+          description: "Benchmark scores by evaluation key. A `null` value means the\n evaluation exists but is unmeasured for this model."
+        release_date:
+          type: "string"
+          description: "Artificial Analysis recorded release date. Empty when unknown."
+        median_output_tokens_per_second:
+          type: "number"
+          description: "Measured output throughput, tokens per second. Absent when unmeasured."
+          format: "double"
+        median_time_to_first_token_seconds:
+          type: "number"
+          description: "Measured time to first token, seconds. Absent when unmeasured."
+          format: "double"
     Sharing:
       type: "object"
       properties:
@@ -19256,10 +19477,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -19676,10 +19897,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -20118,10 +20339,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -20281,10 +20502,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -20419,10 +20640,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -20576,10 +20797,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -20715,10 +20936,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -20857,10 +21078,10 @@ paths:
                         type: "string"
                       created:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.748Z"
                       updated:
                         type: "string"
-                        default: "2026-08-20T15:20:52.764Z"
+                        default: "2026-08-20T18:41:42.749Z"
                       created_by_id:
                         type:
                           - "string"
@@ -32471,7 +32692,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M0FW5WVMFJQJEKYV8APB20QG"
+                                          default: "01M0G7NMJH568K90SXG4J68RET"
                                         name:
                                           type: "string"
                                         description:
@@ -34061,7 +34282,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M0FW5WX4TRFW1611GNV02VNV"
+                                          default: "01M0G7NMKZQ8QN6RDDTQJQMT0D"
                                         name:
                                           type: "string"
                                         description:
@@ -42825,7 +43046,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M0FW5X1A1C7QQ137311T0DST"
+                              default: "tool_01M0G7NMQXZ52S56A44QAFCNSZ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42926,7 +43147,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M0FW5X1B1PYKMCRWVTJXAXC8"
+                              default: "tool_01M0G7NMR552MB1ZJZNW1F8EV5"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43029,7 +43250,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M0FW5X1CWDXFW9DPRRC5TTY9"
+                              default: "tool_01M0G7NMR62Q9DQG858Y5E3D1N"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43173,7 +43394,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M0FW5X1EB7JX2K3K26KWN6HA"
+                              default: "tool_01M0G7NMR8SRYKRGKFWT0TQ0HC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43660,7 +43881,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X1NFP47QFACTYH1NDKD"
+                        default: "tool_01M0G7NMRG7DVGYN9PPJJCN0W3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43761,7 +43982,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X1XEH1PC3M7CZAATGXN"
+                        default: "tool_01M0G7NMRHA8RSK23N39ASZMQG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43864,7 +44085,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X1YKAF5G7YRFK2897M2"
+                        default: "tool_01M0G7NMRJ1DADAEMS3JWENXAW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44008,7 +44229,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X20N9S132H8GGJ15E6F"
+                        default: "tool_01M0G7NMRMGRHB6W97ZSHMW1WX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44506,7 +44727,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X28G09M3ZPTG8TF69BY"
+                        default: "tool_01M0G7NMRTXEYJACVXFH5GRDKY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44607,7 +44828,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X29JC5KH902BGF2PEYR"
+                        default: "tool_01M0G7NMRVP29M772DPV7TE56F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44710,7 +44931,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X2BEY8J5V1ZVC6T2PGA"
+                        default: "tool_01M0G7NMRWDZ7XQCVVM8JR6YHM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44854,7 +45075,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X2C6JCGTB377GZR4NTX"
+                        default: "tool_01M0G7NMRYGVZTZEMAP9XYA5BM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45015,7 +45236,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X2X53TZAW9Q4TNNW5GB"
+                        default: "tool_01M0G7NMSPVS63EP291PGKAGDR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45116,7 +45337,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X2ZXA4EEFPSRM4F5KVA"
+                        default: "tool_01M0G7NMSR4KZJZN3CJH03S6M2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45219,7 +45440,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X319060M0TWCV2N0ER3"
+                        default: "tool_01M0G7NMSTCKTXTMT4FT6QXF7J"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45363,7 +45584,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M0FW5X34CCBWPZ527892VR5S"
+                        default: "tool_01M0G7NMSXN77WEWEY25PVJR08"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45783,7 +46004,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-08-20T15:20:50.573Z"
+                          default: "2026-08-20T18:41:40.524Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45791,7 +46012,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:20:50.574Z"
+                              default: "2026-08-20T18:41:40.524Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -45915,7 +46136,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45923,7 +46144,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46038,7 +46259,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46046,7 +46267,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46190,7 +46411,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -46198,7 +46419,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46624,7 +46845,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-08-20T15:21:05.410Z"
+                                    default: "2026-08-20T18:41:55.540Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46697,7 +46918,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-08-20T15:21:05.411Z"
+                                    default: "2026-08-20T18:41:55.541Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46770,7 +46991,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-08-20T15:21:05.412Z"
+                                    default: "2026-08-20T18:41:55.541Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46843,7 +47064,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-08-20T15:21:05.413Z"
+                                    default: "2026-08-20T18:41:55.542Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46883,7 +47104,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-08-20T15:20:50.573Z"
+                          default: "2026-08-20T18:41:40.524Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -46891,7 +47112,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:20:50.574Z"
+                              default: "2026-08-20T18:41:40.524Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -47515,7 +47736,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-08-20T15:21:05.433Z"
+                                default: "2026-08-20T18:41:55.562Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47588,7 +47809,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-08-20T15:21:05.433Z"
+                                default: "2026-08-20T18:41:55.562Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47661,7 +47882,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-08-20T15:21:05.434Z"
+                                default: "2026-08-20T18:41:55.563Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47734,7 +47955,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-08-20T15:21:05.435Z"
+                                default: "2026-08-20T18:41:55.564Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47774,7 +47995,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-08-20T15:20:50.573Z"
+                      default: "2026-08-20T18:41:40.524Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -47782,7 +48003,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-08-20T15:20:50.574Z"
+                          default: "2026-08-20T18:41:40.524Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -48143,7 +48364,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.419Z"
+                              default: "2026-08-20T18:41:55.555Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48216,7 +48437,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.420Z"
+                              default: "2026-08-20T18:41:55.556Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48289,7 +48510,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.420Z"
+                              default: "2026-08-20T18:41:55.556Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48362,7 +48583,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.421Z"
+                              default: "2026-08-20T18:41:55.557Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48402,7 +48623,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -48410,7 +48631,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -49028,7 +49249,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.452Z"
+                              default: "2026-08-20T18:41:55.589Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49101,7 +49322,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.453Z"
+                              default: "2026-08-20T18:41:55.589Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49174,7 +49395,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.454Z"
+                              default: "2026-08-20T18:41:55.590Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49247,7 +49468,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:21:05.454Z"
+                              default: "2026-08-20T18:41:55.591Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -49287,7 +49508,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -49295,7 +49516,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -55507,7 +55728,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-08-20T15:21:05.563Z"
+                      default: "2026-08-20T18:41:55.688Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55549,7 +55770,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-08-20T15:21:05.563Z"
+                      default: "2026-08-20T18:41:55.689Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55591,7 +55812,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-08-20T15:21:05.564Z"
+                      default: "2026-08-20T18:41:55.690Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55633,7 +55854,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-08-20T15:21:05.565Z"
+                      default: "2026-08-20T18:41:55.690Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55960,7 +56181,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-08-20T15:20:50.573Z"
+                          default: "2026-08-20T18:41:40.524Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55968,7 +56189,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:20:50.574Z"
+                              default: "2026-08-20T18:41:40.524Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -56038,7 +56259,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-08-20T15:20:50.573Z"
+                          default: "2026-08-20T18:41:40.524Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -56046,7 +56267,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:20:50.574Z"
+                              default: "2026-08-20T18:41:40.524Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -56222,7 +56443,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-08-20T15:20:50.573Z"
+                        default: "2026-08-20T18:41:40.524Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56230,7 +56451,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-08-20T15:20:50.574Z"
+                            default: "2026-08-20T18:41:40.524Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56300,7 +56521,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-08-20T15:20:50.573Z"
+                        default: "2026-08-20T18:41:40.524Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56308,7 +56529,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-08-20T15:20:50.574Z"
+                            default: "2026-08-20T18:41:40.524Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56402,7 +56623,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-08-20T15:20:50.573Z"
+                        default: "2026-08-20T18:41:40.524Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56410,7 +56631,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-08-20T15:20:50.574Z"
+                            default: "2026-08-20T18:41:40.524Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56480,7 +56701,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-08-20T15:20:50.573Z"
+                        default: "2026-08-20T18:41:40.524Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56488,7 +56709,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-08-20T15:20:50.574Z"
+                            default: "2026-08-20T18:41:40.524Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56672,7 +56893,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-08-20T15:20:50.573Z"
+                        default: "2026-08-20T18:41:40.524Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56680,7 +56901,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-08-20T15:20:50.574Z"
+                            default: "2026-08-20T18:41:40.524Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56750,7 +56971,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-08-20T15:20:50.573Z"
+                        default: "2026-08-20T18:41:40.524Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56758,7 +56979,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-08-20T15:20:50.574Z"
+                            default: "2026-08-20T18:41:40.524Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56915,7 +57136,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-08-20T15:20:50.573Z"
+                          default: "2026-08-20T18:41:40.524Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -56923,7 +57144,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-08-20T15:20:50.574Z"
+                              default: "2026-08-20T18:41:40.524Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -57037,7 +57258,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -57045,7 +57266,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -57141,7 +57362,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -57149,7 +57370,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -57264,7 +57485,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-08-20T15:20:50.573Z"
+                    default: "2026-08-20T18:41:40.524Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -57272,7 +57493,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-08-20T15:20:50.574Z"
+                        default: "2026-08-20T18:41:40.524Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -63559,6 +63780,304 @@ paths:
       x-speakeasy-name-override: "update"
       security:
         - ApiKey: []
+  /v2/model-catalog:
+    get:
+      tags:
+        - "Model Catalog"
+      summary: "List the model catalog"
+      description: "Returns every model orq offers, optionally filtered, searched and sorted. Use `starting_after` or `ending_before` to page through the collection."
+      operationId: "ModelCatalogList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          description: "Page size, 1–200. Unset uses the server default (50)."
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          description: "Cursor for forward pagination. Set to the `id` of the last item from\n the previous page."
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          description: "Cursor for backward pagination. Set to the `id` of the first item\n from the previous page."
+          schema:
+            type: "string"
+        - name: "provider"
+          in: "query"
+          description: "Filter by catalog provider key. Repeat to match any of several\n providers."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "endpoint"
+          in: "query"
+          description: "Filter by API endpoint. Repeat to match any of several endpoints."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "input_modality"
+          in: "query"
+          description: "Filter by input modality. Repeat to match any of several modalities."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "output_modality"
+          in: "query"
+          description: "Filter by output modality. Repeat to match any of several modalities."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "location"
+          in: "query"
+          description: "Filter by region. Repeat to match any of several regions."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "type"
+          in: "query"
+          description: "Filter by task type. Repeat to match any of several types."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "status"
+          in: "query"
+          description: "Filter by catalog lifecycle status. Repeat to match any of several\n statuses."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "supported_parameter"
+          in: "query"
+          description: "Filter by supported parameter key. Repeat to match any of several\n parameters."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "tier"
+          in: "query"
+          description: "Filter by supported service tier. Repeat to match any of several\n tiers."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "offering_of"
+          in: "query"
+          description: "Filter to offerings of one base model reference, `<developer>/<stem>`."
+          schema:
+            type: "string"
+        - name: "deprecated"
+          in: "query"
+          description: "Filter by deprecation: true returns only offerings with an announced\n sunset date, false returns only offerings without one. Unset returns\n both."
+          schema:
+            type: "boolean"
+        - name: "search"
+          in: "query"
+          description: "Case-insensitive substring search over `id`, `name` and `description`."
+          schema:
+            type: "string"
+        - name: "sort_by"
+          in: "query"
+          description: "Field to sort by."
+          schema:
+            type: "string"
+        - name: "order"
+          in: "query"
+          description: "Sort order. Defaults to ascending."
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListModelCatalogResponse"
+      x-speakeasy-group: "modelCatalog"
+      x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List the model catalog"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/model-catalog?provider=openai&limit=10'\n"
+        - lang: "typescript"
+          label: "Node.js - List the model catalog"
+          source: "const response = await fetch('https://api.orq.ai/v2/model-catalog?provider=openai&limit=10');\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst { data } = await response.json();\nfor (const model of data) {\n  console.log(model.id, model.name);\n}\n"
+      security:
+        - ApiKey: []
+  /v2/model-catalog/offerings:
+    get:
+      tags:
+        - "Model Catalog"
+      summary: "List model catalog offerings"
+      description: "Returns catalog entries as a flat list of offerings. Pass `model` to narrow the list to every provider offering of one base model reference (for example `anthropic/claude-opus`)."
+      operationId: "ModelCatalogListOfferings"
+      parameters:
+        - name: "limit"
+          in: "query"
+          description: "Page size, 1–200. Unset uses the server default (50)."
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          description: "Cursor for forward pagination. Set to the `id` of the last item from\n the previous page."
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          description: "Cursor for backward pagination. Set to the `id` of the first item\n from the previous page."
+          schema:
+            type: "string"
+        - name: "provider"
+          in: "query"
+          description: "Filter by catalog provider key. Repeat to match any of several\n providers."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "endpoint"
+          in: "query"
+          description: "Filter by API endpoint. Repeat to match any of several endpoints."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "input_modality"
+          in: "query"
+          description: "Filter by input modality. Repeat to match any of several modalities."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "output_modality"
+          in: "query"
+          description: "Filter by output modality. Repeat to match any of several modalities."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "location"
+          in: "query"
+          description: "Filter by region. Repeat to match any of several regions."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "type"
+          in: "query"
+          description: "Filter by task type. Repeat to match any of several types."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "status"
+          in: "query"
+          description: "Filter by catalog lifecycle status. Repeat to match any of several\n statuses."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "supported_parameter"
+          in: "query"
+          description: "Filter by supported parameter key. Repeat to match any of several\n parameters."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "tier"
+          in: "query"
+          description: "Filter by supported service tier. Repeat to match any of several\n tiers."
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        - name: "offering_of"
+          in: "query"
+          description: "Filter to offerings of one base model reference, `<developer>/<stem>`."
+          schema:
+            type: "string"
+        - name: "deprecated"
+          in: "query"
+          description: "Filter by deprecation: true returns only offerings with an announced\n sunset date, false returns only offerings without one. Unset returns\n both."
+          schema:
+            type: "boolean"
+        - name: "search"
+          in: "query"
+          description: "Case-insensitive substring search over `id`, `name` and `description`."
+          schema:
+            type: "string"
+        - name: "sort_by"
+          in: "query"
+          description: "Field to sort by."
+          schema:
+            type: "string"
+        - name: "order"
+          in: "query"
+          description: "Sort order. Defaults to ascending."
+          schema:
+            type: "string"
+        - name: "model"
+          in: "query"
+          description: "Base model reference, `<developer>/<stem>` (for example\n `anthropic/claude-opus`). Narrows the result to every provider\n offering of that base model. Omit to return every offering."
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListModelCatalogOfferingsResponse"
+      x-speakeasy-group: "modelCatalog"
+      x-speakeasy-name-override: "listOfferings"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List model catalog offerings"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/model-catalog/offerings?model=anthropic/claude-opus'\n"
+        - lang: "typescript"
+          label: "Node.js - List model catalog offerings"
+          source: "const response = await fetch(\n  'https://api.orq.ai/v2/model-catalog/offerings?model=anthropic/claude-opus',\n);\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst { data } = await response.json();\nfor (const offering of data) {\n  console.log(offering.provider.name, offering.id);\n}\n"
+      security:
+        - ApiKey: []
+  /v2/model-catalog/{id}:
+    get:
+      tags:
+        - "Model Catalog"
+      summary: "Retrieve a model catalog entry"
+      description: "Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`)."
+      operationId: "ModelCatalogGet"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetModelCatalogModelResponse"
+      x-speakeasy-group: "modelCatalog"
+      x-speakeasy-name-override: "get"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Catalog identifier, `<provider>/<model>` (for example `openai/gpt-4o`)."
+          required: true
+          description: "Catalog identifier, `<provider>/<model>` (for example `openai/gpt-4o`)."
+          name: "id"
+          in: "path"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve a model catalog entry"
+          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/model-catalog/openai/gpt-4o'\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve a model catalog entry"
+          source: "const response = await fetch('https://api.orq.ai/v2/model-catalog/openai/gpt-4o');\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst model = await response.json();\nconsole.log(model.name, model.pricing);\n"
+      security:
+        - ApiKey: []
   /v2/models/{model_id}/sharing:
     put:
       tags:
@@ -67972,6 +68491,8 @@ tags:
     description: "Identities represent end users from your system for usage and engagement tracking."
   - name: "Management keys"
     description: "Management keys are workspace-scoped credentials that authenticate programmatic access to workspace administration surfaces (API keys, budgets). Unlike project-scoped API keys, a management key always operates at the workspace level."
+  - name: "Model Catalog"
+    description: "Browse the orq.ai model catalog: every model orq offers, across every provider, with pricing, capabilities and benchmark data. This API is public, requires no authentication, and is rate limited to 120 requests per minute per IP. Responses carry a 5-minute cache-control max-age."
   - name: "Model Sharing"
     description: "Model sharing controls which projects a workspace model is available to. Workspace admins configure a model's Sharing (all projects / selected projects); the config ships inline on the models list response, so there is no separate read endpoint."
   - name: "Notifiers"
