@@ -22,6 +22,7 @@ import { Knowledge } from "./knowledge.js";
 import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
 import { MemoryStores } from "./memorystores.js";
+import { ModelCatalog } from "./modelcatalog.js";
 import { Models } from "./models.js";
 import { Notifiers } from "./notifiers.js";
 import { People } from "./people.js";
@@ -165,6 +166,11 @@ export class Orq extends ClientSDK {
   private _managementKeys?: ManagementKeys;
   get managementKeys(): ManagementKeys {
     return (this._managementKeys ??= new ManagementKeys(this._options));
+  }
+
+  private _modelCatalog?: ModelCatalog;
+  get modelCatalog(): ModelCatalog {
+    return (this._modelCatalog ??= new ModelCatalog(this._options));
   }
 
   private _notifiers?: Notifiers;
