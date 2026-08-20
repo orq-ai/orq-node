@@ -24,7 +24,7 @@ import { SearchType, SearchType$outboundSchema } from "./searchtype.js";
 /**
  * Exists
  */
-export type SearchKnowledgeRequestOrExists = {
+export type OrExists = {
   exists: boolean;
 };
 
@@ -101,7 +101,7 @@ export type FilterByOr =
   | SearchKnowledgeRequestOrLte
   | SearchKnowledgeRequestOrFilterByIn
   | SearchKnowledgeRequestOrFilterByNin
-  | SearchKnowledgeRequestOrExists;
+  | OrExists;
 
 /**
  * Or
@@ -118,7 +118,7 @@ export type SearchKnowledgeRequestFilterByOr = {
         | SearchKnowledgeRequestOrLte
         | SearchKnowledgeRequestOrFilterByIn
         | SearchKnowledgeRequestOrFilterByNin
-        | SearchKnowledgeRequestOrExists;
+        | OrExists;
     }
   >;
 };
@@ -126,7 +126,7 @@ export type SearchKnowledgeRequestFilterByOr = {
 /**
  * Exists
  */
-export type SearchKnowledgeRequestAndExists = {
+export type AndExists = {
   exists: boolean;
 };
 
@@ -203,7 +203,7 @@ export type FilterByAnd =
   | SearchKnowledgeRequestAndLte
   | SearchKnowledgeRequestAndFilterByIn
   | SearchKnowledgeRequestAndFilterByNin
-  | SearchKnowledgeRequestAndExists;
+  | AndExists;
 
 /**
  * And
@@ -220,7 +220,7 @@ export type SearchKnowledgeRequestFilterByAnd = {
         | SearchKnowledgeRequestAndLte
         | SearchKnowledgeRequestAndFilterByIn
         | SearchKnowledgeRequestAndFilterByNin
-        | SearchKnowledgeRequestAndExists;
+        | AndExists;
     }
   >;
 };
@@ -228,7 +228,7 @@ export type SearchKnowledgeRequestFilterByAnd = {
 /**
  * Exists
  */
-export type OneExists = {
+export type Exists = {
   exists: boolean;
 };
 
@@ -305,7 +305,7 @@ export type FilterBy1 =
   | OneLte
   | SearchKnowledgeRequest1In
   | SearchKnowledgeRequest1Nin
-  | OneExists;
+  | Exists;
 
 /**
  * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
@@ -323,7 +323,7 @@ export type FilterBy =
       | OneLte
       | SearchKnowledgeRequest1In
       | SearchKnowledgeRequest1Nin
-      | OneExists;
+      | Exists;
   };
 
 export type AgenticRagConfig2 = {
@@ -407,7 +407,7 @@ export type SearchKnowledgeRequest = {
         | OneLte
         | SearchKnowledgeRequest1In
         | SearchKnowledgeRequest1Nin
-        | OneExists;
+        | Exists;
     }
     | undefined;
   /**
@@ -429,27 +429,21 @@ export type SearchKnowledgeRequest = {
 };
 
 /** @internal */
-export type SearchKnowledgeRequestOrExists$Outbound = {
+export type OrExists$Outbound = {
   exists: boolean;
 };
 
 /** @internal */
-export const SearchKnowledgeRequestOrExists$outboundSchema: z.ZodType<
-  SearchKnowledgeRequestOrExists$Outbound,
+export const OrExists$outboundSchema: z.ZodType<
+  OrExists$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeRequestOrExists
+  OrExists
 > = z.object({
   exists: z.boolean(),
 });
 
-export function searchKnowledgeRequestOrExistsToJSON(
-  searchKnowledgeRequestOrExists: SearchKnowledgeRequestOrExists,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeRequestOrExists$outboundSchema.parse(
-      searchKnowledgeRequestOrExists,
-    ),
-  );
+export function orExistsToJSON(orExists: OrExists): string {
+  return JSON.stringify(OrExists$outboundSchema.parse(orExists));
 }
 
 /** @internal */
@@ -724,7 +718,7 @@ export type FilterByOr$Outbound =
   | SearchKnowledgeRequestOrLte$Outbound
   | SearchKnowledgeRequestOrFilterByIn$Outbound
   | SearchKnowledgeRequestOrFilterByNin$Outbound
-  | SearchKnowledgeRequestOrExists$Outbound;
+  | OrExists$Outbound;
 
 /** @internal */
 export const FilterByOr$outboundSchema: z.ZodType<
@@ -740,7 +734,7 @@ export const FilterByOr$outboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledgeRequestOrLte$outboundSchema),
   z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
   z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrExists$outboundSchema),
+  z.lazy(() => OrExists$outboundSchema),
 ]);
 
 export function filterByOrToJSON(filterByOr: FilterByOr): string {
@@ -760,7 +754,7 @@ export type SearchKnowledgeRequestFilterByOr$Outbound = {
         | SearchKnowledgeRequestOrLte$Outbound
         | SearchKnowledgeRequestOrFilterByIn$Outbound
         | SearchKnowledgeRequestOrFilterByNin$Outbound
-        | SearchKnowledgeRequestOrExists$Outbound;
+        | OrExists$Outbound;
     }
   >;
 };
@@ -783,7 +777,7 @@ export const SearchKnowledgeRequestFilterByOr$outboundSchema: z.ZodType<
       z.lazy(() => SearchKnowledgeRequestOrLte$outboundSchema),
       z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
       z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
-      z.lazy(() => SearchKnowledgeRequestOrExists$outboundSchema),
+      z.lazy(() => OrExists$outboundSchema),
     ])),
   ),
 });
@@ -799,27 +793,21 @@ export function searchKnowledgeRequestFilterByOrToJSON(
 }
 
 /** @internal */
-export type SearchKnowledgeRequestAndExists$Outbound = {
+export type AndExists$Outbound = {
   exists: boolean;
 };
 
 /** @internal */
-export const SearchKnowledgeRequestAndExists$outboundSchema: z.ZodType<
-  SearchKnowledgeRequestAndExists$Outbound,
+export const AndExists$outboundSchema: z.ZodType<
+  AndExists$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeRequestAndExists
+  AndExists
 > = z.object({
   exists: z.boolean(),
 });
 
-export function searchKnowledgeRequestAndExistsToJSON(
-  searchKnowledgeRequestAndExists: SearchKnowledgeRequestAndExists,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeRequestAndExists$outboundSchema.parse(
-      searchKnowledgeRequestAndExists,
-    ),
-  );
+export function andExistsToJSON(andExists: AndExists): string {
+  return JSON.stringify(AndExists$outboundSchema.parse(andExists));
 }
 
 /** @internal */
@@ -1104,7 +1092,7 @@ export type FilterByAnd$Outbound =
   | SearchKnowledgeRequestAndLte$Outbound
   | SearchKnowledgeRequestAndFilterByIn$Outbound
   | SearchKnowledgeRequestAndFilterByNin$Outbound
-  | SearchKnowledgeRequestAndExists$Outbound;
+  | AndExists$Outbound;
 
 /** @internal */
 export const FilterByAnd$outboundSchema: z.ZodType<
@@ -1120,7 +1108,7 @@ export const FilterByAnd$outboundSchema: z.ZodType<
   z.lazy(() => SearchKnowledgeRequestAndLte$outboundSchema),
   z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
   z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndExists$outboundSchema),
+  z.lazy(() => AndExists$outboundSchema),
 ]);
 
 export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
@@ -1140,7 +1128,7 @@ export type SearchKnowledgeRequestFilterByAnd$Outbound = {
         | SearchKnowledgeRequestAndLte$Outbound
         | SearchKnowledgeRequestAndFilterByIn$Outbound
         | SearchKnowledgeRequestAndFilterByNin$Outbound
-        | SearchKnowledgeRequestAndExists$Outbound;
+        | AndExists$Outbound;
     }
   >;
 };
@@ -1163,7 +1151,7 @@ export const SearchKnowledgeRequestFilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() => SearchKnowledgeRequestAndLte$outboundSchema),
       z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
       z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
-      z.lazy(() => SearchKnowledgeRequestAndExists$outboundSchema),
+      z.lazy(() => AndExists$outboundSchema),
     ])),
   ),
 });
@@ -1179,21 +1167,21 @@ export function searchKnowledgeRequestFilterByAndToJSON(
 }
 
 /** @internal */
-export type OneExists$Outbound = {
+export type Exists$Outbound = {
   exists: boolean;
 };
 
 /** @internal */
-export const OneExists$outboundSchema: z.ZodType<
-  OneExists$Outbound,
+export const Exists$outboundSchema: z.ZodType<
+  Exists$Outbound,
   z.ZodTypeDef,
-  OneExists
+  Exists
 > = z.object({
   exists: z.boolean(),
 });
 
-export function oneExistsToJSON(oneExists: OneExists): string {
-  return JSON.stringify(OneExists$outboundSchema.parse(oneExists));
+export function existsToJSON(exists: Exists): string {
+  return JSON.stringify(Exists$outboundSchema.parse(exists));
 }
 
 /** @internal */
@@ -1422,7 +1410,7 @@ export type FilterBy1$Outbound =
   | OneLte$Outbound
   | SearchKnowledgeRequest1In$Outbound
   | SearchKnowledgeRequest1Nin$Outbound
-  | OneExists$Outbound;
+  | Exists$Outbound;
 
 /** @internal */
 export const FilterBy1$outboundSchema: z.ZodType<
@@ -1438,7 +1426,7 @@ export const FilterBy1$outboundSchema: z.ZodType<
   z.lazy(() => OneLte$outboundSchema),
   z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
   z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
-  z.lazy(() => OneExists$outboundSchema),
+  z.lazy(() => Exists$outboundSchema),
 ]);
 
 export function filterBy1ToJSON(filterBy1: FilterBy1): string {
@@ -1459,7 +1447,7 @@ export type FilterBy$Outbound =
       | OneLte$Outbound
       | SearchKnowledgeRequest1In$Outbound
       | SearchKnowledgeRequest1Nin$Outbound
-      | OneExists$Outbound;
+      | Exists$Outbound;
   };
 
 /** @internal */
@@ -1479,7 +1467,7 @@ export const FilterBy$outboundSchema: z.ZodType<
     z.lazy(() => OneLte$outboundSchema),
     z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
     z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
-    z.lazy(() => OneExists$outboundSchema),
+    z.lazy(() => Exists$outboundSchema),
   ])),
 ]);
 
@@ -1598,7 +1586,7 @@ export type SearchKnowledgeRequest$Outbound = {
         | OneLte$Outbound
         | SearchKnowledgeRequest1In$Outbound
         | SearchKnowledgeRequest1Nin$Outbound
-        | OneExists$Outbound;
+        | Exists$Outbound;
     }
     | undefined;
   search_options?: SearchOptions$Outbound | undefined;
@@ -1634,7 +1622,7 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
         z.lazy(() => OneLte$outboundSchema),
         z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
         z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
-        z.lazy(() => OneExists$outboundSchema),
+        z.lazy(() => Exists$outboundSchema),
       ]),
     ),
   ]).optional(),

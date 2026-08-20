@@ -11,7 +11,7 @@ let value: FilterByAnd = {
   and: [
     {
       "key": {
-        nin: [],
+        in: [],
       },
     },
     {},

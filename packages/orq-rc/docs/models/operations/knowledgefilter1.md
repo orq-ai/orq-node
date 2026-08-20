@@ -67,11 +67,3 @@ const value: operations.DeploymentStream1Nin = {
 };
 ```
 
-### `operations.OneExists`
-
-```typescript
-const value: operations.OneExists = {
-  exists: false,
-};
-```
-

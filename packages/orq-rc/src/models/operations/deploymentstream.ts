@@ -771,13 +771,6 @@ export type DeploymentStreamThread = {
   tags?: Array<string> | undefined;
 };
 
-/**
- * Exists
- */
-export type DeploymentStreamOrExists = {
-  exists: boolean;
-};
-
 export type DeploymentStreamOrDeploymentsNin = string | number | boolean;
 
 /**
@@ -850,8 +843,7 @@ export type DeploymentStreamKnowledgeFilterDeploymentsOr =
   | DeploymentStreamOrLt
   | DeploymentStreamOrLte
   | DeploymentStreamOrIn
-  | DeploymentStreamOrNin
-  | DeploymentStreamOrExists;
+  | DeploymentStreamOrNin;
 
 /**
  * Or
@@ -867,17 +859,9 @@ export type DeploymentStreamKnowledgeFilterOr = {
         | DeploymentStreamOrLt
         | DeploymentStreamOrLte
         | DeploymentStreamOrIn
-        | DeploymentStreamOrNin
-        | DeploymentStreamOrExists;
+        | DeploymentStreamOrNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type DeploymentStreamAndExists = {
-  exists: boolean;
 };
 
 export type DeploymentStreamAndDeploymentsNin = string | number | boolean;
@@ -952,8 +936,7 @@ export type DeploymentStreamKnowledgeFilterDeploymentsAnd =
   | DeploymentStreamAndLt
   | DeploymentStreamAndLte
   | DeploymentStreamAndIn
-  | DeploymentStreamAndNin
-  | DeploymentStreamAndExists;
+  | DeploymentStreamAndNin;
 
 /**
  * And
@@ -969,17 +952,9 @@ export type DeploymentStreamKnowledgeFilterAnd = {
         | DeploymentStreamAndLt
         | DeploymentStreamAndLte
         | DeploymentStreamAndIn
-        | DeploymentStreamAndNin
-        | DeploymentStreamAndExists;
+        | DeploymentStreamAndNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type OneExists = {
-  exists: boolean;
 };
 
 export type DeploymentStream1DeploymentsNin = string | number | boolean;
@@ -1054,8 +1029,7 @@ export type KnowledgeFilter1 =
   | OneLt
   | OneLte
   | DeploymentStream1In
-  | DeploymentStream1Nin
-  | OneExists;
+  | DeploymentStream1Nin;
 
 /**
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
@@ -1072,8 +1046,7 @@ export type DeploymentStreamKnowledgeFilter =
       | OneLt
       | OneLte
       | DeploymentStream1In
-      | DeploymentStream1Nin
-      | OneExists;
+      | DeploymentStream1Nin;
   };
 
 export type DeploymentStreamRequestBody = {
@@ -1150,8 +1123,7 @@ export type DeploymentStreamRequestBody = {
         | OneLt
         | OneLte
         | DeploymentStream1In
-        | DeploymentStream1Nin
-        | OneExists;
+        | DeploymentStream1Nin;
     }
     | undefined;
 };
@@ -2980,28 +2952,6 @@ export function deploymentStreamThreadToJSON(
 }
 
 /** @internal */
-export type DeploymentStreamOrExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const DeploymentStreamOrExists$outboundSchema: z.ZodType<
-  DeploymentStreamOrExists$Outbound,
-  z.ZodTypeDef,
-  DeploymentStreamOrExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function deploymentStreamOrExistsToJSON(
-  deploymentStreamOrExists: DeploymentStreamOrExists,
-): string {
-  return JSON.stringify(
-    DeploymentStreamOrExists$outboundSchema.parse(deploymentStreamOrExists),
-  );
-}
-
-/** @internal */
 export type DeploymentStreamOrDeploymentsNin$Outbound =
   | string
   | number
@@ -3278,8 +3228,7 @@ export type DeploymentStreamKnowledgeFilterDeploymentsOr$Outbound =
   | DeploymentStreamOrLt$Outbound
   | DeploymentStreamOrLte$Outbound
   | DeploymentStreamOrIn$Outbound
-  | DeploymentStreamOrNin$Outbound
-  | DeploymentStreamOrExists$Outbound;
+  | DeploymentStreamOrNin$Outbound;
 
 /** @internal */
 export const DeploymentStreamKnowledgeFilterDeploymentsOr$outboundSchema:
@@ -3296,7 +3245,6 @@ export const DeploymentStreamKnowledgeFilterDeploymentsOr$outboundSchema:
     z.lazy(() => DeploymentStreamOrLte$outboundSchema),
     z.lazy(() => DeploymentStreamOrIn$outboundSchema),
     z.lazy(() => DeploymentStreamOrNin$outboundSchema),
-    z.lazy(() => DeploymentStreamOrExists$outboundSchema),
   ]);
 
 export function deploymentStreamKnowledgeFilterDeploymentsOrToJSON(
@@ -3322,8 +3270,7 @@ export type DeploymentStreamKnowledgeFilterOr$Outbound = {
         | DeploymentStreamOrLt$Outbound
         | DeploymentStreamOrLte$Outbound
         | DeploymentStreamOrIn$Outbound
-        | DeploymentStreamOrNin$Outbound
-        | DeploymentStreamOrExists$Outbound;
+        | DeploymentStreamOrNin$Outbound;
     }
   >;
 };
@@ -3346,7 +3293,6 @@ export const DeploymentStreamKnowledgeFilterOr$outboundSchema: z.ZodType<
       z.lazy(() => DeploymentStreamOrLte$outboundSchema),
       z.lazy(() => DeploymentStreamOrIn$outboundSchema),
       z.lazy(() => DeploymentStreamOrNin$outboundSchema),
-      z.lazy(() => DeploymentStreamOrExists$outboundSchema),
     ])),
   ),
 });
@@ -3358,28 +3304,6 @@ export function deploymentStreamKnowledgeFilterOrToJSON(
     DeploymentStreamKnowledgeFilterOr$outboundSchema.parse(
       deploymentStreamKnowledgeFilterOr,
     ),
-  );
-}
-
-/** @internal */
-export type DeploymentStreamAndExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const DeploymentStreamAndExists$outboundSchema: z.ZodType<
-  DeploymentStreamAndExists$Outbound,
-  z.ZodTypeDef,
-  DeploymentStreamAndExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function deploymentStreamAndExistsToJSON(
-  deploymentStreamAndExists: DeploymentStreamAndExists,
-): string {
-  return JSON.stringify(
-    DeploymentStreamAndExists$outboundSchema.parse(deploymentStreamAndExists),
   );
 }
 
@@ -3660,8 +3584,7 @@ export type DeploymentStreamKnowledgeFilterDeploymentsAnd$Outbound =
   | DeploymentStreamAndLt$Outbound
   | DeploymentStreamAndLte$Outbound
   | DeploymentStreamAndIn$Outbound
-  | DeploymentStreamAndNin$Outbound
-  | DeploymentStreamAndExists$Outbound;
+  | DeploymentStreamAndNin$Outbound;
 
 /** @internal */
 export const DeploymentStreamKnowledgeFilterDeploymentsAnd$outboundSchema:
@@ -3678,7 +3601,6 @@ export const DeploymentStreamKnowledgeFilterDeploymentsAnd$outboundSchema:
     z.lazy(() => DeploymentStreamAndLte$outboundSchema),
     z.lazy(() => DeploymentStreamAndIn$outboundSchema),
     z.lazy(() => DeploymentStreamAndNin$outboundSchema),
-    z.lazy(() => DeploymentStreamAndExists$outboundSchema),
   ]);
 
 export function deploymentStreamKnowledgeFilterDeploymentsAndToJSON(
@@ -3704,8 +3626,7 @@ export type DeploymentStreamKnowledgeFilterAnd$Outbound = {
         | DeploymentStreamAndLt$Outbound
         | DeploymentStreamAndLte$Outbound
         | DeploymentStreamAndIn$Outbound
-        | DeploymentStreamAndNin$Outbound
-        | DeploymentStreamAndExists$Outbound;
+        | DeploymentStreamAndNin$Outbound;
     }
   >;
 };
@@ -3728,7 +3649,6 @@ export const DeploymentStreamKnowledgeFilterAnd$outboundSchema: z.ZodType<
       z.lazy(() => DeploymentStreamAndLte$outboundSchema),
       z.lazy(() => DeploymentStreamAndIn$outboundSchema),
       z.lazy(() => DeploymentStreamAndNin$outboundSchema),
-      z.lazy(() => DeploymentStreamAndExists$outboundSchema),
     ])),
   ),
 });
@@ -3741,24 +3661,6 @@ export function deploymentStreamKnowledgeFilterAndToJSON(
       deploymentStreamKnowledgeFilterAnd,
     ),
   );
-}
-
-/** @internal */
-export type OneExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const OneExists$outboundSchema: z.ZodType<
-  OneExists$Outbound,
-  z.ZodTypeDef,
-  OneExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function oneExistsToJSON(oneExists: OneExists): string {
-  return JSON.stringify(OneExists$outboundSchema.parse(oneExists));
 }
 
 /** @internal */
@@ -4013,8 +3915,7 @@ export type KnowledgeFilter1$Outbound =
   | OneLt$Outbound
   | OneLte$Outbound
   | DeploymentStream1In$Outbound
-  | DeploymentStream1Nin$Outbound
-  | OneExists$Outbound;
+  | DeploymentStream1Nin$Outbound;
 
 /** @internal */
 export const KnowledgeFilter1$outboundSchema: z.ZodType<
@@ -4030,7 +3931,6 @@ export const KnowledgeFilter1$outboundSchema: z.ZodType<
   z.lazy(() => OneLte$outboundSchema),
   z.lazy(() => DeploymentStream1In$outboundSchema),
   z.lazy(() => DeploymentStream1Nin$outboundSchema),
-  z.lazy(() => OneExists$outboundSchema),
 ]);
 
 export function knowledgeFilter1ToJSON(
@@ -4054,8 +3954,7 @@ export type DeploymentStreamKnowledgeFilter$Outbound =
       | OneLt$Outbound
       | OneLte$Outbound
       | DeploymentStream1In$Outbound
-      | DeploymentStream1Nin$Outbound
-      | OneExists$Outbound;
+      | DeploymentStream1Nin$Outbound;
   };
 
 /** @internal */
@@ -4075,7 +3974,6 @@ export const DeploymentStreamKnowledgeFilter$outboundSchema: z.ZodType<
     z.lazy(() => OneLte$outboundSchema),
     z.lazy(() => DeploymentStream1In$outboundSchema),
     z.lazy(() => DeploymentStream1Nin$outboundSchema),
-    z.lazy(() => OneExists$outboundSchema),
   ])),
 ]);
 
@@ -4131,8 +4029,7 @@ export type DeploymentStreamRequestBody$Outbound = {
         | OneLt$Outbound
         | OneLte$Outbound
         | DeploymentStream1In$Outbound
-        | DeploymentStream1Nin$Outbound
-        | OneExists$Outbound;
+        | DeploymentStream1Nin$Outbound;
     }
     | undefined;
 };
@@ -4186,7 +4083,6 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
         z.lazy(() => OneLte$outboundSchema),
         z.lazy(() => DeploymentStream1In$outboundSchema),
         z.lazy(() => DeploymentStream1Nin$outboundSchema),
-        z.lazy(() => OneExists$outboundSchema),
       ]),
     ),
   ]).optional(),

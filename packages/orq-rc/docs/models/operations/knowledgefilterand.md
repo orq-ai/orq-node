@@ -69,11 +69,3 @@ const value: operations.AndNin = {
 };
 ```
 
-### `operations.AndExists`
-
-```typescript
-const value: operations.AndExists = {
-  exists: false,
-};
-```
-

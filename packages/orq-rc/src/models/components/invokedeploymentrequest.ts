@@ -792,13 +792,6 @@ export type Thread = {
   tags?: Array<string> | undefined;
 };
 
-/**
- * Exists
- */
-export type OrExists = {
-  exists: boolean;
-};
-
 export type OrNin = string | number | boolean;
 
 /**
@@ -871,8 +864,7 @@ export type Or =
   | OrLt
   | OrLte
   | InvokeDeploymentRequestOrIn
-  | InvokeDeploymentRequestOrNin
-  | OrExists;
+  | InvokeDeploymentRequestOrNin;
 
 /**
  * Or
@@ -888,17 +880,9 @@ export type KnowledgeFilterOr = {
         | OrLt
         | OrLte
         | InvokeDeploymentRequestOrIn
-        | InvokeDeploymentRequestOrNin
-        | OrExists;
+        | InvokeDeploymentRequestOrNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type AndExists = {
-  exists: boolean;
 };
 
 export type AndNin = string | number | boolean;
@@ -973,8 +957,7 @@ export type And =
   | AndLt
   | AndLte
   | InvokeDeploymentRequestAndIn
-  | InvokeDeploymentRequestAndNin
-  | AndExists;
+  | InvokeDeploymentRequestAndNin;
 
 /**
  * And
@@ -990,17 +973,9 @@ export type KnowledgeFilterAnd = {
         | AndLt
         | AndLte
         | InvokeDeploymentRequestAndIn
-        | InvokeDeploymentRequestAndNin
-        | AndExists;
+        | InvokeDeploymentRequestAndNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type Exists = {
-  exists: boolean;
 };
 
 export type Nin = string | number | boolean;
@@ -1075,8 +1050,7 @@ export type KnowledgeFilter1 =
   | Lt
   | Lte
   | InvokeDeploymentRequest1In
-  | InvokeDeploymentRequest1Nin
-  | Exists;
+  | InvokeDeploymentRequest1Nin;
 
 /**
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
@@ -1090,8 +1064,7 @@ export type KnowledgeFilter = KnowledgeFilterAnd | KnowledgeFilterOr | {
     | Lt
     | Lte
     | InvokeDeploymentRequest1In
-    | InvokeDeploymentRequest1Nin
-    | Exists;
+    | InvokeDeploymentRequest1Nin;
 };
 
 /**
@@ -1172,8 +1145,7 @@ export type InvokeDeploymentRequest = {
       | Lt
       | Lte
       | InvokeDeploymentRequest1In
-      | InvokeDeploymentRequest1Nin
-      | Exists;
+      | InvokeDeploymentRequest1Nin;
   } | undefined;
 };
 
@@ -2491,24 +2463,6 @@ export function threadToJSON(thread: Thread): string {
 }
 
 /** @internal */
-export type OrExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const OrExists$outboundSchema: z.ZodType<
-  OrExists$Outbound,
-  z.ZodTypeDef,
-  OrExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function orExistsToJSON(orExists: OrExists): string {
-  return JSON.stringify(OrExists$outboundSchema.parse(orExists));
-}
-
-/** @internal */
 export type OrNin$Outbound = string | number | boolean;
 
 /** @internal */
@@ -2726,8 +2680,7 @@ export type Or$Outbound =
   | OrLt$Outbound
   | OrLte$Outbound
   | InvokeDeploymentRequestOrIn$Outbound
-  | InvokeDeploymentRequestOrNin$Outbound
-  | OrExists$Outbound;
+  | InvokeDeploymentRequestOrNin$Outbound;
 
 /** @internal */
 export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
@@ -2740,7 +2693,6 @@ export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
     z.lazy(() => OrLte$outboundSchema),
     z.lazy(() => InvokeDeploymentRequestOrIn$outboundSchema),
     z.lazy(() => InvokeDeploymentRequestOrNin$outboundSchema),
-    z.lazy(() => OrExists$outboundSchema),
   ]);
 
 export function orToJSON(or: Or): string {
@@ -2759,8 +2711,7 @@ export type KnowledgeFilterOr$Outbound = {
         | OrLt$Outbound
         | OrLte$Outbound
         | InvokeDeploymentRequestOrIn$Outbound
-        | InvokeDeploymentRequestOrNin$Outbound
-        | OrExists$Outbound;
+        | InvokeDeploymentRequestOrNin$Outbound;
     }
   >;
 };
@@ -2783,7 +2734,6 @@ export const KnowledgeFilterOr$outboundSchema: z.ZodType<
       z.lazy(() => OrLte$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestOrIn$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestOrNin$outboundSchema),
-      z.lazy(() => OrExists$outboundSchema),
     ])),
   ),
 });
@@ -2794,24 +2744,6 @@ export function knowledgeFilterOrToJSON(
   return JSON.stringify(
     KnowledgeFilterOr$outboundSchema.parse(knowledgeFilterOr),
   );
-}
-
-/** @internal */
-export type AndExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const AndExists$outboundSchema: z.ZodType<
-  AndExists$Outbound,
-  z.ZodTypeDef,
-  AndExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function andExistsToJSON(andExists: AndExists): string {
-  return JSON.stringify(AndExists$outboundSchema.parse(andExists));
 }
 
 /** @internal */
@@ -3047,8 +2979,7 @@ export type And$Outbound =
   | AndLt$Outbound
   | AndLte$Outbound
   | InvokeDeploymentRequestAndIn$Outbound
-  | InvokeDeploymentRequestAndNin$Outbound
-  | AndExists$Outbound;
+  | InvokeDeploymentRequestAndNin$Outbound;
 
 /** @internal */
 export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
@@ -3061,7 +2992,6 @@ export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
     z.lazy(() => AndLte$outboundSchema),
     z.lazy(() => InvokeDeploymentRequestAndIn$outboundSchema),
     z.lazy(() => InvokeDeploymentRequestAndNin$outboundSchema),
-    z.lazy(() => AndExists$outboundSchema),
   ]);
 
 export function andToJSON(and: And): string {
@@ -3080,8 +3010,7 @@ export type KnowledgeFilterAnd$Outbound = {
         | AndLt$Outbound
         | AndLte$Outbound
         | InvokeDeploymentRequestAndIn$Outbound
-        | InvokeDeploymentRequestAndNin$Outbound
-        | AndExists$Outbound;
+        | InvokeDeploymentRequestAndNin$Outbound;
     }
   >;
 };
@@ -3104,7 +3033,6 @@ export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
       z.lazy(() => AndLte$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestAndIn$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestAndNin$outboundSchema),
-      z.lazy(() => AndExists$outboundSchema),
     ])),
   ),
 });
@@ -3115,24 +3043,6 @@ export function knowledgeFilterAndToJSON(
   return JSON.stringify(
     KnowledgeFilterAnd$outboundSchema.parse(knowledgeFilterAnd),
   );
-}
-
-/** @internal */
-export type Exists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const Exists$outboundSchema: z.ZodType<
-  Exists$Outbound,
-  z.ZodTypeDef,
-  Exists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function existsToJSON(exists: Exists): string {
-  return JSON.stringify(Exists$outboundSchema.parse(exists));
 }
 
 /** @internal */
@@ -3338,8 +3248,7 @@ export type KnowledgeFilter1$Outbound =
   | Lt$Outbound
   | Lte$Outbound
   | InvokeDeploymentRequest1In$Outbound
-  | InvokeDeploymentRequest1Nin$Outbound
-  | Exists$Outbound;
+  | InvokeDeploymentRequest1Nin$Outbound;
 
 /** @internal */
 export const KnowledgeFilter1$outboundSchema: z.ZodType<
@@ -3355,7 +3264,6 @@ export const KnowledgeFilter1$outboundSchema: z.ZodType<
   z.lazy(() => Lte$outboundSchema),
   z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
   z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
-  z.lazy(() => Exists$outboundSchema),
 ]);
 
 export function knowledgeFilter1ToJSON(
@@ -3379,8 +3287,7 @@ export type KnowledgeFilter$Outbound =
       | Lt$Outbound
       | Lte$Outbound
       | InvokeDeploymentRequest1In$Outbound
-      | InvokeDeploymentRequest1Nin$Outbound
-      | Exists$Outbound;
+      | InvokeDeploymentRequest1Nin$Outbound;
   };
 
 /** @internal */
@@ -3400,7 +3307,6 @@ export const KnowledgeFilter$outboundSchema: z.ZodType<
     z.lazy(() => Lte$outboundSchema),
     z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
     z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
   ])),
 ]);
 
@@ -3453,8 +3359,7 @@ export type InvokeDeploymentRequest$Outbound = {
         | Lt$Outbound
         | Lte$Outbound
         | InvokeDeploymentRequest1In$Outbound
-        | InvokeDeploymentRequest1Nin$Outbound
-        | Exists$Outbound;
+        | InvokeDeploymentRequest1Nin$Outbound;
     }
     | undefined;
 };
@@ -3506,7 +3411,6 @@ export const InvokeDeploymentRequest$outboundSchema: z.ZodType<
       z.lazy(() => Lte$outboundSchema),
       z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
       z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
-      z.lazy(() => Exists$outboundSchema),
     ])),
   ]).optional(),
 }).transform((v) => {

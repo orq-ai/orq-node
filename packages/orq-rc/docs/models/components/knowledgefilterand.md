@@ -12,7 +12,7 @@ let value: KnowledgeFilterAnd = {
     {},
     {
       "key": {
-        nin: [
+        in: [
           "<value>",
         ],
       },

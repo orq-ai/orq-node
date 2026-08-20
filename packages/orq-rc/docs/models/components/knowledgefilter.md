@@ -19,7 +19,7 @@ const value: components.KnowledgeFilterAnd = {
     {},
     {
       "key": {
-        nin: [
+        in: [
           "<value>",
         ],
       },
@@ -35,12 +35,12 @@ const value: components.KnowledgeFilterOr = {
   or: [
     {
       "key": {
-        ne: true,
+        eq: true,
       },
     },
     {
       "key": {
-        lte: 2414.33,
+        lt: 2414.33,
       },
     },
   ],

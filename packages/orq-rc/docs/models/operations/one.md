@@ -71,11 +71,3 @@ const value: operations.Nin = {
 };
 ```
 
-### `operations.Exists`
-
-```typescript
-const value: operations.Exists = {
-  exists: true,
-};
-```
-

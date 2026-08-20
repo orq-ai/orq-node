@@ -10,7 +10,7 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 ```typescript
 const value: { [k: string]: operations.One } = {
   "key": {
-    gte: 4428.74,
+    gt: 4428.74,
   },
 };
 ```
@@ -22,7 +22,9 @@ const value: operations.And = {
   and: [
     {
       "key": {
-        exists: false,
+        nin: [
+          true,
+        ],
       },
     },
   ],
@@ -41,7 +43,9 @@ const value: operations.Or = {
     },
     {
       "key": {
-        exists: false,
+        nin: [
+          "<value>",
+        ],
       },
     },
   ],

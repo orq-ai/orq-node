@@ -71,11 +71,11 @@ const value: components.SearchKnowledgeRequest1Nin = {
 };
 ```
 
-### `components.OneExists`
+### `components.Exists`
 
 ```typescript
-const value: components.OneExists = {
-  exists: false,
+const value: components.Exists = {
+  exists: true,
 };
 ```
 

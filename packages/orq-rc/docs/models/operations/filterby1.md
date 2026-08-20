@@ -67,11 +67,3 @@ const value: operations.CreateChatCompletion1Nin = {
 };
 ```
 
-### `operations.CreateChatCompletion1Exists`
-
-```typescript
-const value: operations.CreateChatCompletion1Exists = {
-  exists: true,
-};
-```
-

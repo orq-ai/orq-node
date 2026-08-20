@@ -67,11 +67,3 @@ const value: components.InvokeDeploymentRequest1Nin = {
 };
 ```
 
-### `components.Exists`
-
-```typescript
-const value: components.Exists = {
-  exists: true,
-};
-```
-

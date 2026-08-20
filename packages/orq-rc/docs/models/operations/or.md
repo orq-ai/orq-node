@@ -16,7 +16,9 @@ let value: Or = {
     },
     {
       "key": {
-        exists: false,
+        nin: [
+          "<value>",
+        ],
       },
     },
   ],

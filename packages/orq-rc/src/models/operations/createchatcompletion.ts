@@ -929,13 +929,6 @@ export const SearchType = {
  */
 export type SearchType = ClosedEnum<typeof SearchType>;
 
-/**
- * Exists
- */
-export type CreateChatCompletionOrExists = {
-  exists: boolean;
-};
-
 export type CreateChatCompletionOrRouterChatCompletionsNin =
   | string
   | number
@@ -1020,8 +1013,7 @@ export type CreateChatCompletionFilterByOr =
   | CreateChatCompletionOrLt
   | CreateChatCompletionOrLte
   | CreateChatCompletionOrIn
-  | CreateChatCompletionOrNin
-  | CreateChatCompletionOrExists;
+  | CreateChatCompletionOrNin;
 
 /**
  * Or
@@ -1037,17 +1029,9 @@ export type FilterByOr = {
         | CreateChatCompletionOrLt
         | CreateChatCompletionOrLte
         | CreateChatCompletionOrIn
-        | CreateChatCompletionOrNin
-        | CreateChatCompletionOrExists;
+        | CreateChatCompletionOrNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type CreateChatCompletionAndExists = {
-  exists: boolean;
 };
 
 export type CreateChatCompletionAndRouterChatCompletionsNin =
@@ -1134,8 +1118,7 @@ export type CreateChatCompletionFilterByAnd =
   | CreateChatCompletionAndLt
   | CreateChatCompletionAndLte
   | CreateChatCompletionAndIn
-  | CreateChatCompletionAndNin
-  | CreateChatCompletionAndExists;
+  | CreateChatCompletionAndNin;
 
 /**
  * And
@@ -1151,17 +1134,9 @@ export type FilterByAnd = {
         | CreateChatCompletionAndLt
         | CreateChatCompletionAndLte
         | CreateChatCompletionAndIn
-        | CreateChatCompletionAndNin
-        | CreateChatCompletionAndExists;
+        | CreateChatCompletionAndNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type CreateChatCompletion1Exists = {
-  exists: boolean;
 };
 
 export type CreateChatCompletion1RouterChatCompletionsNin =
@@ -1248,8 +1223,7 @@ export type FilterBy1 =
   | CreateChatCompletion1Lt
   | CreateChatCompletion1Lte
   | CreateChatCompletion1In
-  | CreateChatCompletion1Nin
-  | CreateChatCompletion1Exists;
+  | CreateChatCompletion1Nin;
 
 /**
  * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
@@ -1263,8 +1237,7 @@ export type FilterBy = FilterByAnd | FilterByOr | {
     | CreateChatCompletion1Lt
     | CreateChatCompletion1Lte
     | CreateChatCompletion1In
-    | CreateChatCompletion1Nin
-    | CreateChatCompletion1Exists;
+    | CreateChatCompletion1Nin;
 };
 
 /**
@@ -1338,8 +1311,7 @@ export type CreateChatCompletionKnowledgeBases = {
       | CreateChatCompletion1Lt
       | CreateChatCompletion1Lte
       | CreateChatCompletion1In
-      | CreateChatCompletion1Nin
-      | CreateChatCompletion1Exists;
+      | CreateChatCompletion1Nin;
   } | undefined;
   /**
    * Additional search options
@@ -3889,30 +3861,6 @@ export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> = z
   .nativeEnum(SearchType);
 
 /** @internal */
-export type CreateChatCompletionOrExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const CreateChatCompletionOrExists$outboundSchema: z.ZodType<
-  CreateChatCompletionOrExists$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionOrExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function createChatCompletionOrExistsToJSON(
-  createChatCompletionOrExists: CreateChatCompletionOrExists,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionOrExists$outboundSchema.parse(
-      createChatCompletionOrExists,
-    ),
-  );
-}
-
-/** @internal */
 export type CreateChatCompletionOrRouterChatCompletionsNin$Outbound =
   | string
   | number
@@ -4197,8 +4145,7 @@ export type CreateChatCompletionFilterByOr$Outbound =
   | CreateChatCompletionOrLt$Outbound
   | CreateChatCompletionOrLte$Outbound
   | CreateChatCompletionOrIn$Outbound
-  | CreateChatCompletionOrNin$Outbound
-  | CreateChatCompletionOrExists$Outbound;
+  | CreateChatCompletionOrNin$Outbound;
 
 /** @internal */
 export const CreateChatCompletionFilterByOr$outboundSchema: z.ZodType<
@@ -4214,7 +4161,6 @@ export const CreateChatCompletionFilterByOr$outboundSchema: z.ZodType<
   z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
   z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
   z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrExists$outboundSchema),
 ]);
 
 export function createChatCompletionFilterByOrToJSON(
@@ -4239,8 +4185,7 @@ export type FilterByOr$Outbound = {
         | CreateChatCompletionOrLt$Outbound
         | CreateChatCompletionOrLte$Outbound
         | CreateChatCompletionOrIn$Outbound
-        | CreateChatCompletionOrNin$Outbound
-        | CreateChatCompletionOrExists$Outbound;
+        | CreateChatCompletionOrNin$Outbound;
     }
   >;
 };
@@ -4263,37 +4208,12 @@ export const FilterByOr$outboundSchema: z.ZodType<
       z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
       z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
       z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
-      z.lazy(() => CreateChatCompletionOrExists$outboundSchema),
     ])),
   ),
 });
 
 export function filterByOrToJSON(filterByOr: FilterByOr): string {
   return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
-}
-
-/** @internal */
-export type CreateChatCompletionAndExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const CreateChatCompletionAndExists$outboundSchema: z.ZodType<
-  CreateChatCompletionAndExists$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletionAndExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function createChatCompletionAndExistsToJSON(
-  createChatCompletionAndExists: CreateChatCompletionAndExists,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionAndExists$outboundSchema.parse(
-      createChatCompletionAndExists,
-    ),
-  );
 }
 
 /** @internal */
@@ -4581,8 +4501,7 @@ export type CreateChatCompletionFilterByAnd$Outbound =
   | CreateChatCompletionAndLt$Outbound
   | CreateChatCompletionAndLte$Outbound
   | CreateChatCompletionAndIn$Outbound
-  | CreateChatCompletionAndNin$Outbound
-  | CreateChatCompletionAndExists$Outbound;
+  | CreateChatCompletionAndNin$Outbound;
 
 /** @internal */
 export const CreateChatCompletionFilterByAnd$outboundSchema: z.ZodType<
@@ -4598,7 +4517,6 @@ export const CreateChatCompletionFilterByAnd$outboundSchema: z.ZodType<
   z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
   z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
   z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndExists$outboundSchema),
 ]);
 
 export function createChatCompletionFilterByAndToJSON(
@@ -4623,8 +4541,7 @@ export type FilterByAnd$Outbound = {
         | CreateChatCompletionAndLt$Outbound
         | CreateChatCompletionAndLte$Outbound
         | CreateChatCompletionAndIn$Outbound
-        | CreateChatCompletionAndNin$Outbound
-        | CreateChatCompletionAndExists$Outbound;
+        | CreateChatCompletionAndNin$Outbound;
     }
   >;
 };
@@ -4647,37 +4564,12 @@ export const FilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
       z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
       z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
-      z.lazy(() => CreateChatCompletionAndExists$outboundSchema),
     ])),
   ),
 });
 
 export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
   return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
-}
-
-/** @internal */
-export type CreateChatCompletion1Exists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const CreateChatCompletion1Exists$outboundSchema: z.ZodType<
-  CreateChatCompletion1Exists$Outbound,
-  z.ZodTypeDef,
-  CreateChatCompletion1Exists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function createChatCompletion1ExistsToJSON(
-  createChatCompletion1Exists: CreateChatCompletion1Exists,
-): string {
-  return JSON.stringify(
-    CreateChatCompletion1Exists$outboundSchema.parse(
-      createChatCompletion1Exists,
-    ),
-  );
 }
 
 /** @internal */
@@ -4965,8 +4857,7 @@ export type FilterBy1$Outbound =
   | CreateChatCompletion1Lt$Outbound
   | CreateChatCompletion1Lte$Outbound
   | CreateChatCompletion1In$Outbound
-  | CreateChatCompletion1Nin$Outbound
-  | CreateChatCompletion1Exists$Outbound;
+  | CreateChatCompletion1Nin$Outbound;
 
 /** @internal */
 export const FilterBy1$outboundSchema: z.ZodType<
@@ -4982,7 +4873,6 @@ export const FilterBy1$outboundSchema: z.ZodType<
   z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
   z.lazy(() => CreateChatCompletion1In$outboundSchema),
   z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Exists$outboundSchema),
 ]);
 
 export function filterBy1ToJSON(filterBy1: FilterBy1): string {
@@ -4999,8 +4889,7 @@ export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
     | CreateChatCompletion1Lt$Outbound
     | CreateChatCompletion1Lte$Outbound
     | CreateChatCompletion1In$Outbound
-    | CreateChatCompletion1Nin$Outbound
-    | CreateChatCompletion1Exists$Outbound;
+    | CreateChatCompletion1Nin$Outbound;
 };
 
 /** @internal */
@@ -5020,7 +4909,6 @@ export const FilterBy$outboundSchema: z.ZodType<
     z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
     z.lazy(() => CreateChatCompletion1In$outboundSchema),
     z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Exists$outboundSchema),
   ])),
 ]);
 
@@ -5118,8 +5006,7 @@ export type CreateChatCompletionKnowledgeBases$Outbound = {
       | CreateChatCompletion1Lt$Outbound
       | CreateChatCompletion1Lte$Outbound
       | CreateChatCompletion1In$Outbound
-      | CreateChatCompletion1Nin$Outbound
-      | CreateChatCompletion1Exists$Outbound;
+      | CreateChatCompletion1Nin$Outbound;
   } | undefined;
   search_options?: SearchOptions$Outbound | undefined;
   rerank_config?: RerankConfig$Outbound | undefined;
@@ -5149,7 +5036,6 @@ export const CreateChatCompletionKnowledgeBases$outboundSchema: z.ZodType<
       z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
       z.lazy(() => CreateChatCompletion1In$outboundSchema),
       z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Exists$outboundSchema),
     ])),
   ]).optional(),
   searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),

@@ -69,11 +69,3 @@ const value: operations.DeploymentStreamAndNin = {
 };
 ```
 
-### `operations.DeploymentStreamAndExists`
-
-```typescript
-const value: operations.DeploymentStreamAndExists = {
-  exists: false,
-};
-```
-

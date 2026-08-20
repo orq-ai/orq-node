@@ -69,11 +69,11 @@ const value: components.SearchKnowledgeRequestOrFilterByNin = {
 };
 ```
 
-### `components.SearchKnowledgeRequestOrExists`
+### `components.OrExists`
 
 ```typescript
-const value: components.SearchKnowledgeRequestOrExists = {
-  exists: true,
+const value: components.OrExists = {
+  exists: false,
 };
 ```
 

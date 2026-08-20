@@ -11,7 +11,7 @@ let value: FilterByOr = {
   or: [
     {
       "key": {
-        nin: [
+        in: [
           true,
         ],
       },

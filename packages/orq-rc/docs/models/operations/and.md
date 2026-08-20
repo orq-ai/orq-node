@@ -11,7 +11,9 @@ let value: And = {
   and: [
     {
       "key": {
-        exists: false,
+        nin: [
+          true,
+        ],
       },
     },
   ],

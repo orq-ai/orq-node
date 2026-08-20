@@ -754,13 +754,6 @@ export type Thread = {
   tags?: Array<string> | undefined;
 };
 
-/**
- * Exists
- */
-export type OrExists = {
-  exists: boolean;
-};
-
 export type DeploymentGetConfigOrNin = string | number | boolean;
 
 /**
@@ -833,34 +826,15 @@ export type KnowledgeFilterOr =
   | OrLt
   | OrLte
   | OrIn
-  | OrNin
-  | OrExists;
+  | OrNin;
 
 /**
  * Or
  */
 export type Or = {
   or: Array<
-    {
-      [k: string]:
-        | OrEq
-        | OrNe
-        | OrGt
-        | OrGte
-        | OrLt
-        | OrLte
-        | OrIn
-        | OrNin
-        | OrExists;
-    }
+    { [k: string]: OrEq | OrNe | OrGt | OrGte | OrLt | OrLte | OrIn | OrNin }
   >;
-};
-
-/**
- * Exists
- */
-export type AndExists = {
-  exists: boolean;
 };
 
 export type DeploymentGetConfigAndNin = string | number | boolean;
@@ -935,8 +909,7 @@ export type KnowledgeFilterAnd =
   | AndLt
   | AndLte
   | AndIn
-  | AndNin
-  | AndExists;
+  | AndNin;
 
 /**
  * And
@@ -952,17 +925,9 @@ export type And = {
         | AndLt
         | AndLte
         | AndIn
-        | AndNin
-        | AndExists;
+        | AndNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type Exists = {
-  exists: boolean;
 };
 
 export type OneNin = string | number | boolean;
@@ -1029,13 +994,13 @@ export type Eq = {
   eq: string | number | boolean;
 };
 
-export type One = Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
+export type One = Eq | Ne | Gt | Gte | Lt | Lte | In | Nin;
 
 /**
  * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
  */
 export type KnowledgeFilter = And | Or | {
-  [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
+  [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin;
 };
 
 export type DeploymentGetConfigRequestBody = {
@@ -1101,7 +1066,7 @@ export type DeploymentGetConfigRequestBody = {
    * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
    */
   knowledgeFilter?: And | Or | {
-    [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin | Exists;
+    [k: string]: Eq | Ne | Gt | Gte | Lt | Lte | In | Nin;
   } | undefined;
 };
 
@@ -2975,24 +2940,6 @@ export function threadToJSON(thread: Thread): string {
 }
 
 /** @internal */
-export type OrExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const OrExists$outboundSchema: z.ZodType<
-  OrExists$Outbound,
-  z.ZodTypeDef,
-  OrExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function orExistsToJSON(orExists: OrExists): string {
-  return JSON.stringify(OrExists$outboundSchema.parse(orExists));
-}
-
-/** @internal */
 export type DeploymentGetConfigOrNin$Outbound = string | number | boolean;
 
 /** @internal */
@@ -3202,8 +3149,7 @@ export type KnowledgeFilterOr$Outbound =
   | OrLt$Outbound
   | OrLte$Outbound
   | OrIn$Outbound
-  | OrNin$Outbound
-  | OrExists$Outbound;
+  | OrNin$Outbound;
 
 /** @internal */
 export const KnowledgeFilterOr$outboundSchema: z.ZodType<
@@ -3219,7 +3165,6 @@ export const KnowledgeFilterOr$outboundSchema: z.ZodType<
   z.lazy(() => OrLte$outboundSchema),
   z.lazy(() => OrIn$outboundSchema),
   z.lazy(() => OrNin$outboundSchema),
-  z.lazy(() => OrExists$outboundSchema),
 ]);
 
 export function knowledgeFilterOrToJSON(
@@ -3242,8 +3187,7 @@ export type Or$Outbound = {
         | OrLt$Outbound
         | OrLte$Outbound
         | OrIn$Outbound
-        | OrNin$Outbound
-        | OrExists$Outbound;
+        | OrNin$Outbound;
     }
   >;
 };
@@ -3263,31 +3207,12 @@ export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
         z.lazy(() => OrLte$outboundSchema),
         z.lazy(() => OrIn$outboundSchema),
         z.lazy(() => OrNin$outboundSchema),
-        z.lazy(() => OrExists$outboundSchema),
       ])),
     ),
   });
 
 export function orToJSON(or: Or): string {
   return JSON.stringify(Or$outboundSchema.parse(or));
-}
-
-/** @internal */
-export type AndExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const AndExists$outboundSchema: z.ZodType<
-  AndExists$Outbound,
-  z.ZodTypeDef,
-  AndExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function andExistsToJSON(andExists: AndExists): string {
-  return JSON.stringify(AndExists$outboundSchema.parse(andExists));
 }
 
 /** @internal */
@@ -3515,8 +3440,7 @@ export type KnowledgeFilterAnd$Outbound =
   | AndLt$Outbound
   | AndLte$Outbound
   | AndIn$Outbound
-  | AndNin$Outbound
-  | AndExists$Outbound;
+  | AndNin$Outbound;
 
 /** @internal */
 export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
@@ -3532,7 +3456,6 @@ export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
   z.lazy(() => AndLte$outboundSchema),
   z.lazy(() => AndIn$outboundSchema),
   z.lazy(() => AndNin$outboundSchema),
-  z.lazy(() => AndExists$outboundSchema),
 ]);
 
 export function knowledgeFilterAndToJSON(
@@ -3555,8 +3478,7 @@ export type And$Outbound = {
         | AndLt$Outbound
         | AndLte$Outbound
         | AndIn$Outbound
-        | AndNin$Outbound
-        | AndExists$Outbound;
+        | AndNin$Outbound;
     }
   >;
 };
@@ -3576,31 +3498,12 @@ export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
         z.lazy(() => AndLte$outboundSchema),
         z.lazy(() => AndIn$outboundSchema),
         z.lazy(() => AndNin$outboundSchema),
-        z.lazy(() => AndExists$outboundSchema),
       ])),
     ),
   });
 
 export function andToJSON(and: And): string {
   return JSON.stringify(And$outboundSchema.parse(and));
-}
-
-/** @internal */
-export type Exists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const Exists$outboundSchema: z.ZodType<
-  Exists$Outbound,
-  z.ZodTypeDef,
-  Exists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function existsToJSON(exists: Exists): string {
-  return JSON.stringify(Exists$outboundSchema.parse(exists));
 }
 
 /** @internal */
@@ -3788,8 +3691,7 @@ export type One$Outbound =
   | Lt$Outbound
   | Lte$Outbound
   | In$Outbound
-  | Nin$Outbound
-  | Exists$Outbound;
+  | Nin$Outbound;
 
 /** @internal */
 export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
@@ -3802,7 +3704,6 @@ export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
     z.lazy(() => Lte$outboundSchema),
     z.lazy(() => In$outboundSchema),
     z.lazy(() => Nin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
   ]);
 
 export function oneToJSON(one: One): string {
@@ -3819,8 +3720,7 @@ export type KnowledgeFilter$Outbound = And$Outbound | Or$Outbound | {
     | Lt$Outbound
     | Lte$Outbound
     | In$Outbound
-    | Nin$Outbound
-    | Exists$Outbound;
+    | Nin$Outbound;
 };
 
 /** @internal */
@@ -3840,7 +3740,6 @@ export const KnowledgeFilter$outboundSchema: z.ZodType<
     z.lazy(() => Lte$outboundSchema),
     z.lazy(() => In$outboundSchema),
     z.lazy(() => Nin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
   ])),
 ]);
 
@@ -3889,8 +3788,7 @@ export type DeploymentGetConfigRequestBody$Outbound = {
       | Lt$Outbound
       | Lte$Outbound
       | In$Outbound
-      | Nin$Outbound
-      | Exists$Outbound;
+      | Nin$Outbound;
   } | undefined;
 };
 
@@ -3940,7 +3838,6 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => Lte$outboundSchema),
       z.lazy(() => In$outboundSchema),
       z.lazy(() => Nin$outboundSchema),
-      z.lazy(() => Exists$outboundSchema),
     ])),
   ]).optional(),
 }).transform((v) => {
