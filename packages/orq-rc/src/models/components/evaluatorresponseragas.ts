@@ -54,8 +54,8 @@ export const EvaluatorResponseRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-08-20T11:48:22.539Z"),
-  updated: z.string().default("2026-08-20T11:48:22.539Z"),
+  created: z.string().default("2026-08-20T13:19:51.038Z"),
+  updated: z.string().default("2026-08-20T13:19:51.038Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
