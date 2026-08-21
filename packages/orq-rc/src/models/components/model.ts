@@ -8,17 +8,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ModelArtificialAnalysis,
-  ModelArtificialAnalysis$inboundSchema,
-} from "./modelartificialanalysis.js";
-import {
   ModelModalities,
   ModelModalities$inboundSchema,
 } from "./modelmodalities.js";
-import {
-  ModelParameter,
-  ModelParameter$inboundSchema,
-} from "./modelparameter.js";
 import { ModelProvider, ModelProvider$inboundSchema } from "./modelprovider.js";
 
 /**
@@ -32,6 +24,14 @@ import { ModelProvider, ModelProvider$inboundSchema } from "./modelprovider.js";
  *  no representable token-based pricing.
  */
 export type ModelPricing = {};
+
+/**
+ * Artificial Analysis benchmark scores keyed by evaluation name. Absent
+ *
+ * @remarks
+ *  when unavailable for this offering.
+ */
+export type ArtificialIntelligence = {};
 
 export type Model = {
   /**
@@ -89,9 +89,9 @@ export type Model = {
    */
   pricing?: ModelPricing | undefined;
   /**
-   * Playground and API parameters this offering exposes.
+   * API parameter keys this offering accepts, snake_case (e.g. `temperature`, `max_tokens`).
    */
-  supportedParameters: Array<ModelParameter>;
+  supportedParameters: Array<string>;
   /**
    * Paid service tier names available to this offering.
    */
@@ -104,39 +104,30 @@ export type Model = {
    */
   contextWindow?: string | undefined;
   /**
-   * Maximum output size in tokens (string-encoded int64 in JSON). Absent
-   *
-   * @remarks
-   *  when not applicable.
-   */
-  maxOutputTokens?: string | undefined;
-  /**
    * Regions this offering routes to, lowercased.
    */
   location: Array<string>;
   /**
-   * Artificial Analysis benchmark data. Absent when unavailable for this
+   * Artificial Analysis benchmark scores keyed by evaluation name. Absent
    *
    * @remarks
-   *  offering.
+   *  when unavailable for this offering.
    */
-  artificialIntelligence?: ModelArtificialAnalysis | undefined;
+  artificialIntelligence?: ArtificialIntelligence | undefined;
   /**
-   * Catalog lifecycle: active, preview or deprecated.
+   * Normalized capability names this offering supports, snake_case and
+   *
+   * @remarks
+   *  alphabetical (e.g. `json_mode`, `tool_calling`, `vision`, `web_search`).
    */
-  status: string;
+  features: Array<string>;
   /**
-   * Task type: chat, completion, embedding, image, ...
+   * True when this offering is deprecated, whether or not a deprecation
+   *
+   * @remarks
+   *  date is known. `deprecation` carries the date when one is announced.
    */
-  type: string;
-  /**
-   * Training-data cutoff (YYYY-MM). Empty when unset.
-   */
-  knowledgeCutoff: string;
-  /**
-   * Public release date (YYYY-MM-DD). Empty when unset.
-   */
-  releaseDate: string;
+  deprecated: boolean;
 };
 
 /** @internal */
@@ -157,6 +148,23 @@ export function modelPricingFromJSON(
 }
 
 /** @internal */
+export const ArtificialIntelligence$inboundSchema: z.ZodType<
+  ArtificialIntelligence,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function artificialIntelligenceFromJSON(
+  jsonString: string,
+): SafeParseResult<ArtificialIntelligence, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ArtificialIntelligence$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ArtificialIntelligence' from JSON`,
+  );
+}
+
+/** @internal */
 export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
@@ -169,26 +177,21 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     modalities: ModelModalities$inboundSchema,
     offering_of: z.string(),
     pricing: z.lazy(() => ModelPricing$inboundSchema).optional(),
-    supported_parameters: z.array(ModelParameter$inboundSchema),
+    supported_parameters: z.array(z.string()),
     supported_tiers: z.array(z.string()),
     context_window: z.string().optional(),
-    max_output_tokens: z.string().optional(),
     location: z.array(z.string()),
-    artificial_intelligence: ModelArtificialAnalysis$inboundSchema.optional(),
-    status: z.string(),
-    type: z.string(),
-    knowledge_cutoff: z.string(),
-    release_date: z.string(),
+    artificial_intelligence: z.lazy(() => ArtificialIntelligence$inboundSchema)
+      .optional(),
+    features: z.array(z.string()),
+    deprecated: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
       "offering_of": "offeringOf",
       "supported_parameters": "supportedParameters",
       "supported_tiers": "supportedTiers",
       "context_window": "contextWindow",
-      "max_output_tokens": "maxOutputTokens",
       "artificial_intelligence": "artificialIntelligence",
-      "knowledge_cutoff": "knowledgeCutoff",
-      "release_date": "releaseDate",
     });
   });
 

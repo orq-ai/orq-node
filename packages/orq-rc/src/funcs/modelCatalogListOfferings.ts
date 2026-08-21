@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -30,11 +30,11 @@ import { Result } from "../types/fp.js";
  * List model catalog offerings
  *
  * @remarks
- * Returns catalog entries as a flat list of offerings. Pass `model` to narrow the list to every provider offering of one base model reference (for example `anthropic/claude-opus`).
+ * Returns every provider offering of one base model, identified by `<developer>/<stem>` (for example `anthropic/claude-opus-4-7`). Deprecated models are never listed.
  */
 export function modelCatalogListOfferings(
   client: OrqCore,
-  request?: operations.ModelCatalogListOfferingsRequest | undefined,
+  request: operations.ModelCatalogListOfferingsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function modelCatalogListOfferings(
 
 async function $do(
   client: OrqCore,
-  request?: operations.ModelCatalogListOfferingsRequest | undefined,
+  request: operations.ModelCatalogListOfferingsRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -79,8 +79,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.ModelCatalogListOfferingsRequest$outboundSchema.optional()
-        .parse(value),
+      operations.ModelCatalogListOfferingsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -89,27 +88,29 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v2/model-catalog/offerings")();
+  const pathParams = {
+    model: encodeSimple("model", payload.model, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v2/model-catalog/{model}/offerings")(pathParams);
 
   const query = encodeFormQuery({
-    "deprecated": payload?.deprecated,
-    "ending_before": payload?.ending_before,
-    "endpoint": payload?.endpoint,
-    "input_modality": payload?.input_modality,
-    "limit": payload?.limit,
-    "location": payload?.location,
-    "model": payload?.model,
-    "offering_of": payload?.offering_of,
-    "order": payload?.order,
-    "output_modality": payload?.output_modality,
-    "provider": payload?.provider,
-    "search": payload?.search,
-    "sort_by": payload?.sort_by,
-    "starting_after": payload?.starting_after,
-    "status": payload?.status,
-    "supported_parameter": payload?.supported_parameter,
-    "tier": payload?.tier,
-    "type": payload?.type,
+    "ending_before": payload.ending_before,
+    "endpoint": payload.endpoint,
+    "feature": payload.feature,
+    "input_modality": payload.input_modality,
+    "limit": payload.limit,
+    "location": payload.location,
+    "order": payload.order,
+    "output_modality": payload.output_modality,
+    "provider": payload.provider,
+    "search": payload.search,
+    "sort_by": payload.sort_by,
+    "starting_after": payload.starting_after,
+    "supported_parameter": payload.supported_parameter,
+    "tier": payload.tier,
   });
 
   const headers = new Headers(compactMap({

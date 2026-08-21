@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ModelCatalogListRequest = {
   /**
-   * Page size, 1–200. Unset uses the server default (50).
+   * Page size, 1–1000. Unset returns every non-deprecated model in one response.
    */
   limit?: number | undefined;
   /**
@@ -48,16 +48,12 @@ export type ModelCatalogListRequest = {
    */
   location?: Array<string> | undefined;
   /**
-   * Filter by task type. Repeat to match any of several types.
-   */
-  type?: Array<string> | undefined;
-  /**
-   * Filter by catalog lifecycle status. Repeat to match any of several
+   * Filter by normalized feature name. Repeat to match any of several
    *
    * @remarks
-   *  statuses.
+   *  features.
    */
-  status?: Array<string> | undefined;
+  feature?: Array<string> | undefined;
   /**
    * Filter by supported parameter key. Repeat to match any of several
    *
@@ -76,14 +72,6 @@ export type ModelCatalogListRequest = {
    * Filter to offerings of one base model reference, `<developer>/<stem>`.
    */
   offeringOf?: string | undefined;
-  /**
-   * Filter by deprecation: true returns only offerings with an announced
-   *
-   * @remarks
-   *  sunset date, false returns only offerings without one. Unset returns
-   *  both.
-   */
-  deprecated?: boolean | undefined;
   /**
    * Case-insensitive substring search over `id`, `name` and `description`.
    */
@@ -108,12 +96,10 @@ export type ModelCatalogListRequest$Outbound = {
   input_modality?: Array<string> | undefined;
   output_modality?: Array<string> | undefined;
   location?: Array<string> | undefined;
-  type?: Array<string> | undefined;
-  status?: Array<string> | undefined;
+  feature?: Array<string> | undefined;
   supported_parameter?: Array<string> | undefined;
   tier?: Array<string> | undefined;
   offering_of?: string | undefined;
-  deprecated?: boolean | undefined;
   search?: string | undefined;
   sort_by?: string | undefined;
   order?: string | undefined;
@@ -133,12 +119,10 @@ export const ModelCatalogListRequest$outboundSchema: z.ZodType<
   inputModality: z.array(z.string()).optional(),
   outputModality: z.array(z.string()).optional(),
   location: z.array(z.string()).optional(),
-  type: z.array(z.string()).optional(),
-  status: z.array(z.string()).optional(),
+  feature: z.array(z.string()).optional(),
   supportedParameter: z.array(z.string()).optional(),
   tier: z.array(z.string()).optional(),
   offeringOf: z.string().optional(),
-  deprecated: z.boolean().optional(),
   search: z.string().optional(),
   sortBy: z.string().optional(),
   order: z.string().optional(),

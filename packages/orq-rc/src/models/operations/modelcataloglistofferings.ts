@@ -7,7 +7,14 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ModelCatalogListOfferingsRequest = {
   /**
-   * Page size, 1–200. Unset uses the server default (50).
+   * Base model reference, `<developer>/<stem>` (for example
+   *
+   * @remarks
+   *  `anthropic/claude-opus-4-7`).
+   */
+  model: string;
+  /**
+   * Page size, 1–1000. Unset returns every non-deprecated model in one response.
    */
   limit?: number | undefined;
   /**
@@ -48,16 +55,12 @@ export type ModelCatalogListOfferingsRequest = {
    */
   location?: Array<string> | undefined;
   /**
-   * Filter by task type. Repeat to match any of several types.
-   */
-  type?: Array<string> | undefined;
-  /**
-   * Filter by catalog lifecycle status. Repeat to match any of several
+   * Filter by normalized feature name. Repeat to match any of several
    *
    * @remarks
-   *  statuses.
+   *  features.
    */
-  status?: Array<string> | undefined;
+  feature?: Array<string> | undefined;
   /**
    * Filter by supported parameter key. Repeat to match any of several
    *
@@ -73,18 +76,6 @@ export type ModelCatalogListOfferingsRequest = {
    */
   tier?: Array<string> | undefined;
   /**
-   * Filter to offerings of one base model reference, `<developer>/<stem>`.
-   */
-  offeringOf?: string | undefined;
-  /**
-   * Filter by deprecation: true returns only offerings with an announced
-   *
-   * @remarks
-   *  sunset date, false returns only offerings without one. Unset returns
-   *  both.
-   */
-  deprecated?: boolean | undefined;
-  /**
    * Case-insensitive substring search over `id`, `name` and `description`.
    */
   search?: string | undefined;
@@ -96,18 +87,11 @@ export type ModelCatalogListOfferingsRequest = {
    * Sort order. Defaults to ascending.
    */
   order?: string | undefined;
-  /**
-   * Base model reference, `<developer>/<stem>` (for example
-   *
-   * @remarks
-   *  `anthropic/claude-opus`). Narrows the result to every provider
-   *  offering of that base model. Omit to return every offering.
-   */
-  model?: string | undefined;
 };
 
 /** @internal */
 export type ModelCatalogListOfferingsRequest$Outbound = {
+  model: string;
   limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -116,16 +100,12 @@ export type ModelCatalogListOfferingsRequest$Outbound = {
   input_modality?: Array<string> | undefined;
   output_modality?: Array<string> | undefined;
   location?: Array<string> | undefined;
-  type?: Array<string> | undefined;
-  status?: Array<string> | undefined;
+  feature?: Array<string> | undefined;
   supported_parameter?: Array<string> | undefined;
   tier?: Array<string> | undefined;
-  offering_of?: string | undefined;
-  deprecated?: boolean | undefined;
   search?: string | undefined;
   sort_by?: string | undefined;
   order?: string | undefined;
-  model?: string | undefined;
 };
 
 /** @internal */
@@ -134,6 +114,7 @@ export const ModelCatalogListOfferingsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCatalogListOfferingsRequest
 > = z.object({
+  model: z.string(),
   limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
@@ -142,16 +123,12 @@ export const ModelCatalogListOfferingsRequest$outboundSchema: z.ZodType<
   inputModality: z.array(z.string()).optional(),
   outputModality: z.array(z.string()).optional(),
   location: z.array(z.string()).optional(),
-  type: z.array(z.string()).optional(),
-  status: z.array(z.string()).optional(),
+  feature: z.array(z.string()).optional(),
   supportedParameter: z.array(z.string()).optional(),
   tier: z.array(z.string()).optional(),
-  offeringOf: z.string().optional(),
-  deprecated: z.boolean().optional(),
   search: z.string().optional(),
   sortBy: z.string().optional(),
   order: z.string().optional(),
-  model: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
@@ -159,7 +136,6 @@ export const ModelCatalogListOfferingsRequest$outboundSchema: z.ZodType<
     inputModality: "input_modality",
     outputModality: "output_modality",
     supportedParameter: "supported_parameter",
-    offeringOf: "offering_of",
     sortBy: "sort_by",
   });
 });

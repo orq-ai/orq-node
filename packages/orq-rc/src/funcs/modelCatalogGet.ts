@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a model catalog entry
  *
  * @remarks
- * Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`).
+ * Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`). Unlike the list endpoints this also resolves deprecated models; check `deprecated` and `deprecation` on the response.
  */
 export function modelCatalogGet(
   client: OrqCore,

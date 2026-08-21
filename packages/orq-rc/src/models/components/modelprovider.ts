@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,21 +13,9 @@ export type ModelProvider = {
    */
   id: string;
   /**
-   * Provider display name.
-   */
-  name: string;
-  /**
    * Absolute URL of the provider logo. Empty when no logo is known.
    */
   logo: string;
-  /**
-   * Provider documentation URL.
-   */
-  docsUrl: string;
-  /**
-   * Provider pricing page URL.
-   */
-  pricingUrl: string;
 };
 
 /** @internal */
@@ -38,15 +25,7 @@ export const ModelProvider$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  name: z.string(),
   logo: z.string(),
-  docs_url: z.string(),
-  pricing_url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "docs_url": "docsUrl",
-    "pricing_url": "pricingUrl",
-  });
 });
 
 export function modelProviderFromJSON(

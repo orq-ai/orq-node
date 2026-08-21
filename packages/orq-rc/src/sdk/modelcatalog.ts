@@ -15,7 +15,7 @@ export class ModelCatalog extends ClientSDK {
    * List the model catalog
    *
    * @remarks
-   * Returns every model orq offers, optionally filtered, searched and sorted. Use `starting_after` or `ending_before` to page through the collection.
+   * Returns every model orq offers, optionally filtered, searched and sorted. Deprecated models are never listed; fetch one directly by id to inspect it. Unset `limit` returns the whole catalog. Use `starting_after` or `ending_before` to page through the collection.
    */
   async list(
     request?: operations.ModelCatalogListRequest | undefined,
@@ -32,10 +32,10 @@ export class ModelCatalog extends ClientSDK {
    * List model catalog offerings
    *
    * @remarks
-   * Returns catalog entries as a flat list of offerings. Pass `model` to narrow the list to every provider offering of one base model reference (for example `anthropic/claude-opus`).
+   * Returns every provider offering of one base model, identified by `<developer>/<stem>` (for example `anthropic/claude-opus-4-7`). Deprecated models are never listed.
    */
   async listOfferings(
-    request?: operations.ModelCatalogListOfferingsRequest | undefined,
+    request: operations.ModelCatalogListOfferingsRequest,
     options?: RequestOptions,
   ): Promise<components.ListModelCatalogOfferingsResponse> {
     return unwrapAsync(modelCatalogListOfferings(
@@ -49,7 +49,7 @@ export class ModelCatalog extends ClientSDK {
    * Retrieve a model catalog entry
    *
    * @remarks
-   * Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`).
+   * Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`). Unlike the list endpoints this also resolves deprecated models; check `deprecated` and `deprecation` on the response.
    */
   async get(
     request: operations.ModelCatalogGetRequest,

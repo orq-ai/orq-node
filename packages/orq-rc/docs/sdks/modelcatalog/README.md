@@ -10,7 +10,7 @@
 
 ## list
 
-Returns every model orq offers, optionally filtered, searched and sorted. Use `starting_after` or `ending_before` to page through the collection.
+Returns every model orq offers, optionally filtered, searched and sorted. Deprecated models are never listed; fetch one directly by id to inspect it. Unset `limit` returns the whole catalog. Use `starting_after` or `ending_before` to page through the collection.
 
 ### Example Usage
 
@@ -79,11 +79,11 @@ run();
 
 ## listOfferings
 
-Returns catalog entries as a flat list of offerings. Pass `model` to narrow the list to every provider offering of one base model reference (for example `anthropic/claude-opus`).
+Returns every provider offering of one base model, identified by `<developer>/<stem>` (for example `anthropic/claude-opus-4-7`). Deprecated models are never listed.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ModelCatalogListOfferings" method="get" path="/v2/model-catalog/offerings" -->
+<!-- UsageSnippet language="typescript" operationID="ModelCatalogListOfferings" method="get" path="/v2/model-catalog/{model}/offerings" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -92,7 +92,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.modelCatalog.listOfferings();
+  const result = await orq.modelCatalog.listOfferings({
+    model: "Cruze",
+  });
 
   console.log(result);
 }
@@ -115,7 +117,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await modelCatalogListOfferings(orq);
+  const res = await modelCatalogListOfferings(orq, {
+    model: "Cruze",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -148,7 +152,7 @@ run();
 
 ## get
 
-Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`).
+Retrieves a single catalog entry by its id, `<provider>/<model>` (for example `openai/gpt-4o`). Unlike the list endpoints this also resolves deprecated models; check `deprecated` and `deprecation` on the response.
 
 ### Example Usage
 

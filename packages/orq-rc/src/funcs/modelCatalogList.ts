@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List the model catalog
  *
  * @remarks
- * Returns every model orq offers, optionally filtered, searched and sorted. Use `starting_after` or `ending_before` to page through the collection.
+ * Returns every model orq offers, optionally filtered, searched and sorted. Deprecated models are never listed; fetch one directly by id to inspect it. Unset `limit` returns the whole catalog. Use `starting_after` or `ending_before` to page through the collection.
  */
 export function modelCatalogList(
   client: OrqCore,
@@ -91,9 +91,9 @@ async function $do(
   const path = pathToFunc("/v2/model-catalog")();
 
   const query = encodeFormQuery({
-    "deprecated": payload?.deprecated,
     "ending_before": payload?.ending_before,
     "endpoint": payload?.endpoint,
+    "feature": payload?.feature,
     "input_modality": payload?.input_modality,
     "limit": payload?.limit,
     "location": payload?.location,
@@ -104,10 +104,8 @@ async function $do(
     "search": payload?.search,
     "sort_by": payload?.sort_by,
     "starting_after": payload?.starting_after,
-    "status": payload?.status,
     "supported_parameter": payload?.supported_parameter,
     "tier": payload?.tier,
-    "type": payload?.type,
   });
 
   const headers = new Headers(compactMap({
