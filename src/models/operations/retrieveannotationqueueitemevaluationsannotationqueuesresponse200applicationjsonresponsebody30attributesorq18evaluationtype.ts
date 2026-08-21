@@ -161,6 +161,7 @@ export const Effort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
  * The effort level for reasoning
@@ -4979,7 +4980,7 @@ export const ThirtyOne$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01M0JC93QF0YQPQEVG4E3VZPK1"),
+  _id: z.string().default("01M0K7K8YFFD5FB0MKZJAWK8ZM"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),
@@ -5993,7 +5994,7 @@ export const RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200Ap
     explanation: z.string().optional(),
     reviewed_by_id: z.string(),
     reviewed_at: z.string().datetime({ offset: true }).default(
-      "2026-08-21T14:40:56.541Z",
+      "2026-08-21T22:38:21.118Z",
     ).transform(v => new Date(v)),
     type:
       RetrieveAnnotationQueueItemEvaluationsAnnotationQueuesResponse200ApplicationJSONResponseBody30AttributesOrq19Type$inboundSchema,

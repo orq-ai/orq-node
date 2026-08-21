@@ -32,7 +32,7 @@ import {
 } from "./retrieveannotationqueueitemevaluationsannotationqueuesresponse200applicationjsonresponsebody2attributesorq14type.js";
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -41,7 +41,7 @@ import {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const InputReasoningEffort = {
   None: "none",
@@ -50,9 +50,10 @@ export const InputReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -61,7 +62,7 @@ export const InputReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type InputReasoningEffort = ClosedEnum<typeof InputReasoningEffort>;
 
@@ -1134,7 +1135,7 @@ export type Input1 = {
    */
   responseFormat?: InputResponseFormat | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1143,7 +1144,7 @@ export type Input1 = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: InputReasoningEffort | undefined;
   /**
@@ -4911,7 +4912,7 @@ export const RetrieveAnnotationQueueItemResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01M0JC91T63EC2K3QJ68QHE29X"),
+  _id: z.string().default("01M0K7K72P9GG2EBTA8X9T7YAY"),
   name: z.string().optional(),
   trace_id: z.string(),
   duration: z.number().optional(),

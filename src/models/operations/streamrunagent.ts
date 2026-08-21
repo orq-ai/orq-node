@@ -66,7 +66,7 @@ export type StreamRunAgentModelConfigurationResponseFormat =
   | StreamRunAgentResponseFormatJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -75,7 +75,7 @@ export type StreamRunAgentModelConfigurationResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const StreamRunAgentModelConfigurationReasoningEffort = {
   None: "none",
@@ -84,9 +84,10 @@ export const StreamRunAgentModelConfigurationReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -95,7 +96,7 @@ export const StreamRunAgentModelConfigurationReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type StreamRunAgentModelConfigurationReasoningEffort = ClosedEnum<
   typeof StreamRunAgentModelConfigurationReasoningEffort
@@ -370,7 +371,7 @@ export type StreamRunAgentModelConfigurationParameters = {
     | StreamRunAgentResponseFormatJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -379,7 +380,7 @@ export type StreamRunAgentModelConfigurationParameters = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: StreamRunAgentModelConfigurationReasoningEffort | undefined;
   /**
@@ -567,7 +568,7 @@ export type StreamRunAgentFallbackModelConfigurationResponseFormat =
   | StreamRunAgentResponseFormatAgentsRequestJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -576,7 +577,7 @@ export type StreamRunAgentFallbackModelConfigurationResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const StreamRunAgentFallbackModelConfigurationReasoningEffort = {
   None: "none",
@@ -585,9 +586,10 @@ export const StreamRunAgentFallbackModelConfigurationReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -596,7 +598,7 @@ export const StreamRunAgentFallbackModelConfigurationReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type StreamRunAgentFallbackModelConfigurationReasoningEffort =
   ClosedEnum<typeof StreamRunAgentFallbackModelConfigurationReasoningEffort>;
@@ -876,7 +878,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | StreamRunAgentResponseFormatAgentsRequestJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -885,7 +887,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?:
     | StreamRunAgentFallbackModelConfigurationReasoningEffort
@@ -3941,7 +3943,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M0JC9180Q07CCQ1350C7JMTK"),
+  id: z.string().default("01M0K7K6HEC974JCMRJ0BC5VT6"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

@@ -208,6 +208,10 @@ export type ToolCalls = {
 
 export type AssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -550,6 +554,10 @@ export type MessagesToolCalls = {
 };
 
 export type MessagesAssistantMessage = {
+  /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -1646,6 +1654,7 @@ export const AssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  reasoning_content: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -1668,11 +1677,13 @@ export const AssistantMessage$inboundSchema: z.ZodType<
   tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "reasoning_content": "reasoningContent",
     "tool_calls": "toolCalls",
   });
 });
 /** @internal */
 export type AssistantMessage$Outbound = {
+  reasoning_content?: string | undefined;
   content?:
     | string
     | Array<
@@ -1696,6 +1707,7 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AssistantMessage
 > = z.object({
+  reasoningContent: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -1718,6 +1730,7 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
+    reasoningContent: "reasoning_content",
     toolCalls: "tool_calls",
   });
 });
@@ -2707,6 +2720,7 @@ export const MessagesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  reasoning_content: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -2729,11 +2743,13 @@ export const MessagesAssistantMessage$inboundSchema: z.ZodType<
   tool_calls: z.array(z.lazy(() => MessagesToolCalls$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "reasoning_content": "reasoningContent",
     "tool_calls": "toolCalls",
   });
 });
 /** @internal */
 export type MessagesAssistantMessage$Outbound = {
+  reasoning_content?: string | undefined;
   content?:
     | string
     | Array<
@@ -2757,6 +2773,7 @@ export const MessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessagesAssistantMessage
 > = z.object({
+  reasoningContent: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -2779,6 +2796,7 @@ export const MessagesAssistantMessage$outboundSchema: z.ZodType<
   toolCalls: z.array(z.lazy(() => MessagesToolCalls$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
+    reasoningContent: "reasoning_content",
     toolCalls: "tool_calls",
   });
 });

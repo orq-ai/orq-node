@@ -13,5 +13,5 @@ let value: Effort = "minimal";
 ## Values
 
 ```typescript
-"none" | "minimal" | "low" | "medium" | "high" | "xhigh"
+"none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
 ```

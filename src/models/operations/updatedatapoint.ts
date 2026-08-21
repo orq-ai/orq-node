@@ -167,6 +167,10 @@ export type UpdateDatapointMessagesToolCalls = {
 
 export type UpdateDatapointMessagesAssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -550,6 +554,10 @@ export type UpdateDatapointMessagesDatasetsToolCalls = {
 };
 
 export type UpdateDatapointMessagesDatasetsAssistantMessage = {
+  /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -1583,6 +1591,7 @@ export function updateDatapointMessagesToolCallsToJSON(
 
 /** @internal */
 export type UpdateDatapointMessagesAssistantMessage$Outbound = {
+  reasoning_content?: string | undefined;
   content?:
     | string
     | Array<
@@ -1606,6 +1615,7 @@ export const UpdateDatapointMessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapointMessagesAssistantMessage
 > = z.object({
+  reasoningContent: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -1631,6 +1641,7 @@ export const UpdateDatapointMessagesAssistantMessage$outboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
+    reasoningContent: "reasoning_content",
     toolCalls: "tool_calls",
   });
 });
@@ -2328,6 +2339,7 @@ export const UpdateDatapointMessagesDatasetsAssistantMessage$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    reasoning_content: z.string().optional(),
     content: z.nullable(
       z.union([
         z.string(),
@@ -2354,6 +2366,7 @@ export const UpdateDatapointMessagesDatasetsAssistantMessage$inboundSchema:
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      "reasoning_content": "reasoningContent",
       "tool_calls": "toolCalls",
     });
   });
@@ -2747,7 +2760,7 @@ export const UpdateDatapointEvaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T14:40:54.387Z",
+    "2026-08-21T22:38:19.021Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2847,7 +2860,7 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T14:40:54.387Z",
+    "2026-08-21T22:38:19.021Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2944,7 +2957,7 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T14:40:54.386Z",
+    "2026-08-21T22:38:19.020Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3033,7 +3046,7 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T14:40:54.386Z",
+    "2026-08-21T22:38:19.020Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3118,7 +3131,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-08-21T14:40:40.451Z",
+    "2026-08-21T22:38:04.091Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

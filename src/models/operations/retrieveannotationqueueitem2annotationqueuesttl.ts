@@ -2304,6 +2304,10 @@ export type RetrieveAnnotationQueueItemMessagesAnnotationQueuesToolCalls = {
 export type RetrieveAnnotationQueueItemMessagesAnnotationQueuesAssistantMessage =
   {
     /**
+     * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+     */
+    reasoningContent?: string | undefined;
+    /**
      * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
      */
     content?:
@@ -5587,6 +5591,7 @@ export const RetrieveAnnotationQueueItemMessagesAnnotationQueuesAssistantMessage
     z.ZodTypeDef,
     unknown
   > = z.object({
+    reasoning_content: z.string().optional(),
     content: z.nullable(
       z.union([
         z.string(),
@@ -5617,6 +5622,7 @@ export const RetrieveAnnotationQueueItemMessagesAnnotationQueuesAssistantMessage
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      "reasoning_content": "reasoningContent",
       "tool_calls": "toolCalls",
     });
   });

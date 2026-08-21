@@ -257,7 +257,7 @@ export type RetrieveAnnotationQueueItemInputResponseFormat =
   | RetrieveAnnotationQueueItemResponseFormatAnnotationQueuesResponse200JSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -266,7 +266,7 @@ export type RetrieveAnnotationQueueItemInputResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const RetrieveAnnotationQueueItemInputReasoningEffort = {
   None: "none",
@@ -275,9 +275,10 @@ export const RetrieveAnnotationQueueItemInputReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -286,7 +287,7 @@ export const RetrieveAnnotationQueueItemInputReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type RetrieveAnnotationQueueItemInputReasoningEffort = ClosedEnum<
   typeof RetrieveAnnotationQueueItemInputReasoningEffort
@@ -1397,7 +1398,7 @@ export type RetrieveAnnotationQueueItemInput2 = {
     | RetrieveAnnotationQueueItemResponseFormatAnnotationQueuesResponse200JSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1406,7 +1407,7 @@ export type RetrieveAnnotationQueueItemInput2 = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: RetrieveAnnotationQueueItemInputReasoningEffort | undefined;
   /**
@@ -1680,6 +1681,10 @@ export type RetrieveAnnotationQueueItemMessagesToolCalls = {
 };
 
 export type RetrieveAnnotationQueueItemMessagesAssistantMessage = {
+  /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -5391,6 +5396,7 @@ export const RetrieveAnnotationQueueItemMessagesAssistantMessage$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    reasoning_content: z.string().optional(),
     content: z.nullable(
       z.union([
         z.string(),
@@ -5417,6 +5423,7 @@ export const RetrieveAnnotationQueueItemMessagesAssistantMessage$inboundSchema:
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      "reasoning_content": "reasoningContent",
       "tool_calls": "toolCalls",
     });
   });
