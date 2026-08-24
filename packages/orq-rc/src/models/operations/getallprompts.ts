@@ -707,7 +707,7 @@ export type GetAllPromptsResponseFormat =
   | GetAllPromptsResponseFormatPromptsJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -716,7 +716,7 @@ export type GetAllPromptsResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const GetAllPromptsReasoningEffort = {
   None: "none",
@@ -725,9 +725,10 @@ export const GetAllPromptsReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -736,7 +737,7 @@ export const GetAllPromptsReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type GetAllPromptsReasoningEffort = ClosedEnum<
   typeof GetAllPromptsReasoningEffort
@@ -1149,6 +1150,10 @@ export type GetAllPromptsMessagesToolCalls = {
 
 export type GetAllPromptsMessagesAssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -1376,7 +1381,7 @@ export type GetAllPromptsPromptField = {
     | GetAllPromptsResponseFormatPromptsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1385,7 +1390,7 @@ export type GetAllPromptsPromptField = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: GetAllPromptsReasoningEffort | undefined;
   /**
@@ -2982,6 +2987,7 @@ export const GetAllPromptsMessagesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  reasoning_content: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -3007,6 +3013,7 @@ export const GetAllPromptsMessagesAssistantMessage$inboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "reasoning_content": "reasoningContent",
     "tool_calls": "toolCalls",
   });
 });

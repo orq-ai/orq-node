@@ -1,7 +1,7 @@
 # IdentityBudgetScopeRestResponse
 
-Per-identity cap. Keyed by the contact's external_id (not the
- internal Mongo `_id`) so the scope is stable across imports.
+Per-identity cap. Keyed by the contact's external identifier so the
+ scope is stable across imports.
 
 ## Example Usage
 

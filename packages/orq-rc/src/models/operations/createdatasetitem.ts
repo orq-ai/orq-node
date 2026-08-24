@@ -167,6 +167,10 @@ export type CreateDatasetItemMessagesToolCalls = {
 
 export type CreateDatasetItemMessagesAssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -546,6 +550,10 @@ export type CreateDatasetItemMessagesDatasetsToolCalls = {
 };
 
 export type CreateDatasetItemMessagesDatasetsAssistantMessage = {
+  /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -1558,6 +1566,7 @@ export function createDatasetItemMessagesToolCallsToJSON(
 
 /** @internal */
 export type CreateDatasetItemMessagesAssistantMessage$Outbound = {
+  reasoning_content?: string | undefined;
   content?:
     | string
     | Array<
@@ -1582,6 +1591,7 @@ export const CreateDatasetItemMessagesAssistantMessage$outboundSchema:
     z.ZodTypeDef,
     CreateDatasetItemMessagesAssistantMessage
   > = z.object({
+    reasoningContent: z.string().optional(),
     content: z.nullable(
       z.union([
         z.string(),
@@ -1608,6 +1618,7 @@ export const CreateDatasetItemMessagesAssistantMessage$outboundSchema:
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      reasoningContent: "reasoning_content",
       toolCalls: "tool_calls",
     });
   });
@@ -2306,6 +2317,7 @@ export const CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
+    reasoning_content: z.string().optional(),
     content: z.nullable(
       z.union([
         z.string(),
@@ -2332,6 +2344,7 @@ export const CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema:
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      "reasoning_content": "reasoningContent",
       "tool_calls": "toolCalls",
     });
   });
@@ -2726,7 +2739,7 @@ export const Evaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.641Z",
+    "2026-08-24T01:57:07.856Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2816,7 +2829,7 @@ export const CreateDatasetItemEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.640Z",
+    "2026-08-24T01:57:07.856Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2901,7 +2914,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.640Z",
+    "2026-08-24T01:57:07.855Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -2987,7 +3000,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.639Z",
+    "2026-08-24T01:57:07.855Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3074,7 +3087,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:33.837Z",
+    "2026-08-24T01:56:57.966Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

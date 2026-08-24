@@ -715,7 +715,7 @@ export type ListPromptVersionsResponseFormat =
   | ListPromptVersionsResponseFormatPromptsJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -724,7 +724,7 @@ export type ListPromptVersionsResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const ListPromptVersionsReasoningEffort = {
   None: "none",
@@ -733,9 +733,10 @@ export const ListPromptVersionsReasoningEffort = {
   Medium: "medium",
   High: "high",
   Xhigh: "xhigh",
+  Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -744,7 +745,7 @@ export const ListPromptVersionsReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+ * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type ListPromptVersionsReasoningEffort = ClosedEnum<
   typeof ListPromptVersionsReasoningEffort
@@ -1157,6 +1158,10 @@ export type ListPromptVersionsMessagesToolCalls = {
 
 export type ListPromptVersionsMessagesAssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -1383,7 +1388,7 @@ export type ListPromptVersionsPromptField = {
     | ListPromptVersionsResponseFormatPromptsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1392,7 +1397,7 @@ export type ListPromptVersionsPromptField = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh".
+   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: ListPromptVersionsReasoningEffort | undefined;
   /**
@@ -3015,6 +3020,7 @@ export function listPromptVersionsMessagesToolCallsFromJSON(
 export const ListPromptVersionsMessagesAssistantMessage$inboundSchema:
   z.ZodType<ListPromptVersionsMessagesAssistantMessage, z.ZodTypeDef, unknown> =
     z.object({
+      reasoning_content: z.string().optional(),
       content: z.nullable(
         z.union([
           z.string(),
@@ -3041,6 +3047,7 @@ export const ListPromptVersionsMessagesAssistantMessage$inboundSchema:
       ).optional(),
     }).transform((v) => {
       return remap$(v, {
+        "reasoning_content": "reasoningContent",
         "tool_calls": "toolCalls",
       });
     });

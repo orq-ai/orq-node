@@ -61,17 +61,17 @@ export type BudgetScope = {
    */
   project?: ProjectBudgetScope | undefined;
   /**
-   * Per-identity cap. Keyed by the contact's external_id (not the
+   * Per-identity cap. Keyed by the contact's external identifier so the
    *
    * @remarks
-   *  internal Mongo `_id`) so the scope is stable across imports.
+   *  scope is stable across imports.
    */
   identity?: IdentityBudgetScope | undefined;
   /**
    * Per-api-key cap. Replaces the legacy embedded `constraints.budget`
    *
    * @remarks
-   *  on auth.apiKeys.
+   *  associated with an API key.
    */
   apiKey?: ApiKeyBudgetScope | undefined;
   /**
@@ -86,7 +86,7 @@ export type BudgetScope = {
    *
    * @remarks
    *  it ("openai/gpt-4o", or "workspaceKey@openai/gpt-4o" for private
-   *  models) — NOT the Mongo `_id` of the model master-data document.
+   *  models), rather than an internal identifier.
    */
   model?: ModelBudgetScope | undefined;
 };

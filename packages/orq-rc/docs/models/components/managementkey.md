@@ -1,8 +1,7 @@
 # ManagementKey
 
-ManagementKey is the canonical record stored in MongoDB
- `auth.managementKeys`. It is the source of truth for permissions,
- expiration, and revocation. Management keys are always
+ManagementKey defines permissions, expiration, and revocation for a
+ management key. Management keys are always
  workspace-scoped — there is no project_scope field, and they have no
  per-user owner (every management key is workspace-owned;
  `created_by_id` records who created it).

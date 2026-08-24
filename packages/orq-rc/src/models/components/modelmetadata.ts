@@ -14,6 +14,12 @@ import {
   AutoRouterConfig$outboundSchema,
 } from "./autorouterconfig.js";
 import {
+  EmbeddingDimensionSupport,
+  EmbeddingDimensionSupport$inboundSchema,
+  EmbeddingDimensionSupport$Outbound,
+  EmbeddingDimensionSupport$outboundSchema,
+} from "./embeddingdimensionsupport.js";
+import {
   Pricing,
   Pricing$inboundSchema,
   Pricing$Outbound,
@@ -23,6 +29,7 @@ import {
 export type ModelMetadata = {
   allowedPassthroughParameters?: Array<string> | null | undefined;
   autorouter?: AutoRouterConfig | undefined;
+  batchEndpoints?: Array<string> | null | undefined;
   cachedImageInputCost?: number | undefined;
   cachedInputCost?: number | undefined;
   chainOfThought?: boolean | undefined;
@@ -75,6 +82,7 @@ export type ModelMetadata = {
   reasoningTokens?: number | undefined;
   region?: string | undefined;
   speedRating?: number | undefined;
+  supportedEmbeddingDimensions?: EmbeddingDimensionSupport | undefined;
   supportedVideoAspectRatios?: Array<string> | null | undefined;
   supportedVideoDurations?: Array<number> | null | undefined;
   supportedVideoFrameImages?: Array<string> | null | undefined;
@@ -102,6 +110,7 @@ export type ModelMetadata = {
   supportsJsonModeResponseFormat?: boolean | undefined;
   supportsJsonSchemaResponseFormat?: boolean | undefined;
   supportsMaxCompletionTokens?: boolean | undefined;
+  supportsOpenaiRealtimeApi?: boolean | undefined;
   supportsOpenaiSDK?: boolean | undefined;
   supportsParallelToolCalls?: boolean | undefined;
   supportsPdfInput?: boolean | undefined;
@@ -125,6 +134,10 @@ export type ModelMetadata = {
   supportsText?: boolean | undefined;
   supportsTextInput?: boolean | undefined;
   supportsTextOutput?: boolean | undefined;
+  supportsThinkingLevel?: boolean | undefined;
+  supportsThinkingLevelLow?: boolean | undefined;
+  supportsThinkingLevelMedium?: boolean | undefined;
+  supportsThinkingLevelMinimal?: boolean | undefined;
   supportsToolCalling?: boolean | undefined;
   supportsToolChoice?: boolean | undefined;
   supportsUrlContext?: boolean | undefined;
@@ -146,6 +159,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
 > = z.object({
   allowed_passthrough_parameters: z.nullable(z.array(z.string())).optional(),
   autorouter: AutoRouterConfig$inboundSchema.optional(),
+  batch_endpoints: z.nullable(z.array(z.string())).optional(),
   cached_image_input_cost: z.number().optional(),
   cached_input_cost: z.number().optional(),
   chain_of_thought: z.boolean().optional(),
@@ -198,6 +212,8 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   reasoning_tokens: z.number().int().optional(),
   region: z.string().optional(),
   speed_rating: z.number().int().optional(),
+  supported_embedding_dimensions: EmbeddingDimensionSupport$inboundSchema
+    .optional(),
   supported_video_aspect_ratios: z.nullable(z.array(z.string())).optional(),
   supported_video_durations: z.nullable(z.array(z.number().int())).optional(),
   supported_video_frame_images: z.nullable(z.array(z.string())).optional(),
@@ -225,6 +241,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_json_mode_response_format: z.boolean().optional(),
   supports_json_schema_response_format: z.boolean().optional(),
   supports_max_completion_tokens: z.boolean().optional(),
+  supports_openai_realtime_api: z.boolean().optional(),
   supports_openai_sdk: z.boolean().optional(),
   supports_parallel_tool_calls: z.boolean().optional(),
   supports_pdf_input: z.boolean().optional(),
@@ -248,6 +265,10 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_text: z.boolean().optional(),
   supports_text_input: z.boolean().optional(),
   supports_text_output: z.boolean().optional(),
+  supports_thinking_level: z.boolean().optional(),
+  supports_thinking_level_low: z.boolean().optional(),
+  supports_thinking_level_medium: z.boolean().optional(),
+  supports_thinking_level_minimal: z.boolean().optional(),
   supports_tool_calling: z.boolean().optional(),
   supports_tool_choice: z.boolean().optional(),
   supports_url_context: z.boolean().optional(),
@@ -262,6 +283,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "allowed_passthrough_parameters": "allowedPassthroughParameters",
+    "batch_endpoints": "batchEndpoints",
     "cached_image_input_cost": "cachedImageInputCost",
     "cached_input_cost": "cachedInputCost",
     "chain_of_thought": "chainOfThought",
@@ -314,6 +336,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "reasoning_cost": "reasoningCost",
     "reasoning_tokens": "reasoningTokens",
     "speed_rating": "speedRating",
+    "supported_embedding_dimensions": "supportedEmbeddingDimensions",
     "supported_video_aspect_ratios": "supportedVideoAspectRatios",
     "supported_video_durations": "supportedVideoDurations",
     "supported_video_frame_images": "supportedVideoFrameImages",
@@ -341,6 +364,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_json_mode_response_format": "supportsJsonModeResponseFormat",
     "supports_json_schema_response_format": "supportsJsonSchemaResponseFormat",
     "supports_max_completion_tokens": "supportsMaxCompletionTokens",
+    "supports_openai_realtime_api": "supportsOpenaiRealtimeApi",
     "supports_openai_sdk": "supportsOpenaiSDK",
     "supports_parallel_tool_calls": "supportsParallelToolCalls",
     "supports_pdf_input": "supportsPdfInput",
@@ -364,6 +388,10 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_text": "supportsText",
     "supports_text_input": "supportsTextInput",
     "supports_text_output": "supportsTextOutput",
+    "supports_thinking_level": "supportsThinkingLevel",
+    "supports_thinking_level_low": "supportsThinkingLevelLow",
+    "supports_thinking_level_medium": "supportsThinkingLevelMedium",
+    "supports_thinking_level_minimal": "supportsThinkingLevelMinimal",
     "supports_tool_calling": "supportsToolCalling",
     "supports_tool_choice": "supportsToolChoice",
     "supports_url_context": "supportsUrlContext",
@@ -381,6 +409,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
 export type ModelMetadata$Outbound = {
   allowed_passthrough_parameters?: Array<string> | null | undefined;
   autorouter?: AutoRouterConfig$Outbound | undefined;
+  batch_endpoints?: Array<string> | null | undefined;
   cached_image_input_cost?: number | undefined;
   cached_input_cost?: number | undefined;
   chain_of_thought?: boolean | undefined;
@@ -433,6 +462,9 @@ export type ModelMetadata$Outbound = {
   reasoning_tokens?: number | undefined;
   region?: string | undefined;
   speed_rating?: number | undefined;
+  supported_embedding_dimensions?:
+    | EmbeddingDimensionSupport$Outbound
+    | undefined;
   supported_video_aspect_ratios?: Array<string> | null | undefined;
   supported_video_durations?: Array<number> | null | undefined;
   supported_video_frame_images?: Array<string> | null | undefined;
@@ -460,6 +492,7 @@ export type ModelMetadata$Outbound = {
   supports_json_mode_response_format?: boolean | undefined;
   supports_json_schema_response_format?: boolean | undefined;
   supports_max_completion_tokens?: boolean | undefined;
+  supports_openai_realtime_api?: boolean | undefined;
   supports_openai_sdk?: boolean | undefined;
   supports_parallel_tool_calls?: boolean | undefined;
   supports_pdf_input?: boolean | undefined;
@@ -483,6 +516,10 @@ export type ModelMetadata$Outbound = {
   supports_text?: boolean | undefined;
   supports_text_input?: boolean | undefined;
   supports_text_output?: boolean | undefined;
+  supports_thinking_level?: boolean | undefined;
+  supports_thinking_level_low?: boolean | undefined;
+  supports_thinking_level_medium?: boolean | undefined;
+  supports_thinking_level_minimal?: boolean | undefined;
   supports_tool_calling?: boolean | undefined;
   supports_tool_choice?: boolean | undefined;
   supports_url_context?: boolean | undefined;
@@ -504,6 +541,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
 > = z.object({
   allowedPassthroughParameters: z.nullable(z.array(z.string())).optional(),
   autorouter: AutoRouterConfig$outboundSchema.optional(),
+  batchEndpoints: z.nullable(z.array(z.string())).optional(),
   cachedImageInputCost: z.number().optional(),
   cachedInputCost: z.number().optional(),
   chainOfThought: z.boolean().optional(),
@@ -556,6 +594,8 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   reasoningTokens: z.number().int().optional(),
   region: z.string().optional(),
   speedRating: z.number().int().optional(),
+  supportedEmbeddingDimensions: EmbeddingDimensionSupport$outboundSchema
+    .optional(),
   supportedVideoAspectRatios: z.nullable(z.array(z.string())).optional(),
   supportedVideoDurations: z.nullable(z.array(z.number().int())).optional(),
   supportedVideoFrameImages: z.nullable(z.array(z.string())).optional(),
@@ -583,6 +623,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsJsonModeResponseFormat: z.boolean().optional(),
   supportsJsonSchemaResponseFormat: z.boolean().optional(),
   supportsMaxCompletionTokens: z.boolean().optional(),
+  supportsOpenaiRealtimeApi: z.boolean().optional(),
   supportsOpenaiSDK: z.boolean().optional(),
   supportsParallelToolCalls: z.boolean().optional(),
   supportsPdfInput: z.boolean().optional(),
@@ -606,6 +647,10 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsText: z.boolean().optional(),
   supportsTextInput: z.boolean().optional(),
   supportsTextOutput: z.boolean().optional(),
+  supportsThinkingLevel: z.boolean().optional(),
+  supportsThinkingLevelLow: z.boolean().optional(),
+  supportsThinkingLevelMedium: z.boolean().optional(),
+  supportsThinkingLevelMinimal: z.boolean().optional(),
   supportsToolCalling: z.boolean().optional(),
   supportsToolChoice: z.boolean().optional(),
   supportsUrlContext: z.boolean().optional(),
@@ -620,6 +665,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     allowedPassthroughParameters: "allowed_passthrough_parameters",
+    batchEndpoints: "batch_endpoints",
     cachedImageInputCost: "cached_image_input_cost",
     cachedInputCost: "cached_input_cost",
     chainOfThought: "chain_of_thought",
@@ -672,6 +718,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     reasoningCost: "reasoning_cost",
     reasoningTokens: "reasoning_tokens",
     speedRating: "speed_rating",
+    supportedEmbeddingDimensions: "supported_embedding_dimensions",
     supportedVideoAspectRatios: "supported_video_aspect_ratios",
     supportedVideoDurations: "supported_video_durations",
     supportedVideoFrameImages: "supported_video_frame_images",
@@ -699,6 +746,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsJsonModeResponseFormat: "supports_json_mode_response_format",
     supportsJsonSchemaResponseFormat: "supports_json_schema_response_format",
     supportsMaxCompletionTokens: "supports_max_completion_tokens",
+    supportsOpenaiRealtimeApi: "supports_openai_realtime_api",
     supportsOpenaiSDK: "supports_openai_sdk",
     supportsParallelToolCalls: "supports_parallel_tool_calls",
     supportsPdfInput: "supports_pdf_input",
@@ -722,6 +770,10 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsText: "supports_text",
     supportsTextInput: "supports_text_input",
     supportsTextOutput: "supports_text_output",
+    supportsThinkingLevel: "supports_thinking_level",
+    supportsThinkingLevelLow: "supports_thinking_level_low",
+    supportsThinkingLevelMedium: "supports_thinking_level_medium",
+    supportsThinkingLevelMinimal: "supports_thinking_level_minimal",
     supportsToolCalling: "supports_tool_calling",
     supportsToolChoice: "supports_tool_choice",
     supportsUrlContext: "supports_url_context",

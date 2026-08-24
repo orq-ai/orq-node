@@ -50,7 +50,7 @@ export type PublicSchedule = {
    */
   expression: string;
   /**
-   * Monotonic counter bumped when the schedule's firing cadence changes. Used by the consumer to skip stale in-flight triggers.
+   * Monotonic counter incremented when the schedule's firing cadence changes, allowing outdated in-flight triggers to be ignored.
    */
   generation: number;
   /**

@@ -21,6 +21,8 @@ import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
+import { McpGateways } from "./mcpgateways.js";
+import { McpServers } from "./mcpservers.js";
 import { MemoryStores } from "./memorystores.js";
 import { ModelCatalog } from "./modelcatalog.js";
 import { Models } from "./models.js";
@@ -161,6 +163,16 @@ export class Orq extends ClientSDK {
   private _managementKeys?: ManagementKeys;
   get managementKeys(): ManagementKeys {
     return (this._managementKeys ??= new ManagementKeys(this._options));
+  }
+
+  private _mcpGateways?: McpGateways;
+  get mcpGateways(): McpGateways {
+    return (this._mcpGateways ??= new McpGateways(this._options));
+  }
+
+  private _mcpServers?: McpServers;
+  get mcpServers(): McpServers {
+    return (this._mcpServers ??= new McpServers(this._options));
   }
 
   private _modelCatalog?: ModelCatalog;

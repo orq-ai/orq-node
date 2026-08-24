@@ -26,11 +26,7 @@ import {
 } from "./ratelimitrestresponse.js";
 
 /**
- * Budget is the canonical record stored in MongoDB `budgets.entities`.
- *
- * @remarks
- *  It replaces the embedded `constraints.budget` on api-keys and the
- *  legacy CONTACT-only `budgets.configs` collection (see ADR 0007).
+ * Budget defines limits and matching rules used to govern consumption.
  */
 export type BudgetRestResponse = {
   budgetId: string;
@@ -74,10 +70,10 @@ export type BudgetRestResponse = {
   createdAt: Date;
   updatedAt: Date;
   /**
-   * Live consumption for the current period, read from the Redis
+   * Latest available consumption used for enforcement in the current
    *
    * @remarks
-   *  counters the enforcement gate maintains. Populated by read paths
+   *  period. This is not an exact billing ledger. Populated by read paths
    *  (Get / List); omitted on write responses (Create / Update / Reset)
    *  where it carries no signal. Absent or all-zero for a budget that
    *  has not been spent against in the current period.

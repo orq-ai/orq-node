@@ -23,7 +23,7 @@ import {
  *  `service_account` keys are workspace-owned and outlive any individual
  *  user. `user` keys are bound to `user_id`: when the user is removed,
  *  disabled, or loses project access, the key is revoked / its scope
- *  shrinks per the cascade rules in ADR 0001.
+ *  shrinks accordingly.
  */
 export type ApiKeyOwner = {
   user?: UserOwner | undefined;

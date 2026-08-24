@@ -165,6 +165,10 @@ export type PrefixMessagesToolCalls = {
 
 export type PrefixMessagesAssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -516,6 +520,10 @@ export type DeploymentStreamMessagesToolCalls = {
 };
 
 export type DeploymentStreamMessagesAssistantMessage = {
+  /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
@@ -1764,6 +1772,7 @@ export function prefixMessagesToolCallsToJSON(
 
 /** @internal */
 export type PrefixMessagesAssistantMessage$Outbound = {
+  reasoning_content?: string | undefined;
   content?:
     | string
     | Array<
@@ -1787,6 +1796,7 @@ export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PrefixMessagesAssistantMessage
 > = z.object({
+  reasoningContent: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -1811,6 +1821,7 @@ export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    reasoningContent: "reasoning_content",
     toolCalls: "tool_calls",
   });
 });
@@ -2438,6 +2449,7 @@ export function deploymentStreamMessagesToolCallsToJSON(
 
 /** @internal */
 export type DeploymentStreamMessagesAssistantMessage$Outbound = {
+  reasoning_content?: string | undefined;
   content?:
     | string
     | Array<
@@ -2461,6 +2473,7 @@ export const DeploymentStreamMessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStreamMessagesAssistantMessage
 > = z.object({
+  reasoningContent: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -2486,6 +2499,7 @@ export const DeploymentStreamMessagesAssistantMessage$outboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
+    reasoningContent: "reasoning_content",
     toolCalls: "tool_calls",
   });
 });

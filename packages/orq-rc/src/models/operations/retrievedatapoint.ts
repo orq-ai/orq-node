@@ -176,6 +176,10 @@ export type RetrieveDatapointMessagesToolCalls = {
 
 export type RetrieveDatapointMessagesAssistantMessage = {
   /**
+   * Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation.
+   */
+  reasoningContent?: string | undefined;
+  /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
@@ -1183,6 +1187,7 @@ export const RetrieveDatapointMessagesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  reasoning_content: z.string().optional(),
   content: z.nullable(
     z.union([
       z.string(),
@@ -1208,6 +1213,7 @@ export const RetrieveDatapointMessagesAssistantMessage$inboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "reasoning_content": "reasoningContent",
     "tool_calls": "toolCalls",
   });
 });
@@ -1579,7 +1585,7 @@ export const RetrieveDatapointEvaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.636Z",
+    "2026-08-24T01:57:07.851Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1679,7 +1685,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.636Z",
+    "2026-08-24T01:57:07.851Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -1777,7 +1783,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.635Z",
+    "2026-08-24T01:57:07.850Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1865,7 +1871,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:42.635Z",
+    "2026-08-24T01:57:07.850Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -1946,7 +1952,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-08-21T08:04:33.837Z",
+    "2026-08-24T01:56:57.966Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
