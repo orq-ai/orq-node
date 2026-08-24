@@ -5,16 +5,16 @@ management:
   docVersion: "2.0"
   speakeasyVersion: 1.795.2
   generationVersion: 2.932.9
-  releaseVersion: 4.14.0-rc.48
-  configChecksum: 5cc1b244f7043e5defa15c13e1e7e3c1
+  releaseVersion: 4.14.0-rc.49
+  configChecksum: 61176c20f63a72d1542025e18e5b01a3
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 persistentEdits:
-  generation_id: 2f63c33e-869d-4e74-b610-aedc005cf412
-  pristine_commit_hash: 1f3c429c4bf2a09ceb916fc9d7d2cbbb433ccf43
-  pristine_tree_hash: 5e86b7db28b0c31ec31bfd88fa3dedc8d9429798
+  generation_id: ca9947ed-24af-4e60-95ba-f3b55aca3c30
+  pristine_commit_hash: 6c22e5de54c0a5e1cb7a8315ca567a42694f986a
+  pristine_tree_hash: c9e6d21c7456685dbb6a7a3d226e048d546d50ef
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -17697,12 +17697,12 @@ trackedFiles:
     pristine_git_object: 4cf0d2ceb6acaa225a9f3afe05e2913f263c3462
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:62f417c4771a540651ea24c68a9814713e66eee5
-    pristine_git_object: b3d3fab1dc73b695bbf217463ebafe2dd5cd3b81
+    last_write_checksum: sha1:428e94fe3cb39e14e8370017fe9400c5a94b1c90
+    pristine_git_object: 104e8e6493f06b2f66aad75d663879771975b775
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:3d4e500e18fdfe8a6bea48ba6e9adfa723fff6ae
-    pristine_git_object: 7dec0422273e9017bbe2b9180845468d31c1a27a
+    last_write_checksum: sha1:c654a5fb3266f9606e49c0adf370776b5eb4d13f
+    pristine_git_object: 11d4f0ffccd4b6c75368b2f4a0f64decc9306ced
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:06cbcf678f38adf43f7fa3f7c1cfbb7a536903c9
@@ -18821,8 +18821,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:b597a4cae6d05eefaeff842206b0708dea6e0c65
-    pristine_git_object: 4ad53ed5e91420f986b8a4c596749e2740cb2873
+    last_write_checksum: sha1:587830ec6efa5f1ec7d846ee2387a4290174a363
+    pristine_git_object: af77a472f1f32680cd8254cd8850f631f545eb4d
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0

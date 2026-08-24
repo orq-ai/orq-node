@@ -28,7 +28,7 @@ targets:
         sourceRevisionDigest: sha256:c7b6643e229a189d5a9cd47d8e80d0294c8212a4a8f2286c7b0a3945eeba5bc1
         sourceBlobDigest: sha256:48139416899dc7474fb9de4820d9e85725d27e6ffa50881684585eb761dcc194
         codeSamplesNamespace: orq-ai-prerelease-node-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:2aec1a12dd7d5c1166dce4b1d6125d46a6075f777c2c0a16b40230dee5550f51
+        codeSamplesRevisionDigest: sha256:ede56a7139eb8307c2a1edcbc00420dcad09b542a4a4bbcf05193548ee994e94
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
