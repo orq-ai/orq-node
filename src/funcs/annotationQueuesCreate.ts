@@ -27,6 +27,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create an annotation queue
+ *
+ * @remarks
+ * Create a new annotation queue in the workspace.
  */
 export function annotationQueuesCreate(
   client: OrqCore,

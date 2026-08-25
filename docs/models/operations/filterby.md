@@ -18,7 +18,7 @@ const value: operations.FilterByAnd = {
   and: [
     {
       "key": {
-        nin: [],
+        in: [],
       },
     },
     {},
@@ -34,7 +34,7 @@ const value: operations.FilterByOr = {
   or: [
     {
       "key": {
-        nin: [
+        in: [
           true,
         ],
       },

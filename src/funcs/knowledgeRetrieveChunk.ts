@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Retrieve a chunk
+ *
+ * @remarks
+ * Retrieves a chunk by its chunk identifier.
  */
 export function knowledgeRetrieveChunk(
   client: OrqCore,
@@ -34,7 +38,7 @@ export function knowledgeRetrieveChunk(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetOneChunkResponseBody,
+    components.KnowledgeChunk,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetOneChunkResponseBody,
+      components.KnowledgeChunk,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -152,7 +156,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GetOneChunkResponseBody,
+    components.KnowledgeChunk,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -162,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetOneChunkResponseBody$inboundSchema),
+    M.json(200, components.KnowledgeChunk$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

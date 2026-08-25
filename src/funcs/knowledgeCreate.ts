@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -21,20 +22,22 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
  * Create a knowledge
+ *
+ * @remarks
+ * Creates an internal or external knowledge base. Internal knowledge bases embed and index uploaded content; external knowledge bases query the configured external retrieval API.
  */
 export function knowledgeCreate(
   client: OrqCore,
-  request: operations.CreateKnowledgeRequestBody,
+  request: components.KnowledgeBasesServiceCreateRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateKnowledgeResponseBody,
+    components.Knowledge,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -54,12 +57,12 @@ export function knowledgeCreate(
 
 async function $do(
   client: OrqCore,
-  request: operations.CreateKnowledgeRequestBody,
+  request: components.KnowledgeBasesServiceCreateRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateKnowledgeResponseBody,
+      components.Knowledge,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -75,7 +78,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.CreateKnowledgeRequestBody$outboundSchema.parse(value),
+      components.KnowledgeBasesServiceCreateRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -138,7 +141,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateKnowledgeResponseBody,
+    components.Knowledge,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -148,7 +151,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateKnowledgeResponseBody$inboundSchema),
+    M.json(200, components.Knowledge$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

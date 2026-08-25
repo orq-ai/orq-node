@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const QueryParam2 = {
   Pending: "pending",
@@ -42,7 +39,7 @@ export type ListChunksRequest = {
    */
   datasourceId: string;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -61,76 +58,6 @@ export type ListChunksRequest = {
    * Filter chunks by status.
    */
   status?: Array<QueryParam1> | QueryParam2 | undefined;
-};
-
-export const ListChunksObject = {
-  List: "list",
-} as const;
-export type ListChunksObject = ClosedEnum<typeof ListChunksObject>;
-
-export type ListChunksMetadata = string | number | boolean;
-
-/**
- * The status of the chunk
- */
-export const ListChunksStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type ListChunksStatus = ClosedEnum<typeof ListChunksStatus>;
-
-export type ListChunksData = {
-  /**
-   * The unique identifier of the chunk
-   */
-  id: string;
-  /**
-   * The text content of the chunk
-   */
-  text: string;
-  /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
-   */
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  /**
-   * Whether the chunk is enabled
-   */
-  enabled: boolean;
-  /**
-   * The status of the chunk
-   */
-  status: ListChunksStatus;
-  /**
-   * The date and time the chunk was created
-   */
-  created: string;
-  /**
-   * The date and time the chunk was updated
-   */
-  updated: string;
-  /**
-   * The unique identifier of the user who created the chunk
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who updated the chunk
-   */
-  updateById?: string | null | undefined;
-};
-
-/**
- * Chunks successfully retrieved
- */
-export type ListChunksResponseBody = {
-  object: ListChunksObject;
-  data: Array<ListChunksData>;
-  hasMore: boolean;
 };
 
 /** @internal */
@@ -200,90 +127,5 @@ export function listChunksRequestToJSON(
 ): string {
   return JSON.stringify(
     ListChunksRequest$outboundSchema.parse(listChunksRequest),
-  );
-}
-
-/** @internal */
-export const ListChunksObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListChunksObject
-> = z.nativeEnum(ListChunksObject);
-
-/** @internal */
-export const ListChunksMetadata$inboundSchema: z.ZodType<
-  ListChunksMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function listChunksMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListChunksStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ListChunksStatus
-> = z.nativeEnum(ListChunksStatus);
-
-/** @internal */
-export const ListChunksData$inboundSchema: z.ZodType<
-  ListChunksData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: ListChunksStatus$inboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-  });
-});
-
-export function listChunksDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListChunksResponseBody$inboundSchema: z.ZodType<
-  ListChunksResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: ListChunksObject$inboundSchema,
-  data: z.array(z.lazy(() => ListChunksData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function listChunksResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksResponseBody' from JSON`,
   );
 }

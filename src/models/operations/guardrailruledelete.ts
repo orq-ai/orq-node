@@ -6,9 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GuardrailRuleDeleteRequest = {
-  /**
-   * The ID of the guardrail rule
-   */
   guardrailRuleId: string;
 };
 

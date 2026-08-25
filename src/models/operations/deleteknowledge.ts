@@ -6,9 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteKnowledgeRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
 };
 

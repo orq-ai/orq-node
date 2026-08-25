@@ -12,6 +12,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -28,6 +29,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create chunks for a datasource
+ *
+ * @remarks
+ * Creates between 1 and 100 chunks. Chunks with supplied embeddings are indexed immediately; chunks without embeddings are queued for embedding.
  */
 export function knowledgeCreateChunks(
   client: OrqCore,
@@ -35,7 +39,7 @@ export function knowledgeCreateChunks(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<operations.ResponseBody>,
+    Array<components.KnowledgeChunk>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -60,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<operations.ResponseBody>,
+      Array<components.KnowledgeChunk>,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -150,7 +154,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<operations.ResponseBody>,
+    Array<components.KnowledgeChunk>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -160,7 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(operations.ResponseBody$inboundSchema)),
+    M.json(200, z.array(components.KnowledgeChunk$inboundSchema)),
     M.fail("4XX"),
     M.fail([500, "5XX"]),
   )(response, req);

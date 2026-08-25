@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -38,7 +39,7 @@ export function memoryStoresList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetAllMemoryStoresResponseBody,
+    components.ListMemoryStoresResponse,
     | errors.HonoApiError
     | OrqError
     | ResponseValidationError
@@ -64,7 +65,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetAllMemoryStoresResponseBody,
+      components.ListMemoryStoresResponse,
       | errors.HonoApiError
       | OrqError
       | ResponseValidationError
@@ -159,7 +160,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetAllMemoryStoresResponseBody,
+    components.ListMemoryStoresResponse,
     | errors.HonoApiError
     | OrqError
     | ResponseValidationError
@@ -170,7 +171,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetAllMemoryStoresResponseBody$inboundSchema),
+    M.json(200, components.ListMemoryStoresResponse$inboundSchema),
     M.jsonErr(401, errors.HonoApiError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

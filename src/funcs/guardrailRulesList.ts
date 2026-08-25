@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -29,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List guardrail rules
  *
  * @remarks
- * Returns a paginated list of guardrail rules for the current project.
+ * Returns guardrail rules with cursor pagination, search, status, project, sort, and referenced-guardrail filters.
  */
 export function guardrailRulesList(
   client: OrqCore,
@@ -37,7 +38,7 @@ export function guardrailRulesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleListResponseBody,
+    components.ListGuardrailRulesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleListResponseBody,
+      components.ListGuardrailRulesResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -100,7 +101,7 @@ async function $do(
     "search": payload?.search,
     "sort_by": payload?.sort_by,
     "starting_after": payload?.starting_after,
-  }, { explode: false });
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -154,7 +155,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GuardrailRuleListResponseBody,
+    components.ListGuardrailRulesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GuardrailRuleListResponseBody$inboundSchema),
+    M.json(200, components.ListGuardrailRulesResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

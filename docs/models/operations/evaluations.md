@@ -27,15 +27,15 @@ const value: operations.Evaluations2 = {
 };
 ```
 
-### `operations.Evaluations3`
+### `operations.CreateDatasetItemEvaluations3`
 
 ```typescript
-const value: operations.Evaluations3 = {
+const value: operations.CreateDatasetItemEvaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",
   type: "boolean",
-  value: true,
+  value: false,
 };
 ```
 

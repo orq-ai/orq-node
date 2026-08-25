@@ -7,7 +7,7 @@ import { UpdateKnowledgeRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdateKnowledgeRequest = {
   knowledgeId: "<id>",
-  requestBody: {
+  knowledgeBasesServiceUpdateRequest: {
     path: "Default",
     type: "internal",
   },
@@ -16,7 +16,7 @@ let value: UpdateKnowledgeRequest = {
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `knowledgeId`                               | *string*                                    | :heavy_check_mark:                          | The unique identifier of the knowledge base |
-| `requestBody`                               | *operations.UpdateKnowledgeRequestBody*     | :heavy_check_mark:                          | N/A                                         |
+| Field                                           | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `knowledgeId`                                   | *string*                                        | :heavy_check_mark:                              | N/A                                             |
+| `knowledgeBasesServiceUpdateRequest`            | *components.KnowledgeBasesServiceUpdateRequest* | :heavy_check_mark:                              | N/A                                             |

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update agent
  *
  * @remarks
- * Modifies an existing agent's configuration with partial updates. Supports updating any aspect of the agent including model assignments (primary and fallback), instructions, tools, knowledge bases, memory stores, and execution parameters. Only the fields provided in the request body will be updated; all other fields remain unchanged. Changes take effect immediately for new agent invocations.
+ * Partially update an existing agent configuration including models, instructions, tools, knowledge bases, and execution parameters.
  */
 export function agentsUpdate(
   client: OrqCore,

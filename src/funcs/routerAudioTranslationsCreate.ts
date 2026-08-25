@@ -35,6 +35,9 @@ import { isReadableStream } from "../types/streams.js";
 
 /**
  * Create translation
+ *
+ * @remarks
+ * Translate audio input into English text using the configured translation model and return the result.
  */
 export function routerAudioTranslationsCreate(
   client: OrqCore,

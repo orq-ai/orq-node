@@ -33,6 +33,9 @@ export class Prompts extends ClientSDK {
 
   /**
    * Create a prompt
+   *
+   * @remarks
+   * Create a new prompt in the workspace.
    */
   async create(
     request?: operations.CreatePromptCreatePromptRequest | undefined,
@@ -64,6 +67,9 @@ export class Prompts extends ClientSDK {
 
   /**
    * Update a prompt
+   *
+   * @remarks
+   * Update a prompt by ID with the provided fields.
    */
   async update(
     request: operations.UpdatePromptRequest,
@@ -78,6 +84,9 @@ export class Prompts extends ClientSDK {
 
   /**
    * Delete a prompt
+   *
+   * @remarks
+   * Delete a prompt and all its versions by ID.
    */
   async delete(
     request: operations.DeletePromptRequest,

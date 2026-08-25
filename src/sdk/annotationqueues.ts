@@ -13,6 +13,7 @@ import { annotationQueuesRetrieve } from "../funcs/annotationQueuesRetrieve.js";
 import { annotationQueuesRetrieveItem } from "../funcs/annotationQueuesRetrieveItem.js";
 import { annotationQueuesUpdate } from "../funcs/annotationQueuesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -36,6 +37,9 @@ export class AnnotationQueues extends ClientSDK {
 
   /**
    * Create an annotation queue
+   *
+   * @remarks
+   * Create a new annotation queue in the workspace.
    */
   async create(
     request?: operations.CreateAnnotationQueueRequestBody | undefined,
@@ -67,6 +71,9 @@ export class AnnotationQueues extends ClientSDK {
 
   /**
    * Edit an annotation queue
+   *
+   * @remarks
+   * Update an annotation queue by ID with the provided fields.
    */
   async update(
     request: operations.UpdateAnnotationQueueRequest,
@@ -81,6 +88,9 @@ export class AnnotationQueues extends ClientSDK {
 
   /**
    * Delete an annotation queue
+   *
+   * @remarks
+   * Delete an annotation queue and its items by ID.
    */
   async delete(
     request: operations.DeleteAnnotationQueueRequest,
@@ -165,12 +175,12 @@ export class AnnotationQueues extends ClientSDK {
    * Retrieve an annotation queue item
    *
    * @remarks
-   * Retrieves an item from the specified annotation queue in its expanded form. An annotation queue item is a pointer to a span; this endpoint returns the fully resolved span the item references.
+   * Retrieve an annotation queue item. Each item is a pointer to a span with fully resolved span data.
    */
   async retrieveItem(
     request: operations.RetrieveAnnotationQueueItemRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveAnnotationQueueItemResponseBody> {
+  ): Promise<components.PublicSpan> {
     return unwrapAsync(annotationQueuesRetrieveItem(
       this,
       request,

@@ -10,6 +10,11 @@ import {
   AlertCondition$outboundSchema,
 } from "./alertcondition.js";
 import {
+  AlertDisplay,
+  AlertDisplay$Outbound,
+  AlertDisplay$outboundSchema,
+} from "./alertdisplay.js";
+import {
   AlertQuery,
   AlertQuery$Outbound,
   AlertQuery$outboundSchema,
@@ -44,6 +49,10 @@ export type UpdateAlertRequest = {
    * New enabled state. Omit to keep the current state.
    */
   enabled?: boolean | undefined;
+  /**
+   * Display options to merge. Omitted fields keep their current values.
+   */
+  display?: AlertDisplay | undefined;
 };
 
 /** @internal */
@@ -55,6 +64,7 @@ export type UpdateAlertRequest$Outbound = {
   condition?: AlertCondition$Outbound | undefined;
   notifier_ids?: Array<string> | undefined;
   enabled?: boolean | undefined;
+  display?: AlertDisplay$Outbound | undefined;
 };
 
 /** @internal */
@@ -70,6 +80,7 @@ export const UpdateAlertRequest$outboundSchema: z.ZodType<
   condition: AlertCondition$outboundSchema.optional(),
   notifierIds: z.array(z.string()).optional(),
   enabled: z.boolean().optional(),
+  display: AlertDisplay$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

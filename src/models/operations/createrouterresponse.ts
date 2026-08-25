@@ -234,7 +234,7 @@ export type Detail = ClosedEnum<typeof Detail>;
 /**
  * An image content part.
  */
-export type Image = {
+export type TwoImage = {
   cacheControl?: CreateRouterResponse2ResponsesCacheControl | undefined;
   /**
    * The detail level for image understanding.
@@ -325,12 +325,12 @@ export type TwoText = {
 /**
  * A content part within a message.
  */
-export type CreateRouterResponseContent2 = TwoText | Image | TwoFile;
+export type CreateRouterResponseContent2 = TwoText | TwoImage | TwoFile;
 
 /**
  * The content of the item: a string or an array of content parts.
  */
-export type InputContent = string | Array<TwoText | Image | TwoFile>;
+export type InputContent = string | Array<TwoText | TwoImage | TwoFile>;
 
 /**
  * The role of the message sender (for message items).
@@ -349,7 +349,7 @@ export type InputRole = ClosedEnum<typeof InputRole>;
 /**
  * The status of a model-generated input item.
  */
-export const InputStatus = {
+export const Status = {
   InProgress: "in_progress",
   Completed: "completed",
   Incomplete: "incomplete",
@@ -357,7 +357,7 @@ export const InputStatus = {
 /**
  * The status of a model-generated input item.
  */
-export type InputStatus = ClosedEnum<typeof InputStatus>;
+export type Status = ClosedEnum<typeof Status>;
 
 /**
  * The type of item.
@@ -409,7 +409,7 @@ export type CreateRouterResponseInput2 = {
   /**
    * The content of the item: a string or an array of content parts.
    */
-  content?: string | Array<TwoText | Image | TwoFile> | undefined;
+  content?: string | Array<TwoText | TwoImage | TwoFile> | undefined;
   /**
    * The ID of the item. For item_reference items, this identifies the referenced item.
    */
@@ -429,7 +429,7 @@ export type CreateRouterResponseInput2 = {
   /**
    * The status of a model-generated input item.
    */
-  status?: InputStatus | undefined;
+  status?: Status | undefined;
   /**
    * The type of item.
    */
@@ -841,7 +841,7 @@ export type CreateRouterResponseRequestBody = {
    */
   parallelToolCalls?: boolean | undefined;
   /**
-   * Request-scoped transforms applied to the text exchanged with the model. Supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and response_healing, which repairs malformed JSON in non-streaming model output.
+   * Request-scoped transforms applied to the text exchanged with the model. Supports pii_redaction, which replaces PII with placeholders before the provider sees it and restores the original values in the response; response_healing, which repairs malformed JSON in non-streaming model output; and trace_scrubbing, which removes selected sensitive fields from exported traces.
    */
   plugins?: Array<components.PublicPlugin> | null | undefined;
   /**
@@ -1020,10 +1020,7 @@ export type CreateRouterResponseResponseBody = {
   serviceTier: CreateRouterResponseServiceTier;
   status: CreateRouterResponseStatus;
   store: boolean;
-  /**
-   * Telemetry information for correlating the response with traces
-   */
-  telemetry?: components.Telemetry | undefined;
+  telemetry?: components.ResponseTelemetry | undefined;
   temperature: number;
   /**
    * Text output configuration including format and verbosity
@@ -1214,7 +1211,7 @@ export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
   .nativeEnum(Detail);
 
 /** @internal */
-export type Image$Outbound = {
+export type TwoImage$Outbound = {
   cache_control?:
     | CreateRouterResponse2ResponsesCacheControl$Outbound
     | undefined;
@@ -1225,10 +1222,10 @@ export type Image$Outbound = {
 };
 
 /** @internal */
-export const Image$outboundSchema: z.ZodType<
-  Image$Outbound,
+export const TwoImage$outboundSchema: z.ZodType<
+  TwoImage$Outbound,
   z.ZodTypeDef,
-  Image
+  TwoImage
 > = z.object({
   cacheControl: z.lazy(() =>
     CreateRouterResponse2ResponsesCacheControl$outboundSchema
@@ -1245,8 +1242,8 @@ export const Image$outboundSchema: z.ZodType<
   });
 });
 
-export function imageToJSON(image: Image): string {
-  return JSON.stringify(Image$outboundSchema.parse(image));
+export function twoImageToJSON(twoImage: TwoImage): string {
+  return JSON.stringify(TwoImage$outboundSchema.parse(twoImage));
 }
 
 /** @internal */
@@ -1315,7 +1312,7 @@ export function twoTextToJSON(twoText: TwoText): string {
 /** @internal */
 export type CreateRouterResponseContent2$Outbound =
   | TwoText$Outbound
-  | Image$Outbound
+  | TwoImage$Outbound
   | TwoFile$Outbound;
 
 /** @internal */
@@ -1325,7 +1322,7 @@ export const CreateRouterResponseContent2$outboundSchema: z.ZodType<
   CreateRouterResponseContent2
 > = z.union([
   z.lazy(() => TwoText$outboundSchema),
-  z.lazy(() => Image$outboundSchema),
+  z.lazy(() => TwoImage$outboundSchema),
   z.lazy(() => TwoFile$outboundSchema),
 ]);
 
@@ -1342,7 +1339,7 @@ export function createRouterResponseContent2ToJSON(
 /** @internal */
 export type InputContent$Outbound =
   | string
-  | Array<TwoText$Outbound | Image$Outbound | TwoFile$Outbound>;
+  | Array<TwoText$Outbound | TwoImage$Outbound | TwoFile$Outbound>;
 
 /** @internal */
 export const InputContent$outboundSchema: z.ZodType<
@@ -1353,7 +1350,7 @@ export const InputContent$outboundSchema: z.ZodType<
   z.string(),
   z.array(z.union([
     z.lazy(() => TwoText$outboundSchema),
-    z.lazy(() => Image$outboundSchema),
+    z.lazy(() => TwoImage$outboundSchema),
     z.lazy(() => TwoFile$outboundSchema),
   ])),
 ]);
@@ -1367,8 +1364,8 @@ export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
   .nativeEnum(InputRole);
 
 /** @internal */
-export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
-  .nativeEnum(InputStatus);
+export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
+  .nativeEnum(Status);
 
 /** @internal */
 export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
@@ -1380,7 +1377,7 @@ export type CreateRouterResponseInput2$Outbound = {
   call_id?: string | undefined;
   content?:
     | string
-    | Array<TwoText$Outbound | Image$Outbound | TwoFile$Outbound>
+    | Array<TwoText$Outbound | TwoImage$Outbound | TwoFile$Outbound>
     | undefined;
   id?: string | undefined;
   name?: string | undefined;
@@ -1402,7 +1399,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
     z.string(),
     z.array(z.union([
       z.lazy(() => TwoText$outboundSchema),
-      z.lazy(() => Image$outboundSchema),
+      z.lazy(() => TwoImage$outboundSchema),
       z.lazy(() => TwoFile$outboundSchema),
     ])),
   ]).optional(),
@@ -1410,7 +1407,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   name: z.string().optional(),
   output: z.string().optional(),
   role: InputRole$outboundSchema.optional(),
-  status: InputStatus$outboundSchema.optional(),
+  status: Status$outboundSchema.optional(),
   type: InputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2142,7 +2139,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   service_tier: CreateRouterResponseServiceTier$inboundSchema,
   status: CreateRouterResponseStatus$inboundSchema,
   store: z.boolean(),
-  telemetry: components.Telemetry$inboundSchema.optional(),
+  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
   temperature: z.number(),
   text: z.any().optional(),
   tool_choice: z.any().optional(),

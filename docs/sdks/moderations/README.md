@@ -8,7 +8,7 @@
 
 ## create
 
-Create moderation
+Analyze text for content policy violations using the moderation model and return classification results.
 
 ### Example Usage
 

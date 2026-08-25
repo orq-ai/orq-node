@@ -201,6 +201,7 @@ export type RunAgentModelConfigurationGuardrails = {
 export type RunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -430,6 +431,7 @@ export type RunAgentModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -694,6 +696,7 @@ export type RunAgentFallbackModelConfigurationGuardrails = {
 export type RunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -932,6 +935,7 @@ export type RunAgentFallbackModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -1785,7 +1789,7 @@ export type RunAgentRequestBody = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -2287,6 +2291,7 @@ export function runAgentModelConfigurationGuardrailsToJSON(
 export type RunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -2298,6 +2303,7 @@ export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
   components.ResponseHealingPlugin$outboundSchema,
 ]);
@@ -2540,6 +2546,7 @@ export type RunAgentModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -2596,6 +2603,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
       components.ResponseHealingPlugin$outboundSchema,
     ]),
@@ -3081,6 +3089,7 @@ export function runAgentFallbackModelConfigurationGuardrailsToJSON(
 export type RunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -3093,6 +3102,7 @@ export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
     components.PIIRedactionPluginAuto$outboundSchema,
     components.ResponseHealingPlugin$outboundSchema,
   ]);
@@ -3352,6 +3362,7 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -3416,6 +3427,7 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
         components.ResponseHealingPlugin$outboundSchema,
       ]),
@@ -3884,7 +3896,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M0NTJ5F4D1VXHM4X9093QB1K"),
+  id: z.string().default("01M0X9CFV6CM3N5SC504SAH8TR"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

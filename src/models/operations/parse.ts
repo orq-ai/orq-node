@@ -4,10 +4,65 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export const ParseChunkingRequestChunkingRequestRequestBody7ReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ParseChunkingRequestChunkingRequestRequestBody7ReturnType =
+  ClosedEnum<typeof ParseChunkingRequestChunkingRequestRequestBody7ReturnType>;
+
+/**
+ * Splits text after preserving the full-document context in its embeddings. Best for retrieval workflows where each chunk should retain information from the surrounding document.
+ */
+export type LateChunkerStrategy = {
+  /**
+   * The text content to be chunked
+   */
+  text: string;
+  /**
+   * Whether to include metadata for each chunk
+   */
+  metadata?: boolean | undefined;
+  /**
+   * Return format: chunks (with metadata) or texts (plain strings)
+   */
+  returnType?:
+    | ParseChunkingRequestChunkingRequestRequestBody7ReturnType
+    | undefined;
+  strategy: "late";
+  /**
+   * Maximum tokens per chunk
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Hierarchy of separators to use for splitting
+   */
+  separators?: Array<string> | undefined;
+  /**
+   * Minimum characters allowed per chunk
+   */
+  minCharactersPerChunk?: number | undefined;
+  /**
+   * Embedding model used to generate context-aware chunk embeddings. (Available embedding models)[https://docs.orq.ai/docs/proxy/supported-models#embedding-models]
+   */
+  embeddingModel: string;
+  /**
+   * Number of dimensions for the embedding output. Required for text-embedding-3 models. Supported range: 256-3072 for text-embedding-3-large, 256-1536 for text-embedding-3-small.
+   */
+  dimensions?: number | undefined;
+  /**
+   * Maximum number of tokens per embedding request. Default is 8191 for text-embedding-3 models.
+   */
+  maxTokens?: number | undefined;
+};
 
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
@@ -341,32 +396,64 @@ export type ParseChunkingRequest =
   | RecursiveChunkerStrategy
   | SemanticChunkerStrategy
   | AgenticChunkerStrategy
-  | FastChunkerStrategy;
+  | FastChunkerStrategy
+  | LateChunkerStrategy;
 
-export type ParseMetadata = {
-  startIndex: number | null;
-  endIndex: number | null;
-  tokenCount: number | null;
-};
+/** @internal */
+export const ParseChunkingRequestChunkingRequestRequestBody7ReturnType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ParseChunkingRequestChunkingRequestRequestBody7ReturnType
+  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBody7ReturnType);
 
-export type Chunks = {
-  /**
-   * The text content of the chunk
-   */
+/** @internal */
+export type LateChunkerStrategy$Outbound = {
   text: string;
-  /**
-   * The position index of this chunk in the sequence
-   */
-  index: number;
-  metadata?: ParseMetadata | undefined;
+  metadata: boolean;
+  return_type: string;
+  strategy: "late";
+  chunk_size: number;
+  separators?: Array<string> | undefined;
+  min_characters_per_chunk: number;
+  embedding_model: string;
+  dimensions?: number | undefined;
+  max_tokens?: number | undefined;
 };
 
-/**
- * Text successfully chunked
- */
-export type ParseResponseBody = {
-  chunks: Array<Chunks>;
-};
+/** @internal */
+export const LateChunkerStrategy$outboundSchema: z.ZodType<
+  LateChunkerStrategy$Outbound,
+  z.ZodTypeDef,
+  LateChunkerStrategy
+> = z.object({
+  text: z.string(),
+  metadata: z.boolean().default(true),
+  returnType:
+    ParseChunkingRequestChunkingRequestRequestBody7ReturnType$outboundSchema
+      .default("chunks"),
+  strategy: z.literal("late"),
+  chunkSize: z.number().int().default(512),
+  separators: z.array(z.string()).optional(),
+  minCharactersPerChunk: z.number().int().default(24),
+  embeddingModel: z.string(),
+  dimensions: z.number().int().optional(),
+  maxTokens: z.number().int().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    returnType: "return_type",
+    chunkSize: "chunk_size",
+    minCharactersPerChunk: "min_characters_per_chunk",
+    embeddingModel: "embedding_model",
+    maxTokens: "max_tokens",
+  });
+});
+
+export function lateChunkerStrategyToJSON(
+  lateChunkerStrategy: LateChunkerStrategy,
+): string {
+  return JSON.stringify(
+    LateChunkerStrategy$outboundSchema.parse(lateChunkerStrategy),
+  );
+}
 
 /** @internal */
 export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema:
@@ -695,7 +782,8 @@ export type ParseChunkingRequest$Outbound =
   | RecursiveChunkerStrategy$Outbound
   | SemanticChunkerStrategy$Outbound
   | AgenticChunkerStrategy$Outbound
-  | FastChunkerStrategy$Outbound;
+  | FastChunkerStrategy$Outbound
+  | LateChunkerStrategy$Outbound;
 
 /** @internal */
 export const ParseChunkingRequest$outboundSchema: z.ZodType<
@@ -709,6 +797,7 @@ export const ParseChunkingRequest$outboundSchema: z.ZodType<
   z.lazy(() => SemanticChunkerStrategy$outboundSchema),
   z.lazy(() => AgenticChunkerStrategy$outboundSchema),
   z.lazy(() => FastChunkerStrategy$outboundSchema),
+  z.lazy(() => LateChunkerStrategy$outboundSchema),
 ]);
 
 export function parseChunkingRequestToJSON(
@@ -716,69 +805,5 @@ export function parseChunkingRequestToJSON(
 ): string {
   return JSON.stringify(
     ParseChunkingRequest$outboundSchema.parse(parseChunkingRequest),
-  );
-}
-
-/** @internal */
-export const ParseMetadata$inboundSchema: z.ZodType<
-  ParseMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  start_index: z.nullable(z.number()),
-  end_index: z.nullable(z.number()),
-  token_count: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    "start_index": "startIndex",
-    "end_index": "endIndex",
-    "token_count": "tokenCount",
-  });
-});
-
-export function parseMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<ParseMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ParseMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ParseMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const Chunks$inboundSchema: z.ZodType<Chunks, z.ZodTypeDef, unknown> = z
-  .object({
-    text: z.string(),
-    index: z.number(),
-    metadata: z.lazy(() => ParseMetadata$inboundSchema).optional(),
-  });
-
-export function chunksFromJSON(
-  jsonString: string,
-): SafeParseResult<Chunks, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Chunks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Chunks' from JSON`,
-  );
-}
-
-/** @internal */
-export const ParseResponseBody$inboundSchema: z.ZodType<
-  ParseResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  chunks: z.array(z.lazy(() => Chunks$inboundSchema)),
-});
-
-export function parseResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ParseResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ParseResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ParseResponseBody' from JSON`,
   );
 }

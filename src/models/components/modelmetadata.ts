@@ -14,6 +14,12 @@ import {
   AutoRouterConfig$outboundSchema,
 } from "./autorouterconfig.js";
 import {
+  EmbeddingDimensionSupport,
+  EmbeddingDimensionSupport$inboundSchema,
+  EmbeddingDimensionSupport$Outbound,
+  EmbeddingDimensionSupport$outboundSchema,
+} from "./embeddingdimensionsupport.js";
+import {
   Pricing,
   Pricing$inboundSchema,
   Pricing$Outbound,
@@ -76,6 +82,7 @@ export type ModelMetadata = {
   reasoningTokens?: number | undefined;
   region?: string | undefined;
   speedRating?: number | undefined;
+  supportedEmbeddingDimensions?: EmbeddingDimensionSupport | undefined;
   supportedVideoAspectRatios?: Array<string> | null | undefined;
   supportedVideoDurations?: Array<number> | null | undefined;
   supportedVideoFrameImages?: Array<string> | null | undefined;
@@ -205,6 +212,8 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   reasoning_tokens: z.number().int().optional(),
   region: z.string().optional(),
   speed_rating: z.number().int().optional(),
+  supported_embedding_dimensions: EmbeddingDimensionSupport$inboundSchema
+    .optional(),
   supported_video_aspect_ratios: z.nullable(z.array(z.string())).optional(),
   supported_video_durations: z.nullable(z.array(z.number().int())).optional(),
   supported_video_frame_images: z.nullable(z.array(z.string())).optional(),
@@ -327,6 +336,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "reasoning_cost": "reasoningCost",
     "reasoning_tokens": "reasoningTokens",
     "speed_rating": "speedRating",
+    "supported_embedding_dimensions": "supportedEmbeddingDimensions",
     "supported_video_aspect_ratios": "supportedVideoAspectRatios",
     "supported_video_durations": "supportedVideoDurations",
     "supported_video_frame_images": "supportedVideoFrameImages",
@@ -452,6 +462,9 @@ export type ModelMetadata$Outbound = {
   reasoning_tokens?: number | undefined;
   region?: string | undefined;
   speed_rating?: number | undefined;
+  supported_embedding_dimensions?:
+    | EmbeddingDimensionSupport$Outbound
+    | undefined;
   supported_video_aspect_ratios?: Array<string> | null | undefined;
   supported_video_durations?: Array<number> | null | undefined;
   supported_video_frame_images?: Array<string> | null | undefined;
@@ -581,6 +594,8 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   reasoningTokens: z.number().int().optional(),
   region: z.string().optional(),
   speedRating: z.number().int().optional(),
+  supportedEmbeddingDimensions: EmbeddingDimensionSupport$outboundSchema
+    .optional(),
   supportedVideoAspectRatios: z.nullable(z.array(z.string())).optional(),
   supportedVideoDurations: z.nullable(z.array(z.number().int())).optional(),
   supportedVideoFrameImages: z.nullable(z.array(z.string())).optional(),
@@ -703,6 +718,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     reasoningCost: "reasoning_cost",
     reasoningTokens: "reasoning_tokens",
     speedRating: "speed_rating",
+    supportedEmbeddingDimensions: "supported_embedding_dimensions",
     supportedVideoAspectRatios: "supported_video_aspect_ratios",
     supportedVideoDurations: "supported_video_durations",
     supportedVideoFrameImages: "supported_video_frame_images",

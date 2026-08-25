@@ -9,6 +9,7 @@ import { routingRulesListUsedModels } from "../funcs/routingRulesListUsedModels.
 import { routingRulesRetrieve } from "../funcs/routingRulesRetrieve.js";
 import { routingRulesUpdate } from "../funcs/routingRulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -17,12 +18,12 @@ export class RoutingRules extends ClientSDK {
    * List routing rules
    *
    * @remarks
-   * Returns a paginated list of routing rules for the current project, ordered by priority ascending.
+   * Returns routing rules ordered by ascending priority. Supports cursor pagination, search, status, project, and referenced-model filters.
    */
   async list(
     request?: operations.RoutingRuleListRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.RoutingRuleListResponseBody> {
+  ): Promise<components.ListRoutingRulesResponse> {
     return unwrapAsync(routingRulesList(
       this,
       request,
@@ -31,15 +32,15 @@ export class RoutingRules extends ClientSDK {
   }
 
   /**
-   * Create routing rule
+   * Create a routing rule
    *
    * @remarks
-   * Creates a new routing rule with expression, models configuration, and priority settings.
+   * Creates a routing rule with metadata and optional model, plugin, priority, and matching configuration. Rules default to disabled when `enabled` is omitted.
    */
   async create(
-    request: operations.RoutingRuleCreateRequestBody,
+    request: components.CreateRoutingRuleRequest,
     options?: RequestOptions,
-  ): Promise<operations.RoutingRuleCreateResponseBody> {
+  ): Promise<components.RoutingRule> {
     return unwrapAsync(routingRulesCreate(
       this,
       request,
@@ -48,25 +49,44 @@ export class RoutingRules extends ClientSDK {
   }
 
   /**
-   * List used models
+   * List models used by routing rules
    *
    * @remarks
-   * Returns the distinct model refs referenced across all routing rules in scope.
+   * Returns the distinct model references used by routing rules in the requested scope.
    */
   async listUsedModels(
+    request?: operations.RoutingRuleListUsedModelsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.RoutingRuleListUsedModelsResponseBody> {
+  ): Promise<components.ListRoutingRuleUsedModelsResponse> {
     return unwrapAsync(routingRulesListUsedModels(
       this,
+      request,
       options,
     ));
   }
 
   /**
-   * Delete routing rule
+   * Retrieve a routing rule
    *
    * @remarks
-   * Deletes an existing routing rule by ID.
+   * Retrieves a routing rule by its unique identifier.
+   */
+  async retrieve(
+    request: operations.RoutingRuleGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.RoutingRule> {
+    return unwrapAsync(routingRulesRetrieve(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a routing rule
+   *
+   * @remarks
+   * Permanently deletes a routing rule.
    */
   async delete(
     request: operations.RoutingRuleDeleteRequest,
@@ -80,32 +100,15 @@ export class RoutingRules extends ClientSDK {
   }
 
   /**
-   * Get routing rule
+   * Update a routing rule
    *
    * @remarks
-   * Retrieves the details of an existing routing rule by ID.
-   */
-  async retrieve(
-    request: operations.RoutingRuleGetRequest,
-    options?: RequestOptions,
-  ): Promise<operations.RoutingRuleGetResponseBody> {
-    return unwrapAsync(routingRulesRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update routing rule
-   *
-   * @remarks
-   * Partially updates an existing routing rule. Only provided fields are updated.
+   * Partially updates routing-rule metadata or configuration. Project scope is immutable.
    */
   async update(
     request: operations.RoutingRuleUpdateRequest,
     options?: RequestOptions,
-  ): Promise<operations.RoutingRuleUpdateResponseBody> {
+  ): Promise<components.RoutingRule> {
     return unwrapAsync(routingRulesUpdate(
       this,
       request,

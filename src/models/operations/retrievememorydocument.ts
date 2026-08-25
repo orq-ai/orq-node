@@ -4,45 +4,11 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveMemoryDocumentRequest = {
-  /**
-   * The unique key identifier of the memory store
-   */
   memoryStoreKey: string;
-  /**
-   * The unique identifier of the memory
-   */
   memoryEntityId: string;
-  /**
-   * The unique identifier of the document
-   */
   documentId: string;
-};
-
-/**
- * Memory document successfully retrieved.
- */
-export type RetrieveMemoryDocumentResponseBody = {
-  id: string;
-  memoryId: string;
-  storeId: string;
-  /**
-   * The content of the memory document (whitespace trimmed).
-   */
-  text: string;
-  created: string;
-  updated: string;
-  createdById?: string | null | undefined;
-  updatedById?: string | null | undefined;
-  workspaceId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
-   */
-  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -76,43 +42,5 @@ export function retrieveMemoryDocumentRequestToJSON(
     RetrieveMemoryDocumentRequest$outboundSchema.parse(
       retrieveMemoryDocumentRequest,
     ),
-  );
-}
-
-/** @internal */
-export const RetrieveMemoryDocumentResponseBody$inboundSchema: z.ZodType<
-  RetrieveMemoryDocumentResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  memory_id: z.string(),
-  store_id: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  workspace_id: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "memory_id": "memoryId",
-    "store_id": "storeId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function retrieveMemoryDocumentResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveMemoryDocumentResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveMemoryDocumentResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveMemoryDocumentResponseBody' from JSON`,
   );
 }

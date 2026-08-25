@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create moderation
+ *
+ * @remarks
+ * Analyze text for content policy violations using the moderation model and return classification results.
  */
 export function routerModerationsCreate(
   client: OrqCore,

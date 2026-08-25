@@ -9,6 +9,7 @@ import { guardrailRulesListUsedGuardrails } from "../funcs/guardrailRulesListUse
 import { guardrailRulesRetrieve } from "../funcs/guardrailRulesRetrieve.js";
 import { guardrailRulesUpdate } from "../funcs/guardrailRulesUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -17,12 +18,12 @@ export class GuardrailRules extends ClientSDK {
    * List guardrail rules
    *
    * @remarks
-   * Returns a paginated list of guardrail rules for the current project.
+   * Returns guardrail rules with cursor pagination, search, status, project, sort, and referenced-guardrail filters.
    */
   async list(
     request?: operations.GuardrailRuleListRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GuardrailRuleListResponseBody> {
+  ): Promise<components.ListGuardrailRulesResponse> {
     return unwrapAsync(guardrailRulesList(
       this,
       request,
@@ -31,15 +32,15 @@ export class GuardrailRules extends ClientSDK {
   }
 
   /**
-   * Create guardrail rule
+   * Create a guardrail rule
    *
    * @remarks
-   * Creates a new guardrail rule with expression, guardrails configuration, and timeout settings.
+   * Creates a guardrail rule with metadata and optional evaluator, plugin, and matching configuration. Rules default to disabled when `enabled` is omitted.
    */
   async create(
-    request: operations.GuardrailRuleCreateRequestBody,
+    request: components.CreateGuardrailRuleRequest,
     options?: RequestOptions,
-  ): Promise<operations.GuardrailRuleCreateResponseBody> {
+  ): Promise<components.CreateGuardrailRuleResponse> {
     return unwrapAsync(guardrailRulesCreate(
       this,
       request,
@@ -48,31 +49,16 @@ export class GuardrailRules extends ClientSDK {
   }
 
   /**
-   * List used guardrails
+   * List guardrails used by guardrail rules
    *
    * @remarks
-   * Returns the distinct guardrail ids referenced across all guardrail rules in scope.
+   * Returns the distinct guardrail identifiers used by guardrail rules in the requested scope.
    */
   async listUsedGuardrails(
+    request?: operations.GuardrailRuleListUsedGuardrailsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GuardrailRuleListUsedGuardrailsResponseBody> {
+  ): Promise<components.ListGuardrailRuleUsedGuardrailsResponse> {
     return unwrapAsync(guardrailRulesListUsedGuardrails(
-      this,
-      options,
-    ));
-  }
-
-  /**
-   * Delete guardrail rule
-   *
-   * @remarks
-   * Deletes an existing guardrail rule by ID.
-   */
-  async delete(
-    request: operations.GuardrailRuleDeleteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(guardrailRulesDelete(
       this,
       request,
       options,
@@ -80,15 +66,15 @@ export class GuardrailRules extends ClientSDK {
   }
 
   /**
-   * Get guardrail rule
+   * Retrieve a guardrail rule
    *
    * @remarks
-   * Retrieves the details of an existing guardrail rule by ID.
+   * Retrieves a guardrail rule by its unique identifier.
    */
   async retrieve(
     request: operations.GuardrailRuleGetRequest,
     options?: RequestOptions,
-  ): Promise<operations.GuardrailRuleGetResponseBody> {
+  ): Promise<components.GetGuardrailRuleResponse> {
     return unwrapAsync(guardrailRulesRetrieve(
       this,
       request,
@@ -97,15 +83,32 @@ export class GuardrailRules extends ClientSDK {
   }
 
   /**
-   * Update guardrail rule
+   * Delete a guardrail rule
    *
    * @remarks
-   * Partially updates an existing guardrail rule. Only provided fields are updated.
+   * Permanently deletes a guardrail rule.
+   */
+  async delete(
+    request: operations.GuardrailRuleDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteGuardrailRuleResponse> {
+    return unwrapAsync(guardrailRulesDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a guardrail rule
+   *
+   * @remarks
+   * Partially updates guardrail-rule metadata or configuration. Project scope is immutable.
    */
   async update(
     request: operations.GuardrailRuleUpdateRequest,
     options?: RequestOptions,
-  ): Promise<operations.GuardrailRuleUpdateResponseBody> {
+  ): Promise<components.UpdateGuardrailRuleResponse> {
     return unwrapAsync(guardrailRulesUpdate(
       this,
       request,

@@ -4,86 +4,19 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type CreateMemoryDocumentRequestBody = {
-  /**
-   * The content of the memory document (whitespace trimmed).
-   */
-  text: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
-   */
-  metadata?: { [k: string]: string } | undefined;
-};
+import * as components from "../components/index.js";
 
 export type CreateMemoryDocumentRequest = {
-  /**
-   * The unique key identifier of the memory store
-   */
   memoryStoreKey: string;
-  /**
-   * The unique entity_id provided during the memory store creation
-   */
   memoryEntityId: string;
-  requestBody?: CreateMemoryDocumentRequestBody | undefined;
+  createMemoryDocumentRequest: components.CreateMemoryDocumentRequest;
 };
-
-/**
- * Memory document successfully created.
- */
-export type CreateMemoryDocumentResponseBody = {
-  id: string;
-  memoryId: string;
-  storeId: string;
-  /**
-   * The content of the memory document (whitespace trimmed).
-   */
-  text: string;
-  created: string;
-  updated: string;
-  createdById?: string | null | undefined;
-  updatedById?: string | null | undefined;
-  workspaceId: string;
-  /**
-   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
-   */
-  metadata?: { [k: string]: string } | undefined;
-};
-
-/** @internal */
-export type CreateMemoryDocumentRequestBody$Outbound = {
-  text: string;
-  metadata?: { [k: string]: string } | undefined;
-};
-
-/** @internal */
-export const CreateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
-  CreateMemoryDocumentRequestBody$Outbound,
-  z.ZodTypeDef,
-  CreateMemoryDocumentRequestBody
-> = z.object({
-  text: z.string(),
-  metadata: z.record(z.string()).optional(),
-});
-
-export function createMemoryDocumentRequestBodyToJSON(
-  createMemoryDocumentRequestBody: CreateMemoryDocumentRequestBody,
-): string {
-  return JSON.stringify(
-    CreateMemoryDocumentRequestBody$outboundSchema.parse(
-      createMemoryDocumentRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type CreateMemoryDocumentRequest$Outbound = {
   memory_store_key: string;
   memory_entity_id: string;
-  RequestBody?: CreateMemoryDocumentRequestBody$Outbound | undefined;
+  CreateMemoryDocumentRequest: components.CreateMemoryDocumentRequest$Outbound;
 };
 
 /** @internal */
@@ -94,13 +27,13 @@ export const CreateMemoryDocumentRequest$outboundSchema: z.ZodType<
 > = z.object({
   memoryStoreKey: z.string(),
   memoryEntityId: z.string(),
-  requestBody: z.lazy(() => CreateMemoryDocumentRequestBody$outboundSchema)
-    .optional(),
+  createMemoryDocumentRequest:
+    components.CreateMemoryDocumentRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
     memoryEntityId: "memory_entity_id",
-    requestBody: "RequestBody",
+    createMemoryDocumentRequest: "CreateMemoryDocumentRequest",
   });
 });
 
@@ -111,42 +44,5 @@ export function createMemoryDocumentRequestToJSON(
     CreateMemoryDocumentRequest$outboundSchema.parse(
       createMemoryDocumentRequest,
     ),
-  );
-}
-
-/** @internal */
-export const CreateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
-  CreateMemoryDocumentResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  memory_id: z.string(),
-  store_id: z.string(),
-  text: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  workspace_id: z.string(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "memory_id": "memoryId",
-    "store_id": "storeId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function createMemoryDocumentResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateMemoryDocumentResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateMemoryDocumentResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateMemoryDocumentResponseBody' from JSON`,
   );
 }

@@ -3,7 +3,12 @@
  */
 
 import { OrqCore } from "../core.js";
-import { appendForm, encodeJSON } from "../lib/encodings.js";
+import { appendForm, encodeJSON, normalizeBlob } from "../lib/encodings.js";
+import {
+  bytesToBlob,
+  getContentTypeFromFileName,
+  readableStreamToArrayBuffer,
+} from "../lib/files.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -23,7 +28,9 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
+import { isBlobLike } from "../types/blobs.js";
 import { Result } from "../types/fp.js";
+import { isReadableStream } from "../types/streams.js";
 
 /**
  * Create image variation
@@ -103,7 +110,31 @@ async function $do(
     );
   }
   if (payload.image !== undefined) {
-    appendForm(body, "image", payload.image);
+    if (isBlobLike(payload.image)) {
+      const file = payload.image;
+      const blob = await normalizeBlob(file);
+      const name = "name" in file ? (file.name as string) : undefined;
+      appendForm(body, "image", blob, name);
+    } else if (isReadableStream(payload.image.content)) {
+      const buffer = await readableStreamToArrayBuffer(payload.image.content);
+      const contentType = getContentTypeFromFileName(payload.image.fileName)
+        || "application/octet-stream";
+      appendForm(
+        body,
+        "image",
+        bytesToBlob(buffer, contentType),
+        payload.image.fileName,
+      );
+    } else {
+      const contentType = getContentTypeFromFileName(payload.image.fileName)
+        || "application/octet-stream";
+      appendForm(
+        body,
+        "image",
+        bytesToBlob(payload.image.content, contentType),
+        payload.image.fileName,
+      );
+    }
   }
   if (payload.load_balancer !== undefined) {
     appendForm(

@@ -19,7 +19,7 @@ export type RetrieveToolRequest = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus = {
+export const RetrieveToolResponseBodyToolsResponse200Status = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -28,23 +28,22 @@ export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus =
-  ClosedEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus
-  >;
+export type RetrieveToolResponseBodyToolsResponse200Status = ClosedEnum<
+  typeof RetrieveToolResponseBodyToolsResponse200Status
+>;
 
 /**
  * The type must be "object"
  */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type = {
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type =
+export type RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type =
   ClosedEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type
   >;
 
 /**
@@ -54,7 +53,7 @@ export type RetrieveToolResponseBodyToolsParameters = {
   /**
    * The type must be "object"
    */
-  type: RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type;
+  type: RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type;
   /**
    * The properties of the function parameters
    */
@@ -95,133 +94,7 @@ export type RetrieveToolResponseBodyCodeExecutionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
-   */
-  path: string;
-  /**
-   * Unique key of the tool as it will be displayed in the UI
-   */
-  key: string;
-  /**
-   * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
-   */
-  displayName?: string | undefined;
-  /**
-   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
-   */
-  description: string;
-  /**
-   * The id of the user that created the tool
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The id of the user that last updated the tool
-   */
-  updatedById?: string | null | undefined;
-  projectId: string;
-  workspaceId: string;
-  created: string;
-  updated: string;
-  /**
-   * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
-   */
-  status: RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus;
-  type: "code";
-  codeTool: RetrieveToolResponseBodyCodeTool;
-};
-
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export const RetrieveToolResponseBodyToolsResponse200Status = {
-  Live: "live",
-  Draft: "draft",
-  Pending: "pending",
-  Published: "published",
-} as const;
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export type RetrieveToolResponseBodyToolsResponse200Status = ClosedEnum<
-  typeof RetrieveToolResponseBodyToolsResponse200Status
->;
-
-export type RetrieveToolResponseBodyHeaders = {
-  value: string;
-  encrypted: boolean;
-};
-
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type = {
-  Object: "object",
-} as const;
-export type RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type =
-  ClosedEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type
-  >;
-
-export type RetrieveToolResponseBodyToolsSchema = {
-  type: RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type;
-  properties?: { [k: string]: any } | undefined;
-  required?: Array<string> | undefined;
-};
-
-export type RetrieveToolResponseBodyTools = {
-  id: string;
-  name: string;
-  description?: string | undefined;
-  schema: RetrieveToolResponseBodyToolsSchema;
-};
-
-/**
- * The connection type used by the MCP server
- */
-export const RetrieveToolResponseBodyConnectionType = {
-  Http: "http",
-  Sse: "sse",
-} as const;
-/**
- * The connection type used by the MCP server
- */
-export type RetrieveToolResponseBodyConnectionType = ClosedEnum<
-  typeof RetrieveToolResponseBodyConnectionType
->;
-
-export type RetrieveToolResponseBodyMcp = {
-  /**
-   * The MCP server URL (cached for execution)
-   */
-  serverUrl: string;
-  /**
-   * HTTP headers for MCP server requests with encryption support
-   */
-  headers?: { [k: string]: RetrieveToolResponseBodyHeaders } | undefined;
-  /**
-   * Array of tools available from the MCP server
-   */
-  tools: Array<RetrieveToolResponseBodyTools>;
-  /**
-   * The connection type used by the MCP server
-   */
-  connectionType: RetrieveToolResponseBodyConnectionType;
-  /**
-   * Names of template variables detected in server_url and headers. Used by the FE to prompt for one-time values on sync/refresh.
-   */
-  templateVariables?: Array<string> | null | undefined;
-};
-
-/**
- * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
- */
-export type RetrieveToolResponseBodyMCPTool = {
-  id: string;
-  /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -254,8 +127,8 @@ export type RetrieveToolResponseBodyMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: RetrieveToolResponseBodyToolsResponse200Status;
-  type: "mcp";
-  mcp: RetrieveToolResponseBodyMcp;
+  type: "code";
+  codeTool: RetrieveToolResponseBodyCodeTool;
 };
 
 /**
@@ -295,9 +168,7 @@ export type RetrieveToolHeaders2 = {
   encrypted: boolean;
 };
 
-export type RetrieveToolResponseBodyToolsHeaders =
-  | RetrieveToolHeaders2
-  | string;
+export type RetrieveToolResponseBodyHeaders = RetrieveToolHeaders2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -328,7 +199,7 @@ export type RetrieveToolResponseBodyBlueprint = {
 /**
  * The type of the argument.
  */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type = {
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONType = {
   String: "string",
   Number: "number",
   Boolean: "boolean",
@@ -336,9 +207,9 @@ export const RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type = {
 /**
  * The type of the argument.
  */
-export type RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type =
+export type RetrieveToolResponseBodyToolsResponse200ApplicationJSONType =
   ClosedEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONType
   >;
 
 /**
@@ -350,7 +221,7 @@ export type RetrieveToolResponseBodyArguments = {
   /**
    * The type of the argument.
    */
-  type: RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type;
+  type: RetrieveToolResponseBodyToolsResponse200ApplicationJSONType;
   /**
    * A description of the argument.
    */
@@ -386,7 +257,7 @@ export type RetrieveToolResponseBodyHTTPTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -487,7 +358,7 @@ export type RetrieveToolResponseBodyJSONSchemaTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -602,7 +473,7 @@ export type RetrieveToolResponseBodyFunctionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -646,7 +517,6 @@ export type RetrieveToolResponseBody =
   | RetrieveToolResponseBodyFunctionTool
   | RetrieveToolResponseBodyJSONSchemaTool
   | RetrieveToolResponseBodyHTTPTool
-  | RetrieveToolResponseBodyMCPTool
   | RetrieveToolResponseBodyCodeExecutionTool;
 
 /** @internal */
@@ -676,19 +546,16 @@ export function retrieveToolRequestToJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus
-  > = z.nativeEnum(
-    RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus,
-  );
+export const RetrieveToolResponseBodyToolsResponse200Status$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponse200Status> = z
+    .nativeEnum(RetrieveToolResponseBodyToolsResponse200Status);
 
 /** @internal */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema:
   z.ZodNativeEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type
   > = z.nativeEnum(
-    RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type,
+    RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type,
   );
 
 /** @internal */
@@ -699,7 +566,7 @@ export const RetrieveToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
 > = collectExtraKeys$(
   z.object({
     type:
-      RetrieveToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema,
+      RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
   }).catchall(z.any()),
@@ -757,7 +624,7 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5NFS9EW906CDWBRW4XG"),
+  _id: z.string().default("tool_01M0X9CG0609NPF59XWYJXPFVM"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -768,9 +635,9 @@ export const RetrieveToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status:
-    RetrieveToolResponseBodyToolsResponse200ApplicationJSONStatus$inboundSchema
-      .default("live"),
+  status: RetrieveToolResponseBodyToolsResponse200Status$inboundSchema.default(
+    "live",
+  ),
   type: z.literal("code"),
   code_tool: z.lazy(() => RetrieveToolResponseBodyCodeTool$inboundSchema),
 }).transform((v) => {
@@ -798,163 +665,6 @@ export function retrieveToolResponseBodyCodeExecutionToolFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'RetrieveToolResponseBodyCodeExecutionTool' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponse200Status$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveToolResponseBodyToolsResponse200Status> = z
-    .nativeEnum(RetrieveToolResponseBodyToolsResponse200Status);
-
-/** @internal */
-export const RetrieveToolResponseBodyHeaders$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function retrieveToolResponseBodyHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveToolResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyHeaders' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type
-  > = z.nativeEnum(
-    RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type,
-  );
-
-/** @internal */
-export const RetrieveToolResponseBodyToolsSchema$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyToolsSchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    RetrieveToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
-
-export function retrieveToolResponseBodyToolsSchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyToolsSchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      RetrieveToolResponseBodyToolsSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyToolsSchema' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveToolResponseBodyTools$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyTools,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().default("01M0NTJ5NE05DH993YWA47AA2D"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() => RetrieveToolResponseBodyToolsSchema$inboundSchema),
-});
-
-export function retrieveToolResponseBodyToolsFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyTools, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveToolResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyTools' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveToolResponseBodyConnectionType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveToolResponseBodyConnectionType> = z.nativeEnum(
-    RetrieveToolResponseBodyConnectionType,
-  );
-
-/** @internal */
-export const RetrieveToolResponseBodyMcp$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyMcp,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  server_url: z.string(),
-  headers: z.record(z.lazy(() => RetrieveToolResponseBodyHeaders$inboundSchema))
-    .optional(),
-  tools: z.array(z.lazy(() => RetrieveToolResponseBodyTools$inboundSchema)),
-  connection_type: RetrieveToolResponseBodyConnectionType$inboundSchema,
-  template_variables: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_url": "serverUrl",
-    "connection_type": "connectionType",
-    "template_variables": "templateVariables",
-  });
-});
-
-export function retrieveToolResponseBodyMcpFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyMcp, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveToolResponseBodyMcp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyMcp' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveToolResponseBodyMCPTool$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyMCPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("tool_01M0NTJ5ND9HDH44S9F5Z3VMBE"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: RetrieveToolResponseBodyToolsResponse200Status$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => RetrieveToolResponseBodyMcp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function retrieveToolResponseBodyMCPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyMCPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveToolResponseBodyMCPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyMCPTool' from JSON`,
   );
 }
 
@@ -989,20 +699,19 @@ export function retrieveToolHeaders2FromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBodyToolsHeaders$inboundSchema: z.ZodType<
-  RetrieveToolResponseBodyToolsHeaders,
+export const RetrieveToolResponseBodyHeaders$inboundSchema: z.ZodType<
+  RetrieveToolResponseBodyHeaders,
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => RetrieveToolHeaders2$inboundSchema), z.string()]);
 
-export function retrieveToolResponseBodyToolsHeadersFromJSON(
+export function retrieveToolResponseBodyHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveToolResponseBodyToolsHeaders, SDKValidationError> {
+): SafeParseResult<RetrieveToolResponseBodyHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      RetrieveToolResponseBodyToolsHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveToolResponseBodyToolsHeaders' from JSON`,
+    (x) => RetrieveToolResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveToolResponseBodyHeaders' from JSON`,
   );
 }
 
@@ -1032,12 +741,10 @@ export function retrieveToolResponseBodyBlueprintFromJSON(
 }
 
 /** @internal */
-export const RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema:
+export const RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
-    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type
-  > = z.nativeEnum(
-    RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type,
-  );
+    typeof RetrieveToolResponseBodyToolsResponse200ApplicationJSONType
+  > = z.nativeEnum(RetrieveToolResponseBodyToolsResponse200ApplicationJSONType);
 
 /** @internal */
 export const RetrieveToolResponseBodyDefaultValue$inboundSchema: z.ZodType<
@@ -1064,7 +771,7 @@ export const RetrieveToolResponseBodyArguments$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type:
-    RetrieveToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema,
+    RetrieveToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
   description: z.string(),
   send_to_model: z.boolean().default(true),
   default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -1113,7 +820,7 @@ export const RetrieveToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5NCAR4CWPZCBSTVZRDF"),
+  _id: z.string().default("tool_01M0X9CG04VZCYD6QRD2GCMMWB"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1209,7 +916,7 @@ export const RetrieveToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5NBTG2Q723RDH11M1TM"),
+  _id: z.string().default("tool_01M0X9CG0330BB47MFFE0PV8MN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1315,7 +1022,7 @@ export const RetrieveToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5NAVQVBXDQ9X7SZ2B8C"),
+  _id: z.string().default("tool_01M0X9CG02Y0PVJKCQQGN9C5VX"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1360,7 +1067,6 @@ export const RetrieveToolResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => RetrieveToolResponseBodyFunctionTool$inboundSchema),
   z.lazy(() => RetrieveToolResponseBodyJSONSchemaTool$inboundSchema),
   z.lazy(() => RetrieveToolResponseBodyHTTPTool$inboundSchema),
-  z.lazy(() => RetrieveToolResponseBodyMCPTool$inboundSchema),
   z.lazy(() => RetrieveToolResponseBodyCodeExecutionTool$inboundSchema),
 ]);
 

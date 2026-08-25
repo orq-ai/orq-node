@@ -3,79 +3,67 @@
 
 ## Supported Types
 
-### `operations.SearchKnowledge1Eq`
+### `operations.CreateChatCompletion1Eq`
 
 ```typescript
-const value: operations.SearchKnowledge1Eq = {
-  eq: false,
+const value: operations.CreateChatCompletion1Eq = {
+  eq: "<value>",
 };
 ```
 
-### `operations.SearchKnowledge1Ne`
+### `operations.CreateChatCompletion1Ne`
 
 ```typescript
-const value: operations.SearchKnowledge1Ne = {
+const value: operations.CreateChatCompletion1Ne = {
   ne: true,
 };
 ```
 
-### `operations.SearchKnowledge1Gt`
+### `operations.CreateChatCompletion1Gt`
 
 ```typescript
-const value: operations.SearchKnowledge1Gt = {
-  gt: 2578.41,
+const value: operations.CreateChatCompletion1Gt = {
+  gt: 6554.46,
 };
 ```
 
-### `operations.SearchKnowledge1Gte`
+### `operations.CreateChatCompletion1Gte`
 
 ```typescript
-const value: operations.SearchKnowledge1Gte = {
-  gte: 5150.72,
+const value: operations.CreateChatCompletion1Gte = {
+  gte: 4022.96,
 };
 ```
 
-### `operations.SearchKnowledge1Lt`
+### `operations.CreateChatCompletion1Lt`
 
 ```typescript
-const value: operations.SearchKnowledge1Lt = {
-  lt: 6257.71,
+const value: operations.CreateChatCompletion1Lt = {
+  lt: 5271.52,
 };
 ```
 
-### `operations.SearchKnowledge1Lte`
+### `operations.CreateChatCompletion1Lte`
 
 ```typescript
-const value: operations.SearchKnowledge1Lte = {
-  lte: 9589.68,
+const value: operations.CreateChatCompletion1Lte = {
+  lte: 2846.17,
 };
 ```
 
-### `operations.SearchKnowledge1In`
+### `operations.CreateChatCompletion1In`
 
 ```typescript
-const value: operations.SearchKnowledge1In = {
-  in: [
-    "<value>",
-  ],
+const value: operations.CreateChatCompletion1In = {
+  in: [],
 };
 ```
 
-### `operations.SearchKnowledge1Nin`
+### `operations.CreateChatCompletion1Nin`
 
 ```typescript
-const value: operations.SearchKnowledge1Nin = {
-  nin: [
-    8483.55,
-  ],
-};
-```
-
-### `operations.SearchKnowledge1Exists`
-
-```typescript
-const value: operations.SearchKnowledge1Exists = {
-  exists: false,
+const value: operations.CreateChatCompletion1Nin = {
+  nin: [],
 };
 ```
 

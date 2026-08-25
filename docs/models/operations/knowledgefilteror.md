@@ -69,11 +69,3 @@ const value: operations.OrNin = {
 };
 ```
 
-### `operations.OrExists`
-
-```typescript
-const value: operations.OrExists = {
-  exists: false,
-};
-```
-

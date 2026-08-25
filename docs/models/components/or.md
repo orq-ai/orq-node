@@ -69,11 +69,3 @@ const value: components.InvokeDeploymentRequestOrNin = {
 };
 ```
 
-### `components.OrExists`
-
-```typescript
-const value: components.OrExists = {
-  exists: false,
-};
-```
-

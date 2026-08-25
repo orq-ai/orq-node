@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Trigger schedule execution
  *
  * @remarks
- * Runs the schedule's payload immediately (≈10 seconds after the request, to stay above the NATS scheduler's minimum deliver-at margin). The schedule's regular cadence is unaffected. Inactive schedules return 400.
+ * Runs the schedule's payload immediately (approximately 10 seconds after the request). The schedule's regular cadence is unaffected. Inactive schedules return 400.
  */
 export function schedulesTrigger(
   client: OrqCore,

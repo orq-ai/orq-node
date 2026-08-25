@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * List all datasources
+ *
+ * @remarks
+ * Returns the datasources in a knowledge base. Use cursors to page through results and optional query or status filters to narrow the list.
  */
 export function knowledgeListDatasources(
   client: OrqCore,
@@ -34,7 +38,7 @@ export function knowledgeListDatasources(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ListDatasourcesResponseBody,
+    components.DatasourcesServiceListResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.ListDatasourcesResponseBody,
+      components.DatasourcesServiceListResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -96,7 +100,6 @@ async function $do(
   const query = encodeFormQuery({
     "ending_before": payload.ending_before,
     "limit": payload.limit,
-    "metadata": payload.metadata,
     "q": payload.q,
     "starting_after": payload.starting_after,
     "status": payload.status,
@@ -154,7 +157,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.ListDatasourcesResponseBody,
+    components.DatasourcesServiceListResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +167,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListDatasourcesResponseBody$inboundSchema),
+    M.json(200, components.DatasourcesServiceListResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

@@ -27,6 +27,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Edit an annotation queue
+ *
+ * @remarks
+ * Update an annotation queue by ID with the provided fields.
  */
 export function annotationQueuesUpdate(
   client: OrqCore,

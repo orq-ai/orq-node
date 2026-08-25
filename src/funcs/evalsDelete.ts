@@ -29,6 +29,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete an Evaluator
+ *
+ * @remarks
+ * Delete an evaluator by its unique identifier.
  */
 export function evalsDelete(
   client: OrqCore,

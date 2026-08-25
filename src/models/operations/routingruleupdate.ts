@@ -4,89 +4,17 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type RoutingRuleUpdateRequestBody = {
-  description?: string | undefined;
-  displayName?: string | undefined;
-  enabled?: boolean | undefined;
-  expression?: components.ExpressionInput | undefined;
-  modelsConfig?: components.ModelsConfig | undefined;
-  priority?: number | undefined;
-};
 
 export type RoutingRuleUpdateRequest = {
-  /**
-   * The ID of the routing rule
-   */
   routingRuleId: string;
-  requestBody: RoutingRuleUpdateRequestBody;
+  updateRoutingRuleRequest: components.UpdateRoutingRuleRequest;
 };
-
-/**
- * Routing rule updated successfully
- */
-export type RoutingRuleUpdateResponseBody = {
-  id: string;
-  createdAt: Date;
-  createdById: string;
-  description?: string | undefined;
-  displayName: string;
-  enabled: boolean;
-  expression?: components.Expression | undefined;
-  modelsConfig?: components.ModelsConfig | undefined;
-  priority: number;
-  projectId: string;
-  updatedAt: Date;
-  updatedById: string;
-};
-
-/** @internal */
-export type RoutingRuleUpdateRequestBody$Outbound = {
-  description?: string | undefined;
-  display_name?: string | undefined;
-  enabled?: boolean | undefined;
-  expression?: components.ExpressionInput$Outbound | undefined;
-  models_config?: components.ModelsConfig$Outbound | undefined;
-  priority?: number | undefined;
-};
-
-/** @internal */
-export const RoutingRuleUpdateRequestBody$outboundSchema: z.ZodType<
-  RoutingRuleUpdateRequestBody$Outbound,
-  z.ZodTypeDef,
-  RoutingRuleUpdateRequestBody
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  expression: components.ExpressionInput$outboundSchema.optional(),
-  modelsConfig: components.ModelsConfig$outboundSchema.optional(),
-  priority: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    modelsConfig: "models_config",
-  });
-});
-
-export function routingRuleUpdateRequestBodyToJSON(
-  routingRuleUpdateRequestBody: RoutingRuleUpdateRequestBody,
-): string {
-  return JSON.stringify(
-    RoutingRuleUpdateRequestBody$outboundSchema.parse(
-      routingRuleUpdateRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type RoutingRuleUpdateRequest$Outbound = {
   routing_rule_id: string;
-  RequestBody: RoutingRuleUpdateRequestBody$Outbound;
+  UpdateRoutingRuleRequest: components.UpdateRoutingRuleRequest$Outbound;
 };
 
 /** @internal */
@@ -96,11 +24,11 @@ export const RoutingRuleUpdateRequest$outboundSchema: z.ZodType<
   RoutingRuleUpdateRequest
 > = z.object({
   routingRuleId: z.string(),
-  requestBody: z.lazy(() => RoutingRuleUpdateRequestBody$outboundSchema),
+  updateRoutingRuleRequest: components.UpdateRoutingRuleRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     routingRuleId: "routing_rule_id",
-    requestBody: "RequestBody",
+    updateRoutingRuleRequest: "UpdateRoutingRuleRequest",
   });
 });
 
@@ -109,46 +37,5 @@ export function routingRuleUpdateRequestToJSON(
 ): string {
   return JSON.stringify(
     RoutingRuleUpdateRequest$outboundSchema.parse(routingRuleUpdateRequest),
-  );
-}
-
-/** @internal */
-export const RoutingRuleUpdateResponseBody$inboundSchema: z.ZodType<
-  RoutingRuleUpdateResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  description: z.string().optional(),
-  display_name: z.string(),
-  enabled: z.boolean(),
-  expression: components.Expression$inboundSchema.optional(),
-  models_config: components.ModelsConfig$inboundSchema.optional(),
-  priority: z.number().int(),
-  project_id: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_at": "createdAt",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "models_config": "modelsConfig",
-    "project_id": "projectId",
-    "updated_at": "updatedAt",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function routingRuleUpdateResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RoutingRuleUpdateResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RoutingRuleUpdateResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RoutingRuleUpdateResponseBody' from JSON`,
   );
 }

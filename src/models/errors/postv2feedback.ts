@@ -6,14 +6,14 @@ import * as z from "zod/v3";
 import { OrqError } from "./orqerror.js";
 
 /**
- * Workspace ID is not found on the request
+ * Workspace, trace, or feedback property was not found
  */
 export type PostV2FeedbackFeedbackResponseBodyData = {
   message: string;
 };
 
 /**
- * Workspace ID is not found on the request
+ * Workspace, trace, or feedback property was not found
  */
 export class PostV2FeedbackFeedbackResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */

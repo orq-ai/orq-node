@@ -589,6 +589,7 @@ export type UpdatePromptGuardrails = {
 export type UpdatePromptPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -863,6 +864,7 @@ export type UpdatePromptPromptInput = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -977,7 +979,7 @@ export type UpdatePromptUpdatePromptRequest = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -1834,6 +1836,7 @@ export type UpdatePromptPromptsGuardrails = {
 export type UpdatePromptPromptsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -2435,6 +2438,7 @@ export type UpdatePromptPromptField = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -3568,6 +3572,7 @@ export function updatePromptGuardrailsToJSON(
 export type UpdatePromptPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -3579,6 +3584,7 @@ export const UpdatePromptPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
   components.ResponseHealingPlugin$outboundSchema,
 ]);
@@ -3850,6 +3856,7 @@ export type UpdatePromptPromptInput$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -3920,6 +3927,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
       components.ResponseHealingPlugin$outboundSchema,
     ]),
@@ -5031,6 +5039,7 @@ export const UpdatePromptPromptsPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
   components.ResponseHealingPlugin$inboundSchema,
 ]);
@@ -5825,6 +5834,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
       components.ResponseHealingPlugin$inboundSchema,
     ]),

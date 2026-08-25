@@ -4,108 +4,17 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateMemoryStoreRequestBody = {
-  /**
-   * The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store.
-   */
-  description?: string | undefined;
-  /**
-   * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
-   */
-  ttl?: number | null | undefined;
-  path?: string | undefined;
-};
+import * as components from "../components/index.js";
 
 export type UpdateMemoryStoreRequest = {
-  /**
-   * The unique key identifier of the memory store
-   */
   memoryStoreKey: string;
-  requestBody?: UpdateMemoryStoreRequestBody | undefined;
+  updateMemoryStoreRequest: components.UpdateMemoryStoreRequest;
 };
-
-export type UpdateMemoryStoreEmbeddingConfig = {
-  /**
-   * The embeddings model to use for the knowledge base in the format "provider/model" for public models or "workspaceKey@provider/model" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models.
-   */
-  model: string;
-};
-
-/**
- * Memory store successfully updated.
- */
-export type UpdateMemoryStoreResponseBody = {
-  /**
-   * The unique identifier of the memory store
-   */
-  id: string;
-  /**
-   * The unique key of the memory store. The key is unique and inmmutable and cannot be repeated within the same workspace.
-   */
-  key: string;
-  /**
-   * The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store.
-   */
-  description: string;
-  /**
-   * The user ID of the creator
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The user ID of the last updater
-   */
-  updatedById?: string | null | undefined;
-  /**
-   * The creation date of the memory store
-   */
-  created: string;
-  /**
-   * The last update date of the memory store
-   */
-  updated: string;
-  /**
-   * The default time to live of every memory document created within the memory store. Useful to control if the documents in the memory should be store for short or long term.
-   */
-  ttl?: number | null | undefined;
-  embeddingConfig: UpdateMemoryStoreEmbeddingConfig;
-};
-
-/** @internal */
-export type UpdateMemoryStoreRequestBody$Outbound = {
-  description?: string | undefined;
-  ttl?: number | null | undefined;
-  path?: string | undefined;
-};
-
-/** @internal */
-export const UpdateMemoryStoreRequestBody$outboundSchema: z.ZodType<
-  UpdateMemoryStoreRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateMemoryStoreRequestBody
-> = z.object({
-  description: z.string().optional(),
-  ttl: z.nullable(z.number()).optional(),
-  path: z.string().optional(),
-});
-
-export function updateMemoryStoreRequestBodyToJSON(
-  updateMemoryStoreRequestBody: UpdateMemoryStoreRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateMemoryStoreRequestBody$outboundSchema.parse(
-      updateMemoryStoreRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type UpdateMemoryStoreRequest$Outbound = {
   memory_store_key: string;
-  RequestBody?: UpdateMemoryStoreRequestBody$Outbound | undefined;
+  UpdateMemoryStoreRequest: components.UpdateMemoryStoreRequest$Outbound;
 };
 
 /** @internal */
@@ -115,12 +24,11 @@ export const UpdateMemoryStoreRequest$outboundSchema: z.ZodType<
   UpdateMemoryStoreRequest
 > = z.object({
   memoryStoreKey: z.string(),
-  requestBody: z.lazy(() => UpdateMemoryStoreRequestBody$outboundSchema)
-    .optional(),
+  updateMemoryStoreRequest: components.UpdateMemoryStoreRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     memoryStoreKey: "memory_store_key",
-    requestBody: "RequestBody",
+    updateMemoryStoreRequest: "UpdateMemoryStoreRequest",
   });
 });
 
@@ -129,60 +37,5 @@ export function updateMemoryStoreRequestToJSON(
 ): string {
   return JSON.stringify(
     UpdateMemoryStoreRequest$outboundSchema.parse(updateMemoryStoreRequest),
-  );
-}
-
-/** @internal */
-export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
-  UpdateMemoryStoreEmbeddingConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
-
-export function updateMemoryStoreEmbeddingConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreEmbeddingConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreEmbeddingConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreEmbeddingConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateMemoryStoreResponseBody$inboundSchema: z.ZodType<
-  UpdateMemoryStoreResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  key: z.string(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.nullable(z.number()).optional(),
-  embedding_config: z.lazy(() =>
-    UpdateMemoryStoreEmbeddingConfig$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "embedding_config": "embeddingConfig",
-  });
-});
-
-export function updateMemoryStoreResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateMemoryStoreResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateMemoryStoreResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateMemoryStoreResponseBody' from JSON`,
   );
 }

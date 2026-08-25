@@ -5,18 +5,18 @@ Returns the transcription or verbose transcription
 
 ## Supported Types
 
-### `operations.CreateTranscriptionResponseBody1`
+### `operations.ResponseBody1`
 
 ```typescript
-const value: operations.CreateTranscriptionResponseBody1 = {
+const value: operations.ResponseBody1 = {
   text: "<value>",
 };
 ```
 
-### `operations.CreateTranscriptionResponseBody2`
+### `operations.ResponseBody2`
 
 ```typescript
-const value: operations.CreateTranscriptionResponseBody2 = {
+const value: operations.ResponseBody2 = {
   text: "<value>",
 };
 ```

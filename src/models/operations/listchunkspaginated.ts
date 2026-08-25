@@ -4,170 +4,21 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * Filter chunks by processing status
- */
-export const Status = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * Filter chunks by processing status
- */
-export type Status = ClosedEnum<typeof Status>;
-
-export type ListChunksPaginatedRequestBody = {
-  /**
-   * Search query to find chunks by text content
-   */
-  q?: string | undefined;
-  /**
-   * Filter chunks by enabled status
-   */
-  enabled?: boolean | undefined;
-  /**
-   * Filter chunks by processing status
-   */
-  status?: Status | undefined;
-  limit?: number | undefined;
-  page?: number | undefined;
-};
+import * as components from "../components/index.js";
 
 export type ListChunksPaginatedRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
-  /**
-   * The unique identifier of the datasource.
-   */
   datasourceId: string;
-  requestBody?: ListChunksPaginatedRequestBody | undefined;
+  chunksServiceListPaginatedRequest:
+    components.ChunksServiceListPaginatedRequest;
 };
-
-export const ListChunksPaginatedObject = {
-  List: "list",
-} as const;
-export type ListChunksPaginatedObject = ClosedEnum<
-  typeof ListChunksPaginatedObject
->;
-
-export type ListChunksPaginatedMetadata = string | number | boolean;
-
-/**
- * The status of the chunk
- */
-export const ListChunksPaginatedStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type ListChunksPaginatedStatus = ClosedEnum<
-  typeof ListChunksPaginatedStatus
->;
-
-export type ListChunksPaginatedData = {
-  /**
-   * The unique identifier of the chunk
-   */
-  id: string;
-  /**
-   * The text content of the chunk
-   */
-  text: string;
-  /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
-   */
-  metadata?: { [k: string]: string | number | boolean } | undefined;
-  /**
-   * Whether the chunk is enabled
-   */
-  enabled: boolean;
-  /**
-   * The status of the chunk
-   */
-  status: ListChunksPaginatedStatus;
-  /**
-   * The date and time the chunk was created
-   */
-  created: string;
-  /**
-   * The date and time the chunk was updated
-   */
-  updated: string;
-  /**
-   * The unique identifier of the user who created the chunk
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who updated the chunk
-   */
-  updateById?: string | null | undefined;
-};
-
-/**
- * Chunks successfully retrieved
- */
-export type ListChunksPaginatedResponseBody = {
-  object: ListChunksPaginatedObject;
-  data: Array<ListChunksPaginatedData>;
-  hasMore: boolean;
-};
-
-/** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
-
-/** @internal */
-export type ListChunksPaginatedRequestBody$Outbound = {
-  q: string;
-  enabled?: boolean | undefined;
-  status?: string | undefined;
-  limit: number;
-  page: number;
-};
-
-/** @internal */
-export const ListChunksPaginatedRequestBody$outboundSchema: z.ZodType<
-  ListChunksPaginatedRequestBody$Outbound,
-  z.ZodTypeDef,
-  ListChunksPaginatedRequestBody
-> = z.object({
-  q: z.string().default(""),
-  enabled: z.boolean().optional(),
-  status: Status$outboundSchema.optional(),
-  limit: z.number().int().default(100),
-  page: z.number().int().default(1),
-});
-
-export function listChunksPaginatedRequestBodyToJSON(
-  listChunksPaginatedRequestBody: ListChunksPaginatedRequestBody,
-): string {
-  return JSON.stringify(
-    ListChunksPaginatedRequestBody$outboundSchema.parse(
-      listChunksPaginatedRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type ListChunksPaginatedRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody?: ListChunksPaginatedRequestBody$Outbound | undefined;
+  ChunksServiceListPaginatedRequest:
+    components.ChunksServiceListPaginatedRequest$Outbound;
 };
 
 /** @internal */
@@ -178,13 +29,13 @@ export const ListChunksPaginatedRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.lazy(() => ListChunksPaginatedRequestBody$outboundSchema)
-    .optional(),
+  chunksServiceListPaginatedRequest:
+    components.ChunksServiceListPaginatedRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
     datasourceId: "datasource_id",
-    requestBody: "RequestBody",
+    chunksServiceListPaginatedRequest: "ChunksServiceListPaginatedRequest",
   });
 });
 
@@ -193,90 +44,5 @@ export function listChunksPaginatedRequestToJSON(
 ): string {
   return JSON.stringify(
     ListChunksPaginatedRequest$outboundSchema.parse(listChunksPaginatedRequest),
-  );
-}
-
-/** @internal */
-export const ListChunksPaginatedObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListChunksPaginatedObject
-> = z.nativeEnum(ListChunksPaginatedObject);
-
-/** @internal */
-export const ListChunksPaginatedMetadata$inboundSchema: z.ZodType<
-  ListChunksPaginatedMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function listChunksPaginatedMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksPaginatedMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksPaginatedMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksPaginatedMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListChunksPaginatedStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ListChunksPaginatedStatus
-> = z.nativeEnum(ListChunksPaginatedStatus);
-
-/** @internal */
-export const ListChunksPaginatedData$inboundSchema: z.ZodType<
-  ListChunksPaginatedData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: ListChunksPaginatedStatus$inboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-  });
-});
-
-export function listChunksPaginatedDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksPaginatedData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksPaginatedData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksPaginatedData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListChunksPaginatedResponseBody$inboundSchema: z.ZodType<
-  ListChunksPaginatedResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: ListChunksPaginatedObject$inboundSchema,
-  data: z.array(z.lazy(() => ListChunksPaginatedData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function listChunksPaginatedResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ListChunksPaginatedResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListChunksPaginatedResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListChunksPaginatedResponseBody' from JSON`,
   );
 }

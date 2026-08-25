@@ -35,6 +35,9 @@ import { isReadableStream } from "../types/streams.js";
 
 /**
  * Create transcription
+ *
+ * @remarks
+ * Transcribe audio input into text using the configured transcription model and return the result.
  */
 export function routerAudioTranscriptionsCreate(
   client: OrqCore,

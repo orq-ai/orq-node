@@ -12,6 +12,6 @@ let value: DeleteKnowledgeRequest = {
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `knowledgeId`                               | *string*                                    | :heavy_check_mark:                          | The unique identifier of the knowledge base |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `knowledgeId`      | *string*           | :heavy_check_mark: | N/A                |

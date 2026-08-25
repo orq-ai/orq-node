@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List tools
  *
  * @remarks
- * Lists all workspace tools. By default, returns all tools in a single response. Set `limit` to enable cursor-based pagination with `starting_after` and `ending_before`.
+ * List all workspace tools. By default returns all tools in one response. Set `limit` for cursor-based pagination.
  */
 export function toolsList(
   client: OrqCore,

@@ -8,7 +8,7 @@
 
 ## create
 
-Create transcription
+Transcribe audio input into text using the configured transcription model and return the result.
 
 ### Example Usage
 

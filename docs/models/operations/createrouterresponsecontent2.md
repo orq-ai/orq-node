@@ -14,10 +14,10 @@ const value: operations.TwoText = {
 };
 ```
 
-### `operations.Image`
+### `operations.TwoImage`
 
 ```typescript
-const value: operations.Image = {
+const value: operations.TwoImage = {
   type: "input_image",
 };
 ```

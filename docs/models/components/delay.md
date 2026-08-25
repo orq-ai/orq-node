@@ -1,6 +1,6 @@
 # Delay
 
-Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
 
 ## Example Usage
 

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { AccessLevel, AccessLevel$outboundSchema } from "./accesslevel.js";
 import {
   ApiKeyOwner,
   ApiKeyOwner$Outbound,
@@ -46,7 +47,7 @@ export type CreateApiKeyRequest = {
    *  catalog of valid keys (Domain.id) and AccessLevel string values,
    *  or fetch the live catalog via the capability catalog endpoint.
    */
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: AccessLevel } | undefined;
   /**
    * Optional expiration. When set, the authenticate hot-path rejects
    *
@@ -70,7 +71,7 @@ export type CreateApiKeyRequest$Outbound = {
   owner?: ApiKeyOwner$Outbound | undefined;
   project_scope?: ProjectScope$Outbound | undefined;
   permission_mode?: string | undefined;
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: string } | undefined;
   expires_at?: string | undefined;
   mcp_access?: McpAccess$Outbound | undefined;
 };
@@ -85,7 +86,7 @@ export const CreateApiKeyRequest$outboundSchema: z.ZodType<
   owner: ApiKeyOwner$outboundSchema.optional(),
   projectScope: ProjectScope$outboundSchema.optional(),
   permissionMode: PermissionMode$outboundSchema.optional(),
-  access: z.record(z.number().int()).optional(),
+  access: z.record(AccessLevel$outboundSchema).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   mcpAccess: McpAccess$outboundSchema.optional(),
 }).transform((v) => {

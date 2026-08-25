@@ -18,6 +18,7 @@ import { memoryStoresUpdate } from "../funcs/memoryStoresUpdate.js";
 import { memoryStoresUpdateDocument } from "../funcs/memoryStoresUpdateDocument.js";
 import { memoryStoresUpdateMemory } from "../funcs/memoryStoresUpdateMemory.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -31,7 +32,7 @@ export class MemoryStores extends ClientSDK {
   async list(
     request?: operations.GetAllMemoryStoresRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GetAllMemoryStoresResponseBody> {
+  ): Promise<components.ListMemoryStoresResponse> {
     return unwrapAsync(memoryStoresList(
       this,
       request,
@@ -43,9 +44,9 @@ export class MemoryStores extends ClientSDK {
    * Create memory store
    */
   async create(
-    request?: operations.CreateMemoryStoreRequestBody | undefined,
+    request: components.CreateMemoryStoreRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateMemoryStoreResponseBody> {
+  ): Promise<components.MemoryStore> {
     return unwrapAsync(memoryStoresCreate(
       this,
       request,
@@ -62,25 +63,8 @@ export class MemoryStores extends ClientSDK {
   async retrieve(
     request: operations.RetrieveMemoryStoreRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveMemoryStoreResponseBody> {
+  ): Promise<components.MemoryStore> {
     return unwrapAsync(memoryStoresRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update memory store
-   *
-   * @remarks
-   * Update the memory store configuration
-   */
-  async update(
-    request: operations.UpdateMemoryStoreRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateMemoryStoreResponseBody> {
-    return unwrapAsync(memoryStoresUpdate(
       this,
       request,
       options,
@@ -105,6 +89,23 @@ export class MemoryStores extends ClientSDK {
   }
 
   /**
+   * Update memory store
+   *
+   * @remarks
+   * Update the memory store configuration
+   */
+  async update(
+    request: operations.UpdateMemoryStoreRequest,
+    options?: RequestOptions,
+  ): Promise<components.MemoryStore> {
+    return unwrapAsync(memoryStoresUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List all memories
    *
    * @remarks
@@ -113,7 +114,7 @@ export class MemoryStores extends ClientSDK {
   async listMemories(
     request: operations.GetAllMemoriesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAllMemoriesResponseBody> {
+  ): Promise<components.ListMemoriesResponse> {
     return unwrapAsync(memoryStoresListMemories(
       this,
       request,
@@ -130,7 +131,7 @@ export class MemoryStores extends ClientSDK {
   async createMemory(
     request: operations.CreateMemoryRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateMemoryResponseBody> {
+  ): Promise<components.Memory> {
     return unwrapAsync(memoryStoresCreateMemory(
       this,
       request,
@@ -147,8 +148,30 @@ export class MemoryStores extends ClientSDK {
   async retrieveMemory(
     request: operations.RetrieveMemoryRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveMemoryResponseBody> {
+  ): Promise<components.Memory> {
     return unwrapAsync(memoryStoresRetrieveMemory(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a specific memory
+   *
+   * @remarks
+   * Permanently deletes a specific memory.
+   *
+   * Use this endpoint to:
+   * - Remove a memory from the store
+   * - Clean up unused memories
+   * - Manage memory storage space
+   */
+  async deleteMemory(
+    request: operations.DeleteMemoryRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(memoryStoresDeleteMemory(
       this,
       request,
       options,
@@ -164,30 +187,8 @@ export class MemoryStores extends ClientSDK {
   async updateMemory(
     request: operations.UpdateMemoryRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateMemoryResponseBody> {
+  ): Promise<components.Memory> {
     return unwrapAsync(memoryStoresUpdateMemory(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a specific memory
-   *
-   * @remarks
-   * Permanently deletes a specific memory.
-   *
-   *         Use this endpoint to:
-   *         - Remove a memory from the store
-   *         - Clean up unused memories
-   *         - Manage memory storage space
-   */
-  async deleteMemory(
-    request: operations.DeleteMemoryRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(memoryStoresDeleteMemory(
       this,
       request,
       options,
@@ -203,7 +204,7 @@ export class MemoryStores extends ClientSDK {
   async listDocuments(
     request: operations.GetAllMemoryDocumentsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAllMemoryDocumentsResponseBody> {
+  ): Promise<components.ListMemoryDocumentsResponse> {
     return unwrapAsync(memoryStoresListDocuments(
       this,
       request,
@@ -220,7 +221,7 @@ export class MemoryStores extends ClientSDK {
   async createDocument(
     request: operations.CreateMemoryDocumentRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateMemoryDocumentResponseBody> {
+  ): Promise<components.MemoryDocument> {
     return unwrapAsync(memoryStoresCreateDocument(
       this,
       request,
@@ -237,8 +238,30 @@ export class MemoryStores extends ClientSDK {
   async retrieveDocument(
     request: operations.RetrieveMemoryDocumentRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveMemoryDocumentResponseBody> {
+  ): Promise<components.MemoryDocument> {
     return unwrapAsync(memoryStoresRetrieveDocument(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a specific memory document
+   *
+   * @remarks
+   * Permanently deletes a specific memory document.
+   *
+   * Use this endpoint to:
+   * - Remove a document from a memory
+   * - Clean up unused documents
+   * - Manage document storage space
+   */
+  async deleteDocument(
+    request: operations.DeleteMemoryDocumentRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(memoryStoresDeleteDocument(
       this,
       request,
       options,
@@ -254,30 +277,8 @@ export class MemoryStores extends ClientSDK {
   async updateDocument(
     request: operations.UpdateMemoryDocumentRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateMemoryDocumentResponseBody> {
+  ): Promise<components.MemoryDocument> {
     return unwrapAsync(memoryStoresUpdateDocument(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a specific memory document
-   *
-   * @remarks
-   * Permanently deletes a specific memory document.
-   *
-   *         Use this endpoint to:
-   *         - Remove a document from a memory
-   *         - Clean up unused documents
-   *         - Manage document storage space
-   */
-  async deleteDocument(
-    request: operations.DeleteMemoryDocumentRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(memoryStoresDeleteDocument(
       this,
       request,
       options,

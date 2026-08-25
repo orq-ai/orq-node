@@ -9,7 +9,7 @@ Successfully updated the tool.
 
 ```typescript
 const value: operations.UpdateToolResponseBodyFunctionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "throughout gosh across about reproach accredit ah",
   projectId: "<id>",
@@ -27,7 +27,7 @@ const value: operations.UpdateToolResponseBodyFunctionTool = {
 
 ```typescript
 const value: operations.UpdateToolResponseBodyJSONSchemaTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description:
     "zowie tomatillo insist flight yowza toward loosely chasuble above",
@@ -56,7 +56,7 @@ const value: operations.UpdateToolResponseBodyJSONSchemaTool = {
 
 ```typescript
 const value: operations.UpdateToolResponseBodyHTTPTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "search whenever psst",
   projectId: "<id>",
@@ -73,38 +73,11 @@ const value: operations.UpdateToolResponseBodyHTTPTool = {
 };
 ```
 
-### `operations.UpdateToolResponseBodyMCPTool`
-
-```typescript
-const value: operations.UpdateToolResponseBodyMCPTool = {
-  path: "Default",
-  key: "<key>",
-  description: "astride decisive smoothly rim consequently tinted",
-  projectId: "<id>",
-  workspaceId: "<id>",
-  created: "<value>",
-  updated: "<value>",
-  type: "mcp",
-  mcp: {
-    serverUrl: "https://eminent-tomatillo.info",
-    tools: [
-      {
-        name: "<value>",
-        schema: {
-          type: "object",
-        },
-      },
-    ],
-    connectionType: "sse",
-  },
-};
-```
-
 ### `operations.UpdateToolResponseBodyCodeExecutionTool`
 
 ```typescript
 const value: operations.UpdateToolResponseBodyCodeExecutionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description:
     "substitution loosely as underneath quarrelsomely equally climb stranger whine",

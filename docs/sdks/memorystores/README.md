@@ -7,18 +7,18 @@
 * [list](#list) - List memory stores
 * [create](#create) - Create memory store
 * [retrieve](#retrieve) - Retrieve memory store
-* [update](#update) - Update memory store
 * [delete](#delete) - Delete memory store
+* [update](#update) - Update memory store
 * [listMemories](#listmemories) - List all memories
 * [createMemory](#creatememory) - Create a new memory
 * [retrieveMemory](#retrievememory) - Retrieve a specific memory
-* [updateMemory](#updatememory) - Update a specific memory
 * [deleteMemory](#deletememory) - Delete a specific memory
+* [updateMemory](#updatememory) - Update a specific memory
 * [listDocuments](#listdocuments) - List all documents for a memory
 * [createDocument](#createdocument) - Create a new memory document
 * [retrieveDocument](#retrievedocument) - Retrieve a specific memory document
-* [updateDocument](#updatedocument) - Update a specific memory document
 * [deleteDocument](#deletedocument) - Delete a specific memory document
+* [updateDocument](#updatedocument) - Update a specific memory document
 
 ## list
 
@@ -81,7 +81,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetAllMemoryStoresResponseBody](../../models/operations/getallmemorystoresresponsebody.md)\>**
+**Promise\<[components.ListMemoryStoresResponse](../../models/components/listmemorystoresresponse.md)\>**
 
 ### Errors
 
@@ -158,14 +158,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.CreateMemoryStoreRequestBody](../../models/operations/creatememorystorerequestbody.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateMemoryStoreRequest](../../models/components/creatememorystorerequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.CreateMemoryStoreResponseBody](../../models/operations/creatememorystoreresponsebody.md)\>**
+**Promise\<[components.MemoryStore](../../models/components/memorystore.md)\>**
 
 ### Errors
 
@@ -238,7 +238,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveMemoryStoreResponseBody](../../models/operations/retrievememorystoreresponsebody.md)\>**
+**Promise\<[components.MemoryStore](../../models/components/memorystore.md)\>**
 
 ### Errors
 
@@ -246,87 +246,6 @@ run();
 | ------------------- | ------------------- | ------------------- |
 | errors.HonoApiError | 401, 403, 404       | application/json    |
 | errors.APIError     | 4XX, 5XX            | \*/\*               |
-
-## update
-
-Update the memory store configuration
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="UpdateMemoryStore" method="patch" path="/v2/memory-stores/{memory_store_key}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.memoryStores.update({
-    memoryStoreKey: "<value>",
-    requestBody: {
-      description: "wherever cash since now exempt proliferate aha tabulate ack",
-      path: "Default",
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { memoryStoresUpdate } from "@orq-ai/node/funcs/memoryStoresUpdate.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await memoryStoresUpdate(orq, {
-    memoryStoreKey: "<value>",
-    requestBody: {
-      description: "wherever cash since now exempt proliferate aha tabulate ack",
-      path: "Default",
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("memoryStoresUpdate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateMemoryStoreRequest](../../models/operations/updatememorystorerequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdateMemoryStoreResponseBody](../../models/operations/updatememorystoreresponsebody.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -401,6 +320,81 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
+## update
+
+Update the memory store configuration
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpdateMemoryStore" method="patch" path="/v2/memory-stores/{memory_store_key}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.memoryStores.update({
+    memoryStoreKey: "<value>",
+    updateMemoryStoreRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { memoryStoresUpdate } from "@orq-ai/node/funcs/memoryStoresUpdate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await memoryStoresUpdate(orq, {
+    memoryStoreKey: "<value>",
+    updateMemoryStoreRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("memoryStoresUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateMemoryStoreRequest](../../models/operations/updatememorystorerequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MemoryStore](../../models/components/memorystore.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
 ## listMemories
 
 Retrieves a paginated list of memories for the memory store
@@ -466,7 +460,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetAllMemoriesResponseBody](../../models/operations/getallmemoriesresponsebody.md)\>**
+**Promise\<[components.ListMemoriesResponse](../../models/components/listmemoriesresponse.md)\>**
 
 ### Errors
 
@@ -491,6 +485,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.memoryStores.createMemory({
     memoryStoreKey: "<value>",
+    createMemoryRequest: {
+      entityId: "<id>",
+    },
   });
 
   console.log(result);
@@ -516,6 +513,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await memoryStoresCreateMemory(orq, {
     memoryStoreKey: "<value>",
+    createMemoryRequest: {
+      entityId: "<id>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -539,7 +539,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateMemoryResponseBody](../../models/operations/creatememoryresponsebody.md)\>**
+**Promise\<[components.Memory](../../models/components/memory.md)\>**
 
 ### Errors
 
@@ -614,82 +614,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveMemoryResponseBody](../../models/operations/retrievememoryresponsebody.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## updateMemory
-
-Updates the details of a specific memory.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="UpdateMemory" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.memoryStores.updateMemory({
-    memoryStoreKey: "<value>",
-    memoryEntityId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { memoryStoresUpdateMemory } from "@orq-ai/node/funcs/memoryStoresUpdateMemory.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await memoryStoresUpdateMemory(orq, {
-    memoryStoreKey: "<value>",
-    memoryEntityId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("memoryStoresUpdateMemory failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateMemoryRequest](../../models/operations/updatememoryrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdateMemoryResponseBody](../../models/operations/updatememoryresponsebody.md)\>**
+**Promise\<[components.Memory](../../models/components/memory.md)\>**
 
 ### Errors
 
@@ -701,10 +626,10 @@ run();
 
 Permanently deletes a specific memory.
 
-        Use this endpoint to:
-        - Remove a memory from the store
-        - Clean up unused memories
-        - Manage memory storage space
+Use this endpoint to:
+- Remove a memory from the store
+- Clean up unused memories
+- Manage memory storage space
 
 ### Example Usage
 
@@ -770,6 +695,83 @@ run();
 ### Response
 
 **Promise\<void\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## updateMemory
+
+Updates the details of a specific memory.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpdateMemory" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.memoryStores.updateMemory({
+    memoryStoreKey: "<value>",
+    memoryEntityId: "<id>",
+    updateMemoryRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { memoryStoresUpdateMemory } from "@orq-ai/node/funcs/memoryStoresUpdateMemory.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await memoryStoresUpdateMemory(orq, {
+    memoryStoreKey: "<value>",
+    memoryEntityId: "<id>",
+    updateMemoryRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("memoryStoresUpdateMemory failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateMemoryRequest](../../models/operations/updatememoryrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.Memory](../../models/components/memory.md)\>**
 
 ### Errors
 
@@ -844,7 +846,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetAllMemoryDocumentsResponseBody](../../models/operations/getallmemorydocumentsresponsebody.md)\>**
+**Promise\<[components.ListMemoryDocumentsResponse](../../models/components/listmemorydocumentsresponse.md)\>**
 
 ### Errors
 
@@ -870,6 +872,9 @@ async function run() {
   const result = await orq.memoryStores.createDocument({
     memoryStoreKey: "<value>",
     memoryEntityId: "<id>",
+    createMemoryDocumentRequest: {
+      text: "<value>",
+    },
   });
 
   console.log(result);
@@ -896,6 +901,9 @@ async function run() {
   const res = await memoryStoresCreateDocument(orq, {
     memoryStoreKey: "<value>",
     memoryEntityId: "<id>",
+    createMemoryDocumentRequest: {
+      text: "<value>",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -919,7 +927,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateMemoryDocumentResponseBody](../../models/operations/creatememorydocumentresponsebody.md)\>**
+**Promise\<[components.MemoryDocument](../../models/components/memorydocument.md)\>**
 
 ### Errors
 
@@ -996,84 +1004,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveMemoryDocumentResponseBody](../../models/operations/retrievememorydocumentresponsebody.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## updateDocument
-
-Updates the details of a specific memory document.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="UpdateMemoryDocument" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents/{document_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.memoryStores.updateDocument({
-    memoryStoreKey: "<value>",
-    memoryEntityId: "<id>",
-    documentId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { memoryStoresUpdateDocument } from "@orq-ai/node/funcs/memoryStoresUpdateDocument.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await memoryStoresUpdateDocument(orq, {
-    memoryStoreKey: "<value>",
-    memoryEntityId: "<id>",
-    documentId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("memoryStoresUpdateDocument failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateMemoryDocumentRequest](../../models/operations/updatememorydocumentrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdateMemoryDocumentResponseBody](../../models/operations/updatememorydocumentresponsebody.md)\>**
+**Promise\<[components.MemoryDocument](../../models/components/memorydocument.md)\>**
 
 ### Errors
 
@@ -1085,10 +1016,10 @@ run();
 
 Permanently deletes a specific memory document.
 
-        Use this endpoint to:
-        - Remove a document from a memory
-        - Clean up unused documents
-        - Manage document storage space
+Use this endpoint to:
+- Remove a document from a memory
+- Clean up unused documents
+- Manage document storage space
 
 ### Example Usage
 
@@ -1156,6 +1087,85 @@ run();
 ### Response
 
 **Promise\<void\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## updateDocument
+
+Updates the details of a specific memory document.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpdateMemoryDocument" method="patch" path="/v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents/{document_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.memoryStores.updateDocument({
+    memoryStoreKey: "<value>",
+    memoryEntityId: "<id>",
+    documentId: "<id>",
+    updateMemoryDocumentRequest: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { memoryStoresUpdateDocument } from "@orq-ai/node/funcs/memoryStoresUpdateDocument.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await memoryStoresUpdateDocument(orq, {
+    memoryStoreKey: "<value>",
+    memoryEntityId: "<id>",
+    documentId: "<id>",
+    updateMemoryDocumentRequest: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("memoryStoresUpdateDocument failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateMemoryDocumentRequest](../../models/operations/updatememorydocumentrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.MemoryDocument](../../models/components/memorydocument.md)\>**
 
 ### Errors
 

@@ -12,6 +12,6 @@ let value: GuardrailRuleGetRequest = {
 
 ## Fields
 
-| Field                        | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `guardrailRuleId`            | *string*                     | :heavy_check_mark:           | The ID of the guardrail rule |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `guardrailRuleId`  | *string*           | :heavy_check_mark: | N/A                |

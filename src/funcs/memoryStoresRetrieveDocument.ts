@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -37,7 +38,7 @@ export function memoryStoresRetrieveDocument(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RetrieveMemoryDocumentResponseBody,
+    components.MemoryDocument,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RetrieveMemoryDocumentResponseBody,
+      components.MemoryDocument,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -158,7 +159,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RetrieveMemoryDocumentResponseBody,
+    components.MemoryDocument,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -168,7 +169,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RetrieveMemoryDocumentResponseBody$inboundSchema),
+    M.json(200, components.MemoryDocument$inboundSchema),
     M.fail([401, 403, 404, "4XX"]),
     M.fail("5XX"),
   )(response, req);

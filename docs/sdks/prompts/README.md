@@ -83,7 +83,7 @@ run();
 
 ## create
 
-Create a prompt
+Create a new prompt in the workspace.
 
 ### Example Usage
 
@@ -261,7 +261,7 @@ run();
 
 ## update
 
-Update a prompt
+Update a prompt by ID with the provided fields.
 
 ### Example Usage
 
@@ -369,7 +369,7 @@ run();
 
 ## delete
 
-Delete a prompt
+Delete a prompt and all its versions by ID.
 
 ### Example Usage
 

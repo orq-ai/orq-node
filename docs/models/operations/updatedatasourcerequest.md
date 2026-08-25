@@ -8,7 +8,7 @@ import { UpdateDatasourceRequest } from "@orq-ai/node/models/operations";
 let value: UpdateDatasourceRequest = {
   knowledgeId: "<id>",
   datasourceId: "<id>",
-  requestBody: {
+  datasourcesServiceUpdateRequest: {
     displayName: "Caleigh_Graham-Breitenberg84",
   },
 };
@@ -16,8 +16,8 @@ let value: UpdateDatasourceRequest = {
 
 ## Fields
 
-| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `knowledgeId`                                                                                    | *string*                                                                                         | :heavy_check_mark:                                                                               | The unique identifier of the knowledge base                                                      |
-| `datasourceId`                                                                                   | *string*                                                                                         | :heavy_check_mark:                                                                               | The unique identifier of the datasource.                                                         |
-| `requestBody`                                                                                    | [operations.UpdateDatasourceRequestBody](../../models/operations/updatedatasourcerequestbody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `knowledgeId`                                                                                            | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `datasourceId`                                                                                           | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `datasourcesServiceUpdateRequest`                                                                        | [components.DatasourcesServiceUpdateRequest](../../models/components/datasourcesserviceupdaterequest.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

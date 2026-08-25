@@ -1,17 +1,17 @@
 # Status
 
-Filter chunks by processing status
+The status of a model-generated input item.
 
 ## Example Usage
 
 ```typescript
 import { Status } from "@orq-ai/node/models/operations";
 
-let value: Status = "failed";
+let value: Status = "completed";
 ```
 
 ## Values
 
 ```typescript
-"pending" | "processing" | "completed" | "failed" | "queued"
+"in_progress" | "completed" | "incomplete"
 ```

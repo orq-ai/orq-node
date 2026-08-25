@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Retrieve a datasource
+ *
+ * @remarks
+ * Retrieves a datasource and its current processing status and chunk count.
  */
 export function knowledgeRetrieveDatasource(
   client: OrqCore,
@@ -34,7 +38,7 @@ export function knowledgeRetrieveDatasource(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RetrieveDatasourceResponseBody,
+    components.Datasource,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RetrieveDatasourceResponseBody,
+      components.Datasource,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -148,7 +152,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RetrieveDatasourceResponseBody,
+    components.Datasource,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -158,7 +162,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RetrieveDatasourceResponseBody$inboundSchema),
+    M.json(200, components.Datasource$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

@@ -1,6 +1,6 @@
 # GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
 
-The type of the argument.
+The type must be "object"
 
 ## Example Usage
 
@@ -8,11 +8,11 @@ The type of the argument.
 import { GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType } from "@orq-ai/node/models/operations";
 
 let value: GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType =
-  "number";
+  "object";
 ```
 
 ## Values
 
 ```typescript
-"string" | "number" | "boolean"
+"object"
 ```

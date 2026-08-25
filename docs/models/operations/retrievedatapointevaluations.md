@@ -27,10 +27,10 @@ const value: operations.RetrieveDatapointEvaluations2 = {
 };
 ```
 
-### `operations.RetrieveDatapointEvaluations3`
+### `operations.Evaluations3`
 
 ```typescript
-const value: operations.RetrieveDatapointEvaluations3 = {
+const value: operations.Evaluations3 = {
   id: "<id>",
   evaluationType: "human_review",
   reviewedById: "<id>",

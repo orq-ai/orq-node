@@ -29,6 +29,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete a prompt
+ *
+ * @remarks
+ * Delete a prompt and all its versions by ID.
  */
 export function promptsDelete(
   client: OrqCore,

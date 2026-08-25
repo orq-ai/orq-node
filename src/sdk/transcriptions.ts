@@ -10,6 +10,9 @@ import { unwrapAsync } from "../types/fp.js";
 export class Transcriptions extends ClientSDK {
   /**
    * Create transcription
+   *
+   * @remarks
+   * Transcribe audio input into text using the configured transcription model and return the result.
    */
   async create(
     request: operations.CreateTranscriptionRequestBody,

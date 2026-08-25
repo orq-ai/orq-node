@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Per-api-key cap. Replaces the legacy embedded `constraints.budget`
  *
  * @remarks
- *  on auth.apiKeys.
+ *  associated with an API key.
  */
 export type ApiKeyBudgetScopeRestResponse = {
   apiKeyId?: string | undefined;

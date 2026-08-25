@@ -21,11 +21,12 @@ import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
+import { McpGateways } from "./mcpgateways.js";
+import { McpServers } from "./mcpservers.js";
 import { MemoryStores } from "./memorystores.js";
 import { ModelCatalog } from "./modelcatalog.js";
 import { Models } from "./models.js";
 import { Notifiers } from "./notifiers.js";
-import { People } from "./people.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
@@ -40,6 +41,7 @@ import { SmartRouters } from "./smartrouters.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
+import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
 
 export class Orq extends ClientSDK {
@@ -66,21 +68,6 @@ export class Orq extends ClientSDK {
   private _tools?: Tools;
   get tools(): Tools {
     return (this._tools ??= new Tools(this._options));
-  }
-
-  private _knowledge?: Knowledge;
-  get knowledge(): Knowledge {
-    return (this._knowledge ??= new Knowledge(this._options));
-  }
-
-  private _chunking?: Chunking;
-  get chunking(): Chunking {
-    return (this._chunking ??= new Chunking(this._options));
-  }
-
-  private _memoryStores?: MemoryStores;
-  get memoryStores(): MemoryStores {
-    return (this._memoryStores ??= new MemoryStores(this._options));
   }
 
   private _datasets?: Datasets;
@@ -113,14 +100,24 @@ export class Orq extends ClientSDK {
     return (this._annotationQueues ??= new AnnotationQueues(this._options));
   }
 
+  private _chunking?: Chunking;
+  get chunking(): Chunking {
+    return (this._chunking ??= new Chunking(this._options));
+  }
+
+  private _knowledge?: Knowledge;
+  get knowledge(): Knowledge {
+    return (this._knowledge ??= new Knowledge(this._options));
+  }
+
+  private _memoryStores?: MemoryStores;
+  get memoryStores(): MemoryStores {
+    return (this._memoryStores ??= new MemoryStores(this._options));
+  }
+
   private _pii?: Pii;
   get pii(): Pii {
     return (this._pii ??= new Pii(this._options));
-  }
-
-  private _guardrailRules?: GuardrailRules;
-  get guardrailRules(): GuardrailRules {
-    return (this._guardrailRules ??= new GuardrailRules(this._options));
   }
 
   private _models?: Models;
@@ -131,11 +128,6 @@ export class Orq extends ClientSDK {
   private _policies?: Policies;
   get policies(): Policies {
     return (this._policies ??= new Policies(this._options));
-  }
-
-  private _routingRules?: RoutingRules;
-  get routingRules(): RoutingRules {
-    return (this._routingRules ??= new RoutingRules(this._options));
   }
 
   private _alerts?: Alerts;
@@ -158,6 +150,11 @@ export class Orq extends ClientSDK {
     return (this._files ??= new Files(this._options));
   }
 
+  private _guardrailRules?: GuardrailRules;
+  get guardrailRules(): GuardrailRules {
+    return (this._guardrailRules ??= new GuardrailRules(this._options));
+  }
+
   private _identities?: Identities;
   get identities(): Identities {
     return (this._identities ??= new Identities(this._options));
@@ -166,6 +163,16 @@ export class Orq extends ClientSDK {
   private _managementKeys?: ManagementKeys;
   get managementKeys(): ManagementKeys {
     return (this._managementKeys ??= new ManagementKeys(this._options));
+  }
+
+  private _mcpGateways?: McpGateways;
+  get mcpGateways(): McpGateways {
+    return (this._mcpGateways ??= new McpGateways(this._options));
+  }
+
+  private _mcpServers?: McpServers;
+  get mcpServers(): McpServers {
+    return (this._mcpServers ??= new McpServers(this._options));
   }
 
   private _modelCatalog?: ModelCatalog;
@@ -178,14 +185,14 @@ export class Orq extends ClientSDK {
     return (this._notifiers ??= new Notifiers(this._options));
   }
 
-  private _people?: People;
-  get people(): People {
-    return (this._people ??= new People(this._options));
-  }
-
   private _projects?: Projects;
   get projects(): Projects {
     return (this._projects ??= new Projects(this._options));
+  }
+
+  private _routingRules?: RoutingRules;
+  get routingRules(): RoutingRules {
+    return (this._routingRules ??= new RoutingRules(this._options));
   }
 
   private _skills?: Skills;
@@ -201,6 +208,11 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _workspaceSecurity?: WorkspaceSecurity;
+  get workspaceSecurity(): WorkspaceSecurity {
+    return (this._workspaceSecurity ??= new WorkspaceSecurity(this._options));
   }
 
   private _workspaceSettings?: WorkspaceSettings;

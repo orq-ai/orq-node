@@ -32,7 +32,7 @@ export type ListAnnotationQueueItemsObject = ClosedEnum<
   typeof ListAnnotationQueueItemsObject
 >;
 
-export type ListAnnotationQueueItemsData2 = {
+export type Data2 = {
   id: string;
   /**
    * The unique identifier of the annotation queue
@@ -50,7 +50,7 @@ export type ListAnnotationQueueItemsData2 = {
   type: "datapoint";
 };
 
-export type ListAnnotationQueueItemsData1 = {
+export type Data1 = {
   id: string;
   /**
    * The unique identifier of the annotation queue
@@ -72,16 +72,14 @@ export type ListAnnotationQueueItemsData1 = {
   type: "span";
 };
 
-export type ListAnnotationQueueItemsData =
-  | ListAnnotationQueueItemsData1
-  | ListAnnotationQueueItemsData2;
+export type ListAnnotationQueueItemsData = Data1 | Data2;
 
 /**
  * Annotation queue items retrieved.
  */
 export type ListAnnotationQueueItemsResponseBody = {
   object: ListAnnotationQueueItemsObject;
-  data: Array<ListAnnotationQueueItemsData1 | ListAnnotationQueueItemsData2>;
+  data: Array<Data1 | Data2>;
   hasMore: boolean;
 };
 
@@ -127,68 +125,62 @@ export const ListAnnotationQueueItemsObject$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ListAnnotationQueueItemsObject);
 
 /** @internal */
-export const ListAnnotationQueueItemsData2$inboundSchema: z.ZodType<
-  ListAnnotationQueueItemsData2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  annotation_queue_id: z.string(),
-  workspace_id: z.string(),
-  used_human_review_ids: z.array(z.string()).optional(),
-  datapoint_id: z.string(),
-  type: z.literal("datapoint"),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "annotation_queue_id": "annotationQueueId",
-    "workspace_id": "workspaceId",
-    "used_human_review_ids": "usedHumanReviewIds",
-    "datapoint_id": "datapointId",
+export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string(),
+    annotation_queue_id: z.string(),
+    workspace_id: z.string(),
+    used_human_review_ids: z.array(z.string()).optional(),
+    datapoint_id: z.string(),
+    type: z.literal("datapoint"),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "annotation_queue_id": "annotationQueueId",
+      "workspace_id": "workspaceId",
+      "used_human_review_ids": "usedHumanReviewIds",
+      "datapoint_id": "datapointId",
+    });
   });
-});
 
-export function listAnnotationQueueItemsData2FromJSON(
+export function data2FromJSON(
   jsonString: string,
-): SafeParseResult<ListAnnotationQueueItemsData2, SDKValidationError> {
+): SafeParseResult<Data2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAnnotationQueueItemsData2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAnnotationQueueItemsData2' from JSON`,
+    (x) => Data2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data2' from JSON`,
   );
 }
 
 /** @internal */
-export const ListAnnotationQueueItemsData1$inboundSchema: z.ZodType<
-  ListAnnotationQueueItemsData1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  annotation_queue_id: z.string(),
-  workspace_id: z.string(),
-  used_human_review_ids: z.array(z.string()).optional(),
-  span_id: z.string(),
-  trace_id: z.string().optional(),
-  type: z.literal("span"),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "annotation_queue_id": "annotationQueueId",
-    "workspace_id": "workspaceId",
-    "used_human_review_ids": "usedHumanReviewIds",
-    "span_id": "spanId",
-    "trace_id": "traceId",
+export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string(),
+    annotation_queue_id: z.string(),
+    workspace_id: z.string(),
+    used_human_review_ids: z.array(z.string()).optional(),
+    span_id: z.string(),
+    trace_id: z.string().optional(),
+    type: z.literal("span"),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "annotation_queue_id": "annotationQueueId",
+      "workspace_id": "workspaceId",
+      "used_human_review_ids": "usedHumanReviewIds",
+      "span_id": "spanId",
+      "trace_id": "traceId",
+    });
   });
-});
 
-export function listAnnotationQueueItemsData1FromJSON(
+export function data1FromJSON(
   jsonString: string,
-): SafeParseResult<ListAnnotationQueueItemsData1, SDKValidationError> {
+): SafeParseResult<Data1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ListAnnotationQueueItemsData1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAnnotationQueueItemsData1' from JSON`,
+    (x) => Data1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data1' from JSON`,
   );
 }
 
@@ -198,8 +190,8 @@ export const ListAnnotationQueueItemsData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ListAnnotationQueueItemsData1$inboundSchema),
-  z.lazy(() => ListAnnotationQueueItemsData2$inboundSchema),
+  z.lazy(() => Data1$inboundSchema),
+  z.lazy(() => Data2$inboundSchema),
 ]);
 
 export function listAnnotationQueueItemsDataFromJSON(
@@ -221,8 +213,8 @@ export const ListAnnotationQueueItemsResponseBody$inboundSchema: z.ZodType<
   object: ListAnnotationQueueItemsObject$inboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => ListAnnotationQueueItemsData1$inboundSchema),
-      z.lazy(() => ListAnnotationQueueItemsData2$inboundSchema),
+      z.lazy(() => Data1$inboundSchema),
+      z.lazy(() => Data2$inboundSchema),
     ]),
   ),
   has_more: z.boolean(),

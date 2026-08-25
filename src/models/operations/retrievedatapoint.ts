@@ -561,7 +561,7 @@ export const RetrieveDatapointEvaluationsDatasetsResponseOutputSchema = {
 export type RetrieveDatapointEvaluationsDatasetsResponseOutputSchema =
   ClosedEnum<typeof RetrieveDatapointEvaluationsDatasetsResponseOutputSchema>;
 
-export type RetrieveDatapointEvaluations3 = {
+export type Evaluations3 = {
   /**
    * The unique identifier of the human evaluation
    */
@@ -838,7 +838,7 @@ export type RetrieveDatapointEvaluations1 = {
 export type RetrieveDatapointEvaluations =
   | RetrieveDatapointEvaluations1
   | RetrieveDatapointEvaluations2
-  | RetrieveDatapointEvaluations3
+  | Evaluations3
   | RetrieveDatapointEvaluations4;
 
 /**
@@ -877,7 +877,7 @@ export type RetrieveDatapointResponseBody = {
     | Array<
       | RetrieveDatapointEvaluations1
       | RetrieveDatapointEvaluations2
-      | RetrieveDatapointEvaluations3
+      | Evaluations3
       | RetrieveDatapointEvaluations4
     >
     | undefined;
@@ -1585,7 +1585,7 @@ export const RetrieveDatapointEvaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-22T22:48:17.367Z",
+    "2026-08-25T20:22:00.482Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1664,8 +1664,8 @@ export const RetrieveDatapointEvaluationsDatasetsResponseOutputSchema$inboundSch
   > = z.nativeEnum(RetrieveDatapointEvaluationsDatasetsResponseOutputSchema);
 
 /** @internal */
-export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
-  RetrieveDatapointEvaluations3,
+export const Evaluations3$inboundSchema: z.ZodType<
+  Evaluations3,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1685,7 +1685,7 @@ export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-22T22:48:17.366Z",
+    "2026-08-25T20:22:00.481Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -1700,13 +1700,13 @@ export const RetrieveDatapointEvaluations3$inboundSchema: z.ZodType<
   });
 });
 
-export function retrieveDatapointEvaluations3FromJSON(
+export function evaluations3FromJSON(
   jsonString: string,
-): SafeParseResult<RetrieveDatapointEvaluations3, SDKValidationError> {
+): SafeParseResult<Evaluations3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RetrieveDatapointEvaluations3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveDatapointEvaluations3' from JSON`,
+    (x) => Evaluations3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluations3' from JSON`,
   );
 }
 
@@ -1783,7 +1783,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-22T22:48:17.366Z",
+    "2026-08-25T20:22:00.481Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1871,7 +1871,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-08-22T22:48:17.365Z",
+    "2026-08-25T20:22:00.480Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -1904,7 +1904,7 @@ export const RetrieveDatapointEvaluations$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => RetrieveDatapointEvaluations1$inboundSchema),
   z.lazy(() => RetrieveDatapointEvaluations2$inboundSchema),
-  z.lazy(() => RetrieveDatapointEvaluations3$inboundSchema),
+  z.lazy(() => Evaluations3$inboundSchema),
   z.lazy(() => RetrieveDatapointEvaluations4$inboundSchema),
 ]);
 
@@ -1941,7 +1941,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => RetrieveDatapointEvaluations1$inboundSchema),
       z.lazy(() => RetrieveDatapointEvaluations2$inboundSchema),
-      z.lazy(() => RetrieveDatapointEvaluations3$inboundSchema),
+      z.lazy(() => Evaluations3$inboundSchema),
       z.lazy(() => RetrieveDatapointEvaluations4$inboundSchema),
     ]),
   ).optional(),
@@ -1952,7 +1952,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-08-22T22:47:49.918Z",
+    "2026-08-25T20:21:49.935Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

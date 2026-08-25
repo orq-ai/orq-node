@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -26,10 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get guardrail rule
+ * Retrieve a guardrail rule
  *
  * @remarks
- * Retrieves the details of an existing guardrail rule by ID.
+ * Retrieves a guardrail rule by its unique identifier.
  */
 export function guardrailRulesRetrieve(
   client: OrqCore,
@@ -37,7 +38,7 @@ export function guardrailRulesRetrieve(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleGetResponseBody,
+    components.GetGuardrailRuleResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleGetResponseBody,
+      components.GetGuardrailRuleResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -148,7 +149,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GuardrailRuleGetResponseBody,
+    components.GetGuardrailRuleResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -158,8 +159,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GuardrailRuleGetResponseBody$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.json(200, components.GetGuardrailRuleResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

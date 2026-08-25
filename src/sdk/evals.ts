@@ -10,12 +10,16 @@ import { evalsInvoke } from "../funcs/evalsInvoke.js";
 import { evalsListVersions } from "../funcs/evalsListVersions.js";
 import { evalsUpdate } from "../funcs/evalsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Evals extends ClientSDK {
   /**
    * Get all Evaluators
+   *
+   * @remarks
+   * List all evaluators in the workspace.
    */
   async all(
     request?: operations.GetEvalsRequest | undefined,
@@ -30,6 +34,9 @@ export class Evals extends ClientSDK {
 
   /**
    * Create an Evaluator
+   *
+   * @remarks
+   * Create a new evaluator in the workspace.
    */
   async create(
     request?: operations.CreateEvalRequestBody | undefined,
@@ -46,11 +53,7 @@ export class Evals extends ClientSDK {
    * Retrieve an Evaluator
    *
    * @remarks
-   * Retrieve a single evaluator by its unique identifier. Returns the evaluator exactly as stored, including its type-specific configuration — prompt and model for LLM evaluators, source code for Python and TypeScript evaluators, the JSON Schema for schema evaluators, and so on.
-   *
-   * Use this when you already know the evaluator id (for example to refresh the state of a resource you manage declaratively). To discover evaluator ids, list them with `GET /v2/evaluators`.
-   *
-   * This endpoint returns the stored record, which carries more detail than the representation `GET /v2/evaluators` returns: `display_name` rather than `key`, `model` as an object rather than a provider-qualified string, plus the `owner`, `domain_id`, `metadata`, `enabled` and `output_type` fields.
+   * Retrieve a single evaluator by ID with more detail than the list endpoint: full type-specific config, owner, domain_id, metadata, enabled, and output_type.
    */
   async get(
     request: operations.GetEvalRequest,
@@ -65,6 +68,9 @@ export class Evals extends ClientSDK {
 
   /**
    * Update an Evaluator
+   *
+   * @remarks
+   * Update an evaluator by ID with the provided fields.
    */
   async update(
     request: operations.UpdateEvalRequest,
@@ -79,6 +85,9 @@ export class Evals extends ClientSDK {
 
   /**
    * Delete an Evaluator
+   *
+   * @remarks
+   * Delete an evaluator by its unique identifier.
    */
   async delete(
     request: operations.DeleteEvalRequest,
@@ -93,11 +102,14 @@ export class Evals extends ClientSDK {
 
   /**
    * Invoke a Custom Evaluator
+   *
+   * @remarks
+   * Runs an evaluator that already exists in the workspace. Accepts either a conversation or the structured input and output fields; when both are present the conversation wins.
    */
   async invoke(
     request: operations.InvokeEvalRequest,
     options?: RequestOptions,
-  ): Promise<operations.InvokeEvalResponseBody> {
+  ): Promise<components.InvokeEvaluatorResponse> {
     return unwrapAsync(evalsInvoke(
       this,
       request,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { AccessLevel, AccessLevel$outboundSchema } from "./accesslevel.js";
 import { ApiKeyStatus, ApiKeyStatus$outboundSchema } from "./apikeystatus.js";
 import {
   McpAccess,
@@ -36,7 +37,7 @@ export type UpdateApiKeyRequest = {
    *  keys (Domain.id) and AccessLevel string values, or fetch the
    *  live catalog via the capability catalog endpoint.
    */
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: AccessLevel } | undefined;
   /**
    * New project scope. Omit to keep current.
    */
@@ -69,7 +70,7 @@ export type UpdateApiKeyRequest$Outbound = {
   name?: string | undefined;
   status?: string | undefined;
   permission_mode?: string | undefined;
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: string } | undefined;
   project_scope?: ProjectScope$Outbound | undefined;
   expires_at?: string | undefined;
   clear_expires_at?: boolean | undefined;
@@ -85,7 +86,7 @@ export const UpdateApiKeyRequest$outboundSchema: z.ZodType<
   name: z.string().optional(),
   status: ApiKeyStatus$outboundSchema.optional(),
   permissionMode: PermissionMode$outboundSchema.optional(),
-  access: z.record(z.number().int()).optional(),
+  access: z.record(AccessLevel$outboundSchema).optional(),
   projectScope: ProjectScope$outboundSchema.optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   clearExpiresAt: z.boolean().optional(),

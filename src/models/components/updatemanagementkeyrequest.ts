@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { AccessLevel, AccessLevel$outboundSchema } from "./accesslevel.js";
 import {
   ManagementKeyStatus,
   ManagementKeyStatus$outboundSchema,
@@ -27,7 +28,7 @@ export type UpdateManagementKeyRequest = {
    *  `MANAGEMENT_PERMISSION_MODE_RESTRICTED`; ignored otherwise. Provide
    *  an empty map to clear.
    */
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: AccessLevel } | undefined;
   /**
    * New expiration. Omit to keep current. Set `clear_expires_at = true`
    *
@@ -46,7 +47,7 @@ export type UpdateManagementKeyRequest$Outbound = {
   name?: string | undefined;
   status?: string | undefined;
   permission_mode?: string | undefined;
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: string } | undefined;
   expires_at?: string | undefined;
   clear_expires_at?: boolean | undefined;
 };
@@ -60,7 +61,7 @@ export const UpdateManagementKeyRequest$outboundSchema: z.ZodType<
   name: z.string().optional(),
   status: ManagementKeyStatus$outboundSchema.optional(),
   permissionMode: ManagementPermissionMode$outboundSchema.optional(),
-  access: z.record(z.number().int()).optional(),
+  access: z.record(AccessLevel$outboundSchema).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   clearExpiresAt: z.boolean().optional(),
 }).transform((v) => {

@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.ListAnnotationQueueItemsData1`
+### `operations.Data1`
 
 ```typescript
-const value: operations.ListAnnotationQueueItemsData1 = {
+const value: operations.Data1 = {
   id: "<id>",
   annotationQueueId: "<id>",
   workspaceId: "<id>",
@@ -15,10 +15,10 @@ const value: operations.ListAnnotationQueueItemsData1 = {
 };
 ```
 
-### `operations.ListAnnotationQueueItemsData2`
+### `operations.Data2`
 
 ```typescript
-const value: operations.ListAnnotationQueueItemsData2 = {
+const value: operations.Data2 = {
   id: "<id>",
   annotationQueueId: "<id>",
   workspaceId: "<id>",

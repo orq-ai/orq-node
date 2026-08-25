@@ -6,13 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteDatasourceRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
   knowledgeId: string;
-  /**
-   * The unique identifier of the datasource.
-   */
   datasourceId: string;
 };
 

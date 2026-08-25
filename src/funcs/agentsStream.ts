@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * Stream agent execution in real-time
  *
  * @remarks
- * Executes an agent and streams the interaction in real-time using Server-Sent Events (SSE). Provides live updates as the agent processes the request, including message chunks, tool calls, and execution status. Perfect for building responsive chat interfaces and monitoring agent progress. The stream continues until the agent completes its task, encounters an error, or reaches the configured timeout (default 30 minutes, configurable 1-3600 seconds).
+ * Stream an existing agent execution in real-time via SSE, providing live message chunks, tool calls, and status updates until completion.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */

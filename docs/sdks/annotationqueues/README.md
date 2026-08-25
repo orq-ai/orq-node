@@ -86,7 +86,7 @@ run();
 
 ## create
 
-Create an annotation queue
+Create a new annotation queue in the workspace.
 
 ### Example Usage
 
@@ -228,7 +228,7 @@ run();
 
 ## update
 
-Edit an annotation queue
+Update an annotation queue by ID with the provided fields.
 
 ### Example Usage
 
@@ -301,7 +301,7 @@ run();
 
 ## delete
 
-Delete an annotation queue
+Delete an annotation queue and its items by ID.
 
 ### Example Usage
 
@@ -666,7 +666,7 @@ run();
 
 ## retrieveItem
 
-Retrieves an item from the specified annotation queue in its expanded form. An annotation queue item is a pointer to a span; this endpoint returns the fully resolved span the item references.
+Retrieve an annotation queue item. Each item is a pointer to a span with fully resolved span data.
 
 ### Example Usage
 
@@ -731,7 +731,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveAnnotationQueueItemResponseBody](../../models/operations/retrieveannotationqueueitemresponsebody.md)\>**
+**Promise\<[components.PublicSpan](../../models/components/publicspan.md)\>**
 
 ### Errors
 

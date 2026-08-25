@@ -73,24 +73,29 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.GetEvalResponseBodyHTTP`
+### `operations.ResponseBodyHTTP`
 
 ```typescript
-const value: operations.GetEvalResponseBodyHTTP = {
+const value: operations.ResponseBodyHTTP = {
   metadata: {},
   id: "<id>",
-  displayName: "Kris_Rau89",
-  description: "times which whistle part alongside during",
+  displayName: "Jacquelyn_Boyer83",
+  description:
+    "solace once eek ordinary wrong yowza loftily supposing but zowie",
   owner: "<value>",
   domainId: "<id>",
   type: "http_eval",
-  url: "https://radiant-coin.com",
+  url: "https://triangular-tenant.org/",
   method: "GET",
   headers: {
     "key": "<value>",
     "key1": "<value>",
   },
-  payload: {},
+  payload: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
 };
 ```
 

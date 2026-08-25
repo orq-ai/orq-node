@@ -6,16 +6,16 @@
 import { GetOneChunkRequest } from "@orq-ai/node/models/operations";
 
 let value: GetOneChunkRequest = {
-  chunkId: "<id>",
-  datasourceId: "<id>",
   knowledgeId: "<id>",
+  datasourceId: "<id>",
+  chunkId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `chunkId`                                   | *string*                                    | :heavy_check_mark:                          | The unique identifier of the chunk          |
-| `datasourceId`                              | *string*                                    | :heavy_check_mark:                          | The unique identifier of the data source    |
-| `knowledgeId`                               | *string*                                    | :heavy_check_mark:                          | The unique identifier of the knowledge base |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `knowledgeId`      | *string*           | :heavy_check_mark: | N/A                |
+| `datasourceId`     | *string*           | :heavy_check_mark: | N/A                |
+| `chunkId`          | *string*           | :heavy_check_mark: | N/A                |

@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Update an Evaluator
+ *
+ * @remarks
+ * Update an evaluator by ID with the provided fields.
  */
 export function evalsUpdate(
   client: OrqCore,

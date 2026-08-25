@@ -12,6 +12,6 @@ let value: RetrieveMemoryStoreRequest = {
 
 ## Fields
 
-| Field                                         | Type                                          | Required                                      | Description                                   |
-| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| `memoryStoreKey`                              | *string*                                      | :heavy_check_mark:                            | The unique key identifier of the memory store |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `memoryStoreKey`   | *string*           | :heavy_check_mark: | N/A                |

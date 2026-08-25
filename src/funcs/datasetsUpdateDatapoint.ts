@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Update a datapoint
+ *
+ * @remarks
+ * Update a datapoint in the specified dataset.
  */
 export function datasetsUpdateDatapoint(
   client: OrqCore,

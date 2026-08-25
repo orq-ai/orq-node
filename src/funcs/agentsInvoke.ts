@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Execute an agent task
  *
  * @remarks
- * Invokes an agent to perform a task with the provided input message. The agent will process the request using its configured model and tools, maintaining context through memory stores if configured. Supports automatic model fallback on primary model failure, tool execution, knowledge base retrieval, and continuation of previous conversations. Returns a task response that can be used to track execution status and retrieve results.
+ * Invoke an agent to perform a task with input messages. Supports tool execution, knowledge retrieval, memory context, and model fallback.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */

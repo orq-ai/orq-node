@@ -3,79 +3,67 @@
 
 ## Supported Types
 
-### `operations.Eq`
+### `operations.DeploymentStream1Eq`
 
 ```typescript
-const value: operations.Eq = {
-  eq: "<value>",
+const value: operations.DeploymentStream1Eq = {
+  eq: false,
 };
 ```
 
-### `operations.Ne`
+### `operations.DeploymentStream1Ne`
 
 ```typescript
-const value: operations.Ne = {
+const value: operations.DeploymentStream1Ne = {
   ne: false,
 };
 ```
 
-### `operations.Gt`
+### `operations.OneGt`
 
 ```typescript
-const value: operations.Gt = {
-  gt: 2952.97,
+const value: operations.OneGt = {
+  gt: 7862.95,
 };
 ```
 
-### `operations.Gte`
+### `operations.OneGte`
 
 ```typescript
-const value: operations.Gte = {
-  gte: 9700.59,
+const value: operations.OneGte = {
+  gte: 6469.31,
 };
 ```
 
-### `operations.Lt`
+### `operations.OneLt`
 
 ```typescript
-const value: operations.Lt = {
-  lt: 854.37,
+const value: operations.OneLt = {
+  lt: 5264,
 };
 ```
 
-### `operations.Lte`
+### `operations.OneLte`
 
 ```typescript
-const value: operations.Lte = {
-  lte: 454.79,
+const value: operations.OneLte = {
+  lte: 8379.2,
 };
 ```
 
-### `operations.In`
+### `operations.DeploymentStream1In`
 
 ```typescript
-const value: operations.In = {
-  in: [
-    false,
-  ],
+const value: operations.DeploymentStream1In = {
+  in: [],
 };
 ```
 
-### `operations.Nin`
+### `operations.DeploymentStream1Nin`
 
 ```typescript
-const value: operations.Nin = {
-  nin: [
-    3990,
-  ],
-};
-```
-
-### `operations.Exists`
-
-```typescript
-const value: operations.Exists = {
-  exists: true,
+const value: operations.DeploymentStream1Nin = {
+  nin: [],
 };
 ```
 

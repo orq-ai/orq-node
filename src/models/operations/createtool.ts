@@ -15,7 +15,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolRequestBodyToolsRequestStatus = {
+export const CreateToolRequestBodyToolsStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -24,21 +24,21 @@ export const CreateToolRequestBodyToolsRequestStatus = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolRequestBodyToolsRequestStatus = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequestStatus
+export type CreateToolRequestBodyToolsStatus = ClosedEnum<
+  typeof CreateToolRequestBodyToolsStatus
 >;
 
 /**
  * The type must be "object"
  */
-export const CreateToolRequestBodyToolsRequest5CodeToolType = {
+export const CreateToolRequestBodyToolsRequest4CodeToolType = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type CreateToolRequestBodyToolsRequest5CodeToolType = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequest5CodeToolType
+export type CreateToolRequestBodyToolsRequest4CodeToolType = ClosedEnum<
+  typeof CreateToolRequestBodyToolsRequest4CodeToolType
 >;
 
 /**
@@ -48,7 +48,7 @@ export type CreateToolRequestBodyParameters = {
   /**
    * The type must be "object"
    */
-  type: CreateToolRequestBodyToolsRequest5CodeToolType;
+  type: CreateToolRequestBodyToolsRequest4CodeToolType;
   /**
    * The properties of the function parameters
    */
@@ -86,91 +86,7 @@ export type CodeExecutionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
-   */
-  path: string;
-  /**
-   * Unique key of the tool as it will be displayed in the UI
-   */
-  key: string;
-  /**
-   * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
-   */
-  displayName?: string | undefined;
-  /**
-   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
-   */
-  description: string;
-  /**
-   * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
-   */
-  status?: CreateToolRequestBodyToolsRequestStatus | undefined;
-  type: "code";
-  codeTool: RequestBodyCodeTool;
-};
-
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export const CreateToolRequestBodyToolsStatus = {
-  Live: "live",
-  Draft: "draft",
-  Pending: "pending",
-  Published: "published",
-} as const;
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export type CreateToolRequestBodyToolsStatus = ClosedEnum<
-  typeof CreateToolRequestBodyToolsStatus
->;
-
-export type RequestBodyHeaders = {
-  value: string;
-  encrypted?: boolean | undefined;
-};
-
-/**
- * The connection type used by the MCP server
- */
-export const RequestBodyConnectionType = {
-  Http: "http",
-  Sse: "sse",
-} as const;
-/**
- * The connection type used by the MCP server
- */
-export type RequestBodyConnectionType = ClosedEnum<
-  typeof RequestBodyConnectionType
->;
-
-export type RequestBodyMcp = {
-  /**
-   * The MCP server URL (cached for execution)
-   */
-  serverUrl: string;
-  /**
-   * HTTP headers for MCP server requests with encryption support
-   */
-  headers?: { [k: string]: RequestBodyHeaders } | undefined;
-  /**
-   * The connection type used by the MCP server
-   */
-  connectionType: RequestBodyConnectionType;
-};
-
-/**
- * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
- */
-export type RequestBodyMCPTool = {
-  /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -191,9 +107,8 @@ export type RequestBodyMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: CreateToolRequestBodyToolsStatus | undefined;
-  type: "mcp";
-  mcp: RequestBodyMcp;
-  discoveryVariables?: { [k: string]: string } | undefined;
+  type: "code";
+  codeTool: RequestBodyCodeTool;
 };
 
 /**
@@ -231,7 +146,7 @@ export type CreateToolHeaders2 = {
   encrypted?: boolean | undefined;
 };
 
-export type CreateToolRequestBodyHeaders = CreateToolHeaders2 | string;
+export type RequestBodyHeaders = CreateToolHeaders2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -318,7 +233,7 @@ export type HTTPTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -404,7 +319,7 @@ export type JSONSchemaTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -432,7 +347,7 @@ export type JSONSchemaTool = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolRequestBodyToolsRequest1Status = {
+export const CreateToolRequestBodyToolsRequestStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -441,8 +356,8 @@ export const CreateToolRequestBodyToolsRequest1Status = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolRequestBodyToolsRequest1Status = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequest1Status
+export type CreateToolRequestBodyToolsRequestStatus = ClosedEnum<
+  typeof CreateToolRequestBodyToolsRequestStatus
 >;
 
 /**
@@ -505,7 +420,7 @@ export type FunctionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -525,7 +440,7 @@ export type FunctionTool = {
   /**
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
-  status?: CreateToolRequestBodyToolsRequest1Status | undefined;
+  status?: CreateToolRequestBodyToolsRequestStatus | undefined;
   type: "function";
   function: RequestBodyFunction;
 };
@@ -537,13 +452,12 @@ export type CreateToolRequestBody =
   | FunctionTool
   | JSONSchemaTool
   | HTTPTool
-  | RequestBodyMCPTool
   | CodeExecutionTool;
 
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export const CreateToolResponseBodyToolsResponse200Status = {
+export const CreateToolResponseBodyToolsResponseStatus = {
   Live: "live",
   Draft: "draft",
   Pending: "pending",
@@ -552,21 +466,21 @@ export const CreateToolResponseBodyToolsResponse200Status = {
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
  */
-export type CreateToolResponseBodyToolsResponse200Status = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponse200Status
+export type CreateToolResponseBodyToolsResponseStatus = ClosedEnum<
+  typeof CreateToolResponseBodyToolsResponseStatus
 >;
 
 /**
  * The type must be "object"
  */
-export const CreateToolResponseBodyToolsResponse200ApplicationJson5Type = {
+export const CreateToolResponseBodyToolsResponse200ApplicationJson4Type = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type CreateToolResponseBodyToolsResponse200ApplicationJson5Type =
-  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJson5Type>;
+export type CreateToolResponseBodyToolsResponse200ApplicationJson4Type =
+  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJson4Type>;
 
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -575,7 +489,7 @@ export type CreateToolResponseBodyParameters = {
   /**
    * The type must be "object"
    */
-  type: CreateToolResponseBodyToolsResponse200ApplicationJson5Type;
+  type: CreateToolResponseBodyToolsResponse200ApplicationJson4Type;
   /**
    * The properties of the function parameters
    */
@@ -614,131 +528,7 @@ export type ResponseBodyCodeExecutionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
-   */
-  path: string;
-  /**
-   * Unique key of the tool as it will be displayed in the UI
-   */
-  key: string;
-  /**
-   * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
-   */
-  displayName?: string | undefined;
-  /**
-   * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
-   */
-  description: string;
-  /**
-   * The id of the user that created the tool
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The id of the user that last updated the tool
-   */
-  updatedById?: string | null | undefined;
-  projectId: string;
-  workspaceId: string;
-  created: string;
-  updated: string;
-  /**
-   * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
-   */
-  status: CreateToolResponseBodyToolsResponse200Status;
-  type: "code";
-  codeTool: ResponseBodyCodeTool;
-};
-
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export const CreateToolResponseBodyToolsResponseStatus = {
-  Live: "live",
-  Draft: "draft",
-  Pending: "pending",
-  Published: "published",
-} as const;
-/**
- * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
- */
-export type CreateToolResponseBodyToolsResponseStatus = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponseStatus
->;
-
-export type ResponseBodyHeaders = {
-  value: string;
-  encrypted: boolean;
-};
-
-export const CreateToolResponseBodyToolsResponse200ApplicationJson4Type = {
-  Object: "object",
-} as const;
-export type CreateToolResponseBodyToolsResponse200ApplicationJson4Type =
-  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJson4Type>;
-
-export type CreateToolResponseBodySchema = {
-  type: CreateToolResponseBodyToolsResponse200ApplicationJson4Type;
-  properties?: { [k: string]: any } | undefined;
-  required?: Array<string> | undefined;
-};
-
-export type ResponseBodyTools = {
-  id: string;
-  name: string;
-  description?: string | undefined;
-  schema: CreateToolResponseBodySchema;
-};
-
-/**
- * The connection type used by the MCP server
- */
-export const ResponseBodyConnectionType = {
-  Http: "http",
-  Sse: "sse",
-} as const;
-/**
- * The connection type used by the MCP server
- */
-export type ResponseBodyConnectionType = ClosedEnum<
-  typeof ResponseBodyConnectionType
->;
-
-export type ResponseBodyMcp = {
-  /**
-   * The MCP server URL (cached for execution)
-   */
-  serverUrl: string;
-  /**
-   * HTTP headers for MCP server requests with encryption support
-   */
-  headers?: { [k: string]: ResponseBodyHeaders } | undefined;
-  /**
-   * Array of tools available from the MCP server
-   */
-  tools: Array<ResponseBodyTools>;
-  /**
-   * The connection type used by the MCP server
-   */
-  connectionType: ResponseBodyConnectionType;
-  /**
-   * Names of template variables detected in server_url and headers. Used by the FE to prompt for one-time values on sync/refresh.
-   */
-  templateVariables?: Array<string> | null | undefined;
-};
-
-/**
- * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
- */
-export type ResponseBodyMCPTool = {
-  id: string;
-  /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -771,8 +561,8 @@ export type ResponseBodyMCPTool = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: CreateToolResponseBodyToolsResponseStatus;
-  type: "mcp";
-  mcp: ResponseBodyMcp;
+  type: "code";
+  codeTool: ResponseBodyCodeTool;
 };
 
 /**
@@ -812,7 +602,7 @@ export type CreateToolHeadersTools2 = {
   encrypted: boolean;
 };
 
-export type CreateToolResponseBodyHeaders = CreateToolHeadersTools2 | string;
+export type ResponseBodyHeaders = CreateToolHeadersTools2 | string;
 
 /**
  * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
@@ -843,7 +633,7 @@ export type ResponseBodyBlueprint = {
 /**
  * The type of the argument.
  */
-export const CreateToolResponseBodyToolsResponse200ApplicationJson3Type = {
+export const CreateToolResponseBodyToolsResponse200ApplicationJSONType = {
   String: "string",
   Number: "number",
   Boolean: "boolean",
@@ -851,8 +641,8 @@ export const CreateToolResponseBodyToolsResponse200ApplicationJson3Type = {
 /**
  * The type of the argument.
  */
-export type CreateToolResponseBodyToolsResponse200ApplicationJson3Type =
-  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJson3Type>;
+export type CreateToolResponseBodyToolsResponse200ApplicationJSONType =
+  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType>;
 
 /**
  * The default value of the argument.
@@ -863,7 +653,7 @@ export type ResponseBodyArguments = {
   /**
    * The type of the argument.
    */
-  type: CreateToolResponseBodyToolsResponse200ApplicationJson3Type;
+  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType;
   /**
    * A description of the argument.
    */
@@ -899,7 +689,7 @@ export type ResponseBodyHTTPTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -1000,7 +790,7 @@ export type ResponseBodyJSONSchemaTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -1111,7 +901,7 @@ export type ResponseBodyFunctionTool = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -1155,18 +945,17 @@ export type CreateToolResponseBody =
   | ResponseBodyFunctionTool
   | ResponseBodyJSONSchemaTool
   | ResponseBodyHTTPTool
-  | ResponseBodyMCPTool
   | ResponseBodyCodeExecutionTool;
 
 /** @internal */
-export const CreateToolRequestBodyToolsRequestStatus$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestStatus> = z
-    .nativeEnum(CreateToolRequestBodyToolsRequestStatus);
+export const CreateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
+  typeof CreateToolRequestBodyToolsStatus
+> = z.nativeEnum(CreateToolRequestBodyToolsStatus);
 
 /** @internal */
-export const CreateToolRequestBodyToolsRequest5CodeToolType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest5CodeToolType> = z
-    .nativeEnum(CreateToolRequestBodyToolsRequest5CodeToolType);
+export const CreateToolRequestBodyToolsRequest4CodeToolType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4CodeToolType> = z
+    .nativeEnum(CreateToolRequestBodyToolsRequest4CodeToolType);
 
 /** @internal */
 export type CreateToolRequestBodyParameters$Outbound = {
@@ -1182,7 +971,7 @@ export const CreateToolRequestBodyParameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateToolRequestBodyParameters
 > = z.object({
-  type: CreateToolRequestBodyToolsRequest5CodeToolType$outboundSchema,
+  type: CreateToolRequestBodyToolsRequest4CodeToolType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -1258,9 +1047,7 @@ export const CodeExecutionTool$outboundSchema: z.ZodType<
   key: z.string(),
   displayName: z.string().optional(),
   description: z.string(),
-  status: CreateToolRequestBodyToolsRequestStatus$outboundSchema.default(
-    "live",
-  ),
+  status: CreateToolRequestBodyToolsStatus$outboundSchema.default("live"),
   type: z.literal("code"),
   codeTool: z.lazy(() => RequestBodyCodeTool$outboundSchema),
 }).transform((v) => {
@@ -1275,108 +1062,6 @@ export function codeExecutionToolToJSON(
 ): string {
   return JSON.stringify(
     CodeExecutionTool$outboundSchema.parse(codeExecutionTool),
-  );
-}
-
-/** @internal */
-export const CreateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CreateToolRequestBodyToolsStatus
-> = z.nativeEnum(CreateToolRequestBodyToolsStatus);
-
-/** @internal */
-export type RequestBodyHeaders$Outbound = {
-  value: string;
-  encrypted: boolean;
-};
-
-/** @internal */
-export const RequestBodyHeaders$outboundSchema: z.ZodType<
-  RequestBodyHeaders$Outbound,
-  z.ZodTypeDef,
-  RequestBodyHeaders
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function requestBodyHeadersToJSON(
-  requestBodyHeaders: RequestBodyHeaders,
-): string {
-  return JSON.stringify(
-    RequestBodyHeaders$outboundSchema.parse(requestBodyHeaders),
-  );
-}
-
-/** @internal */
-export const RequestBodyConnectionType$outboundSchema: z.ZodNativeEnum<
-  typeof RequestBodyConnectionType
-> = z.nativeEnum(RequestBodyConnectionType);
-
-/** @internal */
-export type RequestBodyMcp$Outbound = {
-  server_url: string;
-  headers?: { [k: string]: RequestBodyHeaders$Outbound } | undefined;
-  connection_type: string;
-};
-
-/** @internal */
-export const RequestBodyMcp$outboundSchema: z.ZodType<
-  RequestBodyMcp$Outbound,
-  z.ZodTypeDef,
-  RequestBodyMcp
-> = z.object({
-  serverUrl: z.string(),
-  headers: z.record(z.lazy(() => RequestBodyHeaders$outboundSchema)).optional(),
-  connectionType: RequestBodyConnectionType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    connectionType: "connection_type",
-  });
-});
-
-export function requestBodyMcpToJSON(requestBodyMcp: RequestBodyMcp): string {
-  return JSON.stringify(RequestBodyMcp$outboundSchema.parse(requestBodyMcp));
-}
-
-/** @internal */
-export type RequestBodyMCPTool$Outbound = {
-  path: string;
-  key: string;
-  display_name?: string | undefined;
-  description: string;
-  status: string;
-  type: "mcp";
-  mcp: RequestBodyMcp$Outbound;
-  discovery_variables?: { [k: string]: string } | undefined;
-};
-
-/** @internal */
-export const RequestBodyMCPTool$outboundSchema: z.ZodType<
-  RequestBodyMCPTool$Outbound,
-  z.ZodTypeDef,
-  RequestBodyMCPTool
-> = z.object({
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  status: CreateToolRequestBodyToolsStatus$outboundSchema.default("live"),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => RequestBodyMcp$outboundSchema),
-  discoveryVariables: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    discoveryVariables: "discovery_variables",
-  });
-});
-
-export function requestBodyMCPToolToJSON(
-  requestBodyMCPTool: RequestBodyMCPTool,
-): string {
-  return JSON.stringify(
-    RequestBodyMCPTool$outboundSchema.parse(requestBodyMCPTool),
   );
 }
 
@@ -1415,24 +1100,20 @@ export function createToolHeaders2ToJSON(
 }
 
 /** @internal */
-export type CreateToolRequestBodyHeaders$Outbound =
-  | CreateToolHeaders2$Outbound
-  | string;
+export type RequestBodyHeaders$Outbound = CreateToolHeaders2$Outbound | string;
 
 /** @internal */
-export const CreateToolRequestBodyHeaders$outboundSchema: z.ZodType<
-  CreateToolRequestBodyHeaders$Outbound,
+export const RequestBodyHeaders$outboundSchema: z.ZodType<
+  RequestBodyHeaders$Outbound,
   z.ZodTypeDef,
-  CreateToolRequestBodyHeaders
+  RequestBodyHeaders
 > = z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]);
 
-export function createToolRequestBodyHeadersToJSON(
-  createToolRequestBodyHeaders: CreateToolRequestBodyHeaders,
+export function requestBodyHeadersToJSON(
+  requestBodyHeaders: RequestBodyHeaders,
 ): string {
   return JSON.stringify(
-    CreateToolRequestBodyHeaders$outboundSchema.parse(
-      createToolRequestBodyHeaders,
-    ),
+    RequestBodyHeaders$outboundSchema.parse(requestBodyHeaders),
   );
 }
 
@@ -1686,9 +1367,9 @@ export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
 }
 
 /** @internal */
-export const CreateToolRequestBodyToolsRequest1Status$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest1Status> = z
-    .nativeEnum(CreateToolRequestBodyToolsRequest1Status);
+export const CreateToolRequestBodyToolsRequestStatus$outboundSchema:
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestStatus> = z
+    .nativeEnum(CreateToolRequestBodyToolsRequestStatus);
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequest1Type$outboundSchema:
@@ -1780,7 +1461,7 @@ export const FunctionTool$outboundSchema: z.ZodType<
   key: z.string(),
   displayName: z.string().optional(),
   description: z.string(),
-  status: CreateToolRequestBodyToolsRequest1Status$outboundSchema.default(
+  status: CreateToolRequestBodyToolsRequestStatus$outboundSchema.default(
     "live",
   ),
   type: z.literal("function"),
@@ -1800,7 +1481,6 @@ export type CreateToolRequestBody$Outbound =
   | FunctionTool$Outbound
   | JSONSchemaTool$Outbound
   | HTTPTool$Outbound
-  | RequestBodyMCPTool$Outbound
   | CodeExecutionTool$Outbound;
 
 /** @internal */
@@ -1812,7 +1492,6 @@ export const CreateToolRequestBody$outboundSchema: z.ZodType<
   z.lazy(() => FunctionTool$outboundSchema),
   z.lazy(() => JSONSchemaTool$outboundSchema),
   z.lazy(() => HTTPTool$outboundSchema),
-  z.lazy(() => RequestBodyMCPTool$outboundSchema),
   z.lazy(() => CodeExecutionTool$outboundSchema),
 ]);
 
@@ -1825,15 +1504,15 @@ export function createToolRequestBodyToJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponse200Status$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Status> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponse200Status);
+export const CreateToolResponseBodyToolsResponseStatus$inboundSchema:
+  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> = z
+    .nativeEnum(CreateToolResponseBodyToolsResponseStatus);
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema:
+export const CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreateToolResponseBodyToolsResponse200ApplicationJson5Type
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson5Type);
+    typeof CreateToolResponseBodyToolsResponse200ApplicationJson4Type
+  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson4Type);
 
 /** @internal */
 export const CreateToolResponseBodyParameters$inboundSchema: z.ZodType<
@@ -1843,7 +1522,7 @@ export const CreateToolResponseBodyParameters$inboundSchema: z.ZodType<
 > = collectExtraKeys$(
   z.object({
     type:
-      CreateToolResponseBodyToolsResponse200ApplicationJson5Type$inboundSchema,
+      CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
   }).catchall(z.any()),
@@ -1894,7 +1573,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5MFDN4XD109MAETK87Y"),
+  _id: z.string().default("tool_01M0X9CFZC7XGEK1QZAAY0DMBP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1905,7 +1584,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   workspace_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  status: CreateToolResponseBodyToolsResponse200Status$inboundSchema.default(
+  status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
     "live",
   ),
   type: z.literal("code"),
@@ -1929,158 +1608,6 @@ export function responseBodyCodeExecutionToolFromJSON(
     jsonString,
     (x) => ResponseBodyCodeExecutionTool$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ResponseBodyCodeExecutionTool' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateToolResponseBodyToolsResponseStatus$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponseStatus);
-
-/** @internal */
-export const ResponseBodyHeaders$inboundSchema: z.ZodType<
-  ResponseBodyHeaders,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
-
-export function responseBodyHeadersFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyHeaders, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyHeaders' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateToolResponseBodyToolsResponse200ApplicationJson4Type
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson4Type);
-
-/** @internal */
-export const CreateToolResponseBodySchema$inboundSchema: z.ZodType<
-  CreateToolResponseBodySchema,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
-  properties: z.record(z.any()).optional(),
-  required: z.array(z.string()).optional(),
-});
-
-export function createToolResponseBodySchemaFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateToolResponseBodySchema, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateToolResponseBodySchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolResponseBodySchema' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyTools$inboundSchema: z.ZodType<
-  ResponseBodyTools,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().default("01M0NTJ5MFYQH6RPGC6N3RA3PK"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() => CreateToolResponseBodySchema$inboundSchema),
-});
-
-export function responseBodyToolsFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyTools, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyTools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyTools' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyConnectionType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyConnectionType
-> = z.nativeEnum(ResponseBodyConnectionType);
-
-/** @internal */
-export const ResponseBodyMcp$inboundSchema: z.ZodType<
-  ResponseBodyMcp,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  server_url: z.string(),
-  headers: z.record(z.lazy(() => ResponseBodyHeaders$inboundSchema)).optional(),
-  tools: z.array(z.lazy(() => ResponseBodyTools$inboundSchema)),
-  connection_type: ResponseBodyConnectionType$inboundSchema,
-  template_variables: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_url": "serverUrl",
-    "connection_type": "connectionType",
-    "template_variables": "templateVariables",
-  });
-});
-
-export function responseBodyMcpFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyMcp, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyMcp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyMcp' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyMCPTool$inboundSchema: z.ZodType<
-  ResponseBodyMCPTool,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("tool_01M0NTJ5MEVHYE3E5KDVTZZ389"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("mcp"),
-  mcp: z.lazy(() => ResponseBodyMcp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
-
-export function responseBodyMCPToolFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyMCPTool, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyMCPTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyMCPTool' from JSON`,
   );
 }
 
@@ -2115,19 +1642,19 @@ export function createToolHeadersTools2FromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyHeaders$inboundSchema: z.ZodType<
-  CreateToolResponseBodyHeaders,
+export const ResponseBodyHeaders$inboundSchema: z.ZodType<
+  ResponseBodyHeaders,
   z.ZodTypeDef,
   unknown
 > = z.union([z.lazy(() => CreateToolHeadersTools2$inboundSchema), z.string()]);
 
-export function createToolResponseBodyHeadersFromJSON(
+export function responseBodyHeadersFromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolResponseBodyHeaders, SDKValidationError> {
+): SafeParseResult<ResponseBodyHeaders, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolResponseBodyHeaders' from JSON`,
+    (x) => ResponseBodyHeaders$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyHeaders' from JSON`,
   );
 }
 
@@ -2157,10 +1684,10 @@ export function responseBodyBlueprintFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema:
+export const CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreateToolResponseBodyToolsResponse200ApplicationJson3Type
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson3Type);
+    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType
+  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONType);
 
 /** @internal */
 export const ResponseBodyDefaultValue$inboundSchema: z.ZodType<
@@ -2185,8 +1712,7 @@ export const ResponseBodyArguments$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type:
-    CreateToolResponseBodyToolsResponse200ApplicationJson3Type$inboundSchema,
+  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
   description: z.string(),
   send_to_model: z.boolean().default(true),
   default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -2234,7 +1760,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5MDCWF4ZKXY81CY2DBM"),
+  _id: z.string().default("tool_01M0X9CFZBTV6D2Y3EP4STSKJQ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2327,7 +1853,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5MCFPJ24EPW7SAQJJ4K"),
+  _id: z.string().default("tool_01M0X9CFZAHPT0Q190R7NHQA67"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2428,7 +1954,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M0NTJ5MBRFGW2V907KFCP7J7"),
+  _id: z.string().default("tool_01M0X9CFZ9CH383YCWCA5TM4YE"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2472,7 +1998,6 @@ export const CreateToolResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => ResponseBodyFunctionTool$inboundSchema),
   z.lazy(() => ResponseBodyJSONSchemaTool$inboundSchema),
   z.lazy(() => ResponseBodyHTTPTool$inboundSchema),
-  z.lazy(() => ResponseBodyMCPTool$inboundSchema),
   z.lazy(() => ResponseBodyCodeExecutionTool$inboundSchema),
 ]);
 

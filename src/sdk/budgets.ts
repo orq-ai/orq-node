@@ -69,7 +69,7 @@ export class Budgets extends ClientSDK {
    * Delete a budget
    *
    * @remarks
-   * Permanently deletes a budget. Consumption counters in Redis for this budget are cleared immediately. The response body is empty on success.
+   * Permanently deletes a budget. Its consumption counters are cleared immediately. The response body is empty on success.
    */
   async delete(
     request: operations.BudgetDeleteRequest,
@@ -103,7 +103,7 @@ export class Budgets extends ClientSDK {
    * Reset budget consumption
    *
    * @remarks
-   * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved; only the Redis counters are reset.
+   * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved.
    */
   async resetConsumption(
     request: operations.BudgetResetConsumptionRequest,

@@ -9,7 +9,7 @@ The tool to create
 
 ```typescript
 const value: operations.FunctionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "beyond playfully atop apropos aw how",
   type: "function",
@@ -23,7 +23,7 @@ const value: operations.FunctionTool = {
 
 ```typescript
 const value: operations.JSONSchemaTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "uh-huh scholarship what madly",
   type: "json_schema",
@@ -45,7 +45,7 @@ const value: operations.JSONSchemaTool = {
 
 ```typescript
 const value: operations.HTTPTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "midst too hello difficult proofread",
   type: "http",
@@ -58,26 +58,11 @@ const value: operations.HTTPTool = {
 };
 ```
 
-### `operations.RequestBodyMCPTool`
-
-```typescript
-const value: operations.RequestBodyMCPTool = {
-  path: "Default",
-  key: "<key>",
-  description: "ah along runny",
-  type: "mcp",
-  mcp: {
-    serverUrl: "https://prime-backburn.info",
-    connectionType: "sse",
-  },
-};
-```
-
 ### `operations.CodeExecutionTool`
 
 ```typescript
 const value: operations.CodeExecutionTool = {
-  path: "Default",
+  path: "Default Project",
   key: "<key>",
   description: "convince without brr",
   type: "code",

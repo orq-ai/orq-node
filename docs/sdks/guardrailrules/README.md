@@ -5,15 +5,15 @@
 ### Available Operations
 
 * [list](#list) - List guardrail rules
-* [create](#create) - Create guardrail rule
-* [listUsedGuardrails](#listusedguardrails) - List used guardrails
-* [delete](#delete) - Delete guardrail rule
-* [retrieve](#retrieve) - Get guardrail rule
-* [update](#update) - Update guardrail rule
+* [create](#create) - Create a guardrail rule
+* [listUsedGuardrails](#listusedguardrails) - List guardrails used by guardrail rules
+* [retrieve](#retrieve) - Retrieve a guardrail rule
+* [delete](#delete) - Delete a guardrail rule
+* [update](#update) - Update a guardrail rule
 
 ## list
 
-Returns a paginated list of guardrail rules for the current project.
+Returns guardrail rules with cursor pagination, search, status, project, sort, and referenced-guardrail filters.
 
 ### Example Usage
 
@@ -26,7 +26,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.guardrailRules.list({});
+  const result = await orq.guardrailRules.list({
+    limit: 10,
+  });
 
   console.log(result);
 }
@@ -49,7 +51,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await guardrailRulesList(orq, {});
+  const res = await guardrailRulesList(orq, {
+    limit: 10,
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -72,7 +76,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GuardrailRuleListResponseBody](../../models/operations/guardrailrulelistresponsebody.md)\>**
+**Promise\<[components.ListGuardrailRulesResponse](../../models/components/listguardrailrulesresponse.md)\>**
 
 ### Errors
 
@@ -82,7 +86,7 @@ run();
 
 ## create
 
-Creates a new guardrail rule with expression, guardrails configuration, and timeout settings.
+Creates a guardrail rule with metadata and optional evaluator, plugin, and matching configuration. Rules default to disabled when `enabled` is omitted.
 
 ### Example Usage
 
@@ -138,14 +142,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GuardrailRuleCreateRequestBody](../../models/operations/guardrailrulecreaterequestbody.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateGuardrailRuleRequest](../../models/components/createguardrailrulerequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GuardrailRuleCreateResponseBody](../../models/operations/guardrailrulecreateresponsebody.md)\>**
+**Promise\<[components.CreateGuardrailRuleResponse](../../models/components/createguardrailruleresponse.md)\>**
 
 ### Errors
 
@@ -155,7 +159,7 @@ run();
 
 ## listUsedGuardrails
 
-Returns the distinct guardrail ids referenced across all guardrail rules in scope.
+Returns the distinct guardrail identifiers used by guardrail rules in the requested scope.
 
 ### Example Usage
 
@@ -207,86 +211,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GuardrailRuleListUsedGuardrailsRequest](../../models/operations/guardrailrulelistusedguardrailsrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GuardrailRuleListUsedGuardrailsResponseBody](../../models/operations/guardrailrulelistusedguardrailsresponsebody.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## delete
-
-Deletes an existing guardrail rule by ID.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="GuardrailRuleDelete" method="delete" path="/v2/guardrail-rules/{guardrail_rule_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  await orq.guardrailRules.delete({
-    guardrailRuleId: "<id>",
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { guardrailRulesDelete } from "@orq-ai/node/funcs/guardrailRulesDelete.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await guardrailRulesDelete(orq, {
-    guardrailRuleId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    
-  } else {
-    console.log("guardrailRulesDelete failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GuardrailRuleDeleteRequest](../../models/operations/guardrailruledeleterequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
+**Promise\<[components.ListGuardrailRuleUsedGuardrailsResponse](../../models/components/listguardrailruleusedguardrailsresponse.md)\>**
 
 ### Errors
 
@@ -296,7 +228,7 @@ run();
 
 ## retrieve
 
-Retrieves the details of an existing guardrail rule by ID.
+Retrieves a guardrail rule by its unique identifier.
 
 ### Example Usage
 
@@ -359,7 +291,80 @@ run();
 
 ### Response
 
-**Promise\<[operations.GuardrailRuleGetResponseBody](../../models/operations/guardrailrulegetresponsebody.md)\>**
+**Promise\<[components.GetGuardrailRuleResponse](../../models/components/getguardrailruleresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## delete
+
+Permanently deletes a guardrail rule.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GuardrailRuleDelete" method="delete" path="/v2/guardrail-rules/{guardrail_rule_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.guardrailRules.delete({
+    guardrailRuleId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { guardrailRulesDelete } from "@orq-ai/node/funcs/guardrailRulesDelete.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await guardrailRulesDelete(orq, {
+    guardrailRuleId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("guardrailRulesDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GuardrailRuleDeleteRequest](../../models/operations/guardrailruledeleterequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.DeleteGuardrailRuleResponse](../../models/components/deleteguardrailruleresponse.md)\>**
 
 ### Errors
 
@@ -369,7 +374,7 @@ run();
 
 ## update
 
-Partially updates an existing guardrail rule. Only provided fields are updated.
+Partially updates guardrail-rule metadata or configuration. Project scope is immutable.
 
 ### Example Usage
 
@@ -384,7 +389,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.guardrailRules.update({
     guardrailRuleId: "<id>",
-    requestBody: {},
+    updateGuardrailRuleRequest: {},
   });
 
   console.log(result);
@@ -410,7 +415,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await guardrailRulesUpdate(orq, {
     guardrailRuleId: "<id>",
-    requestBody: {},
+    updateGuardrailRuleRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -434,7 +439,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GuardrailRuleUpdateResponseBody](../../models/operations/guardrailruleupdateresponsebody.md)\>**
+**Promise\<[components.UpdateGuardrailRuleResponse](../../models/components/updateguardrailruleresponse.md)\>**
 
 ### Errors
 

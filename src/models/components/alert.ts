@@ -12,6 +12,7 @@ import {
   AlertCondition,
   AlertCondition$inboundSchema,
 } from "./alertcondition.js";
+import { AlertDisplay, AlertDisplay$inboundSchema } from "./alertdisplay.js";
 import { AlertQuery, AlertQuery$inboundSchema } from "./alertquery.js";
 import { AlertRun, AlertRun$inboundSchema } from "./alertrun.js";
 
@@ -120,6 +121,10 @@ export type Alert = {
    * User ID that last updated the alert.
    */
   updatedById: string;
+  /**
+   * Display options for the alert activity chart.
+   */
+  display?: AlertDisplay | undefined;
 };
 
 /** @internal */
@@ -155,6 +160,7 @@ export const Alert$inboundSchema: z.ZodType<Alert, z.ZodTypeDef, unknown> = z
     ),
     created_by_id: z.string(),
     updated_by_id: z.string(),
+    display: AlertDisplay$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "alert_id": "alertId",

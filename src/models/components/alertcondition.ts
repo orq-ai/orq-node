@@ -41,22 +41,21 @@ export const Window = {
 export type Window = ClosedEnum<typeof Window>;
 
 /**
- * How often the alert is evaluated. `30s` is a testing cadence.
+ * How often the alert is evaluated. Plan limits may enforce a minimum.
  */
 export const Interval = {
-  Thirtys: "30s",
   Fivem: "5m",
   Fifteenm: "15m",
   Oneh: "1h",
   Oned: "1d",
 } as const;
 /**
- * How often the alert is evaluated. `30s` is a testing cadence.
+ * How often the alert is evaluated. Plan limits may enforce a minimum.
  */
 export type Interval = ClosedEnum<typeof Interval>;
 
 /**
- * Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+ * Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
  */
 export const Delay = {
   Thirtys: "30s",
@@ -66,7 +65,7 @@ export const Delay = {
   SixHundreds: "600s",
 } as const;
 /**
- * Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+ * Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
  */
 export type Delay = ClosedEnum<typeof Delay>;
 
@@ -105,11 +104,11 @@ export type AlertCondition = {
    */
   window: Window;
   /**
-   * How often the alert is evaluated. `30s` is a testing cadence.
+   * How often the alert is evaluated. Plan limits may enforce a minimum.
    */
   interval: Interval;
   /**
-   * Ingestion delay subtracted from the evaluation window. Defaults to `120s`.
+   * Ingestion delay subtracted from the evaluation window. Defaults to `30s`.
    */
   delay?: Delay | undefined;
 };

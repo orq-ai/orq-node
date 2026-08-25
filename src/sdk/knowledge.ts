@@ -17,11 +17,15 @@ import { knowledgeListDatasources } from "../funcs/knowledgeListDatasources.js";
 import { knowledgeRetrieve } from "../funcs/knowledgeRetrieve.js";
 import { knowledgeRetrieveChunk } from "../funcs/knowledgeRetrieveChunk.js";
 import { knowledgeRetrieveDatasource } from "../funcs/knowledgeRetrieveDatasource.js";
+import { knowledgeRetrieveFileUrl } from "../funcs/knowledgeRetrieveFileUrl.js";
+import { knowledgeRetrieveProcessingStatus } from "../funcs/knowledgeRetrieveProcessingStatus.js";
 import { knowledgeSearch } from "../funcs/knowledgeSearch.js";
+import { knowledgeToggleChunk } from "../funcs/knowledgeToggleChunk.js";
 import { knowledgeUpdate } from "../funcs/knowledgeUpdate.js";
 import { knowledgeUpdateChunk } from "../funcs/knowledgeUpdateChunk.js";
 import { knowledgeUpdateDatasource } from "../funcs/knowledgeUpdateDatasource.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -35,7 +39,7 @@ export class Knowledge extends ClientSDK {
   async list(
     request?: operations.ListKnowledgeBasesRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.ListKnowledgeBasesResponseBody> {
+  ): Promise<components.KnowledgeBasesServiceListResponse> {
     return unwrapAsync(knowledgeList(
       this,
       request,
@@ -45,11 +49,14 @@ export class Knowledge extends ClientSDK {
 
   /**
    * Create a knowledge
+   *
+   * @remarks
+   * Creates an internal or external knowledge base. Internal knowledge bases embed and index uploaded content; external knowledge bases query the configured external retrieval API.
    */
   async create(
-    request: operations.CreateKnowledgeRequestBody,
+    request: components.KnowledgeBasesServiceCreateRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateKnowledgeResponseBody> {
+  ): Promise<components.Knowledge> {
     return unwrapAsync(knowledgeCreate(
       this,
       request,
@@ -66,22 +73,8 @@ export class Knowledge extends ClientSDK {
   async retrieve(
     request: operations.GetOneKnowledgeRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetOneKnowledgeResponseBody> {
+  ): Promise<components.Knowledge> {
     return unwrapAsync(knowledgeRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Updates a knowledge
-   */
-  async update(
-    request: operations.UpdateKnowledgeRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateKnowledgeResponseBody> {
-    return unwrapAsync(knowledgeUpdate(
       this,
       request,
       options,
@@ -106,16 +99,16 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Search knowledge base
+   * Updates a knowledge
    *
    * @remarks
-   * Search a Knowledge Base and return the most similar chunks, along with their search and rerank scores. Note that all configuration changes made in the API will override the settings in the UI.
+   * Updates a knowledge base. Omitted optional fields retain their current values.
    */
-  async search(
-    request: operations.SearchKnowledgeRequest,
+  async update(
+    request: operations.UpdateKnowledgeRequest,
     options?: RequestOptions,
-  ): Promise<operations.SearchKnowledgeResponseBody> {
-    return unwrapAsync(knowledgeSearch(
+  ): Promise<components.Knowledge> {
+    return unwrapAsync(knowledgeUpdate(
       this,
       request,
       options,
@@ -124,11 +117,14 @@ export class Knowledge extends ClientSDK {
 
   /**
    * List all datasources
+   *
+   * @remarks
+   * Returns the datasources in a knowledge base. Use cursors to page through results and optional query or status filters to narrow the list.
    */
   async listDatasources(
     request: operations.ListDatasourcesRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListDatasourcesResponseBody> {
+  ): Promise<components.DatasourcesServiceListResponse> {
     return unwrapAsync(knowledgeListDatasources(
       this,
       request,
@@ -138,11 +134,14 @@ export class Knowledge extends ClientSDK {
 
   /**
    * Create a new datasource
+   *
+   * @remarks
+   * Creates a datasource shell when only a display name is provided. When file_id is provided, the uploaded file is queued for chunking and ingestion.
    */
   async createDatasource(
     request: operations.CreateDatasourceRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateDatasourceResponseBody> {
+  ): Promise<components.Datasource> {
     return unwrapAsync(knowledgeCreateDatasource(
       this,
       request,
@@ -152,11 +151,14 @@ export class Knowledge extends ClientSDK {
 
   /**
    * Retrieve a datasource
+   *
+   * @remarks
+   * Retrieves a datasource and its current processing status and chunk count.
    */
   async retrieveDatasource(
     request: operations.RetrieveDatasourceRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveDatasourceResponseBody> {
+  ): Promise<components.Datasource> {
     return unwrapAsync(knowledgeRetrieveDatasource(
       this,
       request,
@@ -183,11 +185,14 @@ export class Knowledge extends ClientSDK {
 
   /**
    * Update a datasource
+   *
+   * @remarks
+   * Updates the display name of a datasource.
    */
   async updateDatasource(
     request: operations.UpdateDatasourceRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateDatasourceResponseBody> {
+  ): Promise<components.Datasource> {
     return unwrapAsync(knowledgeUpdateDatasource(
       this,
       request,
@@ -196,26 +201,15 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Create chunks for a datasource
-   */
-  async createChunks(
-    request: operations.CreateChunkRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
-    return unwrapAsync(knowledgeCreateChunks(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List all chunks for a datasource
+   *
+   * @remarks
+   * Returns chunks using cursor pagination, with optional text and processing-status filters.
    */
   async listChunks(
     request: operations.ListChunksRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListChunksResponseBody> {
+  ): Promise<components.ChunksServiceListResponse> {
     return unwrapAsync(knowledgeListChunks(
       this,
       request,
@@ -224,13 +218,16 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Delete multiple chunks
+   * Create chunks for a datasource
+   *
+   * @remarks
+   * Creates between 1 and 100 chunks. Chunks with supplied embeddings are indexed immediately; chunks without embeddings are queued for embedding.
    */
-  async deleteChunks(
-    request: operations.DeleteChunksRequest,
+  async createChunks(
+    request: operations.CreateChunkRequest,
     options?: RequestOptions,
-  ): Promise<operations.DeleteChunksResponseBody> {
-    return unwrapAsync(knowledgeDeleteChunks(
+  ): Promise<Array<components.KnowledgeChunk>> {
+    return unwrapAsync(knowledgeCreateChunks(
       this,
       request,
       options,
@@ -238,13 +235,16 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * List chunks with offset-based pagination
+   * Delete multiple chunks
+   *
+   * @remarks
+   * Deletes up to 100 chunks and reports IDs that were not found or could not be deleted.
    */
-  async listChunksPaginated(
-    request: operations.ListChunksPaginatedRequest,
+  async deleteChunks(
+    request: operations.DeleteChunksRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListChunksPaginatedResponseBody> {
-    return unwrapAsync(knowledgeListChunksPaginated(
+  ): Promise<components.ChunksServiceDeleteManyResponse> {
+    return unwrapAsync(knowledgeDeleteChunks(
       this,
       request,
       options,
@@ -260,7 +260,7 @@ export class Knowledge extends ClientSDK {
   async getChunksCount(
     request: operations.GetChunksCountRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetChunksCountResponseBody> {
+  ): Promise<components.ChunksServiceCountResponse> {
     return unwrapAsync(knowledgeGetChunksCount(
       this,
       request,
@@ -269,13 +269,33 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Update a chunk
+   * List chunks with offset-based pagination
+   *
+   * @remarks
+   * Returns a page of chunks, with optional text, enabled-state, and processing-status filters.
    */
-  async updateChunk(
-    request: operations.UpdateChunkRequest,
+  async listChunksPaginated(
+    request: operations.ListChunksPaginatedRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateChunkResponseBody> {
-    return unwrapAsync(knowledgeUpdateChunk(
+  ): Promise<components.ChunksServiceListPaginatedResponse> {
+    return unwrapAsync(knowledgeListChunksPaginated(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a chunk
+   *
+   * @remarks
+   * Retrieves a chunk by its chunk identifier.
+   */
+  async retrieveChunk(
+    request: operations.GetOneChunkRequest,
+    options?: RequestOptions,
+  ): Promise<components.KnowledgeChunk> {
+    return unwrapAsync(knowledgeRetrieveChunk(
       this,
       request,
       options,
@@ -284,6 +304,9 @@ export class Knowledge extends ClientSDK {
 
   /**
    * Delete a chunk
+   *
+   * @remarks
+   * Deletes a chunk from the datasource and its vector index.
    */
   async deleteChunk(
     request: operations.DeleteChunkRequest,
@@ -297,13 +320,84 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Retrieve a chunk
+   * Update a chunk
+   *
+   * @remarks
+   * Updates chunk text, metadata, or a supplied embedding. Changing text without an embedding queues the chunk for re-embedding.
    */
-  async retrieveChunk(
-    request: operations.GetOneChunkRequest,
+  async updateChunk(
+    request: operations.UpdateChunkRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetOneChunkResponseBody> {
-    return unwrapAsync(knowledgeRetrieveChunk(
+  ): Promise<components.KnowledgeChunk> {
+    return unwrapAsync(knowledgeUpdateChunk(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set a chunk's enabled status
+   *
+   * @remarks
+   * Enables or disables a chunk for retrieval. If the vector-index document is missing, enabling the chunk queues it for embedding.
+   */
+  async toggleChunk(
+    request: operations.UpdateChunkEnabledRequest,
+    options?: RequestOptions,
+  ): Promise<components.KnowledgeChunk> {
+    return unwrapAsync(knowledgeToggleChunk(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve datasource processing status
+   *
+   * @remarks
+   * Returns aggregate queued, completed, passed, and failed chunk counts together with the datasource and chunk processing attempts.
+   */
+  async retrieveProcessingStatus(
+    request: operations.GetOneDatasourceProcessingStatusRequest,
+    options?: RequestOptions,
+  ): Promise<components.DatasourcesServiceGetProcessingStatusResponse> {
+    return unwrapAsync(knowledgeRetrieveProcessingStatus(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search knowledge base
+   *
+   * @remarks
+   * Search a Knowledge Base and return the most similar chunks, along with their search and rerank scores. Note that all configuration changes made in the API will override the settings in the UI.
+   */
+  async search(
+    request: operations.SearchKnowledgeRequest,
+    options?: RequestOptions,
+  ): Promise<components.SearchKnowledgeResponse> {
+    return unwrapAsync(knowledgeSearch(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a file upload URL
+   *
+   * @remarks
+   * Creates a presigned upload policy for a file that will be attached to a knowledge-base datasource. Submit the returned form fields and file directly to the returned URL.
+   */
+  async retrieveFileUrl(
+    request: operations.GetOneFileUploadUrlRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetUploadFileUrlResponse> {
+    return unwrapAsync(knowledgeRetrieveFileUrl(
       this,
       request,
       options,

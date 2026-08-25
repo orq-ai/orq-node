@@ -39,7 +39,7 @@ export class Identities extends ClientSDK {
   async create(
     request: components.CreateIdentityRequest,
     options?: RequestOptions,
-  ): Promise<components.CreateIdentityResponse> {
+  ): Promise<operations.CreateIdentityResponse> {
     return unwrapAsync(identitiesCreate(
       this,
       request,

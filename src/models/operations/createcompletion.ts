@@ -200,7 +200,7 @@ export type CreateCompletionRouterCompletionsCache = {
 };
 
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export const CreateCompletionSearchType = {
   VectorSearch: "vector_search",
@@ -208,18 +208,11 @@ export const CreateCompletionSearchType = {
   HybridSearch: "hybrid_search",
 } as const;
 /**
- * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
  */
 export type CreateCompletionSearchType = ClosedEnum<
   typeof CreateCompletionSearchType
 >;
-
-/**
- * Exists
- */
-export type CreateCompletionOrExists = {
-  exists: boolean;
-};
 
 export type CreateCompletionOrRouterCompletionsNin = string | number | boolean;
 
@@ -293,8 +286,7 @@ export type CreateCompletionFilterByRouterCompletionsOr =
   | CreateCompletionOrLt
   | CreateCompletionOrLte
   | CreateCompletionOrIn
-  | CreateCompletionOrNin
-  | CreateCompletionOrExists;
+  | CreateCompletionOrNin;
 
 /**
  * Or
@@ -310,17 +302,9 @@ export type CreateCompletionFilterByOr = {
         | CreateCompletionOrLt
         | CreateCompletionOrLte
         | CreateCompletionOrIn
-        | CreateCompletionOrNin
-        | CreateCompletionOrExists;
+        | CreateCompletionOrNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type CreateCompletionAndExists = {
-  exists: boolean;
 };
 
 export type CreateCompletionAndRouterCompletionsNin = string | number | boolean;
@@ -395,8 +379,7 @@ export type CreateCompletionFilterByRouterCompletionsAnd =
   | CreateCompletionAndLt
   | CreateCompletionAndLte
   | CreateCompletionAndIn
-  | CreateCompletionAndNin
-  | CreateCompletionAndExists;
+  | CreateCompletionAndNin;
 
 /**
  * And
@@ -412,17 +395,9 @@ export type CreateCompletionFilterByAnd = {
         | CreateCompletionAndLt
         | CreateCompletionAndLte
         | CreateCompletionAndIn
-        | CreateCompletionAndNin
-        | CreateCompletionAndExists;
+        | CreateCompletionAndNin;
     }
   >;
-};
-
-/**
- * Exists
- */
-export type CreateCompletion1Exists = {
-  exists: boolean;
 };
 
 export type CreateCompletion1RouterCompletionsNin = string | number | boolean;
@@ -497,8 +472,7 @@ export type CreateCompletionFilterBy1 =
   | CreateCompletion1Lt
   | CreateCompletion1Lte
   | CreateCompletion1In
-  | CreateCompletion1Nin
-  | CreateCompletion1Exists;
+  | CreateCompletion1Nin;
 
 /**
  * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
@@ -515,8 +489,7 @@ export type CreateCompletionFilterBy =
       | CreateCompletion1Lt
       | CreateCompletion1Lte
       | CreateCompletion1In
-      | CreateCompletion1Nin
-      | CreateCompletion1Exists;
+      | CreateCompletion1Nin;
   };
 
 /**
@@ -550,7 +523,7 @@ export type CreateCompletionRerankConfig = {
    */
   threshold?: number | undefined;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking. Defaults to `10`.
    */
   topK?: number | undefined;
 };
@@ -567,17 +540,17 @@ export type CreateCompletionAgenticRagConfig = {
 
 export type CreateCompletionKnowledgeBases = {
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of results to return. Send `null` or omit to use the knowledge base configured `top_k`.
    */
-  topK?: number | undefined;
+  topK?: number | null | undefined;
   /**
-   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   * The threshold to apply to the search. Send `null` or omit to use the knowledge base configured `threshold`
    */
-  threshold?: number | undefined;
+  threshold?: number | null | undefined;
   /**
-   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   * The type of search to perform. Send `null` or omit to use the knowledge base configured `retrieval_type`
    */
-  searchType?: CreateCompletionSearchType | undefined;
+  searchType?: CreateCompletionSearchType | null | undefined;
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
@@ -590,8 +563,7 @@ export type CreateCompletionKnowledgeBases = {
       | CreateCompletion1Lt
       | CreateCompletion1Lte
       | CreateCompletion1In
-      | CreateCompletion1Nin
-      | CreateCompletion1Exists;
+      | CreateCompletion1Nin;
   } | undefined;
   /**
    * Additional search options
@@ -1496,28 +1468,6 @@ export const CreateCompletionSearchType$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateCompletionSearchType);
 
 /** @internal */
-export type CreateCompletionOrExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const CreateCompletionOrExists$outboundSchema: z.ZodType<
-  CreateCompletionOrExists$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionOrExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function createCompletionOrExistsToJSON(
-  createCompletionOrExists: CreateCompletionOrExists,
-): string {
-  return JSON.stringify(
-    CreateCompletionOrExists$outboundSchema.parse(createCompletionOrExists),
-  );
-}
-
-/** @internal */
 export type CreateCompletionOrRouterCompletionsNin$Outbound =
   | string
   | number
@@ -1795,8 +1745,7 @@ export type CreateCompletionFilterByRouterCompletionsOr$Outbound =
   | CreateCompletionOrLt$Outbound
   | CreateCompletionOrLte$Outbound
   | CreateCompletionOrIn$Outbound
-  | CreateCompletionOrNin$Outbound
-  | CreateCompletionOrExists$Outbound;
+  | CreateCompletionOrNin$Outbound;
 
 /** @internal */
 export const CreateCompletionFilterByRouterCompletionsOr$outboundSchema:
@@ -1813,7 +1762,6 @@ export const CreateCompletionFilterByRouterCompletionsOr$outboundSchema:
     z.lazy(() => CreateCompletionOrLte$outboundSchema),
     z.lazy(() => CreateCompletionOrIn$outboundSchema),
     z.lazy(() => CreateCompletionOrNin$outboundSchema),
-    z.lazy(() => CreateCompletionOrExists$outboundSchema),
   ]);
 
 export function createCompletionFilterByRouterCompletionsOrToJSON(
@@ -1839,8 +1787,7 @@ export type CreateCompletionFilterByOr$Outbound = {
         | CreateCompletionOrLt$Outbound
         | CreateCompletionOrLte$Outbound
         | CreateCompletionOrIn$Outbound
-        | CreateCompletionOrNin$Outbound
-        | CreateCompletionOrExists$Outbound;
+        | CreateCompletionOrNin$Outbound;
     }
   >;
 };
@@ -1863,7 +1810,6 @@ export const CreateCompletionFilterByOr$outboundSchema: z.ZodType<
       z.lazy(() => CreateCompletionOrLte$outboundSchema),
       z.lazy(() => CreateCompletionOrIn$outboundSchema),
       z.lazy(() => CreateCompletionOrNin$outboundSchema),
-      z.lazy(() => CreateCompletionOrExists$outboundSchema),
     ])),
   ),
 });
@@ -1873,28 +1819,6 @@ export function createCompletionFilterByOrToJSON(
 ): string {
   return JSON.stringify(
     CreateCompletionFilterByOr$outboundSchema.parse(createCompletionFilterByOr),
-  );
-}
-
-/** @internal */
-export type CreateCompletionAndExists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const CreateCompletionAndExists$outboundSchema: z.ZodType<
-  CreateCompletionAndExists$Outbound,
-  z.ZodTypeDef,
-  CreateCompletionAndExists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function createCompletionAndExistsToJSON(
-  createCompletionAndExists: CreateCompletionAndExists,
-): string {
-  return JSON.stringify(
-    CreateCompletionAndExists$outboundSchema.parse(createCompletionAndExists),
   );
 }
 
@@ -2179,8 +2103,7 @@ export type CreateCompletionFilterByRouterCompletionsAnd$Outbound =
   | CreateCompletionAndLt$Outbound
   | CreateCompletionAndLte$Outbound
   | CreateCompletionAndIn$Outbound
-  | CreateCompletionAndNin$Outbound
-  | CreateCompletionAndExists$Outbound;
+  | CreateCompletionAndNin$Outbound;
 
 /** @internal */
 export const CreateCompletionFilterByRouterCompletionsAnd$outboundSchema:
@@ -2197,7 +2120,6 @@ export const CreateCompletionFilterByRouterCompletionsAnd$outboundSchema:
     z.lazy(() => CreateCompletionAndLte$outboundSchema),
     z.lazy(() => CreateCompletionAndIn$outboundSchema),
     z.lazy(() => CreateCompletionAndNin$outboundSchema),
-    z.lazy(() => CreateCompletionAndExists$outboundSchema),
   ]);
 
 export function createCompletionFilterByRouterCompletionsAndToJSON(
@@ -2223,8 +2145,7 @@ export type CreateCompletionFilterByAnd$Outbound = {
         | CreateCompletionAndLt$Outbound
         | CreateCompletionAndLte$Outbound
         | CreateCompletionAndIn$Outbound
-        | CreateCompletionAndNin$Outbound
-        | CreateCompletionAndExists$Outbound;
+        | CreateCompletionAndNin$Outbound;
     }
   >;
 };
@@ -2247,7 +2168,6 @@ export const CreateCompletionFilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() => CreateCompletionAndLte$outboundSchema),
       z.lazy(() => CreateCompletionAndIn$outboundSchema),
       z.lazy(() => CreateCompletionAndNin$outboundSchema),
-      z.lazy(() => CreateCompletionAndExists$outboundSchema),
     ])),
   ),
 });
@@ -2259,28 +2179,6 @@ export function createCompletionFilterByAndToJSON(
     CreateCompletionFilterByAnd$outboundSchema.parse(
       createCompletionFilterByAnd,
     ),
-  );
-}
-
-/** @internal */
-export type CreateCompletion1Exists$Outbound = {
-  exists: boolean;
-};
-
-/** @internal */
-export const CreateCompletion1Exists$outboundSchema: z.ZodType<
-  CreateCompletion1Exists$Outbound,
-  z.ZodTypeDef,
-  CreateCompletion1Exists
-> = z.object({
-  exists: z.boolean(),
-});
-
-export function createCompletion1ExistsToJSON(
-  createCompletion1Exists: CreateCompletion1Exists,
-): string {
-  return JSON.stringify(
-    CreateCompletion1Exists$outboundSchema.parse(createCompletion1Exists),
   );
 }
 
@@ -2561,8 +2459,7 @@ export type CreateCompletionFilterBy1$Outbound =
   | CreateCompletion1Lt$Outbound
   | CreateCompletion1Lte$Outbound
   | CreateCompletion1In$Outbound
-  | CreateCompletion1Nin$Outbound
-  | CreateCompletion1Exists$Outbound;
+  | CreateCompletion1Nin$Outbound;
 
 /** @internal */
 export const CreateCompletionFilterBy1$outboundSchema: z.ZodType<
@@ -2578,7 +2475,6 @@ export const CreateCompletionFilterBy1$outboundSchema: z.ZodType<
   z.lazy(() => CreateCompletion1Lte$outboundSchema),
   z.lazy(() => CreateCompletion1In$outboundSchema),
   z.lazy(() => CreateCompletion1Nin$outboundSchema),
-  z.lazy(() => CreateCompletion1Exists$outboundSchema),
 ]);
 
 export function createCompletionFilterBy1ToJSON(
@@ -2602,8 +2498,7 @@ export type CreateCompletionFilterBy$Outbound =
       | CreateCompletion1Lt$Outbound
       | CreateCompletion1Lte$Outbound
       | CreateCompletion1In$Outbound
-      | CreateCompletion1Nin$Outbound
-      | CreateCompletion1Exists$Outbound;
+      | CreateCompletion1Nin$Outbound;
   };
 
 /** @internal */
@@ -2623,7 +2518,6 @@ export const CreateCompletionFilterBy$outboundSchema: z.ZodType<
     z.lazy(() => CreateCompletion1Lte$outboundSchema),
     z.lazy(() => CreateCompletion1In$outboundSchema),
     z.lazy(() => CreateCompletion1Nin$outboundSchema),
-    z.lazy(() => CreateCompletion1Exists$outboundSchema),
   ])),
 ]);
 
@@ -2727,9 +2621,9 @@ export function createCompletionAgenticRagConfigToJSON(
 
 /** @internal */
 export type CreateCompletionKnowledgeBases$Outbound = {
-  top_k?: number | undefined;
-  threshold?: number | undefined;
-  search_type: string;
+  top_k?: number | null | undefined;
+  threshold?: number | null | undefined;
+  search_type?: string | null | undefined;
   filter_by?:
     | CreateCompletionFilterByAnd$Outbound
     | CreateCompletionFilterByOr$Outbound
@@ -2742,8 +2636,7 @@ export type CreateCompletionKnowledgeBases$Outbound = {
         | CreateCompletion1Lt$Outbound
         | CreateCompletion1Lte$Outbound
         | CreateCompletion1In$Outbound
-        | CreateCompletion1Nin$Outbound
-        | CreateCompletion1Exists$Outbound;
+        | CreateCompletion1Nin$Outbound;
     }
     | undefined;
   search_options?: CreateCompletionSearchOptions$Outbound | undefined;
@@ -2759,11 +2652,9 @@ export const CreateCompletionKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateCompletionKnowledgeBases
 > = z.object({
-  topK: z.number().int().optional(),
-  threshold: z.number().optional(),
-  searchType: CreateCompletionSearchType$outboundSchema.default(
-    "hybrid_search",
-  ),
+  topK: z.nullable(z.number().int()).optional(),
+  threshold: z.nullable(z.number()).optional(),
+  searchType: z.nullable(CreateCompletionSearchType$outboundSchema).optional(),
   filterBy: z.union([
     z.lazy(() => CreateCompletionFilterByAnd$outboundSchema),
     z.lazy(() => CreateCompletionFilterByOr$outboundSchema),
@@ -2776,7 +2667,6 @@ export const CreateCompletionKnowledgeBases$outboundSchema: z.ZodType<
       z.lazy(() => CreateCompletion1Lte$outboundSchema),
       z.lazy(() => CreateCompletion1In$outboundSchema),
       z.lazy(() => CreateCompletion1Nin$outboundSchema),
-      z.lazy(() => CreateCompletion1Exists$outboundSchema),
     ])),
   ]).optional(),
   searchOptions: z.lazy(() => CreateCompletionSearchOptions$outboundSchema)
@@ -3044,13 +2934,13 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
   prompt: z.string(),
   echo: z.nullable(z.boolean().default(false)),
   frequencyPenalty: z.nullable(z.number().default(0)),
-  maxTokens: z.nullable(z.number().default(16)),
+  maxTokens: z.nullable(z.number().int().default(16)),
   presencePenalty: z.nullable(z.number().default(0)),
-  seed: z.nullable(z.number()).optional(),
+  seed: z.nullable(z.number().int()).optional(),
   stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
   temperature: z.nullable(z.number().default(1)),
   topP: z.nullable(z.number().default(1)),
-  n: z.nullable(z.number().default(1)),
+  n: z.nullable(z.number().int().default(1)),
   user: z.string().optional(),
   name: z.string().optional(),
   fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))

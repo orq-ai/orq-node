@@ -11,13 +11,13 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Change the schedule type. Only cron is accepted. Changing type or expression resets the NATS schedule and bumps generation.
+ * Change the schedule type. Only cron is accepted. Changing the type or expression reschedules future executions and increments generation.
  */
 export const UpdateAgentScheduleType = {
   Cron: "cron",
 } as const;
 /**
- * Change the schedule type. Only cron is accepted. Changing type or expression resets the NATS schedule and bumps generation.
+ * Change the schedule type. Only cron is accepted. Changing the type or expression reschedules future executions and increments generation.
  */
 export type UpdateAgentScheduleType = ClosedEnum<
   typeof UpdateAgentScheduleType
@@ -37,12 +37,12 @@ export type UpdateAgentScheduleRequestBody = {
    */
   expression?: string | undefined;
   /**
-   * Activate or deactivate the schedule. Deactivating removes the NATS entry; activating re-publishes with current values.
+   * Activate or deactivate the schedule. Deactivating stops future executions; activating schedules future executions using the current values.
    */
   isActive?: boolean | undefined;
   payload?: components.PublicSchedulePayload | undefined;
   /**
-   * Change the schedule type. Only cron is accepted. Changing type or expression resets the NATS schedule and bumps generation.
+   * Change the schedule type. Only cron is accepted. Changing the type or expression reschedules future executions and increments generation.
    */
   type?: UpdateAgentScheduleType | undefined;
 };
@@ -101,7 +101,7 @@ export type UpdateAgentScheduleResponseBody = {
    */
   expression: string;
   /**
-   * Monotonic counter bumped when the schedule's firing cadence changes. Used by the consumer to skip stale in-flight triggers.
+   * Monotonic counter incremented when the schedule's firing cadence changes, allowing outdated in-flight triggers to be ignored.
    */
   generation: number;
   /**

@@ -35,10 +35,10 @@ import {
   FallbackConfig$outboundSchema,
 } from "./fallbackconfig.js";
 import {
-  PublicIdentity,
-  PublicIdentity$Outbound,
-  PublicIdentity$outboundSchema,
-} from "./publicidentity.js";
+  ResponseIdentity,
+  ResponseIdentity$Outbound,
+  ResponseIdentity$outboundSchema,
+} from "./responseidentity.js";
 
 export type EmbeddingOrqParams = {
   cache?: EmbeddingCacheConfig | undefined;
@@ -47,10 +47,7 @@ export type EmbeddingOrqParams = {
    * Deprecated: use top-level fallbacks instead.
    */
   fallbacks?: Array<FallbackConfig> | null | undefined;
-  /**
-   * Information about the identity making the request. If the identity does not exist, it will be created automatically.
-   */
-  identity?: PublicIdentity | undefined;
+  identity?: ResponseIdentity | undefined;
   loadBalancer?: EmbeddingLoadBalancerConfig | undefined;
   /**
    * Deprecated: use top-level name instead.
@@ -65,7 +62,7 @@ export type EmbeddingOrqParams$Outbound = {
   cache?: EmbeddingCacheConfig$Outbound | undefined;
   contact?: EmbeddingContactParams$Outbound | undefined;
   fallbacks?: Array<FallbackConfig$Outbound> | null | undefined;
-  identity?: PublicIdentity$Outbound | undefined;
+  identity?: ResponseIdentity$Outbound | undefined;
   load_balancer?: EmbeddingLoadBalancerConfig$Outbound | undefined;
   name?: string | undefined;
   retry?: EmbeddingRetryConfig$Outbound | undefined;
@@ -81,7 +78,7 @@ export const EmbeddingOrqParams$outboundSchema: z.ZodType<
   cache: EmbeddingCacheConfig$outboundSchema.optional(),
   contact: EmbeddingContactParams$outboundSchema.optional(),
   fallbacks: z.nullable(z.array(FallbackConfig$outboundSchema)).optional(),
-  identity: PublicIdentity$outboundSchema.optional(),
+  identity: ResponseIdentity$outboundSchema.optional(),
   loadBalancer: EmbeddingLoadBalancerConfig$outboundSchema.optional(),
   name: z.string().optional(),
   retry: EmbeddingRetryConfig$outboundSchema.optional(),

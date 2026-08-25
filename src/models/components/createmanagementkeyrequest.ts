@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { AccessLevel, AccessLevel$outboundSchema } from "./accesslevel.js";
 import {
   ManagementPermissionMode,
   ManagementPermissionMode$outboundSchema,
@@ -24,7 +25,7 @@ export type CreateManagementKeyRequest = {
    *  values, or fetch the live catalog via the capability catalog
    *  endpoint.
    */
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: AccessLevel } | undefined;
   /**
    * Optional expiration. When set, the authenticate hot-path rejects
    *
@@ -39,7 +40,7 @@ export type CreateManagementKeyRequest = {
 export type CreateManagementKeyRequest$Outbound = {
   name: string;
   permission_mode?: string | undefined;
-  access?: { [k: string]: number } | undefined;
+  access?: { [k: string]: string } | undefined;
   expires_at?: string | undefined;
 };
 
@@ -51,7 +52,7 @@ export const CreateManagementKeyRequest$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   permissionMode: ManagementPermissionMode$outboundSchema.optional(),
-  access: z.record(z.number().int()).optional(),
+  access: z.record(AccessLevel$outboundSchema).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
 }).transform((v) => {
   return remap$(v, {

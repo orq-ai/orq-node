@@ -205,6 +205,7 @@ export type StreamRunAgentModelConfigurationGuardrails = {
 export type StreamRunAgentModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -441,6 +442,7 @@ export type StreamRunAgentModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -712,6 +714,7 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
 export type StreamRunAgentFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -952,6 +955,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -1827,7 +1831,7 @@ export type StreamRunAgentRequestBody = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -2264,6 +2268,7 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -2275,6 +2280,7 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
   components.ResponseHealingPlugin$outboundSchema,
 ]);
@@ -2532,6 +2538,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -2593,6 +2600,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
         components.ResponseHealingPlugin$outboundSchema,
       ]),
@@ -3097,6 +3105,7 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -3109,6 +3118,7 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$outboundSchema,
     components.PIIRedactionPluginNl$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
     components.PIIRedactionPluginAuto$outboundSchema,
     components.ResponseHealingPlugin$outboundSchema,
   ]);
@@ -3371,6 +3381,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -3441,6 +3452,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
       z.union([
         components.PIIRedactionPluginEn$outboundSchema,
         components.PIIRedactionPluginNl$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
         components.PIIRedactionPluginAuto$outboundSchema,
         components.ResponseHealingPlugin$outboundSchema,
       ]),
@@ -3943,7 +3955,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M0NTJ5GFH14P4HG3P81HRB5F"),
+  id: z.string().default("01M0X9CFW63BFJKK3QJXZWMZS5"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

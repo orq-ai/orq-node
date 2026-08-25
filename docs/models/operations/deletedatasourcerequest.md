@@ -13,7 +13,7 @@ let value: DeleteDatasourceRequest = {
 
 ## Fields
 
-| Field                                       | Type                                        | Required                                    | Description                                 |
-| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `knowledgeId`                               | *string*                                    | :heavy_check_mark:                          | The unique identifier of the knowledge base |
-| `datasourceId`                              | *string*                                    | :heavy_check_mark:                          | The unique identifier of the datasource.    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `knowledgeId`      | *string*           | :heavy_check_mark: | N/A                |
+| `datasourceId`     | *string*           | :heavy_check_mark: | N/A                |

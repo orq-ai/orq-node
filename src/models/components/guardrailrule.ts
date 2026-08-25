@@ -7,24 +7,38 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { Expression, Expression$inboundSchema } from "./expression.js";
-import { GuardrailRef, GuardrailRef$inboundSchema } from "./guardrailref.js";
-import { Plugin, Plugin$inboundSchema } from "./plugin.js";
+import {
+  GuardrailRuleExpression,
+  GuardrailRuleExpression$inboundSchema,
+} from "./guardrailruleexpression.js";
+import {
+  GuardrailRuleGuardrail,
+  GuardrailRuleGuardrail$inboundSchema,
+} from "./guardrailruleguardrail.js";
+import {
+  GuardrailRulePlugin,
+  GuardrailRulePlugin$inboundSchema,
+} from "./guardrailruleplugin.js";
 
 export type GuardrailRule = {
   id: string;
   createdAt: Date;
-  createdById: string;
-  description?: string | undefined;
-  displayName: string;
-  enabled: boolean;
-  expression?: Expression | undefined;
-  guardrails?: Array<GuardrailRef> | null | undefined;
-  plugins?: Array<Plugin> | null | undefined;
-  projectId: string;
-  timeout: number;
   updatedAt: Date;
+  createdById: string;
   updatedById: string;
+  /**
+   * Project that contains the rule. Empty for workspace-wide rules.
+   */
+  projectId: string;
+  /**
+   * Human-readable guardrail-rule name.
+   */
+  displayName: string;
+  description: string;
+  enabled: boolean;
+  expression?: GuardrailRuleExpression | undefined;
+  guardrails: Array<GuardrailRuleGuardrail>;
+  plugins: Array<GuardrailRulePlugin>;
 };
 
 /** @internal */
@@ -33,28 +47,26 @@ export const GuardrailRule$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string(),
+  id: z.string(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  description: z.string().optional(),
-  display_name: z.string(),
-  enabled: z.boolean(),
-  expression: Expression$inboundSchema.optional(),
-  guardrails: z.nullable(z.array(GuardrailRef$inboundSchema)).optional(),
-  plugins: z.nullable(z.array(Plugin$inboundSchema)).optional(),
-  project_id: z.string(),
-  timeout: z.number().int(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  created_by_id: z.string(),
   updated_by_id: z.string(),
+  project_id: z.string(),
+  display_name: z.string(),
+  description: z.string(),
+  enabled: z.boolean(),
+  expression: GuardrailRuleExpression$inboundSchema.optional(),
+  guardrails: z.array(GuardrailRuleGuardrail$inboundSchema),
+  plugins: z.array(GuardrailRulePlugin$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "created_at": "createdAt",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "project_id": "projectId",
     "updated_at": "updatedAt",
+    "created_by_id": "createdById",
     "updated_by_id": "updatedById",
+    "project_id": "projectId",
+    "display_name": "displayName",
   });
 });
 

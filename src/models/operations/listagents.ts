@@ -447,6 +447,7 @@ export type ListAgentsAgentsGuardrails = {
 export type ListAgentsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -672,6 +673,7 @@ export type ListAgentsParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -913,6 +915,7 @@ export type ListAgentsFallbackModelConfigurationGuardrails = {
 export type ListAgentsFallbackModelConfigurationPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -1153,6 +1156,7 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -1272,7 +1276,7 @@ export type ListAgentsData = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -1901,6 +1905,7 @@ export const ListAgentsPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
   components.ResponseHealingPlugin$inboundSchema,
 ]);
@@ -2115,6 +2120,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
       components.ResponseHealingPlugin$inboundSchema,
     ]),
@@ -2521,6 +2527,7 @@ export const ListAgentsFallbackModelConfigurationPlugins$inboundSchema:
   > = z.union([
     components.PIIRedactionPluginEn$inboundSchema,
     components.PIIRedactionPluginNl$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
     components.PIIRedactionPluginAuto$inboundSchema,
     components.ResponseHealingPlugin$inboundSchema,
   ]);
@@ -2787,6 +2794,7 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       z.union([
         components.PIIRedactionPluginEn$inboundSchema,
         components.PIIRedactionPluginNl$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
         components.PIIRedactionPluginAuto$inboundSchema,
         components.ResponseHealingPlugin$inboundSchema,
       ]),

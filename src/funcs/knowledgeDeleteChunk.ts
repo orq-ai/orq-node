@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete a chunk
+ *
+ * @remarks
+ * Deletes a chunk from the datasource and its vector index.
  */
 export function knowledgeDeleteChunk(
   client: OrqCore,

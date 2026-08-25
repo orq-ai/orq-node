@@ -1,0 +1,18 @@
+# CreateMemoryDocumentRequest
+
+## Example Usage
+
+```typescript
+import { CreateMemoryDocumentRequest } from "@orq-ai/node/models/components";
+
+let value: CreateMemoryDocumentRequest = {
+  text: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                     | Type                                                                                                                                                                                      | Required                                                                                                                                                                                  | Description                                                                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `text`                                                                                                                                                                                    | *string*                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                        | The content of the memory document (whitespace trimmed).                                                                                                                                  |
+| `metadata`                                                                                                                                                                                | Record<string, *string*>                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                        | Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs. |

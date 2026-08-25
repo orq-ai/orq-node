@@ -6,13 +6,16 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { Domain, Domain$inboundSchema } from "./domain.js";
+import {
+  ManagementDomain,
+  ManagementDomain$inboundSchema,
+} from "./managementdomain.js";
 
 export type ListManagementCapabilitiesResponse = {
   /**
    * Full management capability catalog.
    */
-  domains: Array<Domain>;
+  domains: Array<ManagementDomain>;
 };
 
 /** @internal */
@@ -21,7 +24,7 @@ export const ListManagementCapabilitiesResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  domains: z.array(Domain$inboundSchema),
+  domains: z.array(ManagementDomain$inboundSchema),
 });
 
 export function listManagementCapabilitiesResponseFromJSON(

@@ -9,29 +9,28 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const EvaluatorRefExecuteOn = {
+export const ExecuteOn = {
   Input: "input",
   Output: "output",
   Both: "both",
 } as const;
-export type EvaluatorRefExecuteOn = ClosedEnum<typeof EvaluatorRefExecuteOn>;
+export type ExecuteOn = ClosedEnum<typeof ExecuteOn>;
 
 export type EvaluatorRef = {
-  executeOn: EvaluatorRefExecuteOn;
+  executeOn: ExecuteOn;
   id: string;
   isGuardrail?: boolean | undefined;
   options?: { [k: string]: any } | undefined;
   sampleRate?: number | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
-export const EvaluatorRefExecuteOn$inboundSchema: z.ZodNativeEnum<
-  typeof EvaluatorRefExecuteOn
-> = z.nativeEnum(EvaluatorRefExecuteOn);
+export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
+  .nativeEnum(ExecuteOn);
 /** @internal */
-export const EvaluatorRefExecuteOn$outboundSchema: z.ZodNativeEnum<
-  typeof EvaluatorRefExecuteOn
-> = EvaluatorRefExecuteOn$inboundSchema;
+export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
+  ExecuteOn$inboundSchema;
 
 /** @internal */
 export const EvaluatorRef$inboundSchema: z.ZodType<
@@ -39,11 +38,12 @@ export const EvaluatorRef$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  execute_on: EvaluatorRefExecuteOn$inboundSchema,
+  execute_on: ExecuteOn$inboundSchema,
   id: z.string(),
   is_guardrail: z.boolean().optional(),
   options: z.record(z.any()).optional(),
   sample_rate: z.number().optional(),
+  timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "execute_on": "executeOn",
@@ -58,6 +58,7 @@ export type EvaluatorRef$Outbound = {
   is_guardrail?: boolean | undefined;
   options?: { [k: string]: any } | undefined;
   sample_rate?: number | undefined;
+  timeout?: number | undefined;
 };
 
 /** @internal */
@@ -66,11 +67,12 @@ export const EvaluatorRef$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvaluatorRef
 > = z.object({
-  executeOn: EvaluatorRefExecuteOn$outboundSchema,
+  executeOn: ExecuteOn$outboundSchema,
   id: z.string(),
   isGuardrail: z.boolean().optional(),
   options: z.record(z.any()).optional(),
   sampleRate: z.number().optional(),
+  timeout: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     executeOn: "execute_on",

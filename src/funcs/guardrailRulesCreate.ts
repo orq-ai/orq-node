@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -21,23 +22,22 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create guardrail rule
+ * Create a guardrail rule
  *
  * @remarks
- * Creates a new guardrail rule with expression, guardrails configuration, and timeout settings.
+ * Creates a guardrail rule with metadata and optional evaluator, plugin, and matching configuration. Rules default to disabled when `enabled` is omitted.
  */
 export function guardrailRulesCreate(
   client: OrqCore,
-  request: operations.GuardrailRuleCreateRequestBody,
+  request: components.CreateGuardrailRuleRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GuardrailRuleCreateResponseBody,
+    components.CreateGuardrailRuleResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function guardrailRulesCreate(
 
 async function $do(
   client: OrqCore,
-  request: operations.GuardrailRuleCreateRequestBody,
+  request: components.CreateGuardrailRuleRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GuardrailRuleCreateResponseBody,
+      components.CreateGuardrailRuleResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -78,7 +78,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GuardrailRuleCreateRequestBody$outboundSchema.parse(value),
+      components.CreateGuardrailRuleRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -141,7 +141,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GuardrailRuleCreateResponseBody,
+    components.CreateGuardrailRuleResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -151,8 +151,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, operations.GuardrailRuleCreateResponseBody$inboundSchema),
-    M.fail([400, 409, "4XX"]),
+    M.json(200, components.CreateGuardrailRuleResponse$inboundSchema),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

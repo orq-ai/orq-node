@@ -69,11 +69,3 @@ const value: operations.CreateCompletionOrNin = {
 };
 ```
 
-### `operations.CreateCompletionOrExists`
-
-```typescript
-const value: operations.CreateCompletionOrExists = {
-  exists: false,
-};
-```
-

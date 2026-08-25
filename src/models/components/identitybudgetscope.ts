@@ -9,10 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Per-identity cap. Keyed by the contact's external_id (not the
+ * Per-identity cap. Keyed by the contact's external identifier so the
  *
  * @remarks
- *  internal Mongo `_id`) so the scope is stable across imports.
+ *  scope is stable across imports.
  */
 export type IdentityBudgetScope = {
   identityExternalId?: string | undefined;

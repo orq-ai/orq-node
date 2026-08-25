@@ -864,6 +864,7 @@ export type ListPromptVersionsGuardrails = {
 export type ListPromptVersionsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -1458,6 +1459,7 @@ export type ListPromptVersionsPromptField = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -2559,6 +2561,7 @@ export const ListPromptVersionsPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
   components.ResponseHealingPlugin$inboundSchema,
 ]);
@@ -3338,6 +3341,7 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
       components.ResponseHealingPlugin$inboundSchema,
     ]),

@@ -1,26 +1,71 @@
 # CreateChatCompletionFilterByOr
 
-Or
 
-## Example Usage
+## Supported Types
+
+### `operations.CreateChatCompletionOrEq`
 
 ```typescript
-import { CreateChatCompletionFilterByOr } from "@orq-ai/node/models/operations";
+const value: operations.CreateChatCompletionOrEq = {
+  eq: "<value>",
+};
+```
 
-let value: CreateChatCompletionFilterByOr = {
-  or: [
-    {},
-    {
-      "key": {
-        gte: 9082.23,
-      },
-    },
+### `operations.CreateChatCompletionOrNe`
+
+```typescript
+const value: operations.CreateChatCompletionOrNe = {
+  ne: "<value>",
+};
+```
+
+### `operations.CreateChatCompletionOrGt`
+
+```typescript
+const value: operations.CreateChatCompletionOrGt = {
+  gt: 1131.35,
+};
+```
+
+### `operations.CreateChatCompletionOrGte`
+
+```typescript
+const value: operations.CreateChatCompletionOrGte = {
+  gte: 3933.71,
+};
+```
+
+### `operations.CreateChatCompletionOrLt`
+
+```typescript
+const value: operations.CreateChatCompletionOrLt = {
+  lt: 5203.78,
+};
+```
+
+### `operations.CreateChatCompletionOrLte`
+
+```typescript
+const value: operations.CreateChatCompletionOrLte = {
+  lte: 2842.15,
+};
+```
+
+### `operations.CreateChatCompletionOrIn`
+
+```typescript
+const value: operations.CreateChatCompletionOrIn = {
+  in: [],
+};
+```
+
+### `operations.CreateChatCompletionOrNin`
+
+```typescript
+const value: operations.CreateChatCompletionOrNin = {
+  nin: [
+    "<value>",
   ],
 };
 ```
 
-## Fields
-
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `or`                                                                               | Record<string, *operations.CreateChatCompletionFilterByRouterChatCompletionsOr*>[] | :heavy_check_mark:                                                                 | N/A                                                                                |

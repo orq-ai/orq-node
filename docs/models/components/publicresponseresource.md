@@ -57,13 +57,14 @@ let value: PublicResponseResource = {
     inputTokens: 786005,
     inputTokensDetails: {
       cacheCreationTokens: 763695,
-      cachedTokens: 732588,
+      cacheWriteTokens: 732588,
+      cachedTokens: 376439,
     },
-    outputTokens: 376439,
+    outputTokens: 349904,
     outputTokensDetails: {
-      reasoningTokens: 349904,
+      reasoningTokens: 437223,
     },
-    totalTokens: 437223,
+    totalTokens: 846277,
   },
   user: "Kelsi_Ratke81",
 };
@@ -100,7 +101,7 @@ let value: PublicResponseResource = {
 | `serviceTier`                                                                                       | [components.ServiceTier](../../models/components/servicetier.md)                                    | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `status`                                                                                            | [components.PublicResponseResourceStatus](../../models/components/publicresponseresourcestatus.md)  | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `store`                                                                                             | *boolean*                                                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `telemetry`                                                                                         | [components.Telemetry](../../models/components/telemetry.md)                                        | :heavy_minus_sign:                                                                                  | Telemetry information for correlating the response with traces                                      |
+| `telemetry`                                                                                         | [components.ResponseTelemetry](../../models/components/responsetelemetry.md)                        | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `temperature`                                                                                       | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `text`                                                                                              | *any*                                                                                               | :heavy_check_mark:                                                                                  | Text output configuration including format and verbosity                                            |
 | `toolChoice`                                                                                        | *any*                                                                                               | :heavy_check_mark:                                                                                  | Tool choice setting: "auto", "none", "required", or a specific function                             |

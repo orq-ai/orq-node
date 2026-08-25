@@ -1,0 +1,23 @@
+# McpGatewayTool
+
+## Example Usage
+
+```typescript
+import { McpGatewayTool } from "@orq-ai/node/models/components";
+
+let value: McpGatewayTool = {};
+```
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `serverKey`                                                                                    | *string*                                                                                       | :heavy_minus_sign:                                                                             | Key of the upstream server the tool comes from.                                                |
+| `alias`                                                                                        | *string*                                                                                       | :heavy_minus_sign:                                                                             | Alias configured on the gateway link the tool comes from.                                      |
+| `exposedName`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | Name MCP clients call; namespaced per the gateway's `tool_naming` and capped at 64 characters. |
+| `description`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | Tool description advertised upstream, passed through to MCP clients.                           |
+| `inputSchema`                                                                                  | [components.InputSchema](../../models/components/inputschema.md)                               | :heavy_minus_sign:                                                                             | JSON Schema for the tool arguments, as advertised upstream.                                    |
+| `mcpServerId`                                                                                  | *string*                                                                                       | :heavy_minus_sign:                                                                             | Upstream server the exposed tool resolves to.                                                  |
+| `upstreamToolName`                                                                             | *string*                                                                                       | :heavy_minus_sign:                                                                             | Bare tool name on the upstream server, before namespacing.                                     |
+| `title`                                                                                        | *string*                                                                                       | :heavy_minus_sign:                                                                             | Human-readable label advertised upstream, when the server sends one.                           |
+| `annotations`                                                                                  | [components.McpToolAnnotations](../../models/components/mcptoolannotations.md)                 | :heavy_minus_sign:                                                                             | Behaviour hints claimed by the upstream server.                                                |

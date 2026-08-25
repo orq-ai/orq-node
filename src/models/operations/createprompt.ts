@@ -641,6 +641,7 @@ export type CreatePromptGuardrails = {
 export type CreatePromptPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -913,6 +914,7 @@ export type PromptInput = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -969,7 +971,7 @@ export type CreatePromptCreatePromptRequest = {
    *
    * @remarks
    *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element identifies the project, followed by nested folders (auto-created as needed). Example: `Default/agents`.
+   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
    *
    * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
    */
@@ -1814,6 +1816,7 @@ export type CreatePromptPromptsGuardrails = {
 export type CreatePromptPromptsPlugins =
   | components.PIIRedactionPluginEn
   | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
@@ -2415,6 +2418,7 @@ export type PromptField = {
     | Array<
       | components.PIIRedactionPluginEn
       | components.PIIRedactionPluginNl
+      | components.TraceScrubbingPlugin
       | components.PIIRedactionPluginAuto
       | components.ResponseHealingPlugin
     >
@@ -3578,6 +3582,7 @@ export function createPromptGuardrailsToJSON(
 export type CreatePromptPlugins$Outbound =
   | components.PIIRedactionPluginEn$Outbound
   | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
   | components.PIIRedactionPluginAuto$Outbound
   | components.ResponseHealingPlugin$Outbound;
 
@@ -3589,6 +3594,7 @@ export const CreatePromptPlugins$outboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$outboundSchema,
   components.PIIRedactionPluginNl$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
   components.PIIRedactionPluginAuto$outboundSchema,
   components.ResponseHealingPlugin$outboundSchema,
 ]);
@@ -3858,6 +3864,7 @@ export type PromptInput$Outbound = {
     | Array<
       | components.PIIRedactionPluginEn$Outbound
       | components.PIIRedactionPluginNl$Outbound
+      | components.TraceScrubbingPlugin$Outbound
       | components.PIIRedactionPluginAuto$Outbound
       | components.ResponseHealingPlugin$Outbound
     >
@@ -3927,6 +3934,7 @@ export const PromptInput$outboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$outboundSchema,
       components.PIIRedactionPluginNl$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
       components.PIIRedactionPluginAuto$outboundSchema,
       components.ResponseHealingPlugin$outboundSchema,
     ]),
@@ -4949,6 +4957,7 @@ export const CreatePromptPromptsPlugins$inboundSchema: z.ZodType<
 > = z.union([
   components.PIIRedactionPluginEn$inboundSchema,
   components.PIIRedactionPluginNl$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
   components.PIIRedactionPluginAuto$inboundSchema,
   components.ResponseHealingPlugin$inboundSchema,
 ]);
@@ -5743,6 +5752,7 @@ export const PromptField$inboundSchema: z.ZodType<
     z.union([
       components.PIIRedactionPluginEn$inboundSchema,
       components.PIIRedactionPluginNl$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
       components.PIIRedactionPluginAuto$inboundSchema,
       components.ResponseHealingPlugin$inboundSchema,
     ]),

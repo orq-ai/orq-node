@@ -7,13 +7,13 @@ import { RoutingRuleUpdateRequest } from "@orq-ai/node/models/operations";
 
 let value: RoutingRuleUpdateRequest = {
   routingRuleId: "<id>",
-  requestBody: {},
+  updateRoutingRuleRequest: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `routingRuleId`                                                                                    | *string*                                                                                           | :heavy_check_mark:                                                                                 | The ID of the routing rule                                                                         |
-| `requestBody`                                                                                      | [operations.RoutingRuleUpdateRequestBody](../../models/operations/routingruleupdaterequestbody.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `routingRuleId`                                                                            | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `updateRoutingRuleRequest`                                                                 | [components.UpdateRoutingRuleRequest](../../models/components/updateroutingrulerequest.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

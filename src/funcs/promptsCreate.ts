@@ -27,6 +27,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create a prompt
+ *
+ * @remarks
+ * Create a new prompt in the workspace.
  */
 export function promptsCreate(
   client: OrqCore,

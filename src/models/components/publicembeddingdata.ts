@@ -11,13 +11,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The object type, which is always "embedding".
  */
-export const ObjectT = {
+export const PublicEmbeddingDataObject = {
   Embedding: "embedding",
 } as const;
 /**
  * The object type, which is always "embedding".
  */
-export type ObjectT = ClosedEnum<typeof ObjectT>;
+export type PublicEmbeddingDataObject = ClosedEnum<
+  typeof PublicEmbeddingDataObject
+>;
 
 export type PublicEmbeddingData = {
   /**
@@ -31,12 +33,13 @@ export type PublicEmbeddingData = {
   /**
    * The object type, which is always "embedding".
    */
-  object: ObjectT;
+  object: PublicEmbeddingDataObject;
 };
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const PublicEmbeddingDataObject$inboundSchema: z.ZodNativeEnum<
+  typeof PublicEmbeddingDataObject
+> = z.nativeEnum(PublicEmbeddingDataObject);
 
 /** @internal */
 export const PublicEmbeddingData$inboundSchema: z.ZodType<
@@ -46,7 +49,7 @@ export const PublicEmbeddingData$inboundSchema: z.ZodType<
 > = z.object({
   embedding: z.any().optional(),
   index: z.number().int(),
-  object: ObjectT$inboundSchema,
+  object: PublicEmbeddingDataObject$inboundSchema,
 });
 
 export function publicEmbeddingDataFromJSON(

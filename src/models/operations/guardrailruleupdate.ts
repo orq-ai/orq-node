@@ -4,89 +4,17 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type GuardrailRuleUpdateRequestBody = {
-  description?: string | undefined;
-  displayName?: string | undefined;
-  enabled?: boolean | undefined;
-  expression?: components.ExpressionInput | undefined;
-  guardrails?: Array<components.GuardrailRef> | undefined;
-  timeout?: number | undefined;
-};
 
 export type GuardrailRuleUpdateRequest = {
-  /**
-   * The ID of the guardrail rule
-   */
   guardrailRuleId: string;
-  requestBody: GuardrailRuleUpdateRequestBody;
+  updateGuardrailRuleRequest: components.UpdateGuardrailRuleRequest;
 };
-
-/**
- * Guardrail rule updated successfully
- */
-export type GuardrailRuleUpdateResponseBody = {
-  id: string;
-  createdAt: Date;
-  createdById: string;
-  description?: string | undefined;
-  displayName: string;
-  enabled: boolean;
-  expression?: components.Expression | undefined;
-  guardrails?: Array<components.GuardrailRef> | null | undefined;
-  plugins?: Array<components.Plugin> | null | undefined;
-  projectId: string;
-  timeout: number;
-  updatedAt: Date;
-  updatedById: string;
-};
-
-/** @internal */
-export type GuardrailRuleUpdateRequestBody$Outbound = {
-  description?: string | undefined;
-  display_name?: string | undefined;
-  enabled?: boolean | undefined;
-  expression?: components.ExpressionInput$Outbound | undefined;
-  guardrails?: Array<components.GuardrailRef$Outbound> | undefined;
-  timeout?: number | undefined;
-};
-
-/** @internal */
-export const GuardrailRuleUpdateRequestBody$outboundSchema: z.ZodType<
-  GuardrailRuleUpdateRequestBody$Outbound,
-  z.ZodTypeDef,
-  GuardrailRuleUpdateRequestBody
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  expression: components.ExpressionInput$outboundSchema.optional(),
-  guardrails: z.array(components.GuardrailRef$outboundSchema).optional(),
-  timeout: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
-
-export function guardrailRuleUpdateRequestBodyToJSON(
-  guardrailRuleUpdateRequestBody: GuardrailRuleUpdateRequestBody,
-): string {
-  return JSON.stringify(
-    GuardrailRuleUpdateRequestBody$outboundSchema.parse(
-      guardrailRuleUpdateRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type GuardrailRuleUpdateRequest$Outbound = {
   guardrail_rule_id: string;
-  RequestBody: GuardrailRuleUpdateRequestBody$Outbound;
+  UpdateGuardrailRuleRequest: components.UpdateGuardrailRuleRequest$Outbound;
 };
 
 /** @internal */
@@ -96,11 +24,12 @@ export const GuardrailRuleUpdateRequest$outboundSchema: z.ZodType<
   GuardrailRuleUpdateRequest
 > = z.object({
   guardrailRuleId: z.string(),
-  requestBody: z.lazy(() => GuardrailRuleUpdateRequestBody$outboundSchema),
+  updateGuardrailRuleRequest:
+    components.UpdateGuardrailRuleRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     guardrailRuleId: "guardrail_rule_id",
-    requestBody: "RequestBody",
+    updateGuardrailRuleRequest: "UpdateGuardrailRuleRequest",
   });
 });
 
@@ -109,47 +38,5 @@ export function guardrailRuleUpdateRequestToJSON(
 ): string {
   return JSON.stringify(
     GuardrailRuleUpdateRequest$outboundSchema.parse(guardrailRuleUpdateRequest),
-  );
-}
-
-/** @internal */
-export const GuardrailRuleUpdateResponseBody$inboundSchema: z.ZodType<
-  GuardrailRuleUpdateResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  description: z.string().optional(),
-  display_name: z.string(),
-  enabled: z.boolean(),
-  expression: components.Expression$inboundSchema.optional(),
-  guardrails: z.nullable(z.array(components.GuardrailRef$inboundSchema))
-    .optional(),
-  plugins: z.nullable(z.array(components.Plugin$inboundSchema)).optional(),
-  project_id: z.string(),
-  timeout: z.number().int(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_at": "createdAt",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "updated_at": "updatedAt",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function guardrailRuleUpdateResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GuardrailRuleUpdateResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GuardrailRuleUpdateResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GuardrailRuleUpdateResponseBody' from JSON`,
   );
 }
