@@ -11,7 +11,6 @@
 * [update](#update) - Update an MCP server
 * [testTool](#testtool) - Test an MCP server tool
 * [sync](#sync) - Sync an MCP server
-* [test](#test) - Test an MCP server connection
 
 ## list
 
@@ -545,75 +544,6 @@ run();
 ### Response
 
 **Promise\<[components.SyncMcpServerResponse](../../models/components/syncmcpserverresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## test
-
-Probes an upstream MCP server connection without persisting it. Returns discovered tools and connectivity status.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="McpServerTest" method="post" path="/v2/mcp-servers:test" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.mcpServers.test({});
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { mcpServersTest } from "@orq-ai/node/funcs/mcpServersTest.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await mcpServersTest(orq, {});
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("mcpServersTest failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.TestMcpServerRequest](../../models/components/testmcpserverrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.TestMcpServerResponse](../../models/components/testmcpserverresponse.md)\>**
 
 ### Errors
 

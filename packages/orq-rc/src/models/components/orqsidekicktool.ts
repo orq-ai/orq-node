@@ -26,7 +26,19 @@ export type OrqSidekickToolReasoningEffort = ClosedEnum<
 >;
 
 /**
- * Lets the primary model delegate a concrete task to a configured secondary model.
+ * Subagent tool discriminator; orq:sidekick is the legacy alias.
+ */
+export const OrqSidekickToolType = {
+  OrqSubagent: "orq:subagent",
+  OrqSidekick: "orq:sidekick",
+} as const;
+/**
+ * Subagent tool discriminator; orq:sidekick is the legacy alias.
+ */
+export type OrqSidekickToolType = ClosedEnum<typeof OrqSidekickToolType>;
+
+/**
+ * Lets the primary model delegate a concrete task to a configured worker model. Use type "orq:subagent" ("orq:sidekick" is the legacy alias).
  */
 export type OrqSidekickTool = {
   /**
@@ -58,15 +70,20 @@ export type OrqSidekickTool = {
    */
   temperature?: number | undefined;
   /**
-   * Sidekick tool discriminator.
+   * Subagent tool discriminator; orq:sidekick is the legacy alias.
    */
-  type: "orq:sidekick";
+  type: OrqSidekickToolType;
 };
 
 /** @internal */
 export const OrqSidekickToolReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof OrqSidekickToolReasoningEffort
 > = z.nativeEnum(OrqSidekickToolReasoningEffort);
+
+/** @internal */
+export const OrqSidekickToolType$outboundSchema: z.ZodNativeEnum<
+  typeof OrqSidekickToolType
+> = z.nativeEnum(OrqSidekickToolType);
 
 /** @internal */
 export type OrqSidekickTool$Outbound = {
@@ -77,7 +94,7 @@ export type OrqSidekickTool$Outbound = {
   reasoning_effort?: string | undefined;
   system_prompt?: string | undefined;
   temperature?: number | undefined;
-  type: "orq:sidekick";
+  type: string;
 };
 
 /** @internal */
@@ -93,7 +110,7 @@ export const OrqSidekickTool$outboundSchema: z.ZodType<
   reasoningEffort: OrqSidekickToolReasoningEffort$outboundSchema.optional(),
   systemPrompt: z.string().optional(),
   temperature: z.number().optional(),
-  type: z.literal("orq:sidekick"),
+  type: OrqSidekickToolType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     maxTokens: "max_tokens",

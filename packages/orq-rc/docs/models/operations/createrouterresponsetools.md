@@ -28,7 +28,16 @@ const value: components.OrqAdvisorTool = {
 ```typescript
 const value: components.OrqSidekickTool = {
   model: "Challenger",
-  type: "orq:sidekick",
+  type: "orq:subagent",
+};
+```
+
+### `components.OrqSidekickTool`
+
+```typescript
+const value: components.OrqSidekickTool = {
+  model: "Challenger",
+  type: "orq:subagent",
 };
 ```
 
@@ -36,7 +45,7 @@ const value: components.OrqSidekickTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
 };
 ```
 
@@ -44,7 +53,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
 };
 ```
 
@@ -52,7 +61,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
 };
 ```
 
@@ -60,7 +69,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
 };
 ```
 
@@ -68,7 +77,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
 };
 ```
 
@@ -76,7 +85,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
 };
 ```
 
@@ -84,7 +93,87 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:function",
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
+};
+```
+
+### `operations.OrqAiTool`
+
+```typescript
+const value: operations.OrqAiTool = {
+  type: "orq:http",
 };
 ```
 

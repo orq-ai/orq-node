@@ -7,7 +7,6 @@ import { mcpServersDelete } from "../funcs/mcpServersDelete.js";
 import { mcpServersList } from "../funcs/mcpServersList.js";
 import { mcpServersRetrieve } from "../funcs/mcpServersRetrieve.js";
 import { mcpServersSync } from "../funcs/mcpServersSync.js";
-import { mcpServersTest } from "../funcs/mcpServersTest.js";
 import { mcpServersTestTool } from "../funcs/mcpServersTestTool.js";
 import { mcpServersUpdate } from "../funcs/mcpServersUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -129,23 +128,6 @@ export class McpServers extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.SyncMcpServerResponse> {
     return unwrapAsync(mcpServersSync(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Test an MCP server connection
-   *
-   * @remarks
-   * Probes an upstream MCP server connection without persisting it. Returns discovered tools and connectivity status.
-   */
-  async test(
-    request: components.TestMcpServerRequest,
-    options?: RequestOptions,
-  ): Promise<components.TestMcpServerResponse> {
-    return unwrapAsync(mcpServersTest(
       this,
       request,
       options,

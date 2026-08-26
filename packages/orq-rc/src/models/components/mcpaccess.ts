@@ -49,6 +49,16 @@ export type McpAccess = {
    *  union of these toolsets. Empty means no toolset restriction.
    */
   toolsetIds?: Array<string> | undefined;
+  /**
+   * Allow-list of file system ids (`fsys_<ULID>`) the key may reach over
+   *
+   * @remarks
+   *  the file system MCP endpoint. Ignored when deny_all is true. Empty
+   *  (with deny_all=false) means no restriction. The access mode a key
+   *  gets on a reachable file system is the file system's own
+   *  external_access, never something the key carries.
+   */
+  allowedFilesystemIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -56,6 +66,7 @@ export type McpAccess$Outbound = {
   deny_all?: boolean | undefined;
   allowed_mcp_gateway_ids?: Array<string> | undefined;
   toolset_ids?: Array<string> | undefined;
+  allowed_filesystem_ids?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -67,11 +78,13 @@ export const McpAccess$outboundSchema: z.ZodType<
   denyAll: z.boolean().optional(),
   allowedMcpGatewayIds: z.array(z.string()).optional(),
   toolsetIds: z.array(z.string()).optional(),
+  allowedFilesystemIds: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     denyAll: "deny_all",
     allowedMcpGatewayIds: "allowed_mcp_gateway_ids",
     toolsetIds: "toolset_ids",
+    allowedFilesystemIds: "allowed_filesystem_ids",
   });
 });
 

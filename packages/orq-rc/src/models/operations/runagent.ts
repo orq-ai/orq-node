@@ -1177,17 +1177,17 @@ export type AgentToolInputRunHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType =
   {
     Object: "object",
   } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType
   >;
 
 export type AgentToolInputRunSchema = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType;
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1584,6 +1584,7 @@ export type AgentToolInputRun =
   | components.AdvisorToolInput
   | components.SidekickToolInput
   | components.CodeInterpreterToolInput
+  | components.FileSystemToolInput
   | HTTPToolRun
   | CodeToolRun
   | FunctionToolRun
@@ -1681,6 +1682,7 @@ export type RunAgentSettings = {
       | components.AdvisorToolInput
       | components.SidekickToolInput
       | components.CodeInterpreterToolInput
+      | components.FileSystemToolInput
       | HTTPToolRun
       | CodeToolRun
       | FunctionToolRun
@@ -3848,11 +3850,11 @@ export function agentToolInputRunHeadersToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType,
   );
 
 /** @internal */
@@ -3869,7 +3871,7 @@ export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
   AgentToolInputRunSchema
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
@@ -3896,7 +3898,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M0WP27XSZNYTBZ730VZMMX06"),
+  id: z.string().default("01M0YFK6SBHPJ6FHKKYY35M7XE"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4482,6 +4484,7 @@ export type AgentToolInputRun$Outbound =
   | components.AdvisorToolInput$Outbound
   | components.SidekickToolInput$Outbound
   | components.CodeInterpreterToolInput$Outbound
+  | components.FileSystemToolInput$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
   | FunctionToolRun$Outbound
@@ -4508,6 +4511,7 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   components.AdvisorToolInput$outboundSchema,
   components.SidekickToolInput$outboundSchema,
   components.CodeInterpreterToolInput$outboundSchema,
+  components.FileSystemToolInput$outboundSchema,
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
   z.lazy(() => FunctionToolRun$outboundSchema),
@@ -4618,6 +4622,7 @@ export type RunAgentSettings$Outbound = {
       | components.AdvisorToolInput$Outbound
       | components.SidekickToolInput$Outbound
       | components.CodeInterpreterToolInput$Outbound
+      | components.FileSystemToolInput$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
       | FunctionToolRun$Outbound
@@ -4656,6 +4661,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       components.AdvisorToolInput$outboundSchema,
       components.SidekickToolInput$outboundSchema,
       components.CodeInterpreterToolInput$outboundSchema,
+      components.FileSystemToolInput$outboundSchema,
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),
       z.lazy(() => FunctionToolRun$outboundSchema),

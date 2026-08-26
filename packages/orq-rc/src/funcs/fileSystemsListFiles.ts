@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -22,22 +22,23 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Test an MCP server connection
+ * List files
  *
  * @remarks
- * Probes an upstream MCP server connection without persisting it. Returns discovered tools and connectivity status.
+ * Lists the files and folders stored in a file system. An empty path lists the file system root.
  */
-export function mcpServersTest(
+export function fileSystemsListFiles(
   client: OrqCore,
-  request: components.TestMcpServerRequest,
+  request: operations.ListFilesRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.TestMcpServerResponse,
+    components.ListFileSystemFilesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +58,12 @@ export function mcpServersTest(
 
 async function $do(
   client: OrqCore,
-  request: components.TestMcpServerRequest,
+  request: operations.ListFilesRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.TestMcpServerResponse,
+      components.ListFileSystemFilesResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,19 +78,32 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.TestMcpServerRequest$outboundSchema.parse(value),
+    (value) => operations.ListFilesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = null;
 
-  const path = pathToFunc("/v2/mcp-servers:test")();
+  const pathParams = {
+    file_system_key: encodeSimple("file_system_key", payload.file_system_key, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v2/file-systems/{file_system_key}/files")(
+    pathParams,
+  );
+
+  const query = encodeFormQuery({
+    "depth": payload.depth,
+    "max_entries": payload.max_entries,
+    "path": payload.path,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -100,7 +114,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "McpServerTest",
+    operationID: "ListFiles",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -114,10 +128,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -140,7 +155,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.TestMcpServerResponse,
+    components.ListFileSystemFilesResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -150,8 +165,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.TestMcpServerResponse$inboundSchema),
-    M.fail("4XX"),
+    M.json(200, components.ListFileSystemFilesResponse$inboundSchema),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

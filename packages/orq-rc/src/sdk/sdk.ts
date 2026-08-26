@@ -15,6 +15,7 @@ import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
+import { FileSystems } from "./filesystems.js";
 import { GuardrailRules } from "./guardrailrules.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
@@ -103,6 +104,11 @@ export class Orq extends ClientSDK {
   private _chunking?: Chunking;
   get chunking(): Chunking {
     return (this._chunking ??= new Chunking(this._options));
+  }
+
+  private _fileSystems?: FileSystems;
+  get fileSystems(): FileSystems {
+    return (this._fileSystems ??= new FileSystems(this._options));
   }
 
   private _knowledge?: Knowledge;

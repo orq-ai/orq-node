@@ -646,9 +646,19 @@ export type Network = {
 };
 
 /**
- * The orq.ai tool type.
+ * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
 export const CreateRouterResponseToolsResponsesType = {
+  OrqWebSearch: "orq:web_search",
+  OrqWebFetch: "orq:web_fetch",
+  OrqDatetime: "orq:datetime",
+  OrqSearchModels: "orq:search_models",
+  OrqImageGeneration: "orq:image_generation",
+  OrqApplyPatch: "orq:apply_patch",
+  OrqFusion: "orq:fusion",
+  OrqShell: "orq:shell",
+  OrqQueryKnowledgeBase: "orq:query_knowledge_base",
+  OrqRetrieveKnowledgeBases: "orq:retrieve_knowledge_bases",
   OrqCurrentDate: "orq:current_date",
   OrqGoogleSearch: "orq:google_search",
   OrqWebScraper: "orq:web_scraper",
@@ -658,7 +668,7 @@ export const CreateRouterResponseToolsResponsesType = {
   OrqFunction: "orq:function",
 } as const;
 /**
- * The orq.ai tool type.
+ * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
 export type CreateRouterResponseToolsResponsesType = ClosedEnum<
   typeof CreateRouterResponseToolsResponsesType
@@ -677,11 +687,15 @@ export type OrqAiTool = {
    */
   network?: Network | undefined;
   /**
+   * Default IANA timezone for orq:datetime (e.g., "Europe/Amsterdam").
+   */
+  timezone?: string | undefined;
+  /**
    * The tool ID (for orq:mcp, orq:http, orq:function).
    */
   toolId?: string | undefined;
   /**
-   * The orq.ai tool type.
+   * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
    */
   type: CreateRouterResponseToolsResponsesType;
 };
@@ -771,7 +785,18 @@ export type ToolsFunction = {
 export type CreateRouterResponseTools =
   | ToolsFunction
   | components.OrqAdvisorTool
-  | components.OrqSidekickTool
+  | (components.OrqSidekickTool & { type: "orq:subagent" })
+  | (components.OrqSidekickTool & { type: "orq:sidekick" })
+  | (OrqAiTool & { type: "orq:web_search" })
+  | (OrqAiTool & { type: "orq:web_fetch" })
+  | (OrqAiTool & { type: "orq:datetime" })
+  | (OrqAiTool & { type: "orq:search_models" })
+  | (OrqAiTool & { type: "orq:image_generation" })
+  | (OrqAiTool & { type: "orq:apply_patch" })
+  | (OrqAiTool & { type: "orq:fusion" })
+  | (OrqAiTool & { type: "orq:shell" })
+  | (OrqAiTool & { type: "orq:query_knowledge_base" })
+  | (OrqAiTool & { type: "orq:retrieve_knowledge_bases" })
   | (OrqAiTool & { type: "orq:current_date" })
   | (OrqAiTool & { type: "orq:google_search" })
   | (OrqAiTool & { type: "orq:web_scraper" })
@@ -909,7 +934,18 @@ export type CreateRouterResponseRequestBody = {
     | Array<
       | ToolsFunction
       | components.OrqAdvisorTool
-      | components.OrqSidekickTool
+      | (components.OrqSidekickTool & { type: "orq:subagent" })
+      | (components.OrqSidekickTool & { type: "orq:sidekick" })
+      | (OrqAiTool & { type: "orq:web_search" })
+      | (OrqAiTool & { type: "orq:web_fetch" })
+      | (OrqAiTool & { type: "orq:datetime" })
+      | (OrqAiTool & { type: "orq:search_models" })
+      | (OrqAiTool & { type: "orq:image_generation" })
+      | (OrqAiTool & { type: "orq:apply_patch" })
+      | (OrqAiTool & { type: "orq:fusion" })
+      | (OrqAiTool & { type: "orq:shell" })
+      | (OrqAiTool & { type: "orq:query_knowledge_base" })
+      | (OrqAiTool & { type: "orq:retrieve_knowledge_bases" })
       | (OrqAiTool & { type: "orq:current_date" })
       | (OrqAiTool & { type: "orq:google_search" })
       | (OrqAiTool & { type: "orq:web_scraper" })
@@ -1732,6 +1768,7 @@ export const CreateRouterResponseToolsResponsesType$outboundSchema:
 export type OrqAiTool$Outbound = {
   files?: Array<Files$Outbound> | undefined;
   network?: Network$Outbound | undefined;
+  timezone?: string | undefined;
   tool_id?: string | undefined;
   type: string;
 };
@@ -1744,6 +1781,7 @@ export const OrqAiTool$outboundSchema: z.ZodType<
 > = z.object({
   files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
   network: z.lazy(() => Network$outboundSchema).optional(),
+  timezone: z.string().optional(),
   toolId: z.string().optional(),
   type: CreateRouterResponseToolsResponsesType$outboundSchema,
 }).transform((v) => {
@@ -1824,7 +1862,18 @@ export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
 export type CreateRouterResponseTools$Outbound =
   | ToolsFunction$Outbound
   | components.OrqAdvisorTool$Outbound
-  | components.OrqSidekickTool$Outbound
+  | (components.OrqSidekickTool$Outbound & { type: "orq:subagent" })
+  | (components.OrqSidekickTool$Outbound & { type: "orq:sidekick" })
+  | (OrqAiTool$Outbound & { type: "orq:web_search" })
+  | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
+  | (OrqAiTool$Outbound & { type: "orq:datetime" })
+  | (OrqAiTool$Outbound & { type: "orq:search_models" })
+  | (OrqAiTool$Outbound & { type: "orq:image_generation" })
+  | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
+  | (OrqAiTool$Outbound & { type: "orq:fusion" })
+  | (OrqAiTool$Outbound & { type: "orq:shell" })
+  | (OrqAiTool$Outbound & { type: "orq:query_knowledge_base" })
+  | (OrqAiTool$Outbound & { type: "orq:retrieve_knowledge_bases" })
   | (OrqAiTool$Outbound & { type: "orq:current_date" })
   | (OrqAiTool$Outbound & { type: "orq:google_search" })
   | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
@@ -1842,7 +1891,42 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ToolsFunction$outboundSchema),
   components.OrqAdvisorTool$outboundSchema,
-  components.OrqSidekickTool$outboundSchema,
+  components.OrqSidekickTool$outboundSchema.and(
+    z.object({ type: z.literal("orq:subagent") }),
+  ),
+  components.OrqSidekickTool$outboundSchema.and(
+    z.object({ type: z.literal("orq:sidekick") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:web_search") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:web_fetch") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:datetime") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:search_models") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:image_generation") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:apply_patch") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:fusion") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:shell") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:query_knowledge_base") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:retrieve_knowledge_bases") }),
+  ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:current_date") }),
   ),
@@ -1920,7 +2004,18 @@ export type CreateRouterResponseRequestBody$Outbound = {
     | Array<
       | ToolsFunction$Outbound
       | components.OrqAdvisorTool$Outbound
-      | components.OrqSidekickTool$Outbound
+      | (components.OrqSidekickTool$Outbound & { type: "orq:subagent" })
+      | (components.OrqSidekickTool$Outbound & { type: "orq:sidekick" })
+      | (OrqAiTool$Outbound & { type: "orq:web_search" })
+      | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
+      | (OrqAiTool$Outbound & { type: "orq:datetime" })
+      | (OrqAiTool$Outbound & { type: "orq:search_models" })
+      | (OrqAiTool$Outbound & { type: "orq:image_generation" })
+      | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
+      | (OrqAiTool$Outbound & { type: "orq:fusion" })
+      | (OrqAiTool$Outbound & { type: "orq:shell" })
+      | (OrqAiTool$Outbound & { type: "orq:query_knowledge_base" })
+      | (OrqAiTool$Outbound & { type: "orq:retrieve_knowledge_bases" })
       | (OrqAiTool$Outbound & { type: "orq:current_date" })
       | (OrqAiTool$Outbound & { type: "orq:google_search" })
       | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
@@ -1995,7 +2090,42 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => ToolsFunction$outboundSchema),
       components.OrqAdvisorTool$outboundSchema,
-      components.OrqSidekickTool$outboundSchema,
+      components.OrqSidekickTool$outboundSchema.and(
+        z.object({ type: z.literal("orq:subagent") }),
+      ),
+      components.OrqSidekickTool$outboundSchema.and(
+        z.object({ type: z.literal("orq:sidekick") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:web_search") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:web_fetch") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:datetime") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:search_models") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:image_generation") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:apply_patch") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:fusion") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:shell") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:query_knowledge_base") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:retrieve_knowledge_bases") }),
+      ),
       z.lazy(() => OrqAiTool$outboundSchema).and(
         z.object({ type: z.literal("orq:current_date") }),
       ),
