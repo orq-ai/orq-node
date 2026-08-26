@@ -3,70 +3,68 @@
 
 ## Supported Types
 
-### `components.SearchKnowledgeRequest1Eq`
+### `components.OneEq`
 
 ```typescript
-const value: components.SearchKnowledgeRequest1Eq = {
-  eq: true,
+const value: components.OneEq = {
+  eq: "<value>",
 };
 ```
 
-### `components.SearchKnowledgeRequest1Ne`
+### `components.OneNe`
 
 ```typescript
-const value: components.SearchKnowledgeRequest1Ne = {
-  ne: 6673.91,
+const value: components.OneNe = {
+  ne: 2953.7,
 };
 ```
 
-### `components.OneGt`
+### `components.Gt`
 
 ```typescript
-const value: components.OneGt = {
-  gt: 7862.95,
+const value: components.Gt = {
+  gt: 2952.97,
 };
 ```
 
-### `components.OneGte`
+### `components.Gte`
 
 ```typescript
-const value: components.OneGte = {
-  gte: 6469.31,
+const value: components.Gte = {
+  gte: 9700.59,
 };
 ```
 
-### `components.OneLt`
+### `components.Lt`
 
 ```typescript
-const value: components.OneLt = {
-  lt: 5264,
+const value: components.Lt = {
+  lt: 854.37,
 };
 ```
 
-### `components.OneLte`
+### `components.Lte`
 
 ```typescript
-const value: components.OneLte = {
-  lte: 8379.2,
+const value: components.Lte = {
+  lte: 454.79,
 };
 ```
 
-### `components.SearchKnowledgeRequest1In`
+### `components.OneIn`
 
 ```typescript
-const value: components.SearchKnowledgeRequest1In = {
-  in: [
-    4478.79,
-  ],
+const value: components.OneIn = {
+  in: [],
 };
 ```
 
-### `components.SearchKnowledgeRequest1Nin`
+### `components.OneNin`
 
 ```typescript
-const value: components.SearchKnowledgeRequest1Nin = {
+const value: components.OneNin = {
   nin: [
-    8513.38,
+    true,
   ],
 };
 ```

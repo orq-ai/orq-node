@@ -1,23 +1,19 @@
 # OneNe
 
+Not equal to
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { OneNe } from "@orq-ai/node/models/components";
+
+let value: OneNe = {
+  ne: 2953.7,
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `ne`               | *components.Ne*    | :heavy_check_mark: | N/A                |

@@ -430,6 +430,7 @@ export const GetOnePromptProvider = {
   Fireworks: "fireworks",
   Baseten: "baseten",
   Reson8: "reson8",
+  Meta: "meta",
   Slack: "slack",
   Orq: "orq",
 } as const;

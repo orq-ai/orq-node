@@ -3,33 +3,12 @@
  */
 
 import { deploymentsGetConfig } from "../funcs/deploymentsGetConfig.js";
-import { deploymentsInvoke } from "../funcs/deploymentsInvoke.js";
 import { deploymentsList } from "../funcs/deploymentsList.js";
-import { deploymentsStream } from "../funcs/deploymentsStream.js";
-import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Deployments extends ClientSDK {
-  /**
-   * Invoke
-   *
-   * @remarks
-   * Invoke a deployment with a given payload
-   */
-  async invoke(
-    request: components.InvokeDeploymentRequest,
-    options?: RequestOptions,
-  ): Promise<operations.DeploymentInvokeResponseBody | undefined> {
-    return unwrapAsync(deploymentsInvoke(
-      this,
-      request,
-      options,
-    ));
-  }
-
   /**
    * List all deployments
    *
@@ -58,23 +37,6 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeploymentGetConfigResponseBody | undefined> {
     return unwrapAsync(deploymentsGetConfig(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Stream
-   *
-   * @remarks
-   * Stream deployment generation. Only supported for completions and chat completions.
-   */
-  async stream(
-    request: operations.DeploymentStreamRequestBody,
-    options?: RequestOptions,
-  ): Promise<EventStream<operations.DeploymentStreamResponseBody>> {
-    return unwrapAsync(deploymentsStream(
       this,
       request,
       options,

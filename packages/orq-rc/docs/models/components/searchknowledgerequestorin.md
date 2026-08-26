@@ -1,23 +1,21 @@
 # SearchKnowledgeRequestOrIn
 
+In
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { SearchKnowledgeRequestOrIn } from "@orq-ai/node/models/components";
+
+let value: SearchKnowledgeRequestOrIn = {
+  in: [
+    "<value>",
+  ],
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field               | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `in`                | *components.OrIn*[] | :heavy_check_mark:  | N/A                 |

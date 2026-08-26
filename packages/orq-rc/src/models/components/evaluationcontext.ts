@@ -14,7 +14,7 @@ import {
   StructuredOutput$outboundSchema,
 } from "./structuredoutput.js";
 
-export type EvaluationContextMessages = {};
+export type Messages = {};
 
 /**
  * The data to grade. When `messages` is present it is the conversation and
@@ -24,7 +24,7 @@ export type EvaluationContextMessages = {};
  *  conversation carries no assistant turn. Mirrors graders-api buildGraderRequest.
  */
 export type EvaluationContext = {
-  messages?: Array<EvaluationContextMessages> | undefined;
+  messages?: Array<Messages> | undefined;
   /**
    * StructuredInput names its fields after the template variables they feed, so
    *
@@ -37,26 +37,22 @@ export type EvaluationContext = {
 };
 
 /** @internal */
-export type EvaluationContextMessages$Outbound = {};
+export type Messages$Outbound = {};
 
 /** @internal */
-export const EvaluationContextMessages$outboundSchema: z.ZodType<
-  EvaluationContextMessages$Outbound,
+export const Messages$outboundSchema: z.ZodType<
+  Messages$Outbound,
   z.ZodTypeDef,
-  EvaluationContextMessages
+  Messages
 > = z.object({});
 
-export function evaluationContextMessagesToJSON(
-  evaluationContextMessages: EvaluationContextMessages,
-): string {
-  return JSON.stringify(
-    EvaluationContextMessages$outboundSchema.parse(evaluationContextMessages),
-  );
+export function messagesToJSON(messages: Messages): string {
+  return JSON.stringify(Messages$outboundSchema.parse(messages));
 }
 
 /** @internal */
 export type EvaluationContext$Outbound = {
-  messages?: Array<EvaluationContextMessages$Outbound> | undefined;
+  messages?: Array<Messages$Outbound> | undefined;
   input?: StructuredInput$Outbound | undefined;
   output?: StructuredOutput$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
@@ -68,8 +64,7 @@ export const EvaluationContext$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvaluationContext
 > = z.object({
-  messages: z.array(z.lazy(() => EvaluationContextMessages$outboundSchema))
-    .optional(),
+  messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
   input: StructuredInput$outboundSchema.optional(),
   output: StructuredOutput$outboundSchema.optional(),
   variables: z.record(z.any()).optional(),

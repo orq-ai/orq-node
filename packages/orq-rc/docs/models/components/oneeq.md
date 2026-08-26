@@ -1,23 +1,19 @@
 # OneEq
 
+Equal to
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { OneEq } from "@orq-ai/node/models/components";
+
+let value: OneEq = {
+  eq: "<value>",
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `eq`               | *components.Eq*    | :heavy_check_mark: | N/A                |

@@ -1,79 +1,27 @@
 # FilterByOr
 
+Or
 
-## Supported Types
-
-### `components.SearchKnowledgeRequestOrFilterByEq`
-
-```typescript
-const value: components.SearchKnowledgeRequestOrFilterByEq = {
-  eq: 118.12,
-};
-```
-
-### `components.SearchKnowledgeRequestOrFilterByNe`
+## Example Usage
 
 ```typescript
-const value: components.SearchKnowledgeRequestOrFilterByNe = {
-  ne: 178.32,
-};
-```
+import { FilterByOr } from "@orq-ai/node/models/components";
 
-### `components.SearchKnowledgeRequestOrGt`
-
-```typescript
-const value: components.SearchKnowledgeRequestOrGt = {
-  gt: 8041.31,
-};
-```
-
-### `components.SearchKnowledgeRequestOrGte`
-
-```typescript
-const value: components.SearchKnowledgeRequestOrGte = {
-  gte: 4590.54,
-};
-```
-
-### `components.SearchKnowledgeRequestOrLt`
-
-```typescript
-const value: components.SearchKnowledgeRequestOrLt = {
-  lt: 9401.68,
-};
-```
-
-### `components.SearchKnowledgeRequestOrLte`
-
-```typescript
-const value: components.SearchKnowledgeRequestOrLte = {
-  lte: 3390.29,
-};
-```
-
-### `components.SearchKnowledgeRequestOrFilterByIn`
-
-```typescript
-const value: components.SearchKnowledgeRequestOrFilterByIn = {
-  in: [
-    500.75,
+let value: FilterByOr = {
+  or: [
+    {
+      "key": {
+        nin: [
+          true,
+        ],
+      },
+    },
   ],
 };
 ```
 
-### `components.SearchKnowledgeRequestOrFilterByNin`
+## Fields
 
-```typescript
-const value: components.SearchKnowledgeRequestOrFilterByNin = {
-  nin: [],
-};
-```
-
-### `components.OrExists`
-
-```typescript
-const value: components.OrExists = {
-  exists: false,
-};
-```
-
+| Field                             | Type                              | Required                          | Description                       |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| `or`                              | Record<string, *components.Or*>[] | :heavy_check_mark:                | N/A                               |

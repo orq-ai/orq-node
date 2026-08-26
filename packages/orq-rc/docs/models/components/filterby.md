@@ -11,19 +11,35 @@ The metadata filter to apply to the search. Check the [Searching a Knowledge Bas
 const value: { [k: string]: components.FilterBy1 } = {};
 ```
 
-### `components.SearchKnowledgeRequestFilterByAnd`
+### `components.FilterByAnd`
 
 ```typescript
-const value: components.SearchKnowledgeRequestFilterByAnd = {
-  and: [],
+const value: components.FilterByAnd = {
+  and: [
+    {
+      "key": {
+        nin: [],
+      },
+    },
+    {},
+    {},
+  ],
 };
 ```
 
-### `components.SearchKnowledgeRequestFilterByOr`
+### `components.FilterByOr`
 
 ```typescript
-const value: components.SearchKnowledgeRequestFilterByOr = {
-  or: [],
+const value: components.FilterByOr = {
+  or: [
+    {
+      "key": {
+        nin: [
+          true,
+        ],
+      },
+    },
+  ],
 };
 ```
 

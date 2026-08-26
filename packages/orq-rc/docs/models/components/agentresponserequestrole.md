@@ -5,15 +5,15 @@ Message role (user or tool for continuing executions)
 
 ## Supported Types
 
-### `components.RoleUserMessage`
+### `components.UserMessage`
 
 ```typescript
-const value: components.RoleUserMessage = "user";
+const value: components.UserMessage = "user";
 ```
 
-### `components.RoleToolMessage`
+### `components.ToolMessage`
 
 ```typescript
-const value: components.RoleToolMessage = "tool";
+const value: components.ToolMessage = "tool";
 ```
 

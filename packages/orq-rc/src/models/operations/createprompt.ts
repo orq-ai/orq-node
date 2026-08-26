@@ -1364,7 +1364,7 @@ export type ModelParameters = {
   thinkingLevel?: CreatePromptThinkingLevel | undefined;
 };
 
-export const CreatePromptProvider = {
+export const Provider = {
   Openai: "openai",
   Groq: "groq",
   Cohere: "cohere",
@@ -1403,10 +1403,11 @@ export const CreatePromptProvider = {
   Fireworks: "fireworks",
   Baseten: "baseten",
   Reson8: "reson8",
+  Meta: "meta",
   Slack: "slack",
   Orq: "orq",
 } as const;
-export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
+export type Provider = ClosedEnum<typeof Provider>;
 
 /**
  * The role of the prompt message
@@ -1555,7 +1556,7 @@ export type PromptConfig = {
    * Model Parameters: Not all parameters apply to every model
    */
   modelParameters?: ModelParameters | undefined;
-  provider?: CreatePromptProvider | null | undefined;
+  provider?: Provider | null | undefined;
   /**
    * The ID of the integration to use
    */
@@ -4309,9 +4310,8 @@ export function modelParametersFromJSON(
 }
 
 /** @internal */
-export const CreatePromptProvider$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptProvider
-> = z.nativeEnum(CreatePromptProvider);
+export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
+  .nativeEnum(Provider);
 
 /** @internal */
 export const CreatePromptRole$inboundSchema: z.ZodNativeEnum<
@@ -4574,7 +4574,7 @@ export const PromptConfig$inboundSchema: z.ZodType<
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(ModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => ModelParameters$inboundSchema).optional(),
-  provider: z.nullable(CreatePromptProvider$inboundSchema).optional(),
+  provider: z.nullable(Provider$inboundSchema).optional(),
   integration_id: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => CreatePromptPromptsMessages$inboundSchema)),

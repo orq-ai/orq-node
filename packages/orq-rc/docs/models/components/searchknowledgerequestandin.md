@@ -1,23 +1,21 @@
 # SearchKnowledgeRequestAndIn
 
+In
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { SearchKnowledgeRequestAndIn } from "@orq-ai/node/models/components";
+
+let value: SearchKnowledgeRequestAndIn = {
+  in: [
+    false,
+  ],
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                | Type                 | Required             | Description          |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `in`                 | *components.AndIn*[] | :heavy_check_mark:   | N/A                  |

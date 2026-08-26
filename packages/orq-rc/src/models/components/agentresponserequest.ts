@@ -29,29 +29,29 @@ import {
 /**
  * Message containing tool execution results
  */
-export const RoleToolMessage = {
+export const ToolMessage = {
   Tool: "tool",
 } as const;
 /**
  * Message containing tool execution results
  */
-export type RoleToolMessage = ClosedEnum<typeof RoleToolMessage>;
+export type ToolMessage = ClosedEnum<typeof ToolMessage>;
 
 /**
  * Message from the end user
  */
-export const RoleUserMessage = {
+export const UserMessage = {
   User: "user",
 } as const;
 /**
  * Message from the end user
  */
-export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
+export type UserMessage = ClosedEnum<typeof UserMessage>;
 
 /**
  * Message role (user or tool for continuing executions)
  */
-export type AgentResponseRequestRole = RoleUserMessage | RoleToolMessage;
+export type AgentResponseRequestRole = UserMessage | ToolMessage;
 
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
@@ -73,7 +73,7 @@ export type A2AMessage = {
   /**
    * Message role (user or tool for continuing executions)
    */
-  role: RoleUserMessage | RoleToolMessage;
+  role: UserMessage | ToolMessage;
   /**
    * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
@@ -145,7 +145,7 @@ export type Contact = {
 /**
  * Thread information to group related requests
  */
-export type AgentResponseRequestThread = {
+export type Thread = {
   /**
    * Unique thread identifier to group related invocations.
    */
@@ -228,7 +228,7 @@ export type AgentResponseRequest = {
   /**
    * Thread information to group related requests
    */
-  thread?: AgentResponseRequestThread | undefined;
+  thread?: Thread | undefined;
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
@@ -260,14 +260,12 @@ export type AgentResponseRequest = {
 };
 
 /** @internal */
-export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
-  typeof RoleToolMessage
-> = z.nativeEnum(RoleToolMessage);
+export const ToolMessage$outboundSchema: z.ZodNativeEnum<typeof ToolMessage> = z
+  .nativeEnum(ToolMessage);
 
 /** @internal */
-export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
-  typeof RoleUserMessage
-> = z.nativeEnum(RoleUserMessage);
+export const UserMessage$outboundSchema: z.ZodNativeEnum<typeof UserMessage> = z
+  .nativeEnum(UserMessage);
 
 /** @internal */
 export type AgentResponseRequestRole$Outbound = string | string;
@@ -277,7 +275,7 @@ export const AgentResponseRequestRole$outboundSchema: z.ZodType<
   AgentResponseRequestRole$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestRole
-> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
+> = z.union([UserMessage$outboundSchema, ToolMessage$outboundSchema]);
 
 export function agentResponseRequestRoleToJSON(
   agentResponseRequestRole: AgentResponseRequestRole,
@@ -333,10 +331,7 @@ export const A2AMessage$outboundSchema: z.ZodType<
   A2AMessage
 > = z.object({
   messageId: z.string().optional(),
-  role: z.union([
-    RoleUserMessage$outboundSchema,
-    RoleToolMessage$outboundSchema,
-  ]),
+  role: z.union([UserMessage$outboundSchema, ToolMessage$outboundSchema]),
   parts: z.array(
     z.union([
       TextPart$outboundSchema,
@@ -424,27 +419,23 @@ export function contactToJSON(contact: Contact): string {
 }
 
 /** @internal */
-export type AgentResponseRequestThread$Outbound = {
+export type Thread$Outbound = {
   id: string;
   tags?: Array<string> | undefined;
 };
 
 /** @internal */
-export const AgentResponseRequestThread$outboundSchema: z.ZodType<
-  AgentResponseRequestThread$Outbound,
+export const Thread$outboundSchema: z.ZodType<
+  Thread$Outbound,
   z.ZodTypeDef,
-  AgentResponseRequestThread
+  Thread
 > = z.object({
   id: z.string(),
   tags: z.array(z.string()).optional(),
 });
 
-export function agentResponseRequestThreadToJSON(
-  agentResponseRequestThread: AgentResponseRequestThread,
-): string {
-  return JSON.stringify(
-    AgentResponseRequestThread$outboundSchema.parse(agentResponseRequestThread),
-  );
+export function threadToJSON(thread: Thread): string {
+  return JSON.stringify(Thread$outboundSchema.parse(thread));
 }
 
 /** @internal */
@@ -524,7 +515,7 @@ export type AgentResponseRequest$Outbound = {
   variables?: { [k: string]: any } | undefined;
   identity?: AgentResponseRequestIdentity$Outbound | undefined;
   contact?: Contact$Outbound | undefined;
-  thread?: AgentResponseRequestThread$Outbound | undefined;
+  thread?: Thread$Outbound | undefined;
   memory?: AgentResponseRequestMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   engine?: string | undefined;
@@ -546,7 +537,7 @@ export const AgentResponseRequest$outboundSchema: z.ZodType<
   identity: z.lazy(() => AgentResponseRequestIdentity$outboundSchema)
     .optional(),
   contact: z.lazy(() => Contact$outboundSchema).optional(),
-  thread: z.lazy(() => AgentResponseRequestThread$outboundSchema).optional(),
+  thread: z.lazy(() => Thread$outboundSchema).optional(),
   memory: z.lazy(() => AgentResponseRequestMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   engine: Engine$outboundSchema.optional(),

@@ -83,7 +83,7 @@ export type AgentThoughtStreamingEventFunction = {
   arguments?: string | undefined;
 };
 
-export type AgentThoughtStreamingEventToolCalls = {
+export type ToolCalls = {
   index?: number | undefined;
   id?: string | undefined;
   type?: AgentThoughtStreamingEventDataType | undefined;
@@ -104,7 +104,7 @@ export type AgentThoughtStreamingEventDataRole = ClosedEnum<
 /**
  * If the audio output modality is requested, this object contains data about the audio response from the model.
  */
-export type AgentThoughtStreamingEventAudio = {
+export type Audio = {
   id: string;
   expiresAt: number;
   data: string;
@@ -117,7 +117,7 @@ export type AgentThoughtStreamingEventAudio = {
 export type AgentThoughtStreamingEventMessage = {
   content?: string | null | undefined;
   refusal?: string | null | undefined;
-  toolCalls?: Array<AgentThoughtStreamingEventToolCalls> | undefined;
+  toolCalls?: Array<ToolCalls> | undefined;
   role?: AgentThoughtStreamingEventDataRole | undefined;
   /**
    * Internal thought process of the model
@@ -134,7 +134,7 @@ export type AgentThoughtStreamingEventMessage = {
   /**
    * If the audio output modality is requested, this object contains data about the audio response from the model.
    */
-  audio?: AgentThoughtStreamingEventAudio | null | undefined;
+  audio?: Audio | null | undefined;
 };
 
 export type TopLogprobs = {
@@ -152,7 +152,7 @@ export type TopLogprobs = {
   bytes: Array<number> | null;
 };
 
-export type AgentThoughtStreamingEventContent = {
+export type Content = {
   /**
    * The token.
    */
@@ -212,7 +212,7 @@ export type Logprobs = {
   /**
    * A list of message content tokens with log probability information.
    */
-  content: Array<AgentThoughtStreamingEventContent> | null;
+  content: Array<Content> | null;
   /**
    * A list of message refusal tokens with log probability information.
    */
@@ -411,8 +411,8 @@ export function agentThoughtStreamingEventFunctionFromJSON(
 }
 
 /** @internal */
-export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
-  AgentThoughtStreamingEventToolCalls,
+export const ToolCalls$inboundSchema: z.ZodType<
+  ToolCalls,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -428,14 +428,13 @@ export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
   });
 });
 
-export function agentThoughtStreamingEventToolCallsFromJSON(
+export function toolCallsFromJSON(
   jsonString: string,
-): SafeParseResult<AgentThoughtStreamingEventToolCalls, SDKValidationError> {
+): SafeParseResult<ToolCalls, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      AgentThoughtStreamingEventToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentThoughtStreamingEventToolCalls' from JSON`,
+    (x) => ToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolCalls' from JSON`,
   );
 }
 
@@ -445,28 +444,25 @@ export const AgentThoughtStreamingEventDataRole$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(AgentThoughtStreamingEventDataRole);
 
 /** @internal */
-export const AgentThoughtStreamingEventAudio$inboundSchema: z.ZodType<
-  AgentThoughtStreamingEventAudio,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  expires_at: z.number().int(),
-  data: z.string(),
-  transcript: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
+export const Audio$inboundSchema: z.ZodType<Audio, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string(),
+    expires_at: z.number().int(),
+    data: z.string(),
+    transcript: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+    });
   });
-});
 
-export function agentThoughtStreamingEventAudioFromJSON(
+export function audioFromJSON(
   jsonString: string,
-): SafeParseResult<AgentThoughtStreamingEventAudio, SDKValidationError> {
+): SafeParseResult<Audio, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AgentThoughtStreamingEventAudio$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentThoughtStreamingEventAudio' from JSON`,
+    (x) => Audio$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Audio' from JSON`,
   );
 }
 
@@ -478,15 +474,12 @@ export const AgentThoughtStreamingEventMessage$inboundSchema: z.ZodType<
 > = z.object({
   content: z.nullable(z.string()).optional(),
   refusal: z.nullable(z.string()).optional(),
-  tool_calls: z.array(
-    z.lazy(() => AgentThoughtStreamingEventToolCalls$inboundSchema),
-  ).optional(),
+  tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
   role: AgentThoughtStreamingEventDataRole$inboundSchema.optional(),
   reasoning: z.nullable(z.string()).optional(),
   reasoning_signature: z.nullable(z.string()).optional(),
   redacted_reasoning: z.string().optional(),
-  audio: z.nullable(z.lazy(() => AgentThoughtStreamingEventAudio$inboundSchema))
-    .optional(),
+  audio: z.nullable(z.lazy(() => Audio$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
@@ -527,28 +520,25 @@ export function topLogprobsFromJSON(
 }
 
 /** @internal */
-export const AgentThoughtStreamingEventContent$inboundSchema: z.ZodType<
-  AgentThoughtStreamingEventContent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  top_logprobs: z.array(z.lazy(() => TopLogprobs$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "top_logprobs": "topLogprobs",
+export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+    top_logprobs: z.array(z.lazy(() => TopLogprobs$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_logprobs": "topLogprobs",
+    });
   });
-});
 
-export function agentThoughtStreamingEventContentFromJSON(
+export function contentFromJSON(
   jsonString: string,
-): SafeParseResult<AgentThoughtStreamingEventContent, SDKValidationError> {
+): SafeParseResult<Content, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => AgentThoughtStreamingEventContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentThoughtStreamingEventContent' from JSON`,
+    (x) => Content$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content' from JSON`,
   );
 }
 
@@ -605,9 +595,7 @@ export const Logprobs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.nullable(
-    z.array(z.lazy(() => AgentThoughtStreamingEventContent$inboundSchema)),
-  ),
+  content: z.nullable(z.array(z.lazy(() => Content$inboundSchema))),
   refusal: z.nullable(z.array(z.lazy(() => Refusal$inboundSchema))),
 });
 

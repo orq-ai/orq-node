@@ -1,23 +1,21 @@
 # OneNin
 
+Not in
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { OneNin } from "@orq-ai/node/models/components";
+
+let value: OneNin = {
+  nin: [
+    true,
+  ],
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `nin`              | *components.Nin*[] | :heavy_check_mark: | N/A                |
