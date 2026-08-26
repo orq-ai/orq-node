@@ -495,6 +495,8 @@ export const DeploymentsProvider = {
   Fireworks: "fireworks",
   Baseten: "baseten",
   Reson8: "reson8",
+  Meta: "meta",
+  Greenpt: "greenpt",
   Slack: "slack",
   Orq: "orq",
 } as const;

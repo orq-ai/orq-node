@@ -14,6 +14,8 @@ let value: PricingVariant = {
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `audioInput`                                         | [components.Price](../../models/components/price.md) | :heavy_minus_sign:                                   | N/A                                                  |
+| `audioOutput`                                        | [components.Price](../../models/components/price.md) | :heavy_minus_sign:                                   | N/A                                                  |
 | `cacheRead`                                          | [components.Price](../../models/components/price.md) | :heavy_minus_sign:                                   | N/A                                                  |
 | `cacheWrite1h`                                       | [components.Price](../../models/components/price.md) | :heavy_minus_sign:                                   | N/A                                                  |
 | `cacheWrite5m`                                       | [components.Price](../../models/components/price.md) | :heavy_minus_sign:                                   | N/A                                                  |

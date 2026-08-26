@@ -103,6 +103,7 @@ export type ModelMetadata = {
   supportsDistillation?: boolean | undefined;
   supportsExtendedThinking?: boolean | undefined;
   supportsFineTuning?: boolean | undefined;
+  supportsGoogleRealtimeApi?: boolean | undefined;
   supportsImageEdit?: boolean | undefined;
   supportsImageInput?: boolean | undefined;
   supportsImageOutput?: boolean | undefined;
@@ -234,6 +235,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_distillation: z.boolean().optional(),
   supports_extended_thinking: z.boolean().optional(),
   supports_fine_tuning: z.boolean().optional(),
+  supports_google_realtime_api: z.boolean().optional(),
   supports_image_edit: z.boolean().optional(),
   supports_image_input: z.boolean().optional(),
   supports_image_output: z.boolean().optional(),
@@ -357,6 +359,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_distillation": "supportsDistillation",
     "supports_extended_thinking": "supportsExtendedThinking",
     "supports_fine_tuning": "supportsFineTuning",
+    "supports_google_realtime_api": "supportsGoogleRealtimeApi",
     "supports_image_edit": "supportsImageEdit",
     "supports_image_input": "supportsImageInput",
     "supports_image_output": "supportsImageOutput",
@@ -485,6 +488,7 @@ export type ModelMetadata$Outbound = {
   supports_distillation?: boolean | undefined;
   supports_extended_thinking?: boolean | undefined;
   supports_fine_tuning?: boolean | undefined;
+  supports_google_realtime_api?: boolean | undefined;
   supports_image_edit?: boolean | undefined;
   supports_image_input?: boolean | undefined;
   supports_image_output?: boolean | undefined;
@@ -616,6 +620,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsDistillation: z.boolean().optional(),
   supportsExtendedThinking: z.boolean().optional(),
   supportsFineTuning: z.boolean().optional(),
+  supportsGoogleRealtimeApi: z.boolean().optional(),
   supportsImageEdit: z.boolean().optional(),
   supportsImageInput: z.boolean().optional(),
   supportsImageOutput: z.boolean().optional(),
@@ -739,6 +744,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsDistillation: "supports_distillation",
     supportsExtendedThinking: "supports_extended_thinking",
     supportsFineTuning: "supports_fine_tuning",
+    supportsGoogleRealtimeApi: "supports_google_realtime_api",
     supportsImageEdit: "supports_image_edit",
     supportsImageInput: "supports_image_input",
     supportsImageOutput: "supports_image_output",
