@@ -4,128 +4,18 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateAnnotationQueueRequestBody = {
-  /**
-   * The display name of the annotation queue
-   */
-  displayName?: string | undefined;
-  /**
-   * The description of the annotation queue
-   */
-  description?: string | undefined;
-  /**
-   * The project ID. When set, human reviews are resolved from the project automatically
-   */
-  projectId?: string | undefined;
-  /**
-   * Legacy: update manually selected human review IDs. Only allowed when project_id is not set
-   */
-  humanReviewIds?: Array<string> | undefined;
-};
+import * as components from "../components/index.js";
 
 export type UpdateAnnotationQueueRequest = {
   annotationQueueId: string;
-  requestBody?: UpdateAnnotationQueueRequestBody | undefined;
+  updateAnnotationQueueRequest: components.UpdateAnnotationQueueRequest;
 };
-
-export type UpdateAnnotationQueueMetadata = {
-  /**
-   * The number of items in the annotation queue
-   */
-  itemsCount: number;
-};
-
-/**
- * Annotation queue updated
- */
-export type UpdateAnnotationQueueResponseBody = {
-  /**
-   * The unique identifier of the annotation queue
-   */
-  id: string;
-  /**
-   * The display name of the annotation queue
-   */
-  displayName: string;
-  /**
-   * The description of the annotation queue
-   */
-  description: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  /**
-   * The project ID. When set, human reviews are resolved from the project automatically
-   */
-  projectId?: string | undefined;
-  /**
-   * Legacy: manually selected human review IDs. Used only when project_id is not set
-   */
-  humanReviewIds: Array<string>;
-  metadata: UpdateAnnotationQueueMetadata;
-  /**
-   * The id of the user who created the resource
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The id of the user who last updated the resource
-   */
-  updatedById?: string | null | undefined;
-  /**
-   * The date and time the resource was created
-   */
-  created?: Date | undefined;
-  /**
-   * The date and time the resource was last updated
-   */
-  updated: Date;
-};
-
-/** @internal */
-export type UpdateAnnotationQueueRequestBody$Outbound = {
-  display_name?: string | undefined;
-  description?: string | undefined;
-  project_id?: string | undefined;
-  human_review_ids?: Array<string> | undefined;
-};
-
-/** @internal */
-export const UpdateAnnotationQueueRequestBody$outboundSchema: z.ZodType<
-  UpdateAnnotationQueueRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateAnnotationQueueRequestBody
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  projectId: z.string().optional(),
-  humanReviewIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-    humanReviewIds: "human_review_ids",
-  });
-});
-
-export function updateAnnotationQueueRequestBodyToJSON(
-  updateAnnotationQueueRequestBody: UpdateAnnotationQueueRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateAnnotationQueueRequestBody$outboundSchema.parse(
-      updateAnnotationQueueRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type UpdateAnnotationQueueRequest$Outbound = {
   annotation_queue_id: string;
-  RequestBody?: UpdateAnnotationQueueRequestBody$Outbound | undefined;
+  UpdateAnnotationQueueRequest:
+    components.UpdateAnnotationQueueRequest$Outbound;
 };
 
 /** @internal */
@@ -135,12 +25,12 @@ export const UpdateAnnotationQueueRequest$outboundSchema: z.ZodType<
   UpdateAnnotationQueueRequest
 > = z.object({
   annotationQueueId: z.string(),
-  requestBody: z.lazy(() => UpdateAnnotationQueueRequestBody$outboundSchema)
-    .optional(),
+  updateAnnotationQueueRequest:
+    components.UpdateAnnotationQueueRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     annotationQueueId: "annotation_queue_id",
-    requestBody: "RequestBody",
+    updateAnnotationQueueRequest: "UpdateAnnotationQueueRequest",
   });
 });
 
@@ -151,70 +41,5 @@ export function updateAnnotationQueueRequestToJSON(
     UpdateAnnotationQueueRequest$outboundSchema.parse(
       updateAnnotationQueueRequest,
     ),
-  );
-}
-
-/** @internal */
-export const UpdateAnnotationQueueMetadata$inboundSchema: z.ZodType<
-  UpdateAnnotationQueueMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  items_count: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "items_count": "itemsCount",
-  });
-});
-
-export function updateAnnotationQueueMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAnnotationQueueMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAnnotationQueueMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAnnotationQueueMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateAnnotationQueueResponseBody$inboundSchema: z.ZodType<
-  UpdateAnnotationQueueResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  workspace_id: z.string(),
-  project_id: z.string().optional(),
-  human_review_ids: z.array(z.string()),
-  metadata: z.lazy(() => UpdateAnnotationQueueMetadata$inboundSchema),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated: z.string().datetime({ offset: true }).default(
-    "2026-08-26T13:26:42.563Z",
-  ).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "workspace_id": "workspaceId",
-    "project_id": "projectId",
-    "human_review_ids": "humanReviewIds",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function updateAnnotationQueueResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAnnotationQueueResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAnnotationQueueResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAnnotationQueueResponseBody' from JSON`,
   );
 }

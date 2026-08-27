@@ -182,7 +182,7 @@ export type Engine = ClosedEnum<typeof Engine>;
 /**
  * Configuration options for the agent invocation
  */
-export type Configuration = {
+export type AgentResponseRequestConfiguration = {
   /**
    * Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status.
    */
@@ -244,7 +244,7 @@ export type AgentResponseRequest = {
   /**
    * Configuration options for the agent invocation
    */
-  configuration?: Configuration | undefined;
+  configuration?: AgentResponseRequestConfiguration | undefined;
   /**
    * If true, returns immediately without waiting for completion. If false (default), waits until the agent becomes inactive or errors.
    */
@@ -469,21 +469,27 @@ export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> = z
   .nativeEnum(Engine);
 
 /** @internal */
-export type Configuration$Outbound = {
+export type AgentResponseRequestConfiguration$Outbound = {
   blocking: boolean;
 };
 
 /** @internal */
-export const Configuration$outboundSchema: z.ZodType<
-  Configuration$Outbound,
+export const AgentResponseRequestConfiguration$outboundSchema: z.ZodType<
+  AgentResponseRequestConfiguration$Outbound,
   z.ZodTypeDef,
-  Configuration
+  AgentResponseRequestConfiguration
 > = z.object({
   blocking: z.boolean().default(false),
 });
 
-export function configurationToJSON(configuration: Configuration): string {
-  return JSON.stringify(Configuration$outboundSchema.parse(configuration));
+export function agentResponseRequestConfigurationToJSON(
+  agentResponseRequestConfiguration: AgentResponseRequestConfiguration,
+): string {
+  return JSON.stringify(
+    AgentResponseRequestConfiguration$outboundSchema.parse(
+      agentResponseRequestConfiguration,
+    ),
+  );
 }
 
 /** @internal */
@@ -519,7 +525,7 @@ export type AgentResponseRequest$Outbound = {
   memory?: AgentResponseRequestMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   engine?: string | undefined;
-  configuration?: Configuration$Outbound | undefined;
+  configuration?: AgentResponseRequestConfiguration$Outbound | undefined;
   background: boolean;
   stream: boolean;
   conversation?: Conversation$Outbound | undefined;
@@ -541,7 +547,8 @@ export const AgentResponseRequest$outboundSchema: z.ZodType<
   memory: z.lazy(() => AgentResponseRequestMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   engine: Engine$outboundSchema.optional(),
-  configuration: z.lazy(() => Configuration$outboundSchema).optional(),
+  configuration: z.lazy(() => AgentResponseRequestConfiguration$outboundSchema)
+    .optional(),
   background: z.boolean().default(false),
   stream: z.boolean().default(false),
   conversation: z.lazy(() => Conversation$outboundSchema).optional(),

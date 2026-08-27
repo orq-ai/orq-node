@@ -4,75 +4,22 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export const Sort = {
-  Asc: "asc",
-  Desc: "desc",
-} as const;
-export type Sort = ClosedEnum<typeof Sort>;
 
 export type GetEvalsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
+   * Page size, 1-200. Unset uses the server default (10).
    */
   limit?: number | undefined;
-  /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
-   */
   startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
-   */
   endingBefore?: string | undefined;
   search?: string | undefined;
-  sort?: Sort | undefined;
+  sort?: string | undefined;
   projectId?: string | undefined;
 };
 
-export const ObjectT = {
-  List: "list",
-} as const;
-export type ObjectT = ClosedEnum<typeof ObjectT>;
-
-export type Data =
-  | components.EvaluatorResponseLlm
-  | components.EvaluatorResponseJsonSchema
-  | components.EvaluatorResponseHttp
-  | components.EvaluatorResponsePython
-  | components.EvaluatorResponseFunction
-  | components.EvaluatorResponseRagas
-  | components.EvaluatorResponseTypescript;
-
-/**
- * Returns a list of evals
- */
-export type GetEvalsResponseBody = {
-  object: ObjectT;
-  data: Array<
-    | components.EvaluatorResponseLlm
-    | components.EvaluatorResponseJsonSchema
-    | components.EvaluatorResponseHttp
-    | components.EvaluatorResponsePython
-    | components.EvaluatorResponseFunction
-    | components.EvaluatorResponseRagas
-    | components.EvaluatorResponseTypescript
-  >;
-  hasMore: boolean;
-};
-
-/** @internal */
-export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
-  Sort,
-);
-
 /** @internal */
 export type GetEvalsRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   search?: string | undefined;
@@ -86,11 +33,11 @@ export const GetEvalsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEvalsRequest
 > = z.object({
-  limit: z.number().int().default(10),
+  limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   search: z.string().optional(),
-  sort: Sort$outboundSchema.optional(),
+  sort: z.string().optional(),
   projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -104,65 +51,4 @@ export function getEvalsRequestToJSON(
   getEvalsRequest: GetEvalsRequest,
 ): string {
   return JSON.stringify(GetEvalsRequest$outboundSchema.parse(getEvalsRequest));
-}
-
-/** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
-
-/** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .union([
-    components.EvaluatorResponseLlm$inboundSchema,
-    components.EvaluatorResponseJsonSchema$inboundSchema,
-    components.EvaluatorResponseHttp$inboundSchema,
-    components.EvaluatorResponsePython$inboundSchema,
-    components.EvaluatorResponseFunction$inboundSchema,
-    components.EvaluatorResponseRagas$inboundSchema,
-    components.EvaluatorResponseTypescript$inboundSchema,
-  ]);
-
-export function dataFromJSON(
-  jsonString: string,
-): SafeParseResult<Data, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Data$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalsResponseBody$inboundSchema: z.ZodType<
-  GetEvalsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: ObjectT$inboundSchema,
-  data: z.array(
-    z.union([
-      components.EvaluatorResponseLlm$inboundSchema,
-      components.EvaluatorResponseJsonSchema$inboundSchema,
-      components.EvaluatorResponseHttp$inboundSchema,
-      components.EvaluatorResponsePython$inboundSchema,
-      components.EvaluatorResponseFunction$inboundSchema,
-      components.EvaluatorResponseRagas$inboundSchema,
-      components.EvaluatorResponseTypescript$inboundSchema,
-    ]),
-  ),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function getEvalsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalsResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEvalsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalsResponseBody' from JSON`,
-  );
 }

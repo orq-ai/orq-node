@@ -14,6 +14,12 @@ import {
   ApiKeyBudgetScope$outboundSchema,
 } from "./apikeybudgetscope.js";
 import {
+  FactoryBudgetScope,
+  FactoryBudgetScope$inboundSchema,
+  FactoryBudgetScope$Outbound,
+  FactoryBudgetScope$outboundSchema,
+} from "./factorybudgetscope.js";
+import {
   IdentityBudgetScope,
   IdentityBudgetScope$inboundSchema,
   IdentityBudgetScope$Outbound,
@@ -48,7 +54,7 @@ import {
  * BudgetScope is a closed oneof. Exactly one variant must be set. The
  *
  * @remarks
- *  six variants are ordered by enforcement precedence (most specific to
+ *  variants are ordered by enforcement precedence (most specific to
  *  most general) and mirror the BudgetScopeKind filter enum.
  */
 export type BudgetScope = {
@@ -89,6 +95,13 @@ export type BudgetScope = {
    *  models), rather than an internal identifier.
    */
   model?: ModelBudgetScope | undefined;
+  /**
+   * Per-factory cap. Matches requests whose api key carries the label
+   *
+   * @remarks
+   *  `factory=<factory_id>` (keys minted for agent sessions of that factory).
+   */
+  factory?: FactoryBudgetScope | undefined;
 };
 
 /** @internal */
@@ -103,6 +116,7 @@ export const BudgetScope$inboundSchema: z.ZodType<
   api_key: ApiKeyBudgetScope$inboundSchema.optional(),
   provider: ProviderBudgetScope$inboundSchema.optional(),
   model: ModelBudgetScope$inboundSchema.optional(),
+  factory: FactoryBudgetScope$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "api_key": "apiKey",
@@ -116,6 +130,7 @@ export type BudgetScope$Outbound = {
   api_key?: ApiKeyBudgetScope$Outbound | undefined;
   provider?: ProviderBudgetScope$Outbound | undefined;
   model?: ModelBudgetScope$Outbound | undefined;
+  factory?: FactoryBudgetScope$Outbound | undefined;
 };
 
 /** @internal */
@@ -130,6 +145,7 @@ export const BudgetScope$outboundSchema: z.ZodType<
   apiKey: ApiKeyBudgetScope$outboundSchema.optional(),
   provider: ProviderBudgetScope$outboundSchema.optional(),
   model: ModelBudgetScope$outboundSchema.optional(),
+  factory: FactoryBudgetScope$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     apiKey: "api_key",

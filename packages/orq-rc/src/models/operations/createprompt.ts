@@ -1019,24 +1019,20 @@ export const CreatePromptFormat = {
  */
 export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
 
-export const CreatePromptResponseFormat6 = {
+export const ResponseFormat6 = {
   Json: "json",
   Text: "text",
   Srt: "srt",
   VerboseJson: "verbose_json",
   Vtt: "vtt",
 } as const;
-export type CreatePromptResponseFormat6 = ClosedEnum<
-  typeof CreatePromptResponseFormat6
->;
+export type ResponseFormat6 = ClosedEnum<typeof ResponseFormat6>;
 
-export const CreatePromptResponseFormat5 = {
+export const ResponseFormat5 = {
   Url: "url",
   Base64Json: "base64_json",
 } as const;
-export type CreatePromptResponseFormat5 = ClosedEnum<
-  typeof CreatePromptResponseFormat5
->;
+export type ResponseFormat5 = ClosedEnum<typeof ResponseFormat5>;
 
 export const CreatePromptResponseFormat4 = {
   Mp3: "mp3",
@@ -1119,8 +1115,8 @@ export type CreatePromptPromptsResponseResponseFormat =
   | CreatePromptResponseFormat2
   | CreatePromptResponseFormat3
   | CreatePromptResponseFormat4
-  | CreatePromptResponseFormat5
-  | CreatePromptResponseFormat6;
+  | ResponseFormat5
+  | ResponseFormat6;
 
 /**
  * Create a cache control breakpoint. Accepts only the value "ephemeral".
@@ -1330,8 +1326,8 @@ export type ModelParameters = {
     | CreatePromptResponseFormat2
     | CreatePromptResponseFormat3
     | CreatePromptResponseFormat4
-    | CreatePromptResponseFormat5
-    | CreatePromptResponseFormat6
+    | ResponseFormat5
+    | ResponseFormat6
     | null
     | undefined;
   /**
@@ -1404,6 +1400,7 @@ export const Provider = {
   Baseten: "baseten",
   Reson8: "reson8",
   Meta: "meta",
+  Greenpt: "greenpt",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -4025,14 +4022,14 @@ export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreatePromptFormat);
 
 /** @internal */
-export const CreatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormat6
-> = z.nativeEnum(CreatePromptResponseFormat6);
+export const ResponseFormat6$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat6
+> = z.nativeEnum(ResponseFormat6);
 
 /** @internal */
-export const CreatePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptResponseFormat5
-> = z.nativeEnum(CreatePromptResponseFormat5);
+export const ResponseFormat5$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormat5
+> = z.nativeEnum(ResponseFormat5);
 
 /** @internal */
 export const CreatePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
@@ -4170,8 +4167,8 @@ export const CreatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
   z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
   CreatePromptResponseFormat4$inboundSchema,
-  CreatePromptResponseFormat5$inboundSchema,
-  CreatePromptResponseFormat6$inboundSchema,
+  ResponseFormat5$inboundSchema,
+  ResponseFormat6$inboundSchema,
 ]);
 
 export function createPromptPromptsResponseResponseFormatFromJSON(
@@ -4279,8 +4276,8 @@ export const ModelParameters$inboundSchema: z.ZodType<
       z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
       z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
       CreatePromptResponseFormat4$inboundSchema,
-      CreatePromptResponseFormat5$inboundSchema,
-      CreatePromptResponseFormat6$inboundSchema,
+      ResponseFormat5$inboundSchema,
+      ResponseFormat6$inboundSchema,
     ]),
   ).optional(),
   cacheControl: z.nullable(

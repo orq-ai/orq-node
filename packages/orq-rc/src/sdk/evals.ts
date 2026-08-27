@@ -6,6 +6,7 @@ import { evalsAll } from "../funcs/evalsAll.js";
 import { evalsCreate } from "../funcs/evalsCreate.js";
 import { evalsDelete } from "../funcs/evalsDelete.js";
 import { evalsGet } from "../funcs/evalsGet.js";
+import { evalsGetVersion } from "../funcs/evalsGetVersion.js";
 import { evalsInvoke } from "../funcs/evalsInvoke.js";
 import { evalsListVersions } from "../funcs/evalsListVersions.js";
 import { evalsUpdate } from "../funcs/evalsUpdate.js";
@@ -24,7 +25,7 @@ export class Evals extends ClientSDK {
   async all(
     request?: operations.GetEvalsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GetEvalsResponseBody> {
+  ): Promise<components.ListEvaluatorsResponse> {
     return unwrapAsync(evalsAll(
       this,
       request,
@@ -39,9 +40,9 @@ export class Evals extends ClientSDK {
    * Create a new evaluator in the workspace.
    */
   async create(
-    request?: operations.CreateEvalRequestBody | undefined,
+    request: operations.CreateEvalRequestBody,
     options?: RequestOptions,
-  ): Promise<operations.CreateEvalResponseBody> {
+  ): Promise<components.EvaluatorDocumentResponse> {
     return unwrapAsync(evalsCreate(
       this,
       request,
@@ -58,25 +59,8 @@ export class Evals extends ClientSDK {
   async get(
     request: operations.GetEvalRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetEvalResponseBody> {
+  ): Promise<components.EvaluatorDocumentResponse> {
     return unwrapAsync(evalsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update an Evaluator
-   *
-   * @remarks
-   * Update an evaluator by ID with the provided fields.
-   */
-  async update(
-    request: operations.UpdateEvalRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateEvalResponseBody> {
-    return unwrapAsync(evalsUpdate(
       this,
       request,
       options,
@@ -92,8 +76,59 @@ export class Evals extends ClientSDK {
   async delete(
     request: operations.DeleteEvalRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<components.DeleteEvaluatorResponse> {
     return unwrapAsync(evalsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update an Evaluator
+   *
+   * @remarks
+   * Update an evaluator by ID with the provided fields.
+   */
+  async update(
+    request: operations.UpdateEvalRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvaluatorDocumentResponse> {
+    return unwrapAsync(evalsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List evaluator versions
+   *
+   * @remarks
+   * Returns version history for a specific evaluator.
+   */
+  async listVersions(
+    request: operations.ListEvalVersionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListEvaluatorVersionsResponse> {
+    return unwrapAsync(evalsListVersions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get evaluator version
+   *
+   * @remarks
+   * Returns a specific version of an evaluator.
+   */
+  async getVersion(
+    request: operations.GetEvalVersionRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetEvaluatorVersionResponse> {
+    return unwrapAsync(evalsGetVersion(
       this,
       request,
       options,
@@ -111,23 +146,6 @@ export class Evals extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.InvokeEvaluatorResponse> {
     return unwrapAsync(evalsInvoke(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * List evaluator versions
-   *
-   * @remarks
-   * Returns version history for a specific evaluator
-   */
-  async listVersions(
-    request: operations.GetV2EvaluatorsIdVersionsRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetV2EvaluatorsIdVersionsResponseBody> {
-    return unwrapAsync(evalsListVersions(
       this,
       request,
       options,

@@ -7,7 +7,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({});
+  const result = await orq.deployments.list({});
 
   console.log(result);
 }

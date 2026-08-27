@@ -46,11 +46,6 @@ import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
 
 export class Orq extends ClientSDK {
-  private _evals?: Evals;
-  get evals(): Evals {
-    return (this._evals ??= new Evals(this._options));
-  }
-
   private _deployments?: Deployments;
   get deployments(): Deployments {
     return (this._deployments ??= new Deployments(this._options));
@@ -96,11 +91,6 @@ export class Orq extends ClientSDK {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
   }
 
-  private _annotationQueues?: AnnotationQueues;
-  get annotationQueues(): AnnotationQueues {
-    return (this._annotationQueues ??= new AnnotationQueues(this._options));
-  }
-
   private _chunking?: Chunking;
   get chunking(): Chunking {
     return (this._chunking ??= new Chunking(this._options));
@@ -121,6 +111,11 @@ export class Orq extends ClientSDK {
     return (this._memoryStores ??= new MemoryStores(this._options));
   }
 
+  private _evals?: Evals;
+  get evals(): Evals {
+    return (this._evals ??= new Evals(this._options));
+  }
+
   private _pii?: Pii;
   get pii(): Pii {
     return (this._pii ??= new Pii(this._options));
@@ -139,6 +134,11 @@ export class Orq extends ClientSDK {
   private _alerts?: Alerts;
   get alerts(): Alerts {
     return (this._alerts ??= new Alerts(this._options));
+  }
+
+  private _annotationQueues?: AnnotationQueues;
+  get annotationQueues(): AnnotationQueues {
+    return (this._annotationQueues ??= new AnnotationQueues(this._options));
   }
 
   private _apiKeys?: ApiKeys;

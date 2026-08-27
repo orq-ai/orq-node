@@ -5,10 +5,10 @@ The metadata filter to apply to the search. Check the [Searching a Knowledge Bas
 
 ## Supported Types
 
-### `{ [k: string]: components.FilterBy1 }`
+### `{ [k: string]: components.One }`
 
 ```typescript
-const value: { [k: string]: components.FilterBy1 } = {};
+const value: { [k: string]: components.One } = {};
 ```
 
 ### `components.FilterByAnd`

@@ -9,6 +9,11 @@ import {
   PiiRedaction$Outbound,
   PiiRedaction$outboundSchema,
 } from "./piiredaction.js";
+import {
+  PolicyProfileIdList,
+  PolicyProfileIdList$Outbound,
+  PolicyProfileIdList$outboundSchema,
+} from "./policyprofileidlist.js";
 
 /**
  * UpdateWorkspaceSettingsRequest is a partial update: every field is optional
@@ -41,6 +46,7 @@ export type UpdateWorkspaceSettingsRequest = {
    *  replaces the stored pii_redaction object.
    */
   piiRedaction?: PiiRedaction | undefined;
+  defaultPolicyProfileIds?: PolicyProfileIdList | undefined;
 };
 
 /** @internal */
@@ -48,6 +54,7 @@ export type UpdateWorkspaceSettingsRequest$Outbound = {
   display_name?: string | undefined;
   enforce_enabled_models?: boolean | undefined;
   pii_redaction?: PiiRedaction$Outbound | undefined;
+  default_policy_profile_ids?: PolicyProfileIdList$Outbound | undefined;
 };
 
 /** @internal */
@@ -59,11 +66,13 @@ export const UpdateWorkspaceSettingsRequest$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   enforceEnabledModels: z.boolean().optional(),
   piiRedaction: PiiRedaction$outboundSchema.optional(),
+  defaultPolicyProfileIds: PolicyProfileIdList$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     enforceEnabledModels: "enforce_enabled_models",
     piiRedaction: "pii_redaction",
+    defaultPolicyProfileIds: "default_policy_profile_ids",
   });
 });
 

@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { evalsAll } from "@orq-ai/node/funcs/evalsAll.js";
+import { deploymentsList } from "@orq-ai/node/funcs/deploymentsList.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,12 +29,12 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await evalsAll(orq, {});
+  const res = await deploymentsList(orq, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("evalsAll failed:", res.error);
+    console.log("deploymentsList failed:", res.error);
   }
 }
 

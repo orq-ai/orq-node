@@ -4,89 +4,27 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAnnotationQueueItemsRequest = {
   annotationQueueId: string;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
+   * Optional. Number of items to return. Defaults to 10 and must be between 1 and 200.
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   * Cursor for forward pagination. Set to the `_id` of the last item from the previous page.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   * Cursor for backward pagination. Set to the `_id` of the first item from the previous page.
    */
   endingBefore?: string | undefined;
-};
-
-export const ListAnnotationQueueItemsObject = {
-  List: "list",
-} as const;
-export type ListAnnotationQueueItemsObject = ClosedEnum<
-  typeof ListAnnotationQueueItemsObject
->;
-
-export type Data2 = {
-  id: string;
-  /**
-   * The unique identifier of the annotation queue
-   */
-  annotationQueueId: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  /**
-   * The unique identifiers of the human reviews that have been used to annotate the item
-   */
-  usedHumanReviewIds?: Array<string> | undefined;
-  datapointId: string;
-  type: "datapoint";
-};
-
-export type Data1 = {
-  id: string;
-  /**
-   * The unique identifier of the annotation queue
-   */
-  annotationQueueId: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  /**
-   * The unique identifiers of the human reviews that have been used to annotate the item
-   */
-  usedHumanReviewIds?: Array<string> | undefined;
-  spanId: string;
-  /**
-   * The trace identifier this span belongs to
-   */
-  traceId?: string | undefined;
-  type: "span";
-};
-
-export type ListAnnotationQueueItemsData = Data1 | Data2;
-
-/**
- * Annotation queue items retrieved.
- */
-export type ListAnnotationQueueItemsResponseBody = {
-  object: ListAnnotationQueueItemsObject;
-  data: Array<Data1 | Data2>;
-  hasMore: boolean;
 };
 
 /** @internal */
 export type ListAnnotationQueueItemsRequest$Outbound = {
   annotation_queue_id: string;
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
 };
@@ -98,7 +36,7 @@ export const ListAnnotationQueueItemsRequest$outboundSchema: z.ZodType<
   ListAnnotationQueueItemsRequest
 > = z.object({
   annotationQueueId: z.string(),
-  limit: z.number().int().default(10),
+  limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -116,121 +54,5 @@ export function listAnnotationQueueItemsRequestToJSON(
     ListAnnotationQueueItemsRequest$outboundSchema.parse(
       listAnnotationQueueItemsRequest,
     ),
-  );
-}
-
-/** @internal */
-export const ListAnnotationQueueItemsObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListAnnotationQueueItemsObject
-> = z.nativeEnum(ListAnnotationQueueItemsObject);
-
-/** @internal */
-export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    annotation_queue_id: z.string(),
-    workspace_id: z.string(),
-    used_human_review_ids: z.array(z.string()).optional(),
-    datapoint_id: z.string(),
-    type: z.literal("datapoint"),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "annotation_queue_id": "annotationQueueId",
-      "workspace_id": "workspaceId",
-      "used_human_review_ids": "usedHumanReviewIds",
-      "datapoint_id": "datapointId",
-    });
-  });
-
-export function data2FromJSON(
-  jsonString: string,
-): SafeParseResult<Data2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Data2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data2' from JSON`,
-  );
-}
-
-/** @internal */
-export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    annotation_queue_id: z.string(),
-    workspace_id: z.string(),
-    used_human_review_ids: z.array(z.string()).optional(),
-    span_id: z.string(),
-    trace_id: z.string().optional(),
-    type: z.literal("span"),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "annotation_queue_id": "annotationQueueId",
-      "workspace_id": "workspaceId",
-      "used_human_review_ids": "usedHumanReviewIds",
-      "span_id": "spanId",
-      "trace_id": "traceId",
-    });
-  });
-
-export function data1FromJSON(
-  jsonString: string,
-): SafeParseResult<Data1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Data1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data1' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAnnotationQueueItemsData$inboundSchema: z.ZodType<
-  ListAnnotationQueueItemsData,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => Data1$inboundSchema),
-  z.lazy(() => Data2$inboundSchema),
-]);
-
-export function listAnnotationQueueItemsDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAnnotationQueueItemsData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAnnotationQueueItemsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAnnotationQueueItemsData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAnnotationQueueItemsResponseBody$inboundSchema: z.ZodType<
-  ListAnnotationQueueItemsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: ListAnnotationQueueItemsObject$inboundSchema,
-  data: z.array(
-    z.union([
-      z.lazy(() => Data1$inboundSchema),
-      z.lazy(() => Data2$inboundSchema),
-    ]),
-  ),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function listAnnotationQueueItemsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAnnotationQueueItemsResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAnnotationQueueItemsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAnnotationQueueItemsResponseBody' from JSON`,
   );
 }

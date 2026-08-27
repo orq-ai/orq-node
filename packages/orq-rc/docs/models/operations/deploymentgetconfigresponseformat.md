@@ -48,15 +48,15 @@ const value: operations.ResponseFormat3 = {
 const value: operations.ResponseFormat4 = "opus";
 ```
 
-### `operations.ResponseFormat5`
+### `operations.Five`
 
 ```typescript
-const value: operations.ResponseFormat5 = "base64_json";
+const value: operations.Five = "url";
 ```
 
-### `operations.ResponseFormat6`
+### `operations.Six`
 
 ```typescript
-const value: operations.ResponseFormat6 = "json";
+const value: operations.Six = "srt";
 ```
 

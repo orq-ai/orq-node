@@ -194,7 +194,7 @@ export type Plugins =
   | components.PIIRedactionPluginAuto
   | components.ResponseHealingPlugin;
 
-export type ModelConfigurationFallbacks = {
+export type Fallbacks = {
   /**
    * Fallback model identifier
    */
@@ -418,7 +418,7 @@ export type ParametersT = {
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
+  fallbacks?: Array<Fallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -444,7 +444,7 @@ export type ParametersT = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type ModelConfigurationRetry = {
+export type Retry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -472,7 +472,7 @@ export type ModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: ModelConfigurationRetry | undefined;
+  retry?: Retry | undefined;
 };
 
 /**
@@ -2780,27 +2780,21 @@ export function pluginsToJSON(plugins: Plugins): string {
 }
 
 /** @internal */
-export type ModelConfigurationFallbacks$Outbound = {
+export type Fallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
-  ModelConfigurationFallbacks$Outbound,
+export const Fallbacks$outboundSchema: z.ZodType<
+  Fallbacks$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationFallbacks
+  Fallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function modelConfigurationFallbacksToJSON(
-  modelConfigurationFallbacks: ModelConfigurationFallbacks,
-): string {
-  return JSON.stringify(
-    ModelConfigurationFallbacks$outboundSchema.parse(
-      modelConfigurationFallbacks,
-    ),
-  );
+export function fallbacksToJSON(fallbacks: Fallbacks): string {
+  return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
 }
 
 /** @internal */
@@ -2982,7 +2976,7 @@ export type ParametersT$Outbound = {
       | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
-  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
+  fallbacks?: Array<Fallbacks$Outbound> | undefined;
   cache?: Cache$Outbound | undefined;
   load_balancer?: LoadBalancer1$Outbound | undefined;
   timeout?: Timeout$Outbound | undefined;
@@ -3034,8 +3028,7 @@ export const ParametersT$outboundSchema: z.ZodType<
       components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
-  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
-    .optional(),
+  fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
   cache: z.lazy(() => Cache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => Timeout$outboundSchema).optional(),
@@ -3065,16 +3058,16 @@ export function parametersToJSON(parametersT: ParametersT): string {
 }
 
 /** @internal */
-export type ModelConfigurationRetry$Outbound = {
+export type Retry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const ModelConfigurationRetry$outboundSchema: z.ZodType<
-  ModelConfigurationRetry$Outbound,
+export const Retry$outboundSchema: z.ZodType<
+  Retry$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationRetry
+  Retry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3084,19 +3077,15 @@ export const ModelConfigurationRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function modelConfigurationRetryToJSON(
-  modelConfigurationRetry: ModelConfigurationRetry,
-): string {
-  return JSON.stringify(
-    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
-  );
+export function retryToJSON(retry: Retry): string {
+  return JSON.stringify(Retry$outboundSchema.parse(retry));
 }
 
 /** @internal */
 export type ModelConfiguration2$Outbound = {
   id: string;
   parameters?: ParametersT$Outbound | undefined;
-  retry?: ModelConfigurationRetry$Outbound | undefined;
+  retry?: Retry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3107,7 +3096,7 @@ export const ModelConfiguration2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
+  retry: z.lazy(() => Retry$outboundSchema).optional(),
 });
 
 export function modelConfiguration2ToJSON(

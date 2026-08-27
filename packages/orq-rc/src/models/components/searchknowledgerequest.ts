@@ -296,16 +296,7 @@ export type OneEq = {
   eq: string | number | boolean;
 };
 
-export type FilterBy1 =
-  | OneEq
-  | OneNe
-  | Gt
-  | Gte
-  | Lt
-  | Lte
-  | OneIn
-  | OneNin
-  | Exists;
+export type One = OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
 
 /**
  * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
@@ -314,7 +305,7 @@ export type FilterBy = FilterByAnd | FilterByOr | {
   [k: string]: OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
 };
 
-export type AgenticRagConfig2 = {
+export type Two = {
   /**
    * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
    */
@@ -355,9 +346,7 @@ export type AgenticRagConfig1 = {
 /**
  * Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
  */
-export type SearchKnowledgeRequestAgenticRagConfig =
-  | AgenticRagConfig2
-  | AgenticRagConfig1;
+export type SearchKnowledgeRequestAgenticRagConfig = Two | AgenticRagConfig1;
 
 /**
  * SearchKnowledgeRequest mirrors the existing public search body and adds the
@@ -396,7 +385,7 @@ export type SearchKnowledgeRequest = {
   /**
    * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
    */
-  agenticRagConfig?: AgenticRagConfig2 | AgenticRagConfig1 | null | undefined;
+  agenticRagConfig?: Two | AgenticRagConfig1 | null | undefined;
   /**
    * Override the stored retrieval configuration for this search. If not provided, the knowledge base configuration is used.
    */
@@ -1211,7 +1200,7 @@ export function oneEqToJSON(oneEq: OneEq): string {
 }
 
 /** @internal */
-export type FilterBy1$Outbound =
+export type One$Outbound =
   | OneEq$Outbound
   | OneNe$Outbound
   | Gt$Outbound
@@ -1223,24 +1212,21 @@ export type FilterBy1$Outbound =
   | Exists$Outbound;
 
 /** @internal */
-export const FilterBy1$outboundSchema: z.ZodType<
-  FilterBy1$Outbound,
-  z.ZodTypeDef,
-  FilterBy1
-> = z.union([
-  z.lazy(() => OneEq$outboundSchema),
-  z.lazy(() => OneNe$outboundSchema),
-  z.lazy(() => Gt$outboundSchema),
-  z.lazy(() => Gte$outboundSchema),
-  z.lazy(() => Lt$outboundSchema),
-  z.lazy(() => Lte$outboundSchema),
-  z.lazy(() => OneIn$outboundSchema),
-  z.lazy(() => OneNin$outboundSchema),
-  z.lazy(() => Exists$outboundSchema),
-]);
+export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
+  .union([
+    z.lazy(() => OneEq$outboundSchema),
+    z.lazy(() => OneNe$outboundSchema),
+    z.lazy(() => Gt$outboundSchema),
+    z.lazy(() => Gte$outboundSchema),
+    z.lazy(() => Lt$outboundSchema),
+    z.lazy(() => Lte$outboundSchema),
+    z.lazy(() => OneIn$outboundSchema),
+    z.lazy(() => OneNin$outboundSchema),
+    z.lazy(() => Exists$outboundSchema),
+  ]);
 
-export function filterBy1ToJSON(filterBy1: FilterBy1): string {
-  return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
+export function oneToJSON(one: One): string {
+  return JSON.stringify(One$outboundSchema.parse(one));
 }
 
 /** @internal */
@@ -1283,7 +1269,7 @@ export function filterByToJSON(filterBy: FilterBy): string {
 }
 
 /** @internal */
-export type AgenticRagConfig2$Outbound = {
+export type Two$Outbound = {
   model?: string | undefined;
   model_db_id: string;
   provider: string;
@@ -1291,28 +1277,21 @@ export type AgenticRagConfig2$Outbound = {
 };
 
 /** @internal */
-export const AgenticRagConfig2$outboundSchema: z.ZodType<
-  AgenticRagConfig2$Outbound,
-  z.ZodTypeDef,
-  AgenticRagConfig2
-> = z.object({
-  model: z.string().optional(),
-  modelDbId: z.string(),
-  provider: z.string(),
-  integrationId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    integrationId: "integration_id",
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
+  .object({
+    model: z.string().optional(),
+    modelDbId: z.string(),
+    provider: z.string(),
+    integrationId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelDbId: "model_db_id",
+      integrationId: "integration_id",
+    });
   });
-});
 
-export function agenticRagConfig2ToJSON(
-  agenticRagConfig2: AgenticRagConfig2,
-): string {
-  return JSON.stringify(
-    AgenticRagConfig2$outboundSchema.parse(agenticRagConfig2),
-  );
+export function twoToJSON(two: Two): string {
+  return JSON.stringify(Two$outboundSchema.parse(two));
 }
 
 /** @internal */
@@ -1350,7 +1329,7 @@ export function agenticRagConfig1ToJSON(
 
 /** @internal */
 export type SearchKnowledgeRequestAgenticRagConfig$Outbound =
-  | AgenticRagConfig2$Outbound
+  | Two$Outbound
   | AgenticRagConfig1$Outbound;
 
 /** @internal */
@@ -1359,7 +1338,7 @@ export const SearchKnowledgeRequestAgenticRagConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchKnowledgeRequestAgenticRagConfig
 > = z.union([
-  z.lazy(() => AgenticRagConfig2$outboundSchema),
+  z.lazy(() => Two$outboundSchema),
   z.lazy(() => AgenticRagConfig1$outboundSchema),
 ]);
 
@@ -1395,7 +1374,7 @@ export type SearchKnowledgeRequest$Outbound = {
   search_options?: SearchOptions$Outbound | undefined;
   rerank_config?: SearchRerankConfig$Outbound | undefined;
   agentic_rag_config?:
-    | AgenticRagConfig2$Outbound
+    | Two$Outbound
     | AgenticRagConfig1$Outbound
     | null
     | undefined;
@@ -1431,7 +1410,7 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
   rerankConfig: SearchRerankConfig$outboundSchema.optional(),
   agenticRagConfig: z.nullable(
     z.union([
-      z.lazy(() => AgenticRagConfig2$outboundSchema),
+      z.lazy(() => Two$outboundSchema),
       z.lazy(() => AgenticRagConfig1$outboundSchema),
     ]),
   ).optional(),

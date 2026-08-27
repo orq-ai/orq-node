@@ -4,18 +4,13 @@
 
 export * from "./apierror.js";
 export * from "./createagentschedule.js";
-export * from "./createeval.js";
 export * from "./createmoderation.js";
 export * from "./createtranscription.js";
 export * from "./createtranslation.js";
 export * from "./deleteagent.js";
 export * from "./deleteagentschedule.js";
-export * from "./deleteeval.js";
 export * from "./deleteprompt.js";
-export * from "./geteval.js";
-export * from "./getevals.js";
 export * from "./getpromptversion.js";
-export * from "./getv2evaluatorsidversions.js";
 export * from "./getv2toolstoolidversions.js";
 export * from "./getv2toolstoolidversionsversionid.js";
 export * from "./honoapierror.js";
@@ -34,6 +29,5 @@ export * from "./streamrunagent.js";
 export * from "./triggeragentschedule.js";
 export * from "./updateagent.js";
 export * from "./updateagentschedule.js";
-export * from "./updateeval.js";
 export * from "./updateprompt.js";
 export * from "./updatetool.js";

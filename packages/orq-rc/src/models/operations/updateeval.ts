@@ -4,396 +4,23 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CategoricalLabels = {
-  value: string;
-  description?: string | undefined;
-};
-
-export const Mode = {
-  Single: "single",
-  Jury: "jury",
-} as const;
-export type Mode = ClosedEnum<typeof Mode>;
-
-export type Retry = {
-  count?: number | undefined;
-  onCodes?: Array<number> | undefined;
-};
-
-export type Fallbacks = {
-  model: string;
-};
-
-export type Judges = {
-  model: string;
-  retry?: Retry | undefined;
-  fallbacks?: Array<Fallbacks> | undefined;
-};
-
-export type UpdateEvalRetry = {
-  count?: number | undefined;
-  onCodes?: Array<number> | undefined;
-};
-
-export type UpdateEvalFallbacks = {
-  model: string;
-};
-
-export type ReplacementJudges = {
-  model: string;
-  retry?: UpdateEvalRetry | undefined;
-  fallbacks?: Array<UpdateEvalFallbacks> | undefined;
-};
-
-export const TieValue = {
-  Tie: "Tie",
-} as const;
-export type TieValue = ClosedEnum<typeof TieValue>;
-
-export type Jury = {
-  judges: Array<Judges>;
-  replacementJudges?: Array<ReplacementJudges> | undefined;
-  minSuccessfulJudges?: number | undefined;
-  tieValue?: TieValue | undefined;
-};
-
-export const VersionIncrement = {
-  Major: "major",
-  Minor: "minor",
-  Patch: "patch",
-} as const;
-export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
-
-export type UpdateEvalRequestBody = {
-  /**
-   * Evaluator type. Optional on update — inferred from existing evaluator.
-   */
-  type?: string | undefined;
-  /**
-   * Legacy alternative to `project_id`. Project path. Optional on update — the evaluator keeps its current project when both are omitted. Mutually exclusive with `project_id`.
-   */
-  path?: string | undefined;
-  /**
-   * Unique identifier of the project that owns the evaluator, as returned by `GET /v2/projects`. Optional on update — the evaluator keeps its current project when omitted; supplying a different id moves it. Mutually exclusive with `path`.
-   */
-  projectId?: string | undefined;
-  key?: string | undefined;
-  description?: string | undefined;
-  prompt?: string | undefined;
-  outputType?: string | undefined;
-  categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<CategoricalLabels> | null | undefined;
-  datasetId?: string | null | undefined;
-  repetitions?: number | undefined;
-  mode?: Mode | undefined;
-  model?: string | undefined;
-  jury?: Jury | undefined;
-  schema?: string | undefined;
-  url?: string | undefined;
-  method?: string | undefined;
-  headers?: { [k: string]: string } | undefined;
-  payload?: { [k: string]: any } | undefined;
-  code?: string | undefined;
-  guardrailConfig?: any | undefined;
-  versionIncrement?: VersionIncrement | undefined;
-  versionDescription?: string | undefined;
-};
+export type UpdateEvalRequestBody = {};
 
 export type UpdateEvalRequest = {
   id: string;
-  requestBody?: UpdateEvalRequestBody | undefined;
-};
-
-/**
- * Successfully updated an eval
- */
-export type UpdateEvalResponseBody =
-  | components.EvaluatorResponseLlm
-  | components.EvaluatorResponseJsonSchema
-  | components.EvaluatorResponseHttp
-  | components.EvaluatorResponsePython
-  | components.EvaluatorResponseFunction
-  | components.EvaluatorResponseRagas
-  | components.EvaluatorResponseTypescript;
-
-/** @internal */
-export type CategoricalLabels$Outbound = {
-  value: string;
-  description?: string | undefined;
+  requestBody: UpdateEvalRequestBody;
 };
 
 /** @internal */
-export const CategoricalLabels$outboundSchema: z.ZodType<
-  CategoricalLabels$Outbound,
-  z.ZodTypeDef,
-  CategoricalLabels
-> = z.object({
-  value: z.string(),
-  description: z.string().optional(),
-});
-
-export function categoricalLabelsToJSON(
-  categoricalLabels: CategoricalLabels,
-): string {
-  return JSON.stringify(
-    CategoricalLabels$outboundSchema.parse(categoricalLabels),
-  );
-}
-
-/** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
-
-/** @internal */
-export type Retry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const Retry$outboundSchema: z.ZodType<
-  Retry$Outbound,
-  z.ZodTypeDef,
-  Retry
-> = z.object({
-  count: z.number().int().default(2),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function retryToJSON(retry: Retry): string {
-  return JSON.stringify(Retry$outboundSchema.parse(retry));
-}
-
-/** @internal */
-export type Fallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const Fallbacks$outboundSchema: z.ZodType<
-  Fallbacks$Outbound,
-  z.ZodTypeDef,
-  Fallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function fallbacksToJSON(fallbacks: Fallbacks): string {
-  return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
-}
-
-/** @internal */
-export type Judges$Outbound = {
-  model: string;
-  retry?: Retry$Outbound | undefined;
-  fallbacks?: Array<Fallbacks$Outbound> | undefined;
-};
-
-/** @internal */
-export const Judges$outboundSchema: z.ZodType<
-  Judges$Outbound,
-  z.ZodTypeDef,
-  Judges
-> = z.object({
-  model: z.string(),
-  retry: z.lazy(() => Retry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
-});
-
-export function judgesToJSON(judges: Judges): string {
-  return JSON.stringify(Judges$outboundSchema.parse(judges));
-}
-
-/** @internal */
-export type UpdateEvalRetry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const UpdateEvalRetry$outboundSchema: z.ZodType<
-  UpdateEvalRetry$Outbound,
-  z.ZodTypeDef,
-  UpdateEvalRetry
-> = z.object({
-  count: z.number().int().default(2),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function updateEvalRetryToJSON(
-  updateEvalRetry: UpdateEvalRetry,
-): string {
-  return JSON.stringify(UpdateEvalRetry$outboundSchema.parse(updateEvalRetry));
-}
-
-/** @internal */
-export type UpdateEvalFallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const UpdateEvalFallbacks$outboundSchema: z.ZodType<
-  UpdateEvalFallbacks$Outbound,
-  z.ZodTypeDef,
-  UpdateEvalFallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function updateEvalFallbacksToJSON(
-  updateEvalFallbacks: UpdateEvalFallbacks,
-): string {
-  return JSON.stringify(
-    UpdateEvalFallbacks$outboundSchema.parse(updateEvalFallbacks),
-  );
-}
-
-/** @internal */
-export type ReplacementJudges$Outbound = {
-  model: string;
-  retry?: UpdateEvalRetry$Outbound | undefined;
-  fallbacks?: Array<UpdateEvalFallbacks$Outbound> | undefined;
-};
-
-/** @internal */
-export const ReplacementJudges$outboundSchema: z.ZodType<
-  ReplacementJudges$Outbound,
-  z.ZodTypeDef,
-  ReplacementJudges
-> = z.object({
-  model: z.string(),
-  retry: z.lazy(() => UpdateEvalRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => UpdateEvalFallbacks$outboundSchema))
-    .optional(),
-});
-
-export function replacementJudgesToJSON(
-  replacementJudges: ReplacementJudges,
-): string {
-  return JSON.stringify(
-    ReplacementJudges$outboundSchema.parse(replacementJudges),
-  );
-}
-
-/** @internal */
-export const TieValue$outboundSchema: z.ZodNativeEnum<typeof TieValue> = z
-  .nativeEnum(TieValue);
-
-/** @internal */
-export type Jury$Outbound = {
-  judges: Array<Judges$Outbound>;
-  replacement_judges?: Array<ReplacementJudges$Outbound> | undefined;
-  min_successful_judges: number;
-  tie_value: string;
-};
-
-/** @internal */
-export const Jury$outboundSchema: z.ZodType<Jury$Outbound, z.ZodTypeDef, Jury> =
-  z.object({
-    judges: z.array(z.lazy(() => Judges$outboundSchema)),
-    replacementJudges: z.array(z.lazy(() => ReplacementJudges$outboundSchema))
-      .optional(),
-    minSuccessfulJudges: z.number().int().default(2),
-    tieValue: TieValue$outboundSchema.default("Tie"),
-  }).transform((v) => {
-    return remap$(v, {
-      replacementJudges: "replacement_judges",
-      minSuccessfulJudges: "min_successful_judges",
-      tieValue: "tie_value",
-    });
-  });
-
-export function juryToJSON(jury: Jury): string {
-  return JSON.stringify(Jury$outboundSchema.parse(jury));
-}
-
-/** @internal */
-export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
-  typeof VersionIncrement
-> = z.nativeEnum(VersionIncrement);
-
-/** @internal */
-export type UpdateEvalRequestBody$Outbound = {
-  type?: string | undefined;
-  path?: string | undefined;
-  project_id?: string | undefined;
-  key?: string | undefined;
-  description?: string | undefined;
-  prompt?: string | undefined;
-  output_type?: string | undefined;
-  categories?: Array<string> | null | undefined;
-  categorical_labels?: Array<CategoricalLabels$Outbound> | null | undefined;
-  dataset_id?: string | null | undefined;
-  repetitions?: number | undefined;
-  mode?: string | undefined;
-  model?: string | undefined;
-  jury?: Jury$Outbound | undefined;
-  schema?: string | undefined;
-  url?: string | undefined;
-  method?: string | undefined;
-  headers?: { [k: string]: string } | undefined;
-  payload?: { [k: string]: any } | undefined;
-  code?: string | undefined;
-  guardrail_config?: any | undefined;
-  versionIncrement?: string | undefined;
-  versionDescription?: string | undefined;
-};
+export type UpdateEvalRequestBody$Outbound = {};
 
 /** @internal */
 export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   UpdateEvalRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateEvalRequestBody
-> = z.object({
-  type: z.string().optional(),
-  path: z.string().optional(),
-  projectId: z.string().optional(),
-  key: z.string().optional(),
-  description: z.string().optional(),
-  prompt: z.string().optional(),
-  outputType: z.string().optional(),
-  categories: z.nullable(z.array(z.string())).optional(),
-  categoricalLabels: z.nullable(
-    z.array(z.lazy(() => CategoricalLabels$outboundSchema)),
-  ).optional(),
-  datasetId: z.nullable(z.string()).optional(),
-  repetitions: z.number().optional(),
-  mode: Mode$outboundSchema.optional(),
-  model: z.string().optional(),
-  jury: z.lazy(() => Jury$outboundSchema).optional(),
-  schema: z.string().optional(),
-  url: z.string().optional(),
-  method: z.string().optional(),
-  headers: z.record(z.string()).optional(),
-  payload: z.record(z.any()).optional(),
-  code: z.string().optional(),
-  guardrailConfig: z.any().optional(),
-  versionIncrement: VersionIncrement$outboundSchema.optional(),
-  versionDescription: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    outputType: "output_type",
-    categoricalLabels: "categorical_labels",
-    datasetId: "dataset_id",
-    guardrailConfig: "guardrail_config",
-  });
-});
+> = z.object({});
 
 export function updateEvalRequestBodyToJSON(
   updateEvalRequestBody: UpdateEvalRequestBody,
@@ -406,7 +33,7 @@ export function updateEvalRequestBodyToJSON(
 /** @internal */
 export type UpdateEvalRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateEvalRequestBody$Outbound | undefined;
+  RequestBody: UpdateEvalRequestBody$Outbound;
 };
 
 /** @internal */
@@ -416,7 +43,7 @@ export const UpdateEvalRequest$outboundSchema: z.ZodType<
   UpdateEvalRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateEvalRequestBody$outboundSchema).optional(),
+  requestBody: z.lazy(() => UpdateEvalRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",
@@ -428,30 +55,5 @@ export function updateEvalRequestToJSON(
 ): string {
   return JSON.stringify(
     UpdateEvalRequest$outboundSchema.parse(updateEvalRequest),
-  );
-}
-
-/** @internal */
-export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
-  UpdateEvalResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  components.EvaluatorResponseLlm$inboundSchema,
-  components.EvaluatorResponseJsonSchema$inboundSchema,
-  components.EvaluatorResponseHttp$inboundSchema,
-  components.EvaluatorResponsePython$inboundSchema,
-  components.EvaluatorResponseFunction$inboundSchema,
-  components.EvaluatorResponseRagas$inboundSchema,
-  components.EvaluatorResponseTypescript$inboundSchema,
-]);
-
-export function updateEvalResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateEvalResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateEvalResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalResponseBody' from JSON`,
   );
 }

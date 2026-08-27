@@ -22,12 +22,12 @@ export class AnnotationQueues extends ClientSDK {
    * List annotation queues
    *
    * @remarks
-   * Retrieves a paginated list of annotation queues for the current workspace. Results can be paginated using cursor-based pagination.
+   * Returns annotation queues in the workspace, newest first.
    */
   async list(
     request?: operations.ListAnnotationQueuesRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.ListAnnotationQueuesResponseBody> {
+  ): Promise<components.ListAnnotationQueuesResponse> {
     return unwrapAsync(annotationQueuesList(
       this,
       request,
@@ -39,12 +39,12 @@ export class AnnotationQueues extends ClientSDK {
    * Create an annotation queue
    *
    * @remarks
-   * Create a new annotation queue in the workspace.
+   * Creates an annotation queue in a project.
    */
   async create(
-    request?: operations.CreateAnnotationQueueRequestBody | undefined,
+    request: components.CreateAnnotationQueueRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateAnnotationQueueResponseBody> {
+  ): Promise<components.AnnotationQueue> {
     return unwrapAsync(annotationQueuesCreate(
       this,
       request,
@@ -56,30 +56,13 @@ export class AnnotationQueues extends ClientSDK {
    * Retrieve an annotation queue
    *
    * @remarks
-   * Retrieves a specific annotation queue by its unique identifier
+   * Retrieves an existing annotation queue by ID.
    */
   async retrieve(
     request: operations.RetrieveAnnotationQueueRequest,
     options?: RequestOptions,
-  ): Promise<operations.RetrieveAnnotationQueueResponseBody> {
+  ): Promise<components.AnnotationQueue> {
     return unwrapAsync(annotationQueuesRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Edit an annotation queue
-   *
-   * @remarks
-   * Update an annotation queue by ID with the provided fields.
-   */
-  async update(
-    request: operations.UpdateAnnotationQueueRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateAnnotationQueueResponseBody> {
-    return unwrapAsync(annotationQueuesUpdate(
       this,
       request,
       options,
@@ -90,12 +73,12 @@ export class AnnotationQueues extends ClientSDK {
    * Delete an annotation queue
    *
    * @remarks
-   * Delete an annotation queue and its items by ID.
+   * Deletes an annotation queue, its items, and the queue references stored on the annotated spans.
    */
   async delete(
     request: operations.DeleteAnnotationQueueRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<components.DeleteAnnotationQueueResponse> {
     return unwrapAsync(annotationQueuesDelete(
       this,
       request,
@@ -104,15 +87,32 @@ export class AnnotationQueues extends ClientSDK {
   }
 
   /**
-   * Delete all items
+   * Update an annotation queue
    *
    * @remarks
-   * Delete all items from an annotation queue. This action is irreversible.
+   * Partially updates an existing annotation queue. Setting `project_id` clears the legacy `human_review_ids` selection.
+   */
+  async update(
+    request: operations.UpdateAnnotationQueueRequest,
+    options?: RequestOptions,
+  ): Promise<components.AnnotationQueue> {
+    return unwrapAsync(annotationQueuesUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Clear an annotation queue
+   *
+   * @remarks
+   * Removes every item from the annotation queue without deleting the queue itself.
    */
   async clear(
     request: operations.ClearAnnotationQueueRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<components.ClearAnnotationQueueResponse> {
     return unwrapAsync(annotationQueuesClear(
       this,
       request,
@@ -124,12 +124,12 @@ export class AnnotationQueues extends ClientSDK {
    * Query items from an annotation queue
    *
    * @remarks
-   * Queries items from the specified annotation queue.
+   * Queries items from the specified annotation queue. Items whose span no longer exists are skipped.
    */
   async listItems(
     request: operations.ListAnnotationQueueItemsRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListAnnotationQueueItemsResponseBody> {
+  ): Promise<components.ListAnnotationQueueItemsResponse> {
     return unwrapAsync(annotationQueuesListItems(
       this,
       request,
@@ -141,12 +141,12 @@ export class AnnotationQueues extends ClientSDK {
    * Add items to an annotation queue
    *
    * @remarks
-   * Adds items to the specified annotation queue.
+   * Adds spans to the annotation queue. Spans already present are skipped; the response contains only the newly created items.
    */
   async addItems(
     request: operations.AddAnnotationQueueItemsRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.AddAnnotationQueueItemsResponseBody>> {
+  ): Promise<components.AddAnnotationQueueItemsResponse> {
     return unwrapAsync(annotationQueuesAddItems(
       this,
       request,
@@ -155,15 +155,15 @@ export class AnnotationQueues extends ClientSDK {
   }
 
   /**
-   * Remove annotation queue items
+   * Remove items from an annotation queue
    *
    * @remarks
-   * Removes items from the specified annotation queue.
+   * Removes the referenced spans from the annotation queue.
    */
   async removeItems(
     request: operations.RemoveAnnotationQueueItemsRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<components.RemoveAnnotationQueueItemsResponse> {
     return unwrapAsync(annotationQueuesRemoveItems(
       this,
       request,
@@ -175,12 +175,12 @@ export class AnnotationQueues extends ClientSDK {
    * Retrieve an annotation queue item
    *
    * @remarks
-   * Retrieve an annotation queue item. Each item is a pointer to a span with fully resolved span data.
+   * Retrieves an item from the specified annotation queue in its expanded form. An annotation queue item is a pointer to a span; this endpoint returns the fully resolved span the item references.
    */
   async retrieveItem(
     request: operations.RetrieveAnnotationQueueItemRequest,
     options?: RequestOptions,
-  ): Promise<components.PublicSpan> {
+  ): Promise<operations.RetrieveAnnotationQueueItemResponseBody> {
     return unwrapAsync(annotationQueuesRetrieveItem(
       this,
       request,

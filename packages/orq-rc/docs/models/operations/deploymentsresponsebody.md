@@ -11,11 +11,11 @@ let value: DeploymentsResponseBody = {
   object: "list",
   data: [
     {
-      id: "6176886f-5896-4931-856f-9710bf5ee7fd",
+      id: "9ab092b0-7aaa-47ec-ba5e-bc4ffa1aa96b",
       created: "<value>",
       updated: "<value>",
       key: "<key>",
-      description: "since snappy robust exaggerate unto",
+      description: "thankfully blacken considering phew footrest",
       promptConfig: {
         tools: [
           {
@@ -29,23 +29,23 @@ let value: DeploymentsResponseBody = {
             },
           },
         ],
-        model: "LeBaron",
-        modelType: "rerank",
+        model: "Grand Caravan",
+        modelType: "embedding",
         modelParameters: {},
-        provider: "google-ai",
+        provider: "mistral",
         messages: [],
       },
       version: "<value>",
     },
   ],
-  hasMore: false,
+  hasMore: true,
 };
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `object`                                                                     | [operations.DeploymentsObject](../../models/operations/deploymentsobject.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `data`                                                                       | [operations.DeploymentsData](../../models/operations/deploymentsdata.md)[]   | :heavy_check_mark:                                                           | N/A                                                                          |
-| `hasMore`                                                                    | *boolean*                                                                    | :heavy_check_mark:                                                           | N/A                                                                          |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `object`                                                 | [operations.ObjectT](../../models/operations/objectt.md) | :heavy_check_mark:                                       | N/A                                                      |
+| `data`                                                   | [operations.Data](../../models/operations/data.md)[]     | :heavy_check_mark:                                       | N/A                                                      |
+| `hasMore`                                                | *boolean*                                                | :heavy_check_mark:                                       | N/A                                                      |

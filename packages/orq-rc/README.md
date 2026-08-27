@@ -89,7 +89,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({});
+  const result = await orq.deployments.list({});
 
   console.log(result);
 }
@@ -119,7 +119,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({});
+  const result = await orq.deployments.list({});
 
   console.log(result);
 }
@@ -167,12 +167,12 @@ run();
 * [list](docs/sdks/annotationqueues/README.md#list) - List annotation queues
 * [create](docs/sdks/annotationqueues/README.md#create) - Create an annotation queue
 * [retrieve](docs/sdks/annotationqueues/README.md#retrieve) - Retrieve an annotation queue
-* [update](docs/sdks/annotationqueues/README.md#update) - Edit an annotation queue
 * [delete](docs/sdks/annotationqueues/README.md#delete) - Delete an annotation queue
-* [clear](docs/sdks/annotationqueues/README.md#clear) - Delete all items
+* [update](docs/sdks/annotationqueues/README.md#update) - Update an annotation queue
+* [clear](docs/sdks/annotationqueues/README.md#clear) - Clear an annotation queue
 * [listItems](docs/sdks/annotationqueues/README.md#listitems) - Query items from an annotation queue
 * [addItems](docs/sdks/annotationqueues/README.md#additems) - Add items to an annotation queue
-* [removeItems](docs/sdks/annotationqueues/README.md#removeitems) - Remove annotation queue items
+* [removeItems](docs/sdks/annotationqueues/README.md#removeitems) - Remove items from an annotation queue
 * [retrieveItem](docs/sdks/annotationqueues/README.md#retrieveitem) - Retrieve an annotation queue item
 
 ### [Annotations](docs/sdks/annotations/README.md)
@@ -226,10 +226,11 @@ run();
 * [all](docs/sdks/evals/README.md#all) - Get all Evaluators
 * [create](docs/sdks/evals/README.md#create) - Create an Evaluator
 * [get](docs/sdks/evals/README.md#get) - Retrieve an Evaluator
-* [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
-* [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
+* [update](docs/sdks/evals/README.md#update) - Update an Evaluator
 * [listVersions](docs/sdks/evals/README.md#listversions) - List evaluator versions
+* [getVersion](docs/sdks/evals/README.md#getversion) - Get evaluator version
+* [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
@@ -605,15 +606,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`alertsListTriggers`](docs/sdks/alerts/README.md#listtriggers) - List alert triggers
 - [`alertsUpdate`](docs/sdks/alerts/README.md#update) - Update an alert
 - [`annotationQueuesAddItems`](docs/sdks/annotationqueues/README.md#additems) - Add items to an annotation queue
-- [`annotationQueuesClear`](docs/sdks/annotationqueues/README.md#clear) - Delete all items
+- [`annotationQueuesClear`](docs/sdks/annotationqueues/README.md#clear) - Clear an annotation queue
 - [`annotationQueuesCreate`](docs/sdks/annotationqueues/README.md#create) - Create an annotation queue
 - [`annotationQueuesDelete`](docs/sdks/annotationqueues/README.md#delete) - Delete an annotation queue
 - [`annotationQueuesList`](docs/sdks/annotationqueues/README.md#list) - List annotation queues
 - [`annotationQueuesListItems`](docs/sdks/annotationqueues/README.md#listitems) - Query items from an annotation queue
-- [`annotationQueuesRemoveItems`](docs/sdks/annotationqueues/README.md#removeitems) - Remove annotation queue items
+- [`annotationQueuesRemoveItems`](docs/sdks/annotationqueues/README.md#removeitems) - Remove items from an annotation queue
 - [`annotationQueuesRetrieve`](docs/sdks/annotationqueues/README.md#retrieve) - Retrieve an annotation queue
 - [`annotationQueuesRetrieveItem`](docs/sdks/annotationqueues/README.md#retrieveitem) - Retrieve an annotation queue item
-- [`annotationQueuesUpdate`](docs/sdks/annotationqueues/README.md#update) - Edit an annotation queue
+- [`annotationQueuesUpdate`](docs/sdks/annotationqueues/README.md#update) - Update an annotation queue
 - [`annotationsCreate`](docs/sdks/annotations/README.md#create) - Annotate a span
 - [`annotationsDelete`](docs/sdks/annotations/README.md#delete) - Remove an annotation from a span
 - [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create a new API key
@@ -646,6 +647,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
 - [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 - [`evalsGet`](docs/sdks/evals/README.md#get) - Retrieve an Evaluator
+- [`evalsGetVersion`](docs/sdks/evals/README.md#getversion) - Get evaluator version
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 - [`evalsListVersions`](docs/sdks/evals/README.md#listversions) - List evaluator versions
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
@@ -1069,7 +1071,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({}, {
+  const result = await orq.deployments.list({}, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -1108,7 +1110,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({});
+  const result = await orq.deployments.list({});
 
   console.log(result);
 }
@@ -1143,7 +1145,7 @@ const orq = new Orq({
 
 async function run() {
   try {
-    const result = await orq.evals.all({});
+    const result = await orq.deployments.list({});
 
     console.log(result);
   } catch (error) {
@@ -1155,7 +1157,8 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.GetEvalsResponseBody) {
+      if (error instanceof errors.HonoApiError) {
+        console.log(error.data$.code); // string
         console.log(error.data$.message); // string
       }
     }
@@ -1170,7 +1173,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (41)</summary>
+<details><summary>Less common errors (34)</summary>
 
 <br />
 
@@ -1183,41 +1186,34 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 280 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 280 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 280 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 280 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 280 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 280 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 280 methods.*
-* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 280 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 280 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 280 methods.*
-* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 280 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 280 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 280 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 280 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 280 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 280 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 280 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 280 methods.*
-* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 280 methods.*
-* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 280 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 280 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 280 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 280 methods.*
-* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 280 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 281 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 281 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 281 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 281 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 281 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 281 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 281 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 281 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 281 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 281 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 281 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 281 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 281 methods.*
+* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 281 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 281 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 281 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 281 methods.*
+* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 281 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1240,7 +1236,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({});
+  const result = await orq.deployments.list({});
 
   console.log(result);
 }

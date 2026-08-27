@@ -47,15 +47,15 @@ const value: operations.CreatePromptResponseFormat3 = {
 const value: operations.CreatePromptResponseFormat4 = "flac";
 ```
 
-### `operations.CreatePromptResponseFormat5`
+### `operations.ResponseFormat5`
 
 ```typescript
-const value: operations.CreatePromptResponseFormat5 = "base64_json";
+const value: operations.ResponseFormat5 = "base64_json";
 ```
 
-### `operations.CreatePromptResponseFormat6`
+### `operations.ResponseFormat6`
 
 ```typescript
-const value: operations.CreatePromptResponseFormat6 = "text";
+const value: operations.ResponseFormat6 = "json";
 ```
 

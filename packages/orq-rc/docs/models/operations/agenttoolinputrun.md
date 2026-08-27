@@ -122,6 +122,7 @@ const value: components.CodeInterpreterToolInput = {
 ```typescript
 const value: components.FileSystemToolInput = {
   type: "file_system",
+  configuration: {},
 };
 ```
 

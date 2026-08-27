@@ -4,6 +4,34 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Whether the agent may only read this file system, or also write to it.
+ */
+export const AccessMode = {
+  ReadOnly: "read_only",
+  ReadWrite: "read_write",
+} as const;
+/**
+ * Whether the agent may only read this file system, or also write to it.
+ */
+export type AccessMode = ClosedEnum<typeof AccessMode>;
+
+export type Configuration = {
+  /**
+   * The id of the file system to attach.
+   */
+  fileSystemId?: string | undefined;
+  /**
+   * The key of the file system to attach.
+   */
+  fileSystemKey?: string | undefined;
+  /**
+   * Whether the agent may only read this file system, or also write to it.
+   */
+  accessMode?: AccessMode | undefined;
+};
 
 /**
  * Attaches a persistent file system to the agent, named by file_system_id or file_system_key in the configuration. The agent may only read it unless the configured access_mode is read_write.
@@ -14,17 +42,46 @@ export type FileSystemToolInput = {
    * Whether this tool requires approval before execution
    */
   requiresApproval?: boolean | undefined;
-  /**
-   * Static tool configuration set at design time. Merged over LLM-provided arguments at execution time.
-   */
-  configuration?: { [k: string]: any } | undefined;
+  configuration: Configuration;
 };
+
+/** @internal */
+export const AccessMode$outboundSchema: z.ZodNativeEnum<typeof AccessMode> = z
+  .nativeEnum(AccessMode);
+
+/** @internal */
+export type Configuration$Outbound = {
+  file_system_id?: string | undefined;
+  file_system_key?: string | undefined;
+  access_mode: string;
+};
+
+/** @internal */
+export const Configuration$outboundSchema: z.ZodType<
+  Configuration$Outbound,
+  z.ZodTypeDef,
+  Configuration
+> = z.object({
+  fileSystemId: z.string().optional(),
+  fileSystemKey: z.string().optional(),
+  accessMode: AccessMode$outboundSchema.default("read_only"),
+}).transform((v) => {
+  return remap$(v, {
+    fileSystemId: "file_system_id",
+    fileSystemKey: "file_system_key",
+    accessMode: "access_mode",
+  });
+});
+
+export function configurationToJSON(configuration: Configuration): string {
+  return JSON.stringify(Configuration$outboundSchema.parse(configuration));
+}
 
 /** @internal */
 export type FileSystemToolInput$Outbound = {
   type: "file_system";
   requires_approval?: boolean | undefined;
-  configuration?: { [k: string]: any } | undefined;
+  configuration: Configuration$Outbound;
 };
 
 /** @internal */
@@ -35,7 +92,7 @@ export const FileSystemToolInput$outboundSchema: z.ZodType<
 > = z.object({
   type: z.literal("file_system"),
   requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
+  configuration: z.lazy(() => Configuration$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requiresApproval: "requires_approval",

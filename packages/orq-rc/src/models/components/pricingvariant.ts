@@ -15,6 +15,8 @@ import {
 } from "./price.js";
 
 export type PricingVariant = {
+  audioInput?: Price | undefined;
+  audioOutput?: Price | undefined;
   cacheRead?: Price | undefined;
   cacheWrite1h?: Price | undefined;
   cacheWrite5m?: Price | undefined;
@@ -30,6 +32,8 @@ export const PricingVariant$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  audio_input: Price$inboundSchema.optional(),
+  audio_output: Price$inboundSchema.optional(),
   cache_read: Price$inboundSchema.optional(),
   cache_write_1h: Price$inboundSchema.optional(),
   cache_write_5m: Price$inboundSchema.optional(),
@@ -39,6 +43,8 @@ export const PricingVariant$inboundSchema: z.ZodType<
   when: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "audio_input": "audioInput",
+    "audio_output": "audioOutput",
     "cache_read": "cacheRead",
     "cache_write_1h": "cacheWrite1h",
     "cache_write_5m": "cacheWrite5m",
@@ -46,6 +52,8 @@ export const PricingVariant$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type PricingVariant$Outbound = {
+  audio_input?: Price$Outbound | undefined;
+  audio_output?: Price$Outbound | undefined;
   cache_read?: Price$Outbound | undefined;
   cache_write_1h?: Price$Outbound | undefined;
   cache_write_5m?: Price$Outbound | undefined;
@@ -61,6 +69,8 @@ export const PricingVariant$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PricingVariant
 > = z.object({
+  audioInput: Price$outboundSchema.optional(),
+  audioOutput: Price$outboundSchema.optional(),
   cacheRead: Price$outboundSchema.optional(),
   cacheWrite1h: Price$outboundSchema.optional(),
   cacheWrite5m: Price$outboundSchema.optional(),
@@ -70,6 +80,8 @@ export const PricingVariant$outboundSchema: z.ZodType<
   when: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    audioInput: "audio_input",
+    audioOutput: "audio_output",
     cacheRead: "cache_read",
     cacheWrite1h: "cache_write_1h",
     cacheWrite5m: "cache_write_5m",

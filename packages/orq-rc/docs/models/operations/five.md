@@ -5,13 +5,11 @@
 ```typescript
 import { Five } from "@orq-ai/node/models/operations";
 
-let value: Five = {
-  type: "contains_email",
-};
+let value: Five = "base64_json";
 ```
 
-## Fields
+## Values
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `type`             | *"contains_email"* | :heavy_check_mark: | N/A                |
+```typescript
+"url" | "base64_json"
+```
