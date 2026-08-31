@@ -9,18 +9,16 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * PiiRedactionConfig mirrors the workspace-default PII redaction plugin config
+ * PiiRedactionConfig mirrors the workspace-default PII redaction plugin
  *
  * @remarks
- *  (libs/go/models PIIRedactionPlugin / libs/models/gateway
- *  PIIRedactionPluginSchema). Every field is optional; the gateway applies its
- *  own defaults for unset fields.
+ *  configuration. Every field is optional; the gateway applies its own
+ *  defaults for unset fields.
  *
- *  The stored value is validated on write with the same
- *  models.PIIRedactionPlugin.Validate() the gateway runs per request. Without
- *  that, an invalid workspace default would 400 every gateway call for the
- *  workspace, since the default plugin is injected into each request and
- *  validated there.
+ *  The stored value is validated on write using the same rules the gateway
+ *  applies to live requests. Without that, an invalid workspace default
+ *  would 400 every gateway call for the workspace, since the default plugin
+ *  is injected into each request and validated there.
  */
 export type PiiRedactionConfig = {
   /**
