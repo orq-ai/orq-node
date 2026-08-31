@@ -8,6 +8,7 @@ import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
+import { AuditLogs } from "./auditlogs.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
@@ -42,6 +43,7 @@ import { SmartRouters } from "./smartrouters.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
+import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
 
@@ -146,6 +148,11 @@ export class Orq extends ClientSDK {
     return (this._apiKeys ??= new ApiKeys(this._options));
   }
 
+  private _auditLogs?: AuditLogs;
+  get auditLogs(): AuditLogs {
+    return (this._auditLogs ??= new AuditLogs(this._options));
+  }
+
   private _budgets?: Budgets;
   get budgets(): Budgets {
     return (this._budgets ??= new Budgets(this._options));
@@ -214,6 +221,11 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _workspaces?: Workspaces;
+  get workspaces(): Workspaces {
+    return (this._workspaces ??= new Workspaces(this._options));
   }
 
   private _workspaceSecurity?: WorkspaceSecurity;

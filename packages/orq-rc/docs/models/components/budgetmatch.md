@@ -1,10 +1,6 @@
 # BudgetMatch
 
-BudgetMatch carries the CEL expression that decides whether a budget
- applies to a request. Available variables: `model`, `provider`,
- `model_id`, `api_key`, `api_key_labels` (map), `factory`, `identity`,
- `project`, `metadata` (map), `headers` (map, lowercase keys). An empty
- expression always matches. Expressions are syntax-validated at write time.
+CEL expression that decides whether a budget applies to a request. Available variables: `model`, `provider`, `model_id`, `api_key`, `api_key_labels` (map), `identity`, `project`, `metadata` (map), `headers` (map, lowercase keys). An empty expression always matches. Expressions are syntax-validated at write time.
 
 ## Example Usage
 

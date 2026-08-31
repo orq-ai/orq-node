@@ -35,7 +35,6 @@ export type WorkspaceSettings = {
    *  workspace has never configured it.
    */
   piiRedaction?: PiiRedaction | undefined;
-  defaultPolicyProfileIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -48,13 +47,11 @@ export const WorkspaceSettings$inboundSchema: z.ZodType<
   display_name: z.string(),
   enforce_enabled_models: z.boolean(),
   pii_redaction: PiiRedaction$inboundSchema.optional(),
-  default_policy_profile_ids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
     "enforce_enabled_models": "enforceEnabledModels",
     "pii_redaction": "piiRedaction",
-    "default_policy_profile_ids": "defaultPolicyProfileIds",
   });
 });
 

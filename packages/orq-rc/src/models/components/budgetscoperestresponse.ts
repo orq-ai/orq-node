@@ -11,10 +11,6 @@ import {
   ApiKeyBudgetScopeRestResponse$inboundSchema,
 } from "./apikeybudgetscoperestresponse.js";
 import {
-  FactoryBudgetScopeRestResponse,
-  FactoryBudgetScopeRestResponse$inboundSchema,
-} from "./factorybudgetscoperestresponse.js";
-import {
   IdentityBudgetScopeRestResponse,
   IdentityBudgetScopeRestResponse$inboundSchema,
 } from "./identitybudgetscoperestresponse.js";
@@ -36,11 +32,7 @@ import {
 } from "./workspacebudgetscope.js";
 
 /**
- * BudgetScope is a closed oneof. Exactly one variant must be set. The
- *
- * @remarks
- *  variants are ordered by enforcement precedence (most specific to
- *  most general) and mirror the BudgetScopeKind filter enum.
+ * Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set. Variants are ordered by enforcement precedence (most specific to most general).
  */
 export type BudgetScopeRestResponse = {
   /**
@@ -80,13 +72,6 @@ export type BudgetScopeRestResponse = {
    *  models), rather than an internal identifier.
    */
   model?: ModelBudgetScopeRestResponse | undefined;
-  /**
-   * Per-factory cap. Matches requests whose api key carries the label
-   *
-   * @remarks
-   *  `factory=<factory_id>` (keys minted for agent sessions of that factory).
-   */
-  factory?: FactoryBudgetScopeRestResponse | undefined;
 };
 
 /** @internal */
@@ -101,7 +86,6 @@ export const BudgetScopeRestResponse$inboundSchema: z.ZodType<
   apiKey: ApiKeyBudgetScopeRestResponse$inboundSchema.optional(),
   provider: ProviderBudgetScope$inboundSchema.optional(),
   model: ModelBudgetScopeRestResponse$inboundSchema.optional(),
-  factory: FactoryBudgetScopeRestResponse$inboundSchema.optional(),
 });
 
 export function budgetScopeRestResponseFromJSON(
