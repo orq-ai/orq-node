@@ -11,6 +11,7 @@ let value: GetUploadFileUrlResponse = {
     postURL: "https://idolized-suv.biz/",
     formData: {},
   },
+  fileId: "<id>",
 };
 ```
 
@@ -20,3 +21,4 @@ let value: GetUploadFileUrlResponse = {
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `objectName`                                                               | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
 | `postPolicy`                                                               | [components.UploadPostPolicy](../../models/components/uploadpostpolicy.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `fileId`                                                                   | *string*                                                                   | :heavy_check_mark:                                                         | Identifier of the file record registered for this upload                   |

@@ -14,7 +14,7 @@ let value: QueryAuditLogsResponse = {
       projectId: "proj_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
       entityId: "skill_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
       entityType: "ORIGIN_UNSPECIFIED",
-      action: "ui",
+      action: "scim",
       actorId: "usr_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
       actorIp: "203.0.113.10",
       createdAt: new Date("2026-06-15T12:30:00Z"),

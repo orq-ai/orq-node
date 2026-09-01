@@ -11,6 +11,10 @@ export const Value = {
   Api: "api",
   Scim: "scim",
   System: "system",
+  Router: "router",
+  Mcp: "mcp",
+  Automation: "automation",
+  Internal: "internal",
 } as const;
 export type Value = ClosedEnum<typeof Value>;
 

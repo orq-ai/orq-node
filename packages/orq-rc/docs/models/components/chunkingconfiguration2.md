@@ -1,6 +1,8 @@
-# ChunkingConfiguration2
+# ~~ChunkingConfiguration2~~
 
-Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs.
+Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs. Deprecated: use one of the named chunking strategies instead.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ## Example Usage
 

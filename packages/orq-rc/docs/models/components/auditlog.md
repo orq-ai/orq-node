@@ -11,7 +11,7 @@ let value: AuditLog = {
   auditLogId: "audit_log_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
   projectId: "proj_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
   entityId: "skill_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
-  entityType: "ui",
+  entityType: "api",
   action: "ORIGIN_UNSPECIFIED",
   actorId: "usr_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY",
   actorIp: "203.0.113.10",
