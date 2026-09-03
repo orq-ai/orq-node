@@ -117,7 +117,6 @@ export * from "./listfiles.js";
 export * from "./listfilesystems.js";
 export * from "./listidentities.js";
 export * from "./listknowledgebases.js";
-export * from "./listlogfacets.js";
 export * from "./listlogfacetvalues.js";
 export * from "./listmodels.js";
 export * from "./listpromptversions.js";

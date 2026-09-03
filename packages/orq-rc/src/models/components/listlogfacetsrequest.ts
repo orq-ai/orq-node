@@ -4,12 +4,20 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  TraceFilter,
+  TraceFilter$Outbound,
+  TraceFilter$outboundSchema,
+} from "./tracefilter.js";
 
 export type ListLogFacetsRequest = {
   from?: Date | undefined;
   to?: Date | undefined;
   keyLimit?: number | undefined;
   valueLimit?: number | undefined;
+  query?: string | undefined;
+  filterOperator?: string | undefined;
+  filters?: Array<TraceFilter> | undefined;
 };
 
 /** @internal */
@@ -18,6 +26,9 @@ export type ListLogFacetsRequest$Outbound = {
   to?: string | undefined;
   key_limit?: number | undefined;
   value_limit?: number | undefined;
+  query?: string | undefined;
+  filter_operator?: string | undefined;
+  filters?: Array<TraceFilter$Outbound> | undefined;
 };
 
 /** @internal */
@@ -30,10 +41,14 @@ export const ListLogFacetsRequest$outboundSchema: z.ZodType<
   to: z.date().transform(v => v.toISOString()).optional(),
   keyLimit: z.number().int().optional(),
   valueLimit: z.number().int().optional(),
+  query: z.string().optional(),
+  filterOperator: z.string().optional(),
+  filters: z.array(TraceFilter$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     keyLimit: "key_limit",
     valueLimit: "value_limit",
+    filterOperator: "filter_operator",
   });
 });
 

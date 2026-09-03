@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ListLogFacetsRequest } from "@orq-ai/node/models/operations";
+import { ListLogFacetsRequest } from "@orq-ai/node/models/components";
 
 let value: ListLogFacetsRequest = {};
 ```
@@ -16,3 +16,6 @@ let value: ListLogFacetsRequest = {};
 | `to`                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `keyLimit`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `valueLimit`                                                                                  | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `query`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `filterOperator`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `filters`                                                                                     | [components.TraceFilter](../../models/components/tracefilter.md)[]                            | :heavy_minus_sign:                                                                            | N/A                                                                                           |

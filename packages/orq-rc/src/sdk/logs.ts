@@ -39,10 +39,10 @@ export class Logs extends ClientSDK {
    * List log facets
    *
    * @remarks
-   * Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values for the requested time range.
+   * Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values. Accepts optional filters and free-text query to narrow the counted subset.
    */
   async listFacets(
-    request?: operations.ListLogFacetsRequest | undefined,
+    request: components.ListLogFacetsRequest,
     options?: RequestOptions,
   ): Promise<components.ListLogFacetsResponse> {
     return unwrapAsync(logsListFacets(

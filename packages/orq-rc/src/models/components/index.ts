@@ -275,6 +275,7 @@ export * from "./listfilesystemsresponse.js";
 export * from "./listguardrailrulesresponse.js";
 export * from "./listguardrailruleusedguardrailsresponse.js";
 export * from "./listidentitiesresponse.js";
+export * from "./listlogfacetsrequest.js";
 export * from "./listlogfacetsresponse.js";
 export * from "./listlogfacetvaluesresponse.js";
 export * from "./listlogfieldsresponse.js";
