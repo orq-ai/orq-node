@@ -288,257 +288,49 @@ components:
         - "type"
       title: "Thinking config adaptive"
       description: "Enables adaptive thinking mode where the model dynamically determines thinking depth"
-    PIIRedactionPluginAuto:
+    PIIRedactionPlugin:
       type: "object"
       properties:
         id:
           type: "string"
           enum:
             - "pii_redaction"
-          description: "Plugin discriminator. Must be `pii_redaction`."
+          description: "PII redaction plugin."
+        language:
+          type: "string"
+          description: "Detector language. Use \"auto\" to auto-detect; omitting the field falls back to en."
+        regions:
+          type: "array"
+          items:
+            type: "string"
+          description: "Region codes selecting whole regions of coverage (e.g. \"nl\", \"gb\"). Every entity type those regions cover is redacted, alongside the base catalog. [\"all\"] is exclusive, and leaving both this and entities empty also runs every region, so selecting nothing is the widest request rather than the narrowest. Combines with entities: the two selections are unioned, so entities adds types on top of the region coverage."
+        entities:
+          type: "array"
+          items:
+            type: "string"
+          description: "The entity types to redact. A named type is redacted even when it belongs to a region, so a region's types can be selected individually without naming the region. On its own this is a strict allowlist; alongside regions it adds to the region coverage. See GET /v2/pii/capabilities for valid types."
+        entity_thresholds:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            minimum: 0
+            maximum: 1
+          description: "Per-entity confidence cutoff overrides in [0,1]. Tunes confidence only and never changes which types are redacted, so every key must also appear in entities."
+        threshold:
+          type: "number"
+          minimum: 0
+          maximum: 1
+          description: "Baseline confidence cutoff applied to every entity type without a per-entity override."
         on_failure:
           type: "string"
           enum:
             - "block"
             - "passthrough"
-          description: "Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text."
-        threshold:
-          type: "number"
-          minimum: 0
-          maximum: 1
-          description: "Detector confidence cutoff in [0,1]."
-        entities:
-          type: "array"
-          items:
-            type: "string"
-            enum:
-              - "AGE"
-              - "API_KEY"
-              - "BANK_ROUTING"
-              - "BIC"
-              - "BIOMETRIC_ID"
-              - "BLOOD_TYPE"
-              - "BSN"
-              - "CREDIT_CARD"
-              - "CRYPTO"
-              - "DATE_TIME"
-              - "DEVICE_ID"
-              - "EDUCATION_LEVEL"
-              - "EMAIL_ADDRESS"
-              - "EMPLOYMENT_STATUS"
-              - "GENDER"
-              - "HEALTH_PLAN_ID"
-              - "HTTP_COOKIE"
-              - "IBAN_CODE"
-              - "ID"
-              - "ID_CARD"
-              - "IMEI"
-              - "IP_ADDRESS"
-              - "JOBTITLE"
-              - "JWT"
-              - "KVK_NUMBER"
-              - "LANGUAGE"
-              - "LICENSE_NUMBER"
-              - "LICENSE_PLATE"
-              - "LOCATION"
-              - "MAC_ADDRESS"
-              - "MEDICAL_LICENSE"
-              - "MEDICAL_RECORD"
-              - "NRP"
-              - "ORGANIZATION"
-              - "PASSPORT"
-              - "PASSWORD"
-              - "PERSON"
-              - "PHONE_NUMBER"
-              - "PIN"
-              - "POLITICAL_VIEW"
-              - "RACE_ETHNICITY"
-              - "RELIGIOUS_BELIEF"
-              - "SEXUALITY"
-              - "TAX_ID"
-              - "TITLE"
-              - "UK_NHS"
-              - "URL"
-              - "US_BANK_NUMBER"
-              - "US_DRIVER_LICENSE"
-              - "US_ITIN"
-              - "US_PASSPORT"
-              - "US_SSN"
-              - "UUID"
-              - "VEHICLE_ID"
-          description: "Entity types to redact when no detector language is configured. Omit to redact every detected type."
+          description: "Behaviour when detection fails."
       required:
         - "id"
       additionalProperties: false
-      title: "PII redaction plugin (automatic language)"
-    PIIRedactionPluginEn:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-          enum:
-            - "pii_redaction"
-          description: "Plugin discriminator. Must be `pii_redaction`."
-        on_failure:
-          type: "string"
-          enum:
-            - "block"
-            - "passthrough"
-          description: "Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text."
-        threshold:
-          type: "number"
-          minimum: 0
-          maximum: 1
-          description: "Detector confidence cutoff in [0,1]."
-        language:
-          type: "string"
-          enum:
-            - "en"
-          description: "Detector language."
-        entities:
-          type: "array"
-          items:
-            type: "string"
-            enum:
-              - "AGE"
-              - "API_KEY"
-              - "BANK_ROUTING"
-              - "BIC"
-              - "BIOMETRIC_ID"
-              - "BLOOD_TYPE"
-              - "BSN"
-              - "CREDIT_CARD"
-              - "CRYPTO"
-              - "DATE_TIME"
-              - "DEVICE_ID"
-              - "EDUCATION_LEVEL"
-              - "EMAIL_ADDRESS"
-              - "EMPLOYMENT_STATUS"
-              - "GENDER"
-              - "HEALTH_PLAN_ID"
-              - "HTTP_COOKIE"
-              - "IBAN_CODE"
-              - "ID"
-              - "ID_CARD"
-              - "IMEI"
-              - "IP_ADDRESS"
-              - "JOBTITLE"
-              - "JWT"
-              - "KVK_NUMBER"
-              - "LANGUAGE"
-              - "LICENSE_NUMBER"
-              - "LICENSE_PLATE"
-              - "LOCATION"
-              - "MAC_ADDRESS"
-              - "MEDICAL_LICENSE"
-              - "MEDICAL_RECORD"
-              - "NRP"
-              - "ORGANIZATION"
-              - "PASSPORT"
-              - "PASSWORD"
-              - "PERSON"
-              - "PHONE_NUMBER"
-              - "PIN"
-              - "POLITICAL_VIEW"
-              - "RACE_ETHNICITY"
-              - "RELIGIOUS_BELIEF"
-              - "SEXUALITY"
-              - "TAX_ID"
-              - "TITLE"
-              - "UK_NHS"
-              - "URL"
-              - "US_BANK_NUMBER"
-              - "US_DRIVER_LICENSE"
-              - "US_ITIN"
-              - "US_PASSPORT"
-              - "US_SSN"
-              - "UUID"
-              - "VEHICLE_ID"
-          description: "English entity types to redact. Omit to redact every type detected for the language."
-      required:
-        - "id"
-        - "language"
-      title: "PII redaction plugin (English)"
-    PIIRedactionPluginNl:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-          enum:
-            - "pii_redaction"
-          description: "Plugin discriminator. Must be `pii_redaction`."
-        on_failure:
-          type: "string"
-          enum:
-            - "block"
-            - "passthrough"
-          description: "Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text."
-        threshold:
-          type: "number"
-          minimum: 0
-          maximum: 1
-          description: "Detector confidence cutoff in [0,1]."
-        language:
-          type: "string"
-          enum:
-            - "nl"
-          description: "Detector language."
-        entities:
-          type: "array"
-          items:
-            type: "string"
-            enum:
-              - "AGE"
-              - "API_KEY"
-              - "BANK_ROUTING"
-              - "BIC"
-              - "BIOMETRIC_ID"
-              - "BLOOD_TYPE"
-              - "BSN"
-              - "CREDIT_CARD"
-              - "CRYPTO"
-              - "DATE_TIME"
-              - "DEVICE_ID"
-              - "EDUCATION_LEVEL"
-              - "EMAIL_ADDRESS"
-              - "EMPLOYMENT_STATUS"
-              - "GENDER"
-              - "HEALTH_PLAN_ID"
-              - "HTTP_COOKIE"
-              - "IBAN_CODE"
-              - "ID"
-              - "ID_CARD"
-              - "IMEI"
-              - "IP_ADDRESS"
-              - "KVK_NUMBER"
-              - "LANGUAGE"
-              - "LICENSE_NUMBER"
-              - "LICENSE_PLATE"
-              - "LOCATION"
-              - "MAC_ADDRESS"
-              - "MEDICAL_RECORD"
-              - "NRP"
-              - "ORGANIZATION"
-              - "PASSPORT"
-              - "PASSWORD"
-              - "PERSON"
-              - "PHONE_NUMBER"
-              - "PIN"
-              - "POLITICAL_VIEW"
-              - "RACE_ETHNICITY"
-              - "RELIGIOUS_BELIEF"
-              - "SEXUALITY"
-              - "TAX_ID"
-              - "TITLE"
-              - "URL"
-              - "US_DRIVER_LICENSE"
-              - "US_SSN"
-              - "VEHICLE_ID"
-          description: "Dutch entity types to redact. Omit to redact every type detected for the language."
-      required:
-        - "id"
-        - "language"
-      title: "PII redaction plugin (Dutch)"
+      title: "PII redaction plugin"
     ResponseHealingPlugin:
       type: "object"
       properties:
@@ -1826,7 +1618,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m1nq4pk1kaabayp8270qmekq"
+              default: "reasoning_01m1ny970yxt51fwq3537kvmda"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -2385,6 +2177,10 @@ components:
                           - "input"
                           - "output"
                         description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                      options:
+                        type: "object"
+                        additionalProperties: {}
+                        description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                     required:
                       - "id"
                       - "execute_on"
@@ -2410,11 +2206,15 @@ components:
                           - "input"
                           - "output"
                         description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                      options:
+                        type: "object"
+                        additionalProperties: {}
+                        description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                     required:
                       - "id"
                       - "execute_on"
                   title: "Agent guardrail configuration"
-                  description: "Configuration for a guardrail applied to the agent"
+                  description: "Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request."
               default:
                 max_execution_time: 600
                 max_iterations: 100
@@ -6547,6 +6347,48 @@ components:
         output:
           type: "string"
       description: "StructuredToolCall mirrors one tool invocation and its result. Name is the\n only field the grader requires; a call without one is dropped."
+    CapabilitiesResponse:
+      type: "object"
+      properties:
+        languages:
+          type: "array"
+          items:
+            type: "string"
+          description: "Supported detector languages, e.g. \"en\", \"nl\". There is no \"auto\" value."
+        base_entities:
+          type: "array"
+          items:
+            type: "string"
+          description: "Universal entity types available regardless of region, e.g. PASSPORT,\n LICENSE_PLATE, UUID, JWT, BIC."
+        all_entities:
+          type: "array"
+          items:
+            type: "string"
+          description: "Every entity type the service can detect across all regions and the\n base catalog."
+        regions:
+          type: "array"
+          items:
+            type: "string"
+          description: "Region codes the service recognizes, e.g. \"nl\", \"gb\", \"all\"."
+        region_entities:
+          type: "object"
+          additionalProperties:
+            $ref: "#/components/schemas/EntityList"
+          description: "Maps each region code to the entity types it gates. Use this to find the\n type to name in `entities` when you need a per-entity threshold on a type\n a region gates."
+        entity_thresholds:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            format: "double"
+          description: "Sparse per-entity default thresholds; entities absent here fall back to\n default_threshold."
+        default_threshold:
+          type: "number"
+          description: "Confidence cutoff applied when neither `threshold` nor an entity-specific\n override is supplied."
+          format: "double"
+        max_text_chars:
+          type: "integer"
+          description: "Maximum number of characters accepted per request."
+          format: "int32"
     DetectRequest:
       type: "object"
       properties:
@@ -6563,6 +6405,22 @@ components:
         include_entities:
           type: "boolean"
           description: "When true, the response includes a per-type entity breakdown."
+        regions:
+          type: "array"
+          items:
+            type: "string"
+          description: "Region codes selecting whole regions of coverage, e.g. \"nl\", \"gb\". Every\n entity type those regions cover is included, alongside the base catalog.\n [\"all\"] is exclusive. Leaving this and `entities` both empty also runs every\n region, so selecting nothing is the widest request rather than the narrowest.\n Empty alongside a non-empty `entities` stays strict. See the capabilities\n endpoint for the region list.\n\n Combines with `entities`: the detector unions the two selections, so a\n request carrying both covers the regions plus the named types. Note that\n `entities` only narrows coverage when it travels alone."
+        entities:
+          type: "array"
+          items:
+            type: "string"
+          description: "The entity types to cover. A named type fires even when it belongs to a\n region, so a region's types can be selected individually without naming\n the region. Alone this is a strict allowlist; alongside `regions` it adds\n to the region coverage instead of narrowing it."
+        entity_thresholds:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            format: "double"
+          description: "Per-entity confidence cutoff overrides. An override REPLACES the global\n `threshold` for that type and may sit above or below it: the gateway\n lowers the first-pass floor it sends the detector to the smallest value\n in the map, and every selected type carries its own cutoff, so a\n sub-global override detects MORE of that type without widening the rest.\n\n This only tunes confidence; it never changes which types are covered.\n Coverage is decided by `entities` alone, so every key here must also\n appear in `entities` — a key that does not is rejected, as is any key at\n all when `entities` is empty.\n\n Declarative [0,1] bound mirrors existing constraint on `threshold`."
       description: "The workspace is resolved from the API key, never sent in the body."
     DetectResponse:
       type: "object"
@@ -6585,6 +6443,22 @@ components:
         threshold:
           type: "number"
           format: "double"
+        regions:
+          type: "array"
+          items:
+            type: "string"
+          description: "Region codes selecting whole regions of coverage, e.g. \"nl\", \"gb\". Every\n entity type those regions cover is included, alongside the base catalog.\n [\"all\"] is exclusive. Leaving this and `entities` both empty also runs every\n region, so selecting nothing is the widest request rather than the narrowest.\n Empty alongside a non-empty `entities` stays strict. See the capabilities\n endpoint for the region list.\n\n Combines with `entities`: the detector unions the two selections, so a\n request carrying both covers the regions plus the named types. Note that\n `entities` only narrows coverage when it travels alone."
+        entities:
+          type: "array"
+          items:
+            type: "string"
+          description: "The entity types to cover. A named type fires even when it belongs to a\n region, so a region's types can be selected individually without naming\n the region. Alone this is a strict allowlist; alongside `regions` it adds\n to the region coverage instead of narrowing it."
+        entity_thresholds:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            format: "double"
+          description: "Per-entity confidence cutoff overrides. An override REPLACES the global\n `threshold` for that type and may sit above or below it: the gateway\n lowers the first-pass floor it sends the detector to the smallest value\n in the map, and every selected type carries its own cutoff, so a\n sub-global override detects MORE of that type without widening the rest.\n\n This only tunes confidence; it never changes which types are covered.\n Coverage is decided by `entities` alone, so every key here must also\n appear in `entities` — a key that does not is rejected, as is any key at\n all when `entities` is empty.\n\n Declarative [0,1] bound mirrors existing constraint on `threshold`."
     RedactResponse:
       type: "object"
       properties:
@@ -6610,6 +6484,14 @@ components:
       properties:
         original_text:
           type: "string"
+    EntityList:
+      type: "object"
+      properties:
+        entities:
+          type: "array"
+          items:
+            type: "string"
+      description: "EntityList wraps a repeated string because proto3 maps cannot hold\n repeated values directly."
     AutoRouterConfig:
       additionalProperties: false
       properties:
@@ -10598,15 +10480,28 @@ components:
           description: "Plugin discriminator."
         language:
           type: "string"
+          description: "Languages, regions and entity types are checked against the live\n pii-detection capabilities catalog when the rule is saved, not pinned\n here, so a language or region the detector gains becomes writable without\n a proto change."
         entities:
           type: "array"
           items:
             type: "string"
+          description: "Entity types to redact. Mutually exclusive with regions."
         on_failure:
           type: "string"
         threshold:
           type: "number"
           format: "double"
+        regions:
+          type: "array"
+          items:
+            type: "string"
+          description: "Regions of coverage by ISO 3166-1 alpha-2 code, or [\"all\"]. Mutually exclusive with entities."
+        entity_thresholds:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            format: "double"
+          description: "Per-entity-type confidence cutoff. Every key must also appear in entities."
     IdentitySortField:
       type: "string"
       enum:
@@ -12353,10 +12248,12 @@ components:
           description: "Plugin discriminator."
         language:
           type: "string"
+          description: "Languages, regions and entity types are checked against the live\n pii-detection capabilities catalog when the rule is saved, not pinned\n here, so a language or region the detector gains becomes writable without\n a proto change."
         entities:
           type: "array"
           items:
             type: "string"
+          description: "Entity types to redact. Mutually exclusive with regions."
         on_failure:
           type: "string"
         threshold:
@@ -12366,6 +12263,17 @@ components:
           type: "array"
           items:
             type: "string"
+        regions:
+          type: "array"
+          items:
+            type: "string"
+          description: "Regions of coverage by ISO 3166-1 alpha-2 code, or [\"all\"]. Mutually exclusive with entities."
+        entity_thresholds:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            format: "double"
+          description: "Per-entity-type confidence cutoff. Every key must also appear in entities."
     RoutingRuleCacheConfig:
       required:
         - "ttl"
@@ -14402,12 +14310,18 @@ components:
       additionalProperties: false
       properties:
         entities:
-          description: "pii_redaction only. Entity types to redact (e.g. EMAIL_ADDRESS, BSN). Omit to redact every type detected for the language."
+          description: "pii_redaction only. Entity types to redact (e.g. EMAIL_ADDRESS, BSN). Omit to redact every type detected for the language and regions. Cannot be combined with regions."
           items:
             type: "string"
           type:
             - "array"
             - "null"
+        entity_thresholds:
+          additionalProperties:
+            format: "double"
+            type: "number"
+          description: "pii_redaction only. Per-entity confidence cutoff overrides in [0,1], keyed by entity type. An override replaces threshold for that type and may sit above or below it. Every key must also appear in entities."
+          type: "object"
         id:
           description: "Plugin discriminator. pii_redaction redacts PII, response_healing repairs malformed JSON, and trace_scrubbing removes selected sensitive fields from exported traces."
           enum:
@@ -14416,10 +14330,7 @@ components:
             - "trace_scrubbing"
           type: "string"
         language:
-          description: "pii_redaction only. Detector language. Defaults to en."
-          enum:
-            - "en"
-            - "nl"
+          description: "pii_redaction only. Detector language, or \"auto\" to detect it per request. Defaults to en. The accepted values are whatever GET /v2/pii/capabilities lists, so they are not enumerated here: a fixed enum would reject a language the detector has since added."
           type: "string"
         mask:
           description: "trace_scrubbing only. Trace surfaces to scrub. At least one value required."
@@ -14442,6 +14353,13 @@ components:
             - "block"
             - "passthrough"
           type: "string"
+        regions:
+          description: "pii_redaction only. Region codes gating regional recognizers (e.g. nl, gb). [\"all\"] is exclusive. Omit for base entities only. Cannot be combined with entities."
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
         threshold:
           description: "pii_redaction only. Detector confidence cutoff in [0,1]."
           format: "double"
@@ -20731,9 +20649,7 @@ paths:
                               type: "array"
                               items:
                                 anyOf:
-                                  - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                  - $ref: "#/components/schemas/PIIRedactionPlugin"
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -21081,9 +20997,7 @@ paths:
                                 type: "array"
                                 items:
                                   anyOf:
-                                    - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                    - $ref: "#/components/schemas/PIIRedactionPlugin"
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -21276,6 +21190,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -21301,6 +21219,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -21614,6 +21536,10 @@ paths:
                                 - "input"
                                 - "output"
                               description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                            options:
+                              type: "object"
+                              additionalProperties: {}
+                              description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                           required:
                             - "id"
                             - "execute_on"
@@ -21639,11 +21565,15 @@ paths:
                                 - "input"
                                 - "output"
                               description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                            options:
+                              type: "object"
+                              additionalProperties: {}
+                              description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                           required:
                             - "id"
                             - "execute_on"
                         title: "Agent guardrail configuration"
-                        description: "Configuration for a guardrail applied to the agent"
+                        description: "Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request."
                     default:
                       max_execution_time: 600
                       max_iterations: 100
@@ -21867,9 +21797,7 @@ paths:
                             type: "array"
                             items:
                               anyOf:
-                                - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                - $ref: "#/components/schemas/PIIRedactionPlugin"
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -22214,9 +22142,7 @@ paths:
                                       type: "array"
                                       items:
                                         anyOf:
-                                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                          - $ref: "#/components/schemas/PIIRedactionPlugin"
                                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -22658,6 +22584,10 @@ paths:
                                       - "input"
                                       - "output"
                                     description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                                  options:
+                                    type: "object"
+                                    additionalProperties: {}
+                                    description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                                 required:
                                   - "id"
                                   - "execute_on"
@@ -22683,11 +22613,15 @@ paths:
                                       - "input"
                                       - "output"
                                     description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                                  options:
+                                    type: "object"
+                                    additionalProperties: {}
+                                    description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                                 required:
                                   - "id"
                                   - "execute_on"
                               title: "Agent guardrail configuration"
-                              description: "Configuration for a guardrail applied to the agent"
+                              description: "Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request."
                           default:
                             max_execution_time: 600
                             max_iterations: 100
@@ -22911,9 +22845,7 @@ paths:
                                   type: "array"
                                   items:
                                     anyOf:
-                                      - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                      - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                      - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                      - $ref: "#/components/schemas/PIIRedactionPlugin"
                                       - $ref: "#/components/schemas/ResponseHealingPlugin"
                                       - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                   description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -23258,9 +23190,7 @@ paths:
                                             type: "array"
                                             items:
                                               anyOf:
-                                                - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                                - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                                - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                                - $ref: "#/components/schemas/PIIRedactionPlugin"
                                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -23804,6 +23734,10 @@ paths:
                                 - "input"
                                 - "output"
                               description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                            options:
+                              type: "object"
+                              additionalProperties: {}
+                              description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                           required:
                             - "id"
                             - "execute_on"
@@ -23829,11 +23763,15 @@ paths:
                                 - "input"
                                 - "output"
                               description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                            options:
+                              type: "object"
+                              additionalProperties: {}
+                              description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                           required:
                             - "id"
                             - "execute_on"
                         title: "Agent guardrail configuration"
-                        description: "Configuration for a guardrail applied to the agent"
+                        description: "Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request."
                     default:
                       max_execution_time: 600
                       max_iterations: 100
@@ -24057,9 +23995,7 @@ paths:
                             type: "array"
                             items:
                               anyOf:
-                                - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                - $ref: "#/components/schemas/PIIRedactionPlugin"
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -24404,9 +24340,7 @@ paths:
                                       type: "array"
                                       items:
                                         anyOf:
-                                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                          - $ref: "#/components/schemas/PIIRedactionPlugin"
                                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -24826,9 +24760,7 @@ paths:
                               type: "array"
                               items:
                                 anyOf:
-                                  - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                  - $ref: "#/components/schemas/PIIRedactionPlugin"
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -25176,9 +25108,7 @@ paths:
                                 type: "array"
                                 items:
                                   anyOf:
-                                    - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                    - $ref: "#/components/schemas/PIIRedactionPlugin"
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -25361,6 +25291,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -25386,6 +25320,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -25695,6 +25633,10 @@ paths:
                                 - "input"
                                 - "output"
                               description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                            options:
+                              type: "object"
+                              additionalProperties: {}
+                              description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                           required:
                             - "id"
                             - "execute_on"
@@ -25720,11 +25662,15 @@ paths:
                                 - "input"
                                 - "output"
                               description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                            options:
+                              type: "object"
+                              additionalProperties: {}
+                              description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                           required:
                             - "id"
                             - "execute_on"
                         title: "Agent guardrail configuration"
-                        description: "Configuration for a guardrail applied to the agent"
+                        description: "Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request."
                     default:
                       max_execution_time: 600
                       max_iterations: 100
@@ -25948,9 +25894,7 @@ paths:
                             type: "array"
                             items:
                               anyOf:
-                                - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                - $ref: "#/components/schemas/PIIRedactionPlugin"
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -26295,9 +26239,7 @@ paths:
                                       type: "array"
                                       items:
                                         anyOf:
-                                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                          - $ref: "#/components/schemas/PIIRedactionPlugin"
                                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -27016,9 +26958,7 @@ paths:
                               type: "array"
                               items:
                                 anyOf:
-                                  - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                  - $ref: "#/components/schemas/PIIRedactionPlugin"
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -27366,9 +27306,7 @@ paths:
                                 type: "array"
                                 items:
                                   anyOf:
-                                    - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                    - $ref: "#/components/schemas/PIIRedactionPlugin"
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -28107,7 +28045,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M1NQ4PMH23SM3S5WSKMEFRA0"
+                                          default: "01M1NY972TSH0RH25AQVWHM5VC"
                                         name:
                                           type: "string"
                                         description:
@@ -28214,6 +28152,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -28239,6 +28181,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -28609,9 +28555,7 @@ paths:
                               type: "array"
                               items:
                                 anyOf:
-                                  - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                  - $ref: "#/components/schemas/PIIRedactionPlugin"
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -28959,9 +28903,7 @@ paths:
                                 type: "array"
                                 items:
                                   anyOf:
-                                    - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                    - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                    - $ref: "#/components/schemas/PIIRedactionPlugin"
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -29700,7 +29642,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M1NQ4PN1KK5ZM8GZMKJXZDDN"
+                                          default: "01M1NY973HYGE5WMP4Z65KFGAW"
                                         name:
                                           type: "string"
                                         description:
@@ -29807,6 +29749,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -29832,6 +29778,10 @@ paths:
                               - "input"
                               - "output"
                             description: "Determines whether the evaluator runs on the agent input (user message) or output (agent response)."
+                          options:
+                            type: "object"
+                            additionalProperties: {}
+                            description: "Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed."
                         required:
                           - "id"
                           - "execute_on"
@@ -30950,9 +30900,7 @@ paths:
                               type: "array"
                               items:
                                 anyOf:
-                                  - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                  - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                  - $ref: "#/components/schemas/PIIRedactionPlugin"
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -31919,9 +31867,7 @@ paths:
                       type: "array"
                       items:
                         anyOf:
-                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                          - $ref: "#/components/schemas/PIIRedactionPlugin"
                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -32767,9 +32713,7 @@ paths:
                         type: "array"
                         items:
                           anyOf:
-                            - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                            - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                            - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                            - $ref: "#/components/schemas/PIIRedactionPlugin"
                             - $ref: "#/components/schemas/ResponseHealingPlugin"
                             - $ref: "#/components/schemas/TraceScrubbingPlugin"
                         description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -33893,9 +33837,7 @@ paths:
                         type: "array"
                         items:
                           anyOf:
-                            - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                            - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                            - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                            - $ref: "#/components/schemas/PIIRedactionPlugin"
                             - $ref: "#/components/schemas/ResponseHealingPlugin"
                             - $ref: "#/components/schemas/TraceScrubbingPlugin"
                         description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -34840,9 +34782,7 @@ paths:
                       type: "array"
                       items:
                         anyOf:
-                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                          - $ref: "#/components/schemas/PIIRedactionPlugin"
                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -35726,9 +35666,7 @@ paths:
                         type: "array"
                         items:
                           anyOf:
-                            - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                            - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                            - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                            - $ref: "#/components/schemas/PIIRedactionPlugin"
                             - $ref: "#/components/schemas/ResponseHealingPlugin"
                             - $ref: "#/components/schemas/TraceScrubbingPlugin"
                         description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -36912,9 +36850,7 @@ paths:
                                   type: "array"
                                   items:
                                     anyOf:
-                                      - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                      - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                      - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                      - $ref: "#/components/schemas/PIIRedactionPlugin"
                                       - $ref: "#/components/schemas/ResponseHealingPlugin"
                                       - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                   description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -38033,9 +37969,7 @@ paths:
                             type: "array"
                             items:
                               anyOf:
-                                - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                                - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                                - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                                - $ref: "#/components/schemas/PIIRedactionPlugin"
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -38508,7 +38442,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M1NQ4PPC3QMMDMJ6ZNKSSG4F"
+                              default: "tool_01M1NY9757E9JK46SEHYTAPT0A"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38609,7 +38543,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M1NQ4PPC12M131ZTE0TAJ1Q0"
+                              default: "tool_01M1NY9759D1TF59H7Z0FD1STZ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38712,7 +38646,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M1NQ4PPDV7JB495620VKSN6F"
+                              default: "tool_01M1NY975AJSWXYESXNFA8Q3VJ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38856,7 +38790,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M1NQ4PPGTJVMC1G5XKSWWJ3Y"
+                              default: "tool_01M1NY975BG38P9H71PQTCXESX"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39343,7 +39277,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPKK9X7938Y8V307NV8"
+                        default: "tool_01M1NY975FYM0MSG7CQC3BMFJX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39444,7 +39378,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPMBKDDXVAWA5NEKGQ5"
+                        default: "tool_01M1NY975GKSDCCJ081QBBTD0G"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39547,7 +39481,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPMJBYEDA85XQKWJNWF"
+                        default: "tool_01M1NY975HYT4FK7NBZ17XWY1A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39691,7 +39625,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPN14QXXQX3CP80T4NM"
+                        default: "tool_01M1NY975J01TPN71QTA1SWNX1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40189,7 +40123,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPQK4YDKJQMJQ2DH0GK"
+                        default: "tool_01M1NY975NY87REE5ZJJK3BKE7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40290,7 +40224,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPRN5KTP1EDJSP7HGEZ"
+                        default: "tool_01M1NY975PN6785CT1ARQDA4SY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40393,7 +40327,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPRFAGY1J6PGWCJRX4Z"
+                        default: "tool_01M1NY975QH10QY0RH72J0VBVP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40537,7 +40471,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPS2G3T0WC6B29C8XS5"
+                        default: "tool_01M1NY975RENN4PWZPWWRGKH71"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40698,7 +40632,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPYGVK15QN3GNRPWHX7"
+                        default: "tool_01M1NY975ZE7P3GDV344FYMB67"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40799,7 +40733,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPZHAVGGCH46TYKACHJ"
+                        default: "tool_01M1NY975Z6QJX4P0HC1XPCXY0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40902,7 +40836,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PPZW15MPKHKE0KP3JNY"
+                        default: "tool_01M1NY9760MSAPA40VE5YQPV3A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41046,7 +40980,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M1NQ4PQ0Z9NPXY1B0F8NB3PW"
+                        default: "tool_01M1NY9761N3EF9RPMNH5XPFJ4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41466,7 +41400,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-04T08:04:04.350Z"
+                          default: "2026-09-04T10:08:50.813Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41474,7 +41408,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:04.351Z"
+                              default: "2026-09-04T10:08:50.814Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -41598,7 +41532,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-04T08:04:04.350Z"
+                    default: "2026-09-04T10:08:50.813Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41606,7 +41540,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-04T08:04:04.351Z"
+                        default: "2026-09-04T10:08:50.814Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41721,7 +41655,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-04T08:04:04.350Z"
+                    default: "2026-09-04T10:08:50.813Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41729,7 +41663,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-04T08:04:04.351Z"
+                        default: "2026-09-04T10:08:50.814Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41873,7 +41807,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-04T08:04:04.350Z"
+                    default: "2026-09-04T10:08:50.813Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41881,7 +41815,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-04T08:04:04.351Z"
+                        default: "2026-09-04T10:08:50.814Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42310,7 +42244,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-04T08:04:11.627Z"
+                                    default: "2026-09-04T10:08:59.599Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42383,7 +42317,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-04T08:04:11.628Z"
+                                    default: "2026-09-04T10:08:59.599Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42456,7 +42390,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-04T08:04:11.628Z"
+                                    default: "2026-09-04T10:08:59.600Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42529,7 +42463,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-04T08:04:11.628Z"
+                                    default: "2026-09-04T10:08:59.600Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42569,7 +42503,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-04T08:04:04.350Z"
+                          default: "2026-09-04T10:08:50.813Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42577,7 +42511,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:04.351Z"
+                              default: "2026-09-04T10:08:50.814Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43207,7 +43141,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-04T08:04:11.633Z"
+                                default: "2026-09-04T10:08:59.606Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43280,7 +43214,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-04T08:04:11.633Z"
+                                default: "2026-09-04T10:08:59.607Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43353,7 +43287,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-04T08:04:11.633Z"
+                                default: "2026-09-04T10:08:59.607Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43426,7 +43360,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-04T08:04:11.634Z"
+                                default: "2026-09-04T10:08:59.607Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43466,7 +43400,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-09-04T08:04:04.350Z"
+                      default: "2026-09-04T10:08:50.813Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43474,7 +43408,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-09-04T08:04:04.351Z"
+                          default: "2026-09-04T10:08:50.814Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -43838,7 +43772,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.630Z"
+                              default: "2026-09-04T10:08:59.603Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -43911,7 +43845,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.630Z"
+                              default: "2026-09-04T10:08:59.603Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -43984,7 +43918,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.631Z"
+                              default: "2026-09-04T10:08:59.603Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44057,7 +43991,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.631Z"
+                              default: "2026-09-04T10:08:59.604Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44097,7 +44031,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-04T08:04:04.350Z"
+                    default: "2026-09-04T10:08:50.813Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44105,7 +44039,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-04T08:04:04.351Z"
+                        default: "2026-09-04T10:08:50.814Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44729,7 +44663,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.641Z"
+                              default: "2026-09-04T10:08:59.621Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44802,7 +44736,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.642Z"
+                              default: "2026-09-04T10:08:59.621Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44875,7 +44809,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.642Z"
+                              default: "2026-09-04T10:08:59.621Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44948,7 +44882,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:11.642Z"
+                              default: "2026-09-04T10:08:59.623Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44988,7 +44922,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-04T08:04:04.350Z"
+                    default: "2026-09-04T10:08:50.813Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44996,7 +44930,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-04T08:04:04.351Z"
+                        default: "2026-09-04T10:08:50.814Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45663,9 +45597,7 @@ paths:
                       type: "array"
                       items:
                         anyOf:
-                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                          - $ref: "#/components/schemas/PIIRedactionPlugin"
                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
@@ -47542,10 +47474,7 @@ paths:
                 plugins:
                   type: "array"
                   items:
-                    anyOf:
-                      - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                      - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                      - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                    $ref: "#/components/schemas/PIIRedactionPlugin"
                   description: "Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response."
                 orq:
                   type: "object"
@@ -48163,10 +48092,7 @@ paths:
                     plugins:
                       type: "array"
                       items:
-                        anyOf:
-                          - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                          - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                          - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                        $ref: "#/components/schemas/PIIRedactionPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response."
                     orq:
                       type: "object"
@@ -49231,10 +49157,7 @@ paths:
                 plugins:
                   type: "array"
                   items:
-                    anyOf:
-                      - $ref: "#/components/schemas/PIIRedactionPluginAuto"
-                      - $ref: "#/components/schemas/PIIRedactionPluginEn"
-                      - $ref: "#/components/schemas/PIIRedactionPluginNl"
+                    $ref: "#/components/schemas/PIIRedactionPlugin"
                   description: "Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response."
                 orq:
                   type: "object"
@@ -51212,7 +51135,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-04T08:04:11.680Z"
+                      default: "2026-09-04T10:08:59.674Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51254,7 +51177,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-04T08:04:11.680Z"
+                      default: "2026-09-04T10:08:59.674Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51296,7 +51219,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-04T08:04:11.680Z"
+                      default: "2026-09-04T10:08:59.675Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51338,7 +51261,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-04T08:04:11.680Z"
+                      default: "2026-09-04T10:08:59.675Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51665,7 +51588,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-04T08:04:04.350Z"
+                          default: "2026-09-04T10:08:50.813Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51673,7 +51596,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:04.351Z"
+                              default: "2026-09-04T10:08:50.814Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51743,7 +51666,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-04T08:04:04.350Z"
+                          default: "2026-09-04T10:08:50.813Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51751,7 +51674,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-04T08:04:04.351Z"
+                              default: "2026-09-04T10:08:50.814Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51927,7 +51850,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-04T08:04:04.350Z"
+                        default: "2026-09-04T10:08:50.813Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51935,7 +51858,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-04T08:04:04.351Z"
+                            default: "2026-09-04T10:08:50.814Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52005,7 +51928,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-04T08:04:04.350Z"
+                        default: "2026-09-04T10:08:50.813Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52013,7 +51936,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-04T08:04:04.351Z"
+                            default: "2026-09-04T10:08:50.814Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52107,7 +52030,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-04T08:04:04.350Z"
+                        default: "2026-09-04T10:08:50.813Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52115,7 +52038,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-04T08:04:04.351Z"
+                            default: "2026-09-04T10:08:50.814Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52185,7 +52108,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-04T08:04:04.350Z"
+                        default: "2026-09-04T10:08:50.813Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52193,7 +52116,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-04T08:04:04.351Z"
+                            default: "2026-09-04T10:08:50.814Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52377,7 +52300,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-04T08:04:04.350Z"
+                        default: "2026-09-04T10:08:50.813Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52385,7 +52308,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-04T08:04:04.351Z"
+                            default: "2026-09-04T10:08:50.814Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52455,7 +52378,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-04T08:04:04.350Z"
+                        default: "2026-09-04T10:08:50.813Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52463,7 +52386,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-04T08:04:04.351Z"
+                            default: "2026-09-04T10:08:50.814Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55254,6 +55177,23 @@ paths:
           source: "curl 'https://api.orq.ai/v3/evaluators/01KT1FCSA8N3YD1K8YBPVTAV9E/invoke' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n    \"context\": {\n      \"messages\": [\n        {\"role\": \"user\", \"content\": \"What is the capital of France?\"},\n        {\"role\": \"assistant\", \"content\": \"The capital of France is Paris.\"}\n      ],\n      \"input\": {\n        \"expected_output\": \"Paris\"\n      }\n    }\n  }'\n"
       security:
         - ApiKey: []
+  /v2/pii/capabilities:
+    get:
+      tags: []
+      summary: "Get PII capabilities"
+      description: "Reports the entity catalog, supported regions, and default thresholds the PII detection service currently exposes, including per-entity default thresholds."
+      operationId: "PIICapabilities"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapabilitiesResponse"
+      x-speakeasy-group: "pii"
+      x-speakeasy-name-override: "capabilities"
+      security:
+        - ApiKey: []
   /v2/pii/detect:
     post:
       tags: []
@@ -55275,6 +55215,10 @@ paths:
                 $ref: "#/components/schemas/DetectResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "detect"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.pii.detect({ text: \"Jane Doe, BSN 123456782\", entities: [\"PERSON\", \"BSN\"] });\n"
       security:
         - ApiKey: []
   /v2/pii/redact:
@@ -55298,6 +55242,10 @@ paths:
                 $ref: "#/components/schemas/RedactResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "redact"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.pii.redact({ text: \"Jane Doe, BSN 123456782\", entities: [\"PERSON\", \"BSN\"] });\n"
       security:
         - ApiKey: []
   /v2/pii/restore:
