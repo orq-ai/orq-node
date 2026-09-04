@@ -7,11 +7,11 @@ Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` a
 ```typescript
 import { Op } from "@orq-ai/node/models/components";
 
-let value: Op = "not_in";
+let value: Op = "exists";
 ```
 
 ## Values
 
 ```typescript
-"eq" | "neq" | "in" | "not_in"
+"eq" | "neq" | "in" | "not_in" | "gt" | "gte" | "lt" | "lte" | "between" | "contains" | "exists" | "not_exists"
 ```

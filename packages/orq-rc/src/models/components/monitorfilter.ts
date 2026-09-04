@@ -16,6 +16,14 @@ export const Op = {
   Neq: "neq",
   In: "in",
   NotIn: "not_in",
+  Gt: "gt",
+  Gte: "gte",
+  Lt: "lt",
+  Lte: "lte",
+  Between: "between",
+  Contains: "contains",
+  Exists: "exists",
+  NotExists: "not_exists",
 } as const;
 /**
  * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.

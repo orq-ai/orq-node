@@ -7,7 +7,7 @@ import { MonitorFilter } from "@orq-ai/node/models/components";
 
 let value: MonitorFilter = {
   field: "<value>",
-  op: "neq",
+  op: "gte",
   values: [],
 };
 ```

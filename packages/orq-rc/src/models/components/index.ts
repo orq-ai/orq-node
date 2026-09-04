@@ -322,6 +322,7 @@ export * from "./mcpconnection.js";
 export * from "./mcpconnectiontype.js";
 export * from "./mcpgateway.js";
 export * from "./mcpgatewaymode.js";
+export * from "./mcpgatewayplugin.js";
 export * from "./mcpgatewayserverlink.js";
 export * from "./mcpgatewaystatus.js";
 export * from "./mcpgatewaytool.js";

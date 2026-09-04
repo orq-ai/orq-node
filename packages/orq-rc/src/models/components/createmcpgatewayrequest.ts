@@ -9,6 +9,11 @@ import {
   McpGatewayMode$outboundSchema,
 } from "./mcpgatewaymode.js";
 import {
+  McpGatewayPlugin,
+  McpGatewayPlugin$Outbound,
+  McpGatewayPlugin$outboundSchema,
+} from "./mcpgatewayplugin.js";
+import {
   McpGatewayServerLink,
   McpGatewayServerLink$Outbound,
   McpGatewayServerLink$outboundSchema,
@@ -46,6 +51,10 @@ export type CreateMcpGatewayRequest = {
    * Which projects in the workspace may use this gateway. Defaults to every project.
    */
   sharing?: Sharing | undefined;
+  /**
+   * Plugins run on every tool call this gateway serves.
+   */
+  plugins?: Array<McpGatewayPlugin> | undefined;
 };
 
 /** @internal */
@@ -57,6 +66,7 @@ export type CreateMcpGatewayRequest$Outbound = {
   tool_naming?: string | undefined;
   mode?: string | undefined;
   sharing?: Sharing$Outbound | undefined;
+  plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
 };
 
 /** @internal */
@@ -72,6 +82,7 @@ export const CreateMcpGatewayRequest$outboundSchema: z.ZodType<
   toolNaming: McpToolNaming$outboundSchema.optional(),
   mode: McpGatewayMode$outboundSchema.optional(),
   sharing: Sharing$outboundSchema.optional(),
+  plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
