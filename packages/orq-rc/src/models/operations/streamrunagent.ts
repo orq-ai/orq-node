@@ -203,11 +203,9 @@ export type StreamRunAgentModelConfigurationGuardrails = {
 };
 
 export type StreamRunAgentModelConfigurationPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type StreamRunAgentModelConfigurationFallbacks = {
   /**
@@ -440,11 +438,9 @@ export type StreamRunAgentModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -712,11 +708,9 @@ export type StreamRunAgentFallbackModelConfigurationGuardrails = {
 };
 
 export type StreamRunAgentFallbackModelConfigurationPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type StreamRunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -953,11 +947,9 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -1673,6 +1665,10 @@ export type StreamRunAgentEvaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: StreamRunAgentExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1702,6 +1698,10 @@ export type StreamRunAgentGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: StreamRunAgentAgentsExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 export type StreamRunAgentSettings = {
@@ -2268,11 +2268,9 @@ export function streamRunAgentModelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type StreamRunAgentModelConfigurationPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2280,11 +2278,11 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationPlugins
 > = z.union([
-  components.PIIRedactionPluginEn$outboundSchema,
-  components.PIIRedactionPluginNl$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-  components.PIIRedactionPluginAuto$outboundSchema,
+  components.PIIRedactionPlugin$outboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
 ]);
 
 export function streamRunAgentModelConfigurationPluginsToJSON(
@@ -2538,11 +2536,9 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
     | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -2600,11 +2596,11 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPluginEn$outboundSchema,
-        components.PIIRedactionPluginNl$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
-        components.PIIRedactionPluginAuto$outboundSchema,
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
         components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3105,11 +3101,9 @@ export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3118,11 +3112,11 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationPlugins
   > = z.union([
-    components.PIIRedactionPluginEn$outboundSchema,
-    components.PIIRedactionPluginNl$outboundSchema,
-    components.TraceScrubbingPlugin$outboundSchema,
-    components.PIIRedactionPluginAuto$outboundSchema,
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
     components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
   ]);
 
 export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
@@ -3381,11 +3375,9 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
     | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3452,11 +3444,11 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPluginEn$outboundSchema,
-        components.PIIRedactionPluginNl$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
-        components.PIIRedactionPluginAuto$outboundSchema,
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
         components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3957,7 +3949,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M1NQ4PN1KK5ZM8GZMKJXZDDN"),
+  id: z.string().default("01M1NY973HYGE5WMP4Z65KFGAW"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>
@@ -4711,6 +4703,7 @@ export type StreamRunAgentEvaluators$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
+  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4722,6 +4715,7 @@ export const StreamRunAgentEvaluators$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: StreamRunAgentExecuteOn$outboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -4747,6 +4741,7 @@ export type StreamRunAgentGuardrails$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
+  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4758,6 +4753,7 @@ export const StreamRunAgentGuardrails$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: StreamRunAgentAgentsExecuteOn$outboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",

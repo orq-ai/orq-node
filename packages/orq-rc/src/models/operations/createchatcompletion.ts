@@ -681,11 +681,9 @@ export type CreateChatCompletionGuardrails = {
 };
 
 export type CreateChatCompletionPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type CreateChatCompletionFallbacks = {
   /**
@@ -1580,11 +1578,9 @@ export type CreateChatCompletionRequestBody = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -3409,11 +3405,9 @@ export function createChatCompletionGuardrailsToJSON(
 
 /** @internal */
 export type CreateChatCompletionPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
@@ -3421,11 +3415,11 @@ export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionPlugins
 > = z.union([
-  components.PIIRedactionPluginEn$outboundSchema,
-  components.PIIRedactionPluginNl$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-  components.PIIRedactionPluginAuto$outboundSchema,
+  components.PIIRedactionPlugin$outboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
 ]);
 
 export function createChatCompletionPluginsToJSON(
@@ -5290,11 +5284,9 @@ export type CreateChatCompletionRequestBody$Outbound = {
   guardrails?: Array<CreateChatCompletionGuardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
@@ -5373,11 +5365,11 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$outboundSchema,
-      components.PIIRedactionPluginNl$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-      components.PIIRedactionPluginAuto$outboundSchema,
+      components.PIIRedactionPlugin$outboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))

@@ -13,10 +13,29 @@ export type GuardrailRulePlugin = {
    * Plugin discriminator.
    */
   id?: string | undefined;
+  /**
+   * Languages, regions and entity types are checked against the live
+   *
+   * @remarks
+   *  pii-detection capabilities catalog when the rule is saved, not pinned
+   *  here, so a language or region the detector gains becomes writable without
+   *  a proto change.
+   */
   language?: string | undefined;
+  /**
+   * Entity types to redact. Mutually exclusive with regions.
+   */
   entities?: Array<string> | undefined;
   onFailure?: string | undefined;
   threshold?: number | undefined;
+  /**
+   * Regions of coverage by ISO 3166-1 alpha-2 code, or ["all"]. Mutually exclusive with entities.
+   */
+  regions?: Array<string> | undefined;
+  /**
+   * Per-entity-type confidence cutoff. Every key must also appear in entities.
+   */
+  entityThresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -30,9 +49,12 @@ export const GuardrailRulePlugin$inboundSchema: z.ZodType<
   entities: z.array(z.string()).optional(),
   on_failure: z.string().optional(),
   threshold: z.number().optional(),
+  regions: z.array(z.string()).optional(),
+  entity_thresholds: z.record(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "on_failure": "onFailure",
+    "entity_thresholds": "entityThresholds",
   });
 });
 /** @internal */
@@ -42,6 +64,8 @@ export type GuardrailRulePlugin$Outbound = {
   entities?: Array<string> | undefined;
   on_failure?: string | undefined;
   threshold?: number | undefined;
+  regions?: Array<string> | undefined;
+  entity_thresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -55,9 +79,12 @@ export const GuardrailRulePlugin$outboundSchema: z.ZodType<
   entities: z.array(z.string()).optional(),
   onFailure: z.string().optional(),
   threshold: z.number().optional(),
+  regions: z.array(z.string()).optional(),
+  entityThresholds: z.record(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     onFailure: "on_failure",
+    entityThresholds: "entity_thresholds",
   });
 });
 

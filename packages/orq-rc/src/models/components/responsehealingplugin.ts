@@ -4,38 +4,15 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * Plugin discriminator. Must be `response_healing`.
- */
-export const ResponseHealingPluginId = {
-  ResponseHealing: "response_healing",
-} as const;
-/**
- * Plugin discriminator. Must be `response_healing`.
- */
-export type ResponseHealingPluginId = ClosedEnum<
-  typeof ResponseHealingPluginId
->;
 
 export type ResponseHealingPlugin = {
   /**
    * Plugin discriminator. Must be `response_healing`.
    */
-  id: ResponseHealingPluginId;
+  id: "response_healing";
 };
-
-/** @internal */
-export const ResponseHealingPluginId$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseHealingPluginId
-> = z.nativeEnum(ResponseHealingPluginId);
-/** @internal */
-export const ResponseHealingPluginId$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseHealingPluginId
-> = ResponseHealingPluginId$inboundSchema;
 
 /** @internal */
 export const ResponseHealingPlugin$inboundSchema: z.ZodType<
@@ -43,11 +20,11 @@ export const ResponseHealingPlugin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: ResponseHealingPluginId$inboundSchema,
+  id: z.literal("response_healing"),
 });
 /** @internal */
 export type ResponseHealingPlugin$Outbound = {
-  id: string;
+  id: "response_healing";
 };
 
 /** @internal */
@@ -56,7 +33,7 @@ export const ResponseHealingPlugin$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseHealingPlugin
 > = z.object({
-  id: ResponseHealingPluginId$outboundSchema,
+  id: z.literal("response_healing"),
 });
 
 export function responseHealingPluginToJSON(

@@ -140,6 +140,10 @@ export type Evaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: AgentStartedStreamingEventDataExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -169,6 +173,10 @@ export type Guardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: AgentStartedStreamingEventExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 export type Settings = {
@@ -198,7 +206,7 @@ export type Settings = {
    */
   evaluators?: Array<Evaluators> | undefined;
   /**
-   * Configuration for a guardrail applied to the agent
+   * Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request.
    */
   guardrails?: Array<Guardrails> | undefined;
 };
@@ -376,6 +384,7 @@ export const Evaluators$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: AgentStartedStreamingEventDataExecuteOn$inboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -407,6 +416,7 @@ export const Guardrails$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: AgentStartedStreamingEventExecuteOn$inboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",

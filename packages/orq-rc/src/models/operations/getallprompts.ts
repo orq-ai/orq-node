@@ -854,11 +854,9 @@ export type GetAllPromptsGuardrails = {
 };
 
 export type GetAllPromptsPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type GetAllPromptsFallbacks = {
   /**
@@ -1449,11 +1447,9 @@ export type GetAllPromptsPromptField = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -2541,11 +2537,11 @@ export const GetAllPromptsPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPluginEn$inboundSchema,
-  components.PIIRedactionPluginNl$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-  components.PIIRedactionPluginAuto$inboundSchema,
+  components.PIIRedactionPlugin$inboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
 ]);
 
 export function getAllPromptsPluginsFromJSON(
@@ -3287,11 +3283,11 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$inboundSchema,
-      components.PIIRedactionPluginNl$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-      components.PIIRedactionPluginAuto$inboundSchema,
+      components.PIIRedactionPlugin$inboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => GetAllPromptsFallbacks$inboundSchema))

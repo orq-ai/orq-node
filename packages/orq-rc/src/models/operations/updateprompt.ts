@@ -587,11 +587,9 @@ export type UpdatePromptGuardrails = {
 };
 
 export type UpdatePromptPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type UpdatePromptFallbacks = {
   /**
@@ -862,11 +860,9 @@ export type UpdatePromptPromptInput = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -1836,11 +1832,9 @@ export type UpdatePromptPromptsGuardrails = {
 };
 
 export type UpdatePromptPromptsPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type UpdatePromptPromptsFallbacks = {
   /**
@@ -2438,11 +2432,9 @@ export type UpdatePromptPromptField = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -3572,11 +3564,9 @@ export function updatePromptGuardrailsToJSON(
 
 /** @internal */
 export type UpdatePromptPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const UpdatePromptPlugins$outboundSchema: z.ZodType<
@@ -3584,11 +3574,11 @@ export const UpdatePromptPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdatePromptPlugins
 > = z.union([
-  components.PIIRedactionPluginEn$outboundSchema,
-  components.PIIRedactionPluginNl$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-  components.PIIRedactionPluginAuto$outboundSchema,
+  components.PIIRedactionPlugin$outboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
 ]);
 
 export function updatePromptPluginsToJSON(
@@ -3856,11 +3846,9 @@ export type UpdatePromptPromptInput$Outbound = {
   guardrails?: Array<UpdatePromptGuardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
@@ -3927,11 +3915,11 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$outboundSchema,
-      components.PIIRedactionPluginNl$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-      components.PIIRedactionPluginAuto$outboundSchema,
+      components.PIIRedactionPlugin$outboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
@@ -5039,11 +5027,11 @@ export const UpdatePromptPromptsPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPluginEn$inboundSchema,
-  components.PIIRedactionPluginNl$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-  components.PIIRedactionPluginAuto$inboundSchema,
+  components.PIIRedactionPlugin$inboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
 ]);
 
 export function updatePromptPromptsPluginsFromJSON(
@@ -5834,11 +5822,11 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$inboundSchema,
-      components.PIIRedactionPluginNl$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-      components.PIIRedactionPluginAuto$inboundSchema,
+      components.PIIRedactionPlugin$inboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))
