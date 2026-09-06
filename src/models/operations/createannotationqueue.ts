@@ -151,7 +151,7 @@ export const CreateAnnotationQueueResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-06T12:10:30.672Z",
+    "2026-09-06T12:48:18.752Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
