@@ -332,6 +332,24 @@ export type CreateRouterResponseContent2 = TwoText | TwoImage | TwoFile;
  */
 export type InputContent = string | Array<TwoText | TwoImage | TwoFile>;
 
+export const Effort = {
+  None: "none",
+  Minimal: "minimal",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Xhigh: "xhigh",
+  Max: "max",
+} as const;
+export type Effort = ClosedEnum<typeof Effort>;
+
+/**
+ * Reasoning settings applied by a configuration_update item.
+ */
+export type Reasoning = {
+  effort?: Effort | undefined;
+};
+
 /**
  * The role of the message sender (for message items).
  */
@@ -388,6 +406,7 @@ export const InputType = {
   McpListTools: "mcp_list_tools",
   McpApprovalRequest: "mcp_approval_request",
   McpApprovalResponse: "mcp_approval_response",
+  ConfigurationUpdate: "configuration_update",
 } as const;
 /**
  * The type of item.
@@ -402,6 +421,10 @@ export type CreateRouterResponseInput2 = {
    * The function arguments as a JSON string (for function_call items).
    */
   arguments?: string | undefined;
+  /**
+   * Whether a function or custom tool call runs asynchronously.
+   */
+  async?: boolean | undefined;
   /**
    * The function call identifier (for function_call and function_call_output items).
    */
@@ -422,6 +445,10 @@ export type CreateRouterResponseInput2 = {
    * The output of the function call (for function_call_output type).
    */
   output?: string | undefined;
+  /**
+   * Reasoning settings applied by a configuration_update item.
+   */
+  reasoning?: Reasoning | undefined;
   /**
    * The role of the message sender (for message items).
    */
@@ -648,7 +675,7 @@ export type Network = {
 /**
  * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
-export const CreateRouterResponseToolsResponsesType = {
+export const CreateRouterResponseToolsResponsesRequestType = {
   OrqWebSearch: "orq:web_search",
   OrqWebFetch: "orq:web_fetch",
   OrqDatetime: "orq:datetime",
@@ -670,8 +697,8 @@ export const CreateRouterResponseToolsResponsesType = {
 /**
  * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
-export type CreateRouterResponseToolsResponsesType = ClosedEnum<
-  typeof CreateRouterResponseToolsResponsesType
+export type CreateRouterResponseToolsResponsesRequestType = ClosedEnum<
+  typeof CreateRouterResponseToolsResponsesRequestType
 >;
 
 /**
@@ -697,7 +724,26 @@ export type OrqAiTool = {
   /**
    * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
    */
-  type: CreateRouterResponseToolsResponsesType;
+  type: CreateRouterResponseToolsResponsesRequestType;
+};
+
+/**
+ * A custom tool that accepts free-form input.
+ */
+export type Custom = {
+  /**
+   * Whether the tool response can be returned asynchronously.
+   */
+  async?: boolean | undefined;
+  /**
+   * A description of what the custom tool does.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the custom tool.
+   */
+  name: string;
+  type: "custom";
 };
 
 /**
@@ -759,6 +805,10 @@ export type ToolsCacheControl = {
  * A function tool the model can call.
  */
 export type ToolsFunction = {
+  /**
+   * Whether the tool response can be returned asynchronously.
+   */
+  async?: boolean | undefined;
   cacheControl?: ToolsCacheControl | undefined;
   /**
    * A description of what the function does.
@@ -784,6 +834,7 @@ export type ToolsFunction = {
  */
 export type CreateRouterResponseTools =
   | ToolsFunction
+  | Custom
   | components.OrqAdvisorTool
   | (components.OrqSidekickTool & { type: "orq:subagent" })
   | (components.OrqSidekickTool & { type: "orq:sidekick" })
@@ -881,6 +932,7 @@ export type CreateRouterResponseRequestBody = {
    * Key for prompt caching across requests.
    */
   promptCacheKey?: string | undefined;
+  promptCacheOptions?: components.OpenAIPromptCacheOptions | undefined;
   reasoning?: components.ReasoningParam | undefined;
   retry?: components.ResponseRetryConfig | undefined;
   /**
@@ -933,6 +985,7 @@ export type CreateRouterResponseRequestBody = {
   tools?:
     | Array<
       | ToolsFunction
+      | Custom
       | components.OrqAdvisorTool
       | (components.OrqSidekickTool & { type: "orq:subagent" })
       | (components.OrqSidekickTool & { type: "orq:sidekick" })
@@ -1050,6 +1103,7 @@ export type CreateRouterResponseResponseBody = {
   presencePenalty: number;
   previousResponseId: string | null;
   promptCacheKey: string | null;
+  promptCacheOptions: components.OpenAIPromptCacheOptions | null;
   promptCacheRetention: string | null;
   reasoning: components.Reasoning | null;
   safetyIdentifier: string | null;
@@ -1396,6 +1450,28 @@ export function inputContentToJSON(inputContent: InputContent): string {
 }
 
 /** @internal */
+export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> = z
+  .nativeEnum(Effort);
+
+/** @internal */
+export type Reasoning$Outbound = {
+  effort?: string | undefined;
+};
+
+/** @internal */
+export const Reasoning$outboundSchema: z.ZodType<
+  Reasoning$Outbound,
+  z.ZodTypeDef,
+  Reasoning
+> = z.object({
+  effort: Effort$outboundSchema.optional(),
+});
+
+export function reasoningToJSON(reasoning: Reasoning): string {
+  return JSON.stringify(Reasoning$outboundSchema.parse(reasoning));
+}
+
+/** @internal */
 export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
   .nativeEnum(InputRole);
 
@@ -1410,6 +1486,7 @@ export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
   arguments?: string | undefined;
+  async?: boolean | undefined;
   call_id?: string | undefined;
   content?:
     | string
@@ -1418,6 +1495,7 @@ export type CreateRouterResponseInput2$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
   output?: string | undefined;
+  reasoning?: Reasoning$Outbound | undefined;
   role?: string | undefined;
   status?: string | undefined;
   type?: string | undefined;
@@ -1430,6 +1508,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   CreateRouterResponseInput2
 > = z.object({
   arguments: z.string().optional(),
+  async: z.boolean().optional(),
   callId: z.string().optional(),
   content: z.union([
     z.string(),
@@ -1442,6 +1521,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   output: z.string().optional(),
+  reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
   role: InputRole$outboundSchema.optional(),
   status: Status$outboundSchema.optional(),
   type: InputType$outboundSchema.optional(),
@@ -1759,10 +1839,9 @@ export function networkToJSON(network: Network): string {
 }
 
 /** @internal */
-export const CreateRouterResponseToolsResponsesType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesType> = z.nativeEnum(
-    CreateRouterResponseToolsResponsesType,
-  );
+export const CreateRouterResponseToolsResponsesRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesRequestType> = z
+    .nativeEnum(CreateRouterResponseToolsResponsesRequestType);
 
 /** @internal */
 export type OrqAiTool$Outbound = {
@@ -1783,7 +1862,7 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   network: z.lazy(() => Network$outboundSchema).optional(),
   timezone: z.string().optional(),
   toolId: z.string().optional(),
-  type: CreateRouterResponseToolsResponsesType$outboundSchema,
+  type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     toolId: "tool_id",
@@ -1792,6 +1871,30 @@ export const OrqAiTool$outboundSchema: z.ZodType<
 
 export function orqAiToolToJSON(orqAiTool: OrqAiTool): string {
   return JSON.stringify(OrqAiTool$outboundSchema.parse(orqAiTool));
+}
+
+/** @internal */
+export type Custom$Outbound = {
+  async?: boolean | undefined;
+  description?: string | undefined;
+  name: string;
+  type: "custom";
+};
+
+/** @internal */
+export const Custom$outboundSchema: z.ZodType<
+  Custom$Outbound,
+  z.ZodTypeDef,
+  Custom
+> = z.object({
+  async: z.boolean().optional(),
+  description: z.string().optional(),
+  name: z.string(),
+  type: z.literal("custom"),
+});
+
+export function customToJSON(custom: Custom): string {
+  return JSON.stringify(Custom$outboundSchema.parse(custom));
 }
 
 /** @internal */
@@ -1828,6 +1931,7 @@ export function toolsCacheControlToJSON(
 
 /** @internal */
 export type ToolsFunction$Outbound = {
+  async?: boolean | undefined;
   cache_control?: ToolsCacheControl$Outbound | undefined;
   description?: string | undefined;
   name: string;
@@ -1842,6 +1946,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ToolsFunction
 > = z.object({
+  async: z.boolean().optional(),
   cacheControl: z.lazy(() => ToolsCacheControl$outboundSchema).optional(),
   description: z.string().optional(),
   name: z.string(),
@@ -1861,6 +1966,7 @@ export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
 /** @internal */
 export type CreateRouterResponseTools$Outbound =
   | ToolsFunction$Outbound
+  | Custom$Outbound
   | components.OrqAdvisorTool$Outbound
   | (components.OrqSidekickTool$Outbound & { type: "orq:subagent" })
   | (components.OrqSidekickTool$Outbound & { type: "orq:sidekick" })
@@ -1890,6 +1996,7 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   CreateRouterResponseTools
 > = z.union([
   z.lazy(() => ToolsFunction$outboundSchema),
+  z.lazy(() => Custom$outboundSchema),
   components.OrqAdvisorTool$outboundSchema,
   components.OrqSidekickTool$outboundSchema.and(
     z.object({ type: z.literal("orq:subagent") }),
@@ -1984,6 +2091,9 @@ export type CreateRouterResponseRequestBody$Outbound = {
   presence_penalty?: number | undefined;
   previous_response_id?: string | undefined;
   prompt_cache_key?: string | undefined;
+  prompt_cache_options?:
+    | components.OpenAIPromptCacheOptions$Outbound
+    | undefined;
   reasoning?: components.ReasoningParam$Outbound | undefined;
   retry?: components.ResponseRetryConfig$Outbound | undefined;
   safety_identifier?: string | undefined;
@@ -2003,6 +2113,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   tools?:
     | Array<
       | ToolsFunction$Outbound
+      | Custom$Outbound
       | components.OrqAdvisorTool$Outbound
       | (components.OrqSidekickTool$Outbound & { type: "orq:subagent" })
       | (components.OrqSidekickTool$Outbound & { type: "orq:sidekick" })
@@ -2067,6 +2178,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   previousResponseId: z.string().optional(),
   promptCacheKey: z.string().optional(),
+  promptCacheOptions: components.OpenAIPromptCacheOptions$outboundSchema
+    .optional(),
   reasoning: components.ReasoningParam$outboundSchema.optional(),
   retry: components.ResponseRetryConfig$outboundSchema.optional(),
   safetyIdentifier: z.string().optional(),
@@ -2089,6 +2202,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   tools: z.array(
     z.union([
       z.lazy(() => ToolsFunction$outboundSchema),
+      z.lazy(() => Custom$outboundSchema),
       components.OrqAdvisorTool$outboundSchema,
       components.OrqSidekickTool$outboundSchema.and(
         z.object({ type: z.literal("orq:subagent") }),
@@ -2166,6 +2280,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
     presencePenalty: "presence_penalty",
     previousResponseId: "previous_response_id",
     promptCacheKey: "prompt_cache_key",
+    promptCacheOptions: "prompt_cache_options",
     safetyIdentifier: "safety_identifier",
     serviceTier: "service_tier",
     stopSequences: "stop_sequences",
@@ -2263,6 +2378,9 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),
   prompt_cache_key: z.nullable(z.string()),
+  prompt_cache_options: z.nullable(
+    components.OpenAIPromptCacheOptions$inboundSchema,
+  ),
   prompt_cache_retention: z.nullable(z.string()),
   reasoning: z.nullable(components.Reasoning$inboundSchema),
   safety_identifier: z.nullable(z.string()),
@@ -2293,6 +2411,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
     "presence_penalty": "presencePenalty",
     "previous_response_id": "previousResponseId",
     "prompt_cache_key": "promptCacheKey",
+    "prompt_cache_options": "promptCacheOptions",
     "prompt_cache_retention": "promptCacheRetention",
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",

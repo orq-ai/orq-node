@@ -18,6 +18,7 @@ import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { FileSystems } from "./filesystems.js";
 import { GuardrailRules } from "./guardrailrules.js";
+import { Hub } from "./hub.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
@@ -38,6 +39,7 @@ import { Responses } from "./responses.js";
 import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
+import { Sessions } from "./sessions.js";
 import { Skills } from "./skills.js";
 import { SmartRouters } from "./smartrouters.js";
 import { Tools } from "./tools.js";
@@ -168,6 +170,11 @@ export class Orq extends ClientSDK {
     return (this._guardrailRules ??= new GuardrailRules(this._options));
   }
 
+  private _hub?: Hub;
+  get hub(): Hub {
+    return (this._hub ??= new Hub(this._options));
+  }
+
   private _identities?: Identities;
   get identities(): Identities {
     return (this._identities ??= new Identities(this._options));
@@ -206,6 +213,11 @@ export class Orq extends ClientSDK {
   private _routingRules?: RoutingRules;
   get routingRules(): RoutingRules {
     return (this._routingRules ??= new RoutingRules(this._options));
+  }
+
+  private _sessions?: Sessions;
+  get sessions(): Sessions {
+    return (this._sessions ??= new Sessions(this._options));
   }
 
   private _skills?: Skills;

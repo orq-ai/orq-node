@@ -274,6 +274,11 @@ run();
 * [delete](docs/sdks/guardrailrules/README.md#delete) - Delete a guardrail rule
 * [update](docs/sdks/guardrailrules/README.md#update) - Update a guardrail rule
 
+### [Hub](docs/sdks/hub/README.md)
+
+* [search](docs/sdks/hub/README.md#search) - Search hub items
+* [get](docs/sdks/hub/README.md#get) - Get a hub item
+
 ### [HumanReviewSets](docs/sdks/humanreviewsets/README.md)
 
 * [list](docs/sdks/humanreviewsets/README.md#list) - Get all human review sets
@@ -516,6 +521,16 @@ run();
 * [update](docs/sdks/schedules/README.md#update) - Update schedule
 * [trigger](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution
 
+### [Sessions](docs/sdks/sessions/README.md)
+
+* [create](docs/sdks/sessions/README.md#create) - Create trace thread
+* [getCount](docs/sdks/sessions/README.md#getcount) - Get thread count
+* [list](docs/sdks/sessions/README.md#list) - List trace threads
+* [listTags](docs/sdks/sessions/README.md#listtags) - List thread tags
+* [get](docs/sdks/sessions/README.md#get) - Get trace thread
+* [delete](docs/sdks/sessions/README.md#delete) - Delete trace thread
+* [update](docs/sdks/sessions/README.md#update) - Update trace thread
+
 ### [Skills](docs/sdks/skills/README.md)
 
 * [list](docs/sdks/skills/README.md#list) - List all skills
@@ -690,6 +705,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`guardrailRulesListUsedGuardrails`](docs/sdks/guardrailrules/README.md#listusedguardrails) - List guardrails used by guardrail rules
 - [`guardrailRulesRetrieve`](docs/sdks/guardrailrules/README.md#retrieve) - Retrieve a guardrail rule
 - [`guardrailRulesUpdate`](docs/sdks/guardrailrules/README.md#update) - Update a guardrail rule
+- [`hubGet`](docs/sdks/hub/README.md#get) - Get a hub item
+- [`hubSearch`](docs/sdks/hub/README.md#search) - Search hub items
 - [`humanReviewSetsCreate`](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
 - [`humanReviewSetsDelete`](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
 - [`humanReviewSetsGet`](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID
@@ -839,6 +856,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`schedulesRetrieve`](docs/sdks/schedules/README.md#retrieve) - Retrieve schedule
 - [`schedulesTrigger`](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution
 - [`schedulesUpdate`](docs/sdks/schedules/README.md#update) - Update schedule
+- [`sessionsCreate`](docs/sdks/sessions/README.md#create) - Create trace thread
+- [`sessionsDelete`](docs/sdks/sessions/README.md#delete) - Delete trace thread
+- [`sessionsGet`](docs/sdks/sessions/README.md#get) - Get trace thread
+- [`sessionsGetCount`](docs/sdks/sessions/README.md#getcount) - Get thread count
+- [`sessionsList`](docs/sdks/sessions/README.md#list) - List trace threads
+- [`sessionsListTags`](docs/sdks/sessions/README.md#listtags) - List thread tags
+- [`sessionsUpdate`](docs/sdks/sessions/README.md#update) - Update trace thread
 - [`skillsCreate`](docs/sdks/skills/README.md#create) - Create a new skill
 - [`skillsDelete`](docs/sdks/skills/README.md#delete) - Delete a skill
 - [`skillsGet`](docs/sdks/skills/README.md#get) - Retrieve a skill
@@ -1204,34 +1228,34 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 287 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 287 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 287 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 287 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 287 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 287 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 287 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 287 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 287 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 287 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 287 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 287 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 287 methods.*
-* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 287 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 287 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 287 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 287 methods.*
-* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 287 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 296 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 296 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 296 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 296 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 296 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 296 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 296 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 296 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 296 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 296 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 296 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 296 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 296 methods.*
+* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 296 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 296 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 296 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 296 methods.*
+* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 296 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

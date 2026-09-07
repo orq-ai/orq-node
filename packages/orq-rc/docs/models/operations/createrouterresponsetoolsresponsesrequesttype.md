@@ -1,13 +1,13 @@
-# CreateRouterResponseToolsResponsesType
+# CreateRouterResponseToolsResponsesRequestType
 
 The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
 
 ## Example Usage
 
 ```typescript
-import { CreateRouterResponseToolsResponsesType } from "@orq-ai/node/models/operations";
+import { CreateRouterResponseToolsResponsesRequestType } from "@orq-ai/node/models/operations";
 
-let value: CreateRouterResponseToolsResponsesType = "orq:apply_patch";
+let value: CreateRouterResponseToolsResponsesRequestType = "orq:current_date";
 ```
 
 ## Values

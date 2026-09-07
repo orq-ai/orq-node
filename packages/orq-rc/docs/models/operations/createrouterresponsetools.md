@@ -14,6 +14,15 @@ const value: operations.ToolsFunction = {
 };
 ```
 
+### `operations.Custom`
+
+```typescript
+const value: operations.Custom = {
+  name: "<value>",
+  type: "custom",
+};
+```
+
 ### `components.OrqAdvisorTool`
 
 ```typescript

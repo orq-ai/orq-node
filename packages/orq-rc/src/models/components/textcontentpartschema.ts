@@ -43,7 +43,7 @@ export type TextContentPartSchemaType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const Ttl = {
+export const TextContentPartSchemaTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -57,7 +57,9 @@ export const Ttl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type Ttl = ClosedEnum<typeof Ttl>;
+export type TextContentPartSchemaTtl = ClosedEnum<
+  typeof TextContentPartSchemaTtl
+>;
 
 export type CacheControl = {
   /**
@@ -74,7 +76,7 @@ export type CacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: Ttl | undefined;
+  ttl?: TextContentPartSchemaTtl | undefined;
 };
 
 /**
@@ -110,10 +112,13 @@ export const TextContentPartSchemaType$outboundSchema: z.ZodNativeEnum<
 > = TextContentPartSchemaType$inboundSchema;
 
 /** @internal */
-export const Ttl$inboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(Ttl);
+export const TextContentPartSchemaTtl$inboundSchema: z.ZodNativeEnum<
+  typeof TextContentPartSchemaTtl
+> = z.nativeEnum(TextContentPartSchemaTtl);
 /** @internal */
-export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
-  Ttl$inboundSchema;
+export const TextContentPartSchemaTtl$outboundSchema: z.ZodNativeEnum<
+  typeof TextContentPartSchemaTtl
+> = TextContentPartSchemaTtl$inboundSchema;
 
 /** @internal */
 export const CacheControl$inboundSchema: z.ZodType<
@@ -122,7 +127,7 @@ export const CacheControl$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: TextContentPartSchemaType$inboundSchema,
-  ttl: Ttl$inboundSchema.default("5m"),
+  ttl: TextContentPartSchemaTtl$inboundSchema.default("5m"),
 });
 /** @internal */
 export type CacheControl$Outbound = {
@@ -137,7 +142,7 @@ export const CacheControl$outboundSchema: z.ZodType<
   CacheControl
 > = z.object({
   type: TextContentPartSchemaType$outboundSchema,
-  ttl: Ttl$outboundSchema.default("5m"),
+  ttl: TextContentPartSchemaTtl$outboundSchema.default("5m"),
 });
 
 export function cacheControlToJSON(cacheControl: CacheControl): string {

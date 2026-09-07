@@ -83,6 +83,7 @@ export type RetrieveResponseResponseBody = {
   presencePenalty: number;
   previousResponseId: string | null;
   promptCacheKey: string | null;
+  promptCacheOptions: components.OpenAIPromptCacheOptions | null;
   promptCacheRetention: string | null;
   reasoning: components.Reasoning | null;
   safetyIdentifier: string | null;
@@ -183,6 +184,9 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),
   prompt_cache_key: z.nullable(z.string()),
+  prompt_cache_options: z.nullable(
+    components.OpenAIPromptCacheOptions$inboundSchema,
+  ),
   prompt_cache_retention: z.nullable(z.string()),
   reasoning: z.nullable(components.Reasoning$inboundSchema),
   safety_identifier: z.nullable(z.string()),
@@ -213,6 +217,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
     "presence_penalty": "presencePenalty",
     "previous_response_id": "previousResponseId",
     "prompt_cache_key": "promptCacheKey",
+    "prompt_cache_options": "promptCacheOptions",
     "prompt_cache_retention": "promptCacheRetention",
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",

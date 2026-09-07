@@ -145,7 +145,7 @@ export type Contact = {
 /**
  * Thread information to group related requests
  */
-export type Thread = {
+export type AgentResponseRequestThread = {
   /**
    * Unique thread identifier to group related invocations.
    */
@@ -228,7 +228,7 @@ export type AgentResponseRequest = {
   /**
    * Thread information to group related requests
    */
-  thread?: Thread | undefined;
+  thread?: AgentResponseRequestThread | undefined;
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
@@ -419,23 +419,27 @@ export function contactToJSON(contact: Contact): string {
 }
 
 /** @internal */
-export type Thread$Outbound = {
+export type AgentResponseRequestThread$Outbound = {
   id: string;
   tags?: Array<string> | undefined;
 };
 
 /** @internal */
-export const Thread$outboundSchema: z.ZodType<
-  Thread$Outbound,
+export const AgentResponseRequestThread$outboundSchema: z.ZodType<
+  AgentResponseRequestThread$Outbound,
   z.ZodTypeDef,
-  Thread
+  AgentResponseRequestThread
 > = z.object({
   id: z.string(),
   tags: z.array(z.string()).optional(),
 });
 
-export function threadToJSON(thread: Thread): string {
-  return JSON.stringify(Thread$outboundSchema.parse(thread));
+export function agentResponseRequestThreadToJSON(
+  agentResponseRequestThread: AgentResponseRequestThread,
+): string {
+  return JSON.stringify(
+    AgentResponseRequestThread$outboundSchema.parse(agentResponseRequestThread),
+  );
 }
 
 /** @internal */
@@ -521,7 +525,7 @@ export type AgentResponseRequest$Outbound = {
   variables?: { [k: string]: any } | undefined;
   identity?: AgentResponseRequestIdentity$Outbound | undefined;
   contact?: Contact$Outbound | undefined;
-  thread?: Thread$Outbound | undefined;
+  thread?: AgentResponseRequestThread$Outbound | undefined;
   memory?: AgentResponseRequestMemory$Outbound | undefined;
   metadata?: { [k: string]: any } | undefined;
   engine?: string | undefined;
@@ -543,7 +547,7 @@ export const AgentResponseRequest$outboundSchema: z.ZodType<
   identity: z.lazy(() => AgentResponseRequestIdentity$outboundSchema)
     .optional(),
   contact: z.lazy(() => Contact$outboundSchema).optional(),
-  thread: z.lazy(() => Thread$outboundSchema).optional(),
+  thread: z.lazy(() => AgentResponseRequestThread$outboundSchema).optional(),
   memory: z.lazy(() => AgentResponseRequestMemory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
   engine: Engine$outboundSchema.optional(),

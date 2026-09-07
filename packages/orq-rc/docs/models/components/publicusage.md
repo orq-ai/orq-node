@@ -8,13 +8,13 @@ import { PublicUsage } from "@orq-ai/node/models/components";
 let value: PublicUsage = {
   inputTokens: 37454,
   inputTokensDetails: {
-    cacheCreationTokens: 763695,
-    cacheWriteTokens: 732588,
-    cachedTokens: 376439,
+    cacheCreationTokens: 732588,
+    cacheWriteTokens: 376439,
+    cachedTokens: 349904,
   },
   outputTokens: 218537,
   outputTokensDetails: {
-    reasoningTokens: 437223,
+    reasoningTokens: 846277,
   },
   totalTokens: 444522,
 };
