@@ -8,10 +8,10 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Currency = {
+export const BudgetLimitCurrency = {
   Usd: "usd",
 } as const;
-export type Currency = ClosedEnum<typeof Currency>;
+export type BudgetLimitCurrency = ClosedEnum<typeof BudgetLimitCurrency>;
 
 export const Period = {
   Hour: "hour",
@@ -23,16 +23,18 @@ export type Period = ClosedEnum<typeof Period>;
 
 export type BudgetLimit = {
   amount: number;
-  currency: Currency;
+  currency: BudgetLimitCurrency;
   period: Period;
 };
 
 /** @internal */
-export const Currency$inboundSchema: z.ZodNativeEnum<typeof Currency> = z
-  .nativeEnum(Currency);
+export const BudgetLimitCurrency$inboundSchema: z.ZodNativeEnum<
+  typeof BudgetLimitCurrency
+> = z.nativeEnum(BudgetLimitCurrency);
 /** @internal */
-export const Currency$outboundSchema: z.ZodNativeEnum<typeof Currency> =
-  Currency$inboundSchema;
+export const BudgetLimitCurrency$outboundSchema: z.ZodNativeEnum<
+  typeof BudgetLimitCurrency
+> = BudgetLimitCurrency$inboundSchema;
 
 /** @internal */
 export const Period$inboundSchema: z.ZodNativeEnum<typeof Period> = z
@@ -48,7 +50,7 @@ export const BudgetLimit$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   amount: z.number(),
-  currency: Currency$inboundSchema,
+  currency: BudgetLimitCurrency$inboundSchema,
   period: Period$inboundSchema,
 });
 /** @internal */
@@ -65,7 +67,7 @@ export const BudgetLimit$outboundSchema: z.ZodType<
   BudgetLimit
 > = z.object({
   amount: z.number(),
-  currency: Currency$outboundSchema,
+  currency: BudgetLimitCurrency$outboundSchema,
   period: Period$outboundSchema,
 });
 

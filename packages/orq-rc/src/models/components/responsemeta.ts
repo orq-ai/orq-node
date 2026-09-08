@@ -25,13 +25,13 @@ export type EffectiveGrain = ClosedEnum<typeof EffectiveGrain>;
 /**
  * ISO 4217 currency code for cost fields. Always `USD` today.
  */
-export const ResponseMetaCurrency = {
+export const Currency = {
   Usd: "USD",
 } as const;
 /**
  * ISO 4217 currency code for cost fields. Always `USD` today.
  */
-export type ResponseMetaCurrency = ClosedEnum<typeof ResponseMetaCurrency>;
+export type Currency = ClosedEnum<typeof Currency>;
 
 export type ResponseMeta = {
   /**
@@ -56,7 +56,7 @@ export type ResponseMeta = {
   /**
    * ISO 4217 currency code for cost fields. Always `USD` today.
    */
-  currency?: ResponseMetaCurrency | undefined;
+  currency?: Currency | undefined;
   /**
    * Non-fatal warnings about the response. May contain `totals_unavailable` when totals were requested but failed.
    */
@@ -69,9 +69,8 @@ export const EffectiveGrain$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EffectiveGrain);
 
 /** @internal */
-export const ResponseMetaCurrency$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseMetaCurrency
-> = z.nativeEnum(ResponseMetaCurrency);
+export const Currency$inboundSchema: z.ZodNativeEnum<typeof Currency> = z
+  .nativeEnum(Currency);
 
 /** @internal */
 export const ResponseMeta$inboundSchema: z.ZodType<
@@ -82,7 +81,7 @@ export const ResponseMeta$inboundSchema: z.ZodType<
   effective_grain: EffectiveGrain$inboundSchema.optional(),
   row_count: z.number().int().optional(),
   request_id: z.string().optional(),
-  currency: ResponseMetaCurrency$inboundSchema.optional(),
+  currency: Currency$inboundSchema.optional(),
   warnings: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

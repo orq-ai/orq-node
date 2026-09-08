@@ -125,6 +125,21 @@ export class Orq extends ClientSDK {
     return (this._pii ??= new Pii(this._options));
   }
 
+  private _logs?: Logs;
+  get logs(): Logs {
+    return (this._logs ??= new Logs(this._options));
+  }
+
+  private _reporting?: Reporting;
+  get reporting(): Reporting {
+    return (this._reporting ??= new Reporting(this._options));
+  }
+
+  private _traces?: Traces;
+  get traces(): Traces {
+    return (this._traces ??= new Traces(this._options));
+  }
+
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
@@ -258,20 +273,5 @@ export class Orq extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
-  }
-
-  private _logs?: Logs;
-  get logs(): Logs {
-    return (this._logs ??= new Logs(this._options));
-  }
-
-  private _reporting?: Reporting;
-  get reporting(): Reporting {
-    return (this._reporting ??= new Reporting(this._options));
-  }
-
-  private _traces?: Traces;
-  get traces(): Traces {
-    return (this._traces ??= new Traces(this._options));
   }
 }

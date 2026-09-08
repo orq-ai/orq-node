@@ -17,7 +17,7 @@ let value: ModelsConfig = {
 
 ## Fields
 
-| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `mode`                                                       | [components.Mode](../../models/components/mode.md)           | :heavy_check_mark:                                           | N/A                                                          |
-| `models`                                                     | [components.ModelRef](../../models/components/modelref.md)[] | :heavy_check_mark:                                           | N/A                                                          |
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `mode`                                                                     | [components.ModelsConfigMode](../../models/components/modelsconfigmode.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `models`                                                                   | [components.ModelRef](../../models/components/modelref.md)[]               | :heavy_check_mark:                                                         | N/A                                                                        |
