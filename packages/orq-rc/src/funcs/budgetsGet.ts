@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve a budget
  *
  * @remarks
- * Retrieves the metadata for an existing budget by its unique identifier. Returns `NotFound` when the budget does not exist in the caller's workspace.
+ * Retrieves the metadata for an existing budget by its unique identifier. Returns `NotFound` when the budget does not exist in the caller's workspace. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
  */
 export function budgetsGet(
   client: OrqCore,

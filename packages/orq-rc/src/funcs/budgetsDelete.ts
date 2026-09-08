@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete a budget
  *
  * @remarks
- * Permanently deletes a budget. Its consumption counters are cleared immediately. The response body is empty on success.
+ * Permanently deletes a budget. Its consumption counters are cleared immediately. The response body is empty on success. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
  */
 export function budgetsDelete(
   client: OrqCore,

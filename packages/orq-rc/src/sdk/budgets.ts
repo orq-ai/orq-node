@@ -18,7 +18,7 @@ export class Budgets extends ClientSDK {
    * List budgets
    *
    * @remarks
-   * Returns budgets visible to the current workspace, ordered by creation time with the newest first. Supports filtering by scope kind, scope target id, period, and active state, plus an optional free-text query that searches across denormalized target names via Typesense.
+   * Returns budgets visible to the current workspace, ordered by creation time with the newest first. Supports filtering by scope kind, scope target id, period, and active state, plus an optional free-text query that searches across denormalized target names via Typesense. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async list(
     request?: operations.BudgetListRequest | undefined,
@@ -35,7 +35,7 @@ export class Budgets extends ClientSDK {
    * Create a new budget
    *
    * @remarks
-   * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id).
+   * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async create(
     request: components.CreateBudgetRequest,
@@ -52,7 +52,7 @@ export class Budgets extends ClientSDK {
    * Retrieve a budget
    *
    * @remarks
-   * Retrieves the metadata for an existing budget by its unique identifier. Returns `NotFound` when the budget does not exist in the caller's workspace.
+   * Retrieves the metadata for an existing budget by its unique identifier. Returns `NotFound` when the budget does not exist in the caller's workspace. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async get(
     request: operations.BudgetGetRequest,
@@ -69,7 +69,7 @@ export class Budgets extends ClientSDK {
    * Delete a budget
    *
    * @remarks
-   * Permanently deletes a budget. Its consumption counters are cleared immediately. The response body is empty on success.
+   * Permanently deletes a budget. Its consumption counters are cleared immediately. The response body is empty on success. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async delete(
     request: operations.BudgetDeleteRequest,
@@ -86,7 +86,7 @@ export class Budgets extends ClientSDK {
    * Update a budget
    *
    * @remarks
-   * Updates mutable fields of a budget: limits, rate limit, activation, and expiration. The scope is immutable — to change a budget's target, delete and recreate it. Omitted fields keep their current values.
+   * Updates mutable fields of a budget: limits, rate limit, activation, and expiration. The scope is immutable — to change a budget's target, delete and recreate it. Omitted fields keep their current values. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async update(
     request: operations.BudgetUpdateRequest,
@@ -103,7 +103,7 @@ export class Budgets extends ClientSDK {
    * Reset budget consumption
    *
    * @remarks
-   * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved.
+   * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async resetConsumption(
     request: operations.BudgetResetConsumptionRequest,
