@@ -3,10 +3,18 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEvalRequest = {
   id: string;
 };
+
+/**
+ * OK
+ */
+export type GetEvalResponseBody = {};
 
 /** @internal */
 export type GetEvalRequest$Outbound = {
@@ -24,4 +32,21 @@ export const GetEvalRequest$outboundSchema: z.ZodType<
 
 export function getEvalRequestToJSON(getEvalRequest: GetEvalRequest): string {
   return JSON.stringify(GetEvalRequest$outboundSchema.parse(getEvalRequest));
+}
+
+/** @internal */
+export const GetEvalResponseBody$inboundSchema: z.ZodType<
+  GetEvalResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function getEvalResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEvalResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBody' from JSON`,
+  );
 }

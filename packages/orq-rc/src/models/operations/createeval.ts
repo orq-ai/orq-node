@@ -3,8 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateEvalRequestBody = {};
+
+/**
+ * OK
+ */
+export type CreateEvalResponseBody = {};
 
 /** @internal */
 export type CreateEvalRequestBody$Outbound = {};
@@ -21,5 +29,22 @@ export function createEvalRequestBodyToJSON(
 ): string {
   return JSON.stringify(
     CreateEvalRequestBody$outboundSchema.parse(createEvalRequestBody),
+  );
+}
+
+/** @internal */
+export const CreateEvalResponseBody$inboundSchema: z.ZodType<
+  CreateEvalResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function createEvalResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateEvalResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateEvalResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateEvalResponseBody' from JSON`,
   );
 }

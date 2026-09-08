@@ -42,7 +42,7 @@ export class Evals extends ClientSDK {
   async create(
     request: operations.CreateEvalRequestBody,
     options?: RequestOptions,
-  ): Promise<components.EvaluatorDocumentResponse> {
+  ): Promise<operations.CreateEvalResponseBody> {
     return unwrapAsync(evalsCreate(
       this,
       request,
@@ -59,7 +59,7 @@ export class Evals extends ClientSDK {
   async get(
     request: operations.GetEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.EvaluatorDocumentResponse> {
+  ): Promise<operations.GetEvalResponseBody> {
     return unwrapAsync(evalsGet(
       this,
       request,
@@ -93,7 +93,7 @@ export class Evals extends ClientSDK {
   async update(
     request: operations.UpdateEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.EvaluatorDocumentResponse> {
+  ): Promise<operations.UpdateEvalResponseBody> {
     return unwrapAsync(evalsUpdate(
       this,
       request,
@@ -127,7 +127,7 @@ export class Evals extends ClientSDK {
   async getVersion(
     request: operations.GetEvalVersionRequest,
     options?: RequestOptions,
-  ): Promise<components.GetEvaluatorVersionResponse> {
+  ): Promise<operations.GetEvalVersionResponseBody> {
     return unwrapAsync(evalsGetVersion(
       this,
       request,
@@ -144,7 +144,7 @@ export class Evals extends ClientSDK {
   async invoke(
     request: operations.InvokeEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.InvokeEvaluatorResponse> {
+  ): Promise<components.EvaluationResult> {
     return unwrapAsync(evalsInvoke(
       this,
       request,

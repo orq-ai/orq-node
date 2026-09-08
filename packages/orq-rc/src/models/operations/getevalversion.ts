@@ -4,11 +4,19 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEvalVersionRequest = {
   id: string;
   versionId: string;
 };
+
+/**
+ * OK
+ */
+export type GetEvalVersionResponseBody = {};
 
 /** @internal */
 export type GetEvalVersionRequest$Outbound = {
@@ -35,5 +43,22 @@ export function getEvalVersionRequestToJSON(
 ): string {
   return JSON.stringify(
     GetEvalVersionRequest$outboundSchema.parse(getEvalVersionRequest),
+  );
+}
+
+/** @internal */
+export const GetEvalVersionResponseBody$inboundSchema: z.ZodType<
+  GetEvalVersionResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function getEvalVersionResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalVersionResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEvalVersionResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalVersionResponseBody' from JSON`,
   );
 }

@@ -1,11 +1,13 @@
-# Document
+# GetEvalVersionResponseBody
+
+OK
 
 ## Example Usage
 
 ```typescript
-import { Document } from "@orq-ai/node/models/components";
+import { GetEvalVersionResponseBody } from "@orq-ai/node/models/operations";
 
-let value: Document = {};
+let value: GetEvalVersionResponseBody = {};
 ```
 
 ## Fields

@@ -147,7 +147,7 @@ run();
 
 ### Response
 
-**Promise\<[components.EvaluatorDocumentResponse](../../models/components/evaluatordocumentresponse.md)\>**
+**Promise\<[operations.CreateEvalResponseBody](../../models/operations/createevalresponsebody.md)\>**
 
 ### Errors
 
@@ -220,7 +220,7 @@ run();
 
 ### Response
 
-**Promise\<[components.EvaluatorDocumentResponse](../../models/components/evaluatordocumentresponse.md)\>**
+**Promise\<[operations.GetEvalResponseBody](../../models/operations/getevalresponsebody.md)\>**
 
 ### Errors
 
@@ -368,7 +368,7 @@ run();
 
 ### Response
 
-**Promise\<[components.EvaluatorDocumentResponse](../../models/components/evaluatordocumentresponse.md)\>**
+**Promise\<[operations.UpdateEvalResponseBody](../../models/operations/updateevalresponsebody.md)\>**
 
 ### Errors
 
@@ -516,7 +516,7 @@ run();
 
 ### Response
 
-**Promise\<[components.GetEvaluatorVersionResponse](../../models/components/getevaluatorversionresponse.md)\>**
+**Promise\<[operations.GetEvalVersionResponseBody](../../models/operations/getevalversionresponsebody.md)\>**
 
 ### Errors
 
@@ -591,7 +591,7 @@ run();
 
 ### Response
 
-**Promise\<[components.InvokeEvaluatorResponse](../../models/components/invokeevaluatorresponse.md)\>**
+**Promise\<[components.EvaluationResult](../../models/components/evaluationresult.md)\>**
 
 ### Errors
 

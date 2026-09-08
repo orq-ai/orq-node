@@ -4,6 +4,9 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateEvalRequestBody = {};
 
@@ -11,6 +14,11 @@ export type UpdateEvalRequest = {
   id: string;
   requestBody: UpdateEvalRequestBody;
 };
+
+/**
+ * OK
+ */
+export type UpdateEvalResponseBody = {};
 
 /** @internal */
 export type UpdateEvalRequestBody$Outbound = {};
@@ -55,5 +63,22 @@ export function updateEvalRequestToJSON(
 ): string {
   return JSON.stringify(
     UpdateEvalRequest$outboundSchema.parse(updateEvalRequest),
+  );
+}
+
+/** @internal */
+export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
+  UpdateEvalResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function updateEvalResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateEvalResponseBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateEvalResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateEvalResponseBody' from JSON`,
   );
 }
