@@ -183,7 +183,7 @@ export const ListAnnotationQueuesData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-07T09:56:22.990Z",
+    "2026-09-08T23:04:08.153Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
