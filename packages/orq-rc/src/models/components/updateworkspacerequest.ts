@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  ChatKitResources,
+  ChatKitResources$Outbound,
+  ChatKitResources$outboundSchema,
+} from "./chatkitresources.js";
+import {
   WorkspaceSettingsFields,
   WorkspaceSettingsFields$Outbound,
   WorkspaceSettingsFields$outboundSchema,
@@ -19,6 +24,7 @@ export type UpdateWorkspaceRequest = {
   settings?: WorkspaceSettingsFields | undefined;
   metadata?: UpdateWorkspaceRequestMetadata | undefined;
   enforceEnabledModels?: boolean | undefined;
+  chatKit?: ChatKitResources | undefined;
 };
 
 /** @internal */
@@ -49,6 +55,7 @@ export type UpdateWorkspaceRequest$Outbound = {
   settings?: WorkspaceSettingsFields$Outbound | undefined;
   metadata?: UpdateWorkspaceRequestMetadata$Outbound | undefined;
   enforce_enabled_models?: boolean | undefined;
+  chat_kit?: ChatKitResources$Outbound | undefined;
 };
 
 /** @internal */
@@ -64,11 +71,13 @@ export const UpdateWorkspaceRequest$outboundSchema: z.ZodType<
   metadata: z.lazy(() => UpdateWorkspaceRequestMetadata$outboundSchema)
     .optional(),
   enforceEnabledModels: z.boolean().optional(),
+  chatKit: ChatKitResources$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     logoUrl: "logo_url",
     enforceEnabledModels: "enforce_enabled_models",
+    chatKit: "chat_kit",
   });
 });
 

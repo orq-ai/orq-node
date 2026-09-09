@@ -74,6 +74,8 @@ export * from "./budgetusage.js";
 export * from "./cacheconfig.js";
 export * from "./callsubagenttoolinput.js";
 export * from "./capabilitiesresponse.js";
+export * from "./chatkitresource.js";
+export * from "./chatkitresources.js";
 export * from "./chunk.js";
 export * from "./chunkingcleanupoptions.js";
 export * from "./chunkingconfiguration.js";
