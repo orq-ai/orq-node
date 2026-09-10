@@ -77,7 +77,7 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   q: z.string().optional(),
-  limit: z.number().default(50),
+  limit: z.number().int().default(50),
   status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
