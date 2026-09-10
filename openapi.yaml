@@ -1618,7 +1618,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m24p7zxwf45kxxecc9bms44p"
+              default: "reasoning_01m25cqy72hdbb584nnv79jg21"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -6475,810 +6475,6 @@ components:
           items:
             type: "string"
       description: "EntityList wraps a repeated string because proto3 maps cannot hold\n repeated values directly."
-    ListInsightsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Insight"
-        has_more:
-          type: "boolean"
-    InsightConfig:
-      type: "object"
-      properties:
-        display_name:
-          type: "string"
-        enabled:
-          type: "boolean"
-        schedule:
-          $ref: "#/components/schemas/InsightSchedule"
-        window:
-          pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
-          type: "string"
-        sampling_percentage:
-          type: "number"
-          format: "double"
-        filters:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFilter"
-          description: "Uses the same canonical field/op/values filter dialect as traces, logs,\n and unified telemetry queries."
-        models:
-          $ref: "#/components/schemas/InsightModels"
-        profile:
-          type: "integer"
-          format: "enum"
-        max_traces:
-          type: "integer"
-          format: "int32"
-        conversation_pass_mode:
-          type: "integer"
-          format: "enum"
-        first_pass_method:
-          type: "integer"
-          format: "enum"
-        max_cost_per_run:
-          type: "number"
-          format: "double"
-        filter_operator:
-          type: "string"
-    CreateInsightResponse:
-      type: "object"
-      properties:
-        insight:
-          $ref: "#/components/schemas/Insight"
-    GetInsightResponse:
-      type: "object"
-      properties:
-        insight:
-          $ref: "#/components/schemas/Insight"
-    UpdateInsightResponse:
-      type: "object"
-      properties:
-        insight:
-          $ref: "#/components/schemas/Insight"
-    ListRunsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightRun"
-        has_more:
-          type: "boolean"
-    RunAnalysisRequest:
-      type: "object"
-      properties:
-        time_range:
-          allOf:
-            - $ref: "#/components/schemas/InsightTimeRange"
-          description: "When omitted, the configured rolling window is used."
-    RunAnalysisResponse:
-      type: "object"
-      properties:
-        run:
-          $ref: "#/components/schemas/InsightRun"
-    GetRunResponse:
-      type: "object"
-      properties:
-        run:
-          $ref: "#/components/schemas/InsightRun"
-    DeleteRunResponse:
-      type: "object"
-      properties: {}
-    GetRunArtifactsResponse:
-      type: "object"
-      properties:
-        artifacts:
-          $ref: "#/components/schemas/InsightRunArtifacts"
-    ListClustersResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightCluster"
-        quality:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightQuality"
-        has_more:
-          type: "boolean"
-    GetClusterResponse:
-      type: "object"
-      properties:
-        cluster:
-          $ref: "#/components/schemas/InsightCluster"
-        quality:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightQuality"
-    ListClusterConversationsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightClusterConversation"
-        has_more:
-          type: "boolean"
-    CancelRunRequest:
-      type: "object"
-      properties: {}
-    CancelRunResponse:
-      type: "object"
-      properties:
-        run:
-          $ref: "#/components/schemas/InsightRun"
-    ReEvaluateRunRequest:
-      type: "object"
-      properties:
-        dimension:
-          type: "integer"
-          description: "UNSPECIFIED evaluates every dimension present in the run."
-          format: "enum"
-        judge_model:
-          type: "string"
-        judge_version:
-          type: "string"
-    ReEvaluateRunResponse:
-      type: "object"
-      properties:
-        run_id:
-          type: "string"
-        results:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightReEvaluationResult"
-    PreviewInsightCandidatesRequest:
-      type: "object"
-      properties:
-        window:
-          pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
-          type: "string"
-        filters:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFilter"
-        filter_operator:
-          type: "string"
-        max_traces:
-          type: "integer"
-          format: "int32"
-    PreviewInsightCandidatesResponse:
-      type: "object"
-      properties:
-        conversation_count:
-          type: "integer"
-          format: "int32"
-        trace_count:
-          type: "integer"
-          format: "int32"
-        selected_conversation_count:
-          type: "integer"
-          format: "int32"
-    Insight:
-      type: "object"
-      properties:
-        insight_id:
-          type: "string"
-        config:
-          $ref: "#/components/schemas/InsightConfig"
-        created_at:
-          type: "string"
-          format: "date-time"
-        updated_at:
-          type: "string"
-          format: "date-time"
-    InsightSchedule:
-      type: "object"
-      properties:
-        cron:
-          type: "string"
-          description: "Empty disables scheduled analysis. Non-empty values are validated by the\n service as cron expressions with a minimum cadence of one hour."
-    TraceFilter:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        op:
-          type: "string"
-        values:
-          type: "array"
-          items:
-            type: "string"
-    InsightModels:
-      type: "object"
-      properties:
-        chat:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightModelRef"
-        embeddings:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightModelRef"
-        judges:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightModelRef"
-    InsightRun:
-      type: "object"
-      properties:
-        run_id:
-          type: "string"
-        status:
-          type: "integer"
-          format: "enum"
-        stage:
-          type: "integer"
-          format: "enum"
-        trigger:
-          type: "integer"
-          format: "enum"
-        time_range:
-          $ref: "#/components/schemas/InsightTimeRange"
-        counts:
-          $ref: "#/components/schemas/InsightRunCounts"
-        config_snapshot:
-          $ref: "#/components/schemas/InsightConfig"
-        resolved_models:
-          $ref: "#/components/schemas/InsightResolvedModels"
-        prompt_hashes:
-          type: "object"
-          additionalProperties:
-            type: "string"
-        first_pass:
-          $ref: "#/components/schemas/InsightFirstPass"
-        algorithm_version:
-          type: "string"
-        root_trace_id:
-          type: "string"
-        cost:
-          $ref: "#/components/schemas/InsightRunCost"
-        stage_durations:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightStageDuration"
-        total_duration_ms:
-          type: "string"
-        error:
-          $ref: "#/components/schemas/InsightRunError"
-        quality:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightQuality"
-        cancel_requested_at:
-          type: "string"
-          format: "date-time"
-        created_at:
-          type: "string"
-          format: "date-time"
-        updated_at:
-          type: "string"
-          format: "date-time"
-        started_at:
-          type: "string"
-          format: "date-time"
-        completed_at:
-          type: "string"
-          format: "date-time"
-        insight_id:
-          type: "string"
-    InsightTimeRange:
-      type: "object"
-      properties:
-        start:
-          type: "string"
-          format: "date-time"
-        end:
-          type: "string"
-          format: "date-time"
-    InsightRunArtifacts:
-      type: "object"
-      properties:
-        run_id:
-          type: "string"
-        failure_taxonomy:
-          $ref: "#/components/schemas/InsightFailureTaxonomy"
-        action_plan:
-          $ref: "#/components/schemas/InsightActionPlan"
-        summary_stats:
-          $ref: "#/components/schemas/InsightSummaryStats"
-        created_at:
-          type: "string"
-          format: "date-time"
-        updated_at:
-          type: "string"
-          format: "date-time"
-        quadrant:
-          $ref: "#/components/schemas/InsightQuadrantAnalysis"
-    InsightCluster:
-      type: "object"
-      properties:
-        cluster_id:
-          type: "string"
-        run_id:
-          type: "string"
-        dimension:
-          type: "integer"
-          format: "enum"
-        level:
-          type: "integer"
-          format: "enum"
-        parent_id:
-          type: "string"
-        name:
-          type: "string"
-        description:
-          type: "string"
-        slug:
-          type: "string"
-        item_count:
-          type: "integer"
-          format: "int32"
-        centroid:
-          $ref: "#/components/schemas/InsightCentroidMetadata"
-        describe_model:
-          type: "string"
-        created_at:
-          type: "string"
-          format: "date-time"
-    InsightQuality:
-      type: "object"
-      properties:
-        quality_id:
-          type: "string"
-        run_id:
-          type: "string"
-        dimension:
-          type: "integer"
-          format: "enum"
-        method:
-          type: "integer"
-          format: "enum"
-        structural:
-          $ref: "#/components/schemas/InsightStructuralQuality"
-        judge:
-          $ref: "#/components/schemas/InsightJudgeQuality"
-        created_at:
-          type: "string"
-          format: "date-time"
-    InsightClusterConversation:
-      type: "object"
-      properties:
-        conversation_id:
-          type: "string"
-        thread_id:
-          type: "string"
-        trace_ids:
-          type: "array"
-          items:
-            type: "string"
-        summary:
-          $ref: "#/components/schemas/InsightConversationSummary"
-        passed:
-          type: "boolean"
-        annotation:
-          type: "string"
-        failure_mode:
-          type: "string"
-        assignment:
-          $ref: "#/components/schemas/InsightAssignment"
-    InsightReEvaluationResult:
-      type: "object"
-      properties:
-        quality:
-          $ref: "#/components/schemas/InsightQuality"
-        reused_existing:
-          type: "boolean"
-          description: "True when the same run, dimension, model, and version had already been\n evaluated and the existing append-only quality row was returned."
-    InsightModelRef:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-    InsightRunCounts:
-      type: "object"
-      properties:
-        candidates:
-          type: "integer"
-          format: "int32"
-        fetched:
-          type: "integer"
-          format: "int32"
-        summarized:
-          type: "integer"
-          format: "int32"
-        summary_failures:
-          type: "integer"
-          format: "int32"
-        embedded:
-          type: "integer"
-          format: "int32"
-        clustered:
-          type: "integer"
-          format: "int32"
-        annotated:
-          type: "integer"
-          format: "int32"
-        annotation_failures:
-          type: "integer"
-          format: "int32"
-    InsightResolvedModels:
-      type: "object"
-      properties:
-        summarize:
-          $ref: "#/components/schemas/InsightModelResolution"
-        describe:
-          $ref: "#/components/schemas/InsightModelResolution"
-        merge:
-          $ref: "#/components/schemas/InsightModelResolution"
-        annotate:
-          $ref: "#/components/schemas/InsightModelResolution"
-        plan:
-          $ref: "#/components/schemas/InsightModelResolution"
-        judge:
-          $ref: "#/components/schemas/InsightModelResolution"
-        pinned_embedding_model:
-          type: "string"
-    InsightFirstPass:
-      type: "object"
-      properties:
-        method:
-          type: "integer"
-          format: "enum"
-        k:
-          type: "integer"
-          format: "int32"
-        seed:
-          type: "string"
-    InsightRunCost:
-      type: "object"
-      properties:
-        ceiling_usd:
-          type: "number"
-          format: "double"
-        total_usd:
-          type: "number"
-          format: "double"
-        by_stage:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightStageCost"
-    InsightStageDuration:
-      type: "object"
-      properties:
-        stage:
-          type: "integer"
-          format: "enum"
-        duration_ms:
-          type: "string"
-    InsightRunError:
-      type: "object"
-      properties:
-        code:
-          type: "string"
-        message:
-          type: "string"
-        stage:
-          type: "integer"
-          format: "enum"
-        retryable:
-          type: "boolean"
-    InsightFailureTaxonomy:
-      type: "object"
-      properties:
-        total_conversations:
-          type: "integer"
-          format: "int32"
-        failure_count:
-          type: "integer"
-          format: "int32"
-        failure_rate:
-          type: "number"
-          format: "double"
-        modes:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightFailureMode"
-    InsightActionPlan:
-      type: "object"
-      properties:
-        summary:
-          type: "string"
-        findings:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightFinding"
-        items:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightActionItem"
-        rerun_criteria:
-          type: "string"
-        dataset_improvements:
-          type: "array"
-          items:
-            type: "string"
-        evaluator_improvements:
-          type: "array"
-          items:
-            type: "string"
-        model:
-          type: "string"
-        prompt_hash:
-          type: "string"
-    InsightSummaryStats:
-      type: "object"
-      properties:
-        conversation_count:
-          type: "integer"
-          format: "int32"
-        cluster_count:
-          type: "integer"
-          format: "int32"
-        pass_rate:
-          type: "number"
-          format: "double"
-        average_satisfaction:
-          type: "number"
-          format: "double"
-        average_frustration:
-          type: "number"
-          format: "double"
-        concerning_count:
-          type: "integer"
-          format: "int32"
-    InsightQuadrantAnalysis:
-      type: "object"
-      properties:
-        entries:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/InsightQuadrantEntry"
-        total_conversations:
-          type: "integer"
-          format: "int32"
-        average_volume:
-          type: "number"
-          format: "double"
-        average_satisfaction:
-          type: "number"
-          format: "double"
-    InsightCentroidMetadata:
-      type: "object"
-      properties:
-        embedding_model:
-          type: "string"
-        mean_distance:
-          type: "number"
-          format: "double"
-        distance_stddev:
-          type: "number"
-          format: "double"
-    InsightStructuralQuality:
-      type: "object"
-      properties:
-        silhouette:
-          type: "number"
-          format: "double"
-        calinski_harabasz:
-          type: "number"
-          format: "double"
-        davies_bouldin:
-          type: "number"
-          format: "double"
-        cluster_count:
-          type: "integer"
-          format: "int32"
-        noise_ratio:
-          type: "number"
-          format: "double"
-        size_distribution:
-          type: "object"
-          additionalProperties:
-            type: "integer"
-            format: "int32"
-    InsightJudgeQuality:
-      type: "object"
-      properties:
-        intra_coherence:
-          type: "number"
-          format: "double"
-        inter_separation:
-          type: "number"
-          format: "double"
-        harmonic_composite:
-          type: "number"
-          format: "double"
-        arithmetic_composite:
-          type: "number"
-          format: "double"
-        judge_model:
-          type: "string"
-        judge_version:
-          type: "string"
-        samples:
-          type: "integer"
-          format: "int32"
-        cost_usd:
-          type: "number"
-          format: "double"
-        prompt_hash:
-          type: "string"
-    InsightConversationSummary:
-      type: "object"
-      properties:
-        summary:
-          type: "string"
-        topic:
-          type: "string"
-        task:
-          type: "string"
-        request:
-          type: "string"
-        frustration:
-          type: "integer"
-          format: "int32"
-        satisfaction:
-          type: "number"
-          format: "double"
-        assistant_errors:
-          type: "array"
-          items:
-            type: "string"
-        tools_used:
-          type: "array"
-          items:
-            type: "string"
-        sentiment:
-          type: "integer"
-          format: "enum"
-        concerning_score:
-          type: "integer"
-          format: "int32"
-    InsightAssignment:
-      type: "object"
-      properties:
-        dimension:
-          type: "integer"
-          format: "enum"
-        cluster_id:
-          type: "string"
-        distance:
-          type: "number"
-          format: "double"
-        confidence:
-          type: "number"
-          format: "double"
-        source:
-          type: "integer"
-          format: "enum"
-    InsightModelResolution:
-      type: "object"
-      properties:
-        candidates:
-          type: "array"
-          items:
-            type: "string"
-        selected:
-          type: "string"
-    InsightStageCost:
-      type: "object"
-      properties:
-        stage:
-          type: "integer"
-          format: "enum"
-        usage:
-          $ref: "#/components/schemas/InsightUsage"
-    InsightFailureMode:
-      type: "object"
-      properties:
-        cluster_id:
-          type: "string"
-        name:
-          type: "string"
-        description:
-          type: "string"
-        count:
-          type: "integer"
-          format: "int32"
-        rate:
-          type: "number"
-          format: "double"
-        classification:
-          type: "integer"
-          format: "enum"
-    InsightFinding:
-      type: "object"
-      properties:
-        title:
-          type: "string"
-        detail:
-          type: "string"
-        severity:
-          type: "string"
-        evidence:
-          type: "string"
-        affected_area:
-          type: "string"
-    InsightActionItem:
-      type: "object"
-      properties:
-        priority:
-          type: "integer"
-          format: "enum"
-        title:
-          type: "string"
-        description:
-          type: "string"
-        fix_type:
-          type: "string"
-        hypothesis:
-          type: "string"
-        estimated_impact:
-          type: "string"
-        success_criteria:
-          type: "string"
-        affected_cluster_ids:
-          type: "array"
-          items:
-            type: "string"
-        affected_trace_ids:
-          type: "array"
-          items:
-            type: "string"
-          description: "Evidence traces are capped so action-plan artifacts cannot become an\n unbounded per-conversation membership document."
-        affected_conversation_count:
-          type: "integer"
-          format: "int32"
-    InsightQuadrantEntry:
-      type: "object"
-      properties:
-        cluster_id:
-          type: "string"
-        dimension:
-          type: "integer"
-          format: "enum"
-        cluster_name:
-          type: "string"
-        quadrant:
-          type: "integer"
-          format: "enum"
-        trace_count:
-          type: "integer"
-          format: "int32"
-        average_satisfaction:
-          type: "number"
-          format: "double"
-        failure_rate:
-          type: "number"
-          format: "double"
-        volume_ratio:
-          type: "number"
-          format: "double"
-        average_frustration:
-          type: "number"
-          format: "double"
-        satisfaction_score:
-          type: "number"
-          format: "double"
-        recommendation:
-          type: "string"
-    InsightUsage:
-      type: "object"
-      properties:
-        input_tokens:
-          type: "string"
-        output_tokens:
-          type: "string"
-        total_tokens:
-          type: "string"
-        cost_usd:
-          type: "number"
-          format: "double"
     AggregateLogsRequest:
       type: "object"
       properties:
@@ -7543,6 +6739,17 @@ components:
           type: "boolean"
         next_page_token:
           type: "string"
+    TraceFilter:
+      type: "object"
+      properties:
+        field:
+          type: "string"
+        op:
+          type: "string"
+        values:
+          type: "array"
+          items:
+            type: "string"
     AggregateBucket:
       type: "object"
       properties:
@@ -10116,188 +9323,6 @@ components:
         - "maxTokens"
         - "topP"
       type: "object"
-    ListActivitiesResponse:
-      required:
-        - "object"
-        - "data"
-        - "has_more"
-      type: "object"
-      properties:
-        object:
-          type: "string"
-          description: "Object discriminator for list responses; always `list`."
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Activity"
-          description: "Page of activities, ordered newest first."
-        has_more:
-          type: "boolean"
-          description: "Whether more activities are available in the selected pagination\n direction."
-    CreateActivityRequest:
-      required:
-        - "type"
-        - "entity_type"
-      type: "object"
-      properties:
-        type:
-          description: "Kind of activity to create. `ACTIVITY_TYPE_UNSPECIFIED` is\n rejected."
-          $ref: "#/components/schemas/ActivityType"
-        project_id:
-          type: "string"
-          description: "Project that contains the entity. Optional; the server resolves the\n project from the entity, and when this field is provided it must\n match that project."
-        content:
-          type: "string"
-          description: "Comment body. Required for comment activities, ignored for version\n activities."
-        parent_activity_id:
-          type: "string"
-          description: "ID of the comment this comment replies to. Leave empty for\n top-level comments. Only used for comment activities."
-        mentions:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/ActivityMention"
-          description: "Users mentioned in the comment body. Only used for comment\n activities."
-        checksum:
-          type: "string"
-          description: "Content hash of the snapshotted entity configuration. Required for\n version activities, ignored for comment activities."
-        version:
-          type: "string"
-          description: "Semantic version to assign to the snapshot, for example `1.4.0`.\n Required for version activities, ignored for comment activities."
-        description:
-          type: "string"
-          description: "Human-readable summary of what changed in this version. Only used\n for version activities."
-        data:
-          type: "object"
-          description: "Snapshot of the entity configuration. Required for version\n activities, ignored for comment activities."
-        entity_type:
-          type: "string"
-          description: "Type of the entity the activity belongs to. One of `agent`,\n `dataset`, `evaluator`, `experiment_v2`, `knowledge`,\n `memory_store`, `prompt_library`, `prompt_snippet`, `sheet`,\n `skill`, or `tool`."
-    CreateActivityResponse:
-      required:
-        - "activity"
-      type: "object"
-      properties:
-        activity:
-          allOf:
-            - $ref: "#/components/schemas/Activity"
-          description: "Newly created activity."
-    UpdateActivityRequest:
-      type: "object"
-      properties:
-        content:
-          type: "string"
-          description: "New comment body. Omit to keep the current content. Setting this\n marks the comment as edited and records the edit time."
-        environments:
-          allOf:
-            - $ref: "#/components/schemas/ActivityEnvironments"
-          description: "Replacement environment list for a version activity. Omit to keep\n the current environments. The listed environments are removed from\n every other version of the same entity."
-    UpdateActivityResponse:
-      required:
-        - "activity"
-      type: "object"
-      properties:
-        activity:
-          allOf:
-            - $ref: "#/components/schemas/Activity"
-          description: "Updated activity."
-    Activity:
-      required:
-        - "activity_id"
-        - "type"
-        - "entity_id"
-        - "created_at"
-        - "updated_at"
-      type: "object"
-      properties:
-        activity_id:
-          type: "string"
-          description: "Unique activity identifier assigned by ORQ, for example\n `act_01jzxw2k7y8q9m0n1p2r3s4t5v`. Use this value in update requests."
-        type:
-          description: "Whether this entry is a comment or a version snapshot."
-          $ref: "#/components/schemas/ActivityType"
-        project_id:
-          type: "string"
-          description: "Project that contains the entity this activity belongs to. Assigned\n by the server from the entity; never supplied by clients."
-        entity_id:
-          type: "string"
-          description: "ID of the entity this activity belongs to, for example an agent or\n prompt ID."
-        account_id:
-          type: "string"
-          description: "ID of the user account that created the activity."
-        created_at:
-          type: "string"
-          description: "Time when the activity was created."
-          format: "date-time"
-        updated_at:
-          type: "string"
-          description: "Time when the activity was last updated."
-          format: "date-time"
-        content:
-          type: "string"
-          description: "Comment body. Only set for comment activities."
-        parent_activity_id:
-          type: "string"
-          description: "ID of the comment this comment replies to. Empty for top-level\n comments. Only set for comment activities."
-        mentions:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/ActivityMention"
-          description: "Users mentioned in the comment body. Only set for comment\n activities."
-        is_edited:
-          type: "boolean"
-          description: "Whether the comment body was edited after creation. Only set for\n comment activities."
-        edited_at:
-          type: "string"
-          description: "Time of the most recent comment edit. Unset when the comment was\n never edited. Only set for comment activities."
-          format: "date-time"
-        checksum:
-          type: "string"
-          description: "Content hash of the snapshotted entity configuration, used to\n detect unchanged saves. Only set for version activities."
-        version:
-          type: "string"
-          description: "Semantic version assigned to the snapshot, for example `1.4.0`.\n Only set for version activities."
-        description:
-          type: "string"
-          description: "Human-readable summary of what changed in this version. Only set\n for version activities."
-        environments:
-          type: "array"
-          items:
-            type: "string"
-          description: "Environments this version is currently deployed to, for example\n `production`. An environment points at a single version of an\n entity at a time. Only set for version activities."
-        data:
-          type: "object"
-          description: "Snapshot of the entity configuration at the time the version was\n created. The shape depends on `entity_type`. Only set for version\n activities."
-        entity_type:
-          type: "string"
-          description: "Type of the entity this activity belongs to, for example `agent`,\n `dataset`, or `skill`."
-      description: "Single entry in the activity timeline of an entity.\n\n Comment fields (`content`, `parent_activity_id`, `mentions`,\n `is_edited`, `edited_at`) are only meaningful when `type` is\n `ACTIVITY_TYPE_COMMENT`. Version fields (`checksum`, `version`,\n `description`, `environments`, `data`) are only meaningful when\n `type` is `ACTIVITY_TYPE_VERSION`."
-    ActivityType:
-      type: "string"
-      enum:
-        - "ACTIVITY_TYPE_UNSPECIFIED"
-        - "ACTIVITY_TYPE_COMMENT"
-        - "ACTIVITY_TYPE_VERSION"
-    ActivityMention:
-      required:
-        - "user_id"
-      type: "object"
-      properties:
-        user_id:
-          type: "string"
-          description: "ID of the mentioned workspace user."
-        display_name:
-          type: "string"
-          description: "Display name of the user at the time the mention was created."
-      description: "User mentioned in the body of a comment activity."
-    ActivityEnvironments:
-      type: "object"
-      properties:
-        values:
-          type: "array"
-          items:
-            type: "string"
-          description: "Environment names this version should be deployed to. An empty\n list removes the version from every environment."
-      description: "Replacement list of environments for a version activity. Wrapped in\n a message so the field can distinguish \"not provided\" from \"clear\n the list\"."
     ListAlertsResponse:
       required:
         - "object"
@@ -12015,68 +11040,6 @@ components:
         modelId:
           type: "string"
       description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models), rather than an internal identifier."
-    SearchDocumentationRequest:
-      required:
-        - "query"
-      type: "object"
-      properties:
-        query:
-          type: "string"
-          description: "Free-text query to search the documentation for."
-        limit:
-          type: "integer"
-          description: "Maximum number of results to return (1-50). Defaults to 10."
-          format: "int32"
-        score_threshold:
-          type: "number"
-          description: "Minimum relevance score (0-1). Defaults to 0.6."
-          format: "double"
-    SearchDocumentationResponse:
-      required:
-        - "results"
-      type: "object"
-      properties:
-        results:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/DocumentationSearchResult"
-          description: "Documentation pages matching the query, ordered by relevance."
-    DocumentationSearchResult:
-      required:
-        - "content"
-        - "path"
-        - "metadata"
-      type: "object"
-      properties:
-        content:
-          type: "string"
-          description: "Matching content snippet from the documentation page."
-        path:
-          type: "string"
-          description: "Path of the documentation page within the docs site."
-        metadata:
-          allOf:
-            - $ref: "#/components/schemas/DocumentationSearchResultMetadata"
-          description: "Display metadata for rendering the result."
-    DocumentationSearchResultMetadata:
-      required:
-        - "title"
-        - "description"
-        - "href"
-      type: "object"
-      properties:
-        title:
-          type: "string"
-          description: "Page title."
-        description:
-          type: "string"
-          description: "Short page description."
-        href:
-          type: "string"
-          description: "Absolute URL to the documentation page."
-        icon:
-          type: "string"
-          description: "Optional icon identifier for the page."
     ListFilesResponse:
       required:
         - "object"
@@ -12200,73 +11163,6 @@ components:
         - "FILE_PURPOSE_KNOWLEDGE_DATASOURCE"
         - "FILE_PURPOSE_BATCH"
         - "FILE_PURPOSE_CODE_INTERPRETER"
-    ListFinderEntitiesResponse:
-      required:
-        - "object"
-        - "data"
-      type: "object"
-      properties:
-        object:
-          type: "string"
-          description: "Object discriminator for list responses; always `list`."
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/FinderItem"
-          description: "Page of finder entities visible to the caller."
-        next_page_token:
-          type: "string"
-          description: "Opaque cursor for the next page. Empty when the result is complete."
-    FinderItem:
-      required:
-        - "_id"
-        - "type"
-        - "display_name"
-        - "workspace_id"
-      type: "object"
-      properties:
-        id:
-          type: "string"
-          description: "Unique entity identifier. Serialized as `_id` for parity with the\n finder collection and the frontend FinderItem shape."
-        type:
-          type: "string"
-          description: "Discriminator for the heterogeneous finder collection, e.g.\n \"project\", \"directory\", \"skill\", \"prompt\", \"agent\", \"dataset\"."
-        display_name:
-          type: "string"
-          description: "Human-readable name shown in the navigation tree."
-        description:
-          type: "string"
-          description: "Optional description of the entity."
-        workspace_id:
-          type: "string"
-          description: "Workspace that owns the entity."
-        project_id:
-          type: "string"
-          description: "Project the entity belongs to. Null for structural roots (projects)."
-        parent_id:
-          type: "string"
-          description: "Parent finder node (directory or project). Null for roots."
-        key:
-          type: "string"
-          description: "Optional stable key used by some entity types (e.g. tools)."
-        created_by_id:
-          type: "string"
-          description: "Identifier of the user who created the entity."
-        updated_by_id:
-          type: "string"
-          description: "Identifier of the user who last updated the entity."
-        metadata:
-          type: "object"
-          description: "Free-form metadata stored with the entity."
-        created_at:
-          type: "string"
-          description: "ISO timestamp for when the entity was created."
-        updated_at:
-          type: "string"
-          description: "ISO timestamp for when the entity was last updated."
-        icon_url:
-          type: "string"
-          description: "Optional logo or image URL shown for this entity."
     ListGuardrailRulesResponse:
       required:
         - "object"
@@ -13731,13 +12627,6 @@ components:
           items:
             type: "string"
           description: "Modalities this offering produces as output."
-    SetModelSharingResponse:
-      type: "object"
-      properties:
-        model_id:
-          type: "string"
-        sharing:
-          $ref: "#/components/schemas/Sharing"
     NotifierType:
       type: "string"
       enum:
@@ -28515,7 +27404,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M24P7ZZRNM5WP1FR8A5XFV6H"
+                                          default: "01M25CQY8H1W8V42W67ZZQ3674"
                                         name:
                                           type: "string"
                                         description:
@@ -30112,7 +29001,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M24P800FD2DV630G0BV2ER03"
+                                          default: "01M25CQY93ZMN7C1A9ZF47W352"
                                         name:
                                           type: "string"
                                         description:
@@ -38912,7 +37801,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M24P8025369964JMA37WVSHG"
+                              default: "tool_01M25CQYACZR0QXBWZCY28QX9V"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39013,7 +37902,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M24P8025CJQX17DRQWBFDXWE"
+                              default: "tool_01M25CQYADPEVFKRTR66Y2PGK7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39116,7 +38005,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M24P80265WHV8HYP8VXS2C3D"
+                              default: "tool_01M25CQYADENXYCC0RV8BKW1PR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39260,7 +38149,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M24P8027RN7FB86DTACY59C2"
+                              default: "tool_01M25CQYAE15YYN1RVPCJZQZY1"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39747,7 +38636,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802C4HH21JB5Z7CNCJCY"
+                        default: "tool_01M25CQYAJ2K8VSR7MPQDX6RE6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39848,7 +38737,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802C2ZYTTPRBWMTE03D8"
+                        default: "tool_01M25CQYAJVTTBXCZ0S3CEBKEJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39951,7 +38840,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802DN1R4WW0KVEE0A1DG"
+                        default: "tool_01M25CQYAKZA1MFJE0ZVCZ14GA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40095,7 +38984,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802E27KRNH8Z6SJSPTJK"
+                        default: "tool_01M25CQYAKBKBPZEM2T9RFT5T6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40593,7 +39482,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802K31ZS7H1BAG30MHXA"
+                        default: "tool_01M25CQYAPFSHNNK3N5E7YFZ1Z"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40694,7 +39583,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802K01KS6FMZ3JE1Y1MQ"
+                        default: "tool_01M25CQYAP4PSKYPZ7ECG3R80P"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40797,7 +39686,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802M8EHSDNMT8KP0DK23"
+                        default: "tool_01M25CQYAQVGCA1F31EG33B4VH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40941,7 +39830,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802NWCHNXKPMTPZCE6XM"
+                        default: "tool_01M25CQYAQGRBEF4Y4D2ZDRZ9F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41102,7 +39991,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802WWS8H4B3XM0TRRBW4"
+                        default: "tool_01M25CQYAYHGAD1G5V1CYKK12M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41203,7 +40092,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802W9DZKJWWT3SHM2VWG"
+                        default: "tool_01M25CQYAZQA2YAX0E43DZZZQB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41306,7 +40195,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802XKNS5RJ94Q57BJ7X3"
+                        default: "tool_01M25CQYAZKARR516PDBPP1HZ4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41450,7 +40339,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M24P802YTQE6N4Y1YJWKBXZW"
+                        default: "tool_01M25CQYB04HDFGZDNP97SYR0P"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -41870,7 +40759,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-10T03:36:58.724Z"
+                          default: "2026-09-10T10:10:11.267Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41878,7 +40767,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:36:58.725Z"
+                              default: "2026-09-10T10:10:11.267Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -42002,7 +40891,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-10T03:36:58.724Z"
+                    default: "2026-09-10T10:10:11.267Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42010,7 +40899,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-10T03:36:58.725Z"
+                        default: "2026-09-10T10:10:11.267Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42125,7 +41014,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-10T03:36:58.724Z"
+                    default: "2026-09-10T10:10:11.267Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42133,7 +41022,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-10T03:36:58.725Z"
+                        default: "2026-09-10T10:10:11.267Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42277,7 +41166,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-10T03:36:58.724Z"
+                    default: "2026-09-10T10:10:11.267Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -42285,7 +41174,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-10T03:36:58.725Z"
+                        default: "2026-09-10T10:10:11.267Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -42714,7 +41603,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-10T03:37:07.434Z"
+                                    default: "2026-09-10T10:10:18.601Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42787,7 +41676,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-10T03:37:07.434Z"
+                                    default: "2026-09-10T10:10:18.601Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42860,7 +41749,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-10T03:37:07.434Z"
+                                    default: "2026-09-10T10:10:18.601Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42933,7 +41822,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-10T03:37:07.435Z"
+                                    default: "2026-09-10T10:10:18.601Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -42973,7 +41862,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-10T03:36:58.724Z"
+                          default: "2026-09-10T10:10:11.267Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -42981,7 +41870,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:36:58.725Z"
+                              default: "2026-09-10T10:10:11.267Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -43611,7 +42500,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-10T03:37:07.443Z"
+                                default: "2026-09-10T10:10:18.606Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43684,7 +42573,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-10T03:37:07.443Z"
+                                default: "2026-09-10T10:10:18.606Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43757,7 +42646,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-10T03:37:07.443Z"
+                                default: "2026-09-10T10:10:18.606Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43830,7 +42719,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-10T03:37:07.444Z"
+                                default: "2026-09-10T10:10:18.606Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -43870,7 +42759,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-09-10T03:36:58.724Z"
+                      default: "2026-09-10T10:10:11.267Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -43878,7 +42767,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-09-10T03:36:58.725Z"
+                          default: "2026-09-10T10:10:11.267Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -44242,7 +43131,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.438Z"
+                              default: "2026-09-10T10:10:18.603Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44315,7 +43204,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.438Z"
+                              default: "2026-09-10T10:10:18.603Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44388,7 +43277,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.440Z"
+                              default: "2026-09-10T10:10:18.604Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44461,7 +43350,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.440Z"
+                              default: "2026-09-10T10:10:18.604Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44501,7 +43390,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-10T03:36:58.724Z"
+                    default: "2026-09-10T10:10:11.267Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44509,7 +43398,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-10T03:36:58.725Z"
+                        default: "2026-09-10T10:10:11.267Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45133,7 +44022,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.454Z"
+                              default: "2026-09-10T10:10:18.616Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -45206,7 +44095,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.455Z"
+                              default: "2026-09-10T10:10:18.616Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -45279,7 +44168,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.455Z"
+                              default: "2026-09-10T10:10:18.616Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -45352,7 +44241,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:37:07.455Z"
+                              default: "2026-09-10T10:10:18.617Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -45392,7 +44281,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-10T03:36:58.724Z"
+                    default: "2026-09-10T10:10:11.267Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45400,7 +44289,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-10T03:36:58.725Z"
+                        default: "2026-09-10T10:10:11.267Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -51623,7 +50512,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-10T03:37:07.503Z"
+                      default: "2026-09-10T10:10:18.652Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51665,7 +50554,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-10T03:37:07.504Z"
+                      default: "2026-09-10T10:10:18.652Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51707,7 +50596,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-10T03:37:07.504Z"
+                      default: "2026-09-10T10:10:18.652Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51749,7 +50638,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-10T03:37:07.504Z"
+                      default: "2026-09-10T10:10:18.652Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52076,7 +50965,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-10T03:36:58.724Z"
+                          default: "2026-09-10T10:10:11.267Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52084,7 +50973,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:36:58.725Z"
+                              default: "2026-09-10T10:10:11.267Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52154,7 +51043,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-10T03:36:58.724Z"
+                          default: "2026-09-10T10:10:11.267Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52162,7 +51051,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-10T03:36:58.725Z"
+                              default: "2026-09-10T10:10:11.267Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52338,7 +51227,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-10T03:36:58.724Z"
+                        default: "2026-09-10T10:10:11.267Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52346,7 +51235,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-10T03:36:58.725Z"
+                            default: "2026-09-10T10:10:11.267Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52416,7 +51305,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-10T03:36:58.724Z"
+                        default: "2026-09-10T10:10:11.267Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52424,7 +51313,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-10T03:36:58.725Z"
+                            default: "2026-09-10T10:10:11.267Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52518,7 +51407,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-10T03:36:58.724Z"
+                        default: "2026-09-10T10:10:11.267Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52526,7 +51415,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-10T03:36:58.725Z"
+                            default: "2026-09-10T10:10:11.267Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52596,7 +51485,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-10T03:36:58.724Z"
+                        default: "2026-09-10T10:10:11.267Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52604,7 +51493,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-10T03:36:58.725Z"
+                            default: "2026-09-10T10:10:11.267Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52788,7 +51677,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-10T03:36:58.724Z"
+                        default: "2026-09-10T10:10:11.267Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52796,7 +51685,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-10T03:36:58.725Z"
+                            default: "2026-09-10T10:10:11.267Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52866,7 +51755,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-10T03:36:58.724Z"
+                        default: "2026-09-10T10:10:11.267Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52874,7 +51763,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-10T03:36:58.725Z"
+                            default: "2026-09-10T10:10:11.267Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55759,477 +54648,6 @@ paths:
       x-speakeasy-name-override: "restore"
       security:
         - ApiKey: []
-  /v2/traces/insights:
-    get:
-      tags: []
-      operationId: "InsightsService_ListInsights"
-      parameters:
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          description: "Cursor for forward pagination. Set to the id of the last item from the\n previous page. Cannot be combined with ending_before."
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          description: "Cursor for backward pagination. Set to the id of the first item from the\n previous page. Cannot be combined with starting_after."
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListInsightsResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "list_insights"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-    post:
-      tags: []
-      operationId: "InsightsService_CreateInsight"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InsightConfig"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateInsightResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "create_insight"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}:
-    get:
-      tags: []
-      operationId: "InsightsService_GetInsight"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetInsightResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "get_insight"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-    patch:
-      tags: []
-      operationId: "InsightsService_UpdateInsight"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "update_mask"
-          in: "query"
-          schema:
-            type: "string"
-            format: "field-mask"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InsightConfig"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateInsightResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "update_insight"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs:
-    get:
-      tags: []
-      operationId: "InsightsService_ListRuns"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "status"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "enum"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListRunsResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "list_runs"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-    post:
-      tags: []
-      operationId: "InsightsService_RunAnalysis"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RunAnalysisRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RunAnalysisResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "run_analysis"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}:
-    get:
-      tags: []
-      operationId: "InsightsService_GetRun"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetRunResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "get_run"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-    delete:
-      tags: []
-      operationId: "InsightsService_DeleteRun"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteRunResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "delete_run"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}/artifacts:
-    get:
-      tags: []
-      operationId: "InsightsService_GetRunArtifacts"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetRunArtifactsResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "get_run_artifacts"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}/clusters:
-    get:
-      tags: []
-      operationId: "InsightsService_ListClusters"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "dimension"
-          in: "query"
-          description: "UNSPECIFIED returns all dimensions."
-          schema:
-            type: "integer"
-            format: "enum"
-        - name: "level"
-          in: "query"
-          description: "UNSPECIFIED returns both base and meta clusters."
-          schema:
-            type: "integer"
-            format: "enum"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListClustersResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "list_clusters"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}/clusters/{cluster_id}:
-    get:
-      tags: []
-      operationId: "InsightsService_GetCluster"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "cluster_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetClusterResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "get_cluster"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}/clusters/{cluster_id}/conversations:
-    get:
-      tags: []
-      operationId: "InsightsService_ListClusterConversations"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "cluster_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListClusterConversationsResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "list_cluster_conversations"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}:cancel:
-    post:
-      tags: []
-      operationId: "InsightsService_CancelRun"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CancelRunRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CancelRunResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "cancel_run"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights/{insight_id}/runs/{run_id}:reEvaluate:
-    post:
-      tags: []
-      operationId: "InsightsService_ReEvaluateRun"
-      parameters:
-        - name: "insight_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ReEvaluateRunRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReEvaluateRunResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "re_evaluate_run"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/traces/insights:previewCandidates:
-    post:
-      tags: []
-      operationId: "InsightsService_PreviewInsightCandidates"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PreviewInsightCandidatesRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PreviewInsightCandidatesResponse"
-      x-speakeasy-group: "insights"
-      x-speakeasy-name-override: "preview_insight_candidates"
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
   /v3/logs/aggregate:
     post:
       tags:
@@ -58816,147 +57234,6 @@ paths:
       x-speakeasy-name-override: "disable"
       security:
         - ApiKey: []
-  /v2/activity/{entity_id}:
-    get:
-      tags:
-        - "Activities"
-      summary: "List activities for an entity"
-      description: "Returns the activity timeline of an entity, ordered by creation time with the newest entry first. The timeline mixes `comment` and `version` activities. Use `starting_after` or `ending_before` to page through large collections; the two cursors are mutually exclusive."
-      operationId: "ActivityList"
-      parameters:
-        - name: "entity_id"
-          in: "path"
-          description: "ID of the entity to list activities for."
-          required: true
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          description: "Page size, 1–200. Unset uses the server default (25); explicit 0\n (or anything outside the range) is rejected by buf.validate."
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          description: "Cursor for forward pagination. Set to the `activity_id` of the\n last item from the previous page. Mutually exclusive with\n `ending_before`."
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          description: "Cursor for backward pagination. Set to the `activity_id` of the\n first item from the previous page. Mutually exclusive with\n `starting_after`."
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListActivitiesResponse"
-      x-speakeasy-group: "activities"
-      x-speakeasy-name-override: "list"
-      x-speakeasy-ignore: true
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - List activities"
-          source: "curl --get 'https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25'\n"
-        - lang: "python"
-          label: "Python - List activities"
-          source: "import os\nimport requests\n\nresponse = requests.get(\n    \"https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    headers={\"Authorization\": f\"Bearer {os.environ['ORQ_API_KEY']}\"},\n    params={\"limit\": 25},\n    timeout=30,\n)\nresponse.raise_for_status()\n\npage = response.json()\nfor activity in page[\"data\"]:\n    print(activity[\"activity_id\"], activity[\"type\"])\n"
-        - lang: "typescript"
-          label: "Node.js - List activities"
-          source: "const response = await fetch(\n  'https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V?limit=25',\n  {\n    headers: {\n      Authorization: `Bearer ${process.env.ORQ_API_KEY}`,\n    },\n  },\n);\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst page = await response.json();\nfor (const activity of page.data) {\n  console.log(activity.activity_id, activity.type);\n}\n"
-      security:
-        - ApiKey: []
-    post:
-      tags:
-        - "Activities"
-      summary: "Create a new activity"
-      description: "Appends an activity to the timeline of an entity. Comment activities require `content` and may mention users or reply to another comment. Version activities require `checksum`, `version`, and `data`, and snapshot the entity configuration at that point in time. The target entity must exist and be accessible to the API key; the activity is attached to the project of that entity, with workspace and project scope inferred from the key."
-      operationId: "ActivityCreate"
-      parameters:
-        - name: "entity_id"
-          in: "path"
-          description: "ID of the entity to append the activity to. The entity must exist\n in the workspace."
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateActivityRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateActivityResponse"
-      x-speakeasy-group: "activities"
-      x-speakeasy-name-override: "create"
-      x-speakeasy-ignore: true
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Comment on an agent"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"type\": \"ACTIVITY_TYPE_COMMENT\",\n    \"entity_type\": \"agent\",\n    \"content\": \"Lowered the temperature to 0.2 to reduce hallucinations.\",\n    \"mentions\": [\n      {\n        \"user_id\": \"user_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n        \"display_name\": \"Ada Lovelace\"\n      }\n    ]\n  }'\n"
-        - lang: "python"
-          label: "Python - Comment on an agent"
-          source: "import os\nimport requests\n\nresponse = requests.post(\n    \"https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    headers={\n        \"Authorization\": f\"Bearer {os.environ['ORQ_API_KEY']}\",\n        \"Content-Type\": \"application/json\",\n    },\n    json={\n        \"type\": \"ACTIVITY_TYPE_COMMENT\",\n        \"entity_type\": \"agent\",\n        \"content\": \"Lowered the temperature to 0.2 to reduce hallucinations.\",\n        \"mentions\": [\n            {\n                \"user_id\": \"user_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n                \"display_name\": \"Ada Lovelace\",\n            }\n        ],\n    },\n    timeout=30,\n)\nresponse.raise_for_status()\n\nactivity = response.json()\nprint(activity[\"activity_id\"])\n"
-        - lang: "typescript"
-          label: "Node.js - Comment on an agent"
-          source: "const response = await fetch(\n  'https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  {\n    method: 'POST',\n    headers: {\n      Authorization: `Bearer ${process.env.ORQ_API_KEY}`,\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify({\n      type: 'ACTIVITY_TYPE_COMMENT',\n      entity_type: 'agent',\n      content: 'Lowered the temperature to 0.2 to reduce hallucinations.',\n      mentions: [\n        {\n          user_id: 'user_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n          display_name: 'Ada Lovelace',\n        },\n      ],\n    }),\n  },\n);\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst activity = await response.json();\nconsole.log(activity.activity_id);\n"
-      security:
-        - ApiKey: []
-  /v2/activity/{entity_id}/{activity_id}:
-    patch:
-      tags:
-        - "Activities"
-      summary: "Update an activity"
-      description: "Updates an existing activity. Set `content` to edit a comment; the comment is marked as edited and the edit time is recorded. Set `environments` to retag a version activity: the listed environments are removed from every other version of the same entity because an environment always points at a single version. Omitted fields keep their current values."
-      operationId: "ActivityUpdate"
-      parameters:
-        - name: "entity_id"
-          in: "path"
-          description: "ID of the entity the activity belongs to."
-          required: true
-          schema:
-            type: "string"
-        - name: "activity_id"
-          in: "path"
-          description: "ID of the activity to update."
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateActivityRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateActivityResponse"
-      x-speakeasy-group: "activities"
-      x-speakeasy-name-override: "update"
-      x-speakeasy-ignore: true
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Edit a comment"
-          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V/act_01hzxw2k7y8q9m0n1p2r3s4t5v' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"content\": \"Lowered the temperature to 0.1 after reviewing the eval run.\"\n  }'\n"
-        - lang: "python"
-          label: "Python - Edit a comment"
-          source: "import os\nimport requests\n\nresponse = requests.patch(\n    \"https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V/act_01hzxw2k7y8q9m0n1p2r3s4t5v\",\n    headers={\n        \"Authorization\": f\"Bearer {os.environ['ORQ_API_KEY']}\",\n        \"Content-Type\": \"application/json\",\n    },\n    json={\n        \"content\": \"Lowered the temperature to 0.1 after reviewing the eval run.\",\n    },\n    timeout=30,\n)\nresponse.raise_for_status()\n\nactivity = response.json()\nprint(activity[\"is_edited\"], activity[\"edited_at\"])\n"
-        - lang: "typescript"
-          label: "Node.js - Edit a comment"
-          source: "const response = await fetch(\n  'https://api.orq.ai/v2/activity/01HZXW2K7Y8Q9M0N1P2R3S4T5V/act_01hzxw2k7y8q9m0n1p2r3s4t5v',\n  {\n    method: 'PATCH',\n    headers: {\n      Authorization: `Bearer ${process.env.ORQ_API_KEY}`,\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify({\n      content: 'Lowered the temperature to 0.1 after reviewing the eval run.',\n    }),\n  },\n);\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst activity = await response.json();\nconsole.log(activity.is_edited, activity.edited_at);\n"
-      security:
-        - ApiKey: []
   /v2/alerts:
     get:
       tags:
@@ -60101,44 +58378,6 @@ paths:
       x-speakeasy-name-override: "resetConsumption"
       security:
         - ApiKey: []
-  /v2/documentation/search:
-    post:
-      tags:
-        - "Documentation"
-      summary: "Search documentation"
-      description: "Searches the orq.ai documentation index for the given query and returns the matching pages with content snippets and metadata."
-      operationId: "DocumentationSearch"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SearchDocumentationRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SearchDocumentationResponse"
-      x-speakeasy-group: "documentation"
-      x-speakeasy-name-override: "search"
-      x-cli-group: "documentation"
-      x-cli-name: "search"
-      x-cli-hidden: true
-      x-speakeasy-ignore: true
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Search documentation"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/documentation/search' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"query\": \"How do I create an API key?\",\n    \"limit\": 5,\n    \"score_threshold\": 0.65\n  }'\n"
-        - lang: "python"
-          label: "Python - Search documentation"
-          source: "import os\nimport requests\n\nresponse = requests.post(\n    \"https://api.orq.ai/v2/documentation/search\",\n    headers={\n        \"Authorization\": f\"Bearer {os.environ['ORQ_API_KEY']}\",\n        \"Content-Type\": \"application/json\",\n    },\n    json={\n        \"query\": \"How do I create an API key?\",\n        \"limit\": 5,\n        \"score_threshold\": 0.65,\n    },\n    timeout=30,\n)\nresponse.raise_for_status()\n\nfor result in response.json()[\"results\"]:\n    print(result[\"metadata\"][\"title\"], result[\"metadata\"][\"href\"])\n"
-        - lang: "typescript"
-          label: "Node.js - Search documentation"
-          source: "const response = await fetch('https://api.orq.ai/v2/documentation/search', {\n  method: 'POST',\n  headers: {\n    Authorization: `Bearer ${process.env.ORQ_API_KEY}`,\n    'Content-Type': 'application/json',\n  },\n  body: JSON.stringify({\n    query: 'How do I create an API key?',\n    limit: 5,\n    score_threshold: 0.65,\n  }),\n});\n\nif (!response.ok) {\n  throw new Error(`Request failed: ${response.status}`);\n}\n\nconst { results } = await response.json();\nfor (const result of results) {\n  console.log(result.metadata.title, result.metadata.href);\n}\n"
-      security:
-        - ApiKey: []
   /v2/files:
     get:
       tags:
@@ -60368,69 +58607,6 @@ paths:
         - lang: "typescript"
           label: "Node.js - Rename file"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.files.update({\n  fileId: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  fileName: 'support-faq-v2.md',\n});\n\nconsole.log(result.file.fileName);\n"
-      security:
-        - ApiKey: []
-  /v2/finder:
-    get:
-      tags:
-        - "Finder"
-      summary: "List finder entities"
-      description: "Returns a page of finder entities visible to the caller across the current workspace."
-      operationId: "ListFinderEntities"
-      parameters:
-        - name: "page_size"
-          in: "query"
-          description: "Number of entities to return. Unset uses the server default (100)."
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "page_token"
-          in: "query"
-          description: "Opaque cursor returned by the previous page."
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListFinderEntitiesResponse"
-      x-speakeasy-group: "finder"
-      x-speakeasy-name-override: "list"
-      x-cli-group: "finder"
-      x-cli-name: "list"
-      x-cli-hidden: true
-      x-speakeasy-ignore: true
-      security:
-        - ApiKey: []
-  /v2/finder/{id}:
-    get:
-      tags:
-        - "Finder"
-      summary: "Retrieve a finder entity"
-      description: "Returns a single finder entity by id, scoped to the caller's workspace membership."
-      operationId: "GetFinderEntity"
-      parameters:
-        - name: "id"
-          in: "path"
-          description: "Identifier of the finder entity to retrieve. Matches the `_id` field."
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FinderItem"
-      x-speakeasy-group: "finder"
-      x-speakeasy-name-override: "get"
-      x-cli-group: "finder"
-      x-cli-name: "get"
-      x-cli-hidden: true
-      x-speakeasy-ignore: true
       security:
         - ApiKey: []
   /v2/guardrail-rules:
@@ -61656,13 +59832,13 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Test a single tool"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/mcp-servers/01JQ0K5R8N2ZC7X4M9T3V6HWBD/tools:test' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"tool_name\": \"search_issues\",\n    \"arguments\": { \"query\": \"repo:orq-ai/orquesta-web is:open label:bug\" }\n  }'\n"
+          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/mcp-servers/01JQ0K5R8N2ZC7X4M9T3V6HWBD/tools:test' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"tool_name\": \"search_issues\",\n    \"arguments\": { \"query\": \"repo:orq-ai/orq-cli is:open label:bug\" }\n  }'\n"
         - lang: "python"
           label: "Python - Test a single tool"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\n# tool_name is the upstream name, not a gateway's namespaced exposed_name.\nresult = client.mcp_servers.test_tool(\n    id=\"01JQ0K5R8N2ZC7X4M9T3V6HWBD\",\n    tool_name=\"search_issues\",\n    arguments={\"query\": \"repo:orq-ai/orquesta-web is:open label:bug\"},\n)\n\nprint(result.result.ok, result.result.latency_ms)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\n# tool_name is the upstream name, not a gateway's namespaced exposed_name.\nresult = client.mcp_servers.test_tool(\n    id=\"01JQ0K5R8N2ZC7X4M9T3V6HWBD\",\n    tool_name=\"search_issues\",\n    arguments={\"query\": \"repo:orq-ai/orq-cli is:open label:bug\"},\n)\n\nprint(result.result.ok, result.result.latency_ms)\n"
         - lang: "typescript"
           label: "Node.js - Test a single tool"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\n// toolName is the upstream name, not a gateway's namespaced exposedName.\nconst { result } = await client.mcpServers.testTool({\n  id: '01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  toolName: 'search_issues',\n  arguments: { query: 'repo:orq-ai/orquesta-web is:open label:bug' },\n});\n\nconsole.log(result.ok, result.latencyMs);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\n// toolName is the upstream name, not a gateway's namespaced exposedName.\nconst { result } = await client.mcpServers.testTool({\n  id: '01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  toolName: 'search_issues',\n  arguments: { query: 'repo:orq-ai/orq-cli is:open label:bug' },\n});\n\nconsole.log(result.ok, result.latencyMs);\n"
       security:
         - ApiKey: []
   /v2/mcp-servers/{id}:sync:
@@ -61997,38 +60173,6 @@ paths:
         - lang: "typescript"
           label: "Node.js - Retrieve a model catalog entry"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.modelCatalog.get({\n  id: 'openai/gpt-4o',\n});\n\nconsole.log(result.model.name, result.model.pricing);\n"
-      security:
-        - ApiKey: []
-  /v2/models/{model_id}/sharing:
-    put:
-      tags:
-        - "Model Sharing"
-      summary: "Set a model's sharing config"
-      description: "Persists the project sharing config for a workspace model. Exactly one sharing mode must be set (all_projects / selected)."
-      operationId: "ModelSharingSet"
-      parameters:
-        - name: "model_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Sharing"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SetModelSharingResponse"
-      x-speakeasy-group: "modelSharing"
-      x-speakeasy-name-override: "set"
-      x-cli-hidden: true
-      x-speakeasy-ignore: true
       security:
         - ApiKey: []
   /v2/notifiers:
@@ -65786,8 +63930,6 @@ tags:
   - description: "List models available through the AI Router."
     name: "Models"
   - name: "Policies"
-  - name: "Activities"
-    description: "Activities form the timeline of an entity. The timeline mixes user-authored comments and version snapshots that record how the entity changed over time."
   - name: "Alerts"
     description: "Alerts evaluate a Reporting API metric on a fixed interval and fire notifications through notifiers when the value breaches a threshold. Each breach opens a trigger that tracks the incident until the value recovers."
   - name: "Annotation Queues"
@@ -65798,12 +63940,8 @@ tags:
     description: "Audit logs record workspace entity changes and access-relevant events."
   - name: "Budgets"
     description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, API key, provider, and model. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
-  - name: "Documentation"
-    description: "Search the orq.ai documentation. Proxies the workspace's query to the hosted docs search index."
   - name: "Files"
     description: "File upload and retrieval operations."
-  - name: "Finder"
-    description: "Finder entities back the studio navigation tree, project switcher, and cross-project resource references."
   - name: "Guardrail Rules"
     description: "Guardrail Rules conditionally enforce evaluators and plugins for AI Gateway traffic. Rules may be scoped to a project or the whole workspace."
   - name: "Hub"
@@ -65816,8 +63954,6 @@ tags:
     description: "Register upstream MCP servers, discover and sync their tools, and assemble gateways that expose a curated tool surface to MCP clients."
   - name: "Model Catalog"
     description: "Browse the orq.ai model catalog: every model orq offers, across every provider, with pricing, capabilities and benchmark data. List endpoints only return models that are not deprecated. This API is public, requires no authentication, and is rate limited to 120 requests per minute per IP. Responses carry a 5-minute cache-control max-age."
-  - name: "Model Sharing"
-    description: "Model sharing controls which projects a workspace model is available to. Workspace admins configure a model's Sharing (all projects / selected projects); the config ships inline on the models list response, so there is no separate read endpoint."
   - name: "Notifiers"
     description: "Notifier destinations used to send delivery and workflow notifications."
   - name: "Projects"
