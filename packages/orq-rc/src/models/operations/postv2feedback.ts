@@ -32,6 +32,7 @@ export const PostV2FeedbackProduct = {
   Evaluators: "evaluators",
   Otel: "otel",
   AiChat: "ai-chat",
+  McpGateway: "mcp_gateway",
 } as const;
 export type PostV2FeedbackProduct = ClosedEnum<typeof PostV2FeedbackProduct>;
 
@@ -78,6 +79,7 @@ export const PostV2FeedbackFeedbackProduct = {
   Evaluators: "evaluators",
   Otel: "otel",
   AiChat: "ai-chat",
+  McpGateway: "mcp_gateway",
 } as const;
 export type PostV2FeedbackFeedbackProduct = ClosedEnum<
   typeof PostV2FeedbackFeedbackProduct

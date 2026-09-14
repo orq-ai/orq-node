@@ -470,7 +470,7 @@ export type CreateCompletionFilterBy1 =
   | CreateCompletion1Nin;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
  */
 export type CreateCompletionFilterBy =
   | CreateCompletionFilterByAnd
@@ -510,7 +510,7 @@ export type CreateCompletionSearchOptions = {
  */
 export type CreateCompletionRerankConfig = {
   /**
-   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/rerank-models).
+   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#rerank-models).
    */
   model: string;
   /**
@@ -528,7 +528,7 @@ export type CreateCompletionRerankConfig = {
  */
 export type CreateCompletionAgenticRagConfig = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#chat-models).
    */
   model: string;
 };
@@ -547,7 +547,7 @@ export type CreateCompletionKnowledgeBases = {
    */
   searchType?: CreateCompletionSearchType | null | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
    */
   filterBy?: CreateCompletionFilterByAnd | CreateCompletionFilterByOr | {
     [k: string]:

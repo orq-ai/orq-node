@@ -266,7 +266,7 @@ export type CreateImageEditOrq = {
 
 export type CreateImageEditRequestBody = {
   /**
-   * The model to use for image edit. [Check models](https://docs.orq.ai/docs/ai-gateway-supported-models#image-models)
+   * The model to use for image edit. [Check models](https://docs.orq.ai/docs/ai-gateway/supported-models#image-models)
    */
   model: string;
   /**
