@@ -1449,7 +1449,7 @@ export type CreateChatCompletionRequestBody = {
     | CreateChatCompletionMessagesToolMessage
   >;
   /**
-   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`. The AI Gateway offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models.
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`. The AI Gateway offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [Supported models](/docs/ai-gateway/supported-models) to browse available models.
    */
   model: string;
   /**

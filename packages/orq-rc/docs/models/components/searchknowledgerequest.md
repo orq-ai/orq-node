@@ -1,7 +1,7 @@
 # SearchKnowledgeRequest
 
-SearchKnowledgeRequest mirrors the existing public search body and adds the
- internal retrieval configuration override used by the knowledge testing UI.
+Search request. Sets the knowledge base and query, plus optional retrieval
+ settings.
 
 ## Example Usage
 

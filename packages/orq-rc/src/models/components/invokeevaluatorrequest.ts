@@ -15,8 +15,8 @@ export type InvokeEvaluatorRequestMessages = {};
  * Accepts two shapes. `context` names its fields after the template variables
  *
  * @remarks
- *  they feed and is the one to use; the flat fields below are the legacy body,
- *  folded into `context` when it is absent. Setting `context` wins.
+ *  they feed and is the one to use; the flat fields below are folded into
+ *  `context` when it is absent. Setting `context` wins.
  */
 export type InvokeEvaluatorRequest = {
   /**
@@ -24,7 +24,7 @@ export type InvokeEvaluatorRequest = {
    *
    * @remarks
    *  `input.user_query` is ignored; `output.response` is appended only when the
-   *  conversation carries no assistant turn. Mirrors graders-api buildGraderRequest.
+   *  conversation carries no assistant turn.
    */
   context?: EvaluationContext | undefined;
   /**

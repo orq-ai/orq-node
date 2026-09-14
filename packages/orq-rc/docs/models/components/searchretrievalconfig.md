@@ -1,6 +1,6 @@
 # SearchRetrievalConfig
 
-SearchRetrievalConfig mirrors RetrievalConfigInDatabaseSchema. Type remains
+SearchRetrievalConfig is the retrieval strategy configuration. Type remains
  optional because external knowledge bases use the same base configuration
  without a retrieval strategy discriminator.
 

@@ -21,7 +21,7 @@ export type Messages = {};
  *
  * @remarks
  *  `input.user_query` is ignored; `output.response` is appended only when the
- *  conversation carries no assistant turn. Mirrors graders-api buildGraderRequest.
+ *  conversation carries no assistant turn.
  */
 export type EvaluationContext = {
   messages?: Array<Messages> | undefined;

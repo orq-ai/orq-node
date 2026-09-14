@@ -18,7 +18,7 @@ export class Budgets extends ClientSDK {
    * List budgets
    *
    * @remarks
-   * Returns budgets visible to the current workspace, ordered by creation time with the newest first. Supports filtering by scope kind, scope target id, period, and active state, plus an optional free-text query that searches across denormalized target names via Typesense. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
+   * Returns budgets visible to the current workspace, ordered by most recently updated with the newest first. Supports filtering by scope kind, scope target id, period, and active state, plus an optional free-text query that matches scope target names and ids. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async list(
     request?: operations.BudgetListRequest | undefined,

@@ -51,7 +51,7 @@ export type LateChunkerStrategy = {
    */
   minCharactersPerChunk?: number | undefined;
   /**
-   * Embedding model used to generate context-aware chunk embeddings. (Available embedding models)[https://docs.orq.ai/docs/proxy/supported-models#embedding-models]
+   * Embedding model used to generate context-aware chunk embeddings. [Available embedding models](/docs/ai-gateway/supported-models#embedding-models)
    */
   embeddingModel: string;
   /**
@@ -154,7 +154,7 @@ export type AgenticChunkerStrategy = {
   returnType?: ParseChunkingRequestChunkingRequestReturnType | undefined;
   strategy: "agentic";
   /**
-   * Model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy/supported-models#chat-models]
+   * Model to use for chunking. [Available models](/docs/ai-gateway/supported-models#chat-models)
    */
   model: string;
   /**
@@ -237,7 +237,7 @@ export type SemanticChunkerStrategy = {
    */
   threshold?: number | Threshold2 | undefined;
   /**
-   * Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy/supported-models#embedding-models]
+   * Embedding model to use for semantic similarity. [Available embedding models](/docs/ai-gateway/supported-models#embedding-models)
    */
   embeddingModel: string;
   /**

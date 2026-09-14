@@ -31,7 +31,7 @@ export type SearchRetrievalConfigRerankConfig = {
 };
 
 /**
- * SearchRetrievalConfig mirrors RetrievalConfigInDatabaseSchema. Type remains
+ * SearchRetrievalConfig is the retrieval strategy configuration. Type remains
  *
  * @remarks
  *  optional because external knowledge bases use the same base configuration

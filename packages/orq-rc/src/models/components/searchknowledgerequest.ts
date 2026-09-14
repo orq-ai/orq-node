@@ -311,7 +311,7 @@ export type Two = {
    */
   model?: string | undefined;
   /**
-   * Internal database model identifier used by the retrieval testing UI.
+   * Identifier of the stored model configuration to use.
    */
   modelDbId: string;
   /**
@@ -330,7 +330,7 @@ export type AgenticRagConfig1 = {
    */
   model: string;
   /**
-   * Internal database model identifier used by the retrieval testing UI.
+   * Identifier of the stored model configuration to use.
    */
   modelDbId?: string | undefined;
   /**
@@ -349,10 +349,10 @@ export type AgenticRagConfig1 = {
 export type SearchKnowledgeRequestAgenticRagConfig = Two | AgenticRagConfig1;
 
 /**
- * SearchKnowledgeRequest mirrors the existing public search body and adds the
+ * Search request. Sets the knowledge base and query, plus optional retrieval
  *
  * @remarks
- *  internal retrieval configuration override used by the knowledge testing UI.
+ *  settings.
  */
 export type SearchKnowledgeRequest = {
   /**
