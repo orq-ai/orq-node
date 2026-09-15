@@ -37,10 +37,10 @@ export type EvaluationResult = {
   spanId?: string | undefined;
   evaluatorId?: string | undefined;
   /**
-   * How the run ended, as distinct from `passed`: "passed", "condition_failed"
+   * How the run ended, as distinct from `passed`: "passed", "condition_failed",
    *
    * @remarks
-   *  or "timed_out". A string, not an enum, because the engine owns the
+   *  "failed" or "timed_out". A string, not an enum, because the engine owns the
    *  vocabulary.
    */
   status?: string | undefined;

@@ -22,7 +22,7 @@ export const ContentType = {
 export type ContentType = ClosedEnum<typeof ContentType>;
 
 /**
- * A webhook subscription and its delivery configuration. Responses include the signing secret; treat it as sensitive.
+ * A webhook subscription and its delivery configuration. The signing secret is shown in full only in the create response and is masked everywhere else.
  */
 export type Webhook = {
   /**
@@ -46,7 +46,7 @@ export type Webhook = {
    */
   events: Array<string>;
   /**
-   * Signing secret used to compute `X-Orq-Signature` as the lowercase hexadecimal HMAC-SHA256 of the exact request body bytes. Treat this value as sensitive.
+   * Signing secret used to compute `X-Orq-Signature` as the lowercase hexadecimal HMAC-SHA256 of the exact request body bytes. Shown in full only in the create response; list and get return a masked value.
    */
   secret: string;
   /**
