@@ -253,11 +253,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.annotationQueues.delete({
+  await orq.annotationQueues.delete({
     annotationQueueId: "<id>",
   });
 
-  console.log(result);
+
 }
 
 run();
@@ -283,7 +283,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("annotationQueuesDelete failed:", res.error);
   }
@@ -303,7 +303,7 @@ run();
 
 ### Response
 
-**Promise\<[components.DeleteAnnotationQueueResponse](../../models/components/deleteannotationqueueresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
@@ -401,11 +401,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.annotationQueues.clear({
+  await orq.annotationQueues.clear({
     annotationQueueId: "<id>",
   });
 
-  console.log(result);
+
 }
 
 run();
@@ -431,7 +431,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("annotationQueuesClear failed:", res.error);
   }
@@ -451,7 +451,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ClearAnnotationQueueResponse](../../models/components/clearannotationqueueresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
@@ -615,7 +615,7 @@ run();
 
 ### Response
 
-**Promise\<[components.AddAnnotationQueueItemsResponse](../../models/components/addannotationqueueitemsresponse.md)\>**
+**Promise\<[components.AnnotationQueueItem[]](../../models/.md)\>**
 
 ### Errors
 
@@ -638,7 +638,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.annotationQueues.removeItems({
+  await orq.annotationQueues.removeItems({
     annotationQueueId: "<id>",
     removeAnnotationQueueItemsRequest: {
       spanIds: [
@@ -648,7 +648,7 @@ async function run() {
     },
   });
 
-  console.log(result);
+
 }
 
 run();
@@ -680,7 +680,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("annotationQueuesRemoveItems failed:", res.error);
   }
@@ -700,7 +700,7 @@ run();
 
 ### Response
 
-**Promise\<[components.RemoveAnnotationQueueItemsResponse](../../models/components/removeannotationqueueitemsresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 

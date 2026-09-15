@@ -13,7 +13,7 @@ export type AuditLogFilter = {
    */
   type: string;
   /**
-   * Audit log field path to filter on. Supported paths include created_at, entity_id, entity_type, action, actor_id, and metadata.display_name.
+   * Audit log field path to filter on. Supported paths include created_at, entity_id, entity_type, action, actor_id, origin, and metadata.display_name.
    */
   path: string;
   /**

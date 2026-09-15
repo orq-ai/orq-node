@@ -78,7 +78,7 @@ export class AnnotationQueues extends ClientSDK {
   async delete(
     request: operations.DeleteAnnotationQueueRequest,
     options?: RequestOptions,
-  ): Promise<components.DeleteAnnotationQueueResponse> {
+  ): Promise<void> {
     return unwrapAsync(annotationQueuesDelete(
       this,
       request,
@@ -112,7 +112,7 @@ export class AnnotationQueues extends ClientSDK {
   async clear(
     request: operations.ClearAnnotationQueueRequest,
     options?: RequestOptions,
-  ): Promise<components.ClearAnnotationQueueResponse> {
+  ): Promise<void> {
     return unwrapAsync(annotationQueuesClear(
       this,
       request,
@@ -146,7 +146,7 @@ export class AnnotationQueues extends ClientSDK {
   async addItems(
     request: operations.AddAnnotationQueueItemsRequest,
     options?: RequestOptions,
-  ): Promise<components.AddAnnotationQueueItemsResponse> {
+  ): Promise<Array<components.AnnotationQueueItem>> {
     return unwrapAsync(annotationQueuesAddItems(
       this,
       request,
@@ -163,7 +163,7 @@ export class AnnotationQueues extends ClientSDK {
   async removeItems(
     request: operations.RemoveAnnotationQueueItemsRequest,
     options?: RequestOptions,
-  ): Promise<components.RemoveAnnotationQueueItemsResponse> {
+  ): Promise<void> {
     return unwrapAsync(annotationQueuesRemoveItems(
       this,
       request,
