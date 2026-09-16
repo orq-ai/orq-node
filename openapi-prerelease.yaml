@@ -18,17 +18,923 @@ components:
       scheme: "bearer"
       bearerFormat: "JWT"
   schemas:
-    HonoApiError:
+    InvokeDeploymentRequest:
       type: "object"
       properties:
-        code:
+        key:
           type: "string"
-          description: "HTTP status code"
-        message:
-          type: "string"
-          description: "Error message"
+          description: "The deployment key to invoke"
+        stream:
+          type: "boolean"
+          default: false
+          description: "If set, partial message content will be sent. Tokens will be sent as data-only `server-sent events` as they become available, with the stream terminated by a `data: [DONE]` message."
+        inputs:
+          type: "object"
+          additionalProperties: {}
+          description: "Key-value pairs variables to replace in your prompts. If a variable is not provided that is defined in the prompt, the default variables are used."
+        context:
+          type: "object"
+          additionalProperties: {}
+          description: "Key-value pairs that match your data model and fields declared in your deployment routing configuration"
+        prefix_messages:
+          type: "array"
+          items:
+            oneOf:
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "system"
+                    description: "The role of the messages author, in this case `system`."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the system message."
+                      - type: "array"
+                        items:
+                          $ref: "#/components/schemas/TextContentPartSchema"
+                        minItems: 1
+                        description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                    description: "The contents of the system message."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                required:
+                  - "role"
+                  - "content"
+                title: "System message"
+                description: "Developer-provided instructions that the model should follow, regardless of messages sent by the user."
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "developer"
+                    description: "The role of the messages author, in this case  `developer`."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the system message."
+                      - type: "array"
+                        items:
+                          $ref: "#/components/schemas/TextContentPartSchema"
+                        minItems: 1
+                        description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                    description: "The contents of the developer message."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                required:
+                  - "role"
+                  - "content"
+                title: "Developer message"
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "user"
+                    description: "The role of the messages author, in this case `user`."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The text contents of the message."
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - $ref: "#/components/schemas/TextContentPartSchema"
+                            - $ref: "#/components/schemas/ImageContentPartSchema"
+                            - $ref: "#/components/schemas/AudioContentPartSchema"
+                            - type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "file"
+                                  description: "The type of the content part. Always `file`."
+                                cache_control:
+                                  type: "object"
+                                  properties:
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "ephemeral"
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                    ttl:
+                                      type: "string"
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                  required:
+                                    - "type"
+                                file:
+                                  $ref: "#/components/schemas/FileContentPartSchema"
+                              required:
+                                - "type"
+                                - "file"
+                        description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                    description: "The contents of the user message."
+                required:
+                  - "role"
+                  - "content"
+                title: "User message"
+              - type: "object"
+                properties:
+                  reasoning_content:
+                    type: "string"
+                    description: "Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the assistant message."
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - $ref: "#/components/schemas/TextContentPartSchema"
+                            - $ref: "#/components/schemas/RefusalPartSchema"
+                            - $ref: "#/components/schemas/ReasoningPartSchema"
+                            - $ref: "#/components/schemas/RedactedReasoningPartSchema"
+                          discriminator:
+                            propertyName: "type"
+                            mapping:
+                              text: "#/components/schemas/TextContentPartSchema"
+                              refusal: "#/components/schemas/RefusalPartSchema"
+                              reasoning: "#/components/schemas/ReasoningPartSchema"
+                              redacted_reasoning: "#/components/schemas/RedactedReasoningPartSchema"
+                        description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                      - type: "null"
+                    description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                  refusal:
+                    type:
+                      - "string"
+                      - "null"
+                    description: "The refusal message by the assistant."
+                  role:
+                    type: "string"
+                    enum:
+                      - "assistant"
+                    description: "The role of the messages author, in this case `assistant`."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                  audio:
+                    type:
+                      - "object"
+                      - "null"
+                    properties:
+                      id:
+                        type: "string"
+                        description: "Unique identifier for a previous audio response from the model."
+                    required:
+                      - "id"
+                    description: "Data about a previous audio response from the model. "
+                  tool_calls:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "string"
+                          description: "The ID of the tool call."
+                        type:
+                          type: "string"
+                          enum:
+                            - "function"
+                          description: "The type of the tool. Currently, only `function` is supported."
+                        function:
+                          type: "object"
+                          properties:
+                            name:
+                              type: "string"
+                              description: "The name of the function to call."
+                            arguments:
+                              type: "string"
+                              description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                        thought_signature:
+                          type: "string"
+                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
+                      required:
+                        - "id"
+                        - "type"
+                        - "function"
+                    description: "The tool calls generated by the model, such as function calls."
+                required:
+                  - "role"
+                title: "Assistant message"
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "tool"
+                    description: "The role of the messages author, in this case tool."
+                  content:
+                    anyOf:
+                      - type: "string"
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - $ref: "#/components/schemas/TextContentPartSchema"
+                          discriminator:
+                            propertyName: "type"
+                            mapping:
+                              text: "#/components/schemas/TextContentPartSchema"
+                    description: "The contents of the tool message."
+                  tool_call_id:
+                    type:
+                      - "string"
+                      - "null"
+                    description: "Tool call that this message is responding to."
+                  cache_control:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
+                        enum:
+                          - "ephemeral"
+                        description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                      ttl:
+                        type: "string"
+                        enum:
+                          - "5m"
+                          - "1h"
+                        default: "5m"
+                        description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                    required:
+                      - "type"
+                required:
+                  - "role"
+                  - "content"
+                  - "tool_call_id"
+                title: "Tool message"
+          description: "A list of messages to include after the `System` message, but before the  `User` and `Assistant` pairs configured in your deployment."
+        messages:
+          type: "array"
+          items:
+            oneOf:
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "system"
+                    description: "The role of the messages author, in this case `system`."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the system message."
+                      - type: "array"
+                        items:
+                          $ref: "#/components/schemas/TextContentPartSchema"
+                        minItems: 1
+                        description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                    description: "The contents of the system message."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                required:
+                  - "role"
+                  - "content"
+                title: "System message"
+                description: "Developer-provided instructions that the model should follow, regardless of messages sent by the user."
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "developer"
+                    description: "The role of the messages author, in this case  `developer`."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the system message."
+                      - type: "array"
+                        items:
+                          $ref: "#/components/schemas/TextContentPartSchema"
+                        minItems: 1
+                        description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                    description: "The contents of the developer message."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                required:
+                  - "role"
+                  - "content"
+                title: "Developer message"
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "user"
+                    description: "The role of the messages author, in this case `user`."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The text contents of the message."
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - $ref: "#/components/schemas/TextContentPartSchema"
+                            - $ref: "#/components/schemas/ImageContentPartSchema"
+                            - $ref: "#/components/schemas/AudioContentPartSchema"
+                            - type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "file"
+                                  description: "The type of the content part. Always `file`."
+                                cache_control:
+                                  type: "object"
+                                  properties:
+                                    type:
+                                      type: "string"
+                                      enum:
+                                        - "ephemeral"
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                    ttl:
+                                      type: "string"
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                  required:
+                                    - "type"
+                                file:
+                                  $ref: "#/components/schemas/FileContentPartSchema"
+                              required:
+                                - "type"
+                                - "file"
+                        description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                    description: "The contents of the user message."
+                required:
+                  - "role"
+                  - "content"
+                title: "User message"
+              - type: "object"
+                properties:
+                  reasoning_content:
+                    type: "string"
+                    description: "Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation."
+                  content:
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the assistant message."
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - $ref: "#/components/schemas/TextContentPartSchema"
+                            - $ref: "#/components/schemas/RefusalPartSchema"
+                            - $ref: "#/components/schemas/ReasoningPartSchema"
+                            - $ref: "#/components/schemas/RedactedReasoningPartSchema"
+                          discriminator:
+                            propertyName: "type"
+                            mapping:
+                              text: "#/components/schemas/TextContentPartSchema"
+                              refusal: "#/components/schemas/RefusalPartSchema"
+                              reasoning: "#/components/schemas/ReasoningPartSchema"
+                              redacted_reasoning: "#/components/schemas/RedactedReasoningPartSchema"
+                        description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                      - type: "null"
+                    description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                  refusal:
+                    type:
+                      - "string"
+                      - "null"
+                    description: "The refusal message by the assistant."
+                  role:
+                    type: "string"
+                    enum:
+                      - "assistant"
+                    description: "The role of the messages author, in this case `assistant`."
+                  name:
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                  audio:
+                    type:
+                      - "object"
+                      - "null"
+                    properties:
+                      id:
+                        type: "string"
+                        description: "Unique identifier for a previous audio response from the model."
+                    required:
+                      - "id"
+                    description: "Data about a previous audio response from the model. "
+                  tool_calls:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "string"
+                          description: "The ID of the tool call."
+                        type:
+                          type: "string"
+                          enum:
+                            - "function"
+                          description: "The type of the tool. Currently, only `function` is supported."
+                        function:
+                          type: "object"
+                          properties:
+                            name:
+                              type: "string"
+                              description: "The name of the function to call."
+                            arguments:
+                              type: "string"
+                              description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                        thought_signature:
+                          type: "string"
+                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
+                      required:
+                        - "id"
+                        - "type"
+                        - "function"
+                    description: "The tool calls generated by the model, such as function calls."
+                required:
+                  - "role"
+                title: "Assistant message"
+              - type: "object"
+                properties:
+                  role:
+                    type: "string"
+                    enum:
+                      - "tool"
+                    description: "The role of the messages author, in this case tool."
+                  content:
+                    anyOf:
+                      - type: "string"
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - $ref: "#/components/schemas/TextContentPartSchema"
+                          discriminator:
+                            propertyName: "type"
+                            mapping:
+                              text: "#/components/schemas/TextContentPartSchema"
+                    description: "The contents of the tool message."
+                  tool_call_id:
+                    type:
+                      - "string"
+                      - "null"
+                    description: "Tool call that this message is responding to."
+                  cache_control:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
+                        enum:
+                          - "ephemeral"
+                        description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                      ttl:
+                        type: "string"
+                        enum:
+                          - "5m"
+                          - "1h"
+                        default: "5m"
+                        description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                    required:
+                      - "type"
+                required:
+                  - "role"
+                  - "content"
+                  - "tool_call_id"
+                title: "Tool message"
+          description: "A list of messages to send to the deployment."
+        identity:
+          $ref: "#/components/schemas/PublicIdentity"
+        file_ids:
+          type: "array"
+          items:
+            type: "string"
+          maxItems: 100
+          description: "A list of file IDs that are associated with the deployment request."
+        metadata:
+          type: "object"
+          additionalProperties: {}
+          description: "Key-value pairs that you want to attach to the log generated by this request."
+        extra_params:
+          type: "object"
+          additionalProperties: {}
+          description: "Utilized for passing additional parameters to the model provider. Exercise caution when using this feature, as the included parameters will overwrite any parameters specified in the deployment prompt configuration."
+        documents:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              text:
+                type: "string"
+                description: "The text content of the document"
+              metadata:
+                type: "object"
+                properties:
+                  file_name:
+                    type: "string"
+                    description: "Name of the file the text is from."
+                  file_type:
+                    type: "string"
+                    description: "Content type of the file the text is from."
+                  page_number:
+                    type: "number"
+                    description: "The page number the text is from."
+                description: "Metadata about the document"
+            required:
+              - "text"
+          description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
+          example:
+            - text: "The refund policy allows customers to return items within 30 days of purchase for a full refund."
+              metadata:
+                file_name: "refund_policy.pdf"
+                file_type: "application/pdf"
+                page_number: 1
+            - text: "Premium members receive free shipping on all orders over $50."
+              metadata:
+                file_name: "membership_benefits.md"
+                file_type: "text/markdown"
+        invoke_options:
+          type: "object"
+          properties:
+            include_retrievals:
+              type: "boolean"
+              default: false
+              description: "Whether to include the retrieved knowledge chunks in the response."
+            include_usage:
+              type: "boolean"
+              default: false
+              description: "Whether to include the usage metrics in the response."
+            mock_response:
+              type: "string"
+              description: "A mock response to use instead of calling the LLM API. This is useful for testing purposes. When provided, the system will return a response object with this content as the completion, without making an actual API call to the LLM provider. This works for both streaming and non-streaming requests. Mock responses will not generate logs, traces or be counted for your plan usage."
+        thread:
+          type: "object"
+          properties:
+            id:
+              type: "string"
+              description: "Unique thread identifier to group related invocations."
+            tags:
+              type: "array"
+              items:
+                type: "string"
+              description: "Optional tags to differentiate or categorize threads"
+          required:
+            - "id"
+        knowledge_filter:
+          anyOf:
+            - type: "object"
+              additionalProperties:
+                anyOf:
+                  - type: "object"
+                    properties:
+                      eq:
+                        anyOf:
+                          - type: "string"
+                            title: "string"
+                            description: "String"
+                          - type: "number"
+                            title: "number"
+                            description: "Number"
+                          - type: "boolean"
+                            title: "boolean"
+                            description: "Boolean"
+                    required:
+                      - "eq"
+                    title: "eq"
+                    description: "Equal to"
+                  - type: "object"
+                    properties:
+                      ne:
+                        anyOf:
+                          - type: "string"
+                            title: "string"
+                            description: "String"
+                          - type: "number"
+                            title: "number"
+                            description: "Number"
+                          - type: "boolean"
+                            title: "boolean"
+                            description: "Boolean"
+                    required:
+                      - "ne"
+                    title: "ne"
+                    description: "Not equal to"
+                  - type: "object"
+                    properties:
+                      gt:
+                        type: "number"
+                    required:
+                      - "gt"
+                    title: "gt"
+                    description: "Greater than"
+                  - type: "object"
+                    properties:
+                      gte:
+                        type: "number"
+                    required:
+                      - "gte"
+                    title: "gte"
+                    description: "Greater than or equal to"
+                  - type: "object"
+                    properties:
+                      lt:
+                        type: "number"
+                    required:
+                      - "lt"
+                    title: "lt"
+                    description: "Less than"
+                  - type: "object"
+                    properties:
+                      lte:
+                        type: "number"
+                    required:
+                      - "lte"
+                    title: "lte"
+                    description: "Less than or equal to"
+                  - type: "object"
+                    properties:
+                      in:
+                        type: "array"
+                        items:
+                          anyOf:
+                            - type: "string"
+                              title: "string"
+                              description: "String"
+                            - type: "number"
+                              title: "number"
+                              description: "Number"
+                            - type: "boolean"
+                              title: "boolean"
+                              description: "Boolean"
+                    required:
+                      - "in"
+                    title: "in"
+                    description: "In"
+                  - type: "object"
+                    properties:
+                      nin:
+                        type: "array"
+                        items:
+                          anyOf:
+                            - type: "string"
+                              title: "string"
+                              description: "String"
+                            - type: "number"
+                              title: "number"
+                              description: "Number"
+                            - type: "boolean"
+                              title: "boolean"
+                              description: "Boolean"
+                    required:
+                      - "nin"
+                    title: "nin"
+                    description: "Not in"
+              title: "Search operator"
+            - type: "object"
+              properties:
+                and:
+                  type: "array"
+                  items:
+                    type: "object"
+                    additionalProperties:
+                      anyOf:
+                        - type: "object"
+                          properties:
+                            eq:
+                              anyOf:
+                                - type: "string"
+                                  title: "string"
+                                  description: "String"
+                                - type: "number"
+                                  title: "number"
+                                  description: "Number"
+                                - type: "boolean"
+                                  title: "boolean"
+                                  description: "Boolean"
+                          required:
+                            - "eq"
+                          title: "eq"
+                          description: "Equal to"
+                        - type: "object"
+                          properties:
+                            ne:
+                              anyOf:
+                                - type: "string"
+                                  title: "string"
+                                  description: "String"
+                                - type: "number"
+                                  title: "number"
+                                  description: "Number"
+                                - type: "boolean"
+                                  title: "boolean"
+                                  description: "Boolean"
+                          required:
+                            - "ne"
+                          title: "ne"
+                          description: "Not equal to"
+                        - type: "object"
+                          properties:
+                            gt:
+                              type: "number"
+                          required:
+                            - "gt"
+                          title: "gt"
+                          description: "Greater than"
+                        - type: "object"
+                          properties:
+                            gte:
+                              type: "number"
+                          required:
+                            - "gte"
+                          title: "gte"
+                          description: "Greater than or equal to"
+                        - type: "object"
+                          properties:
+                            lt:
+                              type: "number"
+                          required:
+                            - "lt"
+                          title: "lt"
+                          description: "Less than"
+                        - type: "object"
+                          properties:
+                            lte:
+                              type: "number"
+                          required:
+                            - "lte"
+                          title: "lte"
+                          description: "Less than or equal to"
+                        - type: "object"
+                          properties:
+                            in:
+                              type: "array"
+                              items:
+                                anyOf:
+                                  - type: "string"
+                                    title: "string"
+                                    description: "String"
+                                  - type: "number"
+                                    title: "number"
+                                    description: "Number"
+                                  - type: "boolean"
+                                    title: "boolean"
+                                    description: "Boolean"
+                          required:
+                            - "in"
+                          title: "in"
+                          description: "In"
+                        - type: "object"
+                          properties:
+                            nin:
+                              type: "array"
+                              items:
+                                anyOf:
+                                  - type: "string"
+                                    title: "string"
+                                    description: "String"
+                                  - type: "number"
+                                    title: "number"
+                                    description: "Number"
+                                  - type: "boolean"
+                                    title: "boolean"
+                                    description: "Boolean"
+                          required:
+                            - "nin"
+                          title: "nin"
+                          description: "Not in"
+              required:
+                - "and"
+              title: "and"
+              description: "And"
+            - type: "object"
+              properties:
+                or:
+                  type: "array"
+                  items:
+                    type: "object"
+                    additionalProperties:
+                      anyOf:
+                        - type: "object"
+                          properties:
+                            eq:
+                              anyOf:
+                                - type: "string"
+                                  title: "string"
+                                  description: "String"
+                                - type: "number"
+                                  title: "number"
+                                  description: "Number"
+                                - type: "boolean"
+                                  title: "boolean"
+                                  description: "Boolean"
+                          required:
+                            - "eq"
+                          title: "eq"
+                          description: "Equal to"
+                        - type: "object"
+                          properties:
+                            ne:
+                              anyOf:
+                                - type: "string"
+                                  title: "string"
+                                  description: "String"
+                                - type: "number"
+                                  title: "number"
+                                  description: "Number"
+                                - type: "boolean"
+                                  title: "boolean"
+                                  description: "Boolean"
+                          required:
+                            - "ne"
+                          title: "ne"
+                          description: "Not equal to"
+                        - type: "object"
+                          properties:
+                            gt:
+                              type: "number"
+                          required:
+                            - "gt"
+                          title: "gt"
+                          description: "Greater than"
+                        - type: "object"
+                          properties:
+                            gte:
+                              type: "number"
+                          required:
+                            - "gte"
+                          title: "gte"
+                          description: "Greater than or equal to"
+                        - type: "object"
+                          properties:
+                            lt:
+                              type: "number"
+                          required:
+                            - "lt"
+                          title: "lt"
+                          description: "Less than"
+                        - type: "object"
+                          properties:
+                            lte:
+                              type: "number"
+                          required:
+                            - "lte"
+                          title: "lte"
+                          description: "Less than or equal to"
+                        - type: "object"
+                          properties:
+                            in:
+                              type: "array"
+                              items:
+                                anyOf:
+                                  - type: "string"
+                                    title: "string"
+                                    description: "String"
+                                  - type: "number"
+                                    title: "number"
+                                    description: "Number"
+                                  - type: "boolean"
+                                    title: "boolean"
+                                    description: "Boolean"
+                          required:
+                            - "in"
+                          title: "in"
+                          description: "In"
+                        - type: "object"
+                          properties:
+                            nin:
+                              type: "array"
+                              items:
+                                anyOf:
+                                  - type: "string"
+                                    title: "string"
+                                    description: "String"
+                                  - type: "number"
+                                    title: "number"
+                                    description: "Number"
+                                  - type: "boolean"
+                                    title: "boolean"
+                                    description: "Boolean"
+                          required:
+                            - "nin"
+                          title: "nin"
+                          description: "Not in"
+              required:
+                - "or"
+              title: "or"
+              description: "Or"
+          description: "A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment."
       required:
-        - "message"
+        - "key"
+      description: "The deployment request payload"
     TextContentPartSchema:
       type: "object"
       properties:
@@ -240,6 +1146,17 @@ components:
       required:
         - "id"
       description: "Information about the identity making the request. If the identity does not exist, it will be created automatically."
+    HonoApiError:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+          description: "HTTP status code"
+        message:
+          type: "string"
+          description: "Error message"
+      required:
+        - "message"
     ThinkingConfigDisabledSchema:
       type: "object"
       properties:
@@ -1618,7 +2535,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m2n4h2fwx0vf1s493cqs5yt8"
+              default: "reasoning_01m2nbzvvc3t9h6cwxreedeecr"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -5999,6 +6916,9 @@ components:
             - "null"
         path:
           type: "string"
+        project_id:
+          type: "string"
+          description: "New containing project. Omit to keep the current project; `path` resolves inside it."
     ListMemoriesResponse:
       required:
         - "object"
@@ -13648,7 +14568,7 @@ components:
           type: "array"
           items:
             type: "string"
-          description: "Replacement tag list. Leave empty to clear tags."
+          description: "Replacement tag list. When provided, replaces the current tags; send an empty array to clear them."
         path:
           type: "string"
           description: "New project path. Omit to keep the current path."
@@ -17942,6 +18862,1604 @@ components:
           format: date-time
   parameters: {}
 paths:
+  /v2/deployments/invoke:
+    post:
+      tags:
+        - "Deployments"
+      operationId: "DeploymentInvoke"
+      summary: "Invoke"
+      description: "Invoke a deployment with a given payload"
+      x-speakeasy-group: "deployments"
+      x-speakeasy-name-override: "invoke"
+      x-cli-group: "deployments"
+      x-cli-name: "invoke"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY ?? '' });\nconst response = await orq.deployments.invoke({\n  key: 'customer-support',\n  inputs: { question: 'What is your refund policy?' },\n});"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvokeDeploymentRequest"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    format: "ulid"
+                    pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    readOnly: true
+                    description: "A unique identifier for the response. Can be used to add metrics to the transaction."
+                  created:
+                    type: "string"
+                    format: "date-time"
+                    description: "A timestamp indicating when the object was created. Usually in a standardized format like ISO 8601"
+                  object:
+                    type: "string"
+                    enum:
+                      - "chat"
+                      - "completion"
+                      - "image"
+                    description: "Indicates the type of model used to generate the response"
+                  model:
+                    type: "string"
+                    description: "The model used to generate the response"
+                  provider:
+                    type: "string"
+                    enum:
+                      - "openai"
+                      - "groq"
+                      - "cohere"
+                      - "azure"
+                      - "aws"
+                      - "google"
+                      - "google-ai"
+                      - "huggingface"
+                      - "togetherai"
+                      - "perplexity"
+                      - "anthropic"
+                      - "leonardoai"
+                      - "fal"
+                      - "nvidia"
+                      - "jina"
+                      - "elevenlabs"
+                      - "litellm"
+                      - "cerebras"
+                      - "openailike"
+                      - "bytedance"
+                      - "mistral"
+                      - "deepseek"
+                      - "moonshotai"
+                      - "zai"
+                      - "minimax"
+                      - "xai"
+                      - "alibaba"
+                      - "tensorix"
+                      - "scaleway"
+                      - "hcompany"
+                      - "inceptron"
+                      - "wafer"
+                      - "poolside"
+                      - "tencent"
+                      - "nebius"
+                      - "fireworks"
+                      - "baseten"
+                      - "reson8"
+                      - "meta"
+                      - "greenpt"
+                      - "slack"
+                      - "orq"
+                    description: "The provider used to generate the response"
+                  is_final:
+                    type: "boolean"
+                    description: "Indicates if the response is the final response"
+                  integration_id:
+                    type: "string"
+                    description: "Indicates integration id used to generate the response"
+                  telemetry:
+                    type: "object"
+                    properties:
+                      trace_id:
+                        type: "string"
+                        description: "The trace id for the request that generated this response"
+                      span_id:
+                        type: "string"
+                        description: "The span id for the request that generated this response"
+                    required:
+                      - "trace_id"
+                      - "span_id"
+                  finalized:
+                    type: "string"
+                    format: "date-time"
+                    description: "A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601"
+                  system_fingerprint:
+                    type:
+                      - "string"
+                      - "null"
+                    description: "Provider backed system fingerprint."
+                  retrievals:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        document:
+                          type: "string"
+                          description: "Content of the retrieved chunk from the knowledge base"
+                        metadata:
+                          type: "object"
+                          properties:
+                            file_name:
+                              type: "string"
+                              description: "Name of the file"
+                            page_number:
+                              type:
+                                - "number"
+                                - "null"
+                              description: "Page number of the chunk"
+                            file_type:
+                              type: "string"
+                              description: "Type of the file"
+                            rerank_score:
+                              type: "number"
+                              description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
+                            search_score:
+                              type: "number"
+                              description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
+                          required:
+                            - "file_name"
+                            - "page_number"
+                            - "file_type"
+                            - "search_score"
+                          description: "Metadata of the retrieved chunk from the knowledge base"
+                      required:
+                        - "document"
+                        - "metadata"
+                    description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
+                  provider_response:
+                    description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
+                  usage:
+                    type:
+                      - "object"
+                      - "null"
+                    properties:
+                      total_tokens:
+                        type: "number"
+                      prompt_tokens:
+                        type: "number"
+                      completion_tokens:
+                        type: "number"
+                      prompt_tokens_details:
+                        type: "object"
+                        properties:
+                          cached_tokens:
+                            type:
+                              - "number"
+                              - "null"
+                      completion_tokens_details:
+                        type:
+                          - "object"
+                          - "null"
+                        properties:
+                          reasoning_tokens:
+                            type:
+                              - "number"
+                              - "null"
+                    description: "Usage metrics for the response"
+                  choices:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        index:
+                          type: "number"
+                        message:
+                          oneOf:
+                            - type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "tool_calls"
+                                role:
+                                  type: "string"
+                                  enum:
+                                    - "system"
+                                    - "developer"
+                                    - "assistant"
+                                    - "user"
+                                    - "exception"
+                                    - "tool"
+                                    - "prompt"
+                                    - "correction"
+                                    - "expected_output"
+                                  description: "The role of the prompt message"
+                                content:
+                                  type:
+                                    - "string"
+                                    - "null"
+                                tool_calls:
+                                  type: "array"
+                                  items:
+                                    type: "object"
+                                    properties:
+                                      id:
+                                        type: "string"
+                                      index:
+                                        type: "number"
+                                      type:
+                                        type: "string"
+                                        enum:
+                                          - "function"
+                                      function:
+                                        type: "object"
+                                        properties:
+                                          name:
+                                            type: "string"
+                                          arguments:
+                                            type: "string"
+                                            description: "JSON string arguments for the functions"
+                                        required:
+                                          - "name"
+                                          - "arguments"
+                                    required:
+                                      - "type"
+                                      - "function"
+                                reasoning:
+                                  type: "string"
+                                  description: "Internal thought process of the model"
+                                reasoning_signature:
+                                  type: "string"
+                                  description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                                redacted_reasoning:
+                                  type: "string"
+                                  description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                              required:
+                                - "type"
+                                - "role"
+                                - "tool_calls"
+                            - type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "content"
+                                role:
+                                  type: "string"
+                                  enum:
+                                    - "system"
+                                    - "developer"
+                                    - "assistant"
+                                    - "user"
+                                    - "exception"
+                                    - "tool"
+                                    - "prompt"
+                                    - "correction"
+                                    - "expected_output"
+                                  description: "The role of the prompt message"
+                                content:
+                                  type:
+                                    - "string"
+                                    - "null"
+                                reasoning:
+                                  type: "string"
+                                  description: "Internal thought process of the model"
+                                reasoning_signature:
+                                  type: "string"
+                                  description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                                redacted_reasoning:
+                                  type: "string"
+                                  description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                              required:
+                                - "type"
+                                - "role"
+                                - "content"
+                            - type: "object"
+                              properties:
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "image"
+                                role:
+                                  type: "string"
+                                  enum:
+                                    - "system"
+                                    - "developer"
+                                    - "assistant"
+                                    - "user"
+                                    - "exception"
+                                    - "tool"
+                                    - "prompt"
+                                    - "correction"
+                                    - "expected_output"
+                                  description: "The role of the prompt message"
+                                url:
+                                  type: "string"
+                              required:
+                                - "type"
+                                - "role"
+                                - "url"
+                        finish_reason:
+                          type:
+                            - "string"
+                            - "null"
+                      required:
+                        - "index"
+                        - "message"
+                    description: "A list of choices generated by the model"
+                required:
+                  - "id"
+                  - "created"
+                  - "object"
+                  - "model"
+                  - "provider"
+                  - "is_final"
+                  - "telemetry"
+                  - "choices"
+        "204":
+          description: "No content - successful operation"
+      security:
+        - ApiKey: []
+  /v2/deployments/stream:
+    post:
+      tags:
+        - "Deployments"
+      operationId: "DeploymentStream"
+      summary: "Stream"
+      description: "Stream deployment generation. Only supported for completions and chat completions."
+      x-speakeasy-group: "deployments"
+      x-speakeasy-name-override: "stream"
+      x-cli-group: "deployments"
+      x-cli-name: "stream"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY ?? '' });\nconst stream = await orq.deployments.stream({\n  key: 'customer-support',\n  inputs: { question: 'What is your refund policy?' },\n});\nfor await (const event of stream) {\n  console.log(event);\n}"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                key:
+                  type: "string"
+                  description: "The deployment key to invoke"
+                inputs:
+                  type: "object"
+                  additionalProperties: {}
+                  description: "Key-value pairs variables to replace in your prompts. If a variable is not provided that is defined in the prompt, the default variables are used."
+                context:
+                  type: "object"
+                  additionalProperties: {}
+                  description: "Key-value pairs that match your data model and fields declared in your deployment routing configuration"
+                prefix_messages:
+                  type: "array"
+                  items:
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "system"
+                            description: "The role of the messages author, in this case `system`."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the system message."
+                              - type: "array"
+                                items:
+                                  $ref: "#/components/schemas/TextContentPartSchema"
+                                minItems: 1
+                                description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                            description: "The contents of the system message."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "System message"
+                        description: "Developer-provided instructions that the model should follow, regardless of messages sent by the user."
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "developer"
+                            description: "The role of the messages author, in this case  `developer`."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the system message."
+                              - type: "array"
+                                items:
+                                  $ref: "#/components/schemas/TextContentPartSchema"
+                                minItems: 1
+                                description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                            description: "The contents of the developer message."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "Developer message"
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "user"
+                            description: "The role of the messages author, in this case `user`."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The text contents of the message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - $ref: "#/components/schemas/TextContentPartSchema"
+                                    - $ref: "#/components/schemas/ImageContentPartSchema"
+                                    - $ref: "#/components/schemas/AudioContentPartSchema"
+                                    - type: "object"
+                                      properties:
+                                        type:
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        cache_control:
+                                          type: "object"
+                                          properties:
+                                            type:
+                                              type: "string"
+                                              enum:
+                                                - "ephemeral"
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                            ttl:
+                                              type: "string"
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                          required:
+                                            - "type"
+                                        file:
+                                          $ref: "#/components/schemas/FileContentPartSchema"
+                                      required:
+                                        - "type"
+                                        - "file"
+                                description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                            description: "The contents of the user message."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "User message"
+                      - type: "object"
+                        properties:
+                          reasoning_content:
+                            type: "string"
+                            description: "Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the assistant message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - $ref: "#/components/schemas/TextContentPartSchema"
+                                    - $ref: "#/components/schemas/RefusalPartSchema"
+                                    - $ref: "#/components/schemas/ReasoningPartSchema"
+                                    - $ref: "#/components/schemas/RedactedReasoningPartSchema"
+                                  discriminator:
+                                    propertyName: "type"
+                                    mapping:
+                                      text: "#/components/schemas/TextContentPartSchema"
+                                      refusal: "#/components/schemas/RefusalPartSchema"
+                                      reasoning: "#/components/schemas/ReasoningPartSchema"
+                                      redacted_reasoning: "#/components/schemas/RedactedReasoningPartSchema"
+                                description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                              - type: "null"
+                            description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                          refusal:
+                            type:
+                              - "string"
+                              - "null"
+                            description: "The refusal message by the assistant."
+                          role:
+                            type: "string"
+                            enum:
+                              - "assistant"
+                            description: "The role of the messages author, in this case `assistant`."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          audio:
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              id:
+                                type: "string"
+                                description: "Unique identifier for a previous audio response from the model."
+                            required:
+                              - "id"
+                            description: "Data about a previous audio response from the model. "
+                          tool_calls:
+                            type: "array"
+                            items:
+                              type: "object"
+                              properties:
+                                id:
+                                  type: "string"
+                                  description: "The ID of the tool call."
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "function"
+                                  description: "The type of the tool. Currently, only `function` is supported."
+                                function:
+                                  type: "object"
+                                  properties:
+                                    name:
+                                      type: "string"
+                                      description: "The name of the function to call."
+                                    arguments:
+                                      type: "string"
+                                      description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                                thought_signature:
+                                  type: "string"
+                                  description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
+                              required:
+                                - "id"
+                                - "type"
+                                - "function"
+                            description: "The tool calls generated by the model, such as function calls."
+                        required:
+                          - "role"
+                        title: "Assistant message"
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "tool"
+                            description: "The role of the messages author, in this case tool."
+                          content:
+                            anyOf:
+                              - type: "string"
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - $ref: "#/components/schemas/TextContentPartSchema"
+                                  discriminator:
+                                    propertyName: "type"
+                                    mapping:
+                                      text: "#/components/schemas/TextContentPartSchema"
+                            description: "The contents of the tool message."
+                          tool_call_id:
+                            type:
+                              - "string"
+                              - "null"
+                            description: "Tool call that this message is responding to."
+                          cache_control:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                        required:
+                          - "role"
+                          - "content"
+                          - "tool_call_id"
+                        title: "Tool message"
+                  description: "A list of messages to include after the `System` message, but before the  `User` and `Assistant` pairs configured in your deployment."
+                messages:
+                  type: "array"
+                  items:
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "system"
+                            description: "The role of the messages author, in this case `system`."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the system message."
+                              - type: "array"
+                                items:
+                                  $ref: "#/components/schemas/TextContentPartSchema"
+                                minItems: 1
+                                description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                            description: "The contents of the system message."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "System message"
+                        description: "Developer-provided instructions that the model should follow, regardless of messages sent by the user."
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "developer"
+                            description: "The role of the messages author, in this case  `developer`."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the system message."
+                              - type: "array"
+                                items:
+                                  $ref: "#/components/schemas/TextContentPartSchema"
+                                minItems: 1
+                                description: "An array of content parts with a defined type. For system messages, only type `text` is supported."
+                            description: "The contents of the developer message."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "Developer message"
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "user"
+                            description: "The role of the messages author, in this case `user`."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The text contents of the message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - $ref: "#/components/schemas/TextContentPartSchema"
+                                    - $ref: "#/components/schemas/ImageContentPartSchema"
+                                    - $ref: "#/components/schemas/AudioContentPartSchema"
+                                    - type: "object"
+                                      properties:
+                                        type:
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        cache_control:
+                                          type: "object"
+                                          properties:
+                                            type:
+                                              type: "string"
+                                              enum:
+                                                - "ephemeral"
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                            ttl:
+                                              type: "string"
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                                          required:
+                                            - "type"
+                                        file:
+                                          $ref: "#/components/schemas/FileContentPartSchema"
+                                      required:
+                                        - "type"
+                                        - "file"
+                                description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                            description: "The contents of the user message."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "User message"
+                      - type: "object"
+                        properties:
+                          reasoning_content:
+                            type: "string"
+                            description: "Provider reasoning content that must be replayed with assistant tool calls when continuing a reasoning-model conversation."
+                          content:
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the assistant message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - $ref: "#/components/schemas/TextContentPartSchema"
+                                    - $ref: "#/components/schemas/RefusalPartSchema"
+                                    - $ref: "#/components/schemas/ReasoningPartSchema"
+                                    - $ref: "#/components/schemas/RedactedReasoningPartSchema"
+                                  discriminator:
+                                    propertyName: "type"
+                                    mapping:
+                                      text: "#/components/schemas/TextContentPartSchema"
+                                      refusal: "#/components/schemas/RefusalPartSchema"
+                                      reasoning: "#/components/schemas/ReasoningPartSchema"
+                                      redacted_reasoning: "#/components/schemas/RedactedReasoningPartSchema"
+                                description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                              - type: "null"
+                            description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                          refusal:
+                            type:
+                              - "string"
+                              - "null"
+                            description: "The refusal message by the assistant."
+                          role:
+                            type: "string"
+                            enum:
+                              - "assistant"
+                            description: "The role of the messages author, in this case `assistant`."
+                          name:
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          audio:
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              id:
+                                type: "string"
+                                description: "Unique identifier for a previous audio response from the model."
+                            required:
+                              - "id"
+                            description: "Data about a previous audio response from the model. "
+                          tool_calls:
+                            type: "array"
+                            items:
+                              type: "object"
+                              properties:
+                                id:
+                                  type: "string"
+                                  description: "The ID of the tool call."
+                                type:
+                                  type: "string"
+                                  enum:
+                                    - "function"
+                                  description: "The type of the tool. Currently, only `function` is supported."
+                                function:
+                                  type: "object"
+                                  properties:
+                                    name:
+                                      type: "string"
+                                      description: "The name of the function to call."
+                                    arguments:
+                                      type: "string"
+                                      description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                                thought_signature:
+                                  type: "string"
+                                  description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
+                              required:
+                                - "id"
+                                - "type"
+                                - "function"
+                            description: "The tool calls generated by the model, such as function calls."
+                        required:
+                          - "role"
+                        title: "Assistant message"
+                      - type: "object"
+                        properties:
+                          role:
+                            type: "string"
+                            enum:
+                              - "tool"
+                            description: "The role of the messages author, in this case tool."
+                          content:
+                            anyOf:
+                              - type: "string"
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - $ref: "#/components/schemas/TextContentPartSchema"
+                                  discriminator:
+                                    propertyName: "type"
+                                    mapping:
+                                      text: "#/components/schemas/TextContentPartSchema"
+                            description: "The contents of the tool message."
+                          tool_call_id:
+                            type:
+                              - "string"
+                              - "null"
+                            description: "Tool call that this message is responding to."
+                          cache_control:
+                            type: "object"
+                            properties:
+                              type:
+                                type: "string"
+                                enum:
+                                  - "ephemeral"
+                                description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                              ttl:
+                                type: "string"
+                                enum:
+                                  - "5m"
+                                  - "1h"
+                                default: "5m"
+                                description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by `Anthropic` Claude models."
+                            required:
+                              - "type"
+                        required:
+                          - "role"
+                          - "content"
+                          - "tool_call_id"
+                        title: "Tool message"
+                  description: "A list of messages to send to the deployment."
+                identity:
+                  $ref: "#/components/schemas/PublicIdentity"
+                file_ids:
+                  type: "array"
+                  items:
+                    type: "string"
+                  maxItems: 100
+                  description: "A list of file IDs that are associated with the deployment request."
+                metadata:
+                  type: "object"
+                  additionalProperties: {}
+                  description: "Key-value pairs that you want to attach to the log generated by this request."
+                extra_params:
+                  type: "object"
+                  additionalProperties: {}
+                  description: "Utilized for passing additional parameters to the model provider. Exercise caution when using this feature, as the included parameters will overwrite any parameters specified in the deployment prompt configuration."
+                documents:
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      text:
+                        type: "string"
+                        description: "The text content of the document"
+                      metadata:
+                        type: "object"
+                        properties:
+                          file_name:
+                            type: "string"
+                            description: "Name of the file the text is from."
+                          file_type:
+                            type: "string"
+                            description: "Content type of the file the text is from."
+                          page_number:
+                            type: "number"
+                            description: "The page number the text is from."
+                        description: "Metadata about the document"
+                    required:
+                      - "text"
+                  description: "A list of documents from your external knowledge base (e.g., chunks retrieved from your own vector database or RAG pipeline) that provide context for the model response. These documents can be used by evaluators and guardrails to assess the relevance and accuracy of the model output against the provided context."
+                  example:
+                    - text: "The refund policy allows customers to return items within 30 days of purchase for a full refund."
+                      metadata:
+                        file_name: "refund_policy.pdf"
+                        file_type: "application/pdf"
+                        page_number: 1
+                    - text: "Premium members receive free shipping on all orders over $50."
+                      metadata:
+                        file_name: "membership_benefits.md"
+                        file_type: "text/markdown"
+                invoke_options:
+                  type: "object"
+                  properties:
+                    include_retrievals:
+                      type: "boolean"
+                      default: false
+                      description: "Whether to include the retrieved knowledge chunks in the response."
+                    include_usage:
+                      type: "boolean"
+                      default: false
+                      description: "Whether to include the usage metrics in the response."
+                    mock_response:
+                      type: "string"
+                      description: "A mock response to use instead of calling the LLM API. This is useful for testing purposes. When provided, the system will return a response object with this content as the completion, without making an actual API call to the LLM provider. This works for both streaming and non-streaming requests. Mock responses will not generate logs, traces or be counted for your plan usage."
+                thread:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                      description: "Unique thread identifier to group related invocations."
+                    tags:
+                      type: "array"
+                      items:
+                        type: "string"
+                      description: "Optional tags to differentiate or categorize threads"
+                  required:
+                    - "id"
+                knowledge_filter:
+                  anyOf:
+                    - type: "object"
+                      additionalProperties:
+                        anyOf:
+                          - type: "object"
+                            properties:
+                              eq:
+                                anyOf:
+                                  - type: "string"
+                                    title: "string"
+                                    description: "String"
+                                  - type: "number"
+                                    title: "number"
+                                    description: "Number"
+                                  - type: "boolean"
+                                    title: "boolean"
+                                    description: "Boolean"
+                            required:
+                              - "eq"
+                            title: "eq"
+                            description: "Equal to"
+                          - type: "object"
+                            properties:
+                              ne:
+                                anyOf:
+                                  - type: "string"
+                                    title: "string"
+                                    description: "String"
+                                  - type: "number"
+                                    title: "number"
+                                    description: "Number"
+                                  - type: "boolean"
+                                    title: "boolean"
+                                    description: "Boolean"
+                            required:
+                              - "ne"
+                            title: "ne"
+                            description: "Not equal to"
+                          - type: "object"
+                            properties:
+                              gt:
+                                type: "number"
+                            required:
+                              - "gt"
+                            title: "gt"
+                            description: "Greater than"
+                          - type: "object"
+                            properties:
+                              gte:
+                                type: "number"
+                            required:
+                              - "gte"
+                            title: "gte"
+                            description: "Greater than or equal to"
+                          - type: "object"
+                            properties:
+                              lt:
+                                type: "number"
+                            required:
+                              - "lt"
+                            title: "lt"
+                            description: "Less than"
+                          - type: "object"
+                            properties:
+                              lte:
+                                type: "number"
+                            required:
+                              - "lte"
+                            title: "lte"
+                            description: "Less than or equal to"
+                          - type: "object"
+                            properties:
+                              in:
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      title: "string"
+                                      description: "String"
+                                    - type: "number"
+                                      title: "number"
+                                      description: "Number"
+                                    - type: "boolean"
+                                      title: "boolean"
+                                      description: "Boolean"
+                            required:
+                              - "in"
+                            title: "in"
+                            description: "In"
+                          - type: "object"
+                            properties:
+                              nin:
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      title: "string"
+                                      description: "String"
+                                    - type: "number"
+                                      title: "number"
+                                      description: "Number"
+                                    - type: "boolean"
+                                      title: "boolean"
+                                      description: "Boolean"
+                            required:
+                              - "nin"
+                            title: "nin"
+                            description: "Not in"
+                      title: "Search operator"
+                    - type: "object"
+                      properties:
+                        and:
+                          type: "array"
+                          items:
+                            type: "object"
+                            additionalProperties:
+                              anyOf:
+                                - type: "object"
+                                  properties:
+                                    eq:
+                                      anyOf:
+                                        - type: "string"
+                                          title: "string"
+                                          description: "String"
+                                        - type: "number"
+                                          title: "number"
+                                          description: "Number"
+                                        - type: "boolean"
+                                          title: "boolean"
+                                          description: "Boolean"
+                                  required:
+                                    - "eq"
+                                  title: "eq"
+                                  description: "Equal to"
+                                - type: "object"
+                                  properties:
+                                    ne:
+                                      anyOf:
+                                        - type: "string"
+                                          title: "string"
+                                          description: "String"
+                                        - type: "number"
+                                          title: "number"
+                                          description: "Number"
+                                        - type: "boolean"
+                                          title: "boolean"
+                                          description: "Boolean"
+                                  required:
+                                    - "ne"
+                                  title: "ne"
+                                  description: "Not equal to"
+                                - type: "object"
+                                  properties:
+                                    gt:
+                                      type: "number"
+                                  required:
+                                    - "gt"
+                                  title: "gt"
+                                  description: "Greater than"
+                                - type: "object"
+                                  properties:
+                                    gte:
+                                      type: "number"
+                                  required:
+                                    - "gte"
+                                  title: "gte"
+                                  description: "Greater than or equal to"
+                                - type: "object"
+                                  properties:
+                                    lt:
+                                      type: "number"
+                                  required:
+                                    - "lt"
+                                  title: "lt"
+                                  description: "Less than"
+                                - type: "object"
+                                  properties:
+                                    lte:
+                                      type: "number"
+                                  required:
+                                    - "lte"
+                                  title: "lte"
+                                  description: "Less than or equal to"
+                                - type: "object"
+                                  properties:
+                                    in:
+                                      type: "array"
+                                      items:
+                                        anyOf:
+                                          - type: "string"
+                                            title: "string"
+                                            description: "String"
+                                          - type: "number"
+                                            title: "number"
+                                            description: "Number"
+                                          - type: "boolean"
+                                            title: "boolean"
+                                            description: "Boolean"
+                                  required:
+                                    - "in"
+                                  title: "in"
+                                  description: "In"
+                                - type: "object"
+                                  properties:
+                                    nin:
+                                      type: "array"
+                                      items:
+                                        anyOf:
+                                          - type: "string"
+                                            title: "string"
+                                            description: "String"
+                                          - type: "number"
+                                            title: "number"
+                                            description: "Number"
+                                          - type: "boolean"
+                                            title: "boolean"
+                                            description: "Boolean"
+                                  required:
+                                    - "nin"
+                                  title: "nin"
+                                  description: "Not in"
+                      required:
+                        - "and"
+                      title: "and"
+                      description: "And"
+                    - type: "object"
+                      properties:
+                        or:
+                          type: "array"
+                          items:
+                            type: "object"
+                            additionalProperties:
+                              anyOf:
+                                - type: "object"
+                                  properties:
+                                    eq:
+                                      anyOf:
+                                        - type: "string"
+                                          title: "string"
+                                          description: "String"
+                                        - type: "number"
+                                          title: "number"
+                                          description: "Number"
+                                        - type: "boolean"
+                                          title: "boolean"
+                                          description: "Boolean"
+                                  required:
+                                    - "eq"
+                                  title: "eq"
+                                  description: "Equal to"
+                                - type: "object"
+                                  properties:
+                                    ne:
+                                      anyOf:
+                                        - type: "string"
+                                          title: "string"
+                                          description: "String"
+                                        - type: "number"
+                                          title: "number"
+                                          description: "Number"
+                                        - type: "boolean"
+                                          title: "boolean"
+                                          description: "Boolean"
+                                  required:
+                                    - "ne"
+                                  title: "ne"
+                                  description: "Not equal to"
+                                - type: "object"
+                                  properties:
+                                    gt:
+                                      type: "number"
+                                  required:
+                                    - "gt"
+                                  title: "gt"
+                                  description: "Greater than"
+                                - type: "object"
+                                  properties:
+                                    gte:
+                                      type: "number"
+                                  required:
+                                    - "gte"
+                                  title: "gte"
+                                  description: "Greater than or equal to"
+                                - type: "object"
+                                  properties:
+                                    lt:
+                                      type: "number"
+                                  required:
+                                    - "lt"
+                                  title: "lt"
+                                  description: "Less than"
+                                - type: "object"
+                                  properties:
+                                    lte:
+                                      type: "number"
+                                  required:
+                                    - "lte"
+                                  title: "lte"
+                                  description: "Less than or equal to"
+                                - type: "object"
+                                  properties:
+                                    in:
+                                      type: "array"
+                                      items:
+                                        anyOf:
+                                          - type: "string"
+                                            title: "string"
+                                            description: "String"
+                                          - type: "number"
+                                            title: "number"
+                                            description: "Number"
+                                          - type: "boolean"
+                                            title: "boolean"
+                                            description: "Boolean"
+                                  required:
+                                    - "in"
+                                  title: "in"
+                                  description: "In"
+                                - type: "object"
+                                  properties:
+                                    nin:
+                                      type: "array"
+                                      items:
+                                        anyOf:
+                                          - type: "string"
+                                            title: "string"
+                                            description: "String"
+                                          - type: "number"
+                                            title: "number"
+                                            description: "Number"
+                                          - type: "boolean"
+                                            title: "boolean"
+                                            description: "Boolean"
+                                  required:
+                                    - "nin"
+                                  title: "nin"
+                                  description: "Not in"
+                      required:
+                        - "or"
+                      title: "or"
+                      description: "Or"
+                  description: "A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment."
+              required:
+                - "key"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            text/event-stream:
+              schema:
+                type: "object"
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: ulid
+                        pattern: ^[0-9A-HJKMNP-TV-Z]{26}$
+                        readOnly: true
+                        description: A unique identifier for the response. Can be used to add metrics to the transaction.
+                      created:
+                        type: string
+                        format: date-time
+                        description: A timestamp indicating when the object was created. Usually in a standardized format like ISO 8601
+                      object:
+                        type: string
+                        enum:
+                          - chat
+                          - completion
+                          - image
+                        description: Indicates the type of model used to generate the response
+                      model:
+                        type: string
+                        description: The model used to generate the response
+                      provider:
+                        type: string
+                        enum:
+                          - openai
+                          - groq
+                          - cohere
+                          - azure
+                          - aws
+                          - google
+                          - google-ai
+                          - huggingface
+                          - togetherai
+                          - perplexity
+                          - anthropic
+                          - leonardoai
+                          - fal
+                          - nvidia
+                          - jina
+                          - elevenlabs
+                          - litellm
+                          - cerebras
+                          - openailike
+                          - bytedance
+                          - mistral
+                          - deepseek
+                          - moonshotai
+                          - zai
+                          - minimax
+                          - xai
+                          - alibaba
+                          - tensorix
+                          - scaleway
+                          - hcompany
+                          - inceptron
+                          - wafer
+                          - poolside
+                          - tencent
+                          - nebius
+                          - fireworks
+                          - baseten
+                          - reson8
+                          - meta
+                          - greenpt
+                          - slack
+                          - orq
+                        description: The provider used to generate the response
+                      is_final:
+                        type: boolean
+                        description: Indicates if the response is the final response
+                      integration_id:
+                        type: string
+                        description: Indicates integration id used to generate the response
+                      telemetry:
+                        type: object
+                        properties:
+                          trace_id:
+                            type: string
+                            description: The trace id for the request that generated this response
+                          span_id:
+                            type: string
+                            description: The span id for the request that generated this response
+                        required:
+                          - trace_id
+                          - span_id
+                      finalized:
+                        type: string
+                        format: date-time
+                        description: A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601
+                      system_fingerprint:
+                        type:
+                          - string
+                          - "null"
+                        description: Provider backed system fingerprint.
+                      retrievals:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            document:
+                              type: string
+                              description: Content of the retrieved chunk from the knowledge base
+                            metadata:
+                              type: object
+                              properties:
+                                file_name:
+                                  type: string
+                                  description: Name of the file
+                                page_number:
+                                  type:
+                                    - number
+                                    - "null"
+                                  description: Page number of the chunk
+                                file_type:
+                                  type: string
+                                  description: Type of the file
+                                rerank_score:
+                                  type: number
+                                  description: Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45
+                                search_score:
+                                  type: number
+                                  description: Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query.
+                              required:
+                                - file_name
+                                - page_number
+                                - file_type
+                                - search_score
+                              description: Metadata of the retrieved chunk from the knowledge base
+                          required:
+                            - document
+                            - metadata
+                        description: List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`.
+                      provider_response:
+                        description: Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`.
+                      usage:
+                        type:
+                          - object
+                          - "null"
+                        properties:
+                          total_tokens:
+                            type: number
+                          prompt_tokens:
+                            type: number
+                          completion_tokens:
+                            type: number
+                          prompt_tokens_details:
+                            type: object
+                            properties:
+                              cached_tokens:
+                                type:
+                                  - number
+                                  - "null"
+                          completion_tokens_details:
+                            type:
+                              - object
+                              - "null"
+                            properties:
+                              reasoning_tokens:
+                                type:
+                                  - number
+                                  - "null"
+                        description: Usage metrics for the response
+                      choices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            index:
+                              type: number
+                            message:
+                              oneOf:
+                                - type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                        - tool_calls
+                                    role:
+                                      type: string
+                                      enum:
+                                        - system
+                                        - developer
+                                        - assistant
+                                        - user
+                                        - exception
+                                        - tool
+                                        - prompt
+                                        - correction
+                                        - expected_output
+                                      description: The role of the prompt message
+                                    content:
+                                      type:
+                                        - string
+                                        - "null"
+                                    tool_calls:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: string
+                                          index:
+                                            type: number
+                                          type:
+                                            type: string
+                                            enum:
+                                              - function
+                                          function:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                              arguments:
+                                                type: string
+                                                description: JSON string arguments for the functions
+                                            required:
+                                              - name
+                                              - arguments
+                                        required:
+                                          - type
+                                          - function
+                                    reasoning:
+                                      type: string
+                                      description: Internal thought process of the model
+                                    reasoning_signature:
+                                      type: string
+                                      description: The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`.
+                                    redacted_reasoning:
+                                      type: string
+                                      description: Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context.
+                                  required:
+                                    - type
+                                    - role
+                                    - tool_calls
+                                - type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                        - content
+                                    role:
+                                      type: string
+                                      enum:
+                                        - system
+                                        - developer
+                                        - assistant
+                                        - user
+                                        - exception
+                                        - tool
+                                        - prompt
+                                        - correction
+                                        - expected_output
+                                      description: The role of the prompt message
+                                    content:
+                                      type:
+                                        - string
+                                        - "null"
+                                    reasoning:
+                                      type: string
+                                      description: Internal thought process of the model
+                                    reasoning_signature:
+                                      type: string
+                                      description: The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`.
+                                    redacted_reasoning:
+                                      type: string
+                                      description: Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context.
+                                  required:
+                                    - type
+                                    - role
+                                    - content
+                                - type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                      enum:
+                                        - image
+                                    role:
+                                      type: string
+                                      enum:
+                                        - system
+                                        - developer
+                                        - assistant
+                                        - user
+                                        - exception
+                                        - tool
+                                        - prompt
+                                        - correction
+                                        - expected_output
+                                      description: The role of the prompt message
+                                    url:
+                                      type: string
+                                  required:
+                                    - type
+                                    - role
+                                    - url
+                            finish_reason:
+                              type:
+                                - string
+                                - "null"
+                          required:
+                            - index
+                            - message
+                        description: A list of choices generated by the model
+                    required:
+                      - id
+                      - created
+                      - object
+                      - model
+                      - provider
+                      - is_final
+                      - telemetry
+                      - choices
+              x-speakeasy-sse-sentinel: "[DONE]"
+      security:
+        - ApiKey: []
   /v2/deployments:
     get:
       tags:
@@ -27440,7 +29958,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M2N4H2HJ7F67BWTMVFE5VV87"
+                                          default: "01M2NBZVXQ6ZF9TTB4SKMT89R1"
                                         name:
                                           type: "string"
                                         description:
@@ -29037,7 +31555,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M2N4H2J576TZH5CGJ409FE0A"
+                                          default: "01M2NBZVYFV2RR2KC82W3A7R8R"
                                         name:
                                           type: "string"
                                         description:
@@ -37841,7 +40359,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M2N4H2KPNAPW315Y2DVCMG6F"
+                              default: "tool_01M2NBZW09KXA7MDENT3RA7YP9"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -37942,7 +40460,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M2N4H2KQ4Q6QKSV9A3FN0E54"
+                              default: "tool_01M2NBZW0AVE5753P57TY3Z9ZK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38045,7 +40563,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M2N4H2KQPX0F9CKRTKJQD672"
+                              default: "tool_01M2NBZW0B4G9GW1QRC709YEN7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38189,7 +40707,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M2N4H2KTYKNCAVJSG91CTK1F"
+                              default: "tool_01M2NBZW0CM1WFX4B0A260PDVR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38676,7 +41194,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2KY1ZDN9NSYWA3MRXGM"
+                        default: "tool_01M2NBZW0H4Q93ED8W6AXF0E7Q"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38777,7 +41295,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2KZ9YV0VGPE3G5RHW1V"
+                        default: "tool_01M2NBZW0H00TX8PTE5QSFDAHA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -38880,7 +41398,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2M019VHHC97KJBVJEQW"
+                        default: "tool_01M2NBZW0JDZM0X3JV071657KC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39024,7 +41542,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2M1S9Y2SAXH4HNHR2ST"
+                        default: "tool_01M2NBZW0K8VTNEVDS5TEVR7VF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39522,7 +42040,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2M3C6VG37TEQY9JCZS7"
+                        default: "tool_01M2NBZW0RSTQP2KBXJGB42SBP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39623,7 +42141,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2M4SR635YPKPJM8W5R7"
+                        default: "tool_01M2NBZW0SVFA20YZE7FY8GZCH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39726,7 +42244,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2M5VBJYJ6KG9GKYEE63"
+                        default: "tool_01M2NBZW0SZHC78V8QHM8CXCX8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -39870,7 +42388,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2M6S30B1A2B3W7XZB45"
+                        default: "tool_01M2NBZW0VH389T9VB903BEYGX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40031,7 +42549,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2MCMQNYJECJTBAEEKBP"
+                        default: "tool_01M2NBZW12KPN13AY4G9FCWRWW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40132,7 +42650,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2MCTT8QZGQSN4D8E84D"
+                        default: "tool_01M2NBZW13X210NPN3QF3V5YAW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40235,7 +42753,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2MDZ7MWCX5QTMQVKEQE"
+                        default: "tool_01M2NBZW14P41E4JRWF2N63T7M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40379,7 +42897,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M2N4H2MESKZE19SCZJ5R96G9"
+                        default: "tool_01M2NBZW15553FJ678YYSYBHR0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -40799,7 +43317,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-16T12:54:27.108Z"
+                          default: "2026-09-16T15:04:51.741Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -40807,7 +43325,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:27.109Z"
+                              default: "2026-09-16T15:04:51.742Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -40931,7 +43449,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-16T12:54:27.108Z"
+                    default: "2026-09-16T15:04:51.741Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -40939,7 +43457,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-16T12:54:27.109Z"
+                        default: "2026-09-16T15:04:51.742Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41054,7 +43572,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-16T12:54:27.108Z"
+                    default: "2026-09-16T15:04:51.741Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41062,7 +43580,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-16T12:54:27.109Z"
+                        default: "2026-09-16T15:04:51.742Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41206,7 +43724,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-16T12:54:27.108Z"
+                    default: "2026-09-16T15:04:51.741Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -41214,7 +43732,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-16T12:54:27.109Z"
+                        default: "2026-09-16T15:04:51.742Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -41643,7 +44161,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-16T12:54:35.930Z"
+                                    default: "2026-09-16T15:05:00.721Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -41716,7 +44234,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-16T12:54:35.931Z"
+                                    default: "2026-09-16T15:05:00.721Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -41789,7 +44307,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-16T12:54:35.931Z"
+                                    default: "2026-09-16T15:05:00.722Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -41862,7 +44380,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-16T12:54:35.931Z"
+                                    default: "2026-09-16T15:05:00.722Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -41902,7 +44420,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-16T12:54:27.108Z"
+                          default: "2026-09-16T15:04:51.741Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -41910,7 +44428,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:27.109Z"
+                              default: "2026-09-16T15:04:51.742Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -42540,7 +45058,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-16T12:54:35.937Z"
+                                default: "2026-09-16T15:05:00.730Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -42613,7 +45131,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-16T12:54:35.937Z"
+                                default: "2026-09-16T15:05:00.731Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -42686,7 +45204,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-16T12:54:35.937Z"
+                                default: "2026-09-16T15:05:00.731Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -42759,7 +45277,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-16T12:54:35.937Z"
+                                default: "2026-09-16T15:05:00.731Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -42799,7 +45317,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-09-16T12:54:27.108Z"
+                      default: "2026-09-16T15:04:51.741Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -42807,7 +45325,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-09-16T12:54:27.109Z"
+                          default: "2026-09-16T15:04:51.742Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -43177,7 +45695,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.934Z"
+                              default: "2026-09-16T15:05:00.725Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -43250,7 +45768,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.934Z"
+                              default: "2026-09-16T15:05:00.727Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -43323,7 +45841,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.934Z"
+                              default: "2026-09-16T15:05:00.727Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -43396,7 +45914,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.934Z"
+                              default: "2026-09-16T15:05:00.728Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -43436,7 +45954,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-16T12:54:27.108Z"
+                    default: "2026-09-16T15:04:51.741Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -43444,7 +45962,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-16T12:54:27.109Z"
+                        default: "2026-09-16T15:04:51.742Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -44068,7 +46586,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.947Z"
+                              default: "2026-09-16T15:05:00.743Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44141,7 +46659,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.947Z"
+                              default: "2026-09-16T15:05:00.743Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44214,7 +46732,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.947Z"
+                              default: "2026-09-16T15:05:00.743Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44287,7 +46805,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:35.948Z"
+                              default: "2026-09-16T15:05:00.744Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -44327,7 +46845,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-16T12:54:27.108Z"
+                    default: "2026-09-16T15:04:51.741Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -44335,7 +46853,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-16T12:54:27.109Z"
+                        default: "2026-09-16T15:04:51.742Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -50558,7 +53076,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-16T12:54:35.991Z"
+                      default: "2026-09-16T15:05:00.797Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -50600,7 +53118,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-16T12:54:35.991Z"
+                      default: "2026-09-16T15:05:00.797Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -50642,7 +53160,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-16T12:54:35.991Z"
+                      default: "2026-09-16T15:05:00.798Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -50684,7 +53202,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-16T12:54:35.991Z"
+                      default: "2026-09-16T15:05:00.798Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51015,7 +53533,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-16T12:54:27.108Z"
+                          default: "2026-09-16T15:04:51.741Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51023,7 +53541,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:27.109Z"
+                              default: "2026-09-16T15:04:51.742Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51093,7 +53611,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-16T12:54:27.108Z"
+                          default: "2026-09-16T15:04:51.741Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51101,7 +53619,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-16T12:54:27.109Z"
+                              default: "2026-09-16T15:04:51.742Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51277,7 +53795,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-16T12:54:27.108Z"
+                        default: "2026-09-16T15:04:51.741Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51285,7 +53803,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-16T12:54:27.109Z"
+                            default: "2026-09-16T15:04:51.742Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51355,7 +53873,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-16T12:54:27.108Z"
+                        default: "2026-09-16T15:04:51.741Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51363,7 +53881,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-16T12:54:27.109Z"
+                            default: "2026-09-16T15:04:51.742Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51457,7 +53975,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-16T12:54:27.108Z"
+                        default: "2026-09-16T15:04:51.741Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51465,7 +53983,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-16T12:54:27.109Z"
+                            default: "2026-09-16T15:04:51.742Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51535,7 +54053,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-16T12:54:27.108Z"
+                        default: "2026-09-16T15:04:51.741Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51543,7 +54061,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-16T12:54:27.109Z"
+                            default: "2026-09-16T15:04:51.742Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51727,7 +54245,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-16T12:54:27.108Z"
+                        default: "2026-09-16T15:04:51.741Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51735,7 +54253,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-16T12:54:27.109Z"
+                            default: "2026-09-16T15:04:51.742Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -51805,7 +54323,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-16T12:54:27.108Z"
+                        default: "2026-09-16T15:04:51.741Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -51813,7 +54331,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-16T12:54:27.109Z"
+                            default: "2026-09-16T15:04:51.742Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -61300,7 +63818,7 @@ paths:
       tags:
         - "Skills"
       summary: "Update a skill"
-      description: "Updates mutable skill fields. Omitted optional fields keep their current values. Repeated fields such as `tags` replace the existing collection when provided."
+      description: "Updates mutable skill fields. Omitted fields keep their current values. When `tags` is provided it replaces the existing tags; send an empty array to clear them."
       operationId: "SkillUpdate"
       parameters:
         - name: "skill_id"
