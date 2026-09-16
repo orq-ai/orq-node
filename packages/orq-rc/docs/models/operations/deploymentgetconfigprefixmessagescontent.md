@@ -1,6 +1,6 @@
 # DeploymentGetConfigPrefixMessagesContent
 
-The contents of the user message.
+The contents of the system message.
 
 
 ## Supported Types
@@ -11,9 +11,9 @@ The contents of the user message.
 const value: string = "<value>";
 ```
 
-### `operations.Two[]`
+### `components.TextContentPartSchema[]`
 
 ```typescript
-const value: operations.Two[] = [];
+const value: components.TextContentPartSchema[] = [];
 ```
 

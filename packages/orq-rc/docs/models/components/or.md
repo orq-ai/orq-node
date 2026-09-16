@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `components.SearchKnowledgeRequestOrEq`
+### `components.InvokeDeploymentRequestOrEq`
 
 ```typescript
-const value: components.SearchKnowledgeRequestOrEq = {
-  eq: false,
+const value: components.InvokeDeploymentRequestOrEq = {
+  eq: "<value>",
 };
 ```
 
-### `components.SearchKnowledgeRequestOrNe`
+### `components.InvokeDeploymentRequestOrNe`
 
 ```typescript
-const value: components.SearchKnowledgeRequestOrNe = {
-  ne: 3151.4,
+const value: components.InvokeDeploymentRequestOrNe = {
+  ne: "<value>",
 };
 ```
 
@@ -51,31 +51,21 @@ const value: components.OrLte = {
 };
 ```
 
-### `components.SearchKnowledgeRequestOrIn`
+### `components.InvokeDeploymentRequestOrIn`
 
 ```typescript
-const value: components.SearchKnowledgeRequestOrIn = {
+const value: components.InvokeDeploymentRequestOrIn = {
   in: [
-    "<value>",
+    5338.03,
   ],
 };
 ```
 
-### `components.SearchKnowledgeRequestOrNin`
+### `components.InvokeDeploymentRequestOrNin`
 
 ```typescript
-const value: components.SearchKnowledgeRequestOrNin = {
-  nin: [
-    2056.93,
-  ],
-};
-```
-
-### `components.OrExists`
-
-```typescript
-const value: components.OrExists = {
-  exists: false,
+const value: components.InvokeDeploymentRequestOrNin = {
+  nin: [],
 };
 ```
 

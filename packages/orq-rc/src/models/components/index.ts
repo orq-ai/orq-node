@@ -251,6 +251,7 @@ export * from "./imagecontentpartschema.js";
 export * from "./incompletedetails.js";
 export * from "./inputtokensdetails.js";
 export * from "./internalretrievalconfig.js";
+export * from "./invokedeploymentrequest.js";
 export * from "./invokeevaluatorrequest.js";
 export * from "./ipallowlist.js";
 export * from "./iprange.js";

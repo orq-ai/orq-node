@@ -29,29 +29,29 @@ import {
 /**
  * Message containing tool execution results
  */
-export const ToolMessage = {
+export const RoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
  * Message containing tool execution results
  */
-export type ToolMessage = ClosedEnum<typeof ToolMessage>;
+export type RoleToolMessage = ClosedEnum<typeof RoleToolMessage>;
 
 /**
  * Message from the end user
  */
-export const UserMessage = {
+export const RoleUserMessage = {
   User: "user",
 } as const;
 /**
  * Message from the end user
  */
-export type UserMessage = ClosedEnum<typeof UserMessage>;
+export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
 
 /**
  * Message role (user or tool for continuing executions)
  */
-export type AgentResponseRequestRole = UserMessage | ToolMessage;
+export type AgentResponseRequestRole = RoleUserMessage | RoleToolMessage;
 
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
@@ -73,7 +73,7 @@ export type A2AMessage = {
   /**
    * Message role (user or tool for continuing executions)
    */
-  role: UserMessage | ToolMessage;
+  role: RoleUserMessage | RoleToolMessage;
   /**
    * A2A message parts (text, file, or tool_result only). Note: Tool role messages must only contain tool_result parts.
    */
@@ -260,12 +260,14 @@ export type AgentResponseRequest = {
 };
 
 /** @internal */
-export const ToolMessage$outboundSchema: z.ZodNativeEnum<typeof ToolMessage> = z
-  .nativeEnum(ToolMessage);
+export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RoleToolMessage
+> = z.nativeEnum(RoleToolMessage);
 
 /** @internal */
-export const UserMessage$outboundSchema: z.ZodNativeEnum<typeof UserMessage> = z
-  .nativeEnum(UserMessage);
+export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RoleUserMessage
+> = z.nativeEnum(RoleUserMessage);
 
 /** @internal */
 export type AgentResponseRequestRole$Outbound = string | string;
@@ -275,7 +277,7 @@ export const AgentResponseRequestRole$outboundSchema: z.ZodType<
   AgentResponseRequestRole$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestRole
-> = z.union([UserMessage$outboundSchema, ToolMessage$outboundSchema]);
+> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
 
 export function agentResponseRequestRoleToJSON(
   agentResponseRequestRole: AgentResponseRequestRole,
@@ -331,7 +333,10 @@ export const A2AMessage$outboundSchema: z.ZodType<
   A2AMessage
 > = z.object({
   messageId: z.string().optional(),
-  role: z.union([UserMessage$outboundSchema, ToolMessage$outboundSchema]),
+  role: z.union([
+    RoleUserMessage$outboundSchema,
+    RoleToolMessage$outboundSchema,
+  ]),
   parts: z.array(
     z.union([
       TextPart$outboundSchema,

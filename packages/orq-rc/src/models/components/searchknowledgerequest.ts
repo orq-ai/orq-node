@@ -28,96 +28,96 @@ export type OrExists = {
   exists: boolean;
 };
 
-export type OrNin = string | number | boolean;
+export type SearchKnowledgeRequestOrNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type SearchKnowledgeRequestOrNin = {
+export type SearchKnowledgeRequestOrFilterByNin = {
   nin: Array<string | number | boolean>;
 };
 
-export type OrIn = string | number | boolean;
+export type SearchKnowledgeRequestOrIn = string | number | boolean;
 
 /**
  * In
  */
-export type SearchKnowledgeRequestOrIn = {
+export type SearchKnowledgeRequestOrFilterByIn = {
   in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type OrLte = {
+export type SearchKnowledgeRequestOrLte = {
   lte: number;
 };
 
 /**
  * Less than
  */
-export type OrLt = {
+export type SearchKnowledgeRequestOrLt = {
   lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type OrGte = {
+export type SearchKnowledgeRequestOrGte = {
   gte: number;
 };
 
 /**
  * Greater than
  */
-export type OrGt = {
+export type SearchKnowledgeRequestOrGt = {
   gt: number;
 };
 
-export type OrNe = string | number | boolean;
+export type SearchKnowledgeRequestOrNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type SearchKnowledgeRequestOrNe = {
+export type SearchKnowledgeRequestOrFilterByNe = {
   ne: string | number | boolean;
 };
 
-export type OrEq = string | number | boolean;
+export type SearchKnowledgeRequestOrEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type SearchKnowledgeRequestOrEq = {
+export type SearchKnowledgeRequestOrFilterByEq = {
   eq: string | number | boolean;
 };
 
-export type Or =
-  | SearchKnowledgeRequestOrEq
-  | SearchKnowledgeRequestOrNe
-  | OrGt
-  | OrGte
-  | OrLt
-  | OrLte
-  | SearchKnowledgeRequestOrIn
-  | SearchKnowledgeRequestOrNin
+export type FilterByOr =
+  | SearchKnowledgeRequestOrFilterByEq
+  | SearchKnowledgeRequestOrFilterByNe
+  | SearchKnowledgeRequestOrGt
+  | SearchKnowledgeRequestOrGte
+  | SearchKnowledgeRequestOrLt
+  | SearchKnowledgeRequestOrLte
+  | SearchKnowledgeRequestOrFilterByIn
+  | SearchKnowledgeRequestOrFilterByNin
   | OrExists;
 
 /**
  * Or
  */
-export type FilterByOr = {
+export type SearchKnowledgeRequestFilterByOr = {
   or: Array<
     {
       [k: string]:
-        | SearchKnowledgeRequestOrEq
-        | SearchKnowledgeRequestOrNe
-        | OrGt
-        | OrGte
-        | OrLt
-        | OrLte
-        | SearchKnowledgeRequestOrIn
-        | SearchKnowledgeRequestOrNin
+        | SearchKnowledgeRequestOrFilterByEq
+        | SearchKnowledgeRequestOrFilterByNe
+        | SearchKnowledgeRequestOrGt
+        | SearchKnowledgeRequestOrGte
+        | SearchKnowledgeRequestOrLt
+        | SearchKnowledgeRequestOrLte
+        | SearchKnowledgeRequestOrFilterByIn
+        | SearchKnowledgeRequestOrFilterByNin
         | OrExists;
     }
   >;
@@ -130,96 +130,96 @@ export type AndExists = {
   exists: boolean;
 };
 
-export type AndNin = string | number | boolean;
+export type SearchKnowledgeRequestAndNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type SearchKnowledgeRequestAndNin = {
+export type SearchKnowledgeRequestAndFilterByNin = {
   nin: Array<string | number | boolean>;
 };
 
-export type AndIn = string | number | boolean;
+export type SearchKnowledgeRequestAndIn = string | number | boolean;
 
 /**
  * In
  */
-export type SearchKnowledgeRequestAndIn = {
+export type SearchKnowledgeRequestAndFilterByIn = {
   in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type AndLte = {
+export type SearchKnowledgeRequestAndLte = {
   lte: number;
 };
 
 /**
  * Less than
  */
-export type AndLt = {
+export type SearchKnowledgeRequestAndLt = {
   lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type AndGte = {
+export type SearchKnowledgeRequestAndGte = {
   gte: number;
 };
 
 /**
  * Greater than
  */
-export type AndGt = {
+export type SearchKnowledgeRequestAndGt = {
   gt: number;
 };
 
-export type AndNe = string | number | boolean;
+export type SearchKnowledgeRequestAndNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type SearchKnowledgeRequestAndNe = {
+export type SearchKnowledgeRequestAndFilterByNe = {
   ne: string | number | boolean;
 };
 
-export type AndEq = string | number | boolean;
+export type SearchKnowledgeRequestAndEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type SearchKnowledgeRequestAndEq = {
+export type SearchKnowledgeRequestAndFilterByEq = {
   eq: string | number | boolean;
 };
 
-export type And =
-  | SearchKnowledgeRequestAndEq
-  | SearchKnowledgeRequestAndNe
-  | AndGt
-  | AndGte
-  | AndLt
-  | AndLte
-  | SearchKnowledgeRequestAndIn
-  | SearchKnowledgeRequestAndNin
+export type FilterByAnd =
+  | SearchKnowledgeRequestAndFilterByEq
+  | SearchKnowledgeRequestAndFilterByNe
+  | SearchKnowledgeRequestAndGt
+  | SearchKnowledgeRequestAndGte
+  | SearchKnowledgeRequestAndLt
+  | SearchKnowledgeRequestAndLte
+  | SearchKnowledgeRequestAndFilterByIn
+  | SearchKnowledgeRequestAndFilterByNin
   | AndExists;
 
 /**
  * And
  */
-export type FilterByAnd = {
+export type SearchKnowledgeRequestFilterByAnd = {
   and: Array<
     {
       [k: string]:
-        | SearchKnowledgeRequestAndEq
-        | SearchKnowledgeRequestAndNe
-        | AndGt
-        | AndGte
-        | AndLt
-        | AndLte
-        | SearchKnowledgeRequestAndIn
-        | SearchKnowledgeRequestAndNin
+        | SearchKnowledgeRequestAndFilterByEq
+        | SearchKnowledgeRequestAndFilterByNe
+        | SearchKnowledgeRequestAndGt
+        | SearchKnowledgeRequestAndGte
+        | SearchKnowledgeRequestAndLt
+        | SearchKnowledgeRequestAndLte
+        | SearchKnowledgeRequestAndFilterByIn
+        | SearchKnowledgeRequestAndFilterByNin
         | AndExists;
     }
   >;
@@ -232,78 +232,99 @@ export type Exists = {
   exists: boolean;
 };
 
-export type Nin = string | number | boolean;
+export type OneNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type OneNin = {
+export type SearchKnowledgeRequest1Nin = {
   nin: Array<string | number | boolean>;
 };
 
-export type In = string | number | boolean;
+export type OneIn = string | number | boolean;
 
 /**
  * In
  */
-export type OneIn = {
+export type SearchKnowledgeRequest1In = {
   in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type Lte = {
+export type OneLte = {
   lte: number;
 };
 
 /**
  * Less than
  */
-export type Lt = {
+export type OneLt = {
   lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type Gte = {
+export type OneGte = {
   gte: number;
 };
 
 /**
  * Greater than
  */
-export type Gt = {
+export type OneGt = {
   gt: number;
 };
 
-export type Ne = string | number | boolean;
+export type OneNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type OneNe = {
+export type SearchKnowledgeRequest1Ne = {
   ne: string | number | boolean;
 };
 
-export type Eq = string | number | boolean;
+export type OneEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type OneEq = {
+export type SearchKnowledgeRequest1Eq = {
   eq: string | number | boolean;
 };
 
-export type One = OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
+export type FilterBy1 =
+  | SearchKnowledgeRequest1Eq
+  | SearchKnowledgeRequest1Ne
+  | OneGt
+  | OneGte
+  | OneLt
+  | OneLte
+  | SearchKnowledgeRequest1In
+  | SearchKnowledgeRequest1Nin
+  | Exists;
 
 /**
  * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
  */
-export type FilterBy = FilterByAnd | FilterByOr | {
-  [k: string]: OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
-};
+export type FilterBy =
+  | SearchKnowledgeRequestFilterByAnd
+  | SearchKnowledgeRequestFilterByOr
+  | {
+    [k: string]:
+      | SearchKnowledgeRequest1Eq
+      | SearchKnowledgeRequest1Ne
+      | OneGt
+      | OneGte
+      | OneLt
+      | OneLte
+      | SearchKnowledgeRequest1In
+      | SearchKnowledgeRequest1Nin
+      | Exists;
+  };
 
 export type Two = {
   /**
@@ -371,9 +392,22 @@ export type SearchKnowledgeRequest = {
   /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
-  filterBy?: FilterByAnd | FilterByOr | {
-    [k: string]: OneEq | OneNe | Gt | Gte | Lt | Lte | OneIn | OneNin | Exists;
-  } | undefined;
+  filterBy?:
+    | SearchKnowledgeRequestFilterByAnd
+    | SearchKnowledgeRequestFilterByOr
+    | {
+      [k: string]:
+        | SearchKnowledgeRequest1Eq
+        | SearchKnowledgeRequest1Ne
+        | OneGt
+        | OneGte
+        | OneLt
+        | OneLte
+        | SearchKnowledgeRequest1In
+        | SearchKnowledgeRequest1Nin
+        | Exists;
+    }
+    | undefined;
   /**
    * Additional search options
    */
@@ -411,32 +445,14 @@ export function orExistsToJSON(orExists: OrExists): string {
 }
 
 /** @internal */
-export type OrNin$Outbound = string | number | boolean;
-
-/** @internal */
-export const OrNin$outboundSchema: z.ZodType<
-  OrNin$Outbound,
-  z.ZodTypeDef,
-  OrNin
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function orNinToJSON(orNin: OrNin): string {
-  return JSON.stringify(OrNin$outboundSchema.parse(orNin));
-}
-
-/** @internal */
-export type SearchKnowledgeRequestOrNin$Outbound = {
-  nin: Array<string | number | boolean>;
-};
+export type SearchKnowledgeRequestOrNin$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestOrNin$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrNin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestOrNinToJSON(
   searchKnowledgeRequestOrNin: SearchKnowledgeRequestOrNin,
@@ -449,29 +465,38 @@ export function searchKnowledgeRequestOrNinToJSON(
 }
 
 /** @internal */
-export type OrIn$Outbound = string | number | boolean;
+export type SearchKnowledgeRequestOrFilterByNin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
 
 /** @internal */
-export const OrIn$outboundSchema: z.ZodType<OrIn$Outbound, z.ZodTypeDef, OrIn> =
-  z.union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeRequestOrFilterByNin$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrFilterByNin$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestOrFilterByNin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
-export function orInToJSON(orIn: OrIn): string {
-  return JSON.stringify(OrIn$outboundSchema.parse(orIn));
+export function searchKnowledgeRequestOrFilterByNinToJSON(
+  searchKnowledgeRequestOrFilterByNin: SearchKnowledgeRequestOrFilterByNin,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrFilterByNin$outboundSchema.parse(
+      searchKnowledgeRequestOrFilterByNin,
+    ),
+  );
 }
 
 /** @internal */
-export type SearchKnowledgeRequestOrIn$Outbound = {
-  in: Array<string | number | boolean>;
-};
+export type SearchKnowledgeRequestOrIn$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestOrIn$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrIn$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestOrInToJSON(
   searchKnowledgeRequestOrIn: SearchKnowledgeRequestOrIn,
@@ -482,95 +507,130 @@ export function searchKnowledgeRequestOrInToJSON(
 }
 
 /** @internal */
-export type OrLte$Outbound = {
+export type SearchKnowledgeRequestOrFilterByIn$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const SearchKnowledgeRequestOrFilterByIn$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrFilterByIn$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestOrFilterByIn
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+export function searchKnowledgeRequestOrFilterByInToJSON(
+  searchKnowledgeRequestOrFilterByIn: SearchKnowledgeRequestOrFilterByIn,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrFilterByIn$outboundSchema.parse(
+      searchKnowledgeRequestOrFilterByIn,
+    ),
+  );
+}
+
+/** @internal */
+export type SearchKnowledgeRequestOrLte$Outbound = {
   lte: number;
 };
 
 /** @internal */
-export const OrLte$outboundSchema: z.ZodType<
-  OrLte$Outbound,
+export const SearchKnowledgeRequestOrLte$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrLte$Outbound,
   z.ZodTypeDef,
-  OrLte
+  SearchKnowledgeRequestOrLte
 > = z.object({
   lte: z.number(),
 });
 
-export function orLteToJSON(orLte: OrLte): string {
-  return JSON.stringify(OrLte$outboundSchema.parse(orLte));
+export function searchKnowledgeRequestOrLteToJSON(
+  searchKnowledgeRequestOrLte: SearchKnowledgeRequestOrLte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrLte$outboundSchema.parse(
+      searchKnowledgeRequestOrLte,
+    ),
+  );
 }
 
 /** @internal */
-export type OrLt$Outbound = {
+export type SearchKnowledgeRequestOrLt$Outbound = {
   lt: number;
 };
 
 /** @internal */
-export const OrLt$outboundSchema: z.ZodType<OrLt$Outbound, z.ZodTypeDef, OrLt> =
-  z.object({
-    lt: z.number(),
-  });
+export const SearchKnowledgeRequestOrLt$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrLt$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestOrLt
+> = z.object({
+  lt: z.number(),
+});
 
-export function orLtToJSON(orLt: OrLt): string {
-  return JSON.stringify(OrLt$outboundSchema.parse(orLt));
+export function searchKnowledgeRequestOrLtToJSON(
+  searchKnowledgeRequestOrLt: SearchKnowledgeRequestOrLt,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrLt$outboundSchema.parse(searchKnowledgeRequestOrLt),
+  );
 }
 
 /** @internal */
-export type OrGte$Outbound = {
+export type SearchKnowledgeRequestOrGte$Outbound = {
   gte: number;
 };
 
 /** @internal */
-export const OrGte$outboundSchema: z.ZodType<
-  OrGte$Outbound,
+export const SearchKnowledgeRequestOrGte$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrGte$Outbound,
   z.ZodTypeDef,
-  OrGte
+  SearchKnowledgeRequestOrGte
 > = z.object({
   gte: z.number(),
 });
 
-export function orGteToJSON(orGte: OrGte): string {
-  return JSON.stringify(OrGte$outboundSchema.parse(orGte));
+export function searchKnowledgeRequestOrGteToJSON(
+  searchKnowledgeRequestOrGte: SearchKnowledgeRequestOrGte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrGte$outboundSchema.parse(
+      searchKnowledgeRequestOrGte,
+    ),
+  );
 }
 
 /** @internal */
-export type OrGt$Outbound = {
+export type SearchKnowledgeRequestOrGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const OrGt$outboundSchema: z.ZodType<OrGt$Outbound, z.ZodTypeDef, OrGt> =
-  z.object({
-    gt: z.number(),
-  });
+export const SearchKnowledgeRequestOrGt$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrGt$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestOrGt
+> = z.object({
+  gt: z.number(),
+});
 
-export function orGtToJSON(orGt: OrGt): string {
-  return JSON.stringify(OrGt$outboundSchema.parse(orGt));
+export function searchKnowledgeRequestOrGtToJSON(
+  searchKnowledgeRequestOrGt: SearchKnowledgeRequestOrGt,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrGt$outboundSchema.parse(searchKnowledgeRequestOrGt),
+  );
 }
 
 /** @internal */
-export type OrNe$Outbound = string | number | boolean;
-
-/** @internal */
-export const OrNe$outboundSchema: z.ZodType<OrNe$Outbound, z.ZodTypeDef, OrNe> =
-  z.union([z.string(), z.number(), z.boolean()]);
-
-export function orNeToJSON(orNe: OrNe): string {
-  return JSON.stringify(OrNe$outboundSchema.parse(orNe));
-}
-
-/** @internal */
-export type SearchKnowledgeRequestOrNe$Outbound = {
-  ne: string | number | boolean;
-};
+export type SearchKnowledgeRequestOrNe$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestOrNe$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrNe$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestOrNeToJSON(
   searchKnowledgeRequestOrNe: SearchKnowledgeRequestOrNe,
@@ -581,29 +641,38 @@ export function searchKnowledgeRequestOrNeToJSON(
 }
 
 /** @internal */
-export type OrEq$Outbound = string | number | boolean;
+export type SearchKnowledgeRequestOrFilterByNe$Outbound = {
+  ne: string | number | boolean;
+};
 
 /** @internal */
-export const OrEq$outboundSchema: z.ZodType<OrEq$Outbound, z.ZodTypeDef, OrEq> =
-  z.union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeRequestOrFilterByNe$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrFilterByNe$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestOrFilterByNe
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
 
-export function orEqToJSON(orEq: OrEq): string {
-  return JSON.stringify(OrEq$outboundSchema.parse(orEq));
+export function searchKnowledgeRequestOrFilterByNeToJSON(
+  searchKnowledgeRequestOrFilterByNe: SearchKnowledgeRequestOrFilterByNe,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrFilterByNe$outboundSchema.parse(
+      searchKnowledgeRequestOrFilterByNe,
+    ),
+  );
 }
 
 /** @internal */
-export type SearchKnowledgeRequestOrEq$Outbound = {
-  eq: string | number | boolean;
-};
+export type SearchKnowledgeRequestOrEq$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestOrEq$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrEq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestOrEqToJSON(
   searchKnowledgeRequestOrEq: SearchKnowledgeRequestOrEq,
@@ -614,78 +683,111 @@ export function searchKnowledgeRequestOrEqToJSON(
 }
 
 /** @internal */
-export type Or$Outbound =
-  | SearchKnowledgeRequestOrEq$Outbound
-  | SearchKnowledgeRequestOrNe$Outbound
-  | OrGt$Outbound
-  | OrGte$Outbound
-  | OrLt$Outbound
-  | OrLte$Outbound
-  | SearchKnowledgeRequestOrIn$Outbound
-  | SearchKnowledgeRequestOrNin$Outbound
-  | OrExists$Outbound;
+export type SearchKnowledgeRequestOrFilterByEq$Outbound = {
+  eq: string | number | boolean;
+};
 
 /** @internal */
-export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
-  .union([
-    z.lazy(() => SearchKnowledgeRequestOrEq$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestOrNe$outboundSchema),
-    z.lazy(() => OrGt$outboundSchema),
-    z.lazy(() => OrGte$outboundSchema),
-    z.lazy(() => OrLt$outboundSchema),
-    z.lazy(() => OrLte$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestOrIn$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestOrNin$outboundSchema),
-    z.lazy(() => OrExists$outboundSchema),
-  ]);
+export const SearchKnowledgeRequestOrFilterByEq$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestOrFilterByEq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestOrFilterByEq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
 
-export function orToJSON(or: Or): string {
-  return JSON.stringify(Or$outboundSchema.parse(or));
+export function searchKnowledgeRequestOrFilterByEqToJSON(
+  searchKnowledgeRequestOrFilterByEq: SearchKnowledgeRequestOrFilterByEq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestOrFilterByEq$outboundSchema.parse(
+      searchKnowledgeRequestOrFilterByEq,
+    ),
+  );
 }
 
 /** @internal */
-export type FilterByOr$Outbound = {
-  or: Array<
-    {
-      [k: string]:
-        | SearchKnowledgeRequestOrEq$Outbound
-        | SearchKnowledgeRequestOrNe$Outbound
-        | OrGt$Outbound
-        | OrGte$Outbound
-        | OrLt$Outbound
-        | OrLte$Outbound
-        | SearchKnowledgeRequestOrIn$Outbound
-        | SearchKnowledgeRequestOrNin$Outbound
-        | OrExists$Outbound;
-    }
-  >;
-};
+export type FilterByOr$Outbound =
+  | SearchKnowledgeRequestOrFilterByEq$Outbound
+  | SearchKnowledgeRequestOrFilterByNe$Outbound
+  | SearchKnowledgeRequestOrGt$Outbound
+  | SearchKnowledgeRequestOrGte$Outbound
+  | SearchKnowledgeRequestOrLt$Outbound
+  | SearchKnowledgeRequestOrLte$Outbound
+  | SearchKnowledgeRequestOrFilterByIn$Outbound
+  | SearchKnowledgeRequestOrFilterByNin$Outbound
+  | OrExists$Outbound;
 
 /** @internal */
 export const FilterByOr$outboundSchema: z.ZodType<
   FilterByOr$Outbound,
   z.ZodTypeDef,
   FilterByOr
+> = z.union([
+  z.lazy(() => SearchKnowledgeRequestOrFilterByEq$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrFilterByNe$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrGt$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrGte$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrLt$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrLte$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
+  z.lazy(() => OrExists$outboundSchema),
+]);
+
+export function filterByOrToJSON(filterByOr: FilterByOr): string {
+  return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
+}
+
+/** @internal */
+export type SearchKnowledgeRequestFilterByOr$Outbound = {
+  or: Array<
+    {
+      [k: string]:
+        | SearchKnowledgeRequestOrFilterByEq$Outbound
+        | SearchKnowledgeRequestOrFilterByNe$Outbound
+        | SearchKnowledgeRequestOrGt$Outbound
+        | SearchKnowledgeRequestOrGte$Outbound
+        | SearchKnowledgeRequestOrLt$Outbound
+        | SearchKnowledgeRequestOrLte$Outbound
+        | SearchKnowledgeRequestOrFilterByIn$Outbound
+        | SearchKnowledgeRequestOrFilterByNin$Outbound
+        | OrExists$Outbound;
+    }
+  >;
+};
+
+/** @internal */
+export const SearchKnowledgeRequestFilterByOr$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestFilterByOr$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestFilterByOr
 > = z.object({
   or: z.array(
     z.record(z.union([
-      z.lazy(() => SearchKnowledgeRequestOrEq$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrFilterByEq$outboundSchema),
       z.lazy(() =>
-        SearchKnowledgeRequestOrNe$outboundSchema
+        SearchKnowledgeRequestOrFilterByNe$outboundSchema
       ),
-      z.lazy(() => OrGt$outboundSchema),
-      z.lazy(() => OrGte$outboundSchema),
-      z.lazy(() => OrLt$outboundSchema),
-      z.lazy(() => OrLte$outboundSchema),
-      z.lazy(() => SearchKnowledgeRequestOrIn$outboundSchema),
-      z.lazy(() => SearchKnowledgeRequestOrNin$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrGt$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrGte$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrLt$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrLte$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
       z.lazy(() => OrExists$outboundSchema),
     ])),
   ),
 });
 
-export function filterByOrToJSON(filterByOr: FilterByOr): string {
-  return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
+export function searchKnowledgeRequestFilterByOrToJSON(
+  searchKnowledgeRequestFilterByOr: SearchKnowledgeRequestFilterByOr,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestFilterByOr$outboundSchema.parse(
+      searchKnowledgeRequestFilterByOr,
+    ),
+  );
 }
 
 /** @internal */
@@ -707,32 +809,14 @@ export function andExistsToJSON(andExists: AndExists): string {
 }
 
 /** @internal */
-export type AndNin$Outbound = string | number | boolean;
-
-/** @internal */
-export const AndNin$outboundSchema: z.ZodType<
-  AndNin$Outbound,
-  z.ZodTypeDef,
-  AndNin
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function andNinToJSON(andNin: AndNin): string {
-  return JSON.stringify(AndNin$outboundSchema.parse(andNin));
-}
-
-/** @internal */
-export type SearchKnowledgeRequestAndNin$Outbound = {
-  nin: Array<string | number | boolean>;
-};
+export type SearchKnowledgeRequestAndNin$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestAndNin$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndNin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestAndNinToJSON(
   searchKnowledgeRequestAndNin: SearchKnowledgeRequestAndNin,
@@ -745,32 +829,38 @@ export function searchKnowledgeRequestAndNinToJSON(
 }
 
 /** @internal */
-export type AndIn$Outbound = string | number | boolean;
+export type SearchKnowledgeRequestAndFilterByNin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
 
 /** @internal */
-export const AndIn$outboundSchema: z.ZodType<
-  AndIn$Outbound,
+export const SearchKnowledgeRequestAndFilterByNin$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndFilterByNin$Outbound,
   z.ZodTypeDef,
-  AndIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+  SearchKnowledgeRequestAndFilterByNin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
-export function andInToJSON(andIn: AndIn): string {
-  return JSON.stringify(AndIn$outboundSchema.parse(andIn));
+export function searchKnowledgeRequestAndFilterByNinToJSON(
+  searchKnowledgeRequestAndFilterByNin: SearchKnowledgeRequestAndFilterByNin,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndFilterByNin$outboundSchema.parse(
+      searchKnowledgeRequestAndFilterByNin,
+    ),
+  );
 }
 
 /** @internal */
-export type SearchKnowledgeRequestAndIn$Outbound = {
-  in: Array<string | number | boolean>;
-};
+export type SearchKnowledgeRequestAndIn$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestAndIn$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndIn$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestAndInToJSON(
   searchKnowledgeRequestAndIn: SearchKnowledgeRequestAndIn,
@@ -783,104 +873,134 @@ export function searchKnowledgeRequestAndInToJSON(
 }
 
 /** @internal */
-export type AndLte$Outbound = {
+export type SearchKnowledgeRequestAndFilterByIn$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const SearchKnowledgeRequestAndFilterByIn$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndFilterByIn$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestAndFilterByIn
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+export function searchKnowledgeRequestAndFilterByInToJSON(
+  searchKnowledgeRequestAndFilterByIn: SearchKnowledgeRequestAndFilterByIn,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndFilterByIn$outboundSchema.parse(
+      searchKnowledgeRequestAndFilterByIn,
+    ),
+  );
+}
+
+/** @internal */
+export type SearchKnowledgeRequestAndLte$Outbound = {
   lte: number;
 };
 
 /** @internal */
-export const AndLte$outboundSchema: z.ZodType<
-  AndLte$Outbound,
+export const SearchKnowledgeRequestAndLte$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndLte$Outbound,
   z.ZodTypeDef,
-  AndLte
+  SearchKnowledgeRequestAndLte
 > = z.object({
   lte: z.number(),
 });
 
-export function andLteToJSON(andLte: AndLte): string {
-  return JSON.stringify(AndLte$outboundSchema.parse(andLte));
+export function searchKnowledgeRequestAndLteToJSON(
+  searchKnowledgeRequestAndLte: SearchKnowledgeRequestAndLte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndLte$outboundSchema.parse(
+      searchKnowledgeRequestAndLte,
+    ),
+  );
 }
 
 /** @internal */
-export type AndLt$Outbound = {
+export type SearchKnowledgeRequestAndLt$Outbound = {
   lt: number;
 };
 
 /** @internal */
-export const AndLt$outboundSchema: z.ZodType<
-  AndLt$Outbound,
+export const SearchKnowledgeRequestAndLt$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndLt$Outbound,
   z.ZodTypeDef,
-  AndLt
+  SearchKnowledgeRequestAndLt
 > = z.object({
   lt: z.number(),
 });
 
-export function andLtToJSON(andLt: AndLt): string {
-  return JSON.stringify(AndLt$outboundSchema.parse(andLt));
+export function searchKnowledgeRequestAndLtToJSON(
+  searchKnowledgeRequestAndLt: SearchKnowledgeRequestAndLt,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndLt$outboundSchema.parse(
+      searchKnowledgeRequestAndLt,
+    ),
+  );
 }
 
 /** @internal */
-export type AndGte$Outbound = {
+export type SearchKnowledgeRequestAndGte$Outbound = {
   gte: number;
 };
 
 /** @internal */
-export const AndGte$outboundSchema: z.ZodType<
-  AndGte$Outbound,
+export const SearchKnowledgeRequestAndGte$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndGte$Outbound,
   z.ZodTypeDef,
-  AndGte
+  SearchKnowledgeRequestAndGte
 > = z.object({
   gte: z.number(),
 });
 
-export function andGteToJSON(andGte: AndGte): string {
-  return JSON.stringify(AndGte$outboundSchema.parse(andGte));
+export function searchKnowledgeRequestAndGteToJSON(
+  searchKnowledgeRequestAndGte: SearchKnowledgeRequestAndGte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndGte$outboundSchema.parse(
+      searchKnowledgeRequestAndGte,
+    ),
+  );
 }
 
 /** @internal */
-export type AndGt$Outbound = {
+export type SearchKnowledgeRequestAndGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const AndGt$outboundSchema: z.ZodType<
-  AndGt$Outbound,
+export const SearchKnowledgeRequestAndGt$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndGt$Outbound,
   z.ZodTypeDef,
-  AndGt
+  SearchKnowledgeRequestAndGt
 > = z.object({
   gt: z.number(),
 });
 
-export function andGtToJSON(andGt: AndGt): string {
-  return JSON.stringify(AndGt$outboundSchema.parse(andGt));
+export function searchKnowledgeRequestAndGtToJSON(
+  searchKnowledgeRequestAndGt: SearchKnowledgeRequestAndGt,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndGt$outboundSchema.parse(
+      searchKnowledgeRequestAndGt,
+    ),
+  );
 }
 
 /** @internal */
-export type AndNe$Outbound = string | number | boolean;
-
-/** @internal */
-export const AndNe$outboundSchema: z.ZodType<
-  AndNe$Outbound,
-  z.ZodTypeDef,
-  AndNe
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-export function andNeToJSON(andNe: AndNe): string {
-  return JSON.stringify(AndNe$outboundSchema.parse(andNe));
-}
-
-/** @internal */
-export type SearchKnowledgeRequestAndNe$Outbound = {
-  ne: string | number | boolean;
-};
+export type SearchKnowledgeRequestAndNe$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestAndNe$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndNe$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestAndNeToJSON(
   searchKnowledgeRequestAndNe: SearchKnowledgeRequestAndNe,
@@ -893,32 +1013,38 @@ export function searchKnowledgeRequestAndNeToJSON(
 }
 
 /** @internal */
-export type AndEq$Outbound = string | number | boolean;
+export type SearchKnowledgeRequestAndFilterByNe$Outbound = {
+  ne: string | number | boolean;
+};
 
 /** @internal */
-export const AndEq$outboundSchema: z.ZodType<
-  AndEq$Outbound,
+export const SearchKnowledgeRequestAndFilterByNe$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndFilterByNe$Outbound,
   z.ZodTypeDef,
-  AndEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+  SearchKnowledgeRequestAndFilterByNe
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
 
-export function andEqToJSON(andEq: AndEq): string {
-  return JSON.stringify(AndEq$outboundSchema.parse(andEq));
+export function searchKnowledgeRequestAndFilterByNeToJSON(
+  searchKnowledgeRequestAndFilterByNe: SearchKnowledgeRequestAndFilterByNe,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndFilterByNe$outboundSchema.parse(
+      searchKnowledgeRequestAndFilterByNe,
+    ),
+  );
 }
 
 /** @internal */
-export type SearchKnowledgeRequestAndEq$Outbound = {
-  eq: string | number | boolean;
-};
+export type SearchKnowledgeRequestAndEq$Outbound = string | number | boolean;
 
 /** @internal */
 export const SearchKnowledgeRequestAndEq$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndEq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function searchKnowledgeRequestAndEqToJSON(
   searchKnowledgeRequestAndEq: SearchKnowledgeRequestAndEq,
@@ -931,78 +1057,111 @@ export function searchKnowledgeRequestAndEqToJSON(
 }
 
 /** @internal */
-export type And$Outbound =
-  | SearchKnowledgeRequestAndEq$Outbound
-  | SearchKnowledgeRequestAndNe$Outbound
-  | AndGt$Outbound
-  | AndGte$Outbound
-  | AndLt$Outbound
-  | AndLte$Outbound
-  | SearchKnowledgeRequestAndIn$Outbound
-  | SearchKnowledgeRequestAndNin$Outbound
-  | AndExists$Outbound;
+export type SearchKnowledgeRequestAndFilterByEq$Outbound = {
+  eq: string | number | boolean;
+};
 
 /** @internal */
-export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
-  .union([
-    z.lazy(() => SearchKnowledgeRequestAndEq$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestAndNe$outboundSchema),
-    z.lazy(() => AndGt$outboundSchema),
-    z.lazy(() => AndGte$outboundSchema),
-    z.lazy(() => AndLt$outboundSchema),
-    z.lazy(() => AndLte$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestAndIn$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestAndNin$outboundSchema),
-    z.lazy(() => AndExists$outboundSchema),
-  ]);
+export const SearchKnowledgeRequestAndFilterByEq$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestAndFilterByEq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestAndFilterByEq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
 
-export function andToJSON(and: And): string {
-  return JSON.stringify(And$outboundSchema.parse(and));
+export function searchKnowledgeRequestAndFilterByEqToJSON(
+  searchKnowledgeRequestAndFilterByEq: SearchKnowledgeRequestAndFilterByEq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestAndFilterByEq$outboundSchema.parse(
+      searchKnowledgeRequestAndFilterByEq,
+    ),
+  );
 }
 
 /** @internal */
-export type FilterByAnd$Outbound = {
-  and: Array<
-    {
-      [k: string]:
-        | SearchKnowledgeRequestAndEq$Outbound
-        | SearchKnowledgeRequestAndNe$Outbound
-        | AndGt$Outbound
-        | AndGte$Outbound
-        | AndLt$Outbound
-        | AndLte$Outbound
-        | SearchKnowledgeRequestAndIn$Outbound
-        | SearchKnowledgeRequestAndNin$Outbound
-        | AndExists$Outbound;
-    }
-  >;
-};
+export type FilterByAnd$Outbound =
+  | SearchKnowledgeRequestAndFilterByEq$Outbound
+  | SearchKnowledgeRequestAndFilterByNe$Outbound
+  | SearchKnowledgeRequestAndGt$Outbound
+  | SearchKnowledgeRequestAndGte$Outbound
+  | SearchKnowledgeRequestAndLt$Outbound
+  | SearchKnowledgeRequestAndLte$Outbound
+  | SearchKnowledgeRequestAndFilterByIn$Outbound
+  | SearchKnowledgeRequestAndFilterByNin$Outbound
+  | AndExists$Outbound;
 
 /** @internal */
 export const FilterByAnd$outboundSchema: z.ZodType<
   FilterByAnd$Outbound,
   z.ZodTypeDef,
   FilterByAnd
+> = z.union([
+  z.lazy(() => SearchKnowledgeRequestAndFilterByEq$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndFilterByNe$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndGt$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndGte$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndLt$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndLte$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
+  z.lazy(() => AndExists$outboundSchema),
+]);
+
+export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
+  return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
+}
+
+/** @internal */
+export type SearchKnowledgeRequestFilterByAnd$Outbound = {
+  and: Array<
+    {
+      [k: string]:
+        | SearchKnowledgeRequestAndFilterByEq$Outbound
+        | SearchKnowledgeRequestAndFilterByNe$Outbound
+        | SearchKnowledgeRequestAndGt$Outbound
+        | SearchKnowledgeRequestAndGte$Outbound
+        | SearchKnowledgeRequestAndLt$Outbound
+        | SearchKnowledgeRequestAndLte$Outbound
+        | SearchKnowledgeRequestAndFilterByIn$Outbound
+        | SearchKnowledgeRequestAndFilterByNin$Outbound
+        | AndExists$Outbound;
+    }
+  >;
+};
+
+/** @internal */
+export const SearchKnowledgeRequestFilterByAnd$outboundSchema: z.ZodType<
+  SearchKnowledgeRequestFilterByAnd$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequestFilterByAnd
 > = z.object({
   and: z.array(
     z.record(z.union([
-      z.lazy(() => SearchKnowledgeRequestAndEq$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndFilterByEq$outboundSchema),
       z.lazy(() =>
-        SearchKnowledgeRequestAndNe$outboundSchema
+        SearchKnowledgeRequestAndFilterByNe$outboundSchema
       ),
-      z.lazy(() => AndGt$outboundSchema),
-      z.lazy(() => AndGte$outboundSchema),
-      z.lazy(() => AndLt$outboundSchema),
-      z.lazy(() => AndLte$outboundSchema),
-      z.lazy(() => SearchKnowledgeRequestAndIn$outboundSchema),
-      z.lazy(() => SearchKnowledgeRequestAndNin$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndGt$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndGte$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndLt$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndLte$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
       z.lazy(() => AndExists$outboundSchema),
     ])),
   ),
 });
 
-export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
-  return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
+export function searchKnowledgeRequestFilterByAndToJSON(
+  searchKnowledgeRequestFilterByAnd: SearchKnowledgeRequestFilterByAnd,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequestFilterByAnd$outboundSchema.parse(
+      searchKnowledgeRequestFilterByAnd,
+    ),
+  );
 }
 
 /** @internal */
@@ -1024,224 +1183,270 @@ export function existsToJSON(exists: Exists): string {
 }
 
 /** @internal */
-export type Nin$Outbound = string | number | boolean;
-
-/** @internal */
-export const Nin$outboundSchema: z.ZodType<Nin$Outbound, z.ZodTypeDef, Nin> = z
-  .union([z.string(), z.number(), z.boolean()]);
-
-export function ninToJSON(nin: Nin): string {
-  return JSON.stringify(Nin$outboundSchema.parse(nin));
-}
-
-/** @internal */
-export type OneNin$Outbound = {
-  nin: Array<string | number | boolean>;
-};
+export type OneNin$Outbound = string | number | boolean;
 
 /** @internal */
 export const OneNin$outboundSchema: z.ZodType<
   OneNin$Outbound,
   z.ZodTypeDef,
   OneNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function oneNinToJSON(oneNin: OneNin): string {
   return JSON.stringify(OneNin$outboundSchema.parse(oneNin));
 }
 
 /** @internal */
-export type In$Outbound = string | number | boolean;
+export type SearchKnowledgeRequest1Nin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
 
 /** @internal */
-export const In$outboundSchema: z.ZodType<In$Outbound, z.ZodTypeDef, In> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeRequest1Nin$outboundSchema: z.ZodType<
+  SearchKnowledgeRequest1Nin$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequest1Nin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
 
-export function inToJSON(value: In): string {
-  return JSON.stringify(In$outboundSchema.parse(value));
+export function searchKnowledgeRequest1NinToJSON(
+  searchKnowledgeRequest1Nin: SearchKnowledgeRequest1Nin,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequest1Nin$outboundSchema.parse(searchKnowledgeRequest1Nin),
+  );
 }
 
 /** @internal */
-export type OneIn$Outbound = {
-  in: Array<string | number | boolean>;
-};
+export type OneIn$Outbound = string | number | boolean;
 
 /** @internal */
 export const OneIn$outboundSchema: z.ZodType<
   OneIn$Outbound,
   z.ZodTypeDef,
   OneIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function oneInToJSON(oneIn: OneIn): string {
   return JSON.stringify(OneIn$outboundSchema.parse(oneIn));
 }
 
 /** @internal */
-export type Lte$Outbound = {
+export type SearchKnowledgeRequest1In$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const SearchKnowledgeRequest1In$outboundSchema: z.ZodType<
+  SearchKnowledgeRequest1In$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequest1In
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+export function searchKnowledgeRequest1InToJSON(
+  searchKnowledgeRequest1In: SearchKnowledgeRequest1In,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequest1In$outboundSchema.parse(searchKnowledgeRequest1In),
+  );
+}
+
+/** @internal */
+export type OneLte$Outbound = {
   lte: number;
 };
 
 /** @internal */
-export const Lte$outboundSchema: z.ZodType<Lte$Outbound, z.ZodTypeDef, Lte> = z
-  .object({
-    lte: z.number(),
-  });
+export const OneLte$outboundSchema: z.ZodType<
+  OneLte$Outbound,
+  z.ZodTypeDef,
+  OneLte
+> = z.object({
+  lte: z.number(),
+});
 
-export function lteToJSON(lte: Lte): string {
-  return JSON.stringify(Lte$outboundSchema.parse(lte));
+export function oneLteToJSON(oneLte: OneLte): string {
+  return JSON.stringify(OneLte$outboundSchema.parse(oneLte));
 }
 
 /** @internal */
-export type Lt$Outbound = {
+export type OneLt$Outbound = {
   lt: number;
 };
 
 /** @internal */
-export const Lt$outboundSchema: z.ZodType<Lt$Outbound, z.ZodTypeDef, Lt> = z
-  .object({
-    lt: z.number(),
-  });
+export const OneLt$outboundSchema: z.ZodType<
+  OneLt$Outbound,
+  z.ZodTypeDef,
+  OneLt
+> = z.object({
+  lt: z.number(),
+});
 
-export function ltToJSON(lt: Lt): string {
-  return JSON.stringify(Lt$outboundSchema.parse(lt));
+export function oneLtToJSON(oneLt: OneLt): string {
+  return JSON.stringify(OneLt$outboundSchema.parse(oneLt));
 }
 
 /** @internal */
-export type Gte$Outbound = {
+export type OneGte$Outbound = {
   gte: number;
 };
 
 /** @internal */
-export const Gte$outboundSchema: z.ZodType<Gte$Outbound, z.ZodTypeDef, Gte> = z
-  .object({
-    gte: z.number(),
-  });
+export const OneGte$outboundSchema: z.ZodType<
+  OneGte$Outbound,
+  z.ZodTypeDef,
+  OneGte
+> = z.object({
+  gte: z.number(),
+});
 
-export function gteToJSON(gte: Gte): string {
-  return JSON.stringify(Gte$outboundSchema.parse(gte));
+export function oneGteToJSON(oneGte: OneGte): string {
+  return JSON.stringify(OneGte$outboundSchema.parse(oneGte));
 }
 
 /** @internal */
-export type Gt$Outbound = {
+export type OneGt$Outbound = {
   gt: number;
 };
 
 /** @internal */
-export const Gt$outboundSchema: z.ZodType<Gt$Outbound, z.ZodTypeDef, Gt> = z
-  .object({
-    gt: z.number(),
-  });
+export const OneGt$outboundSchema: z.ZodType<
+  OneGt$Outbound,
+  z.ZodTypeDef,
+  OneGt
+> = z.object({
+  gt: z.number(),
+});
 
-export function gtToJSON(gt: Gt): string {
-  return JSON.stringify(Gt$outboundSchema.parse(gt));
+export function oneGtToJSON(oneGt: OneGt): string {
+  return JSON.stringify(OneGt$outboundSchema.parse(oneGt));
 }
 
 /** @internal */
-export type Ne$Outbound = string | number | boolean;
-
-/** @internal */
-export const Ne$outboundSchema: z.ZodType<Ne$Outbound, z.ZodTypeDef, Ne> = z
-  .union([z.string(), z.number(), z.boolean()]);
-
-export function neToJSON(ne: Ne): string {
-  return JSON.stringify(Ne$outboundSchema.parse(ne));
-}
-
-/** @internal */
-export type OneNe$Outbound = {
-  ne: string | number | boolean;
-};
+export type OneNe$Outbound = string | number | boolean;
 
 /** @internal */
 export const OneNe$outboundSchema: z.ZodType<
   OneNe$Outbound,
   z.ZodTypeDef,
   OneNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function oneNeToJSON(oneNe: OneNe): string {
   return JSON.stringify(OneNe$outboundSchema.parse(oneNe));
 }
 
 /** @internal */
-export type Eq$Outbound = string | number | boolean;
+export type SearchKnowledgeRequest1Ne$Outbound = {
+  ne: string | number | boolean;
+};
 
 /** @internal */
-export const Eq$outboundSchema: z.ZodType<Eq$Outbound, z.ZodTypeDef, Eq> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeRequest1Ne$outboundSchema: z.ZodType<
+  SearchKnowledgeRequest1Ne$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequest1Ne
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
 
-export function eqToJSON(eq: Eq): string {
-  return JSON.stringify(Eq$outboundSchema.parse(eq));
+export function searchKnowledgeRequest1NeToJSON(
+  searchKnowledgeRequest1Ne: SearchKnowledgeRequest1Ne,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequest1Ne$outboundSchema.parse(searchKnowledgeRequest1Ne),
+  );
 }
 
 /** @internal */
-export type OneEq$Outbound = {
-  eq: string | number | boolean;
-};
+export type OneEq$Outbound = string | number | boolean;
 
 /** @internal */
 export const OneEq$outboundSchema: z.ZodType<
   OneEq$Outbound,
   z.ZodTypeDef,
   OneEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 export function oneEqToJSON(oneEq: OneEq): string {
   return JSON.stringify(OneEq$outboundSchema.parse(oneEq));
 }
 
 /** @internal */
-export type One$Outbound =
-  | OneEq$Outbound
-  | OneNe$Outbound
-  | Gt$Outbound
-  | Gte$Outbound
-  | Lt$Outbound
-  | Lte$Outbound
-  | OneIn$Outbound
-  | OneNin$Outbound
-  | Exists$Outbound;
+export type SearchKnowledgeRequest1Eq$Outbound = {
+  eq: string | number | boolean;
+};
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .union([
-    z.lazy(() => OneEq$outboundSchema),
-    z.lazy(() => OneNe$outboundSchema),
-    z.lazy(() => Gt$outboundSchema),
-    z.lazy(() => Gte$outboundSchema),
-    z.lazy(() => Lt$outboundSchema),
-    z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => OneIn$outboundSchema),
-    z.lazy(() => OneNin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
-  ]);
+export const SearchKnowledgeRequest1Eq$outboundSchema: z.ZodType<
+  SearchKnowledgeRequest1Eq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRequest1Eq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function searchKnowledgeRequest1EqToJSON(
+  searchKnowledgeRequest1Eq: SearchKnowledgeRequest1Eq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRequest1Eq$outboundSchema.parse(searchKnowledgeRequest1Eq),
+  );
 }
 
 /** @internal */
-export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
-  [k: string]:
-    | OneEq$Outbound
-    | OneNe$Outbound
-    | Gt$Outbound
-    | Gte$Outbound
-    | Lt$Outbound
-    | Lte$Outbound
-    | OneIn$Outbound
-    | OneNin$Outbound
-    | Exists$Outbound;
-};
+export type FilterBy1$Outbound =
+  | SearchKnowledgeRequest1Eq$Outbound
+  | SearchKnowledgeRequest1Ne$Outbound
+  | OneGt$Outbound
+  | OneGte$Outbound
+  | OneLt$Outbound
+  | OneLte$Outbound
+  | SearchKnowledgeRequest1In$Outbound
+  | SearchKnowledgeRequest1Nin$Outbound
+  | Exists$Outbound;
+
+/** @internal */
+export const FilterBy1$outboundSchema: z.ZodType<
+  FilterBy1$Outbound,
+  z.ZodTypeDef,
+  FilterBy1
+> = z.union([
+  z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
+  z.lazy(() => OneGt$outboundSchema),
+  z.lazy(() => OneGte$outboundSchema),
+  z.lazy(() => OneLt$outboundSchema),
+  z.lazy(() => OneLte$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
+  z.lazy(() => Exists$outboundSchema),
+]);
+
+export function filterBy1ToJSON(filterBy1: FilterBy1): string {
+  return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
+}
+
+/** @internal */
+export type FilterBy$Outbound =
+  | SearchKnowledgeRequestFilterByAnd$Outbound
+  | SearchKnowledgeRequestFilterByOr$Outbound
+  | {
+    [k: string]:
+      | SearchKnowledgeRequest1Eq$Outbound
+      | SearchKnowledgeRequest1Ne$Outbound
+      | OneGt$Outbound
+      | OneGte$Outbound
+      | OneLt$Outbound
+      | OneLte$Outbound
+      | SearchKnowledgeRequest1In$Outbound
+      | SearchKnowledgeRequest1Nin$Outbound
+      | Exists$Outbound;
+  };
 
 /** @internal */
 export const FilterBy$outboundSchema: z.ZodType<
@@ -1249,17 +1454,17 @@ export const FilterBy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FilterBy
 > = z.union([
-  z.lazy(() => FilterByAnd$outboundSchema),
-  z.lazy(() => FilterByOr$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestFilterByAnd$outboundSchema),
+  z.lazy(() => SearchKnowledgeRequestFilterByOr$outboundSchema),
   z.record(z.union([
-    z.lazy(() => OneEq$outboundSchema),
-    z.lazy(() => OneNe$outboundSchema),
-    z.lazy(() => Gt$outboundSchema),
-    z.lazy(() => Gte$outboundSchema),
-    z.lazy(() => Lt$outboundSchema),
-    z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => OneIn$outboundSchema),
-    z.lazy(() => OneNin$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
+    z.lazy(() => OneGt$outboundSchema),
+    z.lazy(() => OneGte$outboundSchema),
+    z.lazy(() => OneLt$outboundSchema),
+    z.lazy(() => OneLte$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
     z.lazy(() => Exists$outboundSchema),
   ])),
 ]);
@@ -1359,18 +1564,22 @@ export type SearchKnowledgeRequest$Outbound = {
   top_k?: number | undefined;
   threshold?: number | undefined;
   search_type?: string | undefined;
-  filter_by?: FilterByAnd$Outbound | FilterByOr$Outbound | {
-    [k: string]:
-      | OneEq$Outbound
-      | OneNe$Outbound
-      | Gt$Outbound
-      | Gte$Outbound
-      | Lt$Outbound
-      | Lte$Outbound
-      | OneIn$Outbound
-      | OneNin$Outbound
-      | Exists$Outbound;
-  } | undefined;
+  filter_by?:
+    | SearchKnowledgeRequestFilterByAnd$Outbound
+    | SearchKnowledgeRequestFilterByOr$Outbound
+    | {
+      [k: string]:
+        | SearchKnowledgeRequest1Eq$Outbound
+        | SearchKnowledgeRequest1Ne$Outbound
+        | OneGt$Outbound
+        | OneGte$Outbound
+        | OneLt$Outbound
+        | OneLte$Outbound
+        | SearchKnowledgeRequest1In$Outbound
+        | SearchKnowledgeRequest1Nin$Outbound
+        | Exists$Outbound;
+    }
+    | undefined;
   search_options?: SearchOptions$Outbound | undefined;
   rerank_config?: SearchRerankConfig$Outbound | undefined;
   agentic_rag_config?:
@@ -1392,19 +1601,21 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
   threshold: z.number().optional(),
   searchType: SearchType$outboundSchema.optional(),
   filterBy: z.union([
-    z.lazy(() => FilterByAnd$outboundSchema),
-    z.lazy(() => FilterByOr$outboundSchema),
-    z.record(z.union([
-      z.lazy(() => OneEq$outboundSchema),
-      z.lazy(() => OneNe$outboundSchema),
-      z.lazy(() => Gt$outboundSchema),
-      z.lazy(() => Gte$outboundSchema),
-      z.lazy(() => Lt$outboundSchema),
-      z.lazy(() => Lte$outboundSchema),
-      z.lazy(() => OneIn$outboundSchema),
-      z.lazy(() => OneNin$outboundSchema),
-      z.lazy(() => Exists$outboundSchema),
-    ])),
+    z.lazy(() => SearchKnowledgeRequestFilterByAnd$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestFilterByOr$outboundSchema),
+    z.record(
+      z.union([
+        z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
+        z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
+        z.lazy(() => OneGt$outboundSchema),
+        z.lazy(() => OneGte$outboundSchema),
+        z.lazy(() => OneLt$outboundSchema),
+        z.lazy(() => OneLte$outboundSchema),
+        z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
+        z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
+        z.lazy(() => Exists$outboundSchema),
+      ]),
+    ),
   ]).optional(),
   searchOptions: SearchOptions$outboundSchema.optional(),
   rerankConfig: SearchRerankConfig$outboundSchema.optional(),

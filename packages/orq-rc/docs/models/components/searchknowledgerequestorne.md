@@ -1,19 +1,23 @@
 # SearchKnowledgeRequestOrNe
 
-Not equal to
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { SearchKnowledgeRequestOrNe } from "@orq-ai/node/models/components";
-
-let value: SearchKnowledgeRequestOrNe = {
-  ne: 3151.4,
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `ne`               | *components.OrNe*  | :heavy_check_mark: | N/A                |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

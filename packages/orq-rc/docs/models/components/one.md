@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `components.OneEq`
+### `components.InvokeDeploymentRequest1Eq`
 
 ```typescript
-const value: components.OneEq = {
-  eq: "<value>",
+const value: components.InvokeDeploymentRequest1Eq = {
+  eq: 1527.51,
 };
 ```
 
-### `components.OneNe`
+### `components.InvokeDeploymentRequest1Ne`
 
 ```typescript
-const value: components.OneNe = {
-  ne: 2953.7,
+const value: components.InvokeDeploymentRequest1Ne = {
+  ne: "<value>",
 };
 ```
 
@@ -51,29 +51,19 @@ const value: components.Lte = {
 };
 ```
 
-### `components.OneIn`
+### `components.InvokeDeploymentRequest1In`
 
 ```typescript
-const value: components.OneIn = {
+const value: components.InvokeDeploymentRequest1In = {
   in: [],
 };
 ```
 
-### `components.OneNin`
+### `components.InvokeDeploymentRequest1Nin`
 
 ```typescript
-const value: components.OneNin = {
-  nin: [
-    true,
-  ],
-};
-```
-
-### `components.Exists`
-
-```typescript
-const value: components.Exists = {
-  exists: true,
+const value: components.InvokeDeploymentRequest1Nin = {
+  nin: [],
 };
 ```
 

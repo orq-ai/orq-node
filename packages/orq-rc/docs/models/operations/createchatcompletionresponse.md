@@ -10,12 +10,12 @@ const value: operations.CreateChatCompletionResponseBody = {
   id: "<id>",
   choices: [
     {
-      finishReason: "function_call",
+      finishReason: "content_filter",
       message: {},
     },
   ],
-  created: 5644.5,
-  model: "Jetta",
+  created: 4400.92,
+  model: "Accord",
   object: "chat.completion",
 };
 ```

@@ -1,21 +1,23 @@
 # SearchKnowledgeRequestOrNin
 
-Not in
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { SearchKnowledgeRequestOrNin } from "@orq-ai/node/models/components";
-
-let value: SearchKnowledgeRequestOrNin = {
-  nin: [
-    2056.93,
-  ],
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                | Type                 | Required             | Description          |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `nin`                | *components.OrNin*[] | :heavy_check_mark:   | N/A                  |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

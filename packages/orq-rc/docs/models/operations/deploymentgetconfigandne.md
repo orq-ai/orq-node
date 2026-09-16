@@ -1,23 +1,19 @@
 # DeploymentGetConfigAndNe
 
+Not equal to
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { DeploymentGetConfigAndNe } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetConfigAndNe = {
+  ne: "<value>",
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                                            | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `ne`                                             | *operations.DeploymentGetConfigAndDeploymentsNe* | :heavy_check_mark:                               | N/A                                              |

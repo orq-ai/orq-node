@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `components.SearchKnowledgeRequestAndEq`
+### `components.InvokeDeploymentRequestAndEq`
 
 ```typescript
-const value: components.SearchKnowledgeRequestAndEq = {
-  eq: 745.44,
+const value: components.InvokeDeploymentRequestAndEq = {
+  eq: true,
 };
 ```
 
-### `components.SearchKnowledgeRequestAndNe`
+### `components.InvokeDeploymentRequestAndNe`
 
 ```typescript
-const value: components.SearchKnowledgeRequestAndNe = {
-  ne: 437.96,
+const value: components.InvokeDeploymentRequestAndNe = {
+  ne: "<value>",
 };
 ```
 
@@ -51,29 +51,21 @@ const value: components.AndLte = {
 };
 ```
 
-### `components.SearchKnowledgeRequestAndIn`
+### `components.InvokeDeploymentRequestAndIn`
 
 ```typescript
-const value: components.SearchKnowledgeRequestAndIn = {
-  in: [
-    false,
+const value: components.InvokeDeploymentRequestAndIn = {
+  in: [],
+};
+```
+
+### `components.InvokeDeploymentRequestAndNin`
+
+```typescript
+const value: components.InvokeDeploymentRequestAndNin = {
+  nin: [
+    "<value>",
   ],
-};
-```
-
-### `components.SearchKnowledgeRequestAndNin`
-
-```typescript
-const value: components.SearchKnowledgeRequestAndNin = {
-  nin: [],
-};
-```
-
-### `components.AndExists`
-
-```typescript
-const value: components.AndExists = {
-  exists: false,
 };
 ```
 

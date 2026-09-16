@@ -24,10 +24,10 @@ export type DeploymentsRequest = {
   endingBefore?: string | undefined;
 };
 
-export const ObjectT = {
+export const DeploymentsObject = {
   List: "list",
 } as const;
-export type ObjectT = ClosedEnum<typeof ObjectT>;
+export type DeploymentsObject = ClosedEnum<typeof DeploymentsObject>;
 
 /**
  * The type of the tool. Currently, only `function` is supported.
@@ -220,14 +220,14 @@ export type DeploymentsResponseFormat =
 /**
  * Create a cache control breakpoint. Accepts only the value "ephemeral".
  */
-export const DeploymentsDeploymentsResponseType = {
+export const DeploymentsDeploymentsType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint. Accepts only the value "ephemeral".
  */
-export type DeploymentsDeploymentsResponseType = ClosedEnum<
-  typeof DeploymentsDeploymentsResponseType
+export type DeploymentsDeploymentsType = ClosedEnum<
+  typeof DeploymentsDeploymentsType
 >;
 
 /**
@@ -263,7 +263,7 @@ export type DeploymentsCacheControl = {
   /**
    * Create a cache control breakpoint. Accepts only the value "ephemeral".
    */
-  type: DeploymentsDeploymentsResponseType;
+  type: DeploymentsDeploymentsType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -588,11 +588,11 @@ export type DeploymentsContent =
   | string
   | Array<Deployments21 | Deployments22 | Deployments23>;
 
-export const DeploymentsDeploymentsType = {
+export const DeploymentsDeploymentsResponseType = {
   Function: "function",
 } as const;
-export type DeploymentsDeploymentsType = ClosedEnum<
-  typeof DeploymentsDeploymentsType
+export type DeploymentsDeploymentsResponseType = ClosedEnum<
+  typeof DeploymentsDeploymentsResponseType
 >;
 
 export type DeploymentsDeploymentsFunction = {
@@ -606,7 +606,7 @@ export type DeploymentsDeploymentsFunction = {
 export type DeploymentsToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: DeploymentsDeploymentsType;
+  type: DeploymentsDeploymentsResponseType;
   function: DeploymentsDeploymentsFunction;
 };
 
@@ -638,7 +638,7 @@ export type DeploymentsPromptConfig = {
   messages: Array<DeploymentsMessages>;
 };
 
-export type Data = {
+export type DeploymentsData = {
   /**
    * Unique identifier for the object.
    */
@@ -670,8 +670,8 @@ export type Data = {
  * List all deployments
  */
 export type DeploymentsResponseBody = {
-  object: ObjectT;
-  data: Array<Data>;
+  object: DeploymentsObject;
+  data: Array<DeploymentsData>;
   hasMore: boolean;
 };
 
@@ -707,8 +707,9 @@ export function deploymentsRequestToJSON(
 }
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const DeploymentsObject$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsObject
+> = z.nativeEnum(DeploymentsObject);
 
 /** @internal */
 export const DeploymentsType$inboundSchema: z.ZodNativeEnum<
@@ -943,9 +944,9 @@ export function deploymentsResponseFormatFromJSON(
 }
 
 /** @internal */
-export const DeploymentsDeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsDeploymentsResponseType
-> = z.nativeEnum(DeploymentsDeploymentsResponseType);
+export const DeploymentsDeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsDeploymentsType
+> = z.nativeEnum(DeploymentsDeploymentsType);
 
 /** @internal */
 export const DeploymentsTtl$inboundSchema: z.ZodNativeEnum<
@@ -958,7 +959,7 @@ export const DeploymentsCacheControl$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: DeploymentsDeploymentsResponseType$inboundSchema,
+  type: DeploymentsDeploymentsType$inboundSchema,
   ttl: DeploymentsTtl$inboundSchema.default("5m"),
 });
 
@@ -1216,9 +1217,9 @@ export function deploymentsContentFromJSON(
 }
 
 /** @internal */
-export const DeploymentsDeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsDeploymentsType
-> = z.nativeEnum(DeploymentsDeploymentsType);
+export const DeploymentsDeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsDeploymentsResponseType
+> = z.nativeEnum(DeploymentsDeploymentsResponseType);
 
 /** @internal */
 export const DeploymentsDeploymentsFunction$inboundSchema: z.ZodType<
@@ -1248,7 +1249,7 @@ export const DeploymentsToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: DeploymentsDeploymentsType$inboundSchema,
+  type: DeploymentsDeploymentsResponseType$inboundSchema,
   function: z.lazy(() => DeploymentsDeploymentsFunction$inboundSchema),
 });
 
@@ -1329,28 +1330,31 @@ export function deploymentsPromptConfigFromJSON(
 }
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    created: z.string(),
-    updated: z.string(),
-    key: z.string(),
-    description: z.string(),
-    prompt_config: z.lazy(() => DeploymentsPromptConfig$inboundSchema),
-    version: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "prompt_config": "promptConfig",
-    });
+export const DeploymentsData$inboundSchema: z.ZodType<
+  DeploymentsData,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  created: z.string(),
+  updated: z.string(),
+  key: z.string(),
+  description: z.string(),
+  prompt_config: z.lazy(() => DeploymentsPromptConfig$inboundSchema),
+  version: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "prompt_config": "promptConfig",
   });
+});
 
-export function dataFromJSON(
+export function deploymentsDataFromJSON(
   jsonString: string,
-): SafeParseResult<Data, SDKValidationError> {
+): SafeParseResult<DeploymentsData, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Data$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data' from JSON`,
+    (x) => DeploymentsData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentsData' from JSON`,
   );
 }
 
@@ -1360,8 +1364,8 @@ export const DeploymentsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: ObjectT$inboundSchema,
-  data: z.array(z.lazy(() => Data$inboundSchema)),
+  object: DeploymentsObject$inboundSchema,
+  data: z.array(z.lazy(() => DeploymentsData$inboundSchema)),
   has_more: z.boolean(),
 }).transform((v) => {
   return remap$(v, {

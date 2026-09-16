@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { deploymentsList } from "@orq-ai/node/funcs/deploymentsList.js";
+import { deploymentsInvoke } from "@orq-ai/node/funcs/deploymentsInvoke.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,12 +29,47 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await deploymentsList(orq, {});
+  const res = await deploymentsInvoke(orq, {
+    key: "<key>",
+    identity: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
+    documents: [
+      {
+        text: "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+        metadata: {
+          fileName: "refund_policy.pdf",
+          fileType: "application/pdf",
+          pageNumber: 1,
+        },
+      },
+      {
+        text: "Premium members receive free shipping on all orders over $50.",
+        metadata: {
+          fileName: "membership_benefits.md",
+          fileType: "text/markdown",
+        },
+      },
+    ],
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("deploymentsList failed:", res.error);
+    console.log("deploymentsInvoke failed:", res.error);
   }
 }
 

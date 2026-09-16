@@ -19,35 +19,35 @@ const value: operations.CreateChatCompletion1Ne = {
 };
 ```
 
-### `operations.OneGt`
+### `operations.CreateChatCompletion1Gt`
 
 ```typescript
-const value: operations.OneGt = {
-  gt: 7862.95,
+const value: operations.CreateChatCompletion1Gt = {
+  gt: 6554.46,
 };
 ```
 
-### `operations.OneGte`
+### `operations.CreateChatCompletion1Gte`
 
 ```typescript
-const value: operations.OneGte = {
-  gte: 6469.31,
+const value: operations.CreateChatCompletion1Gte = {
+  gte: 4022.96,
 };
 ```
 
-### `operations.OneLt`
+### `operations.CreateChatCompletion1Lt`
 
 ```typescript
-const value: operations.OneLt = {
-  lt: 5264,
+const value: operations.CreateChatCompletion1Lt = {
+  lt: 5271.52,
 };
 ```
 
-### `operations.OneLte`
+### `operations.CreateChatCompletion1Lte`
 
 ```typescript
-const value: operations.OneLte = {
-  lte: 8379.2,
+const value: operations.CreateChatCompletion1Lte = {
+  lte: 2846.17,
 };
 ```
 

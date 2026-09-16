@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update a skill
  *
  * @remarks
- * Updates mutable skill fields. Omitted optional fields keep their current values. Repeated fields such as `tags` replace the existing collection when provided.
+ * Updates mutable skill fields. Omitted fields keep their current values. When `tags` is provided it replaces the existing tags; send an empty array to clear them.
  */
 export function skillsUpdate(
   client: OrqCore,

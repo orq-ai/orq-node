@@ -1,6 +1,6 @@
 # Usage
 
-Usage statistics for the completion request.
+Usage metrics for the response
 
 ## Example Usage
 
@@ -14,8 +14,8 @@ let value: Usage = {};
 
 | Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `completionTokens`                                                                       | *number*                                                                                 | :heavy_minus_sign:                                                                       | Number of tokens in the generated completion.                                            |
-| `promptTokens`                                                                           | *number*                                                                                 | :heavy_minus_sign:                                                                       | Number of tokens in the prompt.                                                          |
-| `totalTokens`                                                                            | *number*                                                                                 | :heavy_minus_sign:                                                                       | Total number of tokens used in the request (prompt + completion).                        |
+| `totalTokens`                                                                            | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `promptTokens`                                                                           | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `completionTokens`                                                                       | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
 | `promptTokensDetails`                                                                    | [operations.PromptTokensDetails](../../models/operations/prompttokensdetails.md)         | :heavy_minus_sign:                                                                       | N/A                                                                                      |
 | `completionTokensDetails`                                                                | [operations.CompletionTokensDetails](../../models/operations/completiontokensdetails.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
