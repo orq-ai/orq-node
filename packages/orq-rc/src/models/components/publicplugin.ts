@@ -43,7 +43,7 @@ export type PublicPluginOnFailure = ClosedEnum<typeof PublicPluginOnFailure>;
 
 export type PublicPlugin = {
   /**
-   * pii_redaction only. Entity types to redact (e.g. EMAIL_ADDRESS, BSN). Omit to redact every type detected for the language and regions. Cannot be combined with regions.
+   * pii_redaction only. Entity types to redact (e.g. EMAIL_ADDRESS, BSN). On its own this is a strict allowlist; alongside regions it adds to the region coverage. Omit to redact every type detected for the language and regions. See GET /v2/pii/capabilities for valid types.
    */
   entities?: Array<string> | null | undefined;
   /**
@@ -67,7 +67,7 @@ export type PublicPlugin = {
    */
   onFailure?: PublicPluginOnFailure | undefined;
   /**
-   * pii_redaction only. Region codes gating regional recognizers (e.g. nl, gb). ["all"] is exclusive. Omit for base entities only. Cannot be combined with entities.
+   * pii_redaction only. Region codes selecting whole regions of coverage (e.g. nl, gb). Every entity type those regions cover is redacted, alongside the base catalog. ["all"] cannot be combined with other region codes, and leaving both this and entities empty also runs every region, so selecting nothing is the widest request rather than the narrowest. Combines with entities: the two selections are unioned.
    */
   regions?: Array<string> | null | undefined;
   /**

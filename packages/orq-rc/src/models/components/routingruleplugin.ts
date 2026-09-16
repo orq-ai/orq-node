@@ -23,14 +23,14 @@ export type RoutingRulePlugin = {
    */
   language?: string | undefined;
   /**
-   * Entity types to redact. Mutually exclusive with regions.
+   * Entity types to redact. On their own a strict allowlist; alongside regions they add to the region coverage.
    */
   entities?: Array<string> | undefined;
   onFailure?: string | undefined;
   threshold?: number | undefined;
   mask?: Array<string> | undefined;
   /**
-   * Regions of coverage by ISO 3166-1 alpha-2 code, or ["all"]. Mutually exclusive with entities.
+   * Regions of coverage by ISO 3166-1 alpha-2 code, or ["all"]. Combines with entities: the two selections are unioned.
    */
   regions?: Array<string> | undefined;
   /**
