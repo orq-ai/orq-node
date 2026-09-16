@@ -15,26 +15,11 @@ export type CategoricalLabels = {
   description?: string | undefined;
 };
 
-export const Mode = {
+export const UpdateEvalMode = {
   Single: "single",
   Jury: "jury",
 } as const;
-export type Mode = ClosedEnum<typeof Mode>;
-
-export type Retry = {
-  count?: number | undefined;
-  onCodes?: Array<number> | undefined;
-};
-
-export type Fallbacks = {
-  model: string;
-};
-
-export type Judges = {
-  model: string;
-  retry?: Retry | undefined;
-  fallbacks?: Array<Fallbacks> | undefined;
-};
+export type UpdateEvalMode = ClosedEnum<typeof UpdateEvalMode>;
 
 export type UpdateEvalRetry = {
   count?: number | undefined;
@@ -45,10 +30,25 @@ export type UpdateEvalFallbacks = {
   model: string;
 };
 
-export type ReplacementJudges = {
+export type Judges = {
   model: string;
   retry?: UpdateEvalRetry | undefined;
   fallbacks?: Array<UpdateEvalFallbacks> | undefined;
+};
+
+export type UpdateEvalEvalsRetry = {
+  count?: number | undefined;
+  onCodes?: Array<number> | undefined;
+};
+
+export type UpdateEvalEvalsFallbacks = {
+  model: string;
+};
+
+export type ReplacementJudges = {
+  model: string;
+  retry?: UpdateEvalEvalsRetry | undefined;
+  fallbacks?: Array<UpdateEvalEvalsFallbacks> | undefined;
 };
 
 export const TieValue = {
@@ -63,12 +63,14 @@ export type Jury = {
   tieValue?: TieValue | undefined;
 };
 
-export const VersionIncrement = {
+export const UpdateEvalVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
 } as const;
-export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+export type UpdateEvalVersionIncrement = ClosedEnum<
+  typeof UpdateEvalVersionIncrement
+>;
 
 export type UpdateEvalRequestBody = {
   /**
@@ -91,7 +93,7 @@ export type UpdateEvalRequestBody = {
   categoricalLabels?: Array<CategoricalLabels> | null | undefined;
   datasetId?: string | null | undefined;
   repetitions?: number | undefined;
-  mode?: Mode | undefined;
+  mode?: UpdateEvalMode | undefined;
   model?: string | undefined;
   jury?: Jury | undefined;
   schema?: string | undefined;
@@ -101,7 +103,7 @@ export type UpdateEvalRequestBody = {
   payload?: { [k: string]: any } | undefined;
   code?: string | undefined;
   guardrailConfig?: any | undefined;
-  versionIncrement?: VersionIncrement | undefined;
+  versionIncrement?: UpdateEvalVersionIncrement | undefined;
   versionDescription?: string | undefined;
 };
 
@@ -147,73 +149,9 @@ export function categoricalLabelsToJSON(
 }
 
 /** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
-
-/** @internal */
-export type Retry$Outbound = {
-  count: number;
-  on_codes?: Array<number> | undefined;
-};
-
-/** @internal */
-export const Retry$outboundSchema: z.ZodType<
-  Retry$Outbound,
-  z.ZodTypeDef,
-  Retry
-> = z.object({
-  count: z.number().int().default(2),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
-
-export function retryToJSON(retry: Retry): string {
-  return JSON.stringify(Retry$outboundSchema.parse(retry));
-}
-
-/** @internal */
-export type Fallbacks$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const Fallbacks$outboundSchema: z.ZodType<
-  Fallbacks$Outbound,
-  z.ZodTypeDef,
-  Fallbacks
-> = z.object({
-  model: z.string(),
-});
-
-export function fallbacksToJSON(fallbacks: Fallbacks): string {
-  return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
-}
-
-/** @internal */
-export type Judges$Outbound = {
-  model: string;
-  retry?: Retry$Outbound | undefined;
-  fallbacks?: Array<Fallbacks$Outbound> | undefined;
-};
-
-/** @internal */
-export const Judges$outboundSchema: z.ZodType<
-  Judges$Outbound,
-  z.ZodTypeDef,
-  Judges
-> = z.object({
-  model: z.string(),
-  retry: z.lazy(() => Retry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
-});
-
-export function judgesToJSON(judges: Judges): string {
-  return JSON.stringify(Judges$outboundSchema.parse(judges));
-}
+export const UpdateEvalMode$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateEvalMode
+> = z.nativeEnum(UpdateEvalMode);
 
 /** @internal */
 export type UpdateEvalRetry$Outbound = {
@@ -264,10 +202,83 @@ export function updateEvalFallbacksToJSON(
 }
 
 /** @internal */
-export type ReplacementJudges$Outbound = {
+export type Judges$Outbound = {
   model: string;
   retry?: UpdateEvalRetry$Outbound | undefined;
   fallbacks?: Array<UpdateEvalFallbacks$Outbound> | undefined;
+};
+
+/** @internal */
+export const Judges$outboundSchema: z.ZodType<
+  Judges$Outbound,
+  z.ZodTypeDef,
+  Judges
+> = z.object({
+  model: z.string(),
+  retry: z.lazy(() => UpdateEvalRetry$outboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => UpdateEvalFallbacks$outboundSchema))
+    .optional(),
+});
+
+export function judgesToJSON(judges: Judges): string {
+  return JSON.stringify(Judges$outboundSchema.parse(judges));
+}
+
+/** @internal */
+export type UpdateEvalEvalsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const UpdateEvalEvalsRetry$outboundSchema: z.ZodType<
+  UpdateEvalEvalsRetry$Outbound,
+  z.ZodTypeDef,
+  UpdateEvalEvalsRetry
+> = z.object({
+  count: z.number().int().default(2),
+  onCodes: z.array(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+export function updateEvalEvalsRetryToJSON(
+  updateEvalEvalsRetry: UpdateEvalEvalsRetry,
+): string {
+  return JSON.stringify(
+    UpdateEvalEvalsRetry$outboundSchema.parse(updateEvalEvalsRetry),
+  );
+}
+
+/** @internal */
+export type UpdateEvalEvalsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateEvalEvalsFallbacks$outboundSchema: z.ZodType<
+  UpdateEvalEvalsFallbacks$Outbound,
+  z.ZodTypeDef,
+  UpdateEvalEvalsFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+export function updateEvalEvalsFallbacksToJSON(
+  updateEvalEvalsFallbacks: UpdateEvalEvalsFallbacks,
+): string {
+  return JSON.stringify(
+    UpdateEvalEvalsFallbacks$outboundSchema.parse(updateEvalEvalsFallbacks),
+  );
+}
+
+/** @internal */
+export type ReplacementJudges$Outbound = {
+  model: string;
+  retry?: UpdateEvalEvalsRetry$Outbound | undefined;
+  fallbacks?: Array<UpdateEvalEvalsFallbacks$Outbound> | undefined;
 };
 
 /** @internal */
@@ -277,8 +288,8 @@ export const ReplacementJudges$outboundSchema: z.ZodType<
   ReplacementJudges
 > = z.object({
   model: z.string(),
-  retry: z.lazy(() => UpdateEvalRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => UpdateEvalFallbacks$outboundSchema))
+  retry: z.lazy(() => UpdateEvalEvalsRetry$outboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => UpdateEvalEvalsFallbacks$outboundSchema))
     .optional(),
 });
 
@@ -323,9 +334,9 @@ export function juryToJSON(jury: Jury): string {
 }
 
 /** @internal */
-export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
-  typeof VersionIncrement
-> = z.nativeEnum(VersionIncrement);
+export const UpdateEvalVersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateEvalVersionIncrement
+> = z.nativeEnum(UpdateEvalVersionIncrement);
 
 /** @internal */
 export type UpdateEvalRequestBody$Outbound = {
@@ -373,7 +384,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   datasetId: z.nullable(z.string()).optional(),
   repetitions: z.number().optional(),
-  mode: Mode$outboundSchema.optional(),
+  mode: UpdateEvalMode$outboundSchema.optional(),
   model: z.string().optional(),
   jury: z.lazy(() => Jury$outboundSchema).optional(),
   schema: z.string().optional(),
@@ -383,7 +394,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   payload: z.record(z.any()).optional(),
   code: z.string().optional(),
   guardrailConfig: z.any().optional(),
-  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionIncrement: UpdateEvalVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

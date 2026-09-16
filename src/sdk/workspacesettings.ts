@@ -28,7 +28,7 @@ export class WorkspaceSettings extends ClientSDK {
    * Update workspace settings
    *
    * @remarks
-   * Partially updates workspace settings. Every field is optional; an omitted field is left unchanged. Provide `display_name` to rename the workspace, `enforce_enabled_models` to toggle model enforcement, or `pii_redaction` to replace the workspace-default PII redaction plugin configuration.
+   * Partially updates workspace settings. Every field is optional; an omitted field is left unchanged. Provide `display_name` to rename the workspace, `enforce_enabled_models` to toggle model enforcement, or `pii_redaction` to update the workspace-default PII redaction plugin: `enabled` is always applied, and `config` replaces the stored config only when present.
    */
   async update(
     request: components.UpdateWorkspaceSettingsRequest,

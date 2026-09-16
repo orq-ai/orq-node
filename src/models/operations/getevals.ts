@@ -34,12 +34,12 @@ export type GetEvalsRequest = {
   projectId?: string | undefined;
 };
 
-export const ObjectT = {
+export const GetEvalsObject = {
   List: "list",
 } as const;
-export type ObjectT = ClosedEnum<typeof ObjectT>;
+export type GetEvalsObject = ClosedEnum<typeof GetEvalsObject>;
 
-export type Data =
+export type GetEvalsData =
   | components.EvaluatorResponseLlm
   | components.EvaluatorResponseJsonSchema
   | components.EvaluatorResponseHttp
@@ -52,7 +52,7 @@ export type Data =
  * Returns a list of evals
  */
 export type GetEvalsResponseBody = {
-  object: ObjectT;
+  object: GetEvalsObject;
   data: Array<
     | components.EvaluatorResponseLlm
     | components.EvaluatorResponseJsonSchema
@@ -107,28 +107,32 @@ export function getEvalsRequestToJSON(
 }
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const GetEvalsObject$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsObject
+> = z.nativeEnum(GetEvalsObject);
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .union([
-    components.EvaluatorResponseLlm$inboundSchema,
-    components.EvaluatorResponseJsonSchema$inboundSchema,
-    components.EvaluatorResponseHttp$inboundSchema,
-    components.EvaluatorResponsePython$inboundSchema,
-    components.EvaluatorResponseFunction$inboundSchema,
-    components.EvaluatorResponseRagas$inboundSchema,
-    components.EvaluatorResponseTypescript$inboundSchema,
-  ]);
+export const GetEvalsData$inboundSchema: z.ZodType<
+  GetEvalsData,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  components.EvaluatorResponseLlm$inboundSchema,
+  components.EvaluatorResponseJsonSchema$inboundSchema,
+  components.EvaluatorResponseHttp$inboundSchema,
+  components.EvaluatorResponsePython$inboundSchema,
+  components.EvaluatorResponseFunction$inboundSchema,
+  components.EvaluatorResponseRagas$inboundSchema,
+  components.EvaluatorResponseTypescript$inboundSchema,
+]);
 
-export function dataFromJSON(
+export function getEvalsDataFromJSON(
   jsonString: string,
-): SafeParseResult<Data, SDKValidationError> {
+): SafeParseResult<GetEvalsData, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Data$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data' from JSON`,
+    (x) => GetEvalsData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsData' from JSON`,
   );
 }
 
@@ -138,7 +142,7 @@ export const GetEvalsResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: ObjectT$inboundSchema,
+  object: GetEvalsObject$inboundSchema,
   data: z.array(
     z.union([
       components.EvaluatorResponseLlm$inboundSchema,

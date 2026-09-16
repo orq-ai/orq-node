@@ -3,18 +3,18 @@
 
 ## Supported Types
 
-### `operations.DeploymentStream1Eq`
+### `operations.DeploymentGetConfig1Eq`
 
 ```typescript
-const value: operations.DeploymentStream1Eq = {
-  eq: false,
+const value: operations.DeploymentGetConfig1Eq = {
+  eq: "<value>",
 };
 ```
 
-### `operations.DeploymentStream1Ne`
+### `operations.DeploymentGetConfig1Ne`
 
 ```typescript
-const value: operations.DeploymentStream1Ne = {
+const value: operations.DeploymentGetConfig1Ne = {
   ne: false,
 };
 ```
@@ -51,18 +51,18 @@ const value: operations.OneLte = {
 };
 ```
 
-### `operations.DeploymentStream1In`
+### `operations.DeploymentGetConfig1In`
 
 ```typescript
-const value: operations.DeploymentStream1In = {
+const value: operations.DeploymentGetConfig1In = {
   in: [],
 };
 ```
 
-### `operations.DeploymentStream1Nin`
+### `operations.DeploymentGetConfig1Nin`
 
 ```typescript
-const value: operations.DeploymentStream1Nin = {
+const value: operations.DeploymentGetConfig1Nin = {
   nin: [],
 };
 ```

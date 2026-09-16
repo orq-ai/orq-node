@@ -8,7 +8,7 @@ Model configuration for agent execution. Can be a simple model ID string or a co
 ### `string`
 
 ```typescript
-const value: string = "<value>";
+const value: string = "openai/gpt-5.6-sol";
 ```
 
 ### `operations.UpdateAgentModelConfiguration2`
@@ -19,7 +19,7 @@ const value: operations.UpdateAgentModelConfiguration2 = {
   parameters: {
     fallbacks: [
       {
-        model: "openai/gpt-4o-mini",
+        model: "openai/gpt-5.4-mini",
       },
     ],
     cache: {

@@ -12,6 +12,6 @@ let value: ResponseHealingPlugin = {
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `id`                                                                                     | [components.ResponseHealingPluginId](../../models/components/responsehealingpluginid.md) | :heavy_check_mark:                                                                       | Plugin discriminator. Must be `response_healing`.                                        |
+| Field                                             | Type                                              | Required                                          | Description                                       |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `id`                                              | *"response_healing"*                              | :heavy_check_mark:                                | Plugin discriminator. Must be `response_healing`. |

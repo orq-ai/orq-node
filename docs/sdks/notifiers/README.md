@@ -25,7 +25,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.notifiers.list();
+  const result = await orq.notifiers.list({
+    type: [
+      "NOTIFIER_TYPE_SLACK_WEBHOOK",
+    ],
+  });
 
   console.log(result);
 }
@@ -48,7 +52,11 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await notifiersList(orq);
+  const res = await notifiersList(orq, {
+    type: [
+      "NOTIFIER_TYPE_SLACK_WEBHOOK",
+    ],
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -319,7 +327,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.notifiers.update({
     notifierId: "<id>",
-    updateNotifierRequest: {},
+    updateNotifierRequest: {
+      type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
+    },
   });
 
   console.log(result);
@@ -345,7 +355,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await notifiersUpdate(orq, {
     notifierId: "<id>",
-    updateNotifierRequest: {},
+    updateNotifierRequest: {
+      type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
+    },
   });
   if (res.ok) {
     const { value: result } = res;

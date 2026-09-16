@@ -105,6 +105,12 @@ async function run() {
     },
     auth: {
       type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
+      staticHeaders: [
+        {
+          key: "Authorization",
+          value: "ghp_xxxxxxxxxxxx",
+        },
+      ],
     },
     defaultToolExposure: {
       mode: "MCP_TOOL_EXPOSURE_MODE_UNSPECIFIED",
@@ -141,6 +147,12 @@ async function run() {
     },
     auth: {
       type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
+      staticHeaders: [
+        {
+          key: "Authorization",
+          value: "ghp_xxxxxxxxxxxx",
+        },
+      ],
     },
     defaultToolExposure: {
       mode: "MCP_TOOL_EXPOSURE_MODE_UNSPECIFIED",
@@ -339,7 +351,24 @@ const orq = new Orq({
 async function run() {
   const result = await orq.mcpServers.update({
     id: "<id>",
-    updateMcpServerRequest: {},
+    updateMcpServerRequest: {
+      connection: {
+        type: "MCP_CONNECTION_TYPE_HTTP",
+        url: "https://api.githubcopilot.com/mcp/",
+      },
+      auth: {
+        type: "MCP_AUTH_TYPE_PER_USER_OAUTH",
+        staticHeaders: [
+          {
+            key: "Authorization",
+            value: "ghp_xxxxxxxxxxxx",
+          },
+        ],
+      },
+      defaultToolExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
+    },
   });
 
   console.log(result);
@@ -365,7 +394,24 @@ const orq = new OrqCore({
 async function run() {
   const res = await mcpServersUpdate(orq, {
     id: "<id>",
-    updateMcpServerRequest: {},
+    updateMcpServerRequest: {
+      connection: {
+        type: "MCP_CONNECTION_TYPE_HTTP",
+        url: "https://api.githubcopilot.com/mcp/",
+      },
+      auth: {
+        type: "MCP_AUTH_TYPE_PER_USER_OAUTH",
+        staticHeaders: [
+          {
+            key: "Authorization",
+            value: "ghp_xxxxxxxxxxxx",
+          },
+        ],
+      },
+      defaultToolExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;

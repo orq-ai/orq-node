@@ -21,3 +21,59 @@ const value: components.ChunkingConfiguration2 = {
 };
 ```
 
+### `components.ChunkingConfiguration3`
+
+```typescript
+const value: components.ChunkingConfiguration3 = {
+  type: "token",
+};
+```
+
+### `components.ChunkingConfiguration4`
+
+```typescript
+const value: components.ChunkingConfiguration4 = {
+  type: "sentence",
+};
+```
+
+### `components.ChunkingConfiguration5`
+
+```typescript
+const value: components.ChunkingConfiguration5 = {
+  type: "recursive",
+};
+```
+
+### `components.ChunkingConfiguration6`
+
+```typescript
+const value: components.ChunkingConfiguration6 = {
+  type: "fast",
+};
+```
+
+### `components.ChunkingConfiguration7`
+
+```typescript
+const value: components.ChunkingConfiguration7 = {
+  type: "semantic",
+};
+```
+
+### `components.ChunkingConfiguration8`
+
+```typescript
+const value: components.ChunkingConfiguration8 = {
+  type: "late",
+};
+```
+
+### `components.ChunkingConfiguration9`
+
+```typescript
+const value: components.ChunkingConfiguration9 = {
+  type: "agentic",
+};
+```
+

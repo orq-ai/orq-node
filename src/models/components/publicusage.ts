@@ -15,6 +15,10 @@ import {
   OutputTokensDetails,
   OutputTokensDetails$inboundSchema,
 } from "./outputtokensdetails.js";
+import {
+  ServerToolUseDetails,
+  ServerToolUseDetails$inboundSchema,
+} from "./servertoolusedetails.js";
 
 export type PublicUsage = {
   /**
@@ -29,6 +33,7 @@ export type PublicUsage = {
   outputCost?: number | undefined;
   outputTokens: number;
   outputTokensDetails: OutputTokensDetails;
+  serverToolUse?: ServerToolUseDetails | undefined;
   /**
    * Total cost (USD) of the response. Present when billing was computed for this response.
    */
@@ -49,6 +54,7 @@ export const PublicUsage$inboundSchema: z.ZodType<
   output_cost: z.number().optional(),
   output_tokens: z.number().int(),
   output_tokens_details: OutputTokensDetails$inboundSchema,
+  server_tool_use: ServerToolUseDetails$inboundSchema.optional(),
   total_cost: z.number().optional(),
   total_tokens: z.number().int(),
   web_search_requests: z.number().int().optional(),
@@ -60,6 +66,7 @@ export const PublicUsage$inboundSchema: z.ZodType<
     "output_cost": "outputCost",
     "output_tokens": "outputTokens",
     "output_tokens_details": "outputTokensDetails",
+    "server_tool_use": "serverToolUse",
     "total_cost": "totalCost",
     "total_tokens": "totalTokens",
     "web_search_requests": "webSearchRequests",

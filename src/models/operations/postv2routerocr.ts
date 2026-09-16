@@ -134,6 +134,18 @@ export type Usage2 = {
    * The number of tokens processed
    */
   tokensProcessed: number;
+  /**
+   * Cost (USD) attributed to input processing. Present when billing was computed for this response.
+   */
+  inputCost?: number | undefined;
+  /**
+   * Cost (USD) attributed to output processing. Present when billing was computed for this response.
+   */
+  outputCost?: number | undefined;
+  /**
+   * Total cost (USD) of the response. Present when billing was computed for this response.
+   */
+  totalCost?: number | undefined;
 };
 
 /**
@@ -145,6 +157,18 @@ export type Usage1 = {
    * The number of pages processed
    */
   pagesProcessed: number;
+  /**
+   * Cost (USD) attributed to input processing. Present when billing was computed for this response.
+   */
+  inputCost?: number | undefined;
+  /**
+   * Cost (USD) attributed to output processing. Present when billing was computed for this response.
+   */
+  outputCost?: number | undefined;
+  /**
+   * Total cost (USD) of the response. Present when billing was computed for this response.
+   */
+  totalCost?: number | undefined;
 };
 
 export type PostV2RouterOcrUsage = Usage1 | Usage2;
@@ -392,9 +416,15 @@ export const Usage2$inboundSchema: z.ZodType<Usage2, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("tokens"),
     tokens_processed: z.number().int(),
+    input_cost: z.number().optional(),
+    output_cost: z.number().optional(),
+    total_cost: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "tokens_processed": "tokensProcessed",
+      "input_cost": "inputCost",
+      "output_cost": "outputCost",
+      "total_cost": "totalCost",
     });
   });
 
@@ -413,9 +443,15 @@ export const Usage1$inboundSchema: z.ZodType<Usage1, z.ZodTypeDef, unknown> = z
   .object({
     type: z.literal("pages"),
     pages_processed: z.number().int(),
+    input_cost: z.number().optional(),
+    output_cost: z.number().optional(),
+    total_cost: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "pages_processed": "pagesProcessed",
+      "input_cost": "inputCost",
+      "output_cost": "outputCost",
+      "total_cost": "totalCost",
     });
   });
 

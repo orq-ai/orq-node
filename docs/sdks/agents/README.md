@@ -31,6 +31,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.create({
     key: "<key>",
+    displayName: "HR Assistant",
     role: "<value>",
     description: "alongside beneath doubtfully behest validity bah after furthermore",
     instructions: "<value>",
@@ -126,6 +127,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsCreate(orq, {
     key: "<key>",
+    displayName: "HR Assistant",
     role: "<value>",
     description: "alongside beneath doubtfully behest validity bah after furthermore",
     instructions: "<value>",
@@ -455,7 +457,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.agents.update({
-    model: "El Camino",
+    model: "openai/gpt-5.6-sol",
     fallbackModels: [
       "<value>",
     ],
@@ -499,7 +501,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await agentsUpdate(orq, {
-    model: "El Camino",
+    model: "openai/gpt-5.6-sol",
     fallbackModels: [
       "<value>",
     ],
@@ -699,7 +701,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.run({
     key: "<key>",
-    model: "F-150",
+    model: "openai/gpt-5.6-sol",
     fallbackModels: [
       "<value>",
     ],
@@ -769,7 +771,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsRun(orq, {
     key: "<key>",
-    model: "F-150",
+    model: "openai/gpt-5.6-sol",
     fallbackModels: [
       "<value>",
     ],
@@ -864,7 +866,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.streamRun({
     key: "<key>",
-    model: "Alpine",
+    model: "openai/gpt-5.6-sol",
     fallbackModels: [
       "<value>",
     ],
@@ -938,7 +940,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsStreamRun(orq, {
     key: "<key>",
-    model: "Alpine",
+    model: "openai/gpt-5.6-sol",
     fallbackModels: [
       "<value>",
     ],

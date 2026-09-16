@@ -8,7 +8,7 @@ import { ModelUpdateOpenAILikeRequest } from "@orq-ai/node/models/operations";
 let value: ModelUpdateOpenAILikeRequest = {
   id: "<id>",
   requestBody: {
-    displayName: "Guido.Tremblay61",
+    displayName: "GPT-4o Compatible",
     modelType: "<value>",
     region: "<value>",
   },

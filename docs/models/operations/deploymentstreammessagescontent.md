@@ -1,6 +1,6 @@
 # DeploymentStreamMessagesContent
 
-The contents of the system message.
+The contents of the developer message.
 
 
 ## Supported Types

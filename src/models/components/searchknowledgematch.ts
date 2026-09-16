@@ -20,10 +20,7 @@ export type SearchKnowledgeMatch = {
   id: string;
   text: string;
   /**
-   * The service maps the internal embedding field to this public name. Empty
-   *
-   * @remarks
-   *  repeated fields are omitted by proto JSON, preserving optional vectors.
+   * Embedding vector of the chunk, returned only when requested.
    */
   vector?: Array<number> | undefined;
   /**

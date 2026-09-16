@@ -43,10 +43,9 @@ export type ManagementKey = {
    * Per-domain access map. Only populated when `permission_mode` is
    *
    * @remarks
-   *  `MANAGEMENT_PERMISSION_MODE_RESTRICTED`. Valid keys are the Domain.id
-   *  values in the management capability catalog — see
-   *  libs/catalog/orq/managementkeys/v1/catalog.textpb for the canonical
-   *  list.
+   *  `MANAGEMENT_PERMISSION_MODE_RESTRICTED`. The authoritative list of
+   *  valid keys (Domain.id values) is returned by the List management
+   *  capability catalog endpoint (GET /v2/management-keys/capabilities).
    */
   access?: { [k: string]: AccessLevel } | undefined;
   /**

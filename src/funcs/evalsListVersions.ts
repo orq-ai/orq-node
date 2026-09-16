@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,7 +19,6 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -30,16 +30,15 @@ import { Result } from "../types/fp.js";
  * List evaluator versions
  *
  * @remarks
- * Returns version history for a specific evaluator
+ * Returns version history for a specific evaluator.
  */
 export function evalsListVersions(
   client: OrqCore,
-  request: operations.GetV2EvaluatorsIdVersionsRequest,
+  request: operations.ListEvalVersionsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetV2EvaluatorsIdVersionsResponseBody,
-    | errors.GetV2EvaluatorsIdVersionsResponseBody
+    components.ListEvaluatorVersionsResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,13 +58,12 @@ export function evalsListVersions(
 
 async function $do(
   client: OrqCore,
-  request: operations.GetV2EvaluatorsIdVersionsRequest,
+  request: operations.ListEvalVersionsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetV2EvaluatorsIdVersionsResponseBody,
-      | errors.GetV2EvaluatorsIdVersionsResponseBody
+      components.ListEvaluatorVersionsResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -80,8 +78,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetV2EvaluatorsIdVersionsRequest$outboundSchema.parse(value),
+    (value) => operations.ListEvalVersionsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -115,7 +112,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get_/v2/evaluators/{id}/versions",
+    operationID: "ListEvalVersions",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -155,13 +152,8 @@ async function $do(
   }
   const response = doResult.value;
 
-  const responseFields = {
-    HttpMeta: { Response: response, Request: req },
-  };
-
   const [result] = await M.match<
-    operations.GetV2EvaluatorsIdVersionsResponseBody,
-    | errors.GetV2EvaluatorsIdVersionsResponseBody
+    components.ListEvaluatorVersionsResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -171,11 +163,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetV2EvaluatorsIdVersionsResponseBody$inboundSchema),
-    M.jsonErr(404, errors.GetV2EvaluatorsIdVersionsResponseBody$inboundSchema),
+    M.json(200, components.ListEvaluatorVersionsResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

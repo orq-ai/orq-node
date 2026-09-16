@@ -193,6 +193,10 @@ export type ListAgentsEvaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: ListAgentsExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -222,6 +226,10 @@ export type ListAgentsGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: ListAgentsAgentsExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 export type ListAgentsSettings = {
@@ -251,7 +259,7 @@ export type ListAgentsSettings = {
    */
   evaluators?: Array<ListAgentsEvaluators> | undefined;
   /**
-   * Configuration for a guardrail applied to the agent
+   * Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request.
    */
   guardrails?: Array<ListAgentsGuardrails> | undefined;
 };
@@ -445,11 +453,9 @@ export type ListAgentsAgentsGuardrails = {
 };
 
 export type ListAgentsPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type ListAgentsFallbacks = {
   /**
@@ -671,11 +677,9 @@ export type ListAgentsParameters = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -913,11 +917,9 @@ export type ListAgentsFallbackModelConfigurationGuardrails = {
 };
 
 export type ListAgentsFallbackModelConfigurationPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type ListAgentsFallbackModelConfigurationFallbacks = {
   /**
@@ -1154,11 +1156,9 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -1530,6 +1530,7 @@ export const ListAgentsEvaluators$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: ListAgentsExecuteOn$inboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -1561,6 +1562,7 @@ export const ListAgentsGuardrails$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: ListAgentsAgentsExecuteOn$inboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -1903,11 +1905,11 @@ export const ListAgentsPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPluginEn$inboundSchema,
-  components.PIIRedactionPluginNl$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-  components.PIIRedactionPluginAuto$inboundSchema,
+  components.PIIRedactionPlugin$inboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$inboundSchema,
+  components.TraceScrubbingPlugin$inboundSchema,
 ]);
 
 export function listAgentsPluginsFromJSON(
@@ -2118,11 +2120,11 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$inboundSchema,
-      components.PIIRedactionPluginNl$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-      components.PIIRedactionPluginAuto$inboundSchema,
+      components.PIIRedactionPlugin$inboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => ListAgentsFallbacks$inboundSchema))
@@ -2525,11 +2527,11 @@ export const ListAgentsFallbackModelConfigurationPlugins$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.PIIRedactionPluginEn$inboundSchema,
-    components.PIIRedactionPluginNl$inboundSchema,
-    components.TraceScrubbingPlugin$inboundSchema,
-    components.PIIRedactionPluginAuto$inboundSchema,
+    components.PIIRedactionPlugin$inboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
     components.ResponseHealingPlugin$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
   ]);
 
 export function listAgentsFallbackModelConfigurationPluginsFromJSON(
@@ -2792,11 +2794,11 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPluginEn$inboundSchema,
-        components.PIIRedactionPluginNl$inboundSchema,
-        components.TraceScrubbingPlugin$inboundSchema,
-        components.PIIRedactionPluginAuto$inboundSchema,
+        components.PIIRedactionPlugin$inboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
         components.ResponseHealingPlugin$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

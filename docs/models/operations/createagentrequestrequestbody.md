@@ -7,52 +7,54 @@ import { CreateAgentRequestRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreateAgentRequestRequestBody = {
   key: "<key>",
+  displayName: "HR Assistant",
   role: "<value>",
-  description: "ruddy sans valiantly rapidly that circa spark role",
+  description:
+    "Answers employee questions about benefits, PTO, and company policies.",
   instructions: "<value>",
   path: "Default Project",
-  model: "A4",
-  fallbackModels: [
-    {
-      id: "<id>",
-      parameters: {
-        fallbacks: [
+  model: {
+    id: "<id>",
+    parameters: {
+      fallbacks: [
+        {
+          model: "openai/gpt-5.4-mini",
+        },
+      ],
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      loadBalancer: {
+        type: "weight_based",
+        models: [
           {
-            model: "openai/gpt-4o-mini",
+            model: "openai/gpt-4o",
+            weight: 0.7,
+          },
+          {
+            model: "anthropic/claude-3-5-sonnet",
+            weight: 0.3,
           },
         ],
-        cache: {
-          ttl: 3600,
-          type: "exact_match",
-        },
-        loadBalancer: {
-          type: "weight_based",
-          models: [
-            {
-              model: "openai/gpt-4o",
-              weight: 0.7,
-            },
-            {
-              model: "anthropic/claude-3-5-sonnet",
-              weight: 0.3,
-            },
-          ],
-        },
-        timeout: {
-          callTimeout: 30000,
-        },
       },
-      retry: {
-        count: 3,
-        onCodes: [
-          429,
-          500,
-          502,
-          503,
-          504,
-        ],
+      timeout: {
+        callTimeout: 30000,
       },
     },
+    retry: {
+      count: 3,
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+  },
+  fallbackModels: [
+    "<value>",
   ],
   settings: {
     tools: [
@@ -77,9 +79,9 @@ let value: CreateAgentRequestRequestBody = {
 | Field                                                                                                                                                                                                                                                                                         | Type                                                                                                                                                                                                                                                                                          | Required                                                                                                                                                                                                                                                                                      | Description                                                                                                                                                                                                                                                                                   | Example                                                                                                                                                                                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`                                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                            | Unique identifier for the agent within the workspace                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                               |
-| `displayName`                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | agent display name within the workspace                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                               |
+| `displayName`                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | agent display name within the workspace                                                                                                                                                                                                                                                       | HR Assistant                                                                                                                                                                                                                                                                                  |
 | `role`                                                                                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                            | The role or function of the agent                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                               |
-| `description`                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                            | A brief description of what the agent does                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                               |
+| `description`                                                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                            | A brief description of what the agent does                                                                                                                                                                                                                                                    | Answers employee questions about benefits, PTO, and company policies.                                                                                                                                                                                                                         |
 | `instructions`                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                            | Detailed instructions that guide the agent's behavior                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                               |
 | `systemPrompt`                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                            | A custom system prompt template for the agent. If omitted, the default template is used.                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                               |
 | `path`                                                                                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                            | The path where the agent will be stored in the project structure. The first element identifies the project, followed by nested folders (auto-created as needed).<br/><br/>With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key. | Default Project                                                                                                                                                                                                                                                                               |

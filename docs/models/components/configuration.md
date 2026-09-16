@@ -1,7 +1,5 @@
 # Configuration
 
-Configuration options for the agent invocation
-
 ## Example Usage
 
 ```typescript
@@ -12,6 +10,8 @@ let value: Configuration = {};
 
 ## Fields
 
-| Field                                                                                                                                                                                 | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `blocking`                                                                                                                                                                            | *boolean*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                    | Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status. |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `fileSystemId`                                                         | *string*                                                               | :heavy_minus_sign:                                                     | The id of the file system to attach.                                   |
+| `fileSystemKey`                                                        | *string*                                                               | :heavy_minus_sign:                                                     | The key of the file system to attach.                                  |
+| `accessMode`                                                           | [components.AccessMode](../../models/components/accessmode.md)         | :heavy_minus_sign:                                                     | Whether the agent may only read this file system, or also write to it. |

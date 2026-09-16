@@ -17,6 +17,10 @@ import {
   IncompleteDetails$inboundSchema,
 } from "./incompletedetails.js";
 import { MemoryParam, MemoryParam$inboundSchema } from "./memoryparam.js";
+import {
+  OpenAIPromptCacheOptions,
+  OpenAIPromptCacheOptions$inboundSchema,
+} from "./openaipromptcacheoptions.js";
 import { PublicUsage, PublicUsage$inboundSchema } from "./publicusage.js";
 import { Reasoning, Reasoning$inboundSchema } from "./reasoning.js";
 import { ResponseError, ResponseError$inboundSchema } from "./responseerror.js";
@@ -86,6 +90,7 @@ export type PublicResponseResource = {
   presencePenalty: number;
   previousResponseId: string | null;
   promptCacheKey: string | null;
+  promptCacheOptions: OpenAIPromptCacheOptions | null;
   promptCacheRetention: string | null;
   reasoning: Reasoning | null;
   safetyIdentifier: string | null;
@@ -158,6 +163,7 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),
   prompt_cache_key: z.nullable(z.string()),
+  prompt_cache_options: z.nullable(OpenAIPromptCacheOptions$inboundSchema),
   prompt_cache_retention: z.nullable(z.string()),
   reasoning: z.nullable(Reasoning$inboundSchema),
   safety_identifier: z.nullable(z.string()),
@@ -188,6 +194,7 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
     "presence_penalty": "presencePenalty",
     "previous_response_id": "previousResponseId",
     "prompt_cache_key": "promptCacheKey",
+    "prompt_cache_options": "promptCacheOptions",
     "prompt_cache_retention": "promptCacheRetention",
     "safety_identifier": "safetyIdentifier",
     "service_tier": "serviceTier",

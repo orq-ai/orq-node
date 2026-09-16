@@ -7,7 +7,17 @@ import { McpGatewayUpdateRequest } from "@orq-ai/node/models/operations";
 
 let value: McpGatewayUpdateRequest = {
   id: "<id>",
-  updateMcpGatewayRequest: {},
+  updateMcpGatewayRequest: {
+    serverLinks: [
+      {
+        mcpServerId: "<id>",
+        alias: "<value>",
+        toolExposure: {
+          mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+        },
+      },
+    ],
+  },
 };
 ```
 

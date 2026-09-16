@@ -8,12 +8,12 @@ import { LiteLLMModel } from "@orq-ai/node/models/components";
 let value: LiteLLMModel = {
   litellmParams: {
     mergeReasoningContentInChoices: true,
-    model: "Expedition",
+    model: "openai/gpt-5.6-sol",
     useInPassThrough: true,
-    useLitellmProxy: false,
+    useLitellmProxy: true,
   },
   modelInfo: {
-    dbModel: null,
+    dbModel: true,
     id: "<id>",
     key: "<key>",
     litellmProvider: "<value>",

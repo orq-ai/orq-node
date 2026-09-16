@@ -1,6 +1,6 @@
 # OnFailure
 
-Behavior when redaction is unavailable. `block` (default) fails the request; `passthrough` sends the original text.
+Behaviour when detection fails.
 
 ## Example Usage
 

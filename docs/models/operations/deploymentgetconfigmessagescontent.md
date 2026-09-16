@@ -1,6 +1,6 @@
 # DeploymentGetConfigMessagesContent
 
-The contents of the developer message.
+The contents of the system message.
 
 
 ## Supported Types

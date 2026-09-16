@@ -1,39 +1,29 @@
 # RequestBody1
 
-
-## Supported Types
-
-### `operations.Llm`
+## Example Usage
 
 ```typescript
-const value: operations.Llm = {
-  type: "llm_eval",
-  prompt: "<value>",
-  path: "Default Project",
-  projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
-  key: "<key>",
-  mode: "single",
-  model: "Model S",
+import { RequestBody1 } from "@orq-ai/node/models/operations";
+
+let value: RequestBody1 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  type: "string",
+  value: "<value>",
+  traceId: "<id>",
 };
 ```
 
-### `operations.LLMJury`
+## Fields
 
-```typescript
-const value: operations.LLMJury = {
-  type: "llm_eval",
-  prompt: "<value>",
-  path: "Default Project",
-  projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
-  key: "<key>",
-  mode: "jury",
-  jury: {
-    judges: [
-      {
-        model: "A8",
-      },
-    ],
-  },
-};
-```
-
+| Field                                                                                                                                                                        | Type                                                                                                                                                                         | Required                                                                                                                                                                     | Description                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                         | *string*                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | The unique identifier of the human evaluation                                                                                                                                |
+| `evaluationType`                                                                                                                                                             | [operations.EvaluationType](../../models/operations/evaluationtype.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                           | The type of evaluation                                                                                                                                                       |
+| `humanReviewId`                                                                                                                                                              | *string*                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                           | The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema.                                                         |
+| `source`                                                                                                                                                                     | [operations.RequestBodySource](../../models/operations/requestbodysource.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                           | N/A                                                                                                                                                                          |
+| `explanation`                                                                                                                                                                | *string*                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                           | Optional free-text explanation of the value                                                                                                                                  |
+| ~~`reviewedAt`~~                                                                                                                                                             | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                | :heavy_minus_sign:                                                                                                                                                           | : warning: ** DEPRECATED **: This will be removed in a future release, please migrate away from it as soon as possible.<br/><br/>Deprecated. The date and time the item was reviewed |
+| `type`                                                                                                                                                                       | *"string"*                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                           | N/A                                                                                                                                                                          |
+| `value`                                                                                                                                                                      | *string*                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | N/A                                                                                                                                                                          |
+| `traceId`                                                                                                                                                                    | *string*                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                           | N/A                                                                                                                                                                          |

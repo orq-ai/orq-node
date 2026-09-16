@@ -31,6 +31,23 @@ export class Deployments extends ClientSDK {
   }
 
   /**
+   * Stream
+   *
+   * @remarks
+   * Stream deployment generation. Only supported for completions and chat completions.
+   */
+  async stream(
+    request: operations.DeploymentStreamRequestBody,
+    options?: RequestOptions,
+  ): Promise<EventStream<operations.DeploymentStreamResponseBody>> {
+    return unwrapAsync(deploymentsStream(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List all deployments
    *
    * @remarks
@@ -58,23 +75,6 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeploymentGetConfigResponseBody | undefined> {
     return unwrapAsync(deploymentsGetConfig(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Stream
-   *
-   * @remarks
-   * Stream deployment generation. Only supported for completions and chat completions.
-   */
-  async stream(
-    request: operations.DeploymentStreamRequestBody,
-    options?: RequestOptions,
-  ): Promise<EventStream<operations.DeploymentStreamResponseBody>> {
-    return unwrapAsync(deploymentsStream(
       this,
       request,
       options,

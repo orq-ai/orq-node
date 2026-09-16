@@ -14,6 +14,6 @@ let value: OrNe = {
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `ne`                                 | *operations.DeploymentGetConfigOrNe* | :heavy_check_mark:                   | N/A                                  |
+| Field                             | Type                              | Required                          | Description                       |
+| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
+| `ne`                              | *operations.DeploymentStreamOrNe* | :heavy_check_mark:                | N/A                               |

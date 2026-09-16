@@ -1,21 +1,23 @@
 # DeploymentStreamAndNin
 
-Not in
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { DeploymentStreamAndNin } from "@orq-ai/node/models/operations";
-
-let value: DeploymentStreamAndNin = {
-  nin: [
-    true,
-  ],
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                            | Type                                             | Required                                         | Description                                      |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `nin`                                            | *operations.DeploymentStreamAndDeploymentsNin*[] | :heavy_check_mark:                               | N/A                                              |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

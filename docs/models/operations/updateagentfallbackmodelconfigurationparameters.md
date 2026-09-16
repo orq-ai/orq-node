@@ -10,7 +10,7 @@ import { UpdateAgentFallbackModelConfigurationParameters } from "@orq-ai/node/mo
 let value: UpdateAgentFallbackModelConfigurationParameters = {
   fallbacks: [
     {
-      model: "openai/gpt-4o-mini",
+      model: "openai/gpt-5.4-mini",
     },
   ],
   cache: {

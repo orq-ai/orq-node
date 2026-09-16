@@ -1,19 +1,23 @@
 # DeploymentStreamOrIn
 
-In
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { DeploymentStreamOrIn } from "@orq-ai/node/models/operations";
-
-let value: DeploymentStreamOrIn = {
-  in: [],
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `in`                                           | *operations.DeploymentStreamOrDeploymentsIn*[] | :heavy_check_mark:                             | N/A                                            |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

@@ -1,97 +1,40 @@
 # Data
 
-
-## Supported Types
-
-### `components.EvaluatorResponseLlm`
+## Example Usage
 
 ```typescript
-const value: components.EvaluatorResponseLlm = {
+import { Data } from "@orq-ai/node/models/operations";
+
+let value: Data = {
   id: "<id>",
-  description: "wetly whereas failing",
-  type: "llm_eval",
-  prompt: "<value>",
-  key: "<key>",
-  mode: "jury",
-};
-```
-
-### `components.EvaluatorResponseJsonSchema`
-
-```typescript
-const value: components.EvaluatorResponseJsonSchema = {
-  id: "<id>",
-  description: "partially muted and per yahoo until upliftingly like",
-  type: "json_schema",
-  schema: "<value>",
-  key: "<key>",
-};
-```
-
-### `components.EvaluatorResponseHttp`
-
-```typescript
-const value: components.EvaluatorResponseHttp = {
-  id: "<id>",
-  description:
-    "and slime corporation um because resort ligate good-natured lonely violin",
-  type: "http_eval",
-  url: "https://pertinent-membership.name",
-  method: "POST",
-  headers: {},
-  payload: {},
-  key: "<key>",
-};
-```
-
-### `components.EvaluatorResponsePython`
-
-```typescript
-const value: components.EvaluatorResponsePython = {
-  id: "<id>",
-  description: "glaring which athwart deficient woot alongside",
-  code: "<value>",
-  type: "python_eval",
-  key: "<key>",
-};
-```
-
-### `components.EvaluatorResponseFunction`
-
-```typescript
-const value: components.EvaluatorResponseFunction = {
-  id: "<id>",
-  description: "amount faithfully whoa eek cheerful pfft",
-  type: "function_eval",
-  functionParams: {
-    type: "sentences_count",
+  created: new Date("2025-09-30T23:27:03.384Z"),
+  object: "completion",
+  model: "Model X",
+  provider: "openai",
+  isFinal: false,
+  telemetry: {
+    traceId: "<id>",
+    spanId: "<id>",
   },
-  key: "<key>",
+  choices: [],
 };
 ```
 
-### `components.EvaluatorResponseRagas`
+## Fields
 
-```typescript
-const value: components.EvaluatorResponseRagas = {
-  id: "<id>",
-  description: "rewarding ack as geez rot outrun an hmph",
-  type: "ragas",
-  ragasMetric: "faithfulness",
-  key: "<key>",
-  model: "XTS",
-};
-```
-
-### `components.EvaluatorResponseTypescript`
-
-```typescript
-const value: components.EvaluatorResponseTypescript = {
-  id: "<id>",
-  description: "since loftily for along past among qua",
-  code: "<value>",
-  type: "typescript_eval",
-  key: "<key>",
-};
-```
-
+| Field                                                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                                                                                                                                                               | *string*                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | A unique identifier for the response. Can be used to add metrics to the transaction.                                                                                                                                                                                                                               |
+| `created`                                                                                                                                                                                                                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | A timestamp indicating when the object was created. Usually in a standardized format like ISO 8601                                                                                                                                                                                                                 |
+| `object`                                                                                                                                                                                                                                                                                                           | [operations.DeploymentStreamObject](../../models/operations/deploymentstreamobject.md)                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | Indicates the type of model used to generate the response                                                                                                                                                                                                                                                          |
+| `model`                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | The model used to generate the response                                                                                                                                                                                                                                                                            |
+| `provider`                                                                                                                                                                                                                                                                                                         | [operations.DeploymentStreamProvider](../../models/operations/deploymentstreamprovider.md)                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | The provider used to generate the response                                                                                                                                                                                                                                                                         |
+| `isFinal`                                                                                                                                                                                                                                                                                                          | *boolean*                                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | Indicates if the response is the final response                                                                                                                                                                                                                                                                    |
+| `integrationId`                                                                                                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                 | Indicates integration id used to generate the response                                                                                                                                                                                                                                                             |
+| `telemetry`                                                                                                                                                                                                                                                                                                        | [operations.DeploymentStreamTelemetry](../../models/operations/deploymentstreamtelemetry.md)                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                                                                                                |
+| `finalized`                                                                                                                                                                                                                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                 | A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601                                                                                                                                                                                                               |
+| `systemFingerprint`                                                                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                 | Provider backed system fingerprint.                                                                                                                                                                                                                                                                                |
+| `retrievals`                                                                                                                                                                                                                                                                                                       | [operations.DeploymentStreamRetrievals](../../models/operations/deploymentstreamretrievals.md)[]                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                 | List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`. |
+| `providerResponse`                                                                                                                                                                                                                                                                                                 | *any*                                                                                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                 | Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`.                                                                                                                            |
+| `usage`                                                                                                                                                                                                                                                                                                            | [operations.DeploymentStreamUsage](../../models/operations/deploymentstreamusage.md)                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                 | Usage metrics for the response                                                                                                                                                                                                                                                                                     |
+| `choices`                                                                                                                                                                                                                                                                                                          | [operations.DeploymentStreamChoices](../../models/operations/deploymentstreamchoices.md)[]                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                                                                                 | A list of choices generated by the model                                                                                                                                                                                                                                                                           |

@@ -11,9 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `components.InvokeDeploymentRequestContent2[]`
+### `components.Content2[]`
 
 ```typescript
-const value: components.InvokeDeploymentRequestContent2[] = [];
+const value: components.Content2[] = [];
 ```
 

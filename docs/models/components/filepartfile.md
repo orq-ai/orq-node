@@ -15,7 +15,7 @@ const value: components.BinaryFormat = {
 
 ```typescript
 const value: components.FileInURIFormat = {
-  uri: "https://experienced-pupil.org",
+  uri: "https://example.com/report.pdf",
 };
 ```
 

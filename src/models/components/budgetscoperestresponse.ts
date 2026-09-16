@@ -32,11 +32,7 @@ import {
 } from "./workspacebudgetscope.js";
 
 /**
- * BudgetScope is a closed oneof. Exactly one variant must be set. The
- *
- * @remarks
- *  six variants are ordered by enforcement precedence (most specific to
- *  most general) and mirror the BudgetScopeKind filter enum.
+ * Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set. Variants are ordered by enforcement precedence (most specific to most general).
  */
 export type BudgetScopeRestResponse = {
   /**

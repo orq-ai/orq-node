@@ -138,19 +138,19 @@ export type Three = {
   keywords: Array<string>;
 };
 
-export type Two = {
+export type FunctionParams2 = {
   type: "contains_none";
   keywords: Array<string>;
 };
 
-export type One = {
+export type FunctionParams1 = {
   type: "contains";
   value: string;
 };
 
 export type FunctionParams =
-  | One
-  | Two
+  | FunctionParams1
+  | FunctionParams2
   | Three
   | Four
   | Five
@@ -195,8 +195,8 @@ export type EvaluatorResponseFunction = {
   guardrailConfig?: any | undefined;
   type: "function_eval";
   functionParams:
-    | One
-    | Two
+    | FunctionParams1
+    | FunctionParams2
     | Three
     | Four
     | Five
@@ -769,36 +769,42 @@ export function threeFromJSON(
 }
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_none"),
-    keywords: z.array(z.string()),
-  });
+export const FunctionParams2$inboundSchema: z.ZodType<
+  FunctionParams2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("contains_none"),
+  keywords: z.array(z.string()),
+});
 
-export function twoFromJSON(
+export function functionParams2FromJSON(
   jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
+): SafeParseResult<FunctionParams2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
+    (x) => FunctionParams2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams2' from JSON`,
   );
 }
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains"),
-    value: z.string(),
-  });
+export const FunctionParams1$inboundSchema: z.ZodType<
+  FunctionParams1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.literal("contains"),
+  value: z.string(),
+});
 
-export function oneFromJSON(
+export function functionParams1FromJSON(
   jsonString: string,
-): SafeParseResult<One, SDKValidationError> {
+): SafeParseResult<FunctionParams1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => One$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One' from JSON`,
+    (x) => FunctionParams1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams1' from JSON`,
   );
 }
 
@@ -808,8 +814,8 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => One$inboundSchema),
-  z.lazy(() => Two$inboundSchema),
+  z.lazy(() => FunctionParams1$inboundSchema),
+  z.lazy(() => FunctionParams2$inboundSchema),
   z.lazy(() => Three$inboundSchema),
   z.lazy(() => Four$inboundSchema),
   z.lazy(() => Five$inboundSchema),
@@ -860,15 +866,15 @@ export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2026-09-15T20:35:53.148Z"),
-  updated: z.string().default("2026-09-15T20:35:53.148Z"),
+  created: z.string().default("2026-08-05T15:12:51.947Z"),
+  updated: z.string().default("2026-08-05T15:12:51.947Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("function_eval"),
   function_params: z.union([
-    z.lazy(() => One$inboundSchema),
-    z.lazy(() => Two$inboundSchema),
+    z.lazy(() => FunctionParams1$inboundSchema),
+    z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => Three$inboundSchema),
     z.lazy(() => Four$inboundSchema),
     z.lazy(() => Five$inboundSchema),

@@ -14,6 +14,8 @@ export type ModelUpdateAwsBedrockRequestBody = {
   assumeRoleExternalId?: string | undefined;
   autorouterId?: string | undefined;
   autorouterVersion?: string | undefined;
+  cacheReadCost?: number | undefined;
+  cacheWriteCost?: number | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
   hasReasoning?: boolean | undefined;
@@ -83,6 +85,8 @@ export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   assume_role_external_id?: string | undefined;
   autorouter_id?: string | undefined;
   autorouter_version?: string | undefined;
+  cache_read_cost?: number | undefined;
+  cache_write_cost?: number | undefined;
   description?: string | undefined;
   display_name?: string | undefined;
   has_reasoning?: boolean | undefined;
@@ -113,6 +117,8 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   assumeRoleExternalId: z.string().optional(),
   autorouterId: z.string().optional(),
   autorouterVersion: z.string().optional(),
+  cacheReadCost: z.number().optional(),
+  cacheWriteCost: z.number().optional(),
   description: z.string().optional(),
   displayName: z.string().optional(),
   hasReasoning: z.boolean().optional(),
@@ -137,6 +143,8 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     assumeRoleExternalId: "assume_role_external_id",
     autorouterId: "autorouter_id",
     autorouterVersion: "autorouter_version",
+    cacheReadCost: "cache_read_cost",
+    cacheWriteCost: "cache_write_cost",
     displayName: "display_name",
     hasReasoning: "has_reasoning",
     inputCost: "input_cost",

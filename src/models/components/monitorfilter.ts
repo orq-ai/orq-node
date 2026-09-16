@@ -11,16 +11,24 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.
  */
-export const Op = {
+export const MonitorFilterOp = {
   Eq: "eq",
   Neq: "neq",
   In: "in",
   NotIn: "not_in",
+  Gt: "gt",
+  Gte: "gte",
+  Lt: "lt",
+  Lte: "lte",
+  Between: "between",
+  Contains: "contains",
+  Exists: "exists",
+  NotExists: "not_exists",
 } as const;
 /**
  * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.
  */
-export type Op = ClosedEnum<typeof Op>;
+export type MonitorFilterOp = ClosedEnum<typeof MonitorFilterOp>;
 
 export type MonitorFilter = {
   /**
@@ -33,7 +41,7 @@ export type MonitorFilter = {
   /**
    * Predicate operator. `eq` and `neq` accept exactly one value; `in` and `not_in` accept 1-100 values.
    */
-  op: Op;
+  op: MonitorFilterOp;
   /**
    * Values compared against the selected field.
    */
@@ -41,9 +49,13 @@ export type MonitorFilter = {
 };
 
 /** @internal */
-export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> = z.nativeEnum(Op);
+export const MonitorFilterOp$inboundSchema: z.ZodNativeEnum<
+  typeof MonitorFilterOp
+> = z.nativeEnum(MonitorFilterOp);
 /** @internal */
-export const Op$outboundSchema: z.ZodNativeEnum<typeof Op> = Op$inboundSchema;
+export const MonitorFilterOp$outboundSchema: z.ZodNativeEnum<
+  typeof MonitorFilterOp
+> = MonitorFilterOp$inboundSchema;
 
 /** @internal */
 export const MonitorFilter$inboundSchema: z.ZodType<
@@ -52,7 +64,7 @@ export const MonitorFilter$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   field: z.string(),
-  op: Op$inboundSchema,
+  op: MonitorFilterOp$inboundSchema,
   values: z.array(z.string()),
 });
 /** @internal */
@@ -69,7 +81,7 @@ export const MonitorFilter$outboundSchema: z.ZodType<
   MonitorFilter
 > = z.object({
   field: z.string(),
-  op: Op$outboundSchema,
+  op: MonitorFilterOp$outboundSchema,
   values: z.array(z.string()),
 });
 

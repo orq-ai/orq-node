@@ -7,8 +7,8 @@
 
 ```typescript
 const value: components.CreateSkillRequest1 = {
-  displayName: "Lura.Koss-Schroeder",
-  path: "/usr/ports",
+  displayName: "summarize_thread",
+  path: "/tmp",
 };
 ```
 
@@ -16,7 +16,7 @@ const value: components.CreateSkillRequest1 = {
 
 ```typescript
 const value: components.CreateSkillRequest2 = {
-  displayName: "Clifton_Schiller-Kutch",
+  displayName: "summarize_thread",
   projectId: "<id>",
 };
 ```

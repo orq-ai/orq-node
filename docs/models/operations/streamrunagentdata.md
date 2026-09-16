@@ -61,6 +61,10 @@ const value: components.AgentInactiveStreamingEvent = {
   timestamp: "<value>",
   data: {
     lastMessage: "<value>",
+    lastMessageFull: {
+      role: "user",
+      parts: [],
+    },
     finishReason: "stop",
     workflowRunId: "<id>",
   },
@@ -221,7 +225,7 @@ const value: components.ToolExecutionFinishedStreamingEvent = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "experiments",
+      product: "playgrounds",
     },
     workflowRunId: "<id>",
   },
@@ -245,7 +249,7 @@ const value: components.ToolExecutionFailedStreamingEvent = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "agents",
+      product: "memory-stores",
     },
     workflowRunId: "<id>",
   },

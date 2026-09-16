@@ -4,9 +4,195 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs.
+ * Asks a model to choose the boundaries. Slowest and most expensive, best on documents with irregular structure. Makes paid model calls.
+ */
+export type ChunkingConfiguration9 = {
+  type: "agentic";
+  /**
+   * Maximum number of tokens per chunk.
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Model that chooses the chunk boundaries.
+   */
+  model?: string | undefined;
+  /**
+   * Size of candidate splits offered to the model.
+   */
+  candidateSize?: number | undefined;
+  /**
+   * Minimum number of characters each chunk must contain.
+   */
+  minCharactersPerChunk?: number | undefined;
+  /**
+   * Custom system prompt for the boundary model.
+   */
+  systemPrompt?: string | undefined;
+};
+
+/**
+ * Embeds the document before splitting it recursively, so each chunk is embedded with the surrounding document in context. Makes paid embedding calls.
+ */
+export type ChunkingConfiguration8 = {
+  type: "late";
+  /**
+   * Maximum number of tokens per chunk.
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Separator hierarchy to split on, tried in order. Defaults to paragraph, line, space, then character.
+   */
+  separators?: Array<string> | undefined;
+  /**
+   * Minimum number of characters each chunk must contain.
+   */
+  minCharactersPerChunk?: number | undefined;
+  /**
+   * Embedding model used to embed the document before it is split.
+   */
+  embeddingModel?: string | undefined;
+  /**
+   * Number of dimensions for the embedding output, when the model supports it.
+   */
+  dimensions?: number | undefined;
+};
+
+/**
+ * Comparison mode.
+ */
+export const ChunkingConfigurationMode = {
+  Window: "window",
+  Sentence: "sentence",
+} as const;
+/**
+ * Comparison mode.
+ */
+export type ChunkingConfigurationMode = ClosedEnum<
+  typeof ChunkingConfigurationMode
+>;
+
+/**
+ * Embeds the text and breaks where meaning shifts, so related passages stay together. Makes paid embedding calls.
+ */
+export type ChunkingConfiguration7 = {
+  type: "semantic";
+  /**
+   * Maximum number of tokens per chunk.
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Embedding model used to detect semantic boundaries.
+   */
+  embeddingModel?: string | undefined;
+  /**
+   * Number of dimensions for the embedding output, when the model supports it.
+   */
+  dimensions?: number | undefined;
+  /**
+   * Similarity threshold from 0 through 1, or "auto".
+   */
+  threshold?: string | undefined;
+  /**
+   * Comparison mode.
+   */
+  mode?: ChunkingConfigurationMode | undefined;
+  /**
+   * Window size for similarity comparison.
+   */
+  similarityWindow?: number | undefined;
+};
+
+/**
+ * Splits on delimiters or a regular expression without tokenizing. Fastest option; chunk sizes vary with where delimiters fall.
+ */
+export type ChunkingConfiguration6 = {
+  type: "fast";
+  /**
+   * Target chunk size in bytes.
+   */
+  targetSize?: number | undefined;
+  /**
+   * Single-byte characters to split on.
+   */
+  delimiters?: string | undefined;
+  /**
+   * Multi-byte split pattern. Takes precedence over delimiters when set.
+   */
+  pattern?: string | undefined;
+  /**
+   * Attach the delimiter to the start of the next chunk instead of the end of the previous one.
+   */
+  prefix?: boolean | undefined;
+  /**
+   * Split at the start of a run of consecutive delimiters rather than at each one.
+   */
+  consecutive?: boolean | undefined;
+  /**
+   * Search forward for a delimiter when searching backward finds none.
+   */
+  forwardFallback?: boolean | undefined;
+};
+
+/**
+ * Splits on a separator hierarchy, falling back through paragraph, line, sentence, and word boundaries until chunks fit. Respects document structure.
+ */
+export type ChunkingConfiguration5 = {
+  type: "recursive";
+  /**
+   * Maximum number of tokens per chunk.
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Separator hierarchy to split on, tried in order. Defaults to paragraph, line, space, then character.
+   */
+  separators?: Array<string> | undefined;
+  /**
+   * Minimum number of characters each chunk must contain.
+   */
+  minCharactersPerChunk?: number | undefined;
+};
+
+/**
+ * Groups whole sentences up to the chunk size, so chunks never cut a sentence in half.
+ */
+export type ChunkingConfiguration4 = {
+  type: "sentence";
+  /**
+   * Maximum number of tokens per chunk.
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Number of tokens to overlap between consecutive chunks. Helps preserve continuity across chunk boundaries.
+   */
+  chunkOverlap?: number | undefined;
+  /**
+   * Minimum number of sentences each chunk must contain.
+   */
+  minSentencesPerChunk?: number | undefined;
+};
+
+/**
+ * Splits text into fixed-size token windows with optional overlap. Predictable chunk sizes, no regard for sentence or paragraph boundaries.
+ */
+export type ChunkingConfiguration3 = {
+  type: "token";
+  /**
+   * Maximum number of tokens per chunk.
+   */
+  chunkSize?: number | undefined;
+  /**
+   * Number of tokens to overlap between consecutive chunks. Helps preserve continuity across chunk boundaries.
+   */
+  chunkOverlap?: number | undefined;
+};
+
+/**
+ * Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs. Deprecated: use one of the named chunking strategies instead.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type ChunkingConfiguration2 = {
   type: "advanced";
@@ -21,7 +207,9 @@ export type ChunkingConfiguration2 = {
 };
 
 /**
- * Optimized chunking strategy focusing on speed and avoiding duplication of content chunks.
+ * Optimized chunking strategy focusing on speed and avoiding duplication of content chunks. Deprecated: use one of the named chunking strategies instead.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type ChunkingConfiguration1 = {
   type: "default";
@@ -32,7 +220,273 @@ export type ChunkingConfiguration1 = {
  */
 export type ChunkingConfiguration =
   | ChunkingConfiguration1
-  | ChunkingConfiguration2;
+  | ChunkingConfiguration2
+  | ChunkingConfiguration3
+  | ChunkingConfiguration4
+  | ChunkingConfiguration5
+  | ChunkingConfiguration6
+  | ChunkingConfiguration7
+  | ChunkingConfiguration8
+  | ChunkingConfiguration9;
+
+/** @internal */
+export type ChunkingConfiguration9$Outbound = {
+  type: "agentic";
+  chunk_size: number;
+  model: string;
+  candidate_size: number;
+  min_characters_per_chunk: number;
+  system_prompt?: string | undefined;
+};
+
+/** @internal */
+export const ChunkingConfiguration9$outboundSchema: z.ZodType<
+  ChunkingConfiguration9$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration9
+> = z.object({
+  type: z.literal("agentic"),
+  chunkSize: z.number().int().default(1024),
+  model: z.string().default("openai/gpt-4o"),
+  candidateSize: z.number().int().default(128),
+  minCharactersPerChunk: z.number().int().default(24),
+  systemPrompt: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    chunkSize: "chunk_size",
+    candidateSize: "candidate_size",
+    minCharactersPerChunk: "min_characters_per_chunk",
+    systemPrompt: "system_prompt",
+  });
+});
+
+export function chunkingConfiguration9ToJSON(
+  chunkingConfiguration9: ChunkingConfiguration9,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration9$outboundSchema.parse(chunkingConfiguration9),
+  );
+}
+
+/** @internal */
+export type ChunkingConfiguration8$Outbound = {
+  type: "late";
+  chunk_size: number;
+  separators?: Array<string> | undefined;
+  min_characters_per_chunk: number;
+  embedding_model?: string | undefined;
+  dimensions?: number | undefined;
+};
+
+/** @internal */
+export const ChunkingConfiguration8$outboundSchema: z.ZodType<
+  ChunkingConfiguration8$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration8
+> = z.object({
+  type: z.literal("late"),
+  chunkSize: z.number().int().default(512),
+  separators: z.array(z.string()).optional(),
+  minCharactersPerChunk: z.number().int().default(24),
+  embeddingModel: z.string().optional(),
+  dimensions: z.number().int().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    chunkSize: "chunk_size",
+    minCharactersPerChunk: "min_characters_per_chunk",
+    embeddingModel: "embedding_model",
+  });
+});
+
+export function chunkingConfiguration8ToJSON(
+  chunkingConfiguration8: ChunkingConfiguration8,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration8$outboundSchema.parse(chunkingConfiguration8),
+  );
+}
+
+/** @internal */
+export const ChunkingConfigurationMode$outboundSchema: z.ZodNativeEnum<
+  typeof ChunkingConfigurationMode
+> = z.nativeEnum(ChunkingConfigurationMode);
+
+/** @internal */
+export type ChunkingConfiguration7$Outbound = {
+  type: "semantic";
+  chunk_size: number;
+  embedding_model?: string | undefined;
+  dimensions?: number | undefined;
+  threshold: string;
+  mode: string;
+  similarity_window: number;
+};
+
+/** @internal */
+export const ChunkingConfiguration7$outboundSchema: z.ZodType<
+  ChunkingConfiguration7$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration7
+> = z.object({
+  type: z.literal("semantic"),
+  chunkSize: z.number().int().default(512),
+  embeddingModel: z.string().optional(),
+  dimensions: z.number().int().optional(),
+  threshold: z.string().default("auto"),
+  mode: ChunkingConfigurationMode$outboundSchema.default("window"),
+  similarityWindow: z.number().int().default(1),
+}).transform((v) => {
+  return remap$(v, {
+    chunkSize: "chunk_size",
+    embeddingModel: "embedding_model",
+    similarityWindow: "similarity_window",
+  });
+});
+
+export function chunkingConfiguration7ToJSON(
+  chunkingConfiguration7: ChunkingConfiguration7,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration7$outboundSchema.parse(chunkingConfiguration7),
+  );
+}
+
+/** @internal */
+export type ChunkingConfiguration6$Outbound = {
+  type: "fast";
+  target_size: number;
+  delimiters: string;
+  pattern?: string | undefined;
+  prefix: boolean;
+  consecutive: boolean;
+  forward_fallback: boolean;
+};
+
+/** @internal */
+export const ChunkingConfiguration6$outboundSchema: z.ZodType<
+  ChunkingConfiguration6$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration6
+> = z.object({
+  type: z.literal("fast"),
+  targetSize: z.number().int().default(4096),
+  delimiters: z.string().default("\n.?"),
+  pattern: z.string().optional(),
+  prefix: z.boolean().default(false),
+  consecutive: z.boolean().default(false),
+  forwardFallback: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
+    targetSize: "target_size",
+    forwardFallback: "forward_fallback",
+  });
+});
+
+export function chunkingConfiguration6ToJSON(
+  chunkingConfiguration6: ChunkingConfiguration6,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration6$outboundSchema.parse(chunkingConfiguration6),
+  );
+}
+
+/** @internal */
+export type ChunkingConfiguration5$Outbound = {
+  type: "recursive";
+  chunk_size: number;
+  separators?: Array<string> | undefined;
+  min_characters_per_chunk: number;
+};
+
+/** @internal */
+export const ChunkingConfiguration5$outboundSchema: z.ZodType<
+  ChunkingConfiguration5$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration5
+> = z.object({
+  type: z.literal("recursive"),
+  chunkSize: z.number().int().default(512),
+  separators: z.array(z.string()).optional(),
+  minCharactersPerChunk: z.number().int().default(24),
+}).transform((v) => {
+  return remap$(v, {
+    chunkSize: "chunk_size",
+    minCharactersPerChunk: "min_characters_per_chunk",
+  });
+});
+
+export function chunkingConfiguration5ToJSON(
+  chunkingConfiguration5: ChunkingConfiguration5,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration5$outboundSchema.parse(chunkingConfiguration5),
+  );
+}
+
+/** @internal */
+export type ChunkingConfiguration4$Outbound = {
+  type: "sentence";
+  chunk_size: number;
+  chunk_overlap: number;
+  min_sentences_per_chunk: number;
+};
+
+/** @internal */
+export const ChunkingConfiguration4$outboundSchema: z.ZodType<
+  ChunkingConfiguration4$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration4
+> = z.object({
+  type: z.literal("sentence"),
+  chunkSize: z.number().int().default(512),
+  chunkOverlap: z.number().int().default(0),
+  minSentencesPerChunk: z.number().int().default(1),
+}).transform((v) => {
+  return remap$(v, {
+    chunkSize: "chunk_size",
+    chunkOverlap: "chunk_overlap",
+    minSentencesPerChunk: "min_sentences_per_chunk",
+  });
+});
+
+export function chunkingConfiguration4ToJSON(
+  chunkingConfiguration4: ChunkingConfiguration4,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration4$outboundSchema.parse(chunkingConfiguration4),
+  );
+}
+
+/** @internal */
+export type ChunkingConfiguration3$Outbound = {
+  type: "token";
+  chunk_size: number;
+  chunk_overlap: number;
+};
+
+/** @internal */
+export const ChunkingConfiguration3$outboundSchema: z.ZodType<
+  ChunkingConfiguration3$Outbound,
+  z.ZodTypeDef,
+  ChunkingConfiguration3
+> = z.object({
+  type: z.literal("token"),
+  chunkSize: z.number().int().default(512),
+  chunkOverlap: z.number().int().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    chunkSize: "chunk_size",
+    chunkOverlap: "chunk_overlap",
+  });
+});
+
+export function chunkingConfiguration3ToJSON(
+  chunkingConfiguration3: ChunkingConfiguration3,
+): string {
+  return JSON.stringify(
+    ChunkingConfiguration3$outboundSchema.parse(chunkingConfiguration3),
+  );
+}
 
 /** @internal */
 export type ChunkingConfiguration2$Outbound = {
@@ -90,7 +544,14 @@ export function chunkingConfiguration1ToJSON(
 /** @internal */
 export type ChunkingConfiguration$Outbound =
   | ChunkingConfiguration1$Outbound
-  | ChunkingConfiguration2$Outbound;
+  | ChunkingConfiguration2$Outbound
+  | ChunkingConfiguration3$Outbound
+  | ChunkingConfiguration4$Outbound
+  | ChunkingConfiguration5$Outbound
+  | ChunkingConfiguration6$Outbound
+  | ChunkingConfiguration7$Outbound
+  | ChunkingConfiguration8$Outbound
+  | ChunkingConfiguration9$Outbound;
 
 /** @internal */
 export const ChunkingConfiguration$outboundSchema: z.ZodType<
@@ -100,6 +561,13 @@ export const ChunkingConfiguration$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ChunkingConfiguration1$outboundSchema),
   z.lazy(() => ChunkingConfiguration2$outboundSchema),
+  z.lazy(() => ChunkingConfiguration3$outboundSchema),
+  z.lazy(() => ChunkingConfiguration4$outboundSchema),
+  z.lazy(() => ChunkingConfiguration5$outboundSchema),
+  z.lazy(() => ChunkingConfiguration6$outboundSchema),
+  z.lazy(() => ChunkingConfiguration7$outboundSchema),
+  z.lazy(() => ChunkingConfiguration8$outboundSchema),
+  z.lazy(() => ChunkingConfiguration9$outboundSchema),
 ]);
 
 export function chunkingConfigurationToJSON(

@@ -27,6 +27,18 @@ export type SpanSummary = {
   usage?: TraceUsage | undefined;
   cost?: TraceCost | undefined;
   hasDetail?: boolean | undefined;
+  level?: number | undefined;
+  hasChildren?: boolean | undefined;
+  /**
+   * Row badge inputs, so the tree does not need a detail fetch per span:
+   *
+   * @remarks
+   *  trace_framework is set on the trace root, leading_span_type where the
+   *  ingest marked one, guardrail_enabled on evaluator spans run as guardrails.
+   */
+  traceFramework?: string | undefined;
+  leadingSpanType?: string | undefined;
+  guardrailEnabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -53,6 +65,11 @@ export const SpanSummary$inboundSchema: z.ZodType<
   usage: TraceUsage$inboundSchema.optional(),
   cost: TraceCost$inboundSchema.optional(),
   has_detail: z.boolean().optional(),
+  level: z.number().int().optional(),
+  has_children: z.boolean().optional(),
+  trace_framework: z.string().optional(),
+  leading_span_type: z.string().optional(),
+  guardrail_enabled: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "trace_id": "traceId",
@@ -62,6 +79,10 @@ export const SpanSummary$inboundSchema: z.ZodType<
     "ended_at": "endedAt",
     "duration_ms": "durationMs",
     "has_detail": "hasDetail",
+    "has_children": "hasChildren",
+    "trace_framework": "traceFramework",
+    "leading_span_type": "leadingSpanType",
+    "guardrail_enabled": "guardrailEnabled",
   });
 });
 
