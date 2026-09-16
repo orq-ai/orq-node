@@ -10,7 +10,7 @@ import { ModelConfigurationParameters } from "@orq-ai/node/models/operations";
 let value: ModelConfigurationParameters = {
   fallbacks: [
     {
-      model: "openai/gpt-4o-mini",
+      model: "openai/gpt-5.4-mini",
     },
   ],
   cache: {

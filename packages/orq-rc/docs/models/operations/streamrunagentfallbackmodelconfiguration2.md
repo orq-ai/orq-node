@@ -12,7 +12,7 @@ let value: StreamRunAgentFallbackModelConfiguration2 = {
   parameters: {
     fallbacks: [
       {
-        model: "openai/gpt-4o-mini",
+        model: "openai/gpt-5.4-mini",
       },
     ],
     cache: {

@@ -27,7 +27,7 @@ let value: CreateImageRequestBody = {
     type: "weight_based",
     models: [
       {
-        model: "openai/gpt-4o",
+        model: "openai/gpt-5.6-sol",
         weight: 0.7,
       },
     ],
@@ -47,7 +47,7 @@ let value: CreateImageRequestBody = {
     },
     fallbacks: [
       {
-        model: "openai/gpt-4o-mini",
+        model: "openai/gpt-5.4-mini",
       },
     ],
     identity: {

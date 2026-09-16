@@ -481,7 +481,7 @@ export type ModelConfigurationRetry = {
  */
 export type UpdateAgentModelConfiguration2 = {
   /**
-   * A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents.
+   * A model ID string (e.g., `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`). Only models that support tool calling can be used with agents.
    */
   id: string;
   /**

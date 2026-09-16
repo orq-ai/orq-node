@@ -7,7 +7,7 @@ import { CreateCompletionKnowledgeBases } from "@orq-ai/node/models/operations";
 
 let value: CreateCompletionKnowledgeBases = {
   rerankConfig: {
-    model: "cohere/rerank-multilingual-v3.0",
+    model: "cohere/rerank-v4.0-pro",
   },
   knowledgeId: "customer-knowledge-base",
 };

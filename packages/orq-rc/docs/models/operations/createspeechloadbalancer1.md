@@ -9,7 +9,7 @@ let value: CreateSpeechLoadBalancer1 = {
   type: "weight_based",
   models: [
     {
-      model: "openai/gpt-4o",
+      model: "openai/gpt-5.6-sol",
       weight: 0.7,
     },
   ],

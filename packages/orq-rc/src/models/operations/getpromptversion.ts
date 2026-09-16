@@ -1487,7 +1487,7 @@ export type GetPromptVersionPromptField = {
     >
     | undefined;
   /**
-   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
    */
   model?: string | null | undefined;
   version?: string | undefined;

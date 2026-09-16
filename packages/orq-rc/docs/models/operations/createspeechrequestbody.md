@@ -39,7 +39,7 @@ let value: CreateSpeechRequestBody = {
     },
     fallbacks: [
       {
-        model: "openai/gpt-4o-mini",
+        model: "openai/gpt-5.4-mini",
       },
     ],
     identity: {

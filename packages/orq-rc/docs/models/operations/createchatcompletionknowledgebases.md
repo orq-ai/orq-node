@@ -7,7 +7,7 @@ import { CreateChatCompletionKnowledgeBases } from "@orq-ai/node/models/operatio
 
 let value: CreateChatCompletionKnowledgeBases = {
   rerankConfig: {
-    model: "cohere/rerank-multilingual-v3.0",
+    model: "cohere/rerank-v4.0-pro",
   },
   knowledgeId: "customer-knowledge-base",
 };

@@ -10,7 +10,7 @@ import { ListAgentsParameters } from "@orq-ai/node/models/operations";
 let value: ListAgentsParameters = {
   fallbacks: [
     {
-      model: "openai/gpt-4o-mini",
+      model: "openai/gpt-5.4-mini",
     },
   ],
   cache: {

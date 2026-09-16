@@ -479,7 +479,7 @@ export type RunAgentModelConfigurationRetry = {
  */
 export type RunAgentModelConfiguration2 = {
   /**
-   * A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents.
+   * A model ID string (e.g., `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`). Only models that support tool calling can be used with agents.
    */
   id: string;
   /**
@@ -3890,7 +3890,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M2MM6E4AYVDDZH7DVWH9DKEP"),
+  id: z.string().default("01M2N4H2HJ7F67BWTMVFE5VV87"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
