@@ -25,7 +25,7 @@ export class Evals extends ClientSDK {
   async all(
     request?: operations.GetEvalsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<components.ListEvaluatorsResponse> {
+  ): Promise<operations.GetEvalsResponseBody> {
     return unwrapAsync(evalsAll(
       this,
       request,
@@ -40,7 +40,7 @@ export class Evals extends ClientSDK {
    * Create a new evaluator in the workspace.
    */
   async create(
-    request: operations.CreateEvalRequestBody,
+    request?: operations.CreateEvalRequestBody | undefined,
     options?: RequestOptions,
   ): Promise<operations.CreateEvalResponseBody> {
     return unwrapAsync(evalsCreate(
@@ -76,7 +76,7 @@ export class Evals extends ClientSDK {
   async delete(
     request: operations.DeleteEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.DeleteEvaluatorResponse> {
+  ): Promise<void> {
     return unwrapAsync(evalsDelete(
       this,
       request,

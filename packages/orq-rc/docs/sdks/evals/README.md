@@ -28,9 +28,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.all({
-    limit: 10,
-  });
+  const result = await orq.evals.all({});
 
   console.log(result);
 }
@@ -53,9 +51,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await evalsAll(orq, {
-    limit: 10,
-  });
+  const res = await evalsAll(orq, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -78,13 +74,14 @@ run();
 
 ### Response
 
-**Promise\<[components.ListEvaluatorsResponse](../../models/components/listevaluatorsresponse.md)\>**
+**Promise\<[operations.GetEvalsResponseBody](../../models/operations/getevalsresponsebody.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| errors.GetEvalsResponseBody | 404                         | application/json            |
+| errors.APIError             | 4XX, 5XX                    | \*/\*                       |
 
 ## create
 
@@ -101,7 +98,14 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.create({});
+  const result = await orq.evals.create({
+    code: "<value>",
+    type: "python_eval",
+    path: "Default",
+    projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+    description: "",
+    key: "<key>",
+  });
 
   console.log(result);
 }
@@ -124,7 +128,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await evalsCreate(orq, {});
+  const res = await evalsCreate(orq, {
+    code: "<value>",
+    type: "python_eval",
+    path: "Default",
+    projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+    description: "",
+    key: "<key>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -151,9 +162,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.CreateEvalResponseBody | 404                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
 ## get
 
@@ -224,9 +236,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.GetEvalResponseBody | 404                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete
 
@@ -243,11 +256,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.evals.delete({
+  await orq.evals.delete({
     id: "<id>",
   });
 
-  console.log(result);
+
 }
 
 run();
@@ -273,7 +286,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("evalsDelete failed:", res.error);
   }
@@ -293,13 +306,15 @@ run();
 
 ### Response
 
-**Promise\<[components.DeleteEvaluatorResponse](../../models/components/deleteevaluatorresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.DeleteEvalResponseBody      | 404                                | application/json                   |
+| errors.DeleteEvalEvalsResponseBody | 409                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## update
 
@@ -318,7 +333,10 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.update({
     id: "<id>",
-    requestBody: {},
+    requestBody: {
+      path: "Default",
+      projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+    },
   });
 
   console.log(result);
@@ -344,7 +362,10 @@ const orq = new OrqCore({
 async function run() {
   const res = await evalsUpdate(orq, {
     id: "<id>",
-    requestBody: {},
+    requestBody: {
+      path: "Default",
+      projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -372,9 +393,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.UpdateEvalResponseBody | 404                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
 ## listVersions
 

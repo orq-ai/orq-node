@@ -98,14 +98,14 @@ export type GroupBy = ClosedEnum<typeof GroupBy>;
 /**
  * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
  */
-export const Mode = {
+export const QueryReportRequestMode = {
   Timeseries: "timeseries",
   Scalar: "scalar",
 } as const;
 /**
  * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
  */
-export type Mode = ClosedEnum<typeof Mode>;
+export type QueryReportRequestMode = ClosedEnum<typeof QueryReportRequestMode>;
 
 /**
  * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
@@ -168,7 +168,7 @@ export type QueryReportRequest = {
   /**
    * Value shaping. `timeseries` (default) buckets by time; `scalar` returns one aggregated row per group over the whole window, ordered by value (top list), or a single row when `group_by` is empty.
    */
-  mode?: Mode | undefined;
+  mode?: QueryReportRequestMode | undefined;
   /**
    * Value ordering for `scalar` rows. Defaults to `desc`. Ignored for `timeseries`.
    */
@@ -198,12 +198,13 @@ export const GroupBy$outboundSchema: z.ZodNativeEnum<typeof GroupBy> =
   GroupBy$inboundSchema;
 
 /** @internal */
-export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
+export const QueryReportRequestMode$inboundSchema: z.ZodNativeEnum<
+  typeof QueryReportRequestMode
+> = z.nativeEnum(QueryReportRequestMode);
 /** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
-  Mode$inboundSchema;
+export const QueryReportRequestMode$outboundSchema: z.ZodNativeEnum<
+  typeof QueryReportRequestMode
+> = QueryReportRequestMode$inboundSchema;
 
 /** @internal */
 export const Sort$inboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
@@ -228,7 +229,7 @@ export const QueryReportRequest$inboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   time_zone: z.string().optional(),
   include_totals: z.boolean().optional(),
-  mode: Mode$inboundSchema.optional(),
+  mode: QueryReportRequestMode$inboundSchema.optional(),
   sort: Sort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -267,7 +268,7 @@ export const QueryReportRequest$outboundSchema: z.ZodType<
   limit: z.number().int().optional(),
   timeZone: z.string().optional(),
   includeTotals: z.boolean().optional(),
-  mode: Mode$outboundSchema.optional(),
+  mode: QueryReportRequestMode$outboundSchema.optional(),
   sort: Sort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

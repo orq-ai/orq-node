@@ -3,9 +3,11 @@
  */
 
 import { OrqCore } from "../core.js";
+import { encodeJSON } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -16,6 +18,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -31,11 +34,12 @@ import { Result } from "../types/fp.js";
  */
 export function evalsCreate(
   client: OrqCore,
-  _request: operations.CreateEvalRequestBody,
+  request?: operations.CreateEvalRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     operations.CreateEvalResponseBody,
+    | errors.CreateEvalResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -48,19 +52,20 @@ export function evalsCreate(
 > {
   return new APIPromise($do(
     client,
-    _request,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  _request: operations.CreateEvalRequestBody,
+  request?: operations.CreateEvalRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
       operations.CreateEvalResponseBody,
+      | errors.CreateEvalResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -73,6 +78,20 @@ async function $do(
     APICall,
   ]
 > {
+  const parsed = safeParse(
+    request,
+    (value) =>
+      operations.CreateEvalRequestBody$outboundSchema.optional().parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return [parsed, { status: "invalid" }];
+  }
+  const payload = parsed.value;
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
+
   const path = pathToFunc("/v2/evaluators")();
 
   const headers = new Headers(compactMap({
@@ -105,6 +124,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
@@ -125,8 +145,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
     operations.CreateEvalResponseBody,
+    | errors.CreateEvalResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -137,9 +162,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.CreateEvalResponseBody$inboundSchema),
-    M.fail("4XX"),
+    M.jsonErr(404, errors.CreateEvalResponseBody$inboundSchema),
+    M.fail([403, "4XX"]),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

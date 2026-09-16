@@ -1,0 +1,19 @@
+# Judges
+
+## Example Usage
+
+```typescript
+import { Judges } from "@orq-ai/node/models/operations";
+
+let value: Judges = {
+  model: "LeBaron",
+};
+```
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `model`                                                                            | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `retry`                                                                            | [operations.UpdateEvalRetry](../../models/operations/updateevalretry.md)           | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `fallbacks`                                                                        | [operations.UpdateEvalFallbacks](../../models/operations/updateevalfallbacks.md)[] | :heavy_minus_sign:                                                                 | N/A                                                                                |

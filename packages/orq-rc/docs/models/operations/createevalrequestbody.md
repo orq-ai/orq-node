@@ -1,14 +1,38 @@
 # CreateEvalRequestBody
 
-## Example Usage
+
+## Supported Types
+
+### `operations.CreateEvalRequestBody1`
 
 ```typescript
-import { CreateEvalRequestBody } from "@orq-ai/node/models/operations";
-
-let value: CreateEvalRequestBody = {};
+const value: operations.CreateEvalRequestBody1 = {
+  type: "llm_eval",
+  prompt: "<value>",
+  description: "",
+  key: "<key>",
+  mode: "jury",
+  jury: {
+    judges: [
+      {
+        model: "A8",
+      },
+    ],
+    minSuccessfulJudges: 2,
+    tieValue: "Tie",
+  },
+};
 ```
 
-## Fields
+### `operations.Python`
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+```typescript
+const value: operations.Python = {
+  code: "<value>",
+  type: "python_eval",
+  path: "Default",
+  projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+  key: "<key>",
+};
+```
+
