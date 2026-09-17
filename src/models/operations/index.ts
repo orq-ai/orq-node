@@ -214,6 +214,7 @@ export * from "./smartrouterupdate.js";
 export * from "./statfile.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
+export * from "./telemetrylistcapabilities.js";
 export * from "./tracesget.js";
 export * from "./tracesgetspan.js";
 export * from "./traceslistfacetvalues.js";
