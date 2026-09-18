@@ -1,0 +1,33 @@
+# State
+
+The content to evaluate. A string, an object or an array.
+
+
+## Supported Types
+
+### `string`
+
+```typescript
+const value: string = "<value>";
+```
+
+### `{ [k: string]: any }`
+
+```typescript
+const value: { [k: string]: any } = {
+  "key": "<value>",
+  "key1": "<value>",
+  "key2": "<value>",
+};
+```
+
+### `any[]`
+
+```typescript
+const value: any[] = [
+  "<value 1>",
+  "<value 2>",
+  "<value 3>",
+];
+```
+

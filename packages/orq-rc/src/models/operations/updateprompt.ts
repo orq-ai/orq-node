@@ -1010,6 +1010,7 @@ export const UpdatePromptModelType = {
   Rerank: "rerank",
   Ocr: "ocr",
   Moderation: "moderation",
+  Classify: "classify",
   Vision: "vision",
 } as const;
 /**
@@ -1419,6 +1420,7 @@ export const UpdatePromptProvider = {
   Reson8: "reson8",
   Meta: "meta",
   Greenpt: "greenpt",
+  Typesafe: "typesafe",
   Slack: "slack",
   Orq: "orq",
 } as const;

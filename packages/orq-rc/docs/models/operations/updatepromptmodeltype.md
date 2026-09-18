@@ -7,11 +7,11 @@ The modality of the model
 ```typescript
 import { UpdatePromptModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptModelType = "moderation";
+let value: UpdatePromptModelType = "classify";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "ocr" | "moderation" | "vision"
+"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "ocr" | "moderation" | "classify" | "vision"
 ```

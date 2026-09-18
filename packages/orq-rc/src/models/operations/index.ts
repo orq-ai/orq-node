@@ -26,6 +26,7 @@ export * from "./createagentschedule.js";
 export * from "./createannotation.js";
 export * from "./createchatcompletion.js";
 export * from "./createchunk.js";
+export * from "./createclassify.js";
 export * from "./createcompletion.js";
 export * from "./createdataset.js";
 export * from "./createdatasetitem.js";
