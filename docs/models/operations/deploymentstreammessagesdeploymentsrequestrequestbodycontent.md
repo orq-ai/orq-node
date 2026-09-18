@@ -1,6 +1,6 @@
 # DeploymentStreamMessagesDeploymentsRequestRequestBodyContent
 
-The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
+The contents of the tool message.
 
 
 ## Supported Types
@@ -11,11 +11,10 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages2[]`
+### `operations.DeploymentStreamContentDeploymentsRequestRequestBody2[]`
 
 ```typescript
 const value:
-  operations.DeploymentStreamContentDeploymentsRequestRequestBodyMessages2[] =
-    [];
+  operations.DeploymentStreamContentDeploymentsRequestRequestBody2[] = [];
 ```
 

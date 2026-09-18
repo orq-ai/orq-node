@@ -5,7 +5,17 @@
 ```typescript
 import { UpdateMcpGatewayRequest } from "@orq-ai/node/models/components";
 
-let value: UpdateMcpGatewayRequest = {};
+let value: UpdateMcpGatewayRequest = {
+  serverLinks: [
+    {
+      mcpServerId: "<id>",
+      alias: "<value>",
+      toolExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
+    },
+  ],
+};
 ```
 
 ## Fields
@@ -21,3 +31,4 @@ let value: UpdateMcpGatewayRequest = {};
 | `mode`                                                                                                                                                                               | [components.McpGatewayMode](../../models/components/mcpgatewaymode.md)                                                                                                               | :heavy_minus_sign:                                                                                                                                                                   | N/A                                                                                                                                                                                  |
 | `sharing`                                                                                                                                                                            | [components.Sharing](../../models/components/sharing.md)                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                   | Which projects in the workspace may use this gateway. Defaults to every project.                                                                                                     |
 | `clearServerLinks`                                                                                                                                                                   | *boolean*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                   | Set true to remove every link; cannot be combined with `server_links`.                                                                                                               |
+| `plugins`                                                                                                                                                                            | [components.McpGatewayPlugin](../../models/components/mcpgatewayplugin.md)[]                                                                                                         | :heavy_minus_sign:                                                                                                                                                                   | Plugins run on every tool call this gateway serves.                                                                                                                                  |

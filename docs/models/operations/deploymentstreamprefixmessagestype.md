@@ -1,17 +1,17 @@
 # DeploymentStreamPrefixMessagesType
 
-The type of the tool. Currently, only `function` is supported.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
 ```typescript
 import { DeploymentStreamPrefixMessagesType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamPrefixMessagesType = "function";
+let value: DeploymentStreamPrefixMessagesType = "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"ephemeral"
 ```

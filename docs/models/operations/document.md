@@ -10,7 +10,7 @@ Document to run OCR on. Can be a DocumentURLChunk or ImageURLChunk.
 ```typescript
 const value: operations.Document1 = {
   type: "document_url",
-  documentUrl: "https://electric-teammate.name",
+  documentUrl: "https://example.com/invoice.pdf",
 };
 ```
 

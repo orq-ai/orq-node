@@ -13,7 +13,7 @@ let value: ToolExecutionFinishedStreamingEventData = {
     workspaceId: "<id>",
     agentManifestId: "<id>",
     agentExecutionId: "<id>",
-    product: "experiments",
+    product: "playgrounds",
   },
   workflowRunId: "<id>",
 };

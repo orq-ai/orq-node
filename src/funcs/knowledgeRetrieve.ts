@@ -157,7 +157,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, components.Knowledge$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.fail([401, 404, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

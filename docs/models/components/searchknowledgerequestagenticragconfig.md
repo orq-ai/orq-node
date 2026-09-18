@@ -13,10 +13,10 @@ const value: components.AgenticRagConfig1 = {
 };
 ```
 
-### `components.AgenticRagConfig2`
+### `components.Two`
 
 ```typescript
-const value: components.AgenticRagConfig2 = {
+const value: components.Two = {
   modelDbId: "<id>",
   provider: "<value>",
 };

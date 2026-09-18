@@ -27,10 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete all items
+ * Clear an annotation queue
  *
  * @remarks
- * Delete all items from an annotation queue. This action is irreversible.
+ * Removes every item from the annotation queue without deleting the queue itself.
  */
 export function annotationQueuesClear(
   client: OrqCore,

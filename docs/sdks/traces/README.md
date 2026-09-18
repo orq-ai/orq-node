@@ -16,7 +16,7 @@
 
 ## aggregate
 
-Aggregate trace metrics using the structured trace filter contract. This API remains supported; POST /v3/telemetry/query offers the same aggregate shape in a neutral multi-signal envelope.
+Aggregate trace metrics using the structured trace filter contract.
 
 ### Example Usage
 

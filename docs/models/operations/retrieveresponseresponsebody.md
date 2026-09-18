@@ -40,33 +40,34 @@ let value: RetrieveResponseResponseBody = {
   presencePenalty: 6082.87,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
+  promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
-  safetyIdentifier: "<value>",
-  serviceTier: "auto",
+  safetyIdentifier: null,
+  serviceTier: "scale",
   status: "failed",
   store: false,
-  temperature: 5748.61,
+  temperature: 1686.88,
   text: "<value>",
   toolChoice: "<value>",
   tools: [],
-  topLogprobs: 28993,
-  topP: 2954.76,
+  topLogprobs: 295476,
+  topP: 8427.85,
   truncation: "auto",
   usage: {
-    inputTokens: 786005,
+    inputTokens: 763695,
     inputTokensDetails: {
-      cacheCreationTokens: 763695,
-      cacheWriteTokens: 732588,
-      cachedTokens: 376439,
+      cacheCreationTokens: 732588,
+      cacheWriteTokens: 376439,
+      cachedTokens: 349904,
     },
-    outputTokens: 349904,
+    outputTokens: 437223,
     outputTokensDetails: {
-      reasoningTokens: 437223,
+      reasoningTokens: 846277,
     },
-    totalTokens: 846277,
+    totalTokens: 81544,
   },
-  user: "Jaquelin_Stiedemann47",
+  user: "Clinton9",
 };
 ```
 
@@ -95,6 +96,7 @@ let value: RetrieveResponseResponseBody = {
 | `presencePenalty`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `previousResponseId`                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheKey`                                                                                    | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `promptCacheOptions`                                                                                | [components.OpenAIPromptCacheOptions](../../models/components/openaipromptcacheoptions.md)          | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheRetention`                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `reasoning`                                                                                         | [components.Reasoning](../../models/components/reasoning.md)                                        | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `safetyIdentifier`                                                                                  | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |

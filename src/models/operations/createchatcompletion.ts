@@ -681,11 +681,9 @@ export type CreateChatCompletionGuardrails = {
 };
 
 export type CreateChatCompletionPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type CreateChatCompletionFallbacks = {
   /**
@@ -1231,7 +1229,7 @@ export type FilterBy1 =
   | CreateChatCompletion1Nin;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
  */
 export type FilterBy = FilterByAnd | FilterByOr | {
   [k: string]:
@@ -1268,7 +1266,7 @@ export type SearchOptions = {
  */
 export type RerankConfig = {
   /**
-   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/rerank-models).
+   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#rerank-models).
    */
   model: string;
   /**
@@ -1286,7 +1284,7 @@ export type RerankConfig = {
  */
 export type AgenticRagConfig = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#chat-models).
    */
   model: string;
 };
@@ -1305,7 +1303,7 @@ export type CreateChatCompletionKnowledgeBases = {
    */
   searchType?: SearchType | null | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
    */
   filterBy?: FilterByAnd | FilterByOr | {
     [k: string]:
@@ -1451,7 +1449,7 @@ export type CreateChatCompletionRequestBody = {
     | CreateChatCompletionMessagesToolMessage
   >;
   /**
-   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`. The AI Gateway offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the (Supported models)[/docs/proxy/supported-models] to browse available models.
+   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. The AI Gateway offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [Supported models](/docs/ai-gateway/supported-models) to browse available models.
    */
   model: string;
   /**
@@ -1580,11 +1578,9 @@ export type CreateChatCompletionRequestBody = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -3415,11 +3411,9 @@ export function createChatCompletionGuardrailsToJSON(
 
 /** @internal */
 export type CreateChatCompletionPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
@@ -3427,11 +3421,11 @@ export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionPlugins
 > = z.union([
-  components.PIIRedactionPluginEn$outboundSchema,
-  components.PIIRedactionPluginNl$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-  components.PIIRedactionPluginAuto$outboundSchema,
+  components.PIIRedactionPlugin$outboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
 ]);
 
 export function createChatCompletionPluginsToJSON(
@@ -5312,11 +5306,9 @@ export type CreateChatCompletionRequestBody$Outbound = {
   guardrails?: Array<CreateChatCompletionGuardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
@@ -5395,11 +5387,11 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$outboundSchema,
-      components.PIIRedactionPluginNl$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-      components.PIIRedactionPluginAuto$outboundSchema,
+      components.PIIRedactionPlugin$outboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))

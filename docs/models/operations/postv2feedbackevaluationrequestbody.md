@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.PostV2FeedbackEvaluationRequestBody1`
+### `operations.RequestBody1`
 
 ```typescript
-const value: operations.PostV2FeedbackEvaluationRequestBody1 = {
+const value: operations.RequestBody1 = {
   id: "<id>",
   evaluationType: "human_review",
   type: "string",

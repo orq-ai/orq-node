@@ -3,29 +3,11 @@
 
 ## Supported Types
 
-### `components.PIIRedactionPluginAuto`
+### `components.PIIRedactionPlugin`
 
 ```typescript
-const value: components.PIIRedactionPluginAuto = {
+const value: components.PIIRedactionPlugin = {
   id: "pii_redaction",
-};
-```
-
-### `components.PIIRedactionPluginEn`
-
-```typescript
-const value: components.PIIRedactionPluginEn = {
-  id: "pii_redaction",
-  language: "en",
-};
-```
-
-### `components.PIIRedactionPluginNl`
-
-```typescript
-const value: components.PIIRedactionPluginNl = {
-  id: "pii_redaction",
-  language: "nl",
 };
 ```
 

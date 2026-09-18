@@ -1,23 +1,19 @@
 # DeploymentGetConfigAndEq
 
+Equal to
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { DeploymentGetConfigAndEq } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetConfigAndEq = {
+  eq: "<value>",
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                                            | Type                                             | Required                                         | Description                                      |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| `eq`                                             | *operations.DeploymentGetConfigAndDeploymentsEq* | :heavy_check_mark:                               | N/A                                              |

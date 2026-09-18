@@ -4,110 +4,18 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type Items = {
-  spanId: string;
-  traceId: string;
-};
-
-export type AddAnnotationQueueItemsRequestBody = {
-  /**
-   * The spans to add to the annotation queue
-   */
-  items: Array<Items>;
-};
+import * as components from "../components/index.js";
 
 export type AddAnnotationQueueItemsRequest = {
   annotationQueueId: string;
-  requestBody?: AddAnnotationQueueItemsRequestBody | undefined;
+  addAnnotationQueueItemsRequest: components.AddAnnotationQueueItemsRequest;
 };
-
-export const AddAnnotationQueueItemsType = {
-  Span: "span",
-} as const;
-export type AddAnnotationQueueItemsType = ClosedEnum<
-  typeof AddAnnotationQueueItemsType
->;
-
-export type AddAnnotationQueueItemsResponseBody = {
-  id: string;
-  /**
-   * The unique identifier of the annotation queue
-   */
-  annotationQueueId: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  /**
-   * The unique identifiers of the human reviews that have been used to annotate the item
-   */
-  usedHumanReviewIds?: Array<string> | undefined;
-  spanId: string;
-  /**
-   * The trace identifier this span belongs to
-   */
-  traceId?: string | undefined;
-  type: AddAnnotationQueueItemsType;
-};
-
-/** @internal */
-export type Items$Outbound = {
-  span_id: string;
-  trace_id: string;
-};
-
-/** @internal */
-export const Items$outboundSchema: z.ZodType<
-  Items$Outbound,
-  z.ZodTypeDef,
-  Items
-> = z.object({
-  spanId: z.string(),
-  traceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    spanId: "span_id",
-    traceId: "trace_id",
-  });
-});
-
-export function itemsToJSON(items: Items): string {
-  return JSON.stringify(Items$outboundSchema.parse(items));
-}
-
-/** @internal */
-export type AddAnnotationQueueItemsRequestBody$Outbound = {
-  items: Array<Items$Outbound>;
-};
-
-/** @internal */
-export const AddAnnotationQueueItemsRequestBody$outboundSchema: z.ZodType<
-  AddAnnotationQueueItemsRequestBody$Outbound,
-  z.ZodTypeDef,
-  AddAnnotationQueueItemsRequestBody
-> = z.object({
-  items: z.array(z.lazy(() => Items$outboundSchema)),
-});
-
-export function addAnnotationQueueItemsRequestBodyToJSON(
-  addAnnotationQueueItemsRequestBody: AddAnnotationQueueItemsRequestBody,
-): string {
-  return JSON.stringify(
-    AddAnnotationQueueItemsRequestBody$outboundSchema.parse(
-      addAnnotationQueueItemsRequestBody,
-    ),
-  );
-}
 
 /** @internal */
 export type AddAnnotationQueueItemsRequest$Outbound = {
   annotation_queue_id: string;
-  RequestBody?: AddAnnotationQueueItemsRequestBody$Outbound | undefined;
+  AddAnnotationQueueItemsRequest:
+    components.AddAnnotationQueueItemsRequest$Outbound;
 };
 
 /** @internal */
@@ -117,12 +25,12 @@ export const AddAnnotationQueueItemsRequest$outboundSchema: z.ZodType<
   AddAnnotationQueueItemsRequest
 > = z.object({
   annotationQueueId: z.string(),
-  requestBody: z.lazy(() => AddAnnotationQueueItemsRequestBody$outboundSchema)
-    .optional(),
+  addAnnotationQueueItemsRequest:
+    components.AddAnnotationQueueItemsRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     annotationQueueId: "annotation_queue_id",
-    requestBody: "RequestBody",
+    addAnnotationQueueItemsRequest: "AddAnnotationQueueItemsRequest",
   });
 });
 
@@ -133,45 +41,5 @@ export function addAnnotationQueueItemsRequestToJSON(
     AddAnnotationQueueItemsRequest$outboundSchema.parse(
       addAnnotationQueueItemsRequest,
     ),
-  );
-}
-
-/** @internal */
-export const AddAnnotationQueueItemsType$inboundSchema: z.ZodNativeEnum<
-  typeof AddAnnotationQueueItemsType
-> = z.nativeEnum(AddAnnotationQueueItemsType);
-
-/** @internal */
-export const AddAnnotationQueueItemsResponseBody$inboundSchema: z.ZodType<
-  AddAnnotationQueueItemsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  annotation_queue_id: z.string(),
-  workspace_id: z.string(),
-  used_human_review_ids: z.array(z.string()).optional(),
-  span_id: z.string(),
-  trace_id: z.string().optional(),
-  type: AddAnnotationQueueItemsType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "annotation_queue_id": "annotationQueueId",
-    "workspace_id": "workspaceId",
-    "used_human_review_ids": "usedHumanReviewIds",
-    "span_id": "spanId",
-    "trace_id": "traceId",
-  });
-});
-
-export function addAnnotationQueueItemsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAnnotationQueueItemsResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      AddAnnotationQueueItemsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAnnotationQueueItemsResponseBody' from JSON`,
   );
 }

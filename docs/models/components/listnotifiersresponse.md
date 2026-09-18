@@ -9,12 +9,16 @@ let value: ListNotifiersResponse = {
   object: "<value>",
   data: [
     {
-      type: "NOTIFIER_TYPE_WEBHOOK",
-      emails: [],
+      type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
+      emails: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
       id: "<id>",
-      displayName: "Aurelia.Thiel21",
-      createdAt: new Date("2026-06-17T09:30:43.013Z"),
-      updatedAt: new Date("2025-09-13T19:10:33.146Z"),
+      displayName: "Brooks_Mann7",
+      createdAt: new Date("2024-02-11T08:34:44.680Z"),
+      updatedAt: new Date("2026-06-17T09:30:43.013Z"),
     },
   ],
   hasMore: false,

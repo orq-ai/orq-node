@@ -8,7 +8,7 @@ import { PostV2FeedbackRemoveRequestBody } from "@orq-ai/node/models/operations"
 let value: PostV2FeedbackRemoveRequestBody = {
   id: "<id>",
   traceId: "<id>",
-  product: "otel",
+  product: "ai-chat",
 };
 ```
 

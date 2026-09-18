@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.CreateEvalRequestBody1`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.CreateEvalRequestBody1 = {
   type: "llm_eval",
   prompt: "<value>",
   description: "",
@@ -30,7 +30,7 @@ const value: operations.RequestBody1 = {
 const value: operations.Python = {
   code: "<value>",
   type: "python_eval",
-  path: "Default Project",
+  path: "Default",
   projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
   key: "<key>",
 };

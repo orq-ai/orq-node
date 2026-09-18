@@ -9,6 +9,12 @@ import { RunAgentTaskStatus } from "@orq-ai/node/models/operations";
 
 let value: RunAgentTaskStatus = {
   state: "submitted",
+  message: {
+    kind: "message",
+    messageId: "<id>",
+    role: "user",
+    parts: [],
+  },
 };
 ```
 

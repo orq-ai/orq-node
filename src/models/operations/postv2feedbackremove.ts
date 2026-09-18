@@ -27,6 +27,7 @@ export const Product = {
   Evaluators: "evaluators",
   Otel: "otel",
   AiChat: "ai-chat",
+  McpGateway: "mcp_gateway",
 } as const;
 export type Product = ClosedEnum<typeof Product>;
 
@@ -54,6 +55,7 @@ export const PostV2FeedbackRemoveProduct = {
   Evaluators: "evaluators",
   Otel: "otel",
   AiChat: "ai-chat",
+  McpGateway: "mcp_gateway",
 } as const;
 export type PostV2FeedbackRemoveProduct = ClosedEnum<
   typeof PostV2FeedbackRemoveProduct

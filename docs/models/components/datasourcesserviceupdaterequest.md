@@ -6,13 +6,13 @@
 import { DatasourcesServiceUpdateRequest } from "@orq-ai/node/models/components";
 
 let value: DatasourcesServiceUpdateRequest = {
-  displayName: "Benjamin_Hermann40",
+  displayName: "Product handbook",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `displayName`      | *string*           | :heavy_check_mark: | N/A                |
-| `description`      | *string*           | :heavy_minus_sign: | N/A                |
+| Field              | Type               | Required           | Description        | Example            |
+| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| `displayName`      | *string*           | :heavy_check_mark: | N/A                | Product handbook   |
+| `description`      | *string*           | :heavy_minus_sign: | N/A                |                    |

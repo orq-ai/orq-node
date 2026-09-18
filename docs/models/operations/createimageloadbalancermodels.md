@@ -6,7 +6,7 @@
 import { CreateImageLoadBalancerModels } from "@orq-ai/node/models/operations";
 
 let value: CreateImageLoadBalancerModels = {
-  model: "openai/gpt-4o",
+  model: "openai/gpt-5.6-sol",
   weight: 0.7,
 };
 ```
@@ -15,5 +15,5 @@ let value: CreateImageLoadBalancerModels = {
 
 | Field                                            | Type                                             | Required                                         | Description                                      | Example                                          |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `model`                                          | *string*                                         | :heavy_check_mark:                               | Model identifier for load balancing              | openai/gpt-4o                                    |
+| `model`                                          | *string*                                         | :heavy_check_mark:                               | Model identifier for load balancing              | openai/gpt-5.6-sol                               |
 | `weight`                                         | *number*                                         | :heavy_minus_sign:                               | Weight assigned to this model for load balancing | 0.7                                              |

@@ -27,10 +27,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Remove annotation queue items
+ * Remove items from an annotation queue
  *
  * @remarks
- * Removes items from the specified annotation queue.
+ * Removes the referenced spans from the annotation queue.
  */
 export function annotationQueuesRemoveItems(
   client: OrqCore,
@@ -86,7 +86,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.RemoveAnnotationQueueItemsRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     annotation_queue_id: encodeSimple(
@@ -162,7 +164,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, z.void()),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

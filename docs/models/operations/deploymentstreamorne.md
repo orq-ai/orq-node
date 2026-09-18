@@ -1,19 +1,23 @@
 # DeploymentStreamOrNe
 
-Not equal to
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { DeploymentStreamOrNe } from "@orq-ai/node/models/operations";
-
-let value: DeploymentStreamOrNe = {
-  ne: "<value>",
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                        | Type                                         | Required                                     | Description                                  |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| `ne`                                         | *operations.DeploymentStreamOrDeploymentsNe* | :heavy_check_mark:                           | N/A                                          |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

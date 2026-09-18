@@ -1,0 +1,31 @@
+# Workspace
+
+## Example Usage
+
+```typescript
+import { Workspace } from "@orq-ai/node/models/components";
+
+let value: Workspace = {
+  id: "<id>",
+  key: "<key>",
+  displayName: "Kelley.OKon52",
+};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `key`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `displayName`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `logoUrl`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `archivedOn`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `archivedById`                                                                                | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `organization`                                                                                | [components.WorkspaceOrganization](../../models/components/workspaceorganization.md)          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `settings`                                                                                    | [components.WorkspaceSettingsFields](../../models/components/workspacesettingsfields.md)      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `sidebarVersion`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `features`                                                                                    | [components.Features](../../models/components/features.md)                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `totalMembers`                                                                                | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `metadata`                                                                                    | [components.WorkspaceMetadata](../../models/components/workspacemetadata.md)                  | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `capabilities`                                                                                | [components.WorkspaceCapabilities](../../models/components/workspacecapabilities.md)          | :heavy_minus_sign:                                                                            | N/A                                                                                           |

@@ -21,3 +21,4 @@ let value: TraceUsage = {};
 | `completionAudioTokens`              | *number*                             | :heavy_minus_sign:                   | N/A                                  |
 | `completionAcceptedPredictionTokens` | *number*                             | :heavy_minus_sign:                   | N/A                                  |
 | `completionRejectedPredictionTokens` | *number*                             | :heavy_minus_sign:                   | N/A                                  |
+| `promptCacheCreationTokens`          | *number*                             | :heavy_minus_sign:                   | N/A                                  |

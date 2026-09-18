@@ -3,11 +3,53 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type RedactRequest = {
   text?: string | undefined;
   language?: string | undefined;
   threshold?: number | undefined;
+  /**
+   * Region codes selecting whole regions of coverage, e.g. "nl", "gb". Every
+   *
+   * @remarks
+   *  entity type those regions cover is included, alongside the base catalog.
+   *  ["all"] is exclusive. Leaving this and `entities` both empty also runs every
+   *  region, so selecting nothing is the widest request rather than the narrowest.
+   *  Empty alongside a non-empty `entities` stays strict. See the capabilities
+   *  endpoint for the region list.
+   *
+   *  Combines with `entities`: the detector unions the two selections, so a
+   *  request carrying both covers the regions plus the named types. Note that
+   *  `entities` only narrows coverage when it travels alone.
+   */
+  regions?: Array<string> | undefined;
+  /**
+   * The entity types to cover. A named type fires even when it belongs to a
+   *
+   * @remarks
+   *  region, so a region's types can be selected individually without naming
+   *  the region. Alone this is a strict allowlist; alongside `regions` it adds
+   *  to the region coverage instead of narrowing it.
+   */
+  entities?: Array<string> | undefined;
+  /**
+   * Per-entity confidence cutoff overrides. An override REPLACES the global
+   *
+   * @remarks
+   *  `threshold` for that type and may sit above or below it: the gateway
+   *  lowers the first-pass floor it sends the detector to the smallest value
+   *  in the map, and every selected type carries its own cutoff, so a
+   *  sub-global override detects MORE of that type without widening the rest.
+   *
+   *  This only tunes confidence; it never changes which types are covered.
+   *  Coverage is decided by `entities` alone, so every key here must also
+   *  appear in `entities` — a key that does not is rejected, as is any key at
+   *  all when `entities` is empty.
+   *
+   *  Declarative [0,1] bound mirrors existing constraint on `threshold`.
+   */
+  entityThresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -15,6 +57,9 @@ export type RedactRequest$Outbound = {
   text?: string | undefined;
   language?: string | undefined;
   threshold?: number | undefined;
+  regions?: Array<string> | undefined;
+  entities?: Array<string> | undefined;
+  entity_thresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -26,6 +71,13 @@ export const RedactRequest$outboundSchema: z.ZodType<
   text: z.string().optional(),
   language: z.string().optional(),
   threshold: z.number().optional(),
+  regions: z.array(z.string()).optional(),
+  entities: z.array(z.string()).optional(),
+  entityThresholds: z.record(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    entityThresholds: "entity_thresholds",
+  });
 });
 
 export function redactRequestToJSON(redactRequest: RedactRequest): string {

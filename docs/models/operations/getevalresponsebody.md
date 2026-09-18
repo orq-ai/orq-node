@@ -21,20 +21,25 @@ const value: operations.ResponseBodyLLM = {
 };
 ```
 
-### `operations.ResponseBodyFunction`
+### `operations.GetEvalResponseBodyFunction`
 
 ```typescript
-const value: operations.ResponseBodyFunction = {
+const value: operations.GetEvalResponseBodyFunction = {
   metadata: {},
   id: "<id>",
-  displayName: "Kylie10",
-  description: "meh astride what culture miserably who sonata pace watery",
+  displayName: "Sarina_Ritchie82",
+  description:
+    "but aside beard generally disappointment embalm nougat selfishly",
   owner: "<value>",
   domainId: "<id>",
   outputType: "string",
   type: "function_eval",
   functionParams: {
-    type: "levenshtein_distance",
+    type: "contains_all",
+    keywords: [
+      "<value 1>",
+      "<value 2>",
+    ],
   },
 };
 ```
@@ -73,29 +78,24 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.ResponseBodyHTTP`
+### `operations.GetEvalResponseBodyHTTP`
 
 ```typescript
-const value: operations.ResponseBodyHTTP = {
+const value: operations.GetEvalResponseBodyHTTP = {
   metadata: {},
   id: "<id>",
-  displayName: "Jacquelyn_Boyer83",
-  description:
-    "solace once eek ordinary wrong yowza loftily supposing but zowie",
+  displayName: "Kris_Rau89",
+  description: "times which whistle part alongside during",
   owner: "<value>",
   domainId: "<id>",
   type: "http_eval",
-  url: "https://triangular-tenant.org/",
+  url: "https://radiant-coin.com",
   method: "GET",
   headers: {
     "key": "<value>",
     "key1": "<value>",
   },
-  payload: {
-    "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
-  },
+  payload: {},
 };
 ```
 

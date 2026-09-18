@@ -41,33 +41,37 @@ let value: CreateRouterResponseResponseBody = {
   presencePenalty: 5582.27,
   previousResponseId: null,
   promptCacheKey: "<value>",
+  promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
-  serviceTier: "auto",
-  status: "completed",
+  serviceTier: "fast",
+  status: "in_progress",
   store: true,
-  temperature: 3997.15,
+  temperature: 3507.41,
   text: "<value>",
   toolChoice: "<value>",
-  tools: [],
-  topLogprobs: 670908,
-  topP: 2219.16,
-  truncation: "auto",
+  tools: [
+    "<value 1>",
+    "<value 2>",
+  ],
+  topLogprobs: 221916,
+  topP: 9592.24,
+  truncation: "disabled",
   usage: {
-    inputTokens: 786005,
+    inputTokens: 763695,
     inputTokensDetails: {
-      cacheCreationTokens: 763695,
-      cacheWriteTokens: 732588,
-      cachedTokens: 376439,
+      cacheCreationTokens: 732588,
+      cacheWriteTokens: 376439,
+      cachedTokens: 349904,
     },
-    outputTokens: 349904,
+    outputTokens: 437223,
     outputTokensDetails: {
-      reasoningTokens: 437223,
+      reasoningTokens: 846277,
     },
-    totalTokens: 846277,
+    totalTokens: 81544,
   },
-  user: null,
+  user: "Camden39",
 };
 ```
 
@@ -96,6 +100,7 @@ let value: CreateRouterResponseResponseBody = {
 | `presencePenalty`                                                                                        | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `previousResponseId`                                                                                     | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `promptCacheKey`                                                                                         | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `promptCacheOptions`                                                                                     | [components.OpenAIPromptCacheOptions](../../models/components/openaipromptcacheoptions.md)               | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `promptCacheRetention`                                                                                   | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `reasoning`                                                                                              | [components.Reasoning](../../models/components/reasoning.md)                                             | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `safetyIdentifier`                                                                                       | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

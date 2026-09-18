@@ -1,23 +1,21 @@
 # DeploymentGetConfigOrIn
 
+In
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { DeploymentGetConfigOrIn } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetConfigOrIn = {
+  in: [
+    3291.69,
+  ],
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                                             | Type                                              | Required                                          | Description                                       |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `in`                                              | *operations.DeploymentGetConfigOrDeploymentsIn*[] | :heavy_check_mark:                                | N/A                                               |

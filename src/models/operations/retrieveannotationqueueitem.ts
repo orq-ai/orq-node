@@ -4,11 +4,19 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveAnnotationQueueItemRequest = {
   annotationQueueId: string;
   itemId: string;
 };
+
+/**
+ * OK
+ */
+export type RetrieveAnnotationQueueItemResponseBody = {};
 
 /** @internal */
 export type RetrieveAnnotationQueueItemRequest$Outbound = {
@@ -38,5 +46,28 @@ export function retrieveAnnotationQueueItemRequestToJSON(
     RetrieveAnnotationQueueItemRequest$outboundSchema.parse(
       retrieveAnnotationQueueItemRequest,
     ),
+  );
+}
+
+/** @internal */
+export const RetrieveAnnotationQueueItemResponseBody$inboundSchema: z.ZodType<
+  RetrieveAnnotationQueueItemResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function retrieveAnnotationQueueItemResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveAnnotationQueueItemResponseBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveAnnotationQueueItemResponseBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveAnnotationQueueItemResponseBody' from JSON`,
   );
 }

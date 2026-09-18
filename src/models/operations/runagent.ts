@@ -199,11 +199,9 @@ export type RunAgentModelConfigurationGuardrails = {
 };
 
 export type RunAgentModelConfigurationPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type RunAgentModelConfigurationFallbacks = {
   /**
@@ -429,11 +427,9 @@ export type RunAgentModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -483,7 +479,7 @@ export type RunAgentModelConfigurationRetry = {
  */
 export type RunAgentModelConfiguration2 = {
   /**
-   * A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents.
+   * A model ID string (e.g., `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`). Only models that support tool calling can be used with agents.
    */
   id: string;
   /**
@@ -694,11 +690,9 @@ export type RunAgentFallbackModelConfigurationGuardrails = {
 };
 
 export type RunAgentFallbackModelConfigurationPlugins =
-  | components.PIIRedactionPluginEn
-  | components.PIIRedactionPluginNl
-  | components.TraceScrubbingPlugin
-  | components.PIIRedactionPluginAuto
-  | components.ResponseHealingPlugin;
+  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin
+  | components.TraceScrubbingPlugin;
 
 export type RunAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -933,11 +927,9 @@ export type RunAgentFallbackModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn
-      | components.PIIRedactionPluginNl
-      | components.TraceScrubbingPlugin
-      | components.PIIRedactionPluginAuto
+      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
       | components.ResponseHealingPlugin
+      | components.TraceScrubbingPlugin
     >
     | undefined;
   /**
@@ -1177,17 +1169,17 @@ export type AgentToolInputRunHeaders = {
   encrypted?: boolean | undefined;
 };
 
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType =
   {
     Object: "object",
   } as const;
-export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType =
+export type RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType =
   ClosedEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType
   >;
 
 export type AgentToolInputRunSchema = {
-  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType;
+  type: RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType;
   properties?: { [k: string]: any } | undefined;
   required?: Array<string> | undefined;
 };
@@ -1584,6 +1576,7 @@ export type AgentToolInputRun =
   | components.AdvisorToolInput
   | components.SidekickToolInput
   | components.CodeInterpreterToolInput
+  | components.FileSystemToolInput
   | HTTPToolRun
   | CodeToolRun
   | FunctionToolRun
@@ -1630,6 +1623,10 @@ export type RunAgentEvaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: RunAgentExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1659,6 +1656,10 @@ export type RunAgentGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: RunAgentAgentsExecuteOn;
+  /**
+   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
+   */
+  options?: { [k: string]: any } | undefined;
 };
 
 export type RunAgentSettings = {
@@ -1681,6 +1682,7 @@ export type RunAgentSettings = {
       | components.AdvisorToolInput
       | components.SidekickToolInput
       | components.CodeInterpreterToolInput
+      | components.FileSystemToolInput
       | HTTPToolRun
       | CodeToolRun
       | FunctionToolRun
@@ -2289,11 +2291,9 @@ export function runAgentModelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type RunAgentModelConfigurationPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2301,11 +2301,11 @@ export const RunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentModelConfigurationPlugins
 > = z.union([
-  components.PIIRedactionPluginEn$outboundSchema,
-  components.PIIRedactionPluginNl$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-  components.PIIRedactionPluginAuto$outboundSchema,
+  components.PIIRedactionPlugin$outboundSchema.and(
+    z.object({ id: z.literal("pii_redaction") }),
+  ),
   components.ResponseHealingPlugin$outboundSchema,
+  components.TraceScrubbingPlugin$outboundSchema,
 ]);
 
 export function runAgentModelConfigurationPluginsToJSON(
@@ -2544,11 +2544,9 @@ export type RunAgentModelConfigurationParameters$Outbound = {
   guardrails?: Array<RunAgentModelConfigurationGuardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<RunAgentModelConfigurationFallbacks$Outbound> | undefined;
@@ -2601,11 +2599,11 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
   ).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPluginEn$outboundSchema,
-      components.PIIRedactionPluginNl$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-      components.PIIRedactionPluginAuto$outboundSchema,
+      components.PIIRedactionPlugin$outboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
       components.ResponseHealingPlugin$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(
@@ -3087,11 +3085,9 @@ export function runAgentFallbackModelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type RunAgentFallbackModelConfigurationPlugins$Outbound =
-  | components.PIIRedactionPluginEn$Outbound
-  | components.PIIRedactionPluginNl$Outbound
-  | components.TraceScrubbingPlugin$Outbound
-  | components.PIIRedactionPluginAuto$Outbound
-  | components.ResponseHealingPlugin$Outbound;
+  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
+  | components.ResponseHealingPlugin$Outbound
+  | components.TraceScrubbingPlugin$Outbound;
 
 /** @internal */
 export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3100,11 +3096,11 @@ export const RunAgentFallbackModelConfigurationPlugins$outboundSchema:
     z.ZodTypeDef,
     RunAgentFallbackModelConfigurationPlugins
   > = z.union([
-    components.PIIRedactionPluginEn$outboundSchema,
-    components.PIIRedactionPluginNl$outboundSchema,
-    components.TraceScrubbingPlugin$outboundSchema,
-    components.PIIRedactionPluginAuto$outboundSchema,
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
     components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
   ]);
 
 export function runAgentFallbackModelConfigurationPluginsToJSON(
@@ -3360,11 +3356,9 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
     | undefined;
   plugins?:
     | Array<
-      | components.PIIRedactionPluginEn$Outbound
-      | components.PIIRedactionPluginNl$Outbound
-      | components.TraceScrubbingPlugin$Outbound
-      | components.PIIRedactionPluginAuto$Outbound
+      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
       | components.ResponseHealingPlugin$Outbound
+      | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3425,11 +3419,11 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPluginEn$outboundSchema,
-        components.PIIRedactionPluginNl$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
-        components.PIIRedactionPluginAuto$outboundSchema,
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
         components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -3848,11 +3842,11 @@ export function agentToolInputRunHeadersToJSON(
 }
 
 /** @internal */
-export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema:
+export const RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType
+    typeof RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType
   > = z.nativeEnum(
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType,
   );
 
 /** @internal */
@@ -3869,7 +3863,7 @@ export const AgentToolInputRunSchema$outboundSchema: z.ZodType<
   AgentToolInputRunSchema
 > = z.object({
   type:
-    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools19McpType$outboundSchema,
+    RunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema,
   properties: z.record(z.any()).optional(),
   required: z.array(z.string()).optional(),
 });
@@ -3896,7 +3890,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M2SYY3KB6568B0WTXZ0BDJA1"),
+  id: z.string().default("01M2T5PNAY675H12W1VJMG5EQA"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),
@@ -4482,6 +4476,7 @@ export type AgentToolInputRun$Outbound =
   | components.AdvisorToolInput$Outbound
   | components.SidekickToolInput$Outbound
   | components.CodeInterpreterToolInput$Outbound
+  | components.FileSystemToolInput$Outbound
   | HTTPToolRun$Outbound
   | CodeToolRun$Outbound
   | FunctionToolRun$Outbound
@@ -4508,6 +4503,7 @@ export const AgentToolInputRun$outboundSchema: z.ZodType<
   components.AdvisorToolInput$outboundSchema,
   components.SidekickToolInput$outboundSchema,
   components.CodeInterpreterToolInput$outboundSchema,
+  components.FileSystemToolInput$outboundSchema,
   z.lazy(() => HTTPToolRun$outboundSchema),
   z.lazy(() => CodeToolRun$outboundSchema),
   z.lazy(() => FunctionToolRun$outboundSchema),
@@ -4538,6 +4534,7 @@ export type RunAgentEvaluators$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
+  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4549,6 +4546,7 @@ export const RunAgentEvaluators$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: RunAgentExecuteOn$outboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -4574,6 +4572,7 @@ export type RunAgentGuardrails$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
+  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4585,6 +4584,7 @@ export const RunAgentGuardrails$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: RunAgentAgentsExecuteOn$outboundSchema,
+  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -4618,6 +4618,7 @@ export type RunAgentSettings$Outbound = {
       | components.AdvisorToolInput$Outbound
       | components.SidekickToolInput$Outbound
       | components.CodeInterpreterToolInput$Outbound
+      | components.FileSystemToolInput$Outbound
       | HTTPToolRun$Outbound
       | CodeToolRun$Outbound
       | FunctionToolRun$Outbound
@@ -4656,6 +4657,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       components.AdvisorToolInput$outboundSchema,
       components.SidekickToolInput$outboundSchema,
       components.CodeInterpreterToolInput$outboundSchema,
+      components.FileSystemToolInput$outboundSchema,
       z.lazy(() => HTTPToolRun$outboundSchema),
       z.lazy(() => CodeToolRun$outboundSchema),
       z.lazy(() => FunctionToolRun$outboundSchema),

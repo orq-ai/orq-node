@@ -86,11 +86,11 @@ run();
 
 ## listFacets
 
-Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values for the requested time range.
+Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values. Accepts optional filters and free-text query to narrow the counted subset.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ListLogFacets" method="get" path="/v3/logs/facets" -->
+<!-- UsageSnippet language="typescript" operationID="ListLogFacets" method="post" path="/v3/logs/facets" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -99,7 +99,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.logs.listFacets();
+  const result = await orq.logs.listFacets({});
 
   console.log(result);
 }
@@ -122,7 +122,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await logsListFacets(orq);
+  const res = await logsListFacets(orq, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -138,7 +138,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ListLogFacetsRequest](../../models/operations/listlogfacetsrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.ListLogFacetsRequest](../../models/components/listlogfacetsrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

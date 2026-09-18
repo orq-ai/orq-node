@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Create a new budget
  *
  * @remarks
- * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id).
+ * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
  */
 export function budgetsCreate(
   client: OrqCore,

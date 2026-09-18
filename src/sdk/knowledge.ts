@@ -14,6 +14,7 @@ import { knowledgeList } from "../funcs/knowledgeList.js";
 import { knowledgeListChunks } from "../funcs/knowledgeListChunks.js";
 import { knowledgeListChunksPaginated } from "../funcs/knowledgeListChunksPaginated.js";
 import { knowledgeListDatasources } from "../funcs/knowledgeListDatasources.js";
+import { knowledgePreviewChunks } from "../funcs/knowledgePreviewChunks.js";
 import { knowledgeRetrieve } from "../funcs/knowledgeRetrieve.js";
 import { knowledgeRetrieveChunk } from "../funcs/knowledgeRetrieveChunk.js";
 import { knowledgeRetrieveDatasource } from "../funcs/knowledgeRetrieveDatasource.js";
@@ -143,6 +144,23 @@ export class Knowledge extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Datasource> {
     return unwrapAsync(knowledgeCreateDatasource(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Preview datasource chunks
+   *
+   * @remarks
+   * Parses an uploaded file and returns the chunks it would produce for the given chunking options without creating a datasource.
+   */
+  async previewChunks(
+    request: operations.PreviewDatasourceChunksRequest,
+    options?: RequestOptions,
+  ): Promise<components.DatasourcesServicePreviewChunksResponse> {
+    return unwrapAsync(knowledgePreviewChunks(
       this,
       request,
       options,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpsertChunkMetadata = string | number | boolean;
 
@@ -16,6 +17,10 @@ export type UpsertChunk = {
    * Metadata of the chunk
    */
   metadata?: { [k: string]: string | number | boolean } | undefined;
+  /**
+   * Optional client-supplied chunk id. Reusing the same _id makes creation idempotent: an existing chunk with that _id in this datasource is replaced instead of duplicated.
+   */
+  id?: string | undefined;
 };
 
 /** @internal */
@@ -41,6 +46,7 @@ export type UpsertChunk$Outbound = {
   text: string;
   embedding?: Array<number> | undefined;
   metadata?: { [k: string]: string | number | boolean } | undefined;
+  _id?: string | undefined;
 };
 
 /** @internal */
@@ -52,6 +58,11 @@ export const UpsertChunk$outboundSchema: z.ZodType<
   text: z.string(),
   embedding: z.array(z.number()).optional(),
   metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
+  id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+  });
 });
 
 export function upsertChunkToJSON(upsertChunk: UpsertChunk): string {

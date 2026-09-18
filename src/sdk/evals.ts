@@ -6,6 +6,7 @@ import { evalsAll } from "../funcs/evalsAll.js";
 import { evalsCreate } from "../funcs/evalsCreate.js";
 import { evalsDelete } from "../funcs/evalsDelete.js";
 import { evalsGet } from "../funcs/evalsGet.js";
+import { evalsGetVersion } from "../funcs/evalsGetVersion.js";
 import { evalsInvoke } from "../funcs/evalsInvoke.js";
 import { evalsListVersions } from "../funcs/evalsListVersions.js";
 import { evalsUpdate } from "../funcs/evalsUpdate.js";
@@ -67,23 +68,6 @@ export class Evals extends ClientSDK {
   }
 
   /**
-   * Update an Evaluator
-   *
-   * @remarks
-   * Update an evaluator by ID with the provided fields.
-   */
-  async update(
-    request: operations.UpdateEvalRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdateEvalResponseBody> {
-    return unwrapAsync(evalsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Delete an Evaluator
    *
    * @remarks
@@ -101,16 +85,16 @@ export class Evals extends ClientSDK {
   }
 
   /**
-   * Invoke a Custom Evaluator
+   * Update an Evaluator
    *
    * @remarks
-   * Runs an evaluator that already exists in the workspace. Accepts either a conversation or the structured input and output fields; when both are present the conversation wins.
+   * Update an evaluator by ID with the provided fields.
    */
-  async invoke(
-    request: operations.InvokeEvalRequest,
+  async update(
+    request: operations.UpdateEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.InvokeEvaluatorResponse> {
-    return unwrapAsync(evalsInvoke(
+  ): Promise<operations.UpdateEvalResponseBody> {
+    return unwrapAsync(evalsUpdate(
       this,
       request,
       options,
@@ -121,13 +105,47 @@ export class Evals extends ClientSDK {
    * List evaluator versions
    *
    * @remarks
-   * Returns version history for a specific evaluator
+   * Returns version history for a specific evaluator.
    */
   async listVersions(
-    request: operations.GetV2EvaluatorsIdVersionsRequest,
+    request: operations.ListEvalVersionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetV2EvaluatorsIdVersionsResponseBody> {
+  ): Promise<components.ListEvaluatorVersionsResponse> {
     return unwrapAsync(evalsListVersions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get evaluator version
+   *
+   * @remarks
+   * Returns a specific version of an evaluator.
+   */
+  async getVersion(
+    request: operations.GetEvalVersionRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetEvalVersionResponseBody> {
+    return unwrapAsync(evalsGetVersion(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Invoke a Custom Evaluator
+   *
+   * @remarks
+   * Runs an evaluator that already exists in the workspace. Accepts either a conversation or the structured input and output fields; when both are present the conversation wins.
+   */
+  async invoke(
+    request: operations.InvokeEvalRequest,
+    options?: RequestOptions,
+  ): Promise<components.EvaluationResult> {
+    return unwrapAsync(evalsInvoke(
       this,
       request,
       options,

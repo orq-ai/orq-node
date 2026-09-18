@@ -63,6 +63,13 @@ export type CreateApiKeyRequest = {
    *  restriction. See McpAccess for the deny_all / allow-list semantics.
    */
   mcpAccess?: McpAccess | undefined;
+  /**
+   * Optional attribution labels (at most 10; keys `^[a-z0-9_.-]{1,32}$`,
+   *
+   * @remarks
+   *  values up to 64 characters). See ApiKey.labels.
+   */
+  labels?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -74,6 +81,7 @@ export type CreateApiKeyRequest$Outbound = {
   access?: { [k: string]: string } | undefined;
   expires_at?: string | undefined;
   mcp_access?: McpAccess$Outbound | undefined;
+  labels?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -89,6 +97,7 @@ export const CreateApiKeyRequest$outboundSchema: z.ZodType<
   access: z.record(AccessLevel$outboundSchema).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   mcpAccess: McpAccess$outboundSchema.optional(),
+  labels: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     projectScope: "project_scope",

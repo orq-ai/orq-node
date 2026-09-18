@@ -170,7 +170,7 @@ async function $do(
   >(
     M.json(200, operations.RetrieveAgentRequestResponseBody$inboundSchema),
     M.jsonErr(404, errors.RetrieveAgentRequestResponseBody$inboundSchema),
-    M.fail("4XX"),
+    M.fail([401, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

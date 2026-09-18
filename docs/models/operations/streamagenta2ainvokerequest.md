@@ -14,7 +14,7 @@ let value: StreamAgentA2AInvokeRequest = {
       {
         kind: "file",
         file: {
-          uri: "https://ignorant-hawk.com",
+          uri: "https://example.com/report.pdf",
         },
       },
     ],

@@ -48,11 +48,10 @@ export type BudgetListRequest = {
    */
   period?: Array<components.BudgetPeriod> | undefined;
   /**
-   * Optional free-text query. Server translates this into a Typesense
+   * Optional free-text query matched against a budget's scope target
    *
    * @remarks
-   *  search over the denormalized `scope_target_name` and id fields on
-   *  the per-workspace `{workspace_id}_budgets` collection.
+   *  name and id.
    */
   query?: string | undefined;
   /**

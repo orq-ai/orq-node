@@ -194,7 +194,7 @@ async function $do(
         }),
     ),
     M.jsonErr(404, errors.StreamAgentResponseBody$inboundSchema),
-    M.fail("4XX"),
+    M.fail([401, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

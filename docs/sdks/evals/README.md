@@ -2,17 +2,16 @@
 
 ## Overview
 
-Run an evaluator against a conversation and its result
-
 ### Available Operations
 
 * [all](#all) - Get all Evaluators
 * [create](#create) - Create an Evaluator
 * [get](#get) - Retrieve an Evaluator
-* [update](#update) - Update an Evaluator
 * [delete](#delete) - Delete an Evaluator
-* [invoke](#invoke) - Invoke a Custom Evaluator
+* [update](#update) - Update an Evaluator
 * [listVersions](#listversions) - List evaluator versions
+* [getVersion](#getversion) - Get evaluator version
+* [invoke](#invoke) - Invoke a Custom Evaluator
 
 ## all
 
@@ -240,6 +239,81 @@ run();
 | errors.GetEvalResponseBody | 404                        | application/json           |
 | errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
+## delete
+
+Delete an evaluator by its unique identifier.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="DeleteEval" method="delete" path="/v2/evaluators/{id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  await orq.evals.delete({
+    id: "<id>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsDelete } from "@orq-ai/node/funcs/evalsDelete.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsDelete(orq, {
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("evalsDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteEvalRequest](../../models/operations/deleteevalrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.DeleteEvalResponseBody      | 404                                | application/json                   |
+| errors.DeleteEvalEvalsResponseBody | 409                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
 ## update
 
 Update an evaluator by ID with the provided fields.
@@ -322,13 +396,13 @@ run();
 | errors.UpdateEvalResponseBody | 404                           | application/json              |
 | errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
-## delete
+## listVersions
 
-Delete an evaluator by its unique identifier.
+Returns version history for a specific evaluator.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="DeleteEval" method="delete" path="/v2/evaluators/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="ListEvalVersions" method="get" path="/v2/evaluators/{id}/versions" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -337,11 +411,11 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.evals.delete({
+  const result = await orq.evals.listVersions({
     id: "<id>",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -353,7 +427,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { evalsDelete } from "@orq-ai/node/funcs/evalsDelete.js";
+import { evalsListVersions } from "@orq-ai/node/funcs/evalsListVersions.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -362,14 +436,14 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await evalsDelete(orq, {
+  const res = await evalsListVersions(orq, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
-    console.log("evalsDelete failed:", res.error);
+    console.log("evalsListVersions failed:", res.error);
   }
 }
 
@@ -380,22 +454,95 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteEvalRequest](../../models/operations/deleteevalrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListEvalVersionsRequest](../../models/operations/listevalversionsrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[components.ListEvaluatorVersionsResponse](../../models/components/listevaluatorversionsresponse.md)\>**
 
 ### Errors
 
-| Error Type                         | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.DeleteEvalResponseBody      | 404                                | application/json                   |
-| errors.DeleteEvalEvalsResponseBody | 409                                | application/json                   |
-| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getVersion
+
+Returns a specific version of an evaluator.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetEvalVersion" method="get" path="/v2/evaluators/{id}/versions/{version_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.evals.getVersion({
+    id: "<id>",
+    versionId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsGetVersion } from "@orq-ai/node/funcs/evalsGetVersion.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsGetVersion(orq, {
+    id: "<id>",
+    versionId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsGetVersion failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetEvalVersionRequest](../../models/operations/getevalversionrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetEvalVersionResponseBody](../../models/operations/getevalversionresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## invoke
 
@@ -464,84 +611,10 @@ run();
 
 ### Response
 
-**Promise\<[components.InvokeEvaluatorResponse](../../models/components/invokeevaluatorresponse.md)\>**
+**Promise\<[components.EvaluationResult](../../models/components/evaluationresult.md)\>**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## listVersions
-
-Returns version history for a specific evaluator
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get_/v2/evaluators/{id}/versions" method="get" path="/v2/evaluators/{id}/versions" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.evals.listVersions({
-    id: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { evalsListVersions } from "@orq-ai/node/funcs/evalsListVersions.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await evalsListVersions(orq, {
-    id: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("evalsListVersions failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetV2EvaluatorsIdVersionsRequest](../../models/operations/getv2evaluatorsidversionsrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetV2EvaluatorsIdVersionsResponseBody](../../models/operations/getv2evaluatorsidversionsresponsebody.md)\>**
-
-### Errors
-
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| errors.GetV2EvaluatorsIdVersionsResponseBody | 404                                          | application/json                             |
-| errors.APIError                              | 4XX, 5XX                                     | \*/\*                                        |

@@ -8,13 +8,13 @@ import { PublicUsage } from "@orq-ai/node/models/components";
 let value: PublicUsage = {
   inputTokens: 37454,
   inputTokensDetails: {
-    cacheCreationTokens: 763695,
-    cacheWriteTokens: 732588,
-    cachedTokens: 376439,
+    cacheCreationTokens: 732588,
+    cacheWriteTokens: 376439,
+    cachedTokens: 349904,
   },
   outputTokens: 218537,
   outputTokensDetails: {
-    reasoningTokens: 437223,
+    reasoningTokens: 846277,
   },
   totalTokens: 444522,
 };
@@ -30,6 +30,7 @@ let value: PublicUsage = {
 | `outputCost`                                                                           | *number*                                                                               | :heavy_minus_sign:                                                                     | Cost (USD) of output tokens. Present when billing was computed for this response.      |
 | `outputTokens`                                                                         | *number*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
 | `outputTokensDetails`                                                                  | [components.OutputTokensDetails](../../models/components/outputtokensdetails.md)       | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `serverToolUse`                                                                        | [components.ServerToolUseDetails](../../models/components/servertoolusedetails.md)     | :heavy_minus_sign:                                                                     | N/A                                                                                    |
 | `totalCost`                                                                            | *number*                                                                               | :heavy_minus_sign:                                                                     | Total cost (USD) of the response. Present when billing was computed for this response. |
 | `totalTokens`                                                                          | *number*                                                                               | :heavy_check_mark:                                                                     | N/A                                                                                    |
 | `webSearchRequests`                                                                    | *number*                                                                               | :heavy_minus_sign:                                                                     | N/A                                                                                    |

@@ -5,7 +5,11 @@
 ```typescript
 import { NotifierListRequest } from "@orq-ai/node/models/operations";
 
-let value: NotifierListRequest = {};
+let value: NotifierListRequest = {
+  type: [
+    "NOTIFIER_TYPE_SLACK_WEBHOOK",
+  ],
+};
 ```
 
 ## Fields

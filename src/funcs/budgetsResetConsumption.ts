@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Reset budget consumption
  *
  * @remarks
- * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved.
+ * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
  */
 export function budgetsResetConsumption(
   client: OrqCore,

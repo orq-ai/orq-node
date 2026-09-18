@@ -31,6 +31,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.agents.create({
     key: "<key>",
+    displayName: "HR Assistant",
     role: "<value>",
     description: "alongside beneath doubtfully behest validity bah after furthermore",
     instructions: "<value>",
@@ -126,6 +127,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await agentsCreate(orq, {
     key: "<key>",
+    displayName: "HR Assistant",
     role: "<value>",
     description: "alongside beneath doubtfully behest validity bah after furthermore",
     instructions: "<value>",

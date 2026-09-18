@@ -7,7 +7,9 @@ import { NotifierUpdateRequest } from "@orq-ai/node/models/operations";
 
 let value: NotifierUpdateRequest = {
   notifierId: "<id>",
-  updateNotifierRequest: {},
+  updateNotifierRequest: {
+    type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
+  },
 };
 ```
 

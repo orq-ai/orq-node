@@ -8,7 +8,7 @@ Model configuration for this execution. Can override the agent manifest defaults
 ### `string`
 
 ```typescript
-const value: string = "<value>";
+const value: string = "openai/gpt-5.6-sol";
 ```
 
 ### `operations.StreamRunAgentModelConfiguration2`
@@ -19,7 +19,7 @@ const value: operations.StreamRunAgentModelConfiguration2 = {
   parameters: {
     fallbacks: [
       {
-        model: "openai/gpt-4o-mini",
+        model: "openai/gpt-5.4-mini",
       },
     ],
     cache: {

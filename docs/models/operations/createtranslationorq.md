@@ -8,7 +8,7 @@ import { CreateTranslationOrq } from "@orq-ai/node/models/operations";
 let value: CreateTranslationOrq = {
   fallbacks: [
     {
-      model: "openai/gpt-4o-mini",
+      model: "openai/gpt-5.4-mini",
     },
   ],
   retry: {

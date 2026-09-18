@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -21,7 +22,6 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -29,15 +29,15 @@ import { Result } from "../types/fp.js";
  * Create an annotation queue
  *
  * @remarks
- * Create a new annotation queue in the workspace.
+ * Creates an annotation queue in a project.
  */
 export function annotationQueuesCreate(
   client: OrqCore,
-  request?: operations.CreateAnnotationQueueRequestBody | undefined,
+  request: components.CreateAnnotationQueueRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateAnnotationQueueResponseBody,
+    components.AnnotationQueue,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function annotationQueuesCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.CreateAnnotationQueueRequestBody | undefined,
+  request: components.CreateAnnotationQueueRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateAnnotationQueueResponseBody,
+      components.AnnotationQueue,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -78,17 +78,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.CreateAnnotationQueueRequestBody$outboundSchema.optional()
-        .parse(value),
+      components.CreateAnnotationQueueRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = payload === undefined
-    ? null
-    : encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/annotation-queues")();
 
@@ -144,7 +141,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateAnnotationQueueResponseBody,
+    components.AnnotationQueue,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -154,7 +151,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateAnnotationQueueResponseBody$inboundSchema),
+    M.json(200, components.AnnotationQueue$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

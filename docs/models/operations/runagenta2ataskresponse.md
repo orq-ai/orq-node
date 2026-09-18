@@ -13,7 +13,21 @@ let value: RunAgentA2ATaskResponse = {
   kind: "task",
   status: {
     state: "submitted",
+    message: {
+      kind: "message",
+      messageId: "<id>",
+      role: "user",
+      parts: [],
+    },
   },
+  messages: [
+    {
+      kind: "message",
+      messageId: "<id>",
+      role: "agent",
+      parts: [],
+    },
+  ],
 };
 ```
 

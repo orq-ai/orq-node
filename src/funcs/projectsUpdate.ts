@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update a project
  *
  * @remarks
- * Updates the specified project by setting the values of the parameters passed.
+ * Updates the specified project by setting the values of the parameters passed. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
  */
 export function projectsUpdate(
   client: OrqCore,

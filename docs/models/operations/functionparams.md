@@ -46,18 +46,18 @@ const value: operations.FunctionParams4 = {
 };
 ```
 
-### `operations.Five`
+### `operations.FunctionParams5`
 
 ```typescript
-const value: operations.Five = {
+const value: operations.FunctionParams5 = {
   type: "contains_email",
 };
 ```
 
-### `operations.Six`
+### `operations.FunctionParams6`
 
 ```typescript
-const value: operations.Six = {
+const value: operations.FunctionParams6 = {
   type: "contains_url",
 };
 ```
