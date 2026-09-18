@@ -4,6 +4,7 @@
 
 export * from "./apierror.js";
 export * from "./createagentschedule.js";
+export * from "./createclassify.js";
 export * from "./createeval.js";
 export * from "./createmoderation.js";
 export * from "./createtranscription.js";

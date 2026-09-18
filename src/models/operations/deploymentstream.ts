@@ -1135,6 +1135,7 @@ export const DeploymentStreamProvider = {
   Reson8: "reson8",
   Meta: "meta",
   Greenpt: "greenpt",
+  Typesafe: "typesafe",
   Slack: "slack",
   Orq: "orq",
 } as const;

@@ -8,6 +8,7 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { Audio } from "./audio.js";
 import { Chat } from "./chat.js";
+import { Classify } from "./classify.js";
 import { Completions } from "./completions.js";
 import { Embeddings } from "./embeddings.js";
 import { Images } from "./images.js";
@@ -48,6 +49,11 @@ export class Router extends ClientSDK {
   private _embeddings?: Embeddings;
   get embeddings(): Embeddings {
     return (this._embeddings ??= new Embeddings(this._options));
+  }
+
+  private _classify?: Classify;
+  get classify(): Classify {
+    return (this._classify ??= new Classify(this._options));
   }
 
   /**

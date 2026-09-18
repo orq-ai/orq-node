@@ -96,6 +96,7 @@ export type ModelMetadata = {
   supportsBatchApi?: boolean | undefined;
   supportsCacheControl?: boolean | undefined;
   supportsCitations?: boolean | undefined;
+  supportsClassify?: boolean | undefined;
   supportsCodeExecution?: boolean | undefined;
   supportsCommercialUse?: boolean | undefined;
   supportsComputerUse?: boolean | undefined;
@@ -229,6 +230,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_batch_api: z.boolean().optional(),
   supports_cache_control: z.boolean().optional(),
   supports_citations: z.boolean().optional(),
+  supports_classify: z.boolean().optional(),
   supports_code_execution: z.boolean().optional(),
   supports_commercial_use: z.boolean().optional(),
   supports_computer_use: z.boolean().optional(),
@@ -354,6 +356,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_batch_api": "supportsBatchApi",
     "supports_cache_control": "supportsCacheControl",
     "supports_citations": "supportsCitations",
+    "supports_classify": "supportsClassify",
     "supports_code_execution": "supportsCodeExecution",
     "supports_commercial_use": "supportsCommercialUse",
     "supports_computer_use": "supportsComputerUse",
@@ -484,6 +487,7 @@ export type ModelMetadata$Outbound = {
   supports_batch_api?: boolean | undefined;
   supports_cache_control?: boolean | undefined;
   supports_citations?: boolean | undefined;
+  supports_classify?: boolean | undefined;
   supports_code_execution?: boolean | undefined;
   supports_commercial_use?: boolean | undefined;
   supports_computer_use?: boolean | undefined;
@@ -617,6 +621,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsBatchApi: z.boolean().optional(),
   supportsCacheControl: z.boolean().optional(),
   supportsCitations: z.boolean().optional(),
+  supportsClassify: z.boolean().optional(),
   supportsCodeExecution: z.boolean().optional(),
   supportsCommercialUse: z.boolean().optional(),
   supportsComputerUse: z.boolean().optional(),
@@ -742,6 +747,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsBatchApi: "supports_batch_api",
     supportsCacheControl: "supports_cache_control",
     supportsCitations: "supports_citations",
+    supportsClassify: "supports_classify",
     supportsCodeExecution: "supports_code_execution",
     supportsCommercialUse: "supports_commercial_use",
     supportsComputerUse: "supports_computer_use",

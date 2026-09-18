@@ -1151,6 +1151,7 @@ export const DeploymentGetConfigType = {
   Rerank: "rerank",
   Ocr: "ocr",
   Moderation: "moderation",
+  Classify: "classify",
   Vision: "vision",
 } as const;
 /**

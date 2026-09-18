@@ -46,6 +46,7 @@ export const ListPromptVersionsModelType = {
   Rerank: "rerank",
   Ocr: "ocr",
   Moderation: "moderation",
+  Classify: "classify",
   Vision: "vision",
 } as const;
 /**
@@ -452,6 +453,7 @@ export const ListPromptVersionsProvider = {
   Reson8: "reson8",
   Meta: "meta",
   Greenpt: "greenpt",
+  Typesafe: "typesafe",
   Slack: "slack",
   Orq: "orq",
 } as const;

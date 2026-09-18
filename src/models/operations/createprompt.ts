@@ -994,6 +994,7 @@ export const ModelType = {
   Rerank: "rerank",
   Ocr: "ocr",
   Moderation: "moderation",
+  Classify: "classify",
   Vision: "vision",
 } as const;
 /**
@@ -1397,6 +1398,7 @@ export const CreatePromptProvider = {
   Reson8: "reson8",
   Meta: "meta",
   Greenpt: "greenpt",
+  Typesafe: "typesafe",
   Slack: "slack",
   Orq: "orq",
 } as const;
